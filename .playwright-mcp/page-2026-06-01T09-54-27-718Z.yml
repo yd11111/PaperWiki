@@ -1,0 +1,1402 @@
+- generic [ref=e2]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Hugging Face's logo Hugging Face" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Hugging Face's logo" [ref=e8]
+          - generic [ref=e9]: Hugging Face
+        - generic [ref=e10]:
+          - textbox "Search models, datasets, users..." [ref=e11]
+          - img [ref=e12]
+      - navigation "Main" [ref=e14]:
+        - list [ref=e15]:
+          - listitem [ref=e16]:
+            - link "Models" [ref=e17] [cursor=pointer]:
+              - /url: /models
+              - img [ref=e18]
+              - text: Models
+          - listitem [ref=e22]:
+            - link "Datasets" [ref=e23] [cursor=pointer]:
+              - /url: /datasets
+              - img [ref=e24]
+              - text: Datasets
+          - listitem [ref=e29]:
+            - link "Spaces" [ref=e30] [cursor=pointer]:
+              - /url: /spaces
+              - img [ref=e31]
+              - text: Spaces
+          - listitem [ref=e35]:
+            - link "Buckets new" [ref=e36] [cursor=pointer]:
+              - /url: /storage
+              - img [ref=e37]
+              - text: Buckets
+              - generic [ref=e41]: new
+          - listitem [ref=e42]:
+            - link "Docs" [ref=e43] [cursor=pointer]:
+              - /url: /docs
+              - img [ref=e44]
+              - text: Docs
+          - listitem [ref=e48]:
+            - link "Enterprise" [ref=e49] [cursor=pointer]:
+              - /url: /enterprise
+              - img [ref=e50]
+              - text: Enterprise
+          - listitem [ref=e52]:
+            - link "Pricing" [ref=e53] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e54]:
+            - generic [ref=e55]:
+              - button [ref=e56] [cursor=pointer]:
+                - img [ref=e57]
+              - navigation [ref=e62]:
+                - list [ref=e63]:
+                  - listitem [ref=e64]:
+                    - generic [ref=e65]: Website
+                    - list [ref=e66]:
+                      - listitem [ref=e67]:
+                        - link "Tasks" [ref=e68] [cursor=pointer]:
+                          - /url: /tasks
+                          - img [ref=e69]
+                          - generic: Tasks
+                      - listitem [ref=e72]:
+                        - link "HuggingChat" [ref=e73] [cursor=pointer]:
+                          - /url: /chat
+                          - img [ref=e74]
+                          - generic: HuggingChat
+                      - listitem [ref=e77]:
+                        - link "Collections" [ref=e78] [cursor=pointer]:
+                          - /url: /collections
+                          - img [ref=e79]
+                          - generic: Collections
+                      - listitem [ref=e83]:
+                        - link "Languages" [ref=e84] [cursor=pointer]:
+                          - /url: /languages
+                          - img [ref=e85]
+                          - generic: Languages
+                      - listitem [ref=e87]:
+                        - link "Organizations" [ref=e88] [cursor=pointer]:
+                          - /url: /organizations
+                          - img [ref=e89]
+                          - generic: Organizations
+                  - listitem [ref=e94]:
+                    - generic [ref=e95]: Community
+                    - list [ref=e96]:
+                      - listitem [ref=e97]:
+                        - link "Blog" [ref=e98] [cursor=pointer]:
+                          - /url: /blog/zh
+                          - img [ref=e99]
+                          - generic: Blog
+                      - listitem [ref=e101]:
+                        - link "Posts" [ref=e102] [cursor=pointer]:
+                          - /url: /posts
+                          - img [ref=e103]
+                          - generic: Posts
+                      - listitem [ref=e105]:
+                        - link "Daily Papers" [ref=e106] [cursor=pointer]:
+                          - /url: /papers
+                          - img [ref=e107]
+                          - generic: Daily Papers
+                      - listitem [ref=e110]:
+                        - link "Learn" [ref=e111] [cursor=pointer]:
+                          - /url: /learn
+                          - img [ref=e112]
+                          - generic: Learn
+                      - listitem [ref=e118]:
+                        - link "Discord" [ref=e119] [cursor=pointer]:
+                          - /url: /join/discord
+                          - img [ref=e120]
+                          - generic: Discord
+                      - listitem [ref=e122]:
+                        - link "Forum" [ref=e123] [cursor=pointer]:
+                          - /url: https://discuss.huggingface.co/
+                          - img [ref=e124]
+                          - generic: Forum
+                      - listitem [ref=e126]:
+                        - link "GitHub" [ref=e127] [cursor=pointer]:
+                          - /url: https://github.com/huggingface
+                          - img [ref=e128]
+                          - generic: GitHub
+                  - listitem [ref=e130]:
+                    - generic [ref=e131]: Solutions
+                    - list [ref=e132]:
+                      - listitem [ref=e133]:
+                        - link "Team & Enterprise" [ref=e134] [cursor=pointer]:
+                          - /url: /enterprise
+                          - img [ref=e135]
+                          - generic: Team & Enterprise
+                      - listitem [ref=e137]:
+                        - link "Hugging Face PRO" [ref=e138] [cursor=pointer]:
+                          - /url: /pro
+                          - img [ref=e139]
+                          - generic: Hugging Face PRO
+                      - listitem [ref=e141]:
+                        - link "Enterprise Support" [ref=e142] [cursor=pointer]:
+                          - /url: /support
+                          - img [ref=e143]
+                          - generic: Enterprise Support
+                      - listitem [ref=e146]:
+                        - link "Inference Providers" [ref=e147] [cursor=pointer]:
+                          - /url: /inference/models
+                          - img [ref=e148]
+                          - generic: Inference Providers
+                      - listitem [ref=e151]:
+                        - link "Inference Endpoints" [ref=e152] [cursor=pointer]:
+                          - /url: /inference-endpoints
+                          - img [ref=e153]
+                          - generic: Inference Endpoints
+                      - listitem [ref=e156]:
+                        - link "Storage Buckets" [ref=e157] [cursor=pointer]:
+                          - /url: /storage
+                          - img [ref=e158]
+                          - generic: Storage Buckets
+          - listitem [ref=e162]:
+            - separator [ref=e163]
+          - listitem [ref=e164]:
+            - link "Log In" [ref=e165] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e166]:
+            - link "Sign Up" [ref=e167] [cursor=pointer]:
+              - /url: /join
+  - main [ref=e168]:
+    - generic [ref=e170]:
+      - img [ref=e171]
+      - generic [ref=e173]:
+        - generic [ref=e174]: new
+        - paragraph [ref=e175]: Get trending papers in your email inbox once a day!
+        - link "Subscribe" [ref=e176] [cursor=pointer]:
+          - /url: /login?next=%2Fpapers
+      - img [ref=e177]
+    - generic [ref=e180]:
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - heading "Daily Papers" [level=1] [ref=e184]
+          - heading "byAK and the research community" [level=2] [ref=e185]:
+            - text: by
+            - link "AK" [ref=e186] [cursor=pointer]:
+              - /url: /akhaliq
+            - text: and the research community
+        - generic [ref=e188]:
+          - img [ref=e189]
+          - searchbox "Search any paper with AI" [ref=e193]
+          - button [ref=e194] [cursor=pointer]:
+            - img [ref=e195]
+          - button "Roll dice" [ref=e197] [cursor=pointer]
+        - generic [ref=e206]:
+          - generic [ref=e207]:
+            - list [ref=e208]:
+              - listitem [ref=e209]:
+                - button "Daily" [ref=e210] [cursor=pointer]
+              - listitem [ref=e211]:
+                - button "Weekly" [ref=e212] [cursor=pointer]
+              - listitem [ref=e213]:
+                - button "Monthly" [ref=e214] [cursor=pointer]
+            - link "Trending Papers" [ref=e215] [cursor=pointer]:
+              - /url: /papers/trending
+              - img [ref=e216]
+          - generic [ref=e218]:
+            - link [ref=e219] [cursor=pointer]:
+              - /url: /papers/date/2026-05-29
+              - img [ref=e220]
+            - generic [ref=e222]: Jun 1
+            - generic:
+              - img
+      - generic [ref=e223]:
+        - article [ref=e224]:
+          - link [ref=e225] [cursor=pointer]:
+            - /url: /papers/2605.31264
+          - generic:
+            - text: Submitted by
+            - text: jasonrqh
+          - generic [ref=e228]:
+            - link "52" [ref=e230] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31264
+              - generic [ref=e231]:
+                - img [ref=e232]
+                - generic [ref=e234]: "52"
+            - generic [ref=e235]:
+              - 'heading "COLLEAGUE.SKILL: Automated AI Skill Generation via Expert Knowledge Distillation" [level=3] [ref=e236]':
+                - 'link "COLLEAGUE.SKILL: Automated AI Skill Generation via Expert Knowledge Distillation" [ref=e237] [cursor=pointer]':
+                  - /url: /papers/2605.31264
+              - generic [ref=e238]:
+                - link "ShanghaiAiLab shanghai ailab" [ref=e239] [cursor=pointer]:
+                  - /url: /ShanghaiAiLab
+                  - img "ShanghaiAiLab" [ref=e240]
+                  - generic [ref=e241]: shanghai ailab
+                - generic [ref=e242]:
+                  - link "18.7k" [ref=e243] [cursor=pointer]:
+                    - /url: /papers/2605.31264
+                    - img [ref=e244]
+                    - generic [ref=e246]: 18.7k
+                  - link "1" [ref=e247] [cursor=pointer]:
+                    - /url: /papers/2605.31264#community
+                    - img [ref=e248]
+                    - text: "1"
+        - article [ref=e250]:
+          - link [ref=e251] [cursor=pointer]:
+            - /url: /papers/2605.31604
+          - generic:
+            - text: Submitted by
+            - text: taesiri
+          - generic [ref=e255]:
+            - link "36" [ref=e257] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31604
+              - generic [ref=e258]:
+                - img [ref=e259]
+                - generic [ref=e261]: "36"
+            - generic [ref=e262]:
+              - heading "Representation Forcing for Bottleneck-Free Unified Multimodal Models" [level=3] [ref=e263]:
+                - link "Representation Forcing for Bottleneck-Free Unified Multimodal Models" [ref=e264] [cursor=pointer]:
+                  - /url: /papers/2605.31604
+              - generic [ref=e265]:
+                - link "ByteDance-Seed ByteDance Seed" [ref=e266] [cursor=pointer]:
+                  - /url: /ByteDance-Seed
+                  - img "ByteDance-Seed" [ref=e267]
+                  - generic [ref=e268]: ByteDance Seed
+                - link "1" [ref=e270] [cursor=pointer]:
+                  - /url: /papers/2605.31604#community
+                  - img [ref=e271]
+                  - text: "1"
+        - article [ref=e273]:
+          - link [ref=e274] [cursor=pointer]:
+            - /url: /papers/2605.31584
+          - generic:
+            - text: Submitted by
+            - text: NeoZ123
+          - generic [ref=e277]:
+            - link "29" [ref=e279] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31584
+              - generic [ref=e280]:
+                - img [ref=e281]
+                - generic [ref=e283]: "29"
+            - generic [ref=e284]:
+              - 'heading "LongTraceRL: Learning Long-Context Reasoning from Search Agent Trajectories with Rubric Rewards" [level=3] [ref=e285]':
+                - 'link "LongTraceRL: Learning Long-Context Reasoning from Search Agent Trajectories with Rubric Rewards" [ref=e286] [cursor=pointer]':
+                  - /url: /papers/2605.31584
+              - generic [ref=e287]:
+                - link "THU-KEG Knowledge Engineer Group @ Tsinghua University" [ref=e288] [cursor=pointer]:
+                  - /url: /THU-KEG
+                  - img "THU-KEG" [ref=e289]
+                  - generic [ref=e290]: Knowledge Engineer Group @ Tsinghua University
+                - generic [ref=e291]:
+                  - link "4" [ref=e292] [cursor=pointer]:
+                    - /url: /papers/2605.31584
+                    - img [ref=e293]
+                    - generic [ref=e295]: "4"
+                  - link "1" [ref=e296] [cursor=pointer]:
+                    - /url: /papers/2605.31584#community
+                    - img [ref=e297]
+                    - text: "1"
+        - article [ref=e299]:
+          - link [ref=e300] [cursor=pointer]:
+            - /url: /papers/2605.30993
+          - generic:
+            - text: Submitted by
+            - text: AaronZ345
+          - generic [ref=e303]:
+            - link "27" [ref=e305] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30993
+              - generic [ref=e306]:
+                - img [ref=e307]
+                - generic [ref=e309]: "27"
+            - generic [ref=e310]:
+              - 'heading "SwanVoice: Expressive Long-Form Zero-Shot Speech Synthesis for Both Monologue and Dialogue" [level=3] [ref=e311]':
+                - 'link "SwanVoice: Expressive Long-Form Zero-Shot Speech Synthesis for Both Monologue and Dialogue" [ref=e312] [cursor=pointer]':
+                  - /url: /papers/2605.30993
+              - generic [ref=e313]:
+                - link "ByteDance ByteDance" [ref=e314] [cursor=pointer]:
+                  - /url: /ByteDance
+                  - img "ByteDance" [ref=e315]
+                  - generic [ref=e316]: ByteDance
+                - link "1" [ref=e320] [cursor=pointer]:
+                  - /url: /papers/2605.30993#community
+                  - img [ref=e321]
+                  - text: "1"
+        - article [ref=e323]:
+          - link "View paper" [ref=e324] [cursor=pointer]:
+            - /url: /papers/2605.31039
+          - generic:
+            - text: Submitted by
+            - text: VCLab-PolyU
+          - generic [ref=e326]:
+            - link "24" [ref=e328] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31039
+              - generic [ref=e329]:
+                - img [ref=e330]
+                - generic [ref=e332]: "24"
+            - generic [ref=e333]:
+              - 'heading "GGT-100K: Generative Ground Truth for Generalizable Real-World Image Restoration" [level=3] [ref=e334]':
+                - 'link "GGT-100K: Generative Ground Truth for Generalizable Real-World Image Restoration" [ref=e335] [cursor=pointer]':
+                  - /url: /papers/2605.31039
+              - generic [ref=e336]:
+                - link "VCLab-HKPU VCLab" [ref=e337] [cursor=pointer]:
+                  - /url: /VCLab-HKPU
+                  - img "VCLab-HKPU" [ref=e338]
+                  - generic [ref=e339]: VCLab
+                - generic [ref=e340]:
+                  - link "9" [ref=e341] [cursor=pointer]:
+                    - /url: /papers/2605.31039
+                    - img [ref=e342]
+                    - generic [ref=e344]: "9"
+                  - link "1" [ref=e345] [cursor=pointer]:
+                    - /url: /papers/2605.31039#community
+                    - img [ref=e346]
+                    - text: "1"
+        - article [ref=e348]:
+          - link [ref=e349] [cursor=pointer]:
+            - /url: /papers/2605.30819
+          - generic:
+            - text: Submitted by
+            - text: yanxg
+          - generic [ref=e353]:
+            - link "23" [ref=e355] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30819
+              - generic [ref=e356]:
+                - img [ref=e357]
+                - generic [ref=e359]: "23"
+            - generic [ref=e360]:
+              - 'heading "Function2Scene: 3D Indoor Scene Layout from Functional Specifications" [level=3] [ref=e361]':
+                - 'link "Function2Scene: 3D Indoor Scene Layout from Functional Specifications" [ref=e362] [cursor=pointer]':
+                  - /url: /papers/2605.30819
+              - generic [ref=e363]:
+                - link "Manolis Savva Angel X. Chang Daniel Ritchie Qimin Chen Ruiqi Wang · 7 authors" [ref=e364] [cursor=pointer]:
+                  - /url: /papers/2605.30819
+                  - list [ref=e365]:
+                    - listitem "Manolis Savva" [ref=e366]
+                    - listitem "Angel X. Chang" [ref=e367]
+                    - listitem "Daniel Ritchie" [ref=e368]
+                    - listitem "Qimin Chen" [ref=e369]
+                    - listitem "Ruiqi Wang" [ref=e370]
+                    - listitem [ref=e371]:
+                      - generic [ref=e372]:
+                        - generic [ref=e373]: ·
+                        - text: 7 authors
+                - link "1" [ref=e375] [cursor=pointer]:
+                  - /url: /papers/2605.30819#community
+                  - img [ref=e376]
+                  - text: "1"
+        - article [ref=e378]:
+          - link "View paper" [ref=e379] [cursor=pointer]:
+            - /url: /papers/2605.30409
+          - generic:
+            - text: Submitted by
+            - text: Yuyang-z
+          - generic [ref=e381]:
+            - link "22" [ref=e383] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30409
+              - generic [ref=e384]:
+                - img [ref=e385]
+                - generic [ref=e387]: "22"
+            - generic [ref=e388]:
+              - 'heading "SANA-Streaming: Real-time Streaming Video Editing with Hybrid Diffusion Transformer" [level=3] [ref=e389]':
+                - 'link "SANA-Streaming: Real-time Streaming Video Editing with Hybrid Diffusion Transformer" [ref=e390] [cursor=pointer]':
+                  - /url: /papers/2605.30409
+              - generic [ref=e391]:
+                - link "nvidia NVIDIA" [ref=e392] [cursor=pointer]:
+                  - /url: /nvidia
+                  - img "nvidia" [ref=e393]
+                  - generic [ref=e394]: NVIDIA
+                - link "1" [ref=e396] [cursor=pointer]:
+                  - /url: /papers/2605.30409#community
+                  - img [ref=e397]
+                  - text: "1"
+        - article [ref=e399]:
+          - link [ref=e400] [cursor=pointer]:
+            - /url: /papers/2605.31075
+          - generic:
+            - text: Submitted by
+            - text: hyc2026
+          - generic [ref=e404]:
+            - link "21" [ref=e406] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31075
+              - generic [ref=e407]:
+                - img [ref=e408]
+                - generic [ref=e410]: "21"
+            - generic [ref=e411]:
+              - heading "Task-Focused Memorization for Multimodal Agents" [level=3] [ref=e412]:
+                - link "Task-Focused Memorization for Multimodal Agents" [ref=e413] [cursor=pointer]:
+                  - /url: /papers/2605.31075
+              - generic [ref=e414]:
+                - link "ByteDance-Seed ByteDance Seed" [ref=e415] [cursor=pointer]:
+                  - /url: /ByteDance-Seed
+                  - img "ByteDance-Seed" [ref=e416]
+                  - generic [ref=e417]: ByteDance Seed
+                - link "1" [ref=e419] [cursor=pointer]:
+                  - /url: /papers/2605.31075#community
+                  - img [ref=e420]
+                  - text: "1"
+        - article [ref=e422]:
+          - link [ref=e423] [cursor=pointer]:
+            - /url: /papers/2605.30940
+          - generic:
+            - text: Submitted by
+            - text: AaronZ345
+          - generic [ref=e427]:
+            - link "20" [ref=e429] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30940
+              - generic [ref=e430]:
+                - img [ref=e431]
+                - generic [ref=e433]: "20"
+            - generic [ref=e434]:
+              - heading "Towards Streaming Synchronized Spatial Audio Generation via Autoregressive Diffusion Transformer" [level=3] [ref=e435]:
+                - link "Towards Streaming Synchronized Spatial Audio Generation via Autoregressive Diffusion Transformer" [ref=e436] [cursor=pointer]:
+                  - /url: /papers/2605.30940
+              - generic [ref=e437]:
+                - link "zju Zhejiang University" [ref=e438] [cursor=pointer]:
+                  - /url: /zju
+                  - img "zju" [ref=e439]
+                  - generic [ref=e440]: Zhejiang University
+                - link "1" [ref=e444] [cursor=pointer]:
+                  - /url: /papers/2605.30940#community
+                  - img [ref=e445]
+                  - text: "1"
+        - article [ref=e447]:
+          - link [ref=e448] [cursor=pointer]:
+            - /url: /papers/2605.28618
+          - generic:
+            - text: Submitted by
+            - text: AaronZ345
+          - generic [ref=e452]:
+            - link "20" [ref=e454] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.28618
+              - generic [ref=e455]:
+                - img [ref=e456]
+                - generic [ref=e458]: "20"
+            - generic [ref=e459]:
+              - heading "Comprehensive Benchmarking of Long-Form Speech Generation in Diverse Scenarios" [level=3] [ref=e460]:
+                - link "Comprehensive Benchmarking of Long-Form Speech Generation in Diverse Scenarios" [ref=e461] [cursor=pointer]:
+                  - /url: /papers/2605.28618
+              - generic [ref=e462]:
+                - link "zju Zhejiang University" [ref=e463] [cursor=pointer]:
+                  - /url: /zju
+                  - img "zju" [ref=e464]
+                  - generic [ref=e465]: Zhejiang University
+                - link "1" [ref=e469] [cursor=pointer]:
+                  - /url: /papers/2605.28618#community
+                  - img [ref=e470]
+                  - text: "1"
+        - article [ref=e472]:
+          - link [ref=e473] [cursor=pointer]:
+            - /url: /papers/2605.26844
+          - generic:
+            - text: Submitted by
+            - text: wyy-code
+          - generic [ref=e477]:
+            - link "17" [ref=e479] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.26844
+              - generic [ref=e480]:
+                - img [ref=e481]
+                - generic [ref=e483]: "17"
+            - generic [ref=e484]:
+              - 'heading "Not All Disagreement Is Learnable: Token Teachability in On-Policy Distillation" [level=3] [ref=e485]':
+                - 'link "Not All Disagreement Is Learnable: Token Teachability in On-Policy Distillation" [ref=e486] [cursor=pointer]':
+                  - /url: /papers/2605.26844
+              - generic [ref=e487]:
+                - link "PolyUHK The Hong Kong Polytechnic University" [ref=e488] [cursor=pointer]:
+                  - /url: /PolyUHK
+                  - img "PolyUHK" [ref=e489]
+                  - generic [ref=e490]: The Hong Kong Polytechnic University
+                - generic [ref=e491]:
+                  - link "3" [ref=e492] [cursor=pointer]:
+                    - /url: /papers/2605.26844
+                    - img [ref=e493]
+                    - generic [ref=e495]: "3"
+                  - link "2" [ref=e498] [cursor=pointer]:
+                    - /url: /papers/2605.26844#community
+                    - img [ref=e499]
+                    - text: "2"
+        - article [ref=e501]:
+          - link [ref=e502] [cursor=pointer]:
+            - /url: /papers/2605.30407
+          - generic:
+            - text: Submitted by
+            - text: 231sm
+          - generic [ref=e506]:
+            - link "16" [ref=e508] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30407
+              - generic [ref=e509]:
+                - img [ref=e510]
+                - generic [ref=e512]: "16"
+            - generic [ref=e513]:
+              - heading "Exploring Autonomous Agentic Data Engineering for Model Specialization" [level=3] [ref=e514]:
+                - link "Exploring Autonomous Agentic Data Engineering for Model Specialization" [ref=e515] [cursor=pointer]:
+                  - /url: /papers/2605.30407
+              - generic [ref=e516]:
+                - link "ZhejiangUniversity Zhejiang University" [ref=e517] [cursor=pointer]:
+                  - /url: /ZhejiangUniversity
+                  - img "ZhejiangUniversity" [ref=e518]
+                  - generic [ref=e519]: Zhejiang University
+                - link "1" [ref=e521] [cursor=pointer]:
+                  - /url: /papers/2605.30407#community
+                  - img [ref=e522]
+                  - text: "1"
+        - article [ref=e524]:
+          - link [ref=e525] [cursor=pointer]:
+            - /url: /papers/2605.29447
+          - generic:
+            - text: Submitted by
+            - text: smallnono
+          - generic [ref=e529]:
+            - link "14" [ref=e531] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.29447
+              - generic [ref=e532]:
+                - img [ref=e533]
+                - generic [ref=e535]: "14"
+            - generic [ref=e536]:
+              - 'heading "Recovering Policy-Induced Errors: Benchmarking and Trajectory Synthesis for Robust GUI Agents" [level=3] [ref=e537]':
+                - 'link "Recovering Policy-Induced Errors: Benchmarking and Trajectory Synthesis for Robust GUI Agents" [ref=e538] [cursor=pointer]':
+                  - /url: /papers/2605.29447
+              - generic [ref=e539]:
+                - link "Shurui Li Hao Jiang Qihua Chen · 10 authors" [ref=e540] [cursor=pointer]:
+                  - /url: /papers/2605.29447
+                  - list [ref=e541]:
+                    - listitem "Shurui Li" [ref=e542]
+                    - listitem "Hao Jiang" [ref=e543]
+                    - listitem "Qihua Chen" [ref=e544]
+                    - listitem "444515liuxin" [ref=e545]
+                    - listitem "smallnono" [ref=e546]
+                    - listitem [ref=e547]:
+                      - generic [ref=e548]:
+                        - generic [ref=e549]: ·
+                        - text: 10 authors
+                - generic [ref=e550]:
+                  - link "4" [ref=e551] [cursor=pointer]:
+                    - /url: /papers/2605.29447
+                    - img [ref=e552]
+                    - generic [ref=e554]: "4"
+                  - link "1" [ref=e557] [cursor=pointer]:
+                    - /url: /papers/2605.29447#community
+                    - img [ref=e558]
+                    - text: "1"
+        - article [ref=e560]:
+          - link [ref=e561] [cursor=pointer]:
+            - /url: /papers/2605.31042
+          - generic:
+            - text: Submitted by
+            - text: zstanjj
+          - generic [ref=e565]:
+            - link "13" [ref=e567] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31042
+              - generic [ref=e568]:
+                - img [ref=e569]
+                - generic [ref=e571]: "13"
+            - generic [ref=e572]:
+              - 'heading "From Prompt Injection to Persistent Control: Defending Agentic Harness Against Trojan Backdoors" [level=3] [ref=e573]':
+                - 'link "From Prompt Injection to Persistent Control: Defending Agentic Harness Against Trojan Backdoors" [ref=e574] [cursor=pointer]':
+                  - /url: /papers/2605.31042
+              - generic [ref=e575]:
+                - link "Yiruo Cheng Xinyu Yang Zhicheng Dou Jiejun Tan · 7 authors" [ref=e576] [cursor=pointer]:
+                  - /url: /papers/2605.31042
+                  - list [ref=e577]:
+                    - listitem "Yiruo Cheng" [ref=e578]
+                    - listitem "Xinyu Yang" [ref=e579]
+                    - listitem "Zhicheng Dou" [ref=e580]
+                    - listitem "Jiejun Tan" [ref=e581]
+                    - listitem "namespace-ERI" [ref=e582]
+                    - listitem [ref=e583]:
+                      - generic [ref=e584]:
+                        - generic [ref=e585]: ·
+                        - text: 7 authors
+                - generic [ref=e586]:
+                  - link "1" [ref=e587] [cursor=pointer]:
+                    - /url: /papers/2605.31042
+                    - img [ref=e588]
+                    - generic [ref=e590]: "1"
+                  - link "1" [ref=e591] [cursor=pointer]:
+                    - /url: /papers/2605.31042#community
+                    - img [ref=e592]
+                    - text: "1"
+        - article [ref=e594]:
+          - link [ref=e595] [cursor=pointer]:
+            - /url: /papers/2605.30876
+          - generic:
+            - text: Submitted by
+            - text: FSCCS
+          - generic [ref=e599]:
+            - link "13" [ref=e601] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30876
+              - generic [ref=e602]:
+                - img [ref=e603]
+                - generic [ref=e605]: "13"
+            - generic [ref=e606]:
+              - 'heading "dMoE: dLLMs with Learnable Block Experts" [level=3] [ref=e607]':
+                - 'link "dMoE: dLLMs with Learnable Block Experts" [ref=e608] [cursor=pointer]':
+                  - /url: /papers/2605.30876
+              - generic [ref=e609]:
+                - link "Xinchao Wang Xinyin Ma Gongfan Fang Zigeng Chen · 5 authors" [ref=e610] [cursor=pointer]:
+                  - /url: /papers/2605.30876
+                  - list [ref=e611]:
+                    - listitem "Xinchao Wang" [ref=e612]
+                    - listitem "Xinyin Ma" [ref=e613]
+                    - listitem "Gongfan Fang" [ref=e614]
+                    - listitem "Zigeng Chen" [ref=e615]
+                    - listitem "FSCCS" [ref=e616]
+                    - listitem [ref=e617]:
+                      - generic [ref=e618]:
+                        - generic [ref=e619]: ·
+                        - text: 5 authors
+                - generic [ref=e620]:
+                  - link "16" [ref=e621] [cursor=pointer]:
+                    - /url: /papers/2605.30876
+                    - img [ref=e622]
+                    - generic [ref=e624]: "16"
+                  - link "2" [ref=e627] [cursor=pointer]:
+                    - /url: /papers/2605.30876#community
+                    - img [ref=e628]
+                    - text: "2"
+        - article [ref=e630]:
+          - link [ref=e631] [cursor=pointer]:
+            - /url: /papers/2605.30434
+          - generic:
+            - text: Submitted by
+            - text: Ningyu
+          - generic [ref=e635]:
+            - link "13" [ref=e637] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30434
+              - generic [ref=e638]:
+                - img [ref=e639]
+                - generic [ref=e641]: "13"
+            - generic [ref=e642]:
+              - 'heading "LongDS-Bench: On the Failure of Long-Horizon Agentic Data Analysis" [level=3] [ref=e643]':
+                - 'link "LongDS-Bench: On the Failure of Long-Horizon Agentic Data Analysis" [ref=e644] [cursor=pointer]':
+                  - /url: /papers/2605.30434
+              - generic [ref=e645]:
+                - link "antgroup Ant Group" [ref=e646] [cursor=pointer]:
+                  - /url: /antgroup
+                  - img "antgroup" [ref=e647]
+                  - generic [ref=e648]: Ant Group
+                - link "1" [ref=e650] [cursor=pointer]:
+                  - /url: /papers/2605.30434#community
+                  - img [ref=e651]
+                  - text: "1"
+        - article [ref=e653]:
+          - link "View paper" [ref=e654] [cursor=pointer]:
+            - /url: /papers/2605.31029
+          - generic:
+            - text: Submitted by
+            - text: nelikCode
+          - generic [ref=e656]:
+            - link "9" [ref=e658] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31029
+              - generic [ref=e659]:
+                - img [ref=e660]
+                - generic [ref=e662]: "9"
+            - generic [ref=e663]:
+              - 'heading "PEEK: Picking Essential frames via Efficient Knowledge distillation" [level=3] [ref=e664]':
+                - 'link "PEEK: Picking Essential frames via Efficient Knowledge distillation" [ref=e665] [cursor=pointer]':
+                  - /url: /papers/2605.31029
+              - generic [ref=e666]:
+                - link "momentslab Moments Lab" [ref=e667] [cursor=pointer]:
+                  - /url: /momentslab
+                  - img "momentslab" [ref=e668]
+                  - generic [ref=e669]: Moments Lab
+                - generic [ref=e670]:
+                  - link "0" [ref=e671] [cursor=pointer]:
+                    - /url: /papers/2605.31029
+                    - img [ref=e672]
+                    - generic [ref=e674]: "0"
+                  - link "1" [ref=e677] [cursor=pointer]:
+                    - /url: /papers/2605.31029#community
+                    - img [ref=e678]
+                    - text: "1"
+        - article [ref=e680]:
+          - link [ref=e681] [cursor=pointer]:
+            - /url: /papers/2605.31433
+          - generic:
+            - text: Submitted by
+            - text: pminervini
+          - generic [ref=e685]:
+            - link "9" [ref=e687] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31433
+              - generic [ref=e688]:
+                - img [ref=e689]
+                - generic [ref=e691]: "9"
+            - generic [ref=e692]:
+              - 'heading "SCOPE: Self-Play via Co-Evolving Policies for Open-Ended Tasks" [level=3] [ref=e693]':
+                - 'link "SCOPE: Self-Play via Co-Evolving Policies for Open-Ended Tasks" [ref=e694] [cursor=pointer]':
+                  - /url: /papers/2605.31433
+              - generic [ref=e695]:
+                - link "Joshua Ong Jun Leang Wai-Chung Kwan · 4 authors" [ref=e696] [cursor=pointer]:
+                  - /url: /papers/2605.31433
+                  - list [ref=e697]:
+                    - listitem "Joshua Ong Jun Leang" [ref=e698]
+                    - listitem "Wai-Chung Kwan" [ref=e699]
+                    - listitem "pminervini" [ref=e700]
+                    - listitem "aryopg" [ref=e701]
+                    - listitem [ref=e702]:
+                      - generic [ref=e703]:
+                        - generic [ref=e704]: ·
+                        - text: 4 authors
+                - link "1" [ref=e708] [cursor=pointer]:
+                  - /url: /papers/2605.31433#community
+                  - img [ref=e709]
+                  - text: "1"
+        - article [ref=e711]:
+          - link [ref=e712] [cursor=pointer]:
+            - /url: /papers/2605.30561
+          - generic:
+            - text: Submitted by
+            - text: zcai
+          - generic [ref=e716]:
+            - link "8" [ref=e718] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30561
+              - generic [ref=e719]:
+                - img [ref=e720]
+                - generic [ref=e722]: "8"
+            - generic [ref=e723]:
+              - 'heading "VLM3: Vision Language Models Are Native 3D Learners" [level=3] [ref=e724]':
+                - 'link "VLM3: Vision Language Models Are Native 3D Learners" [ref=e725] [cursor=pointer]':
+                  - /url: /papers/2605.30561
+              - generic [ref=e726]:
+                - link "facebook-research AI at Meta" [ref=e727] [cursor=pointer]:
+                  - /url: /facebook-research
+                  - img "facebook-research" [ref=e728]
+                  - generic [ref=e729]: AI at Meta
+                - generic [ref=e730]:
+                  - link "1" [ref=e731] [cursor=pointer]:
+                    - /url: /papers/2605.30561
+                    - img [ref=e732]
+                    - generic [ref=e734]: "1"
+                  - link "1" [ref=e735] [cursor=pointer]:
+                    - /url: /papers/2605.30561#community
+                    - img [ref=e736]
+                    - text: "1"
+        - article [ref=e738]:
+          - link [ref=e739] [cursor=pointer]:
+            - /url: /papers/2605.29796
+          - generic:
+            - text: Submitted by
+            - text: liussy
+          - generic [ref=e743]:
+            - link "6" [ref=e745] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.29796
+              - generic [ref=e746]:
+                - img [ref=e747]
+                - generic [ref=e749]: "6"
+            - generic [ref=e750]:
+              - 'heading "SAAS: Self-Aware Reinforcement Learning for Over-Search Mitigation in Agentic Search" [level=3] [ref=e751]':
+                - 'link "SAAS: Self-Aware Reinforcement Learning for Over-Search Mitigation in Agentic Search" [ref=e752] [cursor=pointer]':
+                  - /url: /papers/2605.29796
+              - generic [ref=e753]:
+                - link "XMU Xiamen University" [ref=e754] [cursor=pointer]:
+                  - /url: /XMU
+                  - img "XMU" [ref=e755]
+                  - generic [ref=e756]: Xiamen University
+                - link "1" [ref=e760] [cursor=pointer]:
+                  - /url: /papers/2605.29796#community
+                  - img [ref=e761]
+                  - text: "1"
+        - article [ref=e763]:
+          - link [ref=e764] [cursor=pointer]:
+            - /url: /papers/2605.30834
+          - generic:
+            - text: Submitted by
+            - text: sam121796
+          - generic [ref=e768]:
+            - link "5" [ref=e770] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30834
+              - generic [ref=e771]:
+                - img [ref=e772]
+                - generic [ref=e774]: "5"
+            - generic [ref=e775]:
+              - 'heading "Hide-and-Seek in Trajectories: Discovering Failure Signals for VLA Runtime Monitoring" [level=3] [ref=e776]':
+                - 'link "Hide-and-Seek in Trajectories: Discovering Failure Signals for VLA Runtime Monitoring" [ref=e777] [cursor=pointer]':
+                  - /url: /papers/2605.30834
+              - generic [ref=e778]:
+                - link "Uwmadison University of Wisconsin-Madison" [ref=e779] [cursor=pointer]:
+                  - /url: /Uwmadison
+                  - img "Uwmadison" [ref=e780]
+                  - generic [ref=e781]: University of Wisconsin-Madison
+                - link "1" [ref=e783] [cursor=pointer]:
+                  - /url: /papers/2605.30834#community
+                  - img [ref=e784]
+                  - text: "1"
+        - article [ref=e786]:
+          - link [ref=e787] [cursor=pointer]:
+            - /url: /papers/2605.23657
+          - generic:
+            - text: Submitted by
+            - text: jhying
+          - generic [ref=e791]:
+            - link "4" [ref=e793] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.23657
+              - generic [ref=e794]:
+                - img [ref=e795]
+                - generic [ref=e797]: "4"
+            - generic [ref=e798]:
+              - 'heading "OpenSkillEval: Automatically Auditing the Open Skill Ecosystem for LLM Agents" [level=3] [ref=e799]':
+                - 'link "OpenSkillEval: Automatically Auditing the Open Skill Ecosystem for LLM Agents" [ref=e800] [cursor=pointer]':
+                  - /url: /papers/2605.23657
+              - generic [ref=e801]:
+                - link "Yixin Cao Siyuan Liu Wei Tang Boxian Ai Jiahao Ying · 5 authors" [ref=e802] [cursor=pointer]:
+                  - /url: /papers/2605.23657
+                  - list [ref=e803]:
+                    - listitem "Yixin Cao" [ref=e804]
+                    - listitem "Siyuan Liu" [ref=e805]
+                    - listitem "Wei Tang" [ref=e806]
+                    - listitem "Boxian Ai" [ref=e807]
+                    - listitem "Jiahao Ying" [ref=e808]
+                    - listitem [ref=e809]:
+                      - generic [ref=e810]:
+                        - generic [ref=e811]: ·
+                        - text: 5 authors
+                - generic [ref=e812]:
+                  - link "1" [ref=e813] [cursor=pointer]:
+                    - /url: /papers/2605.23657
+                    - img [ref=e814]
+                    - generic [ref=e816]: "1"
+                  - link "1" [ref=e817] [cursor=pointer]:
+                    - /url: /papers/2605.23657#community
+                    - img [ref=e818]
+                    - text: "1"
+        - article [ref=e820]:
+          - link "View paper" [ref=e821] [cursor=pointer]:
+            - /url: /papers/2605.31598
+          - generic:
+            - text: Submitted by
+            - text: taesiri
+          - generic [ref=e823]:
+            - link "3" [ref=e825] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31598
+              - generic [ref=e826]:
+                - img [ref=e827]
+                - generic [ref=e829]: "3"
+            - generic [ref=e830]:
+              - heading "Linear Scaling Video VLMs for Long Video Understanding" [level=3] [ref=e831]:
+                - link "Linear Scaling Video VLMs for Long Video Understanding" [ref=e832] [cursor=pointer]:
+                  - /url: /papers/2605.31598
+              - generic [ref=e833]:
+                - link "StanfordUniversity Stanford University" [ref=e834] [cursor=pointer]:
+                  - /url: /StanfordUniversity
+                  - img "StanfordUniversity" [ref=e835]
+                  - generic [ref=e836]: Stanford University
+                - link "1" [ref=e838] [cursor=pointer]:
+                  - /url: /papers/2605.31598#community
+                  - img [ref=e839]
+                  - text: "1"
+        - article [ref=e841]:
+          - link [ref=e842] [cursor=pointer]:
+            - /url: /papers/2605.30888
+          - generic:
+            - text: Submitted by
+            - text: Yofuria
+          - generic [ref=e846]:
+            - link "2" [ref=e848] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30888
+              - generic [ref=e849]:
+                - img [ref=e850]
+                - generic [ref=e852]: "2"
+            - generic [ref=e853]:
+              - 'heading "The Flip Side of RLHF: On-Policy Feedback for Reward Model Self-Supervised Improvement" [level=3] [ref=e854]':
+                - 'link "The Flip Side of RLHF: On-Policy Feedback for Reward Model Self-Supervised Improvement" [ref=e855] [cursor=pointer]':
+                  - /url: /papers/2605.30888
+              - generic [ref=e856]:
+                - link "Qi Liu Jiaqi Li Min Tang Tong Wu · 6 authors" [ref=e857] [cursor=pointer]:
+                  - /url: /papers/2605.30888
+                  - list [ref=e858]:
+                    - listitem "Qi Liu" [ref=e859]
+                    - listitem "Jiaqi Li" [ref=e860]
+                    - listitem "Min Tang" [ref=e861]
+                    - listitem "Tong Wu" [ref=e862]
+                    - listitem "Yofuria" [ref=e863]
+                    - listitem [ref=e864]:
+                      - generic [ref=e865]:
+                        - generic [ref=e866]: ·
+                        - text: 6 authors
+                - link "1" [ref=e870] [cursor=pointer]:
+                  - /url: /papers/2605.30888#community
+                  - img [ref=e871]
+                  - text: "1"
+        - article [ref=e873]:
+          - link "View paper" [ref=e874] [cursor=pointer]:
+            - /url: /papers/2605.31603
+          - generic:
+            - text: Submitted by
+            - text: taesiri
+          - generic [ref=e876]:
+            - link "2" [ref=e878] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31603
+              - generic [ref=e879]:
+                - img [ref=e880]
+                - generic [ref=e882]: "2"
+            - generic [ref=e883]:
+              - 'heading "Lumos-Nexus: Efficient Frequency Bridging with Homogeneous Latent Space for Video Unified Models" [level=3] [ref=e884]':
+                - 'link "Lumos-Nexus: Efficient Frequency Bridging with Homogeneous Latent Space for Video Unified Models" [ref=e885] [cursor=pointer]':
+                  - /url: /papers/2605.31603
+              - generic [ref=e886]:
+                - link "Yujie Wei Xinyu Liu Lingling Cai Hangjie Yuan Jiazheng Xing · 12 authors" [ref=e887] [cursor=pointer]:
+                  - /url: /papers/2605.31603
+                  - list [ref=e888]:
+                    - listitem "Yujie Wei" [ref=e889]
+                    - listitem "Xinyu Liu" [ref=e890]
+                    - listitem "Lingling Cai" [ref=e891]
+                    - listitem "Hangjie Yuan" [ref=e892]
+                    - listitem "Jiazheng Xing" [ref=e893]
+                    - listitem [ref=e894]:
+                      - generic [ref=e895]:
+                        - generic [ref=e896]: ·
+                        - text: 12 authors
+                - link "2" [ref=e898] [cursor=pointer]:
+                  - /url: /papers/2605.31603#community
+                  - img [ref=e899]
+                  - text: "2"
+        - article [ref=e901]:
+          - link [ref=e902] [cursor=pointer]:
+            - /url: /papers/2605.31170
+          - generic:
+            - text: Submitted by
+            - text: EvilScript
+          - generic [ref=e906]:
+            - link "1" [ref=e908] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31170
+              - generic [ref=e909]:
+                - img [ref=e910]
+                - generic [ref=e912]: "1"
+            - generic [ref=e913]:
+              - 'heading "Emergent Languages in Populations of Language Model Agents: From Token Efficiency to Oversight Evasion" [level=3] [ref=e914]':
+                - 'link "Emergent Languages in Populations of Language Model Agents: From Token Efficiency to Oversight Evasion" [ref=e915] [cursor=pointer]':
+                  - /url: /papers/2605.31170
+              - generic [ref=e916]:
+                - link "aisilab AI Safety & Interpretability Lab" [ref=e917] [cursor=pointer]:
+                  - /url: /aisilab
+                  - img "aisilab" [ref=e918]
+                  - generic [ref=e919]: AI Safety & Interpretability Lab
+                - generic [ref=e920]:
+                  - link "0" [ref=e921] [cursor=pointer]:
+                    - /url: /papers/2605.31170
+                    - img [ref=e922]
+                    - generic [ref=e924]: "0"
+                  - link "1" [ref=e927] [cursor=pointer]:
+                    - /url: /papers/2605.31170#community
+                    - img [ref=e928]
+                    - text: "1"
+        - article [ref=e930]:
+          - link [ref=e931] [cursor=pointer]:
+            - /url: /papers/2605.31096
+          - generic:
+            - text: Submitted by
+            - text: allencbzhang
+          - generic [ref=e935]:
+            - link "1" [ref=e937] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31096
+              - generic [ref=e938]:
+                - img [ref=e939]
+                - generic [ref=e941]: "1"
+            - generic [ref=e942]:
+              - 'heading "iVGR: Internalizing Visually Grounded Reasoning for MLLMs with Reinforcement Learning" [level=3] [ref=e943]':
+                - 'link "iVGR: Internalizing Visually Grounded Reasoning for MLLMs with Reinforcement Learning" [ref=e944] [cursor=pointer]':
+                  - /url: /papers/2605.31096
+              - generic [ref=e945]:
+                - link "HKUCDS University of Hong Kong" [ref=e946] [cursor=pointer]:
+                  - /url: /HKUCDS
+                  - img "HKUCDS" [ref=e947]
+                  - generic [ref=e948]: University of Hong Kong
+                - generic [ref=e949]:
+                  - link "4" [ref=e950] [cursor=pointer]:
+                    - /url: /papers/2605.31096
+                    - img [ref=e951]
+                    - generic [ref=e953]: "4"
+                  - link "1" [ref=e954] [cursor=pointer]:
+                    - /url: /papers/2605.31096#community
+                    - img [ref=e955]
+                    - text: "1"
+        - article [ref=e957]:
+          - link [ref=e958] [cursor=pointer]:
+            - /url: /papers/2605.31158
+          - generic:
+            - text: Submitted by
+            - text: taesiri
+          - generic [ref=e962]:
+            - link "1" [ref=e964] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31158
+              - generic [ref=e965]:
+                - img [ref=e966]
+                - generic [ref=e968]: "1"
+            - generic [ref=e969]:
+              - 'heading "Light Interaction: Training-Free Inference Acceleration for Interactive Video World Models" [level=3] [ref=e970]':
+                - 'link "Light Interaction: Training-Free Inference Acceleration for Interactive Video World Models" [ref=e971] [cursor=pointer]':
+                  - /url: /papers/2605.31158
+              - generic [ref=e972]:
+                - link "nvidia NVIDIA" [ref=e973] [cursor=pointer]:
+                  - /url: /nvidia
+                  - img "nvidia" [ref=e974]
+                  - generic [ref=e975]: NVIDIA
+                - link "1" [ref=e977] [cursor=pointer]:
+                  - /url: /papers/2605.31158#community
+                  - img [ref=e978]
+                  - text: "1"
+        - article [ref=e980]:
+          - link [ref=e981] [cursor=pointer]:
+            - /url: /papers/2605.31336
+          - generic:
+            - text: Submitted by
+            - text: JeffreyYzh
+          - generic [ref=e985]:
+            - link "1" [ref=e987] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31336
+              - generic [ref=e988]:
+                - img [ref=e989]
+                - generic [ref=e991]: "1"
+            - generic [ref=e992]:
+              - 'heading "DecMem: Towards Minute-Long Consistent World Generation with Decoupled Memory" [level=3] [ref=e993]':
+                - 'link "DecMem: Towards Minute-Long Consistent World Generation with Decoupled Memory" [ref=e994] [cursor=pointer]':
+                  - /url: /papers/2605.31336
+              - generic [ref=e995]:
+                - link "KlingTeam Kling Team" [ref=e996] [cursor=pointer]:
+                  - /url: /KlingTeam
+                  - img "KlingTeam" [ref=e997]
+                  - generic [ref=e998]: Kling Team
+                - link "1" [ref=e1002] [cursor=pointer]:
+                  - /url: /papers/2605.31336#community
+                  - img [ref=e1003]
+                  - text: "1"
+        - article [ref=e1005]:
+          - link [ref=e1006] [cursor=pointer]:
+            - /url: /papers/2605.30846
+          - generic:
+            - text: Submitted by
+            - text: MengqiLei
+          - generic [ref=e1010]:
+            - link "1" [ref=e1012] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30846
+              - generic [ref=e1013]:
+                - img [ref=e1014]
+                - generic [ref=e1016]: "1"
+            - generic [ref=e1017]:
+              - heading "Count Anything" [level=3] [ref=e1018]:
+                - link "Count Anything" [ref=e1019] [cursor=pointer]:
+                  - /url: /papers/2605.30846
+              - generic [ref=e1020]:
+                - link "Jun-Hai Yong Shaoyi Du Wei Bao Shuokun Cheng Mengqi Lei · 7 authors" [ref=e1021] [cursor=pointer]:
+                  - /url: /papers/2605.30846
+                  - list [ref=e1022]:
+                    - listitem "Jun-Hai Yong" [ref=e1023]
+                    - listitem "Shaoyi Du" [ref=e1024]
+                    - listitem "Wei Bao" [ref=e1025]
+                    - listitem "Shuokun Cheng" [ref=e1026]
+                    - listitem "Mengqi Lei" [ref=e1027]
+                    - listitem [ref=e1028]:
+                      - generic [ref=e1029]:
+                        - generic [ref=e1030]: ·
+                        - text: 7 authors
+                - generic [ref=e1031]:
+                  - link "7" [ref=e1032] [cursor=pointer]:
+                    - /url: /papers/2605.30846
+                    - img [ref=e1033]
+                    - generic [ref=e1035]: "7"
+                  - link "1" [ref=e1036] [cursor=pointer]:
+                    - /url: /papers/2605.30846#community
+                    - img [ref=e1037]
+                    - text: "1"
+        - article [ref=e1039]:
+          - link [ref=e1040] [cursor=pointer]:
+            - /url: /papers/2605.30329
+          - generic:
+            - text: Submitted by
+            - text: hosytuyen
+          - generic [ref=e1044]:
+            - link "1" [ref=e1046] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30329
+              - generic [ref=e1047]:
+                - img [ref=e1048]
+                - generic [ref=e1050]: "1"
+            - generic [ref=e1051]:
+              - 'heading "SoundnessBench: Can Your AI Scientist Really Tell Good Research Ideas from Bad Ones?" [level=3] [ref=e1052]':
+                - 'link "SoundnessBench: Can Your AI Scientist Really Tell Good Research Ideas from Bad Ones?" [ref=e1053] [cursor=pointer]':
+                  - /url: /papers/2605.30329
+              - generic [ref=e1054]:
+                - link "furonghuang-lab Furong Huang's Lab at UMD" [ref=e1055] [cursor=pointer]:
+                  - /url: /furonghuang-lab
+                  - img "furonghuang-lab" [ref=e1056]
+                  - generic [ref=e1057]: Furong Huang's Lab at UMD
+                - generic [ref=e1058]:
+                  - link "0" [ref=e1059] [cursor=pointer]:
+                    - /url: /papers/2605.30329
+                    - img [ref=e1060]
+                    - generic [ref=e1062]: "0"
+                  - link "1" [ref=e1065] [cursor=pointer]:
+                    - /url: /papers/2605.30329#community
+                    - img [ref=e1066]
+                    - text: "1"
+        - article [ref=e1068]:
+          - link [ref=e1069] [cursor=pointer]:
+            - /url: /papers/2605.30557
+          - generic:
+            - text: Submitted by
+            - text: Yuezhangjoslin
+          - generic [ref=e1073]:
+            - link "1" [ref=e1075] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30557
+              - generic [ref=e1076]:
+                - img [ref=e1077]
+                - generic [ref=e1079]: "1"
+            - generic [ref=e1080]:
+              - 'heading "Seeing Isn''t Knowing: Do VLMs Know When Not to Answer Spatial Questions (and Why)?" [level=3] [ref=e1081]':
+                - 'link "Seeing Isn''t Knowing: Do VLMs Know When Not to Answer Spatial Questions (and Why)?" [ref=e1082] [cursor=pointer]':
+                  - /url: /papers/2605.30557
+              - generic [ref=e1083]:
+                - link "Idan Szpektor Yonatan Bitton Han Lin Zun Wang Yue Zhang · 6 authors" [ref=e1084] [cursor=pointer]:
+                  - /url: /papers/2605.30557
+                  - list [ref=e1085]:
+                    - listitem "Idan Szpektor" [ref=e1086]
+                    - listitem "Yonatan Bitton" [ref=e1087]
+                    - listitem "Han Lin" [ref=e1088]
+                    - listitem "Zun Wang" [ref=e1089]
+                    - listitem "Yue Zhang" [ref=e1090]
+                    - listitem [ref=e1091]:
+                      - generic [ref=e1092]:
+                        - generic [ref=e1093]: ·
+                        - text: 6 authors
+                - generic [ref=e1094]:
+                  - link "3" [ref=e1095] [cursor=pointer]:
+                    - /url: /papers/2605.30557
+                    - img [ref=e1096]
+                    - generic [ref=e1098]: "3"
+                  - link "1" [ref=e1099] [cursor=pointer]:
+                    - /url: /papers/2605.30557#community
+                    - img [ref=e1100]
+                    - text: "1"
+        - article [ref=e1102]:
+          - link [ref=e1103] [cursor=pointer]:
+            - /url: /papers/2605.30514
+          - generic:
+            - text: Submitted by
+            - text: amanchadha
+          - generic [ref=e1107]:
+            - link "1" [ref=e1109] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30514
+              - generic [ref=e1110]:
+                - img [ref=e1111]
+                - generic [ref=e1113]: "1"
+            - generic [ref=e1114]:
+              - 'heading "MAAT: Multi-phase Adapter-Aware Targeted Unlearning" [level=3] [ref=e1115]':
+                - 'link "MAAT: Multi-phase Adapter-Aware Targeted Unlearning" [ref=e1116] [cursor=pointer]':
+                  - /url: /papers/2605.30514
+              - generic [ref=e1117]:
+                - link "Vinija Jain Saksham Thakur Shubham Gaur Suryash Yagnik · 6 authors" [ref=e1118] [cursor=pointer]:
+                  - /url: /papers/2605.30514
+                  - list [ref=e1119]:
+                    - listitem "Vinija Jain" [ref=e1120]
+                    - listitem "Saksham Thakur" [ref=e1121]
+                    - listitem "Shubham Gaur" [ref=e1122]
+                    - listitem "Suryash Yagnik" [ref=e1123]
+                    - listitem "amanchadha" [ref=e1124]
+                    - listitem [ref=e1125]:
+                      - generic [ref=e1126]:
+                        - generic [ref=e1127]: ·
+                        - text: 6 authors
+                - link "1" [ref=e1131] [cursor=pointer]:
+                  - /url: /papers/2605.30514#community
+                  - img [ref=e1132]
+                  - text: "1"
+        - article [ref=e1134]:
+          - link [ref=e1135] [cursor=pointer]:
+            - /url: /papers/2605.29411
+          - generic:
+            - text: Submitted by
+            - text: Shuwan
+          - generic [ref=e1139]:
+            - link "1" [ref=e1141] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.29411
+              - generic [ref=e1142]:
+                - img [ref=e1143]
+                - generic [ref=e1145]: "1"
+            - generic [ref=e1146]:
+              - heading "The Good, the Bad, and the Ugly of Markov Boundary for Tabular Prediction" [level=3] [ref=e1147]:
+                - link "The Good, the Bad, and the Ugly of Markov Boundary for Tabular Prediction" [ref=e1148] [cursor=pointer]:
+                  - /url: /papers/2605.29411
+              - generic [ref=e1149]:
+                - link "CSE472-blanket-challenge Beyond the Blanket" [ref=e1150] [cursor=pointer]:
+                  - /url: /CSE472-blanket-challenge
+                  - img "CSE472-blanket-challenge" [ref=e1151]
+                  - generic [ref=e1152]: Beyond the Blanket
+                - link "1" [ref=e1154] [cursor=pointer]:
+                  - /url: /papers/2605.29411#community
+                  - img [ref=e1155]
+                  - text: "1"
+        - article [ref=e1157]:
+          - link [ref=e1158] [cursor=pointer]:
+            - /url: /papers/2605.28992
+          - generic:
+            - text: Submitted by
+            - text: danjacobellis
+          - generic [ref=e1162]:
+            - link "1" [ref=e1164] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.28992
+              - generic [ref=e1165]:
+                - img [ref=e1166]
+                - generic [ref=e1168]: "1"
+            - generic [ref=e1169]:
+              - 'heading "FRAPPE: Full Input, Residual Output Autoencoding with Projection Pursuit Encoder" [level=3] [ref=e1170]':
+                - 'link "FRAPPE: Full Input, Residual Output Autoencoding with Projection Pursuit Encoder" [ref=e1171] [cursor=pointer]':
+                  - /url: /papers/2605.28992
+              - generic [ref=e1172]:
+                - link "Neeraja J. Yadwadkar Dan Jacobellis · 2 authors" [ref=e1173] [cursor=pointer]:
+                  - /url: /papers/2605.28992
+                  - list [ref=e1174]:
+                    - listitem "Neeraja J. Yadwadkar" [ref=e1175]
+                    - listitem "Dan Jacobellis" [ref=e1176]
+                    - listitem [ref=e1177]:
+                      - generic [ref=e1178]:
+                        - generic [ref=e1179]: ·
+                        - text: 2 authors
+                - link "1" [ref=e1181] [cursor=pointer]:
+                  - /url: /papers/2605.28992#community
+                  - img [ref=e1182]
+                  - text: "1"
+        - article [ref=e1184]:
+          - link [ref=e1185] [cursor=pointer]:
+            - /url: /papers/2605.24442
+          - generic:
+            - text: Submitted by
+            - text: billpsomas
+          - generic [ref=e1189]:
+            - link "1" [ref=e1191] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.24442
+              - generic [ref=e1192]:
+                - img [ref=e1193]
+                - generic [ref=e1195]: "1"
+            - generic [ref=e1196]:
+              - heading "Benchmarking Composed Image Retrieval for Applied Earth Observation" [level=3] [ref=e1197]:
+                - link "Benchmarking Composed Image Retrieval for Applied Earth Observation" [ref=e1198] [cursor=pointer]:
+                  - /url: /papers/2605.24442
+              - generic [ref=e1199]:
+                - link "vrg-prague Visual Recognition Group FEE CTU in Prague" [ref=e1200] [cursor=pointer]:
+                  - /url: /vrg-prague
+                  - img "vrg-prague" [ref=e1201]
+                  - generic [ref=e1202]: Visual Recognition Group FEE CTU in Prague
+                - link "1" [ref=e1204] [cursor=pointer]:
+                  - /url: /papers/2605.24442#community
+                  - img [ref=e1205]
+                  - text: "1"
+        - article [ref=e1207]:
+          - link [ref=e1208] [cursor=pointer]:
+            - /url: /papers/2605.31455
+          - generic:
+            - text: Submitted by
+            - text: mujianijan
+          - generic [ref=e1212]:
+            - link "-" [ref=e1214] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.31455
+              - generic [ref=e1215]:
+                - img [ref=e1216]
+                - generic [ref=e1218]: "-"
+            - generic [ref=e1219]:
+              - 'heading "DRIFT: Decoupled Rollouts and Importance-Weighted Fine-Tuning for Efficient Multi-Turn Optimization" [level=3] [ref=e1220]':
+                - 'link "DRIFT: Decoupled Rollouts and Importance-Weighted Fine-Tuning for Efficient Multi-Turn Optimization" [ref=e1221] [cursor=pointer]':
+                  - /url: /papers/2605.31455
+              - generic [ref=e1222]:
+                - link "Yao Shu Zhongxiang Dai Chengwei Qin Tianyi Lin · 5 authors" [ref=e1223] [cursor=pointer]:
+                  - /url: /papers/2605.31455
+                  - list [ref=e1224]:
+                    - listitem "Yao Shu" [ref=e1225]
+                    - listitem "Zhongxiang Dai" [ref=e1226]
+                    - listitem "Chengwei Qin" [ref=e1227]
+                    - listitem "Tianyi Lin" [ref=e1228]
+                    - listitem "mujianijan" [ref=e1229]
+                    - listitem [ref=e1230]:
+                      - generic [ref=e1231]:
+                        - generic [ref=e1232]: ·
+                        - text: 5 authors
+                - generic [ref=e1233]:
+                  - link "0" [ref=e1234] [cursor=pointer]:
+                    - /url: /papers/2605.31455
+                    - img [ref=e1235]
+                    - generic [ref=e1237]: "0"
+                  - link "1" [ref=e1240] [cursor=pointer]:
+                    - /url: /papers/2605.31455#community
+                    - img [ref=e1241]
+                    - text: "1"
+        - article [ref=e1243]:
+          - link [ref=e1244] [cursor=pointer]:
+            - /url: /papers/2605.29488
+          - generic:
+            - text: Submitted by
+            - text: L-yiheng
+          - generic [ref=e1248]:
+            - link "-" [ref=e1250] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.29488
+              - generic [ref=e1251]:
+                - img [ref=e1252]
+                - generic [ref=e1254]: "-"
+            - generic [ref=e1255]:
+              - 'heading "AnyMo: Scaling Any-Modality Conditional Motion Generation with Masked Modeling" [level=3] [ref=e1256]':
+                - 'link "AnyMo: Scaling Any-Modality Conditional Motion Generation with Masked Modeling" [ref=e1257] [cursor=pointer]':
+                  - /url: /papers/2605.29488
+              - generic [ref=e1258]:
+                - link "Hong Chang Yingjie Chen Ruibing Hou Zhuo Li Yiheng Li · 7 authors" [ref=e1259] [cursor=pointer]:
+                  - /url: /papers/2605.29488
+                  - list [ref=e1260]:
+                    - listitem "Hong Chang" [ref=e1261]
+                    - listitem "Yingjie Chen" [ref=e1262]
+                    - listitem "Ruibing Hou" [ref=e1263]
+                    - listitem "Zhuo Li" [ref=e1264]
+                    - listitem "Yiheng Li" [ref=e1265]
+                    - listitem [ref=e1266]:
+                      - generic [ref=e1267]:
+                        - generic [ref=e1268]: ·
+                        - text: 7 authors
+                - link "1" [ref=e1270] [cursor=pointer]:
+                  - /url: /papers/2605.29488#community
+                  - img [ref=e1271]
+                  - text: "1"
+        - article [ref=e1273]:
+          - link [ref=e1274] [cursor=pointer]:
+            - /url: /papers/2605.27919
+          - generic:
+            - text: Submitted by
+            - text: HenryWJL
+          - generic [ref=e1278]:
+            - link "-" [ref=e1280] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.27919
+              - generic [ref=e1281]:
+                - img [ref=e1282]
+                - generic [ref=e1284]: "-"
+            - generic [ref=e1285]:
+              - heading "Frequency-Guided Action Diffusion via Sub-Frequency Manifold Traversal" [level=3] [ref=e1286]:
+                - link "Frequency-Guided Action Diffusion via Sub-Frequency Manifold Traversal" [ref=e1287] [cursor=pointer]:
+                  - /url: /papers/2605.27919
+              - generic [ref=e1288]:
+                - link "upenn University of Pennsylvania" [ref=e1289] [cursor=pointer]:
+                  - /url: /upenn
+                  - img "upenn" [ref=e1290]
+                  - generic [ref=e1291]: University of Pennsylvania
+                - generic [ref=e1292]:
+                  - link "0" [ref=e1293] [cursor=pointer]:
+                    - /url: /papers/2605.27919
+                    - img [ref=e1294]
+                    - generic [ref=e1296]: "0"
+                  - link "1" [ref=e1299] [cursor=pointer]:
+                    - /url: /papers/2605.27919#community
+                    - img [ref=e1300]
+                    - text: "1"
+        - link "Previous" [ref=e1303] [cursor=pointer]:
+          - /url: /papers/date/2026-05-29
+          - img [ref=e1304]
+          - text: Previous
+  - contentinfo [ref=e1306]:
+    - navigation [ref=e1307]:
+      - button "System theme" [ref=e1310] [cursor=pointer]:
+        - img [ref=e1311]
+        - text: System theme
+      - link "TOS" [ref=e1316] [cursor=pointer]:
+        - /url: /terms-of-service
+      - link "Privacy" [ref=e1317] [cursor=pointer]:
+        - /url: /privacy
+      - link "About" [ref=e1318] [cursor=pointer]:
+        - /url: /huggingface
+      - link "Careers" [ref=e1319] [cursor=pointer]:
+        - /url: https://apply.workable.com/huggingface/
+      - link "Hugging Face" [ref=e1320] [cursor=pointer]:
+        - /url: /
+        - img [ref=e1321]
+      - link "Models" [ref=e1335] [cursor=pointer]:
+        - /url: /models
+      - link "Datasets" [ref=e1336] [cursor=pointer]:
+        - /url: /datasets
+      - link "Spaces" [ref=e1337] [cursor=pointer]:
+        - /url: /spaces
+      - link "Pricing" [ref=e1338] [cursor=pointer]:
+        - /url: /pricing
+      - link "Docs" [ref=e1339] [cursor=pointer]:
+        - /url: /docs

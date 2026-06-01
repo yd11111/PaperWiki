@@ -1,7 +1,7 @@
 ---
 type: concept
 title: "Speech Factorization"
-aliases: [语音因子分解, Timbre Disentanglement, Self-distillation for TTS]
+aliases: [语音因子分解, Timbre Disentanglement, Self-distillation for TTS, Speaker-Content Disentanglement, 说话人-内容解耦]
 category: "training-strategy"
 tags: [TTS, disentanglement, voice-conversion, self-distillation]
 key_papers: ["[[论文笔记/Seed-TTS|Seed-TTS]]"]

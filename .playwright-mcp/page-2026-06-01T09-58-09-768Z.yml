@@ -1,0 +1,284 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Skip to main content" [ref=e4] [cursor=pointer]:
+      - /url: "#content"
+    - generic [ref=e5]:
+      - link "Cornell University" [ref=e7] [cursor=pointer]:
+        - /url: https://www.cornell.edu/
+        - img "Cornell University" [ref=e8]
+      - link "Learn about arXiv becoming an independent nonprofit." [ref=e10] [cursor=pointer]:
+        - /url: https://tech.cornell.edu/arxiv/
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - text: We gratefully acknowledge support from the Simons Foundation,
+          - link "member institutions" [ref=e13] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+          - text: ", and all contributors."
+        - link "Donate" [ref=e14] [cursor=pointer]:
+          - /url: https://info.arxiv.org/about/donate.html
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - link "arxiv logo" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img "arxiv logo" [ref=e18]
+        - generic [ref=e19]: ">"
+        - link "eess" [ref=e20] [cursor=pointer]:
+          - /url: /list/eess/recent
+        - generic [ref=e21]: ">"
+        - text: arXiv:2605.30993
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - textbox "Search term or terms" [ref=e26]:
+            - /placeholder: Search...
+          - paragraph [ref=e27]:
+            - link "Help" [ref=e28] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+            - text: "|"
+            - link "Advanced Search" [ref=e29] [cursor=pointer]:
+              - /url: https://arxiv.org/search/advanced
+        - combobox "Field to search" [ref=e31]:
+          - option "All fields" [selected]
+          - option "Title"
+          - option "Author"
+          - option "Abstract"
+          - option "Comments"
+          - option "Journal reference"
+          - option "ACM classification"
+          - option "MSC classification"
+          - option "Report number"
+          - option "arXiv identifier"
+          - option "DOI"
+          - option "ORCID"
+          - option "arXiv author ID"
+          - option "Help pages"
+          - option "Full text"
+        - button "Search" [ref=e32] [cursor=pointer]
+  - main [ref=e33]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Electrical Engineering and Systems Science > Audio and Speech Processing" [level=1] [ref=e38]
+        - generic [ref=e40]:
+          - generic [ref=e41]: "[Submitted on 29 May 2026]"
+          - 'heading "SwanVoice: Expressive Long-Form Zero-Shot Speech Synthesis for Both Monologue and Dialogue" [level=1] [ref=e42]'
+          - generic [ref=e43]:
+            - link "Ruiqi Li" [ref=e44] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Li,+R
+            - text: ","
+            - link "Yu Zhang" [ref=e45] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Zhang,+Y
+            - text: ","
+            - link "Changhao Pan" [ref=e46] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Pan,+C
+            - text: ","
+            - link "Ke Lei" [ref=e47] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Lei,+K
+            - text: ","
+            - link "Xiang Yin" [ref=e48] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Yin,+X
+            - text: ","
+            - link "Cheng Yang" [ref=e49] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Yang,+C
+          - blockquote [ref=e50]:
+            - text: Zero-shot text-to-speech (TTS) has improved substantially for single-speaker synthesis, yet expressive long-form multi-speaker dialogue remains difficult. A common workaround is to synthesize each turn with a monologue TTS model and stitch the outputs together. This adds inference cost and often breaks acoustic consistency, conversational coherence, and affective continuity across turns. Recent dialogue TTS systems have begun to address this setting, but they still struggle to keep expressive coherence, controllable speaker switching, and monologue quality at the same time. We present SwanData-Speech and SwanVoice. SwanData-Speech builds monologue and dialogue corpora from in-the-wild audio, using Swan Forced Aligner for pause-aware word-level alignment and RobustMegaTTS3 for pronunciation-hard cases. Built on these data, SwanVoice is a zero-shot TTS model for 1--4 speakers, combining a 25 Hz VAE, raw-text conditioning with pause-aware symbols and pinyin substitution, and a flow-matching DiT with speaker-turn conditioning. Training starts from monologue speech, moves through mixed and real dialogue data, and then uses DiffusionNFT post-training with phone-level and speaker-similarity rewards. On SwanBench-Speech, SwanVoice obtains higher richness and hierarchy scores than all evaluated open-source baselines in both monologue and dialogue settings, while content accuracy remains the main limitation. Audio demos are available at
+            - link "this https URL" [ref=e51] [cursor=pointer]:
+              - /url: https://swanaigc.github.io//#swanvoice
+            - text: .
+          - table "Additional metadata" [ref=e53]:
+            - rowgroup [ref=e54]:
+              - 'row "Comments: Technical Report" [ref=e55]':
+                - cell "Comments:" [ref=e56]
+                - cell "Technical Report" [ref=e57]
+              - 'row "Subjects: Audio and Speech Processing (eess.AS)" [ref=e58]':
+                - cell "Subjects:" [ref=e59]
+                - cell "Audio and Speech Processing (eess.AS)" [ref=e60]
+              - 'row "Cite as: arXiv:2605.30993 [eess.AS]" [ref=e61]':
+                - cell "Cite as:" [ref=e62]
+                - cell "arXiv:2605.30993 [eess.AS]" [ref=e63]:
+                  - generic [ref=e64]:
+                    - link "arXiv:2605.30993" [ref=e65] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2605.30993
+                    - text: "[eess.AS]"
+              - row "(or arXiv:2605.30993v1 [eess.AS] for this version)" [ref=e66]:
+                - cell [ref=e67]
+                - cell "(or arXiv:2605.30993v1 [eess.AS] for this version)" [ref=e68]:
+                  - text: (or
+                  - generic [ref=e69]:
+                    - link "arXiv:2605.30993v1" [ref=e70] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2605.30993v1
+                    - text: "[eess.AS]"
+                  - text: for this version)
+              - row "https://doi.org/10.48550/arXiv.2605.30993 Focus to learn more" [ref=e71]:
+                - cell [ref=e72]
+                - cell "https://doi.org/10.48550/arXiv.2605.30993 Focus to learn more" [ref=e73]:
+                  - link "https://doi.org/10.48550/arXiv.2605.30993" [ref=e74] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2605.30993
+                  - button "Focus to learn more" [ref=e76]:
+                    - generic [ref=e78]: Focus to learn more
+        - generic [ref=e79]:
+          - heading "Submission history" [level=2] [ref=e80]
+          - text: "From: Ruiqi Li ["
+          - link "view email" [ref=e81] [cursor=pointer]:
+            - /url: /show-email/d4f28c97/2605.30993
+          - text: "]"
+          - strong [ref=e82]: "[v1]"
+          - text: Fri, 29 May 2026 08:27:57 UTC (1,205 KB)
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - heading "Access Paper:" [level=2] [ref=e85]
+          - list [ref=e86]:
+            - listitem [ref=e87]:
+              - link "View PDF" [ref=e88] [cursor=pointer]:
+                - /url: /pdf/2605.30993
+            - listitem [ref=e89]:
+              - link "HTML (experimental)" [ref=e90] [cursor=pointer]:
+                - /url: https://arxiv.org/html/2605.30993v1
+            - listitem [ref=e91]:
+              - link "TeX Source" [ref=e92] [cursor=pointer]:
+                - /url: /src/2605.30993
+          - link "view license" [ref=e94] [cursor=pointer]:
+            - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+        - generic [ref=e95]:
+          - heading "Current browse context:" [level=3] [ref=e96]
+          - generic [ref=e97]: eess.AS
+          - generic [ref=e98]:
+            - link "< prev" [ref=e100] [cursor=pointer]:
+              - /url: /prevnext?id=2605.30993&function=prev&context=eess.AS
+            - text: "|"
+            - link "next >" [ref=e102] [cursor=pointer]:
+              - /url: /prevnext?id=2605.30993&function=next&context=eess.AS
+          - generic [ref=e103]:
+            - link "new" [ref=e104] [cursor=pointer]:
+              - /url: /list/eess.AS/new
+            - text: "|"
+            - link "recent" [ref=e105] [cursor=pointer]:
+              - /url: /list/eess.AS/recent
+            - text: "|"
+            - link "2026-05" [ref=e106] [cursor=pointer]:
+              - /url: /list/eess.AS/2026-05
+          - generic [ref=e107]:
+            - text: "Change to browse by:"
+            - link "eess" [ref=e109] [cursor=pointer]:
+              - /url: /abs/2605.30993?context=eess
+        - generic [ref=e110]:
+          - heading "References & Citations" [level=3] [ref=e111]
+          - list [ref=e112]:
+            - listitem [ref=e113]:
+              - link "NASA ADS" [ref=e114] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2605.30993
+            - listitem [ref=e115]:
+              - link "Google Scholar" [ref=e116] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2605.30993
+            - listitem [ref=e117]:
+              - link "Semantic Scholar" [ref=e118] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2605.30993
+        - button "export BibTeX citation" [ref=e120]
+        - generic [ref=e121]:
+          - heading "Bookmark" [level=3] [ref=e123]
+          - link "BibSonomy" [ref=e124] [cursor=pointer]:
+            - /url: "http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2605.30993&description=SwanVoice: Expressive Long-Form Zero-Shot Speech Synthesis for Both Monologue and Dialogue"
+            - img "BibSonomy" [ref=e125]
+          - link "Reddit" [ref=e126] [cursor=pointer]:
+            - /url: "https://reddit.com/submit?url=https://arxiv.org/abs/2605.30993&title=SwanVoice: Expressive Long-Form Zero-Shot Speech Synthesis for Both Monologue and Dialogue"
+            - img "Reddit" [ref=e127]
+      - tablist "arXivLabs tools" [ref=e129]:
+        - radio "Bibliographic Tools" [checked] [ref=e130]
+        - tab "Bibliographic Tools" [selected] [ref=e131] [cursor=pointer]
+        - tabpanel "Bibliographic Tools" [ref=e132]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e133]
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e137]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e139]: Bibliographic Explorer Toggle
+              - generic [ref=e140]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e141]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e142] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e143]:
+              - generic [ref=e145]:
+                - checkbox "Connected Papers"
+                - generic [ref=e147]: Connected Papers Toggle
+              - generic [ref=e148]:
+                - text: Connected Papers
+                - emphasis [ref=e149]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e150] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e151]:
+              - generic [ref=e153]:
+                - checkbox "Litmaps"
+                - generic [ref=e155]: Litmaps Toggle
+              - generic [ref=e156]:
+                - text: Litmaps
+                - emphasis [ref=e157]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e158] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e159]:
+              - generic [ref=e161]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e163]: scite.ai Toggle
+              - generic [ref=e164]:
+                - text: scite Smart Citations
+                - emphasis [ref=e165]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e166] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e170]
+        - tab "Code, Data, Media" [ref=e171] [cursor=pointer]
+        - radio "Demos" [ref=e172]
+        - tab "Demos" [ref=e173] [cursor=pointer]
+        - radio "Related Papers" [ref=e174]
+        - tab "Related Papers" [ref=e175] [cursor=pointer]
+        - radio "About arXivLabs" [ref=e176]
+        - tab "About arXivLabs" [ref=e177] [cursor=pointer]
+      - generic [ref=e178]:
+        - link "Which authors of this paper are endorsers?" [ref=e179] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2605.30993
+        - text: "|"
+        - link "Disable MathJax" [ref=e180] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e181] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e182]:
+    - navigation "Secondary" [ref=e183]:
+      - generic [ref=e185]:
+        - list [ref=e187]:
+          - listitem [ref=e188]:
+            - link "About" [ref=e189] [cursor=pointer]:
+              - /url: https://info.arxiv.org/about
+          - listitem [ref=e190]:
+            - link "Help" [ref=e191] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+        - list [ref=e193]:
+          - listitem [ref=e194]:
+            - link "Contact" [ref=e196] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/contact.html
+          - listitem [ref=e197]:
+            - link "Subscribe" [ref=e199] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/subscribe
+      - generic [ref=e201]:
+        - list [ref=e203]:
+          - listitem [ref=e204]:
+            - link "Copyright" [ref=e205] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/license/index.html
+          - listitem [ref=e206]:
+            - link "Privacy Policy" [ref=e207] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+        - list [ref=e209]:
+          - listitem [ref=e210]:
+            - link "Web Accessibility Assistance" [ref=e211] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/web_accessibility.html
+          - listitem [ref=e212]:
+            - paragraph [ref=e213]:
+              - link "arXiv Operational Status" [ref=e214] [cursor=pointer]:
+                - /url: https://status.arxiv.org
+                - text: arXiv Operational Status

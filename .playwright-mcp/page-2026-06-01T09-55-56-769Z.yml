@@ -1,0 +1,440 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "Hugging Face's logo Hugging Face" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - img "Hugging Face's logo" [ref=e8]
+            - generic [ref=e9]: Hugging Face
+          - generic [ref=e10]:
+            - textbox "Search models, datasets, users..." [ref=e11]
+            - img [ref=e12]
+        - navigation "Main" [ref=e14]:
+          - list [ref=e15]:
+            - listitem [ref=e16]:
+              - link "Models" [ref=e17] [cursor=pointer]:
+                - /url: /models
+                - img [ref=e18]
+                - text: Models
+            - listitem [ref=e22]:
+              - link "Datasets" [ref=e23] [cursor=pointer]:
+                - /url: /datasets
+                - img [ref=e24]
+                - text: Datasets
+            - listitem [ref=e29]:
+              - link "Spaces" [ref=e30] [cursor=pointer]:
+                - /url: /spaces
+                - img [ref=e31]
+                - text: Spaces
+            - listitem [ref=e35]:
+              - link "Buckets new" [ref=e36] [cursor=pointer]:
+                - /url: /storage
+                - img [ref=e37]
+                - text: Buckets
+                - generic [ref=e41]: new
+            - listitem [ref=e42]:
+              - link "Docs" [ref=e43] [cursor=pointer]:
+                - /url: /docs
+                - img [ref=e44]
+                - text: Docs
+            - listitem [ref=e48]:
+              - link "Enterprise" [ref=e49] [cursor=pointer]:
+                - /url: /enterprise
+                - img [ref=e50]
+                - text: Enterprise
+            - listitem [ref=e52]:
+              - link "Pricing" [ref=e53] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e54]:
+              - generic [ref=e55]:
+                - button [ref=e56] [cursor=pointer]:
+                  - img [ref=e57]
+                - navigation [ref=e62]:
+                  - list [ref=e63]:
+                    - listitem [ref=e64]:
+                      - generic [ref=e65]: Website
+                      - list [ref=e66]:
+                        - listitem [ref=e67]:
+                          - link "Tasks" [ref=e68] [cursor=pointer]:
+                            - /url: /tasks
+                            - img [ref=e69]
+                            - generic: Tasks
+                        - listitem [ref=e72]:
+                          - link "HuggingChat" [ref=e73] [cursor=pointer]:
+                            - /url: /chat
+                            - img [ref=e74]
+                            - generic: HuggingChat
+                        - listitem [ref=e77]:
+                          - link "Collections" [ref=e78] [cursor=pointer]:
+                            - /url: /collections
+                            - img [ref=e79]
+                            - generic: Collections
+                        - listitem [ref=e83]:
+                          - link "Languages" [ref=e84] [cursor=pointer]:
+                            - /url: /languages
+                            - img [ref=e85]
+                            - generic: Languages
+                        - listitem [ref=e87]:
+                          - link "Organizations" [ref=e88] [cursor=pointer]:
+                            - /url: /organizations
+                            - img [ref=e89]
+                            - generic: Organizations
+                    - listitem [ref=e94]:
+                      - generic [ref=e95]: Community
+                      - list [ref=e96]:
+                        - listitem [ref=e97]:
+                          - link "Blog" [ref=e98] [cursor=pointer]:
+                            - /url: /blog/zh
+                            - img [ref=e99]
+                            - generic: Blog
+                        - listitem [ref=e101]:
+                          - link "Posts" [ref=e102] [cursor=pointer]:
+                            - /url: /posts
+                            - img [ref=e103]
+                            - generic: Posts
+                        - listitem [ref=e105]:
+                          - link "Daily Papers" [ref=e106] [cursor=pointer]:
+                            - /url: /papers
+                            - img [ref=e107]
+                            - generic: Daily Papers
+                        - listitem [ref=e110]:
+                          - link "Learn" [ref=e111] [cursor=pointer]:
+                            - /url: /learn
+                            - img [ref=e112]
+                            - generic: Learn
+                        - listitem [ref=e118]:
+                          - link "Discord" [ref=e119] [cursor=pointer]:
+                            - /url: /join/discord
+                            - img [ref=e120]
+                            - generic: Discord
+                        - listitem [ref=e122]:
+                          - link "Forum" [ref=e123] [cursor=pointer]:
+                            - /url: https://discuss.huggingface.co/
+                            - img [ref=e124]
+                            - generic: Forum
+                        - listitem [ref=e126]:
+                          - link "GitHub" [ref=e127] [cursor=pointer]:
+                            - /url: https://github.com/huggingface
+                            - img [ref=e128]
+                            - generic: GitHub
+                    - listitem [ref=e130]:
+                      - generic [ref=e131]: Solutions
+                      - list [ref=e132]:
+                        - listitem [ref=e133]:
+                          - link "Team & Enterprise" [ref=e134] [cursor=pointer]:
+                            - /url: /enterprise
+                            - img [ref=e135]
+                            - generic: Team & Enterprise
+                        - listitem [ref=e137]:
+                          - link "Hugging Face PRO" [ref=e138] [cursor=pointer]:
+                            - /url: /pro
+                            - img [ref=e139]
+                            - generic: Hugging Face PRO
+                        - listitem [ref=e141]:
+                          - link "Enterprise Support" [ref=e142] [cursor=pointer]:
+                            - /url: /support
+                            - img [ref=e143]
+                            - generic: Enterprise Support
+                        - listitem [ref=e146]:
+                          - link "Inference Providers" [ref=e147] [cursor=pointer]:
+                            - /url: /inference/models
+                            - img [ref=e148]
+                            - generic: Inference Providers
+                        - listitem [ref=e151]:
+                          - link "Inference Endpoints" [ref=e152] [cursor=pointer]:
+                            - /url: /inference-endpoints
+                            - img [ref=e153]
+                            - generic: Inference Endpoints
+                        - listitem [ref=e156]:
+                          - link "Storage Buckets" [ref=e157] [cursor=pointer]:
+                            - /url: /storage
+                            - img [ref=e158]
+                            - generic: Storage Buckets
+            - listitem [ref=e162]:
+              - separator [ref=e163]
+            - listitem [ref=e164]:
+              - link "Log In" [ref=e165] [cursor=pointer]:
+                - /url: /login
+            - listitem [ref=e166]:
+              - link "Sign Up" [ref=e167] [cursor=pointer]:
+                - /url: /join
+    - main [ref=e168]:
+      - generic [ref=e169]:
+        - generic [ref=e171]:
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - generic [ref=e174]:
+                - link "Papers" [ref=e175] [cursor=pointer]:
+                  - /url: /papers
+                  - img [ref=e176]
+                  - text: Papers
+                - generic [ref=e178]:
+                  - img [ref=e179]
+                  - text: arxiv:2605.30940
+                  - button "Copy to clipboard" [ref=e182] [cursor=pointer]:
+                    - img [ref=e183]
+              - generic [ref=e188]:
+                - button "Copy markdown" [ref=e189] [cursor=pointer]:
+                  - img [ref=e191]
+                  - generic [ref=e195]: Copy markdown
+                - button "Open copy menu" [ref=e196] [cursor=pointer]:
+                  - img [ref=e197]
+            - heading "Towards Streaming Synchronized Spatial Audio Generation via Autoregressive Diffusion Transformer" [level=1] [ref=e199]
+            - generic [ref=e200]:
+              - generic [ref=e201]: Published on May 29
+              - generic [ref=e202]:
+                - generic [ref=e203]: ·
+                - img [ref=e204]
+                - generic [ref=e206]: Submitted by
+                - link "Yu Zhang" [ref=e209] [cursor=pointer]:
+                  - /url: /AaronZ345
+                  - text: Yu Zhang
+                - generic [ref=e211]: on Jun 1
+              - generic [ref=e212]:
+                - generic [ref=e213]: ·
+                - link "zju Zhejiang University" [ref=e214] [cursor=pointer]:
+                  - /url: /zju
+                  - img "zju" [ref=e215]
+                  - generic [ref=e216]: Zhejiang University
+            - generic [ref=e217]:
+              - generic [ref=e218]: "Authors:"
+              - generic [ref=e220]:
+                - button "Ke Lei" [ref=e223] [cursor=pointer]
+                - text: ","
+              - generic [ref=e225]:
+                - link "Yu Zhang" [ref=e228] [cursor=pointer]:
+                  - /url: /AaronZ345
+                - text: ","
+              - generic [ref=e230]:
+                - button "Changhao Pan" [ref=e233] [cursor=pointer]
+                - text: ","
+              - generic [ref=e235]:
+                - button "Xueyi Pu" [ref=e238] [cursor=pointer]
+                - text: ","
+              - generic [ref=e240]:
+                - button "Wenxiang Guo" [ref=e243] [cursor=pointer]
+                - text: ","
+              - generic [ref=e245]:
+                - button "Ruiqi Li" [ref=e248] [cursor=pointer]
+                - text: ","
+              - button "Zhou Zhao" [ref=e253] [cursor=pointer]
+          - generic [ref=e254]:
+            - heading "Abstract" [level=2] [ref=e255]
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - paragraph [ref=e258]: SwanSphere presents a unified streaming framework for high-fidelity spatial audio generation from panoramic videos and text prompts using causal autoregressive diffusion transformers and multimodal learning strategies.
+                - generic [ref=e259]:
+                  - img [ref=e260]
+                  - text: AI-generated summary
+              - paragraph [ref=e264]:
+                - text: Real-time and accurate
+                - link "spatial audio generation" [ref=e265] [cursor=pointer]:
+                  - /url: /papers?q=spatial%20audio%20generation
+                - text: is pivotal for delivering an immersive experience. However, existing spatial audio synthesis technologies are often encumbered by a tradeoff between generation quality and high inference latency, as well as difficulty in capturing precise spatial information from multimodal inputs. To address these challenges, we propose SwanSphere, a unified streaming framework for high-fidelity
+                - link "spatial audio generation" [ref=e266] [cursor=pointer]:
+                  - /url: /papers?q=spatial%20audio%20generation
+                - text: from
+                - link "panoramic videos" [ref=e267] [cursor=pointer]:
+                  - /url: /papers?q=panoramic%20videos
+                - text: and
+                - link "text prompts" [ref=e268] [cursor=pointer]:
+                  - /url: /papers?q=text%20prompts
+                - text: ". SwanSphere mainly makes the following contributions: 1) We introduce a"
+                - link "causal autoregressive diffusion transformer" [ref=e269] [cursor=pointer]:
+                  - /url: /papers?q=causal%20autoregressive%20diffusion%20transformer
+                - text: architecture that enables streaming high-quality
+                - link "spatial audio generation" [ref=e270] [cursor=pointer]:
+                  - /url: /papers?q=spatial%20audio%20generation
+                - text: . 2) We design a Spatial Video-Audio Contrastive (SVAC) learning strategy to align the video encoder with the acoustic domain, and further employ a
+                - link "multi-objective online direct preference optimization" [ref=e271] [cursor=pointer]:
+                  - /url: /papers?q=multi-objective%20online%20direct%20preference%20optimization
+                - text: (ODPO) scheme, resulting in strong spatial perception and robust multimodal spatial audio synthesis. 3) To alleviate the current scarcity of spatial audio datasets, we also develop an
+                - link "automated annotation pipeline" [ref=e272] [cursor=pointer]:
+                  - /url: /papers?q=automated%20annotation%20pipeline
+                - text: for generating detailed
+                - link "spatial captions" [ref=e273] [cursor=pointer]:
+                  - /url: /papers?q=spatial%20captions
+                - text: . Experimental results demonstrate that SwanSphere achieves superior performance in both video-to-spatial and text-to-
+                - link "spatial audio generation" [ref=e274] [cursor=pointer]:
+                  - /url: /papers?q=spatial%20audio%20generation
+                - text: "tasks. Demos can be found at: https://swanaigc.github.io."
+          - generic [ref=e275]:
+            - link "View arXiv page" [ref=e276] [cursor=pointer]:
+              - /url: https://arxiv.org/abs/2605.30940
+              - img [ref=e277]
+              - text: View arXiv page
+            - link "View PDF" [ref=e279] [cursor=pointer]:
+              - /url: https://arxiv.org/pdf/2605.30940
+              - img [ref=e280]
+              - text: View PDF
+            - link "Project page" [ref=e282] [cursor=pointer]:
+              - /url: https://swanaigc.github.io/#swansphere
+              - img [ref=e283]
+              - text: Project page
+            - link "Add to collection" [ref=e285] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30940
+              - img [ref=e286]
+              - text: Add to collection
+          - generic [ref=e290]:
+            - heading "Community" [level=3] [ref=e291]:
+              - img [ref=e292]
+              - text: Community
+            - generic [ref=e298]:
+              - generic [ref=e299]:
+                - generic [ref=e300]:
+                  - link "AaronZ345" [ref=e305] [cursor=pointer]:
+                    - /url: /AaronZ345
+                  - generic [ref=e306]: Paper author
+                  - generic [ref=e307]: Paper submitter
+                  - link "about 6 hours ago" [ref=e308] [cursor=pointer]:
+                    - /url: "#6a1d01255dd65b050c4d0b69"
+                    - time [ref=e309]: about 6 hours ago
+                - button [ref=e312] [cursor=pointer]:
+                  - img [ref=e313]
+              - generic [ref=e317]:
+                - paragraph [ref=e319]: "Real-time and accurate spatial audio generation is pivotal for delivering an immersive experience. However, existing spatial audio synthesis technologies are often encumbered by a tradeoff between generation quality and high inference latency, as well as difficulty in capturing precise spatial information from multimodal inputs. To address these challenges, we propose SwanSphere, a unified streaming framework for high-fidelity spatial audio generation from panoramic videos and text prompts. SwanSphere mainly makes the following contributions: 1) We introduce a causal autoregressive diffusion transformer architecture that enables streaming high-quality spatial audio generation. 2) We design a Spatial Video-Audio Contrastive (SVAC) learning strategy to align the video encoder with the acoustic domain, and further employ a multi-objective online direct preference optimization (ODPO) scheme, resulting in strong spatial perception and robust multimodal spatial audio synthesis. 3) To alleviate the current scarcity of spatial audio datasets, we also develop an automated annotation pipeline for generating detailed spatial captions. Experimental results demonstrate that SwanSphere achieves superior performance in both video-to-spatial and text-to-spatial audio generation tasks."
+                - button "See translation" [ref=e321] [cursor=pointer]
+                - generic [ref=e322]:
+                  - button [ref=e326] [cursor=pointer]:
+                    - img [ref=e328]
+                  - button "Reply" [ref=e331] [cursor=pointer]:
+                    - img [ref=e332]
+                    - text: Reply
+            - generic [ref=e334]:
+              - generic [ref=e336]:
+                - button "Edit" [ref=e337] [cursor=pointer]
+                - button "Preview" [ref=e338] [cursor=pointer]
+              - generic [ref=e339]:
+                - textbox "Start discussing about this paper" [disabled] [ref=e342]
+                - generic [ref=e343]:
+                  - img [ref=e344]
+                  - generic [ref=e348]: Upload images, audio, and videos by dragging in the text input, pasting, or clicking here.
+            - generic [ref=e351]:
+              - button "Comment" [disabled] [ref=e352]:
+                - img [ref=e353]
+                - text: Comment
+              - paragraph [ref=e357]:
+                - text: ·
+                - link "Sign up" [ref=e358] [cursor=pointer]:
+                  - /url: /join?next=%2Fpapers%2F2605.30940
+                - text: or
+                - link "log in" [ref=e359] [cursor=pointer]:
+                  - /url: /login?next=%2Fpapers%2F2605.30940
+                - text: to comment
+        - generic [ref=e360]:
+          - generic [ref=e363]:
+            - link "Upvote 20" [ref=e364] [cursor=pointer]:
+              - /url: /login?next=%2Fpapers%2F2605.30940
+              - generic [ref=e365]:
+                - img [ref=e366]
+                - text: Upvote
+                - generic [ref=e368]: "20"
+            - list [ref=e369]:
+              - listitem "AaronZ345" [ref=e370]:
+                - link "AaronZ345" [ref=e371] [cursor=pointer]:
+                  - /url: /AaronZ345
+              - listitem "1f" [ref=e372]:
+                - link "1f" [ref=e373] [cursor=pointer]:
+                  - /url: /1f
+              - listitem "leungtianle" [ref=e374]:
+                - link "leungtianle" [ref=e375] [cursor=pointer]:
+                  - /url: /leungtianle
+              - listitem "sgshdgdhsdg" [ref=e376]:
+                - link "sgshdgdhsdg" [ref=e377] [cursor=pointer]:
+                  - /url: /sgshdgdhsdg
+              - listitem "BrokenMoon" [ref=e378]:
+                - link "BrokenMoon" [ref=e379] [cursor=pointer]:
+                  - /url: /BrokenMoon
+              - listitem "yrainbow" [ref=e380]:
+                - link "yrainbow" [ref=e381] [cursor=pointer]:
+                  - /url: /yrainbow
+              - listitem "Phoenix-Alan233" [ref=e382]:
+                - link "Phoenix-Alan233" [ref=e383] [cursor=pointer]:
+                  - /url: /Phoenix-Alan233
+              - listitem "Davidwang215" [ref=e384]:
+                - link "Davidwang215" [ref=e385] [cursor=pointer]:
+                  - /url: /Davidwang215
+              - listitem "yixuan7878" [ref=e386]:
+                - link "yixuan7878" [ref=e387] [cursor=pointer]:
+                  - /url: /yixuan7878
+              - listitem "hexmSeeU" [ref=e388]:
+                - link "hexmSeeU" [ref=e389] [cursor=pointer]:
+                  - /url: /hexmSeeU
+              - listitem "DavidPigeon" [ref=e390]:
+                - link "DavidPigeon" [ref=e391] [cursor=pointer]:
+                  - /url: /DavidPigeon
+              - listitem "WorldEdit0" [ref=e392]:
+                - link "WorldEdit0" [ref=e393] [cursor=pointer]:
+                  - /url: /WorldEdit0
+              - listitem [ref=e394]:
+                - button "+8" [ref=e395] [cursor=pointer]
+          - generic [ref=e396]:
+            - paragraph [ref=e397]:
+              - img [ref=e398]
+              - text: "Get this paper in your agent:"
+            - generic [ref=e401]:
+              - code [ref=e402]: hf papers read 2605.30940
+              - button "Copy to clipboard" [ref=e404] [cursor=pointer]:
+                - img [ref=e405]
+            - group [ref=e409]:
+              - generic "Don't have the latest CLI?" [ref=e410] [cursor=pointer]
+          - heading "Models citing this paper 0" [level=2] [ref=e411]:
+            - img [ref=e412]
+            - text: Models citing this paper
+            - generic [ref=e416]: "0"
+          - paragraph [ref=e418]: No model linking this paper
+          - generic [ref=e419]: Cite arxiv.org/abs/2605.30940 in a model README.md to link it from this page.
+          - heading "Datasets citing this paper 0" [level=2] [ref=e420]:
+            - img [ref=e421]
+            - text: Datasets citing this paper
+            - generic [ref=e426]: "0"
+          - paragraph [ref=e428]: No dataset linking this paper
+          - generic [ref=e429]: Cite arxiv.org/abs/2605.30940 in a dataset README.md to link it from this page.
+          - heading "Spaces citing this paper 0" [level=3] [ref=e430]:
+            - img [ref=e431]
+            - text: Spaces citing this paper
+            - generic [ref=e437]: "0"
+          - paragraph [ref=e439]: No Space linking this paper
+          - generic [ref=e440]: Cite arxiv.org/abs/2605.30940 in a Space README.md to link it from this page.
+          - heading "Collections including this paper 0" [level=2] [ref=e441]:
+            - img [ref=e442]
+            - text: Collections including this paper
+            - generic [ref=e446]: "0"
+          - paragraph [ref=e448]: No Collection including this paper
+          - generic [ref=e449]:
+            - text: Add this paper to a
+            - link "collection" [ref=e450] [cursor=pointer]:
+              - /url: /new-collection
+            - text: to link it from this page.
+    - contentinfo [ref=e451]:
+      - navigation [ref=e452]:
+        - button "System theme" [ref=e455] [cursor=pointer]:
+          - img [ref=e456]
+          - text: System theme
+        - link "TOS" [ref=e461] [cursor=pointer]:
+          - /url: /terms-of-service
+        - link "Privacy" [ref=e462] [cursor=pointer]:
+          - /url: /privacy
+        - link "About" [ref=e463] [cursor=pointer]:
+          - /url: /huggingface
+        - link "Careers" [ref=e464] [cursor=pointer]:
+          - /url: https://apply.workable.com/huggingface/
+        - link "Hugging Face" [ref=e465] [cursor=pointer]:
+          - /url: /
+          - img [ref=e466]
+        - link "Models" [ref=e480] [cursor=pointer]:
+          - /url: /models
+        - link "Datasets" [ref=e481] [cursor=pointer]:
+          - /url: /datasets
+        - link "Spaces" [ref=e482] [cursor=pointer]:
+          - /url: /spaces
+        - link "Pricing" [ref=e483] [cursor=pointer]:
+          - /url: /pricing
+        - link "Docs" [ref=e484] [cursor=pointer]:
+          - /url: /docs
+  - generic [ref=e487]:
+    - img [ref=e488]
+    - textbox "Ask HuggingChat about this Paper" [ref=e491]
+    - button "Send message" [ref=e492] [cursor=pointer]:
+      - img [ref=e493]

@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(sed -i '' 's/^status: pending-review/status: confirmed/' \"概念库/Conditional Flow Matching.md\" \"概念库/Speech Tokenizer.md\" \"概念库/Residual Vector Quantization.md\" \"任务库/Zero-shot Speech Synthesis.md\")",
-      "Bash(sed -i '' 's/^status: draft/status: reviewed/' \"论文笔记/CosyVoice 3.md\")"
+      "Bash(sed -i '' 's/^status: draft/status: reviewed/' \"论文笔记/CosyVoice 3.md\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/tmp/daily_papers_top30.json'\\)\\); print\\(f'Papers fetched: {len\\(d\\)}'\\); [print\\(f\\\\\"  {p.get\\('score',0\\):.1f} | {p.get\\('title','?'\\)[:60]}\\\\\"\\) for p in d[:5]]\")",
+      "Bash(python3 /Users/xiangshu/.claude/skills/daily-papers/fetch_and_score.py --days 3)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/tmp/daily_papers_top30.json'\\)\\); print\\(f'Papers: {len\\(d\\)}'\\)\")",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_close"
     ]
   }
 }
