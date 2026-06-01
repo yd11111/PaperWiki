@@ -22,3 +22,4 @@
 - [kb/search] [[Seed-TTS]] — 命中 9 页(取 Top 3 confirmed): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Cross-lingual Voice Cloning]](待确认), [[SEED-TTS-Eval]](待确认), [[BigVGAN]](待确认), [[Differentiable Reward Optimization]](待确认), [[CosyVoice 2]](待确认), [[Instructed Speech Generation]](待确认)
 - [ingest/deep] [[Seed-TTS]] — KB 检索首次启用(P3 验证), kb_sources=3, 新建 1, 追加 7
 - [lint/local] Seed-TTS — 通过/0 问题
+- [ingest/repro] [[DAC]] — 从 deep 升级为 repro, KB 检索启用, kb_sources=2
