@@ -1,6 +1,6 @@
 ---
 type: paper
-tier: deep
+tier: repro
 title: "IndexTTS2: A Breakthrough in Emotionally Expressive and Duration-Controlled Auto-Regressive Zero-Shot Text-to-Speech"
 arxiv_id: "2506.21619"
 source: "Sources/IndexTTS2.pdf"
@@ -12,7 +12,7 @@ concepts: ["[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Gradient 
 models: ["[[BigVGAN]]", "[[CosyVoice 2]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
-kb_context_sources: 0
+kb_context_sources: 3
 status: draft
 created: 2026-06-01
 updated: 2026-06-01
@@ -20,7 +20,12 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (KB 检索未启用 — P1 阶段)
+> [!info] KB 背景 (基于 3 个已确认实体页: [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Zero-shot Speech Synthesis]])
+> 检索命中: [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Instructed Speech Generation]](pending-review), [[BigVGAN]](pending-review), [[CosyVoice 2]](pending-review)
+
+**谱系定位**: IndexTTS2 属于 Zero-shot TTS 任务页记录的 "LLM + 离散 token" 路线,使用 MaskGCT 的 semantic codec 作为 Speech Tokenizer,下游用 CFM 生成声学特征。在 SEED-TTS-Eval 基准上达到当前最优。
+
+**创新判断**: W_sem=W_num 的 duration control trick 和 GRL 情感解耦在已有知识库中无先例,是本文独有贡献。
 
 ## 速查
 
@@ -133,3 +138,73 @@ T2E 模块的 "soft instruction" 设计(概率分布而非 hard label)比 CosyVo
 3. **GPT latent 增强**: 利用上游 AR 模型的隐状态增强下游非 AR 模型,可用于任何级联系统中弥补信息损失
 4. **三阶段训练范式**: "全量预训练 → 小数据精调新能力 → 全量回炉鲁棒化" 适用于任何稀缺特殊数据的场景
 5. **LLM 蒸馏做 soft emotion control**: 用大模型标注情感分布 → 蒸馏到小模型,可扩展到其他主观属性(年龄、说话风格)
+
+## 复现要点
+
+### 关键模块实现
+
+**1. W_sem = W_num 共享位置编码**
+```
+# 核心: 位置编码表与 duration embedding 表共享
+pos_embed = nn.Embedding(max_tokens, d_model)  # W_sem
+# duration embedding 直接复用 pos_embed
+dur_embed = pos_embed  # W_num = W_sem, 零额外参数
+
+# 推理时:
+if target_length is not None:
+    p = pos_embed(target_length)  # duration signal
+else:
+    p = zeros(d_model)  # 自由生成模式
+```
+
+**2. GRL (Gradient Reversal Layer)**
+```
+# 前向传播: identity
+# 反向传播: 梯度取反 × lambda
+class GRL(autograd.Function):
+    @staticmethod
+    def forward(ctx, x, lambda_):
+        ctx.lambda_ = lambda_
+        return x
+    @staticmethod
+    def backward(ctx, grad):
+        return -ctx.lambda_ * grad, None
+
+# 接 speaker classifier:
+# loss = CE(speaker_cls(GRL(emotion_embed)), speaker_id)
+# → 迫使 emotion_embed 不含 speaker 信息
+```
+
+**3. GPT Latent Enhancement**
+```
+# 50% 概率融合 T2S hidden state
+if random() < 0.5:
+    Q_fin = MLP(concat(semantic_tokens, H_gpt_last_layer))
+else:
+    Q_fin = semantic_tokens
+```
+
+### 数据要求
+
+| 阶段 | 数据量 | 要求 |
+|------|--------|------|
+| Stage 1 预训练 | ~55K h | 多说话人语音 + 文本对齐, ASR 标注可接受噪声 |
+| Stage 2 情感精调 | ~135 h (361 speakers × 7 emotions) | 高质量情感语音, 需 emotion label |
+| Stage 3 回炉 | 全量数据 | 冻结 conditioner, 仅 fine-tune transformer |
+
+### 复现难点评估
+
+| 难点 | 级别 | 说明 |
+|------|------|------|
+| Semantic codec | 中 | 需要 MaskGCT 的 VQ-VAE semantic codec (已开源) |
+| Speaker perceiver | 高 | 论文未详述 frozen speaker perceiver 架构 |
+| 情感数据 | 高 | 135h × 7 emotions 的高质量标注数据难获取 |
+| T2E 蒸馏 | 中 | 需要 DeepSeek-R1 API 生成 1000 个训练样本 |
+| 计算资源 | 中 | 8×A100 80GB, 三周训练 |
+| BigVGAN v2 | 低 | 已开源 |
+
+### 开源状态
+
+- 论文 code/weights: 未开源 (截至 2026-06-01)
+- 依赖组件: MaskGCT semantic codec (开源), BigVGAN v2 (开源)
+- 关键缺失: speaker perceiver conditioner 的具体实现, 情感数据集
