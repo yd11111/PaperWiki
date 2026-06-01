@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "IndexTTS2: A Breakthrough in Emotionally Expressive and Duration-Controlled Auto-Regressive Zero-Shot Text-to-Speech"
 arxiv_id: "2506.21619"
-source: "arXiv"
+source: "Sources/IndexTTS2.pdf"
 authors: [Siyi Zhou, Yiquan Zhou, Yi He, Xun Zhou, Jinchao Wang, Wei Deng, Jingchen Shu]
 year: 2025
 venue: "AAAI 2026"
