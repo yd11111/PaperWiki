@@ -23,3 +23,4 @@
 - [ingest/deep] [[Seed-TTS]] — KB 检索首次启用(P3 验证), kb_sources=3, 新建 1, 追加 7
 - [lint/local] Seed-TTS — 通过/0 问题
 - [ingest/repro] [[DAC]] — 从 deep 升级为 repro, KB 检索启用, kb_sources=2
+- [lint/full] 全量 lint: 1 dead links, 5 frontmatter issues, 2 orphan pages, 积压: 26 pending-review + 4 draft

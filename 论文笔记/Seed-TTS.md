@@ -148,3 +148,4 @@ Seed-TTS 由四个模块级联组成 [§2, Figure 1]:
 3. **Total-duration conditioning (Seed-TTS_DiT)**: 不预测 phone-level duration,只给 total duration 让 diffusion 自行学 alignment,简化 pipeline 且支持 speech editing
 4. **Streaming deployment 组合**: Causal diffusion + consistency distillation + GQA + model quantization 的组合策略,latency 从 1x 降至 0.028x
 5. **Reward hacking awareness**: 记录了 RL 过优化导致"标准化"发音的问题,为后续 reward design 提供教训
+
