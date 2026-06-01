@@ -10,3 +10,5 @@
 - [lint/local] CosyVoice 3 — 通过/0 问题
 - [ingest/deep] [[IndexTTS2]] — 精读(P1 反向更新验证), 新建实体页 3 个, 追加更新已有页 6 个
 - [lint/local] IndexTTS2 — 通过/0 问题
+- [ingest/deep] [[DAC]] — codec 领域精读(P1 breadth 验证), 新建实体页 10 个, 追加更新 3 个
+- [lint/local] DAC — 通过/0 问题
