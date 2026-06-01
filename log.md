@@ -29,3 +29,4 @@
 - [kb/search] [[VALL-E]] — 命中 3 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Neural Audio Compression]](pending-review)
 - [ingest/deep] [[VALL-E]] — 从 inbox 处理为精读, kb_sources=3, 追加更新 3 个实体页
 - [inbox/processed] VALL-E — inbox 条目删除
+- [update/concept] [[Codebook Collapse]] — 基于 web 搜索补充: 根本原因(encoder drift理论)+ 新兴方案(ERVQ/NDVQ/Random Codebooks)+ 度量方式 + 演进路线(实质修改, status→pending-review)
