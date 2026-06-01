@@ -16,3 +16,6 @@
 - [review/batch] 确认 4 实体页(CFM, Speech Tokenizer, RVQ, Zero-shot TTS) + 审核 1 精读笔记(CosyVoice 3)
 - [update/concept] [[Gumbel-Softmax]] — 基于 web 搜索补充: 重写定义+原理+温度参数+ST变体(实质修改, 路径③验证)
 - [update/concept] [[Finite Scalar Quantization]] — 基于原始论文(Mentzer et al. ICLR 2024)重写: 完整机制+数学形式+VQ对比+超参数+实验数据(路径②验证)
+- [ingest/deep] [[MaskGCT]] — 从 inbox 处理为精读, 新建实体页 1 个, 追加更新 8 个
+- [inbox/processed] MaskGCT — inbox 条目删除
+- [lint/local] MaskGCT — 通过/0 问题
