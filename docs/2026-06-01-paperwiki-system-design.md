@@ -242,6 +242,17 @@ Vault/
 **精读产出原则:**
 > 精读笔记必须体现**机制理解**,而不是更长的摘要。标准:合上笔记后能向同事解释"它为什么 work",而不只是"它做了什么"。
 
+**速查卡片:**
+精读/复现笔记在 KB 背景节之后、核心问题之前包含一个速查卡片,用于快速回忆:
+```markdown
+> [!summary] 速查
+> - **一句话**: (核心贡献,一句话)
+> - **路线**: (输入→模块→输出 pipeline)
+> - **指标**: (关键数字 + 对比基准 + 数据集)
+> - **可借鉴**: (可迁移到你工作中的 idea)
+> - **局限**: (不 work 的地方 / 复现难点 / 未开源)
+```
+
 **可信度规则:**
 - 卡片/加强卡片 = 线索和参考,永远不进入可信层
 - 精读 (status: reviewed) = 可信层,可作为引用来源
@@ -286,6 +297,7 @@ aliases: [flow matching, conditional flow matching, CFM]
 category: generative-method
 tags: [generation, continuous-flow, ODE]
 key_papers: ["[[Paper1]]", "[[Paper2]]"]
+origin_paper: ""                   # 该概念的原始出处论文,空表示尚未溯源
 related_concepts: ["[[Diffusion]]", "[[ODE Solver]]"]
 status: pending-review | confirmed  # LLM 实质修改后为 pending-review,你确认后为 confirmed
 lifecycle: active | deprecated | merged  # 实体生命周期状态
@@ -390,8 +402,10 @@ created: 2026-06-01
 
 ### 入口 1: 每日推荐 → 选读
 
+**日期规则:** 每日推荐只收录当天 arXiv 发布的论文。HuggingFace trending 不等于当天论文。如果当天无新论文(如周末),可以不生成推荐,不可混入非当天论文。
+
 ```
-arXiv / HuggingFace 自动拓取(TTS 相关)
+arXiv / HuggingFace 自动拓取(TTS 相关,仅当天发布)
     ↓
 LLM 按兴趣画像打分排序
     ↓
@@ -648,6 +662,7 @@ Lint 能力分两级,对应不同实施阶段:
 | 实体存在性 | frontmatter 引用的实体在对应库中存在 | 低,文件查找 |
 | MOC 覆盖 | 每个实体页至少被一个 MOC 包含 | 低,遍历检查 |
 | 概念页 updated 日期 | 有新论文引用但概念页未更新 | 低,日期比较 |
+| 概念页溯源提醒 | `key_papers` ≥ 3 且 `origin_paper` 为空 → 提示"建议找原始论文完善" | 低,字段检查 |
 | 审核积压统计 | pending-review 和 draft 数量 | 低,状态统计 |
 
 #### 高级认知 lint (P5 增强)
