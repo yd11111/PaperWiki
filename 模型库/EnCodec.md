@@ -7,7 +7,7 @@ year: 2022
 tags: [audio-codec, neural-compression, RVQ, speech-tokenizer]
 key_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
 tasks: ["[[Neural Audio Compression]]"]
-key_papers: ["[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 supersedes: [SoundStream]
 superseded_by: []
 status: pending-review

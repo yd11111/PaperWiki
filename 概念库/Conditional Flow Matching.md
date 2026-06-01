@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]"]
 status: confirmed
@@ -34,6 +34,7 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 - F5-TTS (2024): Flow matching for fluent and faithful speech
 - Matcha-TTS (2024): CFM for fast TTS
 - IndexTTS2 (Zhou et al., 2025): 在 S2M 模块中使用 flow matching 从 semantic tokens + speaker embedding 生成 mel spectrogram,并引入 GPT latent enhancement 融合上游 AR 隐状态以提升高情感语音的发音清晰度
+- MaskGCT (Wang et al., 2024): 使用 flow matching 训练 total duration predictor (非 phone-level),12 层 Transformer + in-context learning + midpoint ODE solver (4 steps 推理)
 
 ## 相关概念
 

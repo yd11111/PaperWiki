@@ -4,7 +4,7 @@ title: "Zero-shot Speech Synthesis"
 aliases: [零样本语音合成, Zero-shot TTS, Zero-shot Voice Cloning]
 tags: [TTS, zero-shot, voice-cloning]
 key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hybrid"]
-key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
 status: confirmed
@@ -37,6 +37,7 @@ updated: 2026-06-01
 - F5-TTS (2024): 非自回归 flow matching
 - MaskGCT (2024): Masked generative codec transformer
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): bilibili, AR-based, 首个同时实现精确 duration control 和自然时长生成的自回归 zero-shot TTS,情感-音色解耦
+- [[论文笔记/MaskGCT|MaskGCT]] (2024): CUHK-SZ, 完全非自回归 masked generative TTS,无需 text-speech alignment 和 phone-level duration prediction,100K h 数据,多语言支持
 
 ## 评估
 

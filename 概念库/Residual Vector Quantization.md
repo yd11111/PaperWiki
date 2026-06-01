@@ -4,7 +4,7 @@ title: "Residual Vector Quantization"
 aliases: [RVQ, Residual VQ, Multi-stage VQ]
 category: "quantization"
 tags: [quantization, discrete-representation, audio-codec, neural-compression]
-key_papers: ["[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]"]
 status: confirmed
@@ -47,6 +47,7 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 - Defossez et al., "EnCodec: High Fidelity Neural Audio Compression", 2022: 改进 RVQ 训练 (EMA codebook)
 - DAC (Kumar et al., NeurIPS 2023): factorized codes + L2-norm 解决 codebook collapse, bitrate efficiency 达 99%
 - Mentzer et al., "Finite Scalar Quantization", ICLR 2024: 提出无需码本的替代方案 FSQ
+- MaskGCT (Wang et al., 2024): 在 acoustic codec 中使用 12 层 RVQ (codebook size 1024, dim 8),配合 Vocos decoder 和 S2A masked generative model 逐层生成 acoustic tokens
 
 ## 相关概念
 

@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: pending-review
@@ -43,3 +43,4 @@ SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,�
 ## 最新结果
 
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): WER 1.008% (test-zh), WER 1.521% (test-en), SS 0.865 (test-zh), SS 0.860 (test-en); 同时在 duration control 设定下 token number error rate <0.02%
+- [[论文笔记/MaskGCT|MaskGCT]] (2024): SIM-O 0.728 (test-en), WER 2.466 (test-en), SIM-O 0.777 (test-zh), WER 2.183 (test-zh); 非自回归 masked generative 方法

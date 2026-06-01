@@ -5,7 +5,7 @@ aliases: [Emilia Dataset]
 domain: "Large-scale speech generation training"
 scale: "101K+ hours, multilingual"
 tags: [training-data, large-scale, multilingual, TTS]
-used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]"]
+used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 metrics_reported_on: []
 url: ""
 status: pending-review
@@ -29,6 +29,7 @@ Emilia 是一个大规模、多语言、多样化的语音数据集,专门为大
 ## 使用此数据集的模型
 
 - [[论文笔记/IndexTTS2|IndexTTS2]]: 使用 Emilia 作为主要训练数据来源,55K 小时训练数据中大部分来自 Emilia (30K 中文 + 25K 英文)
+- [[论文笔记/MaskGCT|MaskGCT]]: 使用 Emilia 100K 小时 (50K 英文 + 50K 中文) 训练全部模型组件
 
 ## 来源
 
