@@ -4,7 +4,7 @@ title: "Finite Scalar Quantization"
 aliases: [FSQ]
 category: "quantization"
 tags: [quantization, discrete-representation, VQ-alternative]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 related_concepts: ["[[Speech Tokenizer]]", "[[Gumbel-Softmax]]"]
 status: pending-review
 lifecycle: active

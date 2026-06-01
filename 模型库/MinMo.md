@@ -7,7 +7,7 @@ year: 2025
 tags: [multimodal-LLM, speech-understanding, voice-interaction]
 key_concepts: ["[[Speech Tokenizer]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 related_concepts: ["[[Finite Scalar Quantization]]"]
 status: pending-review
 lifecycle: active

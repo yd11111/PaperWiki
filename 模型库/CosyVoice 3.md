@@ -7,7 +7,7 @@ year: 2025
 tags: [TTS, zero-shot, multilingual, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Differentiable Reward Optimization]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 supersedes: ["[[CosyVoice 2]]"]
 superseded_by: []
 status: pending-review

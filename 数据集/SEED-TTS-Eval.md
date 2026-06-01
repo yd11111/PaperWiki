@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[CosyVoice 3]]", "[[CosyVoice 2]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: pending-review
@@ -30,7 +30,7 @@ SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,�
 
 ## 使用此数据集的模型
 
-- [[CosyVoice 3]]: CER 0.71% (zh), WER 1.45% (en), CER 5.09% (hard)
+- [[论文笔记/CosyVoice 3|CosyVoice 3]]: CER 0.71% (zh), WER 1.45% (en), CER 5.09% (hard)
 - [[CosyVoice 2]]: CER 1.45% (zh), WER 2.57% (en), CER 6.83% (hard)
 - Seed-TTS: CER 1.12% (zh), WER 2.25% (en), CER 7.59% (hard)
 - F5-TTS: CER 1.56% (zh), WER 1.83% (en), CER 8.67% (hard)

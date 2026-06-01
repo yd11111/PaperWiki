@@ -4,7 +4,7 @@ title: "Gumbel-Softmax"
 aliases: [Gumbel Softmax, Gumbel-Softmax Trick]
 category: "optimization-technique"
 tags: [differentiable-sampling, discrete-optimization, gradient-estimation]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 related_concepts: ["[[Differentiable Reward Optimization]]"]
 status: pending-review
 lifecycle: active

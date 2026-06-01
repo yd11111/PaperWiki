@@ -4,7 +4,7 @@ title: "Cross-lingual Voice Cloning"
 aliases: [跨语言语音克隆, Cross-lingual TTS, Cross-lingual Speech Synthesis]
 tags: [TTS, cross-lingual, voice-cloning, multilingual]
 key_approaches: ["Multilingual LLM + shared tokenizer", "Language-agnostic speaker embedding"]
-key_models: ["[[CosyVoice 3]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS]
 status: pending-review
@@ -30,7 +30,7 @@ updated: 2026-06-01
 
 ## 代表模型
 
-- [[CosyVoice 3]] (2025): 支持 zh/en/ja/ko 等多方向跨语言克隆,WER 显著优于前代
+- [[论文笔记/CosyVoice 3|CosyVoice 3]] (2025): 支持 zh/en/ja/ko 等多方向跨语言克隆,WER 显著优于前代
 - CosyVoice 2 (2024): 仅支持中英,日文方向因字符转换问题表现差
 
 ## 评估

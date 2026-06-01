@@ -5,7 +5,7 @@ aliases: [CV3-Eval benchmark, CosyVoice 3 Eval]
 domain: "TTS evaluation (multilingual)"
 scale: "9 languages x 500 samples + cross-lingual + emotion subsets"
 tags: [benchmark, TTS, multilingual, zero-shot, evaluation, in-the-wild]
-used_by: ["[[CosyVoice 3]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity, MOS, DNSMOS, Emotion Accuracy]
 url: ""
 status: pending-review
@@ -40,7 +40,7 @@ CV3-Eval 是 CosyVoice 3 论文中提出的多语言零样本 TTS 评估 benchma
 
 ## 使用此数据集的模型
 
-- [[CosyVoice 3]]: 唯一支持全部 9 语种的系统
+- [[论文笔记/CosyVoice 3|CosyVoice 3]]: 唯一支持全部 9 语种的系统
 - F5-TTS: 仅支持 zh/en
 - Spark-TTS: 仅支持 zh/en
 - GPT-SoVits: 仅支持 zh/en

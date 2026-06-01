@@ -304,6 +304,7 @@ deep 及以上层级笔记**必须**包含：
 
 - 所有跨页引用使用 `[[wikilink]]` 格式
 - Frontmatter 中的链接使用 `"[[Page Name]]"` 格式（带引号）
+- **同名文件消歧**: 当论文笔记和实体页同名时（如论文笔记/CosyVoice 3.md 和模型库/CosyVoice 3.md），使用 folder-qualified path：`[[论文笔记/CosyVoice 3|CosyVoice 3]]`。实体页的 `key_papers` 始终使用 `[[论文笔记/xxx|显示名]]` 格式。
 - 模板区分：
   - **核心链接（must-link）**: 实体页必须包含的关系链接（如 `related_concepts`）
   - **相关引用（optional）**: 可选的延伸链接（如 `see_also`）

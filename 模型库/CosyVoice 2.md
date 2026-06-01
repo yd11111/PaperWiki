@@ -7,9 +7,9 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 supersedes: []
-superseded_by: ["[[CosyVoice 3]]"]
+superseded_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -38,7 +38,7 @@ CosyVoice 2 是阿里巴巴通义实验室开发的可扩展流式语音合成�
 
 ## 演进线
 
-CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[CosyVoice 3]] (2025)
+CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔记/CosyVoice 3|CosyVoice 3]] (2025)
 
 ## 关键贡献
 
