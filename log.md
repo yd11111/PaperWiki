@@ -13,3 +13,4 @@
 - [ingest/deep] [[DAC]] — codec 领域精读(P1 breadth 验证), 新建实体页 10 个, 追加更新 3 个
 - [lint/local] DAC — 通过/0 问题
 - [skip/ingest] Sources/corrupt_test.pdf — PDF 解析失败(非有效 PDF 格式),未生成笔记
+- [review/batch] 确认 4 实体页(CFM, Speech Tokenizer, RVQ, Zero-shot TTS) + 审核 1 精读笔记(CosyVoice 3)

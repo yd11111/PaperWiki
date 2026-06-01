@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i '' 's/^status: pending-review/status: confirmed/' \"概念库/Conditional Flow Matching.md\" \"概念库/Speech Tokenizer.md\" \"概念库/Residual Vector Quantization.md\" \"任务库/Zero-shot Speech Synthesis.md\")",
+      "Bash(sed -i '' 's/^status: draft/status: reviewed/' \"论文笔记/CosyVoice 3.md\")"
+    ]
+  }
+}

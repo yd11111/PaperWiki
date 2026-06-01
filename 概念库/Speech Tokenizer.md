@@ -6,7 +6,7 @@ category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]"]
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

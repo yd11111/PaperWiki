@@ -6,7 +6,7 @@ category: "quantization"
 tags: [quantization, discrete-representation, audio-codec, neural-compression]
 key_papers: ["[[论文笔记/DAC|DAC]]"]
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

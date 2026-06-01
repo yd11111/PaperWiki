@@ -13,7 +13,7 @@ models: ["[[CosyVoice 3]]", "[[CosyVoice 2]]", "[[MinMo]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 kb_context_sources: 0
-status: draft
+status: reviewed
 created: 2026-06-01
 updated: 2026-06-01
 ---

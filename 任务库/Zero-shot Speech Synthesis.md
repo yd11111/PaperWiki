@@ -7,7 +7,7 @@ key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hyb
 key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

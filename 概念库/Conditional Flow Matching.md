@@ -6,7 +6,7 @@ category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 related_concepts: ["[[Finite Scalar Quantization]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""
