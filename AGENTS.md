@@ -61,20 +61,26 @@
 
 ### 原则 1: 可信知识层
 
-| 层级 | 内容 | 进入条件 |
-|------|------|----------|
-| **trusted**（已确认） | 人类确认过的概念定义、关系、结论 | 人类显式确认（review 通过） |
-| **pending-review**（待审） | Agent 生成但未经人类确认的内容 | Agent 创建/实质性修改 |
-| **draft**（草稿） | 初步摘录，可能有误 | Agent 初次生成 |
+| 内容 | 是否属于可信层 | 准入条件 |
+|------|----------------|----------|
+| 精读笔记 (status: reviewed) | **是** | 人类审核并标记 `status: reviewed` |
+| 复现笔记 (status: reviewed) | **是** | 人类审核并标记 `status: reviewed` |
+| 概念页 (status: confirmed) | **是** | 人类批量确认后标记 `status: confirmed` |
+| 模型页 (status: confirmed) | **是** | 人类批量确认后标记 `status: confirmed` |
+| 任务页 (status: confirmed) | **是** | 人类批量确认后标记 `status: confirmed` |
+| 数据集页 (status: confirmed) | **是** | 人类批量确认后标记 `status: confirmed` |
+| 精读/复现笔记 (status: draft) | **否** | 未审核，参考级 |
+| 实体页 (status: pending-review) | **否** | Agent 刚更新，等待确认 |
+| 卡片 / 加强卡片 | **否，永远不是** | 线索级，不可引用 |
 
 **规则**:
-- KB 检索以 trusted 层为主要来源，pending-review 作为参考并标注 `[待确认]`
-- AI 生成内容在未经人类确认前，**不得**进入 trusted 层
+- KB 检索以可信层(confirmed/reviewed)为主依据，pending-review 可作为参考依据但必须标注 `[待确认]`
+- AI 生成内容在未经人类确认前，**不得**进入可信层
 - `status` 字段记录于 frontmatter
 
 ### 原则 2: 主视图 = 实体页 + MOC
 
-知识库的主视图不是论文笔记列表，而是**实体页**（概念/模型/数据集）+ **MOC 导航页**。论文笔记是输入端，实体页是沉淀端。
+知识库的主视图不是论文笔记列表，而是**实体页**（概念库/模型库/任务库/数据集）+ **MOC 导航页**。论文笔记是输入端，实体页是沉淀端。
 
 ### 原则 3: Inbox — 零承诺
 
