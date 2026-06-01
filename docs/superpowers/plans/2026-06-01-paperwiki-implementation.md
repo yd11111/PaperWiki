@@ -1,3 +1,5 @@
+> ⚠️ 本文件为实施历史文档(已全部执行完毕 P0-P5)。系统当前规范以 `AGENTS.md` 为准。
+
 # PaperWiki Implementation Plan (v2)
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
