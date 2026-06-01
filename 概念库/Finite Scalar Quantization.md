@@ -4,7 +4,7 @@ title: "Finite Scalar Quantization"
 aliases: [FSQ]
 category: "quantization"
 tags: [quantization, discrete-representation, VQ-alternative]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]"]
 related_concepts: ["[[Speech Tokenizer]]", "[[Gumbel-Softmax]]"]
 status: pending-review
 lifecycle: active
@@ -34,7 +34,7 @@ Finite Scalar Quantization (FSQ) 是一种向量量化替代方案,将连续表�
 ## 相关概念
 
 - Vector Quantization (VQ): FSQ 的前身,需显式码本
-- Residual Vector Quantization (RVQ): 多层级 VQ,用于声学 codec(如 SoundStream, EnCodec)
+- [[Residual Vector Quantization]]: 多层级 VQ,用于声学 codec(如 SoundStream, EnCodec, DAC)
 - [[Speech Tokenizer]]: FSQ 是其量化核心模块
 - [[Gumbel-Softmax]]: DiffRO 中用于使离散采样可微
 

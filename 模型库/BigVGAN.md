@@ -7,7 +7,7 @@ year: 2023
 tags: [vocoder, neural-vocoder, GAN-based, waveform-generation]
 key_concepts: []
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]"]
 supersedes: [HiFi-GAN]
 superseded_by: []
 status: pending-review
@@ -45,3 +45,4 @@ BigVGAN 是 NVIDIA 提出的通用神经声码器,通过大规模训练实现对
 
 - [[论文笔记/IndexTTS2|IndexTTS2]]: 使用 BigVGANv2 作为 vocoder
 - IndexTTS (Deng et al., 2025): 同样使用 BigVGAN
+- [[论文笔记/DAC|DAC]] (Kumar et al., NeurIPS 2023): 沿用 BigVGAN 的 Snake activation 和训练 recipe,将其扩展到 universal audio codec 领域

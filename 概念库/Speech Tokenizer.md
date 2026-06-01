@@ -4,8 +4,8 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
-related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]"]
+related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -38,6 +38,7 @@ CosyVoice 3 的 speech tokenizer 基于 MinMo 构建,通过 FSQ 量化,以 25 Hz
 - CosyVoice (2024): FSQ-SenseVoice tokenizer
 - HuBERT (2021): 自监督 speech representation
 - SoundStream (2021): 声学 RVQ tokenizer
+- DAC (Kumar et al., NeurIPS 2023): 改进 RVQ-GAN 的声学 codec,可作为 drop-in replacement 用于 AudioLM/VALL-E/MusicLM 等生成模型的 audio tokenizer,因更高 bitrate efficiency (99%) 和保真度提升下游生成质量
 - IndexTTS2 (Zhou et al., 2025): 采用 MaskGCT 的 semantic codec 作为 speech tokenizer,在 T2S 模块中生成 semantic token 序列,并通过共享位置编码表(W_sem = W_num)实现精确 duration control
 
 ## 相关概念
