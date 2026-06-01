@@ -5,6 +5,7 @@ aliases: [{{aliases}}]
 category: "{{category}}"
 tags: [{{tags}}]
 key_papers: []
+origin_paper: ""              # 该概念的原始出处论文,空表示尚未溯源
 related_concepts: []
 status: pending-review
 lifecycle: active

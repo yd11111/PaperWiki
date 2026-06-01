@@ -5,6 +5,7 @@ aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
 key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]"]
+origin_paper: ""
 related_concepts: ["[[Speech Tokenizer]]"]
 status: pending-review
 lifecycle: active

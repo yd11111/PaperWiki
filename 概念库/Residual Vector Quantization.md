@@ -5,6 +5,7 @@ aliases: [RVQ, Residual VQ, Multi-stage VQ]
 category: "quantization"
 tags: [quantization, discrete-representation, audio-codec, neural-compression]
 key_papers: ["[[论文笔记/DAC|DAC]]"]
+origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]"]
 status: confirmed
 lifecycle: active

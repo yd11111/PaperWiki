@@ -5,6 +5,7 @@ aliases: [码本坍缩, Codebook Underutilization, Dead Codes]
 category: "training-challenge"
 tags: [VQ, quantization, training-instability, audio-codec]
 key_papers: ["[[论文笔记/DAC|DAC]]"]
+origin_paper: ""
 related_concepts: ["[[Residual Vector Quantization]]", "[[Finite Scalar Quantization]]"]
 status: pending-review
 lifecycle: active

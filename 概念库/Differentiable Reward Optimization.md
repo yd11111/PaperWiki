@@ -5,6 +5,7 @@ aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
+origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
 lifecycle: active

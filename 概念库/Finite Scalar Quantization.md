@@ -5,6 +5,7 @@ aliases: [FSQ, Finite Scalar Quantization]
 category: "quantization"
 tags: [quantization, discrete-representation, VQ-alternative, codebook-free]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]"]
+origin_paper: "Mentzer et al., Finite Scalar Quantization: VQ-VAE Made Simple, ICLR 2024"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Gumbel-Softmax]]"]
 status: pending-review
 lifecycle: active

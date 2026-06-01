@@ -5,6 +5,7 @@ aliases: [Snake Function, Periodic Activation]
 category: "architecture-component"
 tags: [activation-function, periodic-inductive-bias, waveform-generation, vocoder]
 key_papers: ["[[论文笔记/DAC|DAC]]"]
+origin_paper: ""
 related_concepts: ["[[Multi-scale STFT Discriminator]]"]
 status: pending-review
 lifecycle: active

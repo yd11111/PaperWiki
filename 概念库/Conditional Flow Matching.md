@@ -5,6 +5,7 @@ aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]"]
 status: confirmed
 lifecycle: active
