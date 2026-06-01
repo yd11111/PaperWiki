@@ -60,6 +60,16 @@ DAC 同时使用:
 - [[Snake Activation]]: 与 STFT-D 配合减少周期性伪影
 - Feature Matching Loss: 从 discriminator 中间层提取的辅助 loss
 
+## 历史背景
+
+据 Xu Tan et al. (2021) Survey 整理,GAN vocoder 判别器的设计核心目标是"如何更好地捕捉波形特征以提供 generator 更精确的梯度信号"。早期工作主要在时域探索:
+1. Random window discriminators (GAN-TTS, 2019): 不同随机窗口互补判别
+2. Multi-scale discriminators (MelGAN, 2019): 不同下采样率捕捉不同频率特征
+3. Multi-period discriminators (HiFi-GAN, 2020): reshape 为 2D 捕捉周期结构
+4. Hierarchical discriminators (VocGAN, 2020): 不同分辨率的层次判别
+
+STFT-based 频域判别器的引入代表了从纯时域到时频联合判别的范式跃迁。
+
 ## 演进
 
 MSD (MelGAN, 2019) → MPD (HiFi-GAN, 2020) → MRSD (UnivNet, 2021) → BigVGAN (MRSD 替换 MSD) → DAC (multi-band complex STFT-D, 2023)

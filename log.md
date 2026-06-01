@@ -34,3 +34,4 @@
 - [skip/ingest] 今日推荐精读请求 — 用户说"把最好的直接精读",拒绝自动升级(原则5),等待用户明确指定
 - [lint/full] 全量 lint: 0 dead links, 0 frontmatter issues, 1 MOC 未覆盖(VALL-E), 积压: 25 pending-review + 6 draft; 溯源提醒: Speech Tokenizer / RVQ / CFM 缺 origin_paper
 - [alert/backlog] pending-review ≥ 10 (当前25), draft deep/repro ≥ 5 (当前6)
+- [ingest/survey] [[Survey-Neural Speech Synthesis]] — T0 冷启动#1: 新建 10 概念页, 更新 2 概念页
