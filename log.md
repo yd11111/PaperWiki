@@ -24,3 +24,5 @@
 - [lint/local] Seed-TTS — 通过/0 问题
 - [ingest/repro] [[DAC]] — 从 deep 升级为 repro, KB 检索启用, kb_sources=2
 - [lint/full] 全量 lint: 1 dead links, 5 frontmatter issues, 2 orphan pages, 积压: 26 pending-review + 4 draft
+- [kb/search] [[SoundStream]] — 命中 2 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Quantizer Dropout]](pending-review), [[Neural Audio Compression]](pending-review), [[Codebook Collapse]](pending-review), [[Multi-scale STFT Discriminator]](pending-review)
+- [ingest/deep] [[SoundStream]] — 精读(跨session一致性测试), kb_sources=2, 追加更新 5 个实体页

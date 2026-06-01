@@ -7,7 +7,7 @@ year: 2021
 tags: [audio-codec, neural-compression, RVQ, streaming-codec]
 key_concepts: ["[[Residual Vector Quantization]]", "[[Quantizer Dropout]]"]
 tasks: ["[[Neural Audio Compression]]"]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 supersedes: []
 superseded_by: [EnCodec]
 status: pending-review

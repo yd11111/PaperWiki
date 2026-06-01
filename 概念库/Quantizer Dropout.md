@@ -4,7 +4,7 @@ title: "Quantizer Dropout"
 aliases: [RVQ Dropout, Variable Bitrate Training]
 category: "training-technique"
 tags: [quantization, training-trick, variable-bitrate, audio-codec]
-key_papers: ["[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
 origin_paper: ""
 related_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
 status: pending-review
