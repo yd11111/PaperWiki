@@ -1,0 +1,41 @@
+---
+type: dataset
+title: "SEED-TTS-Eval"
+aliases: [SEED-TTS Eval, SEED TTS Eval]
+domain: "TTS evaluation"
+scale: "3 subsets (test-zh, test-en, test-hard)"
+tags: [benchmark, TTS, zero-shot, evaluation]
+used_by: ["[[CosyVoice 3]]", "[[CosyVoice 2]]"]
+metrics_reported_on: [CER, WER, Speaker Similarity]
+url: ""
+status: pending-review
+lifecycle: active
+merged_into: ""
+created: 2026-06-01
+updated: 2026-06-01
+---
+
+## 概述
+
+SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,包含三个子集:
+- **test-zh**: 中文普通话测试集
+- **test-en**: 英文测试集
+- **test-hard**: 中文高难度测试集(包含罕见词、绕口令、领域术语等)
+
+评估维度: 内容一致性(CER/WER)和说话人相似度(Speaker Similarity)。
+
+## 用途
+
+作为零样本 TTS 模型的标准化评估 benchmark,被 Seed-TTS、CosyVoice 系列、F5-TTS、MaskGCT、FireRedTTS 等众多模型采用。
+
+## 使用此数据集的模型
+
+- [[CosyVoice 3]]: CER 0.71% (zh), WER 1.45% (en), CER 5.09% (hard)
+- [[CosyVoice 2]]: CER 1.45% (zh), WER 2.57% (en), CER 6.83% (hard)
+- Seed-TTS: CER 1.12% (zh), WER 2.25% (en), CER 7.59% (hard)
+- F5-TTS: CER 1.56% (zh), WER 1.83% (en), CER 8.67% (hard)
+
+## 注意事项
+
+- Speaker Similarity 有两种评估方式: ERes2Net-based 和 WavLM-based,需注明使用哪种
+- 随着模型进步,各系统在此 benchmark 上的分数趋于接近,区分度下降,这促使了 CV3-Eval 等新 benchmark 的提出
