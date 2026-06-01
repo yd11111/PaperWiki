@@ -26,3 +26,6 @@
 - [lint/full] 全量 lint: 1 dead links, 5 frontmatter issues, 2 orphan pages, 积压: 26 pending-review + 4 draft
 - [kb/search] [[SoundStream]] — 命中 2 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Quantizer Dropout]](pending-review), [[Neural Audio Compression]](pending-review), [[Codebook Collapse]](pending-review), [[Multi-scale STFT Discriminator]](pending-review)
 - [ingest/deep] [[SoundStream]] — 精读(跨session一致性测试), kb_sources=2, 追加更新 5 个实体页
+- [kb/search] [[VALL-E]] — 命中 3 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Neural Audio Compression]](pending-review)
+- [ingest/deep] [[VALL-E]] — 从 inbox 处理为精读, kb_sources=3, 追加更新 3 个实体页
+- [inbox/processed] VALL-E — inbox 条目删除

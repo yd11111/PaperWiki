@@ -4,7 +4,7 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]"]
 status: confirmed
