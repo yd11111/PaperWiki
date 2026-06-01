@@ -103,6 +103,21 @@ Phoneme → [Encoder] → Hidden → [Duration Predictor] → Expanded Hidden �
 - [[Mel Spectrogram]]: NAR 模型的输出目标
 - [[Prosody Modeling]]: variance adaptor (pitch, energy) 提升 NAR 韵律
 
+## 可控性对比 (Xie et al. 2024 Survey)
+
+Survey 从可控性角度对比 NAR vs AR/LLM 架构:
+
+| 维度 | NAR (FastSpeech, Matcha-TTS, F5-TTS) | LLM-based (VALL-E, CosyVoice) |
+|------|--------------------------------------|-------------------------------|
+| 控制方式 | 显式 variance predictor / flow conditioning | In-context learning / instruction |
+| 控制精度 | 高 (直接操控 pitch/energy/duration) | 低 (隐式, 难精确控制) |
+| 灵活度 | 低 (预定义属性集) | 高 (自然语言驱动) |
+| 推理速度 | 快 (并行) | 慢 (自回归) |
+| 零样本能力 | 有限 | 强 (few-second prompt) |
+| 表达多样性 | 受限于显式标签 | 丰富 (上下文感知) |
+
+**Hybrid 趋势**: CosyVoice 等将 LLM 的控制灵活度与 flow-based NAR 的生成质量结合。
+
 ## 演进
 
-Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024)
+Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024) → Hybrid: LLM + NAR Flow (CosyVoice, 2024)

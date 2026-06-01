@@ -6,7 +6,7 @@ category: "technique"
 tags: [TTS, prosody, style, emotion, expressiveness, variation-information]
 key_papers: []
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
-related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]"]
+related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]", "[[Speech Attribute Disentanglement]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -107,12 +107,24 @@ Survey 将语音合成所需的信息分为四大类:
 - 从文本预测韵律特征
 - 从隐空间采样
 
-## 在现代 LLM-TTS 中的韵律建模
+## 在可控 TTS 中的韵律控制 (Xie et al. 2024 Survey)
+
+Survey 将 Prosody Control 定义为可控 TTS 的最基本任务,涵盖对 pitch, duration, energy 的操控,是实现自然度和表现力的关键。
+
+### 控制策略 (Style Tagging for Prosody)
+
+1. **离散标签控制**: StyleTagging-TTS 用短语/词汇直接指定韵律属性
+2. **连续信号控制**: DiffStyleTTS 层级化建模 pitch/energy/duration/style 的 scale factors; Spark-TTS 通过专用 token 实现 pitch/speed 细粒度修改
+3. **隐空间修改**: Cauliflow 通过 flow-based model 调整 latent 控制语速/停顿; DiTTo-TTS 通过 DiT 修改 latent length predictions
+4. **韵律轮廓草图**: DrawSpeech (Chen et al., 2025) 让用户直接绘制韵律轮廓,由 diffusion model 细化为语音
+
+### 在现代 LLM-TTS 中的韵律建模
 
 传统 Prosody Modeling 技术在 LLM-TTS 时代的演变:
 - **VALL-E / Seed-TTS**: 通过 in-context learning 从 prompt 音频隐式获取韵律风格
 - **CosyVoice**: speech tokenizer 编码部分韵律信息 + CFM 还原声学细节
 - **MaskGCT**: masked generative modeling 隐式学习韵律分布
+- **LLM-based 局限**: 隐式建模使细粒度韵律控制困难 (Survey 指出这是关键挑战)
 
 ## 关键论文
 
