@@ -4,7 +4,7 @@ title: "Zero-shot Speech Synthesis"
 aliases: [零样本语音合成, Zero-shot TTS, Zero-shot Voice Cloning]
 tags: [TTS, zero-shot, voice-cloning]
 key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hybrid"]
-key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
 status: confirmed
@@ -33,7 +33,7 @@ updated: 2026-06-01
 ## 代表模型
 
 - [[论文笔记/CosyVoice 3|CosyVoice 3]] (2025): Alibaba, 1.5B, 9 languages, SOTA
-- Seed-TTS (2024): ByteDance, 自回归, 高 speaker similarity
+- [[论文笔记/Seed-TTS|Seed-TTS]] (2024): ByteDance, 自回归 + token diffusion, CMOS -0.07/-0.08 vs Human (首次达人类水平), 附带 Seed-TTS_DiT (全 diffusion NAR 变体)
 - F5-TTS (2024): 非自回归 flow matching
 - MaskGCT (2024): Masked generative codec transformer
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): bilibili, AR-based, 首个同时实现精确 duration control 和自然时长生成的自回归 zero-shot TTS,情感-音色解耦

@@ -35,7 +35,8 @@ DiffRO 解决了 TTS RL 的两个核心难题:
 
 ## 关键论文
 
-- CosyVoice 3 (2025): 首次提出 DiffRO
+- [[论文笔记/Seed-TTS|Seed-TTS]] (ByteDance, 2024): DiffRO 的直接前驱——首次在 TTS 中系统性应用 RL post-training (REINFORCE),使用 SIM+WER 和 SER accuracy 作为 reward function,验证了 RL 对 TTS robustness/similarity/controllability 的有效性,同时发现 reward hacking 问题
+- CosyVoice 3 (2025): 首次提出 DiffRO,将 Seed-TTS 的 audio-level RL 升级为 token-level 可微优化
 
 ## 相关概念
 

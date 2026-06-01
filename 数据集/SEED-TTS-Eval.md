@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: pending-review
@@ -17,7 +17,7 @@ updated: 2026-06-01
 
 ## 概述
 
-SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,包含三个子集:
+SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发布的广泛使用的零样本 TTS 评估集,包含三个子集:
 - **test-zh**: 中文普通话测试集
 - **test-en**: 英文测试集
 - **test-hard**: 中文高难度测试集(包含罕见词、绕口令、领域术语等)
@@ -26,7 +26,7 @@ SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,�
 
 ## 用途
 
-作为零样本 TTS 模型的标准化评估 benchmark,被 Seed-TTS、CosyVoice 系列、F5-TTS、MaskGCT、FireRedTTS 等众多模型采用。
+作为零样本 TTS 模型的标准化评估 benchmark,被 Seed-TTS、CosyVoice 系列、F5-TTS、MaskGCT、FireRedTTS 等众多模型采用。原始论文使用 Whisper-large-v3 (EN) 和 Paraformer-zh (ZH) 计算 WER,使用 WavLM-large fine-tuned speaker verification 计算 SIM [Seed-TTS §3.1]。objective set 包含 1000 条 Common Voice + 2000 条 DiDiSpeech 样本。
 
 ## 使用此数据集的模型
 

@@ -4,7 +4,7 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]"]
 status: confirmed
@@ -42,6 +42,7 @@ CosyVoice 3 的 speech tokenizer 基于 MinMo 构建,通过 FSQ 量化,以 25 Hz
 - DAC (Kumar et al., NeurIPS 2023): 改进 RVQ-GAN 的声学 codec,可作为 drop-in replacement 用于 AudioLM/VALL-E/MusicLM 等生成模型的 audio tokenizer,因更高 bitrate efficiency (99%) 和保真度提升下游生成质量
 - IndexTTS2 (Zhou et al., 2025): 采用 MaskGCT 的 semantic codec 作为 speech tokenizer,在 T2S 模块中生成 semantic token 序列,并通过共享位置编码表(W_sem = W_num)实现精确 duration control
 - MaskGCT (Wang et al., 2024): 提出 VQ-VAE semantic codec,用单层 codebook (8192 entries, dim 8) 量化 W2v-BERT 2.0 第 17 层 hidden states,相比 k-means 保留更多韵律信息,被后续 IndexTTS2 等采用
+- [[论文笔记/Seed-TTS|Seed-TTS]] (ByteDance, 2024): 探索 continuous 和 discrete 两种 speech tokenizer 设计,发现 tokenizer 是全系统性能瓶颈;使用类似 Betker (2023) 的方案,在大规模数据上验证了 tokenizer 质量对零样本 TTS 的决定性影响
 
 ## 相关概念
 

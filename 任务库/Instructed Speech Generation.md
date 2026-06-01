@@ -4,7 +4,7 @@ title: "Instructed Speech Generation"
 aliases: [指令式语音生成, Instruction-following TTS, Controllable TTS]
 tags: [TTS, controllable, instruction-following, emotion, style]
 key_approaches: ["Natural language instruction", "Fine-grained markers", "Style prompt"]
-key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [Style Similarity, WER, MOS, Emotion Accuracy]
 status: pending-review
@@ -30,7 +30,7 @@ updated: 2026-06-01
 
 - [[论文笔记/CosyVoice 3|CosyVoice 3]] (2025): 100+ 种风格,5000 小时 instruction-following 数据
 - CosyVoice 2 (2024): 基础指令能力
-- Seed-TTS (2024): 支持情感/风格指令
+- [[论文笔记/Seed-TTS|Seed-TTS]] (2024): 通过 Speaker Fine-tuning + Instruction Fine-tuning 支持情感/expressiveness/speaking rate/style 控制;RL-SER 变体将 SER accuracy 作为 reward,emotion control accuracy 从 ICL 的 0.44 提升至 0.80 (happy) [Table 9]
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): 通过 T2E 模块实现自然语言情感控制,将 DeepSeek-R1 的情感分布预测能力蒸馏到 Qwen-3-1.7b,支持 7 种情感的 soft 混合控制
 
 ## 评估
