@@ -31,3 +31,6 @@
 - [inbox/processed] VALL-E — inbox 条目删除
 - [update/concept] [[Codebook Collapse]] — 基于 web 搜索补充: 根本原因(encoder drift理论)+ 新兴方案(ERVQ/NDVQ/Random Codebooks)+ 度量方式 + 演进路线(实质修改, status→pending-review)
 - [ingest/repro] [[IndexTTS2]] — 用户明确要求升级为复现级, KB 检索启用, kb_sources=3, 添加复现要点+代码分析+难点评估
+- [skip/ingest] 今日推荐精读请求 — 用户说"把最好的直接精读",拒绝自动升级(原则5),等待用户明确指定
+- [lint/full] 全量 lint: 0 dead links, 0 frontmatter issues, 1 MOC 未覆盖(VALL-E), 积压: 25 pending-review + 6 draft; 溯源提醒: Speech Tokenizer / RVQ / CFM 缺 origin_paper
+- [alert/backlog] pending-review ≥ 10 (当前25), draft deep/repro ≥ 5 (当前6)
