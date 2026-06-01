@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 supersedes: []
 superseded_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 status: pending-review
@@ -44,3 +44,7 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 
 - 首个实现几乎无损双向流式零样本 TTS 的系统
 - 验证了 text-based LLM 初始化对 TTS LM 的有效性
+
+## 作为 Baseline 被引用
+
+- [[论文笔记/IndexTTS2|IndexTTS2]] (2025): 在基础性能和情感表达两方面均以 CosyVoice2 为 baseline,IndexTTS2 在 SS 和 WER 上全面超越 CosyVoice2;在自然语言情感控制对比中,IndexTTS2 的 EMOS (3.786) 显著优于 CosyVoice2 (3.339)

@@ -4,7 +4,7 @@ title: "Zero-shot Speech Synthesis"
 aliases: [零样本语音合成, Zero-shot TTS, Zero-shot Voice Cloning]
 tags: [TTS, zero-shot, voice-cloning]
 key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hybrid"]
-key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
 status: pending-review
@@ -36,6 +36,7 @@ updated: 2026-06-01
 - Seed-TTS (2024): ByteDance, 自回归, 高 speaker similarity
 - F5-TTS (2024): 非自回归 flow matching
 - MaskGCT (2024): Masked generative codec transformer
+- [[论文笔记/IndexTTS2|IndexTTS2]] (2025): bilibili, AR-based, 首个同时实现精确 duration control 和自然时长生成的自回归 zero-shot TTS,情感-音色解耦
 
 ## 评估
 
@@ -58,6 +59,8 @@ updated: 2026-06-01
 | CosyVoice 3-1.5B_RL | CER test-zh | 0.71% | SEED-TTS-Eval | CosyVoice 3 Table 4 |
 | CosyVoice 3-1.5B_RL | WER test-en | 1.45% | SEED-TTS-Eval | CosyVoice 3 Table 4 |
 | Seed-TTS | SS test-zh | 0.796 | SEED-TTS-Eval | CosyVoice 3 Table 4 |
+| IndexTTS2 | WER test-zh | 1.008% | SEED-TTS-Eval | IndexTTS2 Table 1 |
+| IndexTTS2 | SS test-zh | 0.865 | SEED-TTS-Eval | IndexTTS2 Table 1 |
 
 ## 开放问题
 

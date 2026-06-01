@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: pending-review
@@ -39,3 +39,7 @@ SEED-TTS-Eval 是由 ByteDance 发布的广泛使用的零样本 TTS 评估集,�
 
 - Speaker Similarity 有两种评估方式: ERes2Net-based 和 WavLM-based,需注明使用哪种
 - 随着模型进步,各系统在此 benchmark 上的分数趋于接近,区分度下降,这促使了 CV3-Eval 等新 benchmark 的提出
+
+## 最新结果
+
+- [[论文笔记/IndexTTS2|IndexTTS2]] (2025): WER 1.008% (test-zh), WER 1.521% (test-en), SS 0.865 (test-zh), SS 0.860 (test-en); 同时在 duration control 设定下 token number error rate <0.02%
