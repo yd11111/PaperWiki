@@ -8,3 +8,5 @@
 - [init] P0 地基阶段完成 ✓
 - [ingest/deep] [[CosyVoice 3]] — 首篇精读(P1 验证), 涉及概念页 5 个, 模型页 3 个, 任务页 3 个, 数据集页 2 个
 - [lint/local] CosyVoice 3 — 通过/0 问题
+- [ingest/deep] [[IndexTTS2]] — 精读(P1 反向更新验证), 新建实体页 3 个, 追加更新已有页 6 个
+- [lint/local] IndexTTS2 — 通过/0 问题
