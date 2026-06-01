@@ -6,3 +6,5 @@
 - [init] 9 个模板文件完成(schema 验证通过)
 - [init] MOC 骨架完成(TTS-总览)
 - [init] P0 地基阶段完成 ✓
+- [ingest/deep] [[CosyVoice 3]] — 首篇精读(P1 验证), 涉及概念页 5 个, 模型页 3 个, 任务页 3 个, 数据集页 2 个
+- [lint/local] CosyVoice 3 — 通过/0 问题
