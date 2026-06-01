@@ -22,6 +22,15 @@ updated: 2026-06-01
 
 > [!info] KB 背景 (KB 检索未启用 — P1 阶段)
 
+## 速查
+
+> [!summary] 速查
+> - **一句话**: 用 masked generative modeling 完全替代自回归,构建无需 text-speech alignment 和 phone-level duration 的非自回归 zero-shot TTS
+> - **路线**: Text + prompt → T2S (Masked Generative Transformer 695M, 50 步迭代) → semantic tokens (50Hz) → S2A (Masked Generative 353M, 逐层) → 12 层 acoustic tokens → Vocos decoder → Waveform
+> - **指标**: SIM-O 0.728 / WER 2.466% (SeedTTS test-en); SIM-O 0.777 / WER 2.183% (SeedTTS test-zh); SMOS 4.24 / 4.11 (LibriSpeech / test-zh); 训练数据 100K h Emilia
+> - **可借鉴**: VQ-VAE 量化 W2v-BERT 2.0 特征做 semantic codec (优于 k-means,已被 IndexTTS2 采用); text+prompt 做 prefix + bidirectional attention 的 in-context learning 范式; flow matching 预测 total duration 而非 phone-level
+> - **局限**: 仍需外部 duration predictor; 多语言扩展仅重训 T2S 未联合 tokenizer/S2A; 代码已开源但 100K h Emilia 数据集获取受限
+
 ## 核心问题
 
 现有 zero-shot TTS 系统存在两大范式缺陷 [§1]:

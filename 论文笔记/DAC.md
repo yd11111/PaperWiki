@@ -22,6 +22,15 @@ updated: 2026-06-01
 
 > [!info] KB 背景 (KB 检索未启用 — P1 阶段)
 
+## 速查
+
+> [!summary] 速查
+> - **一句话**: 系统性改进 RVQ-GAN 各组件 (Snake 激活、factorized codes、sub-band discriminator),在 8 kbps / ~91x 压缩下全面超越 EnCodec 24 kbps
+> - **路线**: Audio (44.1kHz) → Conv Encoder (stride 512, 22M) → RVQ (9 层, 1024 entries, 86Hz) → Conv Decoder (54M) → Reconstructed Audio
+> - **指标**: ViSQOL 4.18 / SI-SDR 10.75 @8kbps vs EnCodec ViSQOL 3.16 / SI-SDR 9.59 @24kbps (混合测试集); codebook bitrate efficiency 99%; 76M 参数
+> - **可借鉴**: Factorized codes (低维 8d 投影做 VQ lookup) 解决 codebook collapse; Snake 激活引入周期 inductive bias 零成本提升音质; 概率式 quantizer dropout (p=0.5) 兼顾可变比特率与全带宽质量
+> - **局限**: 无语义/声学分层 (不适合直接做 TTS semantic token); 无 streaming/causal 模式; 代码和权重已开源 (github.com/descriptinc/descript-audio-codec)
+
 ## 核心问题
 
 如何构建一个**通用**高保真 neural audio codec,在极低比特率 (8 kbps) 下实现 ~90x 压缩,同时处理语音、音乐、环境声等所有音频类型,且优于 EnCodec/SoundStream 等现有方案?

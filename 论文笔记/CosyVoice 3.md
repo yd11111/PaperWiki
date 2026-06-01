@@ -23,6 +23,15 @@ updated: 2026-06-01
 > [!info] KB 背景 (KB 检索未启用 — P1 阶段)
 > P3 阶段启用 KB 检索后,此节将自动填充知识库背景。
 
+## 速查
+
+> [!summary] 速查
+> - **一句话**: 监督式多任务 speech tokenizer + DiffRO token-level RL + 100 万小时数据 scaling,构建 9 语种 in-the-wild zero-shot TTS
+> - **路线**: Text → LLM (1.5B, AR) → discrete speech tokens (25Hz) → CFM (DiT 300M) → Mel → Vocoder → Waveform
+> - **指标**: CER 0.71% / WER 1.45% (SEED-TTS-Eval test-zh/en), SS 0.775; 相对 CosyVoice 2 内容一致性提升 44%-51%; 跨语言 WER zh→en 5.09 vs 13.5 (CV3-Eval)
+> - **可借鉴**: DiffRO 绕过 CFM/vocoder 在 token 层用 Gumbel-Softmax 做可微 reward 优化; 在预训练 backbone (MinMo) 中间层插入 FSQ 的监督式 tokenizer 设计模式
+> - **局限**: 1.5B 在 test-hard 上反而逊于 0.5B (scaling 未充分验证); 模型和 100 万小时数据均未开源; 缺少与 VALL-E 2 等强 baseline 直接对比
+
 ## 核心问题
 
 CosyVoice 2 虽然在中英文广播场景下表现良好,但在以下方面存在明显局限:

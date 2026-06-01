@@ -22,6 +22,15 @@ updated: 2026-06-01
 
 > [!info] KB 背景 (KB 检索未启用 — P1 阶段)
 
+## 速查
+
+> [!summary] 速查
+> - **一句话**: 通过位置编码共享 (W_sem=W_num) 实现 AR TTS 精确时长控制,通过 GRL 对抗训练实现情感-音色解耦的 zero-shot 情感迁移
+> - **路线**: Text + timbre/style prompt → T2S (AR Transformer) → semantic tokens → S2M (CFM) → Mel → BigVGAN → Waveform
+> - **指标**: WER 1.008% / SS 0.865 (SeedTTS test-zh); ES 0.887 / EMOS 4.22 (Emotional test set); duration token error <0.02% (SeedTTS 1x)
+> - **可借鉴**: W_sem=W_num 位置编码共享零开销实现 AR duration control; GRL 解耦情感与音色可迁移到任何内容-风格分离场景; "全量预训→135h 精调→全量回炉" 三阶段范式应对稀缺数据
+> - **局限**: 情感数据仅 135h / 7 种基础情感; 仅支持中英文; 未报告 RTF/推理延迟; 开源状态未明确
+
 ## 核心问题
 
 自回归 TTS 模型在自然度和表现力上优于非自回归模型,但其 token-by-token 生成机制难以精确控制语音时长,限制了视频配音等需要严格音画同步的应用场景 [§1]。同时,现有模型的情感表达受限于稀缺的情感训练数据,情感和说话人身份特征耦合在一起,难以独立控制 [§1]。
