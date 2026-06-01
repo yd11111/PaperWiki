@@ -1,11 +1,11 @@
 ---
 type: concept
 title: "Gumbel-Softmax"
-aliases: [Gumbel Softmax, Gumbel-Softmax Trick]
+aliases: [Gumbel Softmax, Gumbel-Softmax Trick, Concrete Distribution]
 category: "optimization-technique"
-tags: [differentiable-sampling, discrete-optimization, gradient-estimation]
+tags: [differentiable-sampling, discrete-optimization, gradient-estimation, reparameterization]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
-related_concepts: ["[[Differentiable Reward Optimization]]"]
+related_concepts: ["[[Differentiable Reward Optimization]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -16,32 +16,68 @@ updated: 2026-06-01
 
 ## 定义
 
-Gumbel-Softmax 是一种使离散类别采样过程可微分的技术(又称 Concrete distribution)。通过向 logits 添加 Gumbel 噪声后做 softmax(或 straight-through 变体),可以在前向传播中得到近似 one-hot 的离散样本,同时在反向传播中通过连续松弛传递梯度。
+Gumbel-Softmax 是一种使离散类别采样可微分的重参数化技巧,解决的核心问题:**神经网络需要连续可微操作来反向传播,但从 categorical distribution 采样是不可微的。**
 
-数学形式: y_i = softmax((log(pi_i) + g_i) / tau),其中 g_i ~ Gumbel(0,1),tau 为温度参数。
+### 原理(为什么 work)
+
+三步推导:
+
+1. **Gumbel-Max Trick**(背景）: 从 categorical distribution 采样等价于: 对每个类别 i,计算 `log(π_i) + g_i`(g_i ~ Gumbel(0,1)),取 argmax。Gumbel 噪声的特殊性质保证 argmax 结果服从原始 categorical 分布。
+
+2. **问题**: argmax 不可微 → 梯度无法回传。
+
+3. **Gumbel-Softmax 的核心 insight**: 用 softmax 替换 argmax 作为连续松弛:
+
+```
+y_i = exp((log(π_i) + g_i) / τ) / Σ_j exp((log(π_j) + g_j) / τ)
+```
+
+**为什么这是合理的**: categorical 样本住在 simplex 的顶点(one-hot),softmax 输出住在同一 simplex 的内部。通过在内部(可微、近似）和顶点(不可微、精确)之间平滑插值,实现可微训练。
+
+### 温度参数 τ
+
+控制"承诺程度":
+- τ → 0: softmax 趋近 argmax,输出接近 one-hot(精确但梯度消失)
+- τ 大: 输出平滑(梯度好但近似差)
+- 实践: 训练过程中 anneal τ 从大到小,但不完全到 0
+
+### Straight-Through 变体
+
+前向用 argmax(真正离散),反向用 softmax 梯度近似。兼顾推理时的离散性和训练时的梯度流。
 
 ## 在 TTS 中的应用
 
-在 CosyVoice 3 的 DiffRO 中,Gumbel-Softmax 用于:
-- LLM 在每个时间步输出 speech token 的 logits 分布
-- 通过 Gumbel-Softmax 采样得到 "soft" token 选择
-- 将采样结果送入 Token2Text reward model 计算 reward
-- Reward 的梯度通过 Gumbel-Softmax 回传到 LLM 参数
+在 CosyVoice 3 的 DiffRO(Differentiable Reward Optimization)中:
+- LLM 每步输出 speech token 的 logits
+- Gumbel-Softmax 采样得到 "soft" token 选择
+- soft token 送入 Token2Text reward model 计算 reward
+- Reward 梯度通过 Gumbel-Softmax 回传到 LLM
 
-这使得整个 "LLM → token 选择 → reward 计算" 链路完全可微,无需 REINFORCE 等高方差梯度估计器。
+这使 "LLM → token 选择 → reward" 链路完全可微,无需 REINFORCE(高方差)。
+
+**更广泛的 TTS 应用场景**: 任何需要在离散 token 空间做端到端优化的场景:
+- 离散 codebook 选择的可微训练
+- VQ/RVQ 中的 soft assignment
+- 离散语音 token 的 RL/reward-based 优化
 
 ## 关键论文
 
-- Jang et al., "Categorical Reparameterization with Gumbel-Softmax", ICLR 2017
-- Maddison et al., "The Concrete Distribution", ICLR 2017
-- CosyVoice 3 (2025): 在 TTS post-training 中使用
+- Jang et al., "Categorical Reparameterization with Gumbel-Softmax", ICLR 2017 — 原始论文
+- Maddison et al., "The Concrete Distribution", ICLR 2017 — 独立同期工作,相同方法
+- CosyVoice 3 (2025): 在 TTS post-training (DiffRO) 中使用,实现 token-level 可微 reward 优化
 
 ## 相关概念
 
-- Straight-Through Estimator (STE): 另一种离散梯度近似,FSQ 训练时使用
-- REINFORCE: 不需要可微路径的梯度估计,但方差大
-- [[Differentiable Reward Optimization]]: Gumbel-Softmax 在其中的应用场景
+- [[Differentiable Reward Optimization]]: CosyVoice 3 中 Gumbel-Softmax 的应用场景
+- [[Finite Scalar Quantization]]: 另一种离散化方案,训练时用 STE 而非 Gumbel-Softmax
+- REINFORCE: 不需要可微路径的替代方案,但方差高
+- Straight-Through Estimator (STE): 类似思路,但不加 Gumbel 噪声
 
 ## 演进
 
-REINFORCE (高方差) → Gumbel-Softmax (2017, 低方差但有 bias) → Straight-Through Gumbel (结合两者) → 应用于 TTS token-level RL (CosyVoice 3, 2025)
+REINFORCE (高方差, 1992) → Gumbel-Softmax / Concrete (低方差可微, 2017) → ST-Gumbel (结合离散前向+可微反向) → 应用于 TTS token-level RL (CosyVoice 3, 2025)
+
+---
+
+> [!info] 来源
+> 定义和原理部分基于 Jang et al. 2017 原始论文 + Eric Jang 博客 (blog.evjang.com, 2016)。TTS 应用部分基于 CosyVoice 3 论文。
