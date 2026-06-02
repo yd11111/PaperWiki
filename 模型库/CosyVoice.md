@@ -10,7 +10,7 @@ tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[
 key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]"]
 supersedes: []
 superseded_by: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-02

@@ -7,7 +7,7 @@ tags: [discriminator, GAN, frequency-domain, audio-codec, vocoder]
 key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: ""
 related_concepts: ["[[Snake Activation]]", "[[Residual Vector Quantization]]", "[[Codec Training Objectives]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

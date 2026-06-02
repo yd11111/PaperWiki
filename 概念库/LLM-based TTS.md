@@ -7,7 +7,7 @@ tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-
 key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "SpearTTS (Kharitonov et al., 2023)", "Make-a-Voice (Huang et al., 2023b)", "Yang et al., When LLM Meet Speech, 2025"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-LLM Integration Taxonomy]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

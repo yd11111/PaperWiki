@@ -11,7 +11,7 @@ tags: [TTS, zero-shot, LLM-based, flow-matching, supervised-token, multilingual,
 concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]"]
 models: ["[[CosyVoice 2]]", "[[CosyVoice 3]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
-datasets: []
+datasets: ["[[数据集/LibriTTS|LibriTTS]]", "[[数据集/AISHELL-3|AISHELL-3]]", "[[数据集/Common Voice|Common Voice]]", "[[数据集/LibriSpeech|LibriSpeech]]", "[[数据集/MLS|MLS]]"]
 kb_context_sources: 3
 status: draft
 created: 2026-06-02

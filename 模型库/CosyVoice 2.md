@@ -9,8 +9,8 @@ key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Cond
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
 key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
-superseded_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
-status: pending-review
+superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

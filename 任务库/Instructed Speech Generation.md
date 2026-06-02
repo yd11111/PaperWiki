@@ -1,13 +1,13 @@
 ---
 type: task
 title: "Instructed Speech Generation"
-aliases: [指令式语音生成, Instruction-following TTS, Controllable TTS]
+aliases: [指令式语音生成, Instruction-following TTS]
 tags: [TTS, controllable, instruction-following, emotion, style]
 key_approaches: ["Natural language instruction", "Fine-grained markers", "Style prompt"]
 key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [Style Similarity, WER, MOS, Emotion Accuracy]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

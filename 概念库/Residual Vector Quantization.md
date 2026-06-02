@@ -7,7 +7,7 @@ tags: [quantization, discrete-representation, audio-codec, neural-compression]
 key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Codec Training Objectives]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""
