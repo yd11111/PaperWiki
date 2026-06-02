@@ -112,6 +112,7 @@ SVS Evaluation Metrics 是用于评估歌声合成系统质量的指标体系。
 - [[F0 Modeling]]: FFE, F0 RMSE 直接评估 F0 建模质量
 - [[Speaker Verification]]: SECS 借用说话人验证技术
 - [[Anti-spoofing and Deepfake Detection]]: SVDD 是歌声领域的延伸
+- [[TTS Evaluation]]: 通用 TTS 评估方法论,与 SVS 共享 MOS/PESQ 但 SVS 有独特音高指标
 
 ## 演进
 

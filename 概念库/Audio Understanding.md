@@ -4,9 +4,9 @@ title: "Audio Understanding"
 aliases: [音频理解, Speech Understanding, 语音理解, Audio Comprehension, Speech Comprehension via LLM]
 category: "task-family"
 tags: [speech-LM, understanding, ASR, emotion, speaker, paralinguistic, downstream]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)"]
+key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "[[论文笔记/Survey-Audio Language Models|Su et al. 2025 (ALM Survey)]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Full-duplex Spoken Dialogue]]"]
+related_concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -110,13 +110,50 @@ SpeechLM 理解能力的另一维度是内部表征质量:
 - SPIRIT-LM (Nguyen et al., 2024): 对齐训练增强跨模态理解
 - Dynamic-SUPERB: 180 任务的大规模综合 benchmark
 
+## ALM 视角: 通用音频理解 [Su et al. 2025]
+
+除 SpeechLM 路线外,Audio-Language Models (ALMs) 通过 CLAP 式预训练提供另一种理解路径,覆盖更广泛的音频类型 (环境声、音乐、语音):
+
+### 扩展任务
+
+| 任务 | 定义 | 与 SpeechLM 任务的区别 |
+|------|------|----------------------|
+| Audio Captioning (AAC) | 自然语言描述音频内容 | SpeechLM 侧重 ASR; AAC 描述声音事件及其关系 |
+| Audio QA (AQA) | 基于音频回答开放问题 | 需要推理能力,不限于识别 |
+| Audio-Text Retrieval (ATR) | 跨模态检索 | SpeechLM 无此任务 |
+| Audio Grounding | 定位音频中与文本对应的时间段 | 时间定位能力 |
+
+### 扩展 Benchmark [Su et al. 2025, §VI-C]
+
+| Benchmark | 类型 | 评估目标 |
+|-----------|------|----------|
+| ARCH | Cross-task | Speech, music, acoustic events 综合 |
+| MMAU | Cross-task | 27 tasks, 多维泛化 |
+| ADU-Bench | Task-specific | Audio-text retrieval + dialogue |
+| CompA-R | Task-specific | Compositional reasoning (开放式 AQA) |
+| LongAudioBench | Robustness | 长音频理解能力 |
+| Audio Jailbreak | Security | 对抗性攻击鲁棒性 |
+
+### 核心差异: SpeechLM vs ALM 理解路线
+
+| 维度 | SpeechLM 路线 | ALM 路线 |
+|------|-------------|---------|
+| 训练范式 | Speech token LM (自回归) | Audio-text contrastive + LLM |
+| 主要输入 | Speech | General audio (speech + sound + music) |
+| 表征 | Discrete tokens or continuous latent | Joint embedding space (CLAP) |
+| 典型输出 | Speech or text | Text (caption, answer, label) |
+| 代表模型 | SpeechGPT, Moshi, SPIRIT-LM | SALMONN, Audio Flamingo, GAMA, LTU |
+
+详见 [[Audio-Language Pretraining]]。
+
 ## 相关概念
 
 - [[Speech Language Model]]: Audio Understanding 是 SpeechLM 能力体系的核心组成
 - [[Speech Tokenizer]]: tokenizer 决定了理解能力的上限
 - [[Semantic vs Acoustic Tokens]]: token 类型影响理解任务的侧重方向
 - [[Full-duplex Spoken Dialogue]]: 全双工模型需要实时理解用户语音
+- [[Audio-Language Pretraining]]: ALM 路线的预训练范式,提供通用音频理解的互补视角
 
 ## 演进
 
-单任务 ASR/SER 系统 (2015-2020) → GSLM 基础理解 (ABX + resynthesis, 2021) → AudioPaLM 大规模 ASR/ST (2023) → SpeechGPT 指令驱动多任务理解 (2023) → SPIRIT-LM 跨模态对齐理解 (2024) → Dynamic-SUPERB 180 任务综合评估 (2024) → VoxEval 端到端语音理解评估 (2024)
+单任务 ASR/SER 系统 (2015-2020) → GSLM 基础理解 (ABX + resynthesis, 2021) → AudioPaLM 大规模 ASR/ST (2023) → SpeechGPT 指令驱动多任务理解 (2023) → SPIRIT-LM 跨模态对齐理解 (2024) → Dynamic-SUPERB 180 任务综合评估 (2024) → VoxEval 端到端语音理解评估 (2024) → ALM/LALM 通用音频理解 (SALMONN, Audio Flamingo, 2024-2025)
