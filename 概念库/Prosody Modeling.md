@@ -126,6 +126,20 @@ Survey 将 Prosody Control 定义为可控 TTS 的最基本任务,涵盖对 pitc
 - **MaskGCT**: masked generative modeling 隐式学习韵律分布
 - **LLM-based 局限**: 隐式建模使细粒度韵律控制困难 (Survey 指出这是关键挑战)
 
+## 在 SVS 中的韵律建模
+
+Singing Voice Synthesis 中的韵律建模与 TTS 有显著差异 [Pan et al., 2026]:
+
+**Vibrato (颤音)**: 歌声特有的周期性音高波动 (频率 5-8 Hz, 幅度 0.5-2 半音)。Song et al. (2022) 提出 DL 模型控制 vibrato 的多个方面 (振幅、频率、起始延迟),这在 TTS 中不存在。数据增强策略中也包括向训练数据添加小 vibrato 以改善跨域泛化 [§A.1]。
+
+**Musical Rhythm (音乐节奏)**: SVS 中时长由乐谱 BPM 和音符时值严格约束,而非数据驱动的自由预测。Duration predictor 需在乐谱约束下进行局部细化。
+
+**Pitch 约束**: TTS 中 pitch 是柔性韵律维度,SVS 中 pitch 必须精确跟随乐谱 MIDI pitch,F0 Frame Error (FFE) 和 F0 RMSE 是核心评估指标。详见 [[F0 Modeling]]。
+
+**歌唱技巧**: 除 vibrato 外,falsetto (假声)、breath (气息)、portamento (滑音) 等歌唱技巧也属于 SVS 韵律的扩展维度。SinTechSVS (Zhao et al., 2024) 和 TechSinger (Guo et al., 2025b) 专门建模这些技巧。
+
+详见 [[Singing Voice Synthesis]]。
+
 ## 关键论文
 
 - GST-Tacotron (Wang et al., ICML 2018): Global Style Tokens, reference encoder + style token bank

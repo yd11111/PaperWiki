@@ -78,6 +78,23 @@ Encoder Output → Duration Predictor → Length Regulator → Pitch Predictor �
 - IndexTTS2: 通过共享位置编码实现隐式 duration control
 - CosyVoice: flow matching 内部隐式处理 duration
 
+## 在 SVS 中的时长预测
+
+SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
+
+**乐谱约束**: SVS 的音符时长由乐谱 (note duration, BPM) 显式提供,duration predictor 的任务从"预测时长"变为"在乐谱约束下细化音素级时长"。
+
+**Melisma 处理**: 一个音节跨越多个不同音高的音符 (花腔),形成一对多映射,TTS 中不存在此问题。
+
+**三种对齐方式**:
+1. 外部强制对齐 (MFA/Praat) → 音素/音节时长标签
+2. 可学习单调对齐 (VISinger) → 随机 duration 建模节奏不确定性
+3. 可学习上采样 (He et al., 2023) → 与 FastSpeech length regulator 类似但接受乐谱约束
+
+**评估指标**: Duration RMSE/MAE 和 Duration Prediction Accuracy 是 SVS 独有的评估维度。
+
+详见 [[Musical Score Encoder]]。
+
 ## 关键论文
 
 - FastSpeech (Ren et al., NeurIPS 2019): 首次引入 duration predictor 到端到端 TTS

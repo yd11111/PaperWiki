@@ -128,6 +128,18 @@ Zhang et al. (2023) 在 audio diffusion survey [§3.3] 中系统总结了 diffus
 2022.05  ItôWave (Ito SDE vocoder)
 ```
 
+## 在 SVS 中的应用
+
+Neural vocoder 在 SVS 级联系统中承担与 TTS 相同的波形合成角色,但有以下特殊性 [Pan et al., 2026]:
+
+**SVS 专用 vocoder**: Huang et al. (2021) 开发了面向歌声的 task-specific neural vocoder,针对歌声的表现力特征 (vibrato, 气息, 长音) 进行优化重建。
+
+**传统 vocoder 遗产**: SVS 领域保留了对 WORLD vocoder (Morise et al., 2016) 的使用 — 一种基于参数化重建的声码器,提供 F0、频谱包络和非周期性参数的可解释控制。
+
+**主流选择**: 现代 SVS 系统仍以 HiFi-GAN 和 BigVGAN 为主流 vocoder [§3.1],与 TTS 领域一致。
+
+**端到端趋势**: VISinger 系列等端到端 SVS 系统已不再需要独立 vocoder [§3.2]。
+
 ## 关键论文
 
 - WaveNet (van den Oord et al., 2016): 首个 neural vocoder

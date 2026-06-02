@@ -89,6 +89,24 @@ Survey 总结的风格控制演进:
 3. **NL descriptions** (2023-2024): PromptTTS, 文本描述 → 用户友好
 4. **Instruction-guided** (2024-): VoxInstruct, CosyVoice → 自由格式控制
 
+## 在 SVS 中的风格迁移
+
+Singing Style Transfer 是 Style Transfer in TTS 在歌声领域的延伸,但具有独特挑战 [Pan et al., 2026, §2]:
+
+**Singing Voice Conversion (SVC)**: 将参考歌声的音色/风格迁移至新歌声。与 TTS voice cloning 不同,SVC 还需保持旋律和节奏的准确性。TCSinger (Zhang et al., 2024c) 用 RVQ 替换为 CVQ (Clustering VQ) 实现更稳定的风格压缩,并通过 LM 联合建模 prosody 和 style。
+
+**Speech-to-Singing (STS)**: 将语音转换为歌声 (Li et al., 2023),需同时建模 musicality 和 style fidelity。
+
+**Audio-based Transfer**: 参考音频分离为多个因素 (content, rhythm, timbre) 后零样本融合迁移 (Li et al., 2023; Dai et al., 2025)。
+
+**Text-based Control for Singing**: PromptSinger (Wang et al., 2024a) 用自然语言 prompt 控制歌声音色、情感和响度; TechSinger (Guo et al., 2025b) 通过 [[Classifier-Free Guidance]] 控制歌唱技巧。
+
+**MoE 风格控制**: TCSinger2 (Zhang et al., 2025b) 引入 MoE 路由策略选择专用生成专家,实现高质量风格控制。
+
+**风格特定生成**: FreeStyler (Ning et al., 2025b) 用于说唱, SongSong (Hu et al., 2025) 用于古典艺术歌曲。
+
+详见 [[Singing Voice Synthesis]]。
+
 ## 关键论文
 
 - GST-Tacotron (Wang et al., ICML 2018): Global Style Tokens 开创无监督风格控制

@@ -107,6 +107,18 @@ Zhang et al. (2023) Table 2 总结了声学模型在不同数据集上的表现:
 | LLM-based | VALL-E | 自回归采样 | 高 | 慢 | in-context |
 | Flow Matching | Voicebox, F5-TTS | 确定 ODE | 高 | **快** | CFG |
 
+## 在 SVS 中的应用
+
+Diffusion model 在 SVS 领域同样发挥重要作用 [Pan et al., 2026]:
+
+**DiffSinger (Liu et al., 2022a)**: 将浅扩散 DDPM 引入歌声 mel spectrogram 生成,显著改善频谱细节,解决 Transformer 生成器的 over-smoothing 问题。成为级联 SVS 系统的标杆 [§2]。
+
+**Diffusion F0 Predictor**: RMSSinger (He et al., 2023) 使用扩散模型预测 F0 轮廓,生成更自然、可控的 pitch 轨迹 [§2]。这是 diffusion 在 SVS 中的独特应用 — TTS 中无对应需求。
+
+**Flow Matching for SVS**: TechSinger (Guo et al., 2025b) 采用 flow matching 作为声学模型的生成范式,在保持质量的同时实现更快、更稳定的生成 [§3.1]。
+
+**ExpressiveSinger**: Dai et al. (2024) 使用级联 diffusion 控制模块增强歌声表现力。
+
 ## 关键论文
 
 - Diff-TTS (Jeong et al., 2021): 首个 DDPM-based TTS [§3.2.1]
