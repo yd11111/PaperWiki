@@ -38,7 +38,7 @@ updated: 2026-06-02
 > [!summary] 速查
 > - **一句话**: 首次将 ASR 监督训练的 semantic tokens 引入 TTS,配合 LLM + OT-CFM 两阶段架构实现可扩展的多语言零样本语音合成
 > - **路线**: Text → BPE + TextEncoder → [S, x-vec, text_enc, T, speech_tokens, E] → LLM (AR) → speech tokens → OT-CFM (+ speaker emb + masked mel) → Mel → HiFi-GAN → Waveform
-> - **指标**: LibriTTS WER 3.17% / SS 69.49 (大规模); 英文 WER 2.89% 超人类 (2.66%); 中文 SS 81.58 超原始录音 (74.15) [Table 7-9]
+> - **指标**: LibriTTS WER 3.17% / SS 69.49 (大规模); 英文 WER 2.89% 接近人类 (2.66%); 中文 SS 81.58 超原始录音 (74.15) [Table 7-9]
 > - **可借鉴**: (1) 在 ASR encoder 中间插入 VQ 层获取监督 semantic tokens,几乎不影响 ASR 性能; (2) x-vector 分离说话人建模,让 LLM 专注语义+韵律、CFM 专注音色+环境; (3) OT-CFM + cosine scheduler + CFG 的组合方案
 > - **局限**: (1) 对 VQ 层插入位置和 codebook 大小未做充分消融; (2) 跨语言场景需省略 prompt 文本/token 来避免韵律泄露,但信息损失不可避免; (3) 指令微调数据规模有限(556h); (4) 已开源但论文未报 MOS
 
