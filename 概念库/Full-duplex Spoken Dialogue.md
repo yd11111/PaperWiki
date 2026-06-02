@@ -4,9 +4,9 @@ title: "Full-duplex Spoken Dialogue"
 aliases: [全双工口语对话, Full-duplex Speech Interaction, Real-time Speech Interaction, 实时语音交互, Duplex Conversation, 全双工语音]
 category: "technique"
 tags: [speech-LM, dialogue, real-time, full-duplex, turn-taking, streaming, interaction]
-key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "NTPP (Wang et al., 2025)", "LSLM (Ma et al., 2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "MiniCPM-o 2.6 (OpenBMB, 2024)", "FlexDuo (Liao et al., 2025)", "OmniFlatten (Zhang et al., 2024)", "SALMONN-omni (Wu et al., 2024)"]
+key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "NTPP (Wang et al., 2025)", "LSLM (Ma et al., 2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "MiniCPM-o 2.6 (OpenBMB, 2024)", "FlexDuo (Liao et al., 2025)", "OmniFlatten (Zhang et al., 2024)", "SALMONN-omni (Wu et al., 2024)", "SyncLLM (2024)", "Parrot (2024)", "Freeze-Omni (2024)", "CleanS2S (2024)"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Language Model]]", "[[Speech-Text Alignment]]", "[[Audio Understanding]]"]
+related_concepts: ["[[Speech Language Model]]", "[[Speech-Text Alignment]]", "[[Audio Understanding]]", "[[Turn-taking in Spoken Dialogue]]", "[[Streaming Spoken Dialogue]]", "[[Spoken Dialogue Evaluation]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -110,21 +110,55 @@ Survey (Section VII-C) 指出:
 2. **Streaming pipeline**: 需要 speech input/output 均可分块处理和生成
 3. **自主波形生成**: SpeechLM 直接生成音频样本而非依赖外部 vocoder
 
+## WavChat 补充: 更多全双工系统 (Ji et al., 2024)
+
+WavChat survey 进一步梳理了全双工系统的更多实现:
+
+### SyncLLM (2024)
+- 自回归 transformer decoder 集成时间同步: 将语音单元与真实时钟对齐
+- 预测双方交错 speech tokens,维持 timing + speaker tags
+- 使用去重 HuBERT tokens 增强语义保真度,同时管理延迟
+- 插值重构 token 序列以适配预期结构,实现无缝语音合成
+
+### Parrot (2024)
+- 双通道音频设置: 每个通道代表一个说话者
+- "Next-token-pair prediction" 机制同时预测双通道 tokens
+- 支持 streaming input: 一通道持续处理用户音频,另一通道生成响应
+- 直接处理音频,无需中间文本转换,高响应性
+
+### Freeze-Omni (2024)
+- 核心: 将 ASR/TTS 功能转移到 encoder 和 decoder,而非赋予 LLM
+- Chunk-level state prediction: 分类层对每个音频 chunk 预测 State 0 (继续听) / State 1 (插入反馈) / State 2 (开始响应)
+- 3-stage training: 模态对齐 → 半双工对话 → 全双工
+- 使用 text-speech paired data 获得 speech-to-speech 对话能力
+
+### CleanS2S (2024)
+- 结构化级联管线: VAD → ASR → LLM → TTS
+- 打断感知: VAD 检测新输入时 LLM 暂停,ASR 转写后生成更新响应
+- TTS 分段输出: 长响应拆分为小段,打断时可立即停止切换
+
 ## 关键论文
 
 - dGSLM (Nguyen et al., 2023): 首个全双工对话模型, dual transformer + cross-attention
-- Moshi (Defossez et al., 2024): RQ-Transformer 全双工, Mimi tokenizer
+- Moshi (Defossez et al., 2024): RQ-Transformer 全双工, Mimi tokenizer, Inner Monologue
 - LSLM (Ma et al., 2024): 边说边听, streaming SSL encoder
-- VITA (Fu et al., 2024): IPR + 多模态全双工
+- VITA (Fu et al., 2024): IPR + 多模态全双工, dual-model 架构
 - NTPP (Wang et al., 2025): next-token-pair prediction 双通道对话
-- Mini-Omni 2 (Xie & Wu, 2024): vision+speech+text 全双工
+- Mini-Omni 2 (Xie & Wu, 2024): vision+speech+text 全双工, irq/n-irq 打断标记
 - FlexDuo (Liao et al., 2025): 可插拔全双工系统
+- SyncLLM (2024): time-synchronized 全双工
+- Parrot (2024): dual-channel + next-token-pair
+- Freeze-Omni (2024): chunk-level state prediction
+- CleanS2S (2024): 结构化级联全双工
 
 ## 相关概念
 
 - [[Speech Language Model]]: 全双工是 SpeechLM 的前沿交互范式
 - [[Speech-Text Alignment]]: 全双工中需要对齐 text-present vs text-independent 推理
 - [[Audio Understanding]]: 全双工模型同时需要理解和生成能力
+- [[Turn-taking in Spoken Dialogue]]: 全双工中的轮次切换、打断和回传信号机制
+- [[Streaming Spoken Dialogue]]: 流式处理是全双工的架构前提
+- [[Spoken Dialogue Evaluation]]: 全双工系统的交互能力评估
 
 ## 演进
 
