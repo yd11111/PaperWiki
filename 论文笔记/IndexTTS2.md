@@ -208,3 +208,12 @@ else:
 - 论文 code/weights: 未开源 (截至 2026-06-01)
 - 依赖组件: MaskGCT semantic codec (开源), BigVGAN v2 (开源)
 - 关键缺失: speaker perceiver conditioner 的具体实现, 情感数据集
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass-with-fixes
+> **评分:** 理解 8 | 溯源 8 | 严谨 7 | 导航 7 | 安全 8
+> **Claim 标注率:** 97% (32/33)
+> **问题:** 0 high, 2 medium, 4 low
+> - [medium/fact-inference-mixing] 方法 > "为什么能 work" 子节: agent 解读与论文原文未区分,建议标注来源
+> - [medium/traceability-gap] 局限性 > 第 2 条: "1000 个训练样本" 缺少出处标注,建议补充 [§T2E]
+> **反向更新:** ✅

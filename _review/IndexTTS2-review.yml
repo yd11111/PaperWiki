@@ -1,0 +1,63 @@
+paper: "IndexTTS2"
+file: "论文笔记/IndexTTS2.md"
+date: "2026-06-02"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 8
+  traceability: 8
+  rigor: 7
+  navigability: 7
+  kb_safety: 8
+
+claim_stats:
+  total_claims: 33
+  annotated_claims: 32
+  coverage_rate: "97%"
+
+issues:
+  - severity: medium
+    type: fact-inference-mixing
+    location: "方法 > 关键设计选择 > 各 '为什么能 work' 子节"
+    detail: "因果解释（如 '模型在接收到 duration 信号时等价于预知了终点位置'、'仅靠 semantic token 可能丢失发音细节'）是合理的机制推断，但未区分哪些是论文原文解释、哪些是 agent 解读。读者无法判断这些因果链的权威性来源。"
+    suggestion: "在每段 '为什么能 work' 解释后标注 [论文原文] 或 [agent 解读]，或在节首统一声明 '以下为基于论文 §X.X 的机制解读'。"
+
+  - severity: medium
+    type: traceability-gap
+    location: "局限性 > 第 2 条"
+    detail: "'仅基于 1000 个训练样本' 这一数字在方法节 T2E 部分和局限性中均出现，但均未标注出处（如 [§T2E] 或 [§Experiments]）。"
+    suggestion: "在局限性第 2 条或方法 T2E 段落中补充 [§T2E] 标注。"
+
+  - severity: low
+    type: overclaim
+    location: "速查 > 可借鉴 vs 点评"
+    detail: "速查写 '零开销实现 AR duration control'，点评写 '几乎零额外开销'。两处措辞不一致。共享权重确实不增加参数，但 '零开销' 可能被误读为包含计算和工程开销。"
+    suggestion: "统一为 '零额外参数开销' 或 '几乎零额外开销'，消除歧义。"
+
+  - severity: low
+    type: bad-linking
+    location: "frontmatter > datasets"
+    detail: "[[Emilia]] 出现在 datasets 字段中，但笔记正文从未提及该数据集。训练策略表中仅写 '全量 55K h'，未说明数据来源。如果 Emilia 是训练数据，应在正文体现；如果不是，不应出现在 frontmatter。"
+    suggestion: "在训练策略部分补充数据来源说明（如 '训练数据主要来自 [[Emilia]] 等大规模语音数据集'），或从 frontmatter 移除。"
+
+  - severity: low
+    type: bad-linking
+    location: "方法 > 整体架构; KB 背景"
+    detail: "MaskGCT 作为 semantic codec 的来源（关键组件依赖）和实验 baseline 在正文中多次出现，但未在 frontmatter models/concepts 中列出，也未使用 wikilink。"
+    suggestion: "在 frontmatter models 中添加 [[MaskGCT]]，或在正文首次提及处加 wikilink。"
+
+  - severity: low
+    type: traceability-gap
+    location: "KB 背景 > 谱系定位"
+    detail: "'在 SEED-TTS-Eval 基准上达到当前最优' 是一个强事实断言，但未指明具体指标（WER? SS? 全部?），也无 [Table N] 标注。"
+    suggestion: "改为 '在 SEED-TTS-Eval 基准的 WER/SS 指标上达到当前最优 [Table 1]'。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "无 high 级别问题，事实数据均有来源。但 fact-inference-mixing 问题意味着部分因果解释的权威性不明确，不宜直接进入可信层。建议修正后再提升。"
+
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "fact-inference-mixing 是 deep/repro 笔记中常见的模式，agent 生成的因果解释容易与论文原文混淆。"
+  system_upgrade_suggestion: "在 paperwiki-reader skill 的 '为什么能 work' 模板中，增加强制标注 [论文原文]/[agent 解读] 的指令。"
