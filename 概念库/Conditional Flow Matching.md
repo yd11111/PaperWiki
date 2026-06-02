@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Diffusion Model]]", "[[Score Matching]]"]
 status: confirmed
@@ -30,6 +30,7 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 ## 关键论文
 
 - Lipman et al., "Flow Matching for Generative Modeling", ICLR 2023
+- CosyVoice (Du et al., 2024): 最早在 LLM-TTS 中采用 OT-CFM 替代 DDPM,使用 cosine scheduler + CFG (β=0.7) + masked mel conditioning 的工程组合
 - CosyVoice 3 (2025): 使用 DiT-based CFM,300M 参数
 - F5-TTS (2024): Flow matching for fluent and faithful speech
 - Matcha-TTS (2024): CFM for fast TTS

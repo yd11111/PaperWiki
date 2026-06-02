@@ -4,7 +4,7 @@ title: "Semantic vs Acoustic Tokens"
 aliases: [语义 token 与声学 token, Semantic Tokens, Acoustic Tokens, Token Hierarchy, 语音 token 层级, Discrete Speech Features]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, speech-LM, trade-off]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]"]
 status: pending-review
@@ -129,6 +129,10 @@ Survey 在 SALMon benchmark 上对比各类 tokenizer:
 - 纯 acoustic tokenizer (EnCodec, DAC) 在语义任务上几乎随机 (~50%)
 - **没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果** → 联合建模仍是开放挑战
 
+## 监督式 Semantic Tokens
+
+CosyVoice (Du et al., 2024) 开创了第四类路线: **监督式 semantic tokens**。不同于 HuBERT 的自监督学习,CosyVoice 的 S3 tokenizer 直接在 ASR encoder 中插入 VQ 层,通过 ASR loss 监督训练,使 token 显式编码语义信息且与文本对齐。实验证明 S3 tokens 在 TTS 任务上的内容一致性 (WER) 远优于 HuBERT semantic tokens 和 EnCodec acoustic tokens [CosyVoice Table 7]。后续 CosyVoice 2/3 继承并扩展了这一路线。
+
 ## 演进
 
-Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025)
+Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → **监督式 semantic tokens (CosyVoice, 2024)** → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025)

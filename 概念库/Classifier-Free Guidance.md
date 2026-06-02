@@ -4,7 +4,7 @@ title: "Classifier-Free Guidance"
 aliases: [CFG, 无分类器引导, Classifier-free Diffusion Guidance]
 category: "training-technique"
 tags: [diffusion, guidance, conditional-generation, TTS, audio-generation]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: "Ho & Salimans, Classifier-Free Diffusion Guidance, 2022"
 related_concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Conditional Flow Matching]]"]
 status: pending-review
