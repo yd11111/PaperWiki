@@ -4,7 +4,7 @@ title: "Neural Vocoder"
 aliases: [神经声码器, Neural Waveform Generator, 波形合成器]
 category: "model-family"
 tags: [TTS, vocoder, waveform-generation, audio-synthesis, GAN, flow, diffusion]
-key_papers: []
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]", "[[Multi-scale STFT Discriminator]]", "[[Snake Activation]]"]
 status: pending-review
@@ -77,6 +77,21 @@ Neural Vocoder 是将声学特征(通常为 mel spectrogram)转换为时域音�
 - **优势**: 生成质量极高
 - **缺点**: 需要多步迭代 (典型 50-200 steps)
 
+### Diffusion Vocoder 后续进展 (Zhang et al. 2023 Survey)
+
+Zhang et al. (2023) 在 audio diffusion survey [§3.3] 中系统总结了 diffusion vocoder 的三条改进路线:
+
+| 模型 | 方法 | 效果 |
+|------|------|------|
+| BDDM (Lam et al., 2022) | 额外 schedule prediction network | 7 步生成,MOS 4.48,143x > WaveGrad |
+| InferGrad (Chen et al., 2022) | 推理过程纳入训练 loss | 3x > WaveGrad |
+| PriorGrad (Lee et al., 2021) | 数据自适应先验替代标准 Gaussian | 加速推理,更好拟合 voiced/unvoiced |
+| DDGM (Nachmani et al., 2021) | Gamma 噪声替代 Gaussian | PESQ 3.308, STOI 0.969 |
+| SpecGrad (Koizumi et al., 2022) | 自适应频谱噪声包络 | 高频质量提升 |
+| ItôWave (Wu & Shi, 2022) | 线性 Ito SDE | MOS > WaveGrad + DiffWave |
+
+详见 [[Diffusion-based Vocoder]]。
+
 ## 生成模型特性对比
 
 | 特性 | AR | VAE | Flow/AR | Flow/Bipartite | Diffusion | GAN |
@@ -105,6 +120,12 @@ Neural Vocoder 是将声学特征(通常为 mel spectrogram)转换为时域音�
 2020.09  WaveGrad (diffusion vocoder)
 2020.10  HiFi-GAN (成为标准)
 2020.07  VocGAN (multi-scale GAN)
+2021.06  PriorGrad (自适应先验 diffusion)
+2021.10  DDGM (Gamma 噪声 diffusion)
+2022.03  BDDM (7步高效 diffusion)
+2022.04  InferGrad (推理感知训练)
+2022.03  SpecGrad (频谱自适应噪声)
+2022.05  ItôWave (Ito SDE vocoder)
 ```
 
 ## 关键论文
@@ -116,6 +137,7 @@ Neural Vocoder 是将声学特征(通常为 mel spectrogram)转换为时域音�
 - MelGAN (Kumar et al., 2019): 首个 GAN vocoder
 - HiFi-GAN (Kong et al., 2020): 成为事实标准的 GAN vocoder
 - DiffWave (Kong et al., 2021): diffusion-based 高质量 vocoder
+- Zhang et al. (2023): A Survey on Audio Diffusion Models — diffusion vocoder 系统总结 [§3.3]
 
 ## 相关概念
 
@@ -123,6 +145,8 @@ Neural Vocoder 是将声学特征(通常为 mel spectrogram)转换为时域音�
 - [[Multi-scale STFT Discriminator]]: GAN vocoder 的频域判别器
 - [[Snake Activation]]: 现代 vocoder (BigVGAN) 使用的周期性激活函数
 - [[Text-to-Speech Pipeline]]: vocoder 是 pipeline 最后一级
+- [[Diffusion-based Vocoder]]: diffusion vocoder 子家族详述 (WaveGrad/DiffWave/BDDM/PriorGrad)
+- [[Diffusion Model]]: diffusion vocoder 的底层生成模型框架
 - LPCNet: 结合 DSP (线性预测) 与 RNN 的混合 vocoder
 
 ## 演进

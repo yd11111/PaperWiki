@@ -44,3 +44,8 @@
 - [[Quantizer Dropout]] — 可变比特率训练
 - [[Snake Activation]] — 周期性激活函数
 - [[Multi-scale STFT Discriminator]] — 频域判别器
+- [[Diffusion Model]] — 扩散模型 (DDPM, score-based, SDE/ODE)
+- [[Score Matching]] — 分数匹配 (NCSN, score function)
+- [[Classifier-Free Guidance]] — 无分类器引导
+- [[Diffusion-based TTS]] — 扩散语音合成 (Grad-TTS, Diff-TTS, ProDiff)
+- [[Diffusion-based Vocoder]] — 扩散声码器 (DiffWave, WaveGrad, BDDM)

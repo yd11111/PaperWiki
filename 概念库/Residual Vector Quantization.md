@@ -4,10 +4,10 @@ title: "Residual Vector Quantization"
 aliases: [RVQ, Residual VQ, Multi-stage VQ]
 category: "quantization"
 tags: [quantization, discrete-representation, audio-codec, neural-compression]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
-origin_paper: ""
-related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]"]
-status: confirmed
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
+related_concepts: ["[[Finite Scalar Quantization]]", "[[Codebook Collapse]]", "[[Quantizer Dropout]]", "[[Speech Tokenizer]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Codec Training Objectives]]"]
+status: pending-review
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""
@@ -41,6 +41,34 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 2. **可变比特率**: 通过使用不同数量的层 (1...N_q) 实现运行时 bitrate 控制
 3. **与 VQ 的区别**: 单层 VQ 的 codebook 需要指数级大小才能覆盖高维空间; RVQ 通过残差分解, 用 N 个小 codebook 组合表达能力
 
+## RVQ 变体 (Survey Taxonomy) [Mousavi et al. 2025, §2.2.1]
+
+| 变体 | 核心思路 | 代表 |
+|------|---------|------|
+| **GVQ** (Group VQ) | 将输入特征分为 G 组,每组独立 RVQ; 增强第一层表达力 | HiFi-Codec (Yang 2023a), FACodec, FunCodec |
+| **MSRVQ** (Multi-Scale RVQ) | 不同层在不同时间分辨率量化; 高层降采样→量化→上采样,减少 token 数 | SNAC (Siuzdak 2024), LLM-Codec |
+| **CSRVQ** (Cross-Scale RVQ) | 在 encoder/decoder 不同层级间做残差量化; coarse-to-fine 多分辨率 | ESC (Gu & Diao 2024), Disen-TF-Codec |
+| **RNDVQ** (Residual Normal Distribution VQ) | 将量化公式化为概率选择而非确定性最近邻; 改善 codebook 利用率和鲁棒性 | NDVQ (Niu et al. 2024) |
+| **GRVQ** (Grouped RVQ) | GVQ + RVQ 的结合; 分组后做残差量化 | Prompt Codec, HiFi-Codec |
+
+### GVQ 数学形式 [§2.2.1]
+
+输入分为 G 组: $z_t = [z_t^{(1)} \| z_t^{(2)} \| \ldots \| z_t^{(G)}]$
+
+每组独立量化: $\hat{z}_t = [\hat{z}_t^{(1)} \| \hat{z}_t^{(2)} \| \ldots \| \hat{z}_t^{(G)}]$
+
+### MSRVQ 数学形式 [§2.2.1]
+
+第 i 层残差降采样 W_i 倍后量化再上采样: $\hat{z}_t^{(i)} = \text{Upsample}(Q^{(i)}(\text{Downsample}(r_t^{(i)}, W_i)))$
+
+## Survey 消融发现 [Mousavi et al. 2025, §4.2]
+
+在 ESPnet-Codec 框架下控制变量实验 (Table 15-16):
+- **RVQ 在大多数重建指标上优于 SVQ 和 FSQ**: SDR, SI-SNR, PESQ, Spk Sim 等
+- **例外**: FSQ@16kHz 在 speech UTMOS 和 DNSMOS 上超过 RVQ (感知质量指标)
+- **采样率交互**: RVQ 从 16kHz → 44.1kHz 一致性提升; FSQ 在 44.1kHz 反而部分退化
+- **结论**: RVQ 具有最高重建保真度潜力, 但重建最优 =/= 下游最优
+
 ## 关键论文
 
 - Zeghidour et al., "SoundStream: An End-to-End Neural Audio Codec", 2021: 首次将 RVQ 用于端到端 audio codec
@@ -55,7 +83,10 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 - [[Codebook Collapse]]: RVQ 训练的主要难点
 - [[Quantizer Dropout]]: 实现 RVQ 可变比特率的训练技巧
 - [[Speech Tokenizer]]: RVQ-based codec 可作为声学 tokenizer 用于 TTS
+- [[Single-codebook vs Multi-codebook]]: RVQ (多码本) vs SVQ (单码本) 的核心设计 trade-off
+- [[Token Rate and Bitrate Trade-offs]]: RVQ 的码本数直接决定 bitrate 和 token rate
+- [[Codec Training Objectives]]: RVQ 训练中使用的 VQ loss / commitment loss
 
 ## 演进
 
-VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → FSQ (2024, 去码本化)
+VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → GVQ/GRVQ (HiFi-Codec, 2023) → FSQ (2024, 去码本化) → MSRVQ (SNAC, 2024, 多尺度) → CSRVQ (ESC, 2024, 跨尺度) → RNDVQ (2024, 概率化) → 单码本回归 (BigCodec/WavTokenizer, 2024)

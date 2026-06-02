@@ -4,9 +4,9 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: ""
-related_concepts: ["[[Finite Scalar Quantization]]"]
+related_concepts: ["[[Finite Scalar Quantization]]", "[[Diffusion Model]]", "[[Score Matching]]"]
 status: confirmed
 lifecycle: active
 merged_into: ""
@@ -39,7 +39,7 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 
 ## 相关概念
 
-- Diffusion Model: CFM 的概念近亲,通过 SDE 而非 ODE
+- [[Diffusion Model]]: CFM 的概念近亲,通过 SDE 而非 ODE; Zhang et al. (2023) audio diffusion survey 详细描述了 SDE → probability flow ODE → flow matching 的理论连接
 - DiT (Diffusion Transformer): CosyVoice 3 CFM 的 backbone
 - Vocoder: CFM 输出 Mel spectrogram 后仍需 vocoder 合成波形
 - [[Finite Scalar Quantization]]: CFM 的输入(speech token 的条件)
