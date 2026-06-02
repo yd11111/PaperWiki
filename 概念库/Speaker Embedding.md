@@ -4,15 +4,15 @@ title: "Speaker Embedding"
 aliases: [说话人嵌入, Speaker Representation, d-vector, Speaker Encoder, 说话人编码]
 category: "representation"
 tags: [TTS, multi-speaker, voice-cloning, speaker-identity, adaptive-TTS]
-key_papers: []
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
-related_concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Text-to-Speech Pipeline]]", "[[Speech Tokenizer]]"]
+related_concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Text-to-Speech Pipeline]]", "[[Speech Tokenizer]]", "[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Adaptation]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""
 created: 2026-06-01
-updated: 2026-06-01
+updated: 2026-06-02
 ---
 
 ## 定义
@@ -87,6 +87,48 @@ Survey 定义的自适应 TTS 场景: 用少量目标说话人数据使源模型
 - CosyVoice: prompt 音频经 flow matching 提取 timbre
 - Seed-TTS: self-distillation 增强 timbre disentanglement
 
+## Voice Cloning Survey 视角 (Azzuni & El Saddik, 2025)
+
+### SECS: Speaker Embedding 作为评估核心
+
+Voice Cloning 综合 survey 揭示了 speaker embedding 在评估中的关键角色。Speaker Embedding Cosine Similarity (SECS) 是衡量 voice cloning 质量的核心指标:
+
+$$\text{SECS} = \frac{E(\text{generated}) \cdot E(\text{reference})}{\|E(\text{generated})\| \cdot \|E(\text{reference})\|}$$
+
+**重要发现**: SECS 结果高度依赖所选 speaker encoder。Survey Tables V/VI 显示同一 TTS 系统使用不同 encoder (x-vector vs GE2E vs ECAPA-TDNN) 报告的 SECS 值可差 0.1-0.3,限制了跨论文可比性。
+
+### Speaker Encoder 在三类 Cloning 中的角色差异
+
+| Cloning 类型 | Encoder 角色 | 训练/推理 | 冻结? |
+|-------------|------------|---------|------|
+| Speaker Adaptation | 提取初始 embedding 或验证质量 | 训练时为主 | 通常冻结 |
+| Few-shot VC | 提取 representation + 验证 | 训练+推理 | 部分可训练 |
+| Zero-shot VC | 核心组件: 推理时实时提取 identity | 推理时必须 | 通常冻结 (预训练) |
+
+### 完整 Speaker Encoder 架构汇总
+
+Survey 汇总的在 SECS 计算和 TTS 训练中常用的 speaker encoder:
+
+| 架构 | 特点 | 典型用途 |
+|------|------|---------|
+| d-vector | DNN 倒数第二层输出 | 早期 multi-speaker TTS |
+| x-vector | TDNN + 统计池化 | 标准 SV baseline |
+| GE2E | 端到端 generalized loss | TTS 训练 (VStyclone, SC-GlowTTS) |
+| ECAPA-TDNN | 通道注意力 + 传播聚合 | 当前最常用 SECS encoder |
+| TitaNet-L | 1D 深度可分离卷积 | 高效推理 |
+| WavLM | 大规模自监督预训练 | 跨领域迁移 |
+| XLSR-53 | 跨语言自监督 | 多语言 TTS |
+| CAM++ | 上下文感知掩码 | DINO-VITS 等 |
+| H/ASP | 多层注意力统计池化 | YourTTS 多语言 |
+| ResCNN | 残差 CNN | 双语 speaker embedding (Chen et al.) |
+
+### Speaker Embedding 在跨语言 Voice Cloning 中的扩展
+
+Survey Section IV.D 表明跨语言 voice cloning 对 speaker embedding 提出额外挑战:
+- **Language-independent encoder**: Xin et al. 训练语言无关的 speaker encoder,生成的 embedding 用于单语多说话人 TTS
+- **Bilingual embedding**: Chen et al. 用 ResCNN 建立英中双语 speaker embedding 网络
+- **Speaker consistency loss**: Latent Filling 用 speaker embedding 一致性损失改善跨语言 (英→英, 韩→英) ZS-TTS
+
 ## 关键论文
 
 - DeepVoice 2 (Arik et al., NIPS 2017): 首个 multi-speaker neural TTS (lookup table)
@@ -95,6 +137,8 @@ Survey 定义的自适应 TTS 场景: 用少量目标说话人数据使源模型
 - SEA-TTS (Chen et al., ICLR 2019): sample efficient adaptive TTS
 - AdaSpeech (Chen et al., ICLR 2021): conditional LN 高效适应
 - VALL-E (Wang et al., 2023): in-context learning 重新定义零样本 TTS
+- Cooper et al. (ICASSP 2020): 系统比较不同 speaker embedding 对 ZS-TTS 的影响 (LDE + angular softmax > x-vector)
+- Desplanques et al. (ECAPA-TDNN, Interspeech 2020): 当前最常用 SECS encoder
 
 ## 相关概念
 
@@ -102,6 +146,9 @@ Survey 定义的自适应 TTS 场景: 用少量目标说话人数据使源模型
 - [[Prosody Modeling]]: speaker embedding 编码音色, prosody 编码韵律
 - [[Speech Tokenizer]]: 在 LLM-TTS 中,prompt token 部分取代 speaker embedding 的功能
 - [[Conditional Flow Matching]]: 现代 TTS 中从 speaker prompt 恢复音色
+- [[Speaker Verification]]: speaker encoder 在 SV 上预训练,提供 SECS 评估能力
+- [[Voice Cloning Taxonomy]]: speaker embedding 在四类 cloning 方法中角色各异
+- [[Speaker Adaptation]]: speaker embedding 是 adaptation 的核心调整对象
 
 ## 演进
 
