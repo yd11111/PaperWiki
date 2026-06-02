@@ -39,6 +39,7 @@
 ### 可区分
 
 - [ ] 因果解释标注了 [论文原文] 或 [agent 解读]
+- [ ] 因果解释来源标注覆盖率 ≥ 80%(方法节中的 WHY 解释有多少标了来源)
 - [ ] 不存在把推断写成断言的句子(缺少"作者认为/实验显示/论文指出"限定词)
 - [ ] "SOTA/唯一/全面优于/远超" 等强断言有数字+出处支撑
 
@@ -46,7 +47,8 @@
 
 - [ ] KB 背景节有具体谱系定位(包含论文/模型名,不是"与已有工作相关")
 - [ ] KB 背景的"创新判断"有对比基准
-- [ ] frontmatter concepts/models/tasks/datasets 挂接完整(正文反复提及的都列了)
+- [ ] frontmatter 字段存在且非空(fields_present)
+- [ ] frontmatter 字段语义正确: models 列本文模型+对比 baseline(非后续系统); concepts 列本文涉及的概念(fields_semantically_correct)
 - [ ] 速查卡片 5 字段都有实质内容(非空/非泛泛)
 
 ### 不污染
@@ -74,6 +76,7 @@
 | bad-linking | 概念挂接不合理或遗漏 |
 | template-compliance | 格式/字段不合规 |
 | kb-safety-risk | 会污染知识库 |
+| successor-as-model | frontmatter models 列了后续系统而非本文对比 baseline |
 
 **如果发现新类型的问题(不在此表中),直接命名并记录。** 这个表会在模式分析时扩展。
 
@@ -105,5 +108,6 @@
 | 日期 | 变更 | 来源 |
 |------|------|------|
 | 2026-06-02 | v1 初始检查项 | 系统设计 + 首轮 8 篇审阅经验 |
+| 2026-06-02 | v1.1: +因果解释来源标注覆盖率; frontmatter 拆分为 present+semantically_correct; +successor-as-model 问题类型 | v2 reviewer 对 DAC+CosyVoice 的 learning signals |
 
 *每次模式分析更新检查项时,在此表追加记录。*
