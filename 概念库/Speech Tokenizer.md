@@ -6,7 +6,7 @@ category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
 key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
 origin_paper: ""
-related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]"]
+related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]"]
 status: confirmed
 lifecycle: active
 merged_into: ""
@@ -50,6 +50,25 @@ CosyVoice 3 的 speech tokenizer 基于 MinMo 构建,通过 FSQ 量化,以 25 Hz
 - [[Conditional Flow Matching]]: tokenizer 的下游,从 token 恢复声学细节
 - BPE Text Tokenizer: 文本侧的 tokenizer,speech tokenizer 是其语音对应物
 
+## SpeechLM 视角下的三类体系
+
+Cui et al. (2024) 从 SpeechLM 角度将 speech tokenizer 重新分类为三类 (Figure 3):
+
+### Mixed Objective Tokenizer
+兼顾语义理解和声学生成的第三类 tokenizer,目前处于早期阶段但前景显著:
+- **SpeechTokenizer** (Zhang et al., ICLR 2024): 采用 RVQ-GAN 架构,但将第一层 RVQ 通过蒸馏对齐 HuBERT 语义表征,后续层量化声学残差。实现了单一 tokenizer 同时编码高层语义和底层声学。
+- **Mimi** (Defossez et al., 2024, Moshi): 使用单个 VQ 模块提取语义信息 (来自 WavLM),外加额外 RVQ 模块编码声学信息。被 Moshi 全双工系统采用。
+
+这种混合路线在 SpeechLM 中越来越受关注,因为它避免了 semantic-only 或 acoustic-only 的局限性。详见 [[Semantic vs Acoustic Tokens]]。
+
+### 在 SpeechLM 中的角色分布
+Survey (Table II) 统计了 50+ SpeechLM 系统的 tokenizer 选择:
+- **Whisper encoder** (最流行): Kimi-Audio, Qwen2.5-Omni, Mimmo, Lyra, Flow-Omni, SLAM-Omni, Mini-Omni 2, IntrinsicVoice
+- **HuBERT**: SynCLLM, SpeechGPT, dGSLM, SUTLM, pGSLM, GSLM, TWIST, PSLM
+- **SpeechTokenizer**: SpeechGPT-Gen, ICoT, AnyGPT
+- **EnCodec**: GPST, VoiceBox, VioLA, UmAudio
+- **w2v-BERT**: AudioLM
+
 ## 演进
 
-Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025)
+Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → Mixed tokenizer (SpeechTokenizer/Mimi, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025)

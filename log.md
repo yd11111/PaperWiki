@@ -36,3 +36,6 @@
 - [alert/backlog] pending-review ≥ 10 (当前25), draft deep/repro ≥ 5 (当前6)
 - [ingest/survey] [[Survey-Neural Speech Synthesis]] — T0 冷启动#1: 新建 10 概念页, 更新 2 概念页
 - [ingest/survey] [[Survey-Controllable TTS]] — T0 冷启动#2: 新建 7, 更新 2
+
+## 2026-06-02
+- [ingest/survey] [[Survey-Speech Language Models]] — T0 冷启动#3: 新建 6, 更新 2

@@ -6,7 +6,7 @@ category: "model-family"
 tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-only]
 key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "SpearTTS (Kharitonov et al., 2023)", "Make-a-Voice (Huang et al., 2023b)"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
-related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]"]
+related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -93,6 +93,17 @@ VALL-E 开创的典型两阶段:
 - 高计算成本: 长序列自回归推理慢
 - 细粒度控制困难: 难以精确控制 pitch/energy/duration
 - 稳定性问题: 可能出现 word skip/repeat
+
+## 与 Speech Language Model / Codec Language Model 的关系
+
+Cui et al. (2024) 的 SpeechLM survey 厘清了三者关系:
+- **Speech Language Model (SpeechLM)** 是最广义的概念,指端到端处理和生成语音的自回归基础模型,支持 speech↔speech, speech↔text 等多种模态组合
+- **Codec Language Model (CodecLM)** 是 SpeechLM 中直接建模 neural codec acoustic tokens 的子范式,可用于 ASR、TTS、ST 等多种任务
+- **LLM-based TTS** 是 SpeechLM/CodecLM 在 TTS 任务上的特例,专注于 text→speech 生成
+
+简言之: LLM-based TTS ⊂ CodecLM (codec 路线) 或 SpeechLM (semantic 路线),取决于使用的 token 类型。VALL-E 同时属于 CodecLM 和 LLM-based TTS; CosyVoice 属于 SpeechLM (semantic tokens) + LLM-based TTS。
+
+详见 [[Speech Language Model]] 和 [[Codec Language Model]]。
 
 ## 研究趋势
 
