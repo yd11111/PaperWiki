@@ -5,6 +5,7 @@
 ## Skill 使用声明
 
 - **论文精读**: 使用 `paperwiki-reader` skill(项目专属),**不要**使用通用 `paper-reader` skill(路径指向旧 vault)
+- **笔记审阅**: 使用 `paperwiki-reviewer` skill（精读后自动触发，或手动"审阅这篇笔记"）
 - **其他 skill**: 按需使用,但输出路径必须在 `/Users/xiangshu/PaperWiki/` 内
 
 ## 关键约束 (不可违反)
@@ -22,22 +23,12 @@
 
 ```
 ① 读原文 PDF
-② KB 检索: 在 概念库/模型库/任务库/数据集/ 中搜索 status:confirmed 的实体页
-   - 匹配条件: title/alias 精确匹配 OR tags 交集≥2 OR frontmatter 直接引用
-   - 读取命中的 confirmed 页(5-10k tokens)
-   - 生成 KB 背景节(谱系定位+已有认知+创新判断)
-   - 无匹配时标注"未找到相关知识库背景"
-③ 生成笔记: 保存到 论文笔记/xxx.md,使用 _templates/paper-deep.md 模板
-   - 必须包含速查卡片(一句话/路线/指标/可借鉴/局限)
-   - 所有数字必须标注出处 [§X.X] / [Table N]
-   - status: draft, tier: deep
-④ 反向更新:
-   - 已有实体页: 追加 key_papers + 贡献描述(不改 status)
-   - 新概念: 创建实体页 status:pending-review
-   - 同名消歧: 实体页 key_papers 用 [[论文笔记/xxx|显示名]]
-⑤ 局部 lint: 检查所有 wikilink 有效 + frontmatter 完整
-⑥ Git commit: [ingest/deep] 论文名 — 描述
-⑦ 更新 log.md
+② KB 检索（搜索 confirmed 实体页）
+③ 生成笔记草稿（含速查卡片 + KB 背景）
+④ 审阅（反向更新前）: 对照 checklist 检查,输出 _review/xxx-review.yml
+⑤ Git commit 草稿 + 审阅报告
+⑥ 反向更新（仅审阅通过后）
+⑦ 局部 lint + Git commit + log
 ```
 
 ## 概念页更新规则
