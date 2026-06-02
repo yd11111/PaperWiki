@@ -4,9 +4,9 @@ title: "Quantizer Dropout"
 aliases: [RVQ Dropout, Variable Bitrate Training]
 category: "training-technique"
 tags: [quantization, training-trick, variable-bitrate, audio-codec]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
-origin_paper: ""
-related_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
+related_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -44,8 +44,20 @@ Quantizer dropout 与 factorized codes 协同: 使 quantized codes 学到 most-s
 - Zeghidour et al., "SoundStream", 2021: 提出原始 quantizer dropout
 - DAC (Kumar et al., NeurIPS 2023): 发现全比特率质量下降问题, 提出概率化 dropout 方案 (p=0.5)
 
+## Bitrate 类型三分法 [Mousavi et al. 2025, §2.2.2]
+
+Survey 明确区分了三种 bitrate 策略:
+
+| 策略 | 机制 | 逐 token 自适应? | 代表 |
+|------|------|----------------|------|
+| **Fixed bitrate** | 码本数和大小固定, 每个 code index 占用固定 bits | 否 | 大多数 codec 默认模式 |
+| **Adaptive bitrate** | 基于 token 频率分布的 entropy coding (Huffman/arithmetic), 高频 token 占用更少 bits | 是 | S-TFNet (Jiang 2023), HARP-Net (Petermann 2021) |
+| **Scalable bitrate** | 通过改变活跃码本数量实现多档位; Quantizer Dropout 是其训练方法 | 否 (层粒度) | EnCodec, SoundStream, DAC |
+
+**关键区分**: Adaptive bitrate 逐 token 调整 bits (需 entropy coding); Scalable bitrate 按层整体调整 (需 quantizer dropout 训练)。两者可以叠加使用。
+
 ## 相关概念
 
 - [[Residual Vector Quantization]]: quantizer dropout 的作用对象
 - [[Codebook Collapse]]: dropout 会影响 codebook 利用率
-- Variable bitrate: quantizer dropout 实现的目标能力
+- [[Token Rate and Bitrate Trade-offs]]: quantizer dropout 实现 scalable bitrate 的机制

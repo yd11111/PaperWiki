@@ -4,9 +4,9 @@ title: "Codec Language Model"
 aliases: [CodecLM, Codec LM, 编解码器语言模型, Neural Codec Language Model, Audio Codec LM]
 category: "model-family"
 tags: [speech-LM, codec, autoregressive, neural-audio-codec, language-model, RVQ]
-key_papers: ["VALL-E (Wang et al., 2023)", "AudioLM (Borsos et al., 2023)", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)"]
+key_papers: ["VALL-E (Wang et al., 2023)", "AudioLM (Borsos et al., 2023)", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Language Model]]", "[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]"]
+related_concepts: ["[[Speech Language Model]]", "[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -99,6 +99,28 @@ CodecLM 是 SpeechLM 中侧重 **声学保真度** 的路线。Survey 分类中�
 - [[Speech Tokenizer]]: 产生 codec tokens 的 acoustic tokenizer
 - [[Semantic vs Acoustic Tokens]]: CodecLM 使用 acoustic 侧 tokens
 
+## Survey Benchmark 发现 [Mousavi et al. 2025]
+
+### SLM 评估 [§3.3.1, Table 10]
+Survey 在统一条件下 (Qwen-2.5 357M, 50K steps) 训练 SLM 并在 SALMon + ZeroSpeech 上评估:
+- Tokenizer 选择对 SLM 性能的影响巨大
+- HuBERT 在语义任务 (sBLIMP, sWUGGY, sSC, tSC) 上最强
+- WavLM 在声学一致性 (gender, sentiment, speaker) 上最强
+- 纯 acoustic tokenizer (EnCodec, DAC) 在语义任务上接近随机 (~50%)
+- 语义蒸馏加权 (Mimi*, ST*) 显著改善语义得分但伴随声学代价
+
+### TTS 评估 [§3.3.2, Table 11]
+Survey 基于 ESPnet VALL-E 实现在 LibriTTS 上评估 TTS:
+- ESPnet EnCodec (speech-only 训练) 达最高 UTMOS (3.77), 证明 domain-specific 训练关键
+- Discrete WavLM 第二高 UTMOS (3.42), 且训练最稳定
+- WavLM (单码本) 达最低 dWER (4.32), 归因于大词表和单流简化建模
+- 通用 acoustic tokenizer (EnCodec, DAC 原始版) UTMOS 仅 2.31/2.47
+
+### 音频/音乐生成 [§3.3.3-3.3.4, Table 12-13]
+- 音频生成: domain-matched EnCodec (Enc-A-16) 在 FAD/KLD/CLAP 上全面领先
+- 音乐生成: EnCodec-32k (music-specific) 在 MusicCaps 上最优; DAC-44k 在多域中表现最好
+- 重建质量最好的 tokenizer 不一定有最好的生成性能
+
 ## 演进
 
-VQ-VAE speech tokens (2019) → SoundStream/EnCodec neural codecs (2021-2023) → AudioLM semantic→acoustic 两阶段 (2022) → VALL-E codec LM for TTS (2023) → VioLA 多任务 CodecLM (2024) → Moshi/SpeechGPT-Gen mixed-token CodecLM (2024)
+VQ-VAE speech tokens (2019) → SoundStream/EnCodec neural codecs (2021-2023) → AudioLM semantic→acoustic 两阶段 (2022) → VALL-E codec LM for TTS (2023) → VioLA 多任务 CodecLM (2024) → Moshi/SpeechGPT-Gen mixed-token CodecLM (2024) → 统一 benchmark 评估 (Mousavi et al., 2025)

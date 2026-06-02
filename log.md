@@ -40,3 +40,4 @@
 ## 2026-06-02
 - [ingest/survey] [[Survey-Speech Language Models]] — T0 冷启动#3: 新建 6, 更新 2
 - [ingest/survey] [[Survey-Audio Diffusion Models]] — T0 冷启动#4: 新建 5 概念页(Diffusion Model, Classifier-Free Guidance, Score Matching, Diffusion-based Vocoder, Diffusion-based TTS), 更新 2 概念页(Neural Vocoder 追加 diffusion vocoder 详述+时间线, Conditional Flow Matching 追加 diffusion 理论连接+related_concepts)
+- [ingest/survey] [[Survey-Discrete Audio Tokens]] — T1 冷启动#5: 新建 4 概念页(Audio Tokenizer Taxonomy, Codec Training Objectives, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook), 更新 9 概念页(RVQ, FSQ, Speech Tokenizer, Semantic vs Acoustic Tokens, Codebook Collapse, Quantizer Dropout, Codec Language Model, Multi-scale STFT Discriminator, Snake Activation)

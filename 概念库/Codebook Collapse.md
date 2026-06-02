@@ -4,9 +4,9 @@ title: "Codebook Collapse"
 aliases: [码本坍缩, Codebook Underutilization, Dead Codes, Index Collapse]
 category: "training-challenge"
 tags: [VQ, quantization, training-instability, audio-codec, RVQ]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: ""
-related_concepts: ["[[Residual Vector Quantization]]", "[[Finite Scalar Quantization]]", "[[Quantizer Dropout]]"]
+related_concepts: ["[[Residual Vector Quantization]]", "[[Finite Scalar Quantization]]", "[[Quantizer Dropout]]", "[[Codec Training Objectives]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -102,6 +102,16 @@ Zheng et al. (2024, IEEE/ACM TASLP 2025) 提出双层优化:
 - [[Finite Scalar Quantization]]: 通过去除码本从根本上避免此问题
 - [[Quantizer Dropout]]: 可能加剧 collapse (全带宽训练概率降低)，DAC 的概率化方案缓解了这一交互
 
+## Survey 上下文补充 [Mousavi et al. 2025, §2.4.2]
+
+Survey 在训练目标章节中进一步总结了 collapse 的解决方案分类:
+
+1. **EMA + dead code replacement**: codebook 不参与反向传播, 用 EMA 更新; 长期未使用的 codes 被重新初始化到数据分布中 (SoundStream, EnCodec) [§2.4.2]
+2. **Factorized codes + L2 normalization**: 低维 lookup + L2-norm 消除 norm 干扰 (DAC, Yang et al. 2024d) [§2.4.2]
+3. **Entropy penalties / code balancing losses**: 引入辅助约束鼓励码本均匀使用; ERVQ (Zheng et al. 2025) 使用 intra-codebook code balancing loss + inter-codebook similarity minimization [§2.4.2]
+4. **Euclidean normalization + probabilistic losses**: ESC (Gu & Diao 2024) 和 NDVQ (Niu et al. 2024) 将码本表示为分布, 使用 margin-based 或 probabilistic losses [§2.4.2]
+5. **FSQ**: 从结构上消除码本, 根本避免 collapse (详见 [[Finite Scalar Quantization]])
+
 ## 演进
 
-VQ-VAE 原始 collapse (2017) → EMA + k-means (SoundStream/EnCodec, 2021-2022) → Factorized codes + L2-norm (DAC, 2023) → FSQ 去码本化 (2024) → ERVQ 双层优化 (2025) → 理论解释 + Robust R-FSQ (2026)
+VQ-VAE 原始 collapse (2017) → EMA + k-means (SoundStream/EnCodec, 2021-2022) → Factorized codes + L2-norm (DAC, 2023) → FSQ 去码本化 (2024) → ERVQ 双层优化 (2025) → Entropy penalties + Euclidean normalization (ESC/NDVQ, 2024) → 理论解释 + Robust R-FSQ (2026)

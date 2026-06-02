@@ -4,9 +4,9 @@ title: "Multi-scale STFT Discriminator"
 aliases: [Multi-band STFT Discriminator, STFT-D, Complex STFT Discriminator]
 category: "architecture-component"
 tags: [discriminator, GAN, frequency-domain, audio-codec, vocoder]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: ""
-related_concepts: ["[[Snake Activation]]", "[[Residual Vector Quantization]]"]
+related_concepts: ["[[Snake Activation]]", "[[Residual Vector Quantization]]", "[[Codec Training Objectives]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -69,6 +69,18 @@ DAC 同时使用:
 4. Hierarchical discriminators (VocGAN, 2020): 不同分辨率的层次判别
 
 STFT-based 频域判别器的引入代表了从纯时域到时频联合判别的范式跃迁。
+
+## Survey 中的 GAN 训练与 Discriminator [Mousavi et al. 2025, §2.4.2]
+
+Survey 给出了 adversarial loss 和 feature matching loss 的统一公式:
+
+**Adversarial loss** (hinge loss): 在 K 个 discriminator 上取平均, generator 最大化 D(x_hat), discriminator 区分真/假 [§2.4.2]
+
+**Feature matching loss**: 从 K 个 discriminator 的 L 层中间激活中提取特征, 让生成信号匹配真实信号的高层统计量: L_Feats = (1/KL) sum ||D_k^l(x) - D_k^l(x_hat)||_1 / mean(||D_k^l(x)||_1) [§2.4.2]
+
+Survey Table 1 显示 GAN + Feature Matching 是最普遍的训练目标组合,覆盖大多数 acoustic tokenizer (SoundStream, EnCodec, DAC, SpeechTokenizer, WavTokenizer 等)。
+
+详见 [[Codec Training Objectives]] 中对完整训练目标体系的描述。
 
 ## 演进
 

@@ -4,9 +4,9 @@ title: "Snake Activation"
 aliases: [Snake Function, Periodic Activation]
 category: "architecture-component"
 tags: [activation-function, periodic-inductive-bias, waveform-generation, vocoder]
-key_papers: ["[[论文笔记/DAC|DAC]]"]
-origin_paper: ""
-related_concepts: ["[[Multi-scale STFT Discriminator]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+origin_paper: "Liu et al., Neural Networks Fail to Learn Periodic Functions and How to Fix It, 2020"
+related_concepts: ["[[Multi-scale STFT Discriminator]]", "[[Codec Training Objectives]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
