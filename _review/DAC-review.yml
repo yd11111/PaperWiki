@@ -1,0 +1,57 @@
+paper: "DAC"
+file: "论文笔记/DAC.md"
+date: "2026-06-02"
+conclusion: pass
+
+scores:
+  understandability: 9
+  traceability: 9
+  rigor: 9
+  navigability: 8
+  kb_safety: 9
+
+claim_stats:
+  total_claims: 118
+  annotated_claims: 110
+  coverage_rate: "93%"
+
+issues:
+  - severity: medium
+    type: fact-inference-mixing
+    location: "KB 背景 > Speech Tokenizer 段落"
+    detail: "'DAC 的 RVQ codes 编码全部声学信息而非仅语义,因此更适合作为 drop-in replacement 用于 AudioLM/VALL-E/MusicLM 等需要高保真重建的生成模型' — 这是 agent 基于技术特性做出的应用推断,但写法与前文确认实体页内容混在一起,读者可能误认为是已确认知识。"
+    suggestion: "在该句前加 '[agent 解读]' 标签,或改写为 '从 RVQ codes 的信息编码特性来看,DAC 理论上可作为...'。"
+
+  - severity: low
+    type: traceability-gap
+    location: "速查卡片 > 指标行"
+    detail: "速查中 'ViSQOL 4.18 / SI-SDR 10.75 @8kbps vs EnCodec ViSQOL 3.16 / SI-SDR 9.59 @24kbps' 和 'codebook bitrate efficiency 99%' 未标注 [Table 3] 和 [Table 2]。"
+    suggestion: "补充为 '...vs EnCodec ViSQOL 3.16 / SI-SDR 9.59 @24kbps [Table 3]; codebook bitrate efficiency 99% [Table 2]; 76M 参数 [§4.3]'。"
+
+  - severity: low
+    type: overclaim
+    location: "点评 > 优点 第 3 条"
+    detail: "'已被广泛用于下游 generative audio modeling (AudioLM, MusicLM, VALL-E 等均可直接受益)' — '已被广泛用于' 和 '均可直接受益' 是需要具体引用支撑的外部事实断言。DAC 论文本身不包含这些下游应用的验证。"
+    suggestion: "改为 '开源代码+权重,为下游 generative audio modeling 提供了高质量的 codec 选项' 或附上具体采用 DAC 的论文引用。"
+
+  - severity: low
+    type: bad-linking
+    location: "方法 > Snake Activation; Decoder"
+    detail: "BigVGAN [21] 和 HiFi-GAN 在正文中多次提及 (Snake 来源、MPD 设计来源),但均未使用 wikilink。这些是 audio codec 领域的重要参考模型。"
+    suggestion: "在首次提及处加 wikilink: [[BigVGAN]]、[[HiFi-GAN]]。"
+
+  - severity: low
+    type: traceability-gap
+    location: "点评 > 不足 第 3 条"
+    detail: "'MUSHRA 测试规模偏小 (10 listeners, 12 samples)' — 10 listeners 和 12 samples 这两个数字未标注论文出处。"
+    suggestion: "补充 [§4.4] 或具体出处。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "所有核心事实数据均有可靠来源标注,93% claim 覆盖率。唯一的 medium 问题在 KB 背景而非核心笔记内容,且 KB 背景的待确认实体已正确标记。可安全进入可信层。"
+
+learning_signals:
+  new_pattern: true
+  matches_known_pattern: "速查卡片数字缺标注 (同 CosyVoice 3、IndexTTS2)"
+  system_upgrade_suggestion: "DAC 作为 repro tier 笔记,其模块细节、训练配置、复现要点的完整度可作为 repro 笔记的参考模板。建议将 DAC 的结构提取为 repro-tier 模板供后续使用。"

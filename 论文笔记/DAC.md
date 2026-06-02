@@ -290,3 +290,11 @@ Audio (44.1 kHz) → Convolutional Encoder (stride 512) → RVQ (9 层 codebook,
 4. **Sub-band STFT discriminator**: 按频带分割 STFT 让 discriminator 专注于局部频率范围 — 更精准的高频反馈
 5. **Balanced data sampling (full-band vs band-limited)**: 解决混合采样率数据集的频率截断问题
 6. **Snake activation for periodicity**: 简单替换激活函数即可获得显著音质提升 — 几乎零成本改进
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass
+> **评分:** 理解 9 | 溯源 9 | 严谨 9 | 导航 8 | 安全 9
+> **Claim 标注率:** 93% (110/118)
+> **问题:** 0 high, 1 medium, 4 low
+> - [medium/fact-inference-mixing] KB 背景 > Speech Tokenizer 段落: 'drop-in replacement 用于 AudioLM/VALL-E/MusicLM' 是 agent 推断,未与确认知识区分
+> **反向更新:** ✅

@@ -158,3 +158,12 @@ instruction-following 数据从 1500 小时扩至 5000 小时,风格类型从有
 3. **Pronunciation Inpainting**: 用 mixed text+phoneme 输入解决多音字,比纯 G2P 或纯 BPE 更灵活且可控
 4. **跨语言能力迁移**: 通过 continual pretraining + 辅助多语种数据,将单语说话人变为多语说话人(polyglot training)
 5. **Multilingual data pipeline**: 6 步处理流程(特别是 cross-validation ASR + MFA 标点对齐)可作为标准参考
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass-with-fixes
+> **评分:** 理解 9 | 溯源 8 | 严谨 8 | 导航 7 | 安全 8
+> **Claim 标注率:** 88% (44/50)
+> **问题:** 0 high, 2 medium, 3 low
+> - [medium/traceability-gap] 速查卡片 > 指标行: 5 个关键数字 (CER, WER, SS, 相对提升, 跨语言 WER) 缺少 [Table N] 标注
+> - [medium/fact-inference-mixing] 方法 > MinMo 监督式 Tokenizer: MinMo SOTA 声明无本文出处,因果链未区分论文原文与 agent 解读
+> **反向更新:** ✅

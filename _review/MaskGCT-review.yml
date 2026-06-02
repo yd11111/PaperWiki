@@ -1,0 +1,63 @@
+paper: "MaskGCT"
+file: "论文笔记/MaskGCT.md"
+date: "2026-06-02"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 8
+  traceability: 7
+  rigor: 8
+  navigability: 6
+  kb_safety: 7
+
+claim_stats:
+  total_claims: 62
+  annotated_claims: 53
+  coverage_rate: "85%"
+
+issues:
+  - severity: medium
+    type: bad-linking
+    location: "frontmatter > models / concepts"
+    detail: "frontmatter models 缺少 [[MaskGCT]] 自身 (CosyVoice 3 和 DAC 均包含自身)。concepts 缺少核心方法概念: Masked Generative Modeling 是本文的核心贡献,W2v-BERT 2.0 是 semantic codec 的关键依赖,VQ-VAE 是 semantic codec 的核心技术 — 三者均未出现在 concepts 字段。"
+    suggestion: "models 补充 [[MaskGCT]]; concepts 补充 [[Masked Generative Modeling]]、[[W2v-BERT 2.0]]、[[VQ-VAE]]。同时考虑将 NaturalSpeech 3、VALL-E 等关键对比模型加入 models。"
+
+  - severity: medium
+    type: fact-inference-mixing
+    location: "方法 > 关键设计选择 > 1. Speech Semantic Representation Codec; 2. T2S Model"
+    detail: "(1) '为什么 VQ-VAE 优于 k-means' 的整段解释 ('k-means 是 post-hoc 聚类...VQ-VAE 是 end-to-end 优化') 是合理的技术分析,但未区分是论文原文论述还是 agent 解读。(2) '为什么 masked generative 比 AR 更适合 TTS' 的 4 个论点中,前 3 个 (bidirectional attention、并行生成、length control) 是通用 NAR 优势的归纳,非论文原文论证,但写法与第 4 个 (有 [§4.2.2] 标注) 混在一起。"
+    suggestion: "在 '为什么 VQ-VAE 优于 k-means' 段首标注 [agent 解读];'为什么 masked generative 比 AR 更适合 TTS' 的前 3 点标注 [通用 NAR 特性],第 4 点保留 [§4.2.2] 标注。"
+
+  - severity: medium
+    type: missing-lineage
+    location: "KB 背景"
+    detail: "KB 背景为空占位符,但 MaskGCT 在 NAR TTS 谱系中有明确定位: 继承 SoundStorm 的 masked generative 范式并扩展到 T2S 阶段;与 NaturalSpeech 3 同期但去除了 alignment 依赖;semantic codec 设计被 IndexTTS2 直接采用。这些谱系关系对理解论文贡献至关重要,但均未在 KB 背景中体现。"
+    suggestion: "手动补充谱系定位: SoundStorm (masked generative S2A) → MaskGCT (扩展到 T2S); 与 NaturalSpeech 3 的差异 (无 alignment); 对后续工作的影响 (IndexTTS2 semantic codec)。"
+
+  - severity: low
+    type: traceability-gap
+    location: "速查卡片 > 指标行"
+    detail: "速查中 SIM-O 0.728、WER 2.466%、SIM-O 0.777、WER 2.183%、SMOS 4.24/4.11 等数字缺少 [Table 2] 标注。"
+    suggestion: "在速查指标行补充 '[Table 2]' 来源。"
+
+  - severity: low
+    type: bad-linking
+    location: "frontmatter > datasets"
+    detail: "LibriSpeech test-clean 在实验表格中作为重要评测数据集使用 (6 行结果),但未出现在 frontmatter datasets 字段中。"
+    suggestion: "在 datasets 字段中添加 [[LibriSpeech]]。"
+
+  - severity: low
+    type: summary-without-mechanism
+    location: "方法 > 关键设计选择 > 5. Speech Acoustic Codec"
+    detail: "'Encoder: 遵循 DAC/RVQGAN' 仅声明了 WHAT (使用了 DAC 架构),未解释 WHY (为什么选择 DAC 架构而非其他 codec)。相比 semantic codec 的详细解释,acoustic codec 部分过于简略。"
+    suggestion: "补充选择 DAC/RVQGAN 架构的理由,或至少说明使用 Vocos decoder 代替传统 upsampling decoder 的动机。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "核心数据可靠,但 3 个 medium 问题 (概念挂接缺失、fact-inference 混写、谱系缺失) 意味着笔记的导航价值和来源透明度不足。修正后可提升至可信层。"
+
+learning_signals:
+  new_pattern: true
+  matches_known_pattern: "bad-linking (frontmatter 缺少自身模型和核心概念) 是首次出现的新模式,之前 IndexTTS2 审阅中仅涉及 MaskGCT 未加 wikilink,而非 frontmatter 字段缺失。"
+  system_upgrade_suggestion: "在 paperwiki-reader skill 中增加 frontmatter 完整性检查: (1) models 必须包含论文自身的模型; (2) concepts 必须包含论文标题/方法名中的核心概念; (3) datasets 必须包含实验表中使用的所有数据集。"

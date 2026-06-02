@@ -185,3 +185,13 @@ MaskGCT 的核心贡献在于证明了 **masked generative modeling 可以完全
 3. **Adaptive RMSNorm with timestep**: 将 masking timestep t 注入到 normalization 层,使模型感知当前 mask 比例
 4. **Flow matching duration predictor**: 使用 flow matching 预测 total duration (non-phonemic granularity) + in-context learning
 5. **Layer-wise linear sampling for S2A**: p(j) = 1 - 2j/(N(N+1)) 偏向 coarse layers → 前几层获得更多训练
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass-with-fixes
+> **评分:** 理解 8 | 溯源 7 | 严谨 8 | 导航 6 | 安全 7
+> **Claim 标注率:** 85% (53/62)
+> **问题:** 0 high, 3 medium, 3 low
+> - [medium/bad-linking] frontmatter: models 缺少 [[MaskGCT]] 自身; concepts 缺少 [[Masked Generative Modeling]]、[[W2v-BERT 2.0]]、[[VQ-VAE]]
+> - [medium/fact-inference-mixing] 方法 > Semantic Codec & T2S: '为什么 VQ-VAE 优于 k-means' 和 '为什么 masked generative 比 AR 更适合 TTS' 未区分论文原文与 agent 解读
+> - [medium/missing-lineage] KB 背景: 空占位符,未定位 MaskGCT 在 NAR TTS 谱系中的位置 (SoundStorm → MaskGCT; vs NaturalSpeech 3)
+> **反向更新:** ✅

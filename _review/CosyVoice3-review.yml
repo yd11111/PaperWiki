@@ -1,0 +1,57 @@
+paper: "CosyVoice 3"
+file: "论文笔记/CosyVoice 3.md"
+date: "2026-06-02"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 9
+  traceability: 8
+  rigor: 8
+  navigability: 7
+  kb_safety: 8
+
+claim_stats:
+  total_claims: 50
+  annotated_claims: 44
+  coverage_rate: "88%"
+
+issues:
+  - severity: medium
+    type: traceability-gap
+    location: "速查卡片 > 指标行"
+    detail: "速查中 5 个关键数字 (CER 0.71%, WER 1.45%, SS 0.775, 相对提升 44%-51%, 跨语言 WER 5.09 vs 13.5) 均无 [Table N] 标注。速查虽为摘要性质,但这些数字是读者最先看到的,缺失来源会降低速查的可信性。"
+    suggestion: "在速查指标行末尾补充来源,如 'CER 0.71% / WER 1.45% [Table 4]'、'相对提升 44%-51% [§5.1]'、'跨语言 WER zh→en 5.09 vs 13.5 [Table 7]'。"
+
+  - severity: medium
+    type: fact-inference-mixing
+    location: "方法 > 关键设计选择 > 1. 基于 MinMo 的监督式多任务 Speech Tokenizer"
+    detail: "'MinMo 本身已在对话、多语种 ASR、情感识别等任务上达到 SOTA,因此其 intermediate representations 天然携带丰富的副语言信息' — 前半句是关于 MinMo 的外部事实断言 (无本文出处),后半句是 agent 推导的因果链,两者混写且均未标注来源。"
+    suggestion: "标注 MinMo SOTA 声明的出处 (如 [MinMo 原文] 或 [§2.1 引用]),并在因果推导后加 [agent 解读]。"
+
+  - severity: low
+    type: overclaim
+    location: "方法 > 关键设计选择 > 1 > 最后一段"
+    detail: "'监督 tokenizer 在 speaker similarity 和 content consistency 上全面优于 W2v-BERT 2.0 和 SoundStream' — '全面优于' 措辞偏强,实验仅在 3000 小时数据上验证 [Table 12],未在更大规模数据上确认泛化性。"
+    suggestion: "改为 '在 3000 小时实验条件下优于 W2v-BERT 2.0 和 SoundStream [Table 12]'。"
+
+  - severity: low
+    type: missing-lineage
+    location: "KB 背景"
+    detail: "KB 背景为 P1 占位符,无具体谱系定位。CosyVoice 3 在 scaling TTS、post-training for TTS 方面有明确谱系 (CosyVoice → CosyVoice 2 → CosyVoice 3),但当前笔记未在 KB 背景中体现。"
+    suggestion: "即使无 KB 检索,可手动补充简要谱系: CosyVoice 系列的演进脉络、与 VALL-E/NaturalSpeech 3 等同期工作的关系。"
+
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > status"
+    detail: "status 标记为 'reviewed' 但实际尚未通过正式审阅流程。status 应在审阅通过后才改为 reviewed。"
+    suggestion: "将 status 改为 'draft',待审阅通过后再更新。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "无 high 级别问题,核心数据均有可靠来源。但 MinMo SOTA 声明和 '全面优于' 措辞需要修正后才宜进入可信层,避免未经验证的外部事实断言扩散。"
+
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "速查卡片中数字缺标注是一个系统性模式,IndexTTS2 审阅中也出现过类似问题。fact-inference-mixing 同样是 deep 笔记的常见模式。"
+  system_upgrade_suggestion: "在 paperwiki-reader skill 的速查模板中增加硬性要求: 速查中每个数字必须附带 [Table/Fig/§] 标注。"
