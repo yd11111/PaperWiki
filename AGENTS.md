@@ -351,6 +351,20 @@ deep 及以上层级笔记**必须**包含：
 
 ---
 
+## 审阅系统
+
+### 单篇审阅
+每次 deep/repro 笔记生成后、反向更新前自动触发。
+- 输出: `_review/{论文名}-review.yml` (YAML) + 笔记末尾 `[!review]` callout
+- 结论: pass(直接反向更新) / pass-with-fixes(建议修正,可放行) / revise(有 high 问题,修正后重审) / reject-as-deep(降为 enhanced-card)
+- 原则: 只诊断不重写,不阻断 pipeline,每个问题有 location+detail+suggestion
+
+### 跨篇模式分析
+每 5-10 篇手动触发。统计高频问题 → 判断根因(模板/规则/skill/检索) → 产出系统升级建议。
+输出: `_review/pattern-analysis-YYYY-MM-DD.md`
+
+---
+
 ## 13. Link 约定
 
 - 所有跨页引用使用 `[[wikilink]]` 格式
@@ -452,12 +466,21 @@ deep 及以上层级笔记**必须**包含：
 ## 附: 快速参考
 
 ```
-Agent 操作清单:
-1. 收到论文 → 判断层级 → 生成笔记 → local lint → commit
-2. deep/repro → 额外执行 KB 检索 → 结果附在 footer
-3. 新概念出现 → 创建实体页(pending-review) → 更新 MOC
-4. Append → 保持 status; Substantive → status=pending-review
-5. 每次 ingest 后 → 检查 MOC 是否需刷新
-6. 每周 → full lint → 报告 + backlog alert
-7. 永不: 自行升级层级 / 自行 merge/deprecate / 修改 trusted 内容
+Agent 精读 pipeline:
+① 读原文
+② KB 检索
+③ 生成笔记草稿 (status: draft)
+④ 审阅 (反向更新前,对照 checklist 检查)
+⑤ Git commit 草稿 + 审阅报告
+⑥ 反向更新 (仅审阅通过后)
+⑦ 局部 lint
+⑧ Git commit + log
+⑨ 审核积压检查
+
+其他规则:
+- 新概念出现 → 创建实体页(pending-review) → 更新 MOC
+- Append → 保持 status; Substantive → status=pending-review
+- 每次 ingest 后 → 检查 MOC 是否需刷新
+- 每周 → full lint → 报告 + backlog alert
+- 永不: 自行升级层级 / 自行 merge/deprecate / 修改 trusted 内容
 ```
