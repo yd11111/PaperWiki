@@ -1,0 +1,66 @@
+paper: "DAC"
+file: "论文笔记/DAC.md"
+date: "2026-06-02"
+reviewer_version: "v2-two-layer"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    judgment: "Every design choice has a WHY explanation backed by ablation data; could confidently explain the method to a colleague"
+  trustworthy:
+    score: 9
+    judgment: "93% claim annotation rate with correct metric names; no factual errors found"
+  distinguishable:
+    score: 7
+    judgment: "Zero [论文原文]/[agent 解读] labels anywhere in the note; boundary usually inferable from context but never explicit"
+  positioned:
+    score: 8
+    judgment: "Strong KB背景 with specific RVQ/SpeechTokenizer lineage; clear EnCodec/SoundStream comparisons"
+  non_polluting:
+    score: 8
+    judgment: "[待确认] concepts properly flagged; one inference in KB背景 (drop-in replacement claim) could propagate if unchecked"
+
+checks:
+  claim_coverage:
+    total: 118
+    annotated: 110
+    rate: "93%"
+  metric_names_correct: true
+  source_labels_present: false
+  speed_card_complete: true
+  frontmatter_complete: true
+  concept_admission_ok: true
+
+issues:
+  - severity: medium
+    type: "fact-inference-mixing"
+    principle: "distinguishable"
+    location: "KB背景 > Speech Tokenizer 段落"
+    detail: "'drop-in replacement 用于 AudioLM/VALL-E/MusicLM' 是 agent 推断,非论文原文,未标注来源"
+    suggestion: "添加 [agent 解读] 标签或改写为 '其 RVQ codes 理论上可替代 EnCodec codes 用于下游生成模型'"
+
+  - severity: medium
+    type: "template-compliance"
+    principle: "distinguishable"
+    location: "方法节全部因果解释"
+    detail: "WHY 解释均未标注 [论文原文] 或 [agent 解读],无法区分是论文自述机制还是 agent 解读"
+    suggestion: "系统级修改: work agent 应在每个 WHY 解释后标注来源类型"
+
+  - severity: low
+    type: "fact-inference-mixing"
+    principle: "distinguishable"
+    location: "方法 > Improved RVQ"
+    detail: "'直觉: 在主成分空间做匹配' 表述不确定是论文原话还是 agent 归纳"
+    suggestion: "标注 [agent 解读] 或引用论文原文"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "所有实验数据准确可溯源,KB背景推断已标记但不阻塞;方法解释虽缺来源标签但内容可靠"
+
+learning_signals:
+  checks_passed_but_principle_failed: "claim_coverage 93% (通过) 但 distinguishable 仅 7 分 -- 因为 claim 标注只验证数据溯源,不验证因果解释的来源标注。检查项有盲区。"
+  new_issue_type: "无新类型"
+  system_upgrade_suggestion: "work agent 应在方法节每个 WHY/因果解释后追加 [论文原文] 或 [agent 解读] 标签"
+  checklist_upgrade_suggestion: "增加检查项: '因果解释来源标注覆盖率' (目标 ≥ 80%),与 claim 标注率并列,服务于可区分原则"

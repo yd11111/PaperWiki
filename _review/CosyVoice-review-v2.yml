@@ -1,0 +1,73 @@
+paper: "CosyVoice"
+file: "论文笔记/CosyVoice.md"
+date: "2026-06-02"
+reviewer_version: "v2-two-layer"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    judgment: "Clear WHY/HOW for S3 tokenizer, x-vector separation, and OT-CFM; VQ insertion position (layer 6) lacks justification but paper itself acknowledges this"
+  trustworthy:
+    score: 8
+    judgment: "89% claim annotation rate; factual error (超人类→接近人类) was correctly fixed; training configs missing section refs"
+  distinguishable:
+    score: 7
+    judgment: "Zero [论文原文]/[agent 解读] labels; SS超原始录音解释 is clearly agent interpretation but unlabeled"
+  positioned:
+    score: 8
+    judgment: "Excellent KB lineage (VALL-E → CosyVoice → CosyVoice 2/3); but models field lists successors instead of comparisons"
+  non_polluting:
+    score: 8
+    judgment: "Factual error fixed, content now safe for KB; [待确认] concepts properly flagged"
+
+checks:
+  claim_coverage:
+    total: 38
+    annotated: 34
+    rate: "89%"
+  metric_names_correct: true
+  source_labels_present: false
+  speed_card_complete: true
+  frontmatter_complete: true
+  concept_admission_ok: true
+
+issues:
+  - severity: medium
+    type: "bad-linking"
+    principle: "positioned"
+    location: "frontmatter > models"
+    detail: "列出后继系统 CosyVoice 2/3 而非论文实际比较的模型 (VALL-E, UniAudio, SpearTTS) 或使用的组件 (HiFi-GAN, CAM++)"
+    suggestion: "改为 models: ['[[VALL-E]]', '[[HiFi-GAN]]', '[[CosyVoice 2]]', '[[CosyVoice 3]]']"
+
+  - severity: medium
+    type: "template-compliance"
+    principle: "distinguishable"
+    location: "方法节全部因果解释"
+    detail: "WHY 解释均未标注 [论文原文] 或 [agent 解读],与 DAC 同一系统性问题"
+    suggestion: "系统级修改: work agent 应在每个 WHY 解释后标注来源类型"
+
+  - severity: low
+    type: "traceability-gap"
+    principle: "trustworthy"
+    location: "训练策略 (lines 120-121)"
+    detail: "训练配置 (4xV100/50epochs/lr=1e-3, 64xV100/800K/lr=1e-4) 无 [§X.X] 标注"
+    suggestion: "追加论文对应章节号"
+
+  - severity: low
+    type: "traceability-gap"
+    principle: "trustworthy"
+    location: "速查 > 指标"
+    detail: "[Table 7-9] 为范围引用,理想状态下各数字应指向具体表"
+    suggestion: "拆分为 [Table 7] / [Table 8] / [Table 9]"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "v1 高危 factual error 已修正;剩余 medium 问题为链接和标签类,不影响内容准确性"
+
+learning_signals:
+  checks_passed_but_principle_failed: "frontmatter_complete 通过 (所有字段已填) 但 models 字段内容错误 (列后继而非对比模型) -- 检查项只验证'字段存在'不验证'字段语义正确',有盲区"
+  new_issue_type: "successor-as-model: models 字段误列后继系统而非论文实际涉及模型,是 bad-linking 的子类型"
+  system_upgrade_suggestion: "work agent models 字段规则应明确: 列本文模型 + 对比基准 + 关键组件,后继系统仅当论文正文讨论时才列"
+  checklist_upgrade_suggestion: "将 frontmatter_complete 拆为 'fields_present' + 'fields_semantically_correct'; 增加规则: models 字段应列本文模型+对比基准而非后继系统"

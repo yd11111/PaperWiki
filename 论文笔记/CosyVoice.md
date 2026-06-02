@@ -185,11 +185,12 @@ LLM + CFM 的 coarse-to-fine 架构设计也很精巧: 通过 x-vector 显式分
 
 5. **合成数据增强 ASR**: CosyVoice 生成的数据可直接替代真实数据,结合多样化文本(MLS)后效果甚至超越原始数据 [Table 11],说明高质量 TTS 可反哺上游任务。
 
-> [!review] 自动审阅 (2026-06-02)
-> **结论:** revise
-> **评分:** 理解 5 | 溯源 4 | 严谨 3 | 导航 4 | 安全 3
-> **Claim 标注率:** 100% (36/36)
-> **问题:** 1 high, 1 medium, 1 low
-> - [high/overclaim] 速查 > 指标: 「英文 WER 2.89% 超人类 (2.66%)」方向错误,WER 越低越好,2.89% 差于 2.66%,非"超人类"
-> - [medium/bad-linking] frontmatter > models: 列出后继系统 CosyVoice 2/3 而非论文实际使用的模型 (HiFi-GAN, CAM++ 等)
-> **反向更新:** ❌
+> [!review] 自动审阅 v2 (2026-06-02)
+> **结论:** pass-with-fixes
+> **原则:** 复述 8 | 信赖 8 | 区分 7 | 定位 8 | 污染 8
+> **Claim 标注率:** 89% (34/38)
+> **问题:** 0 high, 2 medium, 2 low
+> - [medium/bad-linking] frontmatter > models: 仍列出后继系统 CosyVoice 2/3 而非论文实际比较模型 (VALL-E 等)
+> - [medium/template-compliance] 方法节因果解释无 [论文原文]/[agent 解读] 标签 (系统性缺失)
+> **反向更新:** ✅
+> **学习信号:** frontmatter_complete 检查应拆分为"字段存在"+"字段语义正确";models 字段应列本文模型+对比基准

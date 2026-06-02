@@ -291,10 +291,12 @@ Audio (44.1 kHz) → Convolutional Encoder (stride 512) → RVQ (9 层 codebook,
 5. **Balanced data sampling (full-band vs band-limited)**: 解决混合采样率数据集的频率截断问题
 6. **Snake activation for periodicity**: 简单替换激活函数即可获得显著音质提升 — 几乎零成本改进
 
-> [!review] 自动审阅 (2026-06-02)
-> **结论:** pass
-> **评分:** 理解 9 | 溯源 9 | 严谨 9 | 导航 8 | 安全 9
+> [!review] 自动审阅 v2 (2026-06-02)
+> **结论:** pass-with-fixes
+> **原则:** 复述 9 | 信赖 9 | 区分 7 | 定位 8 | 污染 8
 > **Claim 标注率:** 93% (110/118)
-> **问题:** 0 high, 1 medium, 4 low
-> - [medium/fact-inference-mixing] KB 背景 > Speech Tokenizer 段落: 'drop-in replacement 用于 AudioLM/VALL-E/MusicLM' 是 agent 推断,未与确认知识区分
+> **问题:** 0 high, 2 medium, 1 low
+> - [medium/fact-inference-mixing] KB背景 > Speech Tokenizer: "drop-in replacement 用于 AudioLM/VALL-E/MusicLM" 是 agent 推断,未标注来源
+> - [medium/template-compliance] 方法节因果解释无 [论文原文]/[agent 解读] 标签 (系统性缺失)
 > **反向更新:** ✅
+> **学习信号:** 检查项应增加"因果解释来源标注覆盖率"指标,与 claim 标注率并列
