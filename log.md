@@ -38,6 +38,10 @@
 - [ingest/survey] [[Survey-Controllable TTS]] — T0 冷启动#2: 新建 7, 更新 2
 
 ## 2026-06-02
+- [kb/search] [[CosyVoice]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[LLM-based TTS]](待确认), [[Classifier-Free Guidance]](待确认), [[Semantic vs Acoustic Tokens]](待确认)
+- [ingest/deep] [[CosyVoice]] — 精读(CosyVoice 系列原始论文), kb_sources=3, 新建模型页 1 (CosyVoice), 追加更新 6 个实体页(Speech Tokenizer, CFM, Zero-shot TTS, CFG, Semantic vs Acoustic Tokens, Cross-lingual Voice Cloning) + 更新 CosyVoice 2 supersedes
+- [lint/local] CosyVoice — 通过/0 问题
+- [alert/backlog] pending-review: 74, draft deep/repro: 7 — 建议抽空审核
 - [ingest/survey] [[Survey-Speech Language Models]] — T0 冷启动#3: 新建 6, 更新 2
 - [ingest/survey] [[Survey-Audio Diffusion Models]] — T0 冷启动#4: 新建 5 概念页(Diffusion Model, Classifier-Free Guidance, Score Matching, Diffusion-based Vocoder, Diffusion-based TTS), 更新 2 概念页(Neural Vocoder 追加 diffusion vocoder 详述+时间线, Conditional Flow Matching 追加 diffusion 理论连接+related_concepts)
 - [ingest/survey] [[Survey-Discrete Audio Tokens]] — T1 冷启动#5: 新建 4 概念页(Audio Tokenizer Taxonomy, Codec Training Objectives, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook), 更新 9 概念页(RVQ, FSQ, Speech Tokenizer, Semantic vs Acoustic Tokens, Codebook Collapse, Quantizer Dropout, Codec Language Model, Multi-scale STFT Discriminator, Snake Activation)
