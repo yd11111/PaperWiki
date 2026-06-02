@@ -1,0 +1,38 @@
+paper: "VALL-E"
+file: "论文笔记/VALL-E.md"
+date: "2026-06-02"
+conclusion: pass-with-fixes
+scores:
+  understandability: 4
+  traceability: 4
+  rigor: 4
+  navigability: 3
+  kb_safety: 4
+claim_stats:
+  total_claims: 20
+  annotated_claims: 20
+  coverage_rate: "100%"
+issues:
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空 []，但论文使用 LibriLight（60K h 训练集）、LibriSpeech（评估集）、VCTK（评估集）三个核心数据集，且笔记正文大量讨论这些数据集。"
+    suggestion: "补充 datasets: ['[[LibriLight]]', '[[LibriSpeech]]', '[[VCTK]]']。"
+  - severity: medium
+    type: bad-linking
+    location: "frontmatter > concepts"
+    detail: "concepts 仅包含 [[RVQ]] 和 [[Speech Tokenizer]] 两个概念。作为'codec LM TTS 范式开山之作'，缺少对核心概念 [[LLM-based TTS]] 的挂接（该概念在 CosyVoice 笔记中已使用）。"
+    suggestion: "补充 [[LLM-based TTS]] 到 concepts 列表；如该概念页尚不存在，优先级应高于多数 pending 概念。"
+  - severity: low
+    type: traceability-gap
+    location: "局限性 > 第4点"
+    detail: "GT Speaker Similarity 0.754 仅出现在局限性 [Table 2] 中，但实验对比表未包含 GT 基线行。读者无法在表中一目了然地看到 VALL-E vs GT 的差距。"
+    suggestion: "在实验表中添加 GT SPK 0.754 [Table 2] 行作为上界参照。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "无事实错误或 overclaim。medium 问题均为导航性不足（缺挂接/缺数据集链接），不影响内容可信性。修复后可安全进入可信层。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "sparse-linking-for-paradigm-papers: 范式开创性论文的概念挂接倾向于保守（只链接已有概念页），可能遗漏自身定义的核心概念"
+  system_upgrade_suggestion: "reader skill 在处理范式开创性论文时，应自动检查该论文定义的新概念是否需要创建概念页并在 frontmatter 中挂接"

@@ -1,0 +1,33 @@
+paper: "SoundStream"
+file: "论文笔记/SoundStream.md"
+date: "2026-06-02"
+conclusion: pass
+scores:
+  understandability: 5
+  traceability: 5
+  rigor: 4
+  navigability: 4
+  kb_safety: 5
+claim_stats:
+  total_claims: 20
+  annotated_claims: 20
+  coverage_rate: "100%"
+issues:
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空 []，但论文使用了 LibriTTS、MagnaTagATune、VCTK+noise 三个数据集，且在笔记正文中多次提及。"
+    suggestion: "补充 datasets: ['[[LibriTTS]]', '[[MagnaTagATune]]', '[[VCTK]]']。"
+  - severity: low
+    type: traceability-gap
+    location: "实验表 > MUSHRA@3kbps"
+    detail: "MUSHRA 数值 ~68、~60、~52 来自图表读数（Fig 5a），使用 ~ 标记了近似但未显式说明'读图估计'。"
+    suggestion: "在实验表对应行添加注释'(读图估计)' 或在表头说明来自 figure 的数值为近似值。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "笔记质量优秀：每个设计选择都有 WHY 解释，所有数字 claim 均有出处，无 overclaim。仅有 2 个 low 级别格式问题。"
+learning_signals:
+  new_pattern: true
+  matches_known_pattern: ""
+  system_upgrade_suggestion: "SoundStream 笔记的'为什么 X'显式标记法是 understandability 满分的范例，可作为 reader skill 的参考模板。"

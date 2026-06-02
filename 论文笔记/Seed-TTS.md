@@ -149,3 +149,11 @@ Seed-TTS 由四个模块级联组成 [§2, Figure 1]:
 4. **Streaming deployment 组合**: Causal diffusion + consistency distillation + GQA + model quantization 的组合策略,latency 从 1x 降至 0.028x
 5. **Reward hacking awareness**: 记录了 RL 过优化导致"标准化"发音的问题,为后续 reward design 提供教训
 
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass-with-fixes
+> **评分:** 理解 4 | 溯源 4 | 严谨 4 | 导航 4 | 安全 5
+> **Claim 标注率:** 100% (25/25)
+> **问题:** 0 high, 1 medium, 2 low
+> - [medium/summary-without-mechanism] 关键设计选择 > Speech Tokenizer 设计: Tokenizer 小节仅描述 WHAT,未解释 WHY 或标注论文信息缺口
+> **反向更新:** ✅
+

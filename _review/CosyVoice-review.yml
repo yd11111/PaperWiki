@@ -1,0 +1,38 @@
+paper: "CosyVoice"
+file: "论文笔记/CosyVoice.md"
+date: "2026-06-02"
+conclusion: revise
+scores:
+  understandability: 5
+  traceability: 4
+  rigor: 3
+  navigability: 4
+  kb_safety: 3
+claim_stats:
+  total_claims: 36
+  annotated_claims: 36
+  coverage_rate: "100%"
+issues:
+  - severity: high
+    type: overclaim
+    location: "速查 > 指标"
+    detail: "「英文 WER 2.89% 超人类 (2.66%)」表述错误。WER 越低越好，CosyVoice WER 2.89% 高于（即差于）人类 2.66%，并非'超人类'。同段中文 SS 81.58 vs 74.15 使用'超原始录音'是正确的（SS 越高越好），但 WER 方向相反。"
+    suggestion: "改为「英文 WER 2.89% (接近人类 2.66%，差距 0.23pp)」或「英文 WER 2.89% (vs 人类 2.66%)」。如需强调超越，应引用 5x re-ranking 结果 WER 1.51% < 2.66%。"
+  - severity: medium
+    type: bad-linking
+    location: "frontmatter > models"
+    detail: "models 字段列出 [[CosyVoice 2]] 和 [[CosyVoice 3]]（后继系统），但未链接论文实际使用的关键模型：HiFi-GAN（vocoder）、ESPNet Conformer / SenseVoice-Large（S3 tokenizer 基座）、CAM++（speaker embedding）。"
+    suggestion: "将 CosyVoice 2/3 移至 related_papers 或备注，models 字段改为论文实际使用的模型。"
+  - severity: low
+    type: traceability-gap
+    location: "训练策略"
+    detail: "训练超参数（4 x V100, 50 epochs, lr=1e-3 等）缺少显式 section 引用。"
+    suggestion: "补充 [§4.x] 标注。"
+risk_assessment:
+  safe_for_reverse_update: false
+  safe_for_trusted_layer: false
+  reason: "速查卡片中存在 high 级别 overclaim（WER 方向错误），若直接反向更新会将错误结论写入 KB 的高频访问位置。修正后可放行。"
+learning_signals:
+  new_pattern: true
+  matches_known_pattern: ""
+  system_upgrade_suggestion: "reader skill 在生成速查卡片的'指标'字段时，应自动校验指标方向：WER/CER 越低越好，SIM/SS/MOS/MUSHRA 越高越好。当使用'超/优于/surpass'等比较词时，应验证数值方向一致性。"

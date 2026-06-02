@@ -168,3 +168,10 @@ FiLM 层插入 encoder 或 decoder 的 residual units 之间。去噪可在推�
 3. **FiLM-conditioned 多任务**: 通过条件信号让同一模型承担多个任务(压缩/去噪),无需多模型部署
 4. **Structured EMA + dead code replacement**: RVQ codebook 训练的标准 recipe,可迁移至任何 VQ 系统
 5. **多分辨率判别器组合**: wave-based (时域多尺度) + STFT-based (频域) 的互补判别,成为后续 audio GAN 标配
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass
+> **评分:** 理解 5 | 溯源 5 | 严谨 4 | 导航 4 | 安全 5
+> **Claim 标注率:** 100% (20/20)
+> **问题:** 0 high, 0 medium, 2 low
+> **反向更新:** ✅

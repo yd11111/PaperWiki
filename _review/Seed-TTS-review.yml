@@ -1,0 +1,38 @@
+paper: "Seed-TTS"
+file: "论文笔记/Seed-TTS.md"
+date: "2026-06-02"
+conclusion: pass-with-fixes
+scores:
+  understandability: 4
+  traceability: 4
+  rigor: 4
+  navigability: 4
+  kb_safety: 5
+claim_stats:
+  total_claims: 25
+  annotated_claims: 25
+  coverage_rate: "100%"
+issues:
+  - severity: medium
+    type: summary-without-mechanism
+    location: "关键设计选择 > Speech Tokenizer 设计 [§2]"
+    detail: "Tokenizer 设计小节仅描述 WHAT（类似 Betker 2023、探索了 continuous/discrete），未解释 WHY 选择该方案或 HOW 它优于替代方案。三个 bullet 全是组件列表，缺少因果链。"
+    suggestion: "补充 tokenizer 设计动机的因果解释（如为什么选 Betker 方案而非 HuBERT/EnCodec），或显式标注为'论文未披露设计动机'以区分信息缺失与笔记遗漏。"
+  - severity: low
+    type: traceability-gap
+    location: "点评 > 优势 第5点"
+    detail: "'发布 SEED-TTS-Eval 成为事实标准 benchmark' 缺少支持证据（引用数/被使用次数等）。"
+    suggestion: "改为'SEED-TTS-Eval 被后续多个系统（如 CosyVoice 3, IndexTTS2）采用作为评估集'并补充具体引用。"
+  - severity: low
+    type: weak-reusability
+    location: "可复用的 idea #4: Streaming deployment 组合"
+    detail: "列举了四项技术（Causal diffusion + consistency distillation + GQA + quantization）但未指明可迁移的具体场景。"
+    suggestion: "补充适用场景，如'可迁移至任何需要流式推理的自回归+扩散级联系统，如实时对话 TTS 或 streaming audio generation'。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "无事实错误或 overclaim，所有数字 claim 均有出处标注。medium 问题为信息不足（可能受限于原论文披露程度），不影响可信性。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "tokenizer-section-thin: 当原论文对某组件描述模糊时，笔记也倾向于薄弱地复述而非主动标注信息缺口"
+  system_upgrade_suggestion: "reader skill 在遇到论文描述模糊的关键组件时，应主动插入 [⚠️ 论文未详述] 标记而非简单复述"

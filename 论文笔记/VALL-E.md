@@ -153,3 +153,12 @@ VALL-E 的核心洞察: 如果用 neural codec 的离散 codes 替代 mel spectr
 3. **In-context learning for speaker cloning**: 将 reference audio 编码为 prefix tokens, 让 LM 自动学习 speaker 特征提取,无需显式 speaker encoder
 4. **半监督大规模训练**: 用 ASR 自动标注 unlabeled audio-only corpus, 以噪声标注换取数据量级提升 (60K h vs 百小时)
 5. **AdaLN for stage conditioning**: 在 NAR model 中用 AdaLN 注入当前 stage 信息,使单模型处理多层生成
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** pass-with-fixes
+> **评分:** 理解 4 | 溯源 4 | 严谨 4 | 导航 3 | 安全 4
+> **Claim 标注率:** 100% (20/20)
+> **问题:** 0 high, 2 medium, 1 low
+> - [medium/template-compliance] frontmatter > datasets: 字段为空但论文使用 LibriLight/LibriSpeech/VCTK 三个核心数据集
+> - [medium/bad-linking] frontmatter > concepts: 仅 2 个概念,缺少 [[LLM-based TTS]] 等核心概念挂接
+> **反向更新:** ✅

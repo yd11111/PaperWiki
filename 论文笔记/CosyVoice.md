@@ -184,3 +184,12 @@ LLM + CFM 的 coarse-to-fine 架构设计也很精巧: 通过 x-vector 显式分
 4. **ASR re-ranking**: 用 ASR 模型对多个随机种子的生成结果做 WER 排序取最优 [Table 8-9],是一种简单有效的离线质量提升策略 (WER 2.89% → 1.51%)。
 
 5. **合成数据增强 ASR**: CosyVoice 生成的数据可直接替代真实数据,结合多样化文本(MLS)后效果甚至超越原始数据 [Table 11],说明高质量 TTS 可反哺上游任务。
+
+> [!review] 自动审阅 (2026-06-02)
+> **结论:** revise
+> **评分:** 理解 5 | 溯源 4 | 严谨 3 | 导航 4 | 安全 3
+> **Claim 标注率:** 100% (36/36)
+> **问题:** 1 high, 1 medium, 1 low
+> - [high/overclaim] 速查 > 指标: 「英文 WER 2.89% 超人类 (2.66%)」方向错误,WER 越低越好,2.89% 差于 2.66%,非"超人类"
+> - [medium/bad-linking] frontmatter > models: 列出后继系统 CosyVoice 2/3 而非论文实际使用的模型 (HiFi-GAN, CAM++ 等)
+> **反向更新:** ❌
