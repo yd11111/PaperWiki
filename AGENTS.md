@@ -191,10 +191,18 @@ deep 及以上层级笔记**必须**包含：
 1. 用户指令: "把 [[A]] 合并到 [[B]]"
 2. Agent 执行:
    - 将 A 的独有内容迁移至 B
-   - A 的 frontmatter 设置 `lifecycle: merged`，`merged_into: "[[B]]"`
-   - A 的正文替换为重定向说明
-   - 更新所有指向 A 的 wikilink（如有）
+   - 将 A 的 title 加入 B 的 `aliases`（保证旧名可被 KB 检索匹配）
+   - `grep -rl "[[A]]"` 全 vault 替换为 `[[B]]`
+   - **删除 A.md**（不留 redirect 文件）
 3. Commit: `[lifecycle/merge] [[A]] → [[B]]`
+
+### 创建新概念前的去重检查
+
+创建新概念页之前**必须**:
+1. 搜索 概念库/ 中所有页面的 `title` 和 `aliases`
+2. 如果找到语义相近的已有页 → 追加到那个页 + 把新术语加入 aliases
+3. 如果不确定是否同一概念 → 先追加到最相近的页（拆比合容易）
+4. 确实没有才新建
 
 ### Deprecate 操作（仅用户可执行）
 
