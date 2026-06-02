@@ -6,8 +6,8 @@ category: "technique"
 tags: [TTS, disentanglement, adversarial, information-bottleneck, factorization, controllability, voice-conversion]
 key_papers: ["[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "NaturalSpeech 3 (Ju et al., 2024)", "Hsu et al. (2019)", "Lu et al. (2023)"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
-related_concepts: ["[[Gradient Reversal Layer]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Speaker Adaptation]]", "[[Voice Cloning Taxonomy]]"]
-status: pending-review
+related_concepts: ["[[Gradient Reversal Layer]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Speaker Adaptation]]", "[[Voice Cloning Taxonomy]]", "[[LLM-based TTS]]"]
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

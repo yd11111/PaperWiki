@@ -8,9 +8,9 @@ tags: [audio-codec, neural-compression, RVQ, speech-tokenizer]
 key_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
 tasks: ["[[Neural Audio Compression]]"]
 key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
-supersedes: [SoundStream]
+supersedes: ["[[模型库/SoundStream|SoundStream]]"]
 superseded_by: []
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

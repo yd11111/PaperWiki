@@ -7,7 +7,7 @@ tags: [quantization, training-trick, variable-bitrate, audio-codec]
 key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Token Rate and Bitrate Trade-offs]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

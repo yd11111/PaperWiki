@@ -9,8 +9,8 @@ key_concepts: ["[[Residual Vector Quantization]]", "[[Quantizer Dropout]]"]
 tasks: ["[[Neural Audio Compression]]"]
 key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 supersedes: []
-superseded_by: [EnCodec]
-status: pending-review
+superseded_by: ["[[模型库/EnCodec|EnCodec]]"]
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

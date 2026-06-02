@@ -7,7 +7,7 @@ key_approaches: ["Multilingual LLM + shared tokenizer", "Language-agnostic speak
 key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 created: 2026-06-01

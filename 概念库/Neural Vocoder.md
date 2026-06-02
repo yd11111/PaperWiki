@@ -7,7 +7,7 @@ tags: [TTS, vocoder, waveform-generation, audio-synthesis, GAN, flow, diffusion]
 key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]", "[[Multi-scale STFT Discriminator]]", "[[Snake Activation]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

@@ -7,7 +7,7 @@ tags: [audio-codec, compression, discrete-representation, speech-tokenization]
 key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
 related_tasks: ["[[Zero-shot Speech Synthesis]]"]
 metrics: [ViSQOL, Mel-distance, STFT-distance, SI-SDR, MUSHRA, Bitrate-efficiency]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

@@ -7,7 +7,7 @@ tags: [speech-representation, tokenization, discrete-token, speech-LM, trade-off
 key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

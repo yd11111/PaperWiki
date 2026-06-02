@@ -7,7 +7,7 @@ tags: [speech-LM, multimodal, foundation-model, end-to-end, autoregressive, spee
 key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "TWIST (Hassid et al., 2024)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "VITA (Fu et al., 2024)", "AudioPaLM (Rubenstein et al., 2023)", "Yang et al., When LLM Meet Speech, 2025"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Codec Language Model]]", "[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-Text Alignment]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio Understanding]]", "[[Neural Vocoder]]", "[[Speech-LLM Integration Taxonomy]]", "[[Modality Adaptation for Speech LLM]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""

@@ -7,7 +7,7 @@ tags: [TTS, multi-speaker, voice-cloning, speaker-identity, adaptive-TTS]
 key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Text-to-Speech Pipeline]]", "[[Speech Tokenizer]]", "[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Adaptation]]"]
-status: pending-review
+status: confirmed
 lifecycle: active
 merged_into: ""
 deprecated_reason: ""
