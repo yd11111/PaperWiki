@@ -4,9 +4,9 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: ""
-related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]"]
+related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
 status: confirmed
 lifecycle: active
 merged_into: ""
@@ -69,6 +69,29 @@ Survey (Table II) 统计了 50+ SpeechLM 系统的 tokenizer 选择:
 - **EnCodec**: GPST, VoiceBox, VioLA, UmAudio
 - **w2v-BERT**: AudioLM
 
+## Survey 五轴 Taxonomy 视角 [Mousavi et al. 2025]
+
+Mousavi et al. (2025) 提出了比 semantic/acoustic/mixed 三分法更精细的五轴分类体系 (详见 [[Audio Tokenizer Taxonomy]]):
+1. **Encoder-Decoder 架构**: CNN / CNN+RNN / Transformer / CNN+T
+2. **量化方法**: RVQ / SVQ / GVQ / MSRVQ / CSRVQ / PQ / FSQ / K-means
+3. **训练范式**: Separate (post-training) vs Joint (end-to-end); 训练目标组合
+4. **目标领域**: Speech / Music / General Audio / Multi-domain
+5. **流式能力**: Streamable / Non-streamable
+
+Survey Table 1 覆盖 50+ tokenizer 的完整设计参数矩阵,是选型的重要参考。
+
+### Survey Benchmark 关键结论 [§3]
+
+| 评估维度 | 最优 tokenizer | 关键发现 |
+|---------|---------------|----------|
+| 判别式下游 (ASR等) | Discrete WavLM | SSL semantic tokenizer 在 phonetic 任务上领先 |
+| Speaker 保持 | DAC | 重建目标保留 speaker identity 更好 |
+| TTS | ESPnet EnCodec (speech-only) | domain-specific 训练关键 |
+| SLM 语义 | HuBERT 25Hz | SSL tokenizer 语义理解仍最强 |
+| SLM 声学 | WavLM (DWavL-S-16) | 最佳声学属性建模 |
+
+**核心发现**: "no single tokenizer excels across all spoken and acoustic tasks" [§3.3.1] — 没有万能 tokenizer。
+
 ## 演进
 
-Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → Mixed tokenizer (SpeechTokenizer/Mimi, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025)
+Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → Mixed tokenizer (SpeechTokenizer/Mimi, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025) → 五轴精细化 taxonomy + 统一 benchmark (Mousavi et al., 2025)

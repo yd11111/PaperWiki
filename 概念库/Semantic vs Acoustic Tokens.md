@@ -4,9 +4,9 @@ title: "Semantic vs Acoustic Tokens"
 aliases: [语义 token 与声学 token, Semantic Tokens, Acoustic Tokens, Token Hierarchy, 语音 token 层级, Discrete Speech Features]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, speech-LM, trade-off]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)"]
+key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]"]
+related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -97,6 +97,38 @@ Token 类型的选择直接决定 SpeechLM 的能力侧重:
 - [[Speech Language Model]]: 消费这些 token 的模型框架
 - [[Codec Language Model]]: 专门建模 acoustic (codec) tokens 的 LM 范式
 
+## Survey 核心论点: 二分法不足 [Mousavi et al. 2025, §1-2]
+
+Mousavi et al. (2025) 明确指出传统 semantic vs acoustic 二分法的三个局限:
+
+1. **边界模糊**: "Acoustic tokenizers can capture semantic information [and] semantic tokenizers have been effectively used in generative tasks" [§1] — 两者能力越来越重叠
+2. **忽略关键架构差异**: 二分法无法区分 CNN vs Transformer encoder、waveform vs time-frequency 表征等
+3. **忽略实用维度**: 流式能力、自适应比特率等部署关键特性不在二分法视野内
+
+**Survey 提出的替代方案**: 五轴精细化 taxonomy (详见 [[Audio Tokenizer Taxonomy]]):
+- Encoder-Decoder 架构 x 量化方法 x 训练范式 x 目标领域 x 流式能力
+
+**关于 "semantic" 的术语澄清** [§1, footnote 1]: Survey 特别指出 "semantic" 在语音上下文中的含义与语言学不同 — 所谓 semantic tokens 实际上更准确地应描述为 "phonetic units",通常不携带真正的语义内容。Survey 沿用 "semantic" 术语以保持与文献一致。
+
+### SLM 评估: 无全能 tokenizer [Table 10]
+
+Survey 在 SALMon benchmark 上对比各类 tokenizer:
+
+| Tokenizer | 类型 | sBLIMP (语义) | sWUGGY (语义) | Gender (声学) | Spk (声学) |
+|-----------|------|-------------|-------------|-------------|----------|
+| HuBERT 25Hz | semantic | **60.89** | **70.51** | 69.50 | 69.00 |
+| DWavL-S-16 (6Q) | semantic | 53.96 | 69.10 | **92.00** | **86.50** |
+| ST-S-16* (8Q) | mixed | 52.75 | 63.46 | 67.00 | 65.50 |
+| Mimi-S-24* (8Q) | mixed | 60.17 | 67.57 | 77.00 | 76.00 |
+| Enc-SMA-24 (8Q) | acoustic | 51.14 | 51.29 | 70.50 | 65.00 |
+| DAC-SMA-16 (8Q) | acoustic | 51.51 | 50.73 | 81.00 | 77.00 |
+
+**关键发现**:
+- HuBERT 在语义任务上保持最强; WavLM 在声学一致性上最强
+- Mimi* (语义加权版) 在语义任务上接近 HuBERT 同时声学也不错 → 混合路线最有前景
+- 纯 acoustic tokenizer (EnCodec, DAC) 在语义任务上几乎随机 (~50%)
+- **没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果** → 联合建模仍是开放挑战
+
 ## 演进
 
-Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024)
+Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025)
