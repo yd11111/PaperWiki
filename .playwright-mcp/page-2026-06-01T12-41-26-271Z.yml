@@ -1,0 +1,294 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Skip to main content" [ref=e4] [cursor=pointer]:
+      - /url: "#content"
+    - generic [ref=e5]:
+      - link "Cornell University" [ref=e7] [cursor=pointer]:
+        - /url: https://www.cornell.edu/
+        - img "Cornell University" [ref=e8]
+      - link "Learn about arXiv becoming an independent nonprofit." [ref=e10] [cursor=pointer]:
+        - /url: https://tech.cornell.edu/arxiv/
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - text: We gratefully acknowledge support from the Simons Foundation,
+          - link "member institutions" [ref=e13] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+          - text: ", and all contributors."
+        - link "Donate" [ref=e14] [cursor=pointer]:
+          - /url: https://info.arxiv.org/about/donate.html
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - link "arxiv logo" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img "arxiv logo" [ref=e18]
+        - generic [ref=e19]: ">"
+        - link "eess" [ref=e20] [cursor=pointer]:
+          - /url: /list/eess/recent
+        - generic [ref=e21]: ">"
+        - text: arXiv:2106.15561
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - textbox "Search term or terms" [ref=e26]:
+            - /placeholder: Search...
+          - paragraph [ref=e27]:
+            - link "Help" [ref=e28] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+            - text: "|"
+            - link "Advanced Search" [ref=e29] [cursor=pointer]:
+              - /url: https://arxiv.org/search/advanced
+        - combobox "Field to search" [ref=e31]:
+          - option "All fields" [selected]
+          - option "Title"
+          - option "Author"
+          - option "Abstract"
+          - option "Comments"
+          - option "Journal reference"
+          - option "ACM classification"
+          - option "MSC classification"
+          - option "Report number"
+          - option "arXiv identifier"
+          - option "DOI"
+          - option "ORCID"
+          - option "arXiv author ID"
+          - option "Help pages"
+          - option "Full text"
+        - button "Search" [ref=e32] [cursor=pointer]
+  - main [ref=e33]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Electrical Engineering and Systems Science > Audio and Speech Processing" [level=1] [ref=e38]
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - text: "[Submitted on 29 Jun 2021 ("
+            - link "v1" [ref=e42] [cursor=pointer]:
+              - /url: https://arxiv.org/abs/2106.15561v1
+            - text: ), last revised 23 Jul 2021 (this version, v3)]
+          - heading "A Survey on Neural Speech Synthesis" [level=1] [ref=e43]
+          - generic [ref=e44]:
+            - link "Xu Tan" [ref=e45] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Tan,+X
+            - text: ","
+            - link "Tao Qin" [ref=e46] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Qin,+T
+            - text: ","
+            - link "Frank Soong" [ref=e47] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Soong,+F
+            - text: ","
+            - link "Tie-Yan Liu" [ref=e48] [cursor=pointer]:
+              - /url: https://arxiv.org/search/eess?searchtype=author&query=Liu,+T
+          - blockquote [ref=e49]: Text to speech (TTS), or speech synthesis, which aims to synthesize intelligible and natural speech given text, is a hot research topic in speech, language, and machine learning communities and has broad applications in the industry. As the development of deep learning and artificial intelligence, neural network-based TTS has significantly improved the quality of synthesized speech in recent years. In this paper, we conduct a comprehensive survey on neural TTS, aiming to provide a good understanding of current research and future trends. We focus on the key components in neural TTS, including text analysis, acoustic models and vocoders, and several advanced topics, including fast TTS, low-resource TTS, robust TTS, expressive TTS, and adaptive TTS, etc. We further summarize resources related to TTS (e.g., datasets, opensource implementations) and discuss future research directions. This survey can serve both academic researchers and industry practitioners working on TTS.
+          - table "Additional metadata" [ref=e51]:
+            - rowgroup [ref=e52]:
+              - 'row "Comments: A comprehensive survey on TTS, 63 pages, 18 tables, 7 figures, 457 references" [ref=e53]':
+                - cell "Comments:" [ref=e54]
+                - cell "A comprehensive survey on TTS, 63 pages, 18 tables, 7 figures, 457 references" [ref=e55]
+              - 'row "Subjects: Audio and Speech Processing (eess.AS); Computation and Language (cs.CL); Machine Learning (cs.LG); Multimedia (cs.MM); Sound (cs.SD)" [ref=e56]':
+                - cell "Subjects:" [ref=e57]
+                - cell "Audio and Speech Processing (eess.AS); Computation and Language (cs.CL); Machine Learning (cs.LG); Multimedia (cs.MM); Sound (cs.SD)" [ref=e58]
+              - 'row "Cite as: arXiv:2106.15561 [eess.AS]" [ref=e59]':
+                - cell "Cite as:" [ref=e60]
+                - cell "arXiv:2106.15561 [eess.AS]" [ref=e61]:
+                  - generic [ref=e62]:
+                    - link "arXiv:2106.15561" [ref=e63] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2106.15561
+                    - text: "[eess.AS]"
+              - row "(or arXiv:2106.15561v3 [eess.AS] for this version)" [ref=e64]:
+                - cell [ref=e65]
+                - cell "(or arXiv:2106.15561v3 [eess.AS] for this version)" [ref=e66]:
+                  - text: (or
+                  - generic [ref=e67]:
+                    - link "arXiv:2106.15561v3" [ref=e68] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2106.15561v3
+                    - text: "[eess.AS]"
+                  - text: for this version)
+              - row "https://doi.org/10.48550/arXiv.2106.15561 Focus to learn more" [ref=e69]:
+                - cell [ref=e70]
+                - cell "https://doi.org/10.48550/arXiv.2106.15561 Focus to learn more" [ref=e71]:
+                  - link "https://doi.org/10.48550/arXiv.2106.15561" [ref=e72] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2106.15561
+                  - button "Focus to learn more" [ref=e74]:
+                    - generic [ref=e76]: Focus to learn more
+        - generic [ref=e77]:
+          - heading "Submission history" [level=2] [ref=e78]
+          - text: "From: Xu Tan ["
+          - link "view email" [ref=e79] [cursor=pointer]:
+            - /url: /show-email/ffb93bd9/2106.15561
+          - text: "]"
+          - strong [ref=e80]:
+            - link "[v1]" [ref=e81] [cursor=pointer]:
+              - /url: /abs/2106.15561v1
+          - text: Tue, 29 Jun 2021 16:50:51 UTC (377 KB)
+          - strong [ref=e82]:
+            - link "[v2]" [ref=e83] [cursor=pointer]:
+              - /url: /abs/2106.15561v2
+          - text: Wed, 30 Jun 2021 15:58:54 UTC (384 KB)
+          - strong [ref=e84]: "[v3]"
+          - text: Fri, 23 Jul 2021 12:32:52 UTC (385 KB)
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - heading "Access Paper:" [level=2] [ref=e87]
+          - list [ref=e88]:
+            - listitem [ref=e89]:
+              - link "View PDF" [ref=e90] [cursor=pointer]:
+                - /url: /pdf/2106.15561
+            - listitem [ref=e91]:
+              - link "TeX Source" [ref=e92] [cursor=pointer]:
+                - /url: /src/2106.15561
+          - link "view license" [ref=e94] [cursor=pointer]:
+            - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+        - generic [ref=e95]:
+          - text: "Current browse context:"
+          - generic [ref=e96]: eess.AS
+          - generic [ref=e97]:
+            - link "< prev" [ref=e99] [cursor=pointer]:
+              - /url: /prevnext?id=2106.15561&function=prev&context=eess.AS
+            - text: "|"
+            - link "next >" [ref=e101] [cursor=pointer]:
+              - /url: /prevnext?id=2106.15561&function=next&context=eess.AS
+          - generic [ref=e102]:
+            - link "new" [ref=e103] [cursor=pointer]:
+              - /url: /list/eess.AS/new
+            - text: "|"
+            - link "recent" [ref=e104] [cursor=pointer]:
+              - /url: /list/eess.AS/recent
+            - text: "|"
+            - link "2021-06" [ref=e105] [cursor=pointer]:
+              - /url: /list/eess.AS/2021-06
+          - generic [ref=e106]:
+            - text: "Change to browse by:"
+            - generic [ref=e107]:
+              - link "cs" [ref=e108] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=cs
+              - link "cs.CL" [ref=e109] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=cs.CL
+              - link "cs.LG" [ref=e110] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=cs.LG
+              - link "cs.MM" [ref=e111] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=cs.MM
+              - link "cs.SD" [ref=e112] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=cs.SD
+              - link "eess" [ref=e113] [cursor=pointer]:
+                - /url: /abs/2106.15561?context=eess
+        - generic [ref=e114]:
+          - heading "References & Citations" [level=3] [ref=e115]
+          - list [ref=e116]:
+            - listitem [ref=e117]:
+              - link "NASA ADS" [ref=e118] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2106.15561
+            - listitem [ref=e119]:
+              - link "Google Scholar" [ref=e120] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2106.15561
+            - listitem [ref=e121]:
+              - link "Semantic Scholar" [ref=e122] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2106.15561
+        - generic [ref=e123]: export BibTeX citation
+        - generic [ref=e124]:
+          - heading "Bookmark" [level=3] [ref=e126]
+          - link "BibSonomy logo" [ref=e127] [cursor=pointer]:
+            - /url: http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2106.15561&description=A Survey on Neural Speech Synthesis
+            - img "BibSonomy logo" [ref=e128]
+          - link "Reddit logo" [ref=e129] [cursor=pointer]:
+            - /url: https://reddit.com/submit?url=https://arxiv.org/abs/2106.15561&title=A Survey on Neural Speech Synthesis
+            - img "Reddit logo" [ref=e130]
+      - generic [ref=e132]:
+        - radio "Bibliographic Tools" [checked] [ref=e133]
+        - generic [ref=e134] [cursor=pointer]: Bibliographic Tools
+        - generic [ref=e135]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e136]
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - generic [ref=e140]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e142]: Bibliographic Explorer Toggle
+              - generic [ref=e143]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e144]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e145] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e146]:
+              - generic [ref=e148]:
+                - checkbox "Connected Papers"
+                - generic [ref=e150]: Connected Papers Toggle
+              - generic [ref=e151]:
+                - text: Connected Papers
+                - emphasis [ref=e152]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e153] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e154]:
+              - generic [ref=e156]:
+                - checkbox "Litmaps"
+                - generic [ref=e158]: Litmaps Toggle
+              - generic [ref=e159]:
+                - text: Litmaps
+                - emphasis [ref=e160]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e161] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e162]:
+              - generic [ref=e164]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e166]: scite.ai Toggle
+              - generic [ref=e167]:
+                - text: scite Smart Citations
+                - emphasis [ref=e168]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e169] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e173]
+        - generic [ref=e174] [cursor=pointer]: Code, Data, Media
+        - radio "Demos" [ref=e175]
+        - generic [ref=e176] [cursor=pointer]: Demos
+        - radio "Related Papers" [ref=e177]
+        - generic [ref=e178] [cursor=pointer]: Related Papers
+        - radio "About arXivLabs" [ref=e179]
+        - generic [ref=e180] [cursor=pointer]: About arXivLabs
+      - generic [ref=e181]:
+        - link "Which authors of this paper are endorsers?" [ref=e182] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2106.15561
+        - text: "|"
+        - link "Disable MathJax" [ref=e183] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e184] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e185]:
+    - navigation "Secondary" [ref=e186]:
+      - generic [ref=e188]:
+        - list [ref=e190]:
+          - listitem [ref=e191]:
+            - link "About" [ref=e192] [cursor=pointer]:
+              - /url: https://info.arxiv.org/about
+          - listitem [ref=e193]:
+            - link "Help" [ref=e194] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+        - list [ref=e196]:
+          - listitem [ref=e197]:
+            - link "Contact" [ref=e199] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/contact.html
+          - listitem [ref=e200]:
+            - link "Subscribe" [ref=e202] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/subscribe
+      - generic [ref=e204]:
+        - list [ref=e206]:
+          - listitem [ref=e207]:
+            - link "Copyright" [ref=e208] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/license/index.html
+          - listitem [ref=e209]:
+            - link "Privacy Policy" [ref=e210] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+        - list [ref=e212]:
+          - listitem [ref=e213]:
+            - link "Web Accessibility Assistance" [ref=e214] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/web_accessibility.html
+          - listitem [ref=e215]:
+            - paragraph [ref=e216]:
+              - link "arXiv Operational Status" [ref=e217] [cursor=pointer]:
+                - /url: https://status.arxiv.org
+                - text: arXiv Operational Status

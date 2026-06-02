@@ -1,0 +1,586 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "跳到主要内容" [ref=e2] [cursor=pointer]
+      - link "无障碍功能帮助" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=zh-CN
+  - generic [ref=e8]:
+    - search [ref=e9]:
+      - generic [ref=e11]:
+        - generic:
+          - generic:
+            - generic:
+              - img
+        - link "2026 年骄傲月" [ref=e13] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=zh-CN&ictx=2&sa=X&ved=0ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQPQgK
+          - img "2026 年骄傲月" [ref=e14]
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - combobox "搜索" [ref=e19]: codebook collapse vector quantization neural audio codec causes solutions codebook collapse vector quantization neural audio codec causes solutions
+            - generic [ref=e20]:
+              - button "清除" [ref=e22] [cursor=pointer]:
+                - img [ref=e24]
+              - generic [ref=e27]:
+                - button "按语音搜索" [ref=e28] [cursor=pointer]:
+                  - img [ref=e29]
+                - button "按图搜索" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+          - button "搜索" [ref=e34] [cursor=pointer]:
+            - img [ref=e37]
+    - generic [ref=e39]:
+      - button "设置" [ref=e41] [cursor=pointer]:
+        - img [ref=e44]
+      - generic [ref=e47]:
+        - button "Google 应用" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+        - link "登录" [ref=e54] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dcodebook%2Bcollapse%2Bvector%2Bquantization%2Bneural%2Baudio%2Bcodec%2Bcauses%2Bsolutions%26sei%3Dn30datjVD5jCkPIP7IXnQA&ec=futura_srp_og_si_72236_p
+  - generic [ref=e56]:
+    - navigation [ref=e62]:
+      - generic [ref=e68]:
+        - list [ref=e69]:
+          - listitem [ref=e70]:
+            - link "AI 模式" [ref=e73] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&aep=1&ntc=1&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ2J8OegQIFhAD
+              - generic [ref=e76]: AI 模式
+          - listitem [ref=e77]:
+            - link "全部" [disabled] [ref=e78]:
+              - generic [ref=e80]: 全部
+          - listitem [ref=e81]:
+            - link "图片" [ref=e82] [cursor=pointer]:
+              - /url: /search?sca_esv=c6a419c7fa69ef73&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQtKgLegQIGBAB
+              - generic [ref=e84]: 图片
+          - listitem [ref=e85]:
+            - link "短视频" [ref=e86] [cursor=pointer]:
+              - /url: /search?sca_esv=c6a419c7fa69ef73&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQs6gLegQIGRAB
+              - generic [ref=e88]: 短视频
+          - listitem [ref=e89]:
+            - link "购物" [ref=e90] [cursor=pointer]:
+              - /url: /search?sca_esv=c6a419c7fa69ef73&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&ved=1t:220175&ictx=111
+              - generic [ref=e92]: 购物
+          - listitem [ref=e93]:
+            - link "视频" [ref=e94] [cursor=pointer]:
+              - /url: /search?sca_esv=c6a419c7fa69ef73&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQtKgLegQIGxAB
+              - generic [ref=e96]: 视频
+          - listitem [ref=e97]:
+            - link "新闻" [ref=e98] [cursor=pointer]:
+              - /url: /search?sca_esv=c6a419c7fa69ef73&q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrlrkSDkQE0bh2n9b50yhQrlR3V6fFnOgZpUf9SRjMwlefPz6cLHKntYuaPHheAR1YCQbKXhgJ-WTQPWL72DeWwRLaGOZV7umD-ce798qcW9GRKNM6bGHkFxpoa51TVi9WAhIPH0glrpu6yGL8MCs7wln6QhqwRoC6I6YjmnxVlzAnyUl7A&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ0pQJegQIHBAB
+              - generic [ref=e100]: 新闻
+          - listitem [ref=e101]:
+            - button "更多过滤条件" [ref=e102] [cursor=pointer]:
+              - generic "更多过滤条件" [ref=e103]:
+                - generic [ref=e104]:
+                  - generic [ref=e105]: 更多
+                  - img [ref=e107]
+        - button "工具" [ref=e110] [cursor=pointer]:
+          - generic [ref=e112]:
+            - generic [ref=e113]: 工具
+            - img [ref=e115]
+    - heading "搜索结果" [level=1] [ref=e117]
+    - generic [ref=e122]:
+      - generic [ref=e141]:
+        - generic [ref=e143]:
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - img [ref=e147]
+              - heading "AI 概览" [level=2] [ref=e149]
+            - button "关于这条结果的详细信息" [ref=e153]:
+              - img [ref=e155]
+          - generic [ref=e174]:
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - text: Codebook collapse in neural audio codecs (like SoundStream or EnCodec) is a persistent training pathology where only a tiny fraction of available vector quantization (VQ) tokens are actively utilized. This severely limits the codec's compression efficiency, bitrate scalability, and audio reconstruction quality.
+                - generic [ref=e180]:
+                  - link "Turnitin（+4 个）- 查看相关链接" [ref=e181] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2025ITASL..33.2539Z/abstract
+                  - button "Turnitin（+4 个）- 查看相关链接" [ref=e182] [cursor=pointer]:
+                    - generic [ref=e184]:
+                      - generic [ref=e185]: Turnitin
+                      - generic [ref=e186]: "+4"
+              - heading "Causes of Codebook Collapse" [level=3] [ref=e187]
+              - list [ref=e189]:
+                - listitem [ref=e190]:
+                  - generic [ref=e191]:
+                    - strong [ref=e192]: "Nearest-Neighbor Dominance:"
+                    - text: Encoders typically select the closest codebook vector using Euclidean distance. If certain "lucky" embeddings get selected early in training, they are pulled closer to the data manifold, while unselected codes receive no gradients and atrophy.
+                  - generic [ref=e194]:
+                    - link [ref=e195] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2409.12717v1
+                    - button [ref=e196] [cursor=pointer]:
+                      - generic [ref=e198]:
+                        - generic [ref=e199]: arXiv
+                        - generic [ref=e200]: "+2"
+                - listitem [ref=e201]:
+                  - generic [ref=e202]:
+                    - strong [ref=e203]: "Encoder Drift:"
+                    - text: The non-stationary nature of encoder updates means that as the continuous latent space shifts during training, unselected codes fail to receive updates and become inactive dead weights.
+                  - generic [ref=e205]:
+                    - link [ref=e206] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2602.18896
+                    - button [ref=e207] [cursor=pointer]:
+                      - generic [ref=e210]: arXiv
+                - listitem [ref=e211]:
+                  - generic [ref=e212]:
+                    - strong [ref=e213]: "Commitment Loss Mismatch:"
+                    - text: Auxiliary losses designed to tie the encoder to the codebook often penalize diversity or push embeddings too rigidly.
+                  - generic [ref=e215]:
+                    - link [ref=e216] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2508.15860v3
+                    - button [ref=e217] [cursor=pointer]:
+                      - generic [ref=e219]:
+                        - generic [ref=e220]: arXiv
+                        - generic [ref=e221]: "+1"
+              - heading [level=3] [ref=e223]: Proven Solutions
+              - list [ref=e225]:
+                - listitem [ref=e226]:
+                  - generic [ref=e227]:
+                    - strong [ref=e228]:
+                      - text: Factorized &
+                      - generic [ref=e231]:
+                        - img
+                        - math [ref=e233]:
+                          - generic [ref=e235]:
+                            - generic [ref=e236]: L
+                            - generic [ref=e237]: "2"
+                        - img [ref=e238]:
+                          - generic [ref=e239]: 𝑳
+                          - generic [ref=e240]: 𝟐
+                      - text: "-Normalized Codes:"
+                    - text: Decoupling vector magnitude from direction using
+                    - generic [ref=e243]:
+                      - img
+                      - math [ref=e245]:
+                        - generic [ref=e247]:
+                          - generic [ref=e248]: L
+                          - generic [ref=e249]: "2"
+                      - img [ref=e250]:
+                        - generic [ref=e251]: 𝐿
+                        - generic [ref=e252]: "2"
+                    - text: normalization prevents code vectors from collapsing into an overly small localized area of the latent space.
+                  - generic [ref=e254]:
+                    - link [ref=e255] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2409.12717v1
+                    - button [ref=e256] [cursor=pointer]:
+                      - generic [ref=e258]:
+                        - generic [ref=e259]: arXiv
+                        - generic [ref=e260]: "+2"
+                - listitem [ref=e261]:
+                  - generic [ref=e262]:
+                    - strong [ref=e263]: "Stochastic & Random Codebooks:"
+                    - text: Introducing randomness (e.g.,
+                    - link [ref=e265] [cursor=pointer]:
+                      - /url: https://hal.science/hal-04705811v1/file/bare_jrnl.pdf
+                      - text: Random Codebooks
+                    - text: or stochastic quantization) ensures that all code vectors are periodically evaluated against incoming embeddings.
+                  - generic [ref=e267]:
+                    - link [ref=e268] [cursor=pointer]:
+                      - /url: https://www.researchgate.net/publication/384974563_ERVQ_Enhanced_Residual_Vector_Quantization_with_Intra-and-Inter-Codebook_Optimization_for_Neural_Audio_Codecs
+                    - button [ref=e269] [cursor=pointer]:
+                      - generic [ref=e271]:
+                        - generic [ref=e272]: ResearchGate
+                        - generic [ref=e273]: "+2"
+                - listitem [ref=e274]:
+                  - generic [ref=e275]:
+                    - strong [ref=e276]: "Enhanced RVQ (ERVQ):"
+                    - text: Implementing intra-codebook optimization (online clustering and balancing loss) and inter-codebook diversity (minimizing similarity between successive quantizations) drives near-100% codebook utilization.
+                  - generic [ref=e278]:
+                    - link [ref=e279] [cursor=pointer]:
+                      - /url: https://ui.adsabs.harvard.edu/abs/2025ITASL..33.2539Z/abstract
+                    - button [ref=e280] [cursor=pointer]:
+                      - generic [ref=e283]: Turnitin
+                - listitem [ref=e284]:
+                  - generic [ref=e285]:
+                    - strong [ref=e286]: "Finite Scalar Quantization (FSQ):"
+                    - text: This structural solution eliminates traditional codebooks entirely, instead quantizing each feature dimension independently to predefined scalar levels, inherently achieving near-perfect utilization without auxiliary loss terms.
+                  - generic [ref=e288]:
+                    - link [ref=e289] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2508.15860v3
+                    - button [ref=e290] [cursor=pointer]:
+                      - generic [ref=e293]: arXiv
+              - generic [ref=e295]:
+                - text: For a deeper dive into mitigating training pathologies in audio autoencoders, explore the
+                - link [ref=e297] [cursor=pointer]:
+                  - /url: https://arxiv.org/html/2508.15860v3
+                  - text: Robust Residual Finite Scalar Quantization
+                - text: research or track community discussions on the
+                - link [ref=e299] [cursor=pointer]:
+                  - /url: https://www.reddit.com/r/MachineLearning/comments/1docuy4/d_codebook_collapse/
+                  - text: Machine Learning Reddit Substack
+                - text: .
+                - button [ref=e302] [cursor=pointer]:
+                  - img [ref=e305]
+            - generic [ref=e311]:
+              - generic [ref=e313]:
+                - button "10 个网站" [ref=e314] [cursor=pointer]:
+                  - generic [ref=e323]: 10 个网站
+                - button "关于这条结果" [ref=e328] [cursor=pointer]:
+                  - img [ref=e330]
+              - list [ref=e333]:
+                - listitem [ref=e334]:
+                  - generic [ref=e335]:
+                    - 'link "ERVQ: Enhanced Residual Vector Quantization With Intra-and .... 在新标签页中打开。" [ref=e336] [cursor=pointer]':
+                      - /url: https://ui.adsabs.harvard.edu/abs/2025ITASL..33.2539Z/abstract
+                    - generic [ref=e337]:
+                      - generic [ref=e339]:
+                        - generic [ref=e340]: "ERVQ: Enhanced Residual Vector Quantization With Intra-and ..."
+                        - generic [ref=e341]: Abstract. Current neural audio codecs typically use residual...
+                      - generic [ref=e342]:
+                        - generic [ref=e347]: Turnitin
+                        - button "关于这条结果" [ref=e351] [cursor=pointer]:
+                          - img [ref=e353]
+                - listitem [ref=e357]:
+                  - generic [ref=e358]:
+                    - 'link "NDVQ: Robust Neural Audio Codec with Normal Distribution-Based .... 在新标签页中打开。" [ref=e359] [cursor=pointer]':
+                      - /url: https://arxiv.org/html/2409.12717v1
+                    - generic [ref=e360]:
+                      - generic [ref=e362]:
+                        - generic [ref=e363]: "NDVQ: Robust Neural Audio Codec with Normal Distribution-Based ..."
+                        - generic [ref=e364]: 2024年9月19日 — SoundStream [5] is one of the first universal neural audio c...
+                      - generic [ref=e365]:
+                        - generic [ref=e370]: arXiv
+                        - button [ref=e374] [cursor=pointer]:
+                          - img [ref=e376]
+                - listitem [ref=e380]:
+                  - generic [ref=e381]:
+                    - link [ref=e382] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2410.12359v2
+                    - generic [ref=e383]:
+                      - generic [ref=e385]:
+                        - generic [ref=e386]: "ERVQ: Enhanced Residual Vector Quantization with Intra-and-Inter- ..."
+                        - generic [ref=e387]: 2025年6月11日 — II-B Recent Neural Audio Codecs with RVQ Structures. ... Sin...
+                      - generic [ref=e388]:
+                        - generic [ref=e393]: arXiv
+                        - button [ref=e397] [cursor=pointer]:
+                          - img [ref=e399]
+                - listitem [ref=e403]:
+                  - generic [ref=e404]:
+                    - link [ref=e405] [cursor=pointer]:
+                      - /url: https://arxiv.org/html/2508.15860v3
+                    - generic [ref=e406]:
+                      - generic [ref=e408]:
+                        - generic [ref=e409]: Robust Residual Finite Scalar Quantization for Neural Compression
+                        - generic [ref=e410]: 2026年4月1日 — A well-designed neural codec must address three coupled chal...
+                      - generic [ref=e411]:
+                        - generic [ref=e416]: arXiv
+                        - button [ref=e420] [cursor=pointer]:
+                          - img [ref=e422]
+              - button [ref=e426] [cursor=pointer]:
+                - generic [ref=e427]: 全部显示
+        - button "显示更多 AI 概览" [ref=e431]:
+          - generic [ref=e433] [cursor=pointer]:
+            - generic [ref=e434]: 展开
+            - img [ref=e436]
+      - main [ref=e439]:
+        - generic [ref=e443]:
+          - generic [ref=e446]:
+            - heading "Web results" [level=2] [ref=e447]
+            - generic [ref=e448]:
+              - generic [ref=e451]:
+                - link "Rethinking Codebook Collapse in Vector Quantization arXiv https://arxiv.org › cs" [ref=e453] [cursor=pointer]:
+                  - /url: https://arxiv.org/abs/2602.18896
+                  - heading "Rethinking Codebook Collapse in Vector Quantization" [level=3] [ref=e454]
+                  - generic [ref=e459]:
+                    - generic [ref=e461]: arXiv
+                    - generic [ref=e463]: https://arxiv.org › cs
+                - generic [ref=e464]:
+                  - generic [ref=e465]: ·
+                  - link "翻译此页" [ref=e466] [cursor=pointer]:
+                    - /url: https://translate.google.com/translate?u=https://arxiv.org/abs/2602.18896&hl=zh-CN&sl=en&tl=zh-CN&client=search
+                - button "关于这条结果的详细信息" [ref=e467] [cursor=pointer]:
+                  - img [ref=e470]
+              - generic [ref=e473]:
+                - generic [ref=e474]: 作者：H Lu · 2026 · 被引用次数：1 —
+                - generic [ref=e475]:
+                  - text: "Abstract:"
+                  - emphasis [ref=e476]: Vector Quantization
+                  - text: (VQ) underpins many modern generative frameworks such as VQ-VAE, VQ-GAN, and latent diffusion models.
+              - generic [ref=e478]: 缺少字词： neural ‎audio ‎codec
+          - generic [ref=e482]:
+            - generic [ref=e485]:
+              - link "Rethinking Codebook Collapse in Vector Quantization arXiv https://arxiv.org › pdf" [ref=e487] [cursor=pointer]:
+                - /url: https://arxiv.org/pdf/2602.18896
+                - heading "Rethinking Codebook Collapse in Vector Quantization" [level=3] [ref=e488]
+                - generic [ref=e493]:
+                  - generic [ref=e495]: arXiv
+                  - generic [ref=e497]: https://arxiv.org › pdf
+              - generic [ref=e498]:
+                - generic:
+                  - generic: PDF
+              - button "关于这条结果的详细信息" [ref=e499] [cursor=pointer]:
+                - img [ref=e502]
+            - generic [ref=e505]:
+              - generic [ref=e506]: 作者：H Lu · 2026 · 被引用次数：1 —
+              - generic [ref=e507]:
+                - text: We provide a theoretical analysis showing that the non- stationary nature of encoder updates is the root
+                - emphasis [ref=e508]: cause
+                - text: of
+                - emphasis [ref=e509]: codebook collapse
+                - text: in VQ-VAE. • ...
+          - generic [ref=e513]:
+            - generic [ref=e516]:
+              - 'link "[D] Codebook collapse : r/MachineLearning Reddit · r/MachineLearning 6条评论 · 1年前" [ref=e518] [cursor=pointer]':
+                - /url: https://www.reddit.com/r/MachineLearning/comments/1docuy4/d_codebook_collapse/
+                - 'heading "[D] Codebook collapse : r/MachineLearning" [level=3] [ref=e519]'
+                - generic [ref=e524]:
+                  - generic [ref=e526]: Reddit · r/MachineLearning
+                  - generic [ref=e528]: 6条评论 · 1年前
+              - button "关于这条结果的详细信息" [ref=e529] [cursor=pointer]:
+                - img [ref=e532]
+            - generic [ref=e536]:
+              - text: I am training a model to learn a
+              - emphasis [ref=e537]: codebook
+              - text: for quantizing the encoder output, similar to the approach used in VQ-VAE.
+            - generic [ref=e539]: 缺少字词： neural ‎codec ‎solutions
+          - table [ref=e545]:
+            - rowgroup [ref=e546]:
+              - row "Google 学术：codebook collapse vector quantization neural audio codec causes solutions" [ref=e547]:
+                - cell "Google 学术：codebook collapse vector quantization neural audio codec causes solutions" [ref=e548]:
+                  - heading "Google 学术：codebook collapse vector quantization neural audio codec causes solutions" [level=3] [ref=e549]:
+                    - link "Google 学术：codebook collapse vector quantization neural audio codec causes solutions" [ref=e550] [cursor=pointer]:
+                      - /url: https://scholar.google.com/scholar?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&hl=zh-CN&as_sdt=0&as_vis=1&oi=scholart
+                      - generic [ref=e551]:
+                        - text: Google 学术：
+                        - emphasis [ref=e552]: codebook collapse vector quantization neural audio codec causes solutions
+              - 'row "… collapsing problems in vector quantization - ‎Zhao - 被引用次数：17 … : Exploring the semantic shortcoming of codec for audio … - ‎Ye - 被引用次数：89" [ref=e553]':
+                - 'cell "… collapsing problems in vector quantization - ‎Zhao - 被引用次数：17 … : Exploring the semantic shortcoming of codec for audio … - ‎Ye - 被引用次数：89" [ref=e554]':
+                  - heading "… collapsing problems in vector quantization - ‎Zhao - 被引用次数：17" [level=3] [ref=e555]:
+                    - link "… collapsing problems in vector quantization" [ref=e556] [cursor=pointer]:
+                      - /url: https://scholar.google.com/scholar_url?url=https://arxiv.org/pdf/2411.16550%3F&hl=zh-CN&sa=X&ei=n30dat_jNvyHieoPq8_56Ak&scisig=AFyMTJVOyFP_SEUUY1G4uBOiqRHr&oi=scholarr
+                      - generic [ref=e557]:
+                        - text: …
+                        - emphasis [ref=e558]: collapsing
+                        - text: problems in
+                        - emphasis [ref=e559]: vector quantization
+                    - generic [ref=e560]:
+                      - text: "-"
+                      - generic [ref=e561]: ‎Zhao
+                      - text: "- 被引用次数：17"
+                  - 'heading "… : Exploring the semantic shortcoming of codec for audio … - ‎Ye - 被引用次数：89" [level=3] [ref=e562]':
+                    - 'link "… : Exploring the semantic shortcoming of codec for audio …" [ref=e563] [cursor=pointer]':
+                      - /url: https://scholar.google.com/scholar_url?url=https://ojs.aaai.org/index.php/AAAI/article/view/34761/36916&hl=zh-CN&sa=X&ei=n30dat_jNvyHieoPq8_56Ak&scisig=AFyMTJUYC3mwLUWcdXbE9rSXPvUl&oi=scholarr
+                      - generic [ref=e564]:
+                        - text: "… : Exploring the semantic shortcoming of"
+                        - emphasis [ref=e565]: codec
+                        - text: for
+                        - emphasis [ref=e566]: audio
+                        - text: …
+                    - generic [ref=e567]:
+                      - text: "-"
+                      - generic [ref=e568]: ‎Ye
+                      - text: "- 被引用次数：89"
+          - generic [ref=e571]:
+            - heading "Web results" [level=2] [ref=e572]
+            - generic [ref=e573]:
+              - generic [ref=e576]:
+                - 'link "ERVQ: Enhanced Residual Vector Quantization with Intra- ... ResearchGate https://www.researchgate.net › ... › Audio" [ref=e578] [cursor=pointer]':
+                  - /url: https://www.researchgate.net/publication/384974563_ERVQ_Enhanced_Residual_Vector_Quantization_with_Intra-and-Inter-Codebook_Optimization_for_Neural_Audio_Codecs
+                  - 'heading "ERVQ: Enhanced Residual Vector Quantization with Intra- ..." [level=3] [ref=e579]'
+                  - generic [ref=e584]:
+                    - generic [ref=e586]: ResearchGate
+                    - generic [ref=e588]: https://www.researchgate.net › ... › Audio
+                - generic [ref=e589]:
+                  - generic [ref=e590]: ·
+                  - link "翻译此页" [ref=e591] [cursor=pointer]:
+                    - /url: https://translate.google.com/translate?u=https://www.researchgate.net/publication/384974563_ERVQ_Enhanced_Residual_Vector_Quantization_with_Intra-and-Inter-Codebook_Optimization_for_Neural_Audio_Codecs&hl=zh-CN&sl=en&tl=zh-CN&client=search
+                - button "关于这条结果的详细信息" [ref=e592] [cursor=pointer]:
+                  - img [ref=e595]
+              - generic [ref=e599]:
+                - text: Current
+                - emphasis [ref=e600]: neural audio
+                - text: codecs typically use residual
+                - emphasis [ref=e601]: vector quantization
+                - text: (RVQ) to discretize speech signals. However, they often experience
+                - emphasis [ref=e602]: codebook collapse
+                - text: ", ..."
+          - generic [ref=e606]:
+            - generic [ref=e609]:
+              - link "A Streamable Neural Audio Codec With Residual Scalar- ... OpenReview https://openreview.net › attachment" [ref=e611] [cursor=pointer]:
+                - /url: https://openreview.net/attachment?id=CzWeH5oEx3&name=pdf
+                - heading "A Streamable Neural Audio Codec With Residual Scalar- ..." [level=3] [ref=e612]
+                - generic [ref=e617]:
+                  - generic [ref=e619]: OpenReview
+                  - generic [ref=e621]: https://openreview.net › attachment
+              - generic [ref=e622]:
+                - generic:
+                  - generic: PDF
+              - button "关于这条结果的详细信息" [ref=e623] [cursor=pointer]:
+                - img [ref=e626]
+            - generic [ref=e630]:
+              - text: To improve
+              - emphasis [ref=e631]: codebook
+              - text: utilization efficiency and compensate for the
+              - emphasis [ref=e632]: audio
+              - text: quality loss caused by structural causality, Stream-.
+              - emphasis [ref=e633]: Codec
+              - text: introduces a novel residual ...
+          - generic [ref=e637]:
+            - generic [ref=e640]:
+              - link "Neural Audio Codec Architecture Emergent Mind https://www.emergentmind.com › topics" [ref=e642] [cursor=pointer]:
+                - /url: https://www.emergentmind.com/topics/neural-audio-codec-architecture
+                - heading "Neural Audio Codec Architecture" [level=3] [ref=e643]
+                - generic [ref=e648]:
+                  - generic [ref=e650]: Emergent Mind
+                  - generic [ref=e652]: https://www.emergentmind.com › topics
+              - generic [ref=e653]:
+                - generic [ref=e654]: ·
+                - link "翻译此页" [ref=e655] [cursor=pointer]:
+                  - /url: https://translate.google.com/translate?u=https://www.emergentmind.com/topics/neural-audio-codec-architecture&hl=zh-CN&sl=en&tl=zh-CN&client=search
+              - button "关于这条结果的详细信息" [ref=e656] [cursor=pointer]:
+                - img [ref=e659]
+            - generic [ref=e662]:
+              - generic [ref=e663]: 2025年10月13日 —
+              - generic [ref=e664]:
+                - text: It employs advanced quantization techniques like residual
+                - emphasis [ref=e665]: vector quantization
+                - text: and multi-stage
+                - emphasis [ref=e666]: codebook
+                - text: design to balance compression efficiency ...
+          - generic [ref=e670]:
+            - generic [ref=e673]:
+              - 'link "ERVQ: Enhanced Residual Vector Quantization With Intra- ... Turnitin https://ui.adsabs.harvard.edu › abs › abstract" [ref=e675] [cursor=pointer]':
+                - /url: https://ui.adsabs.harvard.edu/abs/2025ITASL..33.2539Z/abstract
+                - 'heading "ERVQ: Enhanced Residual Vector Quantization With Intra- ..." [level=3] [ref=e676]'
+                - generic [ref=e681]:
+                  - generic [ref=e683]: Turnitin
+                  - generic [ref=e685]: https://ui.adsabs.harvard.edu › abs › abstract
+              - generic [ref=e686]:
+                - generic [ref=e687]: ·
+                - link "翻译此页" [ref=e688] [cursor=pointer]:
+                  - /url: https://translate.google.com/translate?u=https://ui.adsabs.harvard.edu/abs/2025ITASL..33.2539Z/abstract&hl=zh-CN&sl=en&tl=zh-CN&client=search
+              - button "关于这条结果的详细信息" [ref=e689] [cursor=pointer]:
+                - img [ref=e692]
+            - generic [ref=e695]:
+              - generic [ref=e696]: 作者：RC Zheng · 2025 · 被引用次数：13 —
+              - generic [ref=e697]:
+                - text: Current
+                - emphasis [ref=e698]: neural audio
+                - text: codecs typically use residual
+                - emphasis [ref=e699]: vector quantization
+                - text: (RVQ) to discretize
+                - emphasis [ref=e700]: audio
+                - text: signals. However, they often experience
+                - emphasis [ref=e701]: codebook collapse
+                - text: ", ..."
+            - generic [ref=e703]: 缺少字词： causes ‎solutions
+          - generic [ref=e710]:
+            - generic [ref=e713]:
+              - link "Neural Audio Compression | What is Residual Vector ... YouTube · AssemblyAI 2280+ 次观看 · 1年前" [ref=e715] [cursor=pointer]:
+                - /url: https://www.youtube.com/watch?v=4FFFDMDo6SM
+                - heading "Neural Audio Compression | What is Residual Vector ..." [level=3] [ref=e716]
+                - generic [ref=e721]:
+                  - generic [ref=e723]: YouTube · AssemblyAI
+                  - generic [ref=e725]: 2280+ 次观看 · 1年前
+              - button "关于这条结果的详细信息" [ref=e726] [cursor=pointer]:
+                - img [ref=e729]
+            - generic [ref=e731]:
+              - button "Neural Audio Compression | What is Residual Vector ...，由AssemblyAI上传到YouTube上. 在 Google 上播放. 5:20" [ref=e732] [cursor=pointer]:
+                - generic [ref=e734]:
+                  - img [ref=e740]
+                  - generic [ref=e743]:
+                    - generic [ref=e744]: 5:20
+                    - img [ref=e747]
+              - generic [ref=e750]: "- Google's Soundstream https://research.google/blog/soundstream-an-end-to-end-neural-audio-codec/ - Meta's Encodec paper https://arxiv.org ..."
+            - button "在此视频中，有 4 个重要时刻" [ref=e755] [cursor=pointer]:
+              - generic [ref=e764]:
+                - generic [ref=e767]: 在此视频中，有 4 个重要时刻
+                - img [ref=e769]
+            - generic [ref=e772]: 缺少字词： codebook ‎collapse ‎codec ‎solutions
+          - generic [ref=e776]:
+            - generic [ref=e779]:
+              - 'link "Multi-Scale Neural Audio Codec (SNAC): An Wxtension of ... MarkTechPost https://www.marktechpost.com › 2024/10/23" [ref=e781] [cursor=pointer]':
+                - /url: https://www.marktechpost.com/2024/10/23/multi-scale-neural-audio-codec-snac-an-wxtension-of-residual-vector-quantization-that-uses-quantizers-operating-at-multiple-temporal-resolutions/
+                - 'heading "Multi-Scale Neural Audio Codec (SNAC): An Wxtension of ..." [level=3] [ref=e782]'
+                - generic [ref=e787]:
+                  - generic [ref=e789]: MarkTechPost
+                  - generic [ref=e791]: https://www.marktechpost.com › 2024/10/23
+              - generic [ref=e792]:
+                - generic [ref=e793]: ·
+                - link "翻译此页" [ref=e794] [cursor=pointer]:
+                  - /url: https://translate.google.com/translate?u=https://www.marktechpost.com/2024/10/23/multi-scale-neural-audio-codec-snac-an-wxtension-of-residual-vector-quantization-that-uses-quantizers-operating-at-multiple-temporal-resolutions/&hl=zh-CN&sl=en&tl=zh-CN&client=search
+              - button "关于这条结果的详细信息" [ref=e795] [cursor=pointer]:
+                - img [ref=e798]
+            - generic [ref=e801]:
+              - generic [ref=e802]: 2024年10月23日 —
+              - generic [ref=e803]:
+                - emphasis [ref=e804]: Vector quantization
+                - text: (VQ) emerged as a fundamental tool, mapping high-dimensional
+                - emphasis [ref=e805]: audio
+                - text: data to discrete code vectors through VQ-VAE models.
+          - generic [ref=e809]:
+            - generic [ref=e812]:
+              - link "Using Random Codebooks for Audio Neural AutoEncoders Archive ouverte HAL https://hal.science › file › bare_jrnl" [ref=e814] [cursor=pointer]:
+                - /url: https://hal.science/hal-04705811v1/file/bare_jrnl.pdf
+                - heading "Using Random Codebooks for Audio Neural AutoEncoders" [level=3] [ref=e815]
+                - generic [ref=e820]:
+                  - generic [ref=e822]: Archive ouverte HAL
+                  - generic [ref=e824]: https://hal.science › file › bare_jrnl
+              - generic [ref=e825]:
+                - generic:
+                  - generic: PDF
+              - button "关于这条结果的详细信息" [ref=e826] [cursor=pointer]:
+                - img [ref=e829]
+            - generic [ref=e832]:
+              - generic [ref=e833]: 作者：B Giniès · 2024 · 被引用次数：1 —
+              - generic [ref=e834]:
+                - text: The dimension reduction (orange rectangles in each quantizer) represents the
+                - emphasis [ref=e835]: codebook collapse
+                - text: mitigant operations. The
+                - emphasis [ref=e836]: quantization
+                - text: module is formed of 9 ...
+        - generic [ref=e838]:
+          - generic [ref=e843]:
+            - heading "用户还搜索了" [level=2] [ref=e845]
+            - generic [ref=e847]:
+              - link "Beyond stationarity Rethinking codebook collapse in Vector Quantization" [ref=e852] [cursor=pointer]:
+                - /url: /search?sca_esv=c6a419c7fa69ef73&q=Beyond+stationarity+Rethinking+codebook+collapse+in+Vector+Quantization&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ1QJ6BAgwEAE
+                - generic [ref=e853]:
+                  - generic [ref=e858]: Beyond stationarity Rethinking codebook collapse in Vector Quantization
+                  - img [ref=e862]
+              - link "Residual vector quantization" [ref=e868] [cursor=pointer]:
+                - /url: /search?sca_esv=c6a419c7fa69ef73&q=Residual+vector+quantization&sa=X&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ1QJ6BAgxEAE
+                - generic [ref=e869]:
+                  - generic [ref=e874]: Residual vector quantization
+                  - img [ref=e878]
+          - navigation [ref=e880]:
+            - heading "网页导航" [level=1] [ref=e881]
+            - text: "1"
+            - link "Page 2" [ref=e884] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=10&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8tMDegQIKxAE
+              - text: "2"
+            - link "Page 3" [ref=e886] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=20&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8tMDegQIKxAG
+              - text: "3"
+            - link "Page 4" [ref=e888] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=30&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8tMDegQIKxAI
+              - text: "4"
+            - link "Page 5" [ref=e890] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=40&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8tMDegQIKxAK
+              - text: "5"
+            - link "Page 6" [ref=e892] [cursor=pointer]:
+              - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=50&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8tMDegQIKxAM
+              - text: "6"
+            - heading "下一页" [level=2] [ref=e894]:
+              - link "下一页" [ref=e895] [cursor=pointer]:
+                - /url: /search?q=codebook+collapse+vector+quantization+neural+audio+codec+causes+solutions&sca_esv=c6a419c7fa69ef73&ei=n30daujrKvDJkPIP4IiFsQs&start=10&sa=N&sstk=AU9db-DXA5ok2MrZrmLesUGy4DAuT2PocJrZy68zaAf_mJ3BcYC1M95ghIWteh1mUwBSHur5DicoSNQYSKFrhv5mkTbveGiMFGZNwQ&ved=2ahUKEwiot_jwh-aUAxXwJEQIHWBEIbYQ8NMDegQIKxAO
+                - generic [ref=e897]: 下一页
+        - navigation
+    - contentinfo [ref=e898]:
+      - heading "页脚链接" [level=1] [ref=e899]
+      - generic [ref=e903]:
+        - generic [ref=e907]:
+          - button "美国 - 是根据您的 IP 地址推断出来的" [ref=e909] [cursor=pointer]:
+            - generic [ref=e910]: 美国
+            - generic [ref=e912]:
+              - text: "-"
+              - generic [ref=e913]: 是根据您的 IP 地址推断出来的
+          - text: "-"
+          - button "更新位置信息" [ref=e915] [cursor=pointer]: 更新位置信息
+        - generic [ref=e918]:
+          - link "帮助" [ref=e919] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=zh-CN&fg=1
+          - link "发送反馈" [ref=e920] [cursor=pointer]:
+            - /url: "#"
+          - link "隐私权" [ref=e921] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=zh-CN&fg=1
+          - link "条款" [ref=e922] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=zh-CN&fg=1

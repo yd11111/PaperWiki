@@ -10,7 +10,20 @@
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_evaluate",
-      "mcp__playwright__browser_close"
+      "mcp__playwright__browser_close",
+      "Bash(xargs -I {} basename {})",
+      "Bash(pkill -f \"chrome.*remote-debugging\")",
+      "Bash(curl -L -o Sources/Survey-NeuralSpeechSynthesis-2021.pdf \"https://arxiv.org/pdf/2106.15561\")",
+      "Bash(curl -L -o Sources/Survey-SpeechLanguageModels-2024.pdf \"https://arxiv.org/pdf/2410.03751\")",
+      "Bash(curl -L -o Sources/Survey-AudioDiffusion-2023.pdf \"https://arxiv.org/pdf/2303.13336\")",
+      "Bash(curl -L -o Sources/Survey-LLMMeetSpeech-2025.pdf \"https://arxiv.org/pdf/2502.19548\")",
+      "Bash(curl -L -o Sources/Survey-VoiceCloning-2025.pdf \"https://arxiv.org/pdf/2505.00579\")",
+      "Bash(curl -L -o Sources/Survey-DiscreteAudioTokens-2025.pdf \"https://arxiv.org/pdf/2506.10274\")",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(cp \"/Users/xiangshu/高德工作/文献/Survey/Wavchat survey.pdf\" Sources/Survey-WavChat-2024.pdf)",
+      "Bash(cp \"/Users/xiangshu/高德工作/文献/ControllableTTS/Survey-ControllableTTS.pdf\" Sources/Survey-ControllableTTS-2024.pdf)",
+      "Read(//Users/xiangshu/.claude/skills/**)",
+      "Read(//Users/xiangshu/DailyPaper/skills/paper-reader/**)"
     ]
   }
 }

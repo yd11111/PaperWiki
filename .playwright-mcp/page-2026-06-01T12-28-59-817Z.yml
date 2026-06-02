@@ -1,0 +1,317 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Skip to main content" [ref=e4] [cursor=pointer]:
+      - /url: "#content"
+    - generic [ref=e5]:
+      - link "Cornell University" [ref=e7] [cursor=pointer]:
+        - /url: https://www.cornell.edu/
+        - img "Cornell University" [ref=e8]
+      - link "Learn about arXiv becoming an independent nonprofit." [ref=e10] [cursor=pointer]:
+        - /url: https://tech.cornell.edu/arxiv/
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - text: We gratefully acknowledge support from the Simons Foundation,
+          - link "member institutions" [ref=e13] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+          - text: ", and all contributors."
+        - link "Donate" [ref=e14] [cursor=pointer]:
+          - /url: https://info.arxiv.org/about/donate.html
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - link "arxiv logo" [ref=e17] [cursor=pointer]:
+          - /url: /
+          - img "arxiv logo" [ref=e18]
+        - generic [ref=e19]: ">"
+        - link "cs" [ref=e20] [cursor=pointer]:
+          - /url: /list/cs/recent
+        - generic [ref=e21]: ">"
+        - text: arXiv:2301.02111
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - textbox "Search term or terms" [ref=e26]:
+            - /placeholder: Search...
+          - paragraph [ref=e27]:
+            - link "Help" [ref=e28] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+            - text: "|"
+            - link "Advanced Search" [ref=e29] [cursor=pointer]:
+              - /url: https://arxiv.org/search/advanced
+        - combobox "Field to search" [ref=e31]:
+          - option "All fields" [selected]
+          - option "Title"
+          - option "Author"
+          - option "Abstract"
+          - option "Comments"
+          - option "Journal reference"
+          - option "ACM classification"
+          - option "MSC classification"
+          - option "Report number"
+          - option "arXiv identifier"
+          - option "DOI"
+          - option "ORCID"
+          - option "arXiv author ID"
+          - option "Help pages"
+          - option "Full text"
+        - button "Search" [ref=e32] [cursor=pointer]
+  - main [ref=e33]:
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "Computer Science > Computation and Language" [level=1] [ref=e38]
+        - generic [ref=e40]:
+          - generic [ref=e41]: "[Submitted on 5 Jan 2023]"
+          - heading "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers" [level=1] [ref=e42]
+          - generic [ref=e43]:
+            - link "Chengyi Wang" [ref=e44] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+C
+            - text: ","
+            - link "Sanyuan Chen" [ref=e45] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+S
+            - text: ","
+            - link "Yu Wu" [ref=e46] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Wu,+Y
+            - text: ","
+            - link "Ziqiang Zhang" [ref=e47] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Z
+            - text: ","
+            - link "Long Zhou" [ref=e48] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+L
+            - text: ","
+            - link "Shujie Liu" [ref=e49] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+S
+            - text: ","
+            - link "Zhuo Chen" [ref=e50] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+Z
+            - text: ","
+            - link "Yanqing Liu" [ref=e51] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+Y
+            - text: ","
+            - link "Huaming Wang" [ref=e52] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+H
+            - text: ","
+            - link "Jinyu Li" [ref=e53] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+J
+            - text: ","
+            - link "Lei He" [ref=e54] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=He,+L
+            - text: ","
+            - link "Sheng Zhao" [ref=e55] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+S
+            - text: ","
+            - link "Furu Wei" [ref=e56] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Wei,+F
+          - blockquote [ref=e57]:
+            - text: We introduce a language modeling approach for text to speech synthesis (TTS). Specifically, we train a neural codec language model (called Vall-E) using discrete codes derived from an off-the-shelf neural audio codec model, and regard TTS as a conditional language modeling task rather than continuous signal regression as in previous work. During the pre-training stage, we scale up the TTS training data to 60K hours of English speech which is hundreds of times larger than existing systems. Vall-E emerges in-context learning capabilities and can be used to synthesize high-quality personalized speech with only a 3-second enrolled recording of an unseen speaker as an acoustic prompt. Experiment results show that Vall-E significantly outperforms the state-of-the-art zero-shot TTS system in terms of speech naturalness and speaker similarity. In addition, we find Vall-E could preserve the speaker's emotion and acoustic environment of the acoustic prompt in synthesis. See
+            - link "this https URL" [ref=e58] [cursor=pointer]:
+              - /url: https://aka.ms/valle
+            - text: for demos of our work.
+          - table "Additional metadata" [ref=e60]:
+            - rowgroup [ref=e61]:
+              - 'row "Comments: Working in progress" [ref=e62]':
+                - cell "Comments:" [ref=e63]
+                - cell "Working in progress" [ref=e64]
+              - 'row "Subjects: Computation and Language (cs.CL); Sound (cs.SD); Audio and Speech Processing (eess.AS)" [ref=e65]':
+                - cell "Subjects:" [ref=e66]
+                - cell "Computation and Language (cs.CL); Sound (cs.SD); Audio and Speech Processing (eess.AS)" [ref=e67]
+              - 'row "Cite as: arXiv:2301.02111 [cs.CL]" [ref=e68]':
+                - cell "Cite as:" [ref=e69]
+                - cell "arXiv:2301.02111 [cs.CL]" [ref=e70]:
+                  - generic [ref=e71]:
+                    - link "arXiv:2301.02111" [ref=e72] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2301.02111
+                    - text: "[cs.CL]"
+              - row "(or arXiv:2301.02111v1 [cs.CL] for this version)" [ref=e73]:
+                - cell [ref=e74]
+                - cell "(or arXiv:2301.02111v1 [cs.CL] for this version)" [ref=e75]:
+                  - text: (or
+                  - generic [ref=e76]:
+                    - link "arXiv:2301.02111v1" [ref=e77] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2301.02111v1
+                    - text: "[cs.CL]"
+                  - text: for this version)
+              - row "https://doi.org/10.48550/arXiv.2301.02111 Focus to learn more" [ref=e78]:
+                - cell [ref=e79]
+                - cell "https://doi.org/10.48550/arXiv.2301.02111 Focus to learn more" [ref=e80]:
+                  - link "https://doi.org/10.48550/arXiv.2301.02111" [ref=e81] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2301.02111
+                  - button "Focus to learn more" [ref=e83]:
+                    - generic [ref=e85]: Focus to learn more
+        - generic [ref=e86]:
+          - heading "Submission history" [level=2] [ref=e87]
+          - text: "From: Yu Wu ["
+          - link "view email" [ref=e88] [cursor=pointer]:
+            - /url: /show-email/79ba2442/2301.02111
+          - text: "]"
+          - strong [ref=e89]: "[v1]"
+          - text: Thu, 5 Jan 2023 15:37:15 UTC (818 KB)
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - heading "Access Paper:" [level=2] [ref=e92]
+          - list [ref=e93]:
+            - listitem [ref=e94]:
+              - link "View PDF" [ref=e95] [cursor=pointer]:
+                - /url: /pdf/2301.02111
+            - listitem [ref=e96]:
+              - link "TeX Source" [ref=e97] [cursor=pointer]:
+                - /url: /src/2301.02111
+          - link "view license" [ref=e99] [cursor=pointer]:
+            - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+        - generic [ref=e100]:
+          - text: "Current browse context:"
+          - generic [ref=e101]: cs.CL
+          - generic [ref=e102]:
+            - link "< prev" [ref=e104] [cursor=pointer]:
+              - /url: /prevnext?id=2301.02111&function=prev&context=cs.CL
+            - text: "|"
+            - link "next >" [ref=e106] [cursor=pointer]:
+              - /url: /prevnext?id=2301.02111&function=next&context=cs.CL
+          - generic [ref=e107]:
+            - link "new" [ref=e108] [cursor=pointer]:
+              - /url: /list/cs.CL/new
+            - text: "|"
+            - link "recent" [ref=e109] [cursor=pointer]:
+              - /url: /list/cs.CL/recent
+            - text: "|"
+            - link "2023-01" [ref=e110] [cursor=pointer]:
+              - /url: /list/cs.CL/2023-01
+          - generic [ref=e111]:
+            - text: "Change to browse by:"
+            - generic [ref=e112]:
+              - link "cs" [ref=e113] [cursor=pointer]:
+                - /url: /abs/2301.02111?context=cs
+              - link "cs.SD" [ref=e114] [cursor=pointer]:
+                - /url: /abs/2301.02111?context=cs.SD
+              - link "eess" [ref=e115] [cursor=pointer]:
+                - /url: /abs/2301.02111?context=eess
+              - link "eess.AS" [ref=e116] [cursor=pointer]:
+                - /url: /abs/2301.02111?context=eess.AS
+        - generic [ref=e117]:
+          - heading "References & Citations" [level=3] [ref=e118]
+          - list [ref=e119]:
+            - listitem [ref=e120]:
+              - link "NASA ADS" [ref=e121] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2301.02111
+            - listitem [ref=e122]:
+              - link "Google Scholar" [ref=e123] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2301.02111
+            - listitem [ref=e124]:
+              - link "Semantic Scholar" [ref=e125] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2301.02111
+        - generic [ref=e127]:
+          - heading "1 blog link" [level=3] [ref=e128]:
+            - link "1 blog link" [ref=e129] [cursor=pointer]:
+              - /url: /tb/2301.02111
+          - text: (
+          - link "what is this?" [ref=e130] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/trackback.html
+          - text: )
+        - generic [ref=e131]: export BibTeX citation
+        - generic [ref=e132]:
+          - heading "Bookmark" [level=3] [ref=e134]
+          - link "BibSonomy logo" [ref=e135] [cursor=pointer]:
+            - /url: http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2301.02111&description=Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers
+            - img "BibSonomy logo" [ref=e136]
+          - link "Reddit logo" [ref=e137] [cursor=pointer]:
+            - /url: https://reddit.com/submit?url=https://arxiv.org/abs/2301.02111&title=Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers
+            - img "Reddit logo" [ref=e138]
+      - generic [ref=e140]:
+        - radio "Bibliographic Tools" [checked] [ref=e141]
+        - generic [ref=e142] [cursor=pointer]: Bibliographic Tools
+        - generic [ref=e143]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e144]
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - generic [ref=e148]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e150]: Bibliographic Explorer Toggle
+              - generic [ref=e151]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e152]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e153] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e154]:
+              - generic [ref=e156]:
+                - checkbox "Connected Papers"
+                - generic [ref=e158]: Connected Papers Toggle
+              - generic [ref=e159]:
+                - text: Connected Papers
+                - emphasis [ref=e160]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e161] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e162]:
+              - generic [ref=e164]:
+                - checkbox "Litmaps"
+                - generic [ref=e166]: Litmaps Toggle
+              - generic [ref=e167]:
+                - text: Litmaps
+                - emphasis [ref=e168]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e169] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e170]:
+              - generic [ref=e172]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e174]: scite.ai Toggle
+              - generic [ref=e175]:
+                - text: scite Smart Citations
+                - emphasis [ref=e176]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e177] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e181]
+        - generic [ref=e182] [cursor=pointer]: Code, Data, Media
+        - radio "Demos" [ref=e183]
+        - generic [ref=e184] [cursor=pointer]: Demos
+        - radio "Related Papers" [ref=e185]
+        - generic [ref=e186] [cursor=pointer]: Related Papers
+        - radio "About arXivLabs" [ref=e187]
+        - generic [ref=e188] [cursor=pointer]: About arXivLabs
+      - generic [ref=e189]:
+        - link "Which authors of this paper are endorsers?" [ref=e190] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2301.02111
+        - text: "|"
+        - link "Disable MathJax" [ref=e191] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e192] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e193]:
+    - navigation "Secondary" [ref=e194]:
+      - generic [ref=e196]:
+        - list [ref=e198]:
+          - listitem [ref=e199]:
+            - link "About" [ref=e200] [cursor=pointer]:
+              - /url: https://info.arxiv.org/about
+          - listitem [ref=e201]:
+            - link "Help" [ref=e202] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help
+        - list [ref=e204]:
+          - listitem [ref=e205]:
+            - link "Contact" [ref=e207] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/contact.html
+          - listitem [ref=e208]:
+            - link "Subscribe" [ref=e210] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/subscribe
+      - generic [ref=e212]:
+        - list [ref=e214]:
+          - listitem [ref=e215]:
+            - link "Copyright" [ref=e216] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/license/index.html
+          - listitem [ref=e217]:
+            - link "Privacy Policy" [ref=e218] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+        - list [ref=e220]:
+          - listitem [ref=e221]:
+            - link "Web Accessibility Assistance" [ref=e222] [cursor=pointer]:
+              - /url: https://info.arxiv.org/help/web_accessibility.html
+          - listitem [ref=e223]:
+            - paragraph [ref=e224]:
+              - link "arXiv Operational Status" [ref=e225] [cursor=pointer]:
+                - /url: https://status.arxiv.org
+                - text: arXiv Operational Status
