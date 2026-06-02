@@ -4,9 +4,9 @@ title: "Speech Language Model"
 aliases: [SpeechLM, 语音语言模型, Spoken Language Model, Multimodal Speech LLM, Speech Foundation Model, Omni-model]
 category: "model-family"
 tags: [speech-LM, multimodal, foundation-model, end-to-end, autoregressive, speech-interaction]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "TWIST (Hassid et al., 2024)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "VITA (Fu et al., 2024)", "AudioPaLM (Rubenstein et al., 2023)"]
+key_papers: ["GSLM (Lakhotia et al., 2021)", "AudioLM (Borsos et al., 2023)", "TWIST (Hassid et al., 2024)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "VITA (Fu et al., 2024)", "AudioPaLM (Rubenstein et al., 2023)", "Yang et al., When LLM Meet Speech, 2025"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Tokenizer]]", "[[Codec Language Model]]", "[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-Text Alignment]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio Understanding]]", "[[Neural Vocoder]]"]
+related_concepts: ["[[Speech Tokenizer]]", "[[Codec Language Model]]", "[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-Text Alignment]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio Understanding]]", "[[Neural Vocoder]]", "[[Speech-LLM Integration Taxonomy]]", "[[Modality Adaptation for Speech LLM]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -104,6 +104,16 @@ SpeechLM 的下游应用覆盖三大类 (Survey Section V):
 **语义相关**: 口语对话、语音翻译、ASR、关键词检测、TTS、意图识别、槽填充
 **说话人相关**: 说话人识别/验证/分段、声音条件生成
 **副语言相关**: 情感识别、语音分离、副语言增强生成
+
+## 互补分类视角: Speech-LLM Integration Taxonomy
+
+Yang et al. (2025) 提出了一种互补的分类视角: 从 **集成接口** 而非 **模型架构** 出发,将 speech-LLM 方法分为 text-based / latent-representation-based / audio-token-based 三类 [§1, Fig 1]。
+
+- SpeechLM (本页) 主要对应 audio-token-based integration 路线
+- Latent-representation-based 路线 (如 Qwen-Audio, SALMONN) 使用连续表征而非离散 tokens,需要 [[Modality Adaptation for Speech LLM]] 桥接语音编码器和 LLM
+- Text-based 路线 (如 AudioGPT, [[LLM-enhanced ASR]]) 通过 ASR/TTS 文本中转,无需修改 LLM
+
+两种分类互补: 本页 (Cui et al. 2024) 是 model-centric 视角,Yang et al. 2025 是 interface-centric 视角。详见 [[Speech-LLM Integration Taxonomy]]。
 
 ## 与 LLM-based TTS 的关系
 

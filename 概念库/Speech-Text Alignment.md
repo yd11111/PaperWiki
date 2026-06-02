@@ -4,9 +4,9 @@ title: "Speech-Text Alignment"
 aliases: [语音文本对齐, Modality Alignment, Speech-Text Representation Alignment, 跨模态对齐, Text-Speech Alignment]
 category: "technique"
 tags: [speech-LM, alignment, multimodal, representation, training-strategy]
-key_papers: ["SPIRIT-LM (Nguyen et al., 2024)", "Spectron (Nachmani et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "Moshi (Defossez et al., 2024)", "Llama-Omni (Fang et al., 2024)", "Align-SLM (2024)", "SpeechAlign (2024)"]
+key_papers: ["SPIRIT-LM (Nguyen et al., 2024)", "Spectron (Nachmani et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "Moshi (Defossez et al., 2024)", "Llama-Omni (Fang et al., 2024)", "Align-SLM (2024)", "SpeechAlign (2024)", "Yang et al., When LLM Meet Speech, 2025"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]", "[[Full-duplex Spoken Dialogue]]"]
+related_concepts: ["[[Speech Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]", "[[Full-duplex Spoken Dialogue]]", "[[Modality Adaptation for Speech LLM]]", "[[Speech-LLM Integration Taxonomy]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -105,6 +105,21 @@ Survey 指出两种模式孰优的问题仍是开放问题: "The question of whe
 - 关注声学质量: "golden" speech tokens 与 LM 生成的 tokens 存在分布差异
 - 导致 vocoder 从非分布内 token 合成时质量下降
 - 用优化技术对齐 LM 输出的 token 分布与 golden 分布
+
+## 训练策略 (Yang et al. 2025 补充)
+
+Yang et al. (2025) [§4.3] 从集成视角补充了对齐训练中各模块的训练策略:
+
+| 策略 | 适用场景 | 效果 |
+|------|----------|------|
+| 全模型微调 | Speech encoder + adapter + LLM 一起训练 | 最优性能,最高成本 |
+| LoRA for LLM | 仅低秩适配 LLM 层 | Pham et al. (2024): 显著优于冻结 LLM |
+| 仅训练 adapter | 冻结 encoder 和 LLM | 最轻量,性能受限 |
+| 两阶段训练 | 先训练 encoder,再启动 LLM PEFT | Wu et al. (2023): 避免不稳定梯度干扰 |
+
+**关键发现** (Pham et al., 2024): 对于 LLM 模块,LoRA > partial fine-tuning; 对于 encoder 模块,full fine-tuning > partial fine-tuning,但 partial 更具性价比。
+
+详见 [[Modality Adaptation for Speech LLM]] 中的具体 adapter 架构。
 
 ## 关键发现
 

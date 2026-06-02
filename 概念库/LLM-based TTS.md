@@ -4,9 +4,9 @@ title: "LLM-based TTS"
 aliases: [LLM TTS, 大语言模型语音合成, Codec Language Model TTS, Neural Codec LM, LLM-driven Speech Synthesis]
 category: "model-family"
 tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-only]
-key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "SpearTTS (Kharitonov et al., 2023)", "Make-a-Voice (Huang et al., 2023b)"]
+key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "SpearTTS (Kharitonov et al., 2023)", "Make-a-Voice (Huang et al., 2023b)", "Yang et al., When LLM Meet Speech, 2025"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
-related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]"]
+related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-LLM Integration Taxonomy]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -104,6 +104,20 @@ Cui et al. (2024) 的 SpeechLM survey 厘清了三者关系:
 简言之: LLM-based TTS ⊂ CodecLM (codec 路线) 或 SpeechLM (semantic 路线),取决于使用的 token 类型。VALL-E 同时属于 CodecLM 和 LLM-based TTS; CosyVoice 属于 SpeechLM (semantic tokens) + LLM-based TTS。
 
 详见 [[Speech Language Model]] 和 [[Codec Language Model]]。
+
+## Integration 视角下的 LLM-based TTS (Yang et al. 2025 补充)
+
+Yang et al. (2025) [§5, Table 1] 从集成分类角度审视 LLM-based TTS:
+
+- **Audio-token → Acoustic Tokens 路线**: VALL-E, LauraGPT, Neekhara et al. 直接用 neural codec tokens
+- **Audio-token → Semantic Tokens 路线**: SpeechGPT, TWIST, Spirit-LM 先生成 semantic tokens 再转换
+- **Audio-token → Semantic + Acoustic 路线**: AudioPaLM, Moshi 两阶段层级生成
+
+Table 1 (LibriTTS TTS 结果) 显示 audio-token-based 方法在 TTS 上表现优于 text-based cascaded 方法,且 semantic + acoustic 联合路线获得最优 MOS。
+
+**计算代价对比** [§6.3]: text-based 和 audio-token-based 的 LLM 推理成本相当 (受限于 LLM 大小),但 latent-representation-based 需同时运行 speech encoder 和 LLM,总成本更高。
+
+详见 [[Speech-LLM Integration Taxonomy]] 的完整对比分析。
 
 ## 研究趋势
 
