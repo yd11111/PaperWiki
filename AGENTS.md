@@ -309,6 +309,7 @@ deep 及以上层级笔记**必须**包含：
 | 概念页溯源提醒 | `key_papers` ≥ 3 且 `origin_paper` 为空 → 提示"建议找原始论文完善此概念页" |
 | Review backlog | 10 个 pending-review 或 5 个 draft deep → alert |
 | 概念页 staleness | active 页超过 3 月未更新 |
+| 概念去重检查 | 扫描 title/aliases 是否存在语义重叠的页面对,提示 merge 候选 |
 
 ### Cognitive Lint（P5，仅手动触发）
 
