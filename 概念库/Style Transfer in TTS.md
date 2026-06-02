@@ -6,7 +6,7 @@ category: "technique"
 tags: [TTS, style, transfer, zero-shot, GST, reference-encoder, disentanglement]
 key_papers: ["GST-Tacotron (Wang et al., 2018)", "MetaStyleSpeech (Min et al., 2021)", "GenerSpeech (Huang et al., 2022b)", "StyleTTS 2 (Li et al., 2023)", "StyleTTS-ZS (Li et al., 2024)", "MegaTTS 2 (Jiang et al., 2024)", "DEX-TTS (Park et al., 2024a)", "ControlSpeech (Ji et al., 2024c)"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
-related_concepts: ["[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Speech Attribute Disentanglement]]", "[[Global Style Tokens]]", "[[LLM-based TTS]]"]
+related_concepts: ["[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Global Style Tokens]]", "[[LLM-based TTS]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -119,7 +119,7 @@ Singing Style Transfer 是 Style Transfer in TTS 在歌声领域的延伸,但具
 
 - [[Prosody Modeling]]: 风格的底层声学实现
 - [[Speaker Embedding]]: 与风格共同决定说话方式, 需解耦
-- [[Speech Attribute Disentanglement]]: 风格迁移的前提
+- [[Speech Factorization]]: 风格迁移的前提
 - [[Global Style Tokens]]: 风格迁移的奠基机制
 - [[LLM-based TTS]]: 新范式下的风格控制方式
 

@@ -6,7 +6,7 @@ category: "technique"
 tags: [TTS, style, unsupervised, reference-encoder, attention, expressiveness]
 key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018"]
 origin_paper: "Wang et al., Style Tokens, ICML 2018"
-related_concepts: ["[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Attribute Disentanglement]]"]
+related_concepts: ["[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -112,7 +112,7 @@ GST 作为可控 TTS 的奠基工作,影响了大量后续方法:
 - [[Prosody Modeling]]: GST 的 style 包含韵律信息
 - [[Speaker Embedding]]: 与 GST 的 style embedding 需解耦
 - [[Attention-based TTS]]: GST 基于 Tacotron 架构
-- [[Speech Attribute Disentanglement]]: GST 后续的解耦改进方向
+- [[Speech Factorization]]: GST 后续的解耦改进方向
 
 ## 演进
 

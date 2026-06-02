@@ -6,7 +6,7 @@ category: "technique"
 tags: [TTS, emotion, expressiveness, control, affective-computing, style]
 key_papers: ["Li et al. (2021)", "MsEmoTTS (Lei et al., 2022)", "Emo-DPO (Gao et al., 2024)", "EmoSphere++ (Cho et al., 2024)", "Rong et al. (2025)"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
-related_concepts: ["[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Speech Attribute Disentanglement]]", "[[Differentiable Reward Optimization]]", "[[LLM-based TTS]]"]
+related_concepts: ["[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Speech Factorization]]", "[[Differentiable Reward Optimization]]", "[[LLM-based TTS]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -115,7 +115,7 @@ Survey 特别指出情感控制的难点:
 
 - [[Prosody Modeling]]: 情感通过韵律变化实现
 - [[Style Transfer in TTS]]: 情感是风格的子维度
-- [[Speech Attribute Disentanglement]]: 情感与 speaker/content 解耦
+- [[Speech Factorization]]: 情感与 speaker/content 解耦
 - [[Differentiable Reward Optimization]]: Emo-DPO 的技术基础
 - [[LLM-based TTS]]: 新范式下的情感控制方式
 

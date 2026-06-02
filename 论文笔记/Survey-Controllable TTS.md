@@ -33,7 +33,7 @@ updated: 2026-06-01
 | [[Emotion Control in TTS]] | Sec 2 + 3.2.1 | 层级情感, Emo-DPO, 跨说话人迁移 |
 | [[Natural Language Description for TTS]] | Sec 3.2.3 | PromptTTS系列, NansyTTS, 环境扩展 |
 | [[Instruction-Guided Speech Synthesis]] | Sec 3.2.4 + 3.2.5 | VoxInstruct, CosyVoice, InstructSpeech |
-| [[Speech Attribute Disentanglement]] | Sec 3.3 | 对抗训练, information bottleneck, factorized codec |
+| [[Speech Factorization]] | Sec 3.3 | 对抗训练, information bottleneck, factorized codec |
 | [[Global Style Tokens]] | Sec 3.2.2 + 引用 | 无监督风格发现, reference encoder, token bank |
 
 ### 更新概念页 (2)

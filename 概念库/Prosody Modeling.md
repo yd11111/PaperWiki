@@ -6,7 +6,7 @@ category: "technique"
 tags: [TTS, prosody, style, emotion, expressiveness, variation-information]
 key_papers: []
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
-related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]", "[[Speech Attribute Disentanglement]]"]
+related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]", "[[Speech Factorization]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
