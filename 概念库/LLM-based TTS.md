@@ -1,7 +1,7 @@
 ---
 type: concept
 title: "LLM-based TTS"
-aliases: [LLM TTS, 大语言模型语音合成, Codec Language Model TTS, Neural Codec LM, LLM-driven Speech Synthesis]
+aliases: [LLM TTS, 大语言模型语音合成, LLM-driven Speech Synthesis]
 category: "model-family"
 tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-only]
 key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "SpearTTS (Kharitonov et al., 2023)", "Make-a-Voice (Huang et al., 2023b)", "Yang et al., When LLM Meet Speech, 2025"]
