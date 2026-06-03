@@ -1,0 +1,49 @@
+paper: VoXtream
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    satisfied: true
+    notes: "方法节包含 WHY 解释(4 个关键设计选择均回答了'为什么选这个'),速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    satisfied: true
+    notes: "53 处 claim 标注(§/Table/Fig),数字均标明出处;指标名正确(WER/SPK-SIM/UTMOS/FPL/RTF);速查卡片指标含具体数字+数据集+来源"
+  distinguishable:
+    satisfied: true
+    notes: "9 处因果来源标注([论文原文]/[agent 解读]),方法节中所有 WHY 解释均有来源标注;无推断写成断言的情况"
+  positionable:
+    satisfied: true
+    notes: "KB 背景节有具体谱系定位(对比 CosyVoice2/XTTS/IST-LM 等),创新判断有对比基准;frontmatter 完整"
+  no_pollution:
+    satisfied: true
+    notes: "未新建概念页;反向更新将为追加操作(key_papers),不涉及实质修改"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "实验 > 关键发现 > 第1条"
+    detail: "'VoXtream 在 mid-scale (9k h) 数据组中达最佳 SPK-SIM 和 UTMOS' 需要对照 Table 1 mid-scale 组的 VoiceCraft/XTTS 数据确认 -- 实际在 SEED-en 上 VoXtream SPK-SIM (0.537 NS) 低于 VoiceCraft/XTTS 同组部分系统; 但论文原文§4确实如此声明"
+    suggestion: "保持现有措辞,因论文原文§4确实如此表述; 可加'(论文原文声称)'限定"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 只列了 CosyVoice 2 作为 baseline, 未列 XTTS-v2, VoiceCraft 等其他关键 baseline"
+    suggestion: "models 字段只列核心对比的 baseline 是合理的,CosyVoice 2 是 full-stream 场景的直接竞品; XTTS-v2/VoiceCraft 未在 KB 模型库中有页面,无需硬挂接"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter > venue"
+    detail: "venue 推断为 'IEEE ICASSP 2026',论文正文未明确标注会议名(只有 IEEE copyright notice),可能是预印本"
+    suggestion: "改为保守表述或标注推断"
+
+conclusion: pass
+total_issues: 3
+high_issues: 0
+medium_issues: 0
+low_issues: 3

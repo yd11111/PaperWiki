@@ -6,7 +6,7 @@ arxiv_id: "2509.15969"
 source: "Sources/VoXtream.pdf"
 authors: [Nikita Torgashov, Gustav Eje Henter, Gabriel Skantze]
 year: 2025
-venue: "IEEE ICASSP 2026"
+venue: "IEEE (推测 ICASSP 2026, 论文含 IEEE copyright 但未明确标注)"
 tags: [TTS, streaming, zero-shot, autoregressive, low-latency, full-stream]
 concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Duration Predictor]]", "[[Phoneme Representation]]", "[[Speech-Text Alignment]]"]
 models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
@@ -174,5 +174,8 @@ CSM-DT 冻结迁移是一个聪明的工程选择,它本质上是利用大模型
 4. **External speaker encoder 而非 in-context prompt**: 在 full-stream 场景下,外部 speaker encoder 比 prompt token 前缀更灵活,不占序列长度,可随时提供 speaker conditioning。
 5. **Limited look-ahead 而非 forced delay**: 允许最多 N 个 phoneme 的 look-ahead 但不等待积累,第一个词到达就立即开始,兼顾韵律 (look-ahead 改善) 和延迟 (不 block)。
 
-> [!review] 审阅待完成
-> 本笔记为 draft 状态,待审阅。
+> [!review] 审阅: pass (2026-06-03)
+> 3 low issues, 0 medium/high。详见 `_review/VoXtream-review.yml`。
+> - traceability-gap (low): mid-scale 最佳声称来自论文原文,已保持
+> - template-compliance (low x2): models 字段只列核心 baseline (合理); venue 改为保守推断表述
+> 结论: 直接放行反向更新。
