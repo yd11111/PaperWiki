@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[DS-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[DS-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Speaker Embedding, Voice Cloning Taxonomy, Style Transfer in TTS, Non-autoregressive TTS, Duration Predictor, Global Style Tokens, Zero-shot Speech Synthesis)
+- [review/auto] [[DS-TTS]] — pass-with-fixes, 0 high / 1 medium / 3 low
+- [lint/local] DS-TTS — 通过 (0 dead links, MOC 已更新: 零样本语音合成)
 - [kb/search] [[SpeechAccentLLM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[CosyVoice]]✓, [[Speaker Embedding]]✓ | 过滤: [[模型库/VITS|VITS]](pending-review), [[Variational Autoencoder for TTS]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[SpeechAccentLLM]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer, Semantic vs Acoustic Tokens, LLM-based TTS, Speech Factorization, CosyVoice, Speaker Embedding)
 - [review/auto] [[SpeechAccentLLM]] — pass, 0 high + 0 medium + 3 low
