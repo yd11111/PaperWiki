@@ -1,0 +1,39 @@
+paper: FPO
+reviewer: agent
+date: 2026-06-03
+version: v1
+
+principles:
+  reproducible: satisfied
+  trustworthy: satisfied
+  distinguishable: satisfied
+  locatable: minor-issue
+  no-pollution: satisfied
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: locatable
+    location: frontmatter.models
+    detail: "models 字段缺少 Llasa -- 论文在三个 backbone 上验证 (CosyVoice, CosyVoice2, Llasa),但 models 仅列了前两个"
+    suggestion: "添加 [[Llasa]] 到 models 列表 (如果模型库中不存在 Llasa 页面,则使用论文笔记链接)"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "实验表格 SECS 列"
+    detail: "SECS 数据仅列了 test-zh 的值,但原文 Table I 中 test-en 和 test-hard 也有 SECS 数据"
+    suggestion: "可接受 -- 速查卡片和正文已说明 SECS 无显著提升,具体分 test set 的值可省略"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: reproducible
+    location: "可复用的 idea #4"
+    detail: "多指标综合评分自动选 preference pairs 不算 FPO 独有贡献,RIO 等也有类似机制"
+    suggestion: "可保留但标注为 '非本文独创,但组合形式可参考'"
+
+conclusion: pass-with-fixes
+summary: "笔记整体质量良好。方法节包含清晰的 WHY/HOW 解释,因果来源标注覆盖率 >80%,数字 claim 溯源充分。一个 medium issue: frontmatter models 字段遗漏 Llasa。两个 low issues 不影响可信性。建议修正 models 字段后继续反向更新。"

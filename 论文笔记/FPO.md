@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv (journal submission)"
 tags: [RLHF, DPO, preference-optimization, zero-shot-TTS, robustness, fine-grained-alignment, token-level-optimization, data-efficiency, codec-LM]
 concepts: ["[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]"]
-models: ["[[CosyVoice]]", "[[CosyVoice 2]]"]
+models: ["[[CosyVoice]]", "[[CosyVoice 2]]", "[[论文笔记/Llasa|Llasa]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 5
@@ -174,5 +174,12 @@ FPO 的核心贡献在于将 "fine-grained alignment" 这一在 NLP 中已有探
 4. **多指标综合评分自动选 preference pairs**: Eq.2 的加权评分方法可替代人工标注,减少标注成本
 
 ---
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> - [medium] frontmatter models 缺少 Llasa -> 已修正
+> - [low] SECS 数据仅列 test-zh (可接受,正文已说明 trade-off)
+> - [low] 可复用 idea #4 非 FPO 独创 (已知,保留作参考)
+> 详见 `_review/FPO-review.yml`
 
 检索命中: [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[CosyVoice]], [[CosyVoice 2]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
