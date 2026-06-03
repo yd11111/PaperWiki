@@ -8,8 +8,8 @@ authors: [Sefik Emre Eskimez, Xiaofei Wang, Manthan Thakker, Canrun Li, Chung-Hs
 year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, zero-shot, flow-matching, non-autoregressive, mel-spectrogram, simplification]
-concepts: ["[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/BigVGAN|BigVGAN]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]"]
+concepts: ["[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]"]
+models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/BigVGAN|BigVGAN]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -180,7 +180,7 @@ E2 TTS 是一个典型的"减法创新"案例。在 TTS 领域,从 Tacotron 到 
 
 不过值得注意的是,收敛速度是显著代价。E2 TTS 的 simplicity 来自于将对齐学习的负担从外部工具转移到了训练过程本身,这需要大量数据和计算。在数据/计算受限场景下,传统 alignment 路线可能仍有优势。
 
-后续工作 F5-TTS 在此基础上进一步发展,使用 DiT 架构和更高效的训练,成为了开源社区广泛使用的方案,验证了 E2 TTS 提出的"无 alignment"路线的可行性和影响力。
+[agent 解读] 后续工作 F5-TTS 在此基础上进一步发展,使用 DiT 架构和更高效的训练,成为了开源社区广泛使用的方案,验证了 E2 TTS 提出的"无 alignment"路线的可行性和影响力。
 
 ## 可复用的 idea
 
@@ -192,8 +192,9 @@ E2 TTS 是一个典型的"减法创新"案例。在 TTS 领域,从 Tacotron 到 
 
 4. **渐进式扩展 (X1/X2)**: 在基础系统上通过训练数据构造(而非架构修改)添加功能(免转录推理、发音指定),保持架构不变。
 
-> [!review] 审阅状态
-> 待审阅。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> 3 issues (0 high, 1 medium, 2 low): models 字段含评估工具已修正; Speech-Text Alignment 概念挂接语义不匹配已修正; 点评节外部知识标注已补充。
+> 详见 `_review/E2 TTS-review.yml`
 
 ---
 

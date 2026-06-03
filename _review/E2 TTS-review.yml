@@ -1,0 +1,44 @@
+paper: "E2 TTS"
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含充分的 WHY 解释(filler token 为何 work、联合建模为何优于 pipeline); 关键设计选择均有替代方案对比; 速查卡片可借鉴字段具体(filler token 机制)"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%; 指标名正确(WER/SIM-o/CMOS/SMOS); 速查指标含数字+数据集+来源; 无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "方法节全面标注了 [论文原文]/[agent 解读]; 因果解释来源覆盖率约 90%; 点评节作为 agent 评论性质明确"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系(CosyVoice 路线 vs E2 TTS 路线 vs FastSpeech 路线); 创新判断以 Duration Predictor 共识为对比基准; frontmatter 字段齐全"
+  不污染:
+    satisfied: true
+    notes: "反向更新待执行; 无新概念页创建需求(所有相关概念已有页面)"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter.models"
+    detail: "HuBERT 和 WavLM 是论文评估时使用的工具(ASR for WER, speaker verification for SIM-o),不是本文模型或对比 baseline。按 checklist 语义 'models 列本文模型+对比 baseline',评估工具不应列入。"
+    suggestion: "从 models 中移除 HuBERT 和 WavLM,或改为在笔记正文中提及。"
+  - id: 2
+    type: bad-linking
+    severity: medium
+    location: "frontmatter.concepts"
+    detail: "Speech-Text Alignment 概念页描述的是 SpeechLM 跨模态对齐(SPIRIT-LM, Mini-Omni 等),与 E2 TTS 讨论的 phoneme-to-mel frame alignment 是不同层面的概念。挂接语义不匹配。"
+    suggestion: "从 concepts 中移除 Speech-Text Alignment。E2 TTS 讨论的对齐问题已被 Duration Predictor 和 Non-autoregressive TTS 概念页充分覆盖。"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "点评节"
+    detail: "'后续工作 F5-TTS 在此基础上进一步发展' 未标注为 [agent 解读/外部知识],且 F5-TTS 不在论文引用列表中。"
+    suggestion: "在该段落前加 [agent 解读] 标注,表明这是基于领域知识的评论而非论文内容。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量较高,5 个原则均满足。方法节的因果解释充分,数据溯源覆盖率 >90%。3 个 issue 均为 low/medium 级别: (1) models 字段含评估工具而非 baseline; (2) Speech-Text Alignment 概念挂接语义不匹配; (3) 点评节引用外部知识未标注来源。建议修正后可放行反向更新。"
