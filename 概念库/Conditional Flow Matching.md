@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Diffusion Model]]", "[[Score Matching]]"]
 status: confirmed
@@ -44,6 +44,8 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 - DiT (Diffusion Transformer): CosyVoice 3 CFM 的 backbone
 - Vocoder: CFM 输出 Mel spectrogram 后仍需 vocoder 合成波形
 - [[Finite Scalar Quantization]]: CFM 的输入(speech token 的条件)
+
+- CosyVoice 2 (Du et al., 2024): 提出 chunk-aware causal flow matching,通过四种 attention mask (non-causal/full-causal/chunk-M/chunk-2M) 统一训练实现隐式自蒸馏,首次在 flow matching 框架下实现近无损流式 TTS; CFG β=0.7, NFE=10, cosine scheduler
 
 ## 演进
 

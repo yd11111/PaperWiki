@@ -4,7 +4,7 @@ title: "Diffusion-based TTS"
 aliases: [Diffusion TTS, 扩散语音合成, Diffusion Acoustic Model]
 category: "model-family"
 tags: [TTS, diffusion, acoustic-model, end-to-end, mel-generation]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
 origin_paper: "Jeong et al., Diff-TTS: A Denoising Diffusion Model for Text-to-Speech, 2021"
 related_concepts: ["[[Diffusion Model]]", "[[Diffusion-based Vocoder]]", "[[Non-autoregressive TTS]]", "[[Conditional Flow Matching]]", "[[Neural Vocoder]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]"]
 status: pending-review
