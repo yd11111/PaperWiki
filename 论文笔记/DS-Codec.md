@@ -108,6 +108,7 @@ DS-Codec 探索了两种量化方案 [§2.2]:
 - 重新初始化 discriminator (但不重新初始化 decoder)
 - Batch size 24, lr 2e-5 → 1e-5
 - 目标: 利用冻结的高质量 codebook,强化 decoder 重建能力
+- 注意: DS-Codec-VQ 的第二阶段直接使用 BigCodec 的官方 checkpoint 作为起点 [§3.2],因此其改进包含 BigCodec 预训练 codebook 的贡献
 
 [agent 解读] DS-Codec-VQ 的第二阶段直接使用 BigCodec 的官方 checkpoint 作为起点 [§3.2],这意味着 DS-Codec-VQ 实际上是 BigCodec + Transformer Block + 非镜像微调。这使得 DS-Codec-VQ 的性能提升中,BigCodec 预训练 codebook 的贡献难以分离。
 
@@ -132,7 +133,7 @@ DS-Codec 探索了两种量化方案 [§2.2]:
 
 4. **VQ vs PQ**: 两种量化方案性能接近,VQ 在 UTMOS 上略优 (4.218 vs 4.214),PQ 在 PESQ 上略优 (2.882 vs 2.862) [Table 1]。PQ 使用更大等效码本 (65536 vs 8192) 但带宽略高 (1.28 vs 1.04 kbps)。
 
-5. **泛化性**: LJSpeech (非训练域) 上的结果验证了泛化能力,DS-Codec 在所有指标上优于 BigCodec 和 WavTokenizer [Table 2]。
+5. **泛化性**: LJSpeech (非训练域) 上的结果验证了泛化能力,DS-Codec-VQ 在所有指标上优于 BigCodec 和 WavTokenizer (UTMOS 4.451 vs 4.385/3.870, PESQ 2.962 vs 2.822/1.948) [Table 2]。
 
 ## 局限性
 
@@ -153,7 +154,7 @@ DS-Codec 提出了一个简洁且有实验支撑的训练策略: 利用镜像结
 
 ## 可复用的 idea
 
-1. **先镜像后非镜像的两阶段训练**: 第一阶段用对称结构保证 quantization bottleneck 的质量,第二阶段冻结 bottleneck 并释放 decoder 自由度。这一策略可推广到任何涉及 encoder-quantizer-decoder 的生成模型 (如 VQ-VAE 系列、image codec 等)。
+1. **先镜像后非镜像的两阶段训练**: 第一阶段用对称结构保证 quantization bottleneck 的质量,第二阶段冻结 bottleneck 并释放 decoder 自由度。这一策略适用于 bottleneck 训练不稳定或码本利用率不足的场景 (如 VQ-VAE 系列、image codec 等),对已充分收敛的系统收益可能有限。
 
 2. **Warm-start decoder 而非重新初始化**: 保留第一阶段 decoder 权重 + 降低学习率,比重新初始化更高效。这与迁移学习中 fine-tuning 的最佳实践一致。
 

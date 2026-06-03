@@ -1,0 +1,53 @@
+paper: "DS-Codec"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+issue_count: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含清晰的因果解释(为什么先镜像后非镜像),关键设计选择均回答了 WHY 问题。速查卡片'可借鉴'字段给出了具体可迁移策略。"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率约 90%,指标名称使用正确 (UTMOS/PESQ/STOI/F1)。速查卡片指标字段包含数字+数据集+来源。"
+  可区分:
+    satisfied: true
+    notes: "因果解释使用 [论文原文] 和 [agent 解读] 标注,覆盖率 ~85%。对 UTMOS 超 GT 现象明确标注了 [agent 解读]。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(单码本演进线: BigCodec→DS-Codec),包含 5 个对比基准,创新判断有对比。"
+  不污染:
+    satisfied: true
+    notes: "反向更新为追加操作,不涉及实质修改。无新概念页需创建。"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "实验节, 关键发现第 5 点"
+    detail: "泛化性结论 'DS-Codec 在所有指标上优于 BigCodec 和 WavTokenizer' 缺少具体数字引用标注"
+    suggestion: "已在表格中有数字,但正文提及时应加 [Table 2]"
+    resolved: false
+
+  - id: 2
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea, 第 1 点"
+    detail: "'推广到任何涉及 encoder-quantizer-decoder 的生成模型' 的推广范围偏宽,缺少限定条件"
+    suggestion: "可补充: 此策略适用于 bottleneck 训练不稳定或码本利用率不足的场景,对已收敛的系统可能收益有限"
+    resolved: false
+
+  - id: 3
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "方法节, 训练策略 Stage 2"
+    detail: "DS-Codec-VQ 使用 BigCodec checkpoint 这一关键信息在正文方法节未提及,仅在 [agent 解读] 注释中出现"
+    suggestion: "训练策略节应直接在 Stage 2 描述中标注: DS-Codec-VQ 第二阶段使用 BigCodec 官方 checkpoint [§3.2]"
+    resolved: false
