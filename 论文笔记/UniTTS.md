@@ -219,4 +219,13 @@ UniTTS 代表了 LLM-based TTS 中"去解耦"路线的一个有意义的探索�
 
 ---
 
+> [!review] 审阅结论: pass (2026-06-03)
+> - **可复述** ✓ 5 个设计选择均有因果解释
+> - **可信赖** ✓ 数字标注覆盖率 >90%
+> - **可区分** ✓ [论文原文]/[agent 解读] 标注覆盖率 >80%
+> - **可定位** ✓ KB 背景谱系定位具体, frontmatter 完整
+> - **不污染** ✓ 反向更新仅追加 key_papers, 无新建概念页
+> - Issues: 3 low (速查指标密度高 / MOS 来源 / LPO 细节)
+> - 详见 `_review/UniTTS-review.yml`
+
 检索命中: [[Residual Vector Quantization]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]], [[Codebook Collapse]] | 过滤: [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无

@@ -1,0 +1,49 @@
+paper: "[[论文笔记/UniTTS]]"
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 5 个关键设计选择,每个都有 WHY 解释和替代方案对比。DMS 蒸馏、不做 semantic alignment 的权衡、三任务预训练的动机都有因果解释。"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 >90%。所有实验数据标注了 [Table N] 出处。指标名使用正确。"
+  可区分:
+    satisfied: true
+    notes: "[论文原文]/[agent 解读] 标注覆盖率 >80%。agent 解读使用了'可能''这意味着'等限定词,未出现推断写成断言的情况。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景节有具体谱系定位(与 CosyVoice/VALL-E/Spark-TTS/Llasa 三角定位),创新判断有对比基准。frontmatter 完整。"
+  不污染:
+    satisfied: true
+    notes: "反向更新计划: 追加 key_papers 到 RVQ/LLM-based TTS/Semantic vs Acoustic Tokens/Speech Tokenizer/Codebook Collapse/Single-codebook vs Multi-codebook。无新建概念页。风险低。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: 可信赖
+    location: "速查卡片 > 指标"
+    detail: "指标字段混合了 TTS MOS、CER、DistilCodec codebook metrics 三类不同实验的数字,信息密度高但阅读时需要区分上下文。"
+    suggestion: "可接受,信息完整且有区分标记(MOS/CER/codebook usage)。"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "速查卡片 > 指标"
+    detail: "MOS 数字未标注来自自建 diversity evaluation dataset 而非标准 benchmark。"
+    suggestion: "可接受,在实验节的 [agent 解读] 中已充分说明评估非标准性。"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea > LPO"
+    detail: "LPO 替代 DPO 的描述较简略,未给出 LPO 的关键公式差异要点。"
+    suggestion: "论文本身 LPO 公式分散在正文和附录中,当前描述足够传达核心思想。"
+
+conclusion: pass
+high_issues: 0
+medium_issues: 0
+low_issues: 3
