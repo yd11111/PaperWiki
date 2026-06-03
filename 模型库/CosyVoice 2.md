@@ -48,3 +48,4 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 ## 作为 Baseline 被引用
 
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): 在基础性能和情感表达两方面均以 CosyVoice2 为 baseline,IndexTTS2 在 SS 和 WER 上全面超越 CosyVoice2;在自然语言情感控制对比中,IndexTTS2 的 EMOS (3.786) 显著优于 CosyVoice2 (3.339)
+- [[论文笔记/NVSpeech|NVSpeech]] (2025): 以 CosyVoice2 为 TTS backbone,通过词表扩展+微调添加 18 类副语言发声的显式控制能力;微调后 CER_w/o_para 3.73% (in-domain),listener win rate 75.4% (vs pre-trained)

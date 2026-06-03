@@ -150,3 +150,11 @@
 - 反向更新: Speech Factorization(+Seed-VC, +USM-VC, 追加方法描述+演进更新), CFM(+Seed-VC), Speaker Embedding(+Seed-VC), Global Style Tokens(+SC VALL-E, wikilink更新), Codec Language Model(+SC VALL-E), Prosody Modeling(+SC VALL-E), Emilia(+Seed-VC), Self-Supervised Speech Representation(+Seed-VC, +USM-VC), Diffusion Model(+Seed-VC, +USM-VC), F0 Modeling(+Seed-VC), Emotion Control in TTS(+SC VALL-E) — 共 11 页 append
 - [create/entity] 无新建 — 候选 (Timbre Leakage, Voice Conversion, Diffusion Transformer/DiT, Universal Semantic Dictionary) 均不满足准入规则(已被已有实体页覆盖或单篇论文特有概念)
 - [lint/local] Seed-VC, USM-VC, SC VALL-E — 通过/0 dead links, frontmatter 完整
+- [kb/search] [[SongGen]] — 命中 2 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Singing Voice Synthesis]](pending-review), [[Codec Language Model]](pending-review), [[Musical Score Encoder]](pending-review), [[Classifier-Free Guidance]](pending-review)
+- [kb/search] [[Emilia]] — 命中 1 页(confirmed): [[Speech Tokenizer]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review)
+- [kb/search] [[NVSpeech]] — 命中 2 页(confirmed): [[Prosody Modeling]]✓, [[CosyVoice 2]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
+- [ingest/deep] [[SongGen]] — 精读(batch processing), kb_sources=2, 单阶段 AR Transformer text-to-song, mixed/dual-track token patterns, auxiliary vocal prediction, VoiceBPE+MERT+FLAN-T5 条件化, 追加更新 4 个实体页(RVQ, Codec Language Model, Singing Voice Synthesis, Speech Tokenizer)
+- [ingest/deep] [[Emilia]] — 精读(batch processing), kb_sources=1, 首个大规模开源 in-the-wild 多语言语音数据集(101K h, 6 语种) + Emilia-Pipe 预处理 pipeline, 实质更新 Emilia 数据集页(添加 pipeline/规模/质量细节), 追加更新 1 个数据集页
+- [ingest/deep] [[NVSpeech]] — 精读(batch processing), kb_sources=2, 副语言发声 pipeline(数据集+ASR+TTS), 18 类 word-level PV 标注, CosyVoice/CosyVoice2 词表扩展微调, 追加更新 4 个实体页(Prosody Modeling, Emotion Control in TTS, CosyVoice 2 model, Emilia dataset)
+- [create/entity] 无新建 — 候选 (VoiceBPE, X-Codec, Paralinguistic Vocalization, Emilia-Pipe, DNSMOS) 均不满足准入规则(单篇论文特有概念或已被已有实体页覆盖)
+- [lint/local] SongGen, Emilia, NVSpeech — 通过/0 dead links, frontmatter 完整
