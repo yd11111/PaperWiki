@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv preprint"
 tags: [TTS, autoregressive, attention, alignment, robustness, length-generalization, encoder-decoder, relative-position-bias, discrete-TTS]
 concepts: ["[[Attention-based TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Mel Spectrogram]]", "[[TTS Evaluation]]"]
-models: ["[[模型库/VITS|VITS]]", "[[模型库/SoundStorm|SoundStorm]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -120,7 +120,7 @@ s^(k)_{i,j} = (q^(k)_i · k^(k)_j) / √L + β^(k)(p_i - j)   [eq. 6]
 ### 训练策略
 
 - 优化器: Adam (β1=0.9, β2=0.999), gradient clipping threshold 1000 [Appendix C.1]
-- 训练步数: 650K steps
+- 训练步数: 650K steps [Appendix C.1]
 - 学习率: 0.01/√(decoder_width), 在 500k/550k/600k 步衰减到 0.5/0.25/0.1x [Appendix C.1]
 - 最大训练音频长度: 9.6 秒 (40Hz codes = 384 decoder steps) [§4.1]
 - Alignment delta 初始化: softplus 的 bias 设为 -1.25,使初始平均 delta ≈ 0.25 (匹配平均对齐速率) [Appendix C.1]
@@ -188,3 +188,9 @@ VAT 的核心洞察简洁而深刻:AR Transformer TTS 的鲁棒性问题不在�
 4. **Maximum Distance Penalty**: 在 RPB 层面显式惩罚超出训练距离的注意力,比单纯依赖初始化更可控。可用于任何需要长度泛化的 Transformer 模型。
 
 5. **Gaussian IRPB 初始化**: log-Gaussian 窗初始化 cross-attention bias 矩阵,配合 MDP,提供了可靠的长度泛化保证。
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> **问题**: 1 medium (models 字段误列 VITS/SoundStorm, 已修正) + 1 low (datasets 为空) + 1 low (训练步数标注, 已修正)
+> **原则评估**: 可复述✓ 可信赖✓ 可区分✓ 可定位✓ 不污染✓
+> **详见**: `_review/Very Attentive Tacotron-review.yml`
