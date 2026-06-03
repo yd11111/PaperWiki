@@ -40,7 +40,7 @@ updated: 2026-06-03
 ## 速查
 
 > [!summary] 速查
-> - **一句话**: Qwen3-TTS 通过双 tokenizer(25Hz 单码本 + 12Hz 16 层 RVQ)+ dual-track LM 架构,在 5M 小时数据上训练,实现 10 语言流式 TTS,在 zero-shot cloning/cross-lingual/controllability 上全面超越 CosyVoice 3 和 MiniMax-Speech
+> - **一句话**: Qwen3-TTS 通过双 tokenizer(25Hz 单码本 + 12Hz 16 层 RVQ)+ dual-track LM 架构,在 5M 小时数据上训练,实现 10 语言流式 TTS,在多数 zero-shot/cross-lingual/controllability 指标上超越 CosyVoice 3 和 MiniMax-Speech(test-zh 上 CosyVoice 3 仍略优）
 > - **路线**: Text(Qwen tokenizer）+ Reference Speech（speaker encoder / in-context）→ Qwen3 LM（dual-track: text + acoustic token 沿 channel 拼接）→ Speech Tokens → Code2Wav（25Hz: chunk-wise DiT + BigVGAN; 12Hz: causal ConvNet）→ Waveform
 > - **指标**: WER 1.24%(test-en, SEED-TTS-Eval, 12Hz-1.7B, SOTA) [Table 5]; WER 0.77%(test-zh) [Table 5]; Speaker SIM 0.799(zh, 最高) [Table 6]; zh-to-ko WER 4.82(比 CosyVoice3 降 66%) [Table 7]; Voice Design APS 85.2(zh, 开源 SOTA) [Table 8]; 首包延迟 97ms(12Hz-0.6B) [Table 2]
 > - **可借鉴**: (1) 双 tokenizer 策略: 同一 LM backbone 适配不同延迟需求,25Hz 适合高质量, 12Hz 适合超低延迟; (2) MTP 模块处理 RVQ 多码本序列,比 delay pattern 和 NAR 更适合流式; (3) 概率性激活 thinking pattern 提升 instruction following; (4) DPO + GSPO 后训练改善自然度和鲁棒性
@@ -249,5 +249,11 @@ Qwen3-TTS 是一个**工程驱动的全面系统**,而非单一方法创新。�
 
 5. **三阶段预训练 + 三阶段后训练**: S1(通用) → S2(高质量) → S3(长上下文)的渐进式预训练,加上 DPO → GSPO → Speaker FT 的后训练流水线。这种"六步训练法"可以作为大规模 TTS 训练的参考范式。
 
-> [!review] 审阅标记
-> 审阅结论待生成。
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> - **可复述**: pass — 方法节覆盖因果解释和 WHY 分析
+> - **可信赖**: pass-with-minor — 数字标注覆盖率 ~85%
+> - **可区分**: pass — [论文原文]/[agent 解读] 标注覆盖率 >90%
+> - **可定位**: pass — KB 背景谱系定位准确,frontmatter 完整
+> - **不污染**: pass-with-minor — 反向更新仅 append,无新建概念页
+> - Issues: 3 low (速查过强断言已修正, frontmatter baseline 可选, thinking pattern 描述泛)
+> - 详见 `_review/Qwen3-TTS-review.yml`

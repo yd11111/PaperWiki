@@ -1,0 +1,49 @@
+paper: "Qwen3-TTS"
+reviewer: agent
+date: 2026-06-03
+version: v1
+
+conclusion: pass-with-fixes
+
+principle_assessment:
+  可复述:
+    verdict: pass
+    notes: "方法节详细覆盖了双 tokenizer 设计哲学、LM 架构差异、训练策略,包含因果解释和设计选择的 WHY 分析。dual-track 与 MTP 的机制解释清晰。"
+  可信赖:
+    verdict: pass-with-minor
+    notes: "数字型 claim 标注覆盖率约 85%,主要实验表格均标注 [Table N]。但速查卡片中 SIM 0.799 的标注来源正确(Table 6),个别 agent 解读中的比较数字有出处标注。"
+  可区分:
+    verdict: pass
+    notes: "方法节中 [论文原文] 和 [agent 解读] 标注覆盖率 >90%。每个 agent 推断均有明确前缀标识。局限性节中所有推断均标注 [agent 解读]。"
+  可定位:
+    verdict: pass
+    notes: "KB 背景节包含具体谱系定位(CosyVoice/Seed-TTS/Mimi/FireRedTTS 2 对比),创新判断有对比基准。frontmatter 字段完整,concepts/models/tasks/datasets 语义正确。"
+  不污染:
+    verdict: pass-with-minor
+    notes: "反向更新计划合理: Speech Tokenizer 等实体页追加 key_papers 属于 append 操作。无需创建新概念页(Qwen3-TTS 的核心技术点已有对应概念页覆盖)。MTP 可考虑未来独立成页但目前不满足准入规则(仅本文使用)。"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "速查卡片 - 指标字段"
+    detail: "速查卡片中 '全面超越 CosyVoice 3 和 MiniMax-Speech' 表述过强,实际 test-zh WER 上 CosyVoice 3 (0.71) 优于 Qwen3-TTS (0.77)。"
+    suggestion: "改为'在多数指标上超越',避免'全面超越'断言。"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter - models"
+    detail: "models 字段列出了 CosyVoice 3/BigVGAN/WavLM 作为本文涉及模型。CosyVoice 3 是对比 baseline (正确)。BigVGAN 和 WavLM 是本文使用的组件 (正确)。但缺少 Seed-TTS、MiniMax-Speech、ElevenLabs 等主要 baseline。"
+    suggestion: "建议在 models 字段补充主要 baseline 模型(如有对应模型页)。但当前 vault 中这些模型可能没有独立页面,所以可以先不加。"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea - 第4条"
+    detail: "'概率性激活 thinking pattern' 的描述较笼统,论文本身也未给出细节,可能无法直接迁移。"
+    suggestion: "标注'具体实现细节未公开,仅为概念层借鉴'。"
+
+summary: |
+  笔记整体质量良好。方法节覆盖了因果解释(WHY),标注来源区分明确([论文原文] vs [agent 解读]),KB 背景定位准确。主要问题是速查卡片中一处过强断言(test-zh 上 CosyVoice 3 仍然更优)。3 个 low severity issues,均不阻塞反向更新。
+  建议: 修正速查卡片中的过强断言后放行反向更新。
