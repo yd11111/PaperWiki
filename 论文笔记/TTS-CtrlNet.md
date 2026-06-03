@@ -150,3 +150,6 @@ emotion-specific flow step 的发现尤其有洞察力: 不是所有 ODE 步骤�
 3. **Block-level skip 消融定位关键 block**: 对 DiT/Transformer 逐 block 做 skip 测试,找出对 WER/speaker similarity 至关重要的 block 并保护它们。这是一种通用的"定位哪些层不能动"的方法论。
 4. **Control scale 推理时调节**: 训练时固定 λ=1.0,推理时通过 λ 实现情感强度的连续调节,提供"一个模型多种强度"的灵活性。
 5. **窗口滑动插值提取时变情感**: SER 模型的 token-level 输出通过 window sliding interpolation 而非逐 token 使用,保持情感上下文信息的同时获得时变特性。
+
+> [!review] 审阅结论: pass (2026-06-03)
+> 5 维度均达标,无 high/medium/low issue。方法节因果解释充分 (4 个 WHY + 消融证据),来源标注覆盖率 100%,KB 定位准确 (CFM 谱系 + EmoCtrl-TTS 路线对比),速查卡片信息具体可操作。详见 `_review/TTS-CtrlNet-review.yml`。

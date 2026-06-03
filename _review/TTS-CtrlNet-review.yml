@@ -1,0 +1,52 @@
+paper: TTS-CtrlNet
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass
+
+dimensions:
+  可复述:
+    score: pass
+    notes: >
+      方法节包含 4 个明确的 WHY 设计选择 (ControlNet vs 全微调, selective blocks, emotion-specific flow step, 窗口滑动插值),
+      每个都有论文消融实验或对比支撑。速查卡片"可借鉴"列出 3 个具体可迁移 trick (ControlNet 范式, 敏感区间, block 消融)。
+    issues: []
+
+  可信赖:
+    score: pass
+    notes: >
+      数字型 claim 标注覆盖率 ~95%: 所有实验表格数据标注了 [Table N], 方法描述标注了 [§X.X], 消融结论全部有对应表格。
+      指标名使用正确 (WER/Emo-SIM/Aro-Val SIM/SIM-o/AutoPCP/SMOS/NMOS/EMOS)。
+      速查卡片指标字段含具体数字 + 数据集 + 出处。
+    issues: []
+
+  可区分:
+    score: pass
+    notes: >
+      因果解释来源标注覆盖率 100%: 所有 WHY 解释均标注 [论文原文] 或 [agent 解读]。
+      不存在推断当断言的句子。"首次"(首次将 ControlNet 迁移至 flow-matching TTS) 来自论文自身主张,
+      agent 未独立验证但论文声明可信。
+    issues: []
+
+  可定位:
+    score: pass
+    notes: >
+      KB 背景节谱系定位具体: 明确定位在 CFM 谱系中 F5-TTS 分支, 与 EmoCtrl-TTS 的路线对比清晰。
+      创新判断有 3 个对比基准。frontmatter 字段完整, 语义正确 (models 列 wav2vec 2.0 + Whisper,
+      concepts 列 6 个相关概念)。速查卡片 5 字段均有实质内容。
+    issues: []
+
+  不污染:
+    score: pass
+    notes: >
+      反向更新计划: 追加 key_papers 到 Conditional Flow Matching 和 Emotion Control in TTS 等页面,
+      属于 append 操作不改 status。未提议创建新概念页 (ControlNet 概念不满足 TTS 领域准入规则:
+      仅单篇引用,非 TTS 前置知识)。
+    issues: []
+
+issues: []
+
+summary: >
+  5 维度均达标,无 high/medium/low issue。方法节因果解释充分 (4 个 WHY + 消融证据),
+  来源标注覆盖率 100%,KB 定位准确 (CFM 谱系 + EmoCtrl-TTS 路线对比),
+  速查卡片信息具体可操作。数据对比 (400h vs 87k h) 在"添加情感控制所需额外数据"语境下合理。
