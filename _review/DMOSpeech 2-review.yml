@@ -1,0 +1,47 @@
+paper: "DMOSpeech 2"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节清晰解释了 WHY (为何靶向 duration predictor 而非整个 pipeline) 和 HOW (GRPO + reward diversity filter + teacher-guided sampling)。每个关键设计选择都有因果解释。速查卡片'可借鉴'字段具体 (component-level RL, reward diversity filter, teacher-guided sampling)。"
+  可信赖:
+    verdict: pass-with-fixes
+    notes: "大部分数字型 claim 有标注 (Table 1/2/3, Fig 4, §引用)。指标名使用正确 (WER/CER/SIM/CVf0/RTF)。速查卡片指标字段有数字+数据集。有一处 CVf0 应标注为 student 的 CVf0 与 DMOSpeech 2 相同 (S/A)。"
+  可区分:
+    verdict: pass
+    notes: "因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率 100%。推断性分析有明确限定词 ('这本质上是一种分治策略', '这说明最优 duration 并非简单等于真实 duration')。"
+  可定位:
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位 (diffusion-based TTS 演进线 + RL-for-TTS 三条路线)。创新判断有对比基准 (对比 DiffRO/Multi-Reward GRPO)。frontmatter 字段齐全。速查卡片 5 字段均有实质内容。"
+  不污染:
+    verdict: pass-with-fixes
+    notes: "frontmatter models 字段有问题: [[论文笔记/NaturalSpeech 2|F5-TTS]] 指向错误 — F5-TTS 不是 NaturalSpeech 2,需修正链接。其他概念挂接合理。反向更新内容无 factual error。"
+
+issues:
+  - id: 1
+    type: bad-linking
+    severity: medium
+    principle: 可定位
+    location: "frontmatter models 字段"
+    detail: "[[论文笔记/NaturalSpeech 2|F5-TTS]] 将 F5-TTS 错误链接到 NaturalSpeech 2 笔记。F5-TTS 在 vault 中无独立笔记,不应以误导性 wikilink 指向无关论文。"
+    suggestion: "移除此链接,或改为纯文本 'F5-TTS (Chen et al., 2024)'。如有 F5-TTS 笔记可后续补挂。"
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可信赖
+    location: "主实验 Table 1, CVf0 行"
+    detail: "CVf0 行中 DMOSpeech 2 (4步) 显示 0.464,但论文 Table 1 注明 CVf0 用 DDPM sampler 计算 (for fairness),student 和 w/o RL 的 CVf0 相同 (S/A)。笔记中未明确标注 CVf0 0.464 是 student model 的值 (非 RL-optimized 的值),可能导致误读为 DMOSpeech 2 的 CVf0 低于 teacher。"
+    suggestion: "在 CVf0 行备注: 'CVf0 0.464 为 student/DMOSpeech 2 共用值 (RL 不影响 CVf0,因 RL 仅优化 duration predictor)'"
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter models 字段"
+    detail: "models 字段包含 DMOSpeech 2 自身的自引用 [[论文笔记/DMOSpeech 2|DMOSpeech 2]],models 字段应列本文使用/对比的模型,不应自引。此外缺少 CosyVoice 2、MaskGCT、Spark-TTS、LLaSA 等 Table 2 对比 baseline。"
+    suggestion: "移除自引,补充主要 baseline 模型链接。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量总体良好。方法机制解释清晰,因果来源标注完整,KB 背景提供了有效的谱系定位。发现 1 个 medium issue (F5-TTS 错误链接到 NaturalSpeech 2) 和 2 个 low issue (CVf0 标注不够清晰, frontmatter models 自引)。建议修正后继续反向更新。"

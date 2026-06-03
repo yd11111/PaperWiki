@@ -9,7 +9,7 @@ year: 2025
 venue: "AAAI 2026"
 tags: [TTS, diffusion, reinforcement-learning, duration-prediction, flow-matching, distillation, zero-shot]
 concepts: ["[[Conditional Flow Matching]]", "[[Duration Predictor]]", "[[Diffusion-based TTS]]", "[[Differentiable Reward Optimization]]", "[[Speaker Embedding]]", "[[Diffusion Model]]"]
-models: ["[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/NaturalSpeech 2|F5-TTS]]"]
+models: ["[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -120,7 +120,7 @@ Duration predictor 使用 softmax 输出 300 个 duration class 的概率分布 
 | CER↓ | **1.527** | 1.695 | 2.000 | 1.468 | Seed-TTS-zh | [Table 1] |
 | SIM↑ | **0.760** | 0.750 | 0.750 | 0.760 | Seed-TTS-zh | [Table 1] |
 | RTF↓ | **0.032** | 0.167 | S/A | 0.094 | - | [Table 1] |
-| CVf0↑ | 0.464 | 0.666 | S/A | 0.593 | - | [Table 1] |
+| CVf0↑ | 0.464 (student/RL 共用, RL 仅优化 duration 不影响 CVf0) | 0.666 | S/A | 0.593 | - | [Table 1] |
 
 关键发现:
 - RL-optimized duration predictor 将 WER 从 3.750 降到 1.752 (53.3% 相对改进),SIM 从 0.672 升到 0.698 [Table 1]
@@ -193,5 +193,9 @@ Duration predictor 使用 softmax 输出 300 个 duration class 的概率分布 
 
 4. **Duration 作为概率分布而非标量**: 将 duration 建模为 softmax 分类 (300 bins) 而非回归,自然支持采样多样性和 GRPO 训练。类比于 LLM 中 token logits 的角色
 
-> [!review] 审阅待完成
-> 本笔记为 AI 生成草稿 (status: draft),尚未经过审阅。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> - **结论**: pass-with-fixes (0 high, 1 medium, 2 low)
+> - [medium] frontmatter models 字段: F5-TTS 错误链接到 NaturalSpeech 2 → 已修正为 MaskGCT + CosyVoice 2
+> - [low] CVf0 标注不够清晰 → 已补充备注
+> - [low] frontmatter models 自引 → 已移除
+> - 详见 `_review/DMOSpeech 2-review.yml`
