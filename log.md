@@ -279,3 +279,8 @@
 - [review/auto] [[VoXtream]] — pass, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] VoXtream — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +VoXtream
+- [kb/search] [[Multi-Reward GRPO]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Prosody Modeling]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Differentiable Reward Optimization]](pending-review)
+- [ingest/deep] [[Multi-Reward GRPO]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS, Prosody Modeling, Conditional Flow Matching, Differentiable Reward Optimization, Single-codebook vs Multi-codebook, SEED-TTS-Eval)
+- [review/auto] [[Multi-Reward GRPO]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] Multi-Reward GRPO — 通过/0 问题
+- [moc] TTS训练与评估 MOC 更新: +Multi-Reward GRPO

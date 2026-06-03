@@ -18,6 +18,7 @@
 - [[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]] — 2025, 通义 RL 框架, GRPO vs DiffRO, Combined+Filter, ASR WER -5.3%
 - [[论文笔记/GSRM|GSRM]] — 2025, generative speech reward model, acoustic feature+CoT, PCC 0.465, online RLHF 82% win
 - [[论文笔记/RIO|RIO]] — 2025, reverse inference optimization, PPC, WER 3.4/SIM 0.96/bad case 1%
+- [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] — 2025, 多奖励 GRPO 于单码本 TTS LLM, 5 reward (WER+SIM+len+ent+prosody), CER 1.10/MOS 4.21
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -45,6 +46,7 @@ Post-training 演进:
   → RL-for-Audio-LLM (2025, GRPO vs DiffRO 统一框架)
   → GSRM (2025, generative speech reward model)
   → RIO (2025, reverse inference optimization)
+  → Multi-Reward GRPO (2025, 多奖励 GRPO for single-codebook TTS)
 
 Evaluation 演进:
   MOS + PESQ/STOI (传统)
