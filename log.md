@@ -32,7 +32,7 @@
 - [ingest/deep] [[Spotlight-TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (Style Transfer in TTS, Global Style Tokens, Residual Vector Quantization, Prosody Modeling, Speech Factorization, Mel Spectrogram, F0 Modeling, Emotion Control in TTS)
 - [review/auto] [[Spotlight-TTS]] — pass-with-fixes, 0 high + 1 medium (fact-inference-mixing, fixed) + 2 low
 - [lint/local] Spotlight-TTS — 通过 (0 dead links, MOC 已更新: TTS-总览)
-- [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [alert/backlog] pending-review: 70, draft deep/repro: 183 — 建议抽空审核- [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[OpenS2S]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Language Model, Streaming Spoken Dialogue, Emotion Control in TTS, CosyVoice 2, Modality Adaptation for Speech LLM, Emilia)
 - [review/auto] [[OpenS2S]] — pass-with-fixes, 0 high / 2 medium / 1 low
 - [lint/local] OpenS2S — 通过, 0 死链
