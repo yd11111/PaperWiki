@@ -220,5 +220,6 @@ RK4 性能最差: 因为最后阶估计需要预测 t=1 处的向量场,在早�
 4. **DWT 替代频带分割**: 无损可逆的频率分解,比 MBD 的滤波器组更干净
 5. **FreeU for audio**: skip alpha=0.9, backbone beta=1.1 的简单调优,可直接应用于任何 UNet-based 音频生成模型
 
-> [!review] 审阅状态
-> 待审阅。详见 [[_review/PeriodWave-review.yml]]。
+> [!review] 审阅: pass (2026-06-03)
+> 5 维度均通过,无 issue。方法节 WHY 解释充分,数字标注覆盖率高,KB 背景谱系定位清晰。
+> 详见 [[_review/PeriodWave-review.yml]]。
