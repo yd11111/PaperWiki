@@ -36,7 +36,7 @@ updated: 2026-06-03
 > [!summary] 速查
 > - **一句话**: 将 coarse-to-fine TTS 中 FM 模块的推理起点从纯噪声移至 coarse 表示构造的中间状态,用正交投影自适应确定时间点,通过单段分段流实现更自然的合成和更快的自适应步长 ODE 求解
 > - **路线**: 文本/speech tokens → weak generator (encoder/LLM) → coarse mel + hidden states → SFM head (预测 X_h, t_h, sigma_h) → 正交投影到 CondOT 路径构造中间状态 → FM decoder 从中间状态出发求解 ODE → mel spectrogram → vocoder → 波形
-> - **指标**: Matcha-TTS/LJ Speech PMOS 4.176 (α=2.5) vs baseline 4.008, CMOS 0.00 vs baseline -0.48 [Table 4]; CosyVoice/LibriTTS PMOS 4.106 vs baseline 3.499, SMOS 3.67 vs baseline 3.47 [Table 4]; Dopri(5) solver 加速率最高 ~48% (Matcha-TTS α=5) [Table 5]
+> - **指标**: Matcha-TTS/LJ Speech: 验证集 PMOS 4.176 (α=2.5) [Table 3], 测试集 CMOS 0.00 vs baseline -0.48 [Table 4]; CosyVoice/LibriTTS: SMOS 3.67 vs baseline 3.47, CMOS 0.00 vs baseline -0.21* [Table 4]; Dopri(5) solver 加速率最高 ~48% (Matcha-TTS α=5) [Table 5]
 > - **可借鉴**: (1) 正交投影确定 FM 中间状态的时间位置——可迁移到任何有 coarse 初始估计的 FM 系统; (2) SFM strength α 超参数——在推理时线性放大 coarse 信号的引导效果,简单有效; (3) 轻量 SFM head (基于 VITS duration predictor 架构,仅 Conv1d+LayerNorm) 作为即插即用模块
 > - **局限**: (1) SFM head 非常简单,weak generator 不稳定时可能不收敛 (StableTTS 的 reference encoder 问题); (2) 未开源训练代码 (仅 demo); (3) 加速仅对自适应步长 ODE solver 有效,固定步长 solver 无法受益; (4) WER 和 SIM 改善不一致
 
@@ -130,27 +130,49 @@ $$L_{\text{SFM}} = L_{\text{coarse}} + L_t + L_\sigma + L_\mu + L_{\text{CFM}}$$
 
 ## 实验
 
-| 指标 | 本文 (SFM) | Baseline | Ablated | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- |
-| PMOS | 4.176 (α=2.5) | 4.008 | 4.026 | LJ Speech (Matcha-TTS) | [Table 3,4] |
-| CMOS | 0.00 | -0.48 | -0.27 | LJ Speech (Matcha-TTS) | [Table 4] |
-| PMOS | 3.679 (α=3.5) | 3.462 (α=1) | — | VCTK (Matcha-TTS) | [Table 4,6] |
-| CMOS | 0.00 | -0.31* | -0.39* | VCTK (Matcha-TTS) | [Table 4] |
-| PMOS | 3.486 (α=3.0) | — | 3.281 (α=1) | VCTK (StableTTS) | [Table 4,7] |
-| CMOS | 0.00 | — | -0.34* | VCTK (StableTTS) | [Table 4] |
-| PMOS | 4.087 (α=2.0) | 3.721 (α=1) | — | LibriTTS (CosyVoice) | [Table 4,8] |
-| SMOS | 3.67 | 3.47 | 3.58 | LibriTTS (CosyVoice) | [Table 4] |
-| PMOS | 3.823 (α=2.5) | 3.405 (α=1) | — | LibriTTS (CosyVoice-DiT) | [Table 4,9] |
-| SMOS | 3.21 | — | 3.15 | LibriTTS (CosyVoice-DiT) | [Table 4] |
-| Dopri(5) RTF | 0.076 (α=5) | 0.145 | 0.145 | LJ Speech (Matcha-TTS) | [Table 5] |
-| Dopri(5) NFE | 63.74 (α=5) | 121.46 | 121.46 | LJ Speech (Matcha-TTS) | [Table 5] |
-| Dopri(5) speedup | 47.6% | — | 0% | LJ Speech (Matcha-TTS) | [Table 5] |
+### 主观评测 (测试集, Table 4)
+
+| 系统 | CMOS | SMOS | 数据集 |
+| --- | --- | --- | --- |
+| Matcha-TTS SFM (α=2.5) | 0.00 (参考) | — | LJ Speech |
+| Matcha-TTS Baseline | -0.48 | — | LJ Speech |
+| Matcha-TTS Ablated | -0.27 | — | LJ Speech |
+| Matcha-TTS SFM (α=3.5) | 0.00 (参考) | — | VCTK |
+| Matcha-TTS Baseline | -0.31* | — | VCTK |
+| StableTTS SFM (α=3.0) | 0.00 (参考) | — | VCTK |
+| StableTTS Ablated | -0.34* | — | VCTK |
+| CosyVoice SFM (α=2.0) | 0.00 (参考) | 3.67 | LibriTTS |
+| CosyVoice Baseline | -0.21* | 3.47 | LibriTTS |
+| CosyVoice Ablated | -0.14 | 3.58 | LibriTTS |
+| CosyVoice-DiT SFM (α=2.5) | 0.00 (参考) | 3.21 | LibriTTS |
+| CosyVoice-DiT Ablated | -0.31* | 3.15 | LibriTTS |
+
+### 客观评测 - α 选择 (验证集, Table 3 + Appendix D)
+
+| 模型 | 最优 α | PMOS (最优) | PMOS (α=1) | 数据集 |
+| --- | --- | --- | --- | --- |
+| Matcha-TTS SFM | 2.5 | 4.176 | 4.036 | LJ Speech [Table 3] |
+| Matcha-TTS SFM | 3.5 | 3.679 | 3.462 | VCTK [Table 6] |
+| StableTTS SFM | 3.0 | 3.486 | 3.281 | VCTK [Table 7] |
+| CosyVoice SFM | 2.0 | 4.087 | 3.721 | LibriTTS [Table 8] |
+| CosyVoice-DiT SFM | 2.5 | 3.823 | 3.405 | LibriTTS [Table 9] |
+
+### 推理加速 (Table 5, Table 10)
+
+| 系统 | Dopri(5) RTF | NFE | 加速率 | 数据集 |
+| --- | --- | --- | --- | --- |
+| Matcha-TTS Ablated | 0.145 | 121.46 | 0% | LJ Speech |
+| Matcha-TTS SFM (α=5) | 0.076 | 63.74 | 47.6% | LJ Speech |
+| CosyVoice Ablated | 1.397 | 223.37 | 0% | LibriTTS |
+| CosyVoice SFM (α=4) | 0.720 | 116.09 | 48.5% | LibriTTS |
+| CosyVoice-DiT Ablated | 0.539 | 403.36 | 0% | LibriTTS |
+| CosyVoice-DiT SFM (α=4) | 0.229 | 163.48 | 57.6% | LibriTTS |
 
 **关键发现**:
 
-1. **一致的自然度提升**: 所有 5 个模型配置下 SFM 的 PMOS 均优于 baseline 和 ablated,CMOS/SMOS 主观评测同样一致 [Table 4]
-2. **WER/SIM 不一致**: WER 和 speaker similarity 的改善方向不统一。例如 CosyVoice SFM 的 WER 3.810 vs baseline 3.513,SIM 0.931 vs 0.932 [Table 4]。作者承认"仍有改善空间" [§5.1]
-3. **自适应 solver 显著加速**: 随 α 增大,NFE 和 RTF 近乎线性下降。Matcha-TTS α=5 时 Dopri(5) 加速 47.6%,NFE 从 121 降至 64 [Table 5]
+1. **一致的自然度提升**: 所有 5 个模型配置下 SFM 的 CMOS 均为参考系统 (0.00),所有 baseline/ablated 均为负值 (p<0.05 标 *);SMOS 在 CosyVoice 上 3.67 vs baseline 3.47 [Table 4]
+2. **WER/SIM 不一致**: WER 和 speaker similarity 的改善方向不统一。CosyVoice SFM 的 WER 3.810 比 baseline 3.513 更差,SIM 0.931 与 baseline 0.932 相当 [Table 4]。作者承认"仍有改善空间" [§5.1]
+3. **自适应 solver 显著加速**: 随 α 增大,NFE 和 RTF 近乎线性下降。Matcha-TTS α=5 时 Dopri(5) 加速 47.6%,NFE 从 121 降至 64;CosyVoice-DiT α=4 加速 57.6% [Table 5, Table 10]
 4. **固定步长 solver 不受益**: 加速仅限于自适应步长 solver,因为固定步长 solver 无法利用改善的初始状态减少步数 [§5.2]
 5. **CosyVoice (SFM-t)**: 仅输入 speech token 时 SMOS 显著下降 (2.66 vs 3.67),因为 ASR 训练的 semantic token 缺乏说话人信息,早期流推理的错误难以修正 [§5.1]
 
@@ -183,8 +205,9 @@ $$L_{\text{SFM}} = L_{\text{coarse}} + L_t + L_\sigma + L_\mu + L_{\text{CFM}}$$
 3. **轻量 head 即插即用**: SFM head 的设计 (Conv1d + LayerNorm,基于 duration predictor) 证明了在 hidden states 基础上做简单变换就能提供有价值的中间状态,不需要复杂模块
 4. **安全降级机制 (Δ 缩放)**: 当预测不可靠时自动退化到标准行为——这种设计模式可用于任何试图"走捷径"的推理加速方法
 
-> [!review] 审阅状态
-> 待审阅。本笔记由 AI agent 自动生成,status: draft。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> 3 个 low 问题 (template-compliance x1, traceability-gap x2),不阻塞反向更新。
+> 详见 `_review/Shallow Flow Matching-review.yml`。
 
 ---
 检索命中: [[Conditional Flow Matching]]✓, [[CosyVoice]]✓, [[Neural Vocoder]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review) | 未命中但可能相关: 无

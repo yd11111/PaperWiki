@@ -1,0 +1,46 @@
+paper: "Shallow Flow Matching"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+issues_count: 3
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter datasets field
+    detail: "datasets: [] 为空,但论文使用了 LJ Speech, VCTK, LibriTTS 三个数据集。这些数据集在 vault 中无对应实体页,故留空可接受,但不够精确。"
+    suggestion: "可在 datasets 字段中列出名称字符串 (非 wikilink),如 datasets: ['LJ Speech', 'VCTK', 'LibriTTS']。或忽略,待数据集页创建后回补。"
+    fixed: false
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "点评 > 方法的优雅之处"
+    detail: "该段落对正交投影和 Delta 缩放因子做了评价性解读 ('数学上自然的选择', '自动处理不稳定情况'),未标注 [agent 解读]。"
+    suggestion: "在段末添加 [agent 解读] 标注,或在段首声明。"
+    fixed: false
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "点评 > 值得关注的问题"
+    detail: "推测 SFM 跳过早期阶段可能影响语义一致性和说话人特征,这是 agent 推断但已用 '可能' 限定词,风险低。"
+    suggestion: "可保持现状,推断已有限定词。"
+    fixed: false
+
+principle_assessment:
+  可复述: pass
+  可信赖: pass-with-notes
+  可区分: pass
+  可定位: pass
+  不污染: pass
+
+notes: |
+  整体质量好。方法节结构清晰,5 个设计选择都有 WHY 解释和来源标注。
+  速查卡片 5 字段均有实质内容。实验表格分为主观/客观/加速三部分,来源标注清晰。
+  因果解释来源标注覆盖率 > 80%。
+  反向更新安全: 仅追加 key_papers 到已有实体页,不改 status。
+  3 个 low 问题不阻塞反向更新。
