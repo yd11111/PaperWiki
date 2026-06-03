@@ -36,6 +36,9 @@
 ### Security & Traceability
 - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 端到端水印联合训练, frame-wise broadcast, PESQ 3.641/MOS 3.959
 
+### Domain Adaptation & Fine-tuning
+- [[论文笔记/CSP-FT|CSP-FT]] — 2026, 基于 weighted-sum 层贡献分析的选择性微调, ~8% 参数 + 2x 加速, 缓解灾难性遗忘 (Fun-CosyVoice3.0 WER 3.8% vs Full FT 12.1%)
+
 ### Emotion Control
 - [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] — 2024, Interspeech, AVD 伪标签 + 球面坐标解耦风格/强度, nMOS 3.88, ECA 94.02%
 - [[论文笔记/Controlling Emotion TTS NL Prompts|Controlling Emotion TTS NL Prompts]] — 2024, Interspeech, 情感文本作 NL prompt + SE block 融合 + curriculum learning, Cramer's V 0.80, MOS 3.37
@@ -64,7 +67,8 @@ Post-training 演进:
   → GSRM (2025, generative speech reward model)
   → RIO (2025, reverse inference optimization)
   → Multi-Reward GRPO (2025, 多奖励 GRPO for single-codebook TTS)
-  → DMOSpeech 2 (2025, component-level GRPO 靶向 duration predictor)
+  DMOSpeech (2024, 首次端到端 CTC+SV direct metric optimization, non-RL, DMD2 蒸馏打通梯度通路)
+    → DMOSpeech 2 (2025, component-level GRPO 靶向 duration predictor)
   → F5R-TTS (2025, GRPO for NAR flow-matching TTS via output probabilization, 首次 RL 集成 NAR)
 
 Evaluation 演进:
