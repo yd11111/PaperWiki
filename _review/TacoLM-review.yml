@@ -1,0 +1,55 @@
+paper: TacoLM
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节包含充分的 WHY 解释 (MEGA 的效率动机、cross-attention 的注意力退化动机), 速查卡片可借鉴字段给出具体可迁移 trick"
+  可信赖:
+    verdict: pass
+    notes: "数字型 claim 标注覆盖率 ~90%, 指标使用正确 (WER/SPK/CMOS/SMOS/RTF), 速查卡片含具体数字+数据集+来源"
+  可区分:
+    verdict: pass-with-fixes
+    notes: "大部分因果解释有 [论文原文]/[agent 解读] 标注, 但部分段落仍缺少标注"
+  可定位:
+    verdict: pass
+    notes: "KB 背景有具体谱系定位 (VALL-E 系列改进), 创新判断有对比基准"
+  不污染:
+    verdict: pass
+    notes: "本次不新建概念页, 仅追加 key_papers, 无 factual-error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可区分
+    location: "方法 > 关键设计选择 > GCA"
+    detail: "GCA 效果段 '参数反而进一步减少' 的解释标注了 [agent 解读] 但原因分析 (shared 权重设计) 缺少论文支撑"
+    suggestion: "保持 [agent 解读] 标注即可, 这里确实是推断"
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: "frontmatter > venue"
+    detail: "venue 填写 'Interspeech 2024 (inferred from format)', 论文格式确实是 Interspeech 但未在论文中明确标注"
+    suggestion: "保持 (inferred) 标注, 用户确认后去除"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea #3"
+    detail: "Text prefix 双向 + audio 单向的混合注意力模式较为通用, 不够具体"
+    suggestion: "可补充具体实现参数 (如 bidirectional mask 的范围边界)"
+
+stats:
+  total_issues: 3
+  high: 0
+  medium: 2
+  low: 1
+  claim_coverage: "~90%"
+  source_annotation_coverage: "~85%"
