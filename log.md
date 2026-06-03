@@ -296,6 +296,12 @@
 - [lint/local] Fish Audio S2 — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +Fish Audio S2, SOTA 表更新
 - [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
+- [kb/search] [[DiSTAR]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓ | 过滤: [[Masked Generative Modeling]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Diffusion-based TTS]](pending-review)
+- [ingest/deep] [[DiSTAR]] — 精读, kb_sources=6, 新建 0, 追加 7 (Residual Vector Quantization, Masked Generative Modeling, Classifier-Free Guidance, Codec Language Model, Quantizer Dropout, Zero-shot Speech Synthesis, Emilia)
+- [review/auto] [[DiSTAR]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] DiSTAR — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +DiSTAR
+- [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
 
 ## 2026-06-03
 - [kb/search] [[Spark-TTS]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Finite Scalar Quantization]](pending-review)
