@@ -1,0 +1,61 @@
+paper: "SafeSpeech"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "点评 > 优势 > 第1点"
+    detail: "'第一个将语音保护从 inference-only 扩展到 training-stage 的系统' 是强断言,论文原文用 'for the first time protects our voice at training time in our best knowledge' [§1],应标注来源并保留原文的限定词"
+    suggestion: "改为 '论文声称是首个将语音保护扩展到 training-stage 的系统 [§1, contribution bullet 1],in best knowledge'"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "局限性 > 第3点"
+    detail: "'说明某些 codec-LM 架构对扰动有一定抗性' 是 agent 推断,应标注"
+    suggestion: "补充 [agent 解读] 标签"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "datasets 为空,论文使用 LibriTTS 和 CMU ARCTIC 但 vault 中无对应数据集页"
+    suggestion: "可保持空值,LibriTTS 和 CMU ARCTIC 是经典公开数据集,在 vault 中不需要独立页面"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > models"
+    detail: "models 仅列 VITS,但论文涉及 BERT-VITS2(代理模型)、StyleTTS2、MB-iSTFT-VITS、GlowTTS、F5-TTS 等 10 个模型作为评估对象"
+    suggestion: "models 应列本文的方法模型(代理模型 BERT-VITS2)和核心评估 baseline,但 vault 中仅有 VITS 页面,不需要为每个 baseline 创建页面。保持当前即可,或补充说明"
+
+  - id: 5
+    type: fact-inference-mixing
+    severity: low
+    principle: distinguishable
+    location: "点评 > 不足 > 第1点"
+    detail: "'可能因为 codec LM 的 VQ 离散化天然过滤了连续扰动' 缺少 [agent 解读] 标签"
+    suggestion: "在该句前补充 [agent 解读]"
+
+stats:
+  claim_coverage: "90%"
+  source_tag_coverage: "85%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 4

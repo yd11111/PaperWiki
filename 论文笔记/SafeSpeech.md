@@ -155,20 +155,20 @@ L = L_SPEC + alpha * L_perception
 
 1. **去噪对抗**: 高级去噪模型(DEMUCS)可将 WER 从 99.6% 降至 57.3%,虽然 SIM 仍低于阈值(0.284 > 0.25 但接近),但保护效果被削弱 [§7.1.1]。[论文原文] 作者认为去噪同时也会去除部分原始说话人信息,形成"双刃剑"效应
 2. **物理世界局限**: 实时保护需要额外的 GPU 设备和播放设备(speaker),且需要 ~14 秒的启动时间 [§7.3]。在嘈杂环境中扰动效果可能下降
-3. **FishSpeech 相对抗性**: zero-shot 评估中 FishSpeech 的 SIM 仍有 0.301(高于 0.25 阈值) [Fig 4],说明某些 codec-LM 架构对扰动有一定抗性
+3. **FishSpeech 相对抗性**: zero-shot 评估中 FishSpeech 的 SIM 仍有 0.301(高于 0.25 阈值) [Fig 4],[agent 解读] 这说明某些 codec-LM 架构对扰动有一定抗性
 4. **epsilon 与感知的 trade-off**: 扩大 epsilon 可增强保护但降低感知质量。当前 epsilon=8/255 是折中点,极端场景可能需要更大的扰动 [Appendix D.3]
 5. **代理模型依赖**: 虽然迁移性已经验证,但对未来架构(如 full audio LM)的迁移效果未知。作者建议用 model ensemble 但承认计算成本高 [§8]
 
 ## 点评
 
 **优势**:
-- 第一个将语音保护从 inference-only(adversarial examples)扩展到 training-stage(unlearnable examples)的系统,场景覆盖面大幅提升
+- 论文声称是首个将语音保护从 inference-only(adversarial examples)扩展到 training-stage(unlearnable examples)的系统 [§1, "for the first time protects our voice at training time in our best knowledge"],场景覆盖面大幅提升
 - SPEC 的 KL 散度引导思路新颖,将防护目标从"降低相似度"升级为"让输出变成噪声",在 WER 指标上几乎达到 100%(完全不可用),远超 AntiFake 的 48.966%
 - 实验设计全面: 10 个 TTS 模型(5 fine-tuning + 5 zero-shot)、2 个数据集、3 层鲁棒性(data/model/physical)、主观评估 80 人
 - 效率突破: pivotal objective 选择将扰动生成时间从 10.3s 缩短到 4.0s(减少 61.2%),实现了实时保护的可能
 
 **不足**:
-- 对 codec LM 架构(如 FishSpeech)的保护效果不如传统 TTS,可能因为 codec LM 的 VQ 离散化天然过滤了连续扰动
+- 对 codec LM 架构(如 FishSpeech)的保护效果不如传统 TTS,[agent 解读] 可能因为 codec LM 的 VQ 离散化天然过滤了连续扰动
 - 感知优化依赖 STOI 和 STFT 两个代理指标,但未报告 PESQ 或 VISQOL 等更全面的感知质量指标
 - 物理世界实验只在安静室内(22 dBA 背景噪声)测试,未验证嘈杂环境
 
@@ -182,5 +182,10 @@ L = L_SPEC + alpha * L_perception
 3. **Perception-aware perturbation**: 用 STOI + STFT 替代纯 L_p norm 做感知约束,在保护效果和可用性之间找平衡
 4. **Single-sample universality**: 只需一段目标说话人音频生成扰动,即可 pad/truncate 到其他样本,实现持续保护 [§7.3]
 
-> [!review] 审阅摘要
-> 待审阅。
+> [!review] 审阅摘要 (auto, 2026-06-03, checklist v1.1)
+> **结论: pass-with-fixes**
+> - 可复述: pass -- 方法节含 WHY 解释(pivotal objective 三原则、SPEC 的 KL 动机),关键设计选择清晰
+> - 可信赖: pass-with-fixes -- 1 个 medium: "首个 training-stage 防护"强断言已补充原文限定词; claim 标注覆盖率 ~90%
+> - 可区分: pass -- 因果解释均标注了 [论文原文] / [agent 解读]; 2 处遗漏已补充
+> - 可定位: pass -- KB 背景含谱系定位+创新判断; frontmatter 字段基本完整(datasets 空可接受)
+> - 不污染: pass -- 概念挂接合理,无新建实体页需求,反向更新为纯 append
