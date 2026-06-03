@@ -569,3 +569,11 @@
 - [review/auto] [[Survey-Speech Language Models]] — pass-with-fixes, 4 issues (0 high, 2 medium (均已修), 2 low)
 - [lint/local] Survey-Speech Language Models — 通过/0 死链
 - [moc] 语音大模型与对话 MOC 更新: +Survey-Speech Language Models (2024, 首篇 SpeechLM 综述)
+
+## 2026-06-03 (RWKVTTS)
+- [kb/search] [[RWKVTTS]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review)
+- [ingest/deep] [[RWKVTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (LLM-based TTS key_papers, CosyVoice 2 key_papers + baseline 引用)
+- [review/auto] [[RWKVTTS]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [lint/local] RWKVTTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +RWKVTTS (2025, RWKV-7 替换 CosyVoice backbone)
+- [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
