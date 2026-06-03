@@ -45,6 +45,7 @@ F0 (Fundamental Frequency, 基频) 是声带振动频率的物理量,直接决�
 - **简单回归**: 类似 FastSpeech 2 的 pitch predictor,但条件化乐谱 MIDI pitch
 - **Diffusion-based**: RMSSinger (He et al., 2023) 使用扩散模型预测 F0 轮廓,生成更自然、可控的 F0 轨迹 [§2]
 - **源滤波器模型**: SiFiSinger (Cui et al., 2024) 引入源模块生成 F0 控制的激励信号 (excitation signal),通过滤波器模块整形为频谱,实现物理可解释的 F0 控制 [§3.2]
+- **Flow Matching-based**: [[论文笔记/TechSinger|TechSinger]] (Guo et al., 2025) 将 F0 视为一维连续数据,用 rectified flow matching 训练向量场估计器预测 F0 轮廓,以乐谱+技巧编码为条件,比 L1 回归更好地建模技巧→F0 的复杂映射
 
 ### 2. Vibrato 建模 [§2, §A.1]
 歌声中的 vibrato 需要专门建模:
