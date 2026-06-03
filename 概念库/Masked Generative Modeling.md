@@ -4,7 +4,7 @@ title: "Masked Generative Modeling"
 aliases: [Masked Generative Transformer, Mask-and-Predict, Non-autoregressive Masked Generation, MaskGIT-style Generation]
 category: "generative-model"
 tags: [generative-model, non-autoregressive, discrete-token, parallel-decoding]
-key_papers: ["[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]"]
+key_papers: ["[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/DiSTAR|DiSTAR]]"]
 origin_paper: "Chang et al., MaskGIT: Masked Generative Image Transformer, CVPR 2022"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]"]
 status: pending-review
