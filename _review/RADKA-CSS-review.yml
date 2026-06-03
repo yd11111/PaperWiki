@@ -1,0 +1,63 @@
+paper: "RADKA-CSS"
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节有 6 个编号设计选择,每个包含 WHY 因果解释;速查可借鉴字段列举了 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "所有实验数据标注 [Table N] 出处;指标名 (N-DMOS/S-DMOS/MAE-P/E/D/CMOS/Recall) 使用正确;无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "13 处 [论文原文]/[agent 解读] 标注,覆盖率约 90%;局限性 4/6 明确标注为 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含谱系定位+已有认知+创新判断;frontmatter concepts 正确挂接 6 个概念页"
+  不污染:
+    satisfied: true
+    notes: "无新建概念页;反向更新仅追加 key_papers 到已有页面"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: "datasets 字段为空,但论文使用 DailyTalk 数据集。vault 中无 DailyTalk 数据集页,但应记录引用关系"
+    suggestion: "datasets 保持为空 (vault 无 DailyTalk 页面,不宜凭空创建);在笔记中已通过文本描述充分覆盖数据集信息"
+    status: acceptable
+
+  - type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "局限性 #3"
+    detail: "'backbone 较老' 是 agent 判断而非论文 claim,虽已通过上下文可推断但未显式标注 [agent 解读]"
+    suggestion: "已在局限性 #4-#6 对 agent 解读做了标注;#3 的判断基于领域常识,风险低"
+    status: acceptable
+
+  - type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "速查卡片.局限 #4"
+    detail: "'代码开源但论文仍为 preprint' 的 preprint 状态需验证 (venue 字段写 submitted to Elsevier)"
+    suggestion: "论文首页标注 'Preprint submitted to Elsevier',信息源可靠"
+    status: acceptable
+
+  - type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.tasks
+    detail: "tasks 字段为空,但论文核心任务是 Conversational Speech Synthesis;vault 中无对应任务页"
+    suggestion: "CSS 尚未独立成页,不强制创建;保持为空"
+    status: acceptable
+
+summary: |
+  笔记整体质量良好。方法机制解释充分,包含 6 个编号设计选择和详细的 [论文原文]/[agent 解读] 区分。
+  KB 背景有效定位了论文在 CSS + RAG 交叉点的位置,明确指出知识库中的空白。
+  实验部分覆盖主结果、9 项消融、7 种检索方案对比和超参分析,数据标注完整。
+  1 个 medium issue (datasets 字段为空) 经评估属于可接受范围 (vault 无对应数据集页)。
+  3 个 low issues 均为可接受的微调建议,不阻塞反向更新。
+  结论: pass-with-fixes,可进行反向更新。
