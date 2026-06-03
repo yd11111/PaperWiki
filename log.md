@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[FMSD-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[FMSD-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Speaker Embedding, Conditional Flow Matching, Speaker Adaptation, Duration Predictor, Non-autoregressive TTS, BigVGAN, VITS)
+- [review/auto] [[FMSD-TTS]] — pass-with-fixes, 0 high + 1 medium + 2 low
+- [lint/local] FMSD-TTS — 通过/0 问题
+- [moc/update] 零样本语音合成 — 追加 FMSD-TTS
+- [kb/search] [[JoyTTS]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[JoyTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (LLM-based TTS, CosyVoice 2, SEED-TTS-Eval)
+- [review/auto] [[JoyTTS]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 2 low (template-compliance, weak-reusability)
+- [lint/local] JoyTTS — 通过/0 问题
+- [moc/update] 语音大模型与对话 + 零样本语音合成 — 追加 JoyTTS
 - [kb/search] [[DiEmo-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Gradient Reversal Layer]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
 - [ingest/deep] [[DiEmo-TTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Emotion Control in TTS, Speech Factorization, Style Transfer in TTS, Speaker Embedding, Gradient Reversal Layer)
 - [review/auto] [[DiEmo-TTS]] — pass-with-fixes, 2 low issues
@@ -40,10 +50,6 @@
 - [review/auto] [[GSA-TTS]] — pass-with-fixes, 0 high + 2 medium
 - [lint/local] GSA-TTS — 通过/0 问题
 - [moc/update] 零样本语音合成 — 追加 GSA-TTS
-- [kb/search] [[RapFlow-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Diffusion Model]](pending-review), [[Score Matching]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review)
-- [ingest/deep] [[RapFlow-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM, Diffusion-based TTS, Diffusion Model, Score Matching, NAR TTS, Duration Predictor)
-- [review/auto] [[RapFlow-TTS]] — pass-with-fixes, 0 high + 0 medium + 3 low
-- [lint/local] RapFlow-TTS — 通过/0 问题
 - [moc/update] TTS-总览 — 生成方法演进分类追加 RapFlow-TTS
 - [kb/search] [[UniTTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review)
 - [ingest/deep] [[UniTTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Residual Vector Quantization, LLM-based TTS, Semantic vs Acoustic Tokens, Speech Tokenizer, Codebook Collapse, Single-codebook vs Multi-codebook)
