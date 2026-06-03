@@ -156,3 +156,6 @@ laughter detector → NV 通用 detector 的发现是一个有趣的 serendipity
 3. **大规模情感数据伪标签流水线**: emotion2vec 分类 → 置信度过滤 → DNSMOS 质量过滤 → speaker change detection → 从 200k 小时清洗出 27k 小时情感数据。这条 pipeline 可复用于任何需要大规模情感数据的任务。
 4. **分数据源选择性启用条件**: 当多种条件 embedding 在某些数据上存在负面交互时,按数据源分别启用不同条件是实用的解决策略。
 5. **线性插值对齐不同时长的条件**: 当 NV/emotion prompt 与 text prompt 长度不同时,直接用线性插值对齐 -- 简单有效。
+
+> [!review] 审阅结论: pass (2026-06-03)
+> 5 维度均达标,无 high/medium issue。方法节因果解释充分 (4 个 WHY 设计选择含消融证据),数据溯源完整,事实/推断区分清晰 (100% 来源标注覆盖),KB 定位准确。详见 `_review/EmoCtrl-TTS-review.yml`。

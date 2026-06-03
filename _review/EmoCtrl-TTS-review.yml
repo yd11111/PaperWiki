@@ -1,0 +1,42 @@
+paper: EmoCtrl-TTS
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass
+
+dimensions:
+  可复述:
+    score: good
+    notes: >
+      方法节包含 4 个关键设计选择的 WHY 解释 (arousal-valence vs 离散类别 vs FACodec;
+      laughter detector 泛化; 分数据源 embedding; dominance 被去掉)。
+      速查卡片"可借鉴"列出 3 个具体可迁移 trick。
+  可信赖:
+    score: good
+    notes: >
+      实验数据全部标注出处 [Table 3/4/5/6/7]。方法描述标注 [§3.1-3.4]。
+      指标名正确 (WER/SIM-o/AutoPCP/Emo SIM/Aro-Val SIM/SMOS/NMOS/EMOS)。
+      速查卡片指标含具体数字+数据集+来源。无方向性错误。
+  可区分:
+    score: good
+    notes: >
+      方法节所有因果解释均标注 [论文原文] 或 [agent 解读],覆盖率 100%。
+      agent 解读用 "可能""这可能是因为" 限定词,未把推断写成断言。
+  可定位:
+    score: good
+    notes: >
+      KB 背景含 Voicebox → ELaTE → EmoCtrl-TTS 谱系链,创新判断有对比基准。
+      frontmatter 字段齐全,concepts/models 语义正确。速查卡片 5 字段有实质内容。
+  不污染:
+    score: good
+    notes: >
+      反向更新为追加 key_papers (不改 status)。无新建概念页。
+      无 factual-error 或 overclaim。
+
+issues: []
+
+summary: >
+  笔记质量优良。方法节因果解释充分 (4 个 WHY 设计选择含消融证据),
+  数据溯源完整 (所有数字标注出处),事实/推断区分清晰 (100% 来源标注覆盖),
+  KB 定位准确 (谱系链 + 与 NVSpeech 等已有工作的路线对比)。
+  无需修正即可执行反向更新。
