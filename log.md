@@ -708,3 +708,10 @@
 - [lint/local] Low-Resource ForwardTacotron — 通过/0 死链
 - [moc] TTS-总览 生成方法演进: +Low-Resource ForwardTacotron
 [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
+
+## 2026-06-03 (FPO)
+- [kb/search] [[FPO]] — 命中 5 页(取 Top 5): [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[CosyVoice]]✓, [[CosyVoice 2]]✓, [[TTS Evaluation]][待确认] | 过滤: [[Differentiable Reward Optimization]](pending-review)
+- [ingest/deep] [[FPO]] — 精读, kb_sources=5, 新建 0, 追加 5 (Differentiable Reward Optimization, LLM-based TTS, TTS Evaluation, CosyVoice, CosyVoice 2 key_papers)
+- [review/auto] [[FPO]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] FPO — 通过/0 死链
+- [moc] TTS训练与评估 Post-training: +FPO; 零样本语音合成 2025: +FPO
