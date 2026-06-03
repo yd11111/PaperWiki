@@ -1,0 +1,70 @@
+paper: StoryTTS
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principle_assessment:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含充分的因果解释(WHY): 为什么选评书、为什么五个维度、为什么混合离散+连续标注、
+      为什么不同LLM负责不同维度。关键设计选择均有对比性解释。
+      速查卡片"可借鉴"包含3个具体可迁移trick。
+  可信赖:
+    verdict: pass
+    notes: >
+      数字型claim标注覆盖率约90%。指标名使用正确(MCD/log-F0 RMSE/MOS)。
+      速查卡片指标字段包含具体数字+来源。无方向性错误。
+  可区分:
+    verdict: pass
+    notes: >
+      因果解释来源标注覆盖率>90%。[论文原文]和[agent解读]区分清晰且一致。
+      "首个"断言有论文原文支撑[§5]。局限性全部标注为[agent解读]。
+  可定位:
+    verdict: pass
+    notes: >
+      KB背景节有具体谱系定位(Reference Encoder/GST vs 文本端方法)。
+      创新判断有三个对比基准。frontmatter字段齐全。
+  不污染:
+    verdict: pass
+    notes: >
+      本次不创建新概念页。反向更新仅为key_papers追加(append)。
+      无factual-error或overclaim风险。
+
+issues:
+  - id: 1
+    type: successor-as-model
+    severity: medium
+    location: frontmatter models
+    detail: >
+      原始草稿models字段列了VITS,但论文实际baseline是VQTTS(Du et al., 2022),
+      二者是不同模型。VITS仅在Introduction中被提及[4],不是实验对比模型。
+    suggestion: 改为VQTTS引用
+    resolved: true
+    resolution: 已修正为"VQTTS (Du et al., 2022)"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 整体架构 - 数据集构建pipeline
+    detail: >
+      数据集统计数字(33108条, 60.9h, 16kHz, SNR 32dB)原始草稿未标注[Table 1]。
+    suggestion: 补充[Table 1]标注
+    resolved: true
+    resolution: 已补充[Table 1]
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: frontmatter datasets
+    detail: >
+      datasets字段为空。StoryTTS本身就是本文提出的数据集,但KB中无对应实体页。
+      不宜在datasets中引用不存在的页面。
+    suggestion: 可考虑后续创建StoryTTS数据集页后回填。当前留空可接受。
+    resolved: false
+
+conclusion: pass-with-fixes
+summary: >
+  笔记整体质量良好。五项原则均通过。发现2个已修复问题(models字段误引+统计数据缺标注)
+  和1个低优先级待定项(datasets字段为空)。因果解释充分且来源标注清晰。
+  KB背景定位准确。可进行反向更新。

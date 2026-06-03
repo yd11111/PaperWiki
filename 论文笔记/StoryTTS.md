@@ -9,7 +9,7 @@ year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, dataset, expressiveness, prosody, annotation, LLM, Mandarin, storytelling]
 concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Natural Language Description for TTS]]", "[[TTS Evaluation]]"]
-models: ["[[模型库/VITS|VITS]]"]
+models: ["VQTTS (Du et al., 2022)"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -69,7 +69,7 @@ StoryTTS 的贡献分两部分: 数据集构建 + 实验验证。
   → 人工逐行校正识别错误
   → 标点增强
   → LLM 五维度标注
-  → 最终: 33108 条, 60.9h, 16kHz, SNR 32dB
+  → 最终: 33108 条, 60.9h, 16kHz, SNR 32dB [Table 1]
 ```
 
 **实验验证架构**:
@@ -195,8 +195,11 @@ StoryTTS 的主要价值在于 **提出了一个被忽视但重要的研究方�
 
 ---
 
-> [!review] 审阅状态
-> 待审阅。详见 `_review/StoryTTS-review.yml`。
+> [!review] 审阅状态: pass-with-fixes (2026-06-03)
+> - **结论**: pass-with-fixes (2 issues resolved, 1 low pending)
+> - **已修复**: models 字段误引 VITS→VQTTS; 数据集统计补 [Table 1] 标注
+> - **待定 (low)**: datasets 字段为空 (待创建 StoryTTS 数据集页后回填)
+> - 详见 `_review/StoryTTS-review.yml`
 
 ---
 
