@@ -1,0 +1,94 @@
+paper: PALLE
+reviewer: agent-auto
+date: 2026-06-03
+version: v1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含清晰的因果解释(WHY PAR > AR/NAR),关键设计选择均有 WHY 回答"
+  trustworthy:
+    verdict: pass
+    notes: "数字 claim 标注覆盖率高,指标名正确(WER-W/WER-H/SIM-o/RTF/SMOS/CMOS 均准确)"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读],边界清晰"
+  locatable:
+    verdict: pass
+    notes: "KB 背景含具体谱系定位(AR/NAR/混合三路线 + PALLE 第四路线),创新判断有对比基准"
+  non_polluting:
+    verdict: pass
+    notes: "无新概念页需创建,反向更新为追加类型,不改变 status"
+
+checklist:
+  - id: mechanism-over-listing
+    principle: reproducible
+    severity: low
+    status: pass
+    detail: "方法节按 PAR 范式/span 比例解耦/confidence refinement/duration estimation 四个设计选择组织,每个回答了 WHY"
+
+  - id: claim-traceability
+    principle: trustworthy
+    severity: low
+    status: pass-with-note
+    detail: "数字 claim 标注覆盖率约 90%。实验表格均有 [Table N] 出处。方法节引用 [§X.X] 和 [Eq N]。少数 agent 解读段落的推断已标注 [agent 解读]"
+
+  - id: metric-accuracy
+    principle: trustworthy
+    severity: low
+    status: pass
+    detail: "WER-W/WER-H/SIM-o/RTF/SMOS/CMOS 均使用正确,方向标注正确(↓/↑)"
+
+  - id: source-labeling
+    principle: distinguishable
+    severity: low
+    status: pass
+    detail: "因果解释来源标注覆盖率约 85%,多数 WHY 解释标了 [论文原文] 或 [agent 解读]"
+
+  - id: no-overclaim
+    principle: distinguishable
+    severity: low
+    status: pass
+    detail: "点评节用了 '可能因为' 等限定词,未出现无支撑的强断言"
+
+  - id: kb-lineage
+    principle: locatable
+    severity: low
+    status: pass
+    detail: "KB 背景包含四条路线定位 + MaskGIT-SoundStorm-MaskGCT 演进线 + 与 SyncSpeech/Grouped AR 的具体区分"
+
+  - id: fields-present
+    principle: locatable
+    severity: low
+    status: pass
+    detail: "frontmatter 所有字段齐全(type/tier/title/arxiv_id/source/authors/year/venue/tags/concepts/models/tasks/datasets/kb_context_sources/status/created/updated)"
+
+  - id: fields-semantically-correct
+    principle: locatable
+    severity: low
+    status: pass
+    detail: "models 列了 CosyVoice 2(tokenizer/detokenizer 来源)和 EnCodec(baseline 对比); concepts 列了本文核心概念; 未出现 successor-as-model 问题"
+
+  - id: quick-card-quality
+    principle: locatable
+    severity: low
+    status: pass
+    detail: "速查卡片 5 字段均有实质内容,指标含具体数字+对比基准+数据集+出处"
+
+  - id: concept-dedup
+    principle: non_polluting
+    severity: low
+    status: pass
+    detail: "未创建新概念页。PAR 作为新范式可能值得独立概念页但本次仅做追加更新"
+
+  - id: backward-update-safety
+    principle: non_polluting
+    severity: low
+    status: pass
+    detail: "反向更新计划: 追加 key_papers 到 Codec Language Model/Masked Generative Modeling/Zero-shot Speech Synthesis 等,不改定义,不改 status"
+
+conclusion: pass
+issue_count: 0
+high_issues: 0
+medium_issues: 0
+low_issues: 0

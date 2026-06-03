@@ -158,3 +158,8 @@ Table 3 的控制实验是本文最有说服力的部分: 同一 tokenizer/detok
 2. **训练/推理 span 比例解耦**: 训练用大 span (10%) 保证梯度信号充足,推理用小 span (1%) 提升质量。类似于 diffusion model 中训练/推理 timestep schedule 的解耦
 3. **Confidence-guided refinement 作为后处理**: 仅 7 步即可显著降低 WER,可作为轻量后处理模块加到任何 masked generative TTS 系统上
 4. **Linear BPE-level duration estimation**: 简单有效,甚至略优于 GT duration (可能因为避免了 prompt-target 语速不匹配),值得在缺乏 forced alignment 的场景采用
+
+> [!review] 审阅 (2026-06-03, agent-auto)
+> **结论**: pass | 0 issues
+> 五维度均通过: 因果解释充分(可复述), claim 标注覆盖率 ~90%(可信赖), 来源标注覆盖率 ~85%(可区分), KB 谱系定位具体(可定位), 反向更新安全(不污染)。
+> 详见 `_review/PALLE-review.yml`
