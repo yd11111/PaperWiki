@@ -1,0 +1,35 @@
+paper: UMETTS
+tier: deep
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节含因果解释(WHY prompt anchoring, WHY two-stage training, WHY different TTS variants); 每个设计选择有对比替代方案的讨论; 速查卡片可借鉴字段具体(prompt anchoring 策略)"
+  可信赖:
+    satisfied: true
+    notes: "所有数字 claim 均标注 [Table I]/[Table II]/[§X]/[Eq.N]; 指标名正确(WER/CER/MCD/SECS/ESMOS/SNMOS/SSMOS); 速查卡片指标含数字+数据集+出处; 无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "因果解释一致标注 [论文原文] 或 [agent 解读]; 覆盖率 ~100%; 无推断写成断言的句子; 局限性节中的 agent 判断均有标注"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系定位(Emotion Control 演进线 + GST 局限对比 + Style Transfer 分类); 创新判断有对比基准(vs 单模态方法); frontmatter 字段齐全"
+  不污染:
+    satisfied: true
+    notes: "未新建概念页; 反向更新将以 append 为主(加 key_papers); 无 overclaim 或 factual error"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "datasets 字段为空,但论文使用了 ESD, MELD, MEAD, RAF-DB 四个数据集,均无 vault 实体页故无法填写 wikilink"
+    suggestion: "可保持空或以纯文本备注; 非阻塞"
+
+conclusion: pass
+total_issues: 1
+high: 0
+medium: 0
+low: 1

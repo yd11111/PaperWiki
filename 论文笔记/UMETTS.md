@@ -168,3 +168,8 @@ UMETTS 的核心 idea — 用对比学习统一多模态情感表示 — 方向�
 2. **解耦对齐与生成**: EP-Align 和 EMI-TTS 的两阶段训练思路 — 先在多模态数据上训练条件提取模块,再将提取的条件注入已有生成模型。这种即插即用的设计可以复用到其他 controllable TTS 场景。
 
 3. **Conditional Cross-Attention 注入情感**: FastSpeech2 变体中用 cross-attention($Q$ from hidden, $K/V$ from condition)注入条件信息的方式,效果优于简单 concatenation(从 SECS 和 WER 指标看)。这种方式值得在其他条件化 TTS 模型中尝试。
+
+> [!review] 审阅 (2026-06-03, auto, checklist v1.1)
+> **结论: pass** | issues: 0 high, 0 medium, 1 low
+> - (low) datasets frontmatter 为空(论文用 ESD/MELD/MEAD/RAF-DB,均无 vault 实体页)
+> 详见 `_review/UMETTS-review.yml`
