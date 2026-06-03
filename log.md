@@ -115,3 +115,11 @@
 - [create/concept] [[Self-Supervised Speech Representation]] — 新建概念页(满足准入: 多篇引用(4+) + 前置知识 + 连接 wav2vec 2.0/HuBERT/WavLM/w2v-BERT)
 - [create/model] [[模型库/wav2vec 2.0|wav2vec 2.0]], [[模型库/WavLM|WavLM]], [[模型库/w2v-BERT|w2v-BERT]] — 3 个模型页创建
 - [lint/local] wav2vec 2.0, WavLM, w2v-BERT — 通过/0 问题
+- [kb/search] [[HierSpeech++]] — 命中 6 页(confirmed): [[Variational Autoencoder for TTS]]✓, [[Speech Factorization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[F0 Modeling]]✓, [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review)
+- [kb/search] [[MELLE]] — 命中 6 页(confirmed): [[LLM-based TTS]]✓, [[Codec Language Model]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
+- [kb/search] [[Make-A-Voice]] — 命中 6 页(confirmed): [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[Speaker Embedding]]✓ | 过滤: [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[HierSpeech++]] — 精读(batch processing), kb_sources=6, 新建模型页 1 (HierSpeech++), 追加更新 6 个实体页(VAE for TTS, Speech Factorization, Semantic vs Acoustic Tokens, F0 Modeling, Neural Vocoder, Speaker Embedding)
+- [ingest/deep] [[MELLE]] — 精读(batch processing), kb_sources=6, 新建模型页 1 (MELLE), 追加更新 6 个实体页(LLM-based TTS, Codec Language Model, RVQ, Neural Vocoder, Mel Spectrogram, VAE for TTS)
+- [ingest/deep] [[Make-A-Voice]] — 精读(batch processing), kb_sources=6, 新建模型页 1 (Make-A-Voice), 追加更新 4 个实体页(Semantic vs Acoustic Tokens, LLM-based TTS, F0 Modeling, Singing Voice Synthesis)
+- [create/entity] 无新建 — 候选 (Spectrogram Flux Loss, Latent Sampling Module, Style Prompt Replication, Bidirectional Transformer Flow, Unit-based Vocoder) 均不满足准入规则(单篇论文特有概念)
+- [lint/local] HierSpeech++, MELLE, Make-A-Voice — 通过/0 问题
