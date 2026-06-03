@@ -9,7 +9,7 @@ year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, multilingual, low-resource, meta-learning, zero-shot, language-embedding, massively-multilingual]
 concepts: ["[[Phoneme Representation]]", "[[Non-autoregressive TTS]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Mel Spectrogram]]", "[[Prosody Modeling]]"]
-models: ["[[VITS]]", "[[Whisper]]"]
+models: ["[[Whisper]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]"]
 datasets: []
 kb_context_sources: 6
@@ -184,8 +184,11 @@ $$\Delta(e(l_1), e(l_2)) = \text{ML}(m(l_1, l_2)) \quad \text{for } m \in M$$
 4. **合成数据扩展语言覆盖**: 用现有 TTS 系统为新语言生成合成数据,再用合成数据训练更通用的系统,形成 bootstrap 循环。
 5. **Articulatory features 作为语言无关输入**: 用发音器官配置的二值向量替代离散音素 ID,实现真正的跨语言共享输入空间。
 
-> [!review] 审阅标记
-> 待审阅。本笔记由 agent 自动生成,status: draft。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> - **结论**: pass-with-fixes (1 medium, 1 low issue)
+> - **medium**: frontmatter models 误含 VITS,已修正
+> - **low**: datasets 为空(论文使用的数据集均不在 KB 中,合理留空)
+> - 详见 `_review/Meta Learning TTS 7000 Languages-review.yml`
 
 ---
 

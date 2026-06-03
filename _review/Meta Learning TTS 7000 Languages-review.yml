@@ -1,0 +1,44 @@
+paper: "Meta Learning TTS 7000 Languages"
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含完整的 WHY 解释(4 个设计选择各有因果分析); 速查卡片可借鉴列举 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%; 指标名正确(WER/PER/WV-MOS); 方向正确(WER↓/WV-MOS↑)"
+  可区分:
+    satisfied: true
+    notes: "[论文原文]/[agent 解读] 标注覆盖率 >85%; 推断性分析(局限性3/4)均已标注 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景清晰区分了语言维度零样本 vs 说话人维度零样本; 创新判断有对比(vs LLM-TTS 路线)"
+  不污染:
+    satisfied: true
+    notes: "反向更新仅追加 key_papers; 不新建概念页; 无 factual error 风险"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: "frontmatter models 字段"
+    detail: "models 包含 [[VITS]],但本文未使用 VITS 作为模型或对比 baseline。VITS 与本文无直接关系。Whisper 用于评估(ASR 转写)是合理的。"
+    suggestion: "移除 VITS,仅保留 [[Whisper]]。本文自身模型(IMS Toucan)不在模型库中,对比 baseline (MMS) 也不在模型库中,不需要新建。"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空,但论文使用了 FLEURS、MLS、VCTK 等多个数据集。不过这些数据集均不在当前 KB 中。"
+    suggestion: "可保持为空。若未来有相关数据集页入库再补充。"
+
+summary: |
+  笔记质量整体良好。方法节对四个关键设计选择均提供了因果解释和来源标注。
+  KB 背景节准确定位了本文在「语言维度零样本」vs「说话人维度零样本」上的独特贡献。
+  唯一 medium issue 是 frontmatter models 字段误包含 VITS,需修正后再进行反向更新。
