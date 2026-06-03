@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[TTS-CtrlNet]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[TTS-CtrlNet]] — 精读, kb_sources=6, 新建 0, 追加 4 (Conditional Flow Matching, Emotion Control in TTS, Zero-shot Speech Synthesis, Style Transfer in TTS), MOC 更新 1 (TTS-总览)
+- [review/auto] [[TTS-CtrlNet]] — pass, 0 issues
+- [lint/local] TTS-CtrlNet — 通过, 0 死链
 - [kb/search] [[UDDETTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Finite Scalar Quantization]](pending-review), [[CosyVoice 3]](pending-review)
 - [ingest/deep] [[UDDETTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Conditional Flow Matching, LLM-based TTS, Speech Tokenizer, Finite Scalar Quantization, CosyVoice 3)
 - [review/auto] [[UDDETTS]] — pass-with-fixes, 0 high + 0 medium + 2 low
