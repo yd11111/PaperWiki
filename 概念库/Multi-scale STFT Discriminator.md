@@ -4,7 +4,7 @@ title: "Multi-scale STFT Discriminator"
 aliases: [Multi-band STFT Discriminator, STFT-D, Complex STFT Discriminator]
 category: "architecture-component"
 tags: [discriminator, GAN, frequency-domain, audio-codec, vocoder]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SNAC|SNAC]]"]
 origin_paper: ""
 related_concepts: ["[[Snake Activation]]", "[[Residual Vector Quantization]]", "[[Codec Training Objectives]]"]
 status: confirmed

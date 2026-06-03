@@ -123,3 +123,12 @@
 - [ingest/deep] [[Make-A-Voice]] — 精读(batch processing), kb_sources=6, 新建模型页 1 (Make-A-Voice), 追加更新 4 个实体页(Semantic vs Acoustic Tokens, LLM-based TTS, F0 Modeling, Singing Voice Synthesis)
 - [create/entity] 无新建 — 候选 (Spectrogram Flux Loss, Latent Sampling Module, Style Prompt Replication, Bidirectional Transformer Flow, Unit-based Vocoder) 均不满足准入规则(单篇论文特有概念)
 - [lint/local] HierSpeech++, MELLE, Make-A-Voice — 通过/0 问题
+- [kb/search] [[SNAC]] — 命中 5 页(confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓, [[Multi-scale STFT Discriminator]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Quantizer Dropout]](pending-review)
+- [kb/search] [[RepCodec]] — 命中 4 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review)
+- [kb/search] [[VQ-VAE]] — 命中 3 页(confirmed): [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Gumbel-Softmax]](pending-review)
+- [ingest/deep] [[SNAC]] — 精读(batch processing), kb_sources=5, 追加更新 6 个实体页(RVQ, Speech Tokenizer, Semantic vs Acoustic Tokens, Multi-scale STFT Discriminator, EnCodec model, 语音编码与量化 MOC)
+- [ingest/deep] [[RepCodec]] — 精读(batch processing), kb_sources=4, 追加更新 5 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens, RVQ, Self-Supervised Speech Representation, EnCodec model)
+- [ingest/deep] [[VQ-VAE]] — 精读(batch processing), kb_sources=3, 追加更新 4 个实体页(RVQ, Codebook Collapse, Variational Autoencoder for TTS, Speech Tokenizer)
+- [create/entity] 无新建 — 候选 (MSRVQ, Noise Block, Representation Codec, Straight-Through Estimator) 均不满足准入规则(已被已有实体页覆盖或单篇论文特有概念)
+- [moc] 语音编码与量化 MOC 刷新: 新增 3 篇论文 + 更新演进脉络
+- [lint/local] SNAC, RepCodec, VQ-VAE — 通过/0 dead links, frontmatter 完整
