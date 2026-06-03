@@ -754,5 +754,12 @@
 - [ingest/deep] [[FPO]] — 精读, kb_sources=5, 新建 0, 追加 5 (Differentiable Reward Optimization, LLM-based TTS, TTS Evaluation, CosyVoice, CosyVoice 2 key_papers)
 - [review/auto] [[FPO]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] FPO — 通过/0 死链
+
+## 2026-06-03 (TechSinger)
+- [kb/search] [[TechSinger]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Singing Voice Synthesis]](pending-review), [[Classifier-Free Guidance]](pending-review), [[F0 Modeling]](pending-review), [[SVS Evaluation Metrics]](pending-review), [[Musical Score Encoder]](pending-review)
+- [ingest/deep] [[TechSinger]] — 精读, kb_sources=6, 新建 0, 追加 7 (Conditional Flow Matching, Classifier-Free Guidance, F0 Modeling, SVS Evaluation Metrics, Musical Score Encoder, Singing Voice Synthesis, Natural Language Description for TTS) + F0 Modeling 内容追加(flow matching F0 prediction 方法节)
+- [review/auto] [[TechSinger]] — pass-with-fixes, 1 medium (CFG scale 对比参数空间不一致, 已修正) + 2 low
+- [lint/local] TechSinger — 通过/0 死链
+- [moc] TTS-总览 — 新增"歌声合成 (SVS)"子主题, 收录 TechSinger
 - [moc] TTS训练与评估 Post-training: +FPO; 零样本语音合成 2025: +FPO
 [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
