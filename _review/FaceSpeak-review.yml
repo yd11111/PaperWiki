@@ -1,0 +1,64 @@
+paper: "FaceSpeak"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 1
+high: 0
+medium: 1
+low: 0
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 5 个关键设计选择,每个都有 WHY 解释(为什么用 FaRL 而非通用 encoder、
+      为什么双分支而非单分支、为什么 GRL+vCLUB 双重解耦、vCLUB 在 GRL 之上的额外价值、
+      control embedding 如何注入 VITS2)。速查卡片"可借鉴"给出 3 个具体可迁移 trick
+      (GRL+vCLUB 组合、domain-specific 预训练模型预过滤、LLM+图像生成构建数据集)。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      修正后数字型 claim 标注覆盖率 ~95%,所有实验数字标注 [Table N]/[Fig N]/[Eq. N]。
+      指标名使用正确(NMOS/ISMOS/ESMOS/MCD/SS/Acc_emo/Acc_gen)。
+      原始草稿 ESMOS 数值存在复制粘贴错误(将 ISMOS 值写入 ESMOS),已修正。
+      速查卡片指标字段现含完整正确数字+数据集+出处。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节的 WHY 解释标注了 [论文原文] 或 [agent 解读],覆盖率 ~90%。
+      agent 解读限定在合理推断范围(FaRL 特征空间分析、GRL 局限性分析、
+      数据集假设风险)。局限性中 agent 解读的条目明确标注 [agent 解读]。
+      无推断写成断言的情况。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景有具体谱系定位(vision-conditioned TTS 在 Style Transfer 四类策略之外的第五类)。
+      创新判断有对比基准(vs IndexTTS2 的 GRL 用法、vs PromptTTS 的文本控制)。
+      frontmatter 字段完整,concepts 列出 6 个相关概念,models 列了 backbone VITS。
+      速查卡片 5 字段均有实质内容。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未计划新建概念页。反向更新仅追加 key_papers 到已有实体页,
+      不涉及实质修改,不会污染知识库。
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: 可信赖
+    location: "实验表 ESMOS 列 + 速查卡片指标字段"
+    detail: >
+      原始草稿中 ESMOS(intra) 数值完全复制了 ISMOS(intra) 的值:
+      FaceSpeak ESMOS 写为 3.97(正确值 4.36),MM-TTS ESMOS 写为 3.82(正确值 4.08),
+      MM-StyleSpeech ESMOS 写为 3.68(正确值 3.89)。
+      速查卡片也写了错误的 ESMOS 3.97。
+      此外实验表缺少 OOD ISMOS/ESMOS 列和 VITS2 baseline 数据。
+    suggestion: >
+      修正 ESMOS 数值为 Table 1 layout 版本的正确值;
+      补全实验表包含所有 6 列和所有 baseline。
+    fix_applied: true
