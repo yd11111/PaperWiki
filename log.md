@@ -337,3 +337,11 @@
 - [review/auto] [[MamTra]] — pass, 1 issue (0 high, 0 medium, 1 low)
 - [lint/local] MamTra — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +MamTra
+
+## 2026-06-03 (E2 TTS)
+- [kb/search] [[E2 TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]$\checkmark$, [[Zero-shot Speech Synthesis]]$\checkmark$ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Duration Predictor]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[E2 TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (Conditional Flow Matching, Non-autoregressive TTS, Classifier-Free Guidance, Duration Predictor, Mel Spectrogram, Zero-shot Speech Synthesis, BigVGAN, NaturalSpeech 3)
+- [review/auto] [[E2 TTS]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] E2 TTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +E2 TTS
+- [alert/backlog] pending-review: 70, draft deep/repro: 81 — 建议抽空审核
