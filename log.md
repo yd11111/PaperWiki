@@ -546,3 +546,4 @@
 - [review/auto] [[SESD]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] SESD — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +SESD (2024, latent diffusion, data-efficient)
+- [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
