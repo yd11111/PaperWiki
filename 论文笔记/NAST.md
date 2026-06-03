@@ -11,7 +11,7 @@ tags: [speech-tokenizer, speech-representation, noise-robustness, discrete-token
 concepts: ["[[Speech Tokenizer]]", "[[Gumbel-Softmax]]", "[[Self-Supervised Speech Representation]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]"]
 models: ["[[模型库/HuBERT|HuBERT]]"]
 tasks: []
-datasets: []
+datasets: ["LibriSpeech", "LibriLight", "DNS Challenge"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -169,3 +169,11 @@ NAST 直击了 GSLM tokenization pipeline 中一个被广泛认知但少有人�
 1. **Augmentation invariance training for tokenizer**: 对 clean 和 augmented 信号的 token 分布做 cross-entropy 对齐,通过 linear interpolation 处理长度不匹配。这一思路可推广到任何离散 tokenizer 的鲁棒性训练
 2. **Local/global 信息分离**: 用 residual encoder 捕获全局属性(speaker),迫使离散 token 专注于局部内容。可应用于需要 content-speaker 解耦的场景(如 voice conversion、speaker-independent TTS)
 3. **Diversity loss 与 robustness loss 的平衡策略**: 两个 loss 存在竞争关系(robustness 倾向于减少 unit 多样性),需要联合调节——这一 insight 对任何使用多目标训练的 tokenizer 设计有参考价值
+
+---
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes
+> - (medium) datasets frontmatter 为空 → 已补充 LibriSpeech/LibriLight/DNS Challenge
+> - (low) venue 标注为 Interspeech 2024,基于格式推断,未在原文确认
+> 详见 `_review/NAST-review.yml`

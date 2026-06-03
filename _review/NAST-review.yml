@@ -1,0 +1,43 @@
+paper: NAST
+title: "NAST: Noise Aware Speech Tokenization for Speech Language Models"
+reviewer: agent
+date: 2026-06-03
+version: draft-v1
+
+conclusion: pass-with-fixes
+
+summary: >
+  笔记质量整体良好。方法节有充分的因果解释且清晰标注了来源;
+  数据标注覆盖率高; KB 背景谱系定位准确; 速查卡片具体可迁移。
+  主要问题是 datasets frontmatter 字段为空。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: >
+      datasets 字段为空,但论文使用了 LibriSpeech 960h (tokenizer 训练)、
+      LibriLight 6k-hour clean subset (uLM 训练)、DNS challenge noise (增强)。
+    suggestion: >
+      添加 datasets: ["LibriSpeech", "LibriLight", "DNS Challenge"]
+      或在 数据集/ 中检查是否有对应实体页。
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可信赖
+    location: frontmatter.venue
+    detail: >
+      venue 标为 "Interspeech 2024",基于论文格式(Index Terms, 4页正文)推断,
+      但 PDF 正文和 arXiv 页面均未明确标注 venue。
+    suggestion: >
+      确认发表 venue 或改为 "arXiv preprint"。
+
+scores:
+  可复述: 9
+  可信赖: 9
+  可区分: 9
+  可定位: 8
+  不污染: 10
