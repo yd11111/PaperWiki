@@ -24,6 +24,9 @@
 - 流式与实时 — streaming, low-latency
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
+- 语音安全与隐私 — voice protection, deepfake defense, watermarking
+  - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 联合水印训练, proactive speech traceability
+  - [[论文笔记/SafeSpeech|SafeSpeech]] — 2025, USENIX Security, unlearnable perturbation + SPEC(KL引导)防护 fine-tuning+zero-shot voice cloning, 10模型迁移, WER 24%→99.6%
 
 ## 按任务浏览
 

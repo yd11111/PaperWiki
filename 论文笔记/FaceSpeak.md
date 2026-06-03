@@ -42,7 +42,7 @@ updated: 2026-06-03
 > [!summary] 速查
 > - **一句话**: 从任意风格肖像图 (真人/卡通/幻想) 中解耦身份与情感特征,驱动 VITS2 合成与人物形象匹配的表达性语音
 > - **路线**: 肖像图 -> FaRL 提取面部特征 -> IAM (identity) + EAM (emotion) 双分支解耦 -> GRL + vCLUB 去相关 -> control embedding 注入 VITS2 -> 波形
-> - **指标**: intra-domain NMOS 4.13 / ESMOS 3.97 (vs MM-TTS 3.94/3.82) [Table 1]; identity-emotion 组合控制准确率 98.6% (identity) / 92.1% (emotion) [Fig 6]; MCD 3.32, SS 0.95 [Table 3]
+> - **指标**: intra-domain NMOS 4.13 / ISMOS 3.97 / ESMOS 4.36 (vs MM-TTS 3.94/3.82/4.08) [Table 1]; identity-emotion 组合控制准确率 98.6% (identity) / 92.1% (emotion) [Fig 6]; MCD 3.32, SS 0.95 [Table 3]
 > - **可借鉴**: (1) GRL + vCLUB 双重解耦策略可用于任何需要分离两个纠缠属性的场景; (2) 用 FaRL (CLIP-pretrained face model) 提取面部特征避免背景/衣着干扰的思路; (3) 用 LLM + 图像生成模型 (DALL-E/PhotoMaker) 自动构建多模态训练数据的 pipeline
 > - **局限**: (1) out-of-domain emotion accuracy 仅 31.32% 泛化堪忧 [Table 3]; (2) 仅在有限情感类别上验证; (3) 合成质量整体仍低于 ground truth; (4) EM2 TTS 数据集的图像由 AI 生成,face-voice 对应关系的真实性存疑
 
@@ -123,20 +123,22 @@ L = L_vits + lambda_1 * L_mi + lambda_2 * L_emo + lambda_3 * L_grl
 
 ## 实验
 
-| 指标 | FaceSpeak | MM-TTS | MM-StyleSpeech | GT | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- | --- |
-| NMOS (intra) | 4.13+-0.04 | 3.94+-0.05 | 3.58+-0.08 | 4.42+-0.02 | EM2 TTS-MEAD | [Table 1] |
-| ISMOS (intra) | 3.97+-0.07 | 3.82+-0.08 | 3.64+-0.04 | - | EM2 TTS-MEAD | [Table 1] |
-| ESMOS (intra) | 3.97+-0.07 | 3.82+-0.08 | 3.68+-0.07 | - | EM2 TTS-MEAD | [Table 1] |
-| NMOS (OOD) | 4.28+-0.05 | 3.41+-0.06 | 3.23+-0.08 | 4.52+-0.03 | OOD real portraits | [Table 1] |
-| MCD | 3.32 | - | - | - | intra-domain | [Table 3] |
-| SS (Speaker Similarity) | 0.95 | - | - | - | intra-domain | [Table 3] |
-| Acc_emo (intra) | 60.92% | - | - | 84.54% | intra-domain | [Table 3] |
-| Acc_emo (OOD) | 31.32% | - | - | - | OOD | [Table 3] |
-| Acc_gen (intra) | 99.40% | - | - | 100.00% | intra-domain | [Table 3] |
-| Acc_gen (OOD) | 92.42% | - | - | - | OOD | [Table 3] |
-| Identity match (组合控制) | 98.6% | - | - | - | - | [Fig 6] |
-| Emotion match (组合控制) | 92.1% | - | - | - | - | [Fig 6] |
+| 指标 | FaceSpeak | MM-TTS | MM-StyleSpeech | VITS2 | GT | 数据集 | 出处 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| NMOS (intra) | 4.13+-0.04 | 3.94+-0.05 | 3.58+-0.08 | 3.55+-0.06 | 4.42+-0.02 | EM2 TTS-MEAD | [Table 1] |
+| ISMOS (intra) | 3.97+-0.07 | 3.82+-0.08 | 3.64+-0.04 | 3.68+-0.07 | - | EM2 TTS-MEAD | [Table 1] |
+| ESMOS (intra) | 4.36+-0.05 | 4.08+-0.08 | 3.89+-0.11 | 3.38+-0.13 | 4.52+-0.03 | EM2 TTS-MEAD | [Table 1] |
+| NMOS (OOD) | 4.28+-0.05 | 3.41+-0.06 | 3.23+-0.08 | 3.42+-0.05 | - | OOD real portraits | [Table 1] |
+| ISMOS (OOD) | 3.77+-0.09 | 3.68+-0.04 | 3.61+-0.07 | 3.56+-0.10 | - | OOD real portraits | [Table 1] |
+| ESMOS (OOD) | 3.98+-0.07 | 3.91+-0.05 | 3.78+-0.08 | 3.31+-0.09 | - | OOD real portraits | [Table 1] |
+| MCD | 3.32 | - | - | - | - | intra-domain | [Table 3] |
+| SS (Speaker Similarity) | 0.95 | - | - | - | - | intra-domain | [Table 3] |
+| Acc_emo (intra) | 60.92% | - | - | - | 84.54% | intra-domain | [Table 3] |
+| Acc_emo (OOD) | 31.32% | - | - | - | - | OOD | [Table 3] |
+| Acc_gen (intra) | 99.40% | - | - | - | 100.00% | intra-domain | [Table 3] |
+| Acc_gen (OOD) | 92.42% | - | - | - | - | OOD | [Table 3] |
+| Identity match (组合控制) | 98.6% | - | - | - | - | - | [Fig 6] |
+| Emotion match (组合控制) | 92.1% | - | - | - | - | - | [Fig 6] |
 
 **关键发现**:
 - FaceSpeak 在 NMOS 和 SMOS (identity/emotion) 上一致优于 MM-TTS 和 MM-StyleSpeech [Table 1]
@@ -173,5 +175,7 @@ FaceSpeak 在一个有趣但小众的问题 (多风格肖像驱动 TTS) 上做�
 3. **LLM + 图像生成模型自动构建多模态数据集**: 当缺乏特定模态的配对数据时,用 LLM 生成中间文本描述,再用生成模型 (DALL-E/Stable Diffusion) 生成目标模态数据。可推广到其他缺数据的多模态场景
 4. **推理时组合控制**: 将控制信号解耦为独立分支后,推理时可从不同来源分别获取各维度控制,大幅增加生成多样性
 
-> [!review] 审阅状态
-> 待审阅 -- 见 `_review/FaceSpeak-review.yml`
+> [!review] 审阅状态 (2026-06-03, agent)
+> **结论: pass-with-fixes** | 1 issue (0 high, 1 medium, 0 low)
+> - [medium/factual-error] 实验表 ESMOS 数值原为 ISMOS 的复制粘贴错误,已修正 (FaceSpeak ESMOS 4.36, 非 3.97)
+> 详见 `_review/FaceSpeak-review.yml`
