@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
+- [kb/search] [[BreezyVoice]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Phoneme Representation]](pending-review)
+- [ingest/deep] [[BreezyVoice]] — 精读, kb_sources=6, 新建 0, 追加 4 (CosyVoice, LLM-based TTS, Speaker Embedding, Conditional Flow Matching)
+- [review/auto] [[BreezyVoice]] — pass-with-fixes, 2 medium (factual-error PER排名修正, overclaim 速查指标修正) + 1 low
+- [lint/local] BreezyVoice — 通过 (0 dead links)
+- [moc] 零样本语音合成 — 追加 BreezyVoice
 - [kb/search] [[OpenOmni]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
 - [ingest/deep] [[OpenOmni]] — 精读, kb_sources=2 confirmed + 4 pending, 新建 0, 追加 5 (Speech Language Model, Emotion Control in TTS, Non-autoregressive TTS, Streaming Spoken Dialogue, Speech Tokenizer) + MOC
 - [review/auto] [[OpenOmni]] — pass, 4 low issues
@@ -66,6 +76,11 @@
 - [alert/backlog] pending-review: 74, draft deep/repro: 7 — 建议抽空审核
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
 - [kb/search] [[AudioLM]] — 命中 6 页(取 Top 5 confirmed): [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓, [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓ | 过滤: [[Codec Language Model]](pending-review)
 - [kb/search] [[SPEAR-TTS]] — 命中 7 页(取 Top 5 confirmed): [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Codec Language Model]](pending-review)
 - [kb/search] [[Mega-TTS]] — 命中 6 页(取 Top 5 confirmed): [[Speech Factorization]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review)
@@ -283,6 +298,11 @@
 - [update/convention] CLAUDE.md vault 状态更新: MOC 6 个, 覆盖 79/79, 死链 0, tier 全补齐
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
 - [kb/search] [[Llasa]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[CosyVoice]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[MELLE]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[Llasa]] — 精读, kb_sources=6, 新建 0, 追加 8 (LLM-based TTS, Speech Tokenizer, FSQ, Semantic vs Acoustic Tokens, Single-codebook vs Multi-codebook, Token Rate and Bitrate Trade-offs, SEED-TTS-Eval, Emilia, Zero-shot Speech Synthesis)
 - [review/auto] [[Llasa]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
@@ -290,6 +310,11 @@
 - [moc] 零样本语音合成 MOC + 语音编码与量化 MOC 更新: +Llasa
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
 - [kb/search] [[Chatterbox-Flash]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Masked Generative Modeling]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Diffusion-based TTS]](pending-review)
 - [ingest/deep] [[Chatterbox-Flash]] — 精读, kb_sources=6, 新建 0, 追加 5 (Masked Generative Modeling, Classifier-Free Guidance, Codec Language Model, Diffusion-based TTS, Zero-shot Speech Synthesis)
 - [review/auto] [[Chatterbox-Flash]] — pass-with-fixes, 1 issue (0 high, 1 medium, 0 low)
@@ -326,6 +351,11 @@
 - [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
 - [kb/search] [[Spark-TTS]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Finite Scalar Quantization]](pending-review)
 - [ingest/deep] [[Spark-TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (Speech Tokenizer, Semantic vs Acoustic Tokens, LLM-based TTS, Finite Scalar Quantization, Single-codebook vs Multi-codebook, Speech Factorization, Zero-shot Speech Synthesis, Instructed Speech Generation)
 - [review/auto] [[Spark-TTS]] — pass, 3 issues (0 high, 0 medium, 3 low)
@@ -436,6 +466,11 @@
 - [moc] 零样本语音合成 MOC 更新: +TacoLM
 
 ## 2026-06-03
+- [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
+- [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
+- [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
+- [lint/local] SafeSpeech — 通过/0 问题
+- [moc] TTS-总览 — 新增"语音安全与隐私"子分类, 收录 SafeSpeech + TraceableSpeech
 - [kb/search] [[TraceableSpeech]] — 命中 5 页(取 Top 5): [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review)
 - [ingest/deep] [[TraceableSpeech]] — 精读, kb_sources=5, 新建 0, 追加 3 (Codec Language Model, Anti-spoofing and Deepfake Detection, Residual Vector Quantization)
 - [review/auto] [[TraceableSpeech]] — pass, 3 issues (0 high, 0 medium, 3 low)
