@@ -191,5 +191,9 @@ GOAT-TTS 的核心思想有价值: 用连续 acoustic embedding 保留 prompt �
 3. **两步冷启动训练**: Stage II 中先用 text query 冷启动中英能力、speech query 冷启动方言,再统一切换到 speech query — 比直接混合训练更稳定 [§2.2, Table 1]
 4. **TTS 合成方言数据做 ASR 数据增强**: 用 TTS 合成特定方言的大规模语音数据来训练 ASR,相比收集真实方言数据成本大幅降低,WER 可达 GT 的 80%+ [Table 3, 4]
 
-> [!review] 审阅
-> 待审阅。
+> [!review] 审阅 — pass (2026-06-03)
+> **结论**: pass — 5 原则满足, 3 low issues
+> - [low] traceability-gap: vocoder 类型未标注 (论文未指明)
+> - [low] template-compliance: frontmatter models 语义确认正确
+> - [low] weak-reusability: 方言数据增强 idea 可补充采样策略细节
+> 详见 `_review/GOAT-TTS-review.yml`

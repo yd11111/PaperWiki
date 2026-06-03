@@ -1,0 +1,47 @@
+paper: GOAT-TTS
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节以 WHY 驱动 (为什么不用离散 token、为什么不全参微调),每个设计选择有因果解释;速查卡片可借鉴字段列出了 4 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 均标注了 [Table N] 出处;指标名使用正确 (CER/WER);速查卡片指标字段含具体数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读];推断性分析均有明确限定词;覆盖率 ≥ 80%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (与 CosyVoice 2/Llasa/FireRedTTS 对比),创新判断有对比基准;frontmatter 完整"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页;反向更新为追加操作 (加 key_papers + 末尾追加),不改 status"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "## 方法: 整体架构"
+    detail: "推理流程图中 flow-matching model → Mel → Waveform 最后一步 vocoder 未标注具体使用哪个 vocoder,论文原文也未指明"
+    suggestion: "可在推理流程描述中标注 [论文未指明 vocoder 类型]"
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter models"
+    detail: "models 字段列了 Whisper 和 CosyVoice 2,但 CosyVoice 2 是 baseline 对比模型 — 这是正确做法 (frontmatter models 应列本文模型+对比 baseline)"
+    suggestion: "无需修改,仅确认此处语义正确"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "## 可复用的 idea #4"
+    detail: "TTS 合成方言数据做 ASR 增强这个 idea 较为常规 (data augmentation),可迁移性有限"
+    suggestion: "可补充具体的方言 prompt 采样策略作为实操参考"
+
+conclusion: pass
+conclusion_reason: "所有 5 个原则满足,仅 3 个 low severity 问题,无需阻塞反向更新"
