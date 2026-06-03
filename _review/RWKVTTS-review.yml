@@ -1,0 +1,48 @@
+paper: "RWKVTTS"
+file: "论文笔记/RWKVTTS.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+scores:
+  understandability: 4
+  traceability: 3
+  rigor: 4
+  navigability: 5
+  kb_safety: 5
+claim_stats:
+  total_claims: 8
+  annotated_claims: 8
+  coverage_rate: "100%"
+issues:
+  - severity: medium
+    type: traceability-gap
+    location: "实验表格 > 数据集"
+    detail: "所有实验指标的数据集列均为'未明确'。论文 §4.1 描述评估数据为'多语言多风格'但未给出具体数据集名称。笔记如实标注了'未明确',但这也意味着实验结果的可引用性极低。"
+    suggestion: "当前处理正确(如实标注来源不足)。无需修改。"
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 为空 [],但这是因为论文确实未明确报告使用的数据集名称,属于原文缺陷非笔记遗漏。"
+    suggestion: "当前处理正确。可考虑在 datasets 字段添加注释说明原文未报告。"
+  - severity: low
+    type: weak-reusability
+    location: "可复用的 idea > 第2点"
+    detail: "PISSA 参数共享部署方案来自论文 §5.3 future work,尚未实现和验证。笔记已标注'未实现',但可复用价值有限。"
+    suggestion: "当前已标注(未实现),可保持。"
+  - severity: low
+    type: fact-inference-mixing
+    location: "方法 > 关键设计选择 > 第2点"
+    detail: "'放弃了 Transformer 的全局 attention 能力,完全依赖 RWKV-7 的 recurrent state 来建模长程依赖' 是 agent 解读而非论文原文论述。已标注 [agent 解读]。"
+    suggestion: "当前标注正确,无需修改。"
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: "models 仅列了 CosyVoice 2 作为基础框架,缺少 FireRedTTS-1S 作为对比 baseline。论文 §4 的唯一对比对象是 FireRedTTS-1S。"
+    suggestion: "在 models 中补充 FireRedTTS 相关引用。但 FireRedTTS-1S 在模型库中无独立页(仅有 FireRedTTS),可考虑引用论文笔记。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "笔记对原论文缺陷的批评性分析准确且有节制(未 overclaim 论文水平低,而是具体指出缺失项)。所有数字均有出处标注。KB 背景准确定位了论文在 LLM-based TTS 效率优化分支中的位置,与 MamTra 的对比有据。反向更新安全: 仅追加 key_papers,不涉及实质内容修改。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "sparse-baseline-linking: 对比 baseline (FireRedTTS-1S) 未进入 frontmatter models"
+  system_upgrade_suggestion: "无"

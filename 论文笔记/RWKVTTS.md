@@ -160,4 +160,12 @@ RWKVTTS 在方向上有价值 -- 探索非 Transformer 架构作为 LLM-based TT
 
 ---
 
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes | 可理解性 4/5 | 可溯源 3/5 | 严谨性 4/5 | 可导航 5/5 | KB 安全 5/5
+> - [medium] traceability-gap: 实验数据集均标注"未明确"(原文缺陷,笔记如实记录)
+> - [medium] template-compliance: datasets 为空(原文未报告数据集名称)
+> - [low] weak-reusability: PISSA 方案为 future work(已标注)
+> - [low] template-compliance: models 缺少对比 baseline FireRedTTS-1S
+> 详见 `_review/RWKVTTS-review.yml`
+
 检索命中: [[LLM-based TTS]], [[模型库/CosyVoice 2|CosyVoice 2]], [[Speech Tokenizer]], [[Zero-shot Speech Synthesis]], [[Residual Vector Quantization]] | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
