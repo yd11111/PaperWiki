@@ -60,3 +60,4 @@
 
 - [[论文笔记/VoiceFlow|VoiceFlow]] — SJTU, 2023 (ICASSP 2024), 首次 rectified flow matching 用于 TTS 声学模型, 2 步 MOS 3.92 vs GradTTS 2.98
 - [[论文笔记/Bridge-TTS|Bridge-TTS]] — Tsinghua/MSRA, 2023, Schrödinger bridge data-to-data TTS, 2-step MOS 4.04 超越 CoMoSpeech/Grad-TTS
+- [[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron]] — Google DeepMind, 2025, 用 IRPBs + latent alignment 解决 AR Transformer TTS 鲁棒性,实现无限长度泛化
