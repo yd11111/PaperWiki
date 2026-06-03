@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[UmbraTTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Diffusion-based TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[数据集/AudioSet|AudioSet]](pending-review)
+- [ingest/deep] [[UmbraTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Conditional Flow Matching, Natural Language Description for TTS, AudioSet)
+- [review/auto] [[UmbraTTS]] — pass-with-fixes, 0 high + 1 medium (Table 2 bolding 已修正) + 3 low
+- [lint/local] UmbraTTS — 通过/0 问题
+- [moc/update] TTS-总览 — 生成方法演进分类追加 UmbraTTS
+- [kb/search] [[DS-Codec]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Speech Tokenizer]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Training Objectives]](pending-review)
+- [ingest/deep] [[DS-Codec]] — 精读, kb_sources=6, 新建 0, 追加 3 (Single-codebook vs Multi-codebook, Codec Training Objectives, EnCodec)
+- [review/auto] [[DS-Codec]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (weak-reusability)
+- [lint/local] DS-Codec — 通过/0 问题
+- [moc/update] 语音编码与量化 — 追加 DS-Codec
 - [kb/search] [[MAE Style-Rich TTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[EnCodec]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Prosody Modeling]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[MAE Style-Rich TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (RVQ, EnCodec, Speaker Embedding, LLM-based TTS, Prosody Modeling, Style Transfer in TTS, CFG, Emotion Control in TTS)
 - [review/auto] [[MAE Style-Rich TTS]] — pass, 0 high + 1 medium + 0 low
