@@ -1,0 +1,47 @@
+paper: CapSpeech
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+total_issues: 2
+high: 0
+medium: 1
+low: 1
+
+issues:
+  - id: 1
+    principle: 可定位
+    type: bad-linking
+    severity: medium
+    location: frontmatter.tasks
+    detail: >
+      tasks 字段挂接 [[任务库/Instructed Speech Generation|Instructed Speech Generation]],
+      但 CapSpeech 属于 NL Description 范式 (content + description 分离),
+      而 Instructed Speech Generation 的核心定义是"统一指令格式"(content 和 style 合并为一条指令)。
+      KB 中 Instruction-Guided Speech Synthesis 概念页明确区分了两者。
+      建议: 保留挂接 (CapTTS 任务确实与 Instructed Speech Generation 有交集),
+      但在 KB 背景中补充说明 CapSpeech 属于 NL Description 子范式。
+    suggestion: >
+      可在 KB 背景已有认知中追加一句说明 CapSpeech 与 Instruction-Guided 范式的区分,
+      或在 tasks 字段补充说明。当前挂接不算错误但不够精确。
+    action: noted
+
+  - id: 2
+    principle: 可信赖
+    type: traceability-gap
+    severity: low
+    location: 速查卡片.一句话
+    detail: >
+      "首个统一覆盖完整语音风格属性" 是论文 Table 1 和 §2.1 末尾的 claim
+      ("To the best of our knowledge"),笔记中未保留 "to the best of our knowledge" 限定词。
+    suggestion: 可改为"自称首个..."或加 [§2.1] 出处标注。
+    action: noted
+
+summary: >
+  笔记整体质量良好。5 个维度检查:
+  - 可复述: 方法节有 5 个设计选择含因果解释,速查卡片可借鉴字段具体可迁移。通过。
+  - 可信赖: 数字 claim 标注覆盖率高 (>90%),指标名正确,无方向性错误。1 个 low issue (首个 claim 缺限定)。
+  - 可区分: 因果解释全部标注了 [论文原文]/[agent 解读],覆盖率 100%。通过。
+  - 可定位: KB 背景节有具体谱系定位和创新判断,frontmatter 字段完整。1 个 medium issue (tasks 挂接不够精确)。
+  - 不污染: 不新建概念页,反向更新均为追加操作。通过。
+  结论: pass-with-fixes,无 high issue,可继续反向更新。

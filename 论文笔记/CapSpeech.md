@@ -158,6 +158,12 @@ NAR on CapSpeech PT: Style-ACC 62.1% vs ParaSpeechCaps 51.8% [Table 3]
 4. **LLM 辅助大规模 caption 生成**: 用 Mistral-7B-Instruct 将结构化属性关键词转为多样化自然语言 caption,通过随机示例配对增加表达多样性 [§A.2]
 5. **PT → SFT 的迁移策略**: 对低资源任务,在大规模 machine-annotated 数据上预训练后,用少量 human-annotated 数据 SFT 可获得大幅提升 (AgentTTS: UTMOS 1.92→3.07, WER 54.8%→9.5%) [Table 4]
 
+> [!review] 审阅 (2026-06-03, agent-auto, v1.1)
+> **结论: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
+> - [medium] tasks 字段挂接 Instructed Speech Generation,但本文属 NL Description 子范式,挂接不够精确 → noted
+> - [low] 速查"首个"claim 缺 "to the best of our knowledge" 限定 → noted
+> 详见 `_review/CapSpeech-review.yml`
+
 ---
 
 检索命中: [[Conditional Flow Matching]], [[Natural Language Description for TTS]], [[Classifier-Free Guidance]], [[Codec Language Model]], [[Emotion Control in TTS]], [[Style Transfer in TTS]] | 过滤: 除 CFM 外均为 pending-review [待确认] | 未命中但可能相关: 无
