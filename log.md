@@ -482,3 +482,10 @@
 - [lint/local] StoryTTS — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +StoryTTS (韵律与情感节)
 - [moc] TTS训练与评估 MOC 更新: +StoryTTS (Understanding & Data节)
+
+## 2026-06-03 (Vec-Tok Speech)
+- [kb/search] [[Vec-Tok Speech]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Speech Language Model]]✓, [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Style Transfer in TTS]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[Vec-Tok Speech]] — 精读, kb_sources=6, 新建 0, 追加 7 (Semantic vs Acoustic Tokens, Speech Factorization, Speech Language Model, Residual Vector Quantization, LLM-based TTS, Speech Tokenizer, WavLM)
+- [review/auto] [[Vec-Tok Speech]] — pass-with-fixes, 1 issue (0 high, 1 medium fixed, 0 low)
+- [lint/local] Vec-Tok Speech — 通过/0 问题
+- [moc] 零样本语音合成 + 语音编码与量化 MOC 更新: +Vec-Tok Speech
