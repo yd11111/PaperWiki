@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, multilingual, LLM-based, coarse-to-fine, flow-matching]
 key_concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]", "[[论文笔记/FPO|FPO]]"]
 supersedes: []
 superseded_by: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
 status: confirmed

@@ -585,3 +585,12 @@
 - [lint/local] Muyan-TTS — 通过/0 死链
 - [moc] 零样本语音合成 MOC 更新: +Muyan-TTS (2025, LLM+SoVITS, podcast, $50K)
 - [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
+
+## 2026-06-03 (DiffCSS)
+- [kb/search] [[DiffCSS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Codec Language Model]](pending-review), [[Natural Language Description for TTS]](pending-review)
+- [ingest/deep] [[DiffCSS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Prosody Modeling, LLM-based TTS, Speaker Embedding, Diffusion-based TTS, Diffusion Model, Codec Language Model, NaturalSpeech 3 key_papers)
+- [review/auto] [[DiffCSS]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [lint/local] DiffCSS — 通过/0 死链
+- [moc] 语音大模型与对话 MOC 更新: +DiffCSS (2025, diffusion CSS); TTS-总览 韵律与情感: +DiffCSS
+
+- [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核

@@ -19,6 +19,7 @@
   - [[论文笔记/Daisy-TTS|Daisy-TTS]] — 2024, Plutchik 结构模型 + prosody embedding PCA 分解, 一/二级情感+强度+极性模拟
   - [[论文笔记/DiffCSS|DiffCSS]] — 2025, Tsinghua/Tencent, diffusion 韵律预测器 + ParlerTTS backbone 实现对话语音韵律多样性, NDB 4/JSD 0.036
   - [[论文笔记/PROEMO|PROEMO]] — 2025, FS2 + HuBERT emotion/intensity 双编码器 + GPT-4 prompt control, 多说话人情感强度可控
+  - [[论文笔记/AutoStyle-TTS|AutoStyle-TTS]] — 2025, Tsinghua/Tencent, RAG 自动风格 prompt 选择 + CosyVoice backbone, 三维 embedding (profile+emotion+user) 风格匹配
 - 流式与实时 — streaming, low-latency
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
