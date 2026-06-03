@@ -164,3 +164,9 @@ MultiTalk 训练出的模型 MOS 与 DailyTalk 等现有数据集相当,且 Mult
 2. **Character Pool + 社交关系**: 给说话人设定详细人设 (年龄/性格/语言习惯) 和彼此间社交关系,使 LLM 生成更符合角色的对话脚本 -- 可用于有声书、游戏配音等场景的数据生成
 3. **副语言标记迭代注入**: 初始脚本不含副语言标记,通过 critic 反馈后由 Script Writer 有针对性地插入 `<strong>`, `[breath]`, 情感标签 -- 比一开始就加标记更可控,避免过度标注
 4. **对话级语音评估维度**: EMOS (情感一致性) 和 TMOS (轮次切换自然度) 作为对话语音的补充评估维度,虽然目前仅有主观定义,但可以启发自动化对话语音质量指标的研究
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (2 issues: 1 medium, 1 low)
+> - [medium] factual-error: 局限性第 7 点原写"最优配置 MOS 3.75"不准确 (3-loop MOS 3.78 更高) → 已修正
+> - [low] template-compliance: 实验表 MOS 行加粗标注已修正 (3-loop MOS 3.78 才是该指标最高)
+> 详见 `_review/DialogueAgents-review.yml`

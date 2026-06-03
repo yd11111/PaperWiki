@@ -1,0 +1,38 @@
+paper: DialogueAgents
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 2
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节含 3 个 WHY 设计选择,均有因果解释; 速查卡片可借鉴字段列出具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "所有实验表格有 [Table N] 标注; 指标名使用正确; 速查卡片指标字段含数字+来源"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注完整 (所有 WHY 均标注 [论文原文] 或 [agent 解读]); 局限性中推断均标注 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (与单模型端到端范式对比); 创新判断有基准 (框架创新 vs 模型创新)"
+  不污染:
+    satisfied: true
+    notes: "无新建概念页; 反向更新仅追加 key_papers; 无 factual error 风险"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: 可信赖
+    location: "局限性 第 7 点"
+    detail: "写'最优配置 MOS 3.75',但 Table II 中 3-loop MOS 3.78 > 2-loop MOS 3.75。2-loop 是大多数指标最优 (EMOS/TMOS/UTMOS/WER/CER) 但 MOS 本身不是。"
+    suggestion: "改为'2-loop 配置在大多数指标最优但 MOS 绝对值仍偏低 (3.75-3.78),EMOS 3.96 接近但未突破 4.0'"
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "实验 框架有效性表"
+    detail: "表中 2-loop 的 MOS 3.75 被加粗标注为最优,但 3-loop MOS 3.78 更高。加粗应标注 2-loop 整体最优(多数指标),而非暗示每个指标都是 2-loop 最优。"
+    suggestion: "在 MOS 行取消 2-loop 加粗,改加粗 3-loop 的 3.78; 或在表格注释说明 2-loop 是综合最优"
