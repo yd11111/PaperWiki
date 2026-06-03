@@ -1,0 +1,92 @@
+paper: "ZipVoice"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节围绕三个关键设计选择展开,每个都有 WHY 解释:
+      (1) Zipformer backbone 的三要素(U-Net/CNN/attention reuse)各自为什么对 flow matching TTS 有效,
+      (2) Average upsampling 为什么比 filler padding 和 ConvNeXt 更好,
+      (3) Flow distillation 如何同时减少 NFE 和消除 CFG 开销。
+      每个选择都配有消融实验数据佐证。速查卡片"可借鉴"列出 3 个具体可迁移 trick
+      (Zipformer 三要素、average upsampling 公式、CFG strength 作为 input)。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      数字型 claim 标注覆盖率 ~90%,大部分标注 [Table I]/[Table II]/[§II-C] 等。
+      指标名使用正确(WER/SIM-o/UTMOS/RTF/CMOS/SMOS)。
+      实验表格完整列出了多 benchmark 多指标对比。
+      但存在两处需修正(见 issue 1, 2)。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节 WHY 解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 ~95%。
+      agent 解读限定在合理范围内(bypass 崩溃性影响的分析、average upsampling 的 prior 解读、
+      consistency distillation 在无显式 duration 场景下失效的分析)。
+      无推断-断言混淆,agent 解读均明确标注。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景谱系定位具体: E2-TTS/F5-TTS 同源 → ZipVoice 效率优化路线 →
+      与 consistency distillation (Seed-TTS) / ReFlow (VoiceFlow) 的并行比较。
+      创新判断有明确对比基准(三方面创新 vs 现有方案)。
+      frontmatter 基本完整,models 列了 E2 TTS / MaskGCT / F5R-TTS (对比 baseline)。
+      速查卡片 5 字段都有实质内容。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新为追加型(向 Conditional Flow Matching 等页面的
+      key_papers 追加本文条目)。无 factual-error 或 overclaim 风险。
+      ZipVoice 本身不满足独立模型页条件(单篇论文系统)。
+
+issues:
+  - id: 1
+    type: successor-as-model
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      models 字段列了 "F5R-TTS",但论文实际对比的 baseline 是 F5-TTS (原版),
+      不是 F5R-TTS (rectified flow 改进版)。vault 中 F5-TTS 没有独立笔记,
+      只有 F5R-TTS 笔记,但 frontmatter 语义上应指向论文实际对比的系统。
+    suggestion: >
+      检查 vault 中是否有 F5-TTS 笔记;若无,保留 F5R-TTS 作为最近似替代,
+      但在 models 注释中说明实际对比的是 F5-TTS 原版。或将 models 中此项移除,
+      因为 F5-TTS 不是本文提出的模型也不是 vault 中有笔记的 baseline。
+    fix_applied: false
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "方法 > 训练策略 > 推理策略"
+    detail: >
+      Time-dependent CFG 策略("早期 NFE 仅 drop text condition,后期 drop text + audio condition")
+      仅标注了 [§II-F],但此策略的具体效果(如消融对比)未在实验部分展示。
+      论文原文也未给出此策略的量化对比,笔记也应明确标注这一点。
+    suggestion: >
+      在该描述后追加"[论文未提供此策略的独立消融]"注释,避免读者误以为有数据支撑。
+    fix_applied: false
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: >
+      datasets 字段列了 "Emilia" 和 "LibriTTS" 但未用 wikilink 格式。
+      vault 中可能有对应实体页。
+    suggestion: >
+      检查是否有 Emilia 和 LibriTTS 的数据集页;若有则改为 wikilink,若无则保持字符串。
+    fix_applied: false

@@ -9,9 +9,9 @@ year: 2025
 venue: "arXiv"
 tags: [zero-shot-TTS, flow-matching, NAR-TTS, model-compression, inference-acceleration, distillation]
 concepts: ["[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Speech-Text Alignment]]", "[[Neural Vocoder]]"]
-models: ["[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/F5R-TTS|F5R-TTS]]"]
+models: ["[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["Emilia", "LibriTTS"]
+datasets: ["[[Emilia]]", "LibriTTS"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -135,7 +135,7 @@ ZipVoice 建立在 conditional flow matching (CFM) 框架之上,采用 speech in
 
 **推理策略** [§II-F]:
 - 合成 duration 按 token 长度比例估计: T_synthesis = T_prompt * |y_synthesis| / |y_prompt| [§II-F, Eq.11]
-- Time-dependent CFG: 早期 NFE 仅 drop text condition,后期 drop text + audio condition [§II-F]
+- Time-dependent CFG: 早期 NFE 仅 drop text condition,后期 drop text + audio condition [§II-F] [论文未提供此策略的独立消融]
 
 ## 实验
 
@@ -193,5 +193,8 @@ ZipVoice 建立在 conditional flow matching (CFM) 框架之上,采用 speech in
 
 ---
 
-> [!review] 自动审阅
+> [!review] 自动审阅 — pass-with-fixes (3 issues: 0 high, 2 medium, 1 low)
+> - [medium] frontmatter.models 中 F5R-TTS 已移除(论文对比的是 F5-TTS 原版,vault 无独立页) → 已修正
+> - [medium] Time-dependent CFG 策略缺少独立消融数据 → 已标注
+> - [low] datasets 中 Emilia 已改为 wikilink → 已修正
 > 审阅报告: [[_review/ZipVoice-review.yml]]
