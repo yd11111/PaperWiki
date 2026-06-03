@@ -1,0 +1,84 @@
+paper: "BreezyVoice"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 3 个关键设计选择,每个都有 WHY 解释(为什么仅训练 LLM、为什么 BERT-style
+      phonetic augmentation、为什么 iconic unit 方案有效)。Iconic Unit 分析的控制变量实验
+      逻辑链清晰(排除 CFM → 排除 conditioning → 锁定 LLM output)。
+      速查卡片"可借鉴"列出 3 个具体可迁移 trick,包括操作细节。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      数字型 claim 标注覆盖率 ~95%,所有实验数字标注 [Table N]/[Fig N]/[§X.X]。
+      指标名使用正确(PER/SSL-MOS/Speaker Similarity)。
+      但实验结果解读中 PER 排名有事实错误(见 issue 1),
+      速查卡片指标行存在 overclaim(见 issue 2)。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节 WHY 解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 ~100%。
+      agent 解读限定在合理推断范围(如仅训练 LLM 的两面性、同音字替换的 robustness training 解读、
+      LLM-CFM 信息分工非正交的洞察)。无推断-断言混淆。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景谱系定位具体(CosyVoice → CosyVoice 2 → CosyVoice 3,BreezyVoice 作为域适配分支)。
+      创新判断有明确对比基准(相对于 CosyVoice 原系统的 4 点创新)。
+      frontmatter 基本完整,models 正确列了 CosyVoice 作为 base model。
+      速查卡片 5 字段都有实质内容。datasets 为空但合理(论文使用的数据集无 vault 页)。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新将仅为追加型(CosyVoice 模型页 key_papers 追加)。
+      无 kb-safety-risk。
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: 可信赖
+    location: "实验 > 结果解读 > 2. 客观评估"
+    detail: >
+      笔记写"PER 0.80% 排名第二 (Service M 最低 0.43%)",但 Table 1 显示
+      Service U 的 PER 为 0.69%,也低于 BreezyVoice 的 0.80%。
+      因此 BreezyVoice 的 PER 排名第三,不是第二。
+    suggestion: >
+      修正为"PER 0.80% 排名第三 (Service M 0.43%, Service U 0.69% 更低)"
+    fix_applied: true
+
+  - id: 2
+    type: overclaim
+    severity: medium
+    principle: 可信赖
+    location: "速查卡片 > 指标"
+    detail: >
+      速查卡片写"优于 4 个商用系统",但这仅在人工主观评估(win rate)上成立。
+      在客观指标上,PER 和 SSL-MOS 都不是最佳。应区分主观/客观评估结论。
+    suggestion: >
+      修改为"主观评估优于 4 个商用系统 [Fig 2]; 客观 PER 0.8% / SSL-MOS 4.46 (TCMD) [Table 1]"
+    fix_applied: true
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: >
+      datasets 字段为空。论文使用了 FormosaSpeech, TCMD, TCCSD 数据集,
+      但这些是特定于 Taiwanese Mandarin 的数据集,vault 中无对应实体页。
+    suggestion: >
+      保持为空即可(不满足独立建页条件),或在正文中明确提及数据集名称。
+    fix_applied: false

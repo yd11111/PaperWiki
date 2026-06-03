@@ -39,7 +39,7 @@ updated: 2026-06-03
 > [!summary] 速查
 > - **一句话**: 将 CosyVoice 适配到 Taiwanese Mandarin,通过 phonetic augmentation 解决多音字消歧问题,并提出 Iconic Unit Augmented Speech Cloning 将 PER 降低 61.2%,同时系统性揭示了 LLM 生成的 speech units 是 voice cloning 失败的主要原因
 > - **路线**: Text (+g2pW phonetic symbols) → LLM → Speech Units → OT-CFM (+speaker embedding) → Mel → Vocoder → Waveform; 可选路径: iconic speaker LLM → Units → CFM (target speaker embedding) → Waveform
-> - **指标**: PER 0.8% / SSL-MOS 4.46 (TCMD), 优于 4 个商用系统 [Table 1]; Iconic Unit Cloning: PER 3.4%→1.3% (61.2% 降低), speaker similarity 仅下降 2.51% [§6.1.3]; 语音克隆平均 speaker similarity 92.29% [§5.2]
+> - **指标**: 主观评估优于 4 个商用系统 [Fig 2]; 客观 PER 0.8% / SSL-MOS 4.46 (TCMD) [Table 1]; Iconic Unit Cloning: PER 3.4%→1.3% (61.2% 降低), speaker similarity 仅下降 2.51% [§6.1.3]; 语音克隆平均 speaker similarity 92.29% [§5.2]
 > - **可借鉴**: (1) Iconic Unit Augmented Speech Cloning — 解耦内容生成和音色转换的两阶段策略,对所有 LLM+CFM 管线中的 long-tail speaker 问题有直接迁移价值; (2) 通过控制变量实验隔离错误源 (CFM conditions vs LLM conditions) 的分析方法论; (3) BERT-style phonetic symbol augmentation 策略 (50% 句子级 + 15% 字符级)
 > - **局限**: (1) 仅训练了 LLM,未微调 S3 tokenizer/CFM,上限受限; (2) 评估数据集规模较小 (30 comparisons, 115 speakers); (3) 中文地名的 code-switching 表现不佳 [Table 2]; (4) 无消融实验量化各训练技巧的独立贡献
 
@@ -144,7 +144,7 @@ Reference Speech → Xcond ──→ [OT-CFM] ──→ Xoutput (Mel) → [Vocod
 
 1. **主观评估 (TCMD)**: BreezyVoice 在 30 次配对比较中一致性地优于 4 个商用系统 [Fig 2]。相对 Service Z 胜率 24/30,相对 Service U 胜率 19/30。
 
-2. **客观评估 (TCMD)**: PER 0.80% 排名第二 (Service M 最低 0.43%),但 SSL-MOS 4.46 排名第二 (Service Z 最高 4.63%) [Table 1]。[agent 解读] 值得注意的是 Service M 的 PER 最低但 SSL-MOS 也最低 (3.46),说明发音准确性和整体音质可以脱钩。
+2. **客观评估 (TCMD)**: PER 0.80% 排名第三 (Service M 0.43%、Service U 0.69% 更低),SSL-MOS 4.46 排名第二 (Service Z 最高 4.63%) [Table 1]。[agent 解读] 值得注意的是 Service M 的 PER 最低但 SSL-MOS 也最低 (3.46),说明发音准确性和整体音质可以脱钩。
 
 3. **Code-switching (TCCSD)**: BreezyVoice 在 General/Entities/Abbreviations 三类上得分最高或并列最高 [Table 2],但在 Taiwan-related Toponyms (地名) 上仅得 3/10,这是唯一弱项。[论文原文] 作者承认地名类别在英文语料中较少见,作为 future work [§5.1.1]。
 
@@ -191,5 +191,8 @@ Reference Speech → Xcond ──→ [OT-CFM] ──→ Xoutput (Mel) → [Vocod
 
 4. **仅训练 LLM 的轻量级域适配**: 对于 CosyVoice 类架构,冻结 tokenizer 和 CFM 仅微调 LLM 即可实现域适配,这表明 LLM 是架构中语言/域知识的主要载体。
 
-> [!review] 审阅结论
-> 待审阅,见 `_review/BreezyVoice-review.yml`
+> [!review] 审阅结论: pass-with-fixes (0 high / 2 medium / 1 low)
+> - [medium] factual-error: PER 排名误写为第二,实为第三 (已修正)
+> - [medium] overclaim: 速查卡片"优于 4 个商用系统"未区分主观/客观 (已修正)
+> - [low] template-compliance: datasets 字段为空 (论文数据集无 vault 页,保持为空)
+> 详见 `_review/BreezyVoice-review.yml`
