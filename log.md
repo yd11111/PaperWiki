@@ -274,3 +274,8 @@
 - [lint/local] Chatterbox-Flash — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +Chatterbox-Flash
 - [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
+- [kb/search] [[VoXtream]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Speech-Text Alignment]](pending-review), [[Phoneme Representation]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
+- [ingest/deep] [[VoXtream]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer, Semantic vs Acoustic Tokens, Speaker Embedding, LLM-based TTS, Zero-shot Speech Synthesis, CosyVoice 2)
+- [review/auto] [[VoXtream]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] VoXtream — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +VoXtream
