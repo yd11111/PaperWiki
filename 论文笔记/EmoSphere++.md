@@ -11,7 +11,7 @@ tags: [emotional-TTS, zero-shot, emotion-control, style-transfer, flow-matching,
 concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Speaker Embedding]]", "[[Gradient Reversal Layer]]", "[[Duration Predictor]]"]
 models: ["[[模型库/BigVGAN]]", "[[模型库/WavLM]]", "[[模型库/Whisper]]", "[[模型库/wav2vec 2.0]]", "[[模型库/HuBERT]]"]
 tasks: ["[[任务库/Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["ESD", "IEMOCAP", "MSP-Podcast"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -111,7 +111,7 @@ L_ort = Σ_j Σ_i || (s_i^T · e_j) / (||s_i|| · ||e_j||) ||^2
 
 **WHY**: 前作依赖额外的 discriminator 模块增强情感表达力,增加模型复杂度。作者认为 CFM 本身的生成能力足以实现高质量情感合成 [§III-C] [论文原文]。
 
-**HOW**: 标准 CFM,用条件概率路径 (公式 7-8) 训练,以 (mu, e_sty, t) 为条件,推理时 guidance level gamma=100,sigma_min 为超参 [§III-C, §IV-B]。
+**HOW**: 标准 CFM,用条件概率路径 (公式 7-8) 训练,以 (mu, e_sty, t) 为条件,推理时 guidance level gamma=100 [§IV-B],sigma_min 为超参 [§III-C, 论文未给出具体值]。
 
 ### 训练策略
 
@@ -153,7 +153,7 @@ L_ort = Σ_j Σ_i || (s_i^T · e_j) / (||s_i|| · ||e_j||) ||^2
 - 去除 Global Emotion Encoder: ECA 从 93.53% 降到 77.68%(seen), 59.66%(unseen) — 全局情感表示对情感准确率至关重要
 - 去除 Dimensional Emotion Encoder: ECA 轻微下降到 92.18%,但 EECS 基本保持 — 说明 EASV 主要贡献在于细粒度控制而非全局情感准确性 [agent 解读]
 - 去除 Disentangling Method: 性能整体下降,unseen 场景更明显
-- 对比 GRL/VQ/原始 orthogonality loss: 提出的 normalized orthogonality loss 在 unseen 场景 ECA (94.61% vs ~89-92%) 和 EECS (0.939 vs ~0.89-0.93) 上表现最佳
+- 对比 GRL/VQ/原始 orthogonality loss: 提出的 normalized orthogonality loss 在 unseen 场景 ECA (94.61% vs GRL 89.58% / VQ 92.60% / OrthoLoss 91.23%) 和 EECS (0.9385 vs GRL 0.8947 / VQ 0.9320 / OrthoLoss 0.9101) 上表现最佳 [Table V]
 
 **EASV Prosodic Analysis** [Table I]:
 - 在 ESD、IEMOCAP、MSP-Podcast 三个数据集上验证 EASV 的韵律变化规律
@@ -190,5 +190,13 @@ L_ort = Σ_j Σ_i || (s_i^T · e_j) / (||s_i|| · ||e_j||) ||^2
 1. **Emotion-adaptive centroid extraction**: 通过最大化 target/neutral 距离比找最优球心的方法,可推广到任何需要建模"从基线到目标偏移"的场景(如说话风格强度控制)
 2. **Normalized orthogonality loss across batch**: 对 batch 内所有 cross-pair 计算归一化正交损失,比仅对 same-sample pair 更强的正则化信号,适用于任何需要多因素解耦的表示学习
 3. **SVAS (Spherical Vector Angle Similarity)**: 利用球面坐标角度的余弦相似度评估情感风格一致性,可作为 ECA/EECS 的补充指标
-4. **IQR 归一化球面半径**: 用统计学 IQR 方法处理情感强度离群值,简单有效
+4. **IQR 归一化球面半径**: 用统计学 IQR 方法处理情感强度离群值 (rmin = Q1 - 1.5*IQR, rmax = Q3 + 1.5*IQR, 然后 min-max 归一化到 [0, 1]),简单有效,可用于任何需要去离群值的连续属性归一化
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (0 high, 2 medium, 2 low)
+> - [medium] traceability-gap: CFM Decoder 节 gamma/sigma_min 出处标注 — **已修正**
+> - [medium] template-compliance: frontmatter datasets 字段为空 — **已修正**
+> - [low] traceability-gap: ablation 约数替换为精确值 — **已修正**
+> - [low] weak-reusability: IQR 细节补充 — **已修正**
+> 详见 `_review/EmoSphere++-review.yml`
 

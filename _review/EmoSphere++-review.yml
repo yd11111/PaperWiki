@@ -1,0 +1,72 @@
+paper: "EmoSphere++"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+issue_count: 4
+high: 0
+medium: 2
+low: 2
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "方法 > 关键设计选择 > 4. CFM Decoder"
+    detail: "CFM Decoder 小节中 'guidance level gamma=100' 和 'sigma_min 为超参' 缺乏具体出处标注; sigma_min 的实际值未给出(论文中也未明确给出具体值)"
+    suggestion: "为 gamma=100 添加 [§IV-B] 标注; sigma_min 标注为 [论文未给出具体值]"
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空列表,但论文使用了 ESD、IEMOCAP、MSP-Podcast 三个数据集。ESD 是核心训练/评估数据集,IEMOCAP 和 MSP-Podcast 用于分析"
+    suggestion: "至少填入 ESD; 若 IEMOCAP/MSP-Podcast 无实体页则可不列入 frontmatter 但应在正文中标注"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "实验 > Ablation Study"
+    detail: "ablation 结论中 '94.61% vs ~89-92%' 使用了约数,原文 Table V 给出精确值: GRL=89.58%, VQ=92.60%, OrthoLoss=91.23%"
+    suggestion: "用精确值替换约数"
+
+  - id: 4
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea > #4 IQR 归一化球面半径"
+    detail: "这一条过于简短,缺乏实际的 IQR 参数细节(如 1.5*IQR 的具体设置)"
+    suggestion: "可补充 'rmin = Q1 - 1.5*IQR, rmax = Q3 + 1.5*IQR' 的细节以增强可复用性"
+
+checklist:
+  可复述:
+    causal_explanation: pass  # 方法节有 WHY 解释,且标注了来源
+    design_choice_why: pass  # 四个关键设计选择均有 WHY 段
+    reusable_ideas: pass-with-note  # #4 稍弱
+
+  可信赖:
+    claim_traceability: pass-with-note  # 大部分有标注,CFM decoder 节有少量遗漏
+    metric_names: pass  # ECA/EECS/SVAS/WER/SECS 使用正确
+    quickcard_metrics: pass  # 含具体数字+数据集+来源
+    direction_correctness: pass  # 方向标注正确
+
+  可区分:
+    source_annotation: pass  # 方法节有 [论文原文] 和 [agent 解读] 标注
+    source_coverage: pass  # 覆盖率 >= 80%
+    no_false_assertion: pass  # 未发现将推断写成断言
+    strong_claim_support: pass  # SOTA 等断言有数据支撑
+
+  可定位:
+    kb_lineage: pass  # 谱系定位具体,包含论文名
+    kb_innovation_comparison: pass  # 有明确对比基准
+    frontmatter_present: pass-with-note  # datasets 为空
+    frontmatter_semantic: pass  # models 列本文用到的模型,concepts 合理
+    quickcard_substance: pass  # 5 字段都有实质内容
+
+  不污染:
+    concept_admission: pass  # 未新建概念页
+    dedup_check: pass  # 不涉及
+    reverse_update_accuracy: pending  # 待反向更新后评估
+    reverse_update_classification: pending  # 待反向更新后评估
