@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[Shallow Flow Matching]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[CosyVoice]]✓, [[Neural Vocoder]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[Shallow Flow Matching]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM key_papers+演进, CosyVoice key_papers, Neural Vocoder key_papers, CFG key_papers, Diffusion-based TTS key_papers, Mel Spectrogram key_papers), MOC 更新 1 (TTS-总览)
+- [review/auto] [[Shallow Flow Matching]] — pass-with-fixes, 0 high + 0 medium + 3 low
+- [lint/local] Shallow Flow Matching — 通过/0 死链
 - [kb/search] [[InstructTTSEval]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[InstructTTSEval]] — 精读, kb_sources=6, 新建 0, 追加 4 (TTS Evaluation, Natural Language Description for TTS, Instruction-Guided Speech Synthesis, Instructed Speech Generation), MOC 更新 1 (TTS训练与评估)
 - [review/auto] [[InstructTTSEval]] — pass-with-fixes, 3 issues (1 high fixed: PDF 列对齐错误, 1 medium fixed, 1 low accepted)
