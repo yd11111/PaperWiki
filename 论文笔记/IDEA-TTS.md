@@ -8,7 +8,7 @@ authors: [Ye-Xin Lu, Hui-Peng Du, Zheng-Yan Sheng, Yang Ai, Zhen-Hua Ling]
 year: 2024
 venue: "ICASSP 2025"
 tags: [TTS, zero-shot, disentanglement, environment-aware, speech-enhancement, acoustic-environment, VITS, spectral-masking]
-concepts: ["[[Speech Factorization]]", "[[Speaker Embedding]]", "[[Variational Autoencoder for TTS]]", "[[Style Transfer in TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]"]
+concepts: ["[[Speech Factorization]]", "[[Speaker Embedding]]", "[[Variational Autoencoder for TTS]]", "[[Style Transfer in TTS]]"]
 models: ["[[VITS]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: []
@@ -190,3 +190,9 @@ IDEA-TTS 提出了一个在 TTS 文献中较少被关注的问题 -- 环境感�
 3. **全零条件的双模态训练**: 在条件生成中,用全零 embedding 表示 "无此因子" 的默认状态,训练时同时生成 "有/无" 两种输出,用一个模型同时覆盖两个任务 (环境鲁棒 + 环境感知)。
 
 4. **Speaker verification 架构迁移到非说话人属性**: ECAPA-TDNN 从说话人验证迁移到环境编码,核心逻辑是 "从变长序列提取时间不变特征" -- 这个能力适用于任何时间不变的全局属性 (录音设备、信道特征等)。
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes | 1 medium, 1 low
+> - [medium] frontmatter concepts 含 Duration Predictor / Mel Spectrogram (仅因 VITS backbone 间接涉及) → 已移除
+> - [low] datasets 为空 (DDS 无实体页,不满足准入规则,留空可接受)
+> 详见 `_review/IDEA-TTS-review.yml`

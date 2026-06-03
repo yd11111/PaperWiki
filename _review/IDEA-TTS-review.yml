@@ -1,0 +1,37 @@
+paper: IDEA-TTS
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  locatable: pass-with-fixes
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: locatable
+    location: frontmatter.concepts
+    detail: "concepts 包含 Duration Predictor 和 Mel Spectrogram,这两个概念在本文中仅因继承 VITS backbone 而被间接涉及,并非本文的核心讨论对象。保留它们会在 KB 中建立噪声连接。"
+    suggestion: "移除 Duration Predictor 和 Mel Spectrogram,保留 Speech Factorization, Speaker Embedding, Variational Autoencoder for TTS, Style Transfer in TTS。"
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: frontmatter.datasets
+    detail: "datasets 字段为空。本文使用 DDS 数据集,但 vault 中无对应实体页。"
+    suggestion: "DDS 数据集仅此一文使用,不满足概念页准入规则,datasets 留空可接受。"
+
+scores:
+  reproducible: 9
+  trustworthy: 9
+  distinguishable: 9
+  locatable: 8
+  no_pollution: 9
+
+conclusion: pass-with-fixes
+summary: "笔记质量整体较高。方法节包含充分的因果解释和来源标注,数据标注覆盖良好,KB 背景定位准确。唯一需修正的是 frontmatter concepts 中包含了两个仅因 backbone 继承而间接涉及的概念 (Duration Predictor, Mel Spectrogram),移除后可放行反向更新。"
