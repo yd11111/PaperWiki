@@ -345,3 +345,10 @@
 - [lint/local] E2 TTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +E2 TTS
 - [alert/backlog] pending-review: 70, draft deep/repro: 81 — 建议抽空审核
+
+## 2026-06-03 (IDEA-TTS)
+- [kb/search] [[IDEA-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[VITS]](pending-review), [[Variational Autoencoder for TTS]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[IDEA-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Factorization, Speaker Embedding, Zero-shot Speech Synthesis, VITS, Variational Autoencoder for TTS, Style Transfer in TTS)
+- [review/auto] [[IDEA-TTS]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [lint/local] IDEA-TTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +IDEA-TTS
