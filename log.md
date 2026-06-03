@@ -419,3 +419,10 @@
 - [review/auto] [[TraceableSpeech]] — pass, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] TraceableSpeech — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +TraceableSpeech; TTS训练与评估 MOC 更新: +TraceableSpeech (Security & Traceability)
+
+## 2026-06-03 (NAST)
+- [kb/search] [[NAST]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 参考: [[Gumbel-Softmax]](待确认), [[Self-Supervised Speech Representation]](待确认), [[模型库/HuBERT|HuBERT]](待确认)
+- [ingest/deep] [[NAST]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer, Gumbel-Softmax, Self-Supervised Speech Representation, Semantic vs Acoustic Tokens, Speech Language Model, HuBERT)
+- [review/auto] [[NAST]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [lint/local] NAST — 通过/0 问题
+- [moc] 语音编码与量化 + 语音表征与自监督学习 MOC 更新: +NAST

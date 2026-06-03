@@ -161,4 +161,4 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026)
