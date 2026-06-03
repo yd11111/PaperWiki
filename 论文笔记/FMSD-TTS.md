@@ -10,7 +10,7 @@ venue: "arXiv"
 tags: [TTS, multi-speaker, multi-dialect, few-shot, low-resource, Tibetan, speaker-identity, non-autoregressive, flow-matching, dynamic-routing]
 concepts: ["[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Speaker Adaptation]]"]
 models: ["[[VITS]]", "[[BigVGAN]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: []
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -134,7 +134,7 @@ $$loss_{ref} = \frac{h_{spk} \cdot h_{did}}{||h_{spk}|| \cdot ||h_{did}||}$$
 - **Mel 参数**: 80-bin, SR=16kHz, window=1024, hop=256 [§4.1]
 - **优化器**: Adam, lr=1e-4, weight decay=1e-2 [§4.1]
 - **训练步数**: 500K steps, batch_size=16/GPU [§4.1]
-- **Speaker encoder**: ECAPA-TDNN, VoxBlink2 预训练, 冻结 [§4.2]
+- **Speaker encoder**: ECAPA-TDNN, VoxBlink2 预训练, 冻结 [§4.2, agent 解读: 根据 Fig.2 特征可视化推断 encoder 未随 TTS 联合训练]
 - **Vocoder**: BigVGAN, 100K steps 单独训练 [§4.1]
 - **硬件**: 2× NVIDIA RTX 4090 [§4.1]
 
@@ -202,3 +202,10 @@ $$loss_{ref} = \frac{h_{spk} \cdot h_{did}}{||h_{spk}|| \cdot ||h_{did}||}$$
 ---
 
 检索命中: [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (0 high / 1 medium / 2 low)
+> - (medium) frontmatter.tasks 已修正: 移除 [[Zero-shot Speech Synthesis]],FMSD-TTS 是 few-shot 非 zero-shot
+> - (low) 训练策略中 speaker encoder 冻结推断已补充标注
+> - (low) 随机裁剪参考音频是常见做法,保留但已知悉
+> 详见 `_review/FMSD-TTS-review.yml`

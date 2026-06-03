@@ -4,7 +4,7 @@ title: "Codec Language Model"
 aliases: [CodecLM, Codec LM, 编解码器语言模型, Neural Codec Language Model, Audio Codec LM]
 category: "model-family"
 tags: [speech-LM, codec, autoregressive, neural-audio-codec, language-model, RVQ]
-key_papers: ["VALL-E (Wang et al., 2023)", "[[论文笔记/AudioLM|AudioLM]]", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/LiveSpeech 2|LiveSpeech 2]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/DiffCSS|DiffCSS]]", "[[论文笔记/PALLE|PALLE]]", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/Koel-TTS|Koel-TTS]]"]
+key_papers: ["VALL-E (Wang et al., 2023)", "[[论文笔记/AudioLM|AudioLM]]", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/LiveSpeech 2|LiveSpeech 2]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/DiffCSS|DiffCSS]]", "[[论文笔记/PALLE|PALLE]]", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/C2F-LM|C2F-LM]]"]
 origin_paper: "[[论文笔记/Survey-Speech Language Models|Cui et al., Speech Language Models, 2024]]"
 related_concepts: ["[[Speech Language Model]]", "[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: pending-review
@@ -74,6 +74,7 @@ Survey (Cui et al., 2024) 明确指出: "Some studies directly model the codec t
 3. **序列长度**: 多层 codec token 展开后序列极长
    - Flattening vs interleaving 策略
    - 基于 delay pattern 的 codebook 排列
+   - 在 LM 层面做 token 压缩: [[论文笔记/C2F-LM|C2F-LM]] 将长距离 speech token 压缩为 5Hz 紧凑表征,通过 attention mask + 压缩 token 实现信息瓶颈,兼容单/多码本 codec 和各种 LM 架构
 
 ## 在 Speech LM 中的角色
 

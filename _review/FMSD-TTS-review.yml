@@ -1,0 +1,47 @@
+paper: FMSD-TTS
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+issue_count: 3
+high: 0
+medium: 1
+low: 2
+
+principles:
+  可复述: pass
+  可信赖: pass
+  可区分: pass
+  可定位: pass-with-fixes
+  不污染: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.tasks
+    detail: "tasks 列了 [[Zero-shot Speech Synthesis]],但 FMSD-TTS 是 few-shot 系统而非 zero-shot — 论文标题和方法都是 few-shot (需要参考音频 + 训练时使用目标说话人数据)。任务库中无 'Few-shot TTS' 或 'Multi-dialect TTS' 页面。"
+    suggestion: "移除 tasks 中的 [[Zero-shot Speech Synthesis]], 改为空列表或待决。不创建新任务页(不满足准入)。"
+    auto_fixable: true
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "方法节 > 训练策略"
+    detail: "训练策略中 'speaker encoder 冻结' 这一关键信息未标注出处。论文 §4.2 提到使用 ECAPA-TDNN pre-trained on VoxBlink2 但未显式写明冻结,是 agent 从 Fig.2 t-SNE 可视化和通用实践推断的。"
+    suggestion: "在 'Speaker encoder: ECAPA-TDNN, VoxBlink2 预训练, 冻结' 后加 [agent 解读:根据 Fig.2 特征可视化推断]"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea > #3 随机裁剪参考音频"
+    detail: "随机裁剪到 3s 是 speaker verification 领域的标准做法,并非本文的创新点,作为 '可复用 idea' 略显平凡。"
+    suggestion: "可保留但降级为括号备注,或标注'常见做法,本文沿用'。"
+
+notes: |
+  整体质量良好。方法节的因果解释完整且标注规范,[论文原文]/[agent 解读] 区分清晰。
+  KB 背景定位准确,创新判断有比较基准。速查卡片五字段实质饱满。
+  实验表格完整,消融分析有具体数字和百分点差异。
+  唯一需要修正的是 frontmatter.tasks 的语义准确性(medium)。

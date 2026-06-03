@@ -7,7 +7,7 @@ year: 2022
 tags: [audio-codec, neural-compression, RVQ, speech-tokenizer]
 key_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
 tasks: ["[[Neural Audio Compression]]"]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/MAE Style-Rich TTS|MAE Style-Rich TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]"]
 supersedes: ["[[模型库/SoundStream|SoundStream]]"]
 superseded_by: []
 status: confirmed

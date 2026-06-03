@@ -7,7 +7,7 @@ year: 2022
 tags: [ASR, weak-supervision, multilingual, multitask, zero-shot, robustness, speech-recognition]
 key_concepts: ["[[Mel Spectrogram]]", "[[Speech Tokenizer]]", "[[LLM-enhanced ASR]]"]
 tasks: []
-key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]"]
+key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/LM-SPT|LM-SPT]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

@@ -4,7 +4,7 @@ title: "Diffusion Model"
 aliases: [DDPM, Denoising Diffusion Probabilistic Model, Score-based Generative Model, Diffusion Probabilistic Model, DPM, 扩散模型]
 category: "generative-model"
 tags: [generative-model, diffusion, DDPM, score-matching, SDE, ODE, audio-generation]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/DiffCSS|DiffCSS]]", "[[论文笔记/DMOSpeech|DMOSpeech]]"]
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/DiffCSS|DiffCSS]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/RapFlow-TTS|RapFlow-TTS]]"]
 origin_paper: "Sohl-Dickstein et al., Deep Unsupervised Learning Using Nonequilibrium Thermodynamics, 2015"
 related_concepts: ["[[Conditional Flow Matching]]", "[[Score Matching]]", "[[Neural Vocoder]]", "[[Diffusion-based Vocoder]]", "[[Diffusion-based TTS]]", "[[Classifier-Free Guidance]]"]
 status: pending-review

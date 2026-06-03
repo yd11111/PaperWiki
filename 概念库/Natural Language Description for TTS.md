@@ -4,7 +4,7 @@ title: "Natural Language Description for TTS"
 aliases: [文本描述语音合成, Description-based TTS, Text-prompted TTS, Prompt-based Style Control, 自然语言风格描述]
 category: "technique"
 tags: [TTS, controllability, natural-language, description, prompt, text-guided]
-key_papers: ["PromptTTS (Guo et al., 2023)", "InstructTTS (Yang et al., 2024b)", "PromptStyle (Liu et al., 2023a)", "NansyTTS (Yamamoto et al., 2024)", "PromptTTS++ (Shimizu et al., 2024)", "PromptTTS 2 (Leng et al., 2023)", "FleSpeech (Li et al., 2025a)", "Parler-TTS (Lyth and King, 2024)", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/TechSinger|TechSinger]]"]
+key_papers: ["PromptTTS (Guo et al., 2023)", "InstructTTS (Yang et al., 2024b)", "PromptStyle (Liu et al., 2023a)", "NansyTTS (Yamamoto et al., 2024)", "PromptTTS++ (Shimizu et al., 2024)", "PromptTTS 2 (Leng et al., 2023)", "FleSpeech (Li et al., 2025a)", "Parler-TTS (Lyth and King, 2024)", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/UmbraTTS|UmbraTTS]]", "[[论文笔记/MPE-TTS|MPE-TTS]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Style Transfer in TTS]]", "[[LLM-based TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]"]
 status: pending-review
@@ -70,6 +70,7 @@ Natural Language Description for TTS 是一种通过自然语言文本描述来�
 - VoiceLDM (Lee et al., 2024): 内容提示 → 环境音合成
 - AST-LDM (Kim et al., 2024b): 扩展 AudioLDM 实现环境条件化
 - MS2KU-VTTS (He et al., 2024): 混合环境图像到 prompt,沉浸式语音
+- [[论文笔记/UmbraTTS|UmbraTTS]] (Glazer et al., ICML 2025 Workshop): 基于 flow matching (F5-TTS 框架) 联合生成语音+环境音,引入 SER 连续控制背景音量,是首个 flow matching 基础的环境感知 TTS
 
 ### Speaker 描述增强
 - PromptSpeaker (Zhang et al., 2023c): 说话人特征的文本描述

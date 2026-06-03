@@ -130,7 +130,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 ## 演进
 
-规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025)
+规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025)
 
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
@@ -139,3 +139,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## Plutchik 结构模型与韵律嵌入分解 (Daisy-TTS)
 
 [[论文笔记/Daisy-TTS|Daisy-TTS]] (Chevi & Aji, 2024) 从 Plutchik 结构模型出发,提出韵律嵌入分解方法实现更宽广的情感模拟。核心思路: 用 emotion discriminator 训练 prosody encoder 学习情感可分离嵌入,再通过 PCA 分解实现四种情感操控 — 一级情感 (采样)、二级情感 (高斯混合)、强度 (缩放因子 alpha)、极性 (取反)。在 ESD 数据集上 MOS 和感知率均优于 Zhou et al. (2022b) baseline。该方法是 "情感表示 = 可分解韵律原型" 范式的首次探索。
+
+## LLM Prompt-based 混合情感 (PUE)
+
+[[论文笔记/Prompt-Unseen-Emotion|PUE]] (Gao et al., 2025) 提出另一条混合情感路线: 利用 LLM 的 in-context learning 能力,通过 emotion-guided prompt (百分比模板: "α% happy, β% sad, ...") 实现零样本混合情感合成。训练时每个样本仅有一种情感 (对应参数=100%, 其余=0%),推理时调整百分比即可生成 outrage (surprise+angry)、disappointment (surprise+sad)、delight (surprise+happy) 等混合情感。基于 CosyVoice-300M-Instruct 架构,AB Preference 测试中 PUE 以 68-87% 偏好率超越 VITS-based mix baseline。与 Daisy-TTS 的 PCA 分解路线互补: PUE 通过文本 prompt 实现组合,Daisy-TTS 通过嵌入空间操作实现组合。

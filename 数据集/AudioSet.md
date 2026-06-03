@@ -4,7 +4,7 @@ title: "AudioSet"
 aliases: []
 domain: "general-audio"
 tags: [environmental-sound, general-audio, large-scale, multi-label]
-key_papers: ["[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/UmbraTTS|UmbraTTS]]"]
 status: pending-review
 lifecycle: active
 created: 2026-06-01
@@ -27,3 +27,8 @@ AudioSet 是 Google 发布的大规模音频事件数据集,包含超过 200 万
 - **评估任务**: AS-2M (19K eval set, mAP) 和 AS-20K (21K balanced train set, mAP) [BEATs §4.1]
 - **SOTA 结果**: BEATs_iter3+ 在 AS-2M 上取得 48.6 mAP (single model SOTA),ensemble 10 models 达 50.6 mAP [BEATs Table 1, Table 3]
 - 详见 [[论文笔记/BEATs|BEATs]]
+
+## 在 UmbraTTS 中的使用
+
+- **训练**: AudioSet 中自然包含语音+环境音的录音,作为 UmbraTTS 环境感知 TTS 的主要训练数据源 [§4]
+- **Self-supervised 数据构建**: 通过 VAD 或 source separation 从 AudioSet 录音中分离语音和环境音,构建 (speech, env, transcript) 三元组 [§3]

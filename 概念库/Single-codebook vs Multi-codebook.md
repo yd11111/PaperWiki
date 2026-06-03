@@ -4,7 +4,7 @@ title: "Single-codebook vs Multi-codebook"
 aliases: [SVQ vs RVQ, 单码本 vs 多码本, Single Codebook, Single-stream Tokenizer, Flat Token]
 category: "design-choice"
 tags: [quantization, codec-design, SVQ, RVQ, single-codebook, audio-codec]
-key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/XTTS|XTTS]]"]
+key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/UniTTS|UniTTS]]", "[[论文笔记/C2F-LM|C2F-LM]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Audio Tokenizer Taxonomy]]", "[[Codec Language Model]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -95,6 +95,7 @@ $$q_t = \arg\min_{k \in \{1,...,K\}} \|z_t - c_k\|^2$$
 | TS3-Codec (2024) | 1 | - | 40-50 | 可变 | Transformer, SVQ, 自适应 |
 | RepCodec (2024) | 1 | - | 50 | - | CNN, SVQ, HuBERT 蒸馏 |
 | Mimi (2024) | 1+7 | 2048 | 12.5 | 1.1-4.4 kbps | 第一层 VQ 语义 + 额外 7 层 RVQ 声学 |
+| DS-Codec (2025) | 1 | 8192/65536(PQ) | 80 | 1.04/1.28 kbps | 双阶段训练(镜像→非镜像), VQ/PQ 两种方案 |
 
 ### 折中方案
 
