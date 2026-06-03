@@ -4,7 +4,7 @@ title: "Audio Understanding"
 aliases: [音频理解, Speech Understanding, 语音理解, Audio Comprehension, Speech Comprehension via LLM]
 category: "task-family"
 tags: [speech-LM, understanding, ASR, emotion, speaker, paralinguistic, downstream]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "[[论文笔记/Survey-Audio Language Models|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/Dynamic-SUPERB|Dynamic-SUPERB Phase-2]]"]
+key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "[[论文笔记/Survey-Audio Language Models|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/Dynamic-SUPERB|Dynamic-SUPERB Phase-2]]", "[[论文笔记/CoT-ST|CoT-ST]]", "[[论文笔记/SpeechWorldModel|SpeechWorldModel]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio-Language Pretraining]]"]
 status: pending-review

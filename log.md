@@ -236,3 +236,17 @@
 - 反向更新: Self-Supervised Speech Representation(+XEUS/BEATs/w2v-BERT 2.0, key_papers+演进), Speech Tokenizer(+XEUS/BEATs, key_papers), Audio Understanding(+Dynamic-SUPERB Phase-2 findings, key_papers), AudioSet(+BEATs usage), w2v-BERT model(+w2v-BERT 2.0 scaling section) — 共 5 页 append
 - [create/entity] 无新建 — 候选 (E-Branchformer, ML-SUPERB, BEATs model, Acoustic Tokenizer) 均不满足准入规则(单篇引用或已被 Self-Supervised Speech Representation/Speech Tokenizer 覆盖)
 - [lint/local] XEUS, BEATs, Dynamic-SUPERB, w2v-BERT 2.0 — 通过/0 dead links, frontmatter 完整
+- [ingest/enhanced-card] [[NLLB]] — 增强卡片(纯文本MT论文,与TTS/语音无直接关联,降级为enhanced-card), 无KB检索
+- [kb/search] [[Seamless]] — 命中 3 页(confirmed): [[Self-Supervised Speech Representation]]✓, [[Prosody Modeling]]✓, [[Speech Language Model]]✓ | 过滤: 无
+- [ingest/deep] [[Seamless]] — 精读(batch processing), kb_sources=3, 首个公开端到端表达性+流式跨语言S2ST系统: SeamlessM4T v2 (UnitY2 NAR T2U, 3x加速) + SeamlessExpressive (韵律保持, 6语言) + SeamlessStreaming (EMMA低延迟), S2TT 101语言 / S2ST 36语言, 追加更新 3 个实体页(Prosody Modeling, Self-Supervised Speech Representation, Speech Language Model)
+- [kb/search] [[NaturalVoices]] — 命中 3 页(confirmed): [[Speaker Embedding]]✓, [[Emotion Control in TTS]]✓, [[Prosody Modeling]]✓ | 过滤: 无
+- [ingest/deep] [[NaturalVoices]] — 精读(batch processing), kb_sources=3, 首个大规模自发情感语音数据集(3846h, 2467+ speakers, podcast来源) + 自动标注pipeline, SV% +24.55% over VCTK, 追加更新 3 个实体页(Speaker Embedding, Emotion Control in TTS, Prosody Modeling)
+- [kb/search] [[CoT-ST]] — 命中 3 页(confirmed): [[Speech Language Model]]✓, [[Speech-Text Alignment]]✓, [[Audio Understanding]]✓ | 过滤: 无
+- [ingest/deep] [[CoT-ST]] — 精读(batch processing), kb_sources=3, 三阶段课程学习(ASR→MMT→SRT)激活SLM CoT推理, Whisper+Q-Former+Qwen2-7B仅训练projection, CoVoST-2 en→zh BLEU 47.7 SOTA, 3x推理加速, 追加更新 2 个实体页(Speech Language Model, Audio Understanding)
+- [kb/search] [[TTSDS2]] — 命中 4 页: [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
+- [ingest/deep] [[TTSDS2]] — 精读(batch processing), kb_sources=4, 分布式TTS评估指标(Wasserstein-2距离), 唯一在4域x14语言所有条件ρ>0.5的客观指标(avg ρ≈0.67), 20个TTS系统排名 + 11K人工MOS + 自动化benchmark pipeline, 追加更新 4 个实体页(TTS Evaluation, Self-Supervised Speech Representation, Speaker Embedding, Prosody Modeling)
+- [kb/search] [[SpeechWorldModel]] — 命中 3 页(confirmed): [[Speech Language Model]]✓, [[Audio Understanding]]✓, [[Prosody Modeling]]✓ | 过滤: 无
+- [ingest/deep] [[SpeechWorldModel]] — 精读(batch processing), kb_sources=3, 首个因果图模块化语音理解模型(4模块DAG: WMA→ToM→SA→Prag), 半监督训练5x加速, 情感识别EM 97.80%超越Gemini 2.5 Pro, 追加更新 4 个实体页(Speech Language Model, Audio Understanding, Prosody Modeling, Emotion Control in TTS)
+- 反向更新: TTS Evaluation(+TTSDS2 section, key_papers), Speech Language Model(+CoT-ST, +SpeechWorldModel, key_papers), Audio Understanding(+CoT-ST, +SpeechWorldModel, key_papers), Prosody Modeling(+Seamless, +NaturalVoices, +TTSDS2, +SpeechWorldModel, key_papers), Speaker Embedding(+NaturalVoices, +TTSDS2, key_papers), Emotion Control in TTS(+NaturalVoices, +SpeechWorldModel, key_papers), Self-Supervised Speech Representation(+Seamless, +TTSDS2, key_papers) — 共 7 页 append
+- [create/entity] 无新建 — 候选(Speech Translation, EMMA Mechanism, Causal Graph for Speech, UnitY2, AutoPCP, Voice Conversion)均不满足准入规则(单/双篇论文引用或已被现有实体页覆盖)
+- [lint/local] NLLB, Seamless, NaturalVoices, CoT-ST, TTSDS2, SpeechWorldModel — 通过/0 dead links, frontmatter 完整

@@ -365,6 +365,37 @@ deep 及以上层级笔记**必须**包含：
 
 ---
 
+## 系统同步
+
+### 单次同步 (每次 ingest 后自动)
+
+精读 pipeline 完成后检查:
+- [ ] 本篇 frontmatter 字段齐全
+- [ ] 本篇涉及的 MOC 是否已更新(论文 tags 对应的 MOC 是否包含本篇)
+- [ ] 审阅 callout 已追加
+- [ ] log.md 已更新
+- [ ] Git commit 已完成
+
+有遗漏当场补完。
+
+### 全面同步 (每周 / 批量操作后 / "跑一下系统同步")
+
+| 检查项 | 说明 |
+|--------|------|
+| MOC 覆盖 | 所有 deep/repro 是否被至少一个 MOC 收录 |
+| 审阅覆盖 | 所有 deep/repro 是否有审阅 callout |
+| Frontmatter 一致性 | 所有笔记是否符合当前模板 schema |
+| 死链 | 全 vault wikilink 有效性 |
+| 孤儿页 | 没有入链的实体页 |
+| 概念去重 | title/aliases 语义重叠 |
+| 可信层进度 | confirmed/reviewed 比例是否在增长 |
+| 概念溯源 | key_papers ≥ 3 且 origin_paper 空 |
+| 系统文档 | CLAUDE.md vault 状态是否反映当前数据 |
+
+产出: `_lint/YYYY-MM-DD-system-sync.md`
+
+---
+
 ## 13. Link 约定
 
 - 所有跨页引用使用 `[[wikilink]]` 格式
