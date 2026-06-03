@@ -1,0 +1,92 @@
+paper: MamTra
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  positionable: pass
+  no_pollution: pass
+
+checks:
+  # 可复述
+  method_has_why:
+    result: pass
+    detail: "方法节含 3 处因果解释: (1) 为什么权重映射 work [agent 解读]; (2) 为什么 BlockBeg 最优 [agent 解读]; (3) 为什么蒸馏不可或缺 [论文原文]"
+  design_choice_rationale:
+    result: pass
+    detail: "3 个关键设计(权重映射/混合策略/蒸馏组合)均有 WHY 解释"
+  reusable_is_concrete:
+    result: pass
+    detail: "可借鉴字段列出 Q→C,K→B,V→x 映射,具体可操作"
+
+  # 可信赖
+  claim_annotation_coverage:
+    result: pass
+    detail: "实验数字全部标注 [Table 3]/[Fig 3]/[Fig 4]/[Table 4]/[Fig 5]/[Fig 6],估计覆盖 ≥90%"
+  metric_names_correct:
+    result: pass
+    detail: "WER/NMOS/UTMOS/SSIM/TFLOPs 使用正确"
+  quickcard_metrics:
+    result: pass
+    detail: "含具体数字 + 数据集名 + [Table 3, Fig 3] 标注"
+  no_direction_error:
+    result: pass-with-fixes
+    detail: "原稿局限性第 3 点'已低于'改为'已劣于',已修正"
+
+  # 可区分
+  causal_source_annotation:
+    result: pass
+    detail: "3 处 WHY 解释分别标注了 [论文原文] 或 [agent 解读]"
+  causal_source_coverage:
+    result: pass
+    detail: "方法节中 WHY 解释 100% 有来源标注"
+  no_inference_as_assertion:
+    result: pass
+    detail: "局限性中的推断均标注 [agent 解读]; 点评中'不公平对比'等判断措辞审慎"
+  strong_claim_supported:
+    result: pass
+    detail: "无'SOTA/唯一/全面优于'等未支撑强断言; '首个系统研究'引自论文原文"
+
+  # 可定位
+  kb_lineage:
+    result: pass
+    detail: "KB 背景含谱系(效率优化分支)、两类方向对比、Zonos 定位"
+  kb_innovation_baseline:
+    result: pass
+    detail: "创新判断有 3 个具体对比基准"
+  frontmatter_present:
+    result: pass
+    detail: "所有必要字段存在且非空"
+  frontmatter_semantically_correct:
+    result: pass
+    detail: "models 列 CosyVoice 2 (teacher/baseline); concepts 列直接相关概念; datasets 列 SEED-TTS-Eval"
+  quickcard_complete:
+    result: pass
+    detail: "5 字段均有实质内容"
+
+  # 不污染
+  concept_admission:
+    result: pass
+    detail: "不新建概念页,不涉及"
+  concept_dedup:
+    result: pass
+    detail: "不新建概念页,不涉及"
+  backward_factual:
+    result: pass
+    detail: "反向更新仅为 key_papers 追加,内容无 factual error"
+  backward_classification:
+    result: pass
+    detail: "反向更新均为追加(不改 status)"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "models 字段未列 Llasa-1B 和 Zonos-v0.1 作为对比 baseline,但这些模型可能无独立模型页,影响有限"
+    suggestion: "如未来为 Llasa 或 Zonos 创建模型页,可回填"
+
+conclusion: pass
+summary: "笔记质量良好: 因果解释充分,出处标注覆盖高,KB 定位精准。已修正 1 处方向性措辞(低→劣)。反向更新风险低(仅追加 key_papers)。"

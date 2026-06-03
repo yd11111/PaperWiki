@@ -151,7 +151,7 @@ Ablation [Table 4] 表明: 去除 L_CE 导致最严重的 WER 退化(3.48→6.70
 
 1. **单一 backbone 依赖**: 所有实验仅基于 CosyVoice 2 (Qwen2.5 0.5B),未验证在其他 TTS backbone(如 Llama-based Llasa, 更大模型)上是否同样有效 [agent 解读]
 2. **仅英文评估**: 训练数据为 LibriTTS (英文),未涉及中文或多语言场景,而 CosyVoice 2 本身是中英双语系统 [agent 解读]
-3. **激进比例下质量下降**: 1:11 ratio 的 WER (3.99%) 已低于 Zonos-v0.1 baseline (3.42%),说明替换比例存在明确上限 [Table 3]
+3. **激进比例下质量下降**: 1:11 ratio 的 WER (3.99%) 已劣于 Zonos-v0.1 baseline (3.42%),说明替换比例存在明确上限 [Table 3]
 4. **蒸馏依赖 teacher 质量**: 方法假设有高质量 pre-trained teacher,不适用于需要从零构建 TTS 系统的场景 [agent 解读]
 5. **SSIM 不升不降**: 所有 MamTra 配置的 SSIM (0.72) 略高于 teacher (0.66),但论文未解释这一现象 [Table 3] [agent 解读: 可能与蒸馏过程中 embedding alignment 有关]
 6. **论文较短(Interspeech 格式)**: 限于 4 页正文,许多设计细节(如 Mamba-2 的具体超参、各层替换的精确 attention head 数量)未充分展开 [agent 解读]
@@ -182,3 +182,10 @@ Ablation [Table 4] 表明: 去除 L_CE 导致最严重的 WER 退化(3.48→6.70
 4. **"先映射初始化,后少量数据蒸馏"范式**: 将大模型迁移到新架构的通用策略,成本比从零预训练低 1-2 个数量级。
 
 5. **Length-stress 测试的发现**: 在长上下文下,"选对层"比"保留更多 Transformer 层"更重要,这个 insight 对边缘部署中的模型裁剪有指导意义。
+
+---
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass
+> **摘要**: 因果解释充分(3 处 WHY 均有来源标注),出处标注覆盖 ≥90%,KB 定位精准。已修正 1 处方向性措辞。1 个 low issue (frontmatter 未列所有 baseline 模型)。反向更新风险低(仅追加 key_papers)。
+> 详见 `_review/MamTra-review.yml`
