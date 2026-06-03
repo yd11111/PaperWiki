@@ -284,6 +284,7 @@
 - [review/auto] [[Multi-Reward GRPO]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] Multi-Reward GRPO — 通过/0 问题
 - [moc] TTS训练与评估 MOC 更新: +Multi-Reward GRPO
+- [alert/backlog] pending-review: 70, draft deep/repro: 88 — 建议抽空审核
 - [kb/search] [[Voxtral TTS]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Speech Language Model]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Codec Training Objectives]](pending-review)
 - [ingest/deep] [[Voxtral TTS]] — 精读, kb_sources=6, 新建 0, 追加 10 (Semantic vs Acoustic Tokens, Speech Tokenizer, LLM-based TTS, Conditional Flow Matching, Speech Factorization, Finite Scalar Quantization, Classifier-Free Guidance, Voice Cloning Taxonomy, Codec Training Objectives, Speech Language Model)
 - [review/auto] [[Voxtral TTS]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
