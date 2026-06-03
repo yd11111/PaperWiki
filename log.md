@@ -360,3 +360,8 @@
 - [lint/local] TADA — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +TADA
 - [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+- [kb/search] [[TTS-PRISM]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓ | 参考: [[TTS Evaluation]](pending-review), [[Audio Understanding]](pending-review), [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[CosyVoice 3]](pending-review)
+- [ingest/deep] [[TTS-PRISM]] — 精读, kb_sources=6, 新建 0, 追加 4 (TTS Evaluation, Prosody Modeling, Emotion Control in TTS, CosyVoice 3)
+- [review/auto] [[TTS-PRISM]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] TTS-PRISM — 通过/0 问题
+- [moc] TTS训练与评估 MOC 更新: +TTS-PRISM
