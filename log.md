@@ -378,3 +378,10 @@
 - [review/auto] [[LLaDA-TTS]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
 - [lint/local] LLaDA-TTS — 通过/0 问题 (1 死链修复: F5-TTS 无笔记,改为纯文本引用)
 - [moc] 零样本语音合成 MOC 更新: +LLaDA-TTS
+
+## 2026-06-03 (SemaVoice)
+- [kb/search] [[SemaVoice]] — 命中 7 页(取 Top 6): [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[SEED-TTS-Eval]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[Next-Token Diffusion]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
+- [ingest/deep] [[SemaVoice]] — 精读, kb_sources=6, 新建 0, 追加 12 (Next-Token Diffusion, Variational Autoencoder for TTS, Self-Supervised Speech Representation, Classifier-Free Guidance, Diffusion-based TTS, LLM-based TTS, Semantic vs Acoustic Tokens, CosyVoice 2, SEED-TTS-Eval, Emilia, Zero-shot Speech Synthesis, 零样本语音合成 MOC)
+- [review/auto] [[SemaVoice]] — pass-with-fixes, 3 issues (all low)
+- [lint/local] SemaVoice — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +SemaVoice
