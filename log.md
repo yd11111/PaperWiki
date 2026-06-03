@@ -75,3 +75,11 @@
 - [ingest/deep] [[Whisper]] — 精读(batch processing), kb_sources=2, 追加更新 2 个实体页(Speech Tokenizer, Mel Spectrogram)
 - [create/model] [[模型库/VITS|VITS]], [[模型库/HuBERT|HuBERT]], [[模型库/Whisper|Whisper]] — 3 个模型页创建(满足准入: 多篇引用+前置知识+连接论文)
 - [lint/local] VITS, HuBERT, Whisper — 通过/0 dead links
+- [kb/search] [[Fish-Speech]] — 命中 5 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review)
+- [kb/search] [[GLM-TTS]] — 命中 4 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Speaker Adaptation]](pending-review)
+- [kb/search] [[UniAudio]] — 命中 5 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: [[Codec Language Model]](pending-review)
+- [ingest/deep] [[Fish-Speech]] — 精读(batch processing), kb_sources=5, 追加更新 6 个实体页(LLM-based TTS, Speech Tokenizer, Neural Vocoder, RVQ, Semantic vs Acoustic Tokens, FSQ)
+- [ingest/deep] [[GLM-TTS]] — 精读(batch processing), kb_sources=4, 追加更新 6 个实体页(LLM-based TTS, Speech Tokenizer, CFM, Neural Vocoder, DiffRO, Speaker Adaptation)
+- [ingest/deep] [[UniAudio]] — 精读(batch processing), kb_sources=5, 追加更新 5 个实体页(LLM-based TTS, Speech Tokenizer, RVQ, Semantic vs Acoustic Tokens, Speech Language Model, Codec Language Model)
+- [lint/local] Fish-Speech, GLM-TTS, UniAudio — 通过/0 问题
+- [create/entity] 无新建 — 候选 (GFSQ, Dual-AR, GRPO-for-TTS, Multi-Scale Transformer, Vocos2D) 均不满足准入规则(单篇论文特有概念)

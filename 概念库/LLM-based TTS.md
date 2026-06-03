@@ -4,7 +4,7 @@ title: "LLM-based TTS"
 aliases: [LLM TTS, 大语言模型语音合成, LLM-driven Speech Synthesis]
 category: "model-family"
 tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-only]
-key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "Make-a-Voice (Huang et al., 2023b)", "Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/Mega-TTS|Mega-TTS]]"]
+key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "MELLE (Meng et al., 2024)", "HALL-E (Nishimura et al., 2024)", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "Make-a-Voice (Huang et al., 2023b)", "Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-LLM Integration Taxonomy]]"]
 status: confirmed
@@ -80,6 +80,9 @@ VALL-E 开创的典型两阶段:
 - CosyVoice (Du et al., 2024): LLM 生成 semantic tokens + CFM 合成高保真语音
 - NaturalSpeech 3 (Ju et al., 2024): factorized diffusion codec
 - SimpleSpeech (Yang et al., 2024c): scalar latent transformer + flow-based
+
+**Dialogue/Multi-speaker 扩展**:
+- FireRedTTS-2 (Xie et al., 2025): Text-speech interleaved format + dual-transformer (backbone + decoder) 实现长对话语音生成,支持 podcast 和交互式聊天;12.5Hz streaming tokenizer 缩短序列长度
 
 ## 在可控性方面的特点
 

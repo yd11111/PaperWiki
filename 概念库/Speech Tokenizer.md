@@ -4,7 +4,7 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
 status: confirmed
@@ -43,6 +43,8 @@ CosyVoice 3 的 speech tokenizer 基于 MinMo 构建,通过 FSQ 量化,以 25 Hz
 - IndexTTS2 (Zhou et al., 2025): 采用 MaskGCT 的 semantic codec 作为 speech tokenizer,在 T2S 模块中生成 semantic token 序列,并通过共享位置编码表(W_sem = W_num)实现精确 duration control
 - MaskGCT (Wang et al., 2024): 提出 VQ-VAE semantic codec,用单层 codebook (8192 entries, dim 8) 量化 W2v-BERT 2.0 第 17 层 hidden states,相比 k-means 保留更多韵律信息,被后续 IndexTTS2 等采用
 - [[论文笔记/Seed-TTS|Seed-TTS]] (ByteDance, 2024): 探索 continuous 和 discrete 两种 speech tokenizer 设计,发现 tokenizer 是全系统性能瓶颈;使用类似 Betker (2023) 的方案,在大规模数据上验证了 tokenizer 质量对零样本 TTS 的决定性影响
+- [[论文笔记/FireRedTTS|FireRedTTS]] (小红书, 2024): 提出 Semantic-Aware Speech Tokenizer (SAST),结合 HuBERT semantic encoder + ECAPA-TDNN acoustic encoder (Clip&Shuffle 防 content 泄漏) + VQ decoder (codebook 16384, frameshift 40ms),属于自监督 semantic + 全局 acoustic embedding 的混合路线
+- [[论文笔记/FireRedTTS 2|FireRedTTS 2]] (小红书, 2025): 重新设计为 12.5Hz streaming tokenizer,结合 Whisper encoder (semantic) + 可训练 acoustic encoder → concat + 4x downsample → 16 层 RVQ (2048 entries) + dual decoder (semantic + Vocos-based acoustic);帧率仅为主流方案的一半,适用于长对话场景
 
 ## 相关概念
 
