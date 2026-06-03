@@ -1,0 +1,58 @@
+paper: VoiceFlow
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+summary: >
+  笔记质量整体良好。方法节的三个 WHY 问题结构清晰,因果解释与推断区分完备。
+  实验表格详尽,所有数字有出处标注。KB 背景谱系定位准确,将 VoiceFlow 置于
+  diffusion → flow matching 演进中。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      models 字段原列 VITS,但 VoiceFlow 未与 VITS 做对比,VITS 也非本文核心模型。
+      GradTTS 是唯一 baseline 但 vault 中无 GradTTS 模型页。
+    suggestion: 已将 models 清空。如后续创建 GradTTS 模型页可回填。
+    fixed: true
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: >
+      datasets 为空,但论文使用 LJSpeech 和 LibriTTS 两个数据集。
+      vault 中目前无对应数据集页。
+    suggestion: 待创建 LJSpeech/LibriTTS 数据集页后回填。
+    fixed: false
+
+checklist:
+  understandable:
+    mechanism_explanation: pass
+    design_choices_why: pass
+    reusable_tricks: pass
+  trustworthy:
+    source_annotation_coverage: pass  # 29 source annotations
+    metric_names_correct: pass
+    quickcard_metrics: pass
+    no_direction_error: pass
+  distinguishable:
+    fact_inference_labels: pass  # 9 annotations
+    fact_inference_coverage: pass  # >80%
+    no_assertion_without_qualifier: pass
+    strong_claims_supported: pass
+  locatable:
+    kb_lineage: pass
+    kb_innovation_benchmark: pass
+    fields_present: pass
+    fields_semantically_correct: pass-with-fixes  # models fixed
+    quickcard_complete: pass
+  no_pollution:
+    concept_admission: not-applicable  # no new concepts
+    dedup_check: not-applicable
+    reverse_update_accuracy: pass
+    reverse_update_classification: pass

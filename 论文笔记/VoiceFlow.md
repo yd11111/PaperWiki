@@ -9,7 +9,7 @@ year: 2023
 venue: "ICASSP 2024"
 tags: [TTS, flow-matching, rectified-flow, acoustic-model, efficiency, NAR, mel-generation]
 concepts: ["[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Neural Vocoder]]"]
-models: ["[[模型库/VITS|VITS]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -154,5 +154,15 @@ VoiceFlow 是一篇方法清晰、实验设计严谨的工作。其核心价值�
 4. **多说话人场景作为 stress test**: LibriTTS (高 speaker variability) 上的实验放大了不同生成算法的差距,提示在评估生成模型时应纳入多说话人场景作为更具区分度的 benchmark。
 
 ---
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes
+> - [x] 可复述: 方法节含 3 个 WHY 因果解释,速查可借鉴具体可迁移
+> - [x] 可信赖: 29 处出处标注,指标名正确,无方向性错误
+> - [x] 可区分: 9 处 [论文原文]/[agent 解读] 标注,覆盖率 >80%
+> - [x] 可定位: KB 谱系定位准确,速查 5 字段实质
+> - [x] 不污染: 无新建概念页,反向更新为追加
+> **Issues**: 1 medium (models 字段已修正), 1 low (datasets 待数据集页创建后回填)
+> 详见 `_review/VoiceFlow-review.yml`
 
 检索命中: [[Conditional Flow Matching]], [[Diffusion-based TTS]], [[Diffusion Model]], [[Score Matching]], [[Non-autoregressive TTS]], [[Duration Predictor]] | 过滤: 无 | 未命中但可能相关: 无
