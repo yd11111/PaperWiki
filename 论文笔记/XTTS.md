@@ -116,9 +116,9 @@ XTTS 由三个组件构成 [§2, Fig 1]:
 
 | 指标 | 本文 (XTTS) | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| CER (en) ↓ | **0.5425** | 0.6789 (Tortoise), 1.4269 (HierSpeech++) | FLORES+ (240 sentences) + DAPS (20 speakers) | [Table 2] |
-| UTMOS (en) ↑ | 4.007 | 4.426 (StyleTTS 2), 4.184 (HierSpeech++) | FLORES+ + DAPS | [Table 2] |
-| SECS (en) ↑ | 0.6423 | 0.6428 (HierSpeech++), 0.5492 (Tortoise) | FLORES+ + DAPS, ECAPA2 encoder | [Table 2] |
+| CER (en) ↓ | **0.5425** | 0.6789 (Tortoise), 0.7741 (HierSpeech++), 1.4269 (Mega-TTS 2) | FLORES+ (240 sentences) + DAPS (20 speakers) | [Table 2] |
+| UTMOS (en) ↑ | 4.007 | 4.457 (HierSpeech++), 4.426 (StyleTTS 2), 4.184 (Mega-TTS 2) | FLORES+ + DAPS | [Table 2] |
+| SECS (en) ↑ | 0.6423 | 0.6530 (HierSpeech++), 0.5492 (Tortoise) | FLORES+ + DAPS, ECAPA2 encoder | [Table 2] |
 | CMOS vs HierSpeech++ ↑ | +0.41 | 0 (reference) | English, 15 evaluators | [Table 3] |
 | CMOS vs Mega-TTS 2 ↑ | +0.92 | 0 (reference) | English, 15 evaluators | [Table 3] |
 | SMOS vs HierSpeech++ ↑ | -0.31 | 0 (reference) | English, 15 evaluators | [Table 3] |
@@ -131,7 +131,7 @@ XTTS 由三个组件构成 [§2, Fig 1]:
 1. XTTS 在 16 语种训练下的英语 CER 优于所有对比模型 (含单语模型),但 UTMOS 和 SECS 低于 HierSpeech++ [Table 2]
 2. 主观评估中,XTTS 在自然度/音质 (CMOS) 上显著优于 HierSpeech++ 和 Mega-TTS 2,但在说话人相似度 (SMOS) 上略逊 [Table 3]
 3. [论文原文] SMOS 略低是多语言训练复杂性的预期结果 [§4.1]
-4. YourTTS 多语言训练后英语性能大幅下降 (CER 2.87→3.48),暴露了之前论文用原始多语言 checkpoint 比较的不公平性 [§4.1]
+4. YourTTS 原始多语言 checkpoint 因数据分布不均 (66% batch 来自仅 6 non-English speakers) 导致过拟合,性能远低于重新训练的单语版本 (Exp 1 CER 1.091 vs Original CER 2.874);多语言扩展到 16 语种后英语进一步劣化 (Exp 2 CER 3.480),暴露了之前论文比较的不公平性 [§3.2, §4.1]
 5. Fine-tuning (~10 min 数据) 可将跨语言 SECS 从 0.585 提升至 0.717,且能跨语言迁移风格 (如耳语) [§5]
 
 ## 局限性

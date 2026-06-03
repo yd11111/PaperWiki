@@ -4,7 +4,7 @@ title: "Mel Spectrogram"
 aliases: [梅尔频谱图, Mel-spectrogram, MelS, 梅尔谱]
 category: "representation"
 tags: [acoustic-feature, signal-processing, TTS, vocoder]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/E2 TTS|E2 TTS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/STTATTS|STTATTS]]"]
 origin_paper: ""
 related_concepts: ["[[Speech Tokenizer]]", "[[Neural Vocoder]]", "[[Text-to-Speech Pipeline]]"]
 status: pending-review

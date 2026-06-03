@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review
@@ -77,6 +77,7 @@ Encoder Output → Duration Predictor → Length Regulator → Pitch Predictor �
 - MaskGCT: 专门的 duration prediction 阶段 (T2D model)
 - IndexTTS2: 通过共享位置编码实现隐式 duration control
 - CosyVoice: flow matching 内部隐式处理 duration
+- SESD (Lovelace et al., 2024): 仅预测 utterance-level 总时长 (fine-tune ByT5 为 seq2seq duration predictor, RMSE 1.4s),diffusion 内部隐式解决 phoneme alignment,完全避免 phoneme duration 标注
 
 ### VITS Stochastic Duration Predictor (Kim et al., ICML 2021)
 - **概率 duration 建模**: 首个用 flow-based 模型学习音素时长的概率分布 (非确定性预测) [§2.2.2]
