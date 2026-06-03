@@ -122,20 +122,36 @@ Patch size = 2, 即 TSLM/RALM 工作在 12.5 Hz token rate, VAE latent 在 25 Hz
 
 ### 主要结果
 
-| 指标 | VoxCPM (0.5B) | CosyVoice 3 (0.5B) | DiTAR (0.6B) | IndexTTS 2 (0.5B) | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- | --- |
-| EN-WER ↓ | **1.85%** | 2.02% | **1.69%** | 2.23% | SEED-TTS-Eval | [Table 3] |
-| EN-SIM ↑ | **72.9%** | 71.8% | 73.5% | 70.6% | SEED-TTS-Eval | [Table 3] |
-| ZH-CER ↓ | **0.93%** | 1.16% | 1.02% | 1.03% | SEED-TTS-Eval | [Table 3] |
-| ZH-SIM ↑ | 77.2% | **78.0%** | 75.3% | 76.5% | SEED-TTS-Eval | [Table 3] |
-| Hard-CER ↓ | 8.87% | - | **5.83%** | 7.97% | SEED-TTS-Eval Hard | [Table 3] |
-| CV3-ZH-CER ↓ | **3.40%** | 3.89%* | - | 3.58% | CV3-Eval | [Table 4] |
-| CV3-EN-WER ↓ | **4.04%** | 5.24%* | - | 4.45% | CV3-Eval | [Table 4] |
-| CV3-Hard-EN WER ↓ | **7.89%** | 9.04%* | - | - | CV3-Hard-EN | [Table 4] |
-| N-MOS (ZH) | 4.10 | - | - | 4.25 | 主观评估 | [Table 5] |
-| S-MOS (EN) | **4.18** | - | - | 4.16 | 主观评估 | [Table 5] |
+**SEED-TTS-Eval** [Table 3]:
 
-*CosyVoice 3 数据来自闭源版本
+| 指标 | VoxCPM (0.5B, 开源) | IndexTTS 2 (0.5B, 开源) | DiTAR (0.6B, 非开源) | CosyVoice 3 (0.5B, 非开源) | 出处 |
+| --- | --- | --- | --- | --- | --- |
+| EN-WER ↓ | **1.85%** | 2.23% | 1.69% | 2.02% | [Table 3] |
+| EN-SIM ↑ | **72.9%** | 70.6% | 73.5% | 71.8% | [Table 3] |
+| ZH-CER ↓ | **0.93%** | 1.03% | 1.02% | 1.16% | [Table 3] |
+| ZH-SIM ↑ | **77.2%** | 76.5% | 75.3% | 78.0% | [Table 3] |
+| Hard-CER ↓ | 8.87% | 7.97% | **5.83%** | - | [Table 3] |
+
+注: 论文将 DiTAR、CosyVoice 3 归为非开源; VoxCPM 声称的 "开源 SOTA" 是在开源系统中的对比(vs IndexTTS2, F5-TTS, CosyVoice 2 等)。加粗标注该类别内最优值。
+
+**CV3-Eval** [Table 4]:
+
+| 指标 | VoxCPM | IndexTTS2 | CosyVoice 3-0.5B* | 出处 |
+| --- | --- | --- | --- | --- |
+| ZH-CER ↓ | **3.40%** | 3.58% | 3.89% | [Table 4] |
+| EN-WER ↓ | **4.04%** | 4.45% | 5.24% | [Table 4] |
+| CV3-Hard-EN WER ↓ | **7.89%** | - | 9.04% | [Table 4] |
+
+*CosyVoice 3 在 CV3-Eval 中标注为闭源
+
+**主观评估** [Table 5]:
+
+| 指标 | VoxCPM | IndexTTS 2 | CosyVoice 2 | 出处 |
+| --- | --- | --- | --- | --- |
+| N-MOS (ZH) | 4.10 | **4.25** | 3.38 | [Table 5] |
+| S-MOS (ZH) | **4.11** | 4.05 | 4.01 | [Table 5] |
+| N-MOS (EN) | 4.11 | 4.03 | **4.14** | [Table 5] |
+| S-MOS (EN) | **4.18** | 4.16 | 3.97 | [Table 5] |
 
 ### 消融: FSQ 瓶颈维度 [Table 6]
 
@@ -211,3 +227,10 @@ RTF 0.17 on single RTX 4090 [§1]。
 2. **残差分工 = 功能分离不割裂架构**: h_final = FSQ(TSLM) + RALM 的残差连接,让两个模块各司其职但仍在同一梯度流中,比多阶段管线更紧凑。
 3. **参数补偿消融 (24L+6L vs 30L+0L)**: 证明架构分离的归纳偏置比等量参数更有价值,是验证 "组件分工假设" 的标准实验范式。
 4. **WSD schedule + batch doubling for similarity**: 两阶段学习率策略在 stable phase 后用 decay + batch size x2 显著提升 zero-shot speaker similarity,值得在其他 TTS 模型训练中尝试。
+
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> - **conclusion**: pass-with-fixes
+> - **issues**: 2 (0 high, 1 medium, 1 low)
+> - medium/traceability-gap: 原始表格混合 open-source 与 non-open-source baseline 未标注区别,已修正
+> - low/template-compliance: 主观评估表缺少部分 baseline (MaskGCT),已补充关键对比
+> - 详见 `_review/VoxCPM-review.yml`
