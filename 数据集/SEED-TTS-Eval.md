@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/MamTra|MamTra]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: confirmed
@@ -45,3 +45,4 @@ SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发�
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): WER 1.008% (test-zh), WER 1.521% (test-en), SS 0.865 (test-zh), SS 0.860 (test-en); 同时在 duration control 设定下 token number error rate <0.02%
 - [[论文笔记/MaskGCT|MaskGCT]] (2024): SIM-O 0.728 (test-en), WER 2.466 (test-en), SIM-O 0.777 (test-zh), WER 2.183 (test-zh); 非自回归 masked generative 方法
 - [[论文笔记/MamTra|MamTra]] (2026): WER 2.28% (test-en, 1:1 配置), SSIM 0.72 (test-en), UTMOS 4.16 (test-en); Mamba-Transformer 混合架构,VRAM 降低 34% vs CosyVoice 2
+- [[论文笔记/LLaDA-TTS|LLaDA-TTS]] (2026): CER 0.98% (test-zh), WER 1.96% (test-en), CER 7.04% (test-hard), SS 74.6% (test-zh); masked discrete diffusion 替代 AR decoder,基于 CosyVoice 3-0.5B backbone,64 步推理实现 2x LLM-stage speedup

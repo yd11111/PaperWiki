@@ -4,7 +4,7 @@ title: "Next-Token Diffusion"
 aliases: [Per-Token Diffusion, Token-Level Diffusion Head, 逐token扩散, Next-Token Diffusion Head]
 category: "technique"
 tags: [diffusion, autoregressive, continuous-representation, language-model, TTS, multimodal]
-key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]"]
+key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]"]
 origin_paper: "Sun et al., Multimodal Latent Language Modeling with Next-Token Diffusion, 2024 (arXiv:2412.08635)"
 related_concepts: ["[[Diffusion Model]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Classifier-Free Guidance]]", "[[Variational Autoencoder for TTS]]"]
 status: pending-review
@@ -44,6 +44,7 @@ Next-Token Diffusion 在 TTS 中实现了**单阶段连续值 AR 生成**,绕过
 - **LatentLM** (Sun et al., 2024): 奠基性工作。sigma-VAE + per-token DDPM head + causal Transformer。TTS 以 15 fps (1600x 压缩) 超越 VALL-E 2,解码步数仅为其 1/10 [LatentLM Table 4]
 - **CLEAR** (Wu et al., 2025): 用 MLP-based rectified flow head (非 DDPM) + enhanced wav-VAE (2048x)。核心优势: MLP 不需全序列注意力,支持流式 (96ms FFL)。RTF 0.18,78 步 AR decoding [CLEAR Table 2, 4]
 - **VibeVoice** (Peng et al., 2025): 直接复用 LatentLM 的 DDPM head (4 layers) + Qwen2.5 LLM backbone。3200x causal tokenizer + dual tokenizer (acoustic + semantic)。实现 90 分钟多说话人对话 [VibeVoice §2.2]
+- **SemaVoice** (Wang et al., 2026): 在 sigma-VAE 训练中引入 WavLM guided alignment (frame-wise cosine + pair-wise 自相似矩阵匹配),提升连续表示的语义一致性。Qwen2.5-1.5B + patch-wise LocDiT (L=2, 含 previous-patch conditioning)。150K h 双语训练, Seed-TTS-Eval EN WER 1.71% [SemaVoice Table 1]
 
 **共同模式**: VAE encoder → 连续 latent → causal Transformer → per-token diffusion/flow head → VAE decoder → waveform
 
@@ -71,4 +72,4 @@ Next-Token Diffusion 不是要取代 sequence-level diffusion,而是用于**与 
 
 ## 演进
 
-MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM (2024, per-token DDPM head, sigma-VAE, multimodal) → CLEAR (2025, per-token rectified flow head, enhanced VAE, streaming TTS) → VibeVoice (2025, industrial-scale, long-form multi-speaker, Qwen2.5 backbone)
+MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM (2024, per-token DDPM head, sigma-VAE, multimodal) → CLEAR (2025, per-token rectified flow head, enhanced VAE, streaming TTS) → VibeVoice (2025, industrial-scale, long-form multi-speaker, Qwen2.5 backbone) → SemaVoice (2026, SFM-guided VAE alignment, patch-wise LocDiT)

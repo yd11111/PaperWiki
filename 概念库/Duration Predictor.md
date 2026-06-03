@@ -120,4 +120,11 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测)
+
+### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
+
+- **GRPO 优化 duration policy**: 将 duration predictor 建模为 300-class 分类 (100ms bins) 的 stochastic policy,用 GRPO 以 SIM+WER 为 reward 优化。仅需 1.5K 额外训练步,在 Seed-TTS-en 上 WER 从 3.750 降到 1.752 [Table 1]
+- **关键发现**: RL-optimized duration 的 WER (1.752) 甚至优于使用 ground truth duration (1.821),说明最优 duration 不等于真实 duration [Table 3]
+- **计算效率**: 利用 4-step DMD-distilled student 生成样本计算 reward,避免传统 RL 需数百步采样的开销
+- 详见 [[论文笔记/DMOSpeech 2|DMOSpeech 2]]

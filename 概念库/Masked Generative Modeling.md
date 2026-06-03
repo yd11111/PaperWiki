@@ -4,7 +4,7 @@ title: "Masked Generative Modeling"
 aliases: [Masked Generative Transformer, Mask-and-Predict, Non-autoregressive Masked Generation, MaskGIT-style Generation]
 category: "generative-model"
 tags: [generative-model, non-autoregressive, discrete-token, parallel-decoding]
-key_papers: ["[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/DiSTAR|DiSTAR]]"]
+key_papers: ["[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]"]
 origin_paper: "Chang et al., MaskGIT: Masked Generative Image Transformer, CVPR 2022"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]"]
 status: pending-review
@@ -63,4 +63,4 @@ MaskGCT 首次将 masked generative modeling 应用于 TTS 的 text-to-semantic 
 
 ## 演进
 
-BERT (2019, masked LM for understanding) → MaskGIT (2022, masked generation for images) → SoundStorm (2023, acoustic token generation) → MaskGCT (2024, full TTS pipeline) → Block Diffusion (Arriola et al., 2025) + Chatterbox-Flash (2026, block-causal masked denoising for streaming TTS with prior-calibrated scoring)
+BERT (2019, masked LM for understanding) → MaskGIT (2022, masked generation for images) → SoundStorm (2023, acoustic token generation) → MaskGCT (2024, full TTS pipeline) → Block Diffusion (Arriola et al., 2025) + Chatterbox-Flash (2026, block-causal masked denoising for streaming TTS with prior-calibrated scoring) → OmniVoice (2026, 单阶段 text-to-multi-codebook, full-codebook random masking 打破 per-layer 惯例, 600+ 语言) → LLaDA-TTS (2026, ELBO-derived 1/t masked diffusion, AR→bidirectional 迁移, 免训练 speech editing)

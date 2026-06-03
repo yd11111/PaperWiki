@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -151,6 +151,10 @@ Zhang et al. (2025) 提出 SpeechJudge,首个专门针对 speech naturalness 的
 
 TTSDS2 (ICLR 2026 under review) 提出**分布级**客观评估指标，在 20 个开源 TTS 系统、4 个域 (Clean/Noisy/Wild/Kids)、14 语言上验证。TTSDS2 使用 Wasserstein-2 距离比较合成与真实语音的特征分布，分解为 4 个因子 (Generic/Speaker/Prosody/Intelligibility)。核心发现: TTSDS2 是 16 个客观指标中唯一在所有条件下 Spearman ρ>0.5 的指标 (平均 ρ≈0.67)，大幅超越 UTMOSv2 (ρ≈0.12)、PESQ (ρ≈-0.1) 等; 4 个 TTS 系统合成语音被听众评为优于真实录音 [Table 2, Table 3]。同时发布 11,282 条人工 MOS 评分和自动化季度更新的多语言 benchmark pipeline。详见 [[论文笔记/TTSDS2|TTSDS2]]。
 
+### TTS-PRISM: Multi-dimensional Diagnostic Framework
+
+Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊断框架。与 GSRM (acoustic-feature-grounded)、SpeechJudge (pairwise preference)、TTSDS2 (distributional) 三条路线不同,TTS-PRISM 走"显式 schema + 端到端模型"路线: 定义 12 个维度的量化评分标准 (Basic Capability 8 维 1-5 分 + Advanced Expressiveness 4 维 0-2 分),通过 schema-driven instruction tuning 在 MiMo-Audio (7B) 上实现单次推理的多维评分 + 可解释推理。关键发现: (1) 训练中的对抗负样本至关重要 — 去掉后 LCC 从 0.717 暴跌至 0.150,比不训练还差; (2) 通用 Audio-LLM (Qwen3-Omni RSC=0.88) 展现"推理自洽但声学脱节"的悖论。系统 profiling 产出的 Diagnostic Flag (如 "Stable but Flat"、"Prosody-Limited") 比 MOS 排名提供更多可操作信息。详见 [[论文笔记/TTS-PRISM|TTS-PRISM]]。
+
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark (TTSDS2, 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026)

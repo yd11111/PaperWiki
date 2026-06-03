@@ -4,7 +4,7 @@ title: "Speech Factorization"
 aliases: [语音因子分解, Speech Attribute Disentanglement, 语音属性解耦, Feature Disentanglement, Timbre Disentanglement, Speaker-Content Disentanglement, 说话人-内容解耦]
 category: "technique"
 tags: [TTS, disentanglement, adversarial, information-bottleneck, factorization, controllability, voice-conversion]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Gradient Reversal Layer]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Speaker Adaptation]]", "[[Voice Cloning Taxonomy]]", "[[LLM-based TTS]]"]
 status: confirmed
@@ -62,6 +62,7 @@ updated: 2026-06-02
 | Prosody | 与 content/speaker 分离 | 跨说话人韵律迁移 |
 | Emotion | 与 speaker identity 分离 | 零样本情感迁移 |
 | Language | 与 speaker 分离 | 跨语言克隆 |
+| Environment | 与 speaker/content 分离 | 环境感知 TTS |
 
 ## 在 Voice Cloning 中的角色
 
@@ -81,6 +82,7 @@ Disentanglement 贯穿所有四类 cloning 方法:
 - GenerSpeech (NeurIPS 2022): Multi-level style adapter
 - [[论文笔记/Seed-VC|Seed-VC]] (2024): External timbre shifter — 在训练数据层面打破 content-timbre 关联,用外部 VC 模型扰动源语音音色
 - [[论文笔记/USM-VC|USM-VC]] (2025): Universal Semantic Dictionary — 离线构建跨说话人 phoneme centroid 字典,用 phoneme posterior 加权组合实现 timbre-free 内容表征
+- [[论文笔记/IDEA-TTS|IDEA-TTS]] (ICASSP 2025): Incremental Disentanglement — 级联式解耦 (先环境后说话人),用 speech enhancement 的 spectral masking 提取 environment mask 作为环境因子的表示,避免环境-说话人因子纠缠
 
 ## 演进
 
