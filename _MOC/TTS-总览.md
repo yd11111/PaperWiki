@@ -11,12 +11,14 @@
 - [[_MOC/语音大模型与对话|语音大模型与对话]] — speech LLM, full-duplex dialogue, omni-model
 - [[_MOC/TTS训练与评估|TTS 训练与评估]] — post-training, RL, evaluation, reward model
 - 韵律与情感 — prosody, emotion, style
+  - [[论文笔记/Survey-Controllable TTS|Survey-Controllable TTS]] — 2024, 首篇全面综述可控 TTS: 架构/控制策略/特征表示三轴分类, Gemini-based 可控性评估
   - [[论文笔记/Llama-VITS|Llama-VITS]] — 2024, Llama2 语义嵌入增强 VITS 情感表达
   - [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集 + LLM 驱动五维度文本表现力标注
   - [[论文笔记/UMETTS|UMETTS]] — 2024, 多模态(视觉/音频/文本)对比学习情感对齐 + 多 TTS 后端情感合成
   - [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]] — 2024, flow-matching zero-shot TTS + 帧级 arousal-valence + NV embedding, 时变情感控制
   - [[论文笔记/Daisy-TTS|Daisy-TTS]] — 2024, Plutchik 结构模型 + prosody embedding PCA 分解, 一/二级情感+强度+极性模拟
   - [[论文笔记/DiffCSS|DiffCSS]] — 2025, Tsinghua/Tencent, diffusion 韵律预测器 + ParlerTTS backbone 实现对话语音韵律多样性, NDB 4/JSD 0.036
+  - [[论文笔记/PROEMO|PROEMO]] — 2025, FS2 + HuBERT emotion/intensity 双编码器 + GPT-4 prompt control, 多说话人情感强度可控
 - 流式与实时 — streaming, low-latency
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
