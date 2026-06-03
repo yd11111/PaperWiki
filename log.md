@@ -459,3 +459,11 @@
 - [review/auto] [[Controlling Emotion TTS NL Prompts]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
 - [lint/local] Controlling Emotion TTS NL Prompts — 通过/0 问题
 - [moc] TTS训练与评估 MOC 更新: +Controlling Emotion TTS NL Prompts (Emotion Control)
+
+## 2026-06-03 (Meta Learning TTS 7000 Languages)
+- [kb/search] [[Meta Learning TTS 7000 Languages]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[Neural Vocoder]]✓, [[Cross-lingual Voice Cloning]]✓ | 参考(待确认): [[Non-autoregressive TTS]], [[Phoneme Representation]]
+- [ingest/deep] [[Meta Learning TTS 7000 Languages]] — 精读, kb_sources=6, 新建 0, 追加 5 (Speaker Embedding, Neural Vocoder, Non-autoregressive TTS, Phoneme Representation, Cross-lingual Voice Cloning)
+- [review/auto] [[Meta Learning TTS 7000 Languages]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [lint/local] Meta Learning TTS 7000 Languages — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +Meta Learning TTS 7000 Languages
+- [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
