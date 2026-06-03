@@ -5,7 +5,7 @@ aliases: [指令式语音生成, Instruction-following TTS]
 tags: [TTS, controllable, instruction-following, emotion, style]
 key_approaches: ["Natural language instruction", "Fine-grained markers", "Style prompt"]
 key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/Survey-Controllable TTS|Xie et al. Survey 2024]]"]
-benchmarks: ["[[CV3-Eval]]"]
+benchmarks: ["[[CV3-Eval]]", "[[论文笔记/InstructTTSEval|InstructTTSEval]]"]
 metrics: [Style Similarity, WER, MOS, Emotion Accuracy]
 status: confirmed
 lifecycle: active
@@ -40,6 +40,7 @@ updated: 2026-06-01
 - Expresso dataset: 8 种 expressive speaking styles
 - CV3-Eval Emotional Voice Cloning subset
 - 内部数据集: 50+ 种情感/方言/角色风格
+- **InstructTTSEval** (Huang et al., 2025): 首个分层级指令遵循 benchmark,3 层任务 (APS/DSD/RP) x 12 副语言特征 x 2 语言 = 6K 测试用例,用 Gemini-as-Judge 自动评估。闭源最佳 gemini-flash EN-Avg 88.7%,开源最佳 VoxInstruct 50.4% [Table 5]
 
 ### Metrics
 
@@ -60,4 +61,4 @@ updated: 2026-06-01
 - 音色(timbre)尚不可通过文本指令控制,需要额外研究
 - 歌唱风格生成尚未纳入
 - 指令理解的精确度: 复杂组合指令(同时控制情感+语速+方言)的效果
-- 评估难题: 缺乏标准化的 style controllability benchmark
+- 评估难题: InstructTTSEval (2025) 迈出第一步,但 Gemini-as-Judge 存在 self-preference bias (Gemini TTS 得分超过 reference audio),且仅 True/False 二分评估粒度粗

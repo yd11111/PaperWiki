@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, autoregressive, continuous-token, mel-spectrogram, codec-free, LLM-TTS]
 key_concepts: ["[[Mel Spectrogram]]", "[[Variational Autoencoder for TTS]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Neural Vocoder]]"]
 tasks: [TTS, zero-shot-TTS]
-key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/SMLLE|SMLLE]]"]
+key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
@@ -46,7 +46,7 @@ MELLE (Meng et al., 2024) 是首个在连续 mel-spectrogram 空间做自回归�
 
 ## 演进线
 
-Tacotron (mel prediction, AR) → VALL-E (discrete codec LM) → **MELLE (continuous mel LM, 回归连续表示)** → 未来: 探索其他连续表示 (VAE latent states)
+Tacotron (mel prediction, AR) → VALL-E (discrete codec LM) → **MELLE (continuous mel LM, 回归连续表示)** → StreamMel (2025, 连续 mel + interleaving 实现流式) → 未来: 探索其他连续表示 (VAE latent states)
 
 ## 关键贡献
 
@@ -56,3 +56,7 @@ Tacotron (mel prediction, AR) → VALL-E (discrete codec LM) → **MELLE (contin
 4. 单阶段 AR (无需 AR+NAR 两阶段),架构最简洁
 5. SMOS 4.40 超越 GT 3.94,speaker similarity 出色
 6. Reduction factor 提供灵活的质量-速度 trade-off
+
+## 后续工作
+
+- [[论文笔记/StreamMel|StreamMel]] (2025, Nankai/Microsoft): 将 MELLE 的连续 mel AR 框架扩展到流式场景,通过 text-mel interleaving (n:m=1:4) 实现单阶段流式零样本 TTS; 直接继承 MELLE 的 latent sampling module + spectrogram flux loss + KL divergence; cross-sentence WER-H 2.76 接近 MELLE-L 离线 2.80, SIM-O 0.622 超越 MELLE-L 的 0.591, FPL-A 仅 0.01s [StreamMel Table I-IV]
