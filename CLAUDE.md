@@ -36,7 +36,7 @@
 ④ 审阅（反向更新前）: 对照 checklist 检查,输出 _review/xxx-review.yml
 ⑤ Git commit 草稿 + 审阅报告
 ⑥ 反向更新（仅审阅通过后）
-⑦ 局部 lint + Git commit + log
+⑦ 自动检查 + Git commit + log（frontmatter/MOC/wikilink 检查,有遗漏当场补）
 ```
 
 ## 概念页更新规则
@@ -56,7 +56,7 @@
 
 `[type/subtype] 页面 — 描述`
 
-Types: ingest|update|create|lint|review|alert|skip|moc|kb|lifecycle|init
+Types: ingest|update|create|check|review|alert|skip|moc|kb|lifecycle|init
 
 ## 文件结构
 
@@ -72,17 +72,21 @@ _templates/        ← 页面模板(生成时参考)
 _MOC/              ← 导航页(主视图)
 DailyPapers/       ← 每日推荐索引
 _inbox/            ← 零承诺缓冲
-_lint/             ← lint 报告
+_lint/             ← 系统检查报告
 log.md             ← 操作日志
 Sources/           ← PDF(gitignored)
 ```
 
 ## 当前 vault 状态 (2026-06-03)
 
-- 论文笔记: 92 篇 (65 deep + 2 repro + 1 enhanced-card + 12 card + 12 survey card)
-- 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed
+- 论文笔记: 94 篇 (65 deep + 2 repro + 1 enhanced-card + 12 card + 14 无 tier)
+- 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed / 70 pending-review
+- 可信层: 22 confirmed 实体 + 1 reviewed 笔记 (CosyVoice 3)
 - MOC: 3 个 (TTS-总览 / 语音编码与量化 / 零样本语音合成)
+- MOC 覆盖: 19/67 deep/repro (缺口 48 篇)
+- 审阅覆盖: 11/67 deep/repro 有 review callout
 - 审阅报告: 10 个 (_review/*.yml)
+- 死链: 7 个 (5 缺数据集页 + 1 大小写 + 1 路径错误)
 - Git tags: p0-foundation → p5-specification-ready → review-module-v1
 - 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇)
 - 审阅模块: 已实装(两层评估: 原则层 + 检查项层)

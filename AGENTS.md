@@ -13,7 +13,7 @@
 | 角色 | 职责 |
 |------|------|
 | 你（人类） | 决策者。确认知识可信度、触发升级、执行 merge/deprecate |
-| LLM（Agent） | 执行者。论文摘录、笔记生成、概念页维护、lint 检查、MOC 刷新 |
+| LLM（Agent） | 执行者。论文摘录、笔记生成、概念页维护、系统检查、MOC 刷新 |
 | 概念页 | 知识载体。实体化的概念/模型/数据集，是知识库的主视图单元 |
 
 ---
@@ -31,7 +31,7 @@
 | `Sources/` | PDF 原文存放 | 人类/Agent 下载 | **No**（gitignored） |
 | `_inbox/` | 零承诺收件箱 | 人类/Agent | Yes |
 | `_templates/` | Obsidian 模板 | 人类 | Yes |
-| `_lint/` | Lint 报告输出 | Agent | Yes |
+| `_lint/` | 系统检查报告 | Agent | Yes |
 | `任务库/` | 任务/项目追踪 | 人类 | Yes |
 | `docs/` | 系统文档（非知识内容） | 人类 | Yes |
 | `log.md` | Agent 操作日志 | Agent | Yes |
@@ -315,39 +315,65 @@ deep 及以上层级笔记**必须**包含：
 
 ---
 
-## 12. Lint 规则
+## 12. 系统检查
 
-### Local Lint（每次 ingest 时执行）
+### Per-ingest 自动检查 (pipeline 最后一步)
 
+每次精读/复现完成后自动执行,检查本次涉及的文件:
+
+- [ ] 本篇 frontmatter 字段齐全(对照模板)
+- [ ] 本篇所有 wikilink 指向存在的文件
+- [ ] 本篇涉及的 MOC 已更新(论文 tags 对应的 MOC 包含本篇)
+- [ ] 审阅 callout 已追加
+- [ ] 实体页引用存在
+- [ ] log.md 已更新
+- [ ] Git commit 已完成
+
+有遗漏当场补完,不留到以后。
+
+### 全面系统检查 (用户说"系统检查" / 每周 / 批量操作后)
+
+按系统四条底线组织:
+
+#### 可导航
 | 检查项 | 说明 |
 |--------|------|
-| Wikilink 有效性 | 所有 `[[link]]` 指向存在的文件 |
-| Frontmatter 完整性 | 必要字段齐全（title, status, tags 等） |
-| 实体存在性 | 引用的概念/模型页存在 |
-| MOC 覆盖（仅 P4+） | deep/repro 笔记是否被至少一个 MOC 包含 |
+| MOC 覆盖 | 所有 deep/repro 笔记被至少一个 MOC 收录 |
+| 死链 | 全 vault wikilink 指向存在的文件 |
+| 孤儿页 | 没有入链的实体页 |
 
-### Full Lint（每周执行）
-
+#### 可溯源
 | 检查项 | 说明 |
 |--------|------|
-| Dead links | 指向不存在页面的 wikilink |
-| Orphan pages | 没有任何 incoming link 的页面 |
-| Frontmatter 一致性 | 字段格式、枚举值合规 |
-| MOC 覆盖 | 所有 deep/repro 笔记被 MOC 包含 |
-| 概念页溯源提醒 | `key_papers` ≥ 3 且 `origin_paper` 为空 → 提示"建议找原始论文完善此概念页" |
-| Review backlog | 10 个 pending-review 或 5 个 draft deep → alert |
-| 概念页 staleness | active 页超过 3 月未更新 |
-| 概念去重检查 | 扫描 title/aliases 是否存在语义重叠的页面对,提示 merge 候选 |
+| 审阅覆盖 | 所有 deep/repro 笔记有审阅 callout |
+| Frontmatter 一致性 | 所有笔记/实体页符合当前模板 schema |
+| 可信层进度 | confirmed/reviewed 比例是否在增长 |
 
-### Cognitive Lint（P5，仅手动触发）
+#### 不腐烂
+| 检查项 | 说明 |
+|--------|------|
+| 概念过时 | active 概念页超过 3 月未更新 |
+| 概念去重 | title/aliases 语义重叠的页面对 |
+| 概念溯源 | key_papers ≥ 3 且 origin_paper 为空 |
+| 审阅积压 | pending-review ≥ 10 或 draft deep ≥ 5 |
+
+#### 系统完整性
+| 检查项 | 说明 |
+|--------|------|
+| CLAUDE.md 状态 | vault 数据快照是否反映当前 |
+| Log 完整 | ingest 条目数 ≈ 论文笔记数 |
+
+产出: `_lint/YYYY-MM-DD-system-check.md`
+
+### 深度分析 (手动触发,成本高)
 
 | 检查项 | 说明 |
 |--------|------|
 | 矛盾检测 | 不同页面对同一概念的描述冲突 |
-| Stale SOTA | 标记的 SOTA 结果已有更新论文超越 |
+| Stale SOTA | 标记的 SOTA 结果已被超越 |
 | Missing links | 语义相关但缺少 wikilink 的页面对 |
 
-**规则**: 所有 cognitive lint 结果标记 `[疑似]`，**永不**自动修改内容。
+**规则**: 所有结果标记 `[疑似]`,永不自动修改内容。
 
 ---
 
@@ -364,35 +390,6 @@ deep 及以上层级笔记**必须**包含：
 输出: `_review/pattern-analysis-YYYY-MM-DD.md`
 
 ---
-
-## 系统同步
-
-### 单次同步 (每次 ingest 后自动)
-
-精读 pipeline 完成后检查:
-- [ ] 本篇 frontmatter 字段齐全
-- [ ] 本篇涉及的 MOC 是否已更新(论文 tags 对应的 MOC 是否包含本篇)
-- [ ] 审阅 callout 已追加
-- [ ] log.md 已更新
-- [ ] Git commit 已完成
-
-有遗漏当场补完。
-
-### 全面同步 (每周 / 批量操作后 / "跑一下系统同步")
-
-| 检查项 | 说明 |
-|--------|------|
-| MOC 覆盖 | 所有 deep/repro 是否被至少一个 MOC 收录 |
-| 审阅覆盖 | 所有 deep/repro 是否有审阅 callout |
-| Frontmatter 一致性 | 所有笔记是否符合当前模板 schema |
-| 死链 | 全 vault wikilink 有效性 |
-| 孤儿页 | 没有入链的实体页 |
-| 概念去重 | title/aliases 语义重叠 |
-| 可信层进度 | confirmed/reviewed 比例是否在增长 |
-| 概念溯源 | key_papers ≥ 3 且 origin_paper 空 |
-| 系统文档 | CLAUDE.md vault 状态是否反映当前数据 |
-
-产出: `_lint/YYYY-MM-DD-system-sync.md`
 
 ---
 
@@ -420,7 +417,7 @@ deep 及以上层级笔记**必须**包含：
 | `ingest` | 新论文笔记入库 |
 | `update` | 更新已有页面 |
 | `create` | 创建新实体页 |
-| `lint` | Lint 检查与修复 |
+| `check` | 系统检查 |
 | `review` | 批量 review 操作 |
 | `alert` | 告警（如 backlog 超限） |
 | `skip` | 跳过操作（失败/主动放弃） |
@@ -440,8 +437,8 @@ deep 及以上层级笔记**必须**包含：
 | `update/concept` | 更新概念页 |
 | `update/model` | 更新模型页 |
 | `create/concept` | 新建概念页 |
-| `lint/local` | 局部 lint |
-| `lint/full` | 全量 lint |
+| `check/auto` | Per-ingest 自动检查 |
+| `check/full` | 全面系统检查 |
 | `review/batch` | 批量 review |
 | `skip/update` | 跳过更新 |
 | `skip/ingest` | 跳过入库 |
@@ -478,7 +475,7 @@ deep 及以上层级笔记**必须**包含：
 | 无法确定是否独立实体 | 记录 `[待决]`，不创建新页 | 否 |
 | 反向更新失败 | 跳过 + 记录日志 | 否 |
 | PDF 无法解析 | 记录 `[skip/ingest]`，不产生 commit | 是（本次） |
-| Wikilink 目标不存在 | Lint 报告，不自动创建 | 否 |
+| Wikilink 目标不存在 | 系统检查报告，不自动创建 | 否 |
 | MOC 刷新失败 | 日志记录，不阻塞 ingest | 否 |
 
 ---
@@ -504,14 +501,12 @@ Agent 精读 pipeline:
 ④ 审阅 (反向更新前,对照 checklist 检查)
 ⑤ Git commit 草稿 + 审阅报告
 ⑥ 反向更新 (仅审阅通过后)
-⑦ 局部 lint
-⑧ Git commit + log
-⑨ 审核积压检查
+⑦ 自动检查 + Git commit + log
 
 其他规则:
 - 新概念出现 → 创建实体页(pending-review) → 更新 MOC
 - Append → 保持 status; Substantive → status=pending-review
 - 每次 ingest 后 → 检查 MOC 是否需刷新
-- 每周 → full lint → 报告 + backlog alert
+- 每周 → 系统检查 → 报告 + backlog alert
 - 永不: 自行升级层级 / 自行 merge/deprecate / 修改 trusted 内容
 ```
