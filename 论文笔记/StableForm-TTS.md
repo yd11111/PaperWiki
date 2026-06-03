@@ -164,3 +164,10 @@ CER ratio 随反向步数变化的可视化 (Fig 1) 是一个非常有效的诊�
 1. **选择性扩散/流匹配**: 不对全部特征施加生成模型,仅对需要多样性/表现力的维度 (如韵律) 使用随机生成,确定性内容用确定性路径。可推广到 flow matching 或 LLM-based TTS 中
 2. **CER ratio 诊断法**: 用 CER(step_n)/CER(step_0) 的比值随步数变化,可视化诊断扩散/流匹配对发音鲁棒性的影响。适用于任何 iterative refinement 系统的鲁棒性分析
 3. **Decomposed variance adaptor**: 将 variance adaptor 拆为韵律路径和内容路径,各自输出不同信息密度的表示,可用于任何需要内容-韵律分离的 TTS 架构
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (3 low issues)
+> - (low) venue 标注待确认是否为 ICASSP 2025
+> - (low) scalability 对比模型未全部列入 frontmatter.models
+> - (low) 局限性中 SOTA 数据规模/参数量数字未注出处 (标注 [agent 解读] 已充分)
+> 详见 `_review/StableForm-TTS-review.yml`

@@ -1,0 +1,73 @@
+paper: "StableForm-TTS"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含 4 个关键设计选择,每个都有 WHY 解释;
+      速查卡片可借鉴字段具体可迁移 (选择性扩散、CER ratio 诊断法)
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率 ~90%;
+      指标名正确 (CER/WER/SECS/UTMOS/MOS/SMOS/CMOS);
+      速查指标含具体数字+数据集+出处
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释一致标注 [论文原文] / [agent 解读];
+      来源覆盖率 ~90%,无明显的推断-断言混淆
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景含具体演进链 (Grad-TTS → Grad-StyleSpeech → StableForm-TTS);
+      创新判断有对比基准 (vs 整个 mel 送入 diffusion 的传统方法);
+      frontmatter 完整
+  不污染:
+    satisfied: true
+    notes: >
+      反向更新全部为 append (key_papers 追加);
+      不新建概念页;
+      无 factual error 或 overclaim
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.venue
+    detail: >
+      venue 标注为 "arXiv (ICASSP format)",不确定是否已被接收。
+      论文格式为 IEEE 双栏,v2 更新至 2025-01-13,可能为 ICASSP 2025。
+    suggestion: >
+      如能确认发表会议,更新为正式 venue 名。当前标注可接受。
+
+  - id: 2
+    type: bad-linking
+    severity: low
+    location: frontmatter.models
+    detail: >
+      scalability test 中的对比模型 (Tortoise, XTTS-v2, YourTTS, Bark, VoiceCraft)
+      未列入 frontmatter models。但这些是可扩展性对比,非核心架构对比。
+    suggestion: >
+      可选择性添加有实体页的模型。当前只列核心对比模型可接受。
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: 局限性.1
+    detail: >
+      "当前 SOTA (CosyVoice 3, Seed-TTS) 使用自回归 LLM + 离散 token,
+      在数据规模 (100K+ h) 和参数量 (1B+) 上完全不同量级" 标注为 [agent 解读],
+      但 100K+ h 和 1B+ 数字未给出具体出处。
+    suggestion: >
+      这是对比背景知识而非论文 claim,标注 [agent 解读] 已充分。可接受。
+
+summary: >
+  笔记质量良好。方法节包含充分的因果解释和来源标注,
+  速查卡片具体可迁移,数字标注覆盖率高。
+  3 个 low issue 均不影响反向更新安全性。
+  建议放行反向更新。
