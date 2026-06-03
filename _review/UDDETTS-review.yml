@@ -1,0 +1,31 @@
+paper: "UDDETTS"
+reviewer: auto
+date: 2026-06-03
+version: draft-v1
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  locatable: pass-with-fixes
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: frontmatter.models
+    detail: "models 字段仅列 CosyVoice 3, CosyVoice, MinMo (架构组件/灵感来源),未包含其他在 vault 中有模型页的对比 baseline (如 CosyVoice 2)。"
+    suggestion: "将 CosyVoice 2 加入 models 列表 (vault 中有模型页)。IndexTTS2/F5-TTS/VALL-E 等 baseline 在 vault 中无模型页,不需加。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "实验 > 消融实验 > w/o EME 行"
+    detail: "描述写'ES 0.820→原文',含义不清 — 应明确 0.820 是 w/o EME 的 ES 值。"
+    suggestion: "改为 'ES 从 0.833 降至 0.820, MOS 从 4.29 降至 4.20 [Table 1 最后一行]'"
+
+conclusion: pass-with-fixes
+summary: "笔记在五维原则上基本满足要求。方法节包含充分的因果解释,来源标注覆盖率高,速查卡片信息完整,KB 背景谱系定位清晰。仅有 2 个 low 级别问题 (frontmatter models 不完整、消融描述不清晰),不阻塞反向更新。"

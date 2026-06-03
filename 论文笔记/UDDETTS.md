@@ -9,7 +9,7 @@ year: 2025
 venue: "Preprint"
 tags: [TTS, emotion, LLM-based, flow-matching, controllable, semi-supervised, ADV-space]
 concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]"]
-models: ["[[CosyVoice 3]]", "[[CosyVoice]]", "[[MinMo]]"]
+models: ["[[CosyVoice 3]]", "[[CosyVoice]]", "[[CosyVoice 2]]", "[[MinMo]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -166,7 +166,7 @@ SRC 接近 1.0 表明感知情感与 ADV 值线性相关 [§4.4]。KW > 0.6 表�
 | 消融 | 影响 | 出处 |
 | --- | --- | --- |
 | 去掉 ADV predictor | 端到端偏好率下降,语音偏中性 | [Table 3] |
-| 去掉 emotional mixture encoder (w/o EME) | ES 0.820→原文, MOS 4.20 (对比 UDDETTS 4.29) | [Table 1 最后一行] |
+| 去掉 emotional mixture encoder (w/o EME) | ES 从 0.833 降至 0.820, MOS 从 4.29 降至 4.20 | [Table 1 最后一行] |
 | 非线性→线性分箱 | SRC/KW 大幅下降 (Valence 0.92→0.57) | [Table 2 右侧] |
 | 仅用 DS,AL (无半监督) | ADV 覆盖率降至 70%,无法合成 [14,1,1] 等未见情感 | [§4.6] |
 
@@ -198,3 +198,9 @@ SRC 接近 1.0 表明感知情感与 ADV 值线性相关 [§4.4]。KW > 0.6 表�
 2. **半监督异构数据统一**: 当不同数据集有不同粒度的标注 (如部分有细粒度标注、部分仅有粗粒度标签),可通过动态 masking + position-aware loss weighting 在统一模型中同时利用
 3. **Emotional mixture encoder 的门控融合**: label 作 query、ADV 作 key-value 的注意力融合 + 三路门控,是一种灵活的多条件注入方式,可泛化到其他多条件生成场景
 4. **数据集分类策略 (spontaneous vs elicited)**: 根据文本-语音情感一致性决定训练信号的 masking 策略,这种数据感知的训练设计思路可迁移到其他 multi-source 训练场景
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (2 low issues, 0 high/medium)
+> - [low] frontmatter models 补充 CosyVoice 2 (已修正)
+> - [low] 消融 w/o EME 描述改为明确的对比数字 (已修正)
+> 详见 `_review/UDDETTS-review.yml`
