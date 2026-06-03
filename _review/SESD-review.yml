@@ -1,0 +1,46 @@
+paper: SESD
+title: "Sample-Efficient Diffusion for Text-To-Speech Synthesis"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节详细解释了 U-AT 架构、position-aware cross-attention、非对称 loss weighting 的 WHY 和 HOW; 消融实验佐证每个设计选择"
+  可信赖:
+    satisfied: true
+    notes: "主要数字标注出处 (Table 1, Fig 3, Fig 4); Fig 3 读图数值用 ~ 标注; 无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] / [agent 解读]; 局限性中 agent 推断全部标注"
+  可定位:
+    satisfied: true
+    notes: "KB 背景提供了 latent diffusion TTS 谱系定位; 与 NS2/VoiceBox/VALL-E 的对比明确"
+  不污染:
+    satisfied: true
+    notes: "反向更新均为 append (加 key_papers); 无新建概念页 (SESD 的组件均已有对应页)"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "实验表格 — NS2/VoiceBox speaker-prompted 数值"
+    detail: "Fig 3 是散点图,NS2 (~0.67) 和 VoiceBox (~0.68) 的 speaker similarity 从图中目测读取"
+    suggestion: "已用 ~ 标注近似值,可接受; 精确值需查原论文"
+
+  - type: fact-inference-mixing
+    severity: medium
+    location: "局限性 §3-7"
+    detail: "推理速度慢、依赖 EnCodec、ByT5 限制、无韵律控制等为 agent 推断"
+    suggestion: "已全部标注 [agent 解读],可放行"
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea §4"
+    detail: "utterance-level duration prediction 的描述偏泛"
+    suggestion: "可补充具体的 ByT5 fine-tune 细节 (seq2seq, nucleus sampling p=0.95, RMSE 1.4s)"
+
+coverage:
+  claim_annotation: "~85%"
+  source_annotation: "~80%"
+  quickcard_fields: 5/5
