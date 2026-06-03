@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[CapSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Natural Language Description for TTS]]✓, [[Classifier-Free Guidance]]✓, [[Codec Language Model]]✓, [[Emotion Control in TTS]]✓, [[Style Transfer in TTS]]✓ | 过滤: 除 CFM 外均为 pending-review
+- [ingest/deep] [[CapSpeech]] — 精读, kb_sources=6, 新建 0, 追加 7 (Natural Language Description for TTS, Classifier-Free Guidance, Conditional Flow Matching, Emotion Control in TTS, Codec Language Model, Style Transfer in TTS, Emilia)
+- [review/auto] [[CapSpeech]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] CapSpeech — 通过, 0 死链
+- [moc/update] TTS-总览 — 追加 CapSpeech
 - [kb/search] [[TTS-CtrlNet]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review), [[Style Transfer in TTS]](pending-review)
 - [ingest/deep] [[TTS-CtrlNet]] — 精读, kb_sources=6, 新建 0, 追加 4 (Conditional Flow Matching, Emotion Control in TTS, Zero-shot Speech Synthesis, Style Transfer in TTS), MOC 更新 1 (TTS-总览)
 - [review/auto] [[TTS-CtrlNet]] — pass, 0 issues

@@ -37,6 +37,7 @@
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
   - [[论文笔记/LLMVoX|LLMVoX]] — 2025, MBZUAI, 30M LLM-agnostic autoregressive streaming TTS, multi-queue, 475ms延迟
+  - [[论文笔记/SMLLE|SMLLE]] — 2025, Microsoft+SJTU, 首个逐帧流式零样本 TTS, Transducer→semantic tokens + AR mel, Delete <Bos> Mechanism
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
 - 语音安全与隐私 — voice protection, deepfake defense, watermarking
