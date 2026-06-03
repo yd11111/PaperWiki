@@ -322,3 +322,10 @@
 - [review/auto] [[VoxCPM]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
 - [lint/local] VoxCPM — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +VoxCPM
+
+## 2026-06-03 (Cont-SPT)
+- [kb/search] [[Cont-SPT]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
+- [ingest/deep] [[Cont-SPT]] — 精读, kb_sources=6, 新建 0, 追加 7 (Speech Tokenizer, Residual Vector Quantization, Conditional Flow Matching, Semantic vs Acoustic Tokens, Codec Language Model, Variational Autoencoder for TTS, MELLE)
+- [review/auto] [[Cont-SPT]] — pass-with-fixes, 4 issues (0 high, 2 medium fixed, 2 low)
+- [lint/local] Cont-SPT — 通过/0 问题
+- [moc] 语音编码与量化 MOC 更新: +Cont-SPT
