@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, autoregressive, continuous-token, mel-spectrogram, codec-free, LLM-TTS]
 key_concepts: ["[[Mel Spectrogram]]", "[[Variational Autoencoder for TTS]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Neural Vocoder]]"]
 tasks: [TTS, zero-shot-TTS]
-key_papers: ["[[论文笔记/MELLE|MELLE]]"]
+key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

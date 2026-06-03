@@ -4,7 +4,7 @@ title: "Global Style Tokens"
 aliases: [GST, 全局风格标记, Style Token Bank, Style Tokens, GST-Tacotron]
 category: "technique"
 tags: [TTS, style, unsupervised, reference-encoder, attention, expressiveness]
-key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018"]
+key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018", "[[论文笔记/SC VALL-E|SC VALL-E]]"]
 origin_paper: "Wang et al., Style Tokens, ICML 2018"
 related_concepts: ["[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]"]
 status: pending-review
@@ -90,7 +90,7 @@ GST 作为可控 TTS 的奠基工作,影响了大量后续方法:
 | Zero-shot | MetaStyleSpeech (2021) | Meta-learning 泛化 |
 | 时变风格 | DEX-TTS (2024) | 分离 time-invariant/variant |
 | 扩散增强 | StyleTTS-ZS (2024) | 风格扩散模型 |
-| LLM 时代 | SC VALL-E (2023) | GST + scale factors 在 LLM TTS 中 |
+| LLM 时代 | [[论文笔记/SC VALL-E|SC VALL-E]] (2023) | GST + scale factors 在 LLM TTS 中 |
 
 ## 在 TTS 中的应用
 

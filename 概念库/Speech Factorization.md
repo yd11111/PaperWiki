@@ -4,7 +4,7 @@ title: "Speech Factorization"
 aliases: [语音因子分解, Speech Attribute Disentanglement, 语音属性解耦, Feature Disentanglement, Timbre Disentanglement, Speaker-Content Disentanglement, 说话人-内容解耦]
 category: "technique"
 tags: [TTS, disentanglement, adversarial, information-bottleneck, factorization, controllability, voice-conversion]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Gradient Reversal Layer]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Speaker Adaptation]]", "[[Voice Cloning Taxonomy]]", "[[LLM-based TTS]]"]
 status: confirmed
@@ -79,7 +79,9 @@ Disentanglement 贯穿所有四类 cloning 方法:
 - Mega-TTS (2023): Content/timbre/prosody/phase 四维分解
 - Hsu et al. (2019): VAE + adversarial speaker-noise 分离
 - GenerSpeech (NeurIPS 2022): Multi-level style adapter
+- [[论文笔记/Seed-VC|Seed-VC]] (2024): External timbre shifter — 在训练数据层面打破 content-timbre 关联,用外部 VC 模型扰动源语音音色
+- [[论文笔记/USM-VC|USM-VC]] (2025): Universal Semantic Dictionary — 离线构建跨说话人 phoneme centroid 字典,用 phoneme posterior 加权组合实现 timbre-free 内容表征
 
 ## 演进
 
-Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → Fine-grained prosody disentanglement (open problem)
+Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → External timbre shifter (Seed-VC, 2024) → Global semantic dictionary re-expression (USM-VC, 2025) → Fine-grained prosody disentanglement (open problem)
