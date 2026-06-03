@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[OpenS2S]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Language Model, Streaming Spoken Dialogue, Emotion Control in TTS, CosyVoice 2, Modality Adaptation for Speech LLM, Emilia)
+- [review/auto] [[OpenS2S]] — pass-with-fixes, 0 high / 2 medium / 1 low
+- [lint/local] OpenS2S — 通过, 0 死链
+- [moc/update] 语音大模型与对话 — 追加 OpenS2S
 - [kb/search] [[FMSD-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[FMSD-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Speaker Embedding, Conditional Flow Matching, Speaker Adaptation, Duration Predictor, Non-autoregressive TTS, BigVGAN, VITS)
 - [review/auto] [[FMSD-TTS]] — pass-with-fixes, 0 high + 1 medium + 2 low
