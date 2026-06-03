@@ -273,3 +273,4 @@
 - [review/auto] [[Chatterbox-Flash]] — pass-with-fixes, 1 issue (0 high, 1 medium, 0 low)
 - [lint/local] Chatterbox-Flash — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +Chatterbox-Flash
+- [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
