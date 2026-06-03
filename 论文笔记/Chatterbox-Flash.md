@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, block-diffusion, streaming, discrete-token, parallel-decoding, diffusion-language-model]
 concepts: ["[[Masked Generative Modeling]]", "[[Classifier-Free Guidance]]", "[[Codec Language Model]]", "[[Non-autoregressive TTS]]", "[[Diffusion-based TTS]]"]
-models: ["[[模型库/SoundStream|SoundStream]]", "[[模型库/EnCodec|EnCodec]]"]
+models: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -206,8 +206,10 @@ CFG 引导 token sampling (ℓ_i = (1+w)ℓ^c_i - wℓ^u_i),但 PMI score 仅在
 
 5. **Early-decoding with calibrated confidence**: 利用 PMI 分数的可靠阈值信号实现自适应步数终止,在不损质量的前提下节省 20-40% 推理计算
 
-> [!review] 审阅状态
-> 待审阅。
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes (0 high / 1 medium / 0 low)
+> - [medium/template-compliance] frontmatter.models 列了 SoundStream/EnCodec 而非实际对比 baseline → 已修正为 CosyVoice 3
+> 详见 `_review/Chatterbox-Flash-review.yml`
 
 ---
 

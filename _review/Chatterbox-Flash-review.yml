@@ -1,0 +1,55 @@
+paper: "Chatterbox-Flash"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 1
+high: 0
+medium: 1
+low: 0
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 7 个关键设计选择,每个都有 WHY 解释(如 hybrid attention 保留预训练 embedding 空间、
+      PMI 解决 dominant-token bias、token-shift loss 保持 AR 参数空间对齐)。
+      速查卡片"可借鉴"给出两个具体可迁移 trick(PMI bias-correction、AR→block-diffusion fine-tuning)。
+
+  可信赖:
+    verdict: pass
+    notes: >
+      数字型 claim 标注覆盖率 ~90%+,所有实验数字标注 [Table N] 或 [§X.X]。
+      指标名使用正确(SIM-o/WER/UTMOS/RTF/TTFP)。速查卡片指标字段含完整数字+数据集+出处。
+      方向性无误(WER↓, SIM-o↑ 等)。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节的 WHY 解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 ~100%。
+      agent 解读限定在合理推断范围内(如 complementary masking 的效率提升、AR 参数空间对齐)。
+      无推断-断言混淆。"首个"等强断言标注了 [§1]。
+
+  可定位:
+    verdict: pass-with-fixes
+    notes: >
+      KB 背景有具体谱系定位(AR vs NAR 中间地带、与 Codec LM/Masked Gen/CFG 的关系)。
+      创新判断有对比基准。frontmatter 字段基本完整,但 models 字段语义不准(见 issue)。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新尚未执行,将在审阅通过后进行。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      models 字段列了 SoundStream/EnCodec(论文引用的通用 codec 概念),
+      而非本文的对比 baseline。论文实际对比的有 KB 中存在模型页的 CosyVoice 3 等,
+      应列入 models。SoundStream/EnCodec 不是本文的核心对比对象。
+    suggestion: >
+      将 models 更新为本文实际对比的 baseline 中存在模型页的模型。
+    fix_applied: true
