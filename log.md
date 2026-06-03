@@ -60,3 +60,18 @@
 - [ingest/survey] [[Survey-Responsible TTS Evaluation]] + [[Survey-Audio Language Models]] — T2 补充: 新建 2 概念页(TTS Evaluation, Audio-Language Pretraining), 更新 2 概念页(Audio Understanding 追加 ALM 视角/扩展任务/benchmark, SVS Evaluation Metrics 追加交叉引用)
 - [review/batch] 确认 7 实体页(T0 高频引用): RVQ, LLM-based TTS, Multi-scale STFT Discriminator, Instructed Speech Generation, CosyVoice, CosyVoice 2, SEED-TTS-Eval; 修正: Instructed Speech Generation 删除过宽 alias "Controllable TTS", CosyVoice 2 修正 superseded_by 路径
 - [review/batch] 确认 11 实体页(T1 引用=3): Speech Language Model, Speech Factorization, Speaker Embedding, SoundStream, Semantic vs Acoustic Tokens, Quantizer Dropout, Prosody Modeling, Neural Vocoder, Neural Audio Compression, EnCodec, Cross-lingual Voice Cloning, Codebook Collapse; 修正: Speech Factorization/Prosody Modeling 去重复 related_concepts, SoundStream/EnCodec 修正 supersedes/superseded_by 为 wikilink
+- [kb/search] [[CosyVoice 2]] — 命中 4 页(confirmed): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Codec Language Model]](pending-review)
+- [kb/search] [[NaturalSpeech 3]] — 命中 3 页(confirmed): [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Gradient Reversal Layer]](pending-review), [[Masked Generative Modeling]](pending-review)
+- [kb/search] [[SoundStorm]] — 命中 3 页(confirmed): [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Masked Generative Modeling]](pending-review)
+- [ingest/deep] [[CosyVoice 2]] — 精读(batch processing), kb_sources=4, 追加更新 5 个实体页(CosyVoice 2 model, CosyVoice model, FSQ, CFM, Semantic vs Acoustic Tokens) + 追加 Speech Tokenizer, CFG
+- [ingest/deep] [[NaturalSpeech 3]] — 精读(batch processing), kb_sources=3, 新建模型页 1 (NaturalSpeech 3), 追加更新 7 个实体页(Speech Factorization, RVQ, Diffusion-based TTS, CFG, GRL, Masked Generative Modeling, Speech Tokenizer) + SoundStream/EnCodec model
+- [ingest/deep] [[SoundStorm]] — 精读(batch processing), kb_sources=3, 新建模型页 1 (SoundStorm), 追加更新 5 个实体页(Masked Generative Modeling, RVQ, Semantic vs Acoustic Tokens, Speech Tokenizer, SoundStream model)
+- [lint/local] CosyVoice 2, NaturalSpeech 3, SoundStorm — 通过/0 问题
+- [kb/search] [[VITS]] — 命中 4 页: [[Neural Vocoder]]✓(confirmed) | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review)
+- [kb/search] [[HuBERT]] — 命中 3 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓
+- [kb/search] [[Whisper]] — 命中 1 页(confirmed): [[Speech Tokenizer]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[LLM-enhanced ASR]](pending-review)
+- [ingest/deep] [[VITS]] — 精读(batch processing), kb_sources=4, 追加更新 5 个实体页(VAE for TTS, Non-autoregressive TTS, Duration Predictor, Neural Vocoder, Mel Spectrogram)
+- [ingest/deep] [[HuBERT]] — 精读(batch processing), kb_sources=3, 追加更新 2 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens)
+- [ingest/deep] [[Whisper]] — 精读(batch processing), kb_sources=2, 追加更新 2 个实体页(Speech Tokenizer, Mel Spectrogram)
+- [create/model] [[模型库/VITS|VITS]], [[模型库/HuBERT|HuBERT]], [[模型库/Whisper|Whisper]] — 3 个模型页创建(满足准入: 多篇引用+前置知识+连接论文)
+- [lint/local] VITS, HuBERT, Whisper — 通过/0 dead links
