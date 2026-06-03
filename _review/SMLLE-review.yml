@@ -1,0 +1,41 @@
+paper: SMLLE
+arxiv_id: "2505.19669"
+reviewer: agent-auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    satisfied: true
+    notes: "方法节 4 个 WHY 解释完整, 因果链清晰; 速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%; 指标名正确; Table 3 CMOS 语义已标注为 similarity"
+  distinguishable:
+    satisfied: true
+    notes: "因果解释 100% 标注了 [论文原文] 或 [agent 解读]; 推断均有限定词"
+  navigable:
+    satisfied: true
+    notes: "KB 背景含谱系定位+3 对比基准; frontmatter 字段齐全"
+  no_pollution:
+    satisfied: true
+    notes: "反向更新全部为追加(不改 status); 无新概念页需要创建"
+
+issues:
+  - type: bad-linking
+    severity: low
+    location: "frontmatter concepts"
+    detail: "Speaker Embedding 列入 concepts 但 SMLLE 不使用显式 speaker embedding, 而是用 in-context prompt learning (参考语音作为 AR 模型前缀). 连接存在但偏弱."
+    suggestion: "可保留, 因为 KB 背景中未使用 Speaker Embedding 页面内容, 不影响信息流. 如追求精确可移除."
+
+  - type: bad-linking
+    severity: low
+    location: "frontmatter concepts"
+    detail: "Non-autoregressive TTS 列入 concepts 但 SMLLE 是 AR 模型, 与 NAR TTS 的关联仅在于 SMLLE 避免了 Duration Predictor (NAR TTS 的核心组件)."
+    suggestion: "反向关联有意义但偏弱, 可保留."
+
+summary:
+  high_issues: 0
+  medium_issues: 0
+  low_issues: 2
+  verdict: "笔记整体质量好: 因果解释充分, 标注覆盖率高, KB 背景谱系定位准确, 速查卡片具体. 两个 low issue 均为 frontmatter 概念挂接偏弱, 不影响反向更新安全性."

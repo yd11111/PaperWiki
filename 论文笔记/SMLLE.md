@@ -197,4 +197,10 @@ SMLLE 是一个两阶段流式 TTS 框架 [§2, Fig 1]:
 
 ---
 
+> [!review] 审阅状态 (2026-06-03, agent-auto)
+> **结论: pass-with-fixes**
+> - 无 high/medium issue
+> - 2 low: frontmatter concepts 中 Speaker Embedding 和 Non-autoregressive TTS 的挂接偏弱 (不影响反向更新)
+> 详见 `_review/SMLLE-review.yml`
+
 检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Tokenizer]], [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] | 过滤: [[Mel Spectrogram]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
