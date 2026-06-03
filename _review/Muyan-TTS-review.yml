@@ -1,0 +1,50 @@
+paper: "Muyan-TTS"
+reviewer: agent
+date: 2026-06-03
+checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: pass
+    notes: "方法节包含因果解释(为什么选 VITS 而非 flow matching, 为什么用 3B LLM),关键设计选择有 WHY 回答,速查卡片可借鉴字段列出了具体可迁移技巧"
+  可信赖:
+    score: pass
+    notes: "数字型 claim 标注覆盖率高(Table 3/4/5/6, §3.1-§3.5 均有标注),指标名使用正确(WER/MOS/SIM),速查指标字段含数字+数据集+来源"
+  可区分:
+    score: pass-with-fixes
+    notes: "因果解释标注了[论文原文]和[agent 解读],覆盖率约 90%。有一处推断未标注(推理速度分析)"
+  可定位:
+    score: pass
+    notes: "KB 背景节有具体谱系定位(LLM-based TTS hybrid 路线 + GPT-SoVITS 升级),创新判断有对比基准(vs CosyVoice 2, vs GPT-SoVITS),frontmatter 字段齐全"
+  不污染:
+    score: pass
+    notes: "不新建概念页,反向更新仅为追加 key_papers,风险低"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "实验 > 推理速度"
+    detail: "推理速度分析(VITS 并行+vLLM+sentence splitting)标注了[agent 解读],但表述较为断定"
+    suggestion: "已标注[agent 解读],可接受"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,论文使用了 LibriSpeech 和 SEED 作为评测数据集"
+    suggestion: "无需添加,这两个数据集是评测用而非训练用,且 vault 中无对应数据集页"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "实验 > 零样本 TTS"
+    detail: "FireRedTTS 的 LibriSpeech MOS 5.00 被标注为'疑似异常值',属合理质疑但无进一步论据"
+    suggestion: "保持标注[agent 解读],已足够"
+
+conclusion: pass
+total_issues: 3
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+recommendation: "无 high/medium issue,可直接进行反向更新"

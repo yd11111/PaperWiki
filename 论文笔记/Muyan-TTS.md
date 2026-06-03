@@ -196,3 +196,7 @@ Muyan-TTS 推理速度最快,仅需 0.33 秒生成 1 秒语音。[agent 解读] 
 2. **VITS 抑制 LLM 幻觉**: 用 G2P-based decoder 缓解 LLM autoregressive 生成的稳定性问题,是一种简单有效的 robustness 方案 [§3.1]
 3. **SFT 快速适应**: Llama3 template + Alpaca 格式的 instruction-following SFT,几十分钟数据 + 15 分钟训练即可适应新说话人,成本极低 [§3.4]
 4. **预算分配参考**: 数据处理 60% + LLM 训练 38% + Decoder 训练 2% 的成本结构,提示数据质量投入的重要性 [Table 1]
+
+> [!review] 审阅结论: pass (2026-06-03)
+> 3 个 low issue,无 high/medium。因果解释有来源标注,数字 claim 覆盖良好。
+> 详见 `_review/Muyan-TTS-review.yml`
