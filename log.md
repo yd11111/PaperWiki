@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[InstructTTSEval]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[InstructTTSEval]] — 精读, kb_sources=6, 新建 0, 追加 4 (TTS Evaluation, Natural Language Description for TTS, Instruction-Guided Speech Synthesis, Instructed Speech Generation), MOC 更新 1 (TTS训练与评估)
+- [review/auto] [[InstructTTSEval]] — pass-with-fixes, 3 issues (1 high fixed: PDF 列对齐错误, 1 medium fixed, 1 low accepted)
+- [lint/local] InstructTTSEval — 通过/0 死链
 - [kb/search] [[Revival with Voice]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
 - [ingest/deep] [[Revival with Voice]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speaker Embedding, RVQ, LLM-based TTS, Natural Language Description for TTS, Codec Language Model, Voice Cloning Taxonomy)
 - [review/auto] [[Revival with Voice]] — pass-with-fixes, 0 high + 1 medium + 1 low
