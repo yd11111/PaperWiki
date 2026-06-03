@@ -184,9 +184,10 @@ TTSDS 使用三个跨时代的数据集验证,覆盖 2008-2024 年的 35 个 TTS
 
 ---
 
-> [!review] 审阅
+> [!review] 审阅 — pass-with-fixes
 > 审阅报告: [[_review/TTSDS-review.yml]]
-> 审阅结论待填写
+> 结论: pass-with-fixes | 3 low issues (Fig 2 近似值 / venue 推断 / datasets 空)
+> 5 个原则均满足,无 high/medium issue,可放行反向更新
 
 ---
 

@@ -1,0 +1,44 @@
+paper: "TTSDS"
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 4 个关键设计 WHY 解释(分布距离 vs 样本距离、多因子 vs 单一距离、Wasserstein-2 选择、噪声锚点归一化); 每个设计选择有替代方案对比; 速查卡片可借鉴字段具体(噪声锚点归一化 trick、因子化分解+等权平均、跨时代验证策略)"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率约 85%; 指标名使用正确(Spearman ρ、MOS、Elo Rating、WER、PESQ); 速查指标含具体数字(ρ=0.60/0.79/0.83)+数据集名+来源[Fig 2]; 无方向性错误。部分 Fig 2 数据为目视近似值(~0.30 等),已用~标注表示非精确。"
+  可区分:
+    satisfied: true
+    notes: "方法节全面标注了 [论文原文]/[agent 解读]; 因果解释来源覆盖率约 90%; 关键推断(如'消除参考文本对齐需求'、'绝对可解释性')已标注[agent 解读]; 点评节作为 agent 评论性质明确。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系定位(FID/FAD → TTSDS → TTSDS2 演进线); 创新判断有对比基准(vs MOS prediction, vs FID); frontmatter 字段齐全; TTSDS 与 TTSDS2 的承继关系在多处交叉定位。"
+  不污染:
+    satisfied: true
+    notes: "反向更新仅为追加 key_papers(不改 status); 无新概念页创建需求(所有涉及概念已有页面)。"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "实验.Spearman 相关性表"
+    detail: "UTMOS/WVMOS/General/Prosody/Speaker 的相关性数字使用 ~ 近似值(如 ~0.85, ~0.30),因为原文仅提供 Fig 2 柱状图,无精确数字。"
+    suggestion: "已用 ~ 标记表示近似值,可接受。如需精确数字需从图中更仔细读取。"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter.venue"
+    detail: "venue 标为 INTERSPEECH 2024,基于论文格式推断(Index Terms 关键词、2列格式)。原文未明确标注会议名。"
+    suggestion: "保持当前标注,在 source 字段已有 arXiv URL 可追溯。"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter.datasets"
+    detail: "datasets 为空。论文使用 LibriTTS、LJSpeech、VCTK、ESC 等作为参考/噪声数据集,但这些不是论文贡献的核心。"
+    suggestion: "可保持为空(这些是评估工具而非研究对象),或可选追加 LibriTTS 引用。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量较高,5 个原则均满足。方法节的因果解释充分(4 个 WHY 解释均有论文原文支撑),数据溯源覆盖率约 85%。3 个 issue 均为 low 级别: (1) Fig 2 数据为目视近似值; (2) venue 基于格式推断; (3) datasets 字段为空。无 high/medium issue,可放行反向更新。"
