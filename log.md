@@ -528,3 +528,14 @@
 - [review/auto] [[Daisy-TTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
 - [lint/local] Daisy-TTS — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +Daisy-TTS (韵律与情感)
+- [kb/search] [[StableForm-TTS]] — 命中 6 页(取 Top 6): [[Speech Factorization]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Score Matching]](pending-review), [[F0 Modeling]](pending-review)
+- [ingest/deep] [[StableForm-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Diffusion-based TTS, Zero-shot Speech Synthesis, Score Matching, Speech Factorization, F0 Modeling, Prosody Modeling)
+- [review/auto] [[StableForm-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] StableForm-TTS — 7 dead links (Grad-TTS, Grad-StyleSpeech, FastPitchFormant, HiFi-GAN, LibriTTS, LibriTTS-R, VCTK — 均为尚未创建的实体页)
+- [moc] 零样本语音合成 MOC 更新: +StableForm-TTS (2024节)
+
+## 2026-06-03 (EmoCtrl-TTS)
+- [kb/search] [[EmoCtrl-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[EmoCtrl-TTS]] — 精读, kb_sources=6, 追加更新 6 个实体页(CFM, Emotion Control in TTS, CFG, Prosody Modeling, Zero-shot Speech Synthesis, Style Transfer in TTS) + Emotion Control in TTS 内容追加(帧级 arousal-valence 方法节) + MOC 更新(零样本语音合成, TTS-总览)
+- [review/auto] [[EmoCtrl-TTS]] — pass, 0 issues
+- [lint/local] EmoCtrl-TTS — 通过/0 问题
