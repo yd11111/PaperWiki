@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, voice-cloning, speaker-encoding, style-transfer, FiLM, dynamic-network, non-autoregressive]
 concepts: ["[[Speaker Embedding]]", "[[Style Transfer in TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Voice Cloning Taxonomy]]", "[[Global Style Tokens]]"]
-models: ["[[模型库/VITS|VITS]]"]
+models: []
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["LibriTTS", "VCTK"]
 kb_context_sources: 6
@@ -180,8 +180,13 @@ SGF 扩展:
 2. **按序列长度动态路由**: 用 hard/soft threshold 为不同长度的输入选择不同复杂度的子网络。可应用于任何序列处理任务中长度分布差异大的场景。
 3. **FiLM + gating 扩展**: 在标准 FiLM ($\gamma h + \beta$) 基础上增加 soft gating,提供两组调制参数之间的平衡。适用于任何需要条件化特征调制的模块。
 
-> [!review] 审阅结论
-> **结论**: 待审阅 (将在审阅步骤中生成)
+> [!review] 审阅结论 (2026-06-03, agent-v1)
+> **结论**: pass-with-fixes (0 high / 1 medium / 3 low)
+> - (medium) frontmatter.models 列 VITS 不精确 — DS-TTS 基于 FastSpeech 2,非 VITS → 已修正为空
+> - (low) SGF 公式中 f(x) 实际应为独立投影层,论文表达含糊
+> - (low) FiLM+gating trick 的可复用性缺少消融佐证
+> - (low) datasets 用字符串而非 wikilink (因无实体页,可接受)
+> 详见 `_review/DS-TTS-review.yml`
 
 ---
 

@@ -1,0 +1,60 @@
+paper: "DS-TTS"
+reviewer: agent-v1
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含完整因果解释: 三个关键设计选择 (DuSEN/SGF/DVA) 均回答了 WHY。速查卡片可借鉴字段给出三个具体可迁移 trick。"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 >90%。指标名称正确 (WER/SMCS/MOS/SMOS)。速查指标含数字+数据集+出处。"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率约 85%。[论文原文] 和 [agent 解读] 明确区分。agent 推断使用了限定词。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (FastSpeech 2 → NAR, MetaStyleSpeech → dual encoder)。创新判断有对比基准 (Zou et al. + dynamic neural network)。"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页。反向更新为 key_papers 追加 (append-only),不涉及实质修改。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: "models 字段列了 VITS,但 DS-TTS 基于 FastSpeech 2 而非 VITS。VITS 仅通过 YourTTS baseline 间接关联。"
+    suggestion: "改为空列表 [] 或不列 (因 FastSpeech 2 无模型库页)。当前不误导但不精确。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "方法 > SGF"
+    detail: "SGF 公式中 gamma/beta/eta/delta 四个参数都从同一个 f(x) 通过 tanh/sigmoid 生成,但论文原文(公式)表达含糊 — 实际每个参数应有独立的投影层。笔记如实转录了论文公式,但未标注原文公式可能过于简化。"
+    suggestion: "可加一句 [agent 解读] 说明公式中的 f(x) 应为不同的线性投影。"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea #3"
+    detail: "FiLM + gating 扩展描述虽具体,但未提及 SGF 没有被单独消融验证,可复用性的实际增益不确定。"
+    suggestion: "可在 trick 末尾追加 '(论文未提供 SGF vs 标准 FiLM 的直接消融)'。"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: "datasets 字段用字符串而非 wikilink,但数据集/ 中无 LibriTTS 和 VCTK 的实体页,所以字符串格式可接受。"
+    suggestion: "无需修改,除非未来创建 LibriTTS/VCTK 实体页。"
+
+conclusion: pass-with-fixes
+high_count: 0
+medium_count: 1
+low_count: 3
+summary: "笔记质量扎实,五个原则均满足。1 个 medium issue (frontmatter models 字段不精确) 不阻塞反向更新。3 个 low issues 为格式和可读性改善建议。"
