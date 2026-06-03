@@ -1,6 +1,21 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[IndexTTS]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓, [[LLM-based TTS]]✓, [[Neural Vocoder]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[BigVGAN]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Phoneme Representation]](pending-review)
+- [ingest/deep] [[IndexTTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Speech Tokenizer, Codebook Collapse, LLM-based TTS, Speaker Embedding, Zero-shot Speech Synthesis)
+- [review/auto] [[IndexTTS]] — pass-with-fixes, 2 medium + 2 low issues (frontmatter models 已修正, traceability-gap 已修正)
+- [lint/local] IndexTTS — 通过/0 问题
+- [moc/update] 零样本语音合成 — 追加 IndexTTS + 演进脉络更新 (Tortoise→XTTS→IndexTTS→IndexTTS2)
+- [kb/search] [[LLaMA-Omni 2]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Finite Scalar Quantization]](pending-review)
+- [ingest/deep] [[LLaMA-Omni 2]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Language Model, Streaming Spoken Dialogue, Conditional Flow Matching, Speech Tokenizer, Finite Scalar Quantization, CosyVoice 2)
+- [review/auto] [[LLaMA-Omni 2]] — pass-with-fixes, 1 medium issue (frontmatter MinMo 已修正)
+- [lint/local] LLaMA-Omni 2 — 通过/0 问题
+- [moc/update] 语音大模型与对话 — 追加 LLaMA-Omni 2
+- [kb/search] [[FaceSpeak]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 过滤: [[Gradient Reversal Layer]](待确认), [[Emotion Control in TTS]](待确认), [[Style Transfer in TTS]](待确认), [[VITS]](待确认)
+- [ingest/deep] [[FaceSpeak]] — 精读, kb_sources=6, 新建 0, 追加 6 (Style Transfer in TTS, Emotion Control in TTS, Speaker Embedding, Speech Factorization, Gradient Reversal Layer, VITS)
+- [review/auto] [[FaceSpeak]] — pass-with-fixes, 1 medium issue (ESMOS factual-error fixed)
+- [lint/local] FaceSpeak — 通过/0 问题
+- [moc] TTS-总览 — 新增 FaceSpeak (韵律与情感)
 - [kb/search] [[DialogueAgents]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review)
 - [ingest/deep] [[DialogueAgents]] — 精读, kb_sources=3 confirmed + 3 pending, 新建 0, 追加 5 (CosyVoice, Emotion Control in TTS, Prosody Modeling, Turn-taking in Spoken Dialogue, TTS Evaluation) + MOC
 - [review/auto] [[DialogueAgents]] — pass-with-fixes, 2 issues (1 medium factual-error 已修正, 1 low)
