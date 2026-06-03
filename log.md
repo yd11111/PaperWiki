@@ -315,3 +315,10 @@
 - [lint/local] Qwen3-TTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +Qwen3-TTS, SOTA 表更新
 - [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
+
+## 2026-06-03 (VoxCPM)
+- [kb/search] [[VoxCPM]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review)
+- [ingest/deep] [[VoxCPM]] — 精读, kb_sources=6, 新建 0, 追加 11 (Finite Scalar Quantization, Conditional Flow Matching, Semantic vs Acoustic Tokens, LLM-based TTS, Speech Tokenizer, Zero-shot Speech Synthesis, Classifier-Free Guidance, Variational Autoencoder for TTS, Emilia, SEED-TTS-Eval, CV3-Eval)
+- [review/auto] [[VoxCPM]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] VoxCPM — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +VoxCPM
