@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[MPE-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review)
+- [ingest/deep] [[MPE-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Prosody Modeling, Speech Factorization, Natural Language Description for TTS, Speaker Embedding, Zero-shot Speech Synthesis)
+- [review/auto] [[MPE-TTS]] — pass-with-fixes, 1 medium (bad-linking, fixed) + 2 low
+- [lint/local] MPE-TTS — 通过 (1 非阻塞: review YAML 引用)
 - [kb/search] [[GSA-TTS]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[GSA-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Style Transfer in TTS, Global Style Tokens, Speaker Embedding, Zero-shot Speech Synthesis, Prosody Modeling, Non-autoregressive TTS)
 - [review/auto] [[GSA-TTS]] — pass-with-fixes, 0 high + 2 medium
