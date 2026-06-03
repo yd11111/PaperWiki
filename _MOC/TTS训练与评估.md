@@ -25,11 +25,15 @@
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
 - [[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]] — 2025, 1645-sample benchmark + LALM-as-judge, Spearman 90.5%
 - [[论文笔记/ALLD|ALLD]] — 2025, descriptive speech quality evaluation + token-level DPO distillation, MOS MSE 0.17
+- [[论文笔记/TTSDS|TTSDS]] — 2024, 首个分布级多因子 TTS 评估(5因子 x Wasserstein-2), 35 系统 ρ=0.60-0.83
 - [[论文笔记/TTSDS2|TTSDS2]] — 2026, 分布式 TTS 评估指标(Wasserstein-2), 唯一 ρ>0.5 客观指标, 14 语言
 - [[论文笔记/TTS-PRISM|TTS-PRISM]] — 2026, 12 维分层诊断框架(中文), schema-driven instruction tuning, 7B 单次推理超越 30B+ 通用模型
 
 ### Security & Traceability
 - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 端到端水印联合训练, frame-wise broadcast, PESQ 3.641/MOS 3.959
+
+### Emotion Control
+- [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] — 2024, Interspeech, AVD 伪标签 + 球面坐标解耦风格/强度, nMOS 3.88, ECA 94.02%
 
 ### Understanding & Data
 - [[论文笔记/EmotionThinker|EmotionThinker]] — 2026, RL-based 可解释语音情感推理, GRPO-PTR, SER Avg 68.89%
@@ -57,10 +61,11 @@ Post-training 演进:
 Evaluation 演进:
   MOS + PESQ/STOI (传统)
   → DNSMOS/NISQA (深度学习 MOS 预测)
+  → TTSDS (2024, 首个分布级多因子评估, 5因子, ρ=0.60-0.83)
   → SpeechJudge (2025, pairwise preference + GRM)
   → EmergentTTS-Eval (2025, LALM-as-judge)
   → ALLD (2025, descriptive evaluation + distillation)
-  → TTSDS2 (2026, distributional, 14 languages, ρ>0.5)
+  → TTSDS2 (2026, distributional 升级, 14 languages, ρ>0.5)
   → TTS-PRISM (2026, 12-dim diagnostic, schema-driven, Mandarin)
 
 Understanding:
