@@ -9,7 +9,7 @@ year: 2026
 venue: "Preprint (under review)"
 tags: [TTS, zero-shot, non-autoregressive, discrete-diffusion, masked-generation, multilingual, multi-codebook, LLM-initialization]
 concepts: ["[[Non-autoregressive TTS]]", "[[Masked Generative Modeling]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Classifier-Free Guidance]]", "[[Single-codebook vs Multi-codebook]]", "[[Diffusion-based TTS]]"]
-models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice 3|CosyVoice 3]]"]
+models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -136,7 +136,7 @@ OmniVoice 的方案: 对整个 T×C token 矩阵,**每个 entry 独立** 以 Ber
 
 ### 训练策略
 
-- Backbone: Qwen3-0.6B bidirectional Transformer [§3.2]
+- Backbone: Qwen3-0.6B bidirectional Transformer; 总参数量 0.8B (含 audio tokenizer + prediction heads) [§3.2, Table 1]
 - Tokenizer: Higgs-audio (8 codebooks) [§3.2]
 - Optimizer: AdamW, peak LR 1e-4, cosine schedule, 3% warmup [§3.3]
 - Precision: BF16, sequence packing 8192 tokens/GPU [§3.3]
@@ -227,11 +227,14 @@ OmniVoice-Emilia 在相同 Emilia 训练数据下全面超越 NAR baselines (F5-
 
 1. **Full-codebook random masking**: 对任何使用 multi-codebook token 的 masked generation 任务 (音乐、音效、多模态),打破 per-layer masking 惯例可能都能获得类似的训练加速。核心 insight 是 dense loss > sparse loss,即使推理时仍需近似层级顺序。
 
-2. **AR LLM → NAR 初始化**: 对任何 bidirectional Transformer 架构,直接用 causal LLM 预训练权重初始化是一个零成本的提升手段。不需要架构修改,不需要额外适配训练。
+2. **AR LLM → NAR 初始化**: 对 bidirectional Transformer 架构,直接用 causal LLM 预训练权重初始化是一个低成本的提升手段。前提是 NAR backbone 与 LLM 架构相同 (OmniVoice 的 backbone 就是 Qwen3 架构);对架构不同的 NAR 模型需要额外适配。
 
 3. **语言级重采样公式**: Eq. 2 的 r_i = max(1, round((D_max/D_i)^{1-β})) 是一个简洁实用的低资源语言上采样方案,β 可调 (0=均匀, 1=自然分布, 0.8=温和平衡)。
 
 4. **Script-dependent duration estimation**: 用 per-character 权重根据文字系统 (CJK vs Latin) 调整目标时长,比统一字符计数更合理,且不需要额外 duration predictor。
 
-> [!review] 审阅结论
-> 见 `_review/OmniVoice-review.yml`
+> [!review] 审阅结论: pass-with-fixes (0 high, 1 medium, 2 low)
+> - **medium**: frontmatter models 字段补充了 MaskGCT/Qwen3-TTS 对比链接 (已修正)
+> - **low**: 补充了总参数量 0.8B 说明 (已修正)
+> - **low**: "AR LLM → NAR 初始化"可复用 idea 补充了架构一致前提 (已修正)
+> 详见 `_review/OmniVoice-review.yml`
