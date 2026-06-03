@@ -1,0 +1,114 @@
+paper: JoyTTS
+reviewer: agent-auto
+date: 2026-06-03
+version: v1
+
+conclusion: pass-with-fixes
+summary: >
+  笔记总体质量良好,诚实反映了这篇工程集成论文的优劣。主要优点: KB 背景定位准确,
+  速查卡片具体有用,对性能退化的批判分析到位。主要问题: 因果解释来源标注可进一步
+  加密,部分 agent 解读边界可更清晰。无 high issue。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "## 方法 → 数据构建"
+    detail: >
+      数据构建节的 "全部为合成语音,非真人录音" 是 agent 推断,但未标注为 [agent 解读]。
+      论文原文 §2 确实说使用 CosyVoice2 将文本对话转为音频,但 "非真人录音" 的判断
+      需要标注来源。
+    suggestion: 在 "全部为合成语音,非真人录音" 后加 [agent 解读]
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "## 实验 → 关键观察"
+    detail: >
+      "论文对 WER 大幅退化的原因未做任何分析或讨论" 是事实陈述,但应标注为 [agent 解读]
+      因为这本身就是一个评价性判断。
+    suggestion: 可保持为 [agent 解读] 块内内容(已在块内,无需额外标注)
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter
+    detail: >
+      论文引用了 MiniCPM-o 和 GPT-SoVITS 作为对比/前身系统,但 models 字段中
+      未列出(因为模型库中无对应页面)。这是可接受的,但建议在 frontmatter 注释中说明。
+    suggestion: 可忽略,因为 MiniCPM-o 和 GPT-SoVITS 无独立模型页
+
+  - id: 4
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "## 可复用的 idea → 第1条"
+    detail: >
+      "虽然论文未证明其优于简单级联" 已经是很好的限定,但可以进一步指出在什么场景下
+      这个 trick 最有价值。
+    suggestion: 可忽略,当前描述已经足够具体
+
+checklist:
+  可复述:
+    - check: "方法节包含因果解释(WHY)"
+      result: partial
+      note: "有 WHY 但论文本身提供的因果解释较浅,笔记忠实反映了这一点"
+    - check: "每个关键设计选择回答了为什么选这个而不是那个"
+      result: pass
+      note: "Q&A 格式清晰回答了两个核心设计选择"
+    - check: "速查卡片可借鉴字段是具体可迁移 trick"
+      result: pass
+      note: "MLP 桥接 + 两阶段训练,具体可操作"
+
+  可信赖:
+    - check: "数字型 claim 有出处标注(≥80%)"
+      result: pass
+      note: "所有数字均标注 [Table 1] / [§X] / [Eq. N]"
+    - check: "指标名使用正确"
+      result: pass
+      note: "SS/WER 使用正确,方向标注无误"
+    - check: "速查卡片指标字段含具体数字+数据集+来源"
+      result: pass
+      note: "SS 0.73 / WER 5.09, SEED-TTS-zh, [Table 1]"
+    - check: "无方向性错误"
+      result: pass
+
+  可区分:
+    - check: "因果解释标注了来源(≥80%)"
+      result: partial
+      note: "大部分已标注,数据构建节有一处遗漏(issue #1)"
+    - check: "不存在把推断写成断言的句子"
+      result: pass
+      note: "关键推断均标注 [agent 解读]"
+    - check: "强断言有数字+出处支撑"
+      result: pass
+      note: "WER 恶化 3.5x 有数据支撑"
+
+  可定位:
+    - check: "KB 背景有具体谱系定位"
+      result: pass
+      note: "与 LLaMA-Omni 2 对比定位清晰"
+    - check: "KB 背景创新判断有对比基准"
+      result: pass
+      note: "明确对比了独立 CosyVoice2 和 LLaMA-Omni 2"
+    - check: "frontmatter 字段存在且非空"
+      result: pass
+    - check: "frontmatter 字段语义正确"
+      result: pass
+      note: "models 列 CosyVoice 2 + CosyVoice (baseline), concepts 合理"
+    - check: "速查卡片5字段都有实质内容"
+      result: pass
+
+  不污染:
+    - check: "新建概念页满足准入规则"
+      result: N/A
+      note: "本次不新建概念页"
+    - check: "反向更新内容无 factual-error 或 overclaim"
+      result: pending
+      note: "待反向更新后验证"
+    - check: "反向更新正确分类为追加或实质修改"
+      result: pending
+      note: "待反向更新后验证"

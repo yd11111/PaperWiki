@@ -98,7 +98,7 @@ $$\text{TTS}_{embed} = \text{Emb}(y_i) + \text{MLP}(h_i)$$
 **训练数据** [§2]:
 - 400K 多轮文本对话样本,约 2000 小时
 - 来源: RedGPT + GeneratedChat0.4M (两个开源数据集)
-- 文本对话 → CosyVoice2 合成音频 (全部为合成语音,非真人录音)
+- 文本对话 → CosyVoice2 合成音频 (全部为合成语音,非真人录音 [agent 解读])
 - 使用 WenetSpeech4TTS 的 text-audio pairs 作为 prompt 增强 voice cloning 能力
 
 **数据增强** [§2]:
@@ -147,3 +147,11 @@ JoyTTS 本质上是一个**工程集成项目而非方法创新论文**。其核
 1. **LLM hidden states → MLP → TTS embedding**: 最简单的 LLM-TTS 模块桥接方式,实现成本极低 — 一个 MLP 层 (3584→768) 加 element-wise addition 即可。虽然论文未证明其优于简单级联,但这种低成本集成策略适合快速原型验证
 2. **两阶段训练 (独立→联合)**: 先独立训练确保各模块对齐,再联合优化交互,是多模块系统的稳健训练策略
 3. **合成对话数据构建流程**: 文本对话数据集 + TTS 合成 + 随机 speaker prompt,可低成本构建大规模多说话人对话训练数据
+
+> [!review] 审阅 (2026-06-03, agent-auto)
+> **结论**: pass-with-fixes | **问题**: 2 medium, 2 low
+> - [medium] traceability-gap: 数据构建节 "非真人录音" 未标注 [agent 解读] → 已修正
+> - [medium] traceability-gap: 实验节评价性判断来源标注 → 已在 [agent 解读] 块内,可接受
+> - [low] template-compliance: MiniCPM-o/GPT-SoVITS 无模型页,models 字段未列出 → 可忽略
+> - [low] weak-reusability: 可复用 idea 场景限定可更具体 → 可忽略
+> 详见 `_review/JoyTTS-review.yml`
