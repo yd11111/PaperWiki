@@ -1,0 +1,78 @@
+paper: DiSTAR
+reviewer: agent-auto
+date: 2026-06-03
+tier: deep
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: >
+      方法节包含完整的 WHY 解释(6 个关键设计选择各有因果分析),
+      每个选择都回答了"为什么选这个而不是那个"。
+      速查卡片"可借鉴"字段列出了 3 个具体可迁移 trick。
+  trustworthy:
+    verdict: pass
+    notes: >
+      数字型 claim 标注覆盖率约 90%,所有表格数据标注了 [Table N],
+      章节引用标注了 [§X.X]。指标名使用正确(WER/SIM/UTMOS/CMOS/SMOS)。
+      速查卡片"指标"字段含具体数字+数据集名+来源标注。
+  distinguishable:
+    verdict: pass-with-fixes
+    notes: >
+      因果解释来源标注覆盖率约 85%,多数 WHY 解释标了 [论文原文] 或 [agent 解读]。
+      embedding init 那段缺少 [agent 解读] 标注(已有,检查通过)。
+      无把推断写成断言的问题。
+  locatable:
+    verdict: pass-with-fixes
+    notes: >
+      KB 背景有具体谱系定位(含模型/概念名)。frontmatter 字段齐全。
+      但 models 字段仅列了 CosyVoice 2,缺少主要对比 baseline
+      (DiTAR, F5-TTS, E2TTS, IndexTTS) 在 models 中的列出。
+      DiTAR 是最直接前身但 vault 中无 model/note 页面,属于合理省略。
+  no_pollution:
+    verdict: pass
+    notes: >
+      未创建新概念页。反向更新仅涉及追加 key_papers(不改 status)。
+      去重检查: 无需新建概念页。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: locatable
+    location: frontmatter.models
+    detail: >
+      models 字段仅列 CosyVoice 2,缺少 DiTAR(最直接前身,同组工作)
+      和其他主要对比 baseline。虽然部分 baseline 在 vault 中无 model 页,
+      但 DiTAR 作为同组前身应被标注。
+    suggestion: >
+      在 models 字段中追加 DiTAR 描述性引用(无 model 页的不加 wikilink,
+      直接写名字即可)。暂不阻塞,可后续补充。
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "消融: RVQ 层数推理"
+    detail: >
+      Fig 2 的数据以约数形式呈现(WER~4.50, SIM~0.58 等),
+      因为原文是图表非精确数字。可接受但应标注"读图估值"。
+    suggestion: >
+      在该段落中加注"(读图估值)"以区分精确数字和图表估读。
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: reproducible
+    location: "可复用的 idea #5"
+    detail: >
+      "Overlapping patch aggregation"虽然是论文提到的特性,
+      但论文默认 P=S=8(无 overlap),未在实验中消融 overlap 效果。
+      作为"可复用 idea"证据不够充分。
+    suggestion: >
+      标注"论文默认不使用 overlap (P=S=8),此特性未经消融验证"。

@@ -170,9 +170,9 @@ Layer-wise + position-wise temperature shaping 将 WER 从 2.11 降至 1.99 (sam
 
 ### 消融: RVQ 层数推理 [Fig 2]
 
-- 使用 2 层: WER~4.50, SIM~0.58
-- 使用 6 层: WER 达到最低 (~1.85), SIM~0.62
-- 使用 9 层 (全部): WER~1.90, SIM~0.64
+- 使用 2 层: WER~4.50, SIM~0.58 (读图估值)
+- 使用 6 层: WER 达到最低 (~1.85), SIM~0.62 (读图估值)
+- 使用 9 层 (全部): WER~1.90, SIM~0.64 (读图估值)
 
 WER 在 6 层左右最优,更多层主要提升 SIM (acoustic detail) 而非 intelligibility — 与 "上层 RVQ 主要编码 acoustic detail" 的假设一致 [论文原文, §4.4]。
 
@@ -218,4 +218,11 @@ History-only CFG (Scheme A, w=1.25, rescale=0.75) 与 Nested AR+history CFG (Sch
 2. **Stochastic layer truncation** — 在 LM 端实现可变比特率推理,比在 codec 端做 quantizer dropout 更灵活 (不需要重训 codec)
 3. **Embedding init from codec codebook** — 用 codec 的 codebook 向量初始化 LM embedding,提供 warm start
 4. **AR sketch + masked diffusion infilling 的组合范式** — patch-level AR 保持长程依赖 + intra-patch masked diffusion 保持局部并行性和多码本耦合,可推广到其他多码本生成任务 (音乐、音效)
-5. **Overlapping patch aggregation** — S < P 允许相邻 patch 共享上下文,smooth boundary artifacts
+5. **Overlapping patch aggregation** — S < P 允许相邻 patch 共享上下文,smooth boundary artifacts (注意: 论文默认 P=S=8 不使用 overlap,此特性未经消融验证)
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (0 high, 2 medium, 1 low)
+> - [medium] frontmatter models 字段缺少 DiTAR 等主要对比 baseline
+> - [medium] Fig 2 RVQ 层数消融数据为读图估值,已标注
+> - [low] 可复用 idea #5 overlapping patch 未经论文消融验证,已标注
+> 详见 `_review/DiSTAR-review.yml`
