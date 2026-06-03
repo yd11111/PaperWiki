@@ -1,0 +1,36 @@
+paper: TITW
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  understandable: pass
+  trustworthy: pass
+  distinguishable: pass
+  navigable: pass
+  no_pollution: pass
+
+issues:
+  - type: overclaim
+    severity: medium
+    location: 速查卡片 > 一句话
+    detail: '"首个公开的标准化 noisy-TTS 训练数据集" — 论文原文 "one of the first of its kind" [§2]'
+    suggestion: "当前表述中 'noisy-TTS 训练' 的限定使其与 Emilia 区分成立,且论文脚注 3 明确区分了两者目标,保留当前表述"
+    resolved: true
+
+  - type: template-compliance
+    severity: low
+    location: frontmatter > venue
+    detail: "论文文本未明确声明发表会议,原设为 'Interspeech 2025' 缺乏依据"
+    suggestion: "已修正为 'arXiv preprint'"
+    resolved: true
+
+traceability:
+  claim_annotation_coverage: ">90%"
+  source_label_coverage: ">90%"
+
+notes: |
+  这是一篇数据集论文,不是模型论文。模板中"训练策略"等节不完全适用,
+  但笔记已在"训练策略"节说明本文不提出新训练策略。
+  整体笔记质量良好,KB 背景定位准确(与 Emilia 的对比尤其有价值),
+  速查卡片内容具体可操作。

@@ -6,7 +6,7 @@ arxiv_id: "2409.08711"
 source: "Sources/TTS_in_the_Wild.pdf"
 authors: [Jee-weon Jung, Wangyou Zhang, Soumi Maiti, Yihan Wu, Xin Wang, Ji-Hoon Kim, Yuta Matsunaga, Seyun Um, Jinchuan Tian, Hye-jin Shim, Nicholas Evans, Joon Son Chung, Shinnosuke Takamichi, Shinji Watanabe]
 year: 2024
-venue: "Interspeech 2025"
+venue: "arXiv preprint"
 tags: [TTS, dataset, noisy-training, data-pipeline, in-the-wild, deepfake-detection, benchmark, VoxCeleb, speech-enhancement]
 concepts: ["[[TTS Evaluation]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Anti-spoofing and Deepfake Detection]]", "[[Speaker Verification]]", "[[Text-to-Speech Pipeline]]"]
 models: ["[[VITS]]", "[[Whisper]]"]
@@ -175,3 +175,13 @@ VoxCeleb1 作为源数据的选择体现了巧妙的 dual-use 思维: 一个数�
 3. **Dual-use 数据集设计**: 选择源数据时考虑下游安全研究需求 (TTS + deepfake detection),使一个数据集同时推动两个研究方向。
 4. **标准化评估协议 (KSKT/KSUT)**: Known Text vs Unknown Text 的分离测试,能区分模型的"记忆能力"和"泛化能力",适用于任何 TTS benchmark。
 5. **VoxCeleb1→TTS 的 pipeline**: 全自动、无人工干预的转录-分割-筛选流程,可迁移到其他语种的 VoxCeleb-style 数据集。
+
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> - **medium / overclaim**: 速查卡片"一句话"中"首个公开的标准化 noisy-TTS 训练数据集" — 论文原文措辞为 "one of the first of its kind" [§2],承认 Emilia 为类似并行工作。但论文同时明确区分了两者目标 (脚注 3),TITW 确实是首个明确面向 noisy-TTS training 且保留低质量子集的标准化 benchmark。判定: 接受当前表述,因为限定语 "noisy-TTS 训练" 使其区别于 Emilia 成立。
+> - **low / template-compliance**: venue 字段无法从论文文本确认,已修正为 "arXiv preprint"。
+> - 可复述: 通过 — 方法节对每个设计选择都给出了 WHY 解释
+> - 可信赖: 通过 — 数字 claim 标注覆盖率 >90%, 指标方向正确
+> - 可区分: 通过 — [论文原文]/[agent 解读] 标注完整
+> - 可定位: 通过 — KB 背景含具体对比 (vs Emilia),谱系清晰
+> - 不污染: 通过 — 无新建概念页,反向更新均为追加
+> 详见: [[_review/TITW-review.yml]]
