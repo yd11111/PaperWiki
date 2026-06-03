@@ -9,9 +9,9 @@ year: 2024
 venue: "NAACL 2025 Findings"
 tags: [TTS, continuous-token, speech-tokenizer, autoregressive, flow-matching, information-retention]
 concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Conditional Flow Matching]]", "[[Variational Autoencoder for TTS]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Mel Spectrogram]]", "[[TTS Evaluation]]"]
-models: ["[[EnCodec]]", "[[MELLE]]"]
+models: ["[[EnCodec]]", "[[MELLE]]", "[[论文笔记/VALL-E|VALL-E]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["LibriSpeech"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -147,5 +147,14 @@ Cont-SPT 在所有指标上优于 VALL-E baseline。**Continuity Quality 提升�
 3. **ASR CTC loss 作为 tokenizer 预训练的辅助约束**: 在重建损失外加入 ASR 解码损失,确保连续 embedding 保留语义信息。
 
 ---
+
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> - **可复述**: 4/5 — 方法节包含因果解释和关键设计选择的 WHY
+> - **可信赖**: 4/5 — claim 标注覆盖率 94%
+> - **可区分**: 4/5 — [论文原文]/[agent 解读] 标注清晰
+> - **可定位**: 4/5 — KB 背景准确定位 continuous tokenizer 路线
+> - **不污染**: 5/5 — 反向更新均为追加,无 factual error
+> - Issues: 2 medium (frontmatter datasets 为空 → 已补; models 缺 VALL-E → 已补), 2 low
+> - 详见 `_review/Cont-SPT-review.yml`
 
 检索命中: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无

@@ -1,0 +1,43 @@
+paper: "Cont-SPT"
+file: "论文笔记/Cont-SPT.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+scores:
+  understandability: 4
+  traceability: 4
+  rigor: 4
+  navigability: 4
+  kb_safety: 5
+claim_stats:
+  total_claims: 18
+  annotated_claims: 17
+  coverage_rate: "94%"
+issues:
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空 []，但论文在 LibriSpeech (dev-clean 验证, test-clean 评估) 上进行所有实验，且 §3.1 明确说明数据集。"
+    suggestion: "补充 datasets 字段。LibriSpeech 尚无数据集页，可记 [待决] 或创建。"
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: "models 列了 [[MELLE]] 作为对比 baseline，正确。但缺少本文提出的核心模型 Cont-SPT 的模型页引用（如果认为它不够独立成页则可忽略）。也缺少 VALL-E 作为 baseline 引用 — 论文主 baseline 是 VALL-E 且架构基于 VALL-E 构建。"
+    suggestion: "补充 VALL-E 到 models（如 VALL-E 无独立模型页但有论文笔记则用论文笔记链接格式）。"
+  - severity: low
+    type: traceability-gap
+    location: "方法 > 训练策略"
+    detail: "Stage 2 描述中提到 '冻结 decoder'，但原文 §2.4.3 说的是 'the decoder is frozen, and the entire model is jointly trained'，具体是 decoder 冻结而 encoder(tokenizer) + LM 联合训练。笔记表述正确但可更明确。"
+    suggestion: "可略。当前表述已基本准确。"
+  - severity: low
+    type: weak-reusability
+    location: "可复用的 idea > 第3点"
+    detail: "'ASR CTC loss 作为 tokenizer 预训练的辅助约束' 表述偏泛，未说明具体是对重建音频做 ASR 再算 CTC，与直接对 embedding 做 CTC 有区别。"
+    suggestion: "补充: '具体实现是对 encoder→decoder 重建的音频再经 ASR decoder 得到文本预测，与 label 算 CTC loss (Eq. 4-5)'。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "无事实错误或 overclaim。所有数字均有出处标注。medium 问题为 frontmatter 不完整（缺 datasets 和 VALL-E baseline），不影响内容可信性。KB 背景准确定位了论文在 continuous tokenizer 路线中的位置。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "sparse-linking-for-paradigm-papers: 基于 VALL-E 架构但 models 未包含 VALL-E"
+  system_upgrade_suggestion: "reader skill 应自动检查方法基于的 baseline 系统是否在 frontmatter models 中引用"
