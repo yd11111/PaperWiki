@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[Prompt-Unseen-Emotion]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Conditional Flow Matching]](pending-review)
+- [ingest/deep] [[Prompt-Unseen-Emotion]] — 精读, kb_sources=6, 新建 0, 追加 3 (Emotion Control in TTS, LLM-based TTS, CosyVoice)
+- [review/auto] [[Prompt-Unseen-Emotion]] — pass-with-fixes, 0 high + 2 medium + 1 low
+- [lint/local] Prompt-Unseen-Emotion — 通过/0 问题
+- [moc/update] TTS-总览 — 情感可控性分类追加 Prompt-Unseen-Emotion
 - [kb/search] [[MPE-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review)
 - [ingest/deep] [[MPE-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Prosody Modeling, Speech Factorization, Natural Language Description for TTS, Speaker Embedding, Zero-shot Speech Synthesis)
 - [review/auto] [[MPE-TTS]] — pass-with-fixes, 1 medium (bad-linking, fixed) + 2 low

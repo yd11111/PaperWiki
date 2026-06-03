@@ -128,8 +128,10 @@ L = αL_reg + λL_KL + βL_flux + γL_stop
 
 | 指标 | StreamMel (streaming) | IST-LM (streaming) | MELLE-L (offline) | FELLE (offline) | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
+| WER-C | 1.65 | - | 1.53 | 1.53 | LibriSpeech test-clean | [Table I] |
 | WER-H | 2.41 | 3.60 | 2.22 | 2.27 | LibriSpeech test-clean | [Table I] |
-| SIM-O | 0.504 | 0.504 | 0.480 | 0.513 | LibriSpeech test-clean | [Table I] |
+| SIM-R | 0.534 | - | 0.517 | 0.539 | LibriSpeech test-clean | [Table I] |
+| SIM-O | 0.504 | - | 0.480 | 0.513 | LibriSpeech test-clean | [Table I] |
 
 **Cross-sentence objective (Table III)**:
 
@@ -196,3 +198,13 @@ L = αL_reg + λL_KL + βL_flux + γL_stop
 2. **n:m ratio 作为延迟-质量旋钮**: 提供了一个简单直觉的超参数来控制流式 TTS 的延迟-质量 trade-off,无需修改模型架构
 3. **Fill token 机制**: 在统一序列中标记"无预测目标"的位置,使异构模态 (文本/声学) 可以共享一个因果自回归框架
 4. **Sample times 作为推理质量旋钮**: 多次 latent sampling 再选最优,以额外推理成本换取质量提升,适用于对质量要求高但不急于实时的场景
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> - [x] 可复述: 方法节包含因果解释, 设计选择有 WHY
+> - [x] 可信赖: claim 标注覆盖率 ~90%, 指标名正确
+> - [x] 可区分: 因果解释来源标注完整, 无推断写成断言
+> - [x] 可定位: KB 背景谱系清晰, frontmatter 齐全
+> - [x] 不污染: 反向更新均为追加, 无 factual error 风险
+> **Issues**: 1 medium (Table I 数据已修正) + 1 low (datasets 为空)
+> 详见 `_review/StreamMel-review.yml`

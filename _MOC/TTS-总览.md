@@ -26,6 +26,8 @@
   - [[论文笔记/Multi-Step Hierarchical ED|Multi-Step Hierarchical ED]] — 2025, CUHK-SZ/Alibaba, 多步 utterance→word→phoneme 层级情感分布预测 + FastSpeech 2 集成, WER 2.45% vs 单步 4.61%
   - [[论文笔记/MAE Style-Rich TTS|MAE Style-Rich TTS]] — 2025, Zhejiang Univ/Tencent, MAE style-rich token + 两阶段 AR LM 细粒度离散标签可控 TTS, CFG on AR logit, 数据解耦缓解高质量语料稀缺
   - [[论文笔记/Prompt-Unseen-Emotion|Prompt-Unseen-Emotion]] — 2025, A*STAR, LLM emotion-guided prompt (百分比模板) 实现零样本混合情感合成, 基于 CosyVoice, AB Pref 68-87% vs VITS-based baseline
+  - [[论文笔记/Multilingual TTS Accents Emotions|Multilingual TTS Accents Emotions]] — 2025, DJSCE Mumbai, Parler-TTS 三阶段 fine-tuning 实现 Hindi/Indian English 口音+情感控制, WER 11.8% / 情感识别 85.3%
+  - [[论文笔记/UDDETTS|UDDETTS]] — 2025, USTC/Alibaba, 首个 LLM-TTS 引入 ADV 空间 + 非线性分箱 + 半监督训练, 三维解耦情感控制 SRC 0.85-0.92, ES 0.833
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
@@ -35,6 +37,7 @@
 - 语音安全与隐私 — voice protection, deepfake defense, watermarking
   - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 联合水印训练, proactive speech traceability
   - [[论文笔记/SafeSpeech|SafeSpeech]] — 2025, USENIX Security, unlearnable perturbation + SPEC(KL引导)防护 fine-tuning+zero-shot voice cloning, 10模型迁移, WER 24%→99.6%
+  - [[论文笔记/Traceable TTS|Traceable TTS]] — 2025, SJTU, watermark-free TTS traceability, 反转 GAN loss 实现 F5-TTS + discriminator 协同训练, 域外 AUC 0.9421 / EER 11.50%
 
 ## 按任务浏览
 

@@ -1,0 +1,42 @@
+paper: StreamMel
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含因果解释(WHY); 每个关键设计选择回答了为什么选这个; 速查卡片可借鉴字段具体可迁移"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 ~90%; 指标名使用正确; 速查指标含具体数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "因果解释均标注了 [论文原文] 或 [agent 解读]; 无推断写成断言; 强断言有数字支撑"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(连续值 AR 路线 + MELLE 延伸); 创新判断有对比基准(vs IST-LM); frontmatter 齐全"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页; 反向更新均为追加(key_papers); 无 factual error 或 overclaim 风险"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    detail: "datasets 字段为空,LibriSpeech 在 vault 中无对应数据集页"
+    suggestion: "可保持空或未来创建 LibriSpeech 数据集页后补填"
+
+  - type: factual-error
+    severity: medium
+    location: "实验 > Continuation Table I (初版)"
+    detail: "初版草稿 Continuation 表中 StreamMel SIM-O 和 IST-LM SIM-O 数据混淆(PDF 表格解析误差),实际 IST-LM 在 Table I 中 WER-C/SIM-R/SIM-O 均为 dash"
+    suggestion: "已在审阅过程中修正: StreamMel WER-C=1.65, SIM-R=0.534, SIM-O=0.504; IST-LM 仅 WER-H=3.60"
+    status: fixed
+
+stats:
+  total_issues: 2
+  high: 0
+  medium: 1
+  low: 1
+  fixed_during_review: 1
