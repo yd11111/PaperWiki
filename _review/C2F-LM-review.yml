@@ -1,0 +1,100 @@
+paper: "C2F-LM"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 3 个关键设计选择,每个都回答了 WHY:
+      (1) 为什么压缩在 LM 层而非 codec 层 — 保持 codec 高保真重建;
+      (2) 为什么 5Hz 是 sweet spot — 对应音节率 + 消融验证;
+      (3) 为什么 NAR 只用滑窗不用压缩 — agent 解读标注清晰。
+      速查卡片"可借鉴"给出 3 个具体可迁移 trick。
+      核心问题节阐述了稀疏性和冗余性的双重挑战及因果链。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      主实验数字全部标注 [Table 2/3/4/5/6],覆盖率 ~95%。
+      指标名使用正确 (WER/SIM/UTMOS/MOS/SMOS/PMOS/RTF)。
+      方向性正确 (WER↓, SIM↑, UTMOS↑)。
+      速查卡片指标字段含具体数字+数据集名+出处标注。
+      问题: (1) 训练数据部分称"44,000 hours"但论文原文注明加 MLS 后为 44Kh,
+      对应行的实验结果标注为 20Kh (Table 2 最后行), 笔记中应澄清 44Kh
+      在正文提及但实际实验仅做了 20Kh;
+      (2) 复杂度公式 O(N_p + T/G + N_AR) 中 T 的含义在笔记中未定义。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节中所有 WHY 解释均标注了 [论文原文] 或 [agent 解读],覆盖率 ~100%。
+      局限性中 agent 推断明确标注 [agent 解读] (4 处)。
+      论文自述的 future work (动态压缩率) 标注 [§6]。
+      无推断-断言混淆。无"SOTA/唯一/全面优于"等未支撑的强断言。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景节有具体谱系定位: 与 4 条路线做了对比 (codec 端压缩/单多码本选择/
+      alignment 方案/semantic-acoustic 分层),均引用具体 KB 页面。
+      创新判断有对比基准 (vs SyllableLM codec 端压缩, vs 单码本降低 token rate)。
+      frontmatter 字段完整且语义正确:
+      - models 列 EnCodec + HuBERT (论文使用的 codec,非后续系统)
+      - concepts 列 6 个直接相关概念
+      - tasks 列 Zero-shot Speech Synthesis
+      速查卡片 5 字段均有实质内容。
+
+  不污染:
+    verdict: pass
+    notes: >
+      本次反向更新计划: 在 Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens,
+      Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT 等
+      页面追加 key_papers 条目。均为追加操作,不修改已有内容,不改 status。
+      无新概念页需创建 (C2F-LM 的核心技术是 attention mask + 压缩 token,
+      属于 Codec Language Model 范畴内的技巧,不满足独立概念页准入规则)。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: 训练策略
+    detail: >
+      笔记称"部分实验扩展到 44Kh (加 MLS)",但 Table 2 中显示的扩展实验
+      标注为 20Kh (EnCodec + VALL-E*)。论文 §4 提到 44,000 hours 但实际
+      Table 2 结果对应的是 20Kh。应澄清避免误导。
+    suggestion: >
+      训练策略中改为"部分实验扩展到 20Kh";或注明 44Kh 是论文提及的
+      扩展数据量但实验结果对应 20Kh。
+    fix_applied: false
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: 方法.关键设计选择.Faster inference
+    detail: >
+      复杂度公式 O(N_p + T/G + N_AR) 中 T 未定义,
+      论文原文中 T 是生成序列总长度。应在笔记中补充。
+    suggestion: >
+      在公式后补充 "(T 为已生成 speech token 总数)"。
+    fix_applied: false
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      论文还实验了 WavTokenizer, BigCodec, SpeechTokenizer 作为 codec,
+      但 vault 中无对应模型页,故未列入 models 字段。如未来创建这些页面可回填。
+      VALL-E 作为本文的主要 baseline LM 也无独立模型页。
+    suggestion: >
+      保持现状。如未来创建 WavTokenizer/BigCodec/VALL-E 模型页再回填。
+    fix_applied: false

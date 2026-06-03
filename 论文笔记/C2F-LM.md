@@ -90,13 +90,13 @@ Neural codec LM 将语音编码为长序列离散 token (7-8 秒语音 = 数百�
 
 **两种推理策略** [§3.4]:
 - *Vanilla inference*: 每 G 步插入 W 的推理步 (无实际输出),不改变序列处理长度,不加速但改善质量。
-- *Faster inference*: 驱逐长距离 token 的 KV cache,仅保留 [prompt, compressed tokens, local tokens] 的 KV cache。复杂度从 O(N_p + T) 降至 O(N_p + T/G + N_AR) [§3.4]。
+- *Faster inference*: 驱逐长距离 token 的 KV cache,仅保留 [prompt, compressed tokens, local tokens] 的 KV cache。复杂度从 O(N_p + T) 降至 O(N_p + T/G + N_AR),其中 T 为已生成 speech token 总数 [§3.4]。
 
 ### 训练策略
 
 - AR decoder: 使用完整 C2F (滑窗 + 压缩 token),交叉熵损失,W 位置损失忽略 [§3.4]
 - NAR decoder: 仅使用 prompt-local 双向滑窗,不使用压缩 token [§3.4]
-- 所有模型使用 960h LibriSpeech 训练;部分实验扩展到 44Kh (加 MLS) [§4]
+- 所有模型使用 960h LibriSpeech 训练;部分实验扩展到 20Kh (加 MLS,论文 §4 提及数据总量 44Kh 但 Table 2 实验结果对应 20Kh) [§4]
 - Transformer: 1024 dim, 12 blocks, 16 heads, 加入 RoPE 和 SiLU (Llama-style) [§4]
 
 ## 实验
@@ -151,4 +151,6 @@ Neural codec LM 将语音编码为长序列离散 token (7-8 秒语音 = 数百�
 
 > [!review] 审阅
 > 见 `_review/C2F-LM-review.yml`。
-> 结论待填写。
+> 结论: **pass-with-fixes** (0 high, 2 medium, 1 low)。
+> 主要问题: (1) 训练数据规模标注 44Kh/20Kh 需澄清 (已修正); (2) 复杂度公式 T 未定义 (已修正)。
+> 反向更新可放行。
