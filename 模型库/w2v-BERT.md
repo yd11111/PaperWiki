@@ -50,3 +50,14 @@ wav2vec 2.0 (2020; contrastive only, Transformer) → HuBERT (2021; masked predi
 3. Balanced capacity 原则: contrastive/MLM 模块各 12 层 ($C_{12}$) 为最优 [Table 3]
 4. Voice search 实战验证: 比 conformer baseline 相对 WER 降 30% [Table 4]
 5. w2v-BERT 2.0 后续成为 AudioLM 的 semantic tokenizer,影响整个 SpeechLM 生态
+
+## w2v-BERT 2.0 (Scaling)
+
+w2v-BERT 2.0 是 w2v-BERT 的大规模多语言扩展 (Barrault et al., 2023):
+- **v1** (SeamlessM4T, 2023a): ~600M params, 1M hours, 143 languages
+- **v2** (Seamless, 2023b): 580M params, **4.5M hours**, 143 languages
+- 架构继承 w2v-BERT 的 contrastive + masked prediction 双模块设计
+- 权重公开但训练数据/代码闭源
+- 作为 SeamlessM4T v2 的核心语音编码器
+- XEUS (Chen et al., 2024) 在 ML-SUPERB 上以更少数据/参数超越 w2v-BERT 2.0 v2 (SUPERB_s 956 vs 826/916),说明预训练目标设计 (dereverberation) 可弥补数据量差距
+- 详见 [[论文笔记/w2v-BERT 2.0|w2v-BERT 2.0]]
