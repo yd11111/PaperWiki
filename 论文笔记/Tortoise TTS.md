@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "Tortoise TTS"
 aliases: [TorToise, TorToise-v2, Better Speech Synthesis Through Scaling]
 authors: ["James Betker"]
@@ -16,6 +17,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[Neural Vocoder]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]"]
 ---
+tier: deep
 
 ## KB 背景
 

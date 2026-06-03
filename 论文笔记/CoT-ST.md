@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "CoT-ST"
 aliases: [Chain-of-Thought Speech Translation, CoT Speech Translation]
 authors: [Yexing Du, Ziyang Ma, Yifan Yang, Keqi Deng, Xie Chen, Bo Yang, Yang Xiang, Ming Liu, Bing Qin]
@@ -16,6 +17,7 @@ models: ["[[模型库/Whisper|Whisper]]"]
 datasets: []
 kb_sources: ["[[Speech Language Model]]", "[[Speech-Text Alignment]]", "[[Audio Understanding]]"]
 ---
+tier: deep
 
 # CoT-ST: Enhancing LLM-based Speech Translation with Multimodal Chain-of-Thought
 

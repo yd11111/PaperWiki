@@ -11,7 +11,7 @@ tags: [TTS, zero-shot, diffusion, factorization, disentanglement, codec, discret
 concepts: ["[[Speech Factorization]]", "[[Diffusion-based TTS]]", "[[Residual Vector Quantization]]", "[[Classifier-Free Guidance]]", "[[Gradient Reversal Layer]]", "[[Masked Generative Modeling]]", "[[Speech Tokenizer]]"]
 models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/EnCodec|EnCodec]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["[[数据集/LibriSpeech|LibriSpeech]]"]
+datasets: ["LibriSpeech"]
 kb_context_sources: 3
 status: draft
 created: 2026-06-03

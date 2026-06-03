@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "FlowDec"
 aliases: [FlowDec Codec, Flow-based Audio Codec]
 authors: ["Simon Welker", "Matthew Le", "Ricky T.Q. Chen", "Wei-Ning Hsu", "Timo Gerkmann", "Alexander Richard", "Yi-Chiao Wu"]
@@ -16,6 +17,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]"]
 ---
+tier: deep
 
 ## KB 背景
 

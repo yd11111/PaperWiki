@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "Seamless"
 aliases: [Seamless Communication, SeamlessM4T v2, SeamlessExpressive, SeamlessStreaming]
 authors: [Seamless Communication, Loic Barrault, Yu-An Chung, et al.]
@@ -16,6 +17,7 @@ models: ["[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/Whisper|Whisper]]"]
 datasets: []
 kb_sources: ["[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speech Language Model]]"]
 ---
+tier: deep
 
 # Seamless: Multilingual Expressive and Streaming Speech Translation
 

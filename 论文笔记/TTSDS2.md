@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "TTSDS2"
 aliases: [TTSDS2, Text-to-Speech Distribution Score 2, TTS Distribution Score 2]
 authors: [Anonymous]
@@ -16,6 +17,7 @@ models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型�
 datasets: []
 kb_sources: ["[[TTS Evaluation]]", "[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]"]
 ---
+tier: deep
 
 # TTSDS2: Resources and Benchmark for Evaluating Human-Quality Text to Speech Systems
 

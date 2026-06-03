@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "NaturalVoices"
 aliases: [NaturalVoices Dataset, NaturalVoice Dataset]
 authors: [Ali N. Salman, Zongyang Du, Shreeram Suresh Chandra, Ismail Rasim Ulgen, Carlos Busso, Berrak Sisman]
@@ -16,6 +17,7 @@ models: []
 datasets: []
 kb_sources: ["[[Speaker Embedding]]", "[[Emotion Control in TTS]]", "[[Prosody Modeling]]"]
 ---
+tier: deep
 
 # Towards Naturalistic Voice Conversion: NaturalVoices Dataset with an Automatic Processing Pipeline
 

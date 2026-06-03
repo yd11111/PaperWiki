@@ -9,7 +9,7 @@ year: 2024
 venue: "arXiv"
 tags: [speech-LM, ASR, TTS, SER, AED, multilingual, zero-shot, voice-cloning, instruction-following, supervised-token, flow-matching, open-source]
 concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Self-Supervised Speech Representation]]", "[[Audio Understanding]]", "[[Emotion Control in TTS]]", "[[Speaker Embedding]]", "[[Instruction-Guided Speech Synthesis]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/Whisper|Whisper]]", "[[模型库/HuBERT|HuBERT]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/SenseVoice|SenseVoice]]", "[[模型库/Whisper|Whisper]]", "[[模型库/HuBERT|HuBERT]]"]
 tasks: []
 datasets: []
 kb_context_sources: 4

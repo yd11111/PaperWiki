@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "SpeechWorldModel"
 aliases: [Speech World Model, SWM, Causal Graph Speech Understanding]
 authors: [Anonymous]
@@ -16,6 +17,7 @@ models: []
 datasets: []
 kb_sources: ["[[Speech Language Model]]", "[[Audio Understanding]]", "[[Prosody Modeling]]"]
 ---
+tier: deep
 
 # Speech World Model: Causal State-Action Planning with Explicit Reasoning for Speech
 

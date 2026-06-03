@@ -250,3 +250,6 @@
 - 反向更新: TTS Evaluation(+TTSDS2 section, key_papers), Speech Language Model(+CoT-ST, +SpeechWorldModel, key_papers), Audio Understanding(+CoT-ST, +SpeechWorldModel, key_papers), Prosody Modeling(+Seamless, +NaturalVoices, +TTSDS2, +SpeechWorldModel, key_papers), Speaker Embedding(+NaturalVoices, +TTSDS2, key_papers), Emotion Control in TTS(+NaturalVoices, +SpeechWorldModel, key_papers), Self-Supervised Speech Representation(+Seamless, +TTSDS2, key_papers) — 共 7 页 append
 - [create/entity] 无新建 — 候选(Speech Translation, EMMA Mechanism, Causal Graph for Speech, UnitY2, AutoPCP, Voice Conversion)均不满足准入规则(单/双篇论文引用或已被现有实体页覆盖)
 - [lint/local] NLLB, Seamless, NaturalVoices, CoT-ST, TTSDS2, SpeechWorldModel — 通过/0 dead links, frontmatter 完整
+- [lint/full] 全面系统同步: MOC覆盖 48/67 缺失, 审阅覆盖 56/67 缺失, 死链 7, 孤儿页 1(SenseVoice), frontmatter PASS, 概念去重 PASS, 概念溯源 10 待补, 可信层 23.9% confirmed + 1 reviewed; 报告 → _lint/2026-06-03-system-sync.md
+- [alert/backlog] pending-review: 70 (阈值 10), draft deep/repro: 66 (阈值 5)
+- [update/convention] CLAUDE.md vault 状态更新(94篇笔记, 覆盖率数据)

@@ -9,7 +9,7 @@ year: 2026
 venue: "Under review at ICLR 2026"
 tags: [audio-codec, low-frame-rate, dynamic-frame-rate, ASR-feature, dual-stream, FSQ, speech-tokenizer, token-merging]
 concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Conditional Flow Matching]]", "[[Multi-scale STFT Discriminator]]", "[[Quantizer Dropout]]", "[[Finite Scalar Quantization]]", "[[Token Rate and Bitrate Trade-offs]]"]
-models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/DAC|DAC]]"]
+models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6

@@ -1,6 +1,6 @@
 ---
 type: paper-note
-title: "Survey: Towards Controllable Speech Synthesis in the Era of Large Language Models"
+tier: cardtitle: "Survey: Towards Controllable Speech Synthesis in the Era of Large Language Models"
 authors: [Tianxin Xie, Yan Rong, Pengfei Zhang, Wenwu Wang, Li Liu]
 year: 2024
 venue: "arXiv:2412.06602"

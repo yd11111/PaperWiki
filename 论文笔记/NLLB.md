@@ -1,4 +1,5 @@
 ---
+tier: enhanced-card
 title: "NLLB"
 aliases: [No Language Left Behind, NLLB-200]
 authors: [NLLB Team, Marta R. Costa-jussa, James Cross, et al.]
@@ -15,6 +16,7 @@ concepts: []
 models: []
 datasets: []
 ---
+tier: enhanced-card
 
 # No Language Left Behind: Scaling Human-Centered Machine Translation
 

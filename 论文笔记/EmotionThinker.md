@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "EmotionThinker"
 aliases: [EmotionThinker, GRPO-PTR, EmotionCoT-35K]
 authors: ["Anonymous"]
@@ -17,6 +18,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Speech Language Model]]", "[[Audio Understanding]]"]
 ---
+tier: deep
 
 ## KB 背景
 

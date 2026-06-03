@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "FELLE"
 aliases: [FELLE TTS, Token-Wise Coarse-to-Fine Flow Matching TTS]
 authors: ["Hui Wang", "Shujie Liu", "Lingwei Meng", "Jinyu Li", "Yifan Yang", "Shiwan Zhao", "Haiyang Sun", "Yanqing Liu", "Haoqin Sun", "Jiaming Zhou", "Yan Lu", "Yong Qin"]
@@ -16,6 +17,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]"]
 ---
+tier: deep
 
 ## KB 背景
 

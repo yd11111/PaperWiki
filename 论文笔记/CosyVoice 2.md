@@ -11,7 +11,7 @@ tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine, flow-matching, FSQ,
 concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Codec Language Model]]"]
 models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-datasets: ["[[数据集/LibriSpeech|LibriSpeech]]"]
+datasets: ["LibriSpeech"]
 kb_context_sources: 4
 status: draft
 created: 2026-06-03

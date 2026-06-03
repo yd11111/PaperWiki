@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "SiTok"
 aliases: [Speech Diffusion Tokenizer, SiTok Tokenizer]
 authors: ["Anonymous"]
@@ -17,6 +18,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Classifier-Free Guidance]]"]
 ---
+tier: deep
 
 ## KB 背景
 

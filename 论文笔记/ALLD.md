@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "ALLD"
 aliases: [ALLD, Audio LLM Distillation, Descriptive Speech Quality Evaluation, Audio LLM Quality Evaluator]
 authors: ["Chen Chen", "Yuchen Hu", "Siyin Wang", "Helin Wang", "Zhehuai Chen", "Chao Zhang", "Chao-Han Huck Yang", "Eng Siong Chng"]
@@ -17,6 +18,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[TTS Evaluation]]", "[[Audio Understanding]]", "[[Prosody Modeling]]"]
 ---
+tier: deep
 
 ## KB 背景
 

@@ -1,4 +1,5 @@
 ---
+tier: deep
 title: "EmergentTTS-Eval"
 aliases: [EmergentTTS-Eval Benchmark, EmergentTTS Eval]
 authors: ["Ruskin Raj Manku", "Yuzhi Tang", "Xingjian Shi", "Mu Li", "Alex Smola"]
@@ -17,6 +18,7 @@ created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[TTS Evaluation]]", "[[Prosody Modeling]]"]
 ---
+tier: deep
 
 ## KB 背景
 

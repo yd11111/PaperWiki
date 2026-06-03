@@ -28,7 +28,7 @@ updated: 2026-06-01
 > - **一句话**: 用 masked generative modeling 完全替代自回归,构建无需 text-speech alignment 和 phone-level duration 的非自回归 zero-shot TTS
 > - **路线**: Text + prompt → T2S (Masked Generative Transformer 695M, 50 步迭代) → semantic tokens (50Hz) → S2A (Masked Generative 353M, 逐层) → 12 层 acoustic tokens → Vocos decoder → Waveform
 > - **指标**: SIM-O 0.728 / WER 2.466% (SeedTTS test-en); SIM-O 0.777 / WER 2.183% (SeedTTS test-zh); SMOS 4.24 / 4.11 (LibriSpeech / test-zh); 训练数据 100K h Emilia
-> - **可借鉴**: VQ-VAE 量化 W2v-BERT 2.0 特征做 semantic codec (优于 k-means,已被 IndexTTS2 采用); text+prompt 做 prefix + bidirectional attention 的 in-context learning 范式; flow matching 预测 total duration 而非 phone-level
+> - **可借鉴**: VQ-VAE 量化 w2v-BERT 2.0 特征做 semantic codec (优于 k-means,已被 IndexTTS2 采用); text+prompt 做 prefix + bidirectional attention 的 in-context learning 范式; flow matching 预测 total duration 而非 phone-level
 > - **局限**: 仍需外部 duration predictor; 多语言扩展仅重训 T2S 未联合 tokenizer/S2A; 代码已开源但 100K h Emilia 数据集获取受限
 
 ## 核心问题
@@ -45,7 +45,7 @@ MaskGCT 的目标: 构建一个**完全非自回归**的 TTS 系统,既不需要
 
 MaskGCT 是一个四组件 two-stage 系统 [Fig 1]:
 
-1. **Speech Semantic Codec**: 将语音波形编码为 semantic token 序列 (VQ-VAE on W2v-BERT 2.0 features)
+1. **Speech Semantic Codec**: 将语音波形编码为 semantic token 序列 (VQ-VAE on w2v-BERT 2.0 features)
 2. **Text-to-Semantic (T2S) Model**: 给定文本和 prompt semantic tokens,通过 masked generative modeling 预测目标 semantic tokens
 3. **Semantic-to-Acoustic (S2A) Model**: 给定 semantic tokens 和 prompt acoustic tokens,通过 masked generative modeling 预测多层 acoustic tokens
 4. **Speech Acoustic Codec**: 将 acoustic tokens 解码为语音波形 (RVQ-based codec with Vocos decoder)
@@ -56,7 +56,7 @@ MaskGCT 是一个四组件 two-stage 系统 [Fig 1]:
 
 **问题**: 以往使用 k-means 离散化 SSL features 会丢失信息,尤其是声调语言 (中文) 的韵律信息 [§3.2.1]。
 
-**方案**: 训练 VQ-VAE 来量化 W2v-BERT 2.0 第 17 层的 hidden states [§3.2.1, Appendix A.4]:
+**方案**: 训练 VQ-VAE 来量化 w2v-BERT 2.0 第 17 层的 hidden states [§3.2.1, Appendix A.4]:
 - Encoder/Decoder: 各 12 层 ConvNext blocks, kernel size 7, hidden 384 [Table 9]
 - 使用 factorized codes (灵感来自 VQ-GAN 改进): 将 encoder 输出投影到低维空间 (codebook dimension 8) [§3.2.1]
 - Codebook size: 8,192 entries, 单层 codebook [Table 9]
@@ -114,7 +114,7 @@ $$\mathcal{L}_\text{total} = \frac{1}{Td}(\lambda_\text{rec} \cdot ||S - \hat{S}
 - 训练: in-context learning (随机取 prefix phoneme + duration 作为 prompt)
 - CFG guidance, drop prompt 概率 0.15 [§A.5]
 - 推理: midpoint ODE solver, 4 steps [§A.5]
-- Duration aligner: MAS (Monotonic Alignment Search) between phoneme and W2v-BERT 2.0 semantic features 获取 ground truth [§A.5]
+- Duration aligner: MAS (Monotonic Alignment Search) between phoneme and w2v-BERT 2.0 semantic features 获取 ground truth [§A.5]
 
 #### 5. Speech Acoustic Codec [§3.2.4]
 
@@ -174,7 +174,7 @@ $$\mathcal{L}_\text{total} = \frac{1}{Td}(\lambda_\text{rec} \cdot ||S - \hat{S}
 
 MaskGCT 的核心贡献在于证明了 **masked generative modeling 可以完全替代自回归模型用于 TTS 的语义阶段**,这是此前 SoundStorm 只在声学阶段做到的。关键 insight 是将 text+prompt 作为 prefix condition 利用 in-context learning,配合 bidirectional attention,使得模型无需显式 alignment 即可学会 text-to-speech 的映射。
 
-**Semantic codec** 的设计 (VQ-VAE on W2v-BERT 2.0) 是被 IndexTTS2 等后续工作直接采用的组件。相比 k-means 离散化,VQ-VAE 的端到端优化保留了更多韵律信息,同时单 codebook 的设计使得 T2S 阶段可以直接建模为一个 flat 序列的 mask-and-predict 问题。
+**Semantic codec** 的设计 (VQ-VAE on w2v-BERT 2.0) 是被 IndexTTS2 等后续工作直接采用的组件。相比 k-means 离散化,VQ-VAE 的端到端优化保留了更多韵律信息,同时单 codebook 的设计使得 T2S 阶段可以直接建模为一个 flat 序列的 mask-and-predict 问题。
 
 与同期 NaturalSpeech 3 的对比: NS3 也使用了 masked generative model + factored codec,但仍需 text-speech alignment 和 duration prediction;MaskGCT 通过 in-context learning 完全去除了这些依赖。
 
@@ -191,7 +191,7 @@ MaskGCT 的核心贡献在于证明了 **masked generative modeling 可以完全
 > **评分:** 理解 8 | 溯源 7 | 严谨 8 | 导航 6 | 安全 7
 > **Claim 标注率:** 85% (53/62)
 > **问题:** 0 high, 3 medium, 3 low
-> - [medium/bad-linking] frontmatter: models 缺少 [[MaskGCT]] 自身; concepts 缺少 [[Masked Generative Modeling]]、[[W2v-BERT 2.0]]、[[VQ-VAE]]
+> - [medium/bad-linking] frontmatter: models 缺少 [[MaskGCT]] 自身; concepts 缺少 [[Masked Generative Modeling]]、[[w2v-BERT 2.0]]、[[VQ-VAE]]
 > - [medium/fact-inference-mixing] 方法 > Semantic Codec & T2S: '为什么 VQ-VAE 优于 k-means' 和 '为什么 masked generative 比 AR 更适合 TTS' 未区分论文原文与 agent 解读
 > - [medium/missing-lineage] KB 背景: 空占位符,未定位 MaskGCT 在 NAR TTS 谱系中的位置 (SoundStorm → MaskGCT; vs NaturalSpeech 3)
 > **反向更新:** ✅
