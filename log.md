@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[F5R-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[F5R-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Conditional Flow Matching, Differentiable Reward Optimization, Non-autoregressive TTS, Speaker Embedding, Zero-shot Speech Synthesis, SEED-TTS-Eval)
+- [review/auto] [[F5R-TTS]] — pass-with-fixes, 1 medium + 2 low issues (models 字段补充, GRPO 超参数标注, internal noisy 数据补入)
+- [lint/local] F5R-TTS — 通过/0 问题
+- [moc/update] 零样本语音合成, TTS训练与评估 — 追加 F5R-TTS + 演进脉络更新
 - [kb/search] [[IndexTTS]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓, [[LLM-based TTS]]✓, [[Neural Vocoder]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[BigVGAN]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Phoneme Representation]](pending-review)
 - [ingest/deep] [[IndexTTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Speech Tokenizer, Codebook Collapse, LLM-based TTS, Speaker Embedding, Zero-shot Speech Synthesis)
 - [review/auto] [[IndexTTS]] — pass-with-fixes, 2 medium + 2 low issues (frontmatter models 已修正, traceability-gap 已修正)

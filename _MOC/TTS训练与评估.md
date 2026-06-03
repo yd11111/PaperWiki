@@ -19,9 +19,11 @@
 - [[论文笔记/GSRM|GSRM]] — 2025, generative speech reward model, acoustic feature+CoT, PCC 0.465, online RLHF 82% win
 - [[论文笔记/RIO|RIO]] — 2025, reverse inference optimization, PPC, WER 3.4/SIM 0.96/bad case 1%
 - [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] — 2025, 多奖励 GRPO 于单码本 TTS LLM, 5 reward (WER+SIM+len+ent+prosody), CER 1.10/MOS 4.21
+- [[论文笔记/DMOSpeech|DMOSpeech]] — 2024, Columbia+Adobe, DMD2 蒸馏 + 首次端到端 CTC+SV loss 优化 (non-RL), student 超越 teacher, SIM 0.69, WER 1.94, RTF 0.07
 - [[论文笔记/DMOSpeech 2|DMOSpeech 2]] — 2025 (AAAI 2026), component-level GRPO 靶向 duration predictor, SIM+WER reward, 1.5K RL steps, WER 1.752% en, RTF 0.032
 - [[论文笔记/FPO|FPO]] — 2025, token-level 选择性 DPO, segmental error 二分类 (temporal/semantic-phonetic), 3-4x 数据效率, CosyVoice bad case 21%->9%
 - [[论文笔记/Koel-TTS|Koel-TTS]] — 2025, NVIDIA, ASR+SV reward 驱动 DPO/RPO + Pareto 最优多目标偏好配对, CER 0.55% LibriTTS unseen SOTA, GT-as-Chosen 失败实验
+- [[论文笔记/F5R-TTS|F5R-TTS]] — 2025, Tencent, 首次将 GRPO 集成到 NAR flow-matching TTS, output probabilization 使 CFM 兼容 RL, WER -29.5% / SIM +4.6%
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -63,6 +65,7 @@ Post-training 演进:
   → RIO (2025, reverse inference optimization)
   → Multi-Reward GRPO (2025, 多奖励 GRPO for single-codebook TTS)
   → DMOSpeech 2 (2025, component-level GRPO 靶向 duration predictor)
+  → F5R-TTS (2025, GRPO for NAR flow-matching TTS via output probabilization, 首次 RL 集成 NAR)
 
 Evaluation 演进:
   MOS + PESQ/STOI (传统)
