@@ -290,3 +290,9 @@
 - [review/auto] [[Voxtral TTS]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] Voxtral TTS — 通过/0 问题
 - [moc] 零样本语音合成+语音编码与量化 MOC 更新: +Voxtral TTS
+- [kb/search] [[Fish Audio S2]] — 命中 5 页(取 Top 5): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[Fish Audio S2]] — 精读, kb_sources=5, 新建 0, 追加 5 (Residual Vector Quantization, Semantic vs Acoustic Tokens, LLM-based TTS, Speech Tokenizer, Differentiable Reward Optimization)
+- [review/auto] [[Fish Audio S2]] — pass, 0 issues
+- [lint/local] Fish Audio S2 — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +Fish Audio S2, SOTA 表更新
+- [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
