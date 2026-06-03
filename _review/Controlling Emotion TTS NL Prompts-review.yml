@@ -1,0 +1,47 @@
+paper: "Controlling Emotion TTS NL Prompts"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    satisfied: true
+    notes: "方法节包含 4 个关键设计选择的 WHY 解释,速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 >90%,指标名正确 (Cramer's V / MOS / cosine similarity / RTF)"
+  distinguishable:
+    satisfied: true
+    notes: "因果解释全部标注 [论文原文] 或 [agent 解读],覆盖率 100%"
+  navigable:
+    satisfied: true
+    notes: "KB 背景谱系定位具体,含演进线位置 + 与 PromptTTS/InstructTTS 的对比"
+  no_pollution:
+    satisfied: true
+    notes: "不创建新概念页,反向更新均为追加 key_papers"
+
+issues:
+  - id: 1
+    type: successor-as-model
+    severity: medium
+    location: "frontmatter → models"
+    detail: "models 字段列了 VITS,但本文既不是 VITS 的后续工作,也未将 VITS 作为 baseline 对比。本文基于 FastSpeech 2 / IMS Toucan 架构,对比的是 EmoSpeech 和无 prompt baseline。"
+    suggestion: "移除 VITS,models 字段置空或列本文实际比较的系统 (EmoSpeech 未在模型库中)"
+    fix_applied: true
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter → datasets"
+    detail: "datasets 字段为空,但本文使用了 ESD, RAVDESS, TESS, LJSpeech, LibriTTS-R, Yelp, DailyDialog, Tales-Emotion 等数据集。这些数据集均不在数据集库中,按规则不强制创建。"
+    suggestion: "保持现状,不创建新数据集页"
+    fix_applied: false
+
+stats:
+  total_issues: 2
+  high: 0
+  medium: 1
+  low: 1
+  traceability_coverage: ">90%"
+  inference_label_coverage: "100%"

@@ -9,7 +9,7 @@ year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, emotion, prompting, controllability, style-transfer, NAR-TTS, multi-speaker]
 concepts: ["[[Emotion Control in TTS]]", "[[Natural Language Description for TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Style Transfer in TTS]]", "[[Non-autoregressive TTS]]", "[[Global Style Tokens]]"]
-models: ["[[模型库/VITS|VITS]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -164,3 +164,9 @@ Prompt encoder (DistilRoBERTa) 在 TTS 训练中保持冻结,而 speaker embeddi
 3. **SE block 融合 speaker + style**: 当需要融合两个语义不同的 embedding (如 speaker + emotion、language + style) 时,SE block 提供了一种轻量但有效的通道级自适应加权方案,比简单 concat/add 有更好的细粒度控制。
 
 4. **Curriculum learning 两阶段分离质量与控制**: 先用大规模数据训练基础质量和 robustness,再用小规模精标数据训练细粒度控制。这种策略在数据标注成本高的可控 TTS 场景中有普遍参考价值。
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> - [medium] frontmatter models 字段误列 VITS (已修正为空) — 本文未使用 VITS 作为 baseline
+> - [low] datasets 字段为空 — 本文使用的数据集均不在数据集库中,不强制创建
+> 详见 `_review/Controlling Emotion TTS NL Prompts-review.yml`
