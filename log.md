@@ -352,3 +352,11 @@
 - [review/auto] [[IDEA-TTS]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
 - [lint/local] IDEA-TTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +IDEA-TTS
+
+## 2026-06-03 (TADA)
+- [kb/search] [[TADA]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Speech Language Model]]✓ | 参考: [[Speech-Text Alignment]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review)
+- [ingest/deep] [[TADA]] — 精读, kb_sources=6, 新建 0, 追加 11 (LLM-based TTS, Conditional Flow Matching, Speech Tokenizer, Speech-Text Alignment, Speech Language Model, Next-Token Diffusion, Variational Autoencoder for TTS, Classifier-Free Guidance, Token Rate and Bitrate Trade-offs, SEED-TTS-Eval, Zero-shot Speech Synthesis)
+- [review/auto] [[TADA]] — pass, 0 issues
+- [lint/local] TADA — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +TADA
+- [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
