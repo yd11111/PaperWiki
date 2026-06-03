@@ -31,7 +31,7 @@ updated: 2026-06-03
 - [[Prosody Modeling]] (confirmed) 区分了显式(variance adaptor)和隐式(reference encoder)韵律建模。Spotlight-TTS 的 SP loss 显式引导 style embedding 保留低频韵律信息,是对"隐式 style → 显式 prosody"方向约束的一次尝试。
 - [[Speech Factorization]] (confirmed) 总结了对抗训练/information bottleneck/self-distillation 三大解耦方法。Spotlight-TTS 的 SD loss (正交约束) + 选择性量化输入(仅 voiced frames)构成了一种**双重 bottleneck**: 既在输入端物理过滤(VE),又在嵌入空间方向约束(SD loss)。
 
-**创新判断**: 相比 GenerSpeech 的 multi-level style 方案(sentence + frame),Spotlight-TTS 不改多级结构但改进 frame-level 的获取方式: (1) 从"均匀处理所有帧"到"区分 voiced/unvoiced"; (2) 从 STE 到 rotation trick; (3) 从单纯 quantization bottleneck 到 quantization + 方向约束(orthogonality + prosody alignment)。这些改进是渐进式的工程创新,非范式变革。
+**创新判断**: 相比 GenerSpeech 的 multi-level style 方案(sentence + frame),Spotlight-TTS 不改多级结构但改进 frame-level 的获取方式: (1) 从"均匀处理所有帧"到"区分 voiced/unvoiced"; (2) 从 STE 到 rotation trick; (3) 从单纯 quantization bottleneck 到 quantization + 方向约束(orthogonality + prosody alignment)。这些改进是渐进式的工程创新,非范式变革 [agent 解读]。
 
 > 检索命中: [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Speech Factorization]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
 
@@ -238,3 +238,9 @@ $$L_{total} = L_{fs2} + \lambda_{rvq} L_{rvq} + \lambda_{adv} L_{adv} + \lambda_
 2. **Biased self-attention for mask filling**: β 系数控制的非对称注意力可用于任何"已知区域填充未知区域"的场景,如 masked audio inpainting、codec 缺码填充等
 3. **Orthogonality + alignment 互补损失**: 当需要解耦两个纠缠属性(A, B)但又要保留 A 中的某个子属性时,可以对 A-B 施加正交约束,同时对 A-子属性施加对齐约束。这比单纯的对抗训练或信息瓶颈更可控
 4. **Rotation trick for VQ in style**: 将 VQ 的 STE 替换为 rotation trick 来获取更精细的 codebook 使用,这个改进对任何用 VQ 做 bottleneck 的场景都可能有益(如 audio codec 的 style layer、VQVAE 的 expressive coding)
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (0 high / 1 medium / 2 low)
+> - (medium) KB 背景创新判断缺 [agent 解读] 标注 → 已修正
+> - (low) venue 含推测标注; Table 1 vs Table 3 nMOS 差异无论文解释
+> 详见 `_review/Spotlight-TTS-review.yml`

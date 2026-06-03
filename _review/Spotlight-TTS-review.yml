@@ -1,0 +1,48 @@
+paper: "Spotlight-TTS"
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节对 4 个关键设计(VE/RT/UF/Style Direction)均有 WHY 段落; 速查'可借鉴'列出 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "所有数字型 claim 有 [Table N]/[§X.X] 标注; 指标名使用正确; 速查指标含数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "方法节 WHY 段均标注 [论文原文]/[agent 解读]; 覆盖率 ≥ 90%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景谱系定位清晰 (GST→GenerSpeech→Spotlight-TTS); 创新判断有对比基准; frontmatter 齐全"
+  不污染:
+    satisfied: true
+    notes: "无需新建概念页; 反向更新全部为追加 (key_papers)"
+
+issues:
+  - type: fact-inference-mixing
+    severity: medium
+    location: "KB 背景 > 创新判断"
+    detail: "'渐进式的工程创新,非范式变革' 是 agent 评价但未标注 [agent 解读]"
+    suggestion: "在该句末尾追加 [agent 解读] 标注"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > venue"
+    detail: "'Interspeech 2025 (inferred from format)' 含推测性标注,格式非标准"
+    suggestion: "可保留推测标注,非阻塞性问题"
+
+  - type: traceability-gap
+    severity: low
+    location: "实验 > 消融 > 注释"
+    detail: "Table 1 vs Table 3 的 nMOS 差异 (4.26 vs 3.93) 标注为 [agent 解读] 但未在论文中找到解释"
+    suggestion: "已标注 [agent 解读],可接受"
+
+stats:
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 2
+  traceability_coverage: "~92%"
+  source_tag_coverage: "~90%"
