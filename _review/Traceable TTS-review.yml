@@ -1,0 +1,40 @@
+paper: "Traceable TTS"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节三个设计选择均有 WHY 解释; 反转 GAN loss 的因果逻辑清晰; 训练策略细节充分"
+  可信赖:
+    satisfied: true
+    notes: "所有数字标注覆盖率 >90%; 指标名正确 (AUC/EER/ACC/WER/SIM/UTMOS); 方向性无误"
+  可区分:
+    satisfied: true
+    notes: "[论文原文]/[agent 解读] 标注覆盖率 ≥90%; 多处 agent 解读明确标出推断性质 (如质量提升来自 finetune 正则化)"
+  可定位:
+    satisfied: true
+    notes: "KB 背景谱系清晰: 被动检测→主动防护→主动溯源→无水印溯源; 与已有 TraceableSpeech 笔记形成对比"
+  不污染:
+    satisfied: true
+    notes: "反向更新均为 append (key_papers 追加); 无新概念页需创建"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "方法 > 关键设计选择 > 3. Vocoder-robust 设计"
+    detail: "vocoder 替换鲁棒性的 claim 仅引用 [§1],但论文全文均无实验验证此 claim"
+    suggestion: "已在局限性 #7 中指出,不需额外修正"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "F5-TTS 是本文核心模型但无模型页,因此 models 字段仅列 wav2vec 2.0"
+    suggestion: "正确行为 — 无模型页不列。如未来创建 F5-TTS 模型页可补充"
+
+summary: |
+  五个原则均满足。笔记对反转 GAN loss 的核心创新解释到位,因果链清晰;
+  实验数据标注完整;agent 解读与论文原文区分明确;KB 背景准确定位了本文在
+  TTS 溯源领域从 watermark-based 到 watermark-free 的范式跃迁。
+  2 个 low issue 均不阻塞反向更新。

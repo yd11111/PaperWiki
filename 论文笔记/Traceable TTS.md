@@ -204,4 +204,8 @@ MUSAN 加噪和 pitch shift 是主要挑战,域外场景下分别导致 ~13.7% �
 
 ---
 
+> [!review] 审阅结论: pass (2026-06-03)
+> 五个原则均满足, 2 个 low issue (traceability-gap ×1, template-compliance ×1) 均不阻塞.
+> 详见 `_review/Traceable TTS-review.yml`
+
 检索命中: [[Conditional Flow Matching]]✓ | 参考: [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[wav2vec 2.0]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: Model Attribution, GAN Fingerprint(概念库中无独立页)
