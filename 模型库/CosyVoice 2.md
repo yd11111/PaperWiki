@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -57,3 +57,5 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/EmoVoice|EmoVoice]] (2025): 以 CosyVoice 语义 token + flow matching + HiFi-GAN 作为音频后端; 在情感控制对比中 EmoVoice(1.5B) 情感 MOS 3.507 vs CosyVoice2 2.138, Emo_Sim 0.9118 vs 0.8647 [EmoVoice Table 2/3]; 中文 Secap 上 EmoVoice-PP WER 7.60 vs CosyVoice2 9.13 [EmoVoice Table 4]
 - [[论文笔记/FPO|FPO]] (2025): 以 CosyVoice2 为 backbone 之一,通过 token-level 选择性 DPO 优化; FPO 将 CER 从 1.45 降至 1.32 (-9.0%), WER 从 2.57 降至 2.24 (-12.8%), bad case ratio 从 14% 降至 8%, NMOS 从 3.81 提升至 3.91 [FPO Table I/II]
 - [[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]] (2025): 直接复用 CosyVoice 2 的 FSQ-SenseVoice tokenizer + chunk-aware causal flow matching + HiFi-GAN 作为 streaming speech decoder,嫁接到 Qwen2.5 LLM 构建 modular SpeechLM; 用 200K 合成多轮对话训练即超越 GLM-4-Voice; UTMOS 4.19-4.20 (R=3 W=10),延迟 ~583ms [LLaMA-Omni 2 Table 1]
+- [[论文笔记/JoyTTS|JoyTTS]] (2025): 用 CosyVoice2 替换 MiniCPM-o 原有 GPT-SoVITS TTS 模块,通过 MLP 映射 LLM hidden states (3584→768) 桥接; SEED-TTS-zh SS 0.73 vs CosyVoice2 独立 0.748 (-2.4%), WER 5.09 vs 1.45 (3.5x 退化); 开源训练代码 [JoyTTS Table 1]
+- [[论文笔记/OpenS2S|OpenS2S]] (2025): 在共情数据构建 pipeline 中使用 CosyVoice2 进行 voice cloning (输入端种子音频克隆) 和 instruction-controlled emotional speech synthesis (输出端情感可控合成); 50k+50k 双语共情样本均通过 CosyVoice2 合成 [OpenS2S §3.2]

@@ -7,7 +7,7 @@ year: 2020
 tags: [self-supervised-learning, speech-representation, contrastive-learning, ASR, low-resource]
 key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Gumbel-Softmax]]", "[[Codebook Collapse]]", "[[Self-Supervised Speech Representation]]"]
 tasks: []
-key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]"]
+key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/Traceable TTS|Traceable TTS]]"]
 supersedes: ["vq-wav2vec (Baevski et al., ICLR 2020)"]
 superseded_by: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/WavLM|WavLM]]"]
 status: pending-review

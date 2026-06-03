@@ -4,7 +4,7 @@ title: "Voice Cloning Taxonomy"
 aliases: [语音克隆分类, Voice Cloning Classification, 声音克隆体系]
 category: "taxonomy"
 tags: [TTS, voice-cloning, speaker-adaptation, few-shot, zero-shot, multilingual, survey]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/SafeSpeech|SafeSpeech]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DS-TTS|DS-TTS]]"]
 origin_paper: "[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"
 related_concepts: ["[[Speaker Adaptation]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Zero-shot Speech Synthesis]]", "[[LLM-based TTS]]", "[[Speaker Verification]]"]
 status: pending-review

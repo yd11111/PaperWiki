@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[UniTTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review)
 - [ingest/deep] [[UniTTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Residual Vector Quantization, LLM-based TTS, Semantic vs Acoustic Tokens, Speech Tokenizer, Codebook Collapse, Single-codebook vs Multi-codebook)
 - [review/auto] [[UniTTS]] — pass, 3 low issues
@@ -188,6 +193,11 @@
 - [alert/backlog] pending-review: 74, draft deep/repro: 7 — 建议抽空审核
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
@@ -410,6 +420,11 @@
 - [update/convention] CLAUDE.md vault 状态更新: MOC 6 个, 覆盖 79/79, 死链 0, tier 全补齐
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
@@ -422,6 +437,11 @@
 - [moc] 零样本语音合成 MOC + 语音编码与量化 MOC 更新: +Llasa
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
@@ -463,6 +483,11 @@
 - [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
@@ -578,6 +603,11 @@
 - [moc] 零样本语音合成 MOC 更新: +TacoLM
 
 ## 2026-06-03
+- [kb/search] [[C2F-LM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[C2F-LM]] — 精读, kb_sources=6, 新建 0, 追加 7 (Codec Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, Token Rate and Bitrate Trade-offs, Single-codebook vs Multi-codebook, EnCodec, HuBERT)
+- [review/auto] [[C2F-LM]] — pass-with-fixes, 0 high + 2 medium (traceability-gap x2) + 1 low (template-compliance)
+- [lint/local] C2F-LM — 通过/0 问题
+- [moc/update] 语音编码与量化 + 零样本语音合成 — 追加 C2F-LM
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
