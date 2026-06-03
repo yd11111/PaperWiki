@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[SMLLE]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[SMLLE]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS, Zero-shot Speech Synthesis, Duration Predictor, Mel Spectrogram, MELLE, Semantic vs Acoustic Tokens), MOC 更新 2 (零样本语音合成, TTS-总览)
+- [review/auto] [[SMLLE]] — pass-with-fixes, 0 high, 0 medium, 2 low (frontmatter 概念挂接偏弱)
+- [lint/local] SMLLE — 通过/0 死链
 - [kb/search] [[CapSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Natural Language Description for TTS]]✓, [[Classifier-Free Guidance]]✓, [[Codec Language Model]]✓, [[Emotion Control in TTS]]✓, [[Style Transfer in TTS]]✓ | 过滤: 除 CFM 外均为 pending-review
 - [ingest/deep] [[CapSpeech]] — 精读, kb_sources=6, 新建 0, 追加 7 (Natural Language Description for TTS, Classifier-Free Guidance, Conditional Flow Matching, Emotion Control in TTS, Codec Language Model, Style Transfer in TTS, Emilia)
 - [review/auto] [[CapSpeech]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
