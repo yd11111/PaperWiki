@@ -1,0 +1,53 @@
+paper: "MathReader"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "局限性 > 第3-4-6点"
+    detail: "局限性第3/4/6条为 [agent 解读],论文自身未讨论这些局限;已标注来源但读者应注意这些是推断"
+    suggestion: "保持当前标注即可,agent 解读在局限性节中属合理推断"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "datasets 为空,论文使用了 MathBridge 数据集 [ref 27] 训练 T5,以及自建测试集"
+    suggestion: "MathBridge 是 LaTeX-spoken English 配对数据集,与 vault TTS 主题关联弱,不满足独立页准入;保持空值"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > tasks"
+    detail: "tasks 为空,论文的核心任务可描述为 'Mathematical Document TTS' 或 'Accessible Document Reading'"
+    suggestion: "vault 无对应任务页,该任务过于细分不满足准入规则;保持空值"
+
+  - id: 4
+    type: weak-reusability
+    severity: low
+    principle: reproducible
+    location: "可复用的 idea > 第3点"
+    detail: "'OCR 标记自带公式定位'的描述偏向工具选择建议,可迁移性一般"
+    suggestion: "可保留,但本质上是'选择输出格式与下游兼容的工具'这个更通用的工程原则"
+
+stats:
+  claim_coverage: "90%"
+  source_tag_coverage: "90%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 3
