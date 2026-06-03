@@ -668,3 +668,4 @@
 - [review/auto] [[Low-Resource ForwardTacotron]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] Low-Resource ForwardTacotron — 通过/0 死链
 - [moc] TTS-总览 生成方法演进: +Low-Resource ForwardTacotron
+[alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
