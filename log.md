@@ -502,3 +502,9 @@
 - [review/auto] [[UMETTS]] — pass, 1 issue (0 high, 0 medium, 1 low)
 - [lint/local] UMETTS — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +UMETTS (韵律与情感)
+
+## 2026-06-03 (EmoSphere++)
+- [kb/search] [[EmoSphere++]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Gradient Reversal Layer]](pending-review)
+- [ingest/deep] [[EmoSphere++]] — 精读, kb_sources=6, emotion-adaptive spherical vector (EASV) + joint attribute style encoder + normalized orthogonality loss + CFM decoder, ECA 93.53%/94.61% (seen/unseen on ESD), 追加更新 6 个实体页(Emotion Control in TTS, Conditional Flow Matching, Speaker Embedding, Global Style Tokens, Gradient Reversal Layer, Style Transfer in TTS) + 零样本语音合成 MOC 更新
+- [review/auto] [[EmoSphere++]] — pass-with-fixes, 4 issues (0 high, 2 medium fixed, 2 low fixed)
+- [lint/local] EmoSphere++ — 通过/0 问题
