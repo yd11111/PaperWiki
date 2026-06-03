@@ -715,3 +715,4 @@
 - [review/auto] [[FPO]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] FPO — 通过/0 死链
 - [moc] TTS训练与评估 Post-training: +FPO; 零样本语音合成 2025: +FPO
+[alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
