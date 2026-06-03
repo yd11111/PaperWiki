@@ -64,6 +64,9 @@ updated: 2026-06-01
 | IndexTTS2 | SS test-zh | 0.865 | SEED-TTS-Eval | IndexTTS2 Table 1 |
 | Qwen3-TTS-12Hz-1.7B | WER test-en | 1.24% | SEED-TTS-Eval | Qwen3-TTS Table 5 |
 | Qwen3-TTS-12Hz-1.7B | WER test-zh | 0.77% | SEED-TTS-Eval | Qwen3-TTS Table 5 |
+| PilotTTS | SS test-zh | 0.862 | SEED-TTS-Eval | PilotTTS Table 1 |
+| PilotTTS | SS test-en | 0.815 | SEED-TTS-Eval | PilotTTS Table 1 |
+| PilotTTS | WER test-en | 1.50% | SEED-TTS-Eval | PilotTTS Table 1 |
 
 ## 开放问题
 

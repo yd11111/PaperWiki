@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, masked-diffusion, non-autoregressive, zero-shot, speech-editing, discrete-diffusion, LLM-based]
 concepts: ["[[Masked Generative Modeling]]", "[[LLM-based TTS]]", "[[Non-autoregressive TTS]]", "[[Diffusion Model]]", "[[Conditional Flow Matching]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]"]
-models: ["[[CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/F5-TTS|F5-TTS]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+models: ["[[CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "F5-TTS (Chen et al., 2024)", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6

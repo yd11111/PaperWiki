@@ -365,3 +365,8 @@
 - [review/auto] [[TTS-PRISM]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
 - [lint/local] TTS-PRISM — 通过/0 问题
 - [moc] TTS训练与评估 MOC 更新: +TTS-PRISM
+- [kb/search] [[LiveSpeech 2]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[Speech Language Model]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
+- [ingest/deep] [[LiveSpeech 2]] — 精读, kb_sources=6, 新建 0, 追加 6 (Zero-shot Speech Synthesis, Codec Language Model, Streaming Spoken Dialogue, Residual Vector Quantization, Semantic vs Acoustic Tokens, Speaker Embedding)
+- [review/auto] [[LiveSpeech 2]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] LiveSpeech 2 — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +LiveSpeech 2
