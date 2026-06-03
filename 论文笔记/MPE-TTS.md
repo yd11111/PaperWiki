@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv (Interspeech submission)"
 tags: [TTS, zero-shot, emotion, multi-modal, disentanglement, diffusion, prosody]
 concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Speech Factorization]]", "[[Natural Language Description for TTS]]", "[[Speaker Embedding]]", "[[Diffusion-based TTS]]", "[[Global Style Tokens]]"]
-models: ["[[模型库/HierSpeech++|GenerSpeech]]"]
+models: ["GenerSpeech", "Meta-StyleSpeech", "MM-TTS"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["LibriTTS", "MEAD-TTS"]
 kb_context_sources: 6

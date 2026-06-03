@@ -1,0 +1,47 @@
+paper: "MPE-TTS"
+reviewer: agent
+date: 2026-06-03
+checklist_version: "v1.1"
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节含 4 个关键设计选择,每个都有 WHY 解释; 层级解耦的粗/细粒度分类理由清晰; MPEE 和 ECL 的设计动机均有因果说明"
+  可信赖:
+    satisfied: true
+    notes: "Tables 1-3 数据全部标注出处; 指标名 MOS/ESMOS/SSMOS/WER/EACC 使用正确; 速查卡片指标含具体数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "[论文原文] 和 [agent 解读] 标注覆盖率 >90%; agent 解读 (如 MSE loss 的局限、输入设计解耦的假设) 均明确标记; 无断言式推断"
+  可定位:
+    satisfied: true
+    notes: "KB 背景节定位到 6 个实体页的演进线中; 创新判断对比了 EmoCtrl-TTS/EmoSphere-TTS/Daisy-TTS; frontmatter 字段完整"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页; 反向更新仅追加 key_papers (Emotion Control in TTS, Prosody Modeling 等),属于 append 操作"
+
+issues:
+  - id: 1
+    type: bad-linking
+    severity: medium
+    location: "frontmatter-models"
+    detail: "原稿 models 字段为 [[模型库/HierSpeech++|GenerSpeech]],GenerSpeech 与 HierSpeech++ 是不同系统(不同作者、不同方法),此链接会导致错误关联"
+    suggestion: "已修正: models 改为 plain text [GenerSpeech, Meta-StyleSpeech, MM-TTS] (均无 KB 模型页)"
+    fixed: true
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法-关键设计选择-2-MPEE"
+    detail: "Emotion2Vec+ Large 模型的具体输出维度和 adapter 架构细节未描述(论文本身也未详述)"
+    suggestion: "非阻塞,可在后续用户补充时加入"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea-3"
+    detail: "低频 mel bins 作为韵律信号来自 ProsoSpeech,非本文原创,标注已说明但可更明确强调出处"
+    suggestion: "已标注 '(来自 ProsoSpeech)',可保持现状"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好。方法节含充分因果解释和来源标注(覆盖率 >90%),实验表格完整且所有数字均有出处。KB 背景准确定位了多模态情感 ZS-TTS 在领域演进中的位置。1 个 medium 问题(frontmatter models 错误链接)已当场修复。2 个 low 问题不阻塞反向更新。放行反向更新。"
