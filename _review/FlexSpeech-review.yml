@@ -1,0 +1,63 @@
+paper: FlexSpeech
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: pass
+    notes: >
+      方法节包含5个关键设计选择的WHY解释,每个都有[论文原文]和[agent 解读]的
+      因果分析。速查卡片"可借鉴"列出4条具体可迁移trick(duration离散化、
+      component-level DPO、duration/timbre解耦、encoder mask learning)。
+  可信赖:
+    score: pass
+    notes: >
+      数字型claim标注覆盖率>90%。所有实验数据标注[Table 1/2]或[Fig 2]。
+      指标名使用正确(WER/SIM-O/SMOS/CMOS)。速查卡片"指标"含具体数字+数据集名。
+  可区分:
+    score: pass
+    notes: >
+      因果解释全部标注了[论文原文]或[agent 解读]。方法节5个设计选择中,
+      论文原文解释和agent推断清晰分离。局限性中SIM-O偏低的原因分析标注了[agent 解读]。
+  可定位:
+    score: pass
+    notes: >
+      KB背景包含具体谱系定位(FastSpeech→Glow-TTS→MaskGCT→DMOSpeech 2演进线),
+      创新判断有对比基准(vs DiffRO/GRPO/MegaTTS)。frontmatter完整。
+  不污染:
+    score: pass
+    notes: >
+      所有引用的概念页已存在,无需新建。反向更新仅为追加key_papers条目,
+      不涉及实质修改。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "实验 > 消融实验"
+    detail: >
+      消融表中FlexSpeech(full)的WER test-en=1.86与Table 1中FlexSpeech#50的1.86一致,
+      但test-zh=1.20与#1k的1.20一致。论文Table 2未明确说明使用的DPO配置版本。
+    suggestion: >
+      在消融表标题或脚注注明"Table 2 数据来自原文,原文未标明DPO数据量"。
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter
+    detail: >
+      models字段可以补充F5-TTS和MaskGCT作为对比baseline,
+      当前仅列CosyVoice/NaturalSpeech 3/BigVGAN。
+    suggestion: 保持当前即可,F5-TTS和MaskGCT无独立模型库页面。
+
+conclusion: pass
+conclusion_reason: >
+  5个原则均满足,仅有2个low severity问题(消融表DPO版本不明确、
+  models列表可扩展),不影响可信度。可继续反向更新。
+total_issues: 2
+high_issues: 0
+medium_issues: 0
+low_issues: 2

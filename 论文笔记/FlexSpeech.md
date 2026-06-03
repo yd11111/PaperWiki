@@ -204,5 +204,8 @@ Inference 配置 [§4.2]:
 3. **Duration/Timbre 完全解耦用于风格迁移**: Duration model 控制韵律风格,acoustic model + speaker embedding 控制音色。迁移新风格时只需微调 duration model(~100 samples),acoustic model 完全不动。
 4. **Encoder mask learning**: 在 duration model 的 encoder 上加 BERT-style mask prediction loss,增强 phoneme-level contextual representation 的质量,间接改善 duration prediction。
 
-> [!review] 审阅待完成
-> 本笔记由 agent 自动生成,status: draft。审阅报告见 `_review/FlexSpeech-review.yml`。
+> [!review] 审阅: pass (2026-06-03)
+> **结论**: pass — 5 个原则均满足,2 个 low issues,0 个 high/medium。
+> - low: 消融表未标明 DPO 数据量版本(原文未明确)
+> - low: models 字段可扩展(保持当前即可)
+> 详见 `_review/FlexSpeech-review.yml`
