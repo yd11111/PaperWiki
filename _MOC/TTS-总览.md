@@ -49,3 +49,4 @@
 - [[Classifier-Free Guidance]] — 无分类器引导
 - [[Diffusion-based TTS]] — 扩散语音合成 (Grad-TTS, Diff-TTS, ProDiff)
 - [[Diffusion-based Vocoder]] — 扩散声码器 (DiffWave, WaveGrad, BDDM)
+- [[Next-Token Diffusion]] — 逐 token 扩散头 (LatentLM, CLEAR, VibeVoice)

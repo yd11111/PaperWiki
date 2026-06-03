@@ -4,7 +4,7 @@ title: "Variational Autoencoder for TTS"
 aliases: [VAE-TTS, TTS中的变分自编码器, VAE for Speech Synthesis, 变分推断TTS]
 category: "generative-model"
 tags: [TTS, VAE, latent-variable, expressive-TTS, generative-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/VQ-VAE|VQ-VAE]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Prosody Modeling]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]", "[[Neural Vocoder]]"]
 status: pending-review
@@ -108,4 +108,16 @@ VITS (Kim et al., ICML 2021) 将 VAE 与 normalizing flow 结合:
 
 ## 演进
 
-Reference Encoder (GST-Tacotron, 2018; 确定性) → VAE (VAE-TTS, 2019; 随机性+正则化) → GMVAE (Hsu, 2019; 结构化 prior) → VAE+Flow (VITS, 2021; 强表达+端到端) → Diffusion/CFM 替代 (2023+; VAE 角色弱化)
+Reference Encoder (GST-Tacotron, 2018; 确定性) → VAE (VAE-TTS, 2019; 随机性+正则化) → GMVAE (Hsu, 2019; 结构化 prior) → VAE+Flow (VITS, 2021; 强表达+端到端) → Diffusion/CFM 替代 (2023+; VAE 角色弱化) → **sigma-VAE + Next-Token Diffusion (LatentLM 2024; VAE 角色复兴)**: VAE 从辅助组件变为核心 tokenizer,用连续 latent 替代离散 tokens
+
+## sigma-VAE: 为自回归建模设计的 VAE 变体
+
+LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归生成场景下的 **variance collapse** 问题:
+
+- **问题**: 标准 VAE 的 sigma 是可学习参数,训练时 sigma 趋向 0 → latent space 退化为确定性映射 → 下游 diffusion head 的输入方差过小,对 exposure bias 不鲁棒 [LatentLM §2.3]
+- **解决**: sigma-VAE 将 variance **固定为从 N(0, C_sigma) 采样的标量**,不参与梯度优化 [LatentLM Eq. 5]
+  - z = mu + sigma * epsilon, epsilon ~ N(0,1), sigma ~ N(0, C_sigma)
+  - 训练目标: minimize ||x_hat - x||^2 + beta * ||mu||^2
+- **关键发现**: LatentLM 偏好更大 variance 的 tokenizer (与 image-level diffusion 模型相反) [LatentLM §3.1.3, Fig 6]
+- **被 CLEAR (Wu et al., 2025) 继承**: CLEAR 的 enhanced wav-VAE 同样借鉴 sigma-VAE 设计
+- **被 VibeVoice (Peng et al., 2025) 直接复用**: VibeVoice 的 acoustic tokenizer 基于 sigma-VAE 构建,3200x 压缩,7.5 Hz

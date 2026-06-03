@@ -197,3 +197,13 @@
 - 反向更新: LLM-based TTS(+3), TTS Evaluation(+GSRM section+4), Semantic vs Acoustic Tokens(+2), DiffRO(+2+GRPO对比), Codec LM(+2) — 5 页 append
 - [create/entity] 无新建 — 候选均不满足准入规则
 - [lint/local] SpeechAlign, RL-for-Audio-LLM, GSRM, RIO — 通过/0 dead links
+- [kb/search] [[LatentLM]] — 命中 4 页(confirmed): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review)
+- [kb/search] [[CLEAR]] — 命中 3 页(confirmed): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review), [[Diffusion-based TTS]](pending-review)
+- [kb/search] [[VibeVoice]] — 命中 3 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review)
+- [ingest/deep] [[LatentLM]] — 精读(batch processing), kb_sources=6, next-token diffusion + sigma-VAE 统一框架, TTS SIM 0.697 / WER-C 1.2 超越 VALL-E 2 (10x fewer decoding steps), ImageNet FID 2.24
+- [ingest/deep] [[CLEAR]] — 精读(batch processing), kb_sources=6, MLP rectified flow head + enhanced wav-VAE (2048x), 单阶段零样本 TTS, RTF 0.18, 流式 FFL 96ms, WER 1.88%
+- [ingest/deep] [[VibeVoice]] — 精读(batch processing), kb_sources=5, 基于 LatentLM + Qwen2.5 7B, dual tokenizer (acoustic+semantic), 90 分钟多说话人对话, Avg MOS 3.76 超越 Gemini 2.5 Pro (3.66)
+- 反向更新: CFM(+CLEAR), LLM-based TTS(+LatentLM, +CLEAR, +VibeVoice), Speech Tokenizer(+LatentLM, +CLEAR, +VibeVoice), Semantic vs Acoustic Tokens(+LatentLM, +CLEAR, +VibeVoice), CFG(+LatentLM, +CLEAR, +VibeVoice), Diffusion Model(+LatentLM, +CLEAR, +VibeVoice), MELLE model(+LatentLM, +CLEAR), VAE for TTS(+LatentLM, +CLEAR, +VibeVoice, sigma-VAE section) — 共 8 页 append
+- [create/concept] [[Next-Token Diffusion]] — 新建概念页(满足准入: 3 篇论文引用 + 前置知识 + 连接 LatentLM/CLEAR/VibeVoice)
+- [moc] 零样本语音合成 MOC 刷新: 新增 3 篇论文(LatentLM, CLEAR, VibeVoice) + 更新演进脉络; TTS-总览 MOC 新增 Next-Token Diffusion
+- [lint/local] LatentLM, CLEAR, VibeVoice — 通过/0 dead links, frontmatter 完整
