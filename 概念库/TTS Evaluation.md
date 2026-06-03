@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -143,6 +143,10 @@ Real-Time Factor 缺乏硬件配置、batch size、prompt 长度、streaming 模
 - [[LLM-based TTS]]: 推动 MOS ceiling 问题凸显的技术趋势
 - [[Audio-Language Pretraining]]: LLM-as-Judge 和 audio quality prediction 的技术基础
 
+### Naturalness-Specific Reward Model (SpeechJudge-GRM)
+
+Zhang et al. (2025) 提出 SpeechJudge,首个专门针对 speech naturalness 的完整评估套件。SpeechJudge-Data 包含 99K pairwise human preference 标注 (69 名标注员,6 种零样本 TTS 模型,中英文 + code-switching)。SpeechJudge-Eval 是 1,000 样本 benchmark (仅 Full Agreement 子集),揭示了一个关键发现: **所有现有客观指标在 naturalness 判断上接近随机** — WER 57.9%, SIM 44.5%, UTMOS 53.7%, 最好的 AudioLLM (Gemini-2.5-Flash) 也仅 69.1% [Table 2]。SpeechJudge-GRM 基于 Qwen2.5-Omni-7B + SFT (Gemini CoT distillation) + GRPO 训练,达 77.2% accuracy (voting@10: 79.4%),超越 BTRM 72.7%; 还可用作 TTS 后训练 reward function,online 模式下 N-CMOS +0.25 [Fig 6]。详见 [[论文笔记/SpeechJudge|SpeechJudge]]。
+
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025)

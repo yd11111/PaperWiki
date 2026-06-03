@@ -4,7 +4,7 @@ title: "Self-Supervised Speech Representation"
 aliases: [自监督语音表征, SSL Speech Pre-training, Speech Self-Supervised Learning, 语音自监督预训练, Self-Supervised Speech Pre-training, SSL for Speech]
 category: "model-family"
 tags: [self-supervised-learning, speech-representation, contrastive-learning, masked-prediction, pre-training, ASR, speech-tokenizer]
-key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]"]
+key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/XEUS|XEUS]]", "[[论文笔记/BEATs|BEATs]]", "[[论文笔记/w2v-BERT 2.0|w2v-BERT 2.0]]"]
 origin_paper: "van den Oord et al., Representation Learning with Contrastive Predictive Coding (CPC), 2018"
 related_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Gumbel-Softmax]]", "[[Codebook Collapse]]", "[[Speech Language Model]]", "[[Masked Generative Modeling]]"]
 status: pending-review
@@ -84,6 +84,17 @@ SSL 语音模型在 TTS 系统中主要作为 semantic tokenizer:
 - [[Speech Language Model]]: 消费 SSL 表征/tokens 的下游模型
 - [[Masked Generative Modeling]]: 与 SSL 的 masked prediction 训练有关联但目标不同 (理解 vs 生成)
 
+## 超音段韵律的 Layer-wise 表征 [de la Fuente & Jurafsky, 2024]
+
+对 wav2vec 2.0, HuBERT, WavLM 三个 12 层 BASE 模型的 probing 分析揭示了 SSL 表征的内在结构:
+- **中间层 (8-9) 对超音段分类最强**: stress/tone/accent 的 F1 在 layer 8-9 达到 peak [Fig 1]
+- **超音段表征是抽象的**: F0 regression 的 peak 不与超音段 peak 重合,说明模型习得的是抽象语言学类别,不是简单的 F0 追踪 [Fig 1, panel 4]
+- **语言特异性仅在 Transformer 层**: CNN 层 (layer 0) 对所有模型/语言表现一致,上下文网络才编码语言特定信息 [Fig 1]
+- **ASR fine-tuning 增强词级韵律**: stress 和 tone (lexical features) 通过正字法间接获益; phrasal accent 增强较弱 [Fig 2]
+- **三种 SSL 预训练目标表现相似**: HuBERT, WavLM, wav2vec 2.0 的 layer-wise 趋势高度一致 [Fig 3]
+
+这些发现对 speech tokenizer 设计有指导意义: SSL 中间层已编码丰富的韵律信息; 如果需要 prosody-aware tokens,应选择中间层而非最后层。详见 [[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]。
+
 ## 演进
 
-CPC (contrastive, 2018) → wav2vec (contrastive on waveform, 2019) → vq-wav2vec (VQ + BERT, 两阶段, 2020) → **wav2vec 2.0** (contrastive + Gumbel-Softmax PQ, 端到端, 2020) → **HuBERT** (masked prediction + k-means, 迭代, 2021) → **w2v-BERT** (contrastive + MLM, 端到端, 2021) → **WavLM** (masked denoising, full-stack, 2022) → Whisper encoder (弱监督替代自监督, 2022) → 监督式 tokenizer (CosyVoice S3, 2024)
+CPC (contrastive, 2018) → wav2vec (contrastive on waveform, 2019) → vq-wav2vec (VQ + BERT, 两阶段, 2020) → **wav2vec 2.0** (contrastive + Gumbel-Softmax PQ, 端到端, 2020) → **HuBERT** (masked prediction + k-means, 迭代, 2021) → **w2v-BERT** (contrastive + MLM, 端到端, 2021) → **WavLM** (masked denoising, full-stack, 2022) → **BEATs** (iterative acoustic tokenizer + discrete label prediction, 通用音频 SSL, 2022) → Whisper encoder (弱监督替代自监督, 2022) → **w2v-BERT 2.0** (contrastive + MLM, 580M params, 4.5M hours, 143 languages, Seamless, 2023) → **XEUS** (masked prediction + denoising + dereverberation, E-Branchformer, 1M hours, 4057 languages, ML-SUPERB SOTA, 2024) → 监督式 tokenizer (CosyVoice S3, 2024)

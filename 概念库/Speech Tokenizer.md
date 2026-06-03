@@ -4,7 +4,7 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/Moshi|Moshi]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/StableToken|StableToken]]", "[[论文笔记/SiTok|SiTok]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/Moshi|Moshi]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/StableToken|StableToken]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/NAC Token Language Analysis|NAC Token Language Analysis]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]", "[[Self-Supervised Speech Representation]]"]
 status: confirmed
@@ -93,6 +93,15 @@ Survey Table 1 覆盖 50+ tokenizer 的完整设计参数矩阵,是选型的重�
 | SLM 声学 | WavLM (DWavL-S-16) | 最佳声学属性建模 |
 
 **核心发现**: "no single tokenizer excels across all spoken and acoustic tasks" [§3.3.1] — 没有万能 tokenizer。
+
+## NAC Token 的语言学统计特性 [Park et al., 2025]
+
+Park et al. (2025) 首次系统分析了 neural audio codec (NAC) token 序列的语言学统计特性。核心发现:
+- **3-gram NAC tokens 最接近自然语言分布**: 在 Zipf alpha, Heaps' beta/k, entropy/redundancy 上,3-gram 级别的 NAC tokens 与自然语言词汇最相似 [Fig 2-6]
+- **"更像语言的 token = 更好的语音"**: alpha↓ (更 Zipfian), beta↑ (更线性 vocab growth), redundancy↓ 与 WER↓ / UTMOS↑ 正相关 [Fig 7-9]
+- **高维 codec (大 n_d) 更接近自然语言**: dimension size 是影响统计特性的关键因素
+
+这些发现有 tokenizer 设计启示: NAC token 的 Zipf/Heaps 统计量可作为 tokenizer 质量的快速 proxy 指标。详见 [[论文笔记/NAC Token Language Analysis|NAC Token Language Analysis]]。
 
 ## 演进
 

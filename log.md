@@ -207,3 +207,13 @@
 - [create/concept] [[Next-Token Diffusion]] — 新建概念页(满足准入: 3 篇论文引用 + 前置知识 + 连接 LatentLM/CLEAR/VibeVoice)
 - [moc] 零样本语音合成 MOC 刷新: 新增 3 篇论文(LatentLM, CLEAR, VibeVoice) + 更新演进脉络; TTS-总览 MOC 新增 Next-Token Diffusion
 - [lint/local] LatentLM, CLEAR, VibeVoice — 通过/0 dead links, frontmatter 完整
+- [kb/search] [[SpeechJudge]] — 命中 0 页(confirmed) | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Audio Understanding]](pending-review)
+- [kb/search] [[SSL Suprasegmental Analysis]] — 命中 1 页(confirmed): [[Prosody Modeling]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review)
+- [kb/search] [[NAC Token Language Analysis]] — 命中 2 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Training Objectives]](pending-review)
+- [skip/ingest] EmotionThinker (ICLR 2026 version) — PDF 内容与已有笔记一致 (ICLR 2026 submission, 非 AAAI), 跳过重复入库
+- [ingest/deep] [[SpeechJudge]] — 精读(batch), kb_sources=3, 首个 TTS naturalness 完整评估套件: 99K pairwise preference 数据集 + 1K benchmark + GRM (77.2% accuracy, Voting@10 79.4%), GRM 可作 TTS 后训练 reward (N-CMOS +0.25), 追加更新 1 个实体页(TTS Evaluation)
+- [ingest/deep] [[SSL Suprasegmental Analysis]] — 精读(batch), kb_sources=2, SSL 模型 layer-wise suprasegmental probing (wav2vec 2.0/HuBERT/WavLM), 中间层 (8-9) 最强且与 F0 解耦, 语言特异性仅在 context network, ASR FT 增强词级韵律, 追加更新 2 个实体页(Prosody Modeling, Self-Supervised Speech Representation)
+- [ingest/deep] [[NAC Token Language Analysis]] — 精读(batch), kb_sources=2, NAC token 统计分析 (Zipf/Heaps/entropy), 3-gram 最像自然语言, "更像语言的 token = 更好的语音", 追加更新 2 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens)
+- 反向更新: TTS Evaluation(+SpeechJudge GRM section), Prosody Modeling(+SSL suprasegmental section), Self-Supervised Speech Representation(+layer-wise probing section), Speech Tokenizer(+NAC statistical section), Semantic vs Acoustic Tokens(+NAC Token Language Analysis) — 共 5 页 append
+- [create/entity] 无新建 — 候选 (Generative Reward Model, Token Statistical Properties, Suprasegmental Probing) 均不满足准入规则(单篇论文特有概念或已被已有实体页覆盖)
+- [lint/local] SpeechJudge, SSL Suprasegmental Analysis, NAC Token Language Analysis — 通过/0 dead links, frontmatter 完整

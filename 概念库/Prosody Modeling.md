@@ -4,7 +4,7 @@ title: "Prosody Modeling"
 aliases: [韵律建模, 语音韵律, Prosody Control, Expressive TTS, 表现力语音合成]
 category: "technique"
 tags: [TTS, prosody, style, emotion, expressiveness, variation-information]
-key_papers: ["[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]"]
+key_papers: ["[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]"]
 status: confirmed
@@ -164,6 +164,10 @@ NVSpeech (Liao et al., 2025) 将韵律建模扩展至副语言发声维度 — �
 - Listener win rate 75-79% (vs 无 PV 的 pre-trained 模型)
 
 与传统韵律建模的区别: 传统方法建模 pitch/duration/energy 等连续韵律维度; PV 建模关注离散的副语言事件 (如 `[Laughter]`, `[Breathing]`) 的检测和可控合成。两者互补。详见 [[论文笔记/NVSpeech|NVSpeech]]。
+
+## SSL 模型中的超音段韵律表征
+
+de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模型 (wav2vec 2.0, HuBERT, WavLM) 对超音段特征 (stress, tone, accent) 的内在表征: 超音段表征在中间层 (8-9) 最强,且是抽象的语言学类别 (与 F0 追踪能力不直接相关)。语言特异性仅在 context network (Transformer 层) 出现,CNN 层对所有语言一致。ASR fine-tuning 增强词级韵律 (stress, tone) 但对短语级 accent 效果弱。详见 [[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]。
 
 ## 演进
 
