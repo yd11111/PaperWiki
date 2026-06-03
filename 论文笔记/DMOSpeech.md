@@ -11,7 +11,7 @@ tags: [TTS, diffusion, distillation, zero-shot, metric-optimization, speaker-sim
 concepts: ["[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Speaker Embedding]]", "[[Speaker Verification]]", "[[Classifier-Free Guidance]]", "[[Non-autoregressive TTS]]"]
 models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["[[SEED-TTS-Eval]]"]
+datasets: []
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -194,6 +194,8 @@ Mode shrinkage 的分析尤其有价值。传统观点认为蒸馏/加速必然�
 4. **延迟引入辅助 loss**: 先让主损失 (DMD) 稳定模型,再逐步引入 CTC 和 SV loss,避免早期梯度冲突。适用于任何多目标训练场景
 5. **训练时模拟推理 mismatch**: 训练时用 student 的预测 (而非 ground truth) 作为下一步输入,减少 train/infer 分布偏移
 
-> [!review] 审阅 (自动)
+> [!review] 审阅 (自动, 2026-06-03)
 > 审阅报告: [[_review/DMOSpeech-review.yml]]
-> 结论: 待审阅后填写
+> 结论: **pass-with-fixes** (2 issues: 1 medium fixed, 1 low unfixed)
+> - [x] ~~datasets 字段误列 SEED-TTS-Eval~~ (已修正)
+> - [ ] DAC 首次提及未注明 Kumar et al. 2024 (low, 可选)

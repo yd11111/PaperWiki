@@ -1,0 +1,49 @@
+paper: "DMOSpeech"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 2
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可信赖
+    location: frontmatter.datasets
+    detail: "datasets 字段列了 [[SEED-TTS-Eval]],但 DMOSpeech 论文未使用该数据集。实际使用的是 LibriSpeech test-clean (评估) 和 LibriLight (训练),两者无实体页。"
+    suggestion: "已修正: 移除 SEED-TTS-Eval,datasets 设为空。"
+    fixed: true
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: 方法/整体架构
+    detail: "DAC autoencoder 用 VAE 替换 RVQ 的描述引用了 §C.1,但未说明 'DAC' 指的是 Kumar et al. (2024) 的 Descript Audio Codec。"
+    suggestion: "可在首次提及 DAC 时补充 '(Kumar et al., 2024)',但非关键。"
+    fixed: false
+
+checklist:
+  可复述:
+    method_has_causal_why: true
+    design_choices_why_not_that: true
+    quickcard_reusable_specific: true
+  可信赖:
+    claim_annotation_coverage: ">90%"
+    metric_names_correct: true
+    quickcard_metrics_with_numbers: true
+    no_directional_errors: true
+  可区分:
+    source_annotations_present: true
+    source_annotation_coverage: ">90%"
+    no_assertion_without_qualifier: true
+  可定位:
+    kb_background_has_lineage: true
+    innovation_has_comparison: true
+    frontmatter_fields_present: true
+    frontmatter_semantically_correct: true
+    quickcard_five_fields_substantial: true
+  不污染:
+    new_concepts_meet_criteria: "N/A (no new concepts)"
+    dedup_checked: "N/A"
+    reverse_update_safe: true
