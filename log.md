@@ -539,3 +539,10 @@
 - [ingest/deep] [[EmoCtrl-TTS]] — 精读, kb_sources=6, 追加更新 6 个实体页(CFM, Emotion Control in TTS, CFG, Prosody Modeling, Zero-shot Speech Synthesis, Style Transfer in TTS) + Emotion Control in TTS 内容追加(帧级 arousal-valence 方法节) + MOC 更新(零样本语音合成, TTS-总览)
 - [review/auto] [[EmoCtrl-TTS]] — pass, 0 issues
 - [lint/local] EmoCtrl-TTS — 通过/0 问题
+
+## 2026-06-03 (SESD)
+- [kb/search] [[SESD]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Duration Predictor]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[SESD]] — 精读, kb_sources=6, 新建 0, 追加 6 (Diffusion-based TTS, Classifier-Free Guidance, Duration Predictor, EnCodec, Non-autoregressive TTS, Duration Predictor 内容追加)
+- [review/auto] [[SESD]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] SESD — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +SESD (2024, latent diffusion, data-efficient)
