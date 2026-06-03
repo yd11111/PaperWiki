@@ -97,7 +97,7 @@ DialogueAgents 由三个 agent 组成闭环迭代系统 [§III, Fig 1]:
 
 | 指标 | Writer+Synth | Writer(self)+Synth | +Critic(1L) | +Critic(2L) | +Critic(3L) | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
-| MOS | 3.63 | 3.63 | 3.71 | **3.75** | 3.78 | [Table II] |
+| MOS | 3.63 | 3.63 | 3.71 | 3.75 | **3.78** | [Table II] |
 | EMOS | 3.64 | 3.62 | 3.79 | **3.96** | 3.91 | [Table II] |
 | TMOS | 3.59 | 3.60 | 3.71 | **3.78** | 3.76 | [Table II] |
 | UTMOS(EN) | 4.186 | 4.224 | 4.302 | **4.316** | 4.162 | [Table II] |
@@ -140,7 +140,7 @@ MultiTalk 训练出的模型 MOS 与 DailyTalk 等现有数据集相当,且 Mult
 4. **数据集规模偏小**: MultiTalk 总计约 32K 秒 (~9 小时),远小于大规模 TTS 数据集 (如 Emilia 100K+ h),作为训练数据用途有限 [Table V]
 5. **评估指标简单**: EMOS 和 TMOS 虽有创新,但仍基于 1-5 分 MOS 框架,未解决 MOS 的 ceiling effect 和不可比性问题 [agent 解读]
 6. **无端到端 turn-taking 建模**: 对话轮次切换完全依赖脚本文本中的角色标注,不涉及真正的语音级 turn-taking 建模 [agent 解读]
-7. **MOS 绝对值偏低**: 最优配置 MOS 3.75、EMOS 3.96 均未突破 4.0 [Table II]
+7. **MOS 绝对值偏低**: 各配置 MOS 在 3.63-3.78 范围,EMOS 最高 3.96,均未突破 4.0 [Table II]
 
 ## 点评
 

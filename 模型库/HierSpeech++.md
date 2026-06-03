@@ -7,7 +7,7 @@ year: 2023
 tags: [TTS, voice-conversion, zero-shot, hierarchical-VAE, non-autoregressive, speech-super-resolution]
 key_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speech Factorization]]", "[[Semantic vs Acoustic Tokens]]", "[[F0 Modeling]]", "[[Neural Vocoder]]"]
 tasks: [TTS, voice-conversion, speech-super-resolution]
-key_papers: ["[[论文笔记/HierSpeech++|HierSpeech++]]"]
+key_papers: ["[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Low-Resource ForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]"]
 supersedes: ["HierSpeech (Lee et al., 2022)", "HierVST (Lee et al., 2023)"]
 superseded_by: []
 status: pending-review

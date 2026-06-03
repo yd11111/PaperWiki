@@ -4,7 +4,7 @@ title: "Diffusion-based TTS"
 aliases: [Diffusion TTS, 扩散语音合成, Diffusion Acoustic Model]
 category: "model-family"
 tags: [TTS, diffusion, acoustic-model, end-to-end, mel-generation]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/DiffCSS|DiffCSS]]"]
 origin_paper: "Jeong et al., Diff-TTS: A Denoising Diffusion Model for Text-to-Speech, 2021"
 related_concepts: ["[[Diffusion Model]]", "[[Diffusion-based Vocoder]]", "[[Non-autoregressive TTS]]", "[[Conditional Flow Matching]]", "[[Neural Vocoder]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]"]
 status: pending-review
@@ -140,4 +140,4 @@ Diffusion model 在 SVS 领域同样发挥重要作用 [Pan et al., 2026]:
 
 ## 演进
 
-Tacotron (AR attention, 2017) --> FastSpeech (NAR, 2019) --> Diff-TTS + Grad-TTS (diffusion 声学模型, 2021) --> ProDiff + DiffGAN-TTS (高效化, 2022) --> Guided-TTS 2 (零样本多说话人, 2022) --> **Flow Matching 取代 diffusion 成为主流** (Voicebox 2023, Matcha-TTS 2024, F5-TTS 2024) --> Hybrid LLM + Flow (CosyVoice, 2024)
+Tacotron (AR attention, 2017) --> FastSpeech (NAR, 2019) --> Diff-TTS + Grad-TTS (diffusion 声学模型, 2021) --> ProDiff + DiffGAN-TTS (高效化, 2022) --> Guided-TTS 2 (零样本多说话人, 2022) --> **Flow Matching 取代 diffusion 成为主流** (Voicebox 2023, Matcha-TTS 2024, F5-TTS 2024) --> DMOSpeech (DMD2 蒸馏 + 端到端 metric 优化, 2024) --> Hybrid LLM + Flow (CosyVoice, 2024)

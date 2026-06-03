@@ -7,7 +7,7 @@ year: 2021
 tags: [TTS, end-to-end, VAE, normalizing-flow, GAN, parallel-synthesis]
 key_concepts: ["[[Variational Autoencoder for TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Neural Vocoder]]", "[[Speech-Text Alignment]]"]
 tasks: []
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/UMETTS|UMETTS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Muyan-TTS|Muyan-TTS]]", "[[论文笔记/MathReader|MathReader]]", "[[论文笔记/SafeSpeech|SafeSpeech]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

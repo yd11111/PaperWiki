@@ -4,7 +4,7 @@ title: "Text-to-Speech Pipeline"
 aliases: [TTS Pipeline, TTS系统架构, 语音合成流水线, Neural TTS Architecture]
 category: "system-architecture"
 tags: [TTS, pipeline, system-design, end-to-end]
-key_papers: []
+key_papers: ["[[论文笔记/MathReader|MathReader]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Mel Spectrogram]]", "[[Neural Vocoder]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Phoneme Representation]]"]
 status: pending-review

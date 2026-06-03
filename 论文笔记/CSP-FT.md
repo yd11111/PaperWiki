@@ -36,7 +36,7 @@ updated: 2026-06-03
 > [!summary] 速查
 > - **一句话**: 通过 weighted-sum 分析 Transformer 各层对情感/说话人控制的贡献,仅微调贡献最高和最低的两层,实现 ~8% 参数、~2x 加速下的高效域适应且显著缓解灾难性遗忘
 > - **路线**: 预训练 codec LM → Stage 1: 冻结模型,用 weighted-sum + 下游分类器分析各层贡献 → 选 highest + lowest 两层 → Stage 2: 仅微调这两层做目标域 TTS 适应
-> - **指标**: Fun-CosyVoice3.0 上 SS 94.8% / ERS 96.8% / WER 3.8% (vs Full FT: 94.5% / 97.0% / 12.1%); 训练速度 1.91-2.62x 加速 [Table 2, Fig 4]
+> - **指标**: Fun-CosyVoice3.0 上 SS 94.8% / ERS 96.8% / WER 3.8% (vs Full FT: 94.5% / 97.0% / 12.1%), 11 个英语情感数据集 (244h); 训练速度 1.91-2.62x 加速 [Table 2, Fig 4]
 > - **可借鉴**: 用下游任务的 layer-wise weighted-sum 分析来指导选择性微调,且分析结果跨数据集/跨语言可迁移 — 分析做一次,适应做多次
 > - **局限**: 仅在 4 个 codec LM 上验证,未在 diffusion-based 或 NAR 架构上测试; 层选择基于任务权重平均,对情感/说话人权重分布不均的模型可能次优 (CosyVoice 案例 [Table 6])
 
@@ -179,8 +179,8 @@ CSP-FT 分两个阶段 [§2.1, Fig 2]:
 ### Codec LM 作为语音编码器的表现 [Table 1]
 
 四个 codec LM 在情感识别和说话人识别上的表现与 SOTA 自监督模型相当:
-- CosyVoice: Speaker Acc 94.97% (最高), Emotion Acc 70.48%
-- Fun-CosyVoice3.0: Emotion Acc 72.44% (接近 WavLM_large 72.61%), Speaker Acc 86.87% (最低)
+- CosyVoice: Speaker Acc 94.97% (最高), Emotion Acc 70.48% [Table 1]
+- Fun-CosyVoice3.0: Emotion Acc 72.44% (接近 WavLM_large 72.61%), Speaker Acc 86.87% (最低) [Table 1]
 - 表明 tokenization 策略决定性能: ASR tokens 保留语义 (利于情感),acoustic tokens 保留声学 (利于说话人) [§4.1]
 
 ## 局限性
@@ -209,5 +209,10 @@ CSP-FT 分两个阶段 [§2.1, Fig 2]:
 3. **跨数据集 layer weight 迁移**: utterance-level 特征 (说话人/情感) 的层贡献分布在不同数据集/语言间稳定,可节省重复分析成本
 4. **U 形层数-性能曲线**: 微调层数既不是越多越好 (遗忘) 也不是越少越好 (能力不足),存在最优点 — 可作为其他 partial fine-tuning 工作的参考
 
-> [!review] 审阅待补充
-> 审阅结果将在 `_review/CSP-FT-review.yml` 中记录。
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> - **可复述**: PASS — 方法节包含 4 个 WHY 设计选择,因果解释充分
+> - **可信赖**: PASS-WITH-FIXES — 速查指标已补充数据集名; Table 1 数字已补标注
+> - **可区分**: PASS — 所有因果解释标注了 [论文原文]/[agent 解读]
+> - **可定位**: PASS — KB 背景谱系定位具体,引用 Speaker Adaptation 演进线
+> - **不污染**: PASS — 无新概念页需创建; 反向更新均为追加
+> - 详见 `_review/CSP-FT-review.yml`

@@ -4,7 +4,7 @@ title: "Speaker Adaptation"
 aliases: [说话人适应, Speaker Fine-tuning, TTS Adaptation, 说话人自适应, Voice Adaptation, 语音适应]
 category: "technique"
 tags: [TTS, voice-cloning, fine-tuning, speaker-identity, few-shot, multi-speaker, adaptation]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/XTTS|XTTS]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/Low-Resource ForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]", "[[论文笔记/SafeSpeech|SafeSpeech]]"]
 origin_paper: ""
 related_concepts: ["[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Speech Factorization]]", "[[Speaker Verification]]", "[[Style Transfer in TTS]]"]
 status: pending-review

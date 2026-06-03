@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, reinforcement-learning, GRPO, flow-matching, NAR-TTS, zero-shot, voice-cloning, post-training]
 concepts: ["[[Conditional Flow Matching]]", "[[Differentiable Reward Optimization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[TTS Evaluation]]"]
-models: []
+models: ["[[模型库/SenseVoice|SenseVoice]]", "[[模型库/WavLM|WavLM]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -109,6 +109,7 @@ GRPO 通过 group relative advantage estimation 计算优势函数: A_i = (Rewar
 - 评估 ASR: Paraformer-zh [§3.2.2]
 - 评估 SV: WavLM-large-based speaker verification [§3.2.2]
 - 评估集: SEED-TTS-Eval test-cn (2020 general + 400 hard + 140 noisy) [§3.1]
+- GRPO 超参数 (epsilon, beta, group size): 论文未报告 [§2.3]
 
 ## 实验
 
@@ -124,6 +125,8 @@ GRPO 通过 group relative advantage estimation 计算优势函数: A_i = (Rewar
 | WER ↓ (hard, internal) | 8.79% | 9.56% | 9.87% | Internal 10K h / SEED test-cn hard | [Table 2] |
 | SIM ↑ (general, internal) | 0.754 | 0.731 | 0.726 | Internal 10K h / SEED test-cn | [Table 2] |
 | SIM ↑ (hard, internal) | 0.718 | 0.710 | 0.702 | Internal 10K h / SEED test-cn hard | [Table 2] |
+| WER ↓ (noisy, internal) | 1.33% | 1.80% | 1.86% | Internal 10K h / SEED test-cn noisy | [Table 2] |
+| SIM ↑ (noisy, internal) | 0.746 | 0.730 | 0.717 | Internal 10K h / SEED test-cn noisy | [Table 2] |
 
 ### 关键发现
 
@@ -171,3 +174,6 @@ output probabilization 的设计简洁优雅: 修改仅在最后一层 (linear �
 1. **Output probabilization for NAR RL**: 将 flow-matching 模型最后一层从确定性预测改为 (mu, sigma) 概率分布预测,使 RL 算法可直接应用。这个 trick 理论上可推广到任何 NAR 生成模型 (diffusion, flow-based vocoder 等),工程改动极小 (仅改最后一层)
 2. **两阶段训练 (CFM pretrain + GRPO finetune)**: 先用标准 flow matching loss 预训练,再用极少数据 (100 h) 和极短步数 (1100 steps) 做 GRPO 微调。数据效率高,GRPO 阶段仅用预训练数据的 ~1.4%
 3. **中性架构改造后做 RL 的范式**: 先验证架构改造 (F5-P) 不损性能,再在改造基础上做 RL (F5-R)。这种两步验证方式清晰地隔离了 "架构改造" 和 "RL 训练" 的贡献
+
+> [!review] 审阅状态: pass-with-fixes (2026-06-03)
+> 1 个 medium 级问题 (models 字段已补充 SenseVoice+WavLM) + 2 个 low 级问题 (GRPO 超参数标注为未报告, internal noisy 数据补入表格)。均已修正,不阻塞反向更新。详见 `_review/F5R-TTS-review.yml`

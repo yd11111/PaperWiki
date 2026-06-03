@@ -16,7 +16,10 @@
   - [[论文笔记/UMETTS|UMETTS]] — 2024, 多模态(视觉/音频/文本)对比学习情感对齐 + 多 TTS 后端情感合成
   - [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]] — 2024, flow-matching zero-shot TTS + 帧级 arousal-valence + NV embedding, 时变情感控制
   - [[论文笔记/Daisy-TTS|Daisy-TTS]] — 2024, Plutchik 结构模型 + prosody embedding PCA 分解, 一/二级情感+强度+极性模拟
+  - [[论文笔记/DiffCSS|DiffCSS]] — 2025, Tsinghua/Tencent, diffusion 韵律预测器 + ParlerTTS backbone 实现对话语音韵律多样性, NDB 4/JSD 0.036
 - 流式与实时 — streaming, low-latency
+- TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
+  - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
 
 ## 按任务浏览
 

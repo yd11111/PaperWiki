@@ -577,3 +577,11 @@
 - [lint/local] RWKVTTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +RWKVTTS (2025, RWKV-7 替换 CosyVoice backbone)
 - [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
+
+## 2026-06-03 (Muyan-TTS)
+- [kb/search] [[Muyan-TTS]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[VITS]](pending-review)
+- [ingest/deep] [[Muyan-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (LLM-based TTS key_papers, VITS key_papers, Zero-shot Speech Synthesis key_models) + CosyVoice 2 baseline 引用
+- [review/auto] [[Muyan-TTS]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] Muyan-TTS — 通过/0 死链
+- [moc] 零样本语音合成 MOC 更新: +Muyan-TTS (2025, LLM+SoVITS, podcast, $50K)
+- [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
