@@ -1,0 +1,49 @@
+paper: PROEMO
+tier: deep
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含因果解释(WHY: 为什么用HuBERT、为什么需要独立intensity encoder、为什么LLM做prompt control),关键设计选择均回答了'为什么选这个'"
+  可信赖:
+    satisfied: true
+    notes: "数字型claim标注覆盖率约85%(Table 1/Fig 3/§引用完整),指标名正确(ECA/MCD/WER/CER/MOS/PIR)"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了[论文原文]和[agent解读],覆盖率>80%"
+  可定位:
+    satisfied: true
+    notes: "KB背景节含具体谱系定位(Emotion embedding → PROEMO → EmoVoice),与Daisy-TTS/EmoSphere-TTS/EmoCtrl-TTS对比明确"
+  不污染:
+    satisfied: true
+    notes: "反向更新仅追加key_papers,不修改已有内容,无factual-error风险"
+
+issues:
+  - id: 1
+    type: weak-reusability
+    severity: medium
+    location: "速查卡片 > 可借鉴"
+    detail: "第一条'relative attribute ranking'描述清晰可迁移,但第三条'duration sensitivity insight'过于具体化,更像observation而非trick"
+    suggestion: "可保留,但标注为'经验观察'而非'可借鉴trick'"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法 > 为什么用GPT-4做prompt control"
+    detail: "此段标注[agent解读]但论文§3.4确实讨论了选择原因(不稳定的前序prompt),可部分升级为[论文原文]"
+    suggestion: "将prompt设计演进的内容与此合并,标注[论文原文: §3.4]"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets字段为空,但论文使用ESD和LibriTTS两个数据集。vault中无对应实体页,故可接受空值"
+    suggestion: "可在log中记录[待决]是否为ESD/LibriTTS创建数据集页"
+
+summary: |
+  笔记整体质量良好。方法节因果解释充分,来源标注覆盖率高,KB背景定位清晰。
+  3个issue均为medium/low,不阻塞反向更新。
+  建议: 可复用idea第3条标注为经验观察。
