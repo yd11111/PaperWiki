@@ -390,3 +390,10 @@
 - [review/auto] [[PilotTTS]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
 - [lint/local] PilotTTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +PilotTTS
+
+## 2026-06-03 (OmniVoice)
+- [kb/search] [[OmniVoice]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Masked Generative Modeling]](pending-review)
+- [ingest/deep] [[OmniVoice]] — 精读, kb_sources=6, 新建 0, 追加 9 (Non-autoregressive TTS, Masked Generative Modeling, LLM-based TTS, Classifier-Free Guidance, Zero-shot Speech Synthesis, Speech Tokenizer, Residual Vector Quantization, Single-codebook vs Multi-codebook, Diffusion-based TTS)
+- [review/auto] [[OmniVoice]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] OmniVoice — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +OmniVoice
