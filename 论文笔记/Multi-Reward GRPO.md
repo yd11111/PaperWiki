@@ -142,7 +142,7 @@ R_pro 贡献最大 (+0.24 MOS),说明显式韵律监督对人类感知偏好的�
 
 消融实验设计清晰,每个奖励的贡献被独立量化,R_pro 和 R_ent 的高贡献验证了 "显式韵律监督 + 解码稳定性" 是单码本 TTS LLM 的关键瓶颈。Scaling analysis 的结论 (RL 与模型/数据规模正相关) 对实际部署有指导意义。
 
-但论文的主要弱点是篇幅太短导致关键细节缺失。与同期 Tongyi 的 RL-for-Audio-LLM 工作相比,本文未讨论 GRPO 的训练稳定性问题 (Tongyi 发现 GRPO 超 1500 步后退化),也未探索 GRPO + DiffRO 的组合方案。此外,与 CosyVoice 3 的对比应注意 CosyVoice 3 使用 1M 小时训练数据 vs 本文 250K 小时,数据规模差异 4 倍,因此本文在数据效率上有优势但绝对性能仍有差距。
+但论文的主要弱点是篇幅太短导致关键细节缺失。与同期 Tongyi 的 RL-for-Audio-LLM 工作相比,本文未讨论 GRPO 的训练稳定性问题 (Tongyi 发现 GRPO 超 1500 步后退化),也未探索 GRPO + DiffRO 的组合方案。此外,与 CosyVoice 3 的对比应注意: CosyVoice 3 使用约 1M 小时预训练数据,本文 LLaSA 预训练数据量未明确 (论文仅提及 GRPO 训练使用 5115 小时音频),但论文声称 CosyVoice 3 "benefits from substantially larger training data (1M h vs. our 250k h)" [§3.2],因此 LLaSA 预训练约 250K 小时,数据规模差异约 4 倍,本文在数据效率上有优势但绝对性能仍有差距。
 
 ## 可复用的 idea
 
@@ -151,5 +151,5 @@ R_pro 贡献最大 (+0.24 MOS),说明显式韵律监督对人类感知偏好的�
 3. **Entropy regularization for AR TTS**: 用平均 token 熵与目标熵的差异作为奖励,约束 AR 解码器的探索幅度。这比 KL 约束更直接地针对 "解码不稳定" 问题。
 4. **RL 数据效率优于 SFT**: 10K 样本即可获得可测量增益,暗示 RL 后训练可作为低成本的性能提升手段,不需要大规模标注数据。
 
-> [!review] 审阅状态
-> 待审阅。详见 [[_review/Multi-Reward GRPO-review.yml]]
+> [!review] 审阅状态: pass-with-fixes (2026-06-03)
+> 3 个 low 级问题: (1) 训练数据量 250K h vs 5115 h 已澄清, (2) MOS 缺失值用 '-' 标注合理, (3) frontmatter models 未列 LLaSA backbone。均不阻塞反向更新。详见 `_review/Multi-Reward GRPO-review.yml`

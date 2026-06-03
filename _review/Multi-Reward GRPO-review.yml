@@ -1,0 +1,49 @@
+paper: "Multi-Reward GRPO"
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节详细解释了五个奖励的设计逻辑 (WHY) 和具体实现 (HOW),包括因果链条; 关键设计选择回答了 GRPO vs PPO/DPO/DiffRO 的理由"
+  可信赖:
+    satisfied: true
+    notes: "所有数字型 claim 标注了出处 (Table 1, Table 2, Eq.2-7, Fig 2); 指标名使用正确 (CER/WER/SIM/MOS); 速查卡片指标含具体数字+数据集"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读]; 局限性节的推断有 [agent 解读] 标记; 无把推断写成断言的情况"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (Seed-TTS -> SpeechAlign -> DiffRO -> 本文),有创新判断基准; frontmatter 完整; 速查 5 字段均有实质内容"
+  不污染:
+    satisfied: true
+    notes: "未新建概念页; 反向更新将使用 append-only 方式追加 key_papers"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "方法: 训练策略"
+    detail: "训练数据量 '250K 小时' 在点评中出现但论文原文写的是 '5115 hours of audio',250K h 似乎是 LLaSA 预训练数据量而非 GRPO 训练数据量,需要区分"
+    suggestion: "点评中明确区分: LLaSA 预训练数据 250K h vs GRPO 训练数据 5115 h"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "实验表格"
+    detail: "Table 1 中 CosyVoice 3 和 Seed-TTS 的 MOS 列为 '-' 和 3.53,但原文 Table 1 的 MOS 列排版不清晰,部分系统的 MOS 未报告"
+    suggestion: "已在表格中用 '-' 标注缺失值,可接受"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter models"
+    detail: "frontmatter models 仅列了 Whisper 和 WavLM (评估工具),未列 LLaSA (本文核心 backbone) 和对比 baseline (CosyVoice/Spark-TTS 等)"
+    suggestion: "将 LLaSA 加入 models 列表; 对比 baseline 可选择性加入"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好。方法机制解释清晰,因果逻辑链完整,标注覆盖率高。3 个 low 级问题: (1) 训练数据量混淆需澄清, (2) MOS 缺失值处理合理, (3) frontmatter models 缺少 backbone 模型。均不阻塞反向更新。"
