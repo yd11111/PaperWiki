@@ -1,0 +1,42 @@
+paper: "LiveSpeech 2"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述: pass
+  可信赖: pass-with-fixes
+  可区分: pass
+  可定位: pass
+  不污染: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "## 实验 表格"
+    detail: "Table 2 中 O-MOS (DNSMOS) 3.9/4.0 未收录到实验表格中,DNSMOS 是重要的客观质量指标"
+    suggestion: "在实验表格中补充 DNSMOS (O-MOS) 行"
+
+  - id: 2
+    type: overclaim
+    severity: low
+    principle: 可区分
+    location: "速查卡片 > 一句话"
+    detail: "'首个支持无限长文本流输入的 streaming zero-shot TTS' — 论文原文仅称 'first to demonstrate competitiveness [of Mamba] at large scale' [§1],未明确声称是首个 streaming zero-shot TTS"
+    suggestion: "改为 '基于 Mamba 的 streaming zero-shot TTS,支持无限长文本流输入'"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter > models"
+    detail: "models 字段仅列了本文使用的工具模型 (EnCodec/Whisper/wav2vec 2.0),未列对比 baseline (YourTTS, XTTS v2, LiveSpeech 等)。但这些 baseline 在模型库中不存在对应页面,无法用 wikilink。"
+    suggestion: "可保持现状。baseline 已在实验表中充分体现,无需强行加入 frontmatter。"
+
+summary: |
+  笔记整体质量高: 三个设计选择的 WHY 解释清晰 (Mamba→O(1) 解码, RoPE→无限泛化, semantic guidance→推理纠错),
+  且每个都标注了 [论文原文]/[agent 解读] 来源。KB 背景谱系定位准确 (Codec LM 路线 + SSM 架构创新)。
+  速查卡片可借鉴字段给出 3 个具体可迁移的 trick。实验表和消融分析覆盖充分。
+  唯一 medium issue 是实验表缺 DNSMOS 行,不阻塞反向更新。

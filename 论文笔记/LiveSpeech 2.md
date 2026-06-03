@@ -34,7 +34,7 @@ updated: 2026-06-03
 ## 速查
 
 > [!summary] 速查
-> - **一句话**: 用 Mamba+RoPE cross-attention 实现首个支持无限长文本流输入的 streaming zero-shot TTS,通过推理时 semantic guidance 保证内容对齐
+> - **一句话**: 基于 Mamba+RoPE cross-attention 的 streaming zero-shot TTS,支持无限长文本流输入,通过推理时 semantic guidance 保证内容对齐
 > - **路线**: 文本流(BPE tokens) + 参考语音(Transformer encoder→64 embeddings) → Mamba decoder(12 层, cross-attention 融合) → EnCodec 16 codebook codes → EnCodec decoder → 语音
 > - **指标**: CER 2.7/3.0 (3-10s/10s+), WER 3.1/4.1, SS 61.7/67.6, SMOS 3.4/3.4, NMOS 3.2/3.3 (LibriTTS test-clean) [Table 2]
 > - **可借鉴**: (1) RoPE 在 cross-attention 中用于 text sliding window — 使固定上下文训练泛化到无限长推理; (2) grapheme token 联合解码 + transcript-guided sampling — 不需额外 ASR 即可推理时纠正对齐; (3) N-time sampling 利用 grapheme 输出做 CER 选择,无需外部 ASR
@@ -122,6 +122,8 @@ $$a_t = \text{Softmax}\left(\frac{q_t K^{(enr)T}}{\sqrt{d_k}} V^{(enr)}; \frac{\
 | SS (>10s) | 67.6 | 64.8 | 55.2 | — | 83.9 | LibriTTS test-clean | [Table 2] |
 | SMOS (3-10s) | 3.4 | 3.1 | 2.6 | 2.8 | 3.8 | LibriTTS test-clean | [Table 2] |
 | NMOS (3-10s) | 3.2 | 3.0 | 2.5 | 2.5 | 3.7 | LibriTTS test-clean | [Table 2] |
+| DNSMOS (3-10s) | 3.9 | 4.0 | 3.8 | 3.8 | 3.9 | LibriTTS test-clean | [Table 2] |
+| DNSMOS (>10s) | 4.0 | 4.0 | 3.9 | — | 4.0 | LibriTTS test-clean | [Table 2] |
 
 ### 关键消融
 
@@ -171,3 +173,9 @@ LiveSpeech 2 抓住了一个被忽略但重要的场景: 上游系统 (LLM/翻�
 2. **Grapheme codebook + transcript-guided sampling**: 将轻量级 semantic token 嵌入解码循环,推理时用 transcript 引导采样 — 无需外部 ASR 即可实时纠正对齐,且 grapheme 输出可直接用于 N-time sampling 的 CER 选择
 3. **Probability-based N-time selection**: 用 grapheme 序列的累积概率 (而非 CER) 选择最优输出,在保持 CER 的同时提升 SS (+1.0) [Table 4] — 可作为任何带 semantic token 的 TTS 系统的免费午餐
 4. **Streaming-aware training via dynamic attention masking**: 训练时随机 mask 掉部分 text context 模拟 streaming 条件 [Algorithm 2-3] — 缩小 train-test gap 而无需改变推理架构
+
+> [!review] 审阅 (auto, 2026-06-03)
+> **结论**: pass-with-fixes
+> - [medium] 实验表缺 DNSMOS (O-MOS) → 已补充
+> - [low] 速查"首个"潜在 overclaim → 已修正
+> 详见 `_review/LiveSpeech 2-review.yml`
