@@ -4,7 +4,7 @@ title: "Speaker Embedding"
 aliases: [说话人嵌入, Speaker Representation, d-vector, Speaker Encoder, 说话人编码]
 category: "representation"
 tags: [TTS, multi-speaker, voice-cloning, speaker-identity, adaptive-TTS]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Text-to-Speech Pipeline]]", "[[Speech Tokenizer]]", "[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Adaptation]]"]
 status: confirmed

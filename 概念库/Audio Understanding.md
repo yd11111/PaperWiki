@@ -4,7 +4,7 @@ title: "Audio Understanding"
 aliases: [音频理解, Speech Understanding, 语音理解, Audio Comprehension, Speech Comprehension via LLM]
 category: "task-family"
 tags: [speech-LM, understanding, ASR, emotion, speaker, paralinguistic, downstream]
-key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "[[论文笔记/Survey-Audio Language Models|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/ALLD|ALLD]]"]
+key_papers: ["GSLM (Lakhotia et al., 2021)", "SpeechGPT (Zhang et al., 2023)", "AudioPaLM (Rubenstein et al., 2023)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "[[论文笔记/Survey-Audio Language Models|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Full-duplex Spoken Dialogue]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -85,13 +85,15 @@ Survey (Table VI) 总结了评估 SpeechLM 理解能力的主要 benchmark:
 | AIR-Bench | Downstream | - | Speech, Sound, Music |
 | SD-Eval | Downstream | 4 | Speech |
 | VoxDialogue | Downstream | 12 | Speech, Sound, Music |
-| Dynamic-SUPERB | Downstream | 180 | Speech, Sound, Music |
+| Dynamic-SUPERB Phase-2 | Downstream | **180** | Speech, Sound, Music |
 | SALMON | Downstream | 8 | Speech |
 | VoiceBench | Downstream | 8 | Speech |
 | VoxEval | Downstream | 56 | Speech |
 | MMAU | Downstream | 27 | Speech, Sound, Music |
 
 **局限**: 多数 benchmark 要求模型以文本回答,形成端到端语音交互评估的瓶颈。VoxEval 尝试解决此问题,提供语音输出的评估管线。
+
+**Dynamic-SUPERB Phase-2 关键发现** (Huang et al., 2024): 180 任务评估 8 个公开模型显示无单一模型全面胜出; ASR cascade (Whisper-LLaMA) 在语义理解域仍是最强 baseline; 语音模型在音乐分类上竟超越专用音乐模型; Speaker Diarization 和 QbE 是当前模型的能力空白。详见 [[论文笔记/Dynamic-SUPERB|Dynamic-SUPERB Phase-2]]。
 
 ## 表征评估
 

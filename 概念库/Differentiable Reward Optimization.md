@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
