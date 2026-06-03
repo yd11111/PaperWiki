@@ -83,3 +83,4 @@
 - [[论文笔记/TTS-Transducer|TTS-Transducer]] — NVIDIA, 2025, RNNT transducer 单调对齐预测第一码本 + NAR Transformer 残余码本, 端到端 codec-agnostic TTS, CER 3.94% (challenging texts)
 - [[论文笔记/Koel-TTS|Koel-TTS]] — NVIDIA, 2025, encoder-decoder AR TTS + DPO/RPO preference alignment + CFG for AR token prediction, CER 0.55% LibriTTS unseen (SOTA), MOS 4.054
 - [[论文笔记/UmbraTTS|UmbraTTS]] — aiOla, 2025 (ICML Workshop), 首个 flow matching 环境感知 TTS, F5-TTS 框架 + SER 连续控制 + self-supervised 数据构建, WER 6.89% / 人类偏好 81.9%
+- [[论文笔记/RapFlow-TTS|RapFlow-TTS]] — NAVER Cloud/Korea Univ, 2025, 首个 consistency flow matching TTS, 2 步 MOS 4.01 超越 Matcha-TTS 10 步 3.83 / ComoSpeech 2 步 3.19
