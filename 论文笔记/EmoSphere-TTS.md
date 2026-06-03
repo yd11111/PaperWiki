@@ -147,7 +147,7 @@ h_emo = LN(softplus(concat(h_sty, h_cls))) + h_int
 3. **无零样本能力**: 需要在训练集中见过目标说话人和情感类型,不支持 unseen speaker/emotion 的泛化
 4. **与 GT 差距**: 合成质量仍显著低于 GT (UTMOS 3.15 vs 3.78, nMOS 差 0.39),说明 FastSpeech 2 架构本身对表现力语音的建模能力有上限
 5. **伪标签质量未验证**: AVD 伪标签来自预训练 SER 模型,未验证其准确性,尤其 dominance 维度的可靠性存疑
-6. **ECA 异常高**: ECA 94.02% 甚至高于 GT 85.67%,说明模型可能过度拟合到"标准"情感模式,损失了真实人类语音中的情感模糊性
+6. **ECA 异常高**: ECA 94.02% 甚至高于 GT 85.67%。[agent 解读] 这可能说明模型过度拟合到"标准"情感模式,损失了真实人类语音中的情感模糊性
 
 ## 点评
 
@@ -167,6 +167,12 @@ h_emo = LN(softplus(concat(h_sty, h_cls))) + h_int
 1. **笛卡尔→球面坐标解耦**: 任何多维连续属性都可尝试用坐标变换将"方向"(what)和"幅度"(how much)解耦。例如 speaker embedding 的风格维度可尝试类似变换。
 2. **SER 伪标签作为无标注情感控制**: wav2vec 2.0-based SER 可为任意语音数据提供 AVD 软标签,避免人工标注。可迁移到其他需要情感条件的任务 (如情感 VC、情感对话生成)。
 3. **双条件判别器**: 在 GAN 训练中加入多个条件 (speaker, emotion, ...) 的判别器分支,迫使生成器同时满足多方面约束,可推广到任何需要多属性保真的生成任务。
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes | 2 issues (0 high, 2 medium, 0 low)
+> - **medium/template-compliance**: models 字段未列 baseline 模型,但 FastSpeech 2 无独立模型页,边界情况
+> - **medium/traceability-gap**: 局限性第 6 点 ECA 异常高的推断已补标 [agent 解读]
+> 详见 `_review/EmoSphere-TTS-review.yml`
 
 ---
 
