@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[DMOSpeech]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Diffusion Model]](pending-review), [[Score Matching]](pending-review), [[Speaker Verification]](pending-review), [[Differentiable Reward Optimization]](pending-review)
+- [ingest/deep] [[DMOSpeech]] — 精读, kb_sources=6, 新建 0, 追加 7 (Diffusion-based TTS, Speaker Embedding, Diffusion Model, Score Matching, Speaker Verification, Differentiable Reward Optimization, Classifier-Free Guidance) + 任务页 1 (Zero-shot Speech Synthesis)
+- [review/auto] [[DMOSpeech]] — pass-with-fixes, 1 medium fixed (datasets 误列) + 1 low unfixed (DAC 引用)
+- [lint/local] DMOSpeech — 通过/0 问题
+- [moc/update] 零样本语音合成, TTS训练与评估 — 追加 DMOSpeech + 演进脉络更新
 - [kb/search] [[Koel-TTS]] — 命中 7 页(取 Top 7): [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](待确认), [[Codec Language Model]](待确认), [[Differentiable Reward Optimization]](待确认), [[Speaker Verification]](待确认), [[Finite Scalar Quantization]](待确认)
 - [ingest/deep] [[Koel-TTS]] — 精读, kb_sources=7, 新建 0, 追加 7 (Classifier-Free Guidance, LLM-based TTS, Codec Language Model, Differentiable Reward Optimization, Speaker Verification, Finite Scalar Quantization, Zero-shot Speech Synthesis)
 - [review/auto] [[Koel-TTS]] — pass-with-fixes, 0 high + 1 medium (concepts 字段 DiffRO 关联间接) + 1 low
