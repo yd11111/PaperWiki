@@ -173,5 +173,6 @@ OZSpeech 提出了一个清晰且有效的加速思路: 与其在已训练的 di
 
 4. **Arbitrary Segment prompting**: 训练时从 ground truth 中随机位置截取 prompt (而非固定取开头), 可显著改善 zero-shot 泛化能力。消融实验验证了效果 [Table 3]。
 
-> [!review] 审阅状态
-> 待审阅。见 `_review/OZSpeech-review.yml`。
+> [!review] 审阅: pass (2026-06-03)
+> 5 原则均满足, 3 low issues (datasets 空列表 / agent 推断已标注)。可反向更新。
+> 详见 `_review/OZSpeech-review.yml`。
