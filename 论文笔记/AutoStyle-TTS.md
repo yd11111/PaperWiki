@@ -9,7 +9,7 @@ year: 2025
 venue: "ICME 2025"
 tags: [TTS, style-control, RAG, retrieval-augmented, CosyVoice, flow-matching, embedding, podcast]
 concepts: ["[[Style Transfer in TTS]]", "[[Speech Factorization]]", "[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Emotion Control in TTS]]", "[[Global Style Tokens]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "MaskGCT"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["EXPRESSO", "Common Voice", "DiDiSpeech-2", "IEMOCAP", "M3ED"]
 kb_context_sources: 6
@@ -129,7 +129,7 @@ $$E_{style} = E_{profile} + E_{emotion} + E_{user}$$
 
 1. **Style-Timbre 解耦有效** [Table I]: 在风格多样化(IS 从 1.007→1.325)的同时,SIM、VISQOL、KL 基本不变,说明风格变化没有损害音色和质量。但 WER 略升(2.3%→3.6%),可能是风格变化引入了额外的韵律/发音变异 [agent 解读]
 
-2. **RAG 风格匹配显著提升主观指标** [Table II]: 相对 CosyVoice,SM-MOS 提升 ~0.5 分,SC-MOS 提升 ~0.3 分。与 MaskGCT 持平(英文)或略优(中文),说明 RAG 风格选择的效果与另一个 SOTA 模型相当 [论文原文]
+2. **RAG 风格匹配显著提升主观指标** [Table II]: 相对 CosyVoice,SM-MOS 提升 ~0.5 分,SC-MOS 提升 ~0.3 分。与 MaskGCT 持平(英文)或略优(中文),说明 RAG 风格选择的效果与另一个 SOTA 模型相当 [Table II]
 
 3. **AB test 表明可替代手工选择** [Fig 6]: 自动选择 vs 手工选择的用户偏好约 50:50,说明 RAG 机制在实用场景中可以替代人工 [论文原文]
 
@@ -165,5 +165,9 @@ AutoStyle-TTS 提出了一个有价值的问题: 在 LM-based TTS 中,style prom
 3. **LLM fine-tune for emotion embedding**: 用 LLaMA 在情感对话数据上微调(PER-LLM-Embedder),输入文本 + 角色画像预测情感,作为 TTS 的风格条件。这比传统的 SER 模型更能理解上下文语义
 4. **Style-timbre 分离注入策略**: style 仅注入 LLM stage (via speech tokens),timbre 注入 LLM + flow matching (via speaker embedding),实现两者独立控制。这种分阶段注入策略可参考
 
-> [!review] 审阅待补充
-> 审阅将在下一步自动执行。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> 结论: **pass-with-fixes** — 3 个 low 级别问题,已当场修正
+> - [low] traceability-gap: 实验发现2缺出处标注 → 已补 [Table II]
+> - [low] template-compliance: MaskGCT 未用 wikilink → 已修正
+> - [low] traceability-gap: PER-LLM-Embedder context window 含义模糊 → 论文原文描述即如此,保留
+> 详见 `_review/AutoStyle-TTS-review.yml`
