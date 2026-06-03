@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[OpenOmni]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
+- [ingest/deep] [[OpenOmni]] — 精读, kb_sources=2 confirmed + 4 pending, 新建 0, 追加 5 (Speech Language Model, Emotion Control in TTS, Non-autoregressive TTS, Streaming Spoken Dialogue, Speech Tokenizer) + MOC
+- [review/auto] [[OpenOmni]] — pass, 4 low issues
+- [lint/local] OpenOmni — 通过, 0 死链
 - [kb/search] [[DiVISe]] — 命中 6 页(取 Top 6): [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[模型库/HuBERT|HuBERT]](pending-review), [[Speaker Verification]](pending-review)
 - [ingest/deep] [[DiVISe]] — 精读, kb_sources=6, 新建 0, 追加 6 (Neural Vocoder, Mel Spectrogram, Speaker Embedding, Speaker Verification, Self-Supervised Speech Representation, HuBERT)
 - [review/auto] [[DiVISe]] — pass-with-fixes, 3 low issues
