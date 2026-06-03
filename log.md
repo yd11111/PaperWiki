@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[UniTTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[UniTTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Residual Vector Quantization, LLM-based TTS, Semantic vs Acoustic Tokens, Speech Tokenizer, Codebook Collapse, Single-codebook vs Multi-codebook)
+- [review/auto] [[UniTTS]] — pass, 3 low issues
+- [lint/local] UniTTS — 通过 (0 dead links, MOC 已更新: 语音编码与量化 + 零样本语音合成)
+- [alert/backlog] pending-review: 70, draft deep/repro: 150 — 建议抽空审核
+- [kb/search] [[Multilingual TTS Accents Emotions]] — 命中 5 页(取 Top 5): [[Speech Factorization]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[Multilingual TTS Accents Emotions]] — 精读, kb_sources=5, 新建 0, 追加 2 (Emotion Control in TTS, Natural Language Description for TTS)
+- [review/auto] [[Multilingual TTS Accents Emotions]] — pass, 0 high + 0 medium + 2 low
+- [lint/local] Multilingual TTS Accents Emotions — 1 死链: [[Parler-TTS]](模型页不存在, 12 处引用, [待决])
+- [moc/update] TTS-总览 — 追加 Multilingual TTS Accents Emotions 至"韵律与情感"
 - [kb/search] [[Prompt-Unseen-Emotion]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Conditional Flow Matching]](pending-review)
 - [ingest/deep] [[Prompt-Unseen-Emotion]] — 精读, kb_sources=6, 新建 0, 追加 3 (Emotion Control in TTS, LLM-based TTS, CosyVoice)
 - [review/auto] [[Prompt-Unseen-Emotion]] — pass-with-fixes, 0 high + 2 medium + 1 low
