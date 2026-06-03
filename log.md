@@ -452,3 +452,10 @@
 - [review/auto] [[TTSDS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] TTSDS — 通过/0 问题
 - [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+
+## 2026-06-03 (Controlling Emotion TTS NL Prompts)
+- [kb/search] [[Controlling Emotion TTS NL Prompts]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 参考(待确认): [[Emotion Control in TTS]], [[Natural Language Description for TTS]], [[Style Transfer in TTS]], [[Global Style Tokens]]
+- [ingest/deep] [[Controlling Emotion TTS NL Prompts]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Natural Language Description for TTS, Prosody Modeling, Speaker Embedding, Style Transfer in TTS, Global Style Tokens)
+- [review/auto] [[Controlling Emotion TTS NL Prompts]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] Controlling Emotion TTS NL Prompts — 通过/0 问题
+- [moc] TTS训练与评估 MOC 更新: +Controlling Emotion TTS NL Prompts (Emotion Control)
