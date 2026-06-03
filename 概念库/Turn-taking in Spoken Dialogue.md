@@ -4,7 +4,7 @@ title: "Turn-taking in Spoken Dialogue"
 aliases: [轮次切换, Barge-in Handling, 打断处理, Turn Management, Backchannel, 回传信号, Interruption Handling, 对话交互管理]
 category: "technique"
 tags: [speech-LM, dialogue, turn-taking, interaction, barge-in, backchannel, full-duplex, real-time]
-key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "Parrot (2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "SyncLLM (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "Duplex Conversation (2024)", "TurnGPT (Ekstedt & Skantze, 2020)"]
+key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "Parrot (2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "SyncLLM (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "Duplex Conversation (2024)", "TurnGPT (Ekstedt & Skantze, 2020)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[Full-duplex Spoken Dialogue]]", "[[Streaming Spoken Dialogue]]", "[[Spoken Dialogue Evaluation]]", "[[Speech Language Model]]"]
 status: pending-review
