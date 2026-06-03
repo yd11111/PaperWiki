@@ -4,7 +4,7 @@ title: "Musical Score Encoder"
 aliases: [乐谱编码器, Score Encoder, Score Conditioning, Music Score Input, 乐谱条件化]
 category: "architecture-component"
 tags: [SVS, singing, score, MIDI, alignment, content-representation]
-key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/TechSinger|TechSinger]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[Singing Voice Synthesis]]", "[[Duration Predictor]]", "[[Phoneme Representation]]", "[[F0 Modeling]]", "[[Speech-Text Alignment]]"]
 status: pending-review

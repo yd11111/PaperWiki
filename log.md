@@ -645,3 +645,10 @@
 - [review/auto] [[AutoStyle-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] AutoStyle-TTS — 通过/0 死链
 - [moc] TTS-总览 韵律与情感: +AutoStyle-TTS
+
+## 2026-06-03 (Low-Resource ForwardTacotron)
+- [kb/search] [[Low-Resource ForwardTacotron]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓, [[Neural Vocoder]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[HierSpeech++]](pending-review), [[Speaker Adaptation]](pending-review)
+- [ingest/deep] [[Low-Resource ForwardTacotron]] — 精读, kb_sources=6, 新建 0, 追加 4 (Speaker Adaptation, Non-autoregressive TTS, Speaker Embedding, HierSpeech++ key_papers)
+- [review/auto] [[Low-Resource ForwardTacotron]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] Low-Resource ForwardTacotron — 通过/0 死链
+- [moc] TTS-总览 生成方法演进: +Low-Resource ForwardTacotron

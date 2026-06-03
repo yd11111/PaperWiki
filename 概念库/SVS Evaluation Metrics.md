@@ -4,7 +4,7 @@ title: "SVS Evaluation Metrics"
 aliases: [歌声合成评估, Singing Evaluation, 歌声评估指标, SVS Metrics]
 category: "evaluation"
 tags: [SVS, evaluation, metrics, MOS, pitch-accuracy, singing]
-key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/TechSinger|TechSinger]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[Singing Voice Synthesis]]", "[[F0 Modeling]]", "[[Speaker Verification]]", "[[Anti-spoofing and Deepfake Detection]]"]
 status: pending-review
