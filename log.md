@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[LM-SPT]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Speech Language Model]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
+- [ingest/deep] [[LM-SPT]] — 精读, kb_sources=6, 新建 0, 追加 10 (Speech Tokenizer, Semantic vs Acoustic Tokens, RVQ, Token Rate, Speech Language Model, Self-Supervised Speech Representation, EnCodec, HuBERT, WavLM, Whisper)
+- [review/auto] [[LM-SPT]] — pass, 0 high + 0 medium + 3 low
+- [lint/local] LM-SPT — 通过/0 问题
+- [moc/update] 语音编码与量化 — 追加 LM-SPT
 - [kb/search] [[UmbraTTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Diffusion-based TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[数据集/AudioSet|AudioSet]](pending-review)
 - [ingest/deep] [[UmbraTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Conditional Flow Matching, Natural Language Description for TTS, AudioSet)
 - [review/auto] [[UmbraTTS]] — pass-with-fixes, 0 high + 1 medium (Table 2 bolding 已修正) + 3 low
