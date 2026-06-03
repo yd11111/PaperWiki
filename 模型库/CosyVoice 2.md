@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -52,3 +52,5 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/VoXtream|VoXtream]] (2025): 在 full-stream 场景直接对比,VoXtream FPL 102ms vs CosyVoice2 1643ms (快 16 倍); 在 LibriSpeech long 上 VoXtream WER 3.24% vs CosyVoice2 6.11%,naturalness preference 57% vs 31%; 但 CosyVoice2 的 SPK-SIM 显著更高 (0.685 vs 0.564),归因于 NAR flow-matching decoder 的声学优势
 - [[论文笔记/MamTra|MamTra]] (2026): 以 CosyVoice 2 为 teacher backbone,将部分 Transformer 层替换为 Mamba-2 层; MamTra 1:1 在 SEED-TTS-eval test-en 上 WER 2.28% (vs teacher 2.03%),NMOS 3.66 vs 3.68,VRAM 降低 34%; 仅用 LibriTTS 0.5kh (teacher 数据量的 0.3%) 训练
 - [[论文笔记/SemaVoice|SemaVoice]] (2026): 连续 AR 路线的 baseline 对比; SemaVoice EN WER 1.71% vs CosyVoice 2 2.57%, ZH CER 1.18% vs 1.45%; 但 CosyVoice 2 在 Hard 子集 CER (6.83% vs 8.09%) 和 SIM (0.724 vs 0.711) 上仍占优 [SemaVoice Table 1]
+- [[论文笔记/RWKVTTS|RWKVTTS]] (2025): 将 CosyVoice 2.0 的 Transformer LLM backbone 完整替换为 RWKV-7 (RNN-based); 声称 Production Quality 7.73 接近 GT 7.80,但仅与 FireRedTTS-1S 对比,未报告标准 TTS 指标 (WER/CER/MOS) 且无效率数据 [RWKVTTS Fig 1]
+- [[论文笔记/Muyan-TTS|Muyan-TTS]] (2025): 以 CosyVoice2 为主要 baseline 之一; LibriSpeech WER Muyan-TTS 3.44% vs CosyVoice2 2.91%, MOS 4.58 vs 4.81, SIM 0.37 vs 0.70; 推理速度 Muyan-TTS (r=0.33) 显著快于 CosyVoice2 (r=2.19) [Muyan-TTS Table 3/5]
