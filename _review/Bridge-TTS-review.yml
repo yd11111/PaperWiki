@@ -1,0 +1,53 @@
+paper: "Bridge-TTS"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "实验 > 关键发现 > 第4点"
+    detail: "'单次训练即达到 SOTA' 缺少明确的来源标注,应标注 [§5] 或 [§1]"
+    suggestion: "在该 claim 后补充 [§5] 或改为 '论文声称单次训练即达到 SOTA [§5]'"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "点评"
+    detail: "'首次在 TTS 中用完整的数学框架...将其实现' 属于 agent 评价性解读,未标注"
+    suggestion: "可接受,点评节允许 agent 主观评价,但读者应知这是 agent 观点"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "datasets 为空,论文使用 LJ-Speech 但 vault 无对应数据集页"
+    suggestion: "无需创建数据集页(LJ-Speech 是经典公开数据集,不满足独立页准入); 保持空值即可"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > venue"
+    detail: "venue 标注为 'arXiv preprint (NeurIPS 2023 submission)',可能不准确 — 该论文后续可能被 ICML 2024 接收"
+    suggestion: "如无法确认发表情况,保留 arXiv preprint 即可,去掉 NeurIPS submission 猜测"
+
+stats:
+  claim_coverage: "85%"
+  source_tag_coverage: "85%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 3

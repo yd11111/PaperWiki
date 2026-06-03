@@ -6,7 +6,7 @@ arxiv_id: "2312.03491"
 source: "Sources/Bridge-TTS.pdf"
 authors: [Zehua Chen, Guande He, Kaiwen Zheng, Xu Tan, Jun Zhu]
 year: 2023
-venue: "arXiv preprint (NeurIPS 2023 submission)"
+venue: "arXiv preprint"
 tags: [TTS, diffusion, Schrödinger-bridge, data-to-data, mel-generation, sampling-efficiency, noise-schedule]
 concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Score Matching]]", "[[Conditional Flow Matching]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]"]
 models: ["[[模型库/VITS|VITS]]"]
@@ -145,7 +145,7 @@ Bridge-TTS 提出了两种噪声调度 [§3.2, Table 1]:
 1. **质量提升**: 在 50-step 和 1000-step 生成中均显著优于 diffusion 对手 Grad-TTS (CMOS 显著正向) [§4.2]。
 2. **少步数优势突出**: 4-step 时 MOS 4.10 甚至超过 50-step 的 Grad-TTS (3.99),说明 data-to-data 先验在少步数下优势更大 [Table 2, Table 3]。
 3. **2-step 超越蒸馏方法**: 在仅 2 步推理下 MOS 4.04 超过 CoMoSpeech (3.87, 需额外 consistency distillation),且 RTF 相同 [Table 3]。
-4. **无需额外训练程序**: 不需要知识蒸馏、GAN 对抗训练或辅助模型,单次训练即达到 SOTA [§5]。
+4. **无需额外训练程序**: 不需要知识蒸馏、GAN 对抗训练或辅助模型,论文声称单次训练即达到 SOTA [§5, §1]。
 
 **消融实验** (Table 4, CMOS):
 
@@ -182,3 +182,11 @@ Bridge-TTS 的最大价值是**观念转换**: 当条件信号(text latent)已�
 3. **Temperature-scaled SDE 采样**: 通过缩放采样噪声的方差(tau_b > 1)来抑制 artifacts,是一个简单有效的 trick,可直接用于其他基于 SDE 的生成器。
 
 4. **Fixed prior (两阶段训练)**: 先稳定 encoder 再训练 decoder,避免 encoder 和 decoder 的联合优化不稳定性。虽然增加训练步骤,但在 paired data 的生成任务中可能普遍有效。
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes (0 high, 1 medium, 3 low)
+> - (medium) traceability-gap: "SOTA" claim 已补充来源标注 [§5, §1]
+> - (low) venue 已去掉未确认的 submission 猜测
+> - (low) datasets 空值: LJ-Speech 无独立页,保持空值
+> - (low) 点评节 agent 评价未标注: 可接受,点评允许主观评价
+> 详见 `_review/Bridge-TTS-review.yml`
