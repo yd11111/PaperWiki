@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[DiEmo-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Gradient Reversal Layer]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
+- [ingest/deep] [[DiEmo-TTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Emotion Control in TTS, Speech Factorization, Style Transfer in TTS, Speaker Embedding, Gradient Reversal Layer)
+- [review/auto] [[DiEmo-TTS]] — pass-with-fixes, 2 low issues
+- [lint/local] DiEmo-TTS — 通过 (0 dead links, MOC 已更新: TTS-总览)
 - [kb/search] [[Traceable TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[wav2vec 2.0]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
 - [ingest/deep] [[Traceable TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Anti-spoofing and Deepfake Detection, Conditional Flow Matching, wav2vec 2.0)
 - [review/auto] [[Traceable TTS]] — pass, 2 low issues
