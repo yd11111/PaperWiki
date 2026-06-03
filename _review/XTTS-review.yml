@@ -1,0 +1,58 @@
+paper: "XTTS"
+file: "论文笔记/XTTS.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 8
+  traceability: 8
+  rigor: 8
+  navigability: 8
+  kb_safety: 8
+
+claim_stats:
+  total_claims: 28
+  annotated_claims: 25
+  coverage_rate: "89%"
+
+issues:
+  - severity: medium
+    type: factual-error
+    location: "实验 > Table 行 CER/UTMOS/SECS"
+    detail: "初稿中将 HierSpeech++ 和 Mega-TTS 2 的 Table 2 数值混淆。PDF 文本提取时行对齐错误导致 HierSpeech++ CER 被写为 1.4269 (实际是 Mega-TTS 2)。已在审阅阶段通过 Table 4 英语行交叉验证后修正。"
+    suggestion: "已修正: HierSpeech++ CER=0.7741, UTMOS=4.457, SECS=0.6530; Mega-TTS 2 CER=1.4269, UTMOS=4.184, SECS=0.6428。"
+    status: fixed
+
+  - severity: medium
+    type: traceability-gap
+    location: "速查 > 指标"
+    detail: "速查指标中 'Fine-tuning 后跨语言 SECS 0.585->0.717' 的出处标注为 [§5]，但未标注具体表格。§5 无独立 table，数据来自正文 prose，可能导致可追溯性模糊。"
+    suggestion: "保持 [§5] 标注，补充说明 '(inline result, no table)' 以明确数据来源形式。"
+
+  - severity: low
+    type: bad-linking
+    location: "frontmatter > models"
+    detail: "YourTTS 链接为 [[模型库/VITS|YourTTS]]，但 VITS 和 YourTTS 是不同模型 (YourTTS 基于 VITS 但为独立系统)。vault 中无独立 YourTTS 模型页,但存在 论文笔记/YourTTS.md。"
+    suggestion: "因 vault 无 YourTTS 模型页,改为 [[论文笔记/YourTTS|YourTTS]] 指向论文笔记,或保留当前链接并在 VITS 模型页补充 YourTTS alias。考虑未来是否值得建独立模型页。"
+
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空 []。论文使用了 FLORES+ (评估)、DAPS (说话人)、LibriTTS-R、LibriLight、Common Voice (训练) 等数据集，但 vault 中仅有 DAPS 实体页。"
+    suggestion: "可接受空置 (vault 中无对应实体页则不强制填充)。如需完善，可新建 DAPS 的 wikilink 或标注 '暂无对应实体页'。"
+
+  - severity: low
+    type: traceability-gap
+    location: "局限性 > 第 4 条"
+    detail: "'CJK 罗马化损失...可能影响同音异字场景的发音准确性 (如中文多音字)' 是 agent 推断，但未标注 [agent 解读]。"
+    suggestion: "在句尾补充 [agent 解读] 标注。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "关键数值错误已在审阅中修正。剩余问题均为 low 级别，不影响反向更新安全性。因果解释来源标注覆盖率 89%，高于 80% 阈值。"
+
+learning_signals:
+  new_pattern: true
+  matches_known_pattern: "PDF 表格行对齐错误是新发现的模式。pdftotext 对多列表格的提取不可靠，同一行的不同列值可能错位。"
+  system_upgrade_suggestion: "对 pdftotext 提取的表格数据，应交叉验证: (1) 与正文讨论的定性描述对比; (2) 相同数据在不同表格中出现时交叉核对。建议在 paperwiki-reader skill 中增加 '表格数据交叉验证' 步骤。"
