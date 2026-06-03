@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, emotion, hierarchical, multi-step-prediction, emotion-distribution, variance-adaptor, FastSpeech2, controllability, prosody, emotion-editing, fine-grained-control]
 concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Non-autoregressive TTS]]", "[[F0 Modeling]]", "[[Duration Predictor]]"]
-models: ["[[VITS]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -181,5 +181,9 @@ updated: 2026-06-03
 3. **模型无关的外部模块设计 (External Integration)**: 将可控属性建模为独立模块,通过 embedding 注入而非修改 TTS 内部结构,降低集成成本 — 类似 ControlNet 对 diffusion model 的增强方式
 4. **层级 ED 的一致性复制策略**: utterance ED → 复制到所有 phoneme, word ED → 复制到对应 phoneme,确保训练时标签的层级一致性 [Fig 2(a)]
 
-> [!review] 审阅待补
-> 本笔记生成后待审阅。
+> [!review] 自动审阅 (2026-06-03)
+> **结论: pass-with-fixes**
+> - [fixed] frontmatter models 字段误列 [[VITS]](本文使用 FastSpeech 2, 非 vault 模型页), 已修正为空
+> - [medium/template-compliance] datasets 字段为空 — ESD 和 LibriTTS-R 均无 vault 实体页, 可后续创建
+> - [low/traceability-gap] 局限性第 1/2/4 条标注 [agent 解读], 本身合规但属于笔记者观点而非论文内容, 已如实标注
+> 详见 `_review/Multi-Step Hierarchical ED-review.yml`

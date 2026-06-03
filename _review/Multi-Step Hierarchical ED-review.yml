@@ -1,0 +1,60 @@
+paper: "Multi-Step Hierarchical ED"
+reviewer: agent-auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: >
+      方法节包含 6 处 [论文原文] + 7 处 [agent 解读] 因果解释,
+      3 个关键设计选择均回答了"为什么选这个而不是那个"。
+      速查卡片"可借鉴"字段具体可迁移 (多步 coarse-to-fine 预测模式)。
+  trustworthy:
+    verdict: pass
+    notes: >
+      21 处 §X.X 引用 + 15 处 Table 引用 + 4 处 Fig 引用, 覆盖率高。
+      指标名使用正确 (MUSHRA/WER/MCD/BWS/FD)。
+      速查卡片"指标"含具体数字 + 对比 + 数据集 + 出处标注。
+  distinguishable:
+    verdict: pass
+    notes: >
+      因果解释来源标注覆盖率约 85% (13/~15 处 WHY 解释均标注来源)。
+      局限性中的推测性观点均标注 [agent 解读]。
+      无方向性错误。
+  navigable:
+    verdict: pass
+    notes: >
+      KB 背景含具体谱系定位 (MsEmoTTS → 本文 → EmoVoice)。
+      创新判断有对比基准 (vs KB 已有 embedding/标签方法)。
+      17/17 frontmatter 字段存在。速查 5 字段均有实质内容。
+  no_pollution:
+    verdict: pass-with-fixes
+    notes: >
+      无新建概念页。反向更新为追加 (key_papers + 末尾行),
+      不改 status,合规。models 字段误列 [[VITS]] 已修正。
+
+issues:
+  - id: 1
+    type: successor-as-model
+    severity: medium
+    location: frontmatter models
+    detail: "models 字段列了 [[VITS]], 但本文使用 FastSpeech 2 和 HiFi-GAN, 两者均无 vault 模型页。VITS 与本文无直接关系。"
+    suggestion: "已修正为空列表。FastSpeech 2 和 HiFi-GAN 若后续建模型页可再填入。"
+    status: fixed
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    location: frontmatter datasets
+    detail: "datasets 字段为空, 但论文使用 ESD 和 LibriTTS-R 两个数据集, 均无 vault 实体页。"
+    suggestion: "后续可为 ESD 和 LibriTTS-R 创建数据集页, 届时补充 frontmatter。暂不阻塞反向更新。"
+    status: noted
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: 局限性节
+    detail: "局限性第 1/2/4 条标注 [agent 解读], 是笔记者基于领域知识的判断而非论文原文, 但标注规范。"
+    suggestion: "合规, 无需修改。"
+    status: acceptable
