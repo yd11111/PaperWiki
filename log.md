@@ -91,3 +91,10 @@
 - [ingest/deep] [[YourTTS]] — 精读(batch processing), kb_sources=4, 追加更新 3 个实体页(Speaker Embedding, Speaker Adaptation, VITS model)
 - [create/entity] 无新建 — 候选 (Clip&Shuffle, Text-Speech Interleaved Format, Dual-Transformer, Speaker Consistency Loss) 均不满足准入规则(单篇论文特有概念)
 - [lint/local] FireRedTTS, FireRedTTS 2, YourTTS — 通过/0 问题
+- [kb/search] [[NaturalSpeech 2]] — 命中 8 页(取 Top 4 confirmed): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Diffusion Model]](pending-review), [[Diffusion-based TTS]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [kb/search] [[Mega-TTS 2]] — 命中 7 页(取 Top 6 confirmed): [[Speech Factorization]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review)
+- [kb/search] [[BASE TTS]] — 命中 7 页(取 Top 5 confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Diffusion-based TTS]](pending-review)
+- [ingest/deep] [[NaturalSpeech 2]] — 精读(batch processing), kb_sources=4, 新建模型页 1 (NaturalSpeech 2), 追加更新 8 个实体页(Diffusion-based TTS, Diffusion Model, RVQ, Speaker Embedding, Prosody Modeling, Speech Factorization, LLM-based TTS, Speech Tokenizer) + NS3 model supersedes
+- [ingest/deep] [[Mega-TTS 2]] — 精读(batch processing), kb_sources=6, 追加更新 7 个实体页(Speech Factorization, Prosody Modeling, Speaker Embedding, LLM-based TTS, Speech Tokenizer, Codebook Collapse, Semantic vs Acoustic Tokens)
+- [ingest/deep] [[BASE TTS]] — 精读(batch processing), kb_sources=5, 追加更新 6 个实体页(LLM-based TTS, Speech Tokenizer, Semantic vs Acoustic Tokens, Speaker Embedding, Speech Factorization, Codebook Collapse)
+- [lint/local] NaturalSpeech 2, Mega-TTS 2, BASE TTS — 通过/0 问题
