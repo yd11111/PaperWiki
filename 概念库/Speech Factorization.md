@@ -4,7 +4,7 @@ title: "Speech Factorization"
 aliases: [语音因子分解, Speech Attribute Disentanglement, 语音属性解耦, Feature Disentanglement, Timbre Disentanglement, Speaker-Content Disentanglement, 说话人-内容解耦]
 category: "technique"
 tags: [TTS, disentanglement, adversarial, information-bottleneck, factorization, controllability, voice-conversion]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Voice Cloning|Azzuni 2025]]", "Hsu et al. (2019)", "Lu et al. (2023)", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Gradient Reversal Layer]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Speaker Adaptation]]", "[[Voice Cloning Taxonomy]]", "[[LLM-based TTS]]"]
 status: confirmed

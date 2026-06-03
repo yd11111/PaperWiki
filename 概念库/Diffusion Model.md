@@ -4,7 +4,7 @@ title: "Diffusion Model"
 aliases: [DDPM, Denoising Diffusion Probabilistic Model, Score-based Generative Model, Diffusion Probabilistic Model, DPM, 扩散模型]
 category: "generative-model"
 tags: [generative-model, diffusion, DDPM, score-matching, SDE, ODE, audio-generation]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]"]
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]"]
 origin_paper: "Sohl-Dickstein et al., Deep Unsupervised Learning Using Nonequilibrium Thermodynamics, 2015"
 related_concepts: ["[[Conditional Flow Matching]]", "[[Score Matching]]", "[[Neural Vocoder]]", "[[Diffusion-based Vocoder]]", "[[Diffusion-based TTS]]", "[[Classifier-Free Guidance]]"]
 status: pending-review

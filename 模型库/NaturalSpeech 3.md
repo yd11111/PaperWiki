@@ -8,7 +8,7 @@ tags: [TTS, zero-shot, diffusion, factorization, codec, non-autoregressive, disc
 key_concepts: ["[[Speech Factorization]]", "[[Diffusion-based TTS]]", "[[Residual Vector Quantization]]", "[[Classifier-Free Guidance]]", "[[Gradient Reversal Layer]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]"]
-supersedes: []
+supersedes: ["[[模型库/NaturalSpeech 2|NaturalSpeech 2]]"]
 superseded_by: []
 status: pending-review
 lifecycle: active

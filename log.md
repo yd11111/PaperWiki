@@ -83,3 +83,11 @@
 - [ingest/deep] [[UniAudio]] — 精读(batch processing), kb_sources=5, 追加更新 5 个实体页(LLM-based TTS, Speech Tokenizer, RVQ, Semantic vs Acoustic Tokens, Speech Language Model, Codec Language Model)
 - [lint/local] Fish-Speech, GLM-TTS, UniAudio — 通过/0 问题
 - [create/entity] 无新建 — 候选 (GFSQ, Dual-AR, GRPO-for-TTS, Multi-Scale Transformer, Vocos2D) 均不满足准入规则(单篇论文特有概念)
+- [kb/search] [[FireRedTTS]] — 命中 6 页(confirmed): [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Emotion Control in TTS]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [kb/search] [[FireRedTTS 2]] — 命中 6 页(confirmed): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Neural Vocoder]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
+- [kb/search] [[YourTTS]] — 命中 4 页(confirmed): [[Speaker Embedding]]✓, [[Neural Vocoder]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[VITS]](model, pending-review)
+- [ingest/deep] [[FireRedTTS]] — 精读(batch processing), kb_sources=6, 追加更新 4 个实体页(Speech Tokenizer, LLM-based TTS, Conditional Flow Matching, Speaker Embedding)
+- [ingest/deep] [[FireRedTTS 2]] — 精读(batch processing), kb_sources=6, 追加更新 4 个实体页(Speech Tokenizer, LLM-based TTS, RVQ, Semantic vs Acoustic Tokens)
+- [ingest/deep] [[YourTTS]] — 精读(batch processing), kb_sources=4, 追加更新 3 个实体页(Speaker Embedding, Speaker Adaptation, VITS model)
+- [create/entity] 无新建 — 候选 (Clip&Shuffle, Text-Speech Interleaved Format, Dual-Transformer, Speaker Consistency Loss) 均不满足准入规则(单篇论文特有概念)
+- [lint/local] FireRedTTS, FireRedTTS 2, YourTTS — 通过/0 问题
