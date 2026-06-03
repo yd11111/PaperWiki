@@ -75,3 +75,5 @@
 - [[论文笔记/Bridge-TTS|Bridge-TTS]] — Tsinghua/MSRA, 2023, Schrödinger bridge data-to-data TTS, 2-step MOS 4.04 超越 CoMoSpeech/Grad-TTS
 - [[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron]] — Google DeepMind, 2025, 用 IRPBs + latent alignment 解决 AR Transformer TTS 鲁棒性,实现无限长度泛化
 - [[论文笔记/Low-Resource ForwardTacotron|Low-Resource ForwardTacotron]] — Fraunhofer IIS, 2025, 仅 4 个 HR 说话人 + 5min LR 数据,WGN 噪声增强 + binned sampling,speaker similarity 超越 HierSpeech++
+- [[论文笔记/TTS-Transducer|TTS-Transducer]] — NVIDIA, 2025, RNNT transducer 单调对齐预测第一码本 + NAR Transformer 残余码本, 端到端 codec-agnostic TTS, CER 3.94% (challenging texts)
+- [[论文笔记/Koel-TTS|Koel-TTS]] — NVIDIA, 2025, encoder-decoder AR TTS + DPO/RPO preference alignment + CFG for AR token prediction, CER 0.55% LibriTTS unseen (SOTA), MOS 4.054

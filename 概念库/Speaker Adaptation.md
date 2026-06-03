@@ -133,4 +133,4 @@ Few-shot TTS 算法 (与 speaker adaptation 密切相关) 的性能对比:
 
 ## 演进
 
-Speaker-dependent model (每人一模型, pre-2015) → Shared model + speaker regression layer (Fan et al., 2015) → Speaker embedding lookup (DeepVoice 2, 2017) → Speaker encoder + full fine-tuning (Jia et al., 2018) → CLN parameter-efficient (AdaSpeech, 2021) → Untranscribed data (AdaSpeech 2, 2021) → Residual adapters / structured pruning (2022) → Diffusion + adaLN (2023) → USAT unified adaptation (2024) → In-context learning 逐渐取代微调 (VALL-E era, 2023-)
+Speaker-dependent model (每人一模型, pre-2015) → Shared model + speaker regression layer (Fan et al., 2015) → Speaker embedding lookup (DeepVoice 2, 2017) → Speaker encoder + full fine-tuning (Jia et al., 2018) → CLN parameter-efficient (AdaSpeech, 2021) → Untranscribed data (AdaSpeech 2, 2021) → Residual adapters / structured pruning (2022) → Diffusion + adaLN (2023) → USAT unified adaptation (2024) → In-context learning 逐渐取代微调 (VALL-E era, 2023-) → Task-driven layer selection (CSP-FT, 2026: 用 weighted-sum 分析选择性微调 codec LM 的 ~8% 参数,缓解灾难性遗忘)

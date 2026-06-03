@@ -105,6 +105,7 @@ Zheng et al. (2024, IEEE/ACM TASLP 2025) 提出双层优化:
 - ERVQ (Zheng et al., IEEE/ACM TASLP 2025): Intra+Inter codebook optimization, 实现 100% utilization 且改善下游 TTS 质量
 - Lu, "Rethinking Codebook Collapse in Vector Quantization" (2026): 理论分析证明 encoder non-stationarity 是根本原因
 - Mentzer et al., "Finite Scalar Quantization" (ICLR 2024): 结构性解决方案,完全消除码本
+- [[论文笔记/IndexTTS|IndexTTS]] (Deng et al., 2025): VQ vs FSQ 系统对比实验 — 6k h 数据下 VQ 利用率仅 55%,但 34k h 数据下 VQ 接近 100%,与 FSQ 无显著差异。表明充足训练数据本身是缓解 codebook collapse 的有效途径
 
 ## 相关概念
 

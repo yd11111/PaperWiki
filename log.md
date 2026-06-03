@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[FlexSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](待确认), [[Non-autoregressive TTS]](待确认), [[Style Transfer in TTS]](待确认), [[Differentiable Reward Optimization]](待确认)
+- [ingest/deep] [[FlexSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 (Conditional Flow Matching, Duration Predictor, Non-autoregressive TTS, Style Transfer in TTS, Prosody Modeling, Differentiable Reward Optimization, Classifier-Free Guidance, Speaker Embedding)
+- [review/auto] [[FlexSpeech]] — pass, 2 low issues
+- [lint/local] FlexSpeech — 通过/0 问题
 - [kb/search] [[SafeSpeech]] — 命中 5 页: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认]
 - [ingest/deep] [[SafeSpeech]] — 精读, kb_sources=5, 新建 0, 追加 7 (Anti-spoofing and Deepfake Detection, Speaker Verification, Voice Cloning Taxonomy, Mel Spectrogram, Speaker Embedding, Speaker Adaptation, VITS)
 - [review/auto] [[SafeSpeech]] — pass-with-fixes, 1 medium + 4 low issues
