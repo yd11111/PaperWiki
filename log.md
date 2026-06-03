@@ -508,3 +508,23 @@
 - [ingest/deep] [[EmoSphere++]] — 精读, kb_sources=6, emotion-adaptive spherical vector (EASV) + joint attribute style encoder + normalized orthogonality loss + CFM decoder, ECA 93.53%/94.61% (seen/unseen on ESD), 追加更新 6 个实体页(Emotion Control in TTS, Conditional Flow Matching, Speaker Embedding, Global Style Tokens, Gradient Reversal Layer, Style Transfer in TTS) + 零样本语音合成 MOC 更新
 - [review/auto] [[EmoSphere++]] — pass-with-fixes, 4 issues (0 high, 2 medium fixed, 2 low fixed)
 - [lint/local] EmoSphere++ — 通过/0 问题
+
+## 2026-06-03 (STTATTS)
+- [kb/search] [[STTATTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Neural Vocoder]]✓, [[Speech Language Model]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[STTATTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Speaker Embedding, Speech-Text Alignment, Mel Spectrogram)
+- [review/auto] [[STTATTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] STTATTS — 通过/0 问题
+- [moc] 语音大模型与对话 MOC 更新: +STTATTS
+
+## 2026-06-03 (Bridge-TTS)
+- [kb/search] [[Bridge-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Diffusion Model]](待确认), [[Diffusion-based TTS]](待确认), [[Score Matching]](待确认), [[Mel Spectrogram]](待确认), [[Duration Predictor]](待确认)
+- [ingest/deep] [[Bridge-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Diffusion-based TTS, Diffusion Model, Score Matching, Conditional Flow Matching, Mel Spectrogram, Duration Predictor)
+- [review/auto] [[Bridge-TTS]] — pass-with-fixes, 4 issues (0 high, 1 medium fixed, 3 low)
+- [lint/local] Bridge-TTS — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +Bridge-TTS (生成方法演进节)
+- [待决] Schrödinger Bridge 概念页 — 目前仅 1 篇 TTS 论文引用,不满足准入规则,待更多论文引用后再创建
+- [kb/search] [[Daisy-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speech Factorization]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion-based TTS]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[Daisy-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Prosody Modeling, Global Style Tokens, Diffusion-based TTS, Speech Factorization, Style Transfer in TTS)
+- [review/auto] [[Daisy-TTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] Daisy-TTS — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +Daisy-TTS (韵律与情感)

@@ -5,7 +5,7 @@ aliases: [语音文本对齐, Modality Alignment, Speech-Text Representation Ali
 category: "technique"
 tags: [speech-LM, alignment, multimodal, representation, training-strategy]
 key_papers: ["SPIRIT-LM (Nguyen et al., 2024)", "Spectron (Nachmani et al., 2024)", "SpeechGPT (Zhang et al., 2023)", "Mini-Omni (Xie & Wu, 2024)", "Moshi (Defossez et al., 2024)", "Llama-Omni (Fang et al., 2024)", "Align-SLM (2024)", "SpeechAlign (2024)", "Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/TADA|TADA]]", "[[论文笔记/STTATTS|STTATTS]]"]
-origin_paper: "Cui et al., Speech Language Models, 2024"
+origin_paper: "[[论文笔记/Survey-Speech Language Models|Cui et al., Speech Language Models, 2024]]"
 related_concepts: ["[[Speech Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]", "[[Full-duplex Spoken Dialogue]]", "[[Modality Adaptation for Speech LLM]]", "[[Speech-LLM Integration Taxonomy]]"]
 status: pending-review
 lifecycle: active
