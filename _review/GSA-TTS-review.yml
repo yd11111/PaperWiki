@@ -1,0 +1,41 @@
+paper: GSA-TTS
+reviewer: agent-auto
+date: 2026-06-03
+tier: deep
+conclusion: pass-with-fixes
+issues_count: 2
+high: 0
+medium: 2
+low: 0
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节对 4 个关键设计选择 (ASR segmentation, LSE, GSE, CLN) 都有 WHY 解释和消融证据支撑。速查卡片可借鉴字段具体可操作。"
+  trustworthy:
+    verdict: pass
+    notes: "所有数字 claim 均有 [Table N] / [§X.X] 标注,覆盖率 ~95%。指标名使用正确,无方向性错误。"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释来源标注覆盖率 ~90%。[论文原文] 和 [agent 解读] 区分清晰。"
+  locatable:
+    verdict: pass-with-fixes
+    notes: "KB 背景有具体谱系定位。frontmatter models 中仅列了 YourTTS,MetaStyleSpeech 作为主要对比 baseline 未在 models 字段中列出。"
+  non-polluting:
+    verdict: pass
+    notes: "无需新建概念页。反向更新预计为 append (加 key_papers)。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: locatable
+    location: frontmatter.models
+    detail: "MetaStyleSpeech 是主要对比 baseline (Table 1, Table 2) 但未在 models 字段中列出。FastPitch 是 backbone 也未列出。"
+    suggestion: "在 models 字段中追加 MetaStyleSpeech 和 FastPitch (如有对应页面)。"
+  - id: 2
+    type: template-compliance
+    severity: medium
+    location: frontmatter.venue
+    detail: "论文尚未被会议接收 (7 pages, 3 figures 的会议格式但无 acceptance 信息),venue 标为 arXiv preprint 是准确的。但 Comments 中未标注目标会议。"
+    suggestion: "保持 venue: arXiv preprint。如后续确认发表场地可更新。"

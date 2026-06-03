@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, style-transfer, non-autoregressive, speaker-adaptation, reference-encoder, FastPitch]
 concepts: ["[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]"]
-models: ["[[论文笔记/YourTTS|YourTTS]]"]
+models: ["[[论文笔记/YourTTS|YourTTS]]", "MetaStyleSpeech (Min et al., 2021)", "FastPitch (Lancucki, 2021)"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["LibriTTS-R", "VCTK"]
 kb_context_sources: 6
@@ -199,5 +199,8 @@ GSA-TTS 提出了一个清晰且有效的 idea: 用 ASR 的语义对齐能力去
 3. **Average local styles 作为 speaker identity 补充**: 在 attention-based 聚合之外加一路简单平均,保证基本 speaker identity 不因 attention 的选择性而丢失。这是一个低成本的鲁棒性增强手段。
 4. **POS-based attention control**: 通过分析和调节不同词性段的 attention weight 来控制合成语音的韵律特征。可作为 reference-based TTS 的后处理控制手段。
 
-> [!review] 审阅结论
-> 待审阅。
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> **结论**: pass-with-fixes (0 high, 2 medium, 0 low)
+> - [medium] frontmatter models 未列 MetaStyleSpeech/FastPitch (已修正)
+> - [medium] venue 为 arXiv preprint, 无 acceptance 信息 (保持现状)
+> 审阅报告: `_review/GSA-TTS-review.yml`
