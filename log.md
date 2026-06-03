@@ -397,3 +397,11 @@
 - [review/auto] [[OmniVoice]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] OmniVoice — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +OmniVoice
+
+## 2026-06-03 (DMOSpeech 2)
+- [kb/search] [[DMOSpeech 2]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Diffusion-based TTS]](pending-review), [[SEED-TTS-Eval]]✓
+- [ingest/deep] [[DMOSpeech 2]] — 精读, kb_sources=6, 新建 0, 追加 5 (Duration Predictor, Differentiable Reward Optimization, Conditional Flow Matching, Diffusion-based TTS, SEED-TTS-Eval)
+- [review/auto] [[DMOSpeech 2]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] DMOSpeech 2 — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +DMOSpeech 2
+- [moc] TTS训练与评估 MOC 更新: +DMOSpeech 2
