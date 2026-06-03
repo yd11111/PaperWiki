@@ -95,3 +95,4 @@
 - [[论文笔记/UmbraTTS|UmbraTTS]] — aiOla, 2025 (ICML Workshop), 首个 flow matching 环境感知 TTS, F5-TTS 框架 + SER 连续控制 + self-supervised 数据构建, WER 6.89% / 人类偏好 81.9%
 - [[论文笔记/RapFlow-TTS|RapFlow-TTS]] — NAVER Cloud/Korea Univ, 2025, 首个 consistency flow matching TTS, 2 步 MOS 4.01 超越 Matcha-TTS 10 步 3.83 / ComoSpeech 2 步 3.19
 - [[论文笔记/SpeechAccentLLM|SpeechAccentLLM]] — SEU/LIGHTSPEED, 2025, CTC-guided VQ (SpeechCodeVAE) + FAC&TTS 联合训练 + BERT-style SpeechRestorer, accentedness 1.86 vs baseline 2.48
+- [[论文笔记/Shallow Flow Matching|Shallow Flow Matching]] — U. Tokyo, NeurIPS 2025, shallow flow matching 将 FM 推理起点从纯噪声移至 coarse 表示中间状态, 正交投影+分段流, Matcha-TTS/CosyVoice/StableTTS 一致提升 + 自适应 ODE solver ~50% 加速
