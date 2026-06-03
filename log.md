@@ -175,3 +175,25 @@
 - [ingest/deep] [[MambaVoiceCloning]] — 精读(batch processing), kb_sources=2, 首个推理时完全 SSM-only 的 diffusion TTS conditioning stack, gated Bi-Mamba + AdaLN 编码器 21M params/1.6x throughput, protocol-matched 评估小幅超越 StyleTTS2/VITS, 追加更新 4 个实体页(Prosody Modeling, F0 Modeling, Speaker Embedding, Diffusion-based TTS)
 - [create/entity] 无新建 — 候选 (Unspoken Reasoning, Hybrid System Prompt, Service-Duplex-Bench, SSM-based TTS, Gated Bi-Mamba) 均不满足准入规则(单篇论文特有概念或现有 KB 跨论文引用不足)
 - [lint/local] STITCH, PersonaPlex, MambaVoiceCloning — 通过/0 dead links, frontmatter 完整
+- [kb/search] [[SiTok]] — 命中 4 页(confirmed): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review), [[Mel Spectrogram]](pending-review), [[Codebook Collapse]](pending-review)
+- [kb/search] [[EmotionThinker]] — 命中 2 页(confirmed): [[Prosody Modeling]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Audio Understanding]](pending-review), [[Differentiable Reward Optimization]](pending-review)
+- [kb/search] [[EmergentTTS-Eval]] — 命中 1 页(confirmed): [[Prosody Modeling]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Audio Understanding]](pending-review), [[Audio-Language Pretraining]](pending-review)
+- [kb/search] [[ALLD]] — 命中 1 页(confirmed): [[Prosody Modeling]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Audio Understanding]](pending-review), [[Audio-Language Pretraining]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review)
+- [ingest/deep] [[SiTok]] — 精读(batch processing), kb_sources=5, diffusion autoencoder speech tokenizer + CTC semantic regularization, 12.5Hz/0.2kbps 单codebook WER 4.06, 1.6B params on 2M hrs, 追加更新 6 个实体页(Speech Tokenizer, CFM, RVQ, Semantic vs Acoustic Tokens, CFG, Diffusion Model)
+- [ingest/deep] [[EmotionThinker]] — 精读(batch processing), kb_sources=4, 首个 RL-based 可解释语音情感推理框架, GRPO-PTR (progressive trust-aware reasoning reward), EmotionCoT-35K prosody-aware CoT 数据集, SER Avg 68.89%, 追加更新 2 个实体页(Prosody Modeling, Emotion Control in TTS)
+- [ingest/deep] [[EmergentTTS-Eval]] — 精读(batch processing), kb_sources=2, 1645-sample TTS benchmark + LALM-as-judge (Gemini 2.5 Pro), 6 challenging 场景, Spearman 90.5% with human, 追加更新 2 个实体页(Prosody Modeling, TTS Evaluation)
+- [ingest/deep] [[ALLD]] — 精读(batch processing), kb_sources=3, 首个 descriptive speech quality evaluation 数据集 + token-level DPO distillation, MOS MSE 0.17, A/B Acc 98.6%, 追加更新 2 个实体页(TTS Evaluation, Audio Understanding)
+- 反向更新: Speech Tokenizer(+SiTok), CFM(+SiTok), RVQ(+SiTok), Semantic vs Acoustic Tokens(+SiTok), CFG(+SiTok), Diffusion Model(+SiTok), Prosody Modeling(+EmotionThinker, +EmergentTTS-Eval), Emotion Control in TTS(+EmotionThinker), TTS Evaluation(+EmergentTTS-Eval, +ALLD), Audio Understanding(+ALLD) — 共 10 页 append
+- [create/entity] 无新建 — 候选 (Diffusion Autoencoder, CTC Semantic Regularization, Token CFG, Shortcut Fine-tuning, GRPO-PTR, EmotionCoT-35K, LALM-as-Judge, ALLD Distillation) 均不满足准入规则(单篇论文特有概念)
+- [lint/local] SiTok, EmotionThinker, EmergentTTS-Eval, ALLD — 通过/0 dead links, frontmatter 完整
+- [kb/search] [[SpeechAlign]] — 命中 5 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[TTS Evaluation]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review)
+- [kb/search] [[RL-for-Audio-LLM]] — 命中 4 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[TTS Evaluation]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review)
+- [kb/search] [[GSRM]] — 命中 3 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[TTS Evaluation]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review)
+- [kb/search] [[RIO]] — 命中 4 页(confirmed): [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓, [[TTS Evaluation]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Differentiable Reward Optimization]](pending-review)
+- [ingest/deep] [[SpeechAlign]] — 精读(batch), kb_sources=5, 首次偏好学习于 codec LM, golden vs synthetic AR tokens, iterative DPO, WER 6.0/SIM 0.90
+- [ingest/deep] [[RL-for-Audio-LLM]] — 精读(batch), kb_sources=4, 通义 RL 框架, GRPO vs DiffRO, Combined+Filter, ASR WER -5.3%, TTS WER 3.414
+- [ingest/deep] [[GSRM]] — 精读(batch), kb_sources=3, generative speech reward model, acoustic feature+CoT, PCC 0.465, online RLHF 82% win
+- [ingest/deep] [[RIO]] — 精读(batch), kb_sources=4, reverse inference optimization, PPC, WER 3.4/SIM 0.96/bad case 1%
+- 反向更新: LLM-based TTS(+3), TTS Evaluation(+GSRM section+4), Semantic vs Acoustic Tokens(+2), DiffRO(+2+GRPO对比), Codec LM(+2) — 5 页 append
+- [create/entity] 无新建 — 候选均不满足准入规则
+- [lint/local] SpeechAlign, RL-for-Audio-LLM, GSRM, RIO — 通过/0 dead links
