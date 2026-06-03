@@ -266,3 +266,10 @@
 - [review/auto] [[Llasa]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] Llasa — 通过/0 问题
 - [moc] 零样本语音合成 MOC + 语音编码与量化 MOC 更新: +Llasa
+
+## 2026-06-03
+- [kb/search] [[Chatterbox-Flash]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Masked Generative Modeling]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Diffusion-based TTS]](pending-review)
+- [ingest/deep] [[Chatterbox-Flash]] — 精读, kb_sources=6, 新建 0, 追加 5 (Masked Generative Modeling, Classifier-Free Guidance, Codec Language Model, Diffusion-based TTS, Zero-shot Speech Synthesis)
+- [review/auto] [[Chatterbox-Flash]] — pass-with-fixes, 1 issue (0 high, 1 medium, 0 low)
+- [lint/local] Chatterbox-Flash — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +Chatterbox-Flash

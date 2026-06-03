@@ -4,7 +4,7 @@ title: "Classifier-Free Guidance"
 aliases: [CFG, 无分类器引导, Classifier-free Diffusion Guidance]
 category: "training-technique"
 tags: [diffusion, guidance, conditional-generation, TTS, audio-generation]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SiTok|SiTok]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]"]
 origin_paper: "Ho & Salimans, Classifier-Free Diffusion Guidance, 2022"
 related_concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Conditional Flow Matching]]"]
 status: pending-review
