@@ -329,3 +329,4 @@
 - [review/auto] [[Cont-SPT]] — pass-with-fixes, 4 issues (0 high, 2 medium fixed, 2 low)
 - [lint/local] Cont-SPT — 通过/0 问题
 - [moc] 语音编码与量化 MOC 更新: +Cont-SPT
+- [alert/backlog] pending-review: 70, draft deep/repro: 81 — 建议抽空审核
