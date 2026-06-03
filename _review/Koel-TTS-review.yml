@@ -1,0 +1,77 @@
+paper: "Koel-TTS"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 2
+high: 0
+medium: 1
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含多个关键因果解释: 为什么 GT-as-Chosen 失败(分布 gap 太大导致 DPO 过拟合);
+      为什么 Decoder Context 泛化最好(无额外编码瓶颈); 为什么 RPO 比 DPO 更鲁棒(reward gap 缩放)。
+      三种架构的对比表格清晰展示了各方案的取舍。
+      速查卡片"可借鉴"给出三个具体可迁移 trick(Pareto 排序、CFG for AR、RPO 稳健性)。
+
+  可信赖:
+    verdict: pass
+    notes: >
+      数字型 claim 标注覆盖率 ~90%。所有实验数字标注 [Table N] 或 [§X.X]。
+      指标名使用正确(CER/WER/SSIM/MOS/SMOS/CMOS/Squim-MOS)。
+      速查卡片指标字段含完整数字+数据集名+来源标注。方向性无误(CER↓, SSIM↑)。
+      值得注意: CER 0.55% 优于 GT 的 0.80%,这个不寻常的结果在论文 Table 3 中有据可查。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节全面标注了 [论文原文] 和 [agent 解读],覆盖率 ~95%。
+      agent 解读限定在合理范围内(如 Decoder Context 泛化好的原因分析标注为 agent 解读)。
+      局限性中"SSIM 差距可能部分源于数据量"明确标注为 [agent 解读]。
+      点评节中"评测 ASR 模型与 reward 模型相同,存在指标偏向性风险"也标注为 [agent 解读]。
+
+  可定位:
+    verdict: pass-with-fixes
+    notes: >
+      KB 背景有具体谱系定位(encoder-decoder vs decoder-only vs hybrid),含对比基准。
+      创新判断有三点具体对比(vs SpeechAlign, vs Parakeet, + 架构对比)。
+      frontmatter 字段基本完整,concepts 中 Differentiable Reward Optimization 的关联是间接的(见 issue)。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新尚未执行,将在审阅通过后进行。
+      frontmatter concepts 中的概念均已存在于 vault,无新概念创建需求。
+
+issues:
+  - id: 1
+    type: bad-linking
+    severity: medium
+    principle: 可定位
+    location: frontmatter.concepts
+    detail: >
+      concepts 字段包含 [[Differentiable Reward Optimization]],但 Koel-TTS 使用的是 DPO/RPO
+      (sequence-level 偏好优化),与 DiffRO (token-level 可微优化) 是不同的技术路线。
+      虽然 DiffRO 概念页中讨论了 DPO/SpeechAlign 作为偏好优化谱系的一部分,但直接将 DiffRO
+      列为本文涉及的概念可能造成误导。概念库中目前没有独立的"Preference Alignment for TTS"页。
+    suggestion: >
+      将 concepts 中的 [[Differentiable Reward Optimization]] 改为更准确的描述,
+      或在反向更新时追加说明 Koel-TTS 使用的是 DPO/RPO 而非 DiffRO。
+      长期建议: 如果偏好对齐在 TTS 中的应用持续增多,可考虑创建独立的
+      "Preference Alignment for TTS" 概念页,将 DPO/RPO/DiffRO/GRPO 统一收录。
+    fix_applied: false
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: frontmatter.datasets
+    detail: >
+      datasets 字段为空,但论文使用了 LibriTTS, HiFiTTS, MLS, CML 等数据集。
+      虽然 vault 中没有这些数据集的实体页,但 datasets 字段可以列出名称以便未来创建时自动关联。
+    suggestion: >
+      可选择性地在 datasets 字段中列出主要数据集名称(不创建新实体页),
+      或保持为空等待未来数据集页创建。当前为空不影响笔记质量。
+    fix_applied: false

@@ -170,5 +170,8 @@ l_cfg = gamma * l_c + (1 - gamma) * l_u
 
 ---
 
-> [!review] 审阅状态
-> 待审阅 — 见 `_review/Koel-TTS-review.yml`
+> [!review] 审阅状态 (2026-06-03, agent)
+> **结论: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
+> - (medium) concepts 字段中 [[Differentiable Reward Optimization]] 关联间接——本文用 DPO/RPO 而非 DiffRO,概念页虽覆盖但命名可能误导
+> - (low) datasets 字段为空,论文实际使用 LibriTTS/HiFiTTS/MLS/CML
+> 详见 `_review/Koel-TTS-review.yml`
