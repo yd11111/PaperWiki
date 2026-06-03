@@ -1,0 +1,141 @@
+paper: "TADA"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节按6个关键设计选择组织(CTC Aligner/VAE Encoder/Dual Decoder/K-shift/Flow Matching Head/SFG),每个含WHY+HOW; 核心问题4个均有因果解释"
+  可信赖:
+    satisfied: true
+    notes: "实验6个表格数据完整标注[Table N]; 指标名CER/SIM/oMOS/RTF使用正确; 速查卡片指标含具体数字+数据集+出处; 幻觉分析有量化数据"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了[论文原文]/[agent 解读]; 方法节WHY解释覆盖率>90%; agent解读有'可能是'等限定词"
+  可定位:
+    satisfied: true
+    notes: "KB背景含谱系定位(Next-Token Diffusion路线+LatentLM/CLEAR/VibeVoice对比); 创新判断有对比基准(帧率2-3fps vs 7.5Hz/15Hz); 与Speech-Text Alignment四种方式的对比定位"
+  不污染:
+    satisfied: true
+    notes: "所有concepts/models均指向已存在实体页; 无新建概念; frontmatter models列wav2vec2.0/EnCodec/VITS(对比baseline),无后续系统"
+
+checks:
+  - id: C01
+    principle: 可复述
+    item: "方法节含因果解释(WHY)"
+    result: pass
+    detail: "6个设计选择均含WHY: CTC为何提供硬对齐, VAE encoder为何用局部注意力, dual decoder为何分两步训练, K-shift为何实现文本前瞻, flow matching为何联合预测连续+离散, SFG为何能弥合modality gap"
+
+  - id: C02
+    principle: 可复述
+    item: "关键设计回答'为什么选这个而不是那个'"
+    result: pass
+    detail: "CTC vs attention-based alignment (§3.1); additive fusion vs interleaving (§4.1); CFG仅对acoustic不对duration (§5.2)"
+
+  - id: C03
+    principle: 可复述
+    item: "速查卡片'可借鉴'是具体trick"
+    result: pass
+    detail: "4条均为可迁移trick: 1:1对齐消除幻觉, Bit Diffusion for mixed prediction, SFG弥合modality gap, online rejection sampling"
+
+  - id: C04
+    principle: 可信赖
+    item: "claim标注覆盖率≥80%"
+    result: pass
+    detail: "方法节和实验节数字claim均标注[§X.X]/[Table N]/[Fig N]; 估计覆盖率>90%"
+
+  - id: C05
+    principle: 可信赖
+    item: "指标名正确"
+    result: pass
+    detail: "CER(↓), SIM(↑), oMOS(↑), RTF(↓), PPL(↓), sSC(↑), tSC(↑)方向均正确; 未混淆CER/WER"
+
+  - id: C06
+    principle: 可信赖
+    item: "速查卡片'指标'含数字+数据集+来源"
+    result: pass
+    detail: "SeedTTS-Eval CER 0.73%/0.76%, SIM 77.9/75.1; LibriTTSR CER 0.55/0.40, SIM 80.2/79.9; RTF 0.09/0.13; [Table 2]"
+
+  - id: C07
+    principle: 可信赖
+    item: "无方向性错误"
+    result: pass
+    detail: "CER/RTF标为越低越好, SIM/oMOS标为越高越好, 均正确"
+
+  - id: C08
+    principle: 可区分
+    item: "因果解释标注来源"
+    result: pass
+    detail: "方法节中每段因果解释均标注[论文原文]或[agent 解读]; CTC选择原因的agent推断有'可能是'限定"
+
+  - id: C09
+    principle: 可区分
+    item: "因果解释来源标注覆盖率≥80%"
+    result: pass
+    detail: "方法节6个设计选择的WHY解释全部标注了来源, 估计覆盖率>95%"
+
+  - id: C10
+    principle: 可区分
+    item: "无把推断写成断言"
+    result: pass
+    detail: "agent解读均用'可能是'/'类似于'限定; 无'SOTA/唯一/全面优于'未支撑断言"
+
+  - id: C11
+    principle: 可定位
+    item: "KB背景有谱系定位"
+    result: pass
+    detail: "谱系: Next-Token Diffusion路线 + 与LatentLM/CLEAR/VibeVoice对比帧率; Speech-Text Alignment第四种方式; Speech Tokenizer演进线"
+
+  - id: C12
+    principle: 可定位
+    item: "KB背景创新判断有对比基准"
+    result: pass
+    detail: "帧率对比: 2-3fps(TADA) vs 7.5Hz(VibeVoice) vs 15Hz(CLEAR) vs 25-75Hz(传统)"
+
+  - id: C13
+    principle: 可定位
+    item: "frontmatter字段存在且非空"
+    result: pass
+    detail: "所有必填字段均存在: type, tier, title, arxiv_id, source, authors, year, venue, tags, concepts, models, tasks, datasets, kb_context_sources, status, created, updated"
+
+  - id: C14
+    principle: 可定位
+    item: "frontmatter字段语义正确"
+    result: pass
+    detail: "models列wav2vec2.0(aligner backbone)/EnCodec(对比baseline)/VITS(related work); concepts列10个相关概念; tasks列Zero-shot Speech Synthesis; datasets列SEED-TTS-Eval"
+
+  - id: C15
+    principle: 可定位
+    item: "速查卡片5字段有实质内容"
+    result: pass
+    detail: "一句话(核心1:1对齐), 路线(完整pipeline), 指标(4组数字), 可借鉴(4条具体trick), 局限(4点具体问题)"
+
+  - id: C16
+    principle: 不污染
+    item: "新建概念页满足准入规则"
+    result: pass
+    detail: "本次不新建概念页; 所有引用概念均已存在"
+
+  - id: C17
+    principle: 不污染
+    item: "去重检查"
+    result: pass
+    detail: "无新建页面, 不涉及去重"
+
+  - id: C18
+    principle: 不污染
+    item: "反向更新无factual-error或overclaim"
+    result: pass
+    detail: "反向更新均为追加key_papers, 内容准确"
+
+  - id: C19
+    principle: 不污染
+    item: "反向更新正确分类"
+    result: pass
+    detail: "追加key_papers不改status; 无实质性修改"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。方法节6个设计选择含完整WHY/HOW, 因果解释来源标注覆盖率高(>95%), KB背景谱系定位精确(Next-Token Diffusion路线+帧率对比), 实验数据完整标注, 速查卡片5字段均有实质内容。无high/medium issue。"

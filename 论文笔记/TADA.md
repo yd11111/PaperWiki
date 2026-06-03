@@ -235,8 +235,10 @@ z_i = (1 - λ_SFG) · z_i^{text-only} + λ_SFG · z_i^{text-speech}
 
 ---
 
-> [!review] 审阅状态
-> 待审阅。审阅报告见 `_review/TADA-review.yml`。
+> [!review] 审阅状态: pass (2026-06-03)
+> 结论: pass — 5 原则全部满足, 0 issues。
+> 方法节 6 个设计选择含完整 WHY/HOW, 因果解释来源标注 >95%, KB 背景谱系定位精确。
+> 详见 `_review/TADA-review.yml`。
 
 ---
 
