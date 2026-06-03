@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: []
+key_papers: ["[[论文笔记/VITS|VITS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review
@@ -77,6 +77,14 @@ Encoder Output → Duration Predictor → Length Regulator → Pitch Predictor �
 - MaskGCT: 专门的 duration prediction 阶段 (T2D model)
 - IndexTTS2: 通过共享位置编码实现隐式 duration control
 - CosyVoice: flow matching 内部隐式处理 duration
+
+### VITS Stochastic Duration Predictor (Kim et al., ICML 2021)
+- **概率 duration 建模**: 首个用 flow-based 模型学习音素时长的概率分布 (非确定性预测) [§2.2.2]
+- **核心设计**: 引入 variational dequantization (u) + variational data augmentation (v) 将离散 duration 转为连续分布 [§2.2.2]
+- **架构**: DDSConv residual blocks + neural spline flows [§2.5.5]
+- **与 Glow-TTS 对比**: Glow-TTS 用 MAS 估计对齐后训练确定性 duration predictor (MSE loss),VITS 则学习 duration 分布的变分下界
+- **实验验证**: stochastic vs deterministic (DDP) 版本 MOS 4.43 vs 4.39 [Table 1],stochastic 产生更多样化的 F0 和时长分布 [Fig 2, Fig 3]
+- 详见 [[论文笔记/VITS|VITS]]
 
 ## 在 SVS 中的时长预测
 

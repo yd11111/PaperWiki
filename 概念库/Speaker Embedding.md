@@ -4,7 +4,7 @@ title: "Speaker Embedding"
 aliases: [说话人嵌入, Speaker Representation, d-vector, Speaker Encoder, 说话人编码]
 category: "representation"
 tags: [TTS, multi-speaker, voice-cloning, speaker-identity, adaptive-TTS]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/Mega-TTS|Mega-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Text-to-Speech Pipeline]]", "[[Speech Tokenizer]]", "[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Adaptation]]"]
 status: confirmed

@@ -4,7 +4,7 @@ title: "Variational Autoencoder for TTS"
 aliases: [VAE-TTS, TTS中的变分自编码器, VAE for Speech Synthesis, 变分推断TTS]
 category: "generative-model"
 tags: [TTS, VAE, latent-variable, expressive-TTS, generative-model]
-key_papers: []
+key_papers: ["[[论文笔记/VITS|VITS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Prosody Modeling]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]", "[[Neural Vocoder]]"]
 status: pending-review
@@ -95,7 +95,7 @@ VITS (Kim et al., ICML 2021) 将 VAE 与 normalizing flow 结合:
 - VAE-TTS (Zhang et al., ICASSP 2019): 首次将 VAE 用于 TTS 韵律建模
 - GMVAE-Tacotron (Hsu et al., ICLR 2019): GMM prior 实现无监督风格聚类
 - BVAE-TTS (Lee et al., ICLR 2021): beta-VAE 用于 NAR TTS
-- VITS (Kim et al., ICML 2021): VAE + Flow + GAN, fully E2E 最佳
+- [[论文笔记/VITS|VITS]] (Kim et al., ICML 2021): VAE + Flow + GAN, fully E2E 最佳; 消融显示去掉 normalizing flow MOS 下降 1.52 (4.50→2.98), 用 mel 替换 linear spectrogram 降 0.19 [Table 2]
 - VAE-Loop (Akuzawa et al., 2018): VAE 建模表情
 
 ## 相关概念

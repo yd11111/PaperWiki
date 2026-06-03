@@ -4,7 +4,7 @@ title: "Prosody Modeling"
 aliases: [韵律建模, 语音韵律, Prosody Control, Expressive TTS, 表现力语音合成]
 category: "technique"
 tags: [TTS, prosody, style, emotion, expressiveness, variation-information]
-key_papers: []
+key_papers: ["[[论文笔记/Mega-TTS|Mega-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]"]
 status: confirmed

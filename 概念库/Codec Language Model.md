@@ -4,7 +4,7 @@ title: "Codec Language Model"
 aliases: [CodecLM, Codec LM, 编解码器语言模型, Neural Codec Language Model, Audio Codec LM]
 category: "model-family"
 tags: [speech-LM, codec, autoregressive, neural-audio-codec, language-model, RVQ]
-key_papers: ["VALL-E (Wang et al., 2023)", "AudioLM (Borsos et al., 2023)", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+key_papers: ["VALL-E (Wang et al., 2023)", "[[论文笔记/AudioLM|AudioLM]]", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Language Model]]", "[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: pending-review

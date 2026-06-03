@@ -4,7 +4,7 @@ title: "Non-autoregressive TTS"
 aliases: [NAR TTS, FastSpeech系列, 非自回归TTS, Parallel TTS, 并行语音合成]
 category: "model-family"
 tags: [TTS, non-autoregressive, parallel, fast-inference, acoustic-model]
-key_papers: []
+key_papers: ["[[论文笔记/VITS|VITS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Attention-based TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]"]
 status: pending-review
