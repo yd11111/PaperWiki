@@ -21,6 +21,7 @@
 - [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] — 2025, 多奖励 GRPO 于单码本 TTS LLM, 5 reward (WER+SIM+len+ent+prosody), CER 1.10/MOS 4.21
 - [[论文笔记/DMOSpeech 2|DMOSpeech 2]] — 2025 (AAAI 2026), component-level GRPO 靶向 duration predictor, SIM+WER reward, 1.5K RL steps, WER 1.752% en, RTF 0.032
 - [[论文笔记/FPO|FPO]] — 2025, token-level 选择性 DPO, segmental error 二分类 (temporal/semantic-phonetic), 3-4x 数据效率, CosyVoice bad case 21%->9%
+- [[论文笔记/Koel-TTS|Koel-TTS]] — 2025, NVIDIA, ASR+SV reward 驱动 DPO/RPO + Pareto 最优多目标偏好配对, CER 0.55% LibriTTS unseen SOTA, GT-as-Chosen 失败实验
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
