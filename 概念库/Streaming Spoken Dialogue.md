@@ -4,7 +4,7 @@ title: "Streaming Spoken Dialogue"
 aliases: [流式语音对话, Streaming Speech Interaction, 实时语音处理, Real-time Speech Processing, Streaming Inference for Speech, 流式推理]
 category: "technique"
 tags: [speech-LM, streaming, real-time, causal, latency, dialogue, inference]
-key_papers: ["Moshi (Defossez et al., 2024)", "Mini-Omni (Xie & Wu, 2024)", "LLaMA-Omni (Fang et al., 2024)", "IntrinsicVoice (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "SyncLLM (2024)"]
+key_papers: ["[[论文笔记/Moshi|Moshi]]", "Mini-Omni (Xie & Wu, 2024)", "LLaMA-Omni (Fang et al., 2024)", "IntrinsicVoice (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "SyncLLM (2024)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[Full-duplex Spoken Dialogue]]", "[[Turn-taking in Spoken Dialogue]]", "[[Speech Language Model]]", "[[Neural Vocoder]]", "[[Spoken Dialogue Evaluation]]"]
 status: pending-review
