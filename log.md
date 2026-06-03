@@ -434,3 +434,8 @@
 - [review/auto] [[PeriodWave]] — pass, 0 issues
 - [lint/local] PeriodWave — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +PeriodWave
+- [kb/search] [[Llama-VITS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓ | 参考(待确认): [[VITS]], [[Emotion Control in TTS]], [[Text-to-Speech Pipeline]]
+- [ingest/deep] [[Llama-VITS]] — 精读, kb_sources=6, 新建 0, 追加 3 (VITS, Emotion Control in TTS, Prosody Modeling)
+- [review/auto] [[Llama-VITS]] — pass-with-fixes, 4 issues (2 medium + 2 low)
+- [lint/local] Llama-VITS — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +Llama-VITS (韵律与情感)
