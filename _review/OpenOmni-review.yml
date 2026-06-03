@@ -1,0 +1,60 @@
+paper: OpenOmni
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含充分的 WHY 解释 (language-pivot 为什么选 language, MOE 为什么必要, DEPO 为什么用 DPO); 关键设计选择均有因果链; 速查卡片具体可迁移"
+  trustworthy:
+    verdict: pass
+    notes: "数字 claim 标注覆盖率 ~90%; 指标名正确 (WER/CER/Emotion Accuracy); 速查卡片指标含具体数字+数据集+出处"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释来源标注良好 — [论文原文] 和 [agent 解读] 明确区分; 方法节中 6 处 WHY 解释有 5 处标注来源"
+  locatable:
+    verdict: pass
+    notes: "KB 背景有具体谱系定位 (OLLM → VITA/MiniCPM-o 阶段, Integration Taxonomy 中的位置); frontmatter 完整; 速查卡片 5 字段均有实质内容"
+  no_pollution:
+    verdict: pass
+    notes: "不创建新概念页; 反向更新仅追加 key_papers 到已有页面"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter models"
+    detail: "models 字段只列了 Whisper 和 CosyVoice (本文使用的外部模型), 未列对比 baseline (VITA, EMOVA, AnyGPT 等)"
+    suggestion: "按 checklist v1.1 规则, models 应含本文模型+对比 baseline; 但 OpenOmni 本身不在模型库, baseline 也不在, 此处影响不大"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "方法 → 训练策略 → 关键细节 bullet 4"
+    detail: "总计算成本 664 GPU·H 是 agent 从 Tab.1 各 stage 加总推算, 论文未直接给出总量"
+    suggestion: "标注 [agent 计算] 或移除具体总数, 保留各 stage 数据即可"
+
+  - id: 3
+    type: fact-inference-mixing
+    severity: low
+    principle: distinguishable
+    location: "方法 → MOE 关键作用 → agent 解读"
+    detail: "agent 解读中 'MOE 的不同 experts 隐式处理不同语言/长度' 是合理推断, 但论文未分析 expert routing 行为"
+    suggestion: "已标注 [agent 解读], 符合规范, 保持即可"
+
+  - id: 4
+    type: weak-reusability
+    severity: low
+    principle: reproducible
+    location: "可复用的 idea #3"
+    detail: "text-guided feature fusion 的描述可进一步细化 — 论文附录描述了两种 decoder mode 的 fusion 细节, 当前描述偏笼统"
+    suggestion: "可补充 AR mode 用 linear projection, NAR mode 用 MOE + upsample 的区别"
+
+conclusion: pass
+total_issues: 4
+high_issues: 0
+medium_issues: 0
+low_issues: 4

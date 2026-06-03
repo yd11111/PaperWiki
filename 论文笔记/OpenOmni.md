@@ -230,5 +230,9 @@ DEPO 平均提升 7.6% 情感准确率 (60.3% → 67.9%), 中文提升更显著 
 
 4. **CTC + DPO 情感注入**: 将 DPO 应用于 CTC 的 token-level 概率 (Eq.7), 用合成的 emotion-conditioned vs neutral 语音构建偏好对, 是一种不需要真人标注就能实现情感控制的路线。
 
-> [!review] 审阅状态
-> 待审阅 — 见 `_review/OpenOmni-review.yml`
+> [!review] 审阅: pass (2026-06-03)
+> 4 low issues, 0 high/medium. 详见 `_review/OpenOmni-review.yml`
+> - [low] frontmatter models 未列对比 baseline (影响不大, baseline 不在模型库)
+> - [low] 总计算成本 664 GPU·H 为 agent 加总推算
+> - [low] MOE expert routing 行为分析为 agent 推断 (已标注)
+> - [low] text-guided feature fusion 描述可细化
