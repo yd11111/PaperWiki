@@ -1,0 +1,51 @@
+paper: Spark-TTS
+tier: deep
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: pass
+    notes: "方法节包含充分的因果解释 (为什么用 wav2vec 2.0 特征、为什么 FSQ 而非 VQ、CoT 工作机制);每个关键设计选择都回答了 why;速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: pass
+    notes: "claim 标注覆盖率高 (所有数字标 Table/Section);指标名使用正确 (CER/WER/SIM/STOI/PESQ/UTMOS 无混淆);速查指标含具体数字+数据集+来源。"
+  可区分:
+    score: pass
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读];方向性正确 (WER/CER 越低越好,UTMOS/SIM 越高越好);无过强未支撑断言。"
+  可定位:
+    score: pass
+    notes: "KB 背景有具体谱系定位 (三条路线对比);创新判断有对比基准 (vs CosyVoice/Llasa);frontmatter 字段完整。"
+  不污染:
+    score: pass
+    notes: "反向更新均为追加更新 (key_papers);无新概念页创建需求;不存在 factual-error 或 overclaim。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.models
+    detail: "models 列了 CosyVoice 和 CosyVoice 2 作为 baseline 对比模型,但未包含论文提到的 Llasa (最直接对比的单阶段方案) 和 F5-TTS。"
+    suggestion: "考虑将 Llasa 和 F5-TTS 加入 models 列表。但 F5-TTS 不在模型库中,Llasa 可加。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法节 - 训练策略"
+    detail: "BiCodec 训练损失函数的各项权重/比例未标注 (原文 §3.3 也未给出具体值)。"
+    suggestion: "标注 [论文原文未给出具体权重] 即可,不影响理解。"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "实验表格"
+    detail: "Llasa 对比行的格式 '1.20 vs 1.89' 不如直接列 Spark-TTS 值和 Baseline 值清晰。"
+    suggestion: "调整为与其他行一致的格式。"
+
+conclusion: pass
+conclusion_reason: "5 个原则均满足。3 个 low severity issue,不阻塞反向更新。笔记包含充分的机制解释、标注的 claim、清晰的谱系定位和准确的 KB 挂接。"
+total_issues: 3
+high_issues: 0
+medium_issues: 0
+low_issues: 3

@@ -160,3 +160,10 @@ Spark-TTS 在 LLM-based TTS 的设计空间中找到了一个有价值的折中�
 4. **BiCodec 训练稳定性技巧**: 初始阶段用 gf pooling 直接获取 global embedding (跳过 FSQ),配合 teacher-student L1 loss 引导 FSQ codebook 学习,稳定后再切换为完整 FSQ pipeline [§3.3]。这种渐进式训练策略可迁移到其他需要同时训练量化层和 decoder 的场景。
 
 5. **混合 zero-shot + control 训练**: 每个音频样本同时构造 zero-shot (reference audio prompt) 和 control (attribute label prompt) 两个训练样本 [§4.3],让同一个 LM 同时学会两种推理模式。
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass (3 low issues, 0 high/medium)
+> - [low] frontmatter models 未包含 Llasa (最直接对比方案)
+> - [low] BiCodec 训练各 loss 权重原文未给出,已标注
+> - [low] Llasa 对比行格式略不一致
+> 详见 `_review/Spark-TTS-review.yml`
