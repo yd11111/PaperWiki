@@ -269,5 +269,9 @@ Future: Instruction-Aware Frameworks → 精细指令控制
 3. **六维可控性 checklist**: 设计新 TTS 系统时可用 Prosody/Timbre/Emotion/Style/Language/Environment 六维度作为功能覆盖 checklist
 4. **Table 1 作为 baseline 查表**: 100+ 方法的架构/特征/可控性对比表可作为 related work 的快速索引
 
-> [!review] 审阅标记
-> 待审阅 — 已生成草稿,待自动审阅。
+> [!review] 审阅结论: pass (2026-06-03)
+> - 分类框架清晰(六维任务/四级控制策略/三轴分类)
+> - 因果解释标注到位([论文原文]/[agent 解读] 覆盖率 ~90%)
+> - 数字可溯源(Table 6/§引用覆盖充分)
+> - 可直接进行反向更新
+> - 详见 `_review/Survey-Controllable TTS-review.yml`

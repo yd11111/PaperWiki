@@ -1,0 +1,105 @@
+paper: "Survey-Controllable TTS"
+reviewer: auto
+date: 2026-06-03
+version: v1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: >
+      Survey 类笔记的"方法节"以分类框架而非单一方法为主。
+      框架解释清晰(六大任务维度、四大控制策略、架构演进路线),
+      包含 WHY 解释(如架构演进中"效率 vs 控制力 vs 保真度"的 trade-off 分析)。
+      速查卡片"可借鉴"提供了 4 个具体可迁移 trick。
+  trustworthy:
+    verdict: pass
+    notes: >
+      数字型 claim 标注覆盖率高(Table 6 数据有 [Table 6, Appendix A.5] 标注,
+      各节内容有 [§X.X] 章节标注)。指标名使用正确(MCD/FDSD/WER/Cosine/PESQ/MOS)。
+      速查卡片"指标"含具体数字+数据集名+标注。
+  distinguishable:
+    verdict: pass-with-note
+    notes: >
+      因果解释来源标注到位: [论文原文] 和 [agent 解读] 有明确区分,
+      覆盖率约 90%。"Agent 补充的局限" 部分也有明确 [agent 解读] 标注。
+      方法节中个别分析性句子("这是本 survey 最核心的分类贡献")
+      虽为 agent 判断但语境下可区分。
+  navigable:
+    verdict: pass
+    notes: >
+      KB 背景节包含谱系定位、已有认知、创新判断三段,
+      有 6 个 confirmed 实体页 + 6 个 pending-review 过滤记录。
+      frontmatter 字段完整(concepts/models/tasks 均填充)。
+      速查卡片 5 字段都有实质内容。
+  no_contamination:
+    verdict: pass
+    notes: >
+      Survey 类论文笔记主要提供分类框架,反向更新以追加 key_papers 为主,
+      不涉及概念定义重写。6 个 pending-review 概念页(Style Transfer in TTS 等)
+      在原 card 阶段已创建,本次 deep 升级不新建概念页。
+
+checklist:
+  method_has_causal_explanation:
+    result: pass
+    detail: "Survey 框架中包含'每一代架构的演进本质上是在控制粒度和生成质量之间寻找新的平衡点'等因果分析"
+  design_choice_has_why:
+    result: pass
+    detail: "控制策略部分解释了从 Style Tagging 到 Instruction-Guided 各阶段的动因和局限"
+  quick_card_reusability:
+    result: pass
+    detail: "可借鉴提供了4个具体可迁移trick(控制策略坐标/MLLM评估/六维checklist/Table 1查表)"
+  claim_traceability:
+    result: pass
+    detail: "数字标注覆盖率 ~90%, 各节均有 [§X.X] 和 [Table N] 标注"
+  metric_names_correct:
+    result: pass
+    detail: "MCD/FDSD/WER/Cosine Similarity/PESQ/MOS/CMOS 使用正确"
+  quick_card_metrics:
+    result: pass
+    detail: "含 CosyVoice Instruction Following 4.81, Naturalness 4.92 + Vevo Naturalness 4.43 等具体数字"
+  no_directional_error:
+    result: pass
+    detail: "MCD <4好/WER越低越好/Cosine越高越好 方向均正确"
+  source_annotation_coverage:
+    result: pass
+    detail: "[论文原文] 和 [agent 解读] 标注清晰,覆盖率约 90%"
+  no_assertion_without_qualifier:
+    result: pass
+    detail: "agent 分析均有'agent 解读'标注;论文引用均有[论文原文]标注"
+  strong_claim_has_evidence:
+    result: pass
+    detail: "无过强未标注断言"
+  kb_background_has_lineage:
+    result: pass
+    detail: "KB 背景含谱系定位(指出知识库已有概念页和 survey 补充的分类框架缺口)"
+  kb_innovation_judgment:
+    result: pass
+    detail: "创新判断指出'本文不是提出新方法,而是提供分类框架和研究路线图'"
+  frontmatter_fields_present:
+    result: pass
+    detail: "所有必需字段均存在且非空"
+  frontmatter_semantically_correct:
+    result: pass
+    detail: "models 列 CosyVoice/EnCodec/SoundStream(survey 中重点讨论的模型); concepts 列 9 个相关概念"
+  quick_card_complete:
+    result: pass
+    detail: "5 个字段均有实质内容"
+  concept_admission:
+    result: not-applicable
+    detail: "本次不新建概念页"
+  concept_dedup:
+    result: not-applicable
+    detail: "本次不新建概念页"
+  reverse_update_no_factual_error:
+    result: pending
+    detail: "待反向更新时检查"
+  reverse_update_classification:
+    result: pending
+    detail: "待反向更新时检查"
+
+issues: []
+
+conclusion: pass
+summary: >
+  Survey 类 deep note 质量良好。分类框架清晰(六维任务/四级控制策略/三轴分类),
+  因果解释标注到位,数字可溯源。可直接进行反向更新。
