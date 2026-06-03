@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[Koel-TTS]] — 命中 7 页(取 Top 7): [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](待确认), [[Codec Language Model]](待确认), [[Differentiable Reward Optimization]](待确认), [[Speaker Verification]](待确认), [[Finite Scalar Quantization]](待确认)
+- [ingest/deep] [[Koel-TTS]] — 精读, kb_sources=7, 新建 0, 追加 7 (Classifier-Free Guidance, LLM-based TTS, Codec Language Model, Differentiable Reward Optimization, Speaker Verification, Finite Scalar Quantization, Zero-shot Speech Synthesis)
+- [review/auto] [[Koel-TTS]] — pass-with-fixes, 0 high + 1 medium (concepts 字段 DiffRO 关联间接) + 1 low
+- [lint/local] Koel-TTS — 通过/0 问题
+- [moc] 零样本语音合成 + TTS-总览 + TTS训练与评估 — 新增 Koel-TTS
 - [kb/search] [[F5R-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[F5R-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Conditional Flow Matching, Differentiable Reward Optimization, Non-autoregressive TTS, Speaker Embedding, Zero-shot Speech Synthesis, SEED-TTS-Eval)
 - [review/auto] [[F5R-TTS]] — pass-with-fixes, 1 medium + 2 low issues (models 字段补充, GRPO 超参数标注, internal noisy 数据补入)
