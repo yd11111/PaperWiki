@@ -594,3 +594,18 @@
 - [moc] 语音大模型与对话 MOC 更新: +DiffCSS (2025, diffusion CSS); TTS-总览 韵律与情感: +DiffCSS
 
 - [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
+
+## 2026-06-03 (MathReader)
+- [kb/search] [[MathReader]] — 命中 3 页(取 Top 3): [[VITS]](pending-review), [[Text-to-Speech Pipeline]](pending-review), [[TTS Evaluation]](pending-review) | 过滤: 无 confirmed | 全部待确认
+- [ingest/deep] [[MathReader]] — 精读, kb_sources=3, 新建 0, 追加 3 (VITS key_papers, Text-to-Speech Pipeline key_papers, TTS Evaluation key_papers)
+- [review/auto] [[MathReader]] — pass-with-fixes, 4 issues (0 high, 1 medium, 3 low)
+- [lint/local] MathReader — 通过/0 死链
+- [moc] TTS-总览 MOC 更新: +MathReader (2025 ICASSP, 新建"TTS 应用与可访问性"子主题)
+- [alert/backlog] pending-review: 70, draft deep/repro: 158 — 建议抽空审核
+
+## 2026-06-03 (PROEMO)
+- [kb/search] [[PROEMO]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[HuBERT]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
+- [ingest/deep] [[PROEMO]] — 精读, kb_sources=6, 新建 0, 追加 5 (Emotion Control in TTS, Prosody Modeling, HuBERT, Non-autoregressive TTS, Speaker Embedding key_papers)
+- [review/auto] [[PROEMO]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] PROEMO — 通过/0 死链
+- [moc] TTS-总览 韵律与情感: +PROEMO
