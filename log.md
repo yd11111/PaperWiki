@@ -554,3 +554,10 @@
 - [review/auto] [[XTTS]] — pass-with-fixes, 5 issues (0 high, 2 medium (1 fixed: Table 2 行对齐错误), 3 low)
 - [lint/local] XTTS — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +XTTS (2024节 + 演进脉络 Tortoise 分支)
+
+## 2026-06-03 (Very Attentive Tacotron)
+- [kb/search] [[Very Attentive Tacotron]] — 命中 6 页(取 Top 6): [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Attention-based TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review), [[TTS Evaluation]](pending-review)
+- [ingest/deep] [[Very Attentive Tacotron]] — 精读, kb_sources=6, 新建 0, 追加 7 (Attention-based TTS, Non-autoregressive TTS, Duration Predictor, Neural Vocoder, Speaker Embedding, TTS Evaluation, Mel Spectrogram)
+- [review/auto] [[Very Attentive Tacotron]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] Very Attentive Tacotron — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +Very Attentive Tacotron (生成方法演进)
