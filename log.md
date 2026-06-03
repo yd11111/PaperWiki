@@ -489,3 +489,9 @@
 - [review/auto] [[Vec-Tok Speech]] — pass-with-fixes, 1 issue (0 high, 1 medium fixed, 0 low)
 - [lint/local] Vec-Tok Speech — 通过/0 问题
 - [moc] 零样本语音合成 + 语音编码与量化 MOC 更新: +Vec-Tok Speech
+
+## 2026-06-03 (TITW)
+- [kb/search] [[TITW]] — 命中 6 页(取 Top 6): [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Emilia]](pending-review), [[VITS]](pending-review)
+- [ingest/deep] [[TITW]] — 精读, kb_sources=6, 首批标准化 noisy-TTS 训练数据集(VoxCeleb1→Easy 173h/Hard 189h), 追加更新 5 个实体页(TTS Evaluation, Anti-spoofing and Deepfake Detection, VITS, Whisper, Speaker Verification) + MOC 更新(TTS训练与评估)
+- [review/auto] [[TITW]] — pass-with-fixes, 2 issues (0 high, 1 medium overclaim, 1 low template)
+- [lint/local] TITW — 通过/0 问题
