@@ -21,7 +21,9 @@
   - [[论文笔记/PROEMO|PROEMO]] — 2025, FS2 + HuBERT emotion/intensity 双编码器 + GPT-4 prompt control, 多说话人情感强度可控
   - [[论文笔记/AutoStyle-TTS|AutoStyle-TTS]] — 2025, Tsinghua/Tencent, RAG 自动风格 prompt 选择 + CosyVoice backbone, 三维 embedding (profile+emotion+user) 风格匹配
   - [[论文笔记/RADKA-CSS|RADKA-CSS]] — 2025, Inner Mongolia Univ/CUHK-SZ, RAG + 多粒度异构图聚合对话风格知识, N-DMOS 3.904/S-DMOS 3.879
+  - [[论文笔记/EmoVoice|EmoVoice]] — 2025 (ACM MM), Qwen2.5 LLM + freestyle NL emotion description + phoneme parallel output, 情感 MOS 3.507 接近 GPT-4o-mini-tts 3.598
 - 流式与实时 — streaming, low-latency
+  - [[论文笔记/LLMVoX|LLMVoX]] — 2025, MBZUAI, 30M LLM-agnostic autoregressive streaming TTS, multi-queue, 475ms延迟
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
 - 语音安全与隐私 — voice protection, deepfake defense, watermarking

@@ -4,7 +4,7 @@ title: "Codebook Collapse"
 aliases: [码本坍缩, Codebook Underutilization, Dead Codes, Index Collapse]
 category: "training-challenge"
 tags: [VQ, quantization, training-instability, audio-codec, RVQ]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/VQ-VAE|VQ-VAE]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/IndexTTS|IndexTTS]]"]
 origin_paper: ""
 related_concepts: ["[[Residual Vector Quantization]]", "[[Finite Scalar Quantization]]", "[[Quantizer Dropout]]", "[[Codec Training Objectives]]"]
 status: confirmed

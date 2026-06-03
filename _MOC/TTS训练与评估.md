@@ -20,6 +20,7 @@
 - [[论文笔记/RIO|RIO]] — 2025, reverse inference optimization, PPC, WER 3.4/SIM 0.96/bad case 1%
 - [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] — 2025, 多奖励 GRPO 于单码本 TTS LLM, 5 reward (WER+SIM+len+ent+prosody), CER 1.10/MOS 4.21
 - [[论文笔记/DMOSpeech 2|DMOSpeech 2]] — 2025 (AAAI 2026), component-level GRPO 靶向 duration predictor, SIM+WER reward, 1.5K RL steps, WER 1.752% en, RTF 0.032
+- [[论文笔记/FPO|FPO]] — 2025, token-level 选择性 DPO, segmental error 二分类 (temporal/semantic-phonetic), 3-4x 数据效率, CosyVoice bad case 21%->9%
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -55,6 +56,7 @@
 ```
 Post-training 演进:
   SpeechAlign (2024, DPO on codec LM)
+  → FPO (2025, token-level selective DPO for TTS)
   → RL-for-Audio-LLM (2025, GRPO vs DiffRO 统一框架)
   → GSRM (2025, generative speech reward model)
   → RIO (2025, reverse inference optimization)
