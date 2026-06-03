@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, masked-diffusion, non-autoregressive, zero-shot, speech-editing, discrete-diffusion, LLM-based]
 concepts: ["[[Masked Generative Modeling]]", "[[LLM-based TTS]]", "[[Non-autoregressive TTS]]", "[[Diffusion Model]]", "[[Conditional Flow Matching]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]"]
-models: ["[[CosyVoice 3]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+models: ["[[CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/F5-TTS|F5-TTS]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
@@ -186,4 +186,7 @@ L(theta) = E_t [ (1/t) * sum_{i: s_t^i = [MASK]} -log p_theta(s_0^i | s_t) ]
 ---
 
 > [!review] 审阅状态
-> 待审阅。见 `_review/LLaDA-TTS-review.yml`。
+> **conclusion: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
+> - medium: frontmatter models 补充 MaskGCT/F5-TTS (已修正)
+> - low: 50h vs 6000h 数据量歧义 (已标注)
+> 详见 `_review/LLaDA-TTS-review.yml`。
