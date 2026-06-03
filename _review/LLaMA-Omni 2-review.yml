@@ -1,0 +1,35 @@
+paper: "LLaMA-Omni 2"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 Gate Fusion / Read-Write / TTS 预训练三个关键设计选择的 WHY 解释,均有消融验证支撑; 速查卡片可借鉴字段具体"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%; 指标名正确; 速查指标含数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 >90%; agent 解读与论文原文区分清晰(R:W ratio 解读, 流式优于离线解读, 合成数据天花板)"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有 modular vs native SpeechLM 谱系定位; 创新判断有对比基准; 速查卡片 5 字段均有实质内容"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页; 反向更新尚未执行"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: frontmatter.models
+    detail: "models 字段包含 [[MinMo]],但论文使用的 speech tokenizer 是 CosyVoice 2 的 FSQ-SenseVoice-Large tokenizer (§2.2),MinMo 是 CosyVoice 3 的 tokenizer backbone,本文未使用"
+    suggestion: "移除 [[MinMo]]"
+
+summary: |
+  整体质量良好。笔记准确抓住了本文的核心贡献(工程集成而非方法创新),
+  三个关键设计选择(Gate Fusion / Read-Write / TTS LM 预训练)都有充分的
+  WHY 解释和消融验证。KB 背景定位清晰,将本文置于 modular SpeechLM 谱系中。
+  唯一问题是 frontmatter models 字段包含了论文未实际使用的 MinMo 模型。

@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [speech-LM, streaming, real-time, autoregressive, modular-SpeechLM, speech-interaction]
 concepts: ["[[Speech Language Model]]", "[[Streaming Spoken Dialogue]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Modality Adaptation for Speech LLM]]", "[[Codec Language Model]]"]
-models: ["[[CosyVoice 2]]", "[[Whisper]]", "[[SenseVoice]]", "[[MinMo]]"]
+models: ["[[CosyVoice 2]]", "[[Whisper]]", "[[SenseVoice]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -174,5 +174,8 @@ LLaMA-Omni 2 是一个**工程集成优于方法创新**的工作。其核心贡
 
 ---
 
-> [!review] 审阅状态
-> 待审阅 — 笔记已生成,等待审阅后执行反向更新。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> **结论**: pass-with-fixes — 1 medium issue (已修正)
+> - [x] ~~frontmatter models 包含 MinMo(论文未使用),已移除~~ (fixed)
+> **原则满足**: 可复述 ✓ / 可信赖 ✓ / 可区分 ✓ / 可定位 ✓ / 不污染 ✓
+> 详见 `_review/LLaMA-Omni 2-review.yml`
