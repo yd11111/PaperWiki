@@ -1,0 +1,52 @@
+paper: DiVISe
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  comprehensible:
+    verdict: pass
+    notes: "方法节包含 5 个关键设计选择,每个都有 WHY 解释; 速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    verdict: pass
+    notes: "数字 claim 标注覆盖率 >90%; 指标方向无误 (SECS↑/EER↓/PESQ↑/WER↓)"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释来源标注覆盖率约 90%; agent 解读处均已标注"
+  navigable:
+    verdict: pass-with-fixes
+    notes: "KB 背景有谱系定位; frontmatter tasks/datasets 为空但对应实体不在库中,可接受"
+  no_contamination:
+    verdict: pass
+    notes: "不新建概念页; 反向更新仅追加 key_papers"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: navigable
+    location: frontmatter
+    detail: "tasks 和 datasets 字段为空列表"
+    suggestion: "V2S 任务和 LRS2/LRS3 数据集不在库中,无需创建实体页 (不满足准入规则),保持空列表可接受"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "局限性第3点"
+    detail: "WER 35-37% 被描述为约三分之一的内容无法被 ASR 正确识别 — WER 的定义是 (S+D+I)/N,可以超过 100%,在 35% 范围内近似等于错误率但表述不够严谨"
+    suggestion: "改为 WER 35-37% 表明内容恢复仍有较大误差"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: comprehensible
+    location: "可复用的 idea 第3点"
+    detail: "端到端简单架构的扩展性 — 表述较泛,缺乏具体可操作的建议"
+    suggestion: "已有具体数据支撑 (Fig 3 引用),可以接受,但可加一句具体场景"
+
+summary: |
+  DiVISe 笔记质量良好。5 个设计选择均有因果解释和来源标注,实验数据标注覆盖率高,
+  指标使用正确。KB 背景准确定位了 V2S 与 TTS 的关系。3 个 low issue 不影响可信性。
+  建议: 修正局限性第3点的 WER 表述。结论: pass-with-fixes,可直接进行反向更新。

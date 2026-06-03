@@ -158,7 +158,7 @@ HiFi-GAN vocoder 的训练分两步 [§4.2.2]:
 
 1. **预处理瓶颈**: 需要 dlib 检测 68 个面部关键点 + 仿射变换提取 96x96 嘴部区域,不适合实时应用 [§8]
 2. **仅英语评估**: 只在 LRS2 和 LRS3 (英语) 上测试,多语言泛化未知 [§8]
-3. **绝对音质仍低**: PESQ 1.17-1.23 距人类语音的 4.0+ 有很大差距; WER 35-37% 意味着约三分之一的内容仍无法被 ASR 正确识别 [Table 2] [agent 解读]
+3. **绝对音质仍低**: PESQ 1.17-1.23 距人类语音的 4.0+ 有很大差距; WER 35-37% 表明内容恢复仍有较大误差 [Table 2] [agent 解读]
 4. **MOS 悖论**: Unit-HiFiGAN 的 MOS (4.37) 反而略高于 HiFi-GAN (4.24) [Table 16],因为 unit vocoder 生成的中性语音在不考虑说话人身份时更讨人喜欢 [论文原文, §C]; 这暗示 mel-based vocoder 在保留说话人特性时可能引入了一些声学噪声 [agent 解读]
 5. **Vocoder 依赖固定**: HiFi-GAN 在 LJSpeech (单说话人) 上预训练,通过微调适应 V2S 输出,但更现代的 vocoder (BigVGAN 等) 可能进一步提升质量 [agent 解读]
 6. **模型规模大**: 总参数 350M (backbone 325M + conformer 10M + vocoder 14M),限制了边缘部署 [Table 15]
@@ -184,8 +184,9 @@ HiFi-GAN vocoder 的训练分两步 [§4.2.2]:
 
 ---
 
-> [!review] 审阅状态
-> 待审阅 — 详见 `_review/DiVISe-review.yml`
+> [!review] 审阅状态: pass-with-fixes (2026-06-03)
+> 3 low issues (template-compliance, traceability-gap, weak-reusability)。无 high/medium issue。
+> 详见 `_review/DiVISe-review.yml`
 
 ---
 

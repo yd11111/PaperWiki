@@ -1,0 +1,53 @@
+paper: "DiffCSS"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "方法 > 关键设计选择 > 4. 韵律嵌入如何注入 TTS backbone"
+    detail: "描述了 speaker embedding 与 prosody embedding 组合后通过 cross-attention 注入,但未标注该机制的具体出处章节"
+    suggestion: "补充 [§II.A] 标注"
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "局限性 > 第5点"
+    detail: "'MOS 绝对值偏低' 是 agent 观察,未标注这是 agent 解读而非论文自述"
+    suggestion: "改为 '[agent 解读] MOS 绝对值偏低 (E-MOS 3.602 [Table I])' 或标注为 agent 观察"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "datasets 为空,论文使用 LibriTTS-R 和 DailyTalk 两个数据集,但 vault 无对应数据集页"
+    suggestion: "LibriTTS-R 和 DailyTalk 是公开数据集,不满足独立页准入规则; 保持空值即可"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > tasks"
+    detail: "tasks 为空,论文属于 Conversational Speech Synthesis 任务"
+    suggestion: "vault 无 CSS 任务页,可保持空值; 如后续 CSS 论文增多可考虑创建"
+
+stats:
+  claim_coverage: "90%"
+  source_tag_coverage: "85%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 2
+  low_issues: 2
