@@ -1,0 +1,43 @@
+paper: TTS-Transducer
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 4 个设计选择的 WHY 解释,每个都对比了替代方案;速查卡片可借鉴列了 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%;指标名 CER/WER/SSIM/MOS 使用正确;速查指标有数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 >80%;方法节 4 个设计选择均标注了 [论文原文] 或 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(VALL-E, FastSpeech, Transduce-and-Speak, VALL-T),创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页;反向更新均为 append(追加 key_papers);无 factual error"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "KB 背景 > 已有认知 > Zero-shot Speech Synthesis"
+    detail: "声称'SSIM 0.868-0.881,与 VALL-E-X 等系统可比',但论文 Table III 仅对比 CER/WER/MOS,未提供 baseline 的 SSIM 数字,无法直接比较"
+    suggestion: "改为'SSIM 0.868-0.881 (LibriTTS-R unseen speakers)'并移除与 VALL-E-X 的可比声明,或标注 [agent 解读]"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 仅列了本文使用的 codec (EnCodec, SoundStream),未包含对比 baseline (Bark, VALL-E-X, SpeechT5),但这些系统暂无模型库页面"
+    suggestion: "可保持现状,或添加 baseline 为字符串(非 wikilink)"
+
+  - type: traceability-gap
+    severity: low
+    location: "BPE vs IPA 分析"
+    detail: "'可能因为 IPA phonemes 与声学特征有更直接的对应关系'已标注 [agent 解读],但未引用相关文献支撑这一解读"
+    suggestion: "可补充: 这一解读与 T5-TTS (ref 11) 中类似发现一致,或保持 [agent 解读] 标注即可"
+
+conclusion: pass-with-fixes
+conclusion_reason: "无 high issue;1 个 medium (KB 背景中 SSIM 可比声明缺乏直接对比数据) 不阻塞反向更新;2 个 low 可后续改善"

@@ -30,7 +30,7 @@ updated: 2026-06-03
 > - [[LLM-based TTS]] (confirmed): VALL-E 系列是当前主流 zero-shot TTS 范式,核心是 codec LM + in-context learning。TTS-Transducer 提供了一种不依赖大规模预训练的替代路线,仅用 464h 数据即可达到可比性能。
 > - [[Speaker Embedding]] (confirmed): TTS-Transducer 使用 [[Global Style Tokens]] [待确认] 从参考语音提取说话人 embedding,通过 conditional LayerNorm 注入 encoder 和 RCH,而非 VALL-E 的 in-context prompt 方式。
 > - [[模型库/EnCodec|EnCodec]] (confirmed): 本文使用的三种 codec 之一,也是 VALL-E 的默认 codec。
-> - [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] (confirmed): TTS-Transducer 在 unseen speakers 上展示了零样本能力,speaker similarity 0.868-0.881,与 VALL-E-X 等系统可比。
+> - [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] (confirmed): TTS-Transducer 在 unseen speakers 上展示了零样本能力,speaker similarity 0.868-0.881 (LibriTTS-R unseen speakers) [Table I]。
 > - [[Codec Language Model]] [待确认]: TTS-Transducer 是 CodecLM 的一个替代方案——同样预测 codec tokens,但用 transducer 而非 language model 建模。
 >
 > **创新判断**: 将 RNNT 引入 TTS codec token 预测是新颖的组合。已有 Transduce-and-Speak (ASRU 2023) 和 VALL-T (arXiv 2024) 探索过 transducer+TTS,但前者需要两阶段分开训练且依赖 semantic tokens,后者内存开销极大;TTS-Transducer 通过 transducer (第一码本) + RCH (剩余码本) 的分离设计解决了多码本 RNNT 的内存问题,且支持端到端联合训练。
@@ -164,7 +164,11 @@ TTS-Transducer 由两个端到端联合训练的组件构成 [§III, Fig 1]:
 
 ---
 
-> [!review] 审阅状态
-> 待审阅 — 见 `_review/TTS-Transducer-review.yml`
+> [!review] 审阅状态 (2026-06-03, agent-auto)
+> **结论: pass-with-fixes**
+> - 无 high issue
+> - 1 medium: KB 背景 SSIM 可比声明已修正 (移除无依据的跨系统比较)
+> - 2 low: frontmatter models 未含 baseline (不阻塞); BPE vs IPA 推断标注充分
+> 详见 `_review/TTS-Transducer-review.yml`
 
 检索命中: [[Residual Vector Quantization]], [[LLM-based TTS]], [[Speaker Embedding]], [[模型库/EnCodec|EnCodec]], [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] | 过滤: [[Codec Language Model]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
