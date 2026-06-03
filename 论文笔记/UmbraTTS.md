@@ -123,11 +123,12 @@ SER (Speech-to-Environment Ratio) 值 ∈ [0,1] 通过 sinusoidal positional enc
 
 | 指标 | UmbraTTS | AudioLDM | AudioLDM2 | VoiceLDM_audio | VoiceDiT | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| CLAP ↑ | 0.619 | 0.42 | **0.58** | 0.51 | 0.45 | AudioCaps | [Table 2] |
+| CLAP ↑ | **0.619** | 0.42 | 0.58 | 0.51 | 0.45 | AudioCaps | [Table 2] |
 | KL ↓ | **1.87** | 2.01 | 2.36 | 10.02 | 1.87 | AudioCaps | [Table 2] |
-| FAD ↓ | **2.65** | 4.27 | 2.04 | 4.13 | 3.55 | AudioCaps | [Table 2] |
+| FAD ↓ | 2.65 | 4.27 | **2.04** | 4.13 | 3.55 | AudioCaps | [Table 2] |
 | CLAP ↑ | **0.77** | 0.54 | 0.61 | 0.63 | - | MusicCaps | [Table 2] |
 | KL ↓ | **0.939** | 1.42 | 3.83 | 4.64 | - | MusicCaps | [Table 2] |
+| FAD ↓ | **3.11** | 4.15 | 3.51 | 5.72 | - | MusicCaps | [Table 2] |
 
 **人类评估** [Table 3, §4.2]:
 
@@ -172,3 +173,11 @@ SER (Speech-to-Environment Ratio) 值 ∈ [0,1] 通过 sinusoidal positional enc
 1. **SER 连续条件注入**: 将任意连续控制量通过 sinusoidal encoding + MLP 编码后与 time step embedding 相加,再通过 adaLN-Zero 注入 DiT。这种方式可泛化到任何需要连续可控维度的生成任务(如情感强度、语速、能量)
 2. **VAD + Source Separation 双策略数据增强**: 对混合音频同时使用时间域分离(VAD)和频率域分离(source separation),训练时随机选择,提升模型对不同分离质量的鲁棒性。可迁移到其他需要从混合信号中学习的任务
 3. **环境音联合生成 vs 后混合的评估方法论**: 通过 A/B test 对比联合生成与后混合,是验证联合建模价值的标准方法,可用于类似的多模态联合生成 vs 级联生成的对比
+
+> [!review] 审阅 (2026-06-03, auto, v1.1)
+> **结论**: pass-with-fixes
+> - (medium, fixed) Table 2 AudioCaps CLAP/FAD 最佳标记错误,已修正
+> - (low) frontmatter models 未包含论文 baseline 模型(因无模型库页)
+> - (low) frontmatter tasks 为空(环境感知 TTS 不满足独立任务页准入)
+> - (low) 局限性第6点引用来源应为 [§1] 非 [§3]
+> 详见 `_review/UmbraTTS-review.yml`

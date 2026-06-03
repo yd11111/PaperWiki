@@ -1,0 +1,54 @@
+paper: "UmbraTTS"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: trustworthy
+    location: "实验 > Audio-to-Audio 任务 > Table 2"
+    detail: "初稿中 AudioCaps CLAP 和 FAD 的最佳标记(加粗)错误: CLAP 应为 UmbraTTS (0.619) 而非 AudioLDM2 (0.58); FAD 应为 AudioLDM2 (2.04) 而非 UmbraTTS (2.65)"
+    suggestion: "已在审阅过程中修正"
+    fixed: true
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > models"
+    detail: "models 仅列 Whisper (用于数据构建/评估的工具),未包含论文对比的 baseline 模型 (VoiceLDM, VoiceDiT, WavCraft, AudioLDM, AudioLDM2, F5-TTS),但这些模型均无模型库实体页"
+    suggestion: "保持现状,待相关模型页创建后补充链接"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > tasks"
+    detail: "tasks 为空,论文涉及的 'environmental-aware TTS' 任务在任务库中没有对应页"
+    suggestion: "保持空值,该任务太细分,不满足独立任务页准入规则(仅此一篇论文)"
+
+  - id: 4
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "局限性 > 第6点"
+    detail: "'论文声称模型和数据将发布' 引用了 §3 但原文出处实际在 §1 (第二段末尾)"
+    suggestion: "引用来源应为 [§1],影响较小"
+
+stats:
+  claim_coverage: "90%"
+  source_tag_coverage: "90%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 3
