@@ -1,0 +1,42 @@
+paper: "F5R-TTS"
+reviewer: agent-v1.1
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  comprehensible: pass
+  trustworthy: pass
+  distinguishable: pass
+  navigable: pass-with-fixes
+  no-pollution: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: navigable
+    location: frontmatter.models
+    detail: "models 字段为空列表 []。本文使用 F5-TTS 作为 backbone,SenseVoice 作为 WER reward 模型,WeSpeaker 作为 SIM reward 模型,WavLM-based SV 和 Paraformer-zh 用于评估。其中 SenseVoice 和 WavLM 有模型库页面,可列入。"
+    suggestion: "在 models 字段中添加 SenseVoice 和 WavLM 作为评估/reward 工具链: [\"[[模型库/SenseVoice|SenseVoice]]\", \"[[模型库/WavLM|WavLM]]\"]"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "方法节 - GRPO Enhancement"
+    detail: "GRPO 的关键超参数 (epsilon, beta, group size, 采样步数 N) 论文未公开,笔记中也未标注为 '未报告'。"
+    suggestion: "在训练策略小节追加一行: 'GRPO 超参数 (epsilon, beta, group size): 论文未报告 [§2.3]'"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "实验表格"
+    detail: "Table 2 (internal dataset) 的 noisy 子集数据未列入实验表格,但论文报告了 (WER 1.33% vs 1.80%, SIM 0.746 vs 0.730)。"
+    suggestion: "在实验表格中补充 internal dataset 的 noisy 行 (2 行: WER noisy + SIM noisy)"
+
+summary: |
+  笔记质量整体优良。方法节对 output probabilization 的因果解释清晰深入,
+  特别是 "Eq.5 退化为 Eq.1" 的 agent 解读体现了机制理解。KB 背景的谱系定位
+  准确地将本文放在 RL-for-TTS 和 NAR TTS 的交叉点上。速查卡片的"可借鉴"
+  具体可迁移。主要不足是 models 字段遗漏和少量数据点缺失。
