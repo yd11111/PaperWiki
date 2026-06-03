@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
