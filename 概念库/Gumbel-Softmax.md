@@ -4,7 +4,7 @@ title: "Gumbel-Softmax"
 aliases: [Gumbel Softmax, Gumbel-Softmax Trick, Concrete Distribution]
 category: "optimization-technique"
 tags: [differentiable-sampling, discrete-optimization, gradient-estimation, reparameterization]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]"]
 origin_paper: "Jang et al., Categorical Reparameterization with Gumbel-Softmax, ICLR 2017"
 related_concepts: ["[[Differentiable Reward Optimization]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]"]
 status: pending-review
@@ -61,10 +61,21 @@ y_i = exp((log(π_i) + g_i) / τ) / Σ_j exp((log(π_j) + g_j) / τ)
 - VQ/RVQ 中的 soft assignment
 - 离散语音 token 的 RL/reward-based 优化
 
+### 在 SSL 语音预训练中的应用 (wav2vec 2.0)
+
+wav2vec 2.0 (Baevski et al., NeurIPS 2020) 使用 Gumbel-Softmax 实现端到端的 speech token 离散化 [§2]:
+- Feature encoder 输出映射到 $G \times V$ 个 logits (Product Quantization: G=2, V=320)
+- Gumbel-Softmax 选择每组最可能的 codebook entry,temperature $\tau$ 从 2 退火至 0.5 [§4.2]
+- Straight-Through 变体: 前向 argmax (真正离散),反向 Gumbel-Softmax 梯度 [§2]
+- 配合 diversity loss 最大化 codebook 使用熵,防止 codebook collapse [§3.2]
+
+[agent 解读] wav2vec 2.0 是 Gumbel-Softmax 在语音 SSL 中的里程碑应用;后续 HuBERT 用离线 k-means 替代了它,避免了温度退火等超参数,但丧失了端到端可微性
+
 ## 关键论文
 
 - Jang et al., "Categorical Reparameterization with Gumbel-Softmax", ICLR 2017 — 原始论文
 - Maddison et al., "The Concrete Distribution", ICLR 2017 — 独立同期工作,相同方法
+- wav2vec 2.0 (Baevski et al., NeurIPS 2020): 在 SSL 语音预训练中使用 Gumbel-Softmax PQ 实现端到端离散化
 - CosyVoice 3 (2025): 在 TTS post-training (DiffRO) 中使用,实现 token-level 可微 reward 优化
 
 ## 相关概念
@@ -76,7 +87,7 @@ y_i = exp((log(π_i) + g_i) / τ) / Σ_j exp((log(π_j) + g_j) / τ)
 
 ## 演进
 
-REINFORCE (高方差, 1992) → Gumbel-Softmax / Concrete (低方差可微, 2017) → ST-Gumbel (结合离散前向+可微反向) → 应用于 TTS token-level RL (CosyVoice 3, 2025)
+REINFORCE (高方差, 1992) → Gumbel-Softmax / Concrete (低方差可微, 2017) → ST-Gumbel (结合离散前向+可微反向) → 应用于 SSL 语音离散化 (wav2vec 2.0, 2020) → 应用于 TTS token-level RL (CosyVoice 3, 2025)
 
 ---
 

@@ -4,7 +4,7 @@ title: "Codebook Collapse"
 aliases: [码本坍缩, Codebook Underutilization, Dead Codes, Index Collapse]
 category: "training-challenge"
 tags: [VQ, quantization, training-instability, audio-codec, RVQ]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/w2v-BERT|w2v-BERT]]"]
 origin_paper: ""
 related_concepts: ["[[Residual Vector Quantization]]", "[[Finite Scalar Quantization]]", "[[Quantizer Dropout]]", "[[Codec Training Objectives]]"]
 status: confirmed
@@ -49,6 +49,16 @@ VQ-VAE 中用于将 encoder 输出绑定到 codebook 的辅助损失,可能过�
 | Factorized codes + L2-norm | DAC (2023) | 低维(8d)做 lookup + L2 归一化消除 norm 干扰 | bitrate efficiency 62% → 99% |
 | FSQ | Mentzer et al. (ICLR 2024) | 去除码本,每维独立量化到有限标量级别 | 根本性解决,100% utilization |
 | Gumbel-Softmax VQ | 多个工作 | 将 hard lookup 软化为可微,让所有 codes 获得梯度 | 有效但引入额外计算 |
+| Contrastive loss as guard | w2v-BERT (Chung et al., 2021) | contrastive loss 强制 codebook entries 具有区分性,为 MLM 提供有意义的 targets | 在端到端 contrastive+MLM 中必要 |
+
+### w2v-BERT 对 Codebook Collapse 的实验证据
+
+w2v-BERT (Chung et al., ASRU 2021) 提供了 codebook collapse 的直接实验证据 [§5.2, Fig 2]:
+- **移除 contrastive module 后**: MLM loss 迅速降至 ~0, prediction accuracy → 100%, diversity loss → 1 (最大 collapse)
+- **原因**: 没有 contrastive 约束时,quantizer 可以"cheat" — 将所有 masked positions 的 token 坍缩到同一 code vector,MLM trivially solved 但无有用表征
+- **结论**: 在端到端 contrastive + MLM 框架中,contrastive loss 本身就是最有效的 anti-collapse 机制
+
+这一发现补充了传统 anti-collapse 方案 (EMA, factorized codes, FSQ) 的视角 — 当系统中已有 contrastive loss 时,无需额外的 code balancing 机制。
 
 ### 新兴方案 (2024-2025)
 

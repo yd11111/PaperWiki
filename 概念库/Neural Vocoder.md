@@ -4,7 +4,7 @@ title: "Neural Vocoder"
 aliases: [神经声码器, Neural Waveform Generator, 波形合成器]
 category: "model-family"
 tags: [TTS, vocoder, waveform-generation, audio-synthesis, GAN, flow, diffusion]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/VITS|VITS]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]"]
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/VITS|VITS]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/MELLE|MELLE]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]", "[[Multi-scale STFT Discriminator]]", "[[Snake Activation]]"]
 status: confirmed

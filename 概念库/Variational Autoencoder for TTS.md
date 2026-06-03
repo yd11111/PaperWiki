@@ -4,7 +4,7 @@ title: "Variational Autoencoder for TTS"
 aliases: [VAE-TTS, TTS中的变分自编码器, VAE for Speech Synthesis, 变分推断TTS]
 category: "generative-model"
 tags: [TTS, VAE, latent-variable, expressive-TTS, generative-model]
-key_papers: ["[[论文笔记/VITS|VITS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Prosody Modeling]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]", "[[Neural Vocoder]]"]
 status: pending-review

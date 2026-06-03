@@ -4,9 +4,9 @@ title: "Semantic vs Acoustic Tokens"
 aliases: [语义 token 与声学 token, Semantic Tokens, Acoustic Tokens, Token Hierarchy, 语音 token 层级, Discrete Speech Features]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, speech-LM, trade-off]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/SoundStorm|SoundStorm]]", "GSLM (Lakhotia et al., 2021)", "[[论文笔记/AudioLM|AudioLM]]", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "Moshi (Defossez et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/BASE TTS|BASE TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/SoundStorm|SoundStorm]]", "GSLM (Lakhotia et al., 2021)", "[[论文笔记/AudioLM|AudioLM]]", "SpeechTokenizer (Zhang et al., 2024)", "pGSLM (Kharitonov et al., 2022)", "SPIRIT-LM (Nguyen et al., 2024)", "[[论文笔记/Moshi|Moshi]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
-related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]"]
+related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]", "[[Self-Supervised Speech Representation]]"]
 status: confirmed
 lifecycle: active
 merged_into: ""

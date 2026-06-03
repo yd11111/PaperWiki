@@ -98,3 +98,20 @@
 - [ingest/deep] [[Mega-TTS 2]] — 精读(batch processing), kb_sources=6, 追加更新 7 个实体页(Speech Factorization, Prosody Modeling, Speaker Embedding, LLM-based TTS, Speech Tokenizer, Codebook Collapse, Semantic vs Acoustic Tokens)
 - [ingest/deep] [[BASE TTS]] — 精读(batch processing), kb_sources=5, 追加更新 6 个实体页(LLM-based TTS, Speech Tokenizer, Semantic vs Acoustic Tokens, Speaker Embedding, Speech Factorization, Codebook Collapse)
 - [lint/local] NaturalSpeech 2, Mega-TTS 2, BASE TTS — 通过/0 问题
+- [kb/search] [[Moshi]] — 命中 5 页(confirmed): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓ | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
+- [kb/search] [[Step-Audio]] — 命中 4 页(confirmed): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review)
+- [kb/search] [[Step-Audio 2.5]] — 命中 3 页(confirmed): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓ | 过滤: [[Modality Adaptation for Speech LLM]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[Moshi]] — 精读(batch processing), kb_sources=5, 追加更新 8 个实体页(Full-duplex Spoken Dialogue, Speech Language Model, Speech Tokenizer, RVQ, Semantic vs Acoustic Tokens, Streaming Spoken Dialogue, LLM-based TTS, Instruction-Guided Speech Synthesis)
+- [ingest/deep] [[Step-Audio]] — 精读(batch processing), kb_sources=4, 追加更新 8 个实体页(Full-duplex Spoken Dialogue, Speech Language Model, Speech Tokenizer, Semantic vs Acoustic Tokens, LLM-based TTS, Streaming Spoken Dialogue, Instruction-Guided Speech Synthesis, Emotion Control in TTS)
+- [ingest/deep] [[Step-Audio 2.5]] — 精读(batch processing), kb_sources=3, 追加更新 6 个实体页(Speech Language Model, LLM-based TTS, Streaming Spoken Dialogue, Instruction-Guided Speech Synthesis, Emotion Control in TTS, Modality Adaptation for Speech LLM)
+- [create/entity] 无新建 — 候选 (Inner Monologue, RQ-Transformer, Split RVQ, Mimi, Generative Reward Model, MTP, Speculative Response Generation) 均不满足准入规则(单/双篇论文特有概念,不构成跨论文共享节点)
+- [lint/local] Moshi, Step-Audio, Step-Audio 2.5 — 通过/0 问题
+- [kb/search] [[wav2vec 2.0]] — 命中 4 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓, [[Speech Language Model]]✓ | 过滤: [[Gumbel-Softmax]](pending-review), [[Masked Generative Modeling]](pending-review)
+- [kb/search] [[WavLM]] — 命中 5 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Language Model]]✓, [[Speech Factorization]]✓ | 过滤: 无
+- [kb/search] [[w2v-BERT]] — 命中 4 页(confirmed): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓, [[Speech Language Model]]✓ | 过滤: [[Gumbel-Softmax]](pending-review), [[Masked Generative Modeling]](pending-review)
+- [ingest/deep] [[wav2vec 2.0]] — 精读(batch processing), kb_sources=4, 新建模型页 1 (wav2vec 2.0), 追加更新 5 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens, Gumbel-Softmax, Codebook Collapse, Speech Language Model)
+- [ingest/deep] [[WavLM]] — 精读(batch processing), kb_sources=5, 新建模型页 1 (WavLM), 追加更新 3 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens, Speaker Embedding) + 更新 HuBERT model superseded_by
+- [ingest/deep] [[w2v-BERT]] — 精读(batch processing), kb_sources=4, 新建模型页 1 (w2v-BERT), 追加更新 4 个实体页(Speech Tokenizer, Semantic vs Acoustic Tokens, Codebook Collapse, Speech Language Model)
+- [create/concept] [[Self-Supervised Speech Representation]] — 新建概念页(满足准入: 多篇引用(4+) + 前置知识 + 连接 wav2vec 2.0/HuBERT/WavLM/w2v-BERT)
+- [create/model] [[模型库/wav2vec 2.0|wav2vec 2.0]], [[模型库/WavLM|WavLM]], [[模型库/w2v-BERT|w2v-BERT]] — 3 个模型页创建
+- [lint/local] wav2vec 2.0, WavLM, w2v-BERT — 通过/0 问题

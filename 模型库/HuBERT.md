@@ -5,11 +5,11 @@ aliases: [Hidden-Unit BERT, HuBERT model]
 org: "Meta AI (Facebook AI Research)"
 year: 2021
 tags: [self-supervised-learning, speech-representation, masked-prediction, BERT, ASR, speech-tokenizer]
-key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]"]
+key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Self-Supervised Speech Representation]]"]
 tasks: []
 key_papers: ["[[论文笔记/HuBERT|HuBERT]]"]
-supersedes: []
-superseded_by: []
+supersedes: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
+superseded_by: ["[[模型库/WavLM|WavLM]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
