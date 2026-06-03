@@ -12,6 +12,7 @@
 - [[_MOC/TTS训练与评估|TTS 训练与评估]] — post-training, RL, evaluation, reward model
 - 韵律与情感 — prosody, emotion, style
   - [[论文笔记/Llama-VITS|Llama-VITS]] — 2024, Llama2 语义嵌入增强 VITS 情感表达
+  - [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集 + LLM 驱动五维度文本表现力标注
 - 流式与实时 — streaming, low-latency
 
 ## 按任务浏览
@@ -52,3 +53,7 @@
 - [[Diffusion-based TTS]] — 扩散语音合成 (Grad-TTS, Diff-TTS, ProDiff)
 - [[Diffusion-based Vocoder]] — 扩散声码器 (DiffWave, WaveGrad, BDDM)
 - [[Next-Token Diffusion]] — 逐 token 扩散头 (LatentLM, CLEAR, VibeVoice)
+
+## 生成方法演进 (相关论文)
+
+- [[论文笔记/VoiceFlow|VoiceFlow]] — SJTU, 2023 (ICASSP 2024), 首次 rectified flow matching 用于 TTS 声学模型, 2 步 MOS 3.92 vs GradTTS 2.98

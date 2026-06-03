@@ -4,7 +4,7 @@ title: "Emotion Control in TTS"
 aliases: [情感控制TTS, Emotional TTS, Emotion Synthesis, 情感语音合成, Affective Speech Synthesis]
 category: "technique"
 tags: [TTS, emotion, expressiveness, control, affective-computing, style]
-key_papers: ["Li et al. (2021)", "MsEmoTTS (Lei et al., 2022)", "Emo-DPO (Gao et al., 2024)", "EmoSphere++ (Cho et al., 2024)", "Rong et al. (2025)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/NaturalVoices|NaturalVoices]]", "[[论文笔记/SpeechWorldModel|SpeechWorldModel]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]"]
+key_papers: ["Li et al. (2021)", "MsEmoTTS (Lei et al., 2022)", "Emo-DPO (Gao et al., 2024)", "EmoSphere++ (Cho et al., 2024)", "Rong et al. (2025)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/NaturalVoices|NaturalVoices]]", "[[论文笔记/SpeechWorldModel|SpeechWorldModel]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/EmoSphere++|EmoSphere++]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Speech Factorization]]", "[[Differentiable Reward Optimization]]", "[[LLM-based TTS]]"]
 status: pending-review
@@ -119,6 +119,10 @@ Survey 特别指出情感控制的难点:
 - [[Speech Factorization]]: 情感与 speaker/content 解耦
 - [[Differentiable Reward Optimization]]: Emo-DPO 的技术基础
 - [[LLM-based TTS]]: 新范式下的情感控制方式
+
+## 帧级 Arousal-Valence 条件控制 (EmoCtrl-TTS)
+
+EmoCtrl-TTS (Wu et al., 2024) 在 flow-matching zero-shot TTS 上同时使用两组帧级条件: (1) arousal-valence 值 (来自 wav2vec 2.0-based extractor, chunk-wise 0.5s/0.25s) 控制时变情感; (2) laughter detector embedding (32 维) 控制 NV (笑声、哭泣等)。用 27k 小时伪标签真实情感数据训练,在 JVNV S2ST 上 Aro-Val SIM 0.643 (超越 ELaTE 0.548)。关键发现: laughter detector embedding 能泛化到哭泣等非笑声 NV; 两种 embedding 在某些数据上存在负面交互,需按数据源选择性启用。与 NVSpeech 的离散 PV 标签方法互补: EmoCtrl-TTS 用连续 embedding 实现帧级控制,NVSpeech 用离散标签实现 token-level 控制。详见 [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]。
 
 ## 副语言发声方法 (NVSpeech)
 

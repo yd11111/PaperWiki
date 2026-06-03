@@ -159,3 +159,9 @@ XTTS 的主要价值在于**规模**而非**深度创新**: 将 Tortoise 的 AR 
 2. **Perceiver Resampler 用于 speaker conditioning**: 将可变长度参考音频映射为固定数量的 embeddings,解耦了音频长度与条件信号维度
 3. **语言 batch balancer + 公平比较实验设计**: 在多语言/多任务训练中使用 batch balancer,并通过控制数据量的对比实验暴露先前工作的比较偏差
 4. **Fine-tuning 实现风格跨语言迁移**: 用 10 min 单语数据 fine-tune 后,耳语风格可自动迁移到其他 15 种语言 [§5]
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes | 分数: 理解 8 / 溯源 8 / 严谨 8 / 导航 8 / KB安全 8
+> **已修正**: Table 2 中 HierSpeech++ 与 Mega-TTS 2 数值混淆 (PDF 表格提取行对齐错误,通过 Table 4 交叉验证修正)
+> **残留**: 速查指标 fine-tuning SECS 出处仅标 [§5] (正文 prose,无独立 table); YourTTS 链接指向 VITS 模型页 (vault 无独立 YourTTS 模型页)
+> 详见 `_review/XTTS-review.yml`

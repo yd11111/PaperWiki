@@ -34,6 +34,7 @@
 
 ### Emotion Control
 - [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] — 2024, Interspeech, AVD 伪标签 + 球面坐标解耦风格/强度, nMOS 3.88, ECA 94.02%
+- [[论文笔记/Controlling Emotion TTS NL Prompts|Controlling Emotion TTS NL Prompts]] — 2024, Interspeech, 情感文本作 NL prompt + SE block 融合 + curriculum learning, Cramer's V 0.80, MOS 3.37
 
 ### Understanding & Data
 - [[论文笔记/EmotionThinker|EmotionThinker]] — 2026, RL-based 可解释语音情感推理, GRPO-PTR, SER Avg 68.89%

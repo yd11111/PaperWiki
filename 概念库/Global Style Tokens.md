@@ -4,7 +4,7 @@ title: "Global Style Tokens"
 aliases: [GST, 全局风格标记, Style Token Bank, Style Tokens, GST-Tacotron]
 category: "technique"
 tags: [TTS, style, unsupervised, reference-encoder, attention, expressiveness]
-key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoSphere++|EmoSphere++]]"]
+key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]"]
 origin_paper: "Wang et al., Style Tokens, ICML 2018"
 related_concepts: ["[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Attention-based TTS]]", "[[Speech Factorization]]"]
 status: pending-review

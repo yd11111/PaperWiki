@@ -4,7 +4,7 @@ title: "Diffusion-based TTS"
 aliases: [Diffusion TTS, 扩散语音合成, Diffusion Acoustic Model]
 category: "model-family"
 tags: [TTS, diffusion, acoustic-model, end-to-end, mel-generation]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/NaturalSpeech 2|NaturalSpeech 2]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]"]
 origin_paper: "Jeong et al., Diff-TTS: A Denoising Diffusion Model for Text-to-Speech, 2021"
 related_concepts: ["[[Diffusion Model]]", "[[Diffusion-based Vocoder]]", "[[Non-autoregressive TTS]]", "[[Conditional Flow Matching]]", "[[Neural Vocoder]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]"]
 status: pending-review

@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
