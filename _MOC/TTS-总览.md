@@ -31,6 +31,7 @@
   - [[论文笔记/DiEmo-TTS|DiEmo-TTS]] — 2025 (Interspeech), Korea Univ, DINO 自监督蒸馏 + cluster-driven sampling + formant perturbation 实现跨说话人情感解耦, FastSpeech 2 backbone, nMOS 4.23/eMOS 4.07
   - [[论文笔记/Spotlight-TTS|Spotlight-TTS]] — 2025, Korea Univ, voiced-aware RVQ (rotation trick) + unvoiced filler (biased self-attention) + style direction adjustment (orthogonality+prosody loss), FastSpeech 2 backbone, nMOS 4.26/sMOS 3.84
   - [[论文笔记/CapSpeech|CapSpeech]] — 2025, JHU/PKU/USC/MIT, 首个统一覆盖 9 种风格属性的大规模 CapTTS 基准 (10M+ pairs), 5 个下游任务 (CapTTS/CapTTS-SE/AccCapTTS/EmoCapTTS/AgentTTS), NAR (F5-TTS) Style-ACC 66.0% > AR (Parler-TTS) 56.0%
+  - [[论文笔记/TTS-CtrlNet|TTS-CtrlNet]] — 2025, Yonsei Univ, 首次 ControlNet 范式迁移至 flow-matching TTS (F5-TTS backbone), 冻结原模型+可训练副本+zero-conv, ~400h 公开数据, Emo-SIM 0.751/Aro-Val SIM 0.742 超越 EmoCtrl-TTS
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
