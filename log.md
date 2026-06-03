@@ -439,3 +439,11 @@
 - [review/auto] [[Llama-VITS]] — pass-with-fixes, 4 issues (2 medium + 2 low)
 - [lint/local] Llama-VITS — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +Llama-VITS (韵律与情感)
+- [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+
+## 2026-06-03 (EmoSphere-TTS)
+- [kb/search] [[EmoSphere-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Emotion Control in TTS]](待确认), [[F0 Modeling]](待确认), [[Global Style Tokens]](待确认), [[Non-autoregressive TTS]](待确认), [[Mel Spectrogram]](待确认) | 过滤: 5 页 pending-review
+- [ingest/deep] [[EmoSphere-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS, Prosody Modeling)
+- [review/auto] [[EmoSphere-TTS]] — pass-with-fixes, 2 issues (0 high, 2 medium)
+- [lint/local] EmoSphere-TTS — 通过/0 问题
+- [moc] TTS训练与评估 MOC 更新: +EmoSphere-TTS
