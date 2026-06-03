@@ -79,14 +79,14 @@ Sources/           ← PDF(gitignored)
 
 ## 当前 vault 状态 (2026-06-03)
 
-- 论文笔记: 94 篇 (65 deep + 2 repro + 1 enhanced-card + 12 card + 14 无 tier)
+- 论文笔记: 94 篇 (77 deep + 2 repro + 2 enhanced-card + 13 card)
 - 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed / 70 pending-review
 - 可信层: 22 confirmed 实体 + 1 reviewed 笔记 (CosyVoice 3)
-- MOC: 3 个 (TTS-总览 / 语音编码与量化 / 零样本语音合成)
-- MOC 覆盖: 19/67 deep/repro (缺口 48 篇)
-- 审阅覆盖: 11/67 deep/repro 有 review callout
+- MOC: 6 个 (TTS-总览 / 语音编码与量化 / 零样本语音合成 / 语音表征与自监督学习 / 语音大模型与对话 / TTS训练与评估)
+- MOC 覆盖: 79/79 deep/repro (全覆盖)
+- 审阅覆盖: 11/79 deep/repro 有 review callout
 - 审阅报告: 10 个 (_review/*.yml)
-- 死链: 7 个 (5 缺数据集页 + 1 大小写 + 1 路径错误)
+- 死链: 0
 - Git tags: p0-foundation → p5-specification-ready → review-module-v1
-- 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇)
+- 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇) + 系统同步修复
 - 审阅模块: 已实装(两层评估: 原则层 + 检查项层)

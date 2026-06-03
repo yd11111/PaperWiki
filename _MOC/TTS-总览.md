@@ -7,11 +7,11 @@
 
 - [[_MOC/语音编码与量化|语音编码与量化]] — codec, tokenization, RVQ, FSQ, quantization
 - [[_MOC/零样本语音合成|零样本语音合成]] — zero-shot TTS, voice cloning, LLM-based generation
-- 语音生成模型 — 架构范式: AR, NAR, diffusion, flow
+- [[_MOC/语音表征与自监督学习|语音表征与自监督学习]] — SSL, wav2vec, HuBERT, speech representation
+- [[_MOC/语音大模型与对话|语音大模型与对话]] — speech LLM, full-duplex dialogue, omni-model
+- [[_MOC/TTS训练与评估|TTS 训练与评估]] — post-training, RL, evaluation, reward model
 - 韵律与情感 — prosody, emotion, style
 - 流式与实时 — streaming, low-latency
-- 语音大模型 — speech LLM, omni-model
-- 评估与数据 — metrics, benchmarks, datasets
 
 ## 按任务浏览
 

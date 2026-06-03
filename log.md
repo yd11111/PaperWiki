@@ -253,3 +253,9 @@
 - [lint/full] 全面系统同步: MOC覆盖 48/67 缺失, 审阅覆盖 56/67 缺失, 死链 7, 孤儿页 1(SenseVoice), frontmatter PASS, 概念去重 PASS, 概念溯源 10 待补, 可信层 23.9% confirmed + 1 reviewed; 报告 → _lint/2026-06-03-system-sync.md
 - [alert/backlog] pending-review: 70 (阈值 10), draft deep/repro: 66 (阈值 5)
 - [update/convention] CLAUDE.md vault 状态更新(94篇笔记, 覆盖率数据)
+- [lint/full] 系统同步修复: 14 篇 tier 补齐(12 deep + 1 enhanced-card + 1 card) + 7 死链修复(MaskGCT 大小写 + FlexiCodec 路径 + CosyVoice/CosyVoice2/NS3 数据集改纯文本) + SenseVoice 孤儿页修复
+- [moc] 零样本语音合成 MOC 扩展: +26 篇论文(按年代分组) + 6 模型 + 6 概念 + 多轨演进脉络重构
+- [moc] 语音编码与量化 MOC 扩展: +5 篇论文(FlexiCodec/StableToken/NAC/SiTok/FlowDec) + 演进脉络更新
+- [moc] 新建 3 个 sub-MOC: 语音表征与自监督学习(11 篇) + 语音大模型与对话(8 篇) + TTS训练与评估(11 篇)
+- [moc] TTS-总览 MOC 更新: 添加 3 个新 sub-MOC 链接, 合并冗余子主题
+- [update/convention] CLAUDE.md vault 状态更新: MOC 6 个, 覆盖 79/79, 死链 0, tier 全补齐
