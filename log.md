@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[UDDETTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Finite Scalar Quantization]](pending-review), [[CosyVoice 3]](pending-review)
+- [ingest/deep] [[UDDETTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Conditional Flow Matching, LLM-based TTS, Speech Tokenizer, Finite Scalar Quantization, CosyVoice 3)
+- [review/auto] [[UDDETTS]] — pass-with-fixes, 0 high + 0 medium + 2 low
+- [lint/local] UDDETTS — 通过/0 问题
+- [moc/update] TTS-总览 — 追加 UDDETTS
+- [kb/search] [[ZipVoice]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[ZipVoice]] — 精读, kb_sources=6, 新建 0, 追加 6 (Conditional Flow Matching, Classifier-Free Guidance, Non-autoregressive TTS, Duration Predictor, Zero-shot Speech Synthesis, Neural Vocoder)
+- [review/auto] [[ZipVoice]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] ZipVoice — 通过 (0 dead links, MOC 已更新: 零样本语音合成)
 - [kb/search] [[DS-TTS]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review)
 - [ingest/deep] [[DS-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Speaker Embedding, Voice Cloning Taxonomy, Style Transfer in TTS, Non-autoregressive TTS, Duration Predictor, Global Style Tokens, Zero-shot Speech Synthesis)
 - [review/auto] [[DS-TTS]] — pass-with-fixes, 0 high / 1 medium / 3 low
