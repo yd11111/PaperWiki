@@ -63,7 +63,7 @@ EmoVoice 以 Qwen2.5-0.5B (24 层 Transformer, 0.49B 参数) 为 backbone,用预
 
 **为什么用 LLM 而非专用 prompt encoder?** [论文原文] 作者的动机是: 利用 LLM 在文本语义理解和情感分析方面的已有能力,通过 LLM 直接理解 emotion description 指令,无需像 PromptTTS 那样训练专用 prompt encoder [§1]。[agent 解读] 这也意味着 LLM 初始化至关重要 — 没有 LLM 初始化,WER 从 2.73 飙升到 6.16 [Table 8],说明 LLM 的语言知识对齐文本和语音 token 起到了决定性作用。
 
-**EmoVoice-PP (Phoneme Parallel Boost)**: 这是核心变体设计。在输出侧并行预测 semantic tokens 和 phoneme tokens [§3.1]。具体做法: 将 phoneme 加入 Qwen2.5 词表 (扩展为 V_t'),分别从 logits 提取音频部分 x_a = logits[..., |V_t'|:] 和音频部分 x_p = logits[..., :|V_t'|] [§3.1]。训练时 phoneme 序列由 Phonemizer 工具提取作 teacher forcing [§3.1]。
+**EmoVoice-PP (Phoneme Parallel Boost)**: 这是核心变体设计。在输出侧并行预测 semantic tokens 和 phoneme tokens [§3.1]。具体做法: 将 phoneme 加入 Qwen2.5 词表 (扩展为 V_t'),分别从 logits 提取音频部分 x_a = logits[..., |V_t'|:] 和 phoneme 部分 x_p = logits[..., :|V_t'|] [§3.1]。训练时 phoneme 序列由 Phonemizer 工具提取作 teacher forcing [§3.1]。
 
 **为什么 parallel 而非 serial?** [论文原文] 灵感来自 CoT (Chain-of-Thought) 和 CoM (Chain-of-Modality, SpeechGPT 提出): 让模型先"想"发音再生成音频 [§1, §3.1]。推理时 phoneme token rate (~11Hz) 低于 audio token rate (~17Hz),因此 phoneme 被更早预测出来,作为中间 supervision signal 引导后续 audio token 生成 [§3.1]。
 
@@ -140,5 +140,6 @@ EmoVoice-DB 的构建 pipeline (GPT-4o 生成 text+description → GPT-4o-audio 
 
 4. **多输出结构的系统性对比**: 论文对 6 种 output structure (pure audio / serial phoneme / serial text / parallel phoneme / parallel text / interleaved) 做了完整对比 [Table 5, Fig 2],这个实验设计本身可作为后续 LLM-based TTS 工作的 reference。
 
-> [!review] 审阅
-> 审阅状态: 待审阅 (see `_review/EmoVoice-review.yml`)
+> [!review] 审阅 (2026-06-03, auto, v1.1)
+> **结论: pass-with-fixes** — 1 个 low issue (文本 typo, 已修正), 1 个 low issue (EmoVoice-DB 数据集页缺失, 不阻塞)
+> 详见 `_review/EmoVoice-review.yml`
