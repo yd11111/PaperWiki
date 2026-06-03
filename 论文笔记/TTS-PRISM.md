@@ -151,7 +151,7 @@ TTS-PRISM 由三个模块组成 [§2, Fig 2]:
 | Paralinguistics | 0.541 | 0.457 | **0.751** | 0.723 | [Table 1] |
 | Emotion Expression | 0.707 | 0.623 | 0.808 | **0.841** | [Table 1] |
 
-TTS-PRISM 在 8/12 维度上 LCC 最高; 弱项为 Pronunciation Accuracy (0.511 vs Gemini 0.613) 和 Intonation (0.658 vs Gemini 0.718)。
+TTS-PRISM 在 8/12 维度上 LCC 最高; 弱于 Gemini-2.5-Pro 的 4 个维度: Pronunciation Accuracy (0.511 vs 0.613), Intonation (0.658 vs 0.718), Pauses (0.701 vs 0.731), Paralinguistics (0.723 vs 0.751)。其中发音和语调差距较大,停顿和副语言差距较小。
 
 ### Rationale 质量 [§4.1]
 
@@ -222,5 +222,11 @@ OOD 下降幅度可控 (LCC 约 -0.04),模型对未见 TTS 系统和真实录音
 3. **显式评分标准嵌入**: 不是让模型自己学什么是"好",而是把每个分数等级的物理定义写进指令。这比自由 CoT 更可控,代价是灵活性降低。
 4. **Diagnostic Flag 方法**: 将多维评分抽象为直觉标签 ("Stable but Flat"、"Highly Expressive"),提供比排名更有决策支持价值的信息。可用于任何多维度系统对比。
 
-> [!review] 审阅待补
-> 本篇笔记为初始草稿,审阅 callout 将在审阅步骤中补充。
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> - **可复述** pass: 三个设计选择均有 WHY 解释,消融与动机对应
+> - **可信赖** pass: 数字 claim 出处标注完整,指标名正确
+> - **可区分** pass: 因果来源标注覆盖率 100%,无推断断言化
+> - **可定位** pass-with-fixes: KB 谱系清晰; models 字段仅列有模型页的系统 (合理)
+> - **不污染** pass: 未新建概念页,反向更新为追加
+> - Issues: 1 medium (实验弱项总结已补完) + 2 low (frontmatter 空字段,合理保持)
+> - 详见 `_review/TTS-PRISM-review.yml`

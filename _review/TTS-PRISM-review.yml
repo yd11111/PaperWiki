@@ -1,0 +1,48 @@
+paper: TTS-PRISM
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  understandable:
+    verdict: pass
+    notes: "方法节结构清晰,三个设计选择均有 WHY 解释。消融结果与设计动机对应。速查卡片可借鉴字段给出两个具体策略。"
+  trustworthy:
+    verdict: pass
+    notes: "所有数字 claim 标注了 [Table N]/[§X.X] 出处; 指标名(LCC/SRCC/MSE_norm/RSC)使用正确; 无方向性错误。"
+  distinguishable:
+    verdict: pass
+    notes: "方法节全部因果解释标注了 [论文原文]/[agent 解读]; 无推断写成断言; 无过强断言。"
+  locatable:
+    verdict: pass-with-fixes
+    notes: "KB 背景节对 GSRM/SpeechJudge/TTSDS2 有具体对比; 谱系定位清晰。models 字段仅列 CosyVoice 3(被 profile 的系统之一),可补充更多 baseline。"
+  no_pollution:
+    verdict: pass
+    notes: "未新建概念页; 反向更新计划为追加 key_papers(不改 status)。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: frontmatter
+    detail: "models 字段仅列 [[CosyVoice 3]],其余 5 个被 profile 的系统 (F5-TTS, MaskGCT, Qwen3-TTS, FireRedTTS-2, IndexTTS 2) 未列出。但 vault 中仅 CosyVoice 3 有模型页,其余无,因此无法链接。"
+    suggestion: "保持现状。当后续这些模型获得模型页时,通过系统检查补充。"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: frontmatter
+    detail: "tasks 和 datasets 字段为空。论文的核心任务为 speech quality assessment / TTS evaluation (非标准 vault 任务页), 数据集为自建的 Gold Test Set (非公开 benchmark)。"
+    suggestion: "保持为空。不创建新任务/数据集实体页,因为不满足准入规则(仅此一篇论文引用)。"
+
+  - id: 3
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "实验 > 主实验表格"
+    detail: "表格标注 TTS-PRISM 在 8/12 维度 LCC 最高,但未明确列出 4 个弱于 Gemini 的维度 (Pronunciation Accuracy, Intonation, Pauses, Paralinguistics)。正文仅提及前两个。"
+    suggestion: "在表格后的总结中补充 Pauses 和 Paralinguistics 也弱于 Gemini。"
+
+summary: "笔记质量良好。方法机制的因果解释充分,因果来源标注覆盖率 100%,实验数据溯源完整。KB 背景节提供了有价值的对比定位(GSRM/SpeechJudge/TTSDS2 四路互补)。1 个 medium issue: 实验弱项总结不完整(4 个弱项仅列 2 个)。结论: pass-with-fixes,可继续反向更新。"
