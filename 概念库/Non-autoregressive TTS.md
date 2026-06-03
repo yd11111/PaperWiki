@@ -4,7 +4,7 @@ title: "Non-autoregressive TTS"
 aliases: [NAR TTS, FastSpeech系列, 非自回归TTS, Parallel TTS, 并行语音合成]
 category: "model-family"
 tags: [TTS, non-autoregressive, parallel, fast-inference, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/OmniVoice|OmniVoice]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Attention-based TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]"]
 status: pending-review
@@ -120,4 +120,4 @@ Survey 从可控性角度对比 NAR vs AR/LLM 架构:
 
 ## 演进
 
-Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024) → Hybrid: LLM + NAR Flow (CosyVoice, 2024)
+Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024) → Hybrid: LLM + NAR Flow (CosyVoice, 2024) → OmniVoice (2026, 单阶段 discrete NAR + LLM 初始化, 首个成功将 AR LLM 权重迁移至 NAR 架构的 TTS, 600+ 语言)

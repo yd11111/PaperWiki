@@ -7,7 +7,7 @@ year: 2023
 tags: [vocoder, neural-vocoder, GAN-based, waveform-generation]
 key_concepts: []
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/E2 TTS|E2 TTS]]"]
 supersedes: [HiFi-GAN]
 superseded_by: []
 status: pending-review

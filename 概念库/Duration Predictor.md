@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review

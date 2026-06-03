@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, diffusion, factorization, codec, non-autoregressive, discrete-diffusion]
 key_concepts: ["[[Speech Factorization]]", "[[Diffusion-based TTS]]", "[[Residual Vector Quantization]]", "[[Classifier-Free Guidance]]", "[[Gradient Reversal Layer]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]"]
+key_papers: ["[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/E2 TTS|E2 TTS]]"]
 supersedes: ["[[模型库/NaturalSpeech 2|NaturalSpeech 2]]"]
 superseded_by: []
 status: pending-review
