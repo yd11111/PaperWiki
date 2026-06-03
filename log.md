@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[LLMVoX]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Streaming Spoken Dialogue]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Codec Language Model]](pending-review) | 过滤: 无
+- [ingest/deep] [[LLMVoX]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS, Speech Tokenizer, RVQ, Streaming Spoken Dialogue, Speech-LLM Integration Taxonomy, Codec Language Model)
+- [review/auto] [[LLMVoX]] — pass-with-fixes, 1 medium (models字段修正)
+- [lint/local] LLMVoX — 通过, 0 死链
+- [kb/search] [[EmoVoice]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[模型库/CosyVoice 2]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
+- [ingest/deep] [[EmoVoice]] — 精读, kb_sources=6, 新建 0, 追加 5 (Emotion Control in TTS, LLM-based TTS, Natural Language Description for TTS, Instruction-Guided Speech Synthesis, CosyVoice 2)
+- [review/auto] [[EmoVoice]] — pass-with-fixes, 2 issues (both low)
+- [lint/local] EmoVoice — 通过/0 问题
 - [kb/search] [[PALLE]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[模型库/CosyVoice 2]]✓, [[Masked Generative Modeling]][待确认] | 过滤: [[Codec Language Model]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Speech-Text Alignment]](pending-review)
 - [ingest/deep] [[PALLE]] — 精读, kb_sources=6, 新建 0, 追加 4 (Masked Generative Modeling, Codec Language Model, Zero-shot Speech Synthesis, Speech Tokenizer)
 - [review/auto] [[PALLE]] — pass, 0 issues
