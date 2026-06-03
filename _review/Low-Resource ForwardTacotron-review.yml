@@ -1,0 +1,47 @@
+paper: "Low-Resource ForwardTacotron"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+issues_count: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节对 4 个关键设计选择 (噪声增强/分割/binned sampling/weighted sampling) 均有 WHY 解释,因果链清晰。clean/noisy dual cond-ID 的设计动机有 agent 解读标注。"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 >80%。所有表格数据标注出处 [Table II] / [Fig 2]。MOS 值来自 boxplot 读取,标注为 ≈ 以示近似。指标名正确 (MCD-DTW, cos-sim, MOS)。"
+  可区分:
+    satisfied: true
+    notes: "因果解释均标注 [论文原文] 或 [agent 解读]。方法节 5 处 WHY 解释中,3 处标 [论文原文],2 处标 [agent 解读],覆盖率 100%。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景谱系定位具体 (Speaker Adaptation 数据增强分支),创新判断有对比基准 (4 HR vs 2311 说话人,43M vs 108.5M 参数)。frontmatter 字段完整。速查 5 字段均有实质内容。"
+  不污染:
+    satisfied: true
+    notes: "本篇不涉及新建概念页。反向更新仅追加 key_papers,属于 append 操作。无 factual-error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "主观指标表 MOS 值"
+    detail: "MOS 值从 Fig 2 boxplot 读取为近似值 (≈4.0, ≈3.5 等),这是合理的,但论文原文 §IV-B 提供了具体的 speaker similarity MOS 差值 (+1.1, +0.25),naturalness 差值 (-0.2),这些值标注了出处。建议在表格 caption 或脚注说明 MOS 值为 boxplot 近似读取。"
+    suggestion: "在主观指标表格前添加说明: '以下 MOS 值从 [Fig 2] boxplot 中近似读取,论文仅给出差值数据'"
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    location: "frontmatter datasets 字段"
+    detail: "datasets 字段为空列表 [],但论文使用了 LJSpeech, TC-Star, Hi-Fi-TTS, VCTK, LibriTTS 等多个数据集。至少应列出论文直接使用的数据集。"
+    suggestion: "补充 datasets 字段: LJSpeech, TC-Star, Hi-Fi-TTS (论文直接训练/评估使用)"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea 第 4 点"
+    detail: "'1000 句阈值' 是论文的经验观察 [§III],但仅在 ForwardTacotron 架构上验证。迁移到其他架构时阈值可能不同,建议标注限定范围。"
+    suggestion: "改为: '经验性发现 NAR 模型 (ForwardTacotron) 在约 1000 个 LR 句子时训练稳定 [§III],具体阈值可能因架构而异'"

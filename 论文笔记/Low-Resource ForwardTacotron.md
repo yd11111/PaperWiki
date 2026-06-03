@@ -11,7 +11,7 @@ tags: [TTS, low-resource, data-augmentation, non-autoregressive, multi-speaker, 
 concepts: ["[[Non-autoregressive TTS]]", "[[Speaker Adaptation]]", "[[Speaker Embedding]]", "[[Neural Vocoder]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]"]
 models: ["[[模型库/HierSpeech++|HierSpeech++]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["LJSpeech", "TC-Star", "Hi-Fi-TTS"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -121,6 +121,8 @@ updated: 2026-06-03
 
 ### 主观指标 [Fig 2]
 
+以下 MOS 值从 [Fig 2] boxplot 中近似读取,论文仅给出差值数据 (similarity +1.1/+0.25, naturalness -0.2)。
+
 | 指标 | 本文 (20min) | 本文 (5min) | 本文 (1min) | HierSpeech++ | HR | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Naturalness MOS | ≈4.0 | ≈3.5 | ≈2.8 | ≈4.2 | ≈4.5 | [Fig 2] |
@@ -166,7 +168,11 @@ updated: 2026-06-03
 1. **Clean/Noisy dual condition-ID**: 为同一说话人的干净和含噪数据分配不同 condition embedding,推理时仅用 clean ID。这个策略可迁移到任何 conditioning-based 的生成模型中处理数据增强。
 2. **Binned sampling for class imbalance**: 将不平衡的多说话人数据按说话人分 bin,确保少数类独占部分 batch。比简单 oversampling 更好地保证梯度更新质量。
 3. **最少 HR 说话人基座**: 4 个高质量说话人 (不同性别/来源) 足以构建多说话人 TTS 基座,无需大规模多说话人数据集。这对低资源语言的 TTS 开发尤其有价值。
-4. **1000 句阈值**: 经验性发现 NAR 模型在约 1000 个 LR 句子时训练稳定,可作为其他低资源场景的数据量参考。
+4. **1000 句阈值**: 经验性发现 NAR 模型 (ForwardTacotron) 在约 1000 个 LR 句子时训练稳定 [§III],具体阈值可能因架构而异,但可作为低资源场景的数据量参考起点。
 
-> [!review]
-> 待审阅 (自动生成)
+> [!review] 自动审阅 (2026-06-03)
+> **结论: pass-with-fixes** | 0 high, 2 medium, 1 low
+> - [medium] traceability-gap: 主观 MOS 值为 boxplot 近似读取 → 已添加说明
+> - [medium] template-compliance: datasets 字段为空 → 已补充 LJSpeech/TC-Star/Hi-Fi-TTS
+> - [low] weak-reusability: 1000 句阈值限定范围 → 已标注架构依赖性
+> 详见 `_review/Low-Resource ForwardTacotron-review.yml`
