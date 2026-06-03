@@ -309,3 +309,9 @@
 - [review/auto] [[Spark-TTS]] — pass, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] Spark-TTS — 通过/0 问题
 - [moc] 零样本语音合成+语音编码与量化 MOC 更新: +Spark-TTS
+- [kb/search] [[Qwen3-TTS]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[Qwen3-TTS]] — 精读, kb_sources=6, 新建 0, 追加 10 (Speech Tokenizer, Semantic vs Acoustic Tokens, Residual Vector Quantization, LLM-based TTS, Conditional Flow Matching, Speaker Embedding, Single-codebook vs Multi-codebook, Zero-shot Speech Synthesis, Cross-lingual Voice Cloning, Instructed Speech Generation)
+- [review/auto] [[Qwen3-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] Qwen3-TTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +Qwen3-TTS, SOTA 表更新
+- [alert/backlog] pending-review: 70, draft deep/repro: 72 — 建议抽空审核
