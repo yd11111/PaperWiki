@@ -11,7 +11,7 @@ tags: [speech-codec, LLM-TTS, zero-shot-TTS, voice-conversion, S2ST, semantic-to
 concepts: ["[[Semantic vs Acoustic Tokens]]", "[[Speech Factorization]]", "[[Speech Language Model]]", "[[Residual Vector Quantization]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Neural Vocoder]]"]
 models: ["[[模型库/WavLM|WavLM]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["WenetSpeech", "GigaSpeech", "LibriTTS", "GigaST"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -143,6 +143,12 @@ Vec-Tok Speech 的核心 insight——"不要把所有信息都塞进离散 toke
 BPE 压缩 speech token 的技巧(50→16 Hz)在 2023 年相当有见地,直接预示了后来 LatentLM/CLEAR 等工作追求更低 token rate 的趋势。实验证据(Table 3 ablation)也清晰支撑了其有效性。
 
 不足之处在于系统偏"组装式": WavLM 特征提取、K-means 聚类、BPE 编码、Conformer 逆映射、CLVP rescoring、HiFi-GAN vocoder——组件众多但缺乏端到端优化,这可能限制了系统的上限。
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes | 1 issue (0 high, 1 medium, 0 low)
+> - [medium/template-compliance] frontmatter datasets 字段原为空,已补充 WenetSpeech/GigaSpeech/LibriTTS/GigaST
+> 各原则: 可复述✓ 可信赖✓ 可区分✓ 可定位✓ 不污染✓
+> 详见 `_review/Vec-Tok Speech-review.yml`
 
 ## 可复用的 idea
 
