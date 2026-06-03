@@ -1,0 +1,40 @@
+paper: "Multilingual TTS Accents Emotions"
+arxiv_id: "2506.16310"
+reviewer: agent
+date: 2026-06-03
+checklist_version: "v1.1"
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含因果解释(三阶段 fine-tuning 的设计逻辑),标注了[论文原文]和[agent 解读];速查卡片'可借鉴'给出了具体可迁移的 dataspeech+prompt 管线"
+  trustworthy:
+    verdict: pass-with-concerns
+    notes: "数字型 claim 标注覆盖率约 85%;但论文本身实验报告存在具体数值缺失(Fig 6 仅图表无数字),笔记忠实反映了这一缺陷"
+  distinguishable:
+    verdict: pass
+    notes: "方法节中因果解释来源标注覆盖率约 90%;多处标注了[agent 解读]区分推断"
+  locatable:
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位(与 NaturalSpeech 3/Seed-TTS 的解耦方法对比,在 Emotion Control 演进线上定位);frontmatter 字段完整;速查卡片 5 字段有实质内容"
+  no_pollution:
+    verdict: pass
+    notes: "未新建概念页;反向更新仅追加 key_papers;无 factual-error 或 overclaim"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "实验节 - 情感 MOS 对比表"
+    detail: "Fig 6 中的 Happy/Sad/Neutral MOS 对比仅标注[Fig 6],但具体数值用'高于baseline/接近SOTA'等定性描述,源于原论文图表未标数值"
+    suggestion: "已在笔记中注明此限制,无需修改(原论文缺陷)"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验节 - PESQ/STOI/SISDR"
+    detail: "这些指标声称'高于 Audiobox'但无具体数值,原论文仅提供定性比较"
+    suggestion: "已忠实反映,无需修改"
+
+conclusion: pass
+conclusion_reason: "无 high 或 medium issue;两个 low 级 traceability-gap 源于原论文的实验报告缺陷而非笔记质量问题;5 个原则均基本满足"
+action: "可进行反向更新"
