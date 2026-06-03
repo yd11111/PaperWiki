@@ -2,11 +2,19 @@
 
 本 vault 是一个 AI+人共同维护的 TTS 论文知识库。**操作前必须读 `AGENTS.md` 了解完整规则。**
 
-## Skill 使用声明
+## Skill 使用声明 (严格遵守)
 
-- **论文精读**: 使用 `paperwiki-reader` skill(项目专属),**不要**使用通用 `paper-reader` skill(路径指向旧 vault)
-- **笔记审阅**: 使用 `paperwiki-reviewer` skill（精读后自动触发，或手动"审阅这篇笔记"）
-- **其他 skill**: 按需使用,但输出路径必须在 `/Users/xiangshu/PaperWiki/` 内
+**⚠️ 论文精读必须使用 `paperwiki-reader` skill。绝对禁止使用通用 `paper-reader` skill。**
+
+通用 paper-reader 的路径指向旧 vault `/Users/xiangshu/DailyPaper/DailyPaper/`,会把笔记写到错误位置。如果你看到系统自动选择了 paper-reader,必须拒绝并手动调用 paperwiki-reader。
+
+| 用户说 | 必须用的 skill | 禁止用的 skill |
+|---|---|---|
+| "精读这篇"/"读一下"/"帮我读"/"深读" | **paperwiki-reader** | ~~paper-reader~~ |
+| "审阅这篇笔记"/"审阅" | **paperwiki-reviewer** | — |
+| "复现分析" | **paperwiki-reader** (repro mode) | ~~paper-reader~~ |
+
+**如何确认用对了 skill:** 检查输出路径是 `/Users/xiangshu/PaperWiki/论文笔记/`,不是 `/Users/xiangshu/DailyPaper/`。
 
 ## 关键约束 (不可违反)
 
