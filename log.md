@@ -427,3 +427,10 @@
 - [review/auto] [[NAST]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
 - [lint/local] NAST — 通过/0 问题
 - [moc] 语音编码与量化 + 语音表征与自监督学习 MOC 更新: +NAST
+
+## 2026-06-03 (PeriodWave)
+- [kb/search] [[PeriodWave]] — 命中 5 页(取 Top 5): [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓, [[Diffusion-based Vocoder]](待确认), [[Snake Activation]](待确认), [[Multi-scale STFT Discriminator]]✓ | 过滤: [[F0 Modeling]](待确认)
+- [ingest/deep] [[PeriodWave]] — 精读, kb_sources=5, 新建 0, 追加 4 (Conditional Flow Matching, Neural Vocoder, Diffusion-based Vocoder, Snake Activation)
+- [review/auto] [[PeriodWave]] — pass, 0 issues
+- [lint/local] PeriodWave — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +PeriodWave
