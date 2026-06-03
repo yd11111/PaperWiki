@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[MAE Style-Rich TTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[EnCodec]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Prosody Modeling]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[MAE Style-Rich TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (RVQ, EnCodec, Speaker Embedding, LLM-based TTS, Prosody Modeling, Style Transfer in TTS, CFG, Emotion Control in TTS)
+- [review/auto] [[MAE Style-Rich TTS]] — pass, 0 high + 1 medium + 0 low
+- [lint/local] MAE Style-Rich TTS — 通过/0 问题
+- [moc/update] TTS-总览 — 追加 MAE Style-Rich TTS 到韵律与情感
 - [kb/search] [[OZSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[模型库/NaturalSpeech 3|NaturalSpeech 3]](pending-review), [[Duration Predictor]](pending-review)
 - [ingest/deep] [[OZSpeech]] — 精读, kb_sources=6, 新建 0, 追加 5 (Conditional Flow Matching, Zero-shot Speech Synthesis, Speech Factorization, Duration Predictor, NaturalSpeech 3)
 - [review/auto] [[OZSpeech]] — pass, 0 high + 0 medium + 3 low
