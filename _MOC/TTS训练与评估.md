@@ -41,6 +41,7 @@
 - [[论文笔记/SpeechWorldModel|SpeechWorldModel]] — 2026, 因果图模块化语音理解(4模块DAG), EM 97.80% 超越 Gemini 2.5 Pro
 - [[论文笔记/NaturalVoices|NaturalVoices]] — 2024, 大规模自发情感语音数据集(3846h, 2467 speakers)
 - [[论文笔记/TITW|TITW]] — 2024, 首批标准化 noisy-TTS 训练数据集(VoxCeleb1→TITW-Easy 173h/Hard 189h), DNSMOS 过滤 pipeline + KSKT/KSUT 评估协议
+- [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集, LLM 五维度文本表现力标注, MOS 4.09
 
 ## 相关任务
 - [[Zero-shot Speech Synthesis]]
