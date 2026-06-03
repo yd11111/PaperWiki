@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[Revival with Voice]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓, [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[Revival with Voice]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speaker Embedding, RVQ, LLM-based TTS, Natural Language Description for TTS, Codec Language Model, Voice Cloning Taxonomy)
+- [review/auto] [[Revival with Voice]] — pass-with-fixes, 0 high + 1 medium + 1 low
+- [lint/local] Revival with Voice — 通过/0 问题
+- [moc/update] TTS-总览 — 追加 Revival with Voice
 - [kb/search] [[SMLLE]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Duration Predictor]](pending-review)
 - [ingest/deep] [[SMLLE]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS, Zero-shot Speech Synthesis, Duration Predictor, Mel Spectrogram, MELLE, Semantic vs Acoustic Tokens), MOC 更新 2 (零样本语音合成, TTS-总览)
 - [review/auto] [[SMLLE]] — pass-with-fixes, 0 high, 0 medium, 2 low (frontmatter 概念挂接偏弱)
