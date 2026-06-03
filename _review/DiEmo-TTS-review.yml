@@ -1,0 +1,36 @@
+paper: DiEmo-TTS
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含充分的因果解释 (WHY): 为什么用 cluster-driven sampling、为什么 formant perturbation 优于 noise augmentation、为什么需要 DCT。每个设计选择有明确的 WHY-HOW 对。"
+  trustworthy:
+    verdict: pass
+    notes: "数字型 claim 均有 [Table 1]/[Table 2]/[§X.X] 标注。指标名使用正确 (nMOS/sMOS/eMOS/WER/CER/SECS/EECS)。速查卡片指标字段含具体数字+数据集+来源。"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释源标注覆盖率高: 方法节每个 WHY 均标注了 [论文原文] 或 [agent 解读],区分清晰。不存在把推断写成断言的句子。"
+  locatable:
+    verdict: pass
+    notes: "KB 背景有具体谱系定位 (GRL→VQ→self-distillation→DINO-based),创新判断有对比基准。frontmatter 字段齐全。速查卡片 5 字段均有实质内容。"
+  no_pollution:
+    verdict: pass
+    notes: "本篇不新建概念页。反向更新仅追加 key_papers (append),不做实质修改。无 factual-error 或 overclaim 风险。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models"
+    detail: "models 列了同组前作 EmoSphere-TTS/EmoSphere++,这些不是本文对比的 baseline (baseline 是 Trans-GRL/Trans-VQ/Trans-Ort),而是相关前作。"
+    suggestion: "models 字段语义用于记录本文模型和对比 baseline。当前用法为记录相关前作,可接受但非标准。可考虑在 related_papers 或正文中引用而非 frontmatter models。"
+  - type: traceability-gap
+    severity: low
+    location: "消融分析 §3.6 解读"
+    detail: "消融分析中的 'DCT 在更好整合情感时轻微牺牲了说话人保持度' 是 agent 推断但未标注 [agent 解读]。"
+    suggestion: "在该句末尾添加 [agent 解读] 标注。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好,五个原则基本满足。方法解释有因果深度,来源标注覆盖率高。2 个 low 问题不阻塞反向更新。"

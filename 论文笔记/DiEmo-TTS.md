@@ -143,7 +143,7 @@ DiEmo-TTS 在 FastSpeech 2 [28] 基础上增加两个核心模块: (1) 基于 DI
 | w/o IP | N | N | N | N | 4.12 | 3.81 | 3.95 | 17.20 | 6.66 | 0.8217 | 0.4357 |
 
 消融实验关键发现 [§3.6]:
-1. **DCT** 显著提升 eMOS (+0.18) 和降低 WER (-0.47),但 SECS 略降 (0.8626→0.8505),说明 DCT 在更好整合情感时轻微牺牲了说话人保持度 [Table 2]
+1. **DCT** 显著提升 eMOS (+0.18) 和降低 WER (-0.47),但 SECS 略降 (0.8626→0.8505),说明 DCT 在更好整合情感时轻微牺牲了说话人保持度 [Table 2] [agent 解读]
 2. **CDS** 提升 sMOS (+0.16) 和 SECS (+0.0365),说明 cluster-driven sampling 有效改善说话人保持 [Table 2]
 3. **CS** 略微降低 eMOS 但改善 WER/CER,说明 cosine similarity loss 在嵌入空间质量和语言一致性方面有益 [Table 2]
 4. **IP (formant perturbation)** 全面提升所有指标,是最基础的解耦组件 [Table 2]
@@ -180,5 +180,11 @@ DiEmo-TTS 提出了一条有价值的 emotion disentanglement 新路线: 将 DIN
 4. **Dual conditioning transformer**: weight-sharing multi-head attention 融合多种 style 信息,比简单拼接/加法更好地建模属性交互
 
 ---
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes | **问题**: 2 low
+> - [low/template-compliance] frontmatter models 列了同组前作而非对比 baseline
+> - [low/traceability-gap] 消融分析中一处 agent 推断未标注来源 (已修正)
+> 详见 `_review/DiEmo-TTS-review.yml`
 
 > 检索命中: [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 参考: [[Emotion Control in TTS]][待确认], [[Style Transfer in TTS]][待确认], [[Gradient Reversal Layer]][待确认], [[Self-Supervised Speech Representation]][待确认] | 未命中但可能相关: 无
