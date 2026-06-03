@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, autoregressive, industrial, polyphone-control, VQ, FSQ, BigVGAN]
 concepts: ["[[Speech Tokenizer]]", "[[Codebook Collapse]]", "[[Finite Scalar Quantization]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Neural Vocoder]]", "[[Single-codebook vs Multi-codebook]]"]
-models: ["[[BigVGAN]]", "[[XTTS]]"]
+models: ["[[BigVGAN]]", "[[XTTS]]", "[[CosyVoice 2]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -142,7 +142,7 @@ FSQ 配置: levels = [8, 8, 8, 6, 5],等效 8192 个离散状态 [§3.2.2]。
 3. **主观评估规模小**: MOS 评估仅随机选取 100 个样本,统计可靠性有限 [§3.3.3]
 4. **缺少同期强 baseline**: 未与 Seed-TTS、MaskGCT、NaturalSpeech 3 等同期系统对比,与 XTTS/Tortoise 的基线对比的增量价值有限
 5. **推理速度非最快**: 虽然 GPU 利用率最低(28.47%),但总耗时(397s)仍高于 F5-TTS(320s) [Table 5]
-6. **训练细节缺失**: 未报告学习率、batch size、训练轮次等关键超参数
+6. **训练细节缺失**: 论文 [§3.2] 未报告学习率、batch size、训练轮次等关键超参数
 
 ## 点评
 
@@ -162,3 +162,12 @@ IndexTTS 是一篇偏工程实践的系统论文,其价值在于提供了三个�
 2. **数据量作为 codebook collapse 解药**: 工业场景中如果训练数据充足(>30k h),VQ 即可获得接近 100% 利用率,不必强制使用 FSQ
 3. **低 GPU 利用率设计**: IndexTTS GPU 利用率仅 28.47%,远低于 FireRedTTS(92.65%)和 XTTS(87.65%) [Table 5],暗示该架构对 GPU 内存/算力需求更友好,适合多路并发部署
 4. **SEQ3 条件化方式**: 不依赖 prompt text,仅用 prompt audio 做 speaker conditioning,减少推理输入复杂度,且避免了跨语言场景中对 multilingual ASR 的依赖 [§2.3]
+
+> [!review] 自动审阅 (2026-06-03)
+> **结论:** pass-with-fixes
+> **评分:** 理解 8 | 溯源 8 | 严谨 8 | 导航 7 | 安全 8
+> **Claim 标注率:** 94% (33/35)
+> **问题:** 0 high, 2 medium, 2 low
+> - [medium/bad-linking] frontmatter > models: 缺少 CosyVoice2 等实验 baseline — 已修正
+> - [medium/traceability-gap] 局限性 > 第 6 条: 缺少 [§3.2] 出处标注 — 已修正
+> **反向更新:** ✅

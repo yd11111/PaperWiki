@@ -1,0 +1,51 @@
+paper: "IndexTTS"
+file: "论文笔记/IndexTTS.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 8
+  traceability: 8
+  rigor: 8
+  navigability: 7
+  kb_safety: 8
+
+claim_stats:
+  total_claims: 35
+  annotated_claims: 33
+  coverage_rate: "94%"
+
+issues:
+  - severity: medium
+    type: bad-linking
+    location: "frontmatter > models"
+    detail: "models 字段仅列出 [[BigVGAN]] 和 [[XTTS]],但 Table 3/4/5 中 CosyVoice2、F5-TTS、FishSpeech、FireRedTTS 均为实验对比 baseline。根据 checklist 规则 'models 列本文模型+对比 baseline',至少应包含 CosyVoice2(多项指标最强 baseline)。"
+    suggestion: "在 frontmatter models 中添加 \"[[CosyVoice 2]]\"。FishSpeech/FireRedTTS 如有模型页也可添加。"
+
+  - severity: medium
+    type: traceability-gap
+    location: "局限性 > 第 6 条"
+    detail: "'未报告学习率、batch size、训练轮次等关键超参数' 是 agent 基于论文 §3.2 的观察,但未标注出处。读者无法判断这是论文真的缺失还是 agent 遗漏。"
+    suggestion: "改为 '论文 [§3.2] 未报告学习率、batch size、训练轮次等关键超参数'。"
+
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但论文使用 LibriSpeech、Aishell-1、CommonVoice 作为测试集。虽然这些是通用评估集而非本文贡献的数据集,但 frontmatter 中应有所体现以便 KB 检索。"
+    suggestion: "保持 datasets 为空(这些是通用评估集非本文数据集),或添加注释说明。当前处理可接受。"
+
+  - severity: low
+    type: weak-reusability
+    location: "可复用的 idea > 第 3 条"
+    detail: "'暗示该架构对 GPU 内存/算力需求更友好' — GPU utilization 低可能意味着模型没有充分利用 GPU 而非对硬件需求更友好。低利用率在工业部署中可能反而是缺点(GPU 空闲浪费)。"
+    suggestion: "将解读改为 '低 GPU 利用率意味着单卡可并行处理更多请求,适合高并发场景' 或删除推测性描述。"
+
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "无 high 级别问题。事实数据均有来源,因果解释已正确标注 [论文原文]/[agent 解读]。medium 问题不影响反向更新的安全性。"
+
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "bad-linking (frontmatter models 不完整) 是批量 ingest 中常见模式。"
+  system_upgrade_suggestion: "在 paperwiki-reader skill 中增加提示: 生成 frontmatter models 时应包含实验表中的主要 baseline 模型。"
