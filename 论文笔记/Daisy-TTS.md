@@ -9,7 +9,7 @@ year: 2024
 venue: "arXiv"
 tags: [TTS, emotion, prosody, diffusion, embedding-decomposition, structural-model-of-emotion, style-control, PCA]
 concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Global Style Tokens]]", "[[Speech Factorization]]", "[[Diffusion-based TTS]]", "[[Style Transfer in TTS]]"]
-models: ["[[模型库/VITS|VITS]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -162,3 +162,10 @@ Daisy-TTS 由三个核心模块组成 [Fig 3]:
 1. **Emotion Discriminator 强制嵌入可分离性**: 在任何 reference encoder 末端加分类器,可将特定属性的分离性从无监督提升为有监督。这一技巧可推广至 speaker-style disentanglement。
 2. **PCA 分解实现嵌入空间操控**: 将嵌入分解为均值 + 主成分线性组合,使得混合/缩放/取反操作变为数学运算。可应用于任何需要连续属性操控的嵌入空间 (如 speaker embedding 插值)。
 3. **多特征输入 + 时间折叠的隐式解耦**: 用时间维度折叠来隐式移除词汇内容信息,比对抗训练解耦更轻量,适用于计算资源受限场景。
+
+> [!review] 审阅 (2026-06-03, agent-auto, v1.1)
+> **结论**: pass-with-fixes
+> - 5 原则均满足
+> - 1 medium (frontmatter models 不准确 → 已修正)
+> - 2 low (局限性 #7 来源标注 + 可复用 idea #3 细节)
+> - 详见 `_review/Daisy-TTS-review.yml`

@@ -1,0 +1,54 @@
+paper: "Daisy-TTS"
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节有 5 个 WHY 设计选择,每个有因果解释;速查可借鉴字段具体可迁移"
+  可信赖:
+    satisfied: true
+    notes: "42 个出处标注;MOS/Emotion Acc. 指标正确;无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "12 处 [论文原文]/[agent 解读] 标注,覆盖率 100%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含谱系定位+对比基准;frontmatter 已修正"
+  不污染:
+    satisfied: true
+    notes: "无新建概念页;反向更新仅追加 key_papers"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: "models 原列 VITS,但 VITS 非本文使用/对比的模型。backbone 是 Grad-TTS,baseline 是 Zhou et al. 2022b,均无模型页"
+    suggestion: "已修正为 []"
+    status: fixed
+
+  - type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "局限性 #7"
+    detail: "Grad-TTS backbone 已过时是 agent 判断,非论文原文 claim"
+    suggestion: "已在局限性节明确区分;这是 agent 补充的上下文判断,非论文断言,可保留"
+    status: acceptable
+
+  - type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用 idea #3"
+    detail: "时间折叠的隐式解耦未给出具体实现细节(CNN 层数、pooling 方式)"
+    suggestion: "论文未详述 encoder 具体架构,可标注为概念级 trick"
+    status: acceptable
+
+summary: |
+  笔记整体质量良好。方法机制解释充分,包含 5 个 WHY 设计选择和对应的 [论文原文]/[agent 解读] 标注。
+  KB 背景有效定位了论文在 emotion TTS + prosody modeling 交叉点的位置。
+  唯一 medium issue (frontmatter models 不准确) 已修正。
+  2 个 low issues 属于可接受范围,不阻塞反向更新。
+  结论: pass-with-fixes,可进行反向更新。

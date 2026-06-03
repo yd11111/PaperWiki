@@ -405,3 +405,10 @@
 - [lint/local] DMOSpeech 2 — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +DMOSpeech 2
 - [moc] TTS训练与评估 MOC 更新: +DMOSpeech 2
+
+## 2026-06-03 (TacoLM)
+- [kb/search] [[TacoLM]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓, [[Zero-shot Speech Synthesis]]✓, [[EnCodec]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[TacoLM]] — 精读, kb_sources=6, 新建 0, 追加 4 (Codec Language Model, LLM-based TTS, EnCodec, Zero-shot Speech Synthesis)
+- [review/auto] [[TacoLM]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] TacoLM — 通过/0 问题 (1 YAML ref, expected)
+- [moc] 零样本语音合成 MOC 更新: +TacoLM
