@@ -151,9 +151,13 @@ PilotTTS 采用四阶段 coarse-to-fine 架构 [§3.1, Fig 3]:
 | WER (%) test-en | **1.50** | 2.02 | 2.25 | 1.64 | 1.65 | SEED-TTS-Eval | [Table 1] |
 | SIM test-en | **0.815** | 0.718 | 0.762 | -- | -- | SEED-TTS-Eval | [Table 1] |
 | 情感成功率 (主类) | **88.1%** | 83.8% | -- | -- | -- | 主观评测 | [Table 2] |
-| 情感成功率 (全类) | 85.7% | **82.5%** | -- | -- | -- | 主观评测 | [Table 2] |
+| 情感成功率 (全类) | 85.7% | 82.5% | -- | -- | -- | 主观评测 | [Table 2]^1^ |
 | 情感SIM w/ control | **0.7329** | 0.6940 | -- | -- | -- | 主观评测 | [Table 3] |
 | 副语言整体成功率 | **85.1%** | 80.4% | -- | -- | -- | 主观评测 | [Table 4] |
+
+^1^ 注: 论文 Table 2 计算得出 PilotTTS Avg.(All)=85.7%, CosyVoice 3=82.5%,但正文 §4.3 写 "CosyVoice 3 leads marginally (81.4% vs. 80.2%)",数值与 Table 不一致,原始论文可能存在 typo。本笔记采用 Table 值。
+
+> 注: SIM 评估使用 speaker embedding cosine similarity [§4.1],但论文未指定使用哪个 speaker encoder 模型。不同 encoder 的 SIM 结果可差 0.1-0.3,影响跨论文可比性。
 
 **关键发现**:
 
@@ -203,3 +207,11 @@ PilotTTS 采用四阶段 coarse-to-fine 架构 [§3.1, Fig 3]:
 4. **三阶段数据管线设计**: Quality Assessment → Label Annotation → Quality Filtering 的分层设计,被排除样本保留元数据不丢弃,支持灵活复用。特别是合成语音检测步骤对大规模爬取数据的清洗很有价值。
 
 5. **CAMPPlus + Q-Former 双路径 conditioning**: 将 speaker identity (静态) 和 speaking style (动态) 分别用不同模块和不同粒度编码,再联合输入 LLM。这种功能分工 + 互补的设计思路可推广到其他多条件生成任务。
+
+---
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> - [medium] 论文 Table 2 与正文 §4.3 的 overall emotion 成功率数值不一致 → 已在实验表格添加脚注标注
+> - [low] SIM 评估未指定 speaker encoder 型号 → 已在实验表格添加注释
+> 详见 `_review/PilotTTS-review.yml`

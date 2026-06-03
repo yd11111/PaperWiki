@@ -1,0 +1,46 @@
+paper: PilotTTS
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    details: "方法节包含 WHY 解释(Q-Former 设计动机、cross-sample paired training 的原因、方言 mixed-prompt 策略的设计逻辑),不是组件罗列。关键设计选择均回答了'为什么选这个而不是那个'。速查卡片'可借鉴'字段给出了3个具体可迁移trick。"
+  trustworthy:
+    verdict: pass-with-fixes
+    details: "主要数字(Table 1-6)均有[Table N]标注。指标名称使用正确(CER/WER/SIM)。速查'指标'有具体数字+数据集。但实验表格中'情感成功率(全类)'行PilotTTS写85.7%而CosyVoice 3标注为82.5%并加粗,实际论文中CosyVoice 3 overall avg为81.4%而非82.5%。"
+    issues:
+      - type: factual-error
+        severity: medium
+        location: "实验表格 - 情感成功率(全类) CosyVoice 3 列"
+        detail: "论文Table 2显示CosyVoice 3 Avg.(All)为82.5%(非81.4%),但论文正文§4.3提到'CosyVoice 3 leads marginally (81.4% vs. 80.2%)'。Table和正文存在不一致,笔记采用了Table值82.5%。但同段正文中PilotTTS overall为80.2%也与Table不一致(Table中PilotTTS All avg应为85.7%)。论文自身Table和正文不一致。"
+        suggestion: "在笔记中标注论文Table 2与正文§4.3中的数值存在不一致(Table vs 正文描述),原始论文可能有typo。"
+  distinguishable:
+    verdict: pass
+    details: "因果解释标注了[论文原文]和[agent 解读],覆盖率>80%。方法节关键WHY均有来源标注。无强断言缺乏支撑的情况。"
+  locatable:
+    verdict: pass
+    details: "KB背景有具体谱系定位(列出CosyVoice系列、Seed-TTS的对比),创新判断有对比基准(Q-Former vs prompt续写 vs self-distillation)。frontmatter完整,concepts/models/tasks/datasets语义正确。速查5字段均有实质内容。"
+  no_pollution:
+    verdict: pass
+    details: "未新建概念页。反向更新将为已有页面追加key_papers条目(追加操作,不改status)。无KB安全风险。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "实验表格"
+    detail: "论文正文§4.3与Table 2的overall数值不一致。正文写'81.4% vs 80.2%',Table计算出PilotTTS=85.7%, CosyVoice 3=82.5%。笔记采用了Table值,但应标注论文自身不一致。"
+    suggestion: "添加脚注标注此不一致。"
+
+  - type: traceability-gap
+    severity: low
+    location: "点评 - SIM评估方法"
+    detail: "点评中提到SIM评估方法未详细说明,这是对论文的合理质疑,但笔记实验节也未标注SIM具体使用哪个speaker encoder。"
+    suggestion: "论文§4.1提到'cosine similarity between speaker embeddings'但未指定encoder型号。在实验节添加[论文未指定speaker encoder型号]标注。"
+
+conclusion: pass-with-fixes
+conclusion_reason: "整体质量高。方法解释有因果逻辑和来源标注,KB背景定位准确,速查卡片内容充实。有1个medium issue(论文Table/正文数值不一致需标注)和1个low issue(SIM encoder未指定),不阻塞反向更新。"
+fix_actions:
+  - "在实验表格附近添加脚注标注论文Table 2与§4.3正文数值不一致"
+  - "在实验表格SIM行添加[论文未指定speaker encoder]标注"
