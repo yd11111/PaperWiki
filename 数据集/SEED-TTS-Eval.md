@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: confirmed

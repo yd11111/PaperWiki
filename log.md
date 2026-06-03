@@ -259,3 +259,10 @@
 - [moc] 新建 3 个 sub-MOC: 语音表征与自监督学习(11 篇) + 语音大模型与对话(8 篇) + TTS训练与评估(11 篇)
 - [moc] TTS-总览 MOC 更新: 添加 3 个新 sub-MOC 链接, 合并冗余子主题
 - [update/convention] CLAUDE.md vault 状态更新: MOC 6 个, 覆盖 79/79, 死链 0, tier 全补齐
+
+## 2026-06-03
+- [kb/search] [[Llasa]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[CosyVoice]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[MELLE]](pending-review), [[Emilia]](pending-review)
+- [ingest/deep] [[Llasa]] — 精读, kb_sources=6, 新建 0, 追加 8 (LLM-based TTS, Speech Tokenizer, FSQ, Semantic vs Acoustic Tokens, Single-codebook vs Multi-codebook, Token Rate and Bitrate Trade-offs, SEED-TTS-Eval, Emilia, Zero-shot Speech Synthesis)
+- [review/auto] [[Llasa]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] Llasa — 通过/0 问题
+- [moc] 零样本语音合成 MOC + 语音编码与量化 MOC 更新: +Llasa

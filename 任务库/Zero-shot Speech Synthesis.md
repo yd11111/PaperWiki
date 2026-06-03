@@ -4,7 +4,7 @@ title: "Zero-shot Speech Synthesis"
 aliases: [零样本语音合成, Zero-shot TTS, Zero-shot Voice Cloning]
 tags: [TTS, zero-shot, voice-cloning]
 key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hybrid"]
-key_models: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]"]
+key_models: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
 status: confirmed

@@ -4,7 +4,7 @@ title: "Finite Scalar Quantization"
 aliases: [FSQ, Finite Scalar Quantization]
 category: "quantization"
 tags: [quantization, discrete-representation, VQ-alternative, codebook-free]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Fish-Speech|Fish-Speech]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/Llasa|Llasa]]"]
 origin_paper: "Mentzer et al., Finite Scalar Quantization: VQ-VAE Made Simple, ICLR 2024"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Gumbel-Softmax]]", "[[Audio Tokenizer Taxonomy]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
 status: pending-review

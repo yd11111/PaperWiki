@@ -5,7 +5,7 @@ aliases: [Emilia Dataset]
 domain: "Large-scale speech generation training"
 scale: "101K+ hours, multilingual"
 tags: [training-data, large-scale, multilingual, TTS]
-used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/FlexiVoice|FlexiVoice]]"]
+used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/Llasa|Llasa]]"]
 metrics_reported_on: []
 url: ""
 status: pending-review
