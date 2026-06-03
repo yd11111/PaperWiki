@@ -447,3 +447,8 @@
 - [review/auto] [[EmoSphere-TTS]] — pass-with-fixes, 2 issues (0 high, 2 medium)
 - [lint/local] EmoSphere-TTS — 通过/0 问题
 - [moc] TTS训练与评估 MOC 更新: +EmoSphere-TTS
+- [kb/search] [[TTSDS]] — 命中 5 页: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[Speaker Verification]](pending-review) | 过滤: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Speaker Verification]](pending-review)
+- [ingest/deep] [[TTSDS]] — 精读, kb_sources=5, 首个分布级多因子 TTS 评估(5因子 x Wasserstein-2, 35系统, ρ=0.60-0.83), 追加更新 5 个实体页(TTS Evaluation, Self-Supervised Speech Representation, Prosody Modeling, Speaker Embedding, Speaker Verification) + TTS Evaluation 内容追加 + MOC 更新
+- [review/auto] [[TTSDS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] TTSDS — 通过/0 问题
+- [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
