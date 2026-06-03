@@ -1,0 +1,44 @@
+paper: "RapFlow-TTS"
+reviewer: agent
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含三个关键设计选择的 WHY 解释(为什么 consistency FM 而非 consistency distillation; 双重约束的不同视角; multi-segment 的分段逼近优势),速查卡片可借鉴列出 5 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "所有数字 claim 标注了 [Table N] 出处; 指标名 MOS/WER/NISQA/RTF 使用正确; 速查卡片指标含具体数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "方法节因果解释标注 [论文原文] 和 [agent 解读] 覆盖率约 85%; 局限性和实验发现中推断性分析均标注 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景给出 Grad-TTS → VoiceFlow → Matcha-TTS → RapFlow-TTS 谱系线; 创新判断有 VoiceFlow 和 ComoSpeech 作为对比基准; frontmatter 完整"
+  不污染:
+    satisfied: true
+    notes: "无新概念页需创建; 反向更新仅追加 key_papers; 无 factual error 或 overclaim"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter"
+    detail: "models 字段仅列 VoiceFlow,未列 Matcha-TTS/Grad-TTS/ComoSpeech 等对比 baseline。但这些 baseline 在 vault 中无独立模型页,且 RapFlow-TTS 基于 Matcha-TTS 架构无独立模型名,故不适合列入 models"
+    suggestion: "保持现状; 若后续建立 Matcha-TTS/Grad-TTS 模型页可追加"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验§关键发现"
+    detail: "第 5 条发现中 NISQA 数字 4.25→4.28→4.29 来自 Table 2 H,但行文中标注为 [Table 2 H] 后未标注 WER 数字出处"
+    suggestion: "WER 3.11→3.41→3.47 后追加 [Table 2 H]"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea §5"
+    detail: "shared dropout 的描述较简短,可补充 dropout ratio 0.05 的具体数值"
+    suggestion: "在第 5 条末尾追加 (dropout ratio 0.05)"
+
+conclusion: pass-with-fixes
+conclusion_reason: "5 个原则均满足; 3 个 low issue 不阻塞反向更新; 笔记机制解释清晰,数字标注覆盖率高"

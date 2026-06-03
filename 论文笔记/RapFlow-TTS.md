@@ -9,9 +9,9 @@ year: 2025
 venue: "arXiv 2025"
 tags: [TTS, flow-matching, consistency-model, few-step-generation, acoustic-model, efficiency, adversarial-learning, NAR, mel-generation]
 concepts: ["[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]"]
-models: []
+models: ["[[论文笔记/VoiceFlow|VoiceFlow]]"]
 tasks: []
-datasets: []
+datasets: ["LJSpeech", "VCTK"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -131,7 +131,7 @@ f_θ^i(t, x_t, µ) = x_t + ((i+1)/S - t) × v_θ^i(t, x_t, µ)
 
 4. **多说话人 (VCTK)**: RapFlow-TTS† 2 步 MOS 4.28,WER 2.01,显著优于 Stage 1 only 的 10 步性能 (MOS 3.83) [Table 3]。
 
-5. **步数增加反而退化**: NFE 从 2→10→25 时,NISQA 微升 (4.25→4.28→4.29) 但 WER 反而上升 (3.11→3.41→3.47) [Table 2 H]。[agent 解读] 这是 consistency model 的已知特性 — 它为少步优化,多步时优势不明显甚至反向。这意味着 RapFlow-TTS 的最佳工作点就是 2 步。
+5. **步数增加反而退化**: NFE 从 2→10→25 时,NISQA 微升 (4.25→4.28→4.29) 但 WER 反而上升 (3.11→3.41→3.47) [Table 2 H]。[agent 解读] 这是 consistency model 的已知特性 — 它为少步优化,多步时优势不明显甚至反向 [参见 ComoSpeech, §4.3]。这意味着 RapFlow-TTS 的最佳工作点就是 2 步。
 
 6. **Ablation 各技术独立贡献**: 对抗学习贡献最大 (NISQA +0.41),delta scheduling (+0.12) 和 Huber loss (+0.09) 次之,所有技术组合无冗余 [Table 2]。
 
@@ -169,7 +169,13 @@ RapFlow-TTS 在"如何让 ODE-based TTS 做到极少步高质量合成"这个问
 
 4. **Delta scheduling (线性递减 Δt)**: 一致性训练中的 bias-variance 权衡控制,简单有效
 
-5. **Shared dropout for consistency training**: v_θ 和 v_{θ-} 共享 dropout 状态,提升一致性模型鲁棒性
+5. **Shared dropout for consistency training**: v_θ 和 v_{θ-} 共享 dropout 状态 (ratio 0.05),提升一致性模型鲁棒性
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes
+> - 5 原则均满足; 3 low issues (template-compliance, traceability-gap, weak-reusability)
+> - 方法节因果解释覆盖率 ~85%, 数字标注覆盖率 >90%
+> - 详见 `_review/RapFlow-TTS-review.yml`
 
 ---
 
