@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[DialogueAgents]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review)
+- [ingest/deep] [[DialogueAgents]] — 精读, kb_sources=3 confirmed + 3 pending, 新建 0, 追加 5 (CosyVoice, Emotion Control in TTS, Prosody Modeling, Turn-taking in Spoken Dialogue, TTS Evaluation) + MOC
+- [review/auto] [[DialogueAgents]] — pass-with-fixes, 2 issues (1 medium factual-error 已修正, 1 low)
+- [lint/local] DialogueAgents — 通过, 0 死链
+- [kb/search] [[TTS-Transducer]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[模型库/EnCodec|EnCodec]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[TTS-Transducer]] — 精读, kb_sources=6, 新建 0, 追加 7 (Residual Vector Quantization, LLM-based TTS, Speaker Embedding, Global Style Tokens, Codec Language Model, Duration Predictor, EnCodec) + 1 任务页 (Zero-shot Speech Synthesis)
+- [review/auto] [[TTS-Transducer]] — pass-with-fixes, 1 medium (SSIM 可比声明已修正) + 2 low issues
+- [lint/local] TTS-Transducer — 通过/0 问题
+- [moc] 零样本语音合成 — 新增 TTS-Transducer (2025 section + 演进脉络 Transducer 路线)
+- [moc] TTS-总览 — 新增 TTS-Transducer (生成方法演进)
 - [kb/search] [[FlexSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](待确认), [[Non-autoregressive TTS]](待确认), [[Style Transfer in TTS]](待确认), [[Differentiable Reward Optimization]](待确认)
 - [ingest/deep] [[FlexSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 (Conditional Flow Matching, Duration Predictor, Non-autoregressive TTS, Style Transfer in TTS, Prosody Modeling, Differentiable Reward Optimization, Classifier-Free Guidance, Speaker Embedding)
 - [review/auto] [[FlexSpeech]] — pass, 2 low issues
