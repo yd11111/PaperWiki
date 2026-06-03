@@ -132,3 +132,12 @@
 - [create/entity] 无新建 — 候选 (MSRVQ, Noise Block, Representation Codec, Straight-Through Estimator) 均不满足准入规则(已被已有实体页覆盖或单篇论文特有概念)
 - [moc] 语音编码与量化 MOC 刷新: 新增 3 篇论文 + 更新演进脉络
 - [lint/local] SNAC, RepCodec, VQ-VAE — 通过/0 dead links, frontmatter 完整
+- [kb/search] [[Tortoise TTS]] — 命中 3 页(confirmed): [[Neural Vocoder]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Mel Spectrogram]](pending-review), [[Diffusion Model]](pending-review)
+- [kb/search] [[FELLE]] — 命中 3 页(confirmed): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Mel Spectrogram]](pending-review)
+- [kb/search] [[FlowDec]] — 命中 3 页(confirmed): [[Conditional Flow Matching]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓ | 过滤: [[Score Matching]](pending-review), [[Diffusion-based Vocoder]](pending-review)
+- [ingest/deep] [[Tortoise TTS]] — 精读(batch processing), kb_sources=3, AR+DDPM 两阶段 TTS 先驱, CLVP re-ranking, TorToise Trick, 49K hrs web data
+- [ingest/deep] [[FELLE]] — 精读(batch processing), kb_sources=3, Token-wise C2F flow matching for AR mel TTS, dynamic prior, SIM-o +4.7% over MELLE
+- [ingest/deep] [[FlowDec]] — 精读(batch processing), kb_sources=3, Non-adversarial codec + flow postfilter, FAD 1.62 vs DAC 3-10, RTF 0.23 (7.5x faster than ScoreDec)
+- 反向更新: CFM(+FELLE, +FlowDec), LLM-based TTS(+Tortoise, +FELLE), Neural Vocoder(+FlowDec), Score Matching(+FlowDec), CFG(+Tortoise, +FELLE), Diffusion Model(+Tortoise), MELLE model(+FELLE), Mel Spectrogram(+FELLE), RVQ(+FlowDec), Diffusion-based Vocoder(+FlowDec) — 共 10 页 append
+- [create/entity] 无新建 — 候选 (CLVP, TorToise Trick, VQVAE-mel, C2F-FM, Dynamic Prior, NDAC, Stochastic Postfilter, CQT Loss) 均不满足准入规则(单篇论文特有概念)
+- [lint/local] Tortoise TTS, FELLE, FlowDec — 通过/0 dead links, frontmatter 完整
