@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[OZSpeech]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[模型库/NaturalSpeech 3|NaturalSpeech 3]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[OZSpeech]] — 精读, kb_sources=6, 新建 0, 追加 5 (Conditional Flow Matching, Zero-shot Speech Synthesis, Speech Factorization, Duration Predictor, NaturalSpeech 3)
+- [review/auto] [[OZSpeech]] — pass, 0 high + 0 medium + 3 low
+- [lint/local] OZSpeech — 通过/0 问题
+- [moc/update] 零样本语音合成 — 追加 OZSpeech
 - [kb/search] [[Multi-Step Hierarchical ED]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review)
 - [ingest/deep] [[Multi-Step Hierarchical ED]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS, Prosody Modeling)
 - [review/auto] [[Multi-Step Hierarchical ED]] — pass-with-fixes, 0 high + 1 medium (models 字段误列 VITS, 已修正) + 1 medium (datasets 为空) + 1 low
