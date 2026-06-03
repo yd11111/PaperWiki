@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/FlowDec|FlowDec]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/FlexiVoice|FlexiVoice]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Diffusion Model]]", "[[Score Matching]]"]
 status: confirmed
@@ -50,3 +50,5 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 ## 演进
 
 WaveNet (2016, autoregressive vocoder) → Diffusion-based TTS (Grad-TTS, 2021) → Flow Matching (Voicebox, 2023) → CFM + DiT (CosyVoice 3, 2025)
+
+- [[论文笔记/CLEAR|CLEAR]] (Wu et al., 2025): 将 rectified flow 作为轻量 MLP head 直接挂在 AR language model 的每个 token 位置上,以 hidden state 为条件逐 token 生成连续 VAE latent。不同于 CosyVoice 系列将 CFM 作为独立的 second-stage renderer,CLEAR 实现了 **单阶段** AR + flow 联合训练。使用 logit-normal timestep sampling 和 auxiliary velocity direction loss 加速收敛。RTF 0.18, 仅需 78 步 AR decoding (对比 VALL-E 750 步)

@@ -4,7 +4,7 @@ title: "LLM-based TTS"
 aliases: [LLM TTS, 大语言模型语音合成, LLM-driven Speech Synthesis]
 category: "model-family"
 tags: [TTS, LLM, autoregressive, codec, zero-shot, in-context-learning, decoder-only]
-key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "[[论文笔记/MELLE|MELLE]]", "HALL-E (Nishimura et al., 2024)", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/FELLE|FELLE]]"]
+key_papers: ["VALL-E (Wang et al., 2023)", "VALL-E X (Zhang et al., 2023d)", "VALL-E 2 (Chen et al., 2024a)", "VALL-E R (Han et al., 2024)", "ELLA-V (Song et al., 2024)", "RALL-E (Xin et al., 2024)", "[[论文笔记/MELLE|MELLE]]", "HALL-E (Nishimura et al., 2024)", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/Mega-TTS|Mega-TTS]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/Mega-TTS 2|Mega-TTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/Tortoise TTS|Tortoise TTS]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/FlexiVoice|FlexiVoice]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech-LLM Integration Taxonomy]]"]
 status: confirmed
@@ -81,8 +81,14 @@ VALL-E 开创的典型两阶段:
 - NaturalSpeech 3 (Ju et al., 2024): factorized diffusion codec
 - SimpleSpeech (Yang et al., 2024c): scalar latent transformer + flow-based
 
+**Continuous-valued AR (Next-Token Diffusion) 路线**:
+- LatentLM (Sun et al., 2024): 提出 next-token diffusion 统一框架,用 sigma-VAE 编码连续数据 + per-token diffusion head 自回归生成,在 TTS 上以 10x 更少解码步数超越 VALL-E 2
+- CLEAR (Wu et al., 2025): 用 MLP rectified flow head + enhanced VAE (2048x 压缩) 实现单阶段零样本 TTS,RTF 0.18, 流式 96ms 首帧延迟
+- VibeVoice (Peng et al., 2025): 基于 LatentLM + Qwen2.5,双 tokenizer (acoustic+semantic),实现 90 分钟多说话人对话,超越 Gemini 2.5 Pro TTS
+
 **Dialogue/Multi-speaker 扩展**:
 - FireRedTTS-2 (Xie et al., 2025): Text-speech interleaved format + dual-transformer (backbone + decoder) 实现长对话语音生成,支持 podcast 和交互式聊天;12.5Hz streaming tokenizer 缩短序列长度
+- VibeVoice (Peng et al., 2025): next-token diffusion + 3200x causal tokenizer (7.5Hz) + Qwen2.5 7B,支持最多 4 说话人、最长 90 分钟对话,Preference/Realism/Richness MOS 均超越 Gemini 2.5 Pro
 
 ## 在可控性方面的特点
 

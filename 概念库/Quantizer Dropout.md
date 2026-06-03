@@ -4,7 +4,7 @@ title: "Quantizer Dropout"
 aliases: [RVQ Dropout, Variable Bitrate Training]
 category: "training-technique"
 tags: [quantization, training-trick, variable-bitrate, audio-codec]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/FlexiCodec|FlexiCodec]]"]
 origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: confirmed

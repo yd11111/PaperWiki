@@ -4,7 +4,7 @@ title: "Codec Language Model"
 aliases: [CodecLM, Codec LM, 编解码器语言模型, Neural Codec Language Model, Audio Codec LM]
 category: "model-family"
 tags: [speech-LM, codec, autoregressive, neural-audio-codec, language-model, RVQ]
-key_papers: ["VALL-E (Wang et al., 2023)", "[[论文笔记/AudioLM|AudioLM]]", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SC VALL-E|SC VALL-E]]"]
+key_papers: ["VALL-E (Wang et al., 2023)", "[[论文笔记/AudioLM|AudioLM]]", "VioLA (Wang et al., 2024)", "NTPP (Wang et al., 2025)", "SpeechGPT-Gen (Zhang et al., 2024)", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RIO|RIO]]"]
 origin_paper: "Cui et al., Speech Language Models, 2024"
 related_concepts: ["[[Speech Language Model]]", "[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
 status: pending-review
@@ -90,6 +90,7 @@ CodecLM 是 SpeechLM 中侧重 **声学保真度** 的路线。Survey 分类中�
 - VioLA (Wang et al., 2024): 多任务 CodecLM (ASR+TTS+ST)
 - NTPP (Wang et al., 2025): 双通道对话 codec LM
 - SpeechGPT-Gen (Zhang et al., 2024): chain-of-information codec 生成
+- SongGen (Liu et al., 2025): 单阶段 AR Transformer 在 X-Codec (RVQ, 8 codebooks) tokens 上做 song generation,codebook-delay pattern + mixed/dual-track token patterns
 
 ## 相关概念
 

@@ -5,7 +5,7 @@ aliases: [Emilia Dataset]
 domain: "Large-scale speech generation training"
 scale: "101K+ hours, multilingual"
 tags: [training-data, large-scale, multilingual, TTS]
-used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]"]
+used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/FlexiVoice|FlexiVoice]]"]
 metrics_reported_on: []
 url: ""
 status: pending-review
@@ -17,20 +17,36 @@ updated: 2026-06-01
 
 ## 概述
 
-Emilia 是一个大规模、多语言、多样化的语音数据集,专门为大规模语音生成模型训练而设计。由 He et al. (2024) 发布,涵盖多种语言和说话风格。
+Emilia 是首个大规模、多语言、多样化的开源 in-the-wild 语音生成数据集,由 He et al. (2024) 发布。配套开源预处理 pipeline Emilia-Pipe,可将原始 in-the-wild 音频转换为高质量带标注训练数据。详见 [[论文笔记/Emilia|Emilia 论文笔记]]。
 
 ## 规模与特点
 
-- 总量超过 101K 小时
-- 覆盖多语言(中文、英文等)
-- 高度多样化: 多种说话人、风格、录音条件
-- 专为语音生成任务设计(而非 ASR)
+- **总量**: 101,654 小时 (初始版本)
+- **语种分布**: 英语 46.8K h (46.77%), 中文 49.9K h (49.83%), 德语 1.6K h, 法语 1.8K h, 日语 1.7K h, 韩语 0.2K h
+- **采样率**: 24 kHz, mono, 16-bit
+- **数据来源**: 多样化视频平台和播客 — 访谈、辩论、体育解说、有声书等 in-the-wild 录音
+- **质量**: DNSMOS P.835 OVRL 3.26 ± 0.14,在 9 个对比数据集中排第三 (仅次于 MLS 3.33, Libri-Light 3.25)
+- **多样性**: acoustic (WavLM features) 和 semantic (Sentence-BERT) 特征空间上均显著优于 audiobook 数据集 (MLS)
+
+## Emilia-Pipe 预处理 Pipeline
+
+首个全开源的 in-the-wild 语音数据预处理 pipeline,6 步流程:
+1. **Standardization**: WAV, mono, 24kHz, -20 dBFS 归一化
+2. **Source Separation**: UVR-MDX-Net Inst 5 去除背景音乐/噪声
+3. **Speaker Diarization**: pyannote 3.1 说话人分割
+4. **Fine-grained Segmentation**: Silero-VAD 切分为 3-30 秒段落
+5. **ASR**: WhisperX (Whisper-Medium + faster-whisper + CTranslate2)
+6. **Filtering**: 语种过滤 + DNSMOS OVRL ≥ 3.0 + duration outlier 过滤
+
+处理效率: ~2.5 小时数据/分钟 (8×RTX 4090)
 
 ## 使用此数据集的模型
 
 - [[论文笔记/IndexTTS2|IndexTTS2]]: 使用 Emilia 作为主要训练数据来源,55K 小时训练数据中大部分来自 Emilia (30K 中文 + 25K 英文)
 - [[论文笔记/MaskGCT|MaskGCT]]: 使用 Emilia 100K 小时 (50K 英文 + 50K 中文) 训练全部模型组件
+- [[论文笔记/Seed-VC|Seed-VC]]: 使用 Emilia 训练 voice conversion 模型
+- [[论文笔记/NVSpeech|NVSpeech]]: 使用 Emilia 子集作为副语言感知 ASR 自动标注的数据来源之一
 
 ## 来源
 
-He et al., "Emilia: An Extensive, Multilingual, and Diverse Speech Dataset for Large-Scale Speech Generation", IEEE SLT 2024.
+He et al., "Emilia: An Extensive, Multilingual, and Diverse Speech Dataset for Large-Scale Speech Generation", IEEE SLT 2024. arXiv: 2407.05361.

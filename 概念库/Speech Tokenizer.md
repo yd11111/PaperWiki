@@ -4,7 +4,7 @@ title: "Speech Tokenizer"
 aliases: [语音分词器, Semantic Token, Discrete Speech Token]
 category: "representation"
 tags: [speech-representation, tokenization, discrete-token, TTS]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/Moshi|Moshi]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/VQ-VAE|VQ-VAE]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SoundStorm|SoundStorm]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/AudioLM|AudioLM]]", "[[论文笔记/SPEAR-TTS|SPEAR-TTS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/UniAudio|UniAudio]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/FireRedTTS 2|FireRedTTS 2]]", "[[论文笔记/BASE TTS|BASE TTS]]", "[[论文笔记/Moshi|Moshi]]", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/StableToken|StableToken]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]", "[[Audio Tokenizer Taxonomy]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]", "[[Self-Supervised Speech Representation]]"]
 status: confirmed
@@ -96,4 +96,14 @@ Survey Table 1 覆盖 50+ tokenizer 的完整设计参数矩阵,是选型的重�
 
 ## 演进
 
-Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → Mixed tokenizer (SpeechTokenizer/Mimi, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025) → 五轴精细化 taxonomy + 统一 benchmark (Mousavi et al., 2025)
+Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → 监督式 semantic tokens (CosyVoice, 2024) → Mixed tokenizer (SpeechTokenizer/Mimi, 2024) → 多任务监督 + 大模型 backbone (CosyVoice 3, 2025) → 五轴精细化 taxonomy + 统一 benchmark (Mousavi et al., 2025) → **Continuous VAE tokenizer** (sigma-VAE, LatentLM 2024; shortcut-VAE, CLEAR 2025): 绕过离散量化,直接用 VAE 编码为连续 latent vectors,压缩比可达 1600-6400x (帧率 3.75-15 Hz),重建质量优于同压缩比离散方案
+
+### Continuous VAE Tokenizer (连续 tokenizer 新路线)
+
+以 LatentLM (Sun et al., 2024), CLEAR (Wu et al., 2025), VibeVoice (Peng et al., 2025) 为代表的新路线**完全绕过离散量化**:
+
+- **sigma-VAE** (LatentLM): 固定 variance sigma ~ N(0, C_sigma) 防止 AR 场景下的 variance collapse; ConvNeXt encoder; 压缩比 1600x/3200x/6400x; PESQ 3.068 / UTMOS 4.181 at 7.5 Hz [LatentLM Table 5]
+- **Enhanced wav-VAE** (CLEAR): 7-stage oobleck encoder + snake activation + **非参数化 shortcut connections** (space-to-channel); 压缩比 2048x (strides [2,4,4,8,8]); WER 2.89%, UTMOS 4.08 接近 ground truth [CLEAR Appendix C.1]
+- **VibeVoice tokenizer**: 基于 sigma-VAE, hierarchical Transformer blocks (7 stages), 1D causal convolution, 3200x 压缩 (7.5 Hz), 340M params; PESQ 3.068, UTMOS 4.181 领先所有 multi-quantizer baseline [VibeVoice Table 3]
+
+**关键优势**: speech-to-text token ratio 约 2:1 (接近 BPE 粒度), 使 LLM 可自然处理语音和文本的交错序列。90 分钟对话仅需 ~40K tokens (传统 50Hz codec 需 ~270K)。

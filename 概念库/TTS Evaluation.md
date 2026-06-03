@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -74,6 +74,10 @@ MOS (Mean Opinion Score) 作为金标准存在系统性问题 [§3.2]:
 - 可量化 fine-grained 质量维度
 - 可迁移性强: 无需针对每个测试条件重新收集人类评分
 - 代表工作: SpeechLLM-as-Judges, QualiSpeech, UrgentMOS
+
+### Generative Speech Reward Model (GSRM)
+
+Shen et al. (2026) 提出 GSRM,将语音自然度评估分解为 (1) vowel-level acoustic feature extraction (pitch/intensity/duration) 和 (2) feature-grounded CoT reasoning 两阶段。基于 Qwen2.5-Omni-7B SFT 训练,在 OOD 数据上 PCC 0.465 接近人类 inter-rater 0.532 [Table 5]。核心发现: frontier speech LLM (Gemini-2.5-Pro) 直接评估 naturalness 时 PCC 为 -0.050 (负相关),而 text LLM 基于 explicit acoustic features 评估反而更好 (PCC 0.133),说明瓶颈在于 speech LLM 提取细粒度韵律 cues 的能力 [Table 2]。GSRM 还首次被用于 online speech RLHF,作为 verifier 指导 speech LLM 训练,naturalness A/B win rate 达 82% [Table 6]。详见 [[论文笔记/GSRM|GSRM]]。
 
 ### Audio Turing Test
 

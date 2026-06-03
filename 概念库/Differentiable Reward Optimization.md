@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -45,6 +45,18 @@ DiffRO 解决了 TTS RL 的两个核心难题:
 - KL Divergence: 约束策略不偏离参考模型
 - [[Speech Tokenizer]]: DiffRO 优化的目标对象(token 选择)
 
+## GRPO vs DiffRO 对比 (Tongyi, 2025)
+
+Gao et al. (2025) [[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]] 首次在同一框架下公平对比 GRPO 和 DiffRO 用于 TTS RL:
+- **DiffRO 降 WER 更强**: DiffRO R^1 WER 3.418 vs GRPO R^1 WER 3.710 (CosyVoice2, CV3-Eval)
+- **DiffRO 可能伤 speaker similarity**: SS 77.00 vs GRPO SS 77.26
+- **DiffRO 训练更稳定**: 超过 1500 步后 GRPO 迅速退化,DiffRO 保持稳定
+- **组合方案**: 直接合并 GRPO+DiffRO loss 反而变差;通过 sample filter (仅对 positive samples 做 DiffRO) 解决兼容性问题,Combined+Filter R^{1,2,3} 达 WER 3.414
+
+## 偏好优化路线 (SpeechAlign, 2024)
+
+Zhang et al. (2024) [[论文笔记/SpeechAlign|SpeechAlign]] 是首次将偏好学习引入 codec language model 的工作,通过 golden vs synthetic AR tokens 构建偏好数据集。虽然使用 DPO 而非 DiffRO,但其 iterative self-improvement 思路与 DiffRO 的 RL 后训练目标一致: 让 TTS 输出更接近人类偏好的分布。
+
 ## 演进
 
-RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025)
+RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025)
