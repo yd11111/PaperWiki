@@ -25,6 +25,7 @@
   - [[论文笔记/FaceSpeak|FaceSpeak]] — 2025 (AAAI), 任意风格肖像驱动 TTS, FaRL+IAM/EAM+GRL+vCLUB 跨模态 identity-emotion 解耦, VITS2 backbone
   - [[论文笔记/Multi-Step Hierarchical ED|Multi-Step Hierarchical ED]] — 2025, CUHK-SZ/Alibaba, 多步 utterance→word→phoneme 层级情感分布预测 + FastSpeech 2 集成, WER 2.45% vs 单步 4.61%
   - [[论文笔记/MAE Style-Rich TTS|MAE Style-Rich TTS]] — 2025, Zhejiang Univ/Tencent, MAE style-rich token + 两阶段 AR LM 细粒度离散标签可控 TTS, CFG on AR logit, 数据解耦缓解高质量语料稀缺
+  - [[论文笔记/Prompt-Unseen-Emotion|Prompt-Unseen-Emotion]] — 2025, A*STAR, LLM emotion-guided prompt (百分比模板) 实现零样本混合情感合成, 基于 CosyVoice, AB Pref 68-87% vs VITS-based baseline
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency

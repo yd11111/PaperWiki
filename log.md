@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[UniTTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[UniTTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Residual Vector Quantization, LLM-based TTS, Semantic vs Acoustic Tokens, Speech Tokenizer, Codebook Collapse, Single-codebook vs Multi-codebook)
+- [review/auto] [[UniTTS]] — pass, 3 low issues
+- [lint/local] UniTTS — 通过 (0 dead links, MOC 已更新: 语音编码与量化 + 零样本语音合成)
 - [kb/search] [[LM-SPT]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Speech Language Model]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
 - [ingest/deep] [[LM-SPT]] — 精读, kb_sources=6, 新建 0, 追加 10 (Speech Tokenizer, Semantic vs Acoustic Tokens, RVQ, Token Rate, Speech Language Model, Self-Supervised Speech Representation, EnCodec, HuBERT, WavLM, Whisper)
 - [review/auto] [[LM-SPT]] — pass, 0 high + 0 medium + 3 low

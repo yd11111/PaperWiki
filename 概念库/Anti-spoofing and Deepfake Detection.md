@@ -4,7 +4,7 @@ title: "Anti-spoofing and Deepfake Detection"
 aliases: [反欺骗检测, Audio Deepfake Detection, Voice Anti-spoofing, 深伪语音检测, Speech Deepfake, 语音伪造检测]
 category: "security"
 tags: [voice-cloning, deepfake, anti-spoofing, ethics, safety, speaker-verification, TTS]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/Traceable TTS|Traceable TTS]]"]
 origin_paper: ""
 related_concepts: ["[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Embedding]]"]
 status: pending-review
@@ -63,6 +63,7 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 - **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印; [[论文笔记/TraceableSpeech|TraceableSpeech]] (Zhou et al., Interspeech 2024) 将水印嵌入与 codec LM TTS 端到端联合训练,实现 proactive traceability
 - **Proactive Voice Protection**: [[论文笔记/SafeSpeech|SafeSpeech]] (Zhang et al., USENIX Security 2025) 在上传前嵌入不可感知扰动,使 TTS 模型在 fine-tuning 和 zero-shot 场景下均无法合成高质量语音,代表从"被动检测"到"主动防护"的范式转变
 - **ASVspoof Challenge 系列**: 推动 anti-spoofing 技术发展的标准化竞赛 (Survey 未展开但属于该领域核心)
+- **Watermark-free Traceability**: [[论文笔记/Traceable TTS|Traceable TTS]] (Zhao et al., 2025) 提出不依赖显式水印的 TTS 模型溯源方案,通过反转 GAN generator loss 实现 TTS 模型与 discriminator (wav2vec 2.0 + LCNN) 的协同训练,使模型自然产生可追溯的隐式指纹。域外泛化 EER 11.5% vs baseline 18.99%
 
 ## 在 TTS 中的应用
 
@@ -88,4 +89,4 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 
 ## 演进
 
-GMM-based spoofing detection (ASVspoof 2015) → DNN binary classification (2017) → End-to-end detection (2019) → Self-supervised feature-based detection (2021) → LLM-era: 生成质量逼近真实,检测难度陡增 (2023-) → Harm taxonomy 框架化 (Hutiri et al., 2024)
+GMM-based spoofing detection (ASVspoof 2015) → DNN binary classification (2017) → End-to-end detection (2019) → Self-supervised feature-based detection (2021) → LLM-era: 生成质量逼近真实,检测难度陡增 (2023-) → Harm taxonomy 框架化 (Hutiri et al., 2024) → Watermark-free model attribution (Traceable TTS, 2025)
