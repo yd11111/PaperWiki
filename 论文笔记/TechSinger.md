@@ -105,7 +105,7 @@ $$v_{CFG}(x,t|c;\theta) = \gamma \cdot v_m(x,t|c;\theta) + (1-\gamma) \cdot v_m(
 
 **为什么对技巧标签做 random drop?** [论文原文] 除了 CFG 的标准动机外,technique detector 输出本身含噪,random drop 防止生成模型盲目信赖标签,增强鲁棒性 [§CFG Flow Matching Postnet]。
 
-[agent 解读] 这个设计巧妙地将 CFG 的条件增强与标签噪声鲁棒化合二为一。γ=1.2 是较温和的 guidance scale,对比 TTS 中常用的 0.7 (CosyVoice) 或更高值,说明 SVS 中过强的条件引导可能损害自然度。
+[agent 解读] 这个设计巧妙地将 CFG 的条件增强与标签噪声鲁棒化合二为一。γ=1.2 对应的无条件偏移系数为 |1-γ|=0.2,相比 CosyVoice 的 β=0.7 (等效 γ=1.7, 偏移系数 0.7) 弱得多,说明 SVS 中过强的条件引导可能损害自然度,或者歌唱技巧条件比说话人条件更容易被模型捕获,不需要过强引导。
 
 **Postnet 架构**: 非因果 WaveNet (20 层, kernel=3, residual channel=256, hidden=256, 100 训练步) [Table 8]。比 FMPP 更大 (20 层 vs 12 层),因为 mel 比 F0 维度高。
 
@@ -252,5 +252,10 @@ TechSinger 的核心价值在于将 flow matching 引入 SVS 的两个关键环�
 3. **Technique detector 自动标注**: 训练一个检测器来自动扩展标注,适用于任何缺乏细粒度标注的 SVS/TTS 任务 (如情感标注、风格标注)。
 4. **Multi-head weighted average 聚合**: 从 frame-level 到 phoneme-level 的聚合,比简单平均保留更多信息,可用于任何需要序列聚合的场景。
 
-> [!review] 审阅待生成
-> 本笔记尚未通过审阅。
+> [!review] 审阅结论: pass-with-fixes (2026-06-03)
+> **可复述**: 通过 — 每个设计选择有 WHY 解释,速查卡片可借鉴具体
+> **可信赖**: 通过 — 数字标注覆盖率 >90%, 指标方向正确
+> **可区分**: 通过 — [论文原文]/[agent 解读] 标注完整, 覆盖率 >80%
+> **可定位**: 通过 — KB 背景有具体谱系定位, frontmatter 字段完整
+> **不污染**: 通过 — 反向更新均为追加, 无新概念页需创建
+> 详见 `_review/TechSinger-review.yml`
