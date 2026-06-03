@@ -11,7 +11,7 @@ tags: [TTS, multi-modal, face-to-speech, controllability, contrastive-learning, 
 concepts: ["[[Speaker Embedding]]", "[[Codec Language Model]]", "[[Natural Language Description for TTS]]", "[[Residual Vector Quantization]]", "[[Voice Cloning Taxonomy]]", "[[Style Transfer in TTS]]", "[[Speech Factorization]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["LRS3", "VoxCeleb2", "LibriTTS-R"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-03
@@ -185,3 +185,9 @@ RV-TTS 在 face-driven TTS 这一小众赛道上取得了显著进步,核心贡�
 2. **Style augmentation for domain generalization**: 用 neural style transfer 在训练时随机风格化输入,缩小 "训练域 (真实照片) 与目标域 (绘画/老照片)" 的差距。思路可迁移到: 用 voice conversion 增强训练数据覆盖未见说话人; 用 codec 编解码添加不同音质特征增强鲁棒性
 3. **Sampling + self-prompting 处理 ill-posed mapping**: 对于一对多的条件生成问题,先用 sampling 生成多候选,再用选中的候选作为 prompt 锁定一致性。可用于: 情感 TTS 中从粗粒度 emotion label 生成多种表现方式; text-to-music 中从文字描述生成不同编曲风格
 4. **去除条件泄露词 (debiasing descriptive text)**: 在多模态条件 TTS 中,确保不同条件通道不重复编码同一信息 (如去除 descriptive text 中的 gender 词,迫使 gender 只从 face 学习),可推广到其他多条件生成任务的条件正交化设计
+
+> [!review] 审阅状态 (2026-06-03, agent)
+> **结论: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
+> - [medium/template-compliance] datasets frontmatter 为空,已补充 LRS3, VoxCeleb2, LibriTTS-R
+> - [low/traceability-gap] 消融分析中 "Style augmentation 的贡献次之: 去掉后 MOS 下降 0.26" 实为 progressive removal 的 marginal contribution (在已去掉 HQ audio 基础上再去掉 Style Aug),非 standalone 贡献,但原文描述即如此,保留
+> 详见 `_review/Revival with Voice-review.yml`
