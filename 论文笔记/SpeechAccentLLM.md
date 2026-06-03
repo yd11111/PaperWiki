@@ -44,7 +44,7 @@ updated: 2026-06-03
 
 **解决什么问题**: Foreign Accent Conversion (FAC) 面临三个挑战: (1) 非母语口音数据集小且缺乏对应母语数据; (2) 传统基于 phoneme 的方法在处理口音语音时前端转换容易出错(尤其低资源语言); (3) LLM-based 语音生成存在随机推理错误(token 级别的不一致)。
 
-**为什么已有方法不够**: 早期 FAC 方法需要参考 L1 语音数据 [§1],后来的方法 (Zhao et al., 2021; Zhou et al., 2023) 虽不需要 L1 参考,但仍依赖显式 phoneme 标注,且在处理 speaker-dependent accent 变化和数据需求上有局限 [§1]。Flow-based 方法 (Ezzerg et al., 2023) 和 TTS-guided 方法 (Zhou et al., 2023) 虽有进步,但建模能力受限。
+**为什么已有方法不够**: 早期 FAC 方法需要参考 L1 语音数据 [§1],后来的方法 (Zhao et al., 2021; Zhou et al., 2023) 虽不需要 L1 参考,但仍依赖显式 phoneme 标注,且在处理 speaker-dependent accent 变化和数据需求上有局限 [§1]。Flow-based 方法 (Ezzerg et al., 2023) 和 TTS-guided 方法 (Zhou et al., 2023) 虽有进步,但在 speaker-dependent accent variations 和训练数据需求方面仍有局限 [§1]。
 
 ## 方法: 它怎么 work
 
@@ -191,4 +191,11 @@ K-means 量化显著劣于 VQ,原因是"codebook-parameter mismatch during infer
 1. **CTC 约束 VQ codebook 获得局部性 tokens**: 可迁移到任何需要帧级对齐离散表征的任务 (VC, 语音编辑, 语音翻译)。关键是 CTC 的 IPA label 提供了跨语言的通用监督信号
 2. **BERT-style token 后处理纠错**: 对任何 autoregressive speech generation 系统,在输出端加一个轻量双向 transformer 做 "denoise" 是一个通用提升策略,前提是 tokens 具有局部性
 3. **输入扰动参数**: f0 ± 20%, formant ± 15%, 50% 训练样本的具体配置,可直接复用于 content-timbre 解耦训练
-4. **TTS 辅助低资源任务训练**: 多任务学习中用丰富任务 (TTS) 辅助稀缺任务 (FAC/VC/语音翻译),通过 Task ID 区分,结构简单有效
+4. **TTS 辅助低资源任务训练**: 多任务学习本身已知,但本文提供了一个完整实例: Task ID 区分任务 + oversampling 平衡数据比例 (1:1) + 共享 content token 空间,可直接套用于其他低资源语音任务 (VC/语音翻译)
+
+> [!review] 审阅 (2026-06-03, agent-auto)
+> **结论**: pass | 3 low issues
+> - [low] 核心问题节第二段"建模能力受限"缺 [§1] 标注
+> - [low] frontmatter tasks 为空 (无现成任务页,暂不填)
+> - [low] 可复用第4条略泛,已补充具体贡献点
+> 详见 `_review/SpeechAccentLLM-review.yml`

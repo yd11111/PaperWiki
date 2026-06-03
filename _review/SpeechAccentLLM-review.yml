@@ -1,0 +1,46 @@
+paper: SpeechAccentLLM
+reviewer: agent-auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节包含充分的 WHY 解释(CTC 为何带来局部性、为何选 Whisper 而非 HuBERT、输入扰动目的),每个关键设计选择有因果推理"
+  可信赖:
+    verdict: pass
+    notes: "数字型 claim 标注覆盖率 >90%, 指标名使用正确 (WER/CMOS/SMOS/Sim-O/Sim-R/accentedness), 速查卡片指标字段含具体数字+数据集+出处"
+  可区分:
+    verdict: pass
+    notes: "因果解释均标注了 [论文原文] 或 [agent 解读], 覆盖率约 90%, 未发现推断写成断言的情况"
+  可定位:
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位(与 CosyVoice S3、NaturalSpeech 3、Mega-TTS 对比), 创新判断有对比基准"
+  不污染:
+    verdict: pass
+    notes: "反向更新计划: 仅追加 key_papers 到已有实体页(不改 status), 不新建概念页"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "核心问题节"
+    detail: "第二段'建模能力受限'缺少具体出处标注"
+    suggestion: "补充 [§1] 标注"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter tasks"
+    detail: "tasks 字段为空,论文涉及 FAC 和 TTS 两个任务"
+    suggestion: "无现成任务库页面,可暂不填或待决"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea 第4条"
+    detail: "'TTS 辅助低资源任务训练'略泛,multitask learning 是已知范式"
+    suggestion: "可保留,但指出本文的具体贡献在于 Task ID 区分 + oversampling 平衡"
+
+conclusion: pass
+summary: "笔记质量良好。方法节因果解释充分,KB 背景谱系定位清晰,数据标注覆盖率高。3 个 low 问题不阻塞反向更新。"
