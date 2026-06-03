@@ -467,3 +467,18 @@
 - [lint/local] Meta Learning TTS 7000 Languages — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +Meta Learning TTS 7000 Languages
 - [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+
+## 2026-06-03 (VoiceFlow)
+- [kb/search] [[VoiceFlow]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Diffusion-based TTS]](待确认), [[Diffusion Model]](待确认), [[Score Matching]](待确认), [[Non-autoregressive TTS]](待确认), [[Duration Predictor]](待确认) | 过滤: 5 页 pending-review
+- [ingest/deep] [[VoiceFlow]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM, Diffusion-based TTS, Diffusion Model, Score Matching, Non-autoregressive TTS, Duration Predictor)
+- [review/auto] [[VoiceFlow]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] VoiceFlow — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +VoiceFlow (生成方法演进节)
+
+## 2026-06-03 (StoryTTS)
+- [kb/search] [[StoryTTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓ | 参考(待确认): [[Emotion Control in TTS]], [[TTS Evaluation]], [[Style Transfer in TTS]], [[Global Style Tokens]], [[Natural Language Description for TTS]]
+- [ingest/deep] [[StoryTTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (Prosody Modeling, Emotion Control in TTS, Style Transfer in TTS, Natural Language Description for TTS)
+- [review/auto] [[StoryTTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] StoryTTS — 通过/0 问题
+- [moc] TTS-总览 MOC 更新: +StoryTTS (韵律与情感节)
+- [moc] TTS训练与评估 MOC 更新: +StoryTTS (Understanding & Data节)
