@@ -562,3 +562,10 @@
 - [lint/local] Very Attentive Tacotron — 通过/0 问题
 - [moc] TTS-总览 MOC 更新: +Very Attentive Tacotron (生成方法演进)
 - [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+
+## 2026-06-03 (Survey-Speech Language Models)
+- [kb/search] [[Survey-Speech Language Models]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓ | 过滤: 无
+- [ingest/deep] [[Survey-Speech Language Models]] — card→deep 升级精读, kb_sources=6, 新建 0, 追加 0, origin_paper wikilink 更新 6 页 (Speech Language Model, Semantic vs Acoustic Tokens, Full-duplex Spoken Dialogue, Codec Language Model, Speech-Text Alignment, Audio Understanding)
+- [review/auto] [[Survey-Speech Language Models]] — pass-with-fixes, 4 issues (0 high, 2 medium (均已修), 2 low)
+- [lint/local] Survey-Speech Language Models — 通过/0 死链
+- [moc] 语音大模型与对话 MOC 更新: +Survey-Speech Language Models (2024, 首篇 SpeechLM 综述)
