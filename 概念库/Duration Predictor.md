@@ -121,7 +121,7 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐)
 
 ### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
 

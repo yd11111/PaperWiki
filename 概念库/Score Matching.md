@@ -4,7 +4,7 @@ title: "Score Matching"
 aliases: [Score Function, Score-based Model, NCSN, Noise Conditional Score Network, 分数匹配]
 category: "generative-model"
 tags: [generative-model, score-matching, diffusion, SDE, speech-enhancement]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]"]
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/DMOSpeech|DMOSpeech]]"]
 origin_paper: "Song & Ermon, Generative Modeling by Estimating Gradients of the Data Distribution, NeurIPS 2019"
 related_concepts: ["[[Diffusion Model]]", "[[Conditional Flow Matching]]"]
 status: pending-review
