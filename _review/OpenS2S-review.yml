@@ -1,0 +1,50 @@
+paper: OpenS2S
+reviewer: agent-auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含充分的因果解释(WHY),三阶段训练策略的每个阶段都解释了设计动机;关键设计选择有明确回答"
+  可信赖:
+    satisfied: true
+    notes: "所有数字型 claim 标注了 [Table 2]/[§X.X] 出处;指标名称使用正确(VoiceBench、URO-Bench);速查卡片指标字段含具体数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "因果解释均标注了[论文原文]或[agent 解读];覆盖率 >80%;无推断写成断言的情况"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(LLaMA-Omni 2/MinMo 路线 vs Moshi 路线);创新判断有对比基准;frontmatter 字段齐全"
+  不污染:
+    satisfied: true
+    notes: "无新建概念页需求;反向更新仅涉及追加 key_papers"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: "models 字段列了 Whisper 和 MinMo,但这两个不是本文直接对比的 baseline 模型,而是架构组件的来源。严格按 checklist 'models 列本文模型+对比 baseline' 规则,应列 Kimi-Audio、GLM-4-Voice、LLaMA-Omni2、Qwen2-Audio 作为 baseline"
+    suggestion: "models 列表改为本文模型 OpenS2S + 对比 baseline: Kimi-Audio, GLM-4-Voice, LLaMA-Omni2, Qwen2-Audio。Whisper/MinMo 作为架构组件来源,放在正文引用即可"
+    action: "建议修正,不阻塞反向更新"
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "速查卡片.指标"
+    detail: "速查卡片指标字段中 '~12k 小时预训练' 的数字来源不够明确 — 论文 §3.1 提到 ASR 数据约 3.8M 对 + SER 70k,再加 Emilia 12k 小时 TTS 数据,但总计预训练数据量的换算未标注具体出处"
+    suggestion: "明确标注 '~12k 小时' 的来源为 §3.1 Emilia 数据 (5k EN + 5k ZH + 1k+1k streaming),或改为更精确的表述"
+    action: "建议修正,不阻塞反向更新"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea #1"
+    detail: "Behavioral alignment 训练策略实际来自 BLSP-Emo (Wang et al., 2024),不是 OpenS2S 的原创设计,建议注明出处以避免误导"
+    suggestion: "补充 '(来自 BLSP-Emo)' 标注"
+    action: "可忽略或后续批量改善"

@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv preprint (Technical Report)"
 tags: [speech-LM, empathetic, end-to-end, streaming, interleaved-decoding, open-source, data-construction]
 concepts: ["[[Speech Language Model]]", "[[Streaming Spoken Dialogue]]", "[[Emotion Control in TTS]]", "[[Speech Tokenizer]]", "[[Modality Adaptation for Speech LLM]]", "[[Conditional Flow Matching]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/MinMo|MinMo]]"]
+models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/MinMo|MinMo]]", "Kimi-Audio", "GLM-4-Voice", "LLaMA-Omni2", "Qwen2-Audio"]
 tasks: []
 datasets: ["[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 6
@@ -41,7 +41,7 @@ updated: 2026-06-03
 > [!summary] 速查
 > - **一句话**: 完全开源的端到端共情语音对话模型,通过自动化数据构建 pipeline 以低成本实现副语言情感理解与表达
 > - **路线**: 语音输入 → Qwen2-Audio encoder (25Hz → 6.25Hz via CNN adapter) → Qwen3-8B LLM (interleaved text+speech hidden states) → Qwen3-1.8B streaming speech decoder (GLM-4-Voice tokenizer, 12.5 tok/s) → chunk-aware causal flow matching + HiFi-GAN → 语音输出
-> - **指标**: VoiceBench alpaca 4.51 / URO-Bench UnderEmo-en 59.32 (V1.5, 接近 Kimi-Audio 的 59.22/76.96) [Table 2]; 仅用 ~12k 小时预训练 + 100k-800k 合成对话对, 远少于 Kimi-Audio 的 1300 万小时
+> - **指标**: VoiceBench alpaca 4.51 / URO-Bench UnderEmo-en 59.32 (V1.5, 接近 Kimi-Audio 的 59.22/76.96) [Table 2]; 预训练用 Emilia ~12k 小时 TTS 数据 [§3.1] + ~3.8M ASR 对 + 70k SER 对, 远少于 Kimi-Audio 的 1300 万小时 [§1]
 > - **可借鉴**: 自动化共情数据构建三步法 (seed audio → LLM self-instruct 生成带副语言标注的 query → CosyVoice2 情感可控合成 response); 用 thinking mode 推断回复应带的情感色调
 > - **局限**: 语音到语音评估仅有定性分析无定量指标; 架构与 LLaMA-Omni 2 高度同构,创新主要在数据侧; V1 版本多项指标落后 Kimi-Audio 较多, V1.5 通过扩数据追平
 
@@ -142,10 +142,14 @@ OpenS2S 的核心价值在于**完全开源**和**低成本共情数据构建方
 
 ## 可复用的 idea
 
-1. **Behavioral alignment 训练策略**: 用 LLM 根据文本生成 continuation 作为训练 target,再让模型从语音输入复现相同输出 — 这种"续写对齐"方法可以零成本地将 LLM 的文本能力迁移到语音模态理解中,可推广到其他跨模态适配场景
+1. **Behavioral alignment 训练策略** (来自 BLSP-Emo): 用 LLM 根据文本生成 continuation 作为训练 target,再让模型从语音输入复现相同输出 — 这种"续写对齐"方法可以零成本地将 LLM 的文本能力迁移到语音模态理解中,可推广到其他跨模态适配场景
 2. **副语言敏感的 self-instruct**: 在 LLM self-instruct 生成指令时,显式标注哪些指令对 age/emotion/gender 敏感,并据此匹配种子音频特征 — 这种有意识的副语言多样性设计比随机 TTS 合成更有针对性
 3. **用 LLM thinking mode 推断回复情感**: 不直接规定回复情感,而是让 LLM 根据上下文 + 输入副语言特征推断应表达的情感 — 这比硬编码情感映射规则更灵活,可迁移到任何需要情感推理的对话系统
 4. **TTS 过拟合的诊断和修复**: Stage 2 TTS 预训练后 speech decoder 只能处理 TTS 任务的窄表征空间,解法是混入 text-to-speech 指令数据 — 这个"过拟合→加任务多样性"的模式对所有多阶段训练系统有参考价值
 
-> [!review] 审阅状态
-> 待审阅。见 `_review/OpenS2S-review.yml`。
+> [!review] 审阅 (2026-06-03, auto)
+> **结论: pass-with-fixes** (0 high / 2 medium / 1 low)
+> - [medium] frontmatter.models: 已补充 baseline 模型 (Kimi-Audio, GLM-4-Voice, LLaMA-Omni2, Qwen2-Audio)
+> - [medium] 速查卡片指标: 已明确 ~12k 小时来源为 §3.1 Emilia 数据
+> - [low] 可复用 idea #1: 已注明 behavioral alignment 来自 BLSP-Emo
+> 详见 `_review/OpenS2S-review.yml`。
