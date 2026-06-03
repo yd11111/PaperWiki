@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[GSA-TTS]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[GSA-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Style Transfer in TTS, Global Style Tokens, Speaker Embedding, Zero-shot Speech Synthesis, Prosody Modeling, Non-autoregressive TTS)
+- [review/auto] [[GSA-TTS]] — pass-with-fixes, 0 high + 2 medium
+- [lint/local] GSA-TTS — 通过/0 问题
+- [moc/update] 零样本语音合成 — 追加 GSA-TTS
+- [kb/search] [[RapFlow-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Diffusion Model]](pending-review), [[Score Matching]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[RapFlow-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM, Diffusion-based TTS, Diffusion Model, Score Matching, NAR TTS, Duration Predictor)
+- [review/auto] [[RapFlow-TTS]] — pass-with-fixes, 0 high + 0 medium + 3 low
+- [lint/local] RapFlow-TTS — 通过/0 问题
+- [moc/update] TTS-总览 — 生成方法演进分类追加 RapFlow-TTS
 - [kb/search] [[UniTTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review)
 - [ingest/deep] [[UniTTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Residual Vector Quantization, LLM-based TTS, Semantic vs Acoustic Tokens, Speech Tokenizer, Codebook Collapse, Single-codebook vs Multi-codebook)
 - [review/auto] [[UniTTS]] — pass, 3 low issues
