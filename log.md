@@ -385,3 +385,8 @@
 - [review/auto] [[SemaVoice]] — pass-with-fixes, 3 issues (all low)
 - [lint/local] SemaVoice — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +SemaVoice
+- [kb/search] [[PilotTTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Emotion Control in TTS]](pending-review), [[CosyVoice 3]](pending-review), [[w2v-BERT]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[PilotTTS]] — 精读, kb_sources=6, 新建 0, 追加 10 (CFM, Speaker Embedding, Speech Tokenizer, FSQ, LLM-based TTS, Emotion Control, Single-codebook, Zero-shot Speech Synthesis, SEED-TTS-Eval, CosyVoice 3)
+- [review/auto] [[PilotTTS]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] PilotTTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +PilotTTS
