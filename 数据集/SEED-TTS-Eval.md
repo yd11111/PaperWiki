@@ -48,3 +48,4 @@ SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发�
 - [[论文笔记/LLaDA-TTS|LLaDA-TTS]] (2026): CER 0.98% (test-zh), WER 1.96% (test-en), CER 7.04% (test-hard), SS 74.6% (test-zh); masked discrete diffusion 替代 AR decoder,基于 CosyVoice 3-0.5B backbone,64 步推理实现 2x LLM-stage speedup
 - [[论文笔记/PilotTTS|PilotTTS]] (2026): CER 0.87% (test-zh), WER 1.50% (test-en), SIM 0.862 (test-zh), SIM 0.815 (test-en); Q-Former + CAMPPlus 双路径 conditioning,仅用 200K h 数据,SIM 刷新 SEED-TTS-Eval 最高记录
 - [[论文笔记/DMOSpeech 2|DMOSpeech 2]] (2025/AAAI 2026): WER 1.752% (test-en), CER 1.527% (test-zh), SIM 0.698 (test-en), SIM 0.760 (test-zh), RTF 0.032; 0.3B params, GRPO 优化 duration predictor, 4-step DMD-distilled flow matching
+- [[论文笔记/F5R-TTS|F5R-TTS]] (Tencent, 2025): WER 1.48% (test-cn general), WER 10.63% (test-cn hard), SIM 0.730 (test-cn general), SIM 0.711 (test-cn hard); 首次在 NAR flow-matching TTS 上集成 GRPO,通过 output probabilization 使 RL 兼容 CFM 架构
