@@ -69,9 +69,12 @@ log.md             ← 操作日志
 Sources/           ← PDF(gitignored)
 ```
 
-## 当前 vault 状态 (2026-06-01)
+## 当前 vault 状态 (2026-06-03)
 
-- 5 deep + 1 repro + 1 enhanced-card + 2 card
-- 29 实体页(4 confirmed: CFM, Speech Tokenizer, RVQ, Zero-shot TTS)
-- 3 MOCs
-- Git tags: p0-foundation → p5-specification-ready
+- 论文笔记: 92 篇 (65 deep + 2 repro + 1 enhanced-card + 12 card + 12 survey card)
+- 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed
+- MOC: 3 个 (TTS-总览 / 语音编码与量化 / 零样本语音合成)
+- 审阅报告: 10 个 (_review/*.yml)
+- Git tags: p0-foundation → p5-specification-ready → review-module-v1
+- 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇)
+- 审阅模块: 已实装(两层评估: 原则层 + 检查项层)
