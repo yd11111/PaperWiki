@@ -547,3 +547,10 @@
 - [lint/local] SESD — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +SESD (2024, latent diffusion, data-efficient)
 - [alert/backlog] pending-review: 70, draft deep/repro: 100 — 建议抽空审核
+
+## 2026-06-03 (XTTS)
+- [kb/search] [[XTTS]] — 命中 6 页(取 Top 6): [[Zero-shot Speech Synthesis]]✓, [[Cross-lingual Voice Cloning]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Speaker Adaptation]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[XTTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (Zero-shot Speech Synthesis, Cross-lingual Voice Cloning, Speaker Embedding, Codec Language Model, Speaker Adaptation, Single-codebook vs Multi-codebook, Voice Cloning Taxonomy)
+- [review/auto] [[XTTS]] — pass-with-fixes, 5 issues (0 high, 2 medium (1 fixed: Table 2 行对齐错误), 3 low)
+- [lint/local] XTTS — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +XTTS (2024节 + 演进脉络 Tortoise 分支)
