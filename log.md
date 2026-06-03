@@ -1,5 +1,11 @@
 # Log
 
+## 2026-06-03
+- [kb/search] [[PALLE]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[模型库/CosyVoice 2]]✓, [[Masked Generative Modeling]][待确认] | 过滤: [[Codec Language Model]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[PALLE]] — 精读, kb_sources=6, 新建 0, 追加 4 (Masked Generative Modeling, Codec Language Model, Zero-shot Speech Synthesis, Speech Tokenizer)
+- [review/auto] [[PALLE]] — pass, 0 issues
+- [lint/local] PALLE — 通过/0 问题
+
 ## 2026-06-01
 - [init] Vault 骨架创建
 - [init] AGENTS.md 系统总纲完成(17 节,含 6 条原则)
@@ -609,3 +615,10 @@
 - [review/auto] [[PROEMO]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] PROEMO — 通过/0 死链
 - [moc] TTS-总览 韵律与情感: +PROEMO
+
+## 2026-06-03 (GOAT-TTS)
+- [kb/search] [[GOAT-TTS]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Speech Language Model]]✓, [[CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Modality Adaptation for Speech LLM]](pending-review), [[Whisper]](pending-review), [[Speaker Adaptation]](pending-review)
+- [ingest/deep] [[GOAT-TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (LLM-based TTS, CFM, Speech Tokenizer, Modality Adaptation, Speech Language Model, Zero-shot Speech Synthesis, SEED-TTS-Eval, Whisper key_papers)
+- [review/auto] [[GOAT-TTS]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] GOAT-TTS — 通过/0 死链
+- [moc] 零样本语音合成: +GOAT-TTS

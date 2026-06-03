@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -55,3 +55,4 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/RWKVTTS|RWKVTTS]] (2025): 将 CosyVoice 2.0 的 Transformer LLM backbone 完整替换为 RWKV-7 (RNN-based); 声称 Production Quality 7.73 接近 GT 7.80,但仅与 FireRedTTS-1S 对比,未报告标准 TTS 指标 (WER/CER/MOS) 且无效率数据 [RWKVTTS Fig 1]
 - [[论文笔记/Muyan-TTS|Muyan-TTS]] (2025): 以 CosyVoice2 为主要 baseline 之一; LibriSpeech WER Muyan-TTS 3.44% vs CosyVoice2 2.91%, MOS 4.58 vs 4.81, SIM 0.37 vs 0.70; 推理速度 Muyan-TTS (r=0.33) 显著快于 CosyVoice2 (r=2.19) [Muyan-TTS Table 3/5]
 - [[论文笔记/EmoVoice|EmoVoice]] (2025): 以 CosyVoice 语义 token + flow matching + HiFi-GAN 作为音频后端; 在情感控制对比中 EmoVoice(1.5B) 情感 MOS 3.507 vs CosyVoice2 2.138, Emo_Sim 0.9118 vs 0.8647 [EmoVoice Table 2/3]; 中文 Secap 上 EmoVoice-PP WER 7.60 vs CosyVoice2 9.13 [EmoVoice Table 4]
+- [[论文笔记/FPO|FPO]] (2025): 以 CosyVoice2 为 backbone 之一,通过 token-level 选择性 DPO 优化; FPO 将 CER 从 1.45 降至 1.32 (-9.0%), WER 从 2.57 降至 2.24 (-12.8%), bad case ratio 从 14% 降至 8%, NMOS 从 3.81 提升至 3.91 [FPO Table I/II]
