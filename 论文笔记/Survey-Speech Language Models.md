@@ -36,7 +36,7 @@ updated: 2026-06-03
 > - **路线**: Speech/Text → [Speech Tokenizer (semantic/acoustic/mixed)] → [Language Model (Transformer decoder)] → [Vocoder (GAN/Flow/Diffusion)] → Speech/Text
 > - **指标**: 非实验论文,无本文实验数据;汇总的评估维度包括表征 (ABX)、语言 (sWUGGY/sBLIMP)、副语言 (pGSLM correctness/consistency/expressiveness)、质量 (MOS/MMOS/PMOS)、实时交互 (IPU/pause/overlap 统计)
 > - **可借鉴**: (1) 三轴分类框架 (features modeled x training stages x generation paradigm) 可迁移到其他多模态模型的 survey 中; (2) Table II 的 50+ 系统组件选择矩阵是 tokenizer/LM/vocoder 选型的直接参考; (3) 评估体系的 auto+human 二分法和 5 子维度分类为 SpeechLM benchmark 设计提供框架
-> - **局限**: (1) 对各系统间的定量横向对比较少 (缺统一 benchmark 数据); (2) 安全讨论仅限毒性和隐私两点,未深入; (3) v4 更新至 2025.08 但仍缺少 2025 年部分新系统 (如 CosyVoice 3, LatentLM, CLEAR 等连续 token 路线)
+> - **局限**: (1) 对各系统间的定量横向对比较少 (缺统一 benchmark 数据); (2) 安全讨论仅限毒性和隐私两点,未深入; (3) v4 更新至 2025.08 [arXiv v4 header] 但仍缺少 2025 年部分新系统 (如 CosyVoice 3, LatentLM, CLEAR 等连续 token 路线) [agent 解读]
 
 ## 核心问题
 
@@ -149,21 +149,15 @@ dGSLM 用 separate transformer per speaker + cross-attention 建模双人对话 
 SpeechLM 的三类下游应用 [§V, Table V]:
 
 **语义相关 (Semantic-related) [§V-A]:**
-- Spoken Dialogue (最自然的应用)
-- Speech Translation
-- ASR
-- Keyword Spotting
-- TTS
-- Intent Classification
-- Slot Filling
-- Query by Example Spoken Term Detection (QbE-STD)
+- **Spoken Dialogue** (最自然的应用): SpeechLM 直接以语音对话,无需 ASR 中转,因此能在回复中保留输入语音的情感和语气上下文 [论文原文, §V-A]; 还能进行跨模态对话 (语音输入+文本输出或反之) [§V-A]
+- Speech Translation, ASR, Keyword Spotting, TTS, Intent Classification, Slot Filling, QbE-STD
 
 **说话人相关 (Speaker-related) [§V-B]:**
 - Speaker Identification / Verification / Diarization
-- Voice-Conditioned Speech Generation (voice cloning + voice conversion)
+- **Voice-Conditioned Speech Generation**: SpeechLM 可通过 in-context learning 从参考语音隐式学习说话人身份,无需显式 speaker embedding [论文原文, §V-B]; 还能同时参与多人对话,区分不同说话人并分别回应 [§V-B]
 
 **副语言相关 (Paralinguistic) [§V-C]:**
-- Emotion Recognition
+- **Emotion Recognition**: SpeechLM 不仅能直接识别语音情感,还能通过语音回复隐式反映对情感的理解 (如 "对不起听你这么难过" — 需要先理解情感再生成得体回复) [论文原文, §V-C]
 - Speech Separation
 - Paralinguistics-Enhanced Generation (如指定情感/语速的生成)
 
@@ -223,7 +217,7 @@ SpeechLM 可直接建模语音,对 "low-resource" 语言友好 (语音数据通�
 
 本文是 survey,不包含自有实验。但汇总了以下关键对比数据:
 
-| 指标 | 最优系统/发现 | 数据来源 | 出处 |
+| 维度 | 最优系统/发现 | 数据来源 | 出处 |
 | --- | --- | --- | --- |
 | Speech tokenizer 对比 | HuBERT 在语义任务最优,但缺声学细节 | GSLM 消融 | [§IV-A1, ref 50] |
 | TextLM 初始化 vs 冷启动 | TextLM 初始化显著优于冷启动和图像预训练初始化 | TWIST 实验 | [§IV-B1, ref 51] |
@@ -256,3 +250,9 @@ SpeechLM 可直接建模语音,对 "low-resource" 语言友好 (语音数据通�
 3. **Speech-text 对齐四方式**: single-sequence interleaving vs multi-sequence parallel vs text-present vs text-independent 的分类,对设计新的多模态训练方案有指导价值
 4. **评估五维度**: 表征/语言/副语言/质量/实时交互的系统化分类,可用于设计新 SpeechLM 的评估方案
 5. **IPR 概念**: Interactive Period Recognition 作为全双工对话的关键能力 (区分 "应该响应" vs "不应该响应" 的音频),是对话系统设计的重要参考
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes | 可理解性 8 | 可溯源性 8 | 严谨性 9 | 可导航性 9 | 知识库安全性 9
+> **Claim 标注覆盖率**: 86% (24/28)
+> **问题**: 2 medium (速查局限行缺 [agent 解读] 标注 — 已修; 下游应用节偏列表式 — 已补充机制解释) + 2 low (可复用 idea 第4点偏泛; 实验表格表头 — 已修)
+> **详见**: `_review/Survey-Speech Language Models-review.yml`

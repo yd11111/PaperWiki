@@ -1,0 +1,50 @@
+paper: "Survey-Speech Language Models"
+file: "论文笔记/Survey-Speech Language Models.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+
+scores:
+  understandability: 8
+  traceability: 8
+  rigor: 9
+  navigability: 9
+  kb_safety: 9
+
+claim_stats:
+  total_claims: 28
+  annotated_claims: 24
+  coverage_rate: "86%"
+  note: "Survey 类笔记的 claim 主要是对原文分类体系的引用,大部分标注了 §/Table/Fig 出处"
+
+issues:
+  - severity: medium
+    type: traceability-gap
+    location: "速查卡片 > 局限行"
+    detail: "'v4 更新至 2025.08 但仍缺少 2025 年部分新系统 (如 CosyVoice 3, LatentLM, CLEAR 等连续 token 路线)' — 这是 agent 对 survey 时效性的判断,但未标注 [agent 解读],且 'v4 更新至 2025.08' 的日期信息未标注出处。"
+    suggestion: "在局限行末尾加 [agent 解读]。v4 日期可从 arXiv 版本页确认后标注 [arXiv v4 header]。"
+
+  - severity: medium
+    type: summary-without-mechanism
+    location: "下游应用分类 [§V]"
+    detail: "下游应用节基本是任务列表 + 一句话定义,缺乏对 SpeechLM 做这些任务的 HOW (与传统方法有何不同) 的解释。例如 spoken dialogue 没有说 SpeechLM 如何实现比 ASR+LLM+TTS 更自然的对话。"
+    suggestion: "对至少 2-3 个核心应用 (spoken dialogue, emotion recognition, voice cloning) 补充 1-2 句 SpeechLM 做法与传统方法的差异。"
+
+  - severity: low
+    type: weak-reusability
+    location: "可复用的 idea > 第4点"
+    detail: "'评估五维度: 表征/语言/副语言/质量/实时交互的系统化分类,可用于设计新 SpeechLM 的评估方案' — 过于泛泛,缺乏具体可操作建议。"
+    suggestion: "补充具体建议,如 '新系统至少应覆盖 sWUGGY (语言) + MOS (质量) + ABX (表征) 三个核心维度'。"
+
+  - severity: low
+    type: template-compliance
+    location: "实验节"
+    detail: "实验表格列了 5 条发现但第一列表头为 '指标' 不太准确 — survey 汇总的不是指标而是发现。"
+    suggestion: "将第一列表头改为 '维度' 或 '对比内容'。"
+
+summary: |
+  作为 survey 精读笔记,整体质量良好。三轴分类框架的呈现清晰,
+  关键设计选择的 WHY 解释充分 (tokenizer 选择、TextLM 初始化、
+  vocoder pipeline 选择均有因果解释),KB 背景精准 (6 个 confirmed
+  实体页,其中 2 个以本文为 origin_paper)。主要问题是下游应用节
+  偏列表式,以及少量 traceability 标注缺失。均为 medium/low 问题,
+  不阻塞反向更新。
