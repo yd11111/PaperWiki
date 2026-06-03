@@ -23,6 +23,7 @@
   - [[论文笔记/RADKA-CSS|RADKA-CSS]] — 2025, Inner Mongolia Univ/CUHK-SZ, RAG + 多粒度异构图聚合对话风格知识, N-DMOS 3.904/S-DMOS 3.879
   - [[论文笔记/EmoVoice|EmoVoice]] — 2025 (ACM MM), Qwen2.5 LLM + freestyle NL emotion description + phoneme parallel output, 情感 MOS 3.507 接近 GPT-4o-mini-tts 3.598
   - [[论文笔记/FaceSpeak|FaceSpeak]] — 2025 (AAAI), 任意风格肖像驱动 TTS, FaRL+IAM/EAM+GRL+vCLUB 跨模态 identity-emotion 解耦, VITS2 backbone
+  - [[论文笔记/Multi-Step Hierarchical ED|Multi-Step Hierarchical ED]] — 2025, CUHK-SZ/Alibaba, 多步 utterance→word→phoneme 层级情感分布预测 + FastSpeech 2 集成, WER 2.45% vs 单步 4.61%
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
@@ -80,3 +81,4 @@
 - [[论文笔记/Low-Resource ForwardTacotron|Low-Resource ForwardTacotron]] — Fraunhofer IIS, 2025, 仅 4 个 HR 说话人 + 5min LR 数据,WGN 噪声增强 + binned sampling,speaker similarity 超越 HierSpeech++
 - [[论文笔记/TTS-Transducer|TTS-Transducer]] — NVIDIA, 2025, RNNT transducer 单调对齐预测第一码本 + NAR Transformer 残余码本, 端到端 codec-agnostic TTS, CER 3.94% (challenging texts)
 - [[论文笔记/Koel-TTS|Koel-TTS]] — NVIDIA, 2025, encoder-decoder AR TTS + DPO/RPO preference alignment + CFG for AR token prediction, CER 0.55% LibriTTS unseen (SOTA), MOS 4.054
+- [[论文笔记/UmbraTTS|UmbraTTS]] — aiOla, 2025 (ICML Workshop), 首个 flow matching 环境感知 TTS, F5-TTS 框架 + SER 连续控制 + self-supervised 数据构建, WER 6.89% / 人类偏好 81.9%

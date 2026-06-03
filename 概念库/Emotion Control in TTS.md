@@ -4,7 +4,7 @@ title: "Emotion Control in TTS"
 aliases: [情感控制TTS, Emotional TTS, Emotion Synthesis, 情感语音合成, Affective Speech Synthesis]
 category: "technique"
 tags: [TTS, emotion, expressiveness, control, affective-computing, style]
-key_papers: ["Li et al. (2021)", "MsEmoTTS (Lei et al., 2022)", "Emo-DPO (Gao et al., 2024)", "EmoSphere++ (Cho et al., 2024)", "Rong et al. (2025)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/NaturalVoices|NaturalVoices]]", "[[论文笔记/SpeechWorldModel|SpeechWorldModel]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]", "[[论文笔记/PROEMO|PROEMO]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/OpenOmni|OpenOmni]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/FaceSpeak|FaceSpeak]]"]
+key_papers: ["Li et al. (2021)", "MsEmoTTS (Lei et al., 2022)", "Emo-DPO (Gao et al., 2024)", "EmoSphere++ (Cho et al., 2024)", "Rong et al. (2025)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/SC VALL-E|SC VALL-E]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/EmotionThinker|EmotionThinker]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/TextrolSpeech|TextrolSpeech]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/NaturalVoices|NaturalVoices]]", "[[论文笔记/SpeechWorldModel|SpeechWorldModel]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/Controlling Emotion TTS NL Prompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]", "[[论文笔记/StoryTTS|StoryTTS]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]", "[[论文笔记/PROEMO|PROEMO]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/OpenOmni|OpenOmni]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/Multi-Step Hierarchical ED|Multi-Step Hierarchical ED (Inoue et al., 2025)]]", "[[论文笔记/MAE Style-Rich TTS|MAE Style-Rich TTS]]", "[[论文笔记/Prompt-Unseen-Emotion|PUE (Gao et al., 2025)]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/UDDETTS|UDDETTS]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Speech Factorization]]", "[[Differentiable Reward Optimization]]", "[[LLM-based TTS]]"]
 status: pending-review
@@ -131,6 +131,10 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## 演进
 
 规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025)
+
+## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
+
+[[论文笔记/Multi-Step Hierarchical ED|Multi-Step Hierarchical ED]] (Inoue et al., 2025) 提出多步预测框架,将情感量化为 utterance/word/phoneme 三级连续分布向量 (Hierarchical ED),并按 utterance→word→phoneme 顺序逐级预测,使高层情感上下文引导底层韵律。ED 通过 OpenSMILE + SVM 排序函数从音频中提取,支持训练时自动标注和推理时用户手动调整。在 FastSpeech 2 上验证了两种集成方式 (External 模型无关 / VA 内嵌),Multi-Step 在 WER (2.45% vs 4.61%) 和 MUSHRA 自然度上均优于 Single-Step baseline。BWS 测试中情感可控性全面优于 MsEmoTTS。关键发现: ED 数值差异相近但合成质量差异显著,说明多步预测学到的是层级依赖关系而非更准确的数值。
 
 ## Plutchik 结构模型与韵律嵌入分解 (Daisy-TTS)
 

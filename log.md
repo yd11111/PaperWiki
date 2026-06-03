@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[Multi-Step Hierarchical ED]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review)
+- [ingest/deep] [[Multi-Step Hierarchical ED]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS, Prosody Modeling)
+- [review/auto] [[Multi-Step Hierarchical ED]] — pass-with-fixes, 0 high + 1 medium (models 字段误列 VITS, 已修正) + 1 medium (datasets 为空) + 1 low
+- [lint/local] Multi-Step Hierarchical ED — 通过/0 问题
+- [moc/update] TTS-总览 — 韵律与情感分类追加 Multi-Step Hierarchical ED
 - [kb/search] [[CSP-FT]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Speaker Adaptation]](待确认), [[Codec Language Model]](待确认), [[Emotion Control in TTS]](待确认)
 - [ingest/deep] [[CSP-FT]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speaker Adaptation, Codec Language Model, Emotion Control in TTS, LLM-based TTS, Speaker Embedding, Self-Supervised Speech Representation)
 - [review/auto] [[CSP-FT]] — pass-with-fixes, 0 high + 1 medium (速查指标缺数据集名+Table 1 标注) + 1 low (datasets frontmatter 为空)
