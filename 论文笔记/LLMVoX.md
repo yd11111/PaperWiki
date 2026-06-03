@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, streaming, LLM-agnostic, autoregressive, speech-tokenizer, low-latency, plug-and-play, speech-LM]
 concepts: ["[[Streaming Spoken Dialogue]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Codec Language Model]]", "[[Residual Vector Quantization]]", "[[Speech-LLM Integration Taxonomy]]"]
-models: ["[[Whisper]]", "[[EnCodec]]"]
+models: ["[[Whisper]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -165,5 +165,11 @@ multi-queue streaming 机制是巧妙的工程设计,通过空间换时间 (两�
 4. **纯文本接口的 LLM-agnostic 设计**: 只依赖 LLM 的文本输出,不依赖 hidden states/logits,使 TTS 模块真正可插拔。可作为所有 cascaded speech 系统的设计原则。
 
 ---
+
+> [!review] 审阅 (2026-06-03, auto)
+> **结论**: pass-with-fixes
+> **issues**: 1 medium
+> - [medium/template-compliance] frontmatter models 列了 EnCodec,但 LLMVoX 实际使用 WavTokenizer (无模型页);EnCodec 仅在 related work 中被引用。已修正为仅保留 Whisper。
+> **通过原则**: 可复述✓ 可信赖✓ 可区分✓ 可定位✓(修正后) 不污染✓
 
 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Streaming Spoken Dialogue]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Codec Language Model]](pending-review) | 过滤: 无 | 未命中但可能相关: 无

@@ -1,0 +1,31 @@
+paper: LLMVoX
+date: 2026-06-03
+reviewer: auto
+conclusion: pass-with-fixes
+total_issues: 1
+high: 0
+medium: 1
+low: 0
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  navigable: pass-with-fixes
+  no-pollution: pass
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    principle: navigable
+    location: "frontmatter line 12 (models field)"
+    detail: "models 字段列了 [[EnCodec]],但 LLMVoX 实际使用 WavTokenizer (无模型页)。EnCodec 仅在 related work 中被引用,不是本文使用或对比的模型。"
+    suggestion: "已修正: 移除 EnCodec,仅保留 [[Whisper]]。"
+    fixed: true
+
+notes: |
+  整体质量良好。因果解释充分 (4 个设计选择均有 WHY+HOW),来源标注覆盖率高,
+  数字 claim 均有 [Table/Fig/Section] 标注。KB 背景谱系定位清晰,
+  创新判断有具体对比基准 (vs Freeze-Omni, vs VALL-E)。
+  速查卡片 5 字段均有实质内容。反向更新仅需追加 key_papers,风险低。
