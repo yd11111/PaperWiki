@@ -29,6 +29,8 @@
   - [[论文笔记/Multilingual TTS Accents Emotions|Multilingual TTS Accents Emotions]] — 2025, DJSCE Mumbai, Parler-TTS 三阶段 fine-tuning 实现 Hindi/Indian English 口音+情感控制, WER 11.8% / 情感识别 85.3%
   - [[论文笔记/UDDETTS|UDDETTS]] — 2025, USTC/Alibaba, 首个 LLM-TTS 引入 ADV 空间 + 非线性分箱 + 半监督训练, 三维解耦情感控制 SRC 0.85-0.92, ES 0.833
   - [[论文笔记/DiEmo-TTS|DiEmo-TTS]] — 2025 (Interspeech), Korea Univ, DINO 自监督蒸馏 + cluster-driven sampling + formant perturbation 实现跨说话人情感解耦, FastSpeech 2 backbone, nMOS 4.23/eMOS 4.07
+  - [[论文笔记/Spotlight-TTS|Spotlight-TTS]] — 2025, Korea Univ, voiced-aware RVQ (rotation trick) + unvoiced filler (biased self-attention) + style direction adjustment (orthogonality+prosody loss), FastSpeech 2 backbone, nMOS 4.26/sMOS 3.84
+  - [[论文笔记/CapSpeech|CapSpeech]] — 2025, JHU/PKU/USC/MIT, 首个统一覆盖 9 种风格属性的大规模 CapTTS 基准 (10M+ pairs), 5 个下游任务 (CapTTS/CapTTS-SE/AccCapTTS/EmoCapTTS/AgentTTS), NAR (F5-TTS) Style-ACC 66.0% > AR (Parler-TTS) 56.0%
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency

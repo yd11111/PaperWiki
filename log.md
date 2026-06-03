@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[SpeechAccentLLM]] — 命中 6 页(取 Top 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[CosyVoice]]✓, [[Speaker Embedding]]✓ | 过滤: [[模型库/VITS|VITS]](pending-review), [[Variational Autoencoder for TTS]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[SpeechAccentLLM]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer, Semantic vs Acoustic Tokens, LLM-based TTS, Speech Factorization, CosyVoice, Speaker Embedding)
+- [review/auto] [[SpeechAccentLLM]] — pass, 0 high + 0 medium + 3 low
+- [lint/local] SpeechAccentLLM — 通过/0 问题
+- [moc/update] 语音编码与量化 + TTS-总览 — 追加 SpeechAccentLLM
+- [kb/search] [[Spotlight-TTS]] — 命中 6 页(取 Top 6): [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Speech Factorization]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[Spotlight-TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (Style Transfer in TTS, Global Style Tokens, Residual Vector Quantization, Prosody Modeling, Speech Factorization, Mel Spectrogram, F0 Modeling, Emotion Control in TTS)
+- [review/auto] [[Spotlight-TTS]] — pass-with-fixes, 0 high + 1 medium (fact-inference-mixing, fixed) + 2 low
+- [lint/local] Spotlight-TTS — 通过 (0 dead links, MOC 已更新: TTS-总览)
 - [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[OpenS2S]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Language Model, Streaming Spoken Dialogue, Emotion Control in TTS, CosyVoice 2, Modality Adaptation for Speech LLM, Emilia)
 - [review/auto] [[OpenS2S]] — pass-with-fixes, 0 high / 2 medium / 1 low
@@ -43,10 +52,6 @@
 - [moc/update] TTS-总览 — 追加 Multilingual TTS Accents Emotions 至"韵律与情感"
 - [kb/search] [[Prompt-Unseen-Emotion]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Conditional Flow Matching]](pending-review)
 - [ingest/deep] [[Prompt-Unseen-Emotion]] — 精读, kb_sources=6, 新建 0, 追加 3 (Emotion Control in TTS, LLM-based TTS, CosyVoice)
-- [review/auto] [[Prompt-Unseen-Emotion]] — pass-with-fixes, 0 high + 2 medium + 1 low
-- [lint/local] Prompt-Unseen-Emotion — 通过/0 问题
-- [moc/update] TTS-总览 — 情感可控性分类追加 Prompt-Unseen-Emotion
-- [kb/search] [[MPE-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review)
 - [ingest/deep] [[MPE-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 (Emotion Control in TTS, Prosody Modeling, Speech Factorization, Natural Language Description for TTS, Speaker Embedding, Zero-shot Speech Synthesis)
 - [review/auto] [[MPE-TTS]] — pass-with-fixes, 1 medium (bad-linking, fixed) + 2 low
 - [lint/local] MPE-TTS — 通过 (1 非阻塞: review YAML 引用)

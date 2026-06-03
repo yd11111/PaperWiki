@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/MathReader|MathReader]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/DialogueAgents|DialogueAgents]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/MathReader|MathReader]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/InstructTTSEval|InstructTTSEval]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -161,4 +161,8 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025)
+
+### InstructTTSEval: Instruction-Following Benchmark
+
+Huang et al. (2025) 提出 InstructTTSEval,首个专门评估 TTS 指令遵循能力的 benchmark。三层任务设计: (1) Acoustic-Parameter Specification (APS): 12 个副语言特征的 free-form 描述,测试精确声学映射; (2) Descriptive-Style Directive (DSD): 自然语言段落,测试非结构化理解; (3) Role-Play (RP): 角色/场景描述,测试推理能力。6K 测试用例 (1K EN + 1K ZH x 3 任务),用 Gemini-as-Judge 做 True/False 二分评估 (人机一致率 79%)。关键发现: 闭源系统 (gemini-flash EN-Avg 88.7%) 大幅超越开源 (VoxInstruct 50.4%),但 Gemini TTS 得分超过 reference audio (84.3%),暗示严重的 self-preference bias [Table 5]。详见 [[论文笔记/InstructTTSEval|InstructTTSEval]]。
