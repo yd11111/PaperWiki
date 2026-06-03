@@ -9,7 +9,7 @@ year: 2025
 venue: "ICML 2025"
 tags: [TTS, LLM-based-TTS, scaling-law, inference-time-compute, speech-codec, single-codebook, autoregressive, zero-shot, FSQ, open-source]
 concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
-models: ["[[CosyVoice]]", "[[EnCodec]]", "[[MELLE]]"]
+models: ["[[CosyVoice]]", "[[EnCodec]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -191,3 +191,10 @@ X-codec2 是 Llasa 的核心组件,基于 X-codec 改进,目标是用单层 code
 2. **Semantic + Acoustic encoder concat → 单层 VQ**: X-codec2 的双路编码器 concat 后做单层 FSQ 量化,是在单 codebook 约束下融合语义和声学信息的实用方案。可用于需要 1D 因果序列的场景
 3. **LLM 初始化 + vocabulary 扩展**: 从预训练文本 LLM (LLaMA) 直接初始化,仅扩展 vocabulary 加入 speech tokens,比从头训练更高效
 4. **Text understanding evaluation protocol**: 用 7 类复杂文本 (情感/多音字/古诗/绕口令等) 评估 TTS 系统的文本理解能力,是一个有价值的评估框架
+
+> [!review] 审阅 (2026-06-03, agent)
+> **结论**: pass-with-fixes (3 issues: 0 high, 1 medium, 2 low)
+> - [medium] frontmatter models 删除 MELLE (关联弱),保留 CosyVoice + EnCodec (已修正)
+> - [low] zero-shot prompt 实现的推测可补充论文中的 prompt 设置描述
+> - [low] 可复用 idea #3 (LLM 初始化) 稍显泛化
+> 详见 `_review/Llasa-review.yml`

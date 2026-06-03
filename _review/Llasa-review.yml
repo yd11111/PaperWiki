@@ -1,0 +1,44 @@
+paper: "Llasa"
+reviewer: agent
+date: 2026-06-03
+conclusion: pass-with-fixes
+total_issues: 3
+
+principles:
+  reproducible:
+    satisfied: true
+    notes: "方法节包含因果解释 (WHY for FSQ over RVQ, WHY single-Transformer, WHY partial PRM), 关键设计选择均有 why 说明"
+  trustworthy:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 > 90%, 指标名使用正确, 速查卡片含具体数字+数据集+出处"
+  distinguishable:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读], 覆盖率约 85%"
+  navigable:
+    satisfied: true
+    notes: "KB 背景节有具体谱系定位 (三条路线对比), frontmatter 字段齐全, 速查卡片 5 字段均有实质内容"
+  non-polluting:
+    satisfied: true
+    notes: "无新建概念页, 反向更新内容为追加 key_papers, 无 overclaim 风险"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "frontmatter models"
+    detail: "models 列了 CosyVoice, EnCodec, MELLE 作为对比 baseline, 但 MELLE 在论文中仅在 LibriSpeech comparison 中出现一次, 关联较弱"
+    suggestion: "保留 CosyVoice 和 EnCodec (实验中反复对比), 考虑将 MELLE 替换为 MaskGCT 或 F5-TTS (Table 2 中更重要的 baseline)"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法 - 为什么不用 prompt 机制做 zero-shot"
+    detail: "该小节标注 [agent 解读] 推测了 zero-shot 的实现方式, 但论文 §4.2.1 和实验设置中应有更多信息可参考"
+    suggestion: "补充论文中关于 speech prompt 的实验设置描述 (如 ESD 实验的 'the longest utterance from each speaker as the prompt')"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea #3"
+    detail: "'LLM 初始化 + vocabulary 扩展' 过于泛化, 类似做法已在 SpeechGPT, AudioPaLM 等多系统中出现"
+    suggestion: "补充 Llasa 在这一点上的具体实践 (如 LLaMA 3.2 vs 3.1 版本选择对不同规模的影响)"
