@@ -1,0 +1,44 @@
+paper: STTATTS
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: trustworthy
+    location: "实验 > Voice Conversion"
+    detail: "原文将 VC 实验 (enm 数据) 的结果与 ens 设置比较,是不同数据规模的跨设置比较,存在误导。已修正为 enm 内部比较 (Table 3 enm vs Table 6 enm+VC)。"
+    suggestion: "已在审阅前修正。"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "速查卡片 > 一句话"
+    detail: "'参数量仅为分离训练的 ~50%' 缺少出处标注。"
+    suggestion: "该数字来源于 Table 2/4 (155M vs 151M+145M=296M),可补 [Table 2, 4]。"
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: frontmatter
+    detail: "tasks 和 datasets 字段均为空数组。STTATTS 涉及 ASR/TTS 任务和 LibriSpeech/LibriTTS 数据集,但 vault 中无对应实体页。"
+    suggestion: "当前 vault 无基础任务/数据集实体页,留空可接受。"
+
+scores:
+  reproducible: 9
+  trustworthy: 8
+  distinguishable: 9
+  locatable: 9
+  no_pollution: 9
+
+conclusion: pass-with-fixes
+summary: "笔记整体质量良好。方法节包含充分的 WHY 解释 (4 种架构变体的对比消融),因果解释来源标注覆盖率高,KB 背景谱系定位准确 (SpeechT5 家族 vs SpeechLM 主流路线)。已修正 VC 实验跨设置比较错误。速查卡片的一处 ~50% 缺出处标注为低优先级问题,不阻塞反向更新。"

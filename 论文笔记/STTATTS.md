@@ -152,10 +152,10 @@ STTATTS 基于 SpeechT5 架构 [§3.1],由三个层次组成:
 | TTS CER ↓ | 6.22 | - | 9.61 | - | - |
 | TTS WV-MOS ↑ | 3.69 | - | - | - | - |
 
-**Voice Conversion** (ens + VC, 联合三任务) [Table 6]:
+**Voice Conversion** (enm + VC, 联合三任务) [Table 6]:
 - VC CER 1.58, Speaker Similarity 0.99 — 无额外参数开销
-- TTS WV-MOS 从 4.40 提升到 4.28 [agent 解读: 轻微下降但在误差范围内]
-- ASR WER 从 4.84 微升到 3.59 [agent 解读: 可能因 VC 使用与 TTS 相同的 loss 共享了输出空间]
+- TTS WV-MOS 4.28 (对比 enm 无 VC 的 4.24, 基本持平) [Table 3, 6]
+- ASR WER 3.59 (对比 enm 无 VC 的 3.47, 轻微退化) [Table 3, 6]
 
 **关键发现**:
 1. STTATTS 155M params 达到与 SpeechT5 单任务模型 (151M+145M = 296M) 相当的性能,参数减少 ~50% [Table 4]
@@ -190,3 +190,8 @@ STTATTS 基于 SpeechT5 架构 [§3.1],由三个层次组成:
 2. **Warm fine-tuning 平衡数据不平衡**: 先用大量数据训练一个任务的基础能力,再联合训练。这是一个通用的 multi-task 训练策略,适用于任何数据不平衡的 multi-task 场景。
 3. **Task fusion position insight**: 放在 encoder 后 (feature space) 而非 encoder 前 (input space) 效果远好于后者,提供了多任务条件化应放在哪里的经验。
 4. **联合训练的正则化效应**: ASR 受益于 TTS 数据的增加 (WER 从 5.61→4.84),暗示多任务训练作为隐式正则化的价值。
+
+> [!review] 审阅 (auto, 2026-06-03, v1.1)
+> **结论**: pass-with-fixes | 可复述 9 · 可信赖 8 · 可区分 9 · 可定位 9 · 不污染 9
+> **问题**: 1 medium (VC 实验跨设置比较,已修正) + 2 low (速查出处/frontmatter 留空)
+> 详见 `_review/STTATTS-review.yml`
