@@ -4,7 +4,7 @@ title: "Diffusion-based Vocoder"
 aliases: [Diffusion Vocoder, 扩散声码器]
 category: "model-family"
 tags: [vocoder, diffusion, waveform-generation, audio-synthesis, TTS]
-key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/FlowDec|FlowDec]]"]
+key_papers: ["[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/PeriodWave|PeriodWave]]"]
 origin_paper: "Chen et al., WaveGrad: Estimating Gradients for Waveform Generation, 2020"
 related_concepts: ["[[Neural Vocoder]]", "[[Diffusion Model]]", "[[Mel Spectrogram]]", "[[Score Matching]]"]
 status: pending-review

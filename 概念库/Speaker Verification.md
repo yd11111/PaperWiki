@@ -4,7 +4,7 @@ title: "Speaker Verification"
 aliases: [说话人验证, Speaker Recognition, SV, 说话人识别, Speaker Identification]
 category: "evaluation-and-security"
 tags: [speaker-identity, evaluation, voice-cloning, anti-spoofing, security, SECS, SV-EER]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TTSDS|TTSDS]]"]
 origin_paper: ""
 related_concepts: ["[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Anti-spoofing and Deepfake Detection]]", "[[Speaker Adaptation]]"]
 status: pending-review

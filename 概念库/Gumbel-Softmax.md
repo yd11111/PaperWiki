@@ -4,7 +4,7 @@ title: "Gumbel-Softmax"
 aliases: [Gumbel Softmax, Gumbel-Softmax Trick, Concrete Distribution]
 category: "optimization-technique"
 tags: [differentiable-sampling, discrete-optimization, gradient-estimation, reparameterization]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/NAST|NAST]]"]
 origin_paper: "Jang et al., Categorical Reparameterization with Gumbel-Softmax, ICLR 2017"
 related_concepts: ["[[Differentiable Reward Optimization]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]"]
 status: pending-review

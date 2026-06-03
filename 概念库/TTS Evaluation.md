@@ -4,7 +4,7 @@ title: "TTS Evaluation"
 aliases: [TTS评估, TTS Metrics, Speech Synthesis Evaluation, 语音合成评估, Responsible TTS Evaluation, TTS评价指标]
 category: "evaluation"
 tags: [TTS, evaluation, metrics, MOS, WER, SIM, LLM-as-judge, responsible-AI, standardization]
-key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]"]
+key_papers: ["[[论文笔记/Survey-Responsible TTS Evaluation|Yang et al. 2025 (Responsible TTS Eval)]]", "[[论文笔记/GSRM|GSRM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/RIO|RIO]]", "[[论文笔记/EmergentTTS-Eval|EmergentTTS-Eval]]", "[[论文笔记/ALLD|ALLD]]", "[[论文笔记/SpeechJudge|SpeechJudge]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/TTSDS|TTSDS]]"]
 origin_paper: "Yang et al., Position: Towards Responsible Evaluation for Text-to-Speech, ICML 2026"
 related_concepts: ["[[SVS Evaluation Metrics]]", "[[Spoken Dialogue Evaluation]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Audio-Language Pretraining]]"]
 status: pending-review
@@ -146,6 +146,10 @@ Real-Time Factor 缺乏硬件配置、batch size、prompt 长度、streaming 模
 ### Naturalness-Specific Reward Model (SpeechJudge-GRM)
 
 Zhang et al. (2025) 提出 SpeechJudge,首个专门针对 speech naturalness 的完整评估套件。SpeechJudge-Data 包含 99K pairwise human preference 标注 (69 名标注员,6 种零样本 TTS 模型,中英文 + code-switching)。SpeechJudge-Eval 是 1,000 样本 benchmark (仅 Full Agreement 子集),揭示了一个关键发现: **所有现有客观指标在 naturalness 判断上接近随机** — WER 57.9%, SIM 44.5%, UTMOS 53.7%, 最好的 AudioLLM (Gemini-2.5-Flash) 也仅 69.1% [Table 2]。SpeechJudge-GRM 基于 Qwen2.5-Omni-7B + SFT (Gemini CoT distillation) + GRPO 训练,达 77.2% accuracy (voting@10: 79.4%),超越 BTRM 72.7%; 还可用作 TTS 后训练 reward function,online 模式下 N-CMOS +0.25 [Fig 6]。详见 [[论文笔记/SpeechJudge|SpeechJudge]]。
+
+### TTSDS: Distributional TTS Evaluation (首创)
+
+Minixhofer et al. (2024) 提出 TTSDS (Text-to-Speech Distribution Score),首个将 TTS 评估从逐样本 MOS 推向分布级多因子评估的 benchmark。核心思想: 将 TTS 质量定义为"合成语音分布与真实语音分布的 Wasserstein-2 距离",分解为 5 个因子 (General/Environment/Speaker/Prosody/Intelligibility),每个因子用 2-3 个预训练特征提取器 (HuBERT, wav2vec 2.0, d-vector, WORLD F0 等) 衡量。在 35 个 TTS 系统 (2008-2024) 上验证,Spearman ρ=0.60-0.83,始终优于 UTMOS (0.05-0.85 波动) 和 WVMOS (0.05-0.80 波动) [Fig 2]。关键创新: (1) 噪声锚点归一化 (>50=更像真实语音); (2) 因子化分解使评估可解释。详见 [[论文笔记/TTSDS|TTSDS]]。
 
 ### TTSDS2: Distributional TTS Evaluation Benchmark
 

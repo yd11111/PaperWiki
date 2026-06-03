@@ -4,7 +4,7 @@ title: "Anti-spoofing and Deepfake Detection"
 aliases: [反欺骗检测, Audio Deepfake Detection, Voice Anti-spoofing, 深伪语音检测, Speech Deepfake, 语音伪造检测]
 category: "security"
 tags: [voice-cloning, deepfake, anti-spoofing, ethics, safety, speaker-verification, TTS]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]"]
 origin_paper: ""
 related_concepts: ["[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Embedding]]"]
 status: pending-review
@@ -60,7 +60,7 @@ Survey 本身聚焦于生成端,但引用的相关 survey 覆盖了检测技术:
 Survey 中提到的一些系统在设计时考虑了安全性:
 
 - **Speaker verification as quality gate**: 多个系统用 SV 验证克隆质量,这同时可作为检测基线
-- **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印
+- **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印; [[论文笔记/TraceableSpeech|TraceableSpeech]] (Zhou et al., Interspeech 2024) 将水印嵌入与 codec LM TTS 端到端联合训练,实现 proactive traceability
 - **ASVspoof Challenge 系列**: 推动 anti-spoofing 技术发展的标准化竞赛 (Survey 未展开但属于该领域核心)
 
 ## 在 TTS 中的应用

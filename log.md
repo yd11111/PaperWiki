@@ -412,3 +412,10 @@
 - [review/auto] [[TacoLM]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] TacoLM — 通过/0 问题 (1 YAML ref, expected)
 - [moc] 零样本语音合成 MOC 更新: +TacoLM
+
+## 2026-06-03
+- [kb/search] [[TraceableSpeech]] — 命中 5 页(取 Top 5): [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review)
+- [ingest/deep] [[TraceableSpeech]] — 精读, kb_sources=5, 新建 0, 追加 3 (Codec Language Model, Anti-spoofing and Deepfake Detection, Residual Vector Quantization)
+- [review/auto] [[TraceableSpeech]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] TraceableSpeech — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +TraceableSpeech; TTS训练与评估 MOC 更新: +TraceableSpeech (Security & Traceability)

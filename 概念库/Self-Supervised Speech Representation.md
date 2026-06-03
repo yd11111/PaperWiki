@@ -4,7 +4,7 @@ title: "Self-Supervised Speech Representation"
 aliases: [自监督语音表征, SSL Speech Pre-training, Speech Self-Supervised Learning, 语音自监督预训练, Self-Supervised Speech Pre-training, SSL for Speech]
 category: "model-family"
 tags: [self-supervised-learning, speech-representation, contrastive-learning, masked-prediction, pre-training, ASR, speech-tokenizer]
-key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/XEUS|XEUS]]", "[[论文笔记/BEATs|BEATs]]", "[[论文笔记/w2v-BERT 2.0|w2v-BERT 2.0]]", "[[论文笔记/Seamless|Seamless]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/SemaVoice|SemaVoice]]"]
+key_papers: ["[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/WavLM|WavLM]]", "[[论文笔记/w2v-BERT|w2v-BERT]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/USM-VC|USM-VC]]", "[[论文笔记/SSL Suprasegmental Analysis|SSL Suprasegmental Analysis]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/XEUS|XEUS]]", "[[论文笔记/BEATs|BEATs]]", "[[论文笔记/w2v-BERT 2.0|w2v-BERT 2.0]]", "[[论文笔记/Seamless|Seamless]]", "[[论文笔记/TTSDS2|TTSDS2]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/TTSDS|TTSDS]]"]
 origin_paper: "van den Oord et al., Representation Learning with Contrastive Predictive Coding (CPC), 2018"
 related_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Gumbel-Softmax]]", "[[Codebook Collapse]]", "[[Speech Language Model]]", "[[Masked Generative Modeling]]"]
 status: pending-review

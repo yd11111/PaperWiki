@@ -4,7 +4,7 @@ title: "Conditional Flow Matching"
 aliases: [CFM, Flow Matching]
 category: "generative-model"
 tags: [generative-model, flow-based, diffusion-alternative, TTS]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Survey-Audio Diffusion Models|Survey-Audio Diffusion Models]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/FireRedTTS|FireRedTTS]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/FlowDec|FlowDec]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/PeriodWave|PeriodWave]]"]
 origin_paper: ""
 related_concepts: ["[[Finite Scalar Quantization]]", "[[Diffusion Model]]", "[[Score Matching]]"]
 status: confirmed
@@ -33,6 +33,7 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 - CosyVoice (Du et al., 2024): 最早在 LLM-TTS 中采用 OT-CFM 替代 DDPM,使用 cosine scheduler + CFG (β=0.7) + masked mel conditioning 的工程组合
 - CosyVoice 3 (2025): 使用 DiT-based CFM,300M 参数
 - F5-TTS (2024): Flow matching for fluent and faithful speech
+- [[论文笔记/VoiceFlow|VoiceFlow]] (Guo et al., ICASSP 2024): 首次将 rectified flow matching 引入 TTS 声学模型,与 GradTTS 保持相同 U-Net 架构仅替换生成算法,2 步 MOS 3.92 vs GradTTS 2.98 (LJSpeech); 通过 flow rectification 自蒸馏进一步拉直 ODE 轨迹,CMOS +0.78/+1.21
 - Matcha-TTS (2024): CFM for fast TTS
 - IndexTTS2 (Zhou et al., 2025): 在 S2M 模块中使用 flow matching 从 semantic tokens + speaker embedding 生成 mel spectrogram,并引入 GPT latent enhancement 融合上游 AR 隐状态以提升高情感语音的发音清晰度
 - MaskGCT (Wang et al., 2024): 使用 flow matching 训练 total duration predictor (非 phone-level),12 层 Transformer + in-context learning + midpoint ODE solver (4 steps 推理)
@@ -52,3 +53,4 @@ CosyVoice 3 中 CFM 采用 DiT (Diffusion Transformer) 架构作为 backbone,参
 WaveNet (2016, autoregressive vocoder) → Diffusion-based TTS (Grad-TTS, 2021) → Flow Matching (Voicebox, 2023) → CFM + DiT (CosyVoice 3, 2025)
 
 - [[论文笔记/CLEAR|CLEAR]] (Wu et al., 2025): 将 rectified flow 作为轻量 MLP head 直接挂在 AR language model 的每个 token 位置上,以 hidden state 为条件逐 token 生成连续 VAE latent。不同于 CosyVoice 系列将 CFM 作为独立的 second-stage renderer,CLEAR 实现了 **单阶段** AR + flow 联合训练。使用 logit-normal timestep sampling 和 auxiliary velocity direction loss 加速收敛。RTF 0.18, 仅需 78 步 AR decoding (对比 VALL-E 750 步)
+- [[论文笔记/PeriodWave|PeriodWave]] (Lee et al., 2024): 首次将 OT-CFM 成功应用于 **波形级 (vocoder)** 生成,而非 mel spectrogram 级。提出 period-aware flow matching estimator,通过 multi-period reshaping (periods=[1,2,3,5,7]) 让 2D UNet 显式捕获不同周期特征。在 pitch/periodicity 指标上大幅超越 GAN vocoder (BigVGAN),且仅用单一 CFM loss 训练 3 天
