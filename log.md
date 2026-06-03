@@ -622,3 +622,25 @@
 - [review/auto] [[GOAT-TTS]] — pass, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] GOAT-TTS — 通过/0 死链
 - [moc] 零样本语音合成: +GOAT-TTS
+
+## 2026-06-03 (Survey-Controllable TTS deep)
+- [kb/search] [[Survey-Controllable TTS]] — 命中 6 页(confirmed): [[LLM-based TTS]]✓, [[Prosody Modeling]]✓, [[Speech Factorization]]✓, [[Conditional Flow Matching]]✓, [[Instructed Speech Generation]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
+- [ingest/deep] [[Survey-Controllable TTS]] — card→deep 升级精读, kb_sources=6, 新建 0, 追加 2 (Instructed Speech Generation key_models, Zero-shot Speech Synthesis key_models)
+- [review/auto] [[Survey-Controllable TTS]] — pass, 0 issues
+- [lint/local] Survey-Controllable TTS — 通过/0 死链
+- [moc] TTS-总览 MOC 更新: +Survey-Controllable TTS (韵律与情感节)
+- [alert/backlog] pending-review: 70, draft deep/repro: 153 — 建议抽空审核
+
+## 2026-06-03 (RADKA-CSS)
+- [kb/search] [[RADKA-CSS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Self-Supervised Speech Representation]](pending-review)
+- [ingest/deep] [[RADKA-CSS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Prosody Modeling, Style Transfer in TTS, Non-autoregressive TTS key_papers)
+- [review/auto] [[RADKA-CSS]] — pass-with-fixes, 4 issues (0 high, 1 medium, 3 low)
+- [lint/local] RADKA-CSS — 通过/0 死链
+- [moc] TTS-总览 韵律与情感 + 语音大模型与对话: +RADKA-CSS
+
+## 2026-06-03 (AutoStyle-TTS)
+- [kb/search] [[AutoStyle-TTS]] — 命中 6 页(取 Top 6): [[Speech Factorization]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review)
+- [ingest/deep] [[AutoStyle-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 概念页(Style Transfer in TTS, Emotion Control in TTS, Speech Factorization) + 1 模型页(CosyVoice)
+- [review/auto] [[AutoStyle-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] AutoStyle-TTS — 通过/0 死链
+- [moc] TTS-总览 韵律与情感: +AutoStyle-TTS
