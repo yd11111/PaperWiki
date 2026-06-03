@@ -1,0 +1,142 @@
+paper: "Fish Audio S2"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节按5个关键设计选择组织,每个有WHY+HOW结构; Dual-AR/Dual-Purpose Pipeline/GRPO的因果解释清晰"
+  可信赖:
+    satisfied: true
+    notes: "实验数据标注覆盖率高,所有表格数据标注[Table N]; 指标名使用正确; 速查卡片指标字段含具体数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了[论文原文]/[agent 解读]; 覆盖率估计>90%; 推断性分析均有限定词"
+  可定位:
+    satisfied: true
+    notes: "KB背景含谱系定位(S1后继, VALL-E路线, 与CosyVoice3/VibeVoice对比); 创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "concepts列均为已存在实体页; 无新建概念; frontmatter models列前代Fish-Speech而非后续系统"
+
+checks:
+  - id: C01
+    principle: 可复述
+    item: "方法节含因果解释(WHY)"
+    result: pass
+    detail: "5个设计选择均含WHY段"
+
+  - id: C02
+    principle: 可复述
+    item: "关键设计回答'为什么选这个而不是那个'"
+    result: pass
+    detail: "Dual-AR vs 展平RVQ; GRPO vs DiffRO; reference audio前置vs追加"
+
+  - id: C03
+    principle: 可复述
+    item: "速查卡片'可借鉴'是具体trick"
+    result: pass
+    detail: "4条均为可迁移的具体trick(dual-purpose, Dr.GRPO, LoRA swap, RadixCache)"
+
+  - id: C04
+    principle: 可信赖
+    item: "claim标注覆盖率≥80%"
+    result: pass
+    detail: "方法节和实验节几乎所有数字claim标注了[§X.X]/[Table N]/[Eq N]"
+
+  - id: C05
+    principle: 可信赖
+    item: "指标名正确"
+    result: pass
+    detail: "WER/CER/SIM/RTF/TTFA/TAR使用正确"
+
+  - id: C06
+    principle: 可信赖
+    item: "速查指标含数字+数据集+来源"
+    result: pass
+    detail: "WER 0.54%/0.99% (zh/en) [Table 1]; ATT 0.515 [Table 5]; win rate 81.88% [Table 6]; RTF 0.195 [§5]"
+
+  - id: C07
+    principle: 可信赖
+    item: "无方向性错误"
+    result: pass
+    detail: "未发现WER/CER方向标注错误"
+
+  - id: C08
+    principle: 可区分
+    item: "因果解释标注[论文原文]/[agent 解读]"
+    result: pass
+    detail: "覆盖率估计>90%"
+
+  - id: C09
+    principle: 可区分
+    item: "因果解释来源标注覆盖率≥80%"
+    result: pass
+    detail: "方法节所有WHY解释均标注了来源"
+
+  - id: C10
+    principle: 可区分
+    item: "无推断写成断言"
+    result: pass-with-note
+    severity: low
+    detail: "点评节'消融缺失是硬伤'是agent评价,非论文claim,可接受"
+
+  - id: C11
+    principle: 可定位
+    item: "KB背景含具体谱系定位"
+    result: pass
+    detail: "含S1后继, VALL-E路线, 4路线对比"
+
+  - id: C12
+    principle: 可定位
+    item: "KB背景创新判断有对比基准"
+    result: pass
+    detail: "与CosyVoice3 DiffRO/VibeVoice continuous VAE对比"
+
+  - id: C13
+    principle: 可定位
+    item: "frontmatter字段存在且非空"
+    result: pass
+    detail: "所有必填字段存在; tasks/datasets为空但合理(论文无特定task/dataset贡献)"
+
+  - id: C14
+    principle: 可定位
+    item: "frontmatter字段语义正确"
+    result: pass
+    detail: "models列Fish-Speech(前代); concepts列已有实体页; 无successor-as-model问题"
+
+  - id: C15
+    principle: 可定位
+    item: "速查卡片5字段都有实质内容"
+    result: pass
+    detail: "一句话/路线/指标/可借鉴/局限均有实质内容"
+
+  - id: C16
+    principle: 不污染
+    item: "新建概念页满足准入规则"
+    result: not-applicable
+    detail: "未新建概念页"
+
+  - id: C17
+    principle: 不污染
+    item: "去重检查"
+    result: not-applicable
+    detail: "未新建概念页"
+
+  - id: C18
+    principle: 不污染
+    item: "反向更新无factual-error或overclaim"
+    result: pending
+    detail: "反向更新尚未执行,待审阅通过后执行"
+
+  - id: C19
+    principle: 不污染
+    item: "反向更新分类正确"
+    result: pending
+    detail: "反向更新尚未执行"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。5个评估原则均满足。方法节结构清晰,因果解释充分,来源标注覆盖率高。KB背景含具体谱系定位和路线对比。速查卡片完整。无high/medium issue。可直接进行反向更新。"

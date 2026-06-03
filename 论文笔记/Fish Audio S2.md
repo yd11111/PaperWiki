@@ -278,6 +278,9 @@ Fish Audio S2 是一个工程完成度很高的 TTS 系统,在多个公开 bench
 
 6. **Token-weighted reward mask**: 在 instruction-following reward 中对不同类型的 token 施加不同权重 (speaker ID tag 错误惩罚更重,missed vocal instructions 追加惩罚),实现差异化的 reward granularity [§4.3]
 
+> [!review] 审阅结论: pass (2026-06-03)
+> 5 个评估原则均满足。方法节结构清晰,因果解释充分 (WHY+HOW),来源标注覆盖率 >90%。KB 背景含具体谱系定位 (S1 后继 + 4 路线对比)。速查卡片 5 字段完整。无 high/medium issue。详见 `_review/Fish Audio S2-review.yml`。
+
 ---
 
 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
