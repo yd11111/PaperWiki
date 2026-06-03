@@ -142,8 +142,11 @@ Llama2 (13B) 输出维度 5120,VITS 文本嵌入维度远小于此。用一个�
 
 3. **数据受限场景下 LLM 特征的价值**: 在训练数据不足时,LLM 的预训练知识作为语义先验更有帮助 (1-hour LJSpeech 实验) [Table 1 中]。这提示在低资源 TTS 场景中引入 LLM 特征可能更有价值。
 
-> [!review]
-> 审阅结果待生成,见 `_review/Llama-VITS-review.yml`。
+> [!review] pass-with-fixes (2026-06-03)
+> **结论**: pass-with-fixes | 可理解 4 / 可溯源 5 / 严谨 4 / 可导航 5 / KB 安全 5
+> **claim 覆盖**: 16/16 (100%)
+> **issues**: 2 medium (训练细节推断标注、可复用 idea 泛化性限定) + 2 low (tasks 空、推断标注)
+> 详见 `_review/Llama-VITS-review.yml`
 
 ---
 检索命中: [[Prosody Modeling]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]] | 参考(待确认): [[VITS]], [[Emotion Control in TTS]], [[Text-to-Speech Pipeline]] | 未命中但可能相关: 无

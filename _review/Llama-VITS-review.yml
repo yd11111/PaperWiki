@@ -1,0 +1,43 @@
+paper: "Llama-VITS"
+file: "论文笔记/Llama-VITS.md"
+date: "2026-06-03"
+conclusion: pass-with-fixes
+scores:
+  understandability: 4
+  traceability: 5
+  rigor: 4
+  navigability: 5
+  kb_safety: 5
+claim_stats:
+  total_claims: 16
+  annotated_claims: 16
+  coverage_rate: "100%"
+issues:
+  - severity: medium
+    type: traceability-gap
+    location: "方法 > 训练策略"
+    detail: "线性投影层 W 和 attention 层的训练细节标注为 [agent 解读],论文 §3.2 虽未显式说明,但从上下文可知 W 随 VITS 训练更新。这一推断合理但应标注更明确。"
+    suggestion: "保持现有 [agent 解读] 标注即可,不需修改。"
+  - severity: medium
+    type: weak-reusability
+    location: "可复用的 idea > 第2点"
+    detail: "'全局 vs 序列 token 的选择经验' 仅基于一个 GPT-like LLM (Llama2) 和一个 BERT 的对比,泛化性未经验证。措辞可能导致读者将其当作通用规律。"
+    suggestion: "补充限定: '此经验仅基于 Llama2 vs BERT-base 的单一对比,需更多实验验证泛化性'。"
+  - severity: low
+    type: template-compliance
+    location: "frontmatter > tasks"
+    detail: "tasks 字段为空。论文涉及 TTS 和 Emotional TTS 任务,但 任务库/ 中无对应实体页。"
+    suggestion: "可忽略。任务库当前无 TTS 实体页,不必强建。"
+  - severity: low
+    type: fact-inference-mixing
+    location: "方法 > 关键设计选择 > 2. 维度对齐"
+    detail: "'选择线性投影而非更复杂的映射是为了最小化引入参数' 标注了 [agent 解读],正确区分。无需修改。"
+    suggestion: "保持现状。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "无事实错误或 overclaim。所有实验数字均有 [Table 1] 出处标注,覆盖率 100%。因果解释一致标注了 [论文原文] 或 [agent 解读]。KB 背景准确定位了论文在 'LLM 辅助传统 TTS' 路线中的位置,与 [[LLM-based TTS]] 的区分清晰。反向更新仅涉及 append 操作 (向 Emotion Control in TTS 和 VITS 追加 key_papers),不会污染已有内容。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "none"
+  system_upgrade_suggestion: "none"
