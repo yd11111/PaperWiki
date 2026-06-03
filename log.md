@@ -370,6 +370,7 @@
 - [review/auto] [[LiveSpeech 2]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
 - [lint/local] LiveSpeech 2 — 通过/0 问题
 - [moc] 零样本语音合成 MOC 更新: +LiveSpeech 2
+- [alert/backlog] pending-review: 70, draft deep/repro: 81 — 建议抽空审核
 
 ## 2026-06-03 (LLaDA-TTS)
 - [kb/search] [[LLaDA-TTS]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[CosyVoice 3]](pending-review), [[Masked Generative Modeling]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Diffusion Model]](pending-review)
