@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[CSP-FT]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Speaker Adaptation]](待确认), [[Codec Language Model]](待确认), [[Emotion Control in TTS]](待确认)
+- [ingest/deep] [[CSP-FT]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speaker Adaptation, Codec Language Model, Emotion Control in TTS, LLM-based TTS, Speaker Embedding, Self-Supervised Speech Representation)
+- [review/auto] [[CSP-FT]] — pass-with-fixes, 0 high + 1 medium (速查指标缺数据集名+Table 1 标注) + 1 low (datasets frontmatter 为空)
+- [lint/local] CSP-FT — 通过/0 问题
+- [moc/update] TTS训练与评估 — 新增 Domain Adaptation & Fine-tuning 分类,追加 CSP-FT
 - [kb/search] [[DMOSpeech]] — 命中 6 页(取 Top 6): [[Speaker Embedding]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Diffusion Model]](pending-review), [[Score Matching]](pending-review), [[Speaker Verification]](pending-review), [[Differentiable Reward Optimization]](pending-review)
 - [ingest/deep] [[DMOSpeech]] — 精读, kb_sources=6, 新建 0, 追加 7 (Diffusion-based TTS, Speaker Embedding, Diffusion Model, Score Matching, Speaker Verification, Differentiable Reward Optimization, Classifier-Free Guidance) + 任务页 1 (Zero-shot Speech Synthesis)
 - [review/auto] [[DMOSpeech]] — pass-with-fixes, 1 medium fixed (datasets 误列) + 1 low unfixed (DAC 引用)
