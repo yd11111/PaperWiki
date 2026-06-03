@@ -1,0 +1,50 @@
+paper: SemaVoice
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节含 5 个设计选择的 WHY 解释; 速查卡片可借鉴字段具体 (双层损失+自适应权重)"
+  可信赖:
+    satisfied: true
+    notes: "实验数字全部标注 [Table N]; 指标名正确 (WER/CER/SIM/MOS); 速查指标含数字+数据集"
+  可区分:
+    satisfied: true
+    notes: "方法节因果解释标注覆盖率 ~90%; [论文原文] 和 [agent 解读] 清晰区分"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系 (continuous AR 路线) + 对比 Semantic-VAE/VoxCPM; frontmatter 字段完整"
+  不污染:
+    satisfied: true
+    notes: "无需新建概念页; 反向更新均为追加 key_papers (不改 status)"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.models
+    detail: "models 未列出论文比较表中的主要同路线 baseline VoxCPM,而列了 MELLE (关联较弱的早期工作)"
+    suggestion: "考虑将 models 改为 WavLM + CosyVoice 2 + VoxCPM,或加入 VoxCPM"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法:关键设计选择 3 (sigma-VAE)"
+    detail: "sigma-VAE 的 C_sigma 具体值未提及,论文中也可能未给出,但 VAE loss 的 lambda 值 (lambda_mel=15.0 等) 已在论文 §3.1.1 中列出,笔记未收录"
+    suggestion: "追加 VAE 损失权重配置以便复现参考"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea 3"
+    detail: "Previous-patch conditioning 归功于 DiTAR 而非 SemaVoice 原创,在笔记中已正确注明,但可复用节可以更明确指出这一归属"
+    suggestion: "无需修改,已标注 'DiTAR 中也被验证有效'"
+
+summary: |
+  笔记整体质量高,5 个原则均满足。方法节的 WHY 解释充分,数字标注完整,
+  因果来源区分清晰。局限性分析中对消融结果与论文标题的张力的指出
+  (history conditioning >> SFM alignment) 是有价值的批判性观察。
+  3 个 low severity issues,不阻塞反向更新。

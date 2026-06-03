@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, continuous-AR, VAE, semantic-alignment, diffusion, LLM-based, patch-diffusion]
 concepts: ["[[Self-Supervised Speech Representation]]", "[[Variational Autoencoder for TTS]]", "[[Next-Token Diffusion]]", "[[Classifier-Free Guidance]]", "[[LLM-based TTS]]", "[[Diffusion-based TTS]]", "[[Semantic vs Acoustic Tokens]]"]
-models: ["[[模型库/WavLM|WavLM]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/MELLE|MELLE]]"]
+models: ["[[模型库/WavLM|WavLM]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/MELLE|MELLE]]", "[[论文笔记/VoxCPM|VoxCPM]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
@@ -193,5 +193,6 @@ $$\lambda_{align} = \alpha \cdot \frac{\|\nabla_\theta L_{mel}\|_2}{\|\nabla_\th
 3. **Previous-patch conditioning 作为 outpainting**: 将自回归生成从独立预测转变为 outpainting,通过提供局部上下文大幅减少 error accumulation。这个设计在 DiTAR 中也被验证有效
 4. **固定信息率变帧率的消融设计**: 在表示学习研究中,通过固定 (frame_rate × dim) 产品改变 granularity 来评估方法的 scaling behavior,是一种干净的实验方法论
 
-> [!review] 审阅状态
-> 待审阅 — 生成于 2026-06-03,尚未通过审阅流程。
+> [!review] 审阅: pass-with-fixes (2026-06-03)
+> 5 原则均满足。3 个 low severity issues (frontmatter models 可加 VoxCPM / VAE loss 权重未收录 / previous-patch conditioning 归属)。不阻塞反向更新。
+> 详见 `_review/SemaVoice-review.yml`
