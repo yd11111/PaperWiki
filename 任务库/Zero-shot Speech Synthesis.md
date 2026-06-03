@@ -4,7 +4,7 @@ title: "Zero-shot Speech Synthesis"
 aliases: [零样本语音合成, Zero-shot TTS, Zero-shot Voice Cloning]
 tags: [TTS, zero-shot, voice-cloning]
 key_approaches: ["LLM + discrete tokens", "Diffusion-based", "Coarse-to-fine hybrid"]
-key_models: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/VoXtream|VoXtream]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/Spark-TTS|Spark-TTS]]"]
+key_models: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Chatterbox-Flash|Chatterbox-Flash]]", "[[论文笔记/VoXtream|VoXtream]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
 benchmarks: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS, DNSMOS]
 status: confirmed
@@ -62,6 +62,8 @@ updated: 2026-06-01
 | Seed-TTS | SS test-zh | 0.796 | SEED-TTS-Eval | CosyVoice 3 Table 4 |
 | IndexTTS2 | WER test-zh | 1.008% | SEED-TTS-Eval | IndexTTS2 Table 1 |
 | IndexTTS2 | SS test-zh | 0.865 | SEED-TTS-Eval | IndexTTS2 Table 1 |
+| Qwen3-TTS-12Hz-1.7B | WER test-en | 1.24% | SEED-TTS-Eval | Qwen3-TTS Table 5 |
+| Qwen3-TTS-12Hz-1.7B | WER test-zh | 0.77% | SEED-TTS-Eval | Qwen3-TTS Table 5 |
 
 ## 开放问题
 

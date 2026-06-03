@@ -4,7 +4,7 @@ title: "Cross-lingual Voice Cloning"
 aliases: [跨语言语音克隆, Cross-lingual TTS, Cross-lingual Speech Synthesis]
 tags: [TTS, cross-lingual, voice-cloning, multilingual]
 key_approaches: ["Multilingual LLM + shared tokenizer", "Language-agnostic speaker embedding"]
-key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]"]
+key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS]
 status: confirmed
@@ -52,6 +52,9 @@ updated: 2026-06-01
 | CosyVoice 3-1.5B + DiffRO | WER to-en (from zh) | 2.98 | CV3-Eval | CosyVoice 3 Table 7 |
 | CosyVoice 3-1.5B + DiffRO | WER to-zh (from en) | 5.09 | CV3-Eval | CosyVoice 3 Table 7 |
 | CosyVoice 3-1.5B | WER en2zh | 8.01 | CV3-Eval | CosyVoice 3 Table 8 |
+| Qwen3-TTS-12Hz-1.7B | WER zh-to-en | 2.77 | CV3-Eval | Qwen3-TTS Table 7 |
+| Qwen3-TTS-12Hz-1.7B | WER en-to-zh | 4.77 | CV3-Eval | Qwen3-TTS Table 7 |
+| Qwen3-TTS-12Hz-1.7B | WER zh-to-ko | 4.82 | CV3-Eval | Qwen3-TTS Table 7 |
 
 ## 开放问题
 
