@@ -13,6 +13,8 @@
 - 韵律与情感 — prosody, emotion, style
   - [[论文笔记/Llama-VITS|Llama-VITS]] — 2024, Llama2 语义嵌入增强 VITS 情感表达
   - [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集 + LLM 驱动五维度文本表现力标注
+  - [[论文笔记/UMETTS|UMETTS]] — 2024, 多模态(视觉/音频/文本)对比学习情感对齐 + 多 TTS 后端情感合成
+  - [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]] — 2024, flow-matching zero-shot TTS + 帧级 arousal-valence + NV embedding, 时变情感控制
 - 流式与实时 — streaming, low-latency
 
 ## 按任务浏览
@@ -57,3 +59,4 @@
 ## 生成方法演进 (相关论文)
 
 - [[论文笔记/VoiceFlow|VoiceFlow]] — SJTU, 2023 (ICASSP 2024), 首次 rectified flow matching 用于 TTS 声学模型, 2 步 MOS 3.92 vs GradTTS 2.98
+- [[论文笔记/Bridge-TTS|Bridge-TTS]] — Tsinghua/MSRA, 2023, Schrödinger bridge data-to-data TTS, 2-step MOS 4.04 超越 CoMoSpeech/Grad-TTS
