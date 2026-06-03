@@ -330,3 +330,10 @@
 - [lint/local] Cont-SPT — 通过/0 问题
 - [moc] 语音编码与量化 MOC 更新: +Cont-SPT
 - [alert/backlog] pending-review: 70, draft deep/repro: 81 — 建议抽空审核
+
+## 2026-06-03 (MamTra)
+- [kb/search] [[MamTra]] — 命中 5 页(取 Top 5): [[LLM-based TTS]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speech Language Model]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Codec Language Model]](pending-review)
+- [ingest/deep] [[MamTra]] — 精读, kb_sources=5, 新建 0, 追加 3 (LLM-based TTS, CosyVoice 2, SEED-TTS-Eval)
+- [review/auto] [[MamTra]] — pass, 1 issue (0 high, 0 medium, 1 low)
+- [lint/local] MamTra — 通过/0 问题
+- [moc] 零样本语音合成 MOC 更新: +MamTra

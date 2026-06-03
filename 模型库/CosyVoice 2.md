@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -50,3 +50,4 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): 在基础性能和情感表达两方面均以 CosyVoice2 为 baseline,IndexTTS2 在 SS 和 WER 上全面超越 CosyVoice2;在自然语言情感控制对比中,IndexTTS2 的 EMOS (3.786) 显著优于 CosyVoice2 (3.339)
 - [[论文笔记/NVSpeech|NVSpeech]] (2025): 以 CosyVoice2 为 TTS backbone,通过词表扩展+微调添加 18 类副语言发声的显式控制能力;微调后 CER_w/o_para 3.73% (in-domain),listener win rate 75.4% (vs pre-trained)
 - [[论文笔记/VoXtream|VoXtream]] (2025): 在 full-stream 场景直接对比,VoXtream FPL 102ms vs CosyVoice2 1643ms (快 16 倍); 在 LibriSpeech long 上 VoXtream WER 3.24% vs CosyVoice2 6.11%,naturalness preference 57% vs 31%; 但 CosyVoice2 的 SPK-SIM 显著更高 (0.685 vs 0.564),归因于 NAR flow-matching decoder 的声学优势
+- [[论文笔记/MamTra|MamTra]] (2026): 以 CosyVoice 2 为 teacher backbone,将部分 Transformer 层替换为 Mamba-2 层; MamTra 1:1 在 SEED-TTS-eval test-en 上 WER 2.28% (vs teacher 2.03%),NMOS 3.66 vs 3.68,VRAM 降低 34%; 仅用 LibriTTS 0.5kh (teacher 数据量的 0.3%) 训练
