@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-03
+- [kb/search] [[StreamMel]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓ | 过滤: [[模型库/MELLE|MELLE]](pending-review), [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
+- [ingest/deep] [[StreamMel]] — 精读, kb_sources=6, 新建 0, 追加 7 (MELLE key_papers+后续工作, CosyVoice 2 key_papers+baseline, Mel Spectrogram key_papers, LLM-based TTS key_papers, VAE for TTS key_papers, Codec LM key_papers, Zero-shot Speech Synthesis key_models), MOC 更新 2 (零样本语音合成, TTS-总览)
+- [review/auto] [[StreamMel]] — pass-with-fixes, 0 high, 1 medium (已修正), 1 low
+- [lint/local] StreamMel — 通过 (0 死链)
 - [kb/search] [[Shallow Flow Matching]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[CosyVoice]]✓, [[Neural Vocoder]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review)
 - [ingest/deep] [[Shallow Flow Matching]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM key_papers+演进, CosyVoice key_papers, Neural Vocoder key_papers, CFG key_papers, Diffusion-based TTS key_papers, Mel Spectrogram key_papers), MOC 更新 1 (TTS-总览)
 - [review/auto] [[Shallow Flow Matching]] — pass-with-fixes, 0 high + 0 medium + 3 low
