@@ -1,0 +1,48 @@
+paper: "Prompt-Unseen-Emotion"
+reviewer: auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节解释了 WHY (为什么用百分比 prompt、为什么 KL loss),不是组件罗列; 速查卡片可借鉴字段具体可迁移"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 有 [Table I]/[Fig 3]/[Table II]/[Table III] 标注; 指标名正确"
+  可区分:
+    satisfied: true
+    notes: "[论文原文] 和 [agent 解读] 区分清晰; WHY 解释标注覆盖率 ~85%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系线 (Zhou et al. 2022 → Daisy-TTS → PUE); CosyVoice 关系明确"
+  不污染:
+    satisfied: true
+    notes: "反向更新仅追加 key_papers,不改定义"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "速查卡片 > 指标"
+    detail: "MOS 数字来自 Fig 5 而非 Table,标注为 [Fig 5, Table III] 但 Fig 5 的具体数字是从图中读取的近似值"
+    suggestion: "在指标行标注 '(从图中读取,近似值)' 以区分精确报告值和读图值"
+
+  - id: 2
+    type: missing-lineage
+    severity: medium
+    location: "点评节"
+    detail: "与 Daisy-TTS 的 Plutchik 模型路线对比仅在点评中提及,KB 背景谱系定位中已有但可更具体"
+    suggestion: "属于论文本身的缺陷 (未与 Daisy-TTS 对比),笔记已正确指出"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "速查卡片 > 路线"
+    detail: "路线描述中 speech tokenizer 类型未明确标注为 S3 supervised semantic tokenizer"
+    suggestion: "可在路线字段补充 '(S3 supervised semantic tokens, single codebook)'"
+
+summary: |
+  笔记质量良好,机制解释清晰,因果标注到位。主要不足是 MOS 数据部分来自图表读取(非精确值),
+  以及与 Daisy-TTS 的方法论对比可更深入(但这是论文本身的缺陷)。
+  结论: pass-with-fixes,可进行反向更新。
