@@ -167,5 +167,6 @@ updated: 2026-06-03
 4. **属性相关性处理**: 用 MLP 从高层属性 (age/gender/emotion) 预测低层属性 (pitch mean/std) 的条件分布,虽简单但提供了处理属性冲突的基线思路
 5. **CFG on AR LM logits**: 将 CFG 从 score-based model 推广到 autoregressive LM,对任何需要增强条件控制的 AR 生成系统都有参考价值
 
-> [!review] 审阅状态
-> 待审阅 --- 见 `_review/MAE Style-Rich TTS-review.yml`
+> [!review] 审阅: pass (2026-06-03)
+> 方法节以因果驱动,来源标注清晰,KB 背景定位精准。仅一个 medium issue (速查指标混合引用),不阻塞反向更新。
+> 详见 `_review/MAE Style-Rich TTS-review.yml`

@@ -1,0 +1,130 @@
+paper: "MAE Style-Rich TTS"
+reviewer: auto
+date: 2026-06-03
+checklist_version: v1.1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节以 WHY 驱动,每个关键设计选择都回答了'为什么不选另一种',MAE/两阶段/离散标签/CFG 各有因果解释"
+  可信赖:
+    verdict: pass-with-fixes
+    notes: "数字 claim 标注覆盖率约 85%,但部分指标引用合并标注 (如 [Table III, IV, V] 混合引用)"
+  可区分:
+    verdict: pass
+    notes: "方法节中 [论文原文] / [agent 解读] 标注清晰,4 处 agent 解读均有'可能'/'相比'等限定词"
+  可定位:
+    verdict: pass
+    notes: "KB 背景节含具体谱系定位(VALL-E 两阶段 vs 本文两阶段的区别),创新判断有对比基准"
+  不污染:
+    verdict: pass
+    notes: "无新建概念页需求,反向更新均为追加 key_papers(不改 status)"
+
+checks:
+  - id: mechanism-explanation
+    principle: 可复述
+    result: pass
+    detail: "方法节按 WHY 组织: 为什么用 MAE/为什么两阶段/为什么离散标签/为什么 CFG 仅在标签上"
+
+  - id: design-choice-rationale
+    principle: 可复述
+    result: pass
+    detail: "4 个关键设计选择均有'为什么选这个而不是那个'的回答"
+
+  - id: reusable-specificity
+    principle: 可复述
+    result: pass
+    detail: "速查'可借鉴'列出 4 个具体可迁移 trick (MAE style 提取/数据解耦/phone-level merge/CFG on AR logit)"
+
+  - id: claim-traceability
+    principle: 可信赖
+    result: pass-with-fixes
+    severity: medium
+    detail: "覆盖率约 85%。实验节数字均有 [Table/Fig] 标注;但速查指标字段中 emotion accuracy 数据混合引用了 Table IV 和 Fig 3,可更精确"
+    location: "速查 > 指标"
+    suggestion: "将速查指标拆分为多行,每行注明具体 Table/Fig 出处"
+
+  - id: metric-correctness
+    principle: 可信赖
+    result: pass
+    detail: "UTMOS/SIM/MCD/WER/MOS-Q/MOS-A 使用正确,无指标方向性错误"
+
+  - id: quick-ref-metrics
+    principle: 可信赖
+    result: pass
+    detail: "速查'指标'含具体数字 + 数据集名 + 出处标注"
+
+  - id: no-directional-error
+    principle: 可信赖
+    result: pass
+    detail: "无方向性错误"
+
+  - id: source-annotation
+    principle: 可区分
+    result: pass
+    detail: "方法节中 4 处 [论文原文] + 4 处 [agent 解读],覆盖率 100%"
+
+  - id: source-annotation-coverage
+    principle: 可区分
+    result: pass
+    detail: "方法节中所有 WHY 解释均有来源标注"
+
+  - id: no-assertion-without-qualifier
+    principle: 可区分
+    result: pass
+    detail: "agent 解读均用'可能是因为'/'相比'/'这是...的 trade-off'等限定词"
+
+  - id: strong-claim-support
+    principle: 可区分
+    result: pass
+    detail: "无 SOTA/唯一/全面优于 等强断言"
+
+  - id: kb-background-lineage
+    principle: 可定位
+    result: pass
+    detail: "KB 背景含具体谱系对比: VALL-E 两阶段 vs 本文两阶段, GST/VAE reference encoder vs MAE"
+
+  - id: kb-innovation-baseline
+    principle: 可定位
+    result: pass
+    detail: "创新判断基于'数据解耦思路在现有概念页中尚未记录'的对比基准"
+
+  - id: frontmatter-fields-present
+    principle: 可定位
+    result: pass
+    detail: "所有必需字段存在且非空"
+
+  - id: frontmatter-semantically-correct
+    principle: 可定位
+    result: pass
+    detail: "models 列 EnCodec (本文使用的 codec); concepts 列本文涉及的概念; datasets 列实验数据集"
+
+  - id: quick-ref-completeness
+    principle: 可定位
+    result: pass
+    detail: "速查 5 字段均有实质内容"
+
+  - id: concept-admission
+    principle: 不污染
+    result: pass
+    detail: "无新建概念页"
+
+  - id: dedup-check
+    principle: 不污染
+    result: pass
+    detail: "无新建实体页,不涉及去重"
+
+  - id: reverse-update-accuracy
+    principle: 不污染
+    result: pass
+    detail: "反向更新计划: 追加 key_papers 到 RVQ/EnCodec/Speaker Embedding/LLM-based TTS/Prosody Modeling/Style Transfer in TTS/CFG/Emotion Control in TTS,均为追加操作"
+
+  - id: reverse-update-classification
+    principle: 不污染
+    result: pass
+    detail: "全部为追加更新(加 key_papers),不改 status"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。方法节以因果驱动,来源标注清晰,KB 背景定位精准。仅有一个 medium issue (速查指标混合引用),不阻塞反向更新。"
