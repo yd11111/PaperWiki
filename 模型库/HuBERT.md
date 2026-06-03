@@ -7,7 +7,7 @@ year: 2021
 tags: [self-supervised-learning, speech-representation, masked-prediction, BERT, ASR, speech-tokenizer]
 key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Self-Supervised Speech Representation]]"]
 tasks: []
-key_papers: ["[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/PROEMO|PROEMO]]"]
+key_papers: ["[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/PROEMO|PROEMO]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]"]
 supersedes: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
 superseded_by: ["[[模型库/WavLM|WavLM]]"]
 status: pending-review

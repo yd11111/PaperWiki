@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review
@@ -129,3 +129,12 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **关键发现**: RL-optimized duration 的 WER (1.752) 甚至优于使用 ground truth duration (1.821),说明最优 duration 不等于真实 duration [Table 3]
 - **计算效率**: 利用 4-step DMD-distilled student 生成样本计算 reward,避免传统 RL 需数百步采样的开销
 - 详见 [[论文笔记/DMOSpeech 2|DMOSpeech 2]]
+
+### FlexSpeech AR Duration + DPO (Ma et al., 2025)
+
+- **AR next-token prediction for duration**: 将 phone-level duration 离散化为 0-99 帧的分类标签,用 encoder-decoder Transformer 做 next-token prediction,显式建模 Markov 依赖
+- **DPO 偏好对齐**: 用人工标注的 win-lose duration 对做 Direct Preference Optimization,仅 50 对数据即可显著改善自然度和稳定性
+- **与 DMOSpeech 2 对比**: DMOSpeech 2 用 GRPO + 自动 reward;FlexSpeech 用 DPO + 人工标注。两者共同结论: duration predictor 是 TTS pipeline 中偏好优化最有效的作用点
+- **WER**: Seed-TTS test-zh 1.20% (低于 GT 1.26%), test-en 1.81% [Table 1]
+- **风格迁移**: 仅微调 duration model (~100 samples DPO),acoustic model 不动,即可完成风格迁移
+- 详见 [[论文笔记/FlexSpeech|FlexSpeech]]
