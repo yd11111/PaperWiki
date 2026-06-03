@@ -11,6 +11,7 @@
 - [[_MOC/语音大模型与对话|语音大模型与对话]] — speech LLM, full-duplex dialogue, omni-model
 - [[_MOC/TTS训练与评估|TTS 训练与评估]] — post-training, RL, evaluation, reward model
 - 韵律与情感 — prosody, emotion, style
+  - [[论文笔记/Llama-VITS|Llama-VITS]] — 2024, Llama2 语义嵌入增强 VITS 情感表达
 - 流式与实时 — streaming, low-latency
 
 ## 按任务浏览
@@ -28,6 +29,7 @@
 - [[EnCodec]] — Meta, 2022, neural audio codec
 - [[SoundStream]] — Google, 2021, 首个端到端 neural audio codec
 - [[BigVGAN]] — NVIDIA, 2023, 通用神经声码器
+- [[论文笔记/PeriodWave|PeriodWave]] — Ajou Univ, 2024, 多周期 flow matching 声码器
 
 ## 按概念浏览
 
