@@ -1,0 +1,40 @@
+paper: InstructTTSEval
+reviewer: agent-auto
+date: 2026-06-03
+conclusion: pass-with-fixes
+issue_count: 3
+issues:
+  - id: 1
+    type: factual-error
+    severity: high
+    principle: "可信赖"
+    location: "实验 > 主要结果表格 (初始版本)"
+    detail: "pdftotext 列对齐错误导致所有 TTS 系统的 APS/DSD/RP/Avg 数值严重错位。例如 gemini-flash EN-Avg 被错误记为 50.4%,实际为 88.7%。"
+    suggestion: "已通过 PDF 原文图像验证并修正。后续 PDF 提取应交叉验证 Avg = mean(APS, DSD, RP)。"
+    status: fixed
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: "可信赖"
+    location: "关键发现 > 各条目"
+    detail: "部分发现中引用的数字缺少具体 [Table N] 标注,仅有 [section] 级标注。"
+    suggestion: "已在修正中补充 [Table 5]/[Table 6] 标注。"
+    status: fixed
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: "可定位"
+    location: "frontmatter > models"
+    detail: "models 字段列了 CosyVoice/CosyVoice 2 (related work 中提及),但它们不是本文的评测对象。作为 benchmark 论文,评测的商用/开源系统多无独立实体页,此字段定位为 related models 尚可接受。"
+    suggestion: "保持现状,benchmark 论文的 models 字段列相关模型而非评测目标是合理的。"
+    status: accepted
+
+summary: >
+  初始版本存在一个 high 级别问题 (PDF 提取导致的数字错误),
+  已通过 PDF 原文图像交叉验证并修正。修正后笔记质量满足所有
+  五条审阅原则: 可复述(分层任务设计有因果解释)、可信赖(数字
+  已修正并标注来源)、可区分(论文原文/agent解读标注充分)、
+  可定位(KB 背景谱系定位清晰)、不污染(无新建概念页风险)。
+  结论: pass-with-fixes,可继续反向更新。
