@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Cross-Lingual F5-TTS]] — 命中 7 页(取 7): [[Conditional Flow Matching]]✓, [[Cross-lingual Voice Cloning]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Emilia]](pending-review)
+- [ingest/deep] [[Cross-Lingual F5-TTS]] — 精读, kb_sources=7, 新建 0, 追加 7 (CFM/Cross-lingual Voice Cloning/Duration Predictor/Non-autoregressive TTS/Zero-shot Speech Synthesis key_papers + Emilia/SEED-TTS-Eval used_by), MOC 更新 1 (零样本语音合成)
+- [review/auto] [[Cross-Lingual F5-TTS]] — conclusion: pass-with-fixes, 2 issues (0 high / 1 medium fixed / 1 low)
+- [lint/local] Cross-Lingual F5-TTS — 通过 (0 死链)
 - [kb/search] [[LibriQuote]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Natural Language Description for TTS]](pending-review)
 - [ingest/deep] [[LibriQuote]] — 精读, kb_sources=6, 新建 1 (数据集/LibriQuote), 追加 6 (CFM/Prosody Modeling/Emotion Control/NL Description/TTS Evaluation/Zero-shot Speech Synthesis key_papers), MOC 更新 2 (零样本语音合成/TTS训练与评估)
 - [review/auto] [[LibriQuote]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low), 已修复
