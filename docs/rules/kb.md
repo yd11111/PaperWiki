@@ -30,7 +30,7 @@
 
 **判定标准**: 修改已有 prose 或关系型 frontmatter。
 
-**status 行为**: 实质性修改后 → KB 审阅(自动 subagent) → 审阅通过则 status 保持/恢复 confirmed; 审阅不通过则 status → `pending-review`。
+**status 行为**: 实质性修改后 status → `pending-review`,等待定期实体页审阅或用户手动触发审阅。
 
 ---
 
@@ -42,10 +42,13 @@ AI 生成内容通过自动化质量门后自动进入可信层。人的纠正�
 
 | 操作 | 质量门 | 通过后 status |
 |------|--------|---------------|
-| 新建实体页 | KB 审阅 pass + lint pass | confirmed |
+| 新建实体页 | entity-review pass + lint pass | confirmed |
 | Append 更新 | 不改 status(已有规则) | 保持不变 |
-| Substantive 更新 | KB 审阅 pass | confirmed |
-| Substantive 更新 | KB 审阅 block | pending-review |
+| Substantive 更新 | — | pending-review(等待定期审阅) |
+| 定期实体页审阅 | entity-review pass | confirmed |
+| 定期实体页审阅 | entity-review revise/restructure | 保持 pending-review |
+
+**自动晋升的唯一路径**: entity-review 结论为 pass → auto-confirmed。KB 审阅检查单次变更安全性,entity-review 检查页面整体质量。
 
 ### status 含义
 
