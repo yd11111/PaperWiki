@@ -68,7 +68,7 @@ Zhong et al. (2025) [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] 在单�
 
 ## 演进
 
-RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Industrial-scale GRPO (TTS-1, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025) → Token-level KTO with contrastive LLM weight estimation / TKTO (SpiralAI, 2025) → GRPO prosody collapse diagnosis + iterative human-DPO (Channel Corp, 2026) → DPO for autoregressive diffusion models / ARDM-DPO (CUHK-SZ + ByteDance, 2025) → GRPO for low-resource multilingual TTS with IPA + unpaired data / Align2Speak (NVIDIA, 2025)
+RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Industrial-scale GRPO (TTS-1, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025) → Token-level KTO with contrastive LLM weight estimation / TKTO (SpiralAI, 2025) → GRPO prosody collapse diagnosis + iterative human-DPO (Channel Corp, 2026) → DPO for autoregressive diffusion models / ARDM-DPO (CUHK-SZ + ByteDance, 2025) → GRPO for low-resource multilingual TTS with IPA + unpaired data / Align2Speak (NVIDIA, 2025) → GRPO with CER+NLL composite reward, cross-architecture verification / GRPO-TTS (USTC/iFLYTEK, 2025)
 
 ## GRPO Prosody Collapse + Iterative Human-DPO (Channel Corp, 2026)
 
@@ -85,6 +85,10 @@ Kotoge & Sasaki (2025) [[论文笔记/TKTO|TKTO]] 提出第五条路线: 基于 
 ## Component-level GRPO (DMOSpeech 2, Columbia/NewsBreak, 2025)
 
 Li et al. (2025) [[论文笔记/DMOSpeech 2|DMOSpeech 2]] 开辟了 RL-for-TTS 的第三条路线: 不对整个 pipeline 做 RL,而是将 GRPO 精确靶向 duration predictor 这一单一组件。利用已有 4-step DMD-distilled student 生成样本计算 reward (SIM + WER),将 RL 计算成本压缩到传统方案的一小部分。Seed-TTS-en WER 1.752 (超越 ground truth duration 的 1.821), SIM 0.698。与 DiffRO/Multi-Reward GRPO 的核心区别: RL 作用对象是 duration predictor 而非 token/audio generator,问题空间更小,训练更高效 (仅需 1.5K GRPO steps)。
+
+## GRPO with ASR NLL Reward / GRPO-TTS (USTC/iFLYTEK, 2025)
+
+Liu et al. (2025) [[论文笔记/GRPO-TTS|GRPO-TTS]] 提出用现成 ASR 模型 (Whisper) 的 CER + NLL 构建 composite reward,通过加权调和平均组合后用 GRPO 微调 TTS LLM。与 DiffRO 的核心区别: 完全在 audio-level 操作,不需要 Gumbel-Softmax 或 token-to-text reward model,仅依赖 off-the-shelf ASR。独特贡献: (1) NLL 作为 CER 互补信号 (r=0.3371),在 CER=0 时仍提供区分度; (2) 同时验证 semantic token 路线 (CosyVoice2) 和 acoustic token 路线 (Llasa-1B),发现 GRPO 对两类系统的 CER 均有效但仅对 semantic token 路线改善自然度。CosyVoice2+GRPO: CER zh 1.41→1.07, MOS zh 4.42→4.58; Llasa+GRPO: CER zh 7.73→1.30 但 MOS 无显著改善 [GRPO-TTS Table 1, Table 2]。
 
 ## DPO for Autoregressive Diffusion / ARDM-DPO (CUHK-SZ + ByteDance, 2025)
 

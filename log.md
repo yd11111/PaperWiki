@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Audiobook-CC]] — 命中 6 页(取 6): [[CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
+- [ingest/deep] [[Audiobook-CC]] — 精读, kb_sources=6, 新建 0, 追加 12 实体页 key_papers, MOC 更新 2 (TTS-总览 + 零样本语音合成)
+- [review/auto] [[Audiobook-CC]] — pass, 0 issues
+- [lint/local] Audiobook-CC — 通过, 0 dead links
 - [kb/search] [[Align2Speak]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Speaker Verification]](pending-review), [[Classifier-Free Guidance]](pending-review)
 - [ingest/deep] [[Align2Speak]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + DiffRO 演进线
 - [review/auto] [[Align2Speak]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
