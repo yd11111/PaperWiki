@@ -119,3 +119,4 @@
 - [[论文笔记/MELA-TTS|MELA-TTS]] — Alibaba, 2025, Tokenizer-free joint AR transformer + DiT diffusion, ASR representation alignment 加速训练 3.3x + 提升内容一致性, CER 0.9% test-zh / WER 2.4% test-en (170K h)
 - [[论文笔记/TMD-TTS|TMD-TTS]] — UESTC/Tibet Univ, 2026, 藏语三方言统一 TTS, Matcha-TTS + DSDR-Net (public/private FFN 条件路由) + dialect fusion, 构建 102h TMDD 数据集, nMOS 3.86 / DECS 88.09%
 - [[论文笔记/MAVE|MAVE]] — MTS AI, 2025, 首个 Mamba SSM + cross-attention codec LM 用于 speech editing 和 zero-shot TTS, 830M 参数, ~6x 内存优势超越 VoiceCraft, CM3 causal masking 实现 AR 框架双向上下文
+- [[论文笔记/Semantic-VAE|Semantic-VAE]] — SJTU/Geely, 2025 (ICASSP 2026), VAE latent 语义对齐正则化 (WavLM cosine loss) 解决重建-生成困境, F5-TTS WER 2.23→1.95% / SIM 0.60→0.64
