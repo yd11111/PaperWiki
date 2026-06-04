@@ -3,30 +3,32 @@ type: paper
 tier: deep
 title: "MambaVoiceCloning: Efficient and Expressive Text-to-Speech via State-Space Modeling and Diffusion Control"
 arxiv_id: ""
-source: "Under review at ICLR 2026"
+source: "Sources/MambaVoiceCloning.pdf"
 authors: [Anonymous]
 year: 2026
 venue: "ICLR 2026 (under review)"
 tags: [TTS, SSM, Mamba, diffusion, voice-cloning, streaming, efficiency, encoder-design, state-space-model]
-concepts: ["[[Diffusion-based TTS]]", "[[Prosody Modeling]]", "[[F0 Modeling]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]"]
-models: []
-tasks: []
-datasets: []
-kb_context_sources: 2
+concepts: ["[[Diffusion-based TTS]]", "[[Prosody Modeling]]", "[[F0 Modeling]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Attention-based TTS]]"]
+models: ["[[VITS]]", "[[NaturalSpeech 3]]", "[[CosyVoice 3]]"]
+tasks: ["[[Zero-shot Speech Synthesis]]"]
+datasets: ["[[LJSpeech]]", "[[LibriTTS]]", "[[VCTK]]", "[[CSS10]]"]
+kb_context_sources: 3
 status: draft
 created: 2026-06-03
-updated: 2026-06-03
+updated: 2026-06-04
 ---
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Speaker Embedding]], [[Prosody Modeling]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[Speaker Embedding]], [[Prosody Modeling]], [[Zero-shot Speech Synthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Mel Spectrogram]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
 >
 > **Speaker Embedding**: MVC 使用全局 style embedding e (mel-derived, shallow conv/GRU) 通过 AdaLN 注入编码器,属于 KB 中 "FiLM conditioning" 和 "Conditional LayerNorm" 注入方式的 SSM 版本。与传统 speaker encoder (d-vector, x-vector) 不同,MVC 的 embedding 同时编码 timbre 和 coarse expressiveness [§3.1, Eq. 1]。[agent解读]
 >
 > **Prosody Modeling**: MVC 将韵律建模分解为三个 SSM 模块: (1) Bi-Mamba Text Encoder 编码语言韵律 (重音/语调); (2) Temporal Bi-Mamba 编码节奏/时长; (3) Expressive Mamba 编码说话人特有的韵律风格。这种模块化分解对应 KB 中 "显式韵律信息" 与 "隐式韵律信息" 的结合 — duration 显式预测, prosody style 隐式通过 SSM 建模。消融实验证明三个模块各贡献不可替代的信息 (CMOS-N drop -0.36 to -0.41) [Table 6]。[agent解读]
+>
+> **Zero-shot Speech Synthesis**: MVC 在 VCTK 上评估零样本说话人泛化 (MOS-N 4.18, MOS-S 4.09 vs StyleTTS2 4.12/4.01) [Table 16],验证了 SSM-only conditioning 不损害零样本能力。与 KB 中记录的主流零样本方法 (LLM + discrete tokens, Diffusion/Flow-based) 不同,MVC 走的是"固定 decoder + 优化 conditioning"路线,在 269h 公开数据上验证 SSM-only conditioning 的零样本可行性,但规模远小于工业级零样本系统 (CosyVoice 3: 170K h, NaturalSpeech 3: ~200K h)。[agent解读]
 >
 > [待确认] **Diffusion-based TTS**: KB 记录了 Diff-TTS→Grad-TTS→ProDiff→DiffGAN-TTS 的演进,以及 flow matching 逐步取代 diffusion 的趋势。MVC 保持 StyleTTS2 的 diffusion decoder + vocoder 不变,仅重新设计 conditioning path,因此其贡献在于编码器侧而非生成侧。diffusion decoder 仍是延迟主要来源 (54.2%) [Table 15]。[agent解读]
 
@@ -263,13 +265,43 @@ h_B = [h_f; h_b] W_f                           [Eq. 6, linear fusion]
 
 MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Table 10]
 
-## 论文贡献与意义
+## 局限性
 
-1. **SSM-only conditioning stack 的可行性验证**: 首次证明推理时完全去除 attention 和 recurrence 的 conditioning path 可以匹配甚至超越 transformer baseline [§6]
-2. **Gated Bi-Mamba + AdaLN 的编码器设计**: 提出的 gated fusion 和 AdaLN conditioning 组合是长文本韵律稳定性和 F0 tracking 的关键 [Table 8]
-3. **Protocol-matched 评估范式**: 所有 baseline 在同一 pipeline 下重训,隔离 conditioning architecture 效果 [§4.1]
-4. **模块化 drop-in replacement**: MVC encoder 可作为未来多语言/工业 pipeline 的 conditioning module 替换现有 transformer encoder [§6]
+1. **仅英语训练数据**: LJSpeech (24h) + LibriTTS (245h) 均为英语,跨语言评估 (CSS10 ES/DE/FR) 仅验证泛化能力而非正式多语言支持。德语长复合词和法语联诵仍存在应力错位问题 [§6, Appendix D.5]
+2. **全局 style 而非细粒度情感**: AdaLN 提供 utterance-level 的 style conditioning,无法实现词级/短语级的情感精细控制 [§6]
+3. **Diffusion decoder 仍是延迟瓶颈**: encoder 侧的 SSM 改进仅影响 31.4% 的延迟,diffusion decoder 占 54.2%,整体 RTF 从 0.0174 降至 0.0169,改善幅度有限 [Table 15]
+4. **公平性存疑**: 论文大量强调 "protocol-matched" 对比,但所有 Mamba baseline (Hybrid-Mamba, Bi-Mamba Concat-only) 均为作者重新实现,非原作者发布版本,无法完全排除实现差异 [agent解读]
+5. **绝对改善幅度小**: MOS 改善 +0.07 (4.15→4.22),虽统计显著但实际感知差异有限;WER 上 StyleTTS2 (6.50%) 略优于 MVC (6.52%) [Table 1, Table 4]
+6. **double-blind review 匿名**: 无法验证 github 代码可复现性 (github.com/aiai-9/MVC 链接在审稿阶段可能受限) [§1]
+7. **未评估端到端替代**: diffusion decoder 是瓶颈,但论文未讨论将 conditioning 改进与更快的 decoder (如 flow matching) 结合的可能性 [agent解读]
+
+## 点评
+
+**优势**:
+- **问题边界清晰**: 论文精确定义了要回答的问题 ("SSM-only conditioning 在固定 decoder 下是否可行"),并通过 protocol-matched 实验设计严格隔离变量。这是 encoder-level 架构研究的模范 [§1, §4.1]
+- **消融设计充分**: 组件移除 (Table 6)、fusion 变体 (Table 8)、编码器深度 (Table 7)、SSM 超参数敏感度 (Tables 19-21)、streaming look-ahead (Table 5) 等消融覆盖全面,每个 claim 都有对应的实验支撑 [§5.4, Appendix E]
+- **长文本是真正亮点**: MOS-long 4.16 vs StyleTTS2 3.91 (+0.25) 是最有说服力的结果,SSM 的有界激活特性在多分钟合成中确实展现出优势 [Table 3]
+- **诚实的 scope 界定**: 明确不与工业系统做数值对比,承认改善幅度 "modest",对 diffusion decoder 的延迟瓶颈不回避 [§1, §6]
+
+**不足**:
+- **"首个 SSM-only" 的 claim 依赖定义**: 如果宽泛定义 "SSM-only inference",则 MVC 在训练时仍依赖 attention-based aligner,且 decoder/vocoder 不属于 SSM。此 claim 仅限于 conditioning path [agent解读]
+- **实际部署价值待验证**: encoder 参数从 42M 降至 21M、内存降 28%,但在 diffusion decoder 占主导的场景下,这些节省能否转化为实际部署收益不清楚 [agent解读]
+- **跨语言评估深度不足**: CSS10 仅 3 种语言 x 30 prompts,且是 phonemizer 转换后的英语模型直接评估,无法充分验证 SSM conditioning 的多语言鲁棒性 [Appendix D.5]
+
+**总体判断**: MVC 是一篇严谨的 encoder-side 架构消融研究,其最大价值不在于绝对性能提升,而在于证明了 Mamba 完全替代 attention 的可行性,并通过 gated fusion + AdaLN 给出了具体的实现路径。长文本稳定性是其最有说服力的实验证据。作为工程参考价值高,但需注意其改善幅度在短文本场景下可能不具实际意义。
+
+## 可复用的 idea
+
+1. **Gated bidirectional SSM fusion**: σ(W_g[h_f; h_b]) ⊙ [h_f; h_b] 的 gating 机制可用于任何双向 SSM/Mamba 架构,解决简单 concat 丢失方向加权信息的问题。核心是让模型基于局部上下文自适应调整前向/后向贡献,MOS +0.52 的提升证明了这一设计选择的有效性 [Eq. 3, Table 8]
+
+2. **AdaLN 注入 SSM**: 用 style/speaker embedding 通过 Adaptive Layer Normalization 调制 SSM hidden states,实现 global conditioning 而不引入 cross-attention。这是 "FiLM-like conditioning + SSM" 的具体实例,可推广到任何需要全局条件信号的 SSM 架构 [Eq. 4, §3.2.1]
+
+3. **Training-time teacher + inference-time removal**: 训练时用轻量 attention-based aligner 提供监督,推理时完全丢弃,实现 "借 attention 的表达力训练,但不承担 attention 的推理开销"。对 alignment noise 的鲁棒性验证 (±10% → WER<0.4) 是这一策略可行性的关键证据 [§3.3, Appendix B.7]
+
+4. **Protocol-matched baseline 评估方法**: 所有 baseline 在完全相同的 preprocessing / decoder / vocoder / optimizer / training schedule 下重训,是隔离 encoder architecture 效果的最佳实践。这种实验设计值得在任何 "模块替换" 类研究中推广 [§4.1, Appendix C.2]
+
+5. **三路 conditioning 分解 (text/rhythm/prosody)**: 将 conditioning 信号按语言学维度分解为三个独立 SSM 模块,各模块可独立消融验证其贡献。这种模块化设计比单一 monolithic encoder 更利于理解和迭代 [§3.2, Table 6]
 
 ---
 
-检索命中: [[Speaker Embedding]], [[Prosody Modeling]] | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Voice Cloning Taxonomy]](pending-review) | 未命中但可能相关: 无
+检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
