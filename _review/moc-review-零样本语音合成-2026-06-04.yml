@@ -1,0 +1,125 @@
+moc: "零样本语音合成"
+file: "_MOC/零样本语音合成.md"
+date: "2026-06-04"
+conclusion: restructure
+
+# 第一层: 原则判断
+principles:
+  navigable:
+    score: 7
+    judgment: "结构骨架清晰(概念→模型→论文→任务→评估→SOTA→演进),用户能快速理解分区;但缺少 scope 声明(R1),不知道覆盖范围边界;概念区 13 个概念平铺无分组"
+  no_mixing:
+    score: 6
+    judgment: "核心概念区未按抽象层级分组(范式/模块/技巧平铺);代表模型区混入 BigVGAN(vocoder)和 MinMo(backbone/tokenizer provider),不是零样本 TTS 主线系统"
+  traceable:
+    score: 4
+    judgment: "36 处强判断词(首个/首次/SOTA/best/开创)无来源标注;SOTA 表缺 R6 要求的日期/metric 定义/可比性声明;演进脉络有 6 处跨团队 → 应为 ⇢"
+  no_decay:
+    score: 3
+    judgment: "26/119 篇论文年份 section 归属与 frontmatter year 字段不一致(22% 错误率);DiaMoE-TTS 和 Dragon-FM 各重复出现 2 次;Dragon-FM 在演进脉络中也重复"
+  no_overload:
+    score: 3
+    judgment: "论文区 119 条,超过 50 条阈值 2.4 倍;43/119 条描述超过 1 行;已需要拆分 sub-MOC"
+
+# 统计
+stats:
+  total_papers: 119
+  total_concepts: 13
+  total_models: 10
+  duplicate_entries: 2
+  year_mismatches: 26
+  dead_links: 0
+  unattributed_judgments: 36
+
+# 发现的问题
+issues:
+  # --- HIGH ---
+  - severity: high
+    type: year-mismatch
+    principle: no_decay
+    location: "相关论文 - 26 篇论文"
+    detail: "26 篇论文的 MOC 年份 section 与 frontmatter year 不一致。主要分两类: (1) 5 篇 frontmatter=2023 但放在 2024 section (NaturalSpeech 2, UniAudio, Make-A-Voice, SC VALL-E, TextrolSpeech); (2) 16 篇 frontmatter=2025 但放在 2026 section (JoyTTS, StreamMel, LatinX, MELA-TTS, TTS-1, TaDiCodec, MSR-Codec, Dragon-FM, BridgeCode, CTDiffusion, DiaMoE-TTS, Flamed-TTS, Audiobook-CC, DialoSpeech, MAVE, Semantic-VAE, UniVoice); 另有零散错位(SongGen MOC=2024/fm=2025, Fish-Speech MOC=2025/fm=2024, FlexiVoice MOC=2025/fm=2026, MambaVoiceCloning MOC=2025/fm=2026)"
+    suggestion: "按 frontmatter year 重新归类所有 26 篇论文到正确的年份 section"
+
+  - severity: high
+    type: paper-overflow
+    principle: no_overload
+    location: "相关论文 (仅 deep/repro) 全区"
+    detail: "论文区共 119 条,超过 R4 阈值(50 条)的 2.4 倍。已严重影响可导航性和可维护性"
+    suggestion: "按路线拆分为 sub-MOC(如 零样本语音合成-LLM路线.md / 零样本语音合成-非自回归路线.md / 零样本语音合成-Post-training.md),主 MOC 保留代表作 + sub-MOC 链接"
+
+  - severity: high
+    type: duplicate-entry
+    principle: no_decay
+    location: "L120 + L156 (DiaMoE-TTS); L130 + L153 (Dragon-FM)"
+    detail: "DiaMoE-TTS 在 2025 section (L120) 和 2026 无标题区域 (L156) 各出现一次;Dragon-FM 在 2025 section (L130) 和 2026 无标题区域 (L153) 各出现一次。两者描述略有不同"
+    suggestion: "删除重复条目,保留信息更完整的那个,放入正确年份 section"
+
+  # --- MEDIUM ---
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "全文 36 处 (L8, L36, L44, L52, L63, L78, L82, L100, L110, L111, L114, L115, L119, L124, L126, L128, L132, L133, L136, L139, L144, L147, L155, L162 等)"
+    detail: "首个/首次/首篇/SOTA/best/开创等强判断词出现 36 次,均未按 R8 要求标注来源(应使用 (作者 claim) / (benchmark: XX) / (agent 整理))"
+    suggestion: "对每个强判断补充来源标注。大部分源自论文作者 claim,标注为 (作者 claim);SOTA 类标注 benchmark 来源和日期"
+
+  - severity: medium
+    type: sota-protocol-missing
+    principle: traceable
+    location: "当前 SOTA 表 (L179-L186)"
+    detail: "SOTA 表缺少 R6 要求的: (1) 日期(数据截至何时); (2) 度量指标全称/定义(SS=Speaker Similarity? 未说明); (3) 可比性声明(各模型是否在相同条件下评测); (4) Fish Audio S2 的 SS 字段为 '-' 未解释"
+    suggestion: "补充表头注释: benchmark 全称、度量指标定义、数据截止日期、可比性说明"
+
+  - severity: medium
+    type: relation-type-error
+    principle: traceable
+    location: "演进脉络 - Post-training 路线"
+    detail: "6 处跨团队关系使用 → (同团队演进符号),应使用 ⇢ (跨团队借鉴): CosyVoice(Alibaba)→IndexTTS2(bilibili), CosyVoice→NVSpeech, CosyVoice→MamTra(KAIST), CosyVoice→RWKVTTS(RWKV community), CosyVoice→BreezyVoice(MediaTek+NTU), Tortoise→XTTS(Coqui/Nvidia)"
+    suggestion: "将跨团队关系改用 ⇢;若作品确实基于 CosyVoice 代码 fork/微调但团队不同,应注明 (基于 CosyVoice 代码) 而非用 →"
+
+  - severity: medium
+    type: model-admission-error
+    principle: no_mixing
+    location: "代表模型区 L30-L31"
+    detail: "BigVGAN(通用声码器)和 MinMo(多模态 LLM/tokenizer backbone)不是零样本 TTS 主线系统。R3 要求 backbone/vocoder/上游模型不与主线系统平级"
+    suggestion: "将 BigVGAN 和 MinMo 移至独立子节'相关上游模型/关键组件',或移除(它们已有独立笔记)"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_mixing
+    location: "核心概念区 (L7-L19)"
+    detail: "13 个概念平铺无分组: 范式级(LLM-based TTS, Non-autoregressive TTS)、模块级(Speech Tokenizer, Duration Predictor)、技巧级(Gumbel-Softmax, Gradient Reversal Layer)混在一起。R2 要求按抽象层级分组"
+    suggestion: "按范式/模块/技巧三层分组概念,例如: 范式(LLM-based TTS, NAR TTS, Codec LM), 模块(Speech Tokenizer, Duration Predictor, VAE for TTS), 技巧(Gumbel-Softmax, GRL, DiffRO)"
+
+  - severity: medium
+    type: scope-violation
+    principle: navigable
+    location: "MOC 文件头部"
+    detail: "缺少 scope 声明(R1),不清楚本 MOC 覆盖什么(纯 TTS? 含 VC? 含对话?),不包含什么(全双工? 歌声合成?)"
+    suggestion: "在文件头部添加 scope 注释或 frontmatter,明确覆盖范围,如: '<!-- scope: zero-shot text-to-speech 含零样本 VC 但不含全双工对话/歌声合成 -->'"
+
+  # --- LOW ---
+  - severity: low
+    type: granularity-inconsistency
+    principle: no_overload
+    location: "相关论文区 43 条描述"
+    detail: "43/119 条论文描述超过 150 字符(部分超过 250 字符),不符合 R4 '每条论文描述 ≤ 1 行' 要求"
+    suggestion: "将详细技术参数移至各论文笔记本体,MOC 描述精简至 1 行(机构+年份+一句话核心贡献)"
+
+  - severity: low
+    type: stale-description
+    principle: no_decay
+    location: "演进脉络 - Dragon-FM 重复"
+    detail: "Dragon-FM 在演进脉络中出现两次(L223 连续值 AR 路线 + L243 连续值 AR 路线),描述略有不同"
+    suggestion: "合并为一条,放在最合适的路线下"
+
+# 风险评估
+risk_assessment:
+  structural_health: false
+  reason: "119 条论文远超容量阈值,26 处年份错位影响可信度,2 处重复条目降低维护信心。MOC 已进入需拆分状态"
+
+# 学习信号
+learning_signals:
+  new_issue_type: "year-section-batch-drift — 批量精读新论文后自动刷新 MOC 时,可能因 frontmatter year 与 arXiv 发布年份不同(如 2025 年发到 arXiv 但 arXiv ID 为 2025 而笔记写成 2026)导致整批论文被错放到下一年 section。这是系统性问题而非偶发错误"
+  rule_gap: "R4 的 50 条阈值在快速增长的方向(如零样本 TTS)很容易突破,但目前没有'何时触发拆分'的操作指南;自动刷新脚本应在超过阈值时发出警告或自动拆分"
+  checklist_upgrade_suggestion: "建议增加检查项: (1) 自动刷新后运行 year-mismatch 验证脚本; (2) 论文区超过 80 条时触发 sub-MOC 拆分建议; (3) 演进脉络中 → 使用的自动团队匹配验证"
