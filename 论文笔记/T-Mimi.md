@@ -118,7 +118,7 @@ T-Mimi 仅修改 Mimi 的 decoder 部分,encoder 保持不变 [§3.1, Fig 1]:
 **最优策略**: T1-10 用 8-bit, T11-12 + L1-L2 保持 32-bit [Table 2]
 - 存储: 163.2MB → 68.7MB (57.9% 减少)
 - PESQ: 3.21 → 3.16 (仅 0.05 下降)
-- SI-SDR: 19.37 → 20.28 (略有提升)
+- SI-SDR: 19.37 → 19.62 (QAT T1-10 8bit 配置, 50k 步) [Table 2]
 
 [agent 解读] 这个发现有直接的物理解释: 后几层直接影响波形重建,量化引入的误差无法被后续层修正。而前面的层产生的是中间表征,后续层仍有机会"吸收"量化噪声。这与 Moshi 论文中发现的 4-bit 量化导致 gibberish 的现象一致 [Moshi §5.8]。
 
@@ -126,7 +126,7 @@ T-Mimi 仅修改 Mimi 的 decoder 部分,encoder 保持不变 [§3.1, Fig 1]:
 
 | 指标 | 本文 | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| CMOS (winrate) | +2.32% (vs Mimi-FT) | 0 (Mimi-FT-32-bit) | 100 samples, 200 pairs, 10 raters | [Table 1] |
+| CMOS winrate | +2.32% (vs Mimi-FT, 95% CI: -0.70%~5.34%, 无显著差异) | 0 (Mimi-FT-32-bit) | 200 pairs, 10 raters/pair | [Table 1] |
 | PESQ (32-bit, 90k steps) | 2.95 (12L) | 2.61 (8L) | 100 random speech samples | [Table 4] |
 | PESQ (QAT, full training) | 3.16 | 3.21 (non-quantized, full training) | 100 random speech samples | [§4.2.2] |
 | STOI (32-bit) | 0.98 | 0.96 (8L) | 100 random speech samples | [Table 4] |
@@ -170,6 +170,22 @@ T-Mimi 是一项目标明确、执行干净的工程改进工作。它的核心�
 3. **Silence padding 数据增强**: 对 10% 样本前后拼接纯静音,解决静音段噪声问题,简单有效且通用
 4. **两阶段训练 (full loss → feature matching only)**: 先用全部损失训练到收敛,再用 feature matching 微调提升感知质量,可用于其他 codec/vocoder 训练
 5. **预训练层复用**: 将 Mimi 预训练的 8 层 Transformer 权重直接用于 T-Mimi 的前 8 层,只随机初始化新增的 4 层,降低训练成本
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释深入,量化敏感度物理解释合理 |
+> | 可信赖 | pass | 数字标注覆盖率约 90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致且覆盖率高 |
+> | 可定位 | pass | KB 背景谱系清晰 (Mimi→TS3-Codec→T-Mimi),与 Moshi 笔记交叉关联 |
+> | 不污染 | pass | 反向更新为追加操作,风险低 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/T-Mimi-review.yml`
 
 ---
 
