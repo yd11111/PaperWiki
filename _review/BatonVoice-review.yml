@@ -1,0 +1,88 @@
+paper: "BatonVoice"
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 3 个关键设计选择 WHY (为什么解耦/为什么从重建语音提取特征/为什么 APO),
+      每个都有因果解释。"conductor-orchestra" 比喻清晰,三阶段训练策略的渐进逻辑完整
+      (基础 TTS → features 条件化 → preference 增强)。
+      速查卡片"可借鉴"列出 3 个具体可迁移 trick,包括操作方式。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      数字型 claim 标注覆盖率 ~90%,实验表格所有数字标注 [Table N]/[Fig N]。
+      指标名使用正确(Emotion Acc./WER/MCD)。
+      但 KB 背景中 CosyVoice/VoxInstruct 指令数据量描述需核实(见 issue 1),
+      且局限性第 6 点 CosyVoice2 数据量表述可能引起误解(见 issue 2)。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节 WHY 解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 100%。
+      agent 解读限定在合理推断范围(模块化升级优势、APO vs DiffRO 对比)。
+      无推断-断言混淆。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景谱系定位具体(LLM-based TTS → Instruction-Guided 分支 → 解耦新范式)。
+      创新判断有明确对比基准(VoxInstruct/CosyVoice 的指令数据需求)。
+      frontmatter 完整,models 正确列了 CosyVoice 2 作为 base decoder。
+      速查卡片 5 字段都有实质内容。
+
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新将仅为追加型(LLM-based TTS/Instruction-Guided/Emotion Control
+      等页面追加 key_papers,CosyVoice 2 模型页追加引用)。无 kb-safety-risk。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "KB 背景 - 创新判断"
+    detail: >
+      "VoxInstruct 需 556h 指令数据, CosyVoice 需 1500h" -- 这个数据来自 Table 1
+      的 Instruction Data 列,其中 CosyVoice 是 556h,CosyVoice2 是 1500h,而非
+      VoxInstruct(VoxInstruct 不在表中)。应修正为 CosyVoice 556h / CosyVoice2 1500h。
+    suggestion: >
+      将 "VoxInstruct 需 556h 指令数据, CosyVoice 需 1500h" 修正为
+      "CosyVoice 需 556h, CosyVoice2 需 1500h 指令数据"。
+
+  - id: 2
+    type: overclaim
+    severity: medium
+    principle: 可信赖
+    location: "局限性 第 6 点"
+    detail: >
+      "CosyVoice2 (167K h pretrain + 1500h instruction)" 把 167K h 归于 CosyVoice2
+      但 Table 1 显示 CosyVoice2 pretrain 是 167K h,而 BatonVoice pretrain 也有
+      103K h。这里的对比暗示 BatonVoice 数据量远小于 CosyVoice2,但实际差距主要
+      在 pretrain 规模(103K vs 167K)而非数量级差异。
+    suggestion: >
+      改为 "SFT 仅用 500h 英文数据,pretrain 103K h;
+      对比 CosyVoice2 pretrain 167K h + 1500h instruction data"。
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter - models"
+    detail: >
+      models 字段仅列了 CosyVoice 2,但 BatonVoice 也对比了 Spark-TTS、
+      CosyVoice (v1)、Higgs speech V2 等 baseline。按 checklist 要求
+      models 应列本文模型 + 对比 baseline。
+    suggestion: >
+      考虑是否需要在 models 中追加对比 baseline (Spark-TTS, CosyVoice 等),
+      但这些 baseline 未在 vault 中都有模型页,且 frontmatter models 字段
+      应指向已有 wikilink,所以当前做法可接受。标记为 low。

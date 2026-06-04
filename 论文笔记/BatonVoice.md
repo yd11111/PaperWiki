@@ -31,7 +31,7 @@ updated: 2026-06-04
 - [[Conditional Flow Matching]]: CosyVoice 2 的 CFM decoder 将离散 speech token 转换为 mel spectrogram,BatonVoice 直接复用这一组件。
 - [[Speech Tokenizer]]: CosyVoice 2 的 FSQ-SenseVoice tokenizer 将语音编码为离散 token,BatonVoice 使用相同的 tokenizer。
 
-**创新判断**: 相对于 [[Instruction-Guided Speech Synthesis]] [待确认] 中的已有方法 (VoxInstruct 需 556h 指令数据, CosyVoice 需 1500h),BatonVoice 的核心创新是"零指令数据"实现可控性 -- 通过 operationalism 思想将抽象指令转为可量化的 vocal features,绕过了昂贵的指令-语音标注。这与 [[Emotion Control in TTS]] [待确认] 中 DiffRO 的"从 reward model 蒸馏情感知识"思路有相似性 -- 都是避免人工标注的路线。
+**创新判断**: 相对于 [[Instruction-Guided Speech Synthesis]] [待确认] 中的已有方法 (CosyVoice 需 556h, CosyVoice2 需 1500h 指令数据 [Table 1]),BatonVoice 的核心创新是"零指令数据"实现可控性 -- 通过 operationalism 思想将抽象指令转为可量化的 vocal features,绕过了昂贵的指令-语音标注。这与 [[Emotion Control in TTS]] [待确认] 中 DiffRO 的"从 reward model 蒸馏情感知识"思路有相似性 -- 都是避免人工标注的路线。
 
 > 检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Prosody Modeling]], [[Speech Tokenizer]], [[CosyVoice 2]] | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
 
@@ -167,7 +167,7 @@ Numerical 表示显著优于 caption; 所有特征均有贡献,energy 影响最�
 
 5. **WER 竞争力一般**: WER 2.5 高于 CosyVoice2 (2.1)、Spark-TTS (1.9)、Minimax (1.5),说明情感增强可能以牺牲可懂度为代价 [Table 1]。
 
-6. **训练数据规模偏小**: SFT 仅用 500h,远少于 CosyVoice2 (167K h pretrain + 1500h instruction),且全部为英文 [§3.1]。
+6. **训练数据规模偏小**: SFT 仅用 500h 英文数据,pretrain 103K h; 对比 CosyVoice2 pretrain 167K h + 1500h instruction data [Table 1],数据总量更少且全部为英文 [§3.1]。
 
 ## 点评
 
@@ -192,3 +192,10 @@ BatonVoice 提出了一个简洁且有效的思路: 与其让 TTS 模型学习�
 3. **Preference data 构造无需人工标注**: 用 pre-trained 模型 (无条件) 的输出作 rejected,SFT 模型 (有条件) 的输出作 chosen,WER/SR 阈值自动筛选。可复制到其他条件生成任务的 preference optimization。
 
 4. **Conductor 可替换性**: 设计系统时将"理解"和"执行"分开,使系统能搭上基础模型进步的顺风车。
+
+> [!review] 审阅 (2026-06-04, agent)
+> **结论**: pass-with-fixes (0 high / 2 medium / 1 low)
+> - [medium] traceability-gap: KB 背景中 VoxInstruct/CosyVoice 指令数据量误标 → 已修正为 CosyVoice 556h / CosyVoice2 1500h
+> - [medium] overclaim: 局限性中数据规模对比表述 → 已修正为准确数据
+> - [low] template-compliance: models 字段仅列 CosyVoice 2,未列其他 baseline → 可接受 (baseline 未全部有模型页)
+> 详见 `_review/BatonVoice-review.yml`
