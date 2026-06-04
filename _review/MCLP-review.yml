@@ -1,0 +1,41 @@
+review:
+  paper: "MCLP"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 9
+      rationale: "方法节包含完整的因果解释: MCLP 的 WHY (固定 transcript 消除 content 变量)、tokenizer 选择 WHY (semantic tokenizer 偏向 style)、gated reward WHY (防止 reward hacking)、turn-level RL WHY (计算效率+完整上下文)。速查卡片可借鉴字段具体可迁移。"
+    trustworthy:
+      score: 8
+      rationale: "数字 claim 出处标注覆盖率约 90%。指标使用正确 (CER/MOS/MCLP/CAM++/Emo2Vec 无混淆)。速查指标字段有具体数字+数据集+出处。关键数字经交叉验证与原文一致。实验表格混合 w/ 和 w/o audio history 设置稍有误导 (medium issue)。"
+    distinguishable:
+      score: 9
+      rationale: "因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率 100%。局限性中的推断项明确标注 [agent 解读]。无把推断写成断言的句子。"
+    positionable:
+      score: 9
+      rationale: "KB 背景从三条线 (评估/RL/Style) 定位,含具体论文和系统名。创新判断与 GSRM/SpeechJudge 做了路线对比。点评节包含与 RLAIF-SPA/DiffRO/SpeechJudge 的差异分析。frontmatter models 字段指向不存在的页面 (low issue)。"
+    no_contamination:
+      score: 9
+      rationale: "未新建概念页。反向更新内容尚未执行,无 factual-error 风险。KB 背景中 pending-review 实体页已标注 [待确认]。"
+
+  issues:
+    - severity: medium
+      type: traceability-gap
+      location: "## 实验 主对比表"
+      detail: "表头标注 '本文 (w/ hist)' 但 OV-InstructTTS 等 Instruct-TTS baselines 的数字来自 w/o audio history 设置 (它们不支持 multi-turn audio history)。虽然正文有说明,但表格本身可能误导读者以为是同设置比较。"
+      suggestion: "在表格中为 OV-InstructTTS 行的指标标注 (w/o hist),或拆分为两个表格。"
+    - severity: low
+      type: template-compliance
+      location: "frontmatter models"
+      detail: "models 字段引用 '[[模型库/Step-Audio 2|Step-Audio-2]]' 但该页面不存在。模型库中无 Step-Audio 2 页面。"
+      suggestion: "改为引用已有的论文笔记: '[[论文笔记/Step-Audio 2.5|Step-Audio-2]]' 或移除。"
+    - severity: low
+      type: template-compliance
+      location: "frontmatter datasets"
+      detail: "datasets 字段为空,但论文引入了 WenetSpeech-RP-TTS 数据集并已开源。"
+      suggestion: "可暂留空 (数据集库中无对应页面),或后续创建数据集页后回填。"
+
+  learning_signals: []

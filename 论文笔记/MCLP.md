@@ -127,13 +127,36 @@ GRPO 仅应用于最后一轮语音的生成,而非全部轮次。[agent 解读]
 
 ## 实验
 
-| 指标 | 本文 (w/ hist) | MiMo-Audio-7B | GPT-Audio | Step-Audio-2-mini | OV-InstructTTS | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| CER (%) ↓ | **1.130** | 10.605 | 11.974 | 3.276 | 7.188 | WenetSpeech-RP-TTS | [Table 2] |
-| CAM++ ↑ | **0.724** | 0.699 | 0.636 | 0.629 | 0.669 | WenetSpeech-RP-TTS | [Table 2] |
-| Emo2Vec ↑ | **0.917** | 0.902 | 0.875 | 0.864 | 0.900 | WenetSpeech-RP-TTS | [Table 2] |
-| MCLP ↑ | **-4.636** | -4.753 | -4.849 | -4.829 | -4.768 | WenetSpeech-RP-TTS | [Table 2] |
-| MOS ↑ | **3.576** (±0.045) | 2.484 (±0.058) | 1.915 (±0.048) | 1.856 (±0.045) | 2.864 (±0.087) | WenetSpeech-RP-TTS | [Table 2] |
+**W/ Audio History (LALM baselines)**:
+
+| 指标 | 本文 | MiMo-Audio-7B | GPT-Audio | Step-Audio-2-mini | 数据集 | 出处 |
+| --- | --- | --- | --- | --- | --- | --- |
+| CER (%) ↓ | **1.130** | 10.605 | 11.974 | 3.276 | WenetSpeech-RP-TTS | [Table 2] |
+| CAM++ ↑ | **0.724** | 0.699 | 0.636 | 0.629 | WenetSpeech-RP-TTS | [Table 2] |
+| Emo2Vec ↑ | **0.917** | 0.902 | 0.875 | 0.864 | WenetSpeech-RP-TTS | [Table 2] |
+| MCLP ↑ | **-4.636** | -4.753 | -4.849 | -4.829 | WenetSpeech-RP-TTS | [Table 2] |
+
+**W/o Audio History (Instruct-TTS baselines, 不支持 multi-turn audio history)**:
+
+| 指标 | 本文 | OV-InstructTTS | CosyVoice3 | Qwen3TTS | Higgs Audio V2 | 出处 |
+| --- | --- | --- | --- | --- | --- | --- |
+| CER (%) ↓ | **1.625** | 7.188 | 4.638 | 5.585 | 3.250 | [Table 2] |
+| CAM++ ↑ | **0.704** | 0.669 | 0.651 | 0.630 | 0.614 | [Table 2] |
+| Emo2Vec ↑ | **0.910** | 0.900 | 0.905 | 0.879 | 0.856 | [Table 2] |
+| MCLP ↑ | **-4.687** | -4.768 | -4.782 | -4.799 | -4.827 | [Table 2] |
+
+**Subjective (跨两种设置)**:
+
+| 模型 | MOS ↑ | 出处 |
+| --- | --- | --- |
+| **本文** | **3.576** (±0.045) | [Table 2] |
+| OV-InstructTTS | 2.864 (±0.087) | [Table 2] |
+| MiMo-Audio-7B | 2.484 (±0.058) | [Table 2] |
+| CosyVoice3 | 2.350 (±0.078) | [Table 2] |
+| Qwen3TTS | 2.036 (±0.073) | [Table 2] |
+| GPT-Audio | 1.915 (±0.048) | [Table 2] |
+| Step-Audio-2-mini | 1.856 (±0.045) | [Table 2] |
+| Higgs Audio V2 | 1.750 (±0.064) | [Table 2] |
 
 **MCLP 与人类判断的对齐** [§6.2, Fig 5]:
 - 32 名专业听众的 pairwise 比较
@@ -206,4 +229,16 @@ GRPO 仅应用于最后一轮语音的生成,而非全部轮次。[agent 解读]
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,速查卡片可借鉴具体可迁移 |
+> | 可信赖 | pass | 数字出处覆盖率约 90%,经交叉验证与原文一致 |
+> | 可区分 | pass | 来源标注覆盖率 100%,推断/事实区分清晰 |
+> | 可定位 | pass | 三线谱系定位 + 具体对比基准 |
+> | 不污染 | pass | 未新建概念页,pending-review 已标注 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/MCLP-review.yml`
