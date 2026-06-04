@@ -42,8 +42,9 @@
   - [[论文笔记/LLMVoX|LLMVoX]] — 2025, MBZUAI, 30M LLM-agnostic autoregressive streaming TTS, multi-queue, 475ms延迟
   - [[论文笔记/SMLLE|SMLLE]] — 2025, Microsoft+SJTU, 首个逐帧流式零样本 TTS, Transducer→semantic tokens + AR mel, Delete <Bos> Mechanism
   - [[论文笔记/StreamMel|StreamMel]] — 2025, Nankai+Microsoft, 首个单阶段连续 mel 流式零样本 TTS, text-mel interleaving (1:4), FPL-A 0.01s
-- TTS 应用与可访问性 — accessibility, document reader, mathematical TTS
+- TTS 应用与可访问性 — accessibility, document reader, mathematical TTS, BCI speech prosthesis
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
+  - [[论文笔记/MiSTR|MiSTR]] — 2025, BME/UKIM, iEEG-to-speech BCI 框架: DWT 小波特征 + Transformer 韵律感知 mel 预测 + IHPR 谐波相位重建, PC 0.91 / HNR 12.7 dB
 - 语音安全与隐私 — voice protection, deepfake defense, watermarking
   - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 联合水印训练, proactive speech traceability
   - [[论文笔记/SafeSpeech|SafeSpeech]] — 2025, USENIX Security, unlearnable perturbation + SPEC(KL引导)防护 fine-tuning+zero-shot voice cloning, 10模型迁移, WER 24%→99.6%

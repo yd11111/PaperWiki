@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]"]
+key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -61,9 +61,13 @@ Zhang et al. (2024) [[论文笔记/SpeechAlign|SpeechAlign]] 是首次将偏好�
 
 Zhong et al. (2025) [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] 在单码本 TTS LLM (LLaSA) 上提出多奖励 GRPO 框架,包含 5 个奖励 (WER + SIM + length penalty + entropy regularization + LLM-annotated prosody alignment)。与 DiffRO 的核心区别: GRPO 在 audio-level 操作,不需要 Gumbel-Softmax 或 token-level reward model,与 ASR/speaker verification 工具链天然兼容。LLaSA+RL 在 SEED benchmark 达到 CER 1.10 (zh) / MOS 4.12,附加 FM 后 MOS 4.21。
 
+## Industrial-scale GRPO for TTS (TTS-1, Inworld, 2025)
+
+[[论文笔记/TTS-1|TTS-1]] (Inworld AI, 2025) 在 8.8B 参数 LLaMA-based TTS 上应用 GRPO,使用 WER + SIM + DNSMOS 三维 composite reward ($\alpha=\beta=\gamma=1.0$)。关键设计: (1) 禁用 reward scaling,使用 unscaled mean-centered advantages 避免 difficulty bias; (2) reward 在 48kHz 解码后的最终音频上计算,而非 token 空间。在 1000 小时英语数据上 GRPO 使 WER 相对降低 20-26% [TTS-1 Table 8]。与 Multi-Reward GRPO 的区别: TTS-1 使用更简单的 3 维 reward (无 length penalty / entropy / prosody),但模型规模更大 (8.8B vs LLaSA ~1B)。
+
 ## 演进
 
-RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025)
+RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Industrial-scale GRPO (TTS-1, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025)
 
 ## Fine-grained Preference Optimization / FPO (NWPU, 2025)
 

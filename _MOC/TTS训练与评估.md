@@ -36,6 +36,7 @@
 - [[论文笔记/TTSDS2|TTSDS2]] — 2026, 分布式 TTS 评估指标(Wasserstein-2), 唯一 ρ>0.5 客观指标, 14 语言
 - [[论文笔记/TTS-PRISM|TTS-PRISM]] — 2026, 12 维分层诊断框架(中文), schema-driven instruction tuning, 7B 单次推理超越 30B+ 通用模型
 - [[论文笔记/InstructTTSEval|InstructTTSEval]] — 2025, 首个指令遵循 TTS benchmark, 3 层任务(APS/DSD/RP) x 12 特征 x 2 语言, Gemini-as-Judge
+- [[论文笔记/AudioMOS Challenge 2025|AudioMOS Challenge 2025]] — 2025, 首个语音/音乐/通用音频自动 MOS 预测挑战赛, 3 赛道(TTM/Audiobox/多采样率), 24 队, SSL+集成为主流方案
 
 ### Security & Traceability
 - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 端到端水印联合训练, frame-wise broadcast, PESQ 3.641/MOS 3.959
@@ -87,6 +88,7 @@ Evaluation 演进:
   → TTSDS2 (2026, distributional 升级, 14 languages, ρ>0.5)
   → TTS-PRISM (2026, 12-dim diagnostic, schema-driven, Mandarin)
   → InstructTTSEval (2025, instruction-following benchmark, Gemini-as-Judge)
+  → AudioMOS Challenge 2025 (2025, MOS 预测从 speech 扩展到 music/general audio, 24 队, SSL+集成主流)
 
 Understanding:
   → EmotionThinker (2026, RL-based reasoning)

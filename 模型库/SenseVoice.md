@@ -7,7 +7,7 @@ year: 2024
 tags: [ASR, SER, AED, LID, multilingual, non-autoregressive, speech-understanding, open-source]
 key_concepts: ["[[Self-Supervised Speech Representation]]", "[[Audio Understanding]]", "[[Speech Tokenizer]]"]
 tasks: []
-key_papers: ["[[论文笔记/FunAudioLLM|FunAudioLLM]]"]
+key_papers: ["[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

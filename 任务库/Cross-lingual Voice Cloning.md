@@ -32,6 +32,7 @@ updated: 2026-06-01
 
 - [[论文笔记/CosyVoice 3|CosyVoice 3]] (2025): 支持 zh/en/ja/ko 等多方向跨语言克隆,WER 显著优于前代
 - CosyVoice 2 (2024): 仅支持中英,日文方向因字符转换问题表现差
+- [[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]] (Liu et al., 2025): 首个 NAR flow-matching 跨语言系统,通过 MMS forced alignment + speaking rate predictor 移除 prompt transcript 依赖,cross-lingual test-en WER 2.496%, SIM 0.543
 
 ## 评估
 
