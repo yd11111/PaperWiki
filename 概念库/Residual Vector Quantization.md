@@ -89,4 +89,4 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 
 ## 演进
 
-VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → GVQ/GRVQ (HiFi-Codec, 2023) → FSQ (2024, 去码本化) → MSRVQ (SNAC, 2024, 多尺度) → CSRVQ (ESC, 2024, 跨尺度) → RNDVQ (2024, 概率化) → 单码本回归 (BigCodec/WavTokenizer, 2024)
+VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → GVQ/GRVQ (HiFi-Codec, 2023) → FSQ (2024, 去码本化) → MSRVQ (SNAC, 2024, 多尺度) → CSRVQ (ESC, 2024, 跨尺度) → RNDVQ (2024, 概率化) → 单码本回归 (BigCodec/WavTokenizer, 2024) → PURE Codec (2025, enhancement-guided entropy decomposition: 用 speech enhancement 模型引导第一层量化低熵表征,训练范式改进而非结构改进)
