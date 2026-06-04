@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DialoSpeech]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Turn-taking in Spoken Dialogue]](pending-review), [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
+- [ingest/deep] [[DialoSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 实体页 key_papers
+- [review/auto] [[DialoSpeech]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] DialoSpeech — 通过 (0 dead links), MOC 已包含 (语音大模型与对话)
 - [kb/search] [[BridgeCode]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review)
 - [ingest/deep] [[BridgeCode]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers
 - [review/auto] [[BridgeCode]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
