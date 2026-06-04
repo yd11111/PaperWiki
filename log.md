@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Semantic-VAE]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review)
+- [ingest/deep] [[Semantic-VAE]] — 精读, kb_sources=6, 新建 0, 追加 6 概念页 + 1 任务页 + 1 模型页 key_papers, VAE for TTS 页追加 Semantic-VAE 描述节, MOC 更新 3 (TTS-总览/零样本语音合成/语音编码与量化)
+- [review/auto] [[Semantic-VAE]] — pass-with-fixes, 2 issues (1 medium, 1 low)
+- [lint/local] Semantic-VAE — 通过 (0 死链), MOC 已覆盖 (3 个)
 - [kb/search] [[WeSCon]] — 命中 6 页(取 6): [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓, [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[WeSCon]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers + 1 概念页内容追加 + 1 模型页 baseline 追加, MOC 更新 1 (零样本语音合成)
 - [review/auto] [[WeSCon]] — pass-with-fixes, 1 low issue (BigVGAN removed from models)
