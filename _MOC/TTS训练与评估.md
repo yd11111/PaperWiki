@@ -21,7 +21,8 @@
 - [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] — 2025, 多奖励 GRPO 于单码本 TTS LLM, 5 reward (WER+SIM+len+ent+prosody), CER 1.10/MOS 4.21
 - [[论文笔记/DMOSpeech|DMOSpeech]] — 2024, Columbia+Adobe, DMD2 蒸馏 + 首次端到端 CTC+SV loss 优化 (non-RL), student 超越 teacher, SIM 0.69, WER 1.94, RTF 0.07
 - [[论文笔记/DMOSpeech 2|DMOSpeech 2]] — 2025 (AAAI 2026), component-level GRPO 靶向 duration predictor, SIM+WER reward, 1.5K RL steps, WER 1.752% en, RTF 0.032
-- [[论文笔记/FPO|FPO]] — 2025, token-level 选择性 DPO, segmental error 二分类 (temporal/semantic-phonetic), 3-4x 数据效率, CosyVoice bad case 21%->9%
+- [[论文笔记/FPO|FPO]] — 2025, NWPU, token-level 选择性 DPO, segmental error 二分类 (temporal/semantic-phonetic), 3-4x 数据效率, CosyVoice bad case 21%->9%
+- [[论文笔记/MPO|MPO]] — 2025, NWPU, multidimensional preference set (各维度独立选极值) + CE loss 正则化防 DPO 退化, CER 3.90/SIM 0.577, ABX 52.3% win vs baseline
 - [[论文笔记/Koel-TTS|Koel-TTS]] — 2025, NVIDIA, ASR+SV reward 驱动 DPO/RPO + Pareto 最优多目标偏好配对, CER 0.55% LibriTTS unseen SOTA, GT-as-Chosen 失败实验
 - [[论文笔记/F5R-TTS|F5R-TTS]] — 2025, Tencent, 首次将 GRPO 集成到 NAR flow-matching TTS, output probabilization 使 CFM 兼容 RL, WER -29.5% / SIM +4.6%
 
@@ -50,6 +51,7 @@
 - [[论文笔记/NaturalVoices|NaturalVoices]] — 2024, 大规模自发情感语音数据集(3846h, 2467 speakers)
 - [[论文笔记/TITW|TITW]] — 2024, 首批标准化 noisy-TTS 训练数据集(VoxCeleb1→TITW-Easy 173h/Hard 189h), DNSMOS 过滤 pipeline + KSKT/KSUT 评估协议
 - [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集, LLM 五维度文本表现力标注, MOS 4.09
+- [[论文笔记/SpeechWeave|SpeechWeave]] — 2025, ACL Industry, 合成 TTS 训练数据管线(keyphrase diversity + at-source normalization + 跨语言说话人标准化), 多样性↑10-48%, 规范化准确率 97%
 
 ## 相关任务
 - [[Zero-shot Speech Synthesis]]
