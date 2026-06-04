@@ -4,7 +4,7 @@ title: "Instruction-Guided Speech Synthesis"
 aliases: [指令引导语音合成, Instruction-following TTS, Instruction-to-Speech, 指令TTS, Speech Instruction Following]
 category: "technique"
 tags: [TTS, instruction, controllability, LLM, multimodal, editing, generation]
-key_papers: ["VoxInstruct (Zhou et al., 2024)", "CosyVoice (Du et al., 2024)", "AudioGPT (Huang et al., 2024b)", "SpeechGPT (Zhang et al., 2023b)", "FunAudioLLM (An et al., 2024)", "VoiceCraft (Peng et al., 2024b)", "InstructSpeech (Huang et al., 2024a)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/InstructTTSEval|InstructTTSEval]]", "[[论文笔记/DeepDubbing|DeepDubbing]]"]
+key_papers: ["VoxInstruct (Zhou et al., 2024)", "CosyVoice (Du et al., 2024)", "AudioGPT (Huang et al., 2024b)", "SpeechGPT (Zhang et al., 2023b)", "FunAudioLLM (An et al., 2024)", "VoiceCraft (Peng et al., 2024b)", "InstructSpeech (Huang et al., 2024a)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio 2.5|StepAudio 2.5]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/InstructTTSEval|InstructTTSEval]]", "[[论文笔记/DeepDubbing|DeepDubbing]]", "[[论文笔记/HD-PPT|HD-PPT]]"]
 origin_paper: "Xie et al., Controllable TTS in LLM Era, 2024"
 related_concepts: ["[[Natural Language Description for TTS]]", "[[LLM-based TTS]]", "[[Style Transfer in TTS]]", "[[Emotion Control in TTS]]"]
 status: pending-review

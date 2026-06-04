@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]"]
+key_papers: ["[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-Speech Pipeline]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]"]
 status: pending-review

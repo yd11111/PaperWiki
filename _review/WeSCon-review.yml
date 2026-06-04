@@ -1,0 +1,149 @@
+paper: WeSCon
+file: 论文笔记/WeSCon.md
+reviewer: agent
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: pass
+    notes: "方法节详细解释了多轮推理、transition smoothing、DEAB 的 WHY 和 HOW,包含因果解释和设计选择的理由"
+  可信赖:
+    score: pass
+    notes: "所有数字标注了出处 [Table N],指标名使用正确,速查卡片指标含具体数字+数据集"
+  可区分:
+    score: pass
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读],区分清晰"
+  可定位:
+    score: pass
+    notes: "KB 背景含具体谱系定位 (EmoCtrl-TTS/ELaTE/TTS-CtrlNet),有对比基准,frontmatter 完整"
+  不污染:
+    score: pass
+    notes: "反向更新内容准确,概念库追加更新不改 status"
+
+checks:
+  - id: C1
+    principle: 可复述
+    check: "方法节包含因果解释(WHY)"
+    result: pass
+    detail: "每个设计选择都回答了'为什么这样做',如'为什么多轮推理'、'为什么需要 smoothing'"
+
+  - id: C2
+    principle: 可复述
+    check: "关键设计选择回答了为什么选这个而不是那个"
+    result: pass
+    detail: "显式对比了多轮推理 vs 直接建模,self-training vs 直接训练,DEAB vs 无 bias"
+
+  - id: C3
+    principle: 可复述
+    check: "速查卡片'可借鉴'字段是具体可迁移 trick"
+    result: pass
+    detail: "列出 4 个具体 trick: tail-to-head linkage, self-training 绕过数据, 预定义模板, prompt 插值"
+
+  - id: C4
+    principle: 可信赖
+    check: "数字型 claim 旁有出处标注(覆盖率≥80%)"
+    result: pass
+    detail: "所有实验数字标注 [Table N],方法描述中标注 [§X.X] 和 [Appendix X]"
+
+  - id: C5
+    principle: 可信赖
+    check: "指标名使用正确"
+    result: pass
+    detail: "WER/CER/MOS/S-SIM/DNSV/Emo2v./Aro./AutoPCP 均正确使用"
+
+  - id: C6
+    principle: 可信赖
+    check: "速查卡片'指标'字段含具体数字+数据集名+来源标注"
+    result: pass
+    detail: "含 Emo2v. 0.882, DNSV 4.361, EMOS 3.70, CER 1.47 等具体数字,标注 [Table 1/2/3]"
+
+  - id: C7
+    principle: 可信赖
+    check: "无方向性错误"
+    result: pass
+    detail: "DNSV↓说明越低越好,已在速查中标注; Emo2v.↑正确"
+
+  - id: C8
+    principle: 可区分
+    check: "因果解释标注了[论文原文]或[agent 解读]"
+    result: pass
+    detail: "方法节所有因果解释均标注来源"
+
+  - id: C9
+    principle: 可区分
+    check: "因果解释来源标注覆盖率≥80%"
+    result: pass
+    detail: "方法节中 10 处因果解释,全部标注来源"
+
+  - id: C10
+    principle: 可区分
+    check: "不存在把推断写成断言的句子"
+    result: pass
+    detail: "agent 推断使用 [agent 解读] 标记"
+
+  - id: C11
+    principle: 可区分
+    check: "强断言有数字+出处支撑"
+    result: pass
+    detail: "'SOTA performance' 有 Table 1/2 数据支撑"
+
+  - id: C12
+    principle: 可定位
+    check: "KB 背景节有具体谱系定位"
+    result: pass
+    detail: "明确定位于 EmoCtrl-TTS/ELaTE 之后,与 TTS-CtrlNet/EmoSteer-TTS 对比"
+
+  - id: C13
+    principle: 可定位
+    check: "KB 背景的创新判断有对比基准"
+    result: pass
+    detail: "三个核心新贡献均与已有方法对比: 不依赖情感转换数据 (vs EmoCtrl-TTS), DEAB (vs 无 bias)"
+
+  - id: C14
+    principle: 可定位
+    check: "frontmatter 字段存在且非空"
+    result: pass
+    detail: "所有必需字段均已填写"
+
+  - id: C15
+    principle: 可定位
+    check: "frontmatter 字段语义正确"
+    result: pass-with-note
+    detail: "models 列了 CosyVoice 2 (backbone) + Whisper/WavLM/wav2vec 2.0/BigVGAN (评估/组件); BigVGAN 未在论文中直接使用,但 CosyVoice2 的 vocoder 基于 HiFi-GAN 而非 BigVGAN"
+    severity: low
+
+  - id: C16
+    principle: 可定位
+    check: "速查卡片 5 字段都有实质内容"
+    result: pass
+    detail: "一句话/路线/指标/可借鉴/局限 均有具体实质内容"
+
+  - id: C17
+    principle: 不污染
+    check: "新建概念页满足准入规则"
+    result: pass
+    detail: "不新建概念页,仅追加到已有实体页"
+
+  - id: C18
+    principle: 不污染
+    check: "反向更新内容无 factual-error 或 overclaim"
+    result: pass
+    detail: "追加 key_papers 和补充描述均基于论文事实"
+
+  - id: C19
+    principle: 不污染
+    check: "反向更新正确分类为追加或实质修改"
+    result: pass
+    detail: "全部为追加更新 (加 key_papers + 末尾追加),不改 status"
+
+issues:
+  - id: I1
+    type: template-compliance
+    severity: low
+    location: frontmatter.models
+    detail: "BigVGAN 列入 models 但论文未直接使用 BigVGAN (CosyVoice2 用 HiFi-GAN)"
+    suggestion: "移除 BigVGAN,或替换为更准确的组件"
+
+conclusion: pass-with-fixes
+summary: "笔记质量高,方法解释清晰有因果链,claim 标注覆盖完整,KB 背景定位准确。仅 1 个 low issue (BigVGAN 列入不完全准确)。可放行反向更新。"

@@ -9,7 +9,7 @@ year: 2025
 venue: "NeurIPS 2025"
 tags: [TTS, emotion-control, zero-shot, self-training, word-level-control, speaking-rate-control, attention-bias, CosyVoice2]
 concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[Prosody Modeling]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]", "[[模型库/BigVGAN|BigVGAN]]"]
+models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
 tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -188,5 +188,7 @@ DEAB 的工作方式:
 
 5. **数据格式与预训练兼容**: 新增控制能力时保持输入格式与原始预训练格式兼容 (单情感时退化为原始格式),最大限度保留预训练知识
 
-> [!review] 审阅待补充
-> 审阅将在 _review/WeSCon-review.yml 中记录。
+> [!review] 审阅结论: pass-with-fixes (2026-06-04)
+> - **结论**: pass-with-fixes, 1 个 low issue
+> - **low**: frontmatter models 含 BigVGAN 但论文未直接使用 (已修正)
+> - 详见 `_review/WeSCon-review.yml`
