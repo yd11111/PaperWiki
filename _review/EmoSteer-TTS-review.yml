@@ -1,0 +1,52 @@
+paper: "EmoSteer-TTS"
+reviewer: agent-auto
+date: 2026-06-04
+version: v1
+
+principles:
+  reproducible:
+    score: 4
+    summary: "方法节详细解释了三阶段算法的 WHY + HOW,每个设计选择有因果解释并标注来源。速查卡片可借鉴字段给出了 5 个具体 trick。"
+  trustworthy:
+    score: 4
+    summary: "实验数据均标注出处 [Table 1], [Fig 4(x)], [Eq. N]。指标名正确使用。速查指标有具体数字+数据集名。"
+  distinguishable:
+    score: 4
+    summary: "方法节因果解释均标注 [论文原文] 或 [agent 解读],覆盖率约 90%。核心假设明确标为 agent 解读。"
+  navigable:
+    score: 4
+    summary: "KB 背景有详细谱系定位 (6 条路线对比表),有 confirmed 实体引用。frontmatter 字段齐全。速查卡片 5 字段均有实质内容。"
+  non-polluting:
+    score: 4
+    summary: "不创建新概念页。反向更新仅追加 key_papers 到已有页 (Emotion Control in TTS, Conditional Flow Matching, CosyVoice 2)。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter.models"
+    detail: "models 字段仅列了 CosyVoice 2。本文还以 F5-TTS 和 E2-TTS 作为主要测试模型,以及 EmoSphere++/EmoDubber/HED-TTS/EmoVoice/FleSpeech 作为 baseline,但这些在 vault 中无模型页。"
+    suggestion: "已有 E2 TTS 笔记但无模型页。F5-TTS 无模型页。当前不需创建,但可在 models 中添加笔记引用说明。不阻塞。"
+    action: none
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "点评.实验局限"
+    detail: "'8 名评估者的主观评估规模偏小' 和 '基线对比使用 demo 样本而非重现实验' 为 agent 观点,未标注来源。"
+    suggestion: "在点评节加 [agent 解读] 标注。属于 agent 分析,不需要论文出处。"
+    action: fix
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "局限性.5"
+    detail: "S-SIM 对比数字 (0.65 vs 0.73) 中 CosyVoice2 原始的 0.73 取自 Table 1 description-based 行,但该行对应的是 CosyVoice2 的情感控制 demo 而非纯 TTS 输出。"
+    suggestion: "澄清: CosyVoice2 在 Table 1 的 S-SIM 0.73 是 description-based 情感控制版本的结果,不是无情感控制的原始输出。两者对比的是不同控制方式下的 speaker preservation。"
+    action: fix
+
+conclusion: pass-with-fixes
+total_issues: 3
+high_issues: 0
+medium_issues: 0
+low_issues: 3

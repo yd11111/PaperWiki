@@ -148,7 +148,7 @@ EmoSteer-TTS 本身无需训练。但需要构造情感语音数据集来计算 
 2. **仅限 flow-matching TTS** [论文原文]: 方法依赖 DiT 层的残差连接结构,未验证对 AR 模型 (VALL-E, Seed-TTS) 或非 DiT backbone 的适用性
 3. **依赖 SER 模型质量** [agent 解读]: top-k token 搜索依赖 emotion2vec,如果 SER 本身对某些情感识别不准,steering vector 质量会受影响
 4. **仅覆盖 6 种基本情感** [agent 解读]: 未探索 subtle/complex emotions,虽然多情感组合理论上可以覆盖,但缺乏系统验证
-5. **Speaker similarity 低于原始 CosyVoice2** [Table 1]: CosyVoice2+EmoSteer S-SIM 0.65 vs 原始 CosyVoice2 0.73,说明 steering 会在一定程度上影响说话人保持
+5. **Speaker similarity 低于 description-based CosyVoice2** [Table 1]: CosyVoice2+EmoSteer S-SIM 0.65 vs description-based CosyVoice2 0.73 (注: 两者对比的是不同情感控制方式下的 speaker preservation,均非无控制的纯 TTS 输出),说明 activation steering 相比文本描述方式对说话人保持有更大影响
 
 ## 点评
 
@@ -158,7 +158,7 @@ EmoSteer-TTS 本身无需训练。但需要构造情感语音数据集来计算 
 
 **与 TTS-CtrlNet 的对比**: 两者都针对 flow-matching TTS,但方法论路线不同。TTS-CtrlNet 冻结模型+训练 ControlNet 旁挂 (ControlNet 范式);EmoSteer-TTS 不训练任何东西,直接操控激活 (steering 范式)。TTS-CtrlNet 支持帧级时变控制 (arousal-valence 条件),EmoSteer-TTS 支持全局连续强度控制和情感组合。两者在 ODE 步骤发现上也相矛盾 (TTS-CtrlNet: 仅早期步骤重要 vs EmoSteer-TTS: 全步骤重要),值得进一步研究。
 
-**实验局限**: 8 名评估者的主观评估规模偏小; 基线对比使用 demo 样本而非重现实验,可能引入偏差; 缺少与 TTS-CtrlNet 的直接对比。
+**实验局限** [agent 解读]: 8 名评估者的主观评估规模偏小; 基线对比使用 demo 样本而非重现实验 [§Experiment],可能引入偏差; 缺少与 TTS-CtrlNet 的直接对比。
 
 **对知识库的价值**: 为 [[Emotion Control in TTS]] 增加了一条全新路线 (activation steering),与现有的 label-based / description-based / AV-based / ControlNet / PCA 路线形成完整光谱。其 training-free 特性使其成为快速原型验证的理想工具。
 
@@ -174,5 +174,6 @@ EmoSteer-TTS 本身无需训练。但需要构造情感语音数据集来计算 
 
 5. **多 steering vector 加法组合**: 不同属性的 steering vectors 可以线性组合 (Eq. 11),实现细粒度多维控制。这比 ControlNet 范式更灵活 (ControlNet 每种控制需要单独训练一个分支)。
 
-> [!review] 审阅状态
-> 待审阅。审阅报告: [[_review/EmoSteer-TTS-review.yml]]
+> [!review] 审阅状态: pass-with-fixes (3 low issues, 0 high/medium)
+> 审阅报告: `_review/EmoSteer-TTS-review.yml`
+> 已修正: 点评节加 [agent 解读] 标注; 局限性第 5 条澄清 S-SIM 对比上下文。
