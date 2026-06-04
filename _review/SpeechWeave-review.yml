@@ -1,0 +1,42 @@
+paper: SpeechWeave
+reviewer: agent
+date: 2026-06-04
+conclusion: pass
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节按4个设计选择展开,每个有WHY+HOW;速查卡片'可借鉴'列出了具体可迁移trick(at-source normalization, keyphrase infusion)"
+  可信赖:
+    satisfied: true
+    notes: "数字claim标注覆盖率>90%;指标名(WER/MOS/SNR/TTR/MATTR)使用正确;速查指标含数字+数据集+来源"
+  可区分:
+    satisfied: true
+    notes: "[论文原文]/[agent 解读]标注一致,方法节每个WHY解释都有来源;推断性分析用'可能''这也说明'等限定词"
+  可定位:
+    satisfied: true
+    notes: "KB背景明确定位为'TTS训练数据生成管线论文',与已有TTS模型架构论文区分;创新判断有对比(数据工程层面vs模型架构层面)"
+  不污染:
+    satisfied: true
+    notes: "不需新建概念页(论文无新概念);反向更新仅追加key_papers,不改status"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "models字段为空。论文使用MeloTTS/StyleTTS 2/OpenVoice V2,但KB中均无对应模型页。空值符合规范(不创建虚链接)。"
+    suggestion: "保持现状,待这些模型有KB页时再补充。"
+
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "datasets字段为空。论文使用LibriSpeech/LibriTTS作为比较数据集,但KB中无对应页。"
+    suggestion: "保持现状。"
+
+stats:
+  total_issues: 2
+  high: 0
+  medium: 0
+  low: 2
+  claim_traceability: ">90%"
+  source_attribution: ">90%"

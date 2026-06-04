@@ -168,5 +168,13 @@ SpeechWeave 是一个四阶段管线 [§3, Fig 2]:
 3. **Secondary seeding 机制** [Appendix G]: 用 primary seed 生成 secondary seeds,在保持可复现性的同时允许循环内生成不同内容。这是一个通用的工程 trick。
 4. **跨语言说话人标准化**: 利用语言无关的 tone color converter,用单一语言的参考音频统一多语言合成数据的说话人身份。可用于构建多语言 TTS 训练集。
 
-> [!review] 审阅
-> 待审阅。
+> [!review] 审阅 (2026-06-04, auto)
+> **结论: pass** — 0 high, 0 medium, 2 low issues
+>
+> **可复述** ✓ 方法节按 4 个设计选择展开,每个有 WHY+HOW
+> **可信赖** ✓ 数字 claim 标注覆盖率 >90%,指标名正确
+> **可区分** ✓ [论文原文]/[agent 解读] 标注一致
+> **可定位** ✓ KB 背景明确定位为数据管线论文
+> **不污染** ✓ 反向更新仅追加 key_papers
+>
+> 详见 `_review/SpeechWeave-review.yml`
