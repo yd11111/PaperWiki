@@ -46,7 +46,7 @@ PURE Codec 关注的"训练不稳定"问题与 codebook collapse 相关但侧重
 ## 核心问题
 
 1. **RVQ 训练不稳定**: 传统 RVQ codec (如 DAC) 在 noisy/低质量数据上训练时,late-stage quantizer 常失败——SDR 可降至 -6.79,PESQ 降至 1.32 [Table II, URGENT]。根本原因是缺乏对各层应编码什么信息的归纳偏置 (inductive bias) [§I]。
-2. **层间冗余**: 没有强引导时,RVQ 各层的 codebook 可能编码重叠信息,降低压缩效率 [§I]。
+2. **层间冗余**: 没有强引导时,RVQ 各层的 codebook 可能编码重叠信息 ("poor decomposition of information across layers"),降低压缩效率 [§I, §II-B]。
 3. **核心假设**: Enhanced (降噪后) 语音信号的熵显著低于原始信号,因此可作为 RVQ 第一层的量化目标,实现从低熵到高熵的自然分解 [§II-C]。
 
 ## 方法: 它怎么 work
@@ -113,7 +113,7 @@ $$\mathcal{L}_\mathcal{G} = \lambda_{\text{enh}} \mathcal{L}_{\text{enh}} + \lam
 - L_vq: vector quantization loss (stop-gradient commitment loss) [Eq. 13]
 - L_adv: adversarial loss (GAN)
 
-超参数: λ_rec=1.0, λ_vq=0.25, λ_adv=1.0 [§IV-B]
+超参数: λ_rec=1.0, λ_vq=0.25, λ_adv=1.0 [§IV-B]; λ_enh 论文未明确给出
 
 Discriminator: multi-scale, multi-period, multi-band 设计,结合 FFT-based periodic modules [§IV-B, Eq. 16]
 
@@ -184,3 +184,19 @@ Discriminator: multi-scale, multi-period, multi-band 设计,结合 FFT-based per
 2. **VAE 预训练 + encoder 冻结**: 先用 VAE 学平滑 latent space,再引入量化时冻结 encoder。这个两阶段策略可用于任何 VQ-based 系统 (如 VQ-VAE, VQ-GAN),减轻量化引入的训练不稳定。
 3. **随机调度引导信号**: 以概率 p 随机切换是否使用外部引导,平衡正则化强度和灵活性。可用于任何 auxiliary loss 场景。
 4. **Perceptual entropy 作为 tokenizer 设计指标**: 对比增强前后的 PE 来量化"信号可压缩性",可作为 RVQ 层数和分解策略的设计依据。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4 个设计选择均有因果解释 + 来源标注 |
+> | 可信赖 | pass | 15 个数据点全标注出处,指标名正确 |
+> | 可区分 | pass | 论文原文/agent 解读标注覆盖率 ~95% |
+> | 可定位 | pass | RVQ 演进线谱系定位清晰,创新判断有对比基准 |
+> | 不污染 | pass-with-fixes | 反向更新计划合理,需确认 append/substantive 分类 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/PURE Codec-review.yml`

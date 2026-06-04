@@ -1,0 +1,50 @@
+review:
+  paper: "PURE Codec"
+  reviewer: auto
+  date: 2026-06-04
+  checklist_version: v1.1
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节包含 4 个关键设计选择的因果解释 (WHY),每个都有论文原文/agent 解读标注;速查卡片可借鉴字段列出 4 个具体可迁移 trick"
+  可信赖:
+    score: 8
+    verdict: pass
+    reason: "实验表格覆盖 15 个数据点全部有 [Table N] 标注;指标名正确;速查指标字段含具体数字+数据集+来源"
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "方法节中 [论文原文]/[agent 解读] 标注覆盖率 ~95%;实验发现中推断性分析均标注 [agent 解读]"
+  可定位:
+    score: 9
+    verdict: pass
+    reason: "KB 背景节提供清晰的 RVQ 演进线谱系定位,区分了'训练范式改进'vs'量化结构改进';创新判断有明确对比基准 (MSRVQ/CSRVQ/GVQ)"
+  不污染:
+    score: 8
+    verdict: pass-with-fixes
+    reason: "反向更新计划合理;frontmatter concepts/models 语义正确;但需确认 Codec Training Objectives 和 Variational Autoencoder for TTS 的反向更新分类"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "训练策略 > Stage 2 > 超参数"
+    detail: "Generator loss 公式包含 λ_enh 但文中未给出其数值。论文原文也未明确给出 λ_enh 的值 (只给了 λ_rec=1.0, λ_vq=0.25, λ_adv=1.0)。这是论文本身的缺失,但笔记应标注此缺失。"
+    suggestion: "在超参数行追加注释: λ_enh 论文未明确给出"
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "核心问题 > 2. 层间冗余"
+    detail: "引用 [§I] 但论文 Introduction 中对层间冗余的表述是隐含的 ('poor decomposition of information across layers', 'Redundancy: Without strong inductive guidance, codebooks may encode overlapping information'),笔记将这些概括为'层间冗余'是合理的但 [§I] 标注不够精确"
+    suggestion: "改为引用 [§I, §II-B] 或直接引用论文原文 'poor decomposition of information across layers'"
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但论文使用了 OWSM-v3.2, CommonVoice, URGENT, LibriSpeech 四个数据集。虽然这些在 vault 中没有实体页,但可列出名称供 MOC 统计"
+    suggestion: "可选: 不要求创建页面,保持为空也可接受"
+
+learning_signals: []
