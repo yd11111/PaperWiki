@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Speaker Identity Unlearning]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[Speaker Identity Unlearning]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/Speaker Embedding/Speaker Verification/CFG/Anti-spoofing/Voice Cloning Taxonomy key_papers, Anti-spoofing 安全设计节追加 Machine Unlearning 条目), MOC 更新 1 (零样本语音合成)
+- [review/auto] [[Speaker Identity Unlearning]] — pass, 0 issues
+- [lint/local] Speaker Identity Unlearning — 通过 (0 死链)
 - [kb/search] [[NonverbalTTS]] — 命中 3 页(confirmed): [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review)
 - [ingest/deep] [[NonverbalTTS]] — 精读, kb_sources=3, 新建 0, 追加 3 (CosyVoice key_papers, CosyVoice 2 key_papers+baseline, Emotion Control key_papers), MOC 更新 2 (TTS-总览, 零样本语音合成)
 - [review/auto] [[NonverbalTTS]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
