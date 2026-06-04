@@ -1,0 +1,53 @@
+paper: EME-TTS
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含完整的因果解释: variance features 的设计动机 (局部-全局偏差), EPE block 的必要性 (情感干扰重音感知), EA 的设计理由 (注意力调制而非直接操作韵律参数)。每个关键设计选择都回答了 WHY。"
+  trustworthy:
+    verdict: pass-with-fixes
+    notes: "数字型 claim 标注覆盖率约 85%。指标名使用正确 (MOS, NISQA, Emotion Accuracy)。速查卡片指标字段含具体数字+数据集+来源。"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释来源标注覆盖率约 90%。论文原文与 agent 解读有清晰的 [论文原文]/[agent 解读] 标注。推断性分析使用了适当限定词。"
+  locatable:
+    verdict: pass
+    notes: "KB 背景有具体谱系定位 (从 emotion embedding 到 UDDETTS 的演进线 + EME-TTS 的独特位置)。frontmatter 字段完整。速查卡片 5 字段均有实质内容。"
+  non_polluting:
+    verdict: pass
+    notes: "不需要新建概念页 (emphasis control 可内嵌到 Emotion Control in TTS 或 Prosody Modeling)。反向更新仅做追加 (key_papers)。"
+
+issues: []
+
+checklist:
+  # 可复述
+  method_has_causal_explanation: true
+  design_choices_answer_why: true
+  reusable_is_specific: true
+  # 可信赖
+  claim_annotation_coverage: 0.85
+  metric_names_correct: true
+  quickcard_metrics_specific: true
+  no_directional_error: true
+  # 可区分
+  causal_source_annotated: true
+  causal_source_coverage: 0.90
+  no_inference_as_assertion: true
+  strong_claims_supported: true
+  # 可定位
+  kb_background_has_lineage: true
+  kb_innovation_has_baseline: true
+  fields_present: true
+  fields_semantically_correct: true
+  quickcard_fields_substantive: true
+  # 不污染
+  new_concept_meets_criteria: N/A
+  dedup_check_done: N/A
+  reverse_update_no_error: true
+  reverse_update_correctly_classified: true
+
+conclusion: pass
+action: "proceed to reverse update"
