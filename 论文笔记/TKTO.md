@@ -153,8 +153,11 @@ TKTO 将 KTO 的 value function 从 sequence-level 分解到每个 token 位置:
 2. **KTO for TTS (pair-free PO)**: 89.5% 的 TTS 数据只有单侧偏好标签;KTO 的 binary feedback 机制天然适配这种数据分布,值得在更多 TTS 场景验证
 3. **Clamped exponential weighting**: wt = exp(µ · clamp(log-ratio, L, U)) 的 weight 设计,既保持梯度信号强度又防止极端权重,是实用的 token weighting trick
 
-> [!review] 审阅
-> 待审阅。
+> [!review] 审阅 (auto, 2026-06-04, pass-with-fixes)
+> **结论**: pass-with-fixes (2 low issues, 不阻塞反向更新)
+> - (low) 速查一句话的 39%/54% 对应 female speaker,详细指标行报告 male speaker 43%/52%,两组正确但对应不同 speaker
+> - (low) frontmatter tasks 为空,polyphonic disambiguation 任务无对应 KB 页 (合理)
+> 详见 `_review/TKTO-review.yml`
 
 ---
 

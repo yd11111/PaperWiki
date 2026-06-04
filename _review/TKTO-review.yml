@@ -1,0 +1,37 @@
+paper: TKTO
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含清晰的 WHY 解释: 为什么用 KTO 而非 DPO, contrastive LLM construction 的原理, clamping 的作用。速查可借鉴字段具体可迁移。"
+  可信赖:
+    satisfied: true
+    notes: "所有数字 claim 有 [Table N]/[Fig N]/[§X.X] 标注,覆盖率 >90%。指标名 (CER/Acc/NMOS/ABX) 使用正确。无方向性错误。"
+  可区分:
+    satisfied: true
+    notes: "[论文原文] 和 [agent 解读] 标注清晰,覆盖方法节全部 WHY 解释。无推断写成断言的情况。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景五路线谱系定位清晰。创新判断有明确对比 (vs FPO/DiffRO/KTO)。frontmatter 挂接合理。"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页 (KTO 为 NLP 概念,在 TTS 中尚无足够多篇引用)。反向更新仅追加 key_papers 和贡献描述。"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片/一句话"
+    detail: "一句话中 '39%/54%' 来自论文 abstract (对应 female speaker),而详细指标行报告的是 male speaker 数据 (43%/52%),两组数字均正确但对应不同 speaker"
+    suggestion: "可在一句话中标注 (female) 或统一使用 male 数据"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter/tasks"
+    detail: "tasks 字段为空;论文评估的是 polyphonic disambiguation 任务,但 KB 中无对应任务页"
+    suggestion: "保持为空是合理的,该任务不满足独立成页准入规则"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好。方法机制解释清晰,因果链完整,KB 背景的五路线谱系定位在已有 FPO/DiffRO 等笔记基础上准确定位了 TKTO 的位置。2 个 low issue 不阻塞反向更新。"
