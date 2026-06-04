@@ -1,0 +1,115 @@
+paper: "Speaker Identity Unlearning"
+title: "Do Not Mimic My Voice: Speaker Identity Unlearning for Zero-Shot Text-to-Speech"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    verdict: pass
+    rationale: >
+      方法节详细解释了 WHY(ZS-TTS 的 in-context learning 使传统 MU 无效)和 HOW(TGU 利用无条件生成作为随机目标),
+      并通过 SGU→TGU 的演进清晰展示设计逻辑。3 个月后回来能理解为什么 work。
+  可信赖:
+    verdict: pass
+    rationale: >
+      所有关键数字(SIM/WER/spk-ZRF/CMOS/SMOS)均标注了 [Table N] 出处,
+      指标名使用正确(WER/SIM/SMOS/CMOS),无方向性错误。
+  可区分:
+    verdict: pass-with-note
+    rationale: >
+      方法节中 WHY 解释较好地标注了 [论文原文] 和 [agent 解读],
+      但"TGU 为什么比 SGU 好"段落标注为 [agent 解读],实际论文 §4.1-4.2 有部分原文解释,
+      可能低估了论文原文的贡献。不影响可信性,属于保守标注。
+  可定位:
+    verdict: pass
+    rationale: >
+      KB 背景节有具体谱系定位(与 SafeSpeech/TraceableSpeech 的对比),
+      点评节明确建立了"三层防线"框架。frontmatter 完整。
+  不污染:
+    verdict: pass
+    rationale: >
+      本文开辟新方向(machine unlearning for ZS-TTS),KB 中尚无对应概念页。
+      反向更新限于追加 key_papers,不涉及实质性修改。无新建概念页需求
+      (machine unlearning 目前仅此一篇,不满足概念页准入规则)。
+
+checks:
+  可复述:
+    - id: mechanism-not-summary
+      result: pass
+      detail: "方法节包含因果链: ZS-TTS in-context learning → 传统 MU 失败 → SGU 拼接问题 → TGU 利用无条件生成解决"
+    - id: design-choice-why
+      result: pass
+      detail: "每个设计选择(SGU vs TGU, λ=0.2, 无条件生成)都有 WHY 解释"
+    - id: reusable-specific
+      result: pass
+      detail: "可借鉴字段给出了具体可迁移的 trick(无条件输出作遗忘目标, spk-ZRF 指标框架)"
+
+  可信赖:
+    - id: claim-citation-coverage
+      result: pass
+      detail: "数字型 claim 标注覆盖率 >90%,所有实验数据标注 [Table N]"
+    - id: metric-names-correct
+      result: pass
+      detail: "WER/SIM/CMOS/SMOS/spk-ZRF 使用正确,方向标注正确(↓/↑)"
+    - id: quickcard-metrics
+      result: pass
+      detail: "速查指标字段含具体数字 + 数据集名 + 出处标注"
+    - id: no-directional-error
+      result: pass
+      detail: "无方向性错误"
+
+  可区分:
+    - id: source-annotation
+      result: pass
+      detail: "因果解释标注了 [论文原文] 和 [agent 解读],覆盖率 ~85%"
+    - id: source-annotation-coverage
+      result: pass
+      detail: "方法节中的 WHY 解释大部分有标来源"
+    - id: no-assertion-without-qualifier
+      result: pass
+      detail: "agent 解读使用了限定词"
+    - id: strong-claim-supported
+      result: pass
+      detail: "无无支撑强断言"
+
+  可定位:
+    - id: kb-lineage
+      result: pass
+      detail: "KB 背景有具体谱系(SafeSpeech/TraceableSpeech 对比, Anti-spoofing 三条路线)"
+    - id: kb-innovation
+      result: pass
+      detail: "创新判断有对比基准(vs SafeSpeech 数据端 vs 本文模型端)"
+    - id: frontmatter-present
+      result: pass
+      detail: "所有字段存在且非空"
+    - id: frontmatter-semantically-correct
+      result: pass-with-note
+      note: "models 为空,因本文不提出新模型也不以特定 TTS 模型为研究对象(VoiceBox 是实验平台而非对比 baseline)。datasets 为空,LibriHeavy/LibriSpeech 是通用数据集无独立实体页。合理。"
+    - id: quickcard-complete
+      result: pass
+      detail: "5 字段均有实质内容"
+
+  不污染:
+    - id: concept-admission
+      result: pass
+      detail: "未新建概念页(machine unlearning 仅此一篇,不满足准入规则)"
+    - id: dedup-check
+      result: pass
+      detail: "不涉及新建,无需去重"
+    - id: backlink-no-factual-error
+      result: pass
+      detail: "反向更新仅追加 key_papers,内容无 factual error"
+    - id: backlink-classification
+      result: pass
+      detail: "追加 key_papers 为 append 操作,不改 status"
+
+conclusion: pass
+issue_count: 0
+high_issues: 0
+medium_issues: 0
+low_issues: 0
+summary: >
+  笔记质量优秀。方法解释清晰(传统 MU 失败原因 → SGU 局限 → TGU 设计),
+  因果链完整,数字标注充分,KB 背景定位准确(与 SafeSpeech/TraceableSpeech 构成三层防线),
+  局限性分析诚实(恢复攻击/架构限制)。无需修正,可直接进行反向更新。

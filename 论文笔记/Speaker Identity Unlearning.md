@@ -175,4 +175,8 @@ $$L_{\text{CFM-forget}}(\theta^-) = \mathbb{E}_{t,q(x_1),p_t(x_f|x_1)} \|m \odot
 
 ---
 
+> [!review] 审阅结论: pass (2026-06-04)
+> checklist v1.1 | 0 issues (0 high / 0 medium / 0 low)
+> 方法解释清晰(传统 MU 失败原因 → SGU 局限 → TGU 设计),因果链完整,数字标注充分,KB 背景定位准确(与 SafeSpeech/TraceableSpeech 构成三层防线),局限性分析诚实(恢复攻击/架构限制)。详见 `_review/Speaker Identity Unlearning-review.yml`。
+
 检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Speaker Verification]][待确认], [[Classifier-Free Guidance]][待确认], [[Anti-spoofing and Deepfake Detection]][待确认], [[Voice Cloning Taxonomy]][待确认] | 过滤: 无 | 未命中但可能相关: [[Masked Generative Modeling]]
