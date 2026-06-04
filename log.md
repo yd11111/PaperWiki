@@ -11,6 +11,7 @@
 - [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(80),跳过追加
 - [skip/update] [[Prosody Modeling]] — key_papers 已达上限(52),跳过追加
 - [lint/local] DisCo-Speech — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 215 — 建议抽空审核
 - [kb/search] [[RRPO]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[RRPO]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页正文 (key_papers 超限跳过)
 - [review/auto] [[RRPO]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
