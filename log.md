@@ -24,6 +24,7 @@
 - [skip/update] [[Prosody Modeling]] — key_papers 已达上限(54),页面较长,跳过追加
 - [skip/update] [[Speech Language Model]] — key_papers 已达上限(27),消费者角色,跳过追加
 - [lint/local] Phonological Tokenizer — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 215 — 建议抽空审核
 - [kb/search] [[T-Mimi]] — 命中 6 页(取 6): [[Multi-scale STFT Discriminator]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
 - [ingest/deep] [[T-Mimi]] — 精读, kb_sources=6, 新建 0, 追加 1 (Neural Audio Compression key_papers)
 - [review/auto] [[T-Mimi]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
