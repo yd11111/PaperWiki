@@ -1,6 +1,19 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[TruS]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[TruS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Speaker Verification key_papers, Voice Cloning Taxonomy key_papers)
+- [lint/local] TruS — 通过
+- [kb/search] [[InstructAudio]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Singing Voice Synthesis]](pending-review), [[Diffusion-based TTS]](pending-review)
+- [ingest/deep] [[InstructAudio]] — 精读, kb_sources=6, 新建 0, 追加 4 (Instruction-Guided Speech Synthesis 正文, NL Description for TTS 正文, CosyVoice 2 baseline引用, SVS key_papers)
+- [review/auto] [[InstructAudio]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [review/kb] [[InstructAudio]] — pass, 0 issues
+- [skip/update] [[Conditional Flow Matching]] — key_papers 已达上限(67),跳过追加
+- [skip/update] [[Diffusion-based TTS]] — key_papers 已达上限(20),跳过追加
+- [skip/update] [[Instruction-Guided Speech Synthesis]] — key_papers 已达上限(26),改追加到正文
+- [skip/update] [[Natural Language Description for TTS]] — key_papers 已达上限(31),改追加到正文
+- [skip/update] [[模型库/CosyVoice 2|CosyVoice 2]] — key_papers 已达上限(23),改追加到正文
+- [lint/local] InstructAudio — 通过
 - [kb/search] [[SonoEdit]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Phoneme Representation]](pending-review), [[Text-to-Speech Pipeline]](pending-review)
 - [ingest/deep] [[SonoEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (Phoneme Representation key_papers+正文)
 - [review/auto] [[SonoEdit]] — pass, 3 issues (0 high, 1 medium, 2 low)
