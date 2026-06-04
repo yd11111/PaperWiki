@@ -39,7 +39,7 @@ updated: 2026-06-04
 > [!summary] 速查
 > - **一句话**: 将 Mimi codec 的卷积 decoder 替换为纯 Transformer decoder (受 TS3-Codec 启发),在手机端将 TTS 解码延迟从 42.1ms 降至 4.4ms (9.6x),同时通过选择性量化将存储从 163.2MB 降至 68.7MB [§1, Table 3]
 > - **路线**: Mimi encoder (frozen) → 12.5Hz codec features → 12-layer Transformer decoder (8 原始 + 4 新增, fixed-window streaming self-attention) → 2 Linear layers (upsampling) → 24kHz waveform [§3.1, Fig 1]
-> - **指标**: CMOS +2.32% vs Mimi-FT (无显著差异) [Table 1]; QAT 后 PESQ 3.16 vs 非量化 3.21, STOI 0.98, SI-SDR 20.28; 存储 68.7MB (vs 163.2MB); 延迟 4.4ms/80ms-chunk (vs 42.1ms) [Table 2, 3]
+> - **指标**: CMOS winrate +2.32% vs Mimi-FT (95% CI 跨 0, 无显著差异) [Table 1]; QAT 后 PESQ 3.16 vs 非量化 3.21, STOI 0.98 [§4.2.2]; 存储 68.7MB (vs 163.2MB); 延迟 4.4ms/80ms-chunk (vs 42.1ms) [Table 2, 3]
 > - **可借鉴**: (1) Transformer + Linear 替代 de-convolution 做波形上采样,对移动端推理框架 (XNNPACK) 更友好; (2) "越靠近波形的层越不能量化"——选择性混合精度 QAT 策略; (3) 10% silence padding 数据增强消除静音段噪声
 > - **局限**: 仅替换 decoder,encoder 未改动; 无公开代码; 训练数据 5M 小时为内部数据; 仅在 Samsung Galaxy S22 上测试; 人类评估仅 CMOS (无 MUSHRA/MOS); QAT 后 PESQ 仍有 0.05 差距
 
@@ -124,9 +124,9 @@ T-Mimi 仅修改 Mimi 的 decoder 部分,encoder 保持不变 [§3.1, Fig 1]:
 
 | 指标 | 本文 | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| CMOS | +2.32% (vs Mimi-FT) | 0 (Mimi-FT-32-bit) | 100 samples, 200 pairs, 10 raters | [Table 1] |
-| PESQ (32-bit) | 2.95 (12L) | 2.61 (8L) | 100 random speech samples | [Table 4] |
-| PESQ (QAT, final) | 3.16 | 3.21 (non-quantized) | 100 random speech samples | [§4.2.2] |
+| CMOS (winrate) | +2.32% (vs Mimi-FT) | 0 (Mimi-FT-32-bit) | 100 samples, 200 pairs, 10 raters | [Table 1] |
+| PESQ (32-bit, 90k steps) | 2.95 (12L) | 2.61 (8L) | 100 random speech samples | [Table 4] |
+| PESQ (QAT, full training) | 3.16 | 3.21 (non-quantized, full training) | 100 random speech samples | [§4.2.2] |
 | STOI (32-bit) | 0.98 | 0.96 (8L) | 100 random speech samples | [Table 4] |
 | SI-SDR (32-bit) | 19.37 | 16.10 (8L) | 100 random speech samples | [Table 4] |
 | Latency (per 80ms chunk) | 4.4ms | 42.1ms (Mimi CNN, win=5) | Samsung Galaxy S22 | [Table 3] |
@@ -168,6 +168,22 @@ T-Mimi 是一项目标明确、执行干净的工程改进工作。它的核心�
 3. **Silence padding 数据增强**: 对 10% 样本前后拼接纯静音,解决静音段噪声问题,简单有效且通用
 4. **两阶段训练 (full loss → feature matching only)**: 先用全部损失训练到收敛,再用 feature matching 微调提升感知质量,可用于其他 codec/vocoder 训练
 5. **预训练层复用**: 将 Mimi 预训练的 8 层 Transformer 权重直接用于 T-Mimi 的前 8 层,只随机初始化新增的 4 层,降低训练成本
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 机制理解深入,因果解释到位 |
+> | 可信赖 | pass | CMOS winrate 描述已修正,标注覆盖率约 90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致 |
+> | 可定位 | pass | 谱系清晰: Mimi→TS3-Codec→T-Mimi,与 Moshi 笔记交叉关联 |
+> | 不污染 | pass | 反向更新为追加操作,风险低 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/T-Mimi-review.yml`
 
 ---
 

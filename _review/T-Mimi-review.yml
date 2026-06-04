@@ -1,0 +1,51 @@
+review:
+  paper: "T-Mimi"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass-with-fixes
+
+  principles:
+    可复述:
+      score: 9
+      status: pass
+      notes: "方法节包含清晰的因果解释(WHY),每个设计选择都回答了'为什么选这个'; 速查卡片可借鉴字段具体可迁移; 量化敏感度的物理解释合理"
+    可信赖:
+      score: 8
+      status: pass
+      notes: "数字型 claim 标注覆盖率约 90%; 指标名使用正确; CMOS 描述存在轻微歧义(paper 原文列标题是 Average winrate 而非传统 CMOS 分数)"
+    可区分:
+      score: 9
+      status: pass
+      notes: "[论文原文]/[agent 解读] 标注一致且覆盖率高; 无把推断写成断言的情况"
+    可定位:
+      score: 9
+      status: pass
+      notes: "KB 背景谱系定位清晰(Mimi→TS3-Codec→T-Mimi); 与 Moshi 笔记的交叉引用有价值; frontmatter concepts/models 合理"
+    不污染:
+      score: 9
+      status: pass
+      notes: "反向更新预计为追加操作,无 factual error 或 overclaim 风险"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "速查卡片 + 实验表"
+      detail: "CMOS 描述为 '+2.32%' 但论文 Table 1 列标题是 'Average winrate' 而非传统 CMOS 分值(-3 to +3 scale)。笔记中直接称 'CMOS +2.32%' 可能让读者误以为是传统 CMOS 差值"
+      suggestion: "改为 'CMOS 评估: winrate +2.32% (95% CI -0.70%~5.34%, 无显著差异)' 或注明这是 winrate 而非 CMOS 分差"
+    - id: 2
+      severity: low
+      type: traceability-gap
+      location: "速查卡片指标字段"
+      detail: "SI-SDR 20.28 未标注出处,该数字在论文 Table 2 (50k 步模型) 中未出现(Table 2 中 T1-10 8bit 的 SI-SDR 是 19.62);可能来自最终全步数训练模型但无明确 table 支撑"
+      suggestion: "删除 SI-SDR 20.28 或标注 '来自最终全步数 QAT 模型(文中描述,无独立表格)'"
+    - id: 3
+      severity: low
+      type: traceability-gap
+      location: "实验节 + 方法节"
+      detail: "Table 4 中 12 层模型 PESQ 2.95 是 90k 步的结果,而最终模型 PESQ 3.21 (§4.2.2 文中描述) 来自完整训练。两个数字在笔记中出现但未明确标注训练步数差异"
+      suggestion: "在实验表中注明 Table 4 数据为 90k 步模型选择结果,最终全精度 PESQ 3.21 来自完整训练"
+
+  learning_signals: []
+
+  summary: "笔记质量整体优秀。机制理解深入(Transformer 替代 de-convolution 的原因分析、量化敏感度的物理解释都很到位); 来源标注覆盖率高; KB 背景与 Moshi 笔记的交叉关联有价值。主要问题是 CMOS 指标描述可能引起歧义。建议修正后可安全进行反向更新。"
