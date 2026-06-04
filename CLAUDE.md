@@ -20,7 +20,7 @@
 ## 关键约束 (不可违反)
 
 1. **不得自动升级笔记层级** — 只有用户明确说"精读/复现/升级"才能改 tier
-2. **AI 生成内容不得进入可信层** — 新建实体页 status=pending-review,笔记 status=draft,只有用户确认后才能变 confirmed/reviewed
+2. **自动化质量门** — AI 生成内容通过 reviewer + lint 后自动进入可信层; 人的纠正是校准信号,不是必经审批
 3. **一篇论文 = 一个文件** — 永远在 `论文笔记/` 下,DailyPapers/ 只是索引(title+link)
 4. **失败不阻断** — KB 检索无结果就标注继续,反向更新失败就跳过记 log,不要中断流程
 5. **所有网络访问用 Playwright** — WebFetch/WebSearch 不稳定,必须用 mcp__playwright 工具

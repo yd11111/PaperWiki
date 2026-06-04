@@ -20,7 +20,7 @@
 
 **status 行为**: "保持当前 status 不变" — confirmed 的页面 append 后仍为 confirmed，pending-review 的页面 append 后仍为 pending-review。
 
-### Substantive Update（→ pending-review）
+### Substantive Update（→ 触发自动审阅）
 
 | 操作 | 示例 |
 |------|------|
@@ -30,7 +30,38 @@
 
 **判定标准**: 修改已有 prose 或关系型 frontmatter。
 
-**status 行为**: 无论当前 status 是什么，实质性修改后 status → `pending-review`。
+**status 行为**: 实质性修改后 → KB 审阅(自动 subagent) → 审阅通过则 status 保持/恢复 confirmed; 审阅不通过则 status → `pending-review`。
+
+---
+
+## 可信层与自动晋升
+
+### 自动晋升规则
+
+AI 生成内容通过自动化质量门后自动进入可信层。人的纠正是系统校准信号,不是必经审批。
+
+| 操作 | 质量门 | 通过后 status |
+|------|--------|---------------|
+| 新建实体页 | KB 审阅 pass + lint pass | confirmed |
+| Append 更新 | 不改 status(已有规则) | 保持不变 |
+| Substantive 更新 | KB 审阅 pass | confirmed |
+| Substantive 更新 | KB 审阅 block | pending-review |
+
+### status 含义
+
+| status | 含义 |
+|--------|------|
+| `confirmed` | 通过自动质量门或人工确认,参与 KB 检索 |
+| `pending-review` | 自动审阅未通过,需修正; KB 检索可参考但标注 `[待确认]` |
+| `reviewed` | 人工审核确认(仅笔记,最高可信) |
+| `draft` | 初始草稿(仅笔记) |
+
+### 人校准机制
+
+人手动修改 confirmed 页面时,修改本身是最高优先级的学习信号:
+- 系统记录 diff(什么被改了)
+- 闭环(L1)分析时作为优先输入
+- 不影响 status(人修改后仍为 confirmed)
 
 ---
 

@@ -98,12 +98,10 @@ L1 frontmatter schema / L2 年份一致 / L3 MOC 重复 / L4 概念去重 / L5 M
 
 ## 3. 剩余问题 (5 个)
 
-### P1. 自动晋升缺失
+### P1. 自动晋升 ✅ 原则已修改,待实现执行逻辑
 
-**现状**: 实体页 pending-review 永远等人 batch review。71 个积压。
-**根因**: AGENTS.md 原则 1 要求"AI 生成内容未经人类确认前不得进入可信层"。
-**方案**: 信任机制转型 — reviewer pass + lint pass → 自动 confirmed。人从"必经审批者"变为"偶尔介入的校准者"。
-**改动**: AGENTS.md 原则 1 + paperwiki-reader 反向更新逻辑。
+**现状**: AGENTS.md 原则 1 已改为"通过自动化质量门后自动进入可信层"。docs/rules/kb.md 已定义自动晋升规则。但 paperwiki-reader skill 尚未实现自动晋升执行逻辑。
+**剩余改动**: paperwiki-reader skill 反向更新步骤中,KB 审阅 pass 后自动将新建/修改的实体页 status 设为 confirmed。
 
 ### P2. 人工检查项未脚本化
 
