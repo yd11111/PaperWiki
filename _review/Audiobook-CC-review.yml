@@ -1,0 +1,127 @@
+paper: "Audiobook-CC"
+reviewer: agent
+date: 2026-06-04
+checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: pass
+    notes: "方法节包含清晰的 WHY 解释(解耦原因、上下文设计动机、自蒸馏目的);关键设计选择有因果论述;速查卡片可借鉴字段给出具体策略"
+  可信赖:
+    score: pass
+    notes: "实验数据标注充分(Table 1-4 均有出处);指标名使用正确(MOS/SS/PER/F1);速查卡片指标字段有具体数字+数据集+来源"
+  可区分:
+    score: pass
+    notes: "方法节 WHY 解释均标注[论文原文]或[agent 解读];无未标注的推断性断言;覆盖率>80%"
+  可定位:
+    score: pass
+    notes: "KB 背景有具体谱系定位(CosyVoice 2 + LLM-based TTS 家族);创新判断有对比基准(AudioStory, MultiActor-Audiobook 等)"
+  不污染:
+    score: pass
+    notes: "未新建概念页;反向更新为追加 key_papers(不改 status)"
+
+checks:
+  - id: mechanism-not-summary
+    principle: 可复述
+    result: pass
+    detail: "方法节围绕4个关键设计选择展开WHY/HOW,非摘要复述"
+
+  - id: design-choice-why
+    principle: 可复述
+    result: pass
+    detail: "4个设计选择均有'为什么'的回答"
+
+  - id: reusability-specific
+    principle: 可复述
+    result: pass
+    detail: "可借鉴字段给出3个具体trick(解耦策略+指令离散化+自蒸馏)"
+
+  - id: claim-traceability
+    principle: 可信赖
+    result: pass
+    detail: "数字型claim标注覆盖率约90%,几乎所有数字都有[Table N]或[§X.X]"
+
+  - id: metric-names
+    principle: 可信赖
+    result: pass
+    detail: "S-MOS/M-MOS/SS/PER/F1 使用正确"
+
+  - id: quickref-metrics
+    principle: 可信赖
+    result: pass
+    detail: "指标字段包含M-MOS 4.25 + 对比基准 + 数据集名"
+
+  - id: no-direction-error
+    principle: 可信赖
+    result: pass
+    detail: "无方向性错误"
+
+  - id: source-annotation
+    principle: 可区分
+    result: pass
+    detail: "方法节所有WHY解释均标注了[论文原文]或[agent 解读]"
+
+  - id: source-coverage
+    principle: 可区分
+    result: pass
+    detail: "覆盖率>80%"
+
+  - id: no-inference-as-assertion
+    principle: 可区分
+    result: pass
+    detail: "推断性分析均标注[agent 解读]"
+
+  - id: strong-claims
+    principle: 可区分
+    result: pass-with-note
+    detail: "点评节提到论文claim 'dramatically improves'缺量化支撑,但笔记自身未传播此overclaim"
+
+  - id: kb-lineage
+    principle: 可定位
+    result: pass
+    detail: "谱系定位清晰: LLM-based TTS → CosyVoice 2 → 有声书专用扩展"
+
+  - id: kb-innovation-baseline
+    principle: 可定位
+    result: pass
+    detail: "创新判断有对比: vs AudioStory, MultiActor-Audiobook, TACA-TTS等"
+
+  - id: frontmatter-present
+    principle: 可定位
+    result: pass
+    detail: "所有字段存在且非空"
+
+  - id: frontmatter-semantics
+    principle: 可定位
+    result: pass
+    detail: "models列CosyVoice 2(base)+BigVGAN(vocoder);concepts列核心概念;无后续系统误列"
+
+  - id: quickref-complete
+    principle: 可定位
+    result: pass
+    detail: "速查卡片5字段均有实质内容"
+
+  - id: concept-admission
+    principle: 不污染
+    result: pass
+    detail: "未新建概念页"
+
+  - id: concept-dedup
+    principle: 不污染
+    result: pass
+    detail: "N/A - 无新建"
+
+  - id: reverse-update-accuracy
+    principle: 不污染
+    result: pass
+    detail: "反向更新仅追加key_papers,不改已有定义"
+
+  - id: reverse-update-classification
+    principle: 不污染
+    result: pass
+    detail: "追加操作正确分类,不改status"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。方法节有充分的因果解释和来源标注,实验数据溯源完整,KB背景定位准确。无high/medium issue。可直接进行反向更新。"
