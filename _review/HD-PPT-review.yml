@@ -1,0 +1,70 @@
+paper: HD-PPT
+reviewer: agent-auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: pass
+    notes: >
+      方法节包含清晰的因果解释(WHY: hierarchical mismatch 问题定义;
+      WHY: ASR+CLAP 双监督的动机; WHY: 条件依赖 vs 并行的实验证据)。
+      三个关键设计选择均回答了"为什么选这个"。
+      速查"可借鉴"字段给出了两个具体可迁移 trick。
+
+  可信赖:
+    score: pass
+    notes: >
+      数字型 claim 标注覆盖率高(Table 1/2/3, §1, §2.1, §2.2, §3.1, §3.2.2, §3.2.3 均有引用)。
+      指标名使用正确(MOS-N/MOS-S/DNSMOS/EMO-SIM/WER 无混淆)。
+      速查"指标"含具体数字+数据集名+来源标注。
+      无方向性错误。
+
+  可区分:
+    score: pass
+    notes: >
+      因果解释来源标注覆盖率≥80%: 每个 WHY 解释标注了 [论文原文] 或 [agent 解读]。
+      content codebook 大小分析、auxiliary projection 动机、codec 冻结推测等
+      均标了 [agent 解读]; 论文直接引述均标了 [论文原文]。
+
+  可定位:
+    score: pass
+    notes: >
+      KB 背景有具体谱系定位(CosyVoice 2、NaturalSpeech 3、Seed-TTS 等模型名)。
+      创新判断有对比基准(vs CosyVoice 2 直接预测, vs EmoVoice-PP)。
+      frontmatter 字段齐全且语义正确: models 列了 CosyVoice/CosyVoice 2/Whisper(本文 baseline 和工具模型);
+      concepts 列了 9 个本文涉及的概念。
+      速查 5 字段均有实质内容。
+
+  不污染:
+    score: pass
+    notes: >
+      本篇未新建概念页(所有引用的概念已存在)。
+      反向更新将仅做 key_papers 追加(不改 status)。
+      无 factual-error 或 overclaim 风险。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.models
+    detail: >
+      models 列了 CosyVoice (v1),但论文主要对比的是 CosyVoice 2。
+      CosyVoice v1 确实也是 baseline 之一(Table 1),所以保留是合理的。
+    suggestion: 无需修改,仅标注。
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 训练策略
+    detail: >
+      "Codec 训练完成后冻结,再训练 LLM 和 decoder" 推断标了 [agent 解读],
+      但论文确实没有明确说明两阶段之间 codec 是否 frozen。
+    suggestion: 保持现有标注即可,已正确区分。
+
+conclusion: pass
+summary: >
+  笔记质量整体良好。五个原则均通过: 因果解释充分(可复述),
+  数字标注覆盖率高(可信赖),来源区分明确(可区分),
+  KB 谱系定位清晰(可定位),无污染风险(不污染)。
+  仅有 2 个 low severity issue,不阻塞反向更新。

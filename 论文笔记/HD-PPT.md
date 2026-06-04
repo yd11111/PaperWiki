@@ -192,8 +192,9 @@ HD-PPT 提出了一个有吸引力的结构化假设: 将 speech token 空间显
 
 ---
 
-> [!review] 审阅状态
-> 待审阅。详见 [[_review/HD-PPT-review.yml]]
+> [!review] 审阅结论: pass (2026-06-04)
+> 五个原则均通过。2 个 low issues (template-compliance + traceability-gap),不阻塞。
+> 详见 `_review/HD-PPT-review.yml`
 
 ---
 
