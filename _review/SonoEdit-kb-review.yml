@@ -1,0 +1,35 @@
+kb_review:
+  paper: "SonoEdit"
+  note_path: "论文笔记/SonoEdit.md"
+  date: 2026-06-04
+  reviewer: auto
+
+change_plan:
+  - target: "概念库/Phoneme Representation.md"
+    action: append
+    content: "追加 key_papers: SonoEdit + 在 LLM-TTS 时代小节末尾追加一行关于知识编辑方式修正发音"
+    risk: low
+    rationale: "key_papers 仅 5 条(限 12), SonoEdit 直接解决 G2P/pronunciation 问题; append-only 不改 status"
+
+  - target: "概念库/LLM-based TTS.md"
+    action: skip
+    content: "key_papers 已 103 条, 远超 12 条上限"
+    risk: n/a
+
+  - target: "概念库/Codec Language Model.md"
+    action: skip
+    content: "key_papers 已 44 条, 远超 12 条上限"
+    risk: n/a
+
+  - target: "概念库/Speaker Embedding.md"
+    action: skip
+    content: "key_papers 已 69 条, 远超 12 条上限"
+    risk: n/a
+
+  - target: "概念库/Speech Tokenizer.md"
+    action: skip
+    content: "key_papers 已 80 条, 远超 12 条上限"
+    risk: n/a
+
+conclusion: pass
+issue_summary: "0 issues. 仅 1 个 append-type 更新(Phoneme Representation), 4 个 skip(key_papers 超限)。"
