@@ -1,0 +1,59 @@
+paper: "Flamed-TTS"
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 3
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: 可信赖
+    location: "实验表格 SIM-R (5s) OZSpeech 列"
+    detail: "原始草稿将 OZSpeech SIM-R 标为 '--',实际论文 Table 1 显示为 0.59"
+    suggestion: "已修正为 0.59"
+    fixed: true
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空列表,论文使用 LibriTTS 训练 + LibriSpeech test-clean 评估,但 vault 中无对应数据集页"
+    suggestion: "可接受 -- vault 中无 LibriTTS/LibriSpeech 数据集页,暂不新建"
+    fixed: false
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "训练策略节 - 数据和 codec 信息"
+    detail: "FACodec 102M 参数数字来自 Table 2 脚注,但笔记中标注为 [§Method]"
+    suggestion: "可标注为 [Table 2] 以更精确"
+    fixed: false
+
+checklist_results:
+  可复述:
+    mechanism_not_summary: pass
+    design_choice_why: pass
+    reusability_specific: pass
+  可信赖:
+    claim_traceability: pass  # >= 80% 覆盖
+    metric_name_correct: pass
+    quick_card_metrics: pass
+    no_direction_error: pass
+  可区分:
+    source_tagging: pass
+    source_coverage: pass  # 方法节 WHY 全部标注
+    no_assertion_from_inference: pass
+    strong_claim_supported: pass
+  可定位:
+    kb_lineage: pass  # OZSpeech 同组后续、CFM 演进谱系
+    kb_innovation_baseline: pass
+    frontmatter_present: pass
+    frontmatter_semantic: pass
+    quick_card_complete: pass
+  不污染:
+    concept_admission: pending  # 反向更新后检查
+    dedup_check: pending
+    no_factual_error: pass
+    update_classification: pending

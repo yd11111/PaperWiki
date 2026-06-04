@@ -126,7 +126,7 @@ p(q_{1:6} | P; p; psi) = p(q1 | P; p1; F_psi^1) * prod_{j=2}^{6} p(qj | q_{j-1};
 | WER (5s) | **0.04** | 0.32 | 0.05 | 0.19 | 0.09 | 0.11 | LibriSpeech test-clean | [Table 1] |
 | UTMOS (5s) | 3.87 | 3.71 | 3.15 | 3.72 | 2.33 | **4.33** | LibriSpeech test-clean | [Table 1] |
 | SIM-O (5s) | 0.51 | 0.57 | 0.39 | 0.46 | 0.35 | **0.61** | LibriSpeech test-clean | [Table 1] |
-| SIM-R (5s) | 0.59 | 0.48 | -- | 0.55 | 0.44 | **0.74** | LibriSpeech test-clean | [Table 1] |
+| SIM-R (5s) | 0.59 | 0.48 | 0.59 | 0.55 | 0.44 | **0.74** | LibriSpeech test-clean | [Table 1] |
 | RTF (3s, NFE=32) | **0.028** | 0.26 | 0.013 | 0.86 | 1.66 | 1.06 | A100 | [Table 2] |
 | #Params (trainable) | **143M** | 336M | 145M | 594M | 378M | 507M | -- | [Table 2] |
 | F0_ACC (5s) | **0.92** | 0.83 | 0.83 | 0.79 | 0.84 | 0.91 | LibriSpeech test-clean | [Table 1] |
@@ -176,3 +176,10 @@ Small (76M) vs Base (143M): WER 和 SIM 几乎不变,UTMOS 下降 4.5-6%,说明 
 3. **Code folding**: 多码本表示 (B*N_q*L*D) → folding (B*L*N_q*D) → CNN 压缩为 (B*L*D'),作为多码本离散-连续桥接的通用策略
 4. **L_anchor (consistency regularization)**: 对 flow matching 单步预测结果施加正则化 [Eq. 10],可与 RapFlow-TTS 的 velocity consistency 和 OZSpeech 的单步采样对比参考
 5. **Speech prompt 条件注入 Code Decoder**: 在层级化 code 生成的每层 FFT block 中拼接同层级 speech prompt,比 OZSpeech 无 prompt 的方案获得更好的 prosody/acoustic 一致性
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes (3 issues: 1 medium, 2 low)
+> - (medium, fixed) SIM-R OZSpeech 数据修正: "--" → 0.59 [Table 1]
+> - (low) datasets 字段空 -- vault 无 LibriTTS 页,可接受
+> - (low) FACodec 参数标注 [§Method] 可改为 [Table 2] 更精确
+> 详见 `_review/Flamed-TTS-review.yml`
