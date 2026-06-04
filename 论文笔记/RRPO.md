@@ -52,8 +52,8 @@ updated: 2026-06-04
 
 RRPO 在 DiffRO 框架上做的改动集中在 Reward Model 端,policy optimization 端保持不变 [Fig 1]:
 
-1. **Policy Model (冻结训练)**: CosyVoice2 的 Neural Codec Language Model,通过 Gumbel-Softmax 重参数化实现可微采样 [§2.1]
-2. **Robust Reward Model (核心改进)**: 在预训练 SER 模型基础上,用混合正则化方案 fine-tune,产生更可靠的 reward signal [§2.2]
+1. **Policy Model (可训练)**: CosyVoice2 的 Neural Codec Language Model,通过 Gumbel-Softmax 重参数化实现可微采样,接收 RM 梯度更新参数 [§2.1]
+2. **Robust Reward Model (核心改进, RRPO 阶段冻结)**: 在预训练 SER Transformer encoder 基础上,先用混合正则化方案 fine-tune SER head,再在 policy optimization 阶段冻结,产生稳定的 reward signal [§2.2, Fig 1]
 3. **优化流程**: reward gradient 通过 chain rule 直接回传到 policy — $\nabla_\theta J(\theta) = \nabla_\theta R_{\text{robust}}(\tau(\theta))$ [Eq. 6]
 
 [论文原文] DiffRO 的解析梯度提供了精确的方向和幅度 (direction + magnitude),这是其相比 DPO/GRPO 仅估计梯度方向的核心优势,但同时也意味着 RM 的缺陷会被精确放大 [§2.1]。
@@ -135,3 +135,21 @@ RRPO 在 DiffRO 框架上做的改动集中在 Reward Model 端,policy optimizat
 2. **三层 RM 正则化组合**: LS (置信度) + EAM (决策边界) + Adv (扰动) 的三层防御思路可迁移到其他基于可微 reward 的后训练场景 (如 MOS prediction, speaker verification reward)
 3. **Reward hacking 诊断方法**: 通过比较 E-MOS vs N-MOS 的不一致来检测 reward hacking — 如果某个维度的 reward 提升伴随着其他维度的感知质量下降,则存在 hacking
 4. **高层 embedding 上做 adversarial training**: 在 RM 的 representation 层面而非输入层面做对抗训练,更直接地对抗 policy 通过低层声学操纵影响高层判断的攻击模式
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY/HOW 清晰,速查卡片可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率高,指标名正确 |
+> | 可区分 | pass | 论文原文/agent解读 标注清晰,覆盖率>90% |
+> | 可定位 | pass | KB 背景谱系定位明确,创新判断有对比基准 |
+> | 不污染 | pass | 无新建概念页,反向更新均为安全 append |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> - medium: "Policy Model (冻结训练)" 错误暗示 policy 冻结 — 已修正
+> - low: 主观评估数据集标注为"内部测试集"(原文局限)
+> 详见 `_review/RRPO-review.yml`
