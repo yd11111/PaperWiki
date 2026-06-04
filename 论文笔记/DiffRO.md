@@ -146,4 +146,11 @@ SER reward 为 log P(A_emo = E | U_tilde),同时保留 ASR reward [§4.3.1]。
 
 ---
 
+> [!review] 审阅 (2026-06-04, agent)
+> **结论: pass-with-fixes** | 3 issues (0 high, 1 medium, 2 low)
+> - [medium] traceability-gap: SOTA claim 仅在 Seed-TTS-eval 上基于 CosyVoice 2.0 对比,已标注来源可接受
+> - [low] template-compliance: datasets 字段为空,可选补充评估集
+> - [low] traceability-gap: 训练超参数段落标注可更精确
+> 详见 `_review/DiffRO-review.yml`
+
 检索命中: [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无

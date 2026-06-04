@@ -1,0 +1,31 @@
+paper: "DiffRO"
+arxiv_id: "2507.05911"
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+issues_count: 3
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "实验 > 关键发现 1"
+    detail: "SOTA claim ('在 zh 和 hard 上达到 SOTA') 仅在 Seed-TTS-eval benchmark 上与 CosyVoice 2.0 / DPO 对比,未与其他系统 (如 Seed-TTS, Fish Audio 等) 横向比较"
+    suggestion: "已标注 [论文原文, §4.2],可接受; 可选补充说明 SOTA 范围是 Seed-TTS-eval benchmark 上基于 CosyVoice 2.0 的方法"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但论文使用了 Seed-TTS-eval, CV3-Eval, IEMOCAP, BVCC, AirBench 等评估集"
+    suggestion: "可选补充主要评估集引用"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法 > 训练策略"
+    detail: "beta=0.1 的设置对应论文哪个公式/段落未标注; 13000+ 小时 reward model 训练数据来源 ('inhome industry ASR training corpus') 可补充标注"
+    suggestion: "补充 [§4.1.3] 标注"
+
+principles_assessment:
+  reproducible: "满足 — 三个核心设计选择均有 WHY 解释,Gumbel-Softmax 的 agent 解读补充了温度参数影响"
+  trustworthy: "满足 — 数字 claim 标注覆盖率 >90%, 指标名正确"
+  distinguishable: "满足 — 因果解释来源标注覆盖率约 85%, [论文原文] 和 [agent 解读] 区分清晰"
+  locatable: "满足 — KB 背景有谱系定位 (与 RL-for-Audio-LLM 的关系), 创新判断有三个对比基准"
+  non_polluting: "满足 — 概念挂接合理, 反向更新将遵循 append-only 规则"
