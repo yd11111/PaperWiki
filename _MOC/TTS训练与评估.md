@@ -28,6 +28,10 @@
 - [[论文笔记/F5R-TTS|F5R-TTS]] — 2025, Tencent, 首次将 GRPO 集成到 NAR flow-matching TTS, output probabilization 使 CFM 兼容 RL, WER -29.5% / SIM +4.6%
 - [[论文笔记/DLPO|DLPO]] — 2025, OSU, RLHF 微调 diffusion TTS (WaveGrad 2), diffusion loss 作为 reward 正则项, UTMOS 3.65/NISQA 4.02, 67% 人类偏好
 - [[论文笔记/LatinX|LatinX]] — 2025, USP, utterance-level DPO + Pareto dominance 多指标偏好标注, 多语言 TTS 对齐, 揭示客观-主观 speaker similarity gap
+- [[论文笔记/ARDM-DPO|ARDM-DPO]] — 2025, 首次将 DPO 扩展到自回归扩散模型 (ARDM), DiTAR 上 F0 方差翻倍 + CER 降低 25%
+- [[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]] — 2025, GRPO CER/NLL reward 导致韵律坍缩, iterative DPO ~200 人类偏好对/轮即可恢复自然韵律
+- [[论文笔记/RLAIF-SPA|RLAIF-SPA]] — 2025, GRPO 优化结构化 AI 反馈 (4 维韵律-情感标签匹配 + WER 惩罚), 无需人工情感标注
+- [[论文笔记/TKTO|TKTO]] — 2025, contrastive LLMs 估计 token-level importance + KTO token-level 推广, 消除 speech tokenizer-LM 对齐要求
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -48,6 +52,9 @@
 ### Emotion Control
 - [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] — 2024, Interspeech, AVD 伪标签 + 球面坐标解耦风格/强度, nMOS 3.88, ECA 94.02%
 - [[论文笔记/Controlling Emotion TTS NL Prompts|Controlling Emotion TTS NL Prompts]] — 2024, Interspeech, 情感文本作 NL prompt + SE block 融合 + curriculum learning, Cramer's V 0.80, MOS 3.37
+
+### Data
+- [[论文笔记/Emilia|Emilia]] — 2024, CUHK-SZ, 首个大规模多语言 in-the-wild 开源语音数据集 (101K+ h, 6 语种) + Emilia-Pipe 预处理 pipeline
 
 ### Understanding & Data
 - [[论文笔记/EmotionThinker|EmotionThinker]] — 2026, RL-based 可解释语音情感推理, GRPO-PTR, SER Avg 68.89%
