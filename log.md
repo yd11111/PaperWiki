@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DualSpeechLM]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Audio Understanding]](pending-review)
+- [ingest/deep] [[DualSpeechLM]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Semantic vs Acoustic Tokens/Speech Language Model/Self-Supervised Speech Representation/Modality Adaptation for Speech LLM/Audio Understanding key_papers), MOC 更新 1 (语音大模型与对话)
+- [review/auto] [[DualSpeechLM]] — pass, 2 low issues
+- [lint/local] DualSpeechLM — 通过 (0 dead links)
+- [kb/search] [[TTS-1]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Zero-shot Speech Synthesis]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[TTS-1]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS/Speech Language Model/Differentiable Reward Optimization/Single-codebook vs Multi-codebook/Emotion Control in TTS/Zero-shot Speech Synthesis key_papers + SEED-TTS-Eval used_by), MOC 更新 1 (零样本语音合成)
+- [review/auto] [[TTS-1]] — pass-with-fixes, 4 issues (1 medium, 3 low)
+- [lint/local] TTS-1 — 通过 (0 dead links)
 - [kb/search] [[VARSTok]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Duration Predictor]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[VARSTok]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Token Rate/Single-codebook/Codebook Collapse/Duration Predictor/Neural Audio Compression key_papers), MOC 更新 1 (语音编码与量化)
 - [review/auto] [[VARSTok]] — pass, 0 issues
