@@ -1,0 +1,42 @@
+paper: "E2E-VGuard"
+reviewer: auto
+date: 2026-06-04
+checklist_version: "v1.1"
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节包含充分的 WHY 解释: (1) 为什么从单代理模型路线转向 encoder ensemble(LLM-based TTS 的离散 token 使 mel-level 扰动失效); (2) 为什么用 targeted ASR attack(避免乱码被检测); (3) 为什么用心理声学模型(频率掩蔽比 STOI+STFT 更贴近人耳感知)。与 SafeSpeech 的对比分析清晰。"
+  可信赖:
+    verdict: pass-with-fixes
+    notes: "数据丰富,claim 标注覆盖率约 90%。表格数字均标注出处。"
+  可区分:
+    verdict: pass
+    notes: "因果解释均标注了 [论文原文] / [agent 解读],推断与断言边界清晰。"
+  可定位:
+    verdict: pass
+    notes: "KB 背景含与 SafeSpeech 的谱系对比、6 个实体页定位、创新增量判断。frontmatter 字段完整。"
+  不污染:
+    verdict: pass
+    notes: "概念挂接合理(6 个现有实体页),无新建实体页需求。反向更新均为 append(追加 key_papers)。"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "实验表"
+    detail: "部分 zero-shot 场景(Table 2, Table 3)缺少 SafeSpeech baseline 对比。原文即不提供 SafeSpeech 在 zero-shot LLM-TTS 上的数据,可能因为 SafeSpeech 不适用于此场景,但笔记未显式说明这一点。"
+    suggestion: "在实验节或点评中补充说明 SafeSpeech 未出现在 zero-shot 对比中的可能原因。"
+    fixed: false
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 LibriTTS/CMU ARCTIC/THCHS30 三个数据集。"
+    suggestion: "按需补充,但 KB 中无对应数据集页,空可接受。"
+    fixed: false
+
+stats:
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 1
