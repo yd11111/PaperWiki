@@ -1,0 +1,45 @@
+kb_review:
+  paper: "Phonological Tokenizer"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass
+
+change_plan:
+  - target: "概念库/Semantic vs Acoustic Tokens.md"
+    action: append
+    detail: "在 Mixed Tokens 节末尾追加 Phonological Tokenizer 作为单码本替代方案的简述 (1-2 行); key_papers 已超限(61+), 跳过 key_papers 追加"
+    status_change: "无 (append only)"
+    risk: low
+
+  - target: "概念库/Speech Factorization.md"
+    action: append
+    detail: "在'主流方法'末尾追加 loss weighting + speaker embedding 条件化解耦作为新方法; key_papers 已超限(35+), 跳过 key_papers 追加"
+    status_change: "无 (append only)"
+    risk: low
+
+  - target: "概念库/Speech Tokenizer.md"
+    action: skip
+    detail: "页面已有 revise 审阅结论,需先重构; key_papers 77+ 条远超限额"
+    risk: none
+
+  - target: "概念库/Speech Language Model.md"
+    action: skip
+    detail: "本文对 SpeechLM 概念的贡献为消费者角色 (使用 speechLM 评估 token),非核心贡献"
+    risk: none
+
+  - target: "概念库/Prosody Modeling.md"
+    action: skip
+    detail: "页面已较长; 本文韵律编码发生在 tokenizer 层而非传统 prosody modeling 层; key_papers 54+; 贡献已被 Semantic vs Acoustic Tokens 页覆盖"
+    risk: none
+
+  - target: "概念库/Single-codebook vs Multi-codebook.md"
+    action: skip
+    detail: "本文单码本属性不是其核心创新(继承自 phonetic token 基线); key_papers 18+"
+    risk: none
+
+  - target: "概念库/Self-Supervised Speech Representation.md"
+    action: skip
+    detail: "本文对 SSL 概念的贡献为消费者角色; key_papers 25+; 贡献已被 Semantic vs Acoustic Tokens 页覆盖"
+    risk: none
+
+issues: []
