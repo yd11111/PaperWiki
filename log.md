@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[RLAIF-SPA]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review)
+- [ingest/deep] [[RLAIF-SPA]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers (Emotion Control in TTS + Prosody Modeling + DiffRO + TTS Evaluation)
+- [review/auto] [[RLAIF-SPA]] — pass-with-fixes, 0 high / 2 medium / 1 low
+- [lint/local] RLAIF-SPA — 通过, 0 死链
 - [kb/search] [[DialoSpeech]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Turn-taking in Spoken Dialogue]](pending-review), [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
 - [ingest/deep] [[DialoSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 实体页 key_papers
 - [review/auto] [[DialoSpeech]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
