@@ -4,7 +4,7 @@ title: "Anti-spoofing and Deepfake Detection"
 aliases: [反欺骗检测, Audio Deepfake Detection, Voice Anti-spoofing, 深伪语音检测, Speech Deepfake, 语音伪造检测]
 category: "security"
 tags: [voice-cloning, deepfake, anti-spoofing, ethics, safety, speaker-verification, TTS]
-key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/Traceable TTS|Traceable TTS]]", "[[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]"]
+key_papers: ["[[论文笔记/Survey-Voice Cloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/Traceable TTS|Traceable TTS]]", "[[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Training-free Speaker Unlearning|TruS (Lee et al., 2026)]]"]
 origin_paper: ""
 related_concepts: ["[[Speaker Verification]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Embedding]]"]
 status: pending-review
@@ -66,6 +66,7 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 - **Watermark-free Traceability**: [[论文笔记/Traceable TTS|Traceable TTS]] (Zhao et al., 2025) 提出不依赖显式水印的 TTS 模型溯源方案,通过反转 GAN generator loss 实现 TTS 模型与 discriminator (wav2vec 2.0 + LCNN) 的协同训练,使模型自然产生可追溯的隐式指纹。域外泛化 EER 11.5% vs baseline 18.99%
 - **Machine Unlearning (模型级遗忘)**: [[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]] (Kim et al., ICML 2025) 首次在 ZS-TTS 中提出 speaker identity unlearning,通过 Teacher-Guided Unlearning (TGU) 直接修改模型权重使其丧失复制特定说话人的能力。与 SafeSpeech(数据端防护)和 Traceable TTS(事后溯源)互补,构成 ZS-TTS 安全的三层防线: 预防(unlearning) + 防护(perturbation) + 溯源(watermark/fingerprint)
 - **LLM-TTS + E2E 防护**: [[论文笔记/E2E-VGuard|E2E-VGuard]] (Zhang et al., NeurIPS 2025) 将 SafeSpeech 的防护扩展到 LLM-based TTS 和 ASR-driven E2E 场景。通过 encoder ensemble(6 种 speaker encoder + MFCC)保护 timbre,同时用 ASR 对抗攻击破坏发音,加上心理声学模型保证扰动不可感知。在 19 个 TTS 模型(含 3 个商业 API)上验证有效
+- **Training-free Inference-time Unlearning**: [[论文笔记/Training-free Speaker Unlearning|TruS]] (Lee et al., 2026) 将 speaker unlearning 从训练范式推向推理范式。通过在 F5-TTS DiT blocks 的 FFN 输出上做动态 activation steering,用 ID-prototype (retain speaker 均值) 定位 identity 方向后投影减法抑制 opt-out speaker 身份。0 GPU 小时训练成本,首次实现 unseen opt-out speaker 的 unlearning (SIM-UO 0.668→0.488),与 TGU (模型级) 互补
 
 ## 在 TTS 中的应用
 
