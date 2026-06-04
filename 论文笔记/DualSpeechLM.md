@@ -208,3 +208,8 @@ DualSpeechLM 的核心贡献是将 "input token ≠ output token" 这一直觉�
 3. **Chain-of-Condition (CoC) 随机条件正则化**: 训练时从多个条件源随机采样,推理时用全部拼接。这种 "training-time dropout on conditioning" 策略可用于任何有多条件输入的自回归生成模型,增强鲁棒性。
 
 4. **Semantic supervision loss 作为中间监督**: 在 two-stage 生成 (semantic→acoustic) 中,显式监督第一阶段的输出质量,防止错误级联。消融证明这个 loss 是系统能 work 的必要条件 (去掉后 WER 暴涨 18x)。
+
+> [!review] 审阅结论: pass (2026-06-04)
+> - **结论**: pass — 5 原则均满足,无 high/medium issue
+> - **问题**: 2 low (frontmatter tasks/datasets 空; 权重敏感性分析引用不够具体)
+> - **详见**: [[_review/DualSpeechLM-review.yml]]

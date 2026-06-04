@@ -1,0 +1,40 @@
+paper: "DualSpeechLM"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 4 个关键设计选择的 WHY 解释,因果链清晰 (USTokenizer→Dual-token→Semantic loss→CoC)"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率约 90%; 指标名使用正确; 速查指标含具体数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读]; 覆盖率 >80%; 推断与事实区分清晰"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系 (AudioLM/SpeechTokenizer/Mimi/CosyVoice 四路线对比); 创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "无需新建概念页; 反向更新均为追加 key_papers,不改 status"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "tasks 和 datasets 字段为空"
+    suggestion: "可接受 — vault 中无对应任务/数据集实体页,留空比造成死链更好"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法节 - 训练策略"
+    detail: "USTokenizer 权重设置 α=1, β=5, γ=45 的敏感性分析引用了 Appendix D 但未给出具体数字"
+    suggestion: "可在后续审阅时补充,不阻塞当前流程"
+
+conclusion: pass
+total_issues: 2
+high_issues: 0
+medium_issues: 0
+low_issues: 2
