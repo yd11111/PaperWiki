@@ -44,6 +44,8 @@ CosyVoice 是阿里巴巴语音实验室提出的可扩展多语言零样本 TTS
 
 CosyVoice (2024, S3 tokenizer, LLM+OT-CFM) → [[模型库/CosyVoice 2|CosyVoice 2]] (2024, streaming, LLM init) → [[模型库/CosyVoice 3|CosyVoice 3]] (2025, MinMo tokenizer, DiffRO, 1M h)
 
+Task derivative: [[论文笔记/CosyEdit|CosyEdit]] (Chen et al., 2026) — 基于 CosyVoice 的 post-training 迁移到端到端 speech editing,仅用 250h 数据微调 LLM+CFM; 提出 GOT-CFM (guided OT-CFM) 和 zero-shot training / one-shot inference 非对称策略; 400M 参数在 RealEdit 上 WER 4.50% / EMOS 4.15,超越 3B-16B 参数的 SLM-based editing 系统 [CosyEdit Table II]
+
 ## 关键贡献
 
 - 首次将 ASR 监督式 speech tokens 引入 TTS,证明监督 token 在内容一致性和说话人相似度上全面优于无监督 token
