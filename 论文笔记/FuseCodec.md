@@ -10,8 +10,8 @@ venue: "arXiv preprint"
 tags: [audio-codec, speech-tokenizer, RVQ, semantic-distillation, contextual-supervision, cross-modal-alignment, zero-shot-TTS]
 concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Self-Supervised Speech Representation]]", "[[Codec Training Objectives]]", "[[Codec Language Model]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]"]
-tasks: []
-datasets: []
+tasks: ["speech tokenization", "zero-shot TTS", "speech reconstruction"]
+datasets: ["LibriSpeech", "LibriTTS", "VCTK"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-04
@@ -214,3 +214,9 @@ FuseCodec 的核心贡献是系统性地探索了将语义和上下文信号融�
 3. **窗口对齐算法 (Algorithm 1)**: 解决不等长序列对齐的轻量方案 — 比 CTC 简单,比 padding 精确。可用于 text-audio alignment、subtitle-audio alignment 等场景。
 
 4. **只监督 RVQ 第一层**: 利用 RVQ 的层级信息结构,只在 coarse layer 施加语义监督,让 fine layers 自由学习声学残差。这一设计选择有坚实的消融支撑 [Table 10],适用于所有 RVQ-based codec 的语义增强。
+
+> [!review] 审阅 (2026-06-04, agent-auto)
+> **结论**: pass-with-fixes (3 issues: 0 high, 2 medium, 1 low)
+> - [medium] frontmatter datasets/tasks 字段为空 → 已补充
+> - [low] 训练 loss 权重未列具体数值 (原文未提供)
+> 详见 `_review/FuseCodec-review.yml`

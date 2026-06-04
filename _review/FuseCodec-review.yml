@@ -1,0 +1,56 @@
+paper: FuseCodec
+reviewer: agent-auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含充分的因果解释(WHY): 为什么引入 contextual representation、为什么只监督 RVQ 第一层、为什么用 10% dropout。
+      每个设计选择都回答了"为什么选这个而不是那个"。速查卡片"可借鉴"字段具体可迁移。
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率高(Table 2/3/4/6-10 均标注)。指标名使用正确(WER/PESQ/STOI/ViSQOL/UTMOS/Similarity)。
+      速查卡片指标含具体数字+数据集名+来源标注。无方向性错误。
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率 ≥ 80%。
+      无把推断写成断言的句子。局限性中的 agent 推断均标注了 [agent 解读]。
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景有具体谱系定位(SpeechTokenizer → DM-Codec → FuseCodec 路线),创新判断有对比基准。
+      frontmatter 字段齐全。速查卡片 5 字段均有实质内容。
+  不污染:
+    satisfied: true
+    notes: >
+      不需新建概念页(主要概念均已存在)。反向更新为追加 key_papers,不改 status。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter datasets
+    detail: "datasets 字段为空,但论文使用了 LibriSpeech (训练+评估) 和 LibriTTS (TTS 训练)、VCTK (TTS 评估)。应列出关键数据集。"
+    suggestion: "补充 datasets 字段"
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter tasks
+    detail: "tasks 字段为空,但论文涉及 speech reconstruction / speech tokenization / zero-shot TTS 等任务。"
+    suggestion: "补充 tasks 字段,至少填 speech tokenization / zero-shot TTS"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: 方法节 训练策略
+    detail: "训练 loss 权重 (λ_time, λ_freq 等) 未列出具体数值,原文 Appendix E.2 未给出(或沿用 SpeechTokenizer 默认值)。"
+    suggestion: "如果原文未提供则标注'未提供',保持现状可接受"
