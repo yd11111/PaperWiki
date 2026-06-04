@@ -1,0 +1,52 @@
+paper: MSR-Codec
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 4
+issues:
+  - id: 1
+    type: overclaim
+    severity: medium
+    principle: 可信赖
+    location: "点评节"
+    detail: >
+      论文摘要和 §3.3.2 声称 "achieves a state-of-the-art WER, surpassing all
+      competing models" 和 "delivers the highest speaker similarity", 但 Table 2
+      显示 CosyVoice2 在 WER (2.57 vs 3.07) 和 SIM (0.652 vs 0.613) 上均优于
+      MSR-Codec. 笔记已在点评节明确指出此矛盾.
+    suggestion: 已处理, 无需进一步修改
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "方法节"
+    detail: >
+      方法节中大部分因果解释已标注 [论文原文] 或 [agent 解读], 但个别段落的
+      标注粒度可进一步细化. 当前覆盖率约 85%.
+    suggestion: 可在后续批量审阅中统一提升
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea 第2条"
+    detail: >
+      "多帧率编码不同属性" 的描述偏泛, 可补充具体如何选择帧率的启发式规则.
+    suggestion: 可在后续 pattern 分析中观察是否为共性问题
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter"
+    detail: >
+      venue 字段为 "arXiv (v3, Feb 2026)" 而非正式会议/期刊. 这是正确的, 因为
+      论文尚未正式发表, 但需注意未来若发表需更新.
+    suggestion: 正确现状, 无需修改
+
+summary: >
+  笔记质量整体良好. 核心架构的 WHY 解释清晰 (级联残差隐式解耦的逻辑),
+  KB 背景谱系定位准确 (NaturalSpeech 3 路线的简化替代), 速查卡片五字段
+  内容实质. 论文自身的 overclaim 问题已在笔记中诚实指出. 反向更新安全:
+  仅涉及 key_papers 追加, 不会实质修改已有概念页.
