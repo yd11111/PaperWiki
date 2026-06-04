@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DLPO]] — 命中 6 页(全部 pending-review): [[Diffusion-based TTS]], [[Diffusion Model]], [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[Diffusion-based Vocoder]], [[Non-autoregressive TTS]] | 过滤: 全部 pending-review
+- [ingest/deep] [[DLPO]] — 精读, kb_sources=6, 新建 0, 追加 5 (Diffusion-based TTS/Diffusion Model/Differentiable Reward Optimization/TTS Evaluation/Diffusion-based Vocoder key_papers), MOC 更新 1 (TTS训练与评估)
+- [review/auto] [[DLPO]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] DLPO — 通过 (0 死链)
 - [kb/search] [[Speaker Identity Unlearning]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
 - [ingest/deep] [[Speaker Identity Unlearning]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/Speaker Embedding/Speaker Verification/CFG/Anti-spoofing/Voice Cloning Taxonomy key_papers, Anti-spoofing 安全设计节追加 Machine Unlearning 条目), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[Speaker Identity Unlearning]] — pass, 0 issues

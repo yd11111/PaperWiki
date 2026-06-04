@@ -166,3 +166,7 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 ### InstructTTSEval: Instruction-Following Benchmark
 
 Huang et al. (2025) 提出 InstructTTSEval,首个专门评估 TTS 指令遵循能力的 benchmark。三层任务设计: (1) Acoustic-Parameter Specification (APS): 12 个副语言特征的 free-form 描述,测试精确声学映射; (2) Descriptive-Style Directive (DSD): 自然语言段落,测试非结构化理解; (3) Role-Play (RP): 角色/场景描述,测试推理能力。6K 测试用例 (1K EN + 1K ZH x 3 任务),用 Gemini-as-Judge 做 True/False 二分评估 (人机一致率 79%)。关键发现: 闭源系统 (gemini-flash EN-Avg 88.7%) 大幅超越开源 (VoxInstruct 50.4%),但 Gemini TTS 得分超过 reference audio (84.3%),暗示严重的 self-preference bias [Table 5]。详见 [[论文笔记/InstructTTSEval|InstructTTSEval]]。
+
+### AudioMOS Challenge 2025: 自动 MOS 预测拓展至音乐与通用音频
+
+Huang et al. (2025) 组织 AudioMOS Challenge 2025,将 VoiceMOS Challenge 系列从 speech-only 拓展到语音/音乐/通用音频三种模态。三个赛道: (1) TTM MOS 预测 (MusicEval 数据集); (2) Audiobox Aesthetics 四轴 (PQ/PC/CE/CU) 预测 (自然样本训练→合成样本测试); (3) 多采样率语音 MOS 预测。24 队参赛,所有赛道冠军均使用模型集成。关键发现: 数据质量/匹配度比规模重要 (Track 2 baseline 用 500h in-house 数据,被仅用 ~3K 样本训练的队伍超越); SSL 特征 (CLAP/WavLM/MuQ) + 集成是主流路线; 16 kHz 在混合采样率评估中最难预测。详见 [[论文笔记/AudioMOS Challenge 2025|AudioMOS Challenge 2025]]。
