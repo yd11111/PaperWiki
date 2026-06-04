@@ -1,0 +1,50 @@
+paper: MAVE
+file: 论文笔记/MAVE.md
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 6 个关键设计选择,每个都有 WHY 解释 (为什么 Mamba、为什么 cross-attention、CM3 masking 等);速查可借鉴列出 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 ~95% (Table/§ 引用充分);指标名正确 (WER/MOS/SIM/MCD/PESQ/F0);无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 ~90%;论文原文与 agent 解读明确区分;局限性中 agent 解读用于补充未对比更强系统的判断,标注清晰"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系 (VALL-E/VoiceCraft/FluentSpeech/VoiceBox/CosyVoice),创新判断有对比基准 (已有 codec LM 均基于 Transformer);速查 5 字段均有实质内容"
+  不污染:
+    satisfied: true
+    notes: "无新建概念页;反向更新仅追加 key_papers (不改 status)"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: "models 字段仅含评估工具 (Whisper, WavLM),未含本文主要对比 baseline VoiceCraft 和 FluentSpeech。原因: 两者在 vault 中无模型页,无法生成 wikilink"
+    suggestion: "可保持现状;若未来创建 VoiceCraft 模型页,补入 frontmatter"
+
+  - id: 2
+    severity: low
+    type: weak-reusability
+    location: 可复用的 idea #3
+    detail: "reference-based speaker conditioning 并非本文原创 (VoiceCraft 也不用 speaker embedding,VALL-E 也是 in-context),作为'可复用 idea'的独特性有限"
+    suggestion: "可补充说明 MAVE 的差异点在于 Mamba 递归状态传递 vs Transformer 自注意力的不同信息传播机制"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: KB 背景 > 创新判断
+    detail: "'现有 codec LM 均基于 Transformer' 这一断言缺少明确出处,虽然在概念库中可验证,但笔记本身未标注来源"
+    suggestion: "可加注 [agent 解读,基于 KB 概念页] 或引用 Codec Language Model 页的代表系统列表"
+
+stats:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
