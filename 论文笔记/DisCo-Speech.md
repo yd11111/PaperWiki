@@ -193,17 +193,17 @@ Stage 1 decoder 镜像 content encoder 架构,从三流表征重建波形(仅用
 ## 审阅
 
 > [!review] 审阅 (2026-06-04, auto)
-> **结论**: pass-with-fixes
+> **结论**: pass
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pass | 方法节因果解释充分,速查可借鉴具体可迁移 |
-> | 可信赖 | pass | 数字出处标注覆盖率 >90%,指标使用正确 |
-> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰,5 处显式标注 |
-> | 可定位 | pass | 与 NaturalSpeech 3 四维度对比,KB 背景谱系定位精准 |
-> | 不污染 | pass-with-fixes | models 已由 lint 补全; 无 factual error |
+> | 可复述 | pass | WHY 解释充分,3 个可迁移 trick |
+> | 可信赖 | pass | 出处标注 >90%, 指标正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰 |
+> | 可定位 | pass | 与 NaturalSpeech 3 四维对比定位 |
+> | 不污染 | pass | 所有概念页已存在,append-only |
 > 
-> Issues: 2 (high: 0, medium: 1, low: 1)
+> Issues: 2 (high: 0, medium: 0, low: 2)
 > 详见 `_review/DisCo-Speech-review.yml`
 
 ---

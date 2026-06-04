@@ -12,34 +12,34 @@ principles:
   可信赖:
     score: 9
     status: pass
-    rationale: "数字型 claim 出处标注覆盖率 >90%,实验表格完整标注 [Table N]。指标名正确使用(SSIM=Speaker SIMilarity 与论文一致)。无方向性错误。"
+    rationale: "数字型 claim 出处标注覆盖率 >90%,实验表格完整标注 [Table N]。指标名正确使用(UTMOS/SSIM/WER/CER/F0cor)。无方向性错误。"
   可区分:
     score: 9
     status: pass
-    rationale: "[论文原文] 和 [agent 解读] 标注清晰,方法节中 5 处显式标注来源。核心设计选择均标注为论文原文或 agent 解读。"
+    rationale: "[论文原文] 和 [agent 解读] 标注清晰,方法节中 7 处 [论文原文] 和 4 处 [agent 解读] 显式标注。核心设计选择均标注来源。"
   可定位:
     score: 9
     status: pass
-    rationale: "KB 背景与 NaturalSpeech 3 做了 4 个维度的具体对比(分离粒度/量化方案/解耦约束/韵律建模),引用 Speech Factorization 概念页的演进线准确定位。"
+    rationale: "KB 背景与 NaturalSpeech 3 做了 4 个维度的具体对比(分离粒度/量化方案/解耦约束/韵律建模),引用 Speech Factorization 概念页的演进线准确定位。frontmatter models 含 NaturalSpeech 3 + CosyVoice 2 + BigVGAN (baselines + 组件)。"
   不污染:
-    score: 8
-    status: pass-with-fixes
-    rationale: "concepts 和 tasks 挂接合理,models 字段仅列 NaturalSpeech 3 但遗漏 CosyVoice 2(论文中重要比较对象且模型库有页)。无 factual error 或 overclaim。"
+    score: 9
+    status: pass
+    rationale: "所有引用概念页均已存在,不需新建实体页。反向更新预计为 append-only (追加 key_papers),不涉及实质修改。concepts/models/tasks/datasets 挂接合理。"
 
 issues:
   - id: 1
-    severity: medium
-    type: template-compliance
-    location: frontmatter models
-    detail: "models 仅列 NaturalSpeech 3,但 CosyVoice 2 是论文中 codec reconstruction/VC/cloning 三个维度的重要 baseline 且模型库已有页面,应补充"
-    suggestion: "在 models 中追加 [[CosyVoice 2]]"
-  - id: 2
     severity: low
     type: traceability-gap
     location: "## 点评 优势 4"
-    detail: "VC 任务上取得最高 SSIM + F0cor 缺少 [Table 2] 标注"
+    detail: "'VC 任务上取得最高 SSIM + F0cor' 缺少 [Table 2] 标注"
     suggestion: "补充 [Table 2] 出处"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "## 点评 不足 4"
+    detail: "'LM 初始化自 Qwen2.5-1.5B 但未讨论预训练 LLM 语义能力对 TTS 的贡献' 是 agent 观点但未显式标注"
+    suggestion: "点评节一般可省略来源标注,非阻塞"
 
-conclusion: pass-with-fixes
-issue_summary: "1 medium, 1 low"
+conclusion: pass
+issue_summary: "0 high, 0 medium, 2 low"
 learning_signals: []
