@@ -1,0 +1,82 @@
+paper: SecoustiCodec
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+summary: >
+  笔记整体质量较高。方法节包含充分的因果解释且来源标注清晰,速查卡片实质完整,
+  KB 背景节谱系定位具体。2 个 medium issue 不阻塞反向更新。
+
+principles:
+  comprehensible: pass
+  trustworthy: pass
+  distinguishable: pass
+  navigable: pass-with-fixes
+  no-pollution: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: navigable
+    location: frontmatter.datasets
+    detail: >
+      datasets 字段使用了纯字符串 "AISHELL-3", "LibriTTS",
+      但 vault 中无对应数据集实体页。应保持为纯字符串(不加 wikilink)以避免死链,
+      这一点已正确处理。但考虑到论文使用的是"内部数据集 + AISHELL-3 + LibriTTS"的组合,
+      frontmatter 未标注"内部数据集"。
+    suggestion: "在 datasets 中补充标注,或在笔记正文中说明数据组成已足够。当前正文已说明,可接受。"
+    action: accept-as-is
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "方法节 - Contrastive Learning 细节"
+    detail: >
+      [agent 解读]段落"将整个 batch 的所有帧展平意味着负样本数量为 (B*Ts)^2..."
+      虽标注了 [agent 解读],但推断内容较强("大幅增强了分离力度"),
+      论文本身并未讨论这种展平的动机或效果。
+    suggestion: "可在该推断后补充'论文未对此设计进行专门讨论'以进一步明确边界。"
+    action: note
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: navigable
+    location: frontmatter.models
+    detail: >
+      models 字段列出了 EnCodec、SoundStream、NaturalSpeech 3、HuBERT、WavLM,
+      这些是论文比较的 baseline 和引用的预训练模型。本文自身的模型 SecoustiCodec
+      不应列入 models(因为 models 字段是外部引用),当前处理正确。
+      但论文实际比较了 8 个 baseline,frontmatter 只列了 5 个有模型页的。
+      其余(SpeechTokenizer、MimiCodec、FACodec、BigCodec、WavTokenizer、TAAE、VQ-CTAP)
+      无模型页,不列入是正确的。
+    suggestion: "当前处理正确,无需修改。"
+    action: accept-as-is
+
+checklist:
+  comprehensible:
+    causal_explanation: true
+    design_choice_why: true
+    quickcard_reusable: true
+  trustworthy:
+    claim_citation_coverage: ">90%"
+    metric_names_correct: true
+    quickcard_metrics_specific: true
+    no_direction_error: true
+  distinguishable:
+    source_annotation: true
+    source_coverage: ">80%"
+    no_assertion_without_evidence: true
+    strong_claims_supported: true
+  navigable:
+    kb_lineage_specific: true
+    kb_innovation_comparison: true
+    frontmatter_present: true
+    frontmatter_semantic: true
+    quickcard_complete: true
+  no_pollution:
+    new_concept_admission: "N/A (no new concepts proposed)"
+    dedup_check: "N/A"
+    reverse_update_factual: "pending (review pass → proceed)"
+    reverse_update_classification: "pending"

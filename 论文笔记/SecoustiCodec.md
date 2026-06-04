@@ -198,5 +198,9 @@ S+G≈A 的三方分解是这篇论文最值得关注的设计: 通过让 semant
 
 ---
 
-> [!review] 审阅状态
-> 待审阅。详见 `_review/SecoustiCodec-review.yml`。
+> [!review] 审阅: pass-with-fixes (2026-06-04)
+> **结论**: pass-with-fixes (2 medium, 1 low)
+> - [medium/template-compliance] frontmatter.datasets 未标注内部数据集 → 正文已说明,可接受
+> - [medium/traceability-gap] contrastive learning 展平推断较强,论文未专门讨论 → 已标注 [agent 解读]
+> - [low/template-compliance] models 字段仅列有模型页的 5 个 baseline → 正确处理
+> 详见 `_review/SecoustiCodec-review.yml`。
