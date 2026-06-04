@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Phonological Tokenizer]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Speech Language Model]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[Phonological Tokenizer]] — 精读, kb_sources=6, 新建 0, 追加 2 (Semantic vs Acoustic Tokens 正文, Speech Factorization 正文)
+- [review/auto] [[Phonological Tokenizer]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [review/kb] [[Phonological Tokenizer]] — pass, 0 issues
+- [skip/update] [[Speech Tokenizer]] — 已有 revise 审阅结论,需先重构; key_papers 77+ 跳过
+- [skip/update] [[Prosody Modeling]] — key_papers 已达上限(54),页面较长,跳过追加
+- [skip/update] [[Speech Language Model]] — key_papers 已达上限(27),消费者角色,跳过追加
+- [lint/local] Phonological Tokenizer — 通过
 - [kb/search] [[T-Mimi]] — 命中 6 页(取 6): [[Multi-scale STFT Discriminator]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
 - [ingest/deep] [[T-Mimi]] — 精读, kb_sources=6, 新建 0, 追加 1 (Neural Audio Compression key_papers)
 - [review/auto] [[T-Mimi]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
