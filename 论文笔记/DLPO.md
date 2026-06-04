@@ -157,5 +157,11 @@ E_{c~p(c)} E_{p_θ(x_{0:T}|c)} [-α·r(x_0, c) - β·||ε̃(x_t, t) - ε_θ(x_t,
 
 3. **MDP 形式化 diffusion 去噪**: 将 T 步去噪过程建模为有限 horizon MDP,reward 仅在最终步给出。这个 formulation 来自 Black et al. (2023) 的 DDPO 工作,但在 TTS 领域的适配经验 (失败案例 + 成功方案) 有参考价值
 
-> [!review] 审阅待补充
-> 此笔记尚未经过审阅。
+> [!review] 审阅结论: pass (2026-06-04)
+> - **可复述**: pass — 方法节含因果解释,关键设计选择有对比论证
+> - **可信赖**: pass-with-minor — claim 标注覆盖率高,指标名正确
+> - **可区分**: pass — 来源标注覆盖率 >80%
+> - **可定位**: pass — KB 背景含谱系定位 + 演进线对比
+> - **不污染**: pass — 未新建概念页
+> - 3 个 low issues (template-compliance x1, traceability-gap x1, weak-reusability x1)
+> - 详见 `_review/DLPO-review.yml`

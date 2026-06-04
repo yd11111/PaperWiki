@@ -1,0 +1,50 @@
+paper: "DLPO"
+arxiv_id: "2508.03123"
+reviewer: "agent"
+date: 2026-06-04
+checklist_version: "v1.1"
+
+principles:
+  可复述:
+    verdict: pass
+    notes: "方法节包含因果解释(WHY: 为何不用KL正则而用diffusion loss),关键设计选择有对比论证"
+  可信赖:
+    verdict: pass-with-minor
+    notes: "数字型claim标注覆盖率高(Table 1/Eq.4/Eq.5/Fig 1/§2.3.1),指标名正确;人类评估样本量偏小但有统计检验"
+  可区分:
+    verdict: pass
+    notes: "因果解释来源标注覆盖率>80%,区分了[论文原文]和[agent解读]"
+  可定位:
+    verdict: pass
+    notes: "KB背景含谱系定位+演进线对比+创新判断,frontmatter字段齐全"
+  不污染:
+    verdict: pass
+    notes: "未新建概念页,反向更新仅追加key_papers"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter.models"
+    detail: "models仅列Whisper(ASR评估工具),未列WaveGrad 2(本文核心模型)和UTMOS(reward model)作为对比baseline。但WaveGrad 2和UTMOS不在模型库中,不宜强行添加wikilink。"
+    suggestion: "可在models中备注WaveGrad 2R和UTMOS为非模型库实体。当前处理可接受。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "实验.关键发现.3"
+    detail: "DLPO NISQA 4.02 (+0.28)的+0.28计算来源未标注出处(需从Table 1推算:4.02-3.74=0.28)"
+    suggestion: "可在数字旁标注[Table 1推算]使溯源更明确"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的idea.3"
+    detail: "MDP形式化diffusion去噪是DDPO原创而非本文贡献,可更明确标注"
+    suggestion: "已在文中标注'来自Black et al.(2023)的DDPO工作',可接受"
+
+conclusion: pass
+conclusion_reason: "无high或medium issue。3个low severity问题均为细节优化,不影响笔记可信性和可导航性。方法节因果解释充分,来源标注覆盖率>80%,KB背景谱系定位清晰,速查卡片5字段均有实质内容。可直接进行反向更新。"
