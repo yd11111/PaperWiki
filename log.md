@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[BridgeCode]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review)
+- [ingest/deep] [[BridgeCode]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers
+- [review/auto] [[BridgeCode]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] BridgeCode — 通过 (0 dead links), MOC 已包含 (零样本语音合成+语音编码与量化)
+- [kb/search] [[TKTO]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[CosyVoice 2]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review)
+- [ingest/deep] [[TKTO]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页 key_papers (DiffRO+CosyVoice2+LLM-based TTS), DiffRO 演进线+TKTO 节
+- [review/auto] [[TKTO]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] TKTO — 通过 (0 dead links), MOC 已包含 (TTS训练与评估)
 - [kb/search] [[No Verifiable Reward for Prosody]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 参考(待确认): [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[F0 Modeling]]
 - [ingest/deep] [[No Verifiable Reward for Prosody]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers + 1 实体页内容段落
 - [review/auto] [[No Verifiable Reward for Prosody]] — pass, 0 issues
