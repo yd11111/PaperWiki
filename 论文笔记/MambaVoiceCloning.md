@@ -81,7 +81,7 @@ h_{T,s} = AdaLN(h_T, e)                        [Eq. 4, style conditioning]
 - 改善长文本的韵律一致性,减少漂移 [Tables 2, 3]
 - 消融: 去除 gating → MOS-long 降至 4.02 (vs 4.16); 去除 AdaLN → 3.95 [Table 8]
 
-**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1] [论文原文] [论文原文]
+**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1] [论文原文]
 
 #### 2. Expressive Mamba Encoder [§3.2.2]
 
@@ -316,6 +316,22 @@ MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Ta
 > | 不污染 | pass | 仅 append 更新,无新建页,无 factual-error 风险 |
 > 
 > Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/MambaVoiceCloning-review.yml`
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三模块WHY解释充分,关键设计选择4个WHY段落,速查可借鉴含4个具体trick |
+> | 可信赖 | pass | 数字claim出处覆盖>95%,指标名正确,无方向性错误 |
+> | 可区分 | pass | [论文原文]/[agent解读]标注覆盖率>85%,KB背景标注完整 |
+> | 可定位 | pass | KB背景基于3个confirmed页面+1个pending-review,Table 10还原清晰定位 |
+> | 不污染 | pass | 反向更新为append(key_papers追加),无factual-error风险 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
 > 详见 `_review/MambaVoiceCloning-review.yml`
 
 ---

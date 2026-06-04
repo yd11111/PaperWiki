@@ -9,7 +9,7 @@ year: 2026
 venue: "ICML 2026"
 tags: [TTS, evaluation, reward, RL, GRPO, role-play, stylistic-consistency, LALM, multi-turn, metric]
 concepts: ["[[LLM-based TTS]]", "[[TTS Evaluation]]", "[[Style Transfer in TTS]]", "[[Differentiable Reward Optimization]]", "[[Instruction-Guided Speech Synthesis]]", "[[Emotion Control in TTS]]"]
-models: ["[[模型库/Step-Audio 2|Step-Audio-2]]"]
+models: ["[[论文笔记/Step-Audio 2.5|Step-Audio-2]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6

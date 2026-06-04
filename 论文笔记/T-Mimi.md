@@ -20,26 +20,28 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[Multi-scale STFT Discriminator]], [[Speech Tokenizer]], [[Neural Vocoder]], [[Neural Audio Compression]], [[Codec Training Objectives]][待确认], [[Audio Tokenizer Taxonomy]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[Speech Tokenizer]], [[Multi-scale STFT Discriminator]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]], [[Codec Training Objectives]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Multi-scale STFT Discriminator]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[Speech Tokenizer]]✓, [[Multi-scale STFT Discriminator]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无
 >
-> **Neural Audio Compression**: Neural audio codec 的标准范式是 Convolutional Encoder-Decoder + RVQ + GAN Training。Mimi 是该任务的代表 codec,以 12.5Hz 帧率、streaming 架构著称。T-Mimi 要解决的问题正是 Mimi decoder 的 on-device 部署瓶颈。
+> **Speech Tokenizer**: Mimi 属于 "Mixed Objective Tokenizer",通过 split RVQ (1 VQ semantic + 7 RVQ acoustic) 在 12.5Hz 低帧率下同时编码语义和声学信息。T-Mimi 不改变 encoder 和量化器,仅替换 decoder 架构,因此 tokenizer 特性保持不变。
 >
-> **Audio Tokenizer Taxonomy** [待确认]: Mousavi et al. (2025) 五轴分类中,Mimi 属于 CNN+T (Axis 1) + RVQ (Axis 2) + Streamable (Axis 5)。T-Mimi 将 decoder 从 CNN+T 转为纯 Transformer,呼应了 TS3-Codec 代表的 Transformer-only 趋势 (Axis 1)。KB 记录 TS3-Codec 为 SVQ + Transformer 类型。
+> **Multi-scale STFT Discriminator**: T-Mimi 训练时使用 Multi-Scale STFT Discriminator (引用 DAC [7]) 提供对抗训练信号。KB 记录了该判别器在多个尺度 (window lengths) 上进行频域真/假判别的机制,以及 feature matching loss 如何从判别器中间层提取辅助梯度信号。
 >
-> **Codec Training Objectives** [待确认]: KB 记录了 codec 训练的标准损失组合: GAN + Feature Matching + Reconstruction + VQ。T-Mimi 的训练策略 (mel recon L1 + LS-GAN + feature matching + L1) 属于经典组合的变体,可对照。
+> **Neural Vocoder**: Codec decoder 在 TTS pipeline 中实质替代了传统 vocoder 的位置。KB 记录了从 WaveNet 到 HiFi-GAN 的演进。T-Mimi 的 transformer-only decoder 代表了一条新路线: 用 transformer + linear upsampling 替代传统 transposed convolution 上采样,聚焦于移动端推理效率。
 >
-> **Multi-scale STFT Discriminator**: T-Mimi 使用 Multi-Scale STFT Discriminator (来自 DAC)。KB 已收录其多尺度/多频带设计以及与 feature matching loss 的配合模式。
+> **Semantic vs Acoustic Tokens**: Mimi 的核心设计是通过 WavLM 蒸馏将语义信息注入第一层 VQ,后续 RVQ 层保留声学信息。T-Mimi 的 decoder 需要从这两类信息中重建波形,但论文关注点不在 token 设计,而在 decoder 的计算效率。
 >
-> **Neural Vocoder**: Codec decoder 在 TTS pipeline 中实质替代了传统 vocoder 的位置。Neural vocoder 的核心挑战是从低维特征上采样到高采样率波形。T-Mimi 的创新在于用 Transformer + Linear 替代传统的转置卷积上采样。
+> **Codec Training Objectives** [待确认]: T-Mimi 使用经典的 codec 训练损失组合 (mel reconstruction + GAN + feature matching + L1),与 KB 中记录的 "GAN + Feat + Rec" 范式一致。创新在于两阶段策略: 先用完整 loss 训练到收敛,再用纯 feature matching loss 微调提升感知质量。
 >
-> **谱系定位**: T-Mimi 位于 Mimi (Moshi 2024) → TS3-Codec (2024) → T-Mimi (2026) 的演进链上。它不改变 Mimi 的 encoder 和量化策略,仅替换 decoder 架构以解决移动端推理瓶颈。这是"相同表征、不同解码"的实用改进路线。
+> **Token Rate and Bitrate Trade-offs** [待确认]: Mimi 的 12.5Hz 是 KB 记录中最低的 frame rate,T-Mimi 保持这一帧率不变,将优化重点放在 decoder 端的计算效率而非压缩率。
+>
+> **谱系定位**: T-Mimi 位于 Mimi (Moshi, 2024) → TS3-Codec (2024) → T-Mimi (2026) 的演进链上。它不改变 Mimi 的 encoder 和量化策略,仅替换 decoder 架构以解决移动端推理瓶颈。这是"相同表征、不同解码"的实用改进路线。
 
 > [!summary] 速查
 > - **一句话**: 将 Mimi codec 的卷积 decoder 替换为纯 Transformer decoder (受 TS3-Codec 启发),在手机端将 TTS 解码延迟从 42.1ms 降至 4.4ms (9.6x),同时通过选择性量化将存储从 163.2MB 降至 68.7MB [§1, Table 3]
 > - **路线**: Mimi encoder (frozen) → 12.5Hz codec features → 12-layer Transformer decoder (8 原始 + 4 新增, fixed-window streaming self-attention) → 2 Linear layers (upsampling) → 24kHz waveform [§3.1, Fig 1]
-> - **指标**: CMOS winrate +2.32% vs Mimi-FT (95% CI 跨 0, 无显著差异) [Table 1]; QAT 后 PESQ 3.16 vs 非量化 3.21, STOI 0.98 [§4.2.2]; 存储 68.7MB (vs 163.2MB); 延迟 4.4ms/80ms-chunk (vs 42.1ms) [Table 2, 3]
+> - **指标**: CMOS winrate +2.32% vs Mimi-FT (95% CI 含0, on-par) [Table 1]; QAT PESQ 3.16 vs FP32 3.21, STOI 0.98 [§4.2.2]; 存储 68.7MB (vs 163.2MB FP32) [Table 3]; 延迟 4.4ms/80ms-chunk (vs 42.1ms) on Samsung S22 [Table 3]
 > - **可借鉴**: (1) Transformer + Linear 替代 de-convolution 做波形上采样,对移动端推理框架 (XNNPACK) 更友好; (2) "越靠近波形的层越不能量化"——选择性混合精度 QAT 策略; (3) 10% silence padding 数据增强消除静音段噪声
 > - **局限**: 仅替换 decoder,encoder 未改动; 无公开代码; 训练数据 5M 小时为内部数据; 仅在 Samsung Galaxy S22 上测试; 人类评估仅 CMOS (无 MUSHRA/MOS); QAT 后 PESQ 仍有 0.05 差距
 
@@ -169,22 +171,6 @@ T-Mimi 是一项目标明确、执行干净的工程改进工作。它的核心�
 4. **两阶段训练 (full loss → feature matching only)**: 先用全部损失训练到收敛,再用 feature matching 微调提升感知质量,可用于其他 codec/vocoder 训练
 5. **预训练层复用**: 将 Mimi 预训练的 8 层 Transformer 权重直接用于 T-Mimi 的前 8 层,只随机初始化新增的 4 层,降低训练成本
 
-## 审阅
-
-> [!review] 审阅 (2026-06-04, auto)
-> **结论**: pass-with-fixes
-> 
-> | 原则 | 状态 | 备注 |
-> |------|------|------|
-> | 可复述 | pass | 机制理解深入,因果解释到位 |
-> | 可信赖 | pass | CMOS winrate 描述已修正,标注覆盖率约 90% |
-> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致 |
-> | 可定位 | pass | 谱系清晰: Mimi→TS3-Codec→T-Mimi,与 Moshi 笔记交叉关联 |
-> | 不污染 | pass | 反向更新为追加操作,风险低 |
-> 
-> Issues: 3 (high: 0, medium: 1, low: 2)
-> 详见 `_review/T-Mimi-review.yml`
-
 ---
 
-检索命中: [[Multi-scale STFT Discriminator]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review) | 未命中但可能相关: 无
+检索命中: [[Speech Tokenizer]]✓, [[Multi-scale STFT Discriminator]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无

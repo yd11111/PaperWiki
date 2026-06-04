@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]"]
+key_papers: ["[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-Speech Pipeline]]", "[[Attention-based TTS]]", "[[Non-autoregressive TTS]]"]
 status: pending-review
@@ -70,6 +70,7 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - 通常使用 phoneme (经 G2P 处理)
 - 部分系统 (如 CosyVoice) 使用 text tokenizer 的 BPE tokens
 - 趋势: 随着模型规模增大,character 输入也能工作
+- 发音修正新方向: SonoEdit (Singh et al., 2026) 证明可通过 knowledge editing (causal tracing + null-space constrained weight update) 在不重训练的情况下 one-shot 修正 LLM-TTS 中特定词的发音错误,绕过 G2P 前端直接编辑模型内部的 text-to-pronunciation 映射
 
 ## Character vs Phoneme 的取舍
 
