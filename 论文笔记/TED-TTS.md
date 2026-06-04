@@ -27,7 +27,7 @@ updated: 2026-06-04
 
 **Duration 控制定位**: KB 中 Duration Predictor 页面记录的演进已覆盖从 FastSpeech 到 RL-optimized duration (DMOSpeech 2, GRPO) 和 DPO 偏好对齐 (FlexSpeech)。这些都在 NAR 或独立 duration 模块上做文章。TED-TTS 的 duration steering 完全不同: 在 AR 解码过程中通过 duration embedding 动态更新 + EOS logit 调制实现 segment-level 时长控制,是 AR TTS 中 inference-time duration control 的首次探索。
 
-**已有认知**: KB 中已确认 LLM-based TTS 的核心局限之一是"细粒度控制困难: 难以精确控制 pitch/energy/duration"。TED-TTS 直接回应这一局限,证明通过 inference-time 干预可以在不改动模型的前提下实现 segment-level 情感和时长控制。Prosody Modeling 页面记录的 LLM-TTS 韵律建模依赖 in-context learning,TED-TTS 提供了一条不依赖 prompt 音频但通过 attention mask 机制实现细粒度韵律操控的替代路径。
+**已有认知**: [[Prosody Modeling]] (confirmed) 指出 LLM-TTS 的核心局限之一是"隐式建模使细粒度韵律控制困难"。TED-TTS 直接回应这一局限,证明通过 inference-time 干预可以在不改动模型的前提下实现 segment-level 情感和时长控制。Prosody Modeling 页面记录的 LLM-TTS 韵律建模依赖 in-context learning,TED-TTS 提供了一条不依赖 prompt 音频但通过 attention mask 机制实现细粒度韵律操控的替代路径。
 
 > 检索命中: [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]][待确认], [[Duration Predictor]][待确认], [[Natural Language Description for TTS]][待确认] | 未命中但可能相关: 无
 
@@ -183,6 +183,22 @@ TED-TTS 基于 IndexTTS2 的 text-to-semantic (T2S) 模块,不改动模型参数
 3. **EOS Logit Modulation for Duration Control**: 通过对 EOS token 的 logit 施加基于 progress ratio 的自适应 bias,在 AR 生成中实现全局时长控制。方案简单有效,可直接迁移到其他 AR TTS/语言模型的长度控制。
 
 4. **LLM-based Automatic Prompt Construction**: 用 LLM fine-tuning 将自由文本自动转换为结构化控制 prompt,消除 segment-level 手动标注需求。可用于任何需要结构化输入但用户期望自由文本输入的系统。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 5 个设计选择均有 WHY+HOW,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 14 个数据点全标注出处,指标命名正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率 100%,推断标注清晰 |
+> | 可定位 | pass | 三维度 KB 定位 (Emotion/Duration/Prosody),比较具体 |
+> | 不污染 | pass | 仅 append 操作,无新建页,无 overclaim 风险 |
+> 
+> Issues: 0 (high: 0, medium: 0, low: 0)
+> 详见 `_review/TED-TTS-review.yml`
 
 ## 审阅
 
