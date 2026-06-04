@@ -4,7 +4,7 @@ title: "AudioSet"
 aliases: []
 domain: "general-audio"
 tags: [environmental-sound, general-audio, large-scale, multi-label]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/UmbraTTS|UmbraTTS]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/UmbraTTS|UmbraTTS]]", "[[论文笔记/MBCodec|MBCodec]]"]
 status: pending-review
 lifecycle: active
 created: 2026-06-01

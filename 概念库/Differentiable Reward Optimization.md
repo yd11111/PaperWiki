@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]"]
+key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -36,7 +36,8 @@ DiffRO 解决了 TTS RL 的两个核心难题:
 ## 关键论文
 
 - [[论文笔记/Seed-TTS|Seed-TTS]] (ByteDance, 2024): DiffRO 的直接前驱——首次在 TTS 中系统性应用 RL post-training (REINFORCE),使用 SIM+WER 和 SER accuracy 作为 reward function,验证了 RL 对 TTS robustness/similarity/controllability 的有效性,同时发现 reward hacking 问题
-- CosyVoice 3 (2025): 首次提出 DiffRO,将 Seed-TTS 的 audio-level RL 升级为 token-level 可微优化
+- [[论文笔记/DiffRO|DiffRO]] (Gao et al., Tongyi Lab, 2507.05911, 2025): DiffRO 方法的原始独立论文,详细阐述 Token2Reward 机制 (SenseVoice→embedding layer 改造) 和 Gumbel-Softmax 可微采样,首次提出 Multi-Task Reward (MTR) 模型统一 ASR/SER/SQA/AED 多维度反馈; 在 CosyVoice 2.0 上验证,WER zh 1.56→0.78 (Seed-TTS-eval); MTR 实现零样本情感控制,accuracy 全面超越 F5-TTS/GPT-SoVITS; 揭示 FM+vocoder 去噪瓶颈限制 MOS/speaker 属性控制
+- CosyVoice 3 (2025): 将 DiffRO 集成到完整 TTS 系统中,加入 token-level KL 约束
 
 ## 相关概念
 

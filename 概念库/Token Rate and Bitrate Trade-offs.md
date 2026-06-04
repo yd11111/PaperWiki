@@ -4,7 +4,7 @@ title: "Token Rate and Bitrate Trade-offs"
 aliases: [Token Rate, 帧率与比特率权衡, Frame Rate vs Bitrate, Codec 比特率设计]
 category: "design-choice"
 tags: [bitrate, frame-rate, token-rate, codec-design, compression]
-key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/TaDiCodec|TaDiCodec]]"]
+key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/TaDiCodec|TaDiCodec]]", "[[论文笔记/VARSTok|VARSTok]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Single-codebook vs Multi-codebook]]", "[[Audio Tokenizer Taxonomy]]", "[[Quantizer Dropout]]"]
 status: pending-review
