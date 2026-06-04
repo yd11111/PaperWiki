@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[SecoustiCodec]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [ingest/deep] [[SecoustiCodec]] — 精读, kb_sources=6, 新建 0, 追加 6 (FSQ/Semantic vs Acoustic Tokens/Single-codebook vs Multi-codebook/Speech Factorization/Codebook Collapse/RVQ key_papers), 实质追加 3 (Speech Factorization 关键论文/Single-codebook 代表工作表/Codebook Collapse 关键论文), MOC 更新 1 (语音编码与量化)
+- [review/auto] [[SecoustiCodec]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] SecoustiCodec — 通过 (0 死链)
 - [kb/search] [[FuseCodec]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[模型库/EnCodec|EnCodec]]✓, [[模型库/SoundStream|SoundStream]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review), [[Codec Language Model]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
 - [ingest/deep] [[FuseCodec]] — 精读, kb_sources=6, 新建 0, 追加 4 (RVQ/Speech Tokenizer/Semantic vs Acoustic Tokens/SoundStream key_papers), MOC 更新 1 (语音编码与量化)
 - [review/auto] [[FuseCodec]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed, 1 low)
