@@ -1,0 +1,33 @@
+kb_review:
+  target_note: "论文笔记/Fun-Audio-Chat.md"
+  date: 2026-06-04
+  reviewer: auto
+  conclusion: pass
+
+  change_plan:
+    - target: "模型库/CosyVoice 3.md"
+      action: append
+      content: "追加 key_papers: [[论文笔记/Fun-Audio-Chat|Fun-Audio-Chat]] — CosyVoice 3 S3Tokenizer 在 LALM 场景的下游验证"
+      safety: pass
+      rationale: "key_papers 当前 6 条,未达上限;Fun-Audio-Chat 冻结使用 CosyVoice 3 的 S3Tokenizer,验证其跨场景迁移能力"
+    - target: "概念库/Speech Language Model.md"
+      action: skip
+      content: "key_papers 已达 45 条(上限 12)"
+      safety: pass
+      rationale: "已严重超限,不再追加"
+    - target: "概念库/Full-duplex Spoken Dialogue.md"
+      action: skip
+      content: "key_papers 已达 27 条(上限 12)"
+      safety: pass
+      rationale: "已严重超限,不再追加"
+    - target: "概念库/Speech Tokenizer.md"
+      action: skip
+      content: "key_papers 已达 77 条(上限 12)"
+      safety: pass
+      rationale: "已严重超限,不再追加"
+
+  new_entities: []
+
+  issues: []
+
+  summary: "变更计划安全。仅对 CosyVoice 3 执行 append(key_papers 6→7,不改 status);其余 3 个实体页 key_papers 均已超限,跳过追加。无新建实体页,无实质修改。"
