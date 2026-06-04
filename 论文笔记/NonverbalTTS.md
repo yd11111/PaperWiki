@@ -40,7 +40,7 @@ updated: 2026-06-04
 > [!summary] 速查
 > - **一句话**: 首个包含 10 类 NV + 8 类情感标注的 17 小时公开英语 TTS 数据集,配套自动检测-人工验证-多标注者融合 pipeline,微调 CosyVoice 后 NV 生成能力与闭源 CosyVoice2 持平
 > - **路线**: VoxCeleb + Expresso 原始音频 → BEATs NV 检测 + MFA 对齐 → emotion2vec 情感分类 → 人工验证+过滤 → 多标注者融合 (Merge + Majority Vote) → 17h NVTTS 语料 → CosyVoice-300M LM SFT → 零样本 NV-capable TTS
-> - **指标**: SIM-o 0.89 vs CosyVoice2 0.85; WER 0.19 vs 0.18; DNSMOS 3.82 vs 3.93; NV Jaccard (全类) 0.80 vs 0.78; 人类偏好 33.4% vs 35.4% (无显著差异, p>0.05) [Table 8, Fig 1]
+> - **指标**: (NVTTS-no-emo vs CosyVoice2-no-emo) SIM-o 0.89 vs 0.75; WER 0.19 vs 0.18; DNSMOS 3.82 vs 3.93; NV Jaccard (全类) 0.80 vs 0.78; 人类偏好 33.4% vs 35.4% (无显著差异, p>0.05) [Table 8, Fig 1]
 > - **可借鉴**: (1) NV 检测 (BEATs) + 强制对齐 (MFA) 组合实现自动 NV 定位; (2) 多标注者融合算法 (Merge + Align + Majority Vote) 是通用可复用的标注融合方案; (3) 仅微调 LM 组件 (非全参) + 25 epoch + 单卡 A100 即可赋予 NV 能力,成本极低; (4) NV Jaccard distance 作为 NV 生成保真度评估指标
 > - **局限**: 仅 17h 规模偏小; 仅英语; NV tokenization 无单/多 token 区分 (导致 laughter Jaccard 低于 CosyVoice2); 去掉情感标签反而更好,情感标注价值未充分体现; BEATs 检测阈值设极低 (0.1) 可能引入噪声; 仅测试 CosyVoice 系列
 
@@ -183,7 +183,10 @@ NV 在 transcription 中的精确定位通过 MFA (Montreal Forced Aligner) 实�
 
 ---
 
-> [!review] 审阅待补充
-> 生成时间: 2026-06-04 | 审阅状态: 待审阅
+> [!review] 审阅结论: pass-with-fixes (2 low issues)
+> 审阅时间: 2026-06-04 | checklist v1.1
+> - [low] traceability-gap: 速查卡片指标应注明对比版本 → 已修正
+> - [low] template-compliance: review callout 占位符 → 已修正
+> 详见 `_review/NonverbalTTS-review.yml`
 
 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[概念库/Emotion Control in TTS|Emotion Control in TTS]](pending-review), [[概念库/TTS Evaluation|TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review) | 未命中但可能相关: 无

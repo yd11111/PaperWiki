@@ -1,0 +1,58 @@
+paper: NonverbalTTS
+reviewer: agent
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: good
+    rationale: >
+      笔记清晰解释了 pipeline 四步、融合算法的 WHY、与 NVSpeech 路线的差异。
+      对数据集论文而言,方法的因果解释已充分:为什么选低阈值、为什么统一 emotion2vec、
+      为什么 merge+vote 而不是简单投票。
+
+  可信赖:
+    score: good
+    rationale: >
+      实验表中所有数字标注了 [Table 8] / [Fig 1]。数据集统计标注了 [Table 1-7]。
+      指标名正确 (SIM-o / WER / DNSMOS / Jaccard)。
+
+  可区分:
+    score: good
+    rationale: >
+      方法节 4 个设计选择均标注了 [论文原文] 或 [agent 解读]。
+      融合算法的限制分析 (2 vs 1 投票问题) 明确标注为 [agent 解读]。
+
+  可定位:
+    score: good
+    rationale: >
+      KB 背景有 3 个 confirmed 实体页的具体谱系定位。与 NVSpeech 的路线对比
+      给出了清晰的领域定位。速查卡片 5 字段完整且具体。
+
+  不污染:
+    score: good
+    rationale: >
+      反向更新计划仅做追加 (key_papers 列表追加),不涉及实质修改。
+      不新建概念页 (NonverbalTTS 是数据集,相关概念已有页面覆盖)。
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片 → 指标"
+    detail: >
+      SIM-o 0.89 vs 0.85 对比使用了 NVTTS-full 和 cosyvoice2-full 的值,
+      但正文后续对比使用 no-emotion 版本 (SIM-o 0.89 vs 0.75)。速查卡片应注明
+      使用的是哪组对比。
+    suggestion: "明确标注对比版本 (e.g., NVTTS-no-emo vs CosyVoice2-no-emo)"
+
+  - type: template-compliance
+    severity: low
+    location: "[!review] callout"
+    detail: "callout 内容为占位符,待审阅完成后更新"
+    suggestion: "审阅完成后用结论替换占位符"
+
+conclusion: pass-with-fixes
+summary: >
+  笔记质量整体良好。作为数据集论文的精读,充分覆盖了 pipeline 设计选择、
+  实验消融发现、与 NVSpeech 的路线对比。两个 low issues 不阻塞反向更新。
+  建议:修正速查卡片指标的对比版本标注,更新 review callout。
