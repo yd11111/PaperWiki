@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -62,3 +62,4 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/StreamMel|StreamMel]] (2025): 作为两阶段流式 baseline 对比; StreamMel 单阶段连续 mel 路线 FPL-A 0.01s vs CosyVoice* 0.22s (快 22 倍); cross-sentence WER-W 2.77 vs CosyVoice* 3.47 [StreamMel Table IV]
 - [[论文笔记/NonverbalTTS|NonverbalTTS]] (2025): 以 CosyVoice2 为 NV 生成 baseline; 用 17h 开源 NVTTS 数据微调 CosyVoice-300M 后,人类偏好测试 33.4% vs CosyVoice2 35.4% (p>0.05 无显著差异); NV Jaccard 0.80 vs 0.78; NVTTS SIM-o 0.89 显著优于 CosyVoice2 0.75,但 DNSMOS 3.82 略低于 3.93; laughter Jaccard NVTTS 0.25 vs CosyVoice2 0.34,归因于 CosyVoice2 的细粒度 laughter tokenization [NonverbalTTS Table 8, Fig 1]
 - [[论文笔记/EmoSteer-TTS|EmoSteer-TTS]] (2025): 以 CosyVoice2 为三个测试模型之一,通过 training-free activation steering 实现情感控制; CosyVoice2+EmoSteer WER 2.83, S-SIM 0.65, E-SIM 0.26, N-MOS 3.65; CosyVoice2 (56 DiT layers, 10 CFM steps) 每隔 5 层 steering (层 1,6,11,...) [EmoSteer-TTS Table 1, Table 2]
+- [[论文笔记/DiffRO|DiffRO]] (Gao et al., 2025): 以 CosyVoice 2.0-0.5B 为 baseline 验证 DiffRO (Differentiable Reward Optimization); DiffRO-ASR WER-zh 0.78% vs CosyVoice2 1.56% (Seed-TTS-eval), 跨语言迁移 ja 6.36% vs 9.13%, ko 5.41% vs 7.43%; DiffRO-MTR 实现零样本情感控制,accuracy 全面超越 CosyVoice2 baseline [DiffRO Table 2, Table 3]

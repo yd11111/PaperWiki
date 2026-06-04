@@ -84,7 +84,8 @@ Disentanglement 贯穿所有四类 cloning 方法:
 - [[论文笔记/USM-VC|USM-VC]] (2025): Universal Semantic Dictionary — 离线构建跨说话人 phoneme centroid 字典,用 phoneme posterior 加权组合实现 timbre-free 内容表征
 - [[论文笔记/IDEA-TTS|IDEA-TTS]] (ICASSP 2025): Incremental Disentanglement — 级联式解耦 (先环境后说话人),用 speech enhancement 的 spectral masking 提取 environment mask 作为环境因子的表示,避免环境-说话人因子纠缠
 - [[论文笔记/SecoustiCodec|SecoustiCodec]] (Qiang et al., 2025): Cross-modal contrastive disentanglement — 帧级 text-speech contrastive learning 做语义解耦 + 全局 paralinguistic encoder 显式建模 S+G≈A 残差关系,在 speech codec 中实现 semantic/paralinguistic/acoustic 三方分解
+- [[论文笔记/MSR-Codec|MSR-Codec]] (Li et al., 2025): Cascaded residual implicit disentanglement — 级联残差架构将语音分为 semantic/timbre/prosody/residual 四流,每流编码前序流的重建残差,无需对抗训练即可隐式解耦,在 424-612 bps 低比特率下实现高保真重建 + voice conversion
 
 ## 演进
 
-Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → External timbre shifter (Seed-VC, 2024) → Global semantic dictionary re-expression (USM-VC, 2025) → Fine-grained prosody disentanglement (open problem)
+Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → External timbre shifter (Seed-VC, 2024) → Global semantic dictionary re-expression (USM-VC, 2025) → Cascaded residual implicit disentanglement (MSR-Codec, 2025) → Fine-grained prosody disentanglement (open problem)
