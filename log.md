@@ -1,6 +1,17 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[UniVoice]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[UniVoice]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + 2 MOC 更新
+- [review/auto] [[UniVoice]] — pass, 0 issues
+- [lint/local] UniVoice — 通过, 0 dead links
+- [kb/search] [[ParsVoice]] — 命中 4 页(取 4): [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review)
+- [ingest/deep] [[ParsVoice]] — 精读, kb_sources=4, 新建 0, 追加 3 实体页 key_papers
+- [review/auto] [[ParsVoice]] — pass-with-fixes, 2 low issues (traceability-gap, template-compliance)
+- [lint/local] ParsVoice — 通过/0 死链, MOC 已包含 (TTS训练与评估)- [kb/search] [[Ming-UniAudio]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Speech Language Model]]✓ | 参考: [[Variational Autoencoder for TTS]](pending-review), [[Next-Token Diffusion]](pending-review)
+- [ingest/deep] [[Ming-UniAudio]] — 精读, kb_sources=6, 新建 0, 追加 8 概念 + 1 任务 + 2 数据集 key_papers, MOC 更新 2 (语音大模型与对话 + 语音编码与量化)
+- [review/auto] [[Ming-UniAudio]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] Ming-UniAudio — 通过 (0 dead links)
 - [kb/search] [[DialoSpeech]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Turn-taking in Spoken Dialogue]](pending-review), [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
 - [ingest/deep] [[DialoSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 实体页 key_papers
 - [review/auto] [[DialoSpeech]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
