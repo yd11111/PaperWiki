@@ -1,0 +1,39 @@
+paper: UltraVoice
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 2
+
+principles:
+  reproducible:
+    satisfied: true
+    notes: "方法节含 6 个设计选择的因果解释,均标注了 [论文原文]/[agent 解读] 来源; 速查可借鉴字段有具体可迁移 trick"
+  trustworthy:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90%; 指标名 (MOS/IFR/WER/CER/UTMOS) 使用正确; 方向性无误"
+  distinguishable:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 ~100%; 推断性分析用 [agent 解读] 标记; 强断言有数据支撑"
+  locatable:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (Instructed Speech Generation / Speech Language Model / CosyVoice); 创新判断有对比基准 (vs InstructTTSEval)"
+  no_pollution:
+    satisfied: true
+    notes: "不新建概念页; 反向更新均为追加 (append); 引用内容有论文出处"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "速查 > 局限"
+    detail: "原文写'未开源模型权重 (仅开源数据集)',但论文 Abstract 和 Reproducibility Statement 明确说'The complete dataset and model checkpoints are available'"
+    suggestion: "已修正为'固定单一 response 音色'"
+    fixed: true
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "论文评估了 SLAM-Omni 和 VocalNet 系列模型,但 KB 中无对应 model 页,故 models 字段仅列 CosyVoice 和 Whisper (作为 pipeline 工具)"
+    suggestion: "可接受; 待 SLAM-Omni/VocalNet model 页创建后补充"
+    fixed: false

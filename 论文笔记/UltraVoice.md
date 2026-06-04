@@ -38,7 +38,7 @@ updated: 2026-06-04
 > - **路线**: UltraChat 文本 → GPT-4o 风格指令注入 → GPT-4o-audio-preview/Edge-TTS/CosyVoice 语音合成 → Whisper ASR 质控过滤 → SFT spoken dialogue 模型
 > - **指标**: SLAM-Omni-0.5B IFR 28.30→68.39% (+40.09pp); VocalNet-8B MOS 2.85→3.68 (+29.12%); URO-Bench VocalNet-7B SFT Avg Basic 81.56 超过 Qwen2.5-Omni-7B 的 70.69 [Table 4, Table 5, Table 10]
 > - **可借鉴**: 用 GPT-4o 作为"风格指令扩写器"批量生成多样化 style prompt 的数据增强策略; 用 Whisper ASR CER<20% 作为合成语音质控门槛
-> - **局限**: 数据全合成 (GPT-4o 合成文本 + TTS 合成语音),无真人对话数据; 仅单轮对话; 多语言控制在 LLaMA backbone 上失效 (Language IFR +0.00~0.33pp); 未开源模型权重 (仅开源数据集)
+> - **局限**: 数据全合成 (GPT-4o 合成文本 + TTS 合成语音),无真人对话数据; 仅单轮对话; 多语言控制在 LLaMA backbone 上失效 (Language IFR +0.00~0.33pp); 固定单一 response 音色
 
 ## 核心问题
 
@@ -179,5 +179,8 @@ Step 4: Quality Control & Filtering
 
 5. **通用对话能力作为风格控制 SFT 的"bonus"**: 实验表明高质量风格控制数据的 SFT 不会损害通用能力,甚至可能提升。这为"数据质量 > 数据纯度"的假设提供了支持。
 
-> [!review] 审阅结果
-> 待审阅 — 请运行 paperwiki-reviewer 或参见 `_review/UltraVoice-review.yml`
+> [!review] 审阅结果: pass-with-fixes (2026-06-04)
+> **结论**: pass-with-fixes (2 issues: 1 medium fixed, 1 low deferred)
+> - [x] ~~factual-error (medium): 速查局限误写"未开源模型权重",实际论文声明开源 dataset + checkpoints~~ → 已修正
+> - [ ] template-compliance (low): models 字段仅列 KB 已有模型页 (CosyVoice/Whisper),SLAM-Omni/VocalNet 待建页后补充
+> 详见 `_review/UltraVoice-review.yml`
