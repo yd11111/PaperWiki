@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[MPO]] — 命中 3 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speaker Verification]](pending-review)
+- [ingest/deep] [[MPO]] — 精读, kb_sources=3, 新建 0, 追加 3 (Differentiable Reward Optimization key_papers+演进线, LLM-based TTS key_papers, TTS Evaluation key_papers), MOC 更新 2 (TTS训练与评估, 零样本语音合成)
+- [review/auto] [[MPO]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] MPO — 通过 (0 死链)
+- [kb/search] [[Dragon-FM]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Next-Token Diffusion]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[Dragon-FM]] — 精读, kb_sources=6, 新建 0, 追加 6 (CFM/FSQ/NTD/TokenRate/SingleMulti/CodecLM key_papers), MOC 更新 3 (TTS-总览/零样本语音合成/语音编码与量化)
+- [review/auto] [[Dragon-FM]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] Dragon-FM — 通过 (0 死链)
 - [kb/search] [[EME-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Duration Predictor]](pending-review), [[F0 Modeling]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Mel Spectrogram]](pending-review)
 - [ingest/deep] [[EME-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS key_papers+贡献描述, Prosody Modeling key_papers), MOC 更新 1 (TTS-总览)
 - [review/auto] [[EME-TTS]] — pass, 0 issues

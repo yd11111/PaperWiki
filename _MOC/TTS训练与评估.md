@@ -25,6 +25,7 @@
 - [[论文笔记/MPO|MPO]] — 2025, NWPU, multidimensional preference set (各维度独立选极值) + CE loss 正则化防 DPO 退化, CER 3.90/SIM 0.577, ABX 52.3% win vs baseline
 - [[论文笔记/Koel-TTS|Koel-TTS]] — 2025, NVIDIA, ASR+SV reward 驱动 DPO/RPO + Pareto 最优多目标偏好配对, CER 0.55% LibriTTS unseen SOTA, GT-as-Chosen 失败实验
 - [[论文笔记/F5R-TTS|F5R-TTS]] — 2025, Tencent, 首次将 GRPO 集成到 NAR flow-matching TTS, output probabilization 使 CFM 兼容 RL, WER -29.5% / SIM +4.6%
+- [[论文笔记/DLPO|DLPO]] — 2025, OSU, RLHF 微调 diffusion TTS (WaveGrad 2), diffusion loss 作为 reward 正则项, UTMOS 3.65/NISQA 4.02, 67% 人类偏好
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -65,6 +66,7 @@
 ```
 Post-training 演进:
   SpeechAlign (2024, DPO on codec LM)
+  → MPO (2025, multidimensional preference set + CE regularization)
   → FPO (2025, token-level selective DPO for TTS)
   → RL-for-Audio-LLM (2025, GRPO vs DiffRO 统一框架)
   → GSRM (2025, generative speech reward model)
