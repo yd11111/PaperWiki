@@ -15,6 +15,7 @@
 
 ### Post-training
 - [[论文笔记/SpeechAlign|SpeechAlign]] — 2024, 首次偏好学习于 codec LM, golden vs synthetic, iterative DPO, WER 6.0/SIM 0.90
+- [[论文笔记/DiffRO|DiffRO]] — 2025, 通义, DiffRO 原始论文, Token2Reward+Gumbel-Softmax+MTR, WER 1.56→0.78 (zh), 零样本情感控制
 - [[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]] — 2025, 通义 RL 框架, GRPO vs DiffRO, Combined+Filter, ASR WER -5.3%
 - [[论文笔记/GSRM|GSRM]] — 2025, generative speech reward model, acoustic feature+CoT, PCC 0.465, online RLHF 82% win
 - [[论文笔记/RIO|RIO]] — 2025, reverse inference optimization, PPC, WER 3.4/SIM 0.96/bad case 1%
@@ -71,6 +72,7 @@ Post-training 演进:
   SpeechAlign (2024, DPO on codec LM)
   → MPO (2025, multidimensional preference set + CE regularization)
   → FPO (2025, token-level selective DPO for TTS)
+  → DiffRO (2025, Token2Reward + Gumbel-Softmax + MTR 原始论文)
   → RL-for-Audio-LLM (2025, GRPO vs DiffRO 统一框架)
   → GSRM (2025, generative speech reward model)
   → RIO (2025, reverse inference optimization)
