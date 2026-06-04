@@ -1,0 +1,55 @@
+review:
+  paper: "SonoEdit"
+  path: "论文笔记/SonoEdit.md"
+  date: 2026-06-04
+  reviewer: auto
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节包含完整因果解释(WHY), 三个关键设计选择均回答了'为什么选这个而不是那个', 速查卡片的可借鉴字段列出三个具体可迁移技巧"
+  可信赖:
+    score: 9
+    verdict: pass
+    reason: "数字型 claim 覆盖率 ~95%, 所有指标方向正确(WER↓/SIM↑/MOS↑), 速查含具体数字+数据集+出处"
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "[论文原文]/[agent 解读] 标注覆盖率 100%, 方法节每段均标注来源, '已知首个'限定为论文自身声称"
+  可定位:
+    score: 9
+    verdict: pass
+    reason: "KB 背景含谱系定位(后部署修正环节)、已有认知(SIM/WavLM)、创新判断(ROME/AlphaEdit跨领域迁移), 对比基准明确"
+  不污染:
+    score: 8
+    verdict: pass
+    reason: "未新建概念页, 所有引用均指向已存在页面, 反向更新为 append-only (追加 key_papers)"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "方法节, Acoustic Causal Tracing"
+    detail: "论文 §4.1 说 'layers 16-22' 但 Table 1 和 §4.3 说 'layers 15-21',笔记统一使用 15-21。可加一句注释说明论文内部有此不一致"
+    suggestion: "在 layers 15-21 处加脚注: '论文 §4.1 提及 layers 16-22,可能为 1-indexed 或笔误;Table 1/§4.3 均为 15-21'"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空,但论文使用了 HardNoun-300(自建)和 LibriTTS(null-space 计算)"
+    suggestion: "HardNoun-300 为自建评估集,不需要实体页;可在 datasets 中注释或保持空"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "仅列 SNAC,未列主要评估模型 Orpheus-TTS。Orpheus-TTS 无实体页但可作为 plain text 引用"
+    suggestion: "models 字段加入 Orpheus-TTS (plain text)"
+
+conclusion: pass
+issue_summary: "0 high, 1 medium, 2 low"
+
+learning_signals: []

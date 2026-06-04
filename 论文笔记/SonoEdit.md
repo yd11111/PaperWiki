@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, pronunciation-correction, knowledge-editing, causal-tracing, null-space, model-editing, LLM-TTS, one-shot-editing]
 concepts: ["[[LLM-based TTS]]", "[[Phoneme Representation]]", "[[Speaker Embedding]]", "[[Codec Language Model]]", "[[Speech Tokenizer]]"]
-models: ["[[论文笔记/SNAC|SNAC]]"]
+models: ["[[论文笔记/SNAC|SNAC]]", "Orpheus-TTS"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -157,3 +157,19 @@ SonoEdit 本身 **不需要训练** — 这是其最核心的设计优势 [§3.4
 3. **One-shot deployment patch**: 将模型修正从"重训练"简化为"权重补丁",特别适合已部署系统的快速修复。在产品 TTS 中,可建立 pronunciation fix registry,每个修正对应一个 rank-1 update,按需应用。
 
 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Speaker Embedding]] | 过滤: [[Codec Language Model]](pending-review), [[Phoneme Representation]](pending-review), [[Text-to-Speech Pipeline]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含完整因果解释,三个设计选择均回答 WHY,速查含三个可迁移技巧 |
+> | 可信赖 | pass | 数字 claim 覆盖率 ~95%,指标方向正确,速查含数字+数据集+出处 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖 100%,来源边界清晰 |
+> | 可定位 | pass | KB 背景含谱系定位+已有认知+创新判断,对比基准明确 |
+> | 不污染 | pass | 未新建概念页,所有引用指向已存在页面 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/SonoEdit-review.yml`
