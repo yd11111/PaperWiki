@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]"]
+key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -68,11 +68,19 @@ Zhong et al. (2025) [[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]] 在单�
 
 ## 演进
 
-RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Industrial-scale GRPO (TTS-1, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025)
+RLHF for NLP (2022) → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Multidimensional preference set + CE regularization / MPO (NWPU, 2025) → Fine-grained token-level DPO / FPO (NWPU, 2025) → Token-level differentiable optimization / DiffRO (CosyVoice 3, 2025) → GRPO vs DiffRO 统一对比 + Combined (Tongyi, 2025) → Multi-Reward GRPO for single-codebook TTS (Tencent, 2025) → Industrial-scale GRPO (TTS-1, 2025) → Component-level GRPO for duration predictor (DMOSpeech 2, 2025) → GRPO for NAR flow-matching TTS via output probabilization (F5R-TTS, 2025) → Token-level KTO with contrastive LLM weight estimation / TKTO (SpiralAI, 2025) → GRPO prosody collapse diagnosis + iterative human-DPO (Channel Corp, 2026)
+
+## GRPO Prosody Collapse + Iterative Human-DPO (Channel Corp, 2026)
+
+Shin et al. (2026) [[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]] 提供了 GRPO 韵律坍缩的直接实验证据,并以 iterative DPO + 真人偏好标注作为修复方案。核心发现: (1) CER/NLL-driven GRPO 使 Llasa-1B 的 logF0 分布显著收窄,CER 降至 2.20% 但 ELO (human preference) 降至 753.7 (所有系统最低); (2) 加入 speaker-similarity reward 导致 CER 暴涨至 42.63% + EOS 失败; (3) iterative DPO (200 human pairs/round, moving reference) 在 Round 2 达到 ELO 1190.1 (最高) + CER 3.60%。与其他路线的区别: 本文不追求自动化 reward,而是论证"当 prosody 不可自动 reward 时,少量人类偏好是最实用的路径"。
 
 ## Fine-grained Preference Optimization / FPO (NWPU, 2025)
 
 Yao et al. (2025) [[论文笔记/FPO|FPO]] 提出 token-level 选择性 DPO,在 utterance-level DPO 和 DiffRO 之间开辟第四条路线: 仍用 DPO 框架但将 loss 计算下沉到 error segment tokens。核心贡献: (1) 将 TTS segmental errors 分为 temporal modeling errors (局部标注) 和 semantic-phonetic alignment errors (级联标注至序列末尾); (2) 通过 indicator function 仅在 error tokens 上计算 DPO loss。在 CosyVoice/CosyVoice2/Llasa 三个 backbone 上,FPO 以 3-4x 数据效率 (200 utterances ≈ UNO 600 utterances) 将 bad case ratio 降低 40-56%。与 DiffRO 的核心区别: FPO 仍需显式偏好数据标注,而 DiffRO 通过可微 reward model 实现 end-to-end 优化; FPO 不使用 Gumbel-Softmax。
+
+## Token-level KTO / TKTO (SpiralAI, 2025)
+
+Kotoge & Sasaki (2025) [[论文笔记/TKTO|TKTO]] 提出第五条路线: 基于 prospect theory 的 token-level 无配对优化。核心方法: (1) 用 label-flipped KTO 训练 contrastive LLM pair (π+ 和 π-),其 log-ratio 自动估计 token-level importance weights; (2) 将 KTO 从 sequence-level 推广到 token-level weighted optimization。在 CosyVoice 2 (0.5B) 上验证,日语歧义发音 Acc 0.668→0.958, CER 降低 54%。与 FPO 的核心区别: TKTO 不需要 ASR forced alignment 标注 error segments,token importance 由 contrastive LLMs 自动估计; 同时消除了对配对数据的依赖 (KTO vs DPO),可利用 6x 更多数据。
 
 ## Component-level GRPO (DMOSpeech 2, Columbia/NewsBreak, 2025)
 
