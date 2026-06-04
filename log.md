@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DialoSpeech]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Turn-taking in Spoken Dialogue]](pending-review), [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
+- [ingest/deep] [[DialoSpeech]] — 精读, kb_sources=6, 新建 0, 追加 8 实体页 key_papers
+- [review/auto] [[DialoSpeech]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] DialoSpeech — 通过 (0 dead links), MOC 已包含 (语音大模型与对话)
+- [kb/search] [[MAVE]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review), [[Non-autoregressive TTS]](pending-review), [[TTS Evaluation]](pending-review)
+- [ingest/deep] [[MAVE]] — 精读, kb_sources=6, 新建 0, 追加 6 概念 + 1 任务 + 2 模型 key_papers, MOC 更新 2 (TTS-总览 + 零样本语音合成)
+- [review/auto] [[MAVE]] — pass-with-fixes, 3 issues (1 medium, 2 low)
+- [lint/local] MAVE — 通过 (0 dead links)
 - [kb/search] [[HD-PPT]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓, [[Instructed Speech Generation]]✓, [[Speech Factorization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Audio-Language Pretraining]](pending-review)
 - [ingest/deep] [[HD-PPT]] — 精读, kb_sources=6, 新建 0, 追加 9 实体页 key_papers
 - [review/auto] [[HD-PPT]] — pass, 2 issues (0 high, 0 medium, 2 low)
