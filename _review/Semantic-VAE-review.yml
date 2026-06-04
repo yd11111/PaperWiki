@@ -1,0 +1,58 @@
+paper: Semantic-VAE
+reviewer: agent-auto
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  comprehensible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  navigable: pass
+  no-pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "速查卡片 / 实验表格"
+    detail: >
+      论文 abstract 和正文 §4.1 均声称 "2.10% WER",但 Table 1 主结果 (1M iterations)
+      显示 1.95% WER。笔记引用了两个数字但未明确解释差异来源。
+      经核实: 2.10% 来自 Table 3 ablation (600K iterations), 1.95% 来自 Table 1 (1M iterations)。
+    suggestion: >
+      在实验节添加脚注说明: "注意: abstract 引用的 2.10% 来自 600K iteration 的 ablation study [Table 3],
+      Table 1 主实验 (1M iterations) 的 WER 为 1.95%。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "训练策略 / Align Loss"
+    detail: >
+      Align Loss 公式标注为 "[Eq. ?]"。原文中该公式介于 Eq.3 和 Eq.4 之间,
+      未编号,但有明确文字描述。
+    suggestion: >
+      将 "[Eq. ?]" 改为 "[§2.2]"。
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: navigable
+    location: "frontmatter datasets"
+    detail: >
+      datasets 字段为空,但论文使用了 LibriSpeech-PC, LibriTTS, Libriheavy 三个数据集。
+      虽然这些数据集没有对应的实体页,但可以标注名称。
+    suggestion: >
+      保持空列表,因为这些数据集没有对应的 vault 实体页。不需要修改。
+
+summary: |
+  笔记整体质量良好。方法节包含 4 个因果解释完整的设计选择,
+  每个都回答了"为什么选这个而不是那个"。速查卡片 5 字段均有实质内容。
+  KB 背景节定位准确,创新判断有对比基准。
+
+  主要问题是 abstract WER (2.10%) 与 Table 1 WER (1.95%) 的差异未解释清楚,
+  但这是论文自身的表述不一致,笔记只需标注即可。
+
+  无 high issue,可放行反向更新。

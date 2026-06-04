@@ -102,7 +102,7 @@ $$L_{\text{total}} = L_{\text{VAE}} + \lambda_{\text{Align}} L_{\text{Align}}$$
 其中:
 - $L_{\text{VAE}} = L_{\text{gen}} + \lambda_{\text{adv}} L_{\text{adv}} + \lambda_{\text{feat}} L_{\text{feat}}$ [Eq. 3]
 - $L_{\text{gen}} = \lambda_{\text{recon}} L_{\text{recon}} + \lambda_{\text{KL}} L_{\text{KL}}$ [Eq. 2]
-- $L_{\text{Align}} = -\frac{1}{T}\sum_{t=1}^{T} \cos(h^{[t]}, z^{[t]})$ — 逐帧 cosine similarity [Eq. ?]
+- $L_{\text{Align}} = -\frac{1}{T}\sum_{t=1}^{T} \cos(h^{[t]}, z^{[t]})$ — 逐帧 cosine similarity [§2.2]
 
 **超参数** [§3.1]: $\lambda_{\text{Align}}=1$, $\lambda_{\text{KL}}=0.01$, $\lambda_{\text{adv}}=1$, $\lambda_{\text{feat}}=2$, $\lambda_{\text{recon}}=15$
 
@@ -135,6 +135,9 @@ $$L_{\text{total}} = L_{\text{VAE}} + \lambda_{\text{Align}} L_{\text{Align}}$$
 3. **跨模型泛化**: 在 E2 TTS 上也观察到一致的改善 (WER 3.51→2.31, SIM 0.61→0.62) [Table 1],说明 Semantic-VAE 的收益不限于特定 TTS 架构。
 
 4. **VAE 优于 mel vocoder**: 即使是 vanilla VAE (PESQ 3.75, STOI 0.97) 的重建质量也显著优于 Vocos vocoder (PESQ 3.57, STOI 0.96),表明端到端 VAE 训练的 latent 比 mel spectrogram 更高效地保留信息 [Table 2, 论文原文]。
+
+> [!note] WER 数字差异说明
+> 论文 abstract 和 §4.1 正文引用 "2.10% WER",对应 Table 3 ablation study (600K iterations 训练)。Table 1 主实验使用 1M iterations 训练,WER 进一步降至 1.95%。本笔记实验表格引用 Table 1 的 1.95%。
 
 ## 局限性
 
@@ -172,4 +175,7 @@ Semantic-VAE 的核心洞见是优雅的: 高维 VAE latent 之所以难以用�
 3. **高维 latent + 语义正则 > 低维 latent**: 不要通过压缩维度来简化学习,而是通过正则化来引导结构。这一设计哲学可迁移到其他 latent variable model。
 
 > [!review] 审阅状态
-> 待审阅。生成日期: 2026-06-04。
+> **结论: pass-with-fixes** (2026-06-04, agent-auto, checklist v1.1)
+> - [medium] traceability-gap: abstract WER (2.10%) 与 Table 1 WER (1.95%) 差异已标注
+> - [low] traceability-gap: Align Loss 公式标注已修正为 [§2.2]
+> - 详见 `_review/Semantic-VAE-review.yml`
