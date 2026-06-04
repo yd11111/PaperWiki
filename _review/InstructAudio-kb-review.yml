@@ -1,0 +1,44 @@
+reviewer: auto
+date: 2026-06-04
+note: 论文笔记/InstructAudio.md
+
+change_plan:
+  - target: "概念库/Instruction-Guided Speech Synthesis.md"
+    action: append
+    detail: |
+      追加 InstructAudio 贡献段落到正文(key_papers 已达 26 条,超过 12 上限)。
+      InstructAudio 首次将 instruction-guided 范式从 TTS 扩展到统一 TTS+TTM。
+
+  - target: "概念库/Natural Language Description for TTS.md"
+    action: append
+    detail: |
+      追加 InstructAudio 到正文相关论文段(key_papers 已达 31 条,超过 12 上限)。
+      InstructAudio 用统一 NL description 同时控制语音和音乐生成。
+
+  - target: "模型库/CosyVoice 2.md"
+    action: append
+    detail: |
+      追加到 "作为 Baseline 被引用" section(key_papers 已达 23 条,超过 12 上限)。
+      InstructAudio 以 CosyVoice2 为 instruction-based TTS baseline。
+
+  - target: "概念库/Singing Voice Synthesis.md"
+    action: append
+    detail: |
+      追加 InstructAudio 到 key_papers(当前 5 条,未达上限)。
+      InstructAudio 的 TTM 组件与传统 SVS 有交集但输入范式不同。
+
+  - target: "概念库/Conditional Flow Matching.md"
+    action: skip
+    detail: InstructAudio 使用 CFM 但未贡献新的 flow matching 技术。
+
+  - target: "概念库/Diffusion-based TTS.md"
+    action: skip
+    detail: InstructAudio 使用 MM-DiT 但未贡献新的 diffusion 技术。
+
+conclusion: pass
+issues: []
+rationale: |
+  所有 append 操作均为追加,不修改已有内容,不改变 status。
+  Singing Voice Synthesis key_papers 追加前检查:当前 5 条,追加后 6 条,未超上限。
+  所有 key_papers 超限的页面改为正文追加,符合规则。
+  无 factual-error 或 overclaim 风险。
