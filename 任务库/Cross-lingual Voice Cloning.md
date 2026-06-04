@@ -4,7 +4,7 @@ title: "Cross-lingual Voice Cloning"
 aliases: [跨语言语音克隆, Cross-lingual TTS, Cross-lingual Speech Synthesis]
 tags: [TTS, cross-lingual, voice-cloning, multilingual]
 key_approaches: ["Multilingual LLM + shared tokenizer", "Language-agnostic speaker embedding"]
-key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]]"]
+key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/Meta Learning TTS 7000 Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS]
 status: confirmed
