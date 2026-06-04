@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[ParaStyleTTS]] — 命中 6 页(取 6): [[CosyVoice]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[VITS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[ParaStyleTTS]] — 精读, kb_sources=6, 新建 0, 追加 7 实体页 key_papers, MOC 更新 1 (TTS-总览)
+- [review/auto] [[ParaStyleTTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] ParaStyleTTS — 通过 (0 dead links)
 - [kb/search] [[TMD-TTS]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Mel Spectrogram]](pending-review), [[VITS]](pending-review)
 - [ingest/deep] [[TMD-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 实体页 key_papers, MOC 更新 1 (TTS-总览)
 - [review/auto] [[TMD-TTS]] — pass, 2 issues (0 high, 0 medium, 2 low)
