@@ -13,6 +13,7 @@
 - [ingest/deep] [[LatinX]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS/Codec Language Model/Cross-lingual Voice Cloning/Speaker Embedding/Differentiable Reward Optimization/Voice Cloning Taxonomy key_papers), MOC 更新 2 (零样本语音合成/TTS训练与评估)
 - [review/auto] [[LatinX]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed, 1 low)
 - [lint/local] LatinX — 通过 (0 死链)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核
 - [kb/search] [[Llasa+]] — 命中 6 页(取 Top 3 confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
 - [ingest/deep] [[Llasa+]] — 精读, kb_sources=3, 新建 0, 追加 7 (LLM-based TTS/Speech Tokenizer/Codec Language Model/Single-codebook vs Multi-codebook/Streaming Spoken Dialogue key_papers, SEED-TTS-Eval used_by, Zero-shot Speech Synthesis key_models), MOC 更新 2 (语音编码与量化/零样本语音合成), Streaming Spoken Dialogue 延迟表追加 2 条
 - [review/auto] [[Llasa+]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
