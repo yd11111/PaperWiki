@@ -58,4 +58,4 @@ review:
 
   learning_signals: []
 
-  summary: "笔记整体质量高,方法理解深入,因果解释充分,实验数据标注完整。主要问题集中在frontmatter字段遗漏(Speaker Embedding、baselines、datasets),不影响反向更新安全性。"
+  summary: "笔记整体质量高,方法理解深入,因果解释充分(37处出处标注、10处来源归属标注),实验数据标注完整且与原文交叉验证一致。frontmatter 遗漏已修正。1个低严重度 overclaim 问题不影响反向更新安全性。"

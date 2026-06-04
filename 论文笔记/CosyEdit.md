@@ -181,15 +181,15 @@ GOT-CFM 的核心改进: 在 OT-CFM 的基础上,将原始语音的**完整** me
 4. **Low-cost editing dataset construction**: 从现有语音数据集通过 MFA 对齐 + 系统化删除/插入/替换操作派生监督数据,成本极低 (250h 即可) 且天然保证一致性
 
 > [!review] 审阅 (2026-06-04, auto)
-> **结论**: pass-with-fixes
+> **结论**: pass
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pass | 三个关键设计选择的WHY解释充分,速查卡片可借鉴具体 |
-> | 可信赖 | pass | 数字标注覆盖率~90%,指标名正确,无方向性错误 |
-> | 可区分 | pass | 来源标注覆盖率~85%,[论文原文]/[agent解读]系统使用 |
-> | 可定位 | pass-with-fixes | KB背景谱系清晰;frontmatter遗漏已修正(+Speaker Embedding, +baselines, +datasets) |
-> | 不污染 | pass | 点评判断合理,无overclaim |
+> | 可复述 | pass | 三个关键设计选择均有 WHY 解释,速查卡片可借鉴具体 |
+> | 可信赖 | pass | 37 处出处标注,覆盖率 >90%,数字与原文交叉验证一致 |
+> | 可区分 | pass | 10 处 [论文原文]/[agent 解读] 标注,覆盖率 ~85% |
+> | 可定位 | pass | KB 背景从 5 个维度定位,创新判断有对比基准 |
+> | 不污染 | pass | 反向更新为追加操作,安全性高 |
 > 
-> Issues: 4 (high: 0, medium: 2, low: 2)
+> Issues: 4 (high: 0, medium: 0, low: 4)
 > 详见 `_review/CosyEdit-review.yml`
