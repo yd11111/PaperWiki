@@ -4,7 +4,7 @@ title: "Single-codebook vs Multi-codebook"
 aliases: [SVQ vs RVQ, 单码本 vs 多码本, Single Codebook, Single-stream Tokenizer, Flat Token]
 category: "design-choice"
 tags: [quantization, codec-design, SVQ, RVQ, single-codebook, audio-codec]
-key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/UniTTS|UniTTS]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/Llasa+|Llasa+]]"]
+key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/OmniVoice|OmniVoice]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/UniTTS|UniTTS]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/Llasa+|Llasa+]]", "[[论文笔记/SecoustiCodec|SecoustiCodec]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[Residual Vector Quantization]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Audio Tokenizer Taxonomy]]", "[[Codec Language Model]]", "[[Speech Tokenizer]]"]
 status: pending-review
