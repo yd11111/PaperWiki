@@ -119,3 +119,18 @@ Mel spectrogram (传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semant
 **关键优势**: speech-to-text token ratio 约 2:1 (接近 BPE 粒度), 使 LLM 可自然处理语音和文本的交错序列。90 分钟对话仅需 ~40K tokens (传统 50Hz codec 需 ~270K)。
 
 - **Cont-SPT** (Li et al., NAACL 2025 Findings): 最简洁的连续 tokenizer 方案 — 直接去掉 RVQ,保留 codec encoder 的连续 embedding 输出作为 speech token。VAE-like 预训练 (重建 + ASR CTC loss) + 与 LM 联合训练 (LR=0.05x)。频域分析证明连续 tokenizer 在高频段信息保留显著优于离散版 (8kHz: 0.55 vs 0.34)。在 LibriSpeech 上 WER 6.59% / SIM 0.73 优于 VALL-E baseline
+
+> [!review] 实体页审阅 (2026-06-04)
+> **结论:** revise
+> **原则:** 不混层 revise | 不过载 revise | 可溯源 pass-with-fixes | 可导航 revise | 不污染 pass-with-fixes
+> **结构:** key_papers 77 (限 12) | H2 8 (限 6) | 行数 105 (限 200)
+> **问题:** 5 high, 3 medium, 2 low
+> - ❌ [overload] frontmatter key_papers: 77 条,超限 6.4 倍,含大量下游使用者而非 tokenizer 核心论文
+> - ❌ [scope-drift] SpeechLM 三类体系 + Survey 五轴 Taxonomy: survey 级内容占正文 39%
+> - ❌ [scope-drift] 演进: 研究演进时间线属于 MOC 层
+> - ❌ [layer-mixing] NAC Token 的语言学统计特性: 单篇论文摘要,非概念定义
+> - ❌ [signal-dilution] key_papers 混入大量下游应用论文,导航信号完全稀释
+> - ⚠️ [frontmatter-drift] aliases 含 'Semantic Token'/'Discrete Speech Token'(子类型/输出物,非同义词)
+> - ⚠️ [overload] H2 标题 8 个超限
+> - ⚠️ [layer-mixing] 关键论文节中论文含详细架构描述
+> **反向更新:** ❌ 需先重构(key_papers 精简 + 移除 survey/paper 级 section)

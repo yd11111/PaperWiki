@@ -38,7 +38,7 @@ updated: 2026-06-04
 > - **路线**: opt-out speaker 参考语音 + retain speaker 池(N=30) → 预计算 ID-prototype (各 DiT block 的 FFN 输出均值) → 推理时逐 step 计算 steering vector (opt-out 激活 - ID-prototype 的归一化差) → 动态选择 cos sim < tau 的 layer-step 组合 → 减去 identity 方向投影 → ODE solver + vocoder → unlearned 语音
 > - **指标**: SIM-SO 0.477 vs TGU 0.510 (更低=更好的 unlearning) [Table 1]; WER-SO 3.25 vs TGU 4.03 [Table 1]; SIM-UO 0.488 (unseen, TGU 无法处理) [Table 2]; SIM-Emo 0.723 vs F5-TTS 0.732 (情感几乎不损) [Table 3]; 训练时间 0h vs TGU 430h [Table 1]
 > - **可借鉴**: (1) "ID-prototype + dynamic threshold" 的两阶段 intervention selection 思路 -- 先用全局统计 (mu+k*sigma) 选 layer,再用 layer 内均值选 step,实现稀疏且自适应的干预; (2) 用 FFN 输出而非 attention 输出做 steering,因为 FFN 做了非线性通道混合后包含更强的 timbre/identity 信号 [§2.2]; (3) steering vector 的 L2 归一化确保方向纯净、强度由 alpha 单独控制
-> - **局限**: 仅在 F5-TTS (DiT-based flow matching) 上验证,未测试 AR 架构; WER 在 unlearning 后有一定上升 (retain: 1.95→1.95 不变,但 SO/UO: 3.25-3.26 vs baseline 3.36/2.03); alpha=1.2 和 k=1 (对应 mu+sigma) 为经验值,缺乏理论指导; 未讨论声音相似 speaker 的误伤风险
+> - **局限**: 仅在 F5-TTS (DiT-based flow matching) 上验证,未测试 AR 架构; unseen opt-out 的 WER 上升明显 (UO: 2.03→3.26),seen opt-out WER 略有改善 (SO: 3.36→3.25); alpha=1.2 和 k=1 (对应 mu+sigma) 为经验值,缺乏理论指导; 未讨论声音相似 speaker 的误伤风险
 
 ## 核心问题
 
@@ -140,7 +140,7 @@ $$\bar{X}_{\text{Opt}}^{(\ell',t')} = X_{\text{Opt}}^{(\ell',t')} - \alpha \left
 ## 局限性
 
 1. **仅在 F5-TTS 上验证**: 所有实验基于 DiT-based flow matching 架构。论文声称"generally applicable to other DiT-based TTS architectures" [§2.1],但未提供 AR 模型 (VALL-E, CosyVoice) 或非 DiT 架构的实验。对于 AR 模型中 speaker identity 的编码方式可能不同,steering 是否有效未知 [agent 解读]
-2. **WER 上升不可忽略**: opt-out speaker 的 WER 从 3.36 升至 3.25 (seen) 和 2.03 升至 3.26 (unseen) [Table 1, 2]。虽然优于 TGU,但仍有明显内容保真度损失 [agent 解读]
+2. **Unseen opt-out 的 WER 上升明显**: unseen opt-out 的 WER 从 2.03 升至 3.26 [Table 2],内容保真度损失不小; seen opt-out 的 WER 反而略有改善 (3.36→3.25 [Table 1]),说明 steering 对 unseen speaker 的干预精度不如 seen speaker [agent 解读]
 3. **缺少恢复攻击分析**: Kim et al. 讨论了 fine-tuning 恢复攻击 [Table 12 of their paper],但 TruS 完全未讨论攻击者绕过推理时干预的可能性 -- 例如攻击者若能获取模型权重,可以直接跳过 TruS 的 steering 模块 [agent 解读]
 4. **alpha=1.2 的鲁棒性**: 仅报告了 alpha=1.2 这一个值,未消融 alpha 对 identity suppression vs 内容保持的影响曲线 [agent 解读]
 5. **未讨论声音相似 speaker 的误伤**: 与 forget speaker 声音高度相似的 retain speaker 是否会被部分抑制?Kim et al. 至少在 Appendix H 做了简要分析 (Pearson r=0.14),但本文完全未涉及 [agent 解读]

@@ -114,6 +114,10 @@ Survey 指出 description-based datasets 的特点:
 - [[Speaker Embedding]]: NL description 可替代显式 speaker embedding
 - [[Prosody Modeling]]: 描述中包含韵律指令
 
+## 统一语音+音乐的 NL Description (InstructAudio)
+
+[[论文笔记/InstructAudio|InstructAudio]] (Qiang et al., 2025) 将 NL description 范式从 TTS 扩展到统一 TTS+TTM。NL instruction 同时控制 timbre (gender, age)、paralinguistic (emotion, style, accent) 和 musical (genre, instrument, rhythm, atmosphere) 属性,消除了对参考音频的依赖。在 Seed-TTS WER 上超越所有 baseline (EN 1.52%, ZH 1.35%),但 MOS 低于使用参考音频的 CosyVoice2 (NMOS 3.46 vs 3.65),体现了纯文本控制的 one-to-many mapping 固有代价。详见 [[论文笔记/InstructAudio|InstructAudio]]。
+
 ## 演进
 
-Style tagging (GST, 离散标签, 2018) → Reference encoder (从音频提取, 2018-2022) → PromptTTS (文本描述5属性, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (三阶段NL理解, 2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (灵活多提示, 2025)
+Style tagging (GST, 离散标签, 2018) → Reference encoder (从音频提取, 2018-2022) → PromptTTS (文本描述5属性, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (三阶段NL理解, 2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (灵活多提示, 2025) → 统一 TTS+TTM NL description (InstructAudio, 2025)

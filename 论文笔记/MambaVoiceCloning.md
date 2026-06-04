@@ -9,7 +9,7 @@ year: 2026
 venue: "ICLR 2026 (under review)"
 tags: [TTS, SSM, Mamba, diffusion, voice-cloning, streaming, efficiency, encoder-design, state-space-model]
 concepts: ["[[Diffusion-based TTS]]", "[[Prosody Modeling]]", "[[F0 Modeling]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Attention-based TTS]]"]
-models: ["[[VITS]]", "[[NaturalSpeech 3]]", "[[CosyVoice 3]]"]
+models: ["[[VITS]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[LJSpeech]]", "[[LibriTTS]]", "[[VCTK]]", "[[CSS10]]"]
 kb_context_sources: 3

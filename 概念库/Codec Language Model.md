@@ -126,3 +126,17 @@ Survey 基于 ESPnet VALL-E 实现在 LibriTTS 上评估 TTS:
 ## 演进
 
 VQ-VAE speech tokens (2019) → SoundStream/EnCodec neural codecs (2021-2023) → AudioLM semantic→acoustic 两阶段 (2022) → VALL-E codec LM for TTS (2023) → VioLA 多任务 CodecLM (2024) → Moshi/SpeechGPT-Gen mixed-token CodecLM (2024) → 统一 benchmark 评估 (Mousavi et al., 2025)
+
+> [!review] 实体页审阅 (2026-06-04)
+> **结论:** restructure
+> **原则:** 不混层 revise | 不过载 revise | 可溯源 pass-with-fixes | 可导航 revise | 不污染 pass-with-fixes
+> **结构:** key_papers 37/12 | ## 标题 9/6 | 行数 112/200 | 长论文段落 5/3
+> **问题:** 3 high, 4 medium, 2 low
+> - ❌ [overload] frontmatter key_papers: 37条超出12条硬上限3倍,大量边缘论文稀释导航信号
+> - ❌ [scope-drift] ## Survey Benchmark 发现: 21行survey数字搬运,属论文级细节
+> - ❌ [layer-mixing] ## 演进: 研究时间线属于MOC,规则明确禁止
+> - ⚠️ [layer-mixing] ## 代表系统: 4个论文专属子章节含模型级细节
+> - ⚠️ [signal-dilution] key_papers格式不统一: 4条plain text + 33条wikilink
+> - ⚠️ [scope-drift] ## 关键论文: 与frontmatter key_papers功能重叠(6篇 vs 37篇)
+> - ⚠️ [overload] 9个##标题超过6个上限
+> **重构建议:** 删除演进/Survey Benchmark/关键论文3个section; 压缩代表系统; key_papers精简到≤12条核心文献并统一wikilink格式

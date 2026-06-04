@@ -120,6 +120,10 @@ Survey (Sec 5.2) 指出的关键挑战:
 - [[Style Transfer in TTS]]: 指令可实现风格迁移
 - [[Emotion Control in TTS]]: 指令中可包含情感控制
 
+## 统一 TTS+TTM 指令控制 (InstructAudio)
+
+[[论文笔记/InstructAudio|InstructAudio]] (Qiang et al., Kuaishou/Tianjin Univ., 2025) 首次将 instruction-guided 范式从纯 TTS 扩展到统一 TTS+TTM (Text-to-Music) 框架。核心设计: 标准化 instruction-phoneme 输入格式,NL instruction 描述所有属性 (timbre/paralinguistic/musical),text/lyrics 统一转为 phoneme,用 MM-DiT (Joint DiT 14L + Single DiT 6L) 基于 CFM 训练同时生成语音和音乐。1.34B 参数,50K h 语音 + 20K h 音乐训练。Seed-TTS WER EN 1.52% / ZH 1.35% (best); 唯一同时支持 Gender/Age/Emotion/Style/Accent/Dialogue 纯文本控制; SongEval 全维度超越 ACE-Step/DiffRhythm+。局限: NMOS 3.46 低于 CosyVoice2 (3.65),纯文本控制的 one-to-many 模糊性导致音质下降。与 VoxInstruct 的区别: VoxInstruct 统一了 TTS 内的 content+style,InstructAudio 进一步统一了 TTS 与 TTM 两个任务。
+
 ## 演进
 
-Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025)
+Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025)

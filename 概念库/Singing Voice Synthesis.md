@@ -4,7 +4,7 @@ title: "Singing Voice Synthesis"
 aliases: [SVS, 歌声合成, 歌唱合成, Singing Synthesis, 歌声生成]
 category: "task"
 tags: [SVS, singing, music, vocal-synthesis, score-conditioned, pitch-control]
-key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/TechSinger|TechSinger]]"]
+key_papers: ["[[论文笔记/Survey-Synthetic Singers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/InstructAudio|InstructAudio]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[Text-to-Speech Pipeline]]", "[[Musical Score Encoder]]", "[[F0 Modeling]]", "[[SVS Evaluation Metrics]]", "[[Prosody Modeling]]", "[[Neural Vocoder]]", "[[Style Transfer in TTS]]", "[[Diffusion-based TTS]]"]
 status: pending-review
