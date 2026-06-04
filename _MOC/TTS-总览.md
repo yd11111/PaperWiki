@@ -117,3 +117,4 @@
 - [[论文笔记/FNH-TTS|FNH-TTS]] — Megatronix/Newcastle, 2026, VITS + MoE Duration Predictor (Switch-Transformer 8 experts) + VOCOS vocoder + CoMBD/SBD, 揭示 duration-vocoder 耦合效应, MOS 4.48/4.63 (LJ/VCTK), 47.73M 参数
 - [[论文笔记/MELA-TTS|MELA-TTS]] — Alibaba, 2025, Tokenizer-free joint AR transformer + DiT diffusion, ASR representation alignment 加速训练 3.3x + 提升内容一致性, CER 0.9% test-zh / WER 2.4% test-en (170K h)
 - [[论文笔记/TMD-TTS|TMD-TTS]] — UESTC/Tibet Univ, 2026, 藏语三方言统一 TTS, Matcha-TTS + DSDR-Net (public/private FFN 条件路由) + dialect fusion, 构建 102h TMDD 数据集, nMOS 3.86 / DECS 88.09%
+- [[论文笔记/MAVE|MAVE]] — MTS AI, 2025, 首个 Mamba SSM + cross-attention codec LM 用于 speech editing 和 zero-shot TTS, 830M 参数, ~6x 内存优势超越 VoiceCraft, CM3 causal masking 实现 AR 框架双向上下文

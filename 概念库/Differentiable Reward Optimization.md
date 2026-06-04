@@ -4,7 +4,7 @@ title: "Differentiable Reward Optimization"
 aliases: [DiffRO]
 category: "training-strategy"
 tags: [reinforcement-learning, post-training, TTS, reward-model]
-key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]]", "[[论文笔记/RLAIF-SPA|RLAIF-SPA]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]"]
+key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/RL-for-Audio-LLM|RL-for-Audio-LLM]]", "[[论文笔记/SpeechAlign|SpeechAlign]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/Fish Audio S2|Fish Audio S2]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/MPO|MPO]]", "[[论文笔记/DLPO|DLPO]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]]", "[[论文笔记/RLAIF-SPA|RLAIF-SPA]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/Align2Speak|Align2Speak]]"]
 origin_paper: ""
 related_concepts: ["[[Gumbel-Softmax]]", "[[Speech Tokenizer]]"]
 status: pending-review
@@ -85,3 +85,7 @@ Kotoge & Sasaki (2025) [[论文笔记/TKTO|TKTO]] 提出第五条路线: 基于 
 ## Component-level GRPO (DMOSpeech 2, Columbia/NewsBreak, 2025)
 
 Li et al. (2025) [[论文笔记/DMOSpeech 2|DMOSpeech 2]] 开辟了 RL-for-TTS 的第三条路线: 不对整个 pipeline 做 RL,而是将 GRPO 精确靶向 duration predictor 这一单一组件。利用已有 4-step DMD-distilled student 生成样本计算 reward (SIM + WER),将 RL 计算成本压缩到传统方案的一小部分。Seed-TTS-en WER 1.752 (超越 ground truth duration 的 1.821), SIM 0.698。与 DiffRO/Multi-Reward GRPO 的核心区别: RL 作用对象是 duration predictor 而非 token/audio generator,问题空间更小,训练更高效 (仅需 1.5K GRPO steps)。
+
+## DPO for Autoregressive Diffusion / ARDM-DPO (CUHK-SZ + ByteDance, 2025)
+
+Liu et al. (2025) [[论文笔记/ARDM-DPO|ARDM-DPO]] 首次将 DPO 扩展到**连续 token 自回归扩散模型 (ARDM)**,填补了 next-token diffusion 范式下偏好对齐的空白。核心推导: 将 ARDM 采样视为 (token index n, diffusion time t) 双重索引的马尔可夫链,通过 Jensen 不等式近似将 DPO 目标分解为逐 token-timestep 的 denoising loss 比较。在 DiTAR (0.4B) 上验证: Task A (F0V 14.2→29.2 Hz, 表现力翻倍) + Task B (CER 8.37→6.32, 鲁棒性 25% 改善),均保持 SIM 无显著损失 (KL ~0.01)。与 DiffRO/GRPO 等路线的核心区别: 对象是连续 token ARDM 而非离散 token LM 或 NAR diffusion。

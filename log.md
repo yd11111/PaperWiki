@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[HD-PPT]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓, [[Instructed Speech Generation]]✓, [[Speech Factorization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Audio-Language Pretraining]](pending-review)
+- [ingest/deep] [[HD-PPT]] — 精读, kb_sources=6, 新建 0, 追加 9 实体页 key_papers
+- [review/auto] [[HD-PPT]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] HD-PPT — 通过 (0 dead links), MOC 已包含 (TTS-总览/韵律与情感)
 - [kb/search] [[E2E-VGuard]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Anti-spoofing and Deepfake Detection]](pending-review), [[Speaker Verification]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
 - [ingest/deep] [[E2E-VGuard]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers (Anti-spoofing + Speaker Verification + Speaker Embedding + Voice Cloning Taxonomy + LLM-based TTS) + Anti-spoofing 正文追加 1 行
 - [review/auto] [[E2E-VGuard]] — pass-with-fixes, 1 medium (traceability-gap) + 1 low (template-compliance)

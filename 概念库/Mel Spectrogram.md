@@ -4,7 +4,7 @@ title: "Mel Spectrogram"
 aliases: [梅尔频谱图, Mel-spectrogram, MelS, 梅尔谱]
 category: "representation"
 tags: [acoustic-feature, signal-processing, TTS, vocoder]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/STTATTS|STTATTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/Shallow Flow Matching|Shallow Flow Matching]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/EmoSSLSphere|EmoSSLSphere]]", "[[论文笔记/TMD-TTS|TMD-TTS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/Whisper|Whisper]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/STTATTS|STTATTS]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/Shallow Flow Matching|Shallow Flow Matching]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/EmoSSLSphere|EmoSSLSphere]]", "[[论文笔记/TMD-TTS|TMD-TTS]]", "[[论文笔记/UniVoice|UniVoice]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
 origin_paper: ""
 related_concepts: ["[[Speech Tokenizer]]", "[[Neural Vocoder]]", "[[Text-to-Speech Pipeline]]"]
 status: pending-review

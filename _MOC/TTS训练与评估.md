@@ -62,6 +62,7 @@
 ### Data
 - [[论文笔记/Emilia|Emilia]] — 2024, CUHK-SZ, 首个大规模多语言 in-the-wild 开源语音数据集 (101K+ h, 6 语种) + Emilia-Pipe 预处理 pipeline
 - [[论文笔记/ParsVoice|ParsVoice]] — 2026, U Tehran, 最大公开波斯语 TTS 语料库 (2,200h, 1,815 speakers), ParsBERT 句子完整性验证 + 二分搜索边界优化 + 多维质量评估 pipeline, XTTS 微调 MOS 3.6/SMOS 4.0
+- [[论文笔记/UltraVoice|UltraVoice]] — 2025, 首个大规模 (830h, 100K 样本) 多维度细粒度风格控制语音对话数据集, SFT 后 MOS +29-42%
 
 ### Understanding & Data
 - [[论文笔记/EmotionThinker|EmotionThinker]] — 2026, RL-based 可解释语音情感推理, GRPO-PTR, SER Avg 68.89%

@@ -121,3 +121,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 - **关键发现**: LatentLM 偏好更大 variance 的 tokenizer (与 image-level diffusion 模型相反) [LatentLM §3.1.3, Fig 6]
 - **被 CLEAR (Wu et al., 2025) 继承**: CLEAR 的 enhanced wav-VAE 同样借鉴 sigma-VAE 设计
 - **被 VibeVoice (Peng et al., 2025) 直接复用**: VibeVoice 的 acoustic tokenizer 基于 sigma-VAE 构建,3200x 压缩,7.5 Hz
+
+## Semantic-VAE: 语义对齐正则化解决重建-生成困境
+
+[[论文笔记/Semantic-VAE|Semantic-VAE]] (Niu et al., ICASSP 2026) 发现 vanilla acoustic VAE 存在 **重建-生成困境**: 高维 latent (dim=64) 重建好但下游 TTS 可懂度差,低维 latent (dim=16) 可懂度好但重建差 [Fig 1]。解决方案是在 VAE 训练中引入 frozen WavLM 第 23 层特征的 cosine similarity 正则化,引导高维 latent space 学习语义结构而不牺牲信息量。集成到 F5-TTS 后,WER 从 2.23%→1.95%,SIM 从 0.60→0.64 (LibriSpeech-PC) [Table 1]。

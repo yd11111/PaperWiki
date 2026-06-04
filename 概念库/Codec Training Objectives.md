@@ -4,7 +4,7 @@ title: "Codec Training Objectives"
 aliases: [Codec 训练目标, Codec Loss Landscape, Audio Codec Training Losses, Neural Codec 损失函数]
 category: "training-technique"
 tags: [training-objective, audio-codec, GAN, reconstruction, perceptual-loss]
-key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
+key_papers: ["[[论文笔记/Survey-Discrete Audio Tokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Voxtral TTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[Audio Tokenizer Taxonomy]]", "[[Residual Vector Quantization]]", "[[Multi-scale STFT Discriminator]]", "[[Codebook Collapse]]"]
 status: pending-review
