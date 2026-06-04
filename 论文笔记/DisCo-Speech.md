@@ -5,13 +5,13 @@ title: "DisCo-Speech: Controllable Zero-Shot Speech Generation with A Disentangl
 arxiv_id: "2512.13251"
 source: "Sources/DisCo-Speech.pdf"
 authors: [Tao Li, Wenshuo Ge, Zhichao Wang, Zihao Cui, Yong Ma, Yingying Gao, Chao Deng, Shilei Zhang, Junlan Feng]
-year: 2025
+year: 2026
 venue: "arXiv"
 tags: [TTS, zero-shot, disentanglement, speech-codec, prosody-control, voice-cloning, FSQ, GRL, controllable-TTS]
 concepts: ["[[Speech Factorization]]", "[[Codec Language Model]]", "[[Finite Scalar Quantization]]", "[[Gradient Reversal Layer]]", "[[Speech Tokenizer]]", "[[Prosody Modeling]]"]
-models: ["[[NaturalSpeech 3]]"]
+models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["[[SEED-TTS-Eval]]"]
+datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]", "[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-04
