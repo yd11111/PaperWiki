@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/OZSpeech|OZSpeech]]", "[[论文笔记/RapFlow-TTS|RapFlow-TTS]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/ZipVoice|ZipVoice]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/SMLLE|SMLLE]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/OZSpeech|OZSpeech]]", "[[论文笔记/RapFlow-TTS|RapFlow-TTS]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/ZipVoice|ZipVoice]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/DiFlow-TTS|DiFlow-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review
@@ -121,7 +121,7 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing)
 
 ### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
 
@@ -129,6 +129,14 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **关键发现**: RL-optimized duration 的 WER (1.752) 甚至优于使用 ground truth duration (1.821),说明最优 duration 不等于真实 duration [Table 3]
 - **计算效率**: 利用 4-step DMD-distilled student 生成样本计算 reward,避免传统 RL 需数百步采样的开销
 - 详见 [[论文笔记/DMOSpeech 2|DMOSpeech 2]]
+
+### FNH-TTS MoE Duration Predictor (Meng et al., 2026)
+
+- **MoE 结构化 duration modeling**: 首次将 Mixture-of-Experts 引入 Duration Predictor,用 1D Conv + Switch-Transformer blocks (8 experts) 构建 MoE-DP。属于 DDP 类别的结构创新,与 SDP 概率化和 GRPO/DPO RL 优化方向正交 [§2.1]
+- **Speaker-conditioned routing**: router 输入为 x + speaker_embedding,使路由决策本身就是说话人感知的,不同说话人的 phoneme 可路由到不同专家 [Eq. 2]
+- **Duration-Vocoder 耦合发现**: MoE-DP 单独使用反而降低 MOS (LJ: 3.92 vs VITS 4.26),因为更丰富的 duration 变化超出 HiFi-GAN 合成能力;配合 VOCOS vocoder + CoMBD/SBD 判别器后恢复并超越 (LJ: 4.48) [Table 1]
+- **JS divergence 评估**: 用 phoneme-level Jensen-Shannon divergence 衡量 duration 对齐质量,MoE-DP (0.053/0.039) 优于 DDP (0.057/0.044) 和 SDP (0.087/0.066) [Table 4]
+- 详见 [[论文笔记/FNH-TTS|FNH-TTS]]
 
 ### FlexSpeech AR Duration + DPO (Ma et al., 2025)
 
