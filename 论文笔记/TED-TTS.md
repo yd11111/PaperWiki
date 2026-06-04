@@ -200,11 +200,11 @@ TED-TTS 基于 IndexTTS2 的 text-to-semantic (T2S) 模块,不改动模型参数
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pass | 5 个设计选择均有 WHY+HOW,速查可借鉴具体可迁移 |
-> | 可信赖 | pass | 14 个数据点全标注出处,指标命名正确 |
-> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率 100%,推断标注清晰 |
-> | 可定位 | pass | 三维度 KB 定位 (Emotion/Duration/Prosody),比较具体 |
-> | 不污染 | pass | 仅 append 操作,无新建页,无 overclaim 风险 |
+> | 可复述 | pass | 5 个设计选择均有 WHY+HOW 因果解释,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 14 个数据点全标注出处,指标命名正确,数字与原文一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率 ~100%,推断标注清晰 |
+> | 可定位 | pass | KB 背景从谱系/已有认知/创新判断三维度定位,与 EmoSteer/WeSCon 差异具体 |
+> | 不污染 | pass | 反向更新为 append 操作,无新建页,无 overclaim 风险 |
 > 
 > Issues: 0 (high: 0, medium: 0, low: 0)
 > 详见 `_review/TED-TTS-review.yml`
