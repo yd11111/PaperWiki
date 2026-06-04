@@ -32,6 +32,8 @@
 - [[论文笔记/No Verifiable Reward for Prosody|No Verifiable Reward for Prosody]] — 2025, GRPO CER/NLL reward 导致韵律坍缩, iterative DPO ~200 人类偏好对/轮即可恢复自然韵律
 - [[论文笔记/RLAIF-SPA|RLAIF-SPA]] — 2025, GRPO 优化结构化 AI 反馈 (4 维韵律-情感标签匹配 + WER 惩罚), 无需人工情感标注
 - [[论文笔记/TKTO|TKTO]] — 2025, contrastive LLMs 估计 token-level importance + KTO token-level 推广, 消除 speech tokenizer-LM 对齐要求
+- [[论文笔记/Align2Speak|Align2Speak]] — 2025, GRPO 在线 RL + ASR/SV/PESQ 多目标 reward, 30 分钟配对数据下 CER 降低 8 倍以上, 低资源语言 TTS
+- [[论文笔记/GRPO-TTS|GRPO-TTS]] — 2025, Whisper CER + NLL 复合 reward + GRPO 微调 CosyVoice2/Llasa-1B, 无需额外训练模型
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)
@@ -47,6 +49,9 @@
 ### Security & Traceability
 - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 端到端水印联合训练, frame-wise broadcast, PESQ 3.641/MOS 3.959
 
+### Alignment & Duration Extraction
+- [[论文笔记/BFA|BFA]] — 2025, Bournemouth Univ, CTC + universal phoneme encoder 强制对齐, 比 MFA 快 240x, onset+offset 双边界 + inter-phoneme gap 建模, TIMIT recall@60ms 87.9%
+
 ### Domain Adaptation & Fine-tuning
 - [[论文笔记/CSP-FT|CSP-FT]] — 2026, 基于 weighted-sum 层贡献分析的选择性微调, ~8% 参数 + 2x 加速, 缓解灾难性遗忘 (Fun-CosyVoice3.0 WER 3.8% vs Full FT 12.1%)
 
@@ -56,6 +61,7 @@
 
 ### Data
 - [[论文笔记/Emilia|Emilia]] — 2024, CUHK-SZ, 首个大规模多语言 in-the-wild 开源语音数据集 (101K+ h, 6 语种) + Emilia-Pipe 预处理 pipeline
+- [[论文笔记/ParsVoice|ParsVoice]] — 2026, U Tehran, 最大公开波斯语 TTS 语料库 (2,200h, 1,815 speakers), ParsBERT 句子完整性验证 + 二分搜索边界优化 + 多维质量评估 pipeline, XTTS 微调 MOS 3.6/SMOS 4.0
 
 ### Understanding & Data
 - [[论文笔记/EmotionThinker|EmotionThinker]] — 2026, RL-based 可解释语音情感推理, GRPO-PTR, SER Avg 68.89%
