@@ -1,0 +1,45 @@
+kb_review:
+  paper: "VoiceSculptor"
+  date: "2026-06-04"
+  reviewer: "auto"
+  conclusion: "pass"
+
+change_plan:
+  - target: "任务库/Instructed Speech Generation.md"
+    action: "append"
+    detail: "key_models 追加 VoiceSculptor (11→12, 达上限); 正文追加一行贡献描述"
+    safety: "safe — 追加操作, 不改 status"
+
+  - target: "模型库/CosyVoice 2.md"
+    action: "append"
+    detail: "key_papers 已超限 (23), 跳过; 在'作为 Baseline 被引用'段末尾追加 VoiceSculptor 引用"
+    safety: "safe — 仅追加到正文列表"
+
+  - target: "概念库/Instruction-Guided Speech Synthesis.md"
+    action: "append"
+    detail: "key_papers 已超限 (26), 跳过; 在正文末尾追加 VoiceSculptor 贡献描述"
+    safety: "safe — 仅追加到正文"
+
+  - target: "概念库/Natural Language Description for TTS.md"
+    action: "append"
+    detail: "key_papers 已超限 (31), 跳过; 在正文末尾追加 VoiceSculptor 贡献描述"
+    safety: "safe — 仅追加到正文"
+
+  - target: "概念库/LLM-based TTS.md"
+    action: "skip"
+    detail: "VoiceSculptor 使用 LLaSA 作为 base 但非 LLM-based TTS 的核心贡献论文,且 key_papers 已严重超限"
+    safety: "N/A"
+
+  - target: "概念库/Speaker Embedding.md"
+    action: "skip"
+    detail: "VoiceSculptor 不显式讨论 speaker embedding 技术; key_papers 已严重超限"
+    safety: "N/A"
+
+issues: []
+
+summary:
+  total_changes: 4
+  appends: 4
+  substantive: 0
+  new_pages: 0
+  recommendation: "pass — 全部为追加操作,不改变任何页面 status"
