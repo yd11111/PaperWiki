@@ -176,7 +176,7 @@ L_diff = E || (x - epsilon) - D_phi(Q(E_theta(x)), x_t, t, x_text) ||
 | Decoder 320M → 160M | 7.96 | 0.63 | 3.60 | [Table 4] |
 | Decoder 320M → 480M | 2.90 | 0.69 | 3.68 | [Table 4] |
 | 6.25 Hz → 12.5 Hz | 2.57 | 0.69 | 3.58 | [Table 4] |
-| Diffusion → PatchGAN | (noticeably worse) | - | - | [§4.2.2] |
+| Diffusion → PatchGAN | (明显下降,无具体数字) | - | - | [§4.2.2, 无具体数字] |
 | w. decoder continued-training | 2.73 | 0.69 | 3.73 | [Table 4] |
 
 ## 局限性
@@ -218,3 +218,9 @@ TaDiCodec 是一个设计优雅、结果有说服力的工作。它的核心洞�
 3. **Prompt mechanism 在 tokenizer 训练中引入**: 在 tokenizer 训练时就使用 mel prefix 作为 prompt,让 VQ 不需要编码全局信息 (speaker identity)。这减轻了量化器的负担,尤其在极低比特率下效果显著 (WER: 8.63 → 3.02)。
 
 4. **Decoder continued-training**: 冻结 encoder/VQ 后单独 fine-tune decoder,是一种成本低但收益明显的后处理策略。可推广到任何 encoder-VQ-decoder 架构。
+
+> [!review] 审阅 (auto, 2026-06-04)
+> **结论**: pass-with-fixes (0 high / 1 medium / 1 low)
+> - medium: PatchGAN 消融行缺少具体数字 (论文原文亦未提供,已标注)
+> - low: frontmatter models 字段精简,可考虑补充 MaskGCT/DualCodec
+> 详见 `_review/TaDiCodec-review.yml`
