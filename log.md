@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[BFA]] — 命中 3 页(取 3): [[Duration Predictor]](pending-review), [[Phoneme Representation]](pending-review), [[Non-autoregressive TTS]](pending-review) | 过滤: 无 | 全部待确认
+- [ingest/deep] [[BFA]] — 精读, kb_sources=3, 新建 0, 追加 1 (Duration Predictor key_papers + 相关概念)
+- [review/auto] [[BFA]] — pass-with-fixes, 4 issues (0 high, 1 medium fixed, 3 low)
+- [lint/local] BFA — 通过/0 死链, MOC 已包含 (TTS训练与评估)
 - [kb/search] [[UniVoice]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[UniVoice]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + 2 MOC 更新
 - [review/auto] [[UniVoice]] — pass, 0 issues
