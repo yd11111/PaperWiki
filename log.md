@@ -5,6 +5,7 @@
 - [ingest/deep] [[ProsodyEval]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers + Prosody Modeling 韵律多样性度量节 + TTS Evaluation DS-WED 节 + 演进线 2 处更新
 - [review/auto] [[ProsodyEval]] — pass-with-fixes, 2 issues (1 medium fixed, 1 low fixed)
 - [lint/local] ProsodyEval — 通过 (0 死链), MOC 已包含 (TTS训练与评估)
+- [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
 - [kb/search] [[GRPO-TTS]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[CosyVoice 2]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Whisper]](pending-review)
 - [ingest/deep] [[GRPO-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + CosyVoice 2 baseline 对比 + DiffRO 演进线更新
 - [review/auto] [[GRPO-TTS]] — pass-with-fixes, 3 low issues
