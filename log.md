@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[TaDiCodec]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review)
+- [ingest/deep] [[TaDiCodec]] — 精读, kb_sources=6, 新建 0, 追加 6 概念 + 1 任务 key_papers, MOC 更新 2 (语音编码与量化 + 零样本语音合成)
+- [review/auto] [[TaDiCodec]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [lint/local] TaDiCodec — 通过 (0 dead links)
 - [kb/search] [[MSR-Codec]] — 命中 7 页(取 7): [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Codec Language Model]](pending-review), [[Codec Training Objectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech 3]](pending-review)
 - [ingest/deep] [[MSR-Codec]] — 精读, kb_sources=7, 新建 0, 追加 12 实体页 + MOC 更新 2 (语音编码与量化 + 零样本语音合成) + Speech Factorization 演进线追加
 - [review/auto] [[MSR-Codec]] — pass-with-fixes, 4 issues (2 medium, 2 low)
