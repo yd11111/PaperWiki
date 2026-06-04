@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[VARSTok]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Duration Predictor]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[VARSTok]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Token Rate/Single-codebook/Codebook Collapse/Duration Predictor/Neural Audio Compression key_papers), MOC 更新 1 (语音编码与量化)
+- [review/auto] [[VARSTok]] — pass, 0 issues
+- [lint/local] VARSTok — 通过 (0 dead links)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核
 - [kb/search] [[ZipVoice-Dialog]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review), [[Speech-Text Alignment]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
 - [ingest/deep] [[ZipVoice-Dialog]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/NAR-TTS/Turn-taking/Zero-shot/Speech-Text Alignment/Spoken Dialogue Evaluation/CFG key_papers), MOC 更新 2 (零样本语音合成/语音大模型与对话)
 - [review/auto] [[ZipVoice-Dialog]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low), 1 fixed
