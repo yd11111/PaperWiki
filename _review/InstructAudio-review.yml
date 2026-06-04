@@ -1,0 +1,80 @@
+reviewer: auto
+date: 2026-06-04
+note: 论文笔记/InstructAudio.md
+checklist: _templates/review-checklist.md
+pdf: Sources/InstructAudio.pdf
+
+principles:
+  可复述:
+    score: 8
+    status: pass
+    rationale: |
+      方法节清晰解释了 MM-DiT 架构的 WHY(统一异构输入)和 HOW(joint/single DiT 分层,
+      instruction-phoneme 格式),每个设计选择有对应理由。速查卡片"可借鉴"具体到 3 个
+      可迁移的 trick。整体架构的 pipeline 图清晰。
+
+  可信赖:
+    score: 8
+    status: pass
+    rationale: |
+      数字型 claim 标注覆盖率高,几乎所有实验数字都标注了 [Table N] 来源。
+      指标名使用正确(WER/SIM/LSD/MCD/MOS 区分清楚)。速查卡片指标字段
+      含具体数字+数据集+来源。实验表格完整复现了原文关键结果。
+
+  可区分:
+    score: 8
+    status: pass
+    rationale: |
+      方法节中 [论文原文] 和 [agent 解读] 标注覆盖率高(约 85%)。
+      第 2/3 点设计选择的因果解释明确标注了推断来源。
+      局限性中 agent 解读和论文原文有清晰区分([agent 解读] 标签)。
+
+  可定位:
+    score: 9
+    status: pass
+    rationale: |
+      KB 背景节谱系定位具体(PromptTTS→InstructTTS→VoxInstruct→CosyVoice 演进线),
+      与 CosyVoice 2/Instruction-Guided Speech Synthesis/CFM/SVS 的对比基准明确。
+      frontmatter 字段完整且语义正确(models 列了 baseline,concepts 列了涉及的概念)。
+
+  不污染:
+    score: 7
+    status: pass-with-fixes
+    rationale: |
+      反向更新内容总体安全。但 frontmatter models 中仅列了 CosyVoice 2 和 CosyVoice,
+      遗漏了 MaskGCT, F5-TTS, E2-TTS, ZipVoice, ACE-Step, DiffRhythm+ 等对比 baseline。
+      不影响知识库安全性,但会降低 KB 检索的链接完整度。
+
+conclusion: pass-with-fixes
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: |
+      models 字段仅列了 CosyVoice 2 和 CosyVoice,遗漏了 Table 1/2/3 中的
+      多个对比 baseline: MaskGCT, F5-TTS, E2-TTS, ZipVoice, ACE-Step, DiffRhythm+。
+      按 checklist 规则,models 应列本文模型+对比 baseline。
+    suggestion: |
+      在 frontmatter models 中补充缺失的 baseline 模型链接。
+
+  - type: traceability-gap
+    severity: low
+    location: 方法节 - 设计选择 2
+    detail: |
+      "Frozen Qwen2.5-7B 做 Instruct Encoder" 整段标注为 [agent 解读],
+      但 Qwen2.5-7B 的选择和 frozen 策略是论文 §3.1 明确描述的事实,
+      应部分标为 [论文原文]。
+    suggestion: |
+      将 "选择 Qwen2.5-7B 做 instruct encoder" 的事实部分改为 [论文原文],
+      仅将关于 WHY 的推测保留为 [agent 解读]。
+
+  - type: template-compliance
+    severity: low
+    location: frontmatter.venue
+    detail: |
+      venue 标注为 "ICASSP 2026",但论文 arXiv 标注为 "arXiv:2511.18487v1 [eess.AS] 23 Nov 2025",
+      无明确 venue 信息。从格式看像 ICASSP 论文但不确定。
+    suggestion: |
+      改为 "arXiv preprint" 或验证后标注正确 venue。
+
+learning_signals: []

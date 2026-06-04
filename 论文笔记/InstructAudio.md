@@ -6,10 +6,10 @@ arxiv_id: "2511.18487"
 source: "Sources/InstructAudio.pdf"
 authors: [Chunyu Qiang, Kang Yin, Xiaopeng Wang, Yuzhe Liang, Jiahui Zhao, Ruibo Fu, Tianrui Wang, Cheng Gong, Chen Zhang, Longbiao Wang, Jianwu Dang]
 year: 2025
-venue: "ICASSP 2026"
+venue: "arXiv preprint"
 tags: [TTS, TTM, unified-audio, instruction-control, MM-DiT, flow-matching, natural-language-description, music-generation, dialogue-TTS, multi-attribute-control]
 concepts: ["[[Instruction-Guided Speech Synthesis]]", "[[Natural Language Description for TTS]]", "[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Singing Voice Synthesis]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
+models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]", "MaskGCT", "F5-TTS", "E2-TTS", "ZipVoice", "ACE-Step", "DiffRhythm+"]
 tasks: ["[[任务库/Instructed Speech Generation]]"]
 datasets: ["[[数据集/SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -90,7 +90,7 @@ Single DiT (6 layers): 仅处理 audio latent (self-attention only)
 
 **2. Frozen Qwen2.5-7B 做 Instruct Encoder [§3.1]**
 
-[agent 解读] 选择 frozen 大 LLM 而非可训练小模型做 instruct encoder,可能出于两个考虑: (1) 7B LLM 对自然语言指令的理解能力远超小模型,特别是对复杂多属性描述; (2) frozen 避免了大 LLM 微调的计算开销,同时利用其语义表示。这与 AudioBox 等使用 T5 或 CLAP 做条件编码的路线不同。
+[论文原文] InstructAudio 使用 Qwen2.5-7B 作为 instruct encoder,训练时保持 frozen [§3.1, §2.1]。[agent 解读] 选择 frozen 大 LLM 而非可训练小模型,可能出于两个考虑: (1) 7B LLM 对自然语言指令的理解能力远超小模型,特别是对复杂多属性描述; (2) frozen 避免了大 LLM 微调的计算开销,同时利用其语义表示。这与 AudioBox 等使用 T5 或 CLAP 做条件编码的路线不同。
 
 **3. 不需要 text-upsampling alignment [§2.1]**
 
@@ -181,4 +181,16 @@ Mel-VAE 将 44.1kHz 音频编码为 43Hz 的连续 latent (1024x 压缩),使 MM-
 
 ## 审阅
 
-*(待独立审阅 agent 补充)*
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含因果解释,设计选择有理由,速查可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率高,指标名正确,表格完整 |
+> | 可区分 | pass | 论文原文/agent解读标注覆盖率~85% |
+> | 可定位 | pass | 谱系定位具体,KB对比基准明确 |
+> | 不污染 | pass-with-fixes | frontmatter models 遗漏部分 baseline(已修复) |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/InstructAudio-review.yml`
