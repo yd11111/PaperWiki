@@ -4,7 +4,7 @@ title: "Spoken Dialogue Evaluation"
 aliases: [口语对话评估, Speech Dialogue Metrics, 语音对话系统评估, Spoken Dialogue Benchmarks, 语音对话基准测试]
 category: "evaluation"
 tags: [speech-LM, evaluation, benchmark, metrics, dialogue, MOS, WER, interaction]
-key_papers: ["VoiceBench (Chen et al., 2024)", "SUPERB (2024)", "AudioBench (2024)", "AirBench (2024)", "SpokenWOZ (2024)", "SD-EVAL (Ao et al., 2024)", "SuperCLUE (2024)", "MMAU (2024)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]"]
+key_papers: ["VoiceBench (Chen et al., 2024)", "SUPERB (2024)", "AudioBench (2024)", "AirBench (2024)", "SpokenWOZ (2024)", "SD-EVAL (Ao et al., 2024)", "SuperCLUE (2024)", "MMAU (2024)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[Speech Language Model]]", "[[Audio Understanding]]", "[[Full-duplex Spoken Dialogue]]", "[[Turn-taking in Spoken Dialogue]]", "[[Streaming Spoken Dialogue]]"]
 status: pending-review

@@ -26,6 +26,7 @@
 - [[论文笔记/Koel-TTS|Koel-TTS]] — 2025, NVIDIA, ASR+SV reward 驱动 DPO/RPO + Pareto 最优多目标偏好配对, CER 0.55% LibriTTS unseen SOTA, GT-as-Chosen 失败实验
 - [[论文笔记/F5R-TTS|F5R-TTS]] — 2025, Tencent, 首次将 GRPO 集成到 NAR flow-matching TTS, output probabilization 使 CFM 兼容 RL, WER -29.5% / SIM +4.6%
 - [[论文笔记/DLPO|DLPO]] — 2025, OSU, RLHF 微调 diffusion TTS (WaveGrad 2), diffusion loss 作为 reward 正则项, UTMOS 3.65/NISQA 4.02, 67% 人类偏好
+- [[论文笔记/LatinX|LatinX]] — 2025, USP, utterance-level DPO + Pareto dominance 多指标偏好标注, 多语言 TTS 对齐, 揭示客观-主观 speaker similarity gap
 
 ### Evaluation
 - [[论文笔记/SpeechJudge|SpeechJudge]] — 2025, TTS naturalness 完整评估套件, 99K pairwise + GRM (77.2% accuracy)

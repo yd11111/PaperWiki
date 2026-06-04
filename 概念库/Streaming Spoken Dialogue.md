@@ -124,6 +124,8 @@ WavChat 将 E2E streaming spoken dialogue 的设计归结为三项核心技术:
 | Time sync chunks | SyncLLM | 固定时间间隔分块 | 实时同步 |
 | Streaming ASR+TTS | 级联系统 | U2++ + XTTS-v2 | 组合最低延迟 |
 | AR TTS LM + Read-Write | LLaMA-Omni 2 | CosyVoice 2 式 R:W 交替 + gate fusion | ~583ms (R=3,W=10) |
+| MTP + Verification | Llasa+ | frozen backbone + plug-and-play MTP 模块 + top-k 验证 | 1.48x 加速 |
+| Causal codec decoder | Llasa+ (XCodec2-S) | X-Codec2 decoder 因果化 + conv1d adapter | 流式波形重建 |
 
 ## Text-guided vs W/o Text-guided 的延迟 Trade-off
 

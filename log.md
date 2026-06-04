@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
+- [ingest/deep] [[DeepDubbing]] — 精读, kb_sources=6, 新建 0, 追加 10 (CFM/Speaker Embedding/CosyVoice/LLM-based TTS/Instruction-Guided SS/NL Description TTS/CFG/Emotion Control/BigVGAN/Prosody Modeling key_papers + Instructed Speech Generation key_models), MOC 更新 1 (TTS-总览)
+- [review/auto] [[DeepDubbing]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] DeepDubbing — 通过 (0 死链)
 - [kb/search] [[FNH-TTS]] — 命中 6 页(取 Top 6): [[Neural Vocoder]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review), [[VITS]](pending-review)
 - [ingest/deep] [[FNH-TTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Duration Predictor key_papers+演进线+贡献描述, Non-autoregressive TTS key_papers, VITS key_papers, Neural Vocoder key_papers, Prosody Modeling key_papers), MOC 更新 1 (TTS-总览)
 - [review/auto] [[FNH-TTS]] — pass-with-fixes, 0 high, 0 medium, 3 low

@@ -4,7 +4,7 @@ title: "Duration Predictor"
 aliases: [时长预测器, Length Regulator, Duration Model, 音素时长预测]
 category: "architecture-component"
 tags: [TTS, duration, alignment, non-autoregressive, acoustic-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/OZSpeech|OZSpeech]]", "[[论文笔记/RapFlow-TTS|RapFlow-TTS]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/ZipVoice|ZipVoice]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/DiFlow-TTS|DiFlow-TTS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/VoiceFlow|VoiceFlow]]", "[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/Bridge-TTS|Bridge-TTS]]", "[[论文笔记/FlexSpeech|FlexSpeech]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/OZSpeech|OZSpeech]]", "[[论文笔记/RapFlow-TTS|RapFlow-TTS]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/ZipVoice|ZipVoice]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/DiFlow-TTS|DiFlow-TTS]]", "[[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[Prosody Modeling]]"]
 status: pending-review

@@ -96,6 +96,7 @@ $$q_t = \arg\min_{k \in \{1,...,K\}} \|z_t - c_k\|^2$$
 | RepCodec (2024) | 1 | - | 50 | - | CNN, SVQ, HuBERT 蒸馏 |
 | Mimi (2024) | 1+7 | 2048 | 12.5 | 1.1-4.4 kbps | 第一层 VQ 语义 + 额外 7 层 RVQ 声学 |
 | DS-Codec (2025) | 1 | 8192/65536(PQ) | 80 | 1.04/1.28 kbps | 双阶段训练(镜像→非镜像), VQ/PQ 两种方案 |
+| SecoustiCodec (2025) | 1 | 6561 (VAE+FSQ) | 20/80 | 0.27/1 kbps | VAE+FSQ, causal streaming, 帧级 contrastive 语义解耦 |
 
 ### 折中方案
 
