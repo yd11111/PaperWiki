@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[MELA-TTS]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[CosyVoice]]✓ | 参考: [[Diffusion-based TTS]](pending-review)
+- [ingest/deep] [[MELA-TTS]] — 精读, kb_sources=6, 新建 0, 追加 15 (概念 9 + 模型 4 + 任务 1 + 数据集 1), MOC 更新 2 (TTS-总览, 零样本语音合成)
+- [review/auto] [[MELA-TTS]] — pass-with-fixes, 3 issues (all low)
+- [lint/local] MELA-TTS — 通过, 0 死链
 - [kb/search] [[DualSpeechLM]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Audio Understanding]](pending-review)
 - [ingest/deep] [[DualSpeechLM]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Semantic vs Acoustic Tokens/Speech Language Model/Self-Supervised Speech Representation/Modality Adaptation for Speech LLM/Audio Understanding key_papers), MOC 更新 1 (语音大模型与对话)
 - [review/auto] [[DualSpeechLM]] — pass, 2 low issues
