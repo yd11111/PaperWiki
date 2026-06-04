@@ -1,0 +1,77 @@
+paper: LatinX
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含完整的三阶段训练逻辑和关键设计选择的 WHY 解释。
+      Pareto dominance 的设计动机、cosine sim 阈值的双重目的、
+      单码本 vs RVQ 的 trade-off 均有因果分析。速查卡片"可借鉴"
+      具体可迁移 (Pareto dominance labeling, dual evaluation)。
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      数字标注覆盖率约 85%, 主要 claim 均有 [Table N] 标注。
+      指标名准确 (WER/SMOS/MOS/cosine similarity)。
+      存在一处 medium 问题: XTTSv2 的 Sim-O 与 LatinX 的 Sim-E
+      在同一行展示可能造成误导, 已在注释中说明但可更清晰。
+  可区分:
+    verdict: pass-with-fixes
+    notes: >
+      因果解释来源标注覆盖率约 80%。方法节中 [论文原文] 和
+      [agent 解读] 标注清晰。存在一处 medium 问题: 点评节部分
+      推断缺少明确标注。
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景包含谱系定位 (VALL-E 同源, SpeechAlign 对比),
+      创新判断有对比基准 (DiffRO/FPO)。frontmatter 字段完整。
+      速查 5 字段均有实质内容。
+  不污染:
+    verdict: pass
+    notes: >
+      未新建概念页。反向更新仅追加 key_papers, 不改变已有
+      实体页内容。不存在 factual error 或 overclaim。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "实验表格 Obj. SIM 行"
+    detail: >
+      XTTSv2 的 Sim-O 与 LatinX 的 Sim-E 在同一行展示,
+      虽有脚注但两个不同度量标准放同一行容易误导读者。
+    suggestion: >
+      在表格中拆分为两行, 或在指标列标注 (Sim-O)/(Sim-E)
+      以区分。
+
+  - id: 2
+    type: fact-inference-mixing
+    severity: medium
+    principle: 可区分
+    location: "点评节第 4 点"
+    detail: >
+      "技术新颖度有限" 是 agent 推断, 但缺少明确的 [agent 解读]
+      标注。
+    suggestion: >
+      在该段添加 [agent 解读] 标注。
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用 idea 第 4 条"
+    detail: >
+      质量过滤阈值 (SI-SDR/PESQ/STOI) 作为参考值有用, 但
+      缺少对不同场景适用性的讨论。
+    suggestion: >
+      可补充: 这些阈值偏严格 (保留 59%), 低资源场景可能需要
+      放宽。

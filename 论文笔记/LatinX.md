@@ -98,11 +98,11 @@ $$\mathcal{L}_{\text{DPO}}(\theta) = -\mathbb{E}_{(x,y^+,y^-)\sim\mathcal{D}} \l
 | WER avg (pt,en,fr,es,it) | **8.95%** | 14.58% | 10.65% | — | cross-lingual | [Table 3] |
 | WER avg (pt,en,fr) | **9.23%** | 14.37% | 11.01% | 14.93% | cross-lingual | [Table 3] |
 | WER ro→es | **0.45%** | 4.09% | 1.15% | — | cross-lingual | [Table 2] |
-| Obj. SIM avg (Sim-E, all) | 0.55 | 0.53 | **0.55*** | — | cross-lingual | [Table 4] |
+| Obj. SIM avg (Sim-E, all) | 0.55 (Sim-E) | 0.53 (Sim-E) | **0.55** (Sim-O) | — | cross-lingual | [Table 4] |
 | SMOS avg (en,es,fr,it,pt) | 3.54±0.08 | **3.63±0.08** | 3.24±0.09 | — | 306 listeners | [Table 5] |
 | MOS avg (en,es,fr,it,pt) | 3.35±0.08 | 3.41±0.08 | **3.45±0.09** | — | 306 listeners | [Table 6] |
 
-*注: XTTSv2 的 SIM 是 Sim-O (original audio vs generated), LatinX 的 Sim-E 是 codec-reconstructed vs generated, 两者不直接可比。*
+*注: Sim-O = original audio vs generated; Sim-E = codec-reconstructed audio vs generated。Sim-E 排除了 codec 信息损失, 是对模型生成能力的更纯粹度量, 但与 Sim-O 不直接可比。*
 
 **核心发现**:
 1. **DPO 大幅降低 WER**: 相比 fine-tuned 版本, DPO 在几乎所有跨语言方向降低 WER, 平均从 16.96% → 9.90% [Table 3]
@@ -129,7 +129,7 @@ LatinX 的核心价值在于在 **小规模系统 (210M, <10K h)** 上系统性�
 
 3. 但论文的**局限也很明显**: 210M 模型 + <10K h 数据 + 自研非开源组件, 在当前动辄 1B+ 模型 + 100K+ h 数据的背景下, 系统实力与 CosyVoice 3/Qwen3-TTS 等不在一个量级。跨语言评估缺乏中/日/韩等高需求语言。评估者偏差 (非母语评估小语种) 也削弱了主观实验的说服力。
 
-4. 与 KB 中 SpeechAlign (首次 DPO for codec LM) 对比, LatinX 的技术新颖度有限 — 本质是 utterance-level DPO + 自动标注, 未探索 token-level DPO/FPO 或 DiffRO 等更细粒度方案。
+4. [agent 解读] 与 KB 中 SpeechAlign (首次 DPO for codec LM) 对比, LatinX 的技术新颖度有限 — 本质是 utterance-level DPO + 自动标注, 未探索 token-level DPO/FPO 或 DiffRO 等更细粒度方案。
 
 ## 可复用的 idea
 
