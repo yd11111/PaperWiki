@@ -161,7 +161,7 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025) → Prosody Diversity 专项评估 (ProsodyEval/DS-WED, ICASSP 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025) → Prosody Diversity 专项评估 (ProsodyEval/DS-WED, ICASSP 2026) → Stylistic Consistency via Continuation Likelihood (MCLP, ICML 2026)
 
 ### InstructTTSEval: Instruction-Following Benchmark
 
@@ -174,3 +174,7 @@ Huang et al. (2025) 组织 AudioMOS Challenge 2025,将 VoiceMOS Challenge 系列
 ### ProsodyEval: 韵律多样性评估 (DS-WED)
 
 Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distance),首个专门度量零样本 TTS 韵律多样性的客观指标,与人类 PMOS 判断相关性 r=0.77 (vs log F0 RMSE 0.30, MCD 0.66)。方法: 对合成语音用 SSL 模型 (HuBERT/WavLM 中间层) 离散化为 semantic tokens,然后计算加权 Levenshtein 编辑距离,权重根据人类感知特性调整 (替换 > 插入/删除)。配套发布 ProsodyEval 数据集 (7 系统 x 1000 样本 + 2000 人类评分)。DS-WED 还验证了 Gemini 2.5 Pro 作为韵律评估者不可靠 (r=0.27),与 GSRM/SpeechJudge 发现的"speech LLM 提取细粒度韵律 cues 的瓶颈"一致。详见 [[论文笔记/ProsodyEval|ProsodyEval]]。
+
+### MCLP: Stylistic Consistency via Continuation Likelihood
+
+Ren et al. (ICML 2026) 提出 MCLP (Mean Continuation Log-Probability),首个利用 LALM continuation likelihood 量化**风格一致性**的客观指标。核心思路: 构造 `[transcript, eval_audio, transcript]` 的 dual-turn context,计算 LALM 对 ground-truth audio tokens 的平均 log-probability。通过固定 transcript 消除 content 变量,使 likelihood 变化仅反映 style 差异。使用 semantic tokenizer (Step-Audio-2) 进一步偏向风格而非声学相似。在 Role-Play TTS 场景的 human MOS correlation 实验中,当 ∆MCLP > 0.1 时 win rate 超过 0.8 [Fig 5]。MCLP 同时被用作 GRPO reward signal,与 CER 组合为 gated hybrid reward,在 WenetSpeech-RP-TTS 上 MOS 3.576 (vs 最强 baseline 2.864) [Table 2]。与 GSRM (acoustic-feature-grounded)、SpeechJudge (pairwise preference)、TTSDS2 (distributional)、TTS-PRISM (multi-dimensional diagnostic) 路线不同,MCLP 走"LALM latent space continuation"路线,填补了**跨轮次风格一致性**评估的空白。详见 [[论文笔记/MCLP|MCLP]]。
