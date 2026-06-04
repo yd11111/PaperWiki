@@ -37,6 +37,7 @@
   - [[论文笔记/NonverbalTTS|NonverbalTTS]] — 2025, VK Lab/Yandex, 17h 英语 NV+情感标注开源数据集 (10 类 NV, 8 类情感), BEATs+MFA 自动标注+多标注者融合 pipeline, CosyVoice SFT 后 NV 生成与 CosyVoice2 持平
   - [[论文笔记/DeepDubbing|DeepDubbing]] — 2025, Tencent Music/BUCEA, 端到端多角色有声书系统: OT-CFM Text-to-Timbre 从文本描述生成 speaker embedding + CosyVoice-based context-aware instruct-TTS, MOS-E 4.15
   - [[论文笔记/EmoSteer-TTS|EmoSteer-TTS]] — 2025, HKUST-GZ/Tencent, 首个 training-free 细粒度情感可控 TTS: LLM activation steering 迁移至 flow-matching DiT, difference-in-means + top-k token 构造 steering vector, 支持转换/插值/擦除/组合, F5-TTS/E2-TTS/CosyVoice2 验证, EI-MOS 4.00 超越 EmoSphere++ 3.50
+  - [[论文笔记/EmoSSLSphere|EmoSSLSphere]] — 2025 (SSW), U Tokyo/PFN, EmoSphere-TTS + HuBERT layer-9 k-means 离散 token + DeBERTaV3 语义编码, 英日双语情感 TTS, nMOS EN 4.13/JA 3.94
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
