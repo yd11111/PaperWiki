@@ -1,0 +1,77 @@
+paper: DiFlow-TTS
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含充分的因果解释(WHY: 为什么选 DFM 而非 continuous FM; 为什么 factorized heads;
+      为什么保留 duration predictor)。关键设计选择均回答了"为什么选这个而不是那个"。
+      速查卡片"可借鉴"字段具体可迁移(factorized multi-head prediction + attribute-type embedding)。
+
+  可信赖:
+    verdict: pass
+    notes: >
+      数字型 claim 标注覆盖率约 90%+。所有实验数字标注 [Table N]/[§X.X]/[Appendix A]。
+      指标名正确使用(UTMOS/WER/SIM-O/F0 RMSE/RTF 无混淆)。
+      速查卡片"指标"字段含具体数字+数据集名+来源标注。
+      无方向性错误。
+
+  可区分:
+    verdict: pass-with-fixes
+    notes: >
+      因果解释来源标注覆盖率约 85%——方法节每个 WHY 解释都标了 [论文原文] 或 [agent 解读]。
+      消融分析中有一处可改善: "content embedding 是最关键的条件信号"标了 [论文原文] OK,
+      但"说明 prosody 受 speaker identity 强烈影响"缺少限定词(论文原文 vs agent 推断不够清晰)。
+
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景节有具体谱系定位(DFM vs 连续 FM、vs NaturalSpeech 3 discrete diffusion、vs OZSpeech),
+      含对比基准。frontmatter 字段完整。models 列了对比 baseline (NaturalSpeech 3, NaturalSpeech 2, EnCodec),
+      非后续系统。速查卡片 5 字段都有实质内容。
+
+  不污染:
+    verdict: pass-with-fixes
+    notes: >
+      反向更新计划合理——向已有概念页追加 key_papers (append-only)。
+      需注意: concepts 中列了 [[Masked Generative Modeling]],但本文并非使用 masked generative modeling,
+      而是 discrete flow matching (mask-to-target interpolation)。虽然 DFM 的 source 是 all-mask,
+      但生成范式与 MaskGCT-style mask-and-predict 有本质区别。建议从 concepts 中移除或保留并标注差异。
+
+issues:
+  - id: 1
+    type: fact-inference-mixing
+    severity: low
+    principle: 可区分
+    location: "消融实验, 第2条"
+    detail: >
+      "说明 prosody 受 speaker identity 强烈影响"——这是 agent 从消融数据推断的因果解释,
+      但写法像是论文的直接结论。论文原文的表述是 "prosody is not only content-dependent
+      but also strongly influenced by speaker identity" [§4.3],所以实际上是 [论文原文]。
+    suggestion: 在该句末尾加标注 [论文原文]
+
+  - id: 2
+    type: bad-linking
+    severity: medium
+    principle: 不污染
+    location: "frontmatter concepts"
+    detail: >
+      concepts 列了 [[Masked Generative Modeling]]。DiFlow-TTS 虽然 source distribution
+      使用 all-mask tokens,但其生成范式是 discrete flow matching (概率速度场驱动的连续时间
+      Markov chain),与 MaskGCT-style iterative parallel decoding 有本质区别。
+      将 DFM 挂接到 Masked Generative Modeling 概念页可能造成概念混淆。
+    suggestion: >
+      从 concepts 中移除 [[Masked Generative Modeling]],保留现有的 [[Conditional Flow Matching]]
+      作为主要方法论挂接点。可在 [[Conditional Flow Matching]] 的反向更新中提及 DFM 变体。
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但本文使用 LibriTTS 训练、LibriSpeech test-clean 评测"
+    suggestion: "添加 datasets 条目(但 vault 中可能无对应数据集页,可跳过)"

@@ -8,7 +8,7 @@ authors: [Ngoc-Son Nguyen, Thanh V. T. Tran, Hieu-Nghia Huynh-Nguyen, Truong-Son
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, discrete-flow-matching, FACodec, non-autoregressive, efficiency, compact, factorization, DiT]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Factorization]]", "[[Duration Predictor]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Masked Generative Modeling]]", "[[Prosody Modeling]]", "[[Speech Tokenizer]]"]
+concepts: ["[[Conditional Flow Matching]]", "[[Speech Factorization]]", "[[Duration Predictor]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Prosody Modeling]]", "[[Speech Tokenizer]]"]
 models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/EnCodec|EnCodec]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: []
@@ -127,7 +127,7 @@ FDFD 架构: DiT blocks, hidden size 768, 12 layers, 12 attention heads, RoPE [A
 
 **消融实验** [Table 4]:
 - 去掉 content embedding → UTMOS 从 3.978 暴降到 3.077,SIM-O 从 0.454 降到 0.333——**content embedding 是最关键的条件信号** [论文原文]
-- 去掉 speaker embedding → SIM-O 从 0.454 降到 0.378,F0 RMSE 从 7.972 飙升到 20.868——说明 **prosody 受 speaker identity 强烈影响** [论文原文]
+- 去掉 speaker embedding → SIM-O 从 0.454 降到 0.378,F0 RMSE 从 7.972 飙升到 20.868——论文指出 "prosody is not only content-dependent but also strongly influenced by speaker identity" [论文原文, §4.3]
 - 去掉 attribute embedding → 轻微降级,UTMOS 反而微升 (3.978→3.983)——attribute embedding 增强保真度但可能引入 minor redundancies [论文原文]
 - single-head 替代 multi-head → 各指标 minor drop,multi-head 提升 prediction diversity [§4.3]
 
@@ -173,5 +173,8 @@ DiFlow-TTS 的核心价值不在于 SOTA 性能(speaker similarity 明显弱),�
 
 4. **Cubic scheduler κ_t = t²**: 相比线性调度,cubic 在初期更慢(给模型更多时间学习全局结构)、后期更快(细节填充),是 DFM 调度的一个简单有效选择。
 
-> [!review] 审阅状态
-> 待审阅。见 `_review/DiFlow-TTS-review.yml`。
+> [!review] 审阅状态: pass-with-fixes (3 issues: 0 high / 1 medium / 2 low)
+> - [medium] frontmatter concepts 移除 [[Masked Generative Modeling]] (DFM != mask-and-predict) -- 已修正
+> - [low] 消融第2条来源标注补充 -- 已修正
+> - [low] datasets 字段为空 (vault 无 LibriTTS/LibriSpeech 页,跳过)
+> 详见 `_review/DiFlow-TTS-review.yml`。
