@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "Seed-VC: Zero-Shot Voice Conversion with Diffusion Transformers"
 arxiv_id: "2411.09943"
-source: "Sources/seedVC.pdf"
+source: "Sources/Seed-VC.pdf"
 authors: [Liu Songting]
 year: 2024
 venue: "arXiv"

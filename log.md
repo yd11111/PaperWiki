@@ -5,6 +5,10 @@
 - [ingest/deep] [[No Verifiable Reward for Prosody]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers + 1 实体页内容段落
 - [review/auto] [[No Verifiable Reward for Prosody]] — pass, 0 issues
 - [lint/local] No Verifiable Reward for Prosody — 通过 (0 dead links), MOC 已包含 (TTS训练与评估)
+- [kb/search] [[CTDiffusion]] — 命中 7 页(取 7): [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考(待确认): [[Next-Token Diffusion]], [[Diffusion-based TTS]], [[Variational Autoencoder for TTS]]
+- [ingest/deep] [[CTDiffusion]] — 精读, kb_sources=7, 新建 0, 追加 5 实体页 key_papers
+- [review/auto] [[CTDiffusion]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] CTDiffusion — 通过 (0 dead links), MOC 已包含 (零样本语音合成)
 - [kb/search] [[HiStyle]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion Model]](pending-review)
 - [ingest/deep] [[HiStyle]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers, MOC 已包含 (TTS-总览)
 - [review/auto] [[HiStyle]] — pass, 2 issues (0 high, 0 medium, 2 low)

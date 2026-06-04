@@ -3,7 +3,7 @@ type: paper
 tier: repro
 title: "High-Fidelity Audio Compression with Improved RVQGAN"
 arxiv_id: "2306.06546"
-source: "Sources/DAC_RVQGAN.pdf"
+source: "Sources/DAC.pdf"
 authors: [Rithesh Kumar, Prem Seetharaman, Alejandro Luebs, Ishaan Kumar, Kundan Kumar]
 year: 2023
 venue: "NeurIPS 2023"

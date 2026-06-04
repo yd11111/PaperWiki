@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "SoundStorm: Efficient Parallel Audio Generation"
 arxiv_id: "2305.09636"
-source: "Sources/soundstorm.pdf"
+source: "Sources/SoundStorm-paper.pdf"
 authors: [Zalan Borsos, Matt Sharifi, Damien Vincent, Eugene Kharitonov, Neil Zeghidour, Marco Tagliasacchi]
 year: 2023
 venue: "arXiv"

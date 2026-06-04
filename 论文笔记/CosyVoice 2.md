@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "CosyVoice 2: Scalable Streaming Speech Synthesis with Large Language Models"
 arxiv_id: "2412.10117"
-source: "Sources/cosy2.pdf"
+source: "Sources/CosyVoice2.pdf"
 authors: [Zhihao Du, Yuxuan Wang, Qian Chen, Xian Shi, Xiang Lv, Tianyu Zhao, Zhifu Gao, Yexin Yang, Changfeng Gao, Hui Wang, Fan Yu, Huadai Liu, Zhengyan Sheng, Yue Gu, Chong Deng, Wen Wang, Shiliang Zhang, Zhijie Yan, Jingren Zhou]
 year: 2024
 venue: "arXiv"

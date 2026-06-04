@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "NaturalSpeech 3: Zero-Shot Speech Synthesis with Factorized Codec and Diffusion Models"
 arxiv_id: "2403.03100"
-source: "Sources/ns3.pdf"
+source: "Sources/NaturalSpeech3.pdf"
 authors: [Zeqian Ju, Yuancheng Wang, Kai Shen, Xu Tan, Detai Xin, Dongchao Yang, Yanqing Liu, Yichong Leng, Kaitao Song, Siliang Tang, Zhizheng Wu, Tao Qin, Xiang-Yang Li, Wei Ye, Shikun Zhang, Jiang Bian, Lei He, Jinyu Li, Sheng Zhao]
 year: 2024
 venue: "ICML 2024"

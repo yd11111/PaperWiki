@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "SC VALL-E: Style-Controllable Zero-Shot Text to Speech Synthesizer"
 arxiv_id: ""
-source: "Sources/SC-VALLE.pdf"
+source: "Sources/SC-VALL-E.pdf"
 authors: [Daegyeom Kim, Seongho Hong, Yong-Hoon Choi]
 year: 2023
 venue: "IEEE Access (CC BY 4.0)"

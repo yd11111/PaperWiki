@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "FlexiCodec: A Dynamic Neural Audio Codec for Low Frame Rates"
 arxiv_id: ""
-source: "Sources/FLEXICODEC-_A_DYNAMIC_NEURAL_AUDIO_CODEC_FOR_LOW_FRAME_RATES.pdf"
+source: "Sources/FlexiCodec.pdf"
 authors: [Anonymous]
 year: 2026
 venue: "Under review at ICLR 2026"

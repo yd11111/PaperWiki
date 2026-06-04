@@ -3,7 +3,7 @@ type: paper
 tier: deep
 title: "Neural Discrete Representation Learning (VQ-VAE)"
 arxiv_id: "1711.00937"
-source: "Sources/VQ_VAE.pdf"
+source: "Sources/VQ-VAE.pdf"
 authors: [Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu]
 year: 2017
 venue: "NeurIPS 2017"
