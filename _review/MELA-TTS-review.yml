@@ -1,0 +1,49 @@
+paper: "MELA-TTS"
+reviewer: agent
+date: 2026-06-04
+checklist_version: v1.1
+
+principle_assessment:
+  可复述:
+    satisfied: true
+    notes: "方法节包含完整的 WHY 解释(为什么选 mel 而非 token, 为什么 ASR 对齐而非 mel 对齐, utterance embedding 的互补作用), 因果链清晰"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率高(Table 1/2, Fig 4/5, §引用); 指标名使用正确(CER/WER/SS1/SS2); 速查卡片含具体数字+数据集"
+  可区分:
+    satisfied: true
+    notes: "方法节一致使用 [论文原文]/[agent 解读] 标注; 局限性中也区分了作者归因和 agent 推断"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(continuous-valued AR 路线, 与 LatentLM/CLEAR/DiTAR 对比), 创新判断有对比基准(vs CosyVoice S3 token, vs DiTAR flow matching)"
+  不污染:
+    satisfied: true
+    notes: "本次无新建概念页; 反向更新将仅追加 key_papers; frontmatter models 列的是论文中的对比 baseline (CosyVoice 系列, SenseVoice)"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "局限性 §2"
+    detail: "提到 MELA-TTS test-hard CER 4.0 vs DiTAR 6.8 时说'这个数字存疑', 但实际上 MELA-TTS 在 test-hard 上 CER 更低是优势, 不是存疑。DiTAR 未在 test-hard 上评估才是论文要说的点。"
+    suggestion: "修正局限性 §2 的表述, 明确 MELA-TTS 在 test-hard 上表现较好, 但 DiTAR 缺乏 test-hard 对照数据"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "实验表格 streaming 行"
+    detail: "streaming 行只列了 SS1 0.72, 缺少 WER 和 SS2 数据, 但原文 Table 2 有这些数据"
+    suggestion: "补充 streaming 模式的 CER/WER 和 SS2 数据"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter models"
+    detail: "models 字段列了 SenseVoice, 它是本文使用的 ASR encoder 而非 TTS baseline。按模板语义, models 应列本文模型+对比 baseline"
+    suggestion: "SenseVoice 作为 representation alignment 的核心组件保留在 models 中是合理的, 但可考虑在 concepts 中也引用 [[Self-Supervised Speech Representation]]"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好。方法的 WHY 解释充分, 数据标注覆盖率高, KB 背景有具体谱系定位。3 个 low 问题不阻塞反向更新。"

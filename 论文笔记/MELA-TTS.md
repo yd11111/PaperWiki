@@ -131,7 +131,7 @@ MELA-TTS 由三个核心模块组成 [§2, Fig 1]:
 
 1. **Speaker similarity 不足**: 在 test-en 上 SS2 0.68,明显低于 CosyVoice 系列的 0.75-0.79。[论文原文] 作者认为这是因为 diffusion 模块只能利用 local context (当前和前一个 chunk 的 h 和 mel),而 CosyVoice 的 flow-matching 模块可以 attend to 所有历史 tokens + prompt speech [§3.3]。类似的 speaker similarity gap 在其他 continuous-representation 系统 (如 MELLE, CLEAR) 中也被观察到 [§3.3, ref 3, 25]。
 
-2. **Hard cases 鲁棒性未充分验证**: 虽然论文在 test-hard 上报告了结果,但 CER 4.0% 仍高于 DiTAR 的 6.8% — [agent 解读] 这个数字存疑,因为 MELA-TTS 的 test-hard CER 为 4.0 而 DiTAR 为 6.8,但 DiTAR 在 test-en WER 上更低 (2.3 vs 2.4)。不过 DiTAR 未在 test-hard 上评估。论文论证 test-hard (含重复/绕口令等) 的重要性但 DiTAR 缺乏对照 [§3.3]。
+2. **Hard cases 鲁棒性缺乏充分对照**: MELA-TTS 在 test-hard 上 CER 4.0%,优于同数据 CosyVoice 系列 (7.0-7.7%) [Table 2]。但最直接的竞争对手 DiTAR 未在 test-hard 上评估 [§3.3],因此无法判断 continuous-AR 路线在 hard cases (重复/绕口令) 上的相对优劣。
 
 3. **Diffusion 推理成本**: 每个 mel chunk 需 10 步 DDIM 采样,总推理步数 = AR 步数 x 10。论文未报告实际 RTF。[agent 解读] 对比 CLEAR 报告的 RTF 0.18,MELA-TTS 的推理效率可能不占优势。
 
@@ -159,5 +159,9 @@ MELA-TTS 由三个核心模块组成 [§2, Fig 1]:
 4. **Diffusion Prefix Context**: 将前一个 chunk 的 clean mel + hidden vector 作为 diffusion 的 prefix,提供时序连续性。
 
 ---
+
+> [!review] 审阅结论: pass-with-fixes (2026-06-04)
+> 3 个 low 问题,不阻塞反向更新。方法的 WHY 解释充分,数据标注覆盖率高,KB 背景有具体谱系定位。
+> 详见 `_review/MELA-TTS-review.yml`
 
 检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speaker Embedding]], [[Diffusion-based TTS]], [[CosyVoice]], [[Speech Tokenizer]] | 过滤: 无 | 未命中但可能相关: 无
