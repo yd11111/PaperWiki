@@ -1,0 +1,46 @@
+paper: MBCodec
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含充分的因果解释(WHY): PQMF 为什么比纯残差好、非均匀 dropout 为什么比 uniform 好、VQ+RVQ 并行为什么比串联好,均有机制层面的论证"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率高,主要实验数据均标注 [Table N] 出处; 指标名使用正确(PESQ/SI-SDR/STFT/Mel/MUSHRA/WER/SIM)"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读],覆盖率高; 推断性分析(如'PQMF 可能只覆盖前几层')均标注为 [agent 解读]"
+  可定位:
+    satisfied: true
+    notes: "KB 背景节有具体谱系定位(SoundStream→EnCodec→DAC→MBCodec),与 SpeechTokenizer 的对比清晰; 创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "反向更新内容将以追加为主; 无需新建概念页(PQMF 不满足准入规则); 信息来源清晰"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "速查卡片 > 指标"
+    detail: "速查卡片指标字段中 '2.2kbps' 来源未标注 [§1] 或 [Table 1]"
+    suggestion: "在速查卡片指标行末尾统一标注出处"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 字段仅列了 SoundStream/EnCodec/HuBERT,缺少 DAC 和 SpeechTokenizer 作为对比 baseline"
+    suggestion: "将 DAC 和 SpeechTokenizer 加入 models 列表"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea > 三阶段训练策略"
+    detail: "三阶段训练策略的可迁移性描述较笼统('渐进式训练兼顾初期稳定性和后期性能优化'),缺少具体迁移场景"
+    suggestion: "可补充: 适用于任何存在层级重要性差异的多层训练场景(如 multi-scale 模型)"
+
+conclusion: pass-with-fixes
+summary: "笔记质量整体良好。方法节因果解释充分,来源区分清晰,KB 背景定位精准。3 个 low 级别问题不阻塞反向更新: 速查卡片出处标注小遗漏、frontmatter models 字段可补全 baseline、三阶段策略的可迁移描述稍泛。可直接放行反向更新。"

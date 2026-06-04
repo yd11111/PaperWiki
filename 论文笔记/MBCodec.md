@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [audio-codec, RVQ, disentanglement, subband-decomposition, quantizer-dropout, PQMF, semantic-acoustic-disentanglement]
 concepts: ["[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Quantizer Dropout]]", "[[Speech Factorization]]", "[[Codebook Collapse]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
-models: ["[[SoundStream]]", "[[EnCodec]]", "[[HuBERT]]"]
+models: ["[[SoundStream]]", "[[EnCodec]]", "[[HuBERT]]", "[[DAC]]", "[[SpeechTokenizer]]"]
 tasks: ["[[Neural Audio Compression]]"]
 datasets: ["[[Emilia]]", "[[AudioSet]]"]
 kb_context_sources: 6
@@ -40,7 +40,7 @@ updated: 2026-06-04
 > [!summary] 速查
 > - **一句话**: 用 PQMF 子带分解给 RVQ 每层码本分配独立频段监督,将传统"残差编码"转变为"功能编码",实现语义-声学的彻底解耦和 2.2 kbps 超低比特率高保真重建
 > - **路线**: 音频 → Neural Encoder → [VQ(HuBERT语义蒸馏) ‖ RVQ(PQMF子带监督)] → Neural Decoder → 重建音频
-> - **指标**: 8cb@25Hz: PESQ 2.98 / SIM 0.90 / WER 4.25 @ 2.2kbps; 16cb@50Hz: PESQ 3.83 / SIM 0.97 / WER 3.24 @ 8.8kbps,全面超越 DAC/EnCodec/SpeechTokenizer [Table 1]
+> - **指标**: 8cb@25Hz: PESQ 2.98 / SIM 0.90 / WER 4.25 @ 2.2kbps (170x 压缩 [§1]); 16cb@50Hz: PESQ 3.83 / SIM 0.97 / WER 3.24 @ 8.8kbps,全面超越 DAC/EnCodec/SpeechTokenizer [Table 1]
 > - **可借鉴**: (1) PQMF 子带监督思路 — 给 RVQ 每层绑定特定频段,增强可解释性且不引入额外 SSL 模型; (2) 非均匀 quantizer dropout — 半高斯分布比 uniform 更匹配 RVQ 残差递减特性
 > - **局限**: 仅评估重建任务(无 TTS 下游验证); 训练仅 2 天单卡 H20,未充分训练; 95k 小时训练但码本大小 2048 需验证利用率; 未开源
 
@@ -196,5 +196,6 @@ VQ(语义) + RVQ(声学)的并行架构也值得关注。相比 SpeechTokenizer 
 3. **VQ+RVQ 并行双分支**: 将语义和声学量化解耦为两个独立分支,避免在同一 quantizer 中产生功能竞争。可作为 mixed tokenizer 设计的参考范式
 4. **三阶段训练策略**: uniform → 非均匀 → 聚焦前层,渐进式训练兼顾初期稳定性和后期性能优化
 
-> [!review] 审阅 (auto)
-> 待审阅,见 `_review/MBCodec-review.yml`
+> [!review] 审阅 (auto, 2026-06-04)
+> **结论: pass-with-fixes** — 3 low issues (已修正 2: frontmatter models 补全 baseline, 速查卡片出处标注)
+> 详见 `_review/MBCodec-review.yml`
