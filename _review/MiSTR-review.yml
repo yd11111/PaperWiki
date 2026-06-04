@@ -1,0 +1,47 @@
+paper: "MiSTR"
+reviewer: agent
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 5 个关键设计选择的 WHY 解释,速查卡片可借鉴字段给出了 IHPR 和 PAC 两个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 >90% (Table 1 / §X.X / Eq.X),指标名正确,无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "[论文原文] 和 [agent 解读] 标注覆盖率 >80%,推断性分析有限定词"
+  可定位:
+    satisfied: true
+    notes: "KB 背景节给出了 BCI/TTS 交叉定位,创新判断有对比基准 (与 TTS 成熟技术对比)"
+  不污染:
+    satisfied: true
+    notes: "未新建概念页 (iEEG/BCI 概念不满足多篇引用准入规则),反向更新为追加操作"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "models/tasks/datasets 为空。论文 baselines 是通用架构名 (bLSTM, CNN, Seq2Seq 等),不是模型库中的命名模型。BigVGAN/WaveGlow 仅在 introduction 提及,非本文使用或对比模型。"
+    suggestion: "可接受的空值,无需修改。"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法节 §4 Autoencoder + Transformer"
+    detail: "Transformer 配置细节 (层数、head 数、模型维度) 论文未给出,笔记中仅标注了 [agent 解读] 指出此缺失。"
+    suggestion: "已标注为信息缺失,合理处理。"
+
+  - type: template-compliance
+    severity: medium
+    location: frontmatter venue
+    detail: "venue 标注为 Interspeech 2025 — 基于论文格式推断 (Index Terms 字段、页数),但 arXiv 页面未显式标注会议。"
+    suggestion: "在 venue 字段备注'(推断)',或等确认后更新。"
+
+summary: |
+  笔记质量良好。方法节包含充分的因果解释和来源标注,实验数据标注完整,
+  局限性分析全面且均标注 [agent 解读]。KB 背景定位清晰,将 BCI 论文放在
+  TTS 知识体系中恰当对比。唯一 medium issue 是 venue 的推断性标注。
+  整体满足反向更新条件。

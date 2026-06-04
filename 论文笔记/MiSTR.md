@@ -6,7 +6,7 @@ arxiv_id: "2508.03166"
 source: "Sources/2508.03166.pdf"
 authors: [Mohammed Salah Al-Radhi, Géza Németh, Branislav Gerazov]
 year: 2025
-venue: "Interspeech 2025"
+venue: "Interspeech 2025 (推断)"
 tags: [BCI, iEEG, speech-synthesis, neural-decoding, prosody, mel-spectrogram, vocoder, phase-reconstruction, transformer]
 concepts: ["[[Mel Spectrogram]]", "[[Neural Vocoder]]", "[[Prosody Modeling]]", "[[F0 Modeling]]"]
 models: []
@@ -174,3 +174,10 @@ MiSTR 是一个工程导向的组合创新工作,将 TTS 领域的成熟技术 (
 ---
 
 检索命中: [[Neural Vocoder]], [[Prosody Modeling]] | 过滤: [[Mel Spectrogram]](pending-review), [[F0 Modeling]](pending-review) | 未命中但可能相关: 无
+
+> [!review] 审阅 (2026-06-04, agent)
+> **结论: pass-with-fixes** | issues: 0 high, 1 medium, 2 low
+> - (medium) venue 标注为 "Interspeech 2025 (推断)" — 基于论文格式推断,待确认
+> - (low) frontmatter models/tasks/datasets 为空 — baselines 为通用架构名,可接受
+> - (low) Transformer 配置细节论文未给出,笔记已标注此缺失
+> 详见 `_review/MiSTR-review.yml`
