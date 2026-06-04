@@ -4,7 +4,7 @@ title: "Gradient Reversal Layer"
 aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]"]
 origin_paper: ""
 related_concepts: ["[[Speech Tokenizer]]"]
 status: pending-review
@@ -31,11 +31,17 @@ Gradient Reversal Layer (GRL) 是一种对抗训练技术,前向传播时为恒�
 
 联合损失函数: L_AR = -(1/(T+1)) * Σ log q(y_t) - α * log q(e),其中第二项为 GRL 驱动的对抗损失。
 
+在 DisCo-Speech 的 DisCodec 中,GRL 用于 prosody-timbre disentanglement:
+- Prosody encoder 的第一层 FSQ 输出连接 GRL → speaker classifier
+- 训练时 speaker classifier 试图从 prosody 表征预测说话人身份,GRL 反转梯度使 prosody encoder 学会排除 timbre 信息
+- 配合 soft orthogonality constraint (beta_t = 1e-4) 实现近正交的 prosody-timbre 解耦
+
 ## 关键论文
 
 - Ganin et al., "Domain-Adversarial Training of Neural Networks", JMLR 2016 — 首次提出 GRL
 - NaturalSpeech 3 (Ju et al., 2024): 在 factorized codec 中使用类似的解耦策略
 - IndexTTS2 (Zhou et al., 2025): 在 TTS 中用 GRL 实现情感-音色正交化
+- [[论文笔记/DisCo-Speech|DisCo-Speech]] (Li et al., 2025): 在 disentangled speech codec 的 prosody branch 使用 GRL 去除 timbre 信息,配合 soft orthogonality constraint 实现 content/prosody/timbre 三因子解耦
 
 ## 相关概念
 
