@@ -1,0 +1,37 @@
+kb_review:
+  paper: "CosyEdit"
+  note_path: "论文笔记/CosyEdit.md"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass
+
+  change_plan:
+    - target: "模型库/CosyVoice.md"
+      action: append
+      description: "在演进线后追加 CosyEdit 作为 task derivative (speech editing) 的简要描述。不改 key_papers(已达 15 条,超限)。"
+      safety: safe
+      rationale: "CosyEdit 是 CosyVoice 首次被迁移到 speech editing 任务,作为模型派生应用值得在演进线中记录。纯追加操作,不修改已有内容。"
+
+    - target: "概念库/Conditional Flow Matching.md"
+      action: skip
+      description: "页面 key_papers 76 条,且已被 entity-review 标注为 revise (overload)。CosyEdit 的 GOT-CFM 变体虽有新意,但在已过载的页面追加会加剧问题。"
+      safety: n/a
+
+    - target: "概念库/Speaker Embedding.md"
+      action: skip
+      description: "CosyEdit 仅使用 x-vector,无概念贡献。key_papers 已 64 条。"
+      safety: n/a
+
+    - target: "概念库/Speech Tokenizer.md"
+      action: skip
+      description: "CosyEdit 冻结复用 S3 tokenizer,无修改。key_papers 已 81 条。"
+      safety: n/a
+
+    - target: "概念库/LLM-based TTS.md"
+      action: skip
+      description: "CosyEdit 将 LLM-based TTS 应用于 editing 但不贡献新 TTS 方法论。key_papers 已 83 条。"
+      safety: n/a
+
+  issues: []
+
+  summary: "仅对 CosyVoice 模型页做追加更新(演进线补充 CosyEdit 作为 task derivative)。其余实体页因 key_papers 超限或无概念贡献均跳过。变更安全,无 factual risk。"
