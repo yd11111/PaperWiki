@@ -1,0 +1,47 @@
+paper: Align2Speak
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+summary: "GRPO for low-resource TTS. 笔记质量整体良好: 6 个关键设计选择均有因果解释且标注来源, KB 背景定位清晰 (RL-for-TTS 演进线), 速查卡片 5 字段均有实质内容。1 个 medium 问题已当场修正。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "速查 > 指标"
+    detail: "原文将 baseline CER 33.00% 误标为 'FT-only 33.00%'。实际 33.00% 是无 FT 的 baseline,FT-only 30min 约 15-20%。"
+    suggestion: "已修正为 'vs baseline 33.00%'"
+    fixed: true
+
+  - type: traceability-gap
+    severity: low
+    location: "实验 > 低资源语言适配表格"
+    detail: "部分 CER 数值为 Fig 3 近似读数 (~16-20%, ~20%, ~12%),论文仅提供图表未给精确数字。"
+    suggestion: "不可避免,保持 ~ 标记即可。"
+    fixed: false
+
+checklist:
+  reproducible:
+    mechanism_explanation: true
+    design_rationale: true
+    reusable_specificity: true
+  trustworthy:
+    claim_traceability: true
+    metric_correctness: true
+    quickcard_metrics: true
+    no_direction_error: true
+  distinguishable:
+    source_annotation: true
+    source_coverage_80pct: true
+    no_assertion_as_fact: true
+    strong_claims_supported: true
+  navigable:
+    kb_lineage: true
+    kb_innovation_benchmark: true
+    frontmatter_present: true
+    frontmatter_semantic: true
+    quickcard_all_fields: true
+  no_pollution:
+    concept_admission: null
+    dedup_check: null
+    no_factual_error_in_update: null
+    update_classification: null

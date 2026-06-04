@@ -36,7 +36,7 @@ updated: 2026-06-04
 > [!summary] 速查
 > - **一句话**: 用 GRPO 在线强化学习 + ASR/SV/PESQ 多目标 reward 优化低资源语言 TTS,在仅 30 分钟配对数据下将 CER 降低 8 倍以上
 > - **路线**: IPA 文本 → NAR Encoder → AR Decoder (Koel-TTS) → NanoCodec tokens → 波形; GRPO 阶段用 unpaired text+speaker prompt 生成多样本,CER+SSIM+PESQ 组合 reward 计算优势,更新策略网络
-> - **指标**: 英语 GRPO vs DPO: CER 0.53 vs 0.55 (CFG), SSIM 0.783 vs 0.729 [Table 1]; 葡萄牙语 30min FT+GRPO: CER 3.94% vs FT-only 33.00% [Fig 3]
+> - **指标**: 英语 GRPO vs DPO: CER 0.53 vs 0.55 (CFG), SSIM 0.783 vs 0.729 [Table 1]; 葡萄牙语 30min FT+GRPO: CER 3.94% vs baseline 33.00% (>8x 降低) [Fig 3, §3.3]
 > - **可借鉴**: (1) IPA tokenization 实现语言无关的 TTS 基座,256 byte-level tokens 即可覆盖所有语音; (2) GRPO 不需要配对数据,只需 unpaired text + speaker audio 即可做 RL; (3) 分段线性 reward 归一化函数设计,将不同量纲指标映射到 [0,1]
 > - **局限**: 仅在 Koel-TTS 380M 上验证; 无人工 MOS 评测; 低资源语言仅测试 3 种 (印地语/葡萄牙语/波兰语); 未讨论 GRPO 训练稳定性问题 (Tongyi 发现 >1500 步后 GRPO 退化)
 
@@ -180,5 +180,8 @@ GRPO 在 CER 和 SSIM 上全面优于 DPO,MOS 基本持平 [Table 1]。无 CFG �
 4. **训练/评估用不同 SV 模型**: 训练用 Titanet-Large,评估用 Titanet-Small,防止 reward hacking。这是 RL-for-TTS 的一个好实践。
 5. **CFG 随机启用 (p=0.5)**: GRPO 时 50% 概率使用 CFG,使模型在 inference 时有无 CFG 都能工作,提高部署灵活性。
 
-> [!review] 审阅状态
-> 待审阅 (auto-review pending)
+> [!review] 审阅: pass-with-fixes (2026-06-04)
+> - **结论**: pass-with-fixes (0 high, 1 medium, 1 low)
+> - **medium** [factual-error]: 速查卡片指标字段原将 baseline CER 33.00% 误标为 "FT-only"。已修正为 "baseline 33.00%"。
+> - **low** [traceability-gap]: 低资源语言实验表格中部分数值为 Fig 3 近似读数 (~16-20%, ~20%, ~12%),论文仅提供图表未给精确数字,不可避免。
+> - 可复述 ✓ | 可信赖 ✓ (修正后) | 可区分 ✓ | 可定位 ✓ | 不污染 ✓
