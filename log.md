@@ -22,7 +22,7 @@
 - [ingest/deep] [[DiFlow-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/Speech Factorization/Duration Predictor/Speech Tokenizer/RVQ/Prosody Modeling/Non-autoregressive TTS key_papers + CFM 演进新增 DFM 条目), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[DiFlow-TTS]] — conclusion: pass-with-fixes, 3 issues (0 high / 1 medium / 2 low), 修正: 移除 Masked Generative Modeling 概念挂接 + 来源标注补充
 - [lint/local] DiFlow-TTS — 通过, 0 死链
-- [kb/search] [[AudioMOS Challenge 2025]] — 命中 6 页(全部 pending-review): [[TTS Evaluation]], [[Self-Supervised Speech Representation]], [[Audio-Language Pretraining]], [[SVS Evaluation Metrics]], [[WavLM]], [[Audio Understanding]] | 过滤: 全部 pending-review
+- [alert/backlog] pending-review: 71, draft deep/repro: 213 — 建议抽空审核- [kb/search] [[AudioMOS Challenge 2025]] — 命中 6 页(全部 pending-review): [[TTS Evaluation]], [[Self-Supervised Speech Representation]], [[Audio-Language Pretraining]], [[SVS Evaluation Metrics]], [[WavLM]], [[Audio Understanding]] | 过滤: 全部 pending-review
 - [ingest/deep] [[AudioMOS Challenge 2025]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTS Evaluation/Audio-Language Pretraining key_papers + TTS Evaluation 新增 AudioMOS 段落), MOC 更新 1 (TTS训练与评估)
 - [review/auto] [[AudioMOS Challenge 2025]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
 - [lint/local] AudioMOS Challenge 2025 — 通过 (0 死链)
