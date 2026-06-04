@@ -8,11 +8,11 @@ authors: [Qifan Liang, Yuansen Liu, Ruixin Wei, Nan Lu, Junchuan Zhao, Ye Wang]
 year: 2026
 venue: "arXiv"
 tags: [TTS, emotion, controllability, training-free, inference-time, duration-control, intra-utterance, autoregressive, zero-shot]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Duration Predictor]]", "[[Natural Language Description for TTS]]"]
-models: ["[[CosyVoice 2]]"]
+concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Duration Predictor]]", "[[Natural Language Description for TTS]]", "[[Attention-based TTS]]"]
+models: ["[[IndexTTS2]]", "[[MaskGCT]]", "[[F5-TTS]]", "[[CosyVoice 2]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: []
-kb_context_sources: 6
+datasets: ["ESD", "MED-TTS"]
+kb_context_sources: 5
 status: draft
 created: 2026-06-04
 updated: 2026-06-04
@@ -29,7 +29,7 @@ updated: 2026-06-04
 
 **已有认知**: KB 中已确认 LLM-based TTS 的核心局限之一是"细粒度控制困难: 难以精确控制 pitch/energy/duration"。TED-TTS 直接回应这一局限,证明通过 inference-time 干预可以在不改动模型的前提下实现 segment-level 情感和时长控制。Prosody Modeling 页面记录的 LLM-TTS 韵律建模依赖 in-context learning,TED-TTS 提供了一条不依赖 prompt 音频但通过 attention mask 机制实现细粒度韵律操控的替代路径。
 
-> 检索命中: [[Emotion Control in TTS]][待确认], [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Natural Language Description for TTS]][待确认], [[Duration Predictor]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]][待确认], [[Duration Predictor]][待确认], [[Natural Language Description for TTS]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -183,3 +183,7 @@ TED-TTS 基于 IndexTTS2 的 text-to-semantic (T2S) 模块,不改动模型参数
 3. **EOS Logit Modulation for Duration Control**: 通过对 EOS token 的 logit 施加基于 progress ratio 的自适应 bias,在 AR 生成中实现全局时长控制。方案简单有效,可直接迁移到其他 AR TTS/语言模型的长度控制。
 
 4. **LLM-based Automatic Prompt Construction**: 用 LLM fine-tuning 将自由文本自动转换为结构化控制 prompt,消除 segment-level 手动标注需求。可用于任何需要结构化输入但用户期望自由文本输入的系统。
+
+## 审阅
+
+(待独立审阅 agent 填写)
