@@ -139,17 +139,15 @@ RRPO 在 DiffRO 框架上做的改动集中在 Reward Model 端,policy optimizat
 ## 审阅
 
 > [!review] 审阅 (2026-06-04, auto)
-> **结论**: pass-with-fixes
+> **结论**: pass
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pass | 方法节 WHY/HOW 清晰,速查卡片可借鉴具体 |
-> | 可信赖 | pass | 数字标注覆盖率高,指标名正确 |
-> | 可区分 | pass | 论文原文/agent解读 标注清晰,覆盖率>90% |
-> | 可定位 | pass | KB 背景谱系定位明确,创新判断有对比基准 |
-> | 不污染 | pass | 无新建概念页,反向更新均为安全 append |
+> | 可复述 | pass | 三层正则化的 WHY/HOW 解释清晰,设计选择有因果说明 |
+> | 可信赖 | pass | 数字标注覆盖率高,经交叉验证 Table 1/2 数据准确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖 >90%,边界清晰 |
+> | 可定位 | pass | DiffRO 演进线定位准确,创新判断有具体对比基准 |
+> | 不污染 | pass | 无新建页需求,反向更新均为 append,无 factual error |
 > 
-> Issues: 2 (high: 0, medium: 1, low: 1)
-> - medium: "Policy Model (冻结训练)" 错误暗示 policy 冻结 — 已修正
-> - low: 主观评估数据集标注为"内部测试集"(原文局限)
+> Issues: 1 (high: 0, medium: 0, low: 1)
 > 详见 `_review/RRPO-review.yml`

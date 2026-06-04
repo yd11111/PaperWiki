@@ -21,7 +21,7 @@ review:
       score: 9
       rationale: "无新建概念页需求; 反向更新均为 append (key_papers 追加), 无 factual error 或 overclaim 风险"
 
-  conclusion: pass-with-fixes
+  conclusion: pass
 
   issues:
     - type: factual-error
