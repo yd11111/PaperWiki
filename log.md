@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[T-Mimi]] — 命中 6 页(取 6): [[Multi-scale STFT Discriminator]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
+- [ingest/deep] [[T-Mimi]] — 精读, kb_sources=6, 新建 0, 追加 1 (Neural Audio Compression key_papers)
+- [review/auto] [[T-Mimi]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [review/kb] [[T-Mimi]] — pass, 0 issues
+- [skip/update] [[Neural Vocoder]] — key_papers 已达上限(18),跳过追加
+- [skip/update] [[Token Rate and Bitrate Trade-offs]] — key_papers 已达上限(12),跳过追加
+- [skip/update] [[EnCodec]] — key_papers 已达上限(15),跳过追加
+- [lint/local] T-Mimi — 通过
 - [kb/search] [[TED-TTS]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Duration Predictor]](pending-review), [[Natural Language Description for TTS]](pending-review)
 - [ingest/deep] [[TED-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS 演进线+段落, Duration Predictor 演进线+段落)
 - [review/auto] [[TED-TTS]] — pass, 0 issues
