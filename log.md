@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[HiStyle]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion Model]](pending-review)
+- [ingest/deep] [[HiStyle]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers, MOC 已包含 (TTS-总览)
+- [review/auto] [[HiStyle]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] HiStyle — 通过 (0 dead links)
 - [kb/search] [[ParaStyleTTS]] — 命中 6 页(取 6): [[CosyVoice]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[VITS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review)
 - [ingest/deep] [[ParaStyleTTS]] — 精读, kb_sources=6, 新建 0, 追加 7 实体页 key_papers, MOC 更新 1 (TTS-总览)
 - [review/auto] [[ParaStyleTTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
