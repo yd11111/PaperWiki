@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[GRPO-TTS]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[CosyVoice 2]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Whisper]](pending-review)
+- [ingest/deep] [[GRPO-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + CosyVoice 2 baseline 对比 + DiffRO 演进线更新
+- [review/auto] [[GRPO-TTS]] — pass-with-fixes, 3 low issues
+- [lint/local] GRPO-TTS — 通过 (0 死链), MOC 已包含 (TTS训练与评估)
 - [kb/search] [[Semantic-VAE]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review)
 - [ingest/deep] [[Semantic-VAE]] — 精读, kb_sources=6, 新建 0, 追加 6 概念页 + 1 任务页 + 1 模型页 key_papers, VAE for TTS 页追加 Semantic-VAE 描述节, MOC 更新 3 (TTS-总览/零样本语音合成/语音编码与量化)
 - [review/auto] [[Semantic-VAE]] — pass-with-fixes, 2 issues (1 medium, 1 low)
