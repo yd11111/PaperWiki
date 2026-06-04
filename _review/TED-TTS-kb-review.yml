@@ -1,18 +1,24 @@
-review:
-  paper: "TED-TTS"
-  note_path: "论文笔记/TED-TTS.md"
-  reviewer: auto-kb
-  date: 2026-06-04
-  checklist: "_templates/kb-review-checklist.md"
-
+paper: "TED-TTS"
+reviewer: auto
+date: 2026-06-04
+conclusion: pass
 change_plan:
   - target: "概念库/Emotion Control in TTS.md"
     action: append
-    detail: "追加 TED-TTS 作为 training-free intra-utterance 情感控制方法的段落。key_papers 已达 58 条 (远超 12 上限),跳过 key_papers 追加,改为正文追加。不改 status。"
-  - target: "概念库/Duration Predictor.md"
+    detail: "追加演进线条目 + 简短段落描述 TED-TTS 的 training-free AR intra-utterance 路线"
+    risk: low
+    note: "key_papers 已 65 条(上限 12),跳过 key_papers 追加,仅追加正文"
+  - target: "模型库/CosyVoice 2.md"
     action: append
-    detail: "追加 TED-TTS 的 inference-time duration steering 方法段落。key_papers 已达 22 条 (超 12 上限),跳过 key_papers 追加,改为正文追加。不改 status。"
-
-conclusion: pass
-issue_summary: "0 issues"
-notes: "两个目标页均为 append 操作 (正文末尾追加),不修改已有内容,不改 status。key_papers 均已超限,按规则跳过。无 factual error 或 dedup 风险。"
+    detail: "在'作为 Baseline 被引用'节追加 TED-TTS 条目"
+    risk: low
+    note: "标准 append 操作"
+  - target: "概念库/Prosody Modeling.md"
+    action: skip
+    detail: "key_papers 已 52 条(上限 12),页面内容已过载,跳过追加"
+    risk: none
+issues: []
+issue_summary:
+  high: 0
+  medium: 0
+  low: 0
