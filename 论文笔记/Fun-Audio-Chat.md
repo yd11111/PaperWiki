@@ -118,15 +118,20 @@ Core-Cocktail 之后的对齐阶段,使用四维度偏好学习:
 
 ## 实验
 
-### Spoken Question Answering
+### Spoken Question Answering (~8B scale)
 
-| 指标 | Fun-Audio-Chat-8B | Fun-Audio-Chat-30B-A3B | Best Baseline | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- |
-| OpenAudioBench Overall (S2T) | **76.61** | 80.13 | 65.45 (MiMo-Audio) | OpenAudioBench | [Table 2] |
-| VoiceBench Overall (S2T) | **83.21** | 88.72 | 74.06 (Kimi-Audio) | VoiceBench | [Table 2] |
-| UltraEval-Audio Overall (S2S) | **59.56** | — | 48.52 (Kimi-Audio) | UltraEval-Audio | [Table 2] |
-| OpenAudioBench Overall (S2T, large) | — | **80.13** | 84.94 (GPT-Audio) | OpenAudioBench | [Table 1] |
-| VoiceBench Overall (S2T, large) | — | **88.72** | 90.06 (GPT-Audio) | VoiceBench | [Table 1] |
+| 指标 | Fun-Audio-Chat-8B | Best Baseline (8B) | 数据集 | 出处 |
+| --- | --- | --- | --- | --- |
+| OpenAudioBench Overall (S2T) | **76.61** | 70.20 (Step-Audio2-Mini) | OpenAudioBench | [Table 2] |
+| VoiceBench Overall (S2T) | **83.21** | 76.93 (Kimi-Audio) | VoiceBench | [Table 2] |
+| UltraEval-Audio Overall (S2S) | **59.56** | 55.52 (MiMo-Audio) | UltraEval-Audio | [Table 2] |
+
+### Spoken Question Answering (large-scale)
+
+| 指标 | Fun-Audio-Chat-30B-A3B | Best Baseline (large) | 数据集 | 出处 |
+| --- | --- | --- | --- | --- |
+| OpenAudioBench Overall (S2T) | 80.59 | **84.94** (GPT-Audio) | OpenAudioBench | [Table 1] |
+| VoiceBench Overall (S2T) | 85.63 | **90.06** (GPT-Audio) | VoiceBench | [Table 1] |
 
 ### Audio Understanding
 
@@ -190,3 +195,19 @@ Frame Rate-In/Out 均为 **5 Hz** [Table 1, Table 2],比其他模型 (6.25-25Hz)
 2. **中间模型合并防遗忘**: $M_r = \alpha M_1 + (1-\alpha) M_0$ 在多模态微调后将模型参数与原始 LLM 混合,比 replay buffer 或 EWC 等正则化方法更简单,适合工程部署
 3. **Multi-Task DPO 维度设计**: 将对齐目标拆分为 robustness / instruction-following / understanding / empathy 四维度,每个维度独立构造偏好数据,通过统一 loss 联合优化,比单一目标更全面
 4. **Post-training-only 路线**: 不做大规模 audio-text 预训练,而是通过精心设计的后训练管线 (pre-alignment → SFT → DPO) 达到竞争力,显著降低训练总成本
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三个设计选择均有 问题→方案→为什么 结构 |
+> | 可信赖 | pass-with-fixes | baseline 数字已修正;出处标注 >90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~90% |
+> | 可定位 | pass | KB 背景定位为 Parallel LALM,与 Moshi/Kimi-Audio 区分清晰 |
+> | 不污染 | pass | 反向更新以追加为主,无新概念页需求 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Fun-Audio-Chat-review.yml`
