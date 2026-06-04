@@ -159,5 +159,6 @@ ParaStyleTTS 在 VITS 的 VAE+normalizing flow+HiFi-GAN 框架上叠加两级风
 
 4. **用 prompt 变体测试风格鲁棒性**: 固定语义、变换 10 种措辞来测试风格控制稳定性 [Table 9],是一个值得复用的评估协议,可用于检验任何 prompt-based TTS 的鲁棒性。
 
-> [!review] 审阅待完成
-> 本笔记尚未通过审阅。待审阅后补充。
+> [!review] pass-with-fixes (auto, 2026-06-04, checklist v1.1)
+> 3 low issues: datasets 字段空 (可接受) / 可复用 idea #3 通用性强 / 局限 #5 可补 §7 引用。
+> 详见 `_review/ParaStyleTTS-review.yml`。

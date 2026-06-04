@@ -1,0 +1,46 @@
+paper: ParaStyleTTS
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节以5个设计选择组织,每个都回答了WHY。GTU vs FiLM的选型有语言学解释,S_para分裂为local+global有因果推理。"
+  trustworthy:
+    verdict: pass
+    notes: "38处§/Table/Fig标注,覆盖率高。数字claim均有出处。指标名使用正确(WER/I-MOS/N-MOS/Acc)。"
+  distinguishable:
+    verdict: pass
+    notes: "6处[论文原文]和8处[agent 解读]标注,因果解释来源覆盖率高。agent推断均有限定词。"
+  locatable:
+    verdict: pass-with-fixes
+    notes: "KB背景有谱系定位和创新判断。速查卡片5字段齐全。frontmatter字段完整。但models列表可考虑补充Spark-TTS作为对比baseline。"
+  no_pollute:
+    verdict: pass
+    notes: "无新建概念页。反向更新仅追加key_papers,不涉及实质修改。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    detail: "datasets字段为空,但论文使用了ESD、LJSpeech、Baker等数据集。虽然这些数据集不在vault数据集库中,但可标注为空列表。"
+    suggestion: "可接受,这些数据集暂不需要独立实体页。"
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea #3"
+    detail: "'Prompt encoder 预计算+缓存'是通用工程实践,不够独特。"
+    suggestion: "可保留,因为它在具体架构中的应用有参考价值。"
+
+  - type: traceability-gap
+    severity: low
+    location: "局限性 #5"
+    detail: "'无零样本声音克隆'标注为[agent 解读],但论文Section 7也提及'current model supports only three paralinguistic styles'间接确认了这一限制。"
+    suggestion: "可补充§7引用,但不影响可信度。"
+
+summary: |
+  笔记质量良好。方法节以设计选择组织,WHY解释充分。因果解释来源标注覆盖率高。
+  速查卡片完整且有具体数据。KB背景谱系定位清晰。3个low severity问题不阻塞反向更新。
+  建议: 可考虑在models列表补充Spark-TTS。
