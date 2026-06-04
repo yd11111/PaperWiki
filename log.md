@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Lightweight Prompt Biasing]] — 命中 2 页(取 2): [[Whisper]](pending-review), [[LLM-enhanced ASR]](pending-review) | 过滤: 无
+- [ingest/deep] [[Lightweight Prompt Biasing]] — 精读, kb_sources=2, 新建 0, 追加 1 模型页 key_papers (Whisper)
+- [review/auto] [[Lightweight Prompt Biasing]] — pass, 0 issues
+- [lint/local] Lightweight Prompt Biasing — 通过
 - [kb/search] [[Dasheng AudioGen]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Audio-Language Pretraining]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Diffusion-based TTS]](pending-review)
 - [ingest/deep] [[Dasheng AudioGen]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页 key_papers
 - [review/auto] [[Dasheng AudioGen]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low fixed)
