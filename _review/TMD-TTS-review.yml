@@ -1,0 +1,39 @@
+paper: "TMD-TTS"
+reviewer: agent
+date: 2026-06-04
+checklist_version: "v1.1"
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节对 Dialect Fusion 和 DSDR-Net 两个核心设计都有 WHY 解释,消融证据充分;速查卡片'可借鉴'给出了具体可迁移的 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字标注覆盖率高(所有实验数据标了 [Table N]);指标名使用正确;无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "[论文原文]/[agent 解读] 标注一致,覆盖率 >90%;推断性分析均有限定词"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(CFM/Matcha-TTS/CosyVoice/F5-TTS);创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "未提议新建概念页;反向更新范围为追加 key_papers"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter.tasks"
+    detail: "tasks 为空;论文任务为 multi-dialect TTS,但 vault 中无对应任务页"
+    suggestion: "可接受,不需要为此创建任务页(准入规则:多篇引用)"
+  - type: template-compliance
+    severity: low
+    location: "frontmatter.datasets"
+    detail: "datasets 为空;论文引入 TMDD 数据集,但为新数据集"
+    suggestion: "可接受,TMDD 仅本文使用,不满足概念页准入规则"
+
+conclusion: pass
+issue_counts:
+  high: 0
+  medium: 0
+  low: 2

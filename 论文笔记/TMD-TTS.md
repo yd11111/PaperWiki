@@ -178,3 +178,13 @@ $$\hat{h}_{\text{text}} = h_{\text{text}} + \text{Linear}(h_{d_{id}})$$
 1. **Public + Private FFN 条件路由**: 对于任何需要按离散条件(方言/情感/风格)分化建模的 Transformer TTS,可以用 DSDR-Net 替换标准 FFN。优点: 实现简单、无 load balancing 问题、确定性路由避免训练不稳定。适用于条件数量较少(< 10)的场景。
 2. **合成数据多级筛选 pipeline**: DECS > 阈值 → PESQ/DNSMOS 检查 → MetricGAN+ 增强 → 人工抽查,这套流程可迁移到任何用 TTS 合成数据增强下游任务的场景。
 3. **Dialect embedding 注入方式**: 将条件 embedding 通过 Linear + residual addition 注入到 text encoder 和 acoustic decoder 两阶段,比仅在 decoder 侧注入更彻底。
+
+> [!review] 审阅结论: pass (2026-06-04)
+> - **结论**: pass — 无 high/medium 问题,可直接反向更新
+> - **可复述**: 通过 — WHY 解释充分,消融证据完整
+> - **可信赖**: 通过 — 数字标注覆盖率高,指标名正确
+> - **可区分**: 通过 — [论文原文]/[agent 解读] 标注覆盖率 >90%
+> - **可定位**: 通过 — KB 背景谱系定位具体
+> - **不污染**: 通过 — 反向更新仅追加 key_papers
+> - **Low issues (2)**: frontmatter tasks/datasets 为空(可接受,无对应 vault 实体)
+> - 详见 `_review/TMD-TTS-review.yml`
