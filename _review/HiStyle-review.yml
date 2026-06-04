@@ -1,0 +1,55 @@
+paper: HiStyle
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+conclusion: pass
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter.models
+    detail: "models 字段为空,但论文对比的 baseline (PromptTTS, PromptTTS 2, FleSpeech) 在模型库中无对应页面,HiStyle 本身也未建模型页,因此留空合理。"
+    suggestion: "如未来创建相关模型页,可回填。"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法:它怎么 work > 为什么用 Residual Connection"
+    detail: "Residual connection 的解释仅为 [agent 解读],论文 §3 中虽提到 residual connection 但未给出 why 的解释。"
+    suggestion: "保持现状,标注合理。"
+
+checks:
+  method_has_causal_explanation: true
+  design_choices_answer_why: true
+  quick_card_reusable_is_specific: true
+  numeric_claims_have_citations: true
+  citation_coverage_pct: 95
+  metric_names_correct: true
+  quick_card_metrics_have_numbers: true
+  no_direction_error: true
+  causal_explanations_labeled: true
+  causal_label_coverage_pct: 90
+  no_inference_as_assertion: true
+  strong_claims_have_evidence: true
+  kb_background_has_lineage: true
+  kb_innovation_has_baseline: true
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true
+  quick_card_all_fields_substantive: true
+  new_concepts_meet_admission: na
+  dedup_check_done: na
+  reverse_update_no_error: pending
+  reverse_update_correctly_classified: pending
+
+notes: |
+  笔记质量好。方法节的因果解释充分,每个关键设计选择都回答了 WHY。
+  数字标注覆盖率高,来源区分清晰。KB 背景的谱系定位准确 (PromptTTS 系列演进线)。
+  速查卡片五项都有实质内容。局限性部分诚实标注了内部数据集和单一 backbone 的限制。
+  唯一的 low issue 是 models 字段为空,但合理。
