@@ -1,0 +1,104 @@
+paper: "Dragon-FM"
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节包含 4 个关键设计选择,每个都回答了 WHY:
+      (1) 为什么用 FSQ codec 而非 mel spectrogram — 低帧率下 mel 的 STFT 短时平稳性假设失效;
+      (2) 为什么 chunk-wise AR 而非逐 token AR — 减少 TNFE;
+      (3) 为什么用 FSQ embedding 而非 VAE latent — 结构化离散表征简化 FM 学习;
+      (4) 为什么用 mean flow 而非蒸馏 — 不需额外 teacher 模型。
+      速查卡片"可借鉴"给出 3 个具体可迁移 trick。
+
+  可信赖:
+    verdict: pass-with-fixes
+    notes: >
+      主实验数字均标注 [Table 2/3/4] 或 [§X.X],覆盖率 ~90%。
+      指标名使用正确 (FAD/SIM/WER/TNFE/RTF)。
+      方向性正确 (FAD↓, SIM↑, WER↓, TNFE↓)。
+      速查卡片指标字段含具体数字+来源标注。
+      问题: (1) 论文称 60K h "publicly available" podcast 数据,但实际经内部 ASR
+      转录和过滤,笔记已在局限性中指出数据不可复现,但训练策略部分仍称"公开";
+      (2) Table 4 CodecB 的 codebook 配置 "100x5" 来自表格,笔记中未解释
+      这代表 FSQ 的具体参数含义(100 个 level x 5 维? 还是 5 个 codebook x 100 entries?)。
+
+  可区分:
+    verdict: pass
+    notes: >
+      方法节中所有 WHY 解释均标注了 [论文原文] 或 [agent 解读],覆盖率 ~95%。
+      局限性中 agent 推断明确标注 [agent 解读] (4/6 项)。
+      无推断-断言混淆。无"SOTA/唯一/全面优于"等未支撑的强断言。
+      点评中对论文评估弱点的批判有具体论据支撑。
+
+  可定位:
+    verdict: pass-with-fixes
+    notes: >
+      KB 背景节有详细谱系定位: 与 LatentLM/CLEAR (per-token diffusion),
+      CosyVoice 2 (chunk-aware CFM), VALL-E (per-token AR), E2 TTS (full-sequence)
+      做了多维对比。创新判断有对比基准 (3 个独特贡献点)。
+      frontmatter 字段基本完整。
+      问题: models 字段为空。论文与 VALL-E 和 E2 TTS 做了直接比较 (Table 3),
+      且 vault 中已有 论文笔记/VALL-E.md 和 论文笔记/E2 TTS.md,但无模型库页面,
+      故不影响 KB 安全。仍建议在 models 字段备注 baseline 系统。
+      速查卡片 5 字段均有实质内容。
+
+  不污染:
+    verdict: pass
+    notes: >
+      本次反向更新计划: 在 Conditional Flow Matching, Finite Scalar Quantization,
+      Next-Token Diffusion, Token Rate and Bitrate Trade-offs, Single-codebook vs
+      Multi-codebook, Codec Language Model 等页面追加 key_papers 条目。
+      均为追加操作,不修改已有内容,不改 status。
+      无新概念页需创建 (Dragon-FM 的核心技术 chunk-AR + chunk-FM 属于
+      Next-Token Diffusion 和 Conditional Flow Matching 的交叉应用,
+      不满足独立概念页准入规则)。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: 方法.关键设计选择.Codec
+    detail: >
+      Table 4 中 CodecB 的 codebook 配置 "100x5" 在笔记中未解释具体含义。
+      FSQ 的 100 x 5 可能指 5 个 scalar channel 各有约 100 个 level
+      (|C| = 100^5),需查原文确认并在笔记中说明。
+    suggestion: >
+      在设计选择 1 中补充: "100x5 表示 FSQ 的 5 维,每维 ~100 个量化 level,
+      隐式 codebook 大小 |C| ≈ 10^10"(或根据原文更正)。
+    fix_applied: false
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      models 字段为空。虽然 vault 中无 VALL-E/E2 TTS 的模型库页面
+      (仅有论文笔记),但笔记中与 VALL-E 和 E2 TTS 做了直接对比 (Table 3)。
+      Dragon-FM 本身也无模型库页。
+    suggestion: >
+      保持空即可,因 vault 无对应模型库页面。如未来创建 VALL-E/E2 模型页再回填。
+      或可备注于笔记内。
+    fix_applied: false
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: 可复用的 idea
+    detail: >
+      第 4 点 "mean flow for few-step chunk denoising" 较泛,
+      未说明 mean flow 的具体机制和与 consistency distillation 的差异。
+    suggestion: >
+      保持现状,mean flow 不是本文提出的技术,详细机制应在引用的
+      Geng et al. 2025 中追踪。
+    fix_applied: false
