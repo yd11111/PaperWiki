@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Vox-Evaluator]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[Vox-Evaluator]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers/used_by
+- [review/auto] [[Vox-Evaluator]] — pass, 3 low issues (template-compliance/traceability-gap/weak-reusability)
+- [lint/local] Vox-Evaluator — 通过/0 死链, MOC 已包含 (TTS训练与评估)
+- [kb/search] [[Flamed-TTS]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Duration Predictor]](pending-review), [[模型库/NaturalSpeech 3|NaturalSpeech 3]](pending-review)
+- [ingest/deep] [[Flamed-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + CFM 演进条目
+- [review/auto] [[Flamed-TTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] Flamed-TTS — 通过 (0 dead links), MOC 已包含 (零样本语音合成)
 - [kb/search] [[RLAIF-SPA]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review)
 - [ingest/deep] [[RLAIF-SPA]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers (Emotion Control in TTS + Prosody Modeling + DiffRO + TTS Evaluation)
 - [review/auto] [[RLAIF-SPA]] — pass-with-fixes, 0 high / 2 medium / 1 low
