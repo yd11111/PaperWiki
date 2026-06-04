@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed
@@ -60,3 +60,4 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/JoyTTS|JoyTTS]] (2025): 用 CosyVoice2 替换 MiniCPM-o 原有 GPT-SoVITS TTS 模块,通过 MLP 映射 LLM hidden states (3584→768) 桥接; SEED-TTS-zh SS 0.73 vs CosyVoice2 独立 0.748 (-2.4%), WER 5.09 vs 1.45 (3.5x 退化); 开源训练代码 [JoyTTS Table 1]
 - [[论文笔记/OpenS2S|OpenS2S]] (2025): 在共情数据构建 pipeline 中使用 CosyVoice2 进行 voice cloning (输入端种子音频克隆) 和 instruction-controlled emotional speech synthesis (输出端情感可控合成); 50k+50k 双语共情样本均通过 CosyVoice2 合成 [OpenS2S §3.2]
 - [[论文笔记/StreamMel|StreamMel]] (2025): 作为两阶段流式 baseline 对比; StreamMel 单阶段连续 mel 路线 FPL-A 0.01s vs CosyVoice* 0.22s (快 22 倍); cross-sentence WER-W 2.77 vs CosyVoice* 3.47 [StreamMel Table IV]
+- [[论文笔记/NonverbalTTS|NonverbalTTS]] (2025): 以 CosyVoice2 为 NV 生成 baseline; 用 17h 开源 NVTTS 数据微调 CosyVoice-300M 后,人类偏好测试 33.4% vs CosyVoice2 35.4% (p>0.05 无显著差异); NV Jaccard 0.80 vs 0.78; NVTTS SIM-o 0.89 显著优于 CosyVoice2 0.75,但 DNSMOS 3.82 略低于 3.93; laughter Jaccard NVTTS 0.25 vs CosyVoice2 0.34,归因于 CosyVoice2 的细粒度 laughter tokenization [NonverbalTTS Table 8, Fig 1]
