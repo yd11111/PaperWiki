@@ -130,7 +130,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 ## 演进
 
-规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025)
+规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026)
 
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
@@ -183,3 +183,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## Self-Training 词级情感控制 (WeSCon)
 
 [[论文笔记/WeSCon|WeSCon]] (Wang et al., NeurIPS 2025) 提出首个不依赖含 intra-sentence 情感转换数据的 word-level 情感和语速联合控制框架。核心方法: 两阶段 self-training — (1) Teacher: 冻结 CosyVoice2 backbone,通过多轮推理 (每段用不同情感 prompt) + transition smoothing (tail-to-head linkage) + dynamic speed control (prompt token 插值/下采样) 实现 word-level 控制; (2) Student: CosyVoice2 + Dynamic Emotional Attention Bias (DEAB,7 种预定义 attention bias 模板的加权组合) 在 teacher 伪标签上 self-training,实现端到端单次推理。仅用 ~500h 公开 ESD 数据 (无情感转换标注),Emo2v. 0.882 / DNSV 4.361 (EN) 全面超越 CosyVoice2 (0.866 / 7.894) 和 F5-TTS/Index-TTS,EMOS 3.70±0.17, NMOS 3.93±0.20; 零样本 TTS 性能几乎无损 (CER 1.47 vs 1.45)。与 EmoCtrl-TTS 的核心区别: 不需要 27k h 含情感转换的伪标签数据; 与 TTS-CtrlNet 的区别: 控制粒度为词级 (非帧级),通过 self-training 蒸馏而非 ControlNet 旁挂。详见 [[论文笔记/WeSCon|WeSCon]]。
+
+## Training-free Attention Mask 实现 Intra-utterance 多情感控制 (TED-TTS)
+
+[[论文笔记/TED-TTS|TED-TTS]] (Liang et al., NUS, 2026) 提出首个在预训练 AR zero-shot TTS 上实现 intra-utterance segment-level 多情感控制的 training-free 框架。核心方法: (1) 2D causal attention mask — 在标准 causal attention 上叠加 segment-local condition visibility 约束,文本/semantic token 只能 attend 到所属 segment 的 emotion condition embedding,而文本/semantic 之间保留全局 causal attention 保证语义连贯; (2) Monotonic Stream Alignment (MSA) — Bayesian 在线对齐追踪算法,通过 monotonic prior + 动态 head selection + Gaussian smoothing 将 noisy multi-head attention 转化为稳定的 text-semantic alignment,驱动 mask 切换。在 IndexTTS2 上验证,SMOS 4.00-4.22 / NMOS 4.07-4.22 (EN) 全面超越独立合成拼接的对比方法 [Table 1, 2]。与 EmoSteer-TTS 的关键区别: EmoSteer-TTS 通过激活空间 steering vector 注入全局情感,TED-TTS 通过 attention mask 实现 segment-level 切换; 与 WeSCon 的区别: WeSCon 需 self-training (~500h ESD data),TED-TTS 完全零训练。局限: 仅 segment-wise 离散切换,不建模渐进情感过渡; EMOS (情感准确率) 低于 baseline (3.42 vs 4.07 EN),反映 intra-utterance 控制中情感准确度与过渡自然度的 trade-off。详见 [[论文笔记/TED-TTS|TED-TTS]]。

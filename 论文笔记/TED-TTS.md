@@ -7,12 +7,12 @@ source: "Sources/TED-TTS.pdf"
 authors: [Qifan Liang, Yuansen Liu, Ruixin Wei, Nan Lu, Junchuan Zhao, Ye Wang]
 year: 2026
 venue: "arXiv"
-tags: [TTS, emotion, controllability, training-free, inference-time, duration-control, intra-utterance, autoregressive, zero-shot]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Duration Predictor]]", "[[Natural Language Description for TTS]]", "[[Attention-based TTS]]"]
-models: ["[[IndexTTS2]]", "[[MaskGCT]]", "[[F5-TTS]]", "[[CosyVoice 2]]"]
+tags: [TTS, emotion-control, duration-control, training-free, inference-time, zero-shot, autoregressive, controllable-TTS, intra-utterance]
+concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]"]
+models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["ESD", "MED-TTS"]
-kb_context_sources: 5
+datasets: []
+kb_context_sources: 6
 status: draft
 created: 2026-06-04
 updated: 2026-06-04
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
+> [!info] KB 背景 (基于 5 个实体页: [[Emotion Control in TTS]], [[Prosody Modeling]], [[Duration Predictor]], [[Natural Language Description for TTS]], [[Attention-based TTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: TED-TTS 处于 Emotion Control in TTS 演进链的最新位置 — 紧接 EmoSteer-TTS (training-free 激活 steering) 和 WeSCon (self-training 词级情感控制) 之后。与 EmoSteer-TTS 同属 training-free 路线,但关键区别在于: EmoSteer-TTS 通过激活空间 steering vector 注入全局情感,不支持 segment-level 切换; TED-TTS 通过 2D causal attention mask + 在线对齐实现 intra-utterance segment-level 多情感转换。与 WeSCon 的区别: WeSCon 需要 self-training (虽然数据量不大,~500h ESD),且基于 Dynamic Emotional Attention Bias; TED-TTS 完全不需要任何训练。
@@ -29,7 +29,7 @@ updated: 2026-06-04
 
 **已有认知**: [[Prosody Modeling]] (confirmed) 指出 LLM-TTS 的核心局限之一是"隐式建模使细粒度韵律控制困难"。TED-TTS 直接回应这一局限,证明通过 inference-time 干预可以在不改动模型的前提下实现 segment-level 情感和时长控制。Prosody Modeling 页面记录的 LLM-TTS 韵律建模依赖 in-context learning,TED-TTS 提供了一条不依赖 prompt 音频但通过 attention mask 机制实现细粒度韵律操控的替代路径。
 
-> 检索命中: [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]][待确认], [[Duration Predictor]][待确认], [[Natural Language Description for TTS]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[Prosody Modeling]]✓ | 过滤: [[Emotion Control in TTS]][待确认], [[Duration Predictor]][待确认], [[Natural Language Description for TTS]][待确认], [[Attention-based TTS]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 

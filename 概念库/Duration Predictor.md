@@ -122,7 +122,7 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing) → Inference-time AR duration steering (TED-TTS, 2026; training-free segment-level duration embedding + EOS logit modulation)
 
 ### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
 
@@ -147,3 +147,11 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **WER**: Seed-TTS test-zh 1.20% (低于 GT 1.26%), test-en 1.81% [Table 1]
 - **风格迁移**: 仅微调 duration model (~100 samples DPO),acoustic model 不动,即可完成风格迁移
 - 详见 [[论文笔记/FlexSpeech|FlexSpeech]]
+
+### TED-TTS Inference-time AR Duration Steering (Liang et al., 2026)
+
+- **Training-free segment-level duration control**: 首次在 AR TTS 中实现推理时 segment-level 时长控制,不修改模型参数。利用 IndexTTS2 的 duration embedding table (与 semantic positional embedding 共享),在 AR 解码中根据在线 text-semantic progress 差异动态重新查询 duration table 修正 embedding
+- **双层控制**: (1) Local duration embedding steering — 比例控制器根据 MSA 对齐估计的 text/semantic progress 差异调整 duration embedding,每 5 步更新一次,最大调整 10 tokens; (2) Global EOS logit modulation — 非最终 segment 抑制 EOS,最终 segment 根据 progress ratio 动态调整 EOS logit (bias 范围 [-5.0, +15.0])
+- **与已有方法的根本区别**: DMOSpeech 2/FlexSpeech/FNH-TTS 都是训练/优化 duration predictor 模块; TED-TTS 完全不训练,在 AR 解码过程中通过 embedding lookup 和 logit 修改实现控制
+- **Duration error**: 全设置 3.21-3.39% (vs baseline 5.78-12.03%),且不同 scaling factor 下误差保持稳定 [Table 4]
+- 详见 [[论文笔记/TED-TTS|TED-TTS]]
