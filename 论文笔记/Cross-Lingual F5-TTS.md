@@ -34,7 +34,7 @@ updated: 2026-06-04
 > - [[Non-autoregressive TTS]] [待确认]: 本文基于 F5-TTS 这一 NAR flow-matching 系统。NAR 与 AR 的关键区别在于并行生成,但 NAR 需要显式或隐式的 duration 信息来确定输出长度。
 > - [[Emilia]] [待确认]: 本文使用 Emilia 约 95K 小时中英数据训练,另取 1000 小时平衡子集训练 speaking rate predictor。
 >
-> **创新判断**: 对比 KB 中已有方法,本文的核心创新在于解决了 NAR flow-matching TTS(特别是 F5-TTS 系列)的跨语言瓶颈。E2 TTS/F5-TTS 通过 speech infilling 消除了显式 phoneme alignment,但推理时仍需 prompt transcript 来估算目标时长(length-ratio)。本文通过两个改造打破这一依赖: (1) 训练时用 MMS forced alignment 在 word boundary 处切分,使 prompt 部分不需要 transcript; (2) 推理时用 speaking rate predictor 从 prompt 声学特征直接估算目标时长。这一方案虽然在 intra-lingual 场景不如原始 F5-TTS(引入了额外模块),但在跨语言场景提供了原 F5-TTS 无法实现的能力。
+> **创新判断**: 对比 KB 中已有方法,本文的核心创新在于解决了 NAR flow-matching TTS(特别是 F5-TTS 系列)的跨语言瓶颈。E2 TTS/F5-TTS 通过 speech infilling 消除了显式 phoneme alignment,但推理时仍需 prompt transcript 来估算目标时长(length-ratio)。本文通过两个改造打破这一依赖: (1) 训练时用 MMS forced alignment 在 word boundary 处切分,使 prompt 部分不需要 transcript; (2) 推理时用 speaking rate predictor 从 prompt 声学特征直接估算目标时长。虽然引入了额外的 speaking rate predictor 模块,但 intra-lingual 性能保持持平或略优(WER/UTMOS 优于 baseline, SIM 仅低 0.005-0.014),同时在跨语言场景提供了原 F5-TTS 无法实现的能力。
 >
 > 检索命中: [[Conditional Flow Matching]]✓, [[Cross-lingual Voice Cloning]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Emilia]](pending-review) | 未命中但可能相关: 无
 
@@ -184,3 +184,9 @@ F5-TTS 等 NAR flow-matching TTS 系统通过 speech infilling 训练范式实�
 2. **MMS Forced Alignment 作为多语言 word boundary 工具**: 1000+ 语言覆盖的强制对齐能力,可用于数据预处理/分段/去噪等场景
 3. **多粒度语言适配**: 英语用 phoneme-level、中文用 syllable-level 的发现提供了具体的工程指导,在涉及中英双语系统设计时可直接参考
 4. **Training-time transcript dropout**: 在训练时有意丢弃部分条件信息(prompt transcript),迫使模型学到更鲁棒的表征。这一思路可推广到其他条件生成任务(如去掉 speaker label 提升音色泛化)
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> - 1 medium: KB 背景创新判断中"不如"表述不准确 (已修正)
+> - 1 low: models 字段为空 (vault 无 F5-TTS 模型页, 可接受)
+> 详见 `_review/Cross-Lingual F5-TTS-review.yml`
