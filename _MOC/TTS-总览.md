@@ -104,3 +104,4 @@
 - [[论文笔记/Shallow Flow Matching|Shallow Flow Matching]] — U. Tokyo, NeurIPS 2025, shallow flow matching 将 FM 推理起点从纯噪声移至 coarse 表示中间状态, 正交投影+分段流, Matcha-TTS/CosyVoice/StableTTS 一致提升 + 自适应 ODE solver ~50% 加速
 - [[论文笔记/Dragon-FM|Dragon-FM]] — Microsoft, 2025, chunk-AR + chunk 内 flow matching 统一框架 ("next-token denoising"), 12.5Hz FSQ codec (48kHz), FSQ embedding 直接作为 FM 连续目标, TNFE 2-4
 - [[论文笔记/FNH-TTS|FNH-TTS]] — Megatronix/Newcastle, 2026, VITS + MoE Duration Predictor (Switch-Transformer 8 experts) + VOCOS vocoder + CoMBD/SBD, 揭示 duration-vocoder 耦合效应, MOS 4.48/4.63 (LJ/VCTK), 47.73M 参数
+- [[论文笔记/MELA-TTS|MELA-TTS]] — Alibaba, 2025, Tokenizer-free joint AR transformer + DiT diffusion, ASR representation alignment 加速训练 3.3x + 提升内容一致性, CER 0.9% test-zh / WER 2.4% test-en (170K h)
