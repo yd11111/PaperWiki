@@ -1,6 +1,9 @@
 # Log
 
 ## 2026-06-04
+- [review/auto] [[MambaVoiceCloning]] — pass, 2 issues (0 high, 0 medium, 2 low); 去重review callout,修正source tagging
+- [lint/local] MambaVoiceCloning — 通过/0 issues
+- [skip/update] [[Duration Predictor]] — key_papers 已达上限(22),跳过追加
 - [skip/ingest] Voiced-Aware Style Extraction (arXiv 2511.14824) — 为 Spotlight-TTS 的 Master's thesis 扩展版,与已有笔记 [[Spotlight-TTS]] (arXiv 2505.20868, Interspeech 2025) 内容相同; 更新 frontmatter 添加 thesis_arxiv_id 和 venue 信息,未新建笔记
 - [kb/search] [[MCLP]] — 命中 6 页(取 6): [[LLM-based TTS]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Style Transfer in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[MCLP]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTS Evaluation, Differentiable Reward Optimization)
