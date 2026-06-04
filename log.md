@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[TMD-TTS]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Mel Spectrogram]](pending-review), [[VITS]](pending-review)
+- [ingest/deep] [[TMD-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 实体页 key_papers, MOC 更新 1 (TTS-总览)
+- [review/auto] [[TMD-TTS]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] TMD-TTS — 通过 (0 dead links)
+- [alert/backlog] pending-review: 71, draft deep/repro: 199 — 建议抽空审核
 - [kb/search] [[DiaMoE-TTS]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Cross-lingual Voice Cloning]]✓ | 参考: [[Phoneme Representation]](pending-review), [[Speaker Adaptation]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[DiaMoE-TTS]] — 精读, kb_sources=6, 新建 0, 追加 6 概念/任务/模型/数据集 key_papers, MOC 更新 1 (零样本语音合成)
 - [review/auto] [[DiaMoE-TTS]] — pass, 2 issues (0 high, 0 medium, 2 low)

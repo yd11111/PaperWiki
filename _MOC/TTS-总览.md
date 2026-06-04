@@ -38,6 +38,8 @@
   - [[论文笔记/DeepDubbing|DeepDubbing]] — 2025, Tencent Music/BUCEA, 端到端多角色有声书系统: OT-CFM Text-to-Timbre 从文本描述生成 speaker embedding + CosyVoice-based context-aware instruct-TTS, MOS-E 4.15
   - [[论文笔记/EmoSteer-TTS|EmoSteer-TTS]] — 2025, HKUST-GZ/Tencent, 首个 training-free 细粒度情感可控 TTS: LLM activation steering 迁移至 flow-matching DiT, difference-in-means + top-k token 构造 steering vector, 支持转换/插值/擦除/组合, F5-TTS/E2-TTS/CosyVoice2 验证, EI-MOS 4.00 超越 EmoSphere++ 3.50
   - [[论文笔记/EmoSSLSphere|EmoSSLSphere]] — 2025 (SSW), U Tokyo/PFN, EmoSphere-TTS + HuBERT layer-9 k-means 离散 token + DeBERTaV3 语义编码, 英日双语情感 TTS, nMOS EN 4.13/JA 3.94
+  - [[论文笔记/HiStyle|HiStyle]] — 2025, 层级 style embedding 预测器 (timbre→style 两阶段 diffusion), 文本描述引导可控语音合成
+  - [[论文笔记/ParaStyleTTS|ParaStyleTTS]] — 2025, 两级风格建模 (音素级韵律 GTU + 句子级副语言 FiLM), VITS 架构文本提示可控 TTS
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
@@ -47,10 +49,12 @@
 - TTS 应用与可访问性 — accessibility, document reader, mathematical TTS, BCI speech prosthesis
   - [[论文笔记/MathReader|MathReader]] — 2025 (ICASSP), OCR+T5+VITS pipeline 实现数学文档正确朗读, WER 0.281 vs Edge 0.510
   - [[论文笔记/MiSTR|MiSTR]] — 2025, BME/UKIM, iEEG-to-speech BCI 框架: DWT 小波特征 + Transformer 韵律感知 mel 预测 + IHPR 谐波相位重建, PC 0.91 / HNR 12.7 dB
+  - [[论文笔记/DiVISe|DiVISe]] — 2025, 端到端 V2S, AV-HuBERT + Conformer 直接从无声视频预测 mel, 无需 speaker embedding 保留说话人特性
 - 语音安全与隐私 — voice protection, deepfake defense, watermarking
   - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 联合水印训练, proactive speech traceability
   - [[论文笔记/SafeSpeech|SafeSpeech]] — 2025, USENIX Security, unlearnable perturbation + SPEC(KL引导)防护 fine-tuning+zero-shot voice cloning, 10模型迁移, WER 24%→99.6%
   - [[论文笔记/Traceable TTS|Traceable TTS]] — 2025, SJTU, watermark-free TTS traceability, 反转 GAN loss 实现 F5-TTS + discriminator 协同训练, 域外 AUC 0.9421 / EER 11.50%
+  - [[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]] — 2025 (ICML), 首次 ZS-TTS speaker unlearning, Teacher-Guided Unlearning 使 VoiceBox 对 forget speaker 生成随机音色
 
 ## 按任务浏览
 
@@ -106,3 +110,4 @@
 - [[论文笔记/Dragon-FM|Dragon-FM]] — Microsoft, 2025, chunk-AR + chunk 内 flow matching 统一框架 ("next-token denoising"), 12.5Hz FSQ codec (48kHz), FSQ embedding 直接作为 FM 连续目标, TNFE 2-4
 - [[论文笔记/FNH-TTS|FNH-TTS]] — Megatronix/Newcastle, 2026, VITS + MoE Duration Predictor (Switch-Transformer 8 experts) + VOCOS vocoder + CoMBD/SBD, 揭示 duration-vocoder 耦合效应, MOS 4.48/4.63 (LJ/VCTK), 47.73M 参数
 - [[论文笔记/MELA-TTS|MELA-TTS]] — Alibaba, 2025, Tokenizer-free joint AR transformer + DiT diffusion, ASR representation alignment 加速训练 3.3x + 提升内容一致性, CER 0.9% test-zh / WER 2.4% test-en (170K h)
+- [[论文笔记/TMD-TTS|TMD-TTS]] — UESTC/Tibet Univ, 2026, 藏语三方言统一 TTS, Matcha-TTS + DSDR-Net (public/private FFN 条件路由) + dialect fusion, 构建 102h TMDD 数据集, nMOS 3.86 / DECS 88.09%
