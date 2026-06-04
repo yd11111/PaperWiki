@@ -130,7 +130,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 ## 演进
 
-规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025)
+规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025)
 
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
@@ -175,3 +175,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## 多语言球面情感 + SSL 离散 token (EmoSSLSphere)
 
 [[论文笔记/EmoSSLSphere|EmoSSLSphere]] (Park & Nakamura, SSW 2025) 在 EmoSphere-TTS 基础上向多语言和 SSL 韵律建模方向扩展。核心增量: (1) HuBERT 第 9 层特征经语言分别 k-means (K=200) 离散化为韵律 token,提供与球面 AVD 互补的局部韵律控制信号; (2) DeBERTaV3 语义编码器通过 cross-attention 条件化情感/韵律模块,实现语义感知的情感生成。在英日双语 (ESD/JVNV) 上优于 EmoSphere-TTS (EN WER 19.58% vs 20.96%, JA CER 18.33% vs 19.26%; nMOS EN 4.13 vs 4.05, JA 3.94 vs 3.63 [Table 1, 2])。消融显示 k-means 离散化优于连续 HuBERT 特征,语言分别聚类的 token 实际捕获了通用韵律模式。局限: 仅单说话人小规模实验,无零样本能力,未与 EmoSphere++ 或 LLM-TTS 对比。详见 [[论文笔记/EmoSSLSphere|EmoSSLSphere]]。
+
+## Self-Training 词级情感控制 (WeSCon)
+
+[[论文笔记/WeSCon|WeSCon]] (Wang et al., NeurIPS 2025) 提出首个不依赖含 intra-sentence 情感转换数据的 word-level 情感和语速联合控制框架。核心方法: 两阶段 self-training — (1) Teacher: 冻结 CosyVoice2 backbone,通过多轮推理 (每段用不同情感 prompt) + transition smoothing (tail-to-head linkage) + dynamic speed control (prompt token 插值/下采样) 实现 word-level 控制; (2) Student: CosyVoice2 + Dynamic Emotional Attention Bias (DEAB,7 种预定义 attention bias 模板的加权组合) 在 teacher 伪标签上 self-training,实现端到端单次推理。仅用 ~500h 公开 ESD 数据 (无情感转换标注),Emo2v. 0.882 / DNSV 4.361 (EN) 全面超越 CosyVoice2 (0.866 / 7.894) 和 F5-TTS/Index-TTS,EMOS 3.70±0.17, NMOS 3.93±0.20; 零样本 TTS 性能几乎无损 (CER 1.47 vs 1.45)。与 EmoCtrl-TTS 的核心区别: 不需要 27k h 含情感转换的伪标签数据; 与 TTS-CtrlNet 的区别: 控制粒度为词级 (非帧级),通过 self-training 蒸馏而非 ControlNet 旁挂。详见 [[论文笔记/WeSCon|WeSCon]]。

@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[BatonVoice]] — 命中 7 页(取 7): [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[BatonVoice]] — 精读, kb_sources=7, 新建 0, 追加 5 实体页 key_papers + 1 模型页 baseline, MOC 更新 1 (TTS-总览)
+- [review/auto] [[BatonVoice]] — pass-with-fixes, 0 high / 2 medium / 1 low
+- [lint/local] BatonVoice — 通过, 0 死链
+- [kb/search] [[UltraVoice]] — 命中 6 页(取 6): [[Instructed Speech Generation]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Style Transfer in TTS]](pending-review)
+- [ingest/deep] [[UltraVoice]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers + 1 任务页 benchmarks, MOC 更新 1 (语音大模型与对话)
+- [review/auto] [[UltraVoice]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [lint/local] UltraVoice — 通过 (0 dead links), MOC 已包含 (语音大模型与对话)
 - [kb/search] [[BFA]] — 命中 3 页(取 3): [[Duration Predictor]](pending-review), [[Phoneme Representation]](pending-review), [[Non-autoregressive TTS]](pending-review) | 过滤: 无 | 全部待确认
 - [ingest/deep] [[BFA]] — 精读, kb_sources=3, 新建 0, 追加 1 (Duration Predictor key_papers + 相关概念)
 - [review/auto] [[BFA]] — pass-with-fixes, 4 issues (0 high, 1 medium fixed, 3 low)
