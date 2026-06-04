@@ -1,0 +1,26 @@
+paper: VARSTok
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含因果解释(WHY),每个设计选择有对比替代方案的讨论(DPC vs k-means, implicit coding vs duration predictor, mean pooling choice)。速查卡片'可借鉴'字段列出两个具体可迁移 trick (implicit duration coding formula, temporal contiguity constraint)。"
+  trustworthy:
+    verdict: pass
+    notes: "数字型 claim 覆盖率高,核心数据全部标注 [Table N] 出处。指标使用正确(UTMOS/PESQ/STOI/WER/SIM/MOS/SMOS 无混淆)。速查卡片指标字段含具体数字+数据集名+来源。"
+  distinguishable:
+    verdict: pass-with-minor
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读] 来源,覆盖率约 85%。少数句子缺少来源标注但不影响可信度。无把推断写成断言的问题。'首个 fully dynamic' 使用了论文原文的表述并标注了出处限定。"
+  navigable:
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位(与 WavTokenizer/BigCodec/TFC 对比)。frontmatter 字段存在且非空。concepts 列出 7 个相关概念,models 列 WavLM 和 Whisper(用于评估的模型,非本文模型也非后续系统)。速查卡片 5 字段有实质内容。"
+  no_pollution:
+    verdict: pass
+    notes: "不需要新建概念页。反向更新仅为追加 key_papers,无实质修改。无 factual-error 或 overclaim 风险。"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好,五维原则基本满足,无 high issue。方法节的因果解释充分,实验数据标注完整,KB 背景定位准确。可直接进行反向更新。"

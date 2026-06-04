@@ -215,8 +215,13 @@ VARSTok 的核心贡献清晰且有说服力: 它证明了 variable-frame-rate a
 
 ---
 
-> [!review] 审阅待填
-> 本笔记尚未经过审阅。
+> [!review] 审阅结论: pass (2026-06-04)
+> - **可复述**: pass — 方法节含因果解释,每个设计选择有 WHY 讨论
+> - **可信赖**: pass — 数字 claim 全部标注 [Table N],指标使用正确
+> - **可区分**: pass — [论文原文]/[agent 解读] 标注覆盖率 ~85%
+> - **可定位**: pass — KB 背景谱系定位含具体模型/方法对比
+> - **不污染**: pass — 反向更新仅追加 key_papers,无实质修改
+> - 详见 `_review/VARSTok-review.yml`
 
 ---
 
