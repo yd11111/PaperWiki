@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Align2Speak]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Speaker Verification]](pending-review), [[Classifier-Free Guidance]](pending-review)
+- [ingest/deep] [[Align2Speak]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + DiffRO 演进线
+- [review/auto] [[Align2Speak]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [lint/local] Align2Speak — 通过, 0 死链
 - [kb/search] [[BatonVoice]] — 命中 7 页(取 7): [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[BatonVoice]] — 精读, kb_sources=7, 新建 0, 追加 5 实体页 key_papers + 1 模型页 baseline, MOC 更新 1 (TTS-总览)
 - [review/auto] [[BatonVoice]] — pass-with-fixes, 0 high / 2 medium / 1 low
@@ -13,6 +17,7 @@
 - [ingest/deep] [[BFA]] — 精读, kb_sources=3, 新建 0, 追加 1 (Duration Predictor key_papers + 相关概念)
 - [review/auto] [[BFA]] — pass-with-fixes, 4 issues (0 high, 1 medium fixed, 3 low)
 - [lint/local] BFA — 通过/0 死链, MOC 已包含 (TTS训练与评估)
+- [alert/backlog] pending-review: 71, draft deep/repro: 242 — 建议抽空审核
 - [kb/search] [[UniVoice]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[UniVoice]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers + 2 MOC 更新
 - [review/auto] [[UniVoice]] — pass, 0 issues
