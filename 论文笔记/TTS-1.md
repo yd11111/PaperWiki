@@ -79,7 +79,7 @@ TTS-1 的架构由两个核心组件构成 [§2, Fig 1]:
 - 24kHz: hop=480, stride=1
 - 48kHz: hop=160, stride=(3,2)
 
-[论文原文] 作者特别指出,他们的 48kHz decoder 使用了比其他 iSTFT-based 模型显著更大的 hop length (160 vs CosyVoice 2 的 4),实验表明更大的 hop length 反而产生了更好的语音质量 [§2.1]。
+[论文原文] 作者特别指出,他们的 48kHz decoder 使用了比其他 iSTFT-based 模型显著更大的 hop length。论文引用 Du et al. [15] (CosyVoice 2) 在 24kHz 下使用 hop length=4,而 TTS-1 在 48kHz 下使用 hop length=160,尽管采样率不同,作者认为更大的 hop length 产生了更好的语音质量 [§2.1]。
 
 #### 3. RMS loudness loss 解决了什么?
 
@@ -160,7 +160,7 @@ $$R(p,c) = \alpha R_{wer}(c) + \beta R_{similarity}(p,c) + \gamma R_{dnsmos}(c) 
 | SIM (non-streaming) | 0.535 (decode w/ prompt) | 0.495 (decode w/o prompt) | SEED-TTS-Eval EN subset | [Table 10] |
 | Arena win rate | TTS-1-Max 59-61% | vs 11Labs/Cartesia/OpenAI | Internal arena, ~400 votes | [Table 9] |
 | Arena win rate | TTS-1-Max 55.3% | vs TTS-1 | Internal arena | [Table 9] |
-| P90 latency (first 2s) | ~30% of vLLM baseline | vLLM baseline | - | [Fig 10] |
+| P90 latency (first 2s) | 70% faster than vLLM | vLLM baseline | - | [§5.2, Fig 10] |
 
 **RL alignment 效果** [Table 8]: GRPO 使 TTS-1 的 WER 从 7.9% 降至 6.3% (相对 -20%),TTS-1-Max 从 6.9% 降至 5.1% (相对 -26%)。
 
@@ -209,5 +209,9 @@ $$R(p,c) = \alpha R_{wer}(c) + \beta R_{similarity}(p,c) + \gamma R_{dnsmos}(c) 
 
 6. **SFT 学习率 = pre-training 最终学习率** [§3.4]: 一个简单但关键的 hyperparameter 选择,对最终语音质量有决定性影响。
 
-> [!review] 审阅待补
-> 审阅将在 Step 3.5 自动触发。
+> [!review] 审阅结论: pass-with-fixes (2026-06-04)
+> - **总评**: 方法节因果解释充分 (5 个 WHY 设计选择均有回答),来源标注覆盖率高,KB 背景定位准确
+> - **medium**: hop length 对比中采样率差异需标注 (已修正)
+> - **low**: frontmatter concepts 中 Codec Training Objectives 与正文关联较弱 (保留)
+> - **low**: P90 latency 表述改为直接引用论文原文 (已修正)
+> - 详见 `_review/TTS-1-review.yml`

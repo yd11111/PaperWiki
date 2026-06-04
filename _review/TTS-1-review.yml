@@ -1,0 +1,62 @@
+paper: "TTS-1 Technical Report"
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+summary: >
+  笔记质量整体良好。方法节包含充分的因果解释(5 个 WHY 设计选择均有回答),
+  来源标注覆盖率高(论文原文/agent 解读区分清晰), KB 背景定位准确(单码本+AR
+  路线 vs CosyVoice/VALL-E)。主要不足: (1) frontmatter concepts 中 Codec
+  Training Objectives 缺乏笔记正文的显式关联; (2) 方法节中 hop length 对比
+  reference 标注为 "CosyVoice 2 的 4" 实际应为 Du et al. [15] 即 CosyVoice 2 论文,
+  需确认准确性。均为 medium/low 级问题,不阻塞反向更新。
+
+issues:
+  - id: 1
+    principle: 可定位
+    type: bad-linking
+    severity: low
+    location: "frontmatter concepts"
+    detail: >
+      concepts 列表中包含 [[Codec Training Objectives]],但笔记正文
+      未显式讨论该概念页的内容(仅讨论了 RMS loss,但 Codec Training
+      Objectives 页覆盖更广泛的 codec 训练目标)。
+    suggestion: >
+      保留,因为 RMS loudness loss 确实属于 codec training objectives
+      范畴。但如有更精确的关联可在反向更新时补充。
+
+  - id: 2
+    principle: 可信赖
+    type: traceability-gap
+    severity: medium
+    location: "方法节 §2. 为什么需要 super-resolution 模块?"
+    detail: >
+      "hop length 160 vs CosyVoice 2 的 4" — 论文原文 [§2.1] 引用的是
+      "Du et al. [15]" (即 CosyVoice 2 论文),称其 hop length 为 4 用于
+      24kHz 生成。但 TTS-1 的 hop length 160 是用于 48kHz。两者采样率不同,
+      直接对比 hop length 数值可能产生误导。笔记原文未标注此差异。
+    suggestion: >
+      补充说明: "论文引用 Du et al. [15] 的 24kHz 方案 hop=4,
+      而 TTS-1 在 48kHz 下使用 hop=160 [§2.1]" — 强调采样率差异。
+
+  - id: 3
+    principle: 可复述
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea #6"
+    detail: >
+      "SFT 学习率 = pre-training 最终学习率" 更像是一个训练 tip
+      而非可迁移方法。但考虑到论文明确称其对最终质量有 "crucial" 影响
+      [§3.4],且该发现在 TTS 训练中不够常识性,保留合理。
+    suggestion: 保留,无需修改。
+
+  - id: 4
+    principle: 可信赖
+    type: traceability-gap
+    severity: low
+    location: "实验表 P90 latency"
+    detail: >
+      "~30% of vLLM baseline" 是从 Fig 10 目测估计,非论文给出的精确数字。
+      论文原文只称 "70% faster" [§5.2],对应本文应为 ~30% of baseline。
+      表述一致但来源为估算。
+    suggestion: >
+      修改为直接引用论文原文 "70% faster than vanilla vLLM" [§5.2]。
