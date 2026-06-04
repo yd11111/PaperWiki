@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[CosyEdit]] — 命中 6 页(取 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review)
+- [ingest/deep] [[CosyEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 演进线)
+- [review/auto] [[CosyEdit]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [review/kb] [[CosyEdit]] — pass, 0 issues
+- [lint/local] CosyEdit — 通过
+- [kb/search] [[MambaVoiceCloning]] — 命中 3 页(取 3): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[MambaVoiceCloning]] — 精读, kb_sources=3, 新建 0, 追加 0 (已有 5 个 KB 页面已引用)
+- [review/auto] [[MambaVoiceCloning]] — pass, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] MambaVoiceCloning — 通过
 - [kb/search] [[TruS]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
 - [ingest/deep] [[TruS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Speaker Verification key_papers, Voice Cloning Taxonomy key_papers)
 - [lint/local] TruS — 通过
@@ -1281,3 +1290,4 @@
 - [moc] TTS训练与评估 Post-training: +FPO; 零样本语音合成 2025: +FPO
 [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
 - [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
+- [alert/backlog] pending-review: 71, draft deep/repro: 215 — 建议抽空审核
