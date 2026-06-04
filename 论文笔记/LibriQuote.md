@@ -9,7 +9,7 @@ year: 2025
 venue: "Findings of ACL 2026"
 tags: [TTS, dataset, expressive-speech, audiobook, zero-shot, flow-matching, evaluation, narrative, prosody]
 concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Natural Language Description for TTS]]", "[[Conditional Flow Matching]]", "[[TTS Evaluation]]"]
-models: ["[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/IndexTTS2|IndexTTS2]]"]
+models: ["[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "F5-TTS"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -60,6 +60,12 @@ LibriQuote 不是一个模型,而是一个**数据集构建 pipeline + 评估框
 Pipeline 分两大部分:
 1. **数据构建**: 音频准备 → 文本准备 (台词检测) → ASR 转写 → 文本-音频对齐 → 台词分割 + 叙事语境提取
 2. **评估框架**: 标准客观指标 (WER, SIM-O, E-Sim) + 基于 LALM 的语境指标 (ContextMOS, Win-Rate)
+
+**数据集规模** [Table 1]:
+- 训练集: 12,723 小时叙述 (N) + 5,359 小时台词 (Q),其中高表现力子集 Qf = 379 小时 (378K 条台词)
+- 测试集: 7.4 小时台词 (5,598 条),15 位未见说话人 (8 男 7 女)
+- 开发集: 5.1 小时台词 (2,921 条),与训练集说话人重叠但不与测试集重叠
+- 说话人: 3,314 个,书籍: 2,991 本,均来自 LibriVox 的 Fiction 分类
 
 ### 关键设计选择
 
@@ -140,7 +146,7 @@ Pipeline 分两大部分:
 2. **评估偏差**: LALM-as-a-Judge 存在固有偏见,自动化结果应主要用于模型间比较而非对单个模型下结论 [§7]。
 3. **叙事语境利用不充分**: 仅在 SparkTTS 从头训练和 IndexTTS2 情感预测中探索了语境条件,未在 F5-TTS 等 flow-matching 模型上测试 [§7]。
 4. **朗读者质量**: LibriVox 业余朗读者的表现力本身有限,某些台词未能充分传达应有的情感 [Appendix H, §6]。
-5. **语言单一**: 仅覆盖英语,未扩展至多语言场景。
+5. **语言单一**: 仅覆盖英语,未扩展至多语言场景。[agent 解读]
 
 ## 点评
 
@@ -164,6 +170,15 @@ Pipeline 分两大部分:
 3. **LALM-as-Judge 评估表现力**: ContextMOS 和 Win-Rate 的评估方案可直接复用于其他需要评估语音与语境匹配度的场景,如对话系统的情感表现力评估。
 
 4. **解耦情感预测的语境条件**: IndexTTS2-Context 的做法 (用叙事语境而非文本本身预测情感) 可推广到所有支持解耦情感条件的 TTS 系统。
+
+---
+
+> [!review] 审阅 (2026-06-04, agent)
+> **结论**: pass-with-fixes (0 high, 1 medium, 2 low)
+> - (medium) frontmatter models 遗漏 F5-TTS → 已修复
+> - (low) 局限性第5点未标注 [agent 解读] → 已修复
+> - (low) 数据集核心统计分散 → 已在方法节补充规模概要
+> 详见 `_review/LibriQuote-review.yml`
 
 ---
 

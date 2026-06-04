@@ -1,0 +1,51 @@
+paper: LibriQuote
+title: "Computational Narrative Understanding for Expressive Text-to-Speech"
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 3
+high_count: 0
+medium_count: 1
+low_count: 2
+
+principles:
+  comprehensible:
+    verdict: pass
+    notes: "方法节包含充分的因果解释,4 个关键设计选择都有 WHY 回答; 速查卡片可借鉴字段列出 3 个具体可迁移 trick"
+  trustworthy:
+    verdict: pass
+    notes: "数字型 claim 标注覆盖率 ~90%; 所有实验表格引用了 [Table 2/3/4]; 指标名称正确; 方向性无误"
+  distinguishable:
+    verdict: pass
+    notes: "方法节因果解释全部标注了 [论文原文] 或 [agent 解读]; agent 推断用 '可能因为' 限定; 无把推断写成断言的情况"
+  locatable:
+    verdict: pass-with-fixes
+    notes: "KB 背景有具体谱系定位 (vs Emilia, vs CFM); frontmatter 基本正确但 models 字段遗漏 F5-TTS"
+  no_contamination:
+    verdict: pass
+    notes: "无需新建概念页; 反向更新均为 append 操作 (加 key_papers); 无 factual error 或 overclaim"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: locatable
+    location: "frontmatter models 字段"
+    detail: "F5-TTS 是本文两大实验基线之一 (与 SparkTTS 并列), 且 F5-TTS 微调实验产生了本文最重要的发现之一 (flow-matching 微调同时提升表现力和可懂度), 但 frontmatter models 字段未包含 F5-TTS"
+    suggestion: "虽然 F5-TTS 在论文笔记/中无独立笔记, 但作为本文核心讨论的模型应在 frontmatter 中标注。由于当前 vault 无 F5-TTS 笔记, 可暂以文本标注 'F5-TTS' 而非 wikilink"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: trustworthy
+    location: "局限性 第5点"
+    detail: "'语言单一: 仅覆盖英语' 是 agent 补充的观察, 论文原文虽然未将其列为 limitation, 但确实是数据集的客观约束"
+    suggestion: "标注 [agent 解读] 以区分来源"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "核心问题节"
+    detail: "数据集核心统计 (5.3K h 台词, 12.7K h 叙述, 3314 speakers, 2991 books) 仅在速查卡片中简略提及, 核心问题或方法节未给出完整数据集规模概览"
+    suggestion: "在方法节整体架构后补充一段数据集规模概要"
