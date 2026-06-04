@@ -1,0 +1,45 @@
+paper: MPO
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 3
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节有因果解释(WHY preference set > combined ranking, WHY CE loss prevents degradation),速查可借鉴字段具体可迁移"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率高(Table 1/2, Fig 2/3 引用完整);指标名正确(CER/SPK SIM/Prosody RMSE)"
+  可区分:
+    satisfied: true
+    notes: "因果解释均标注了[论文原文]或[agent 解读],来源覆盖率 >90%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(SpeechAlign→UNO→RIO→FPO→DiffRO演进线),与FPO的同实验室关系也指出"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页;反向更新仅追加 key_papers"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter models
+    detail: "frontmatter models 为空,但论文使用了 LLaMA 架构且提及了 SeedTTS/SpeechAlign/UNO/RIO 等对比方法;models 字段可列对比 baseline 或核心架构参考"
+    suggestion: "MPO 的 base model 无公开名称,可不列;但可考虑在 models 中列明 baseline 参照"
+  - id: 2
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea #3"
+    detail: "quality gating (CER=0, gap>=0.1) 较常规,不算很有迁移价值的 insight"
+    suggestion: "可保留但降低优先级"
+  - id: 3
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "方法 §3.2 CE loss 正则化"
+    detail: "提到 NLP 中 DPOP/SimPO 等类似工作但未给具体引用"
+    suggestion: "加上 NLP 文献引用或标注[agent 解读]说明这是 agent 的类比判断(已标注,可接受)"
