@@ -1,0 +1,30 @@
+kb_review:
+  paper: "MCLP"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass
+
+  change_plan:
+    - target: "概念库/TTS Evaluation.md"
+      action: append
+      detail: "在演进线末尾追加 MCLP 作为 stylistic consistency 评估新路线。key_papers 已达上限 (28条),不追加。追加正文段落约 5 行。"
+      status_change: "无 (append 不改 status)"
+
+    - target: "概念库/Differentiable Reward Optimization.md"
+      action: append
+      detail: "在演进线末尾追加 MCLP+GRPO 作为 style-centric reward 路线。key_papers 已达上限 (26条),不追加。追加正文段落约 5 行。"
+      status_change: "无 (append 不改 status)"
+
+  skipped:
+    - target: "概念库/LLM-based TTS.md"
+      reason: "key_papers 远超上限 (103条),且连接过于泛化 (使用 LALM 做 TTS 是共性不是特色)"
+    - target: "概念库/Style Transfer in TTS.md"
+      reason: "key_papers 远超上限 (40条),且本文关注 stylistic consistency 而非 style transfer"
+    - target: "概念库/Emotion Control in TTS.md"
+      reason: "key_papers 远超上限 (65条),且本文论点是情感分类不足以衡量 role-play style,属对比关系"
+    - target: "概念库/Instruction-Guided Speech Synthesis.md"
+      reason: "key_papers 超上限 (26条),且本文非 instruct-TTS 系统,仅以其为 baseline"
+
+  new_entities: []
+
+  issues: []
