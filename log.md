@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DiffRO]] — 命中 6 页(取 6): [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Gumbel-Softmax]](pending-review)
+- [ingest/deep] [[DiffRO]] — 精读, kb_sources=6, 新建 0, 追加 4 概念页 + 1 模型页 key_papers, MOC 更新 1 (TTS训练与评估), Emotion Control in TTS 追加 DiffRO-MTR 段, Differentiable Reward Optimization 追加原始论文段
+- [review/auto] [[DiffRO]] — pass-with-fixes, 3 issues (1 medium, 2 low)
+- [lint/local] DiffRO — 通过 (0 dead links)
 - [kb/search] [[TaDiCodec]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review)
 - [ingest/deep] [[TaDiCodec]] — 精读, kb_sources=6, 新建 0, 追加 6 概念 + 1 任务 key_papers, MOC 更新 2 (语音编码与量化 + 零样本语音合成)
 - [review/auto] [[TaDiCodec]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
