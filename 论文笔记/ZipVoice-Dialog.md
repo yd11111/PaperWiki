@@ -156,8 +156,8 @@ Inference: Euler ODE solver (16 steps) + time-dependent CFG → Vocos vocoder �
 | cpWER ↓ (test-en short) | **3.27** | 16.53 | 12.59 | [Table 4] |
 | cpSIM ↑ (test-en) | **0.437** | 0.356 | 0.333 | [Table 4] |
 | UTMOS ↑ (test-en) | **3.07** | 2.37 | 1.87 | [Table 4] |
-| WER ↓ (test-zh) | **3.17** | -- | 15.85 | [Table 4] |
-| cpSIM ↑ (test-zh) | **0.556** | -- | 0.463 | [Table 4] |
+| WER ↓ (test-zh) | **3.17** | 15.85 | -- | [Table 4] |
+| cpSIM ↑ (test-zh) | **0.556** | 0.463 | -- | [Table 4] |
 
 ### 主观评估 [Table 5] (test-zh, 10 中文母语评估者)
 
@@ -212,3 +212,10 @@ Inference: Euler ODE solver (16 steps) + time-dependent CFG → Vocos vocoder �
 2. **Minimal speaker disambiguation via learnable embeddings**: 仅用 2 个可学习向量就完成说话人轮次分配,避免了 speaker encoder / x-vector 等重型方案。关键 insight: 对话 TTS 需要的是"哪个说话人说这段"的指示信号,不是音色本身的编码。
 3. **Speaker exclusive loss**: 自适应能量阈值 + 双通道活跃帧惩罚,是一种通用的通道分离策略,可迁移到 source separation、stereo speech generation 等场景。
 4. **cpWER/cpSIM 评估方案**: 基于 concatenated min-permutation 的评估方法将 speaker attribution accuracy 和 content accuracy 统一到一个指标中,可作为对话 TTS 的标准评估 protocol。
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> - [fixed] Table 4 test-zh 行 MoonCast/Dia 数据交换 (medium, factual-error)
+> - [noted] 速查"全面超越"措辞偏强 (low, overclaim)
+> - [noted] datasets 列 Emilia 为间接使用 (low, template-compliance)
+> 详见 `_review/ZipVoice-Dialog-review.yml`

@@ -1,0 +1,48 @@
+paper: ZipVoice-Dialog
+reviewer: agent-auto
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principle_assessment:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_contamination: pass
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "## 实验 > 核心对比 [Table 4]"
+    detail: "test-zh 行中 MoonCast 和 Dia 的数据被交换: 论文中 MoonCast 有 test-zh 数据 (WER=15.85, cpSIM=0.463), Dia 无 test-zh 数据 (--); 笔记原稿写反了。"
+    suggestion: "已在审阅过程中修正。MoonCast=15.85/0.463, Dia=--。"
+    status: fixed
+
+  - id: 2
+    type: overclaim
+    severity: low
+    location: "速查 > 一句话"
+    detail: "'全面超越' 措辞偏强。MoonCast 在 expressiveness 方面被主观评价者认为更好 (Limitations 节提及), 且 Dia 未评测 test-zh, 故严格来说非'全面'。"
+    suggestion: "可改为'在推理速度、可懂度、说话人相似度等客观指标上全面超越',限定范围。但因实际客观指标确实全面更优, severity 标为 low, 不阻塞。"
+    status: noted
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets 列 Emilia, 但 Emilia 是 ZipVoice 预训练数据而非本文直接训练数据。本文核心数据集是 OpenDialog (新发布) + in-house dataset。OpenDialog 无 vault 页, 暂不列入。"
+    suggestion: "可保留 Emilia (间接使用), 在笔记中已有 OpenDialog 数据集专门章节详述。不影响知识库正确性, 不阻塞。"
+    status: noted
+
+summary: |
+  整体质量良好。方法节包含充分的因果解释 (WHY) 并清晰标注了 [论文原文]/[agent 解读] 来源;
+  数字 claim 标注覆盖率高 (估计 > 90%); KB 背景谱系定位准确, 将 dialogue TTS 与
+  interactive spoken dialogue 的区别清晰阐明; 速查卡片 5 字段均有实质内容;
+  反向更新计划仅涉及追加 (key_papers), 不污染已有知识。
+
+  发现 1 个 medium issue (Table 4 test-zh 数据行 MoonCast/Dia 交换, 已修正) +
+  2 个 low issues (overclaim 措辞 + datasets 字段间接引用)。
+
+  结论: pass-with-fixes, 可进行反向更新。
