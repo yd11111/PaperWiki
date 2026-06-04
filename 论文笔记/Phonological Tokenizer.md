@@ -158,3 +158,19 @@ alpha = 0 → 纯 phonetic token (ASR-only); alpha = 1 → 接近 acoustic token
 4. **Differentiable k-means 作为通用 token 属性编辑工具**: 可将此技术应用于其他 SSL 模型 (HuBERT, w2v-BERT 2.0) 和其他目标任务 (TTS prosody control, emotion transfer)。
 
 检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speech Factorization]], [[Speech Language Model]] | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含三个设计选择的 WHY 解释,速查可借鉴含具体 trick |
+> | 可信赖 | pass | 数字 claim 标注覆盖率 ~95%,指标名正确,方向无误 |
+> | 可区分 | pass | 因果解释来源标注覆盖率 ~90%,无推断写成断言 |
+> | 可定位 | pass | KB 背景有具体谱系定位和对比基准,frontmatter 完整 |
+> | 不污染 | pass | 反向更新为 append-only,无 factual error 风险 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/Phonological Tokenizer-review.yml`

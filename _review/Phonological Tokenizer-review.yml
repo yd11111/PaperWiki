@@ -1,0 +1,92 @@
+review:
+  paper: "Phonological Tokenizer"
+  reviewer: auto
+  date: 2026-06-04
+  checklist_version: v1.1
+  conclusion: pass
+
+principles:
+  可复述:
+    score: 9
+    status: pass
+    rationale: "方法节包含三个关键设计选择,每个都有 WHY 解释 (differentiable k-means 的可编程性、loss weighting 的属性调控机制、speaker embedding 的被动解耦原理)。速查卡片可借鉴字段包含 3 个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    status: pass
+    rationale: "数字型 claim 标注覆盖率 ~95% (Table 2/3/4 均标注); 指标名使用正确 (WER, ER acc, SID acc, F0 corr, SpkSim, UTMOS, GenPPL, PESQ); 方向性正确; 速查指标含具体数字+数据集+出处。"
+  可区分:
+    score: 9
+    status: pass
+    rationale: "因果解释来源标注覆盖率 ~90%,方法节中 6 处 [论文原文] 和 4 处 [agent 解读] 标注清晰; 实验发现中推断性分析均以 [agent 解读] 标注; 无推断写成断言的情况。"
+  可定位:
+    score: 9
+    status: pass
+    rationale: "KB 背景包含具体谱系定位 (phonetic vs acoustic vs mixed token 三角关系); 创新判断有对比基准 (SpeechTokenizer 960h, WavTokenizer 585h, Seed-TTS self-distillation, NaturalSpeech 3 factorized codec); frontmatter 字段完整; concepts 列出 7 个相关概念页。"
+  不污染:
+    score: 8
+    status: pass
+    rationale: "反向更新计划为 append-only (key_papers 追加),无 factual error 或 overclaim 风险; 不新建实体页。"
+
+checklist:
+  可复述:
+    - item: "方法节包含因果解释"
+      status: pass
+    - item: "关键设计选择回答为什么"
+      status: pass
+    - item: "速查可借鉴是具体 trick"
+      status: pass
+
+  可信赖:
+    - item: "数字 claim 标注覆盖率 ≥ 80%"
+      status: pass
+      detail: "约 95% 覆盖"
+    - item: "指标名正确"
+      status: pass
+    - item: "速查指标含数字+数据集+来源"
+      status: pass
+    - item: "无方向性错误"
+      status: pass
+
+  可区分:
+    - item: "因果解释标注来源"
+      status: pass
+    - item: "来源标注覆盖率 ≥ 80%"
+      status: pass
+      detail: "约 90% 覆盖"
+    - item: "无推断写成断言"
+      status: pass
+    - item: "强断言有支撑"
+      status: pass
+
+  可定位:
+    - item: "KB 背景有谱系定位"
+      status: pass
+    - item: "创新判断有对比基准"
+      status: pass
+    - item: "frontmatter 字段存在且非空"
+      status: pass
+    - item: "frontmatter 语义正确"
+      status: pass
+    - item: "速查 5 字段有实质内容"
+      status: pass
+
+  不污染:
+    - item: "反向更新无 factual error"
+      status: pass
+    - item: "反向更新正确分类"
+      status: pass
+
+issues:
+  - severity: low
+    type: template-compliance
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,论文使用了 VCTK, LibriSpeech, RAVDESS, VoxCeleb1, LJSpeech, TIMIT, Expresso, LibriLight 等多个数据集,但 vault 数据集库中均无对应页面,因此空值合理"
+    suggestion: "可保持空值,或未来数据集页创建后追加"
+
+  - severity: low
+    type: template-compliance
+    location: "实验表格"
+    detail: "GenPPL 5.60 标注为 best,实际与 ASR-only (alpha=0) 并列 best"
+    suggestion: "可在脚注说明'与 ASR-only 并列',当前速查卡片写法不影响理解"
+
+learning_signals: []
