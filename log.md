@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[FNH-TTS]] — 命中 6 页(取 Top 6): [[Neural Vocoder]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review), [[VITS]](pending-review)
+- [ingest/deep] [[FNH-TTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (Duration Predictor key_papers+演进线+贡献描述, Non-autoregressive TTS key_papers, VITS key_papers, Neural Vocoder key_papers, Prosody Modeling key_papers), MOC 更新 1 (TTS-总览)
+- [review/auto] [[FNH-TTS]] — pass-with-fixes, 0 high, 0 medium, 3 low
+- [lint/local] FNH-TTS — 通过 (0 死链)
 - [kb/search] [[DLPO]] — 命中 6 页(全部 pending-review): [[Diffusion-based TTS]], [[Diffusion Model]], [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[Diffusion-based Vocoder]], [[Non-autoregressive TTS]] | 过滤: 全部 pending-review
 - [ingest/deep] [[DLPO]] — 精读, kb_sources=6, 新建 0, 追加 5 (Diffusion-based TTS/Diffusion Model/Differentiable Reward Optimization/TTS Evaluation/Diffusion-based Vocoder key_papers), MOC 更新 1 (TTS训练与评估)
 - [review/auto] [[DLPO]] — pass, 3 issues (0 high, 0 medium, 3 low)
