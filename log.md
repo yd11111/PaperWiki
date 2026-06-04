@@ -1,6 +1,9 @@
 # Log
 
 ## 2026-06-04
+- [review/auto] [[MambaVoiceCloning]] — pass, 2 issues (0 high, 0 medium, 2 low); 补充局限性/点评/可复用idea,修正source字段,去重review callout
+- [lint/local] MambaVoiceCloning — 通过/0 issues
+- [skip/update] [[Duration Predictor]] — key_papers 已达上限(22),跳过追加
 - [kb/search] [[Training-free Speaker Unlearning]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
 - [ingest/deep] [[Training-free Speaker Unlearning]] — 精读, kb_sources=6, 新建 0, 追加 3 (Anti-spoofing, Speaker Verification, Emilia)
 - [review/auto] [[Training-free Speaker Unlearning]] — pass, 0 issues
