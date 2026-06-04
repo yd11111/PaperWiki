@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Training-free Speaker Unlearning]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speaker Verification]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[Training-free Speaker Unlearning]] — 精读, kb_sources=6, 新建 0, 追加 3 (Anti-spoofing, Speaker Verification, Emilia)
+- [review/auto] [[Training-free Speaker Unlearning]] — pass, 0 issues
+- [review/kb] [[Training-free Speaker Unlearning]] — pass, 0 issues
+- [skip/update] [[Conditional Flow Matching]] — key_papers 已达上限,跳过追加
+- [skip/update] [[Speaker Embedding]] — key_papers 已达上限,跳过追加
+- [lint/local] Training-free Speaker Unlearning — 通过
 - [kb/search] [[CosyEdit]] — 命中 6 页(取 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review)
 - [ingest/deep] [[CosyEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 演进线)
 - [review/auto] [[CosyEdit]] — pass, 4 issues (0 high, 0 medium, 4 low, frontmatter fixes applied)
