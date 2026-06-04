@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[TED-TTS]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Duration Predictor]](pending-review), [[Natural Language Description for TTS]](pending-review)
+- [ingest/deep] [[TED-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS 演进线+段落, Duration Predictor 演进线+段落)
+- [review/auto] [[TED-TTS]] — pass, 0 issues
+- [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(53),改追加到正文
+- [skip/update] [[Duration Predictor]] — key_papers 已达上限(23),改追加到正文
+- [lint/local] TED-TTS — 通过
 - [kb/search] [[PURE Codec]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Quantizer Dropout]]✓, [[Speech Tokenizer]]✓, [[Neural Audio Compression]]✓, [[Multi-scale STFT Discriminator]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
 - [ingest/deep] [[PURE Codec]] — 精读, kb_sources=6, 新建 0, 追加 2 (RVQ 演进线 + Neural Audio Compression key_papers)
 - [review/auto] [[PURE Codec]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
