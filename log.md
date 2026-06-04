@@ -13,6 +13,7 @@
 - [ingest/deep] [[BatonVoice]] — 精读, kb_sources=7, 新建 0, 追加 5 实体页 key_papers + 1 模型页 baseline, MOC 更新 1 (TTS-总览)
 - [review/auto] [[BatonVoice]] — pass-with-fixes, 0 high / 2 medium / 1 low
 - [lint/local] BatonVoice — 通过, 0 死链
+- [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
 - [kb/search] [[UltraVoice]] — 命中 6 页(取 6): [[Instructed Speech Generation]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Style Transfer in TTS]](pending-review)
 - [ingest/deep] [[UltraVoice]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers + 1 任务页 benchmarks, MOC 更新 1 (语音大模型与对话)
 - [review/auto] [[UltraVoice]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
