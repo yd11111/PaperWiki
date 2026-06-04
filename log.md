@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[MSR-Codec]] — 命中 7 页(取 7): [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Codec Language Model]](pending-review), [[Codec Training Objectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech 3]](pending-review)
+- [ingest/deep] [[MSR-Codec]] — 精读, kb_sources=7, 新建 0, 追加 12 实体页 + MOC 更新 2 (语音编码与量化 + 零样本语音合成) + Speech Factorization 演进线追加
+- [review/auto] [[MSR-Codec]] — pass-with-fixes, 4 issues (2 medium, 2 low)
+- [lint/local] MSR-Codec — 通过 (0 dead links)
+- [kb/search] [[MBCodec]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Quantizer Dropout]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Training Objectives]](pending-review)
+- [ingest/deep] [[MBCodec]] — 精读, kb_sources=6, 新建 0, 追加 8 概念/任务 + 2 数据集 key_papers, MOC 更新 1 (语音编码与量化)
+- [review/auto] [[MBCodec]] — pass-with-fixes, 3 low issues (已修正)
+- [lint/local] MBCodec — 通过 (0 死链)
 - [kb/search] [[MELA-TTS]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[CosyVoice]]✓ | 参考: [[Diffusion-based TTS]](pending-review)
 - [ingest/deep] [[MELA-TTS]] — 精读, kb_sources=6, 新建 0, 追加 15 (概念 9 + 模型 4 + 任务 1 + 数据集 1), MOC 更新 2 (TTS-总览, 零样本语音合成)
 - [review/auto] [[MELA-TTS]] — pass-with-fixes, 3 issues (all low)
