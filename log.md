@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[MambaVoiceCloning]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[MambaVoiceCloning]] — 精读完善(局限性/点评/可复用idea补充), kb_sources=3, 新建 0, 追加 1 (Attention-based TTS key_papers+演进线)
+- [review/auto] [[MambaVoiceCloning]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [skip/update] [[Duration Predictor]] — key_papers 已达上限(22),跳过追加
+- [skip/update] [[Non-autoregressive TTS]] — key_papers 已达上限(28),跳过追加
+- [lint/local] MambaVoiceCloning — 通过
 - [kb/search] [[Phonological Tokenizer]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Speech Language Model]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
 - [ingest/deep] [[Phonological Tokenizer]] — 精读, kb_sources=6, 新建 0, 追加 2 (Semantic vs Acoustic Tokens 正文, Speech Factorization 正文)
 - [review/auto] [[Phonological Tokenizer]] — pass, 2 issues (0 high, 0 medium, 2 low)
