@@ -10,7 +10,7 @@ kb_review:
 
     - target: "概念库/Emotion Control in TTS.md"
       action: append
-      detail: "追加 RRPO 段落到正文 (RL-based robust RM 情感控制路线); key_papers 已达 53 条超出上限,跳过 key_papers 追加"
+      detail: "追加 RRPO 段落到正文 (RL-based robust RM 情感控制路线); key_papers 已达 58 条超出上限,跳过 key_papers 追加"
 
     - target: "模型库/CosyVoice 2.md"
       action: append
