@@ -1,11 +1,11 @@
 ---
 type: paper
 tier: deep
-title: "RRPO: Robust Reward Policy Optimization for LLM-based Emotional TTS"
+title: "RRPO: Robust Reward Policy Optimization for LLM-Based Emotional TTS"
 arxiv_id: "2512.04552"
 source: "Sources/RRPO.pdf"
 authors: [Cong Wang, Changfeng Gao, Yang Xiang, Zhihao Du, Keyu An, Han Zhao, Qian Chen, Xiangang Li, Yingming Gao, Ya Li]
-year: 2026
+year: 2025
 venue: "arXiv preprint"
 tags: [emotional-TTS, reinforcement-learning, reward-hacking, reward-model, robustness, LLM-TTS, post-training]
 concepts: ["[[Differentiable Reward Optimization]]", "[[Emotion Control in TTS]]", "[[Gumbel-Softmax]]", "[[LLM-based TTS]]"]
