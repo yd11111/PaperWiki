@@ -184,5 +184,8 @@ SAC 在 codec 类模型中遥遥领先,平均准确率超过第二名 XY-Tokeniz
 4. **ConvNeXt-based adapter/prenet**: 用 ConvNeXt 块做帧率对齐和跨流融合,轻量且有效。
 5. **Semantic-only / Acoustic-only reconstruction 作为解耦评估手段**: 分别 mask 一个流来评估解耦程度,比传统的 probing 方法更直观。
 
-> [!review] 审阅待完成
-> 本笔记为 AI 生成草稿 (status: draft),待审阅。
+> [!review] pass-with-fixes (2026-06-04)
+> **结论**: pass-with-fixes | 1 medium, 2 low | 详见 `_review/SAC-review.yml`
+> - (medium) traceability-gap: 单码本设计动机的 agent 解读可补充论文原文标注 [§D]
+> - (low) weak-reusability: 可复用 idea #4 略泛,可补充 ConvNeXt 的具体优势
+> - (low) template-compliance: 检索日志 footer 位置与模板描述略有出入,但符合 vault 惯例

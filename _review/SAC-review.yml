@@ -1,0 +1,65 @@
+paper: SAC
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+
+principles:
+  repeatable:
+    satisfied: true
+    notes: >
+      方法节包含 4 个详细的 WHY 解释(冻结语义流/单码本/帧率差异/ConvNeXt 选择),
+      每个设计选择都回答了"为什么选这个",速查卡片"可借鉴"给出 3 个具体可迁移 trick。
+  trustworthy:
+    satisfied: true
+    notes: >
+      所有实验表格标注出处([Table N]),数字均可溯源。指标名使用正确。
+      速查卡片指标字段含完整数字+数据集。无方向性错误。
+  distinguishable:
+    satisfied: true
+    notes: >
+      方法节全面标注 [论文原文] 和 [agent 解读],覆盖率约 90%。
+      推断性解释(如 ConvNeXt 选择原因、Lsem 系数解读)均正确标注为 [agent 解读]。
+      无将推断写成断言的情况。强断言"SOTA""首次"均有数字+出处支撑。
+  locatable:
+    satisfied: true
+    notes: >
+      KB 背景节有明确谱系定位(4 类已有方案 + SAC 的第四种范式),
+      创新判断有对比基准(WER 3.99 vs 30.67)。
+      frontmatter 字段齐全且语义正确。速查卡片 5 字段均有实质内容。
+  no_contamination:
+    satisfied: true
+    notes: >
+      反向更新计划为 append(追加 key_papers),不涉及实质修改。
+      不需要新建概念页(SAC 涉及的概念均已有对应实体页)。
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "方法节 > 关键设计选择 > 为什么用单码本而非 RVQ?"
+    detail: >
+      "单码本简化了下游 LM 建模"的推断标注了 [agent 解读],但论文实际上在
+      Appendix D 提到了 interleaved flattening 的设计动机,可补充论文原文标注。
+    suggestion: >
+      在该段末尾补充"论文在 Appendix D 描述了 interleaved flattening 方案 [§D]"。
+    fixed: false
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea #4"
+    detail: >
+      "ConvNeXt-based adapter/prenet: 用 ConvNeXt 块做帧率对齐和跨流融合,轻量且有效"
+      相比其他 4 条具体 idea 略显泛泛,未说明具体参数或对比。
+    suggestion: >
+      可补充:ConvNeXt 在此处的优势是局部卷积(相比 Transformer 更高效)+ LayerNorm(训练稳定),
+      整体 codec RTF 0.0135 中大部分推理时间在轻量卷积层。
+    fixed: false
+
+  - type: template-compliance
+    severity: low
+    location: "KB 背景节"
+    detail: >
+      检索日志 footer 放在 KB 背景 callout 内部而非笔记末尾。
+      当前 vault 惯例是放在 KB callout 内,与模板描述("笔记末尾附加")略有出入,
+      但不影响实际使用。
+    suggestion: 保持当前格式(vault 惯例优先)。
+    fixed: false
