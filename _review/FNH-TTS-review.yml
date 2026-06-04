@@ -1,0 +1,46 @@
+paper: FNH-TTS
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含充分的 WHY 解释: MoE vs 容量扩增、Switch Transformer 选型、VOCOS 替换 HiFi-GAN、双判别器互补。速查卡片可借鉴字段给出 3 个具体可迁移 trick。"
+  可信赖:
+    satisfied: true
+    notes: "数字 claim 标注覆盖率 ~90%,指标名正确,无方向性错误。速查指标字段含具体数字+数据集+出处。"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 ~85%。[论文原文] 和 [agent 解读] 区分清晰,agent 推断合理且标注明确。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景节提供了 VITS 系列演进线 + Duration Predictor 发展谱系的双重定位,创新判断有具体对比基准 (SDP/GRPO/DPO vs MoE 结构创新)。"
+  不污染:
+    satisfied: true
+    notes: "反向更新预计为 append-only (key_papers 追加),无新概念页计划,不涉及 status 变更。"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "方法 > CoMBD/SBD 段落"
+    detail: "CoMBD 和 SBD 的功能描述缺少具体出处标注 (应为 [§2.2])"
+    suggestion: "在 CoMBD 和 SBD 的功能句末补充 [§2.2]"
+
+  - type: fact-inference-mixing
+    severity: low
+    location: "方法 > 为什么选 Switch Transformer"
+    detail: "推断 Switch Transformer 使用 top-1 routing,但论文原文写 top-k 未指定 k 值"
+    suggestion: "修改为 '论文使用 top-k routing (论文未指定 k,Switch Transformer 原始设计为 top-1)'"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但论文在 LJSpeech/VCTK/LibriTTS 上评估"
+    suggestion: "可选: 这些是标准公开数据集非本文贡献,空值可接受"
+
+summary: |
+  笔记质量整体良好。方法节的因果解释充分,KB 背景定位准确且有对比基准。
+  3 个 low 级别问题不影响可信性和可用性。核心发现 (duration-vocoder 耦合效应)
+  的阐述清晰有力,可复用 idea 具体可操作。建议放行反向更新。

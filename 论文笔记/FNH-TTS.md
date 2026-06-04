@@ -170,6 +170,11 @@ FNH-TTS 的核心价值不在于 MoE 或 VOCOS 这些单独组件 (它们都是�
 4. **Analysis-by-Synthesis 协议**: 将 GT 音频经 posterior encoder 再由 vocoder 重建,隔离评估 vocoder 重建能力,避免 duration prediction 和 alignment 的干扰。
 5. **VOCOS 集成到 VITS**: 将 VOCOS 的 ConvNeXt + ISTFT 架构嵌入 VITS 的 z→waveform 路径,conditioned on z+s,实现 7.6x CPU 推理加速。
 
+> [!review] 审阅: pass-with-fixes (2026-06-04)
+> - 3 个 low 级别问题 (traceability-gap ×1, fact-inference-mixing ×1, template-compliance ×1)
+> - 详见 `_review/FNH-TTS-review.yml`
+> - 结论: 放行反向更新
+
 ---
 
 检索命中: [[Duration Predictor]], [[Non-autoregressive TTS]], [[VITS]], [[Neural Vocoder]], [[Prosody Modeling]], [[Speaker Embedding]] | 过滤: [[Multi-scale STFT Discriminator]](confirmed), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
