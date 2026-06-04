@@ -148,5 +148,6 @@ UniVoice 的核心贡献在于提出了一个清晰的架构方案来解决 AR-A
 3. **Speech infilling 替代 speaker embedding**: masked context 的信息量远大于 global embedding,在不增加额外模块的前提下获得更好的 zero-shot cloning 效果 [Table 2]
 4. **联合 ASR-TTS 训练增强 TTS 鲁棒性**: 共享语言建模能力让 TTS WER 改善 13%,暗示 ASR 数据可以作为 TTS 训练的免费正则化
 
-> [!review] 审阅状态
-> 待审阅 --- 审阅报告将在下方步骤生成
+> [!review] 审阅: pass (2026-06-04)
+> 5 原则全部通过,0 issues。方法节因果解释完整(来源标注 100%),KB 谱系定位清晰,速查卡片具体可操作。
+> 详见 `_review/UniVoice-review.yml`

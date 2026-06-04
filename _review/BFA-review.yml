@@ -1,0 +1,53 @@
+paper: "BFA"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    principle: trustworthy
+    location: "点评 > 第1段"
+    detail: "'对于大规模 TTS 数据标注管线,使用 BFA 可将 TIMIT 规模数据的对齐时间从 4.2 天压缩到 25 分钟' -- 4.2 天数字来自 Table 1 (MFA Total Time),但原文说的是处理全部 6300 句的总时间,不是 'TIMIT 规模数据标注管线' 这个泛化说法"
+    suggestion: "改为更精确的表述: '处理 TIMIT 全部 6300 句的总时间从 4.2 天降至 25 分钟 [Table 1]'"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > models"
+    detail: "models 列了 SenseVoice 但论文未使用或对比 SenseVoice; 对比 baseline 是 MFA (Montreal Forced Aligner),vault 无对应模型页"
+    suggestion: "models 应为空或仅列本文系统 BFA (无独立页); 移除 SenseVoice 引用"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "datasets 为空,但论文使用了 TIMIT, Buckeye, LibriSpeech, MLS, MSWC; vault 无对应数据集页且这些是经典公开数据集"
+    suggestion: "保持空值即可,不满足独立页准入"
+
+  - id: 4
+    type: weak-reusability
+    severity: low
+    principle: reproducible
+    location: "可复用的 idea > 第4点"
+    detail: "'contextless frame-level 分类 + 外部序列约束' 表述稍抽象,可以更具体说明适用场景"
+    suggestion: "补充具体场景: 如 TTS 训练数据标注、语音教学系统实时反馈等"
+
+stats:
+  claim_coverage: "90%"
+  source_tag_coverage: "85%"
+  quickcard_completeness: "5/5"
+  high_issues: 0
+  medium_issues: 1
+  low_issues: 3

@@ -1,0 +1,118 @@
+paper: "[[论文笔记/UniVoice]]"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  reproducible: pass  # 方法节有因果解释,关键设计选择有 WHY
+  trustworthy: pass  # 数字均标注 Table/Section 来源
+  distinguishable: pass  # [论文原文]/[agent 解读] 标注清晰
+  navigable: pass  # KB 背景有具体谱系定位,frontmatter 完整
+  non_polluting: pass  # 未新建概念页,反向更新为追加
+
+checks:
+  - id: reproducible-1
+    check: "方法节包含因果解释(WHY)"
+    result: pass
+    detail: "dual attention mask 有 WHY (AR 需 causal, FM 需 bidirectional), 连续表征选择有 WHY (离散 token 信息损失), text-prefix infilling vs speaker embedding 有 WHY (global embedding 信息不足)"
+
+  - id: reproducible-2
+    check: "每个关键设计选择回答了为什么选这个而不是那个"
+    result: pass
+    detail: "4 个关键设计选择均有对比解释和消融实验支撑"
+
+  - id: reproducible-3
+    check: "速查卡片可借鉴字段是具体可迁移 trick"
+    result: pass
+    detail: "dual attention mask 机制 + text-prefix-conditioned infilling,均具体可操作"
+
+  - id: trustworthy-1
+    check: "数字型 claim 有标注(覆盖率 >= 80%)"
+    result: pass
+    detail: "所有数字均标注 [Table 1]/[Table 2]/[Table 3]/[Table 4]/[§X] 出处"
+
+  - id: trustworthy-2
+    check: "指标名正确"
+    result: pass
+    detail: "WER/SIM/UTMOS/CMOS/SMOS 使用正确,方向未混淆"
+
+  - id: trustworthy-3
+    check: "速查卡片指标字段含数字+数据集+来源"
+    result: pass
+    detail: "ASR WER 3.0/6.3 (LibriSpeech clean/other); TTS SIM 0.56, WER 4.06, UTMOS 3.72 (LibriSpeech-PC) [Table 1]"
+
+  - id: trustworthy-4
+    check: "无方向性错误"
+    result: pass
+    detail: "WER/SIM/UTMOS 方向正确"
+
+  - id: distinguishable-1
+    check: "因果解释标注了 [论文原文] 或 [agent 解读]"
+    result: pass
+    detail: "方法节每段因果解释均标注来源"
+
+  - id: distinguishable-2
+    check: "因果解释来源标注覆盖率 >= 80%"
+    result: pass
+    detail: "方法节 7 处因果解释中 7 处标注, 100%"
+
+  - id: distinguishable-3
+    check: "不存在推断写成断言的句子"
+    result: pass
+    detail: "推断均使用[agent 解读]前缀"
+
+  - id: distinguishable-4
+    check: "强断言有数字+出处支撑"
+    result: pass
+    detail: "无无支撑的 SOTA/唯一/远超 断言; '首个在连续空间统一' 有 KB 背景中的对比佐证"
+
+  - id: navigable-1
+    check: "KB 背景有具体谱系定位"
+    result: pass
+    detail: "定位清楚: SpeechLM 统一模型赛道, 与 SpeechT5/LauraGPT/OpusLM 对比, 与 CLEAR 的 AR+flow 路线对比"
+
+  - id: navigable-2
+    check: "KB 背景创新判断有对比基准"
+    result: pass
+    detail: "与 CLEAR(AR+flow TTS), VioLA/LauraGPT(离散统一), OpusLM(全离散 multi-stream) 对比"
+
+  - id: navigable-3
+    check: "frontmatter 字段存在且非空"
+    result: pass
+    detail: "所有字段完整"
+
+  - id: navigable-4
+    check: "frontmatter 字段语义正确"
+    result: pass-with-note
+    detail: "models 列了 Whisper/BigVGAN(本文使用的组件) + CosyVoice/NaturalSpeech 2(对比 baseline), 合理"
+    note: "NaturalSpeech 2 在 Table 1 中数据来自 NaturalSpeech 3 论文 (标 †), 但作为对比 baseline 列出合理"
+
+  - id: navigable-5
+    check: "速查卡片 5 字段都有实质内容"
+    result: pass
+    detail: "一句话/路线/指标/可借鉴/局限均具体充实"
+
+  - id: non_polluting-1
+    check: "新建概念页满足准入规则"
+    result: pass
+    detail: "未新建任何概念页"
+
+  - id: non_polluting-2
+    check: "已有概念库中无语义相近页"
+    result: pass
+    detail: "不涉及新建"
+
+  - id: non_polluting-3
+    check: "反向更新内容无 factual-error 或 overclaim"
+    result: pass
+    detail: "反向更新仅为追加 key_papers, 无内容风险"
+
+  - id: non_polluting-4
+    check: "反向更新正确分类为追加或实质修改"
+    result: pass
+    detail: "全部为追加(加 key_papers), 不改 status"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。方法节包含完整的因果解释和消融实验佐证,来源标注覆盖 100%。KB 背景谱系定位清晰,与 CLEAR/VioLA/LauraGPT/OpusLM 的对比有效区分了 UniVoice 的创新点。速查卡片具体可操作。无 high/medium issue。"
