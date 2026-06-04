@@ -1,0 +1,131 @@
+moc: "零样本语音合成-自回归路线"
+file: "_MOC/零样本语音合成-自回归路线.md"
+date: "2026-06-04"
+conclusion: pass-with-fixes
+
+# 第一层: 原则判断
+principles:
+  navigable:
+    score: 7
+    judgment: "作为 sub-MOC 结构清晰: scope 声明明确(离散 Token AR / VITS 系 / 混合 AR+FM)、与父页 [[零样本语音合成]] 通过 wikilink 互引、年份分组提供基础导航。但 46 篇论文纯按年份平铺,缺少技术路线子分组(如 Codec LM / VITS 系 / 混合 AR+FM),用户需要逐条扫描才能定位某条路线的代表工作。"
+  no_mixing:
+    score: 8
+    judgment: "所有 46 篇论文均属于自回归路线范畴,与 scope 声明一致。VITS/YourTTS 虽非严格 codec LM,但 scope 明确包含'端到端基础 (VITS 系)',不算越界。作为纯论文列表的 sub-MOC,无概念/模型混层风险。"
+  traceable:
+    score: 5
+    judgment: "10 处强判断词(首个/首篇/SOTA/最快/最高/best)均无 R8 要求的来源标注((作者 claim)/(benchmark: XX)/(agent 整理))。这是系统性缺失,而非偶发遗漏。如果读者引用这些判断写报告,无法判断可信度。"
+  no_decay:
+    score: 6
+    judgment: "年份 section 归属全部正确(46 篇均匹配 frontmatter year)。但 4 篇论文的 inline 描述文本年份与 frontmatter/section 不一致: Make-A-Voice/SC VALL-E/TextrolSpeech/UniAudio 在 ### 2023 section 下但描述写'2024'。无重复条目,无死链。"
+  no_overload:
+    score: 7
+    judgment: "46 篇论文,未超 50 条阈值但已进入 lint L15 WARNING 区间(>40)。2 条描述超出单行合理长度(UniTTS 210 chars, TTS-1 238 chars)。随着 2026 论文继续入库,很快将触及拆分线。"
+
+# 统计数据
+stats:
+  total_papers: 46
+  total_concepts: 0
+  total_models: 0
+  duplicate_entries: 0
+  year_mismatches: 4    # inline description year vs frontmatter
+  dead_links: 0
+  unattributed_judgments: 10
+
+# 发现的问题
+issues:
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 10, VITS entry"
+    detail: "'首个免 2-stage 的高质量 TTS' 无来源标注"
+    suggestion: "添加 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 18, VALL-E entry"
+    detail: "'首篇 LLM+codec token zero-shot TTS' 无来源标注"
+    suggestion: "添加 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 23, TextrolSpeech entry"
+    detail: "'首个大规模文本风格控制语音数据集(330h)' 无来源标注"
+    suggestion: "添加 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 38, CosyVoice 3 entry"
+    detail: "'SOTA 多语言 zero-shot TTS' 无来源标注"
+    suggestion: "添加 (benchmark: SEED-TTS-Eval) 或 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 47, DiSTAR entry"
+    detail: "'WER 1.32% SeedTTS-en (best)' 中 best 无来源标注"
+    suggestion: "改为 (benchmark: SEED-TTS-Eval) 或移除 best"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 49, Muyan-TTS entry"
+    detail: "'推理速度 r=0.33 最快' 无来源标注"
+    suggestion: "添加 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 52, UniTTS entry"
+    detail: "'MOS Emotional expressiveness 4.60(最高)' 无来源标注"
+    suggestion: "添加 (作者 claim) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 54, Koel-TTS entry"
+    detail: "'SOTA CER 0.55% (LibriTTS unseen)' 无来源标注"
+    suggestion: "添加 (benchmark: LibriTTS) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 62, Qwen3-TTS entry"
+    detail: "'SOTA test-en WER 1.24%' 无来源标注"
+    suggestion: "添加 (benchmark: SEED-TTS-Eval) 标注"
+
+  - severity: medium
+    type: unattributed-judgment
+    principle: traceable
+    location: "line 65, PilotTTS entry"
+    detail: "'SEED-TTS-Eval SIM SOTA (0.862/0.815)' 无来源标注"
+    suggestion: "添加 (benchmark: SEED-TTS-Eval) 标注"
+
+  - severity: medium
+    type: stale-description
+    principle: no_decay
+    location: "line 21-24, ### 2023 section"
+    detail: "4 篇论文(Make-A-Voice / SC VALL-E / TextrolSpeech / UniAudio)放在 ### 2023 section(与 frontmatter year=2023 一致),但 inline 描述文本以'2024'开头,造成视觉矛盾"
+    suggestion: "将 4 条描述中的 '2024' 改为 '2023',与 section 归属和 frontmatter 保持三方一致"
+
+  - severity: low
+    type: paper-overflow
+    principle: no_overload
+    location: "全页"
+    detail: "46 条论文已超过 lint L15 WARNING 线(>40),距拆分线(>50)仅余 4 条"
+    suggestion: "预备拆分计划: 可按 Codec LM / VITS 系 / 混合 AR+FM 三条子路线拆分,或将 2021-2023 早期工作归入'奠基工作'子节"
+
+  - severity: low
+    type: granularity-inconsistency
+    principle: no_overload
+    location: "line 52 (UniTTS), line 55 (TTS-1)"
+    detail: "2 条描述超过 200 字符(210/238 chars),信息密度显著高于其他条目(平均 ~120 chars)"
+    suggestion: "精简至 150 chars 以内: UniTTS 可省略 DMS 蒸馏细节,TTS-1 可省略 arena 胜率和 MIT 开源"
+
+# 学习信号
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "R5 只规定 section 归属必须匹配 frontmatter year,但未规定 inline 描述中的年份文本也必须一致。建议补充: '每条论文描述中的年份标注也应与 frontmatter year 一致'。"
+  checklist_upgrade_suggestion: "建议增加检查项: 'inline 描述年份与 frontmatter year 一致' (服务 no_decay 原则); sub-MOC 当论文超过 30 篇时,建议按技术子路线分组而非纯年份平铺 (服务 navigable 原则)。"

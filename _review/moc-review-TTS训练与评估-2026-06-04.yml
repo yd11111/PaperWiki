@@ -1,0 +1,51 @@
+moc: "TTS训练与评估"
+file: "_MOC/TTS训练与评估.md"
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  navigable:
+    score: 7
+    judgment: "scope 声明清晰,按技术路线分节(Post-training/Evaluation/Data 等)导航合理;但代表模型区为空,演进脉络用代码块不利于链接跳转"
+  no_mixing:
+    score: 6
+    judgment: "核心概念 4 项平铺未分组(R2 违规);论文分节合理但 Understanding & Data 混合了两类不同内容"
+  traceable:
+    score: 3
+    judgment: "15 处强判断词(首次/首个/SOTA/唯一)无来源标注,系统性 R8 违规"
+  no_decay:
+    score: 8
+    judgment: "无重复条目,无死链,年份抽样一致"
+  no_overload:
+    score: 7
+    judgment: "论文区约 44 条,在 50 条阈值内;Post-training 20 篇较密但尚可"
+
+stats:
+  total_papers: 44
+  total_concepts: 4
+  duplicate_entries: 0
+  year_mismatches: 0
+  dead_links: 0
+  unattributed_judgments: 15
+
+issues:
+  - severity: high
+    type: unattributed-judgment
+    principle: traceable
+    location: "全文 15 处"
+    detail: "首次(lines 20,26,31,34), 首个(lines 45,48,49,51,67,69), 首批(line 75), SOTA(line 30), 唯一(line 46), 演进脉络中 3 处"
+    suggestion: "逐条补充 (作者 claim) 标注"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_mixing
+    location: "核心概念 (lines 10-13)"
+    detail: "4 个概念平铺未按 R2 分组(范式/模块/技巧)"
+    suggestion: "至少分为 训练范式(DRO) / 评估框架(TTS Evaluation, Audio Understanding) / 控制技巧(Emotion Control)"
+
+  - severity: low
+    type: empty-section
+    principle: navigable
+    location: "代表模型 (line 15)"
+    detail: "代表模型区为空"
+    suggestion: "填入 post-training 代表系统或移除该节"

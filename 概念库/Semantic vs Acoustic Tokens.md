@@ -67,6 +67,7 @@ Semantic tokens 和 Acoustic tokens 是 Speech Language Model 中两类根本不
 - **Mimi**: 单 VQ 模块提取语义 + 额外 RVQ 提取声学
 - **FireRedTTS 2**: Whisper encoder (semantic) + acoustic encoder → concat + downsample → 16 层 RVQ,以 12.5Hz 低帧率编码混合信息,dual decoder 分别重建 semantic 和 acoustic features [§2.1]
 - **LM-SPT** (Jo et al., 2025): dual encoder + Split RVQ (1 semantic VQ + 7 acoustic RVQ),核心创新是 reconstruction-driven semantic distillation — 不直接对齐 teacher-student 特征,而是用 Whisper ASR encoder 对比原始与语义重建波形的表征差异,绕过帧率对齐约束,在 TTS 下游任务上大幅超越 SpeechTokenizer/Mimi
+- **Phonological Tokenizer** (Onda et al., 2026): 从 phonetic token (WavLM k-means) 出发,通过 differentiable k-means + ASR/resynthesis 多目标微调 (alpha 权重调控) 注入韵律信息,同时用 speaker embedding 条件化 vocoder 抑制 speaker identity。保持单码本 (2000 entries, 50 tok/s),仅需 44h 额外数据。在 ER (+10pp)、VC (UTMOS/SpkSim best)、speechLM 续写 (GenPPL/UTMOS best) 上全面优于 SpeechTokenizer 和 WavTokenizer [Table 2-4]。详见 [[论文笔记/Phonological Tokenizer|Phonological Tokenizer]]。
 - **优点**: 统一框架,无需串联
 - **缺点**: 设计复杂,仍在探索中
 

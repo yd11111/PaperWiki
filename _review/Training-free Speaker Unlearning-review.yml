@@ -1,0 +1,34 @@
+paper: "Training-free Speaker Unlearning"
+reviewer: agent
+date: "2026-06-04"
+checklist_version: "v1.1"
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    verdict: pass
+    notes: "方法节详细解释了四个关键设计选择的 WHY: FFN 编码 identity (ref 27)、L2 归一化保方向纯净、两阶段动态阈值避免过度干预、投影减法保留非 identity 分量。每个选择都有消融支撑。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    notes: "所有关键数字标注了 [Table N] 或 [§X.X] 来源。指标方向正确 (SIM-SO ↓ = 更好的 unlearning)。修正了初稿中 WER-SO 方向描述的不精确之处。"
+  distinguishable:
+    score: 9
+    verdict: pass
+    notes: "因果解释全部标注了 [论文原文] 或 [agent 解读]。6 处 agent 解读清晰标识,无未标注的推断性断言。"
+  positionable:
+    score: 9
+    verdict: pass
+    notes: "KB 背景将本文精准定位为 Kim et al. (ICML 2025) 的 training-free 后继,与 SafeSpeech/TraceableSpeech 构成四层防线。与 EmoSteer 的区别也有清晰说明。"
+  no_pollution:
+    score: 8
+    verdict: pass
+    notes: "反向更新计划均为 append (加 key_papers),不涉及实质修改。无 factual error 或 overclaim 风险。"
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""

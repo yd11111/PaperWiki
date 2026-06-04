@@ -1,0 +1,41 @@
+moc: "语音大模型与对话"
+file: "_MOC/语音大模型与对话.md"
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  navigable:
+    score: 7
+    judgment: "scope 清晰, 6 个核心概念覆盖主要方向; 代表模型仅 2 个偏少"
+  no_mixing:
+    score: 7
+    judgment: "核心概念未分组但数量适中(6个); 论文区按方向分节(虽无显式标题)"
+  traceable:
+    score: 2
+    judgment: "17 处强判断词(首个/首篇/首次/首创/SOTA)无来源标注, 是 5 个 MOC 中最严重的 R8 违规"
+  no_decay:
+    score: 7
+    judgment: "无重复条目, 年份抽样一致; 相关数据集区为空"
+  no_overload:
+    score: 7
+    judgment: "论文区 ~25 篇, 在阈值内"
+
+stats:
+  total_papers: 25
+  total_concepts: 6
+  unattributed_judgments: 17
+
+issues:
+  - severity: high
+    type: unattributed-judgment
+    principle: traceable
+    location: "lines 22-45, 56-57"
+    detail: "17 处 首个/首篇/首次/首创/SOTA 无来源标注, traceable 评分仅 2/10"
+    suggestion: "逐条补充 (作者 claim) 或 (benchmark: XX) 标注"
+
+  - severity: low
+    type: empty-section
+    principle: navigable
+    location: "相关数据集 (line 51)"
+    detail: "相关数据集区为空"
+    suggestion: "填入 UltraVoice/MultiTalk 等相关数据集, 或移除该节"

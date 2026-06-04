@@ -1,0 +1,18 @@
+review:
+  paper: "TED-TTS"
+  note_path: "论文笔记/TED-TTS.md"
+  reviewer: auto-kb
+  date: 2026-06-04
+  checklist: "_templates/kb-review-checklist.md"
+
+change_plan:
+  - target: "概念库/Emotion Control in TTS.md"
+    action: append
+    detail: "追加 TED-TTS 作为 training-free intra-utterance 情感控制方法的段落。key_papers 已达 58 条 (远超 12 上限),跳过 key_papers 追加,改为正文追加。不改 status。"
+  - target: "概念库/Duration Predictor.md"
+    action: append
+    detail: "追加 TED-TTS 的 inference-time duration steering 方法段落。key_papers 已达 22 条 (超 12 上限),跳过 key_papers 追加,改为正文追加。不改 status。"
+
+conclusion: pass
+issue_summary: "0 issues"
+notes: "两个目标页均为 append 操作 (正文末尾追加),不修改已有内容,不改 status。key_papers 均已超限,按规则跳过。无 factual error 或 dedup 风险。"

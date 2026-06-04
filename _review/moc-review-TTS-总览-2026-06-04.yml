@@ -1,0 +1,92 @@
+moc: "TTS-总览"
+file: "_MOC/TTS-总览.md"
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  navigable:
+    score: 6
+    judgment: "scope 声明清晰,5 个 sub-MOC 入口在页面顶部可快速理解骨架;但 6 个 inline 主题(尤其韵律与情感 31 篇)展开后页面很长,需大量滚屏才能到达按任务/模型/概念浏览区"
+  no_mixing:
+    score: 5
+    judgment: "三个混层问题:(1) 按概念浏览 19 项平铺无分组;(2) 按模型浏览混合 TTS 系统/codec/vocoder/语音 LLM;(3) WeSCon+Audiobook-CC 被错放在语音安全与隐私节"
+  traceable:
+    score: 3
+    judgment: "17 处强判断词(首个/首次/SOTA)无任何来源标注,整个 MOC 中 0 个 (作者 claim)/(benchmark: XX)/(agent 整理) 标签;这是系统性 R8 违规"
+  no_decay:
+    score: 7
+    judgment: "无重复条目、无死链、抽样 20 篇论文年份均与 frontmatter 一致;但按模型浏览中 CosyVoice 3/CosyVoice 2/SoundStream 链接到论文笔记而非已有模型库实体页"
+  no_overload:
+    score: 5
+    judgment: "论文区总条目 63 篇(超 50 阈值),韵律与情感 31 篇应拆为独立 sub-MOC;部分论文描述过于冗长(50+ 词)"
+
+stats:
+  total_papers: 63
+  total_concepts: 19
+  total_models: 7
+  duplicate_entries: 0
+  year_mismatches: 0
+  dead_links: 0
+  unattributed_judgments: 17
+
+issues:
+  - severity: high
+    type: unattributed-judgment
+    principle: traceable
+    location: "全文 17 处: 首个(lines 34,37,42,49,52,53,82,116,117,124), 首次(lines 38,39,62,64,110), SOTA(lines 78,115)"
+    detail: "整个 MOC 中 0 个来源标注标签。所有 首个/首次/SOTA 均缺少 (作者 claim)/(benchmark: XX)/(agent 整理) 标注,违反 R8"
+    suggestion: "逐条补充来源标注。大多数 首个/首次 是论文作者自称,标注 (作者 claim);SOTA 需标注 benchmark 名或标注 (作者 claim);批量处理建议: grep 首个|首次|SOTA 后逐行添加"
+
+  - severity: high
+    type: paper-overflow
+    principle: no_overload
+    location: "核心子主题 > 韵律与情感 (31 篇) + 生成方法演进 (16 篇), 全 MOC 共 63 篇"
+    detail: "论文区总条目 63 篇,超过 R4 规定的 50 条阈值。韵律与情感 31 篇远超 sub-MOC 拆分标准"
+    suggestion: "将韵律与情感拆为独立 sub-MOC _MOC/韵律与情感.md,TTS-总览保留 sub-MOC 链接 + Top 3 代表作。生成方法演进如继续增长也需考虑拆分"
+
+  - severity: high
+    type: scope-violation
+    principle: no_mixing
+    location: "核心子主题 > 语音安全与隐私 > WeSCon (line 64) 和 Audiobook-CC (line 65)"
+    detail: "WeSCon 是 word-level 情感+语速联合控制论文 (NeurIPS 2025),Audiobook-CC 是有声书多角色可控合成框架。两篇均不属于 voice protection/deepfake defense/watermarking,被错误归类到语音安全与隐私节"
+    suggestion: "WeSCon 移至韵律与情感节,Audiobook-CC 移至韵律与情感节或新建 有声书/长篇合成 子节"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_mixing
+    location: "按概念浏览 (lines 88-107)"
+    detail: "19 个概念平铺列出,未按 R2 要求的抽象层级(范式/表征与模块/训练技巧)分组。混合了范式概念(Conditional Flow Matching, Masked Generative Modeling)、模块概念(Speech Tokenizer, Multi-scale STFT Discriminator)和训练技巧(Gumbel-Softmax, Quantizer Dropout)"
+    suggestion: "按三级分组: 范式(CFM, Diffusion Model, Masked Generative Modeling, LLM-based TTS 等) → 表征与模块(Speech Tokenizer, RVQ, FSQ, Snake Activation 等) → 训练技巧(Gumbel-Softmax, Gradient Reversal Layer, Quantizer Dropout, CFG 等)"
+
+  - severity: medium
+    type: model-admission-error
+    principle: no_mixing
+    location: "按模型浏览 (lines 77-84)"
+    detail: "混合了不同角色的模型: 主线 TTS 系统(CosyVoice 3/2)、语音 LLM(MinMo)、codec(EnCodec/SoundStream)、通用 vocoder(BigVGAN/PeriodWave)。按 R3,backbone/vocoder/上游模型应放独立子节"
+    suggestion: "分为: 主线 TTS 系统 / Codec 模型 / 通用声码器 / 语音 LLM 四个子组,或至少标注各模型角色"
+
+  - severity: medium
+    type: stale-description
+    principle: no_decay
+    location: "按模型浏览 > CosyVoice 3 (line 78), CosyVoice 2 (line 79), SoundStream (line 82)"
+    detail: "这三个模型在模型库中均有实体页(模型库/CosyVoice 3.md, 模型库/CosyVoice 2.md, 模型库/SoundStream.md),但 MOC 中的 wikilink 指向论文笔记而非模型库实体页"
+    suggestion: "将 [[CosyVoice 3]] 等链接改为 [[模型库/CosyVoice 3|CosyVoice 3]] 以指向实体页而非论文笔记"
+
+  - severity: low
+    type: granularity-inconsistency
+    principle: no_overload
+    location: "核心子主题 > 韵律与情感 全部论文描述"
+    detail: "论文描述长度差异极大: 最短如 HiStyle '层级 style embedding 预测器' (~15 字) vs 最长如 EmoSteer-TTS (90+ 字含多个指标)。R4 要求每条 ≤ 1 行但未限字数,部分条目过于冗长影响扫描效率"
+    suggestion: "统一每条描述为 年份+机构+核心贡献一句话,删除具体指标数字(读者可点入笔记查看)"
+
+  - severity: low
+    type: granularity-inconsistency
+    principle: no_decay
+    location: "生成方法演进 (lines 110-126)"
+    detail: "17 篇论文跨 2023-2026 但无年份分组或时间线结构,难以看出演进脉络。且无任何演进关系符号(→/⇢/∥/⊃)的使用"
+    suggestion: "按年份分组(2023/2024/2025/2026)或按技术路线(flow matching/AR/NAR)分组,并使用 R7 演进关系符号标注关键继承关系"
+
+learning_signals:
+  new_issue_type: "missing-evolution-markers — 标题为'演进脉络'的 section 缺少实际的演进关系标注(→/⇢/∥/⊃),仅为论文列表"
+  rule_gap: "R4 '每条论文描述 ≤ 1 行' 缺少字数建议,导致单行内容差异从 15 字到 90+ 字"
+  checklist_upgrade_suggestion: "建议增加检查项: (1) 按模型/按概念浏览区的链接优先指向实体页而非论文笔记; (2) 按概念浏览必须有分组(与核心概念区使用相同的 R2 规则); (3) 演进 section 必须使用 R7 关系符号"

@@ -1,0 +1,139 @@
+entity: "Speech Tokenizer"
+file: "概念库/Speech Tokenizer.md"
+type: concept
+reviewer: agent
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  no_layer_mixing:
+    verdict: revise
+    notes: >
+      页面混入了三个不属于概念层的内容层:
+      (1) Survey 级内容 — "SpeechLM 视角下的三类体系"和"Survey 五轴 Taxonomy 视角"整段复述了 Cui et al. 和 Mousavi et al. 两篇 survey 的分类框架和 benchmark 结论,共 41 行,占正文 39%,属于 survey 综述层;
+      (2) 单论文摘要 — "NAC Token 的语言学统计特性"是 Park et al. (2025) 一篇论文的独立总结,应存在于论文笔记中通过 wikilink 引用;
+      (3) 研究演进时间线 — "演进"节是按时间排列的技术发展脉络,规则明确指出属于 MOC 层级内容。
+      另外"关键论文"节中 FireRedTTS/FireRedTTS 2/Seed-TTS 等条目各含 1-2 行详细架构描述,接近论文级细节。
+  no_overload:
+    verdict: revise
+    notes: >
+      key_papers = 77 条,超出 12 条硬上限 6.4 倍 — 这是全 vault 最严重的结构超标。
+      H2 标题数 = 8,超出 ≤6 阈值。
+      虽然正文行数 105 行控制在 200 行限内,但 frontmatter 中的 77 条 key_papers 本身就构成了巨量噪声,
+      使得 frontmatter 比正文还长。页面已从"概念定义页"演变为"所有涉及 tokenizer 的论文收集池"。
+  traceable:
+    verdict: pass-with-fixes
+    notes: >
+      大部分强判断有来源标注:
+      LM-SPT "全面超越"有论文归属,Survey Benchmark 表中"最优/最强/最佳/领先"均在 survey 上下文中使用,
+      Park et al. "首次系统分析"有作者归属。
+      但 L28 "处于核心位置"缺乏来源锚点,L109 "演进"节的技术排序隐含因果判断无来源。
+  navigable:
+    verdict: revise
+    notes: >
+      77 条 key_papers 彻底摧毁了导航信号。
+      其中大量论文(如 SpeechAccentLLM、Audiobook-CC、OpenOmni、LLaMA-Omni 2、MELA-TTS、DiFlow-TTS)
+      仅仅是使用了某种 speech tokenizer 作为组件,并未对 tokenizer 设计本身做出贡献。
+      用户无法从 77 条中区分"奠基性 tokenizer 论文"(如 HuBERT、SoundStream、SpeechTokenizer)
+      和"碰巧用了 tokenizer 的下游应用论文"。key_papers 已变成"提到 tokenizer 的论文全集"。
+  no_pollution:
+    verdict: pass-with-fixes
+    notes: >
+      核心定义(三类 tokenizer 分类)准确且有用。
+      但 aliases 包含 "Semantic Token" 和 "Discrete Speech Token":
+      (1) "Semantic Token" 是 speech token 的子类型,非 Speech Tokenizer 的同义词,
+      且概念库已有独立的 [[Semantic vs Acoustic Tokens]] 页面,会造成 KB 检索歧义;
+      (2) "Discrete Speech Token" 是 tokenizer 的输出物,不是 tokenizer 本身,
+      混淆了"工具"和"产出"的语义边界。
+      这两个错误 aliases 会在 KB 检索时引入噪声。
+
+structure_metrics:
+  key_papers_count: 77
+  heading_count: 8
+  line_count: 105
+  long_paper_paragraphs: 5
+
+issues:
+  - severity: high
+    type: overload
+    principle: no_overload
+    location: "frontmatter key_papers"
+    detail: "key_papers = 77 条,超出 ≤12 硬上限 6.4 倍。其中大量论文仅是 tokenizer 的下游使用者,非 tokenizer 领域的奠基/代表/转折级文献。"
+    suggestion: "精选 10-12 篇真正关于 tokenizer 设计的核心论文(HuBERT, SoundStream, SpeechTokenizer, Mimi, DAC, MaskGCT semantic codec, CosyVoice, VALL-E, LM-SPT, LatentLM 等),其余移入 _MOC/语音编码与量化.md 或各论文笔记的 concepts 反向链接中。"
+
+  - severity: high
+    type: scope-drift
+    principle: no_layer_mixing
+    location: "## SpeechLM 视角下的三类体系 + ## Survey 五轴 Taxonomy 视角"
+    detail: "两个 survey 的分类框架和 benchmark 结论被整段复述(共 41 行,占正文 39%),属于 survey 综述层内容,不属于概念定义页。"
+    suggestion: "保留 1-2 句概括(如三类分法的一句话总结),详细内容通过 wikilink 指向 [[Audio Tokenizer Taxonomy]] 和对应论文笔记。"
+
+  - severity: high
+    type: scope-drift
+    principle: no_layer_mixing
+    location: "## 演进"
+    detail: "研究演进时间线是按时间排列的技术发展脉络,规则明确规定属于 MOC 层级内容,不应出现在概念页。含 Continuous VAE Tokenizer 子节(12 行详细参数)进一步加重论文级细节。"
+    suggestion: "删除此节,演进脉络由 _MOC/语音编码与量化.md 承载。概念页只需在定义中说明当前主流路线。"
+
+  - severity: high
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## NAC Token 的语言学统计特性 [Park et al., 2025]"
+    detail: "整节是 Park et al. (2025) 一篇论文的独立摘要(7 行),属于论文笔记级内容,不是概念定义。"
+    suggestion: "精简为 1 行概念级结论(如'NAC token 的 Zipf/Heaps 统计量可作为 tokenizer 质量的 proxy 指标'),详情通过 [[论文笔记/NAC Token Language Analysis]] wikilink 引用。"
+
+  - severity: high
+    type: signal-dilution
+    principle: navigable
+    location: "frontmatter key_papers"
+    detail: "77 条 key_papers 中混入大量下游应用论文(SpeechAccentLLM, Audiobook-CC, OpenOmni, LLaMA-Omni 2, MELA-TTS, DiFlow-TTS 等),这些论文仅使用 tokenizer 作为组件,未贡献 tokenizer 设计洞见。导航信号被完全稀释。"
+    suggestion: "key_papers 仅保留对 tokenizer 设计有直接贡献的论文。下游使用者通过 concepts 字段的反向链接自然关联,不需要塞进 key_papers。"
+
+  - severity: medium
+    type: frontmatter-drift
+    principle: no_pollution
+    location: "frontmatter aliases"
+    detail: "aliases 包含 'Semantic Token'(子类型,非同义词,且已有独立概念页 [[Semantic vs Acoustic Tokens]])和 'Discrete Speech Token'(tokenizer 的输出物,非 tokenizer 本身)。"
+    suggestion: "移除 'Semantic Token' 和 'Discrete Speech Token',仅保留 '语音分词器'。如需覆盖更多搜索路径,可加 'Speech Tokenization' 或 'Audio Tokenizer'。"
+
+  - severity: medium
+    type: overload
+    principle: no_overload
+    location: "H2 标题结构"
+    detail: "8 个 H2 标题超出 ≤6 阈值。'SpeechLM 视角下的三类体系'、'Survey 五轴 Taxonomy'、'NAC Token 的语言学统计特性' 三节在移除 survey/paper 级内容后自然消解。"
+    suggestion: "重构后保留: 定义 / 在 TTS 中的应用 / 主要技术路线 / 相关概念,4 个 H2 即可。"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## 关键论文"
+    detail: "'关键论文'节中 Seed-TTS、FireRedTTS、FireRedTTS 2 等条目各含 1-2 行详细架构描述(编码器类型、参数量、帧率等),接近论文级细节。"
+    suggestion: "key_papers 条目精简为一句话定位(如 'Seed-TTS: 验证 tokenizer 是零样本 TTS 性能瓶颈'),详细架构描述留在论文笔记中。"
+
+  - severity: low
+    type: unsourced-claim
+    principle: traceable
+    location: "## 在 TTS 中的应用, L28"
+    detail: "'semantic speech tokenizer 处于核心位置' — '核心' 是强判断触发词,缺乏来源锚点。"
+    suggestion: "改为 '在典型 coarse-to-fine TTS pipeline 中,semantic speech tokenizer 连接文本理解与声学生成两个阶段'(描述性陈述,无需强来源)。"
+
+  - severity: low
+    type: unsourced-claim
+    principle: traceable
+    location: "## 演进"
+    detail: "技术演进的时间排序和因果关系('→')隐含判断,但整节无来源标注。"
+    suggestion: "如保留精简版演进线,需标注来源(如 'Mousavi et al. (2025) 将发展脉络归纳为...')。"
+
+restructure_plan:
+  split_targets:
+    - "Survey 内容 → 已有 [[Audio Tokenizer Taxonomy]] 页面和对应 survey 论文笔记"
+    - "NAC Token 统计特性 → [[论文笔记/NAC Token Language Analysis]]"
+    - "演进时间线 → _MOC/语音编码与量化.md"
+    - "Continuous VAE Tokenizer 详情 → 各论文笔记 + 可能的独立概念页"
+  merge_into: ""
+  demote_to: ""
+
+learning_signals:
+  new_issue_type: "key-papers-inflation — key_papers 从代表作列表退化为'所有提及该概念的论文全集',与 signal-dilution 相关但成因不同(非噪声链接,而是准入标准缺失)"
+  rule_gap: "当前 key_papers ≤12 是硬上限但反向更新时每次 append 一条不触发警告,导致增量膨胀无人发现。建议 lint.py 增加 key_papers 数量检查项。"
+  checklist_upgrade_suggestion: "增加检查项: key_papers 中每条论文是否对该概念的设计/理论有直接贡献(vs 仅作为下游使用者)。当前检查项只检查数量,不检查相关度。"

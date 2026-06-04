@@ -1,0 +1,96 @@
+entity: "Conditional Flow Matching"
+file: "概念库/Conditional Flow Matching.md"
+type: concept
+reviewer: agent
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  no_layer_mixing:
+    verdict: revise
+    notes: "页面含 '## 演进' section,这是典型的研究演进时间线(WaveNet 2016 → ... → CosyVoice 3 2025),规则明确禁止概念页包含此类内容(属于 MOC)。演进 section 下 7 个论文专属段落(CLEAR/PeriodWave/OZSpeech/RapFlow-TTS/Shallow FM/DiFlow-TTS/Flamed-TTS)各 3-7 行,远超 ≤3 个的限制。关键论文 section 也含 4 个 >3 行的逐论文摘要。页面整体呈 mini-survey 形态,混合了概念层(定义/应用)与 survey 层(论文逐篇分析/演进时间线)。"
+  no_overload:
+    verdict: revise
+    notes: "key_papers 字段含 67 条,是 ≤12 硬上限的 5.6 倍。虽然 body 行数(47)远低于 200 限制,但 frontmatter 中的 67 条 key_papers 列表本身已构成信息过载。页面试图索引每一篇使用 CFM 的论文,而非仅保留奠基/代表/转折级文献。"
+  traceable:
+    verdict: pass-with-fixes
+    notes: "6 处使用强判断触发词(首次/最早/首个)的句子均未使用规范来源格式(应为 'X 论文声称...' 或 'Survey Y 指出...')。虽然每处都附有论文名和年份,具备一定可追溯性,但格式不符合规则要求。定义段本身准确无误,与标准 CFM 文献一致。"
+  navigable:
+    verdict: revise
+    notes: "67 条 key_papers 完全稀释了导航信号。用户无法区分哪些是 CFM 方法论的奠基工作(如 Lipman 2023/VoiceFlow/Matcha-TTS),哪些只是使用 CFM 作为组件的应用论文(如 Audiobook-CC/Speaker Identity Unlearning/LibriQuote)。body 中的 '关键论文' section 仅覆盖 ~9 篇,与 frontmatter 67 篇严重脱节。"
+  no_pollution:
+    verdict: pass-with-fixes
+    notes: "定义段准确,不会引入偏见。但 category='generative-model' 不在受控枚举中(应为 technique),可能导致下游分类错误。aliases 含 'Flow Matching',而 FM 是比 CFM 更广的概念(CFM 是 FM 的条件变体),用作 alias 可能在 KB 检索中引入语义漂移。"
+
+structure_metrics:
+  key_papers_count: 67
+  heading_count: 5
+  line_count: 47
+  long_paper_paragraphs: 11
+
+issues:
+  - severity: high
+    type: overload
+    principle: no_overload
+    location: "frontmatter key_papers 字段"
+    detail: "key_papers 含 67 条,是 ≤12 硬上限的 5.6 倍。包含大量仅'使用 CFM 作为组件'的应用论文(如 Audiobook-CC/LibriQuote/Speaker Identity Unlearning/EmoCtrl-TTS 等),这些不属于 CFM 方法论的奠基/代表/转折级文献。"
+    suggestion: "精简至 ≤12 条核心论文: Lipman 2023 (原始论文)、VoiceFlow (TTS 首次引入)、Matcha-TTS (CFM for fast TTS)、CosyVoice/CosyVoice 2/CosyVoice 3 (工程演进代表)、F5-TTS、E2 TTS、Seed-TTS (规模化代表)、PeriodWave (vocoder 级扩展)、RapFlow-TTS (consistency FM)、DiFlow-TTS (离散 FM)。其余 55+ 篇移至 MOC 的'相关论文'区。"
+
+  - severity: high
+    type: scope-drift
+    principle: no_layer_mixing
+    location: "## 演进 section (L36-L47)"
+    detail: "'## 演进' section 是典型的研究演进时间线,规则明确禁止概念页包含此类内容('不允许包含研究演进时间线,属于 MOC')。时间线 'WaveNet (2016) → Diffusion-based TTS (2021) → Flow Matching (2023) → CFM + DiT (2025)' 加上 7 篇论文的详细技术分析,构成了一个 mini-survey。"
+    suggestion: "删除整个 '## 演进' section。其中的时间线可迁移至 _MOC/TTS-总览.md 的相关 section;7 篇论文的技术细节已在各自的论文笔记中,无需在概念页重复。"
+
+  - severity: high
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## 关键论文 + ## 演进 section 的论文专属段落"
+    detail: "body 中含 ~11 个 >3 行的论文专属段落(限制 ≤3 个)。关键论文 section 的 VoiceFlow/IndexTTS2/MaskGCT/Seed-TTS 条目各 2-4 行,演进 section 的 CLEAR/PeriodWave/OZSpeech/RapFlow-TTS/SFM/DiFlow-TTS/Flamed-TTS 各 3-7 行。概念页不应逐论文展开技术细节。"
+    suggestion: "关键论文 section 每条精简至 1 行(论文名 + 一句核心贡献);演进 section 整体移除;需要详细分析的读者应直接访问论文笔记页。"
+
+  - severity: medium
+    type: unsourced-claim
+    principle: traceable
+    location: "关键论文 L18, 演进 L34/L41/L43/L45, 相关概念 L21"
+    detail: "6 处使用'首次/最早/首个'触发词但未采用规范来源格式: (1) CosyVoice '最早在 LLM-TTS 中采用 OT-CFM'; (2) VoiceFlow '首次将 rectified flow matching 引入 TTS'; (3) CosyVoice 2 '首次在 flow matching 框架下实现近无损流式 TTS'; (4) PeriodWave '首次将 OT-CFM 应用于波形级生成'; (5) RapFlow-TTS '首次将 consistency flow matching 引入 TTS'; (6) DiFlow-TTS '首个将 DFM 应用于 TTS'。"
+    suggestion: "改写为 'VoiceFlow (Guo et al., 2024) 声称首次将...' 或精简掉'首次'断言,仅描述技术贡献。"
+
+  - severity: medium
+    type: frontmatter-drift
+    principle: no_pollution
+    location: "frontmatter category 字段"
+    detail: "category='generative-model' 不在受控枚举中(technique/component/model-family/representation/problem/design-choice/taxonomy/trade-off)。CFM 是一种生成模型训练方法,应归类为 technique。"
+    suggestion: "改 category 为 'technique'。"
+
+  - severity: medium
+    type: signal-dilution
+    principle: navigable
+    location: "frontmatter key_papers vs body ## 关键论文"
+    detail: "frontmatter key_papers 有 67 条,body '关键论文' section 仅分析 ~9 篇,两者严重脱节。frontmatter 中的绝大多数论文在 body 中完全没有提及,用户无法理解它们与 CFM 的具体关系。"
+    suggestion: "frontmatter key_papers 与 body 关键论文 section 保持一致,均控制在 ≤12 条。"
+
+  - severity: low
+    type: boundary-blur
+    principle: no_pollution
+    location: "frontmatter aliases"
+    detail: "aliases 含 'Flow Matching',但 FM 是比 CFM 更广的概念(CFM 是 FM 的条件变体,Lipman 2023 论文标题就是 'Flow Matching for Generative Modeling')。将广义 FM 作为 CFM 的 alias 可能在 KB 检索中引入语义漂移。"
+    suggestion: "保留 'CFM' 作为 alias,将 'Flow Matching' 移除或改为 related_concepts 中的一条。如果 vault 中多数论文实际使用的是 CFM 而非广义 FM,则可保留 alias 但在定义段加一句区分说明。"
+
+  - severity: low
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## 相关概念 section 末尾 CosyVoice 2 条目"
+    detail: "相关概念 section 末尾有一条 CosyVoice 2 的 3 行技术描述,这是论文级细节混入概念层,且与 section 标题'相关概念'不匹配(CosyVoice 2 是模型不是概念)。"
+    suggestion: "删除此条目。CosyVoice 2 的 chunk-aware causal FM 细节属于 CosyVoice 2 论文笔记或模型页。"
+
+restructure_plan:
+  split_targets: []
+  merge_into: ""
+  demote_to: ""
+
+learning_signals:
+  new_issue_type: "frontmatter-body-mismatch — frontmatter key_papers 列表与 body 关键论文 section 内容严重脱节(67 vs 9),这是一种新的不一致问题,现有词汇表未覆盖"
+  rule_gap: "当前反向更新规则允许每篇论文 append key_papers 条目但无上限检查。67 条 key_papers 是逐篇精读累积的结果,说明 append 操作需要一个触发阈值检查的机制(如 key_papers > 12 时 lint 报警或自动触发 review)。"
+  checklist_upgrade_suggestion: "建议增加检查项: 'frontmatter key_papers 列表与 body 关键论文/相关工作 section 一致性' — 确保 frontmatter 中列出的论文在 body 中有至少一句说明其与概念的关系。"

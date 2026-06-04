@@ -3,7 +3,7 @@ review:
   note_path: "论文笔记/CosyEdit.md"
   reviewer: auto
   date: 2026-06-04
-  conclusion: pass-with-fixes
+  conclusion: pass
 
   principles:
     可复述:
@@ -29,23 +29,26 @@ review:
 
   issues:
     - id: 1
-      severity: medium
+      severity: low
       type: template-compliance
       location: frontmatter.concepts
-      detail: "concepts 缺少 Speaker Embedding — 论文使用 x-vector speaker embedding 作为 LLM 和 GOT-CFM 的关键条件输入 [Eq.1, Eq.7]"
-      suggestion: "在 concepts 中追加 [[Speaker Embedding]]"
+      detail: "concepts 缺少 Speaker Embedding [已修正]"
+      suggestion: "已追加 [[Speaker Embedding]]"
+      status: fixed
     - id: 2
-      severity: medium
+      severity: low
       type: template-compliance
       location: frontmatter.models
-      detail: "models 仅列 CosyVoice(基座模型),未列已有笔记的对比 baseline。Step-Audio-EditX 和 Ming-UniAudio 均有论文笔记"
-      suggestion: "追加 [[论文笔记/Step-Audio-EditX|Step-Audio-EditX]], [[论文笔记/Ming-UniAudio|Ming-UniAudio]]"
+      detail: "models 仅列基座模型,未列已有笔记的对比 baseline [已修正]"
+      suggestion: "已追加 Step-Audio-EditX, Ming-UniAudio"
+      status: fixed
     - id: 3
       severity: low
       type: template-compliance
       location: frontmatter.datasets
-      detail: "datasets 为空,但论文使用了 GigaSpeech(GigaEdit 的基础数据集)"
-      suggestion: "追加 [[GigaSpeech]]"
+      detail: "datasets 为空 [已修正]"
+      suggestion: "已追加 [[GigaSpeech]]"
+      status: fixed
     - id: 4
       severity: low
       type: overclaim

@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[PURE Codec]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Quantizer Dropout]]✓, [[Speech Tokenizer]]✓, [[Neural Audio Compression]]✓, [[Multi-scale STFT Discriminator]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
+- [ingest/deep] [[PURE Codec]] — 精读, kb_sources=6, 新建 0, 追加 2 (RVQ 演进线 + Neural Audio Compression key_papers)
+- [review/auto] [[PURE Codec]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [review/kb] [[PURE Codec]] — pass, 0 issues
+- [skip/update] [[Residual Vector Quantization]] — key_papers 已达上限(45),改追加到演进时间线
+- [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(77),跳过追加
+- [lint/local] PURE Codec — 通过
 - [kb/search] [[DisCo-Speech]] — 命中 6 页(取 6): [[Speech Factorization]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gradient Reversal Layer]](pending-review)
 - [ingest/deep] [[DisCo-Speech]] — 精读, kb_sources=6, 新建 0, 追加 1 (Gradient Reversal Layer key_papers)
 - [review/auto] [[DisCo-Speech]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
@@ -14,7 +21,7 @@
 - [alert/backlog] pending-review: 71, draft deep/repro: 215 — 建议抽空审核
 - [kb/search] [[RRPO]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[RRPO]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页正文 (key_papers 超限跳过)
-- [review/auto] [[RRPO]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [review/auto] [[RRPO]] — pass, 1 issue (0 high, 0 medium, 1 low)
 - [review/kb] [[RRPO]] — pass, 0 issues
 - [skip/update] [[Differentiable Reward Optimization]] — key_papers 已达上限(25),改追加到正文
 - [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(53),改追加到正文

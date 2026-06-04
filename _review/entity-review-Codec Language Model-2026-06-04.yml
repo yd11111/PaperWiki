@@ -1,0 +1,146 @@
+entity: "Codec Language Model"
+file: "概念库/Codec Language Model.md"
+type: concept
+reviewer: agent
+date: "2026-06-04"
+conclusion: restructure
+
+# 第一层: 原则判断
+principles:
+  no_layer_mixing:
+    verdict: revise
+    notes: "页面同时承担概念页+survey摘要+mini-MOC+演进时间线四种角色。'代表系统'有4个论文专属子章节(VioLA/NTPP/SpeechGPT-Gen/AudioLM各3-4行模型级细节);'Survey Benchmark 发现'是21行单篇survey的详细数字搬运;'演进'是研究时间线(规则明确'属于MOC');'关键论文'与frontmatter key_papers功能重叠,兼做了索引页。"
+  no_overload:
+    verdict: revise
+    notes: "key_papers 37条,硬上限12条,超出3倍。## 标题9个,上限6个。37条key_papers中大量是边缘相关论文(DiffCSS/CapSpeech/LLMVoX/TextrolSpeech/StreamMel等),与'奠基/代表/转折'标准不符。"
+  traceable:
+    verdict: pass-with-fixes
+    notes: "核心定义引用了Cui et al. 2024 survey原文;Survey Benchmark数字标注了具体章节和表格编号;'首个大规模codec LM TTS'归属VALL-E合理。但L85'语义理解是口语交互的核心需求'缺来源锚点,'演进'时间线的线性叙事是agent综合推断而非来源论文原述。"
+  navigable:
+    verdict: revise
+    notes: "37条key_papers使导航信号完全稀释,用户无法区分VALL-E(奠基)与CapSpeech(边缘应用)的重要性差异。4条plain text格式(VALL-E/VioLA/NTPP/SpeechGPT-Gen)与33条wikilink格式不一致。body中'关键论文'section仅列6篇,与frontmatter 37篇严重脱节。"
+  no_pollution:
+    verdict: pass-with-fixes
+    notes: "核心定义准确,与LLM-based TTS的区分有价值。但Survey Benchmark的具体benchmark数字(UTMOS 3.77/dWER 4.32等)作为KB检索背景出现时,可能让下游笔记过度关注特定benchmark结果而非概念本身。此外37条key_papers中若有误归(如MSR-Codec是codec本身而非codec LM),会通过KB检索传播错误关联。"
+
+# 第二层: 检查项
+structure_metrics:
+  key_papers_count: 37
+  heading_count: 9
+  line_count: 112
+  long_paper_paragraphs: 5  # VioLA(4行), NTPP(4行), AudioLM(4行), Survey SLM评估(~7行), Survey TTS评估(~5行)
+
+checks:
+  no_layer_mixing:
+    long_paper_paragraphs_ok: false  # ≤3要求, 实际≥5
+    single_responsibility: false  # 兼做concept+survey-digest+mini-MOC+timeline
+    no_evolution_timeline: false  # "## 演进" 明确违反
+    model_details_separated: false  # VioLA/NTPP/SpeechGPT-Gen/AudioLM有模型级subsection
+  no_overload:
+    key_papers_limit: false  # 37 > 12
+    heading_limit: false  # 9 > 6
+    line_limit: true  # 112 ≤ 200
+    split_targets_specified: false
+  traceable:
+    strong_claims_sourced: true  # 大部分有来源
+    source_format_ok: true
+    no_directional_errors: true
+    no_agent_speculation_as_fact: false  # "演进"时间线是agent综合叙事
+  navigable:
+    key_papers_quality: false  # 含大量非奠基/代表/转折级文献
+    key_papers_format_uniform: false  # 4 plain text + 33 wikilink
+    related_concepts_distinct: true
+    link_density_ok: false  # 37 key_papers导致信号稀释
+  no_pollution:
+    definition_no_unverified_claims: true
+    aliases_correct: true  # CodecLM/Codec LM/编解码器语言模型等均为同概念别名
+    origin_paper_clear: true
+    category_controlled: true  # model-family
+
+# 发现的问题
+issues:
+  - severity: high
+    type: overload
+    principle: no_overload
+    location: "frontmatter key_papers"
+    detail: "key_papers 37条,硬上限12条,超出3倍。大量边缘论文(DiffCSS/CapSpeech/LLMVoX/TextrolSpeech/StreamMel/Revival with Voice/LatinX/MSR-Codec等)不符合'奠基/代表/转折'标准,只是'使用了codec LM'的论文。"
+    suggestion: "精简到≤12条核心文献:保留VALL-E/AudioLM/VioLA/NTPP/SpeechGPT-Gen/Survey-Discrete Audio Tokens等奠基+代表作,其余移至MOC的'相关论文'或各论文笔记的概念引用中。"
+
+  - severity: high
+    type: scope-drift
+    principle: no_layer_mixing
+    location: "## Survey Benchmark 发现 [Mousavi et al. 2025]"
+    detail: "21行专门搬运单篇survey的benchmark数字(UTMOS/dWER/FAD/KLD等),含3个子章节,是论文级细节,不属于概念页'定义+机制+边界'层。"
+    suggestion: "删除整个section,在Survey-Discrete Audio Tokens笔记中保留这些数字。概念页仅保留1-2行总结性结论(如'纯acoustic tokenizer在语义任务上接近随机,domain-specific训练可显著提升生成质量')。"
+
+  - severity: high
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## 演进"
+    detail: "研究演进时间线(VQ-VAE→SoundStream→AudioLM→VALL-E→VioLA→Moshi→benchmark)规则明确禁止:'不允许包含研究演进时间线(属于MOC)'。"
+    suggestion: "删除整个section。演进时间线属于TTS-总览MOC或语音编码与量化MOC。"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_layer_mixing
+    location: "## 代表系统"
+    detail: "4个论文专属子章节(VioLA/NTPP/SpeechGPT-Gen/AudioLM),每个3-4行模型级细节。这是逐论文摘要行为,模型级细节应在模型页或论文笔记中。"
+    suggestion: "压缩为1-2行/系统的简介(如'VioLA: 首个多任务CodecLM (ASR+TTS+ST)'),或合并到关键论文列表中用一行annotation。"
+
+  - severity: medium
+    type: signal-dilution
+    principle: navigable
+    location: "frontmatter key_papers"
+    detail: "4条plain text格式(VALL-E/VioLA/NTPP/SpeechGPT-Gen)与33条wikilink格式不一致,违反'格式统一'要求。"
+    suggestion: "统一为wikilink格式 [[论文笔记/xxx|显示名]]。如果vault中没有对应笔记则不放入key_papers。"
+
+  - severity: medium
+    type: scope-drift
+    principle: no_layer_mixing
+    location: "## 关键论文"
+    detail: "body中'关键论文'section列出6篇带注释的论文,与frontmatter key_papers 37篇功能重叠但内容严重脱节。这个section实际上是mini-MOC行为。"
+    suggestion: "删除body中的'关键论文'section。核心论文通过frontmatter key_papers(精简后≤12条)管理,不需要body中再单独列出。"
+
+  - severity: medium
+    type: overload
+    principle: no_overload
+    location: "## 标题结构"
+    detail: "9个##标题超过6个上限: 定义/区别/代表系统/技术挑战/角色/关键论文/相关概念/Survey Benchmark/演进。"
+    suggestion: "删除演进/Survey Benchmark/关键论文3个section后降至6个。代表系统可合并到定义或技术挑战中。"
+
+  - severity: low
+    type: unsourced-claim
+    principle: traceable
+    location: "L85 (## 在 Speech LM 中的角色)"
+    detail: "'多数SpeechLM更倾向使用semantic tokens而非codec tokens,因为语义理解是口语交互的核心需求'——'核心需求'是强判断词,缺来源锚点。"
+    suggestion: "改为'Survey X指出,多数SpeechLM更倾向...'或添加来源标注。"
+
+  - severity: low
+    type: frontmatter-drift
+    principle: no_pollution
+    location: "frontmatter key_papers 中非wikilink条目"
+    detail: "VALL-E/VioLA/NTPP/SpeechGPT-Gen 4篇使用plain text而非wikilink,可能是vault中无对应笔记导致,但应确认是否存在。"
+    suggestion: "检查vault中是否有VALL-E等笔记。有则改为wikilink,无则从key_papers移除(仅保留有笔记的论文)。"
+
+# 重构计划
+restructure_plan:
+  actions:
+    - "删除 ## 演进 section(移至MOC)"
+    - "删除 ## Survey Benchmark 发现 section(保留1-2行总结,详细数字归论文笔记)"
+    - "删除 ## 关键论文 section(与frontmatter重复)"
+    - "压缩 ## 代表系统(每个系统1-2行,或合并到正文)"
+    - "key_papers 从37条精简到≤12条(保留VALL-E/AudioLM/VioLA/NTPP/SpeechGPT-Gen/Survey等核心文献)"
+    - "统一key_papers为wikilink格式"
+  expected_after:
+    heading_count: "≤6 (定义/区别/代表系统或合并/技术挑战/角色/相关概念)"
+    key_papers_count: "≤12"
+    long_paper_paragraphs: "≤3"
+  split_targets: []
+  merge_into: ""
+  demote_to: ""
+
+# 学习信号
+learning_signals:
+  new_issue_type: "frontmatter-body-desync: frontmatter key_papers(37条)与body关键论文section(6条)内容严重不一致,可能是反复append导致frontmatter膨胀但body未同步更新"
+  rule_gap: "当前规则未明确key_papers的'仅保留有笔记的论文'要求。plain text条目(无wikilink)的处理规则也未明确——应该只在vault有笔记时才加入key_papers,还是允许plain text引用外部论文?"
+  checklist_upgrade_suggestion: "增加检查项: frontmatter key_papers与body关键论文section是否一致(如有body section);key_papers中plain text条目占比(理想为0%)"

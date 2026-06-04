@@ -1,0 +1,46 @@
+kb_review:
+  paper: "TruS"
+  reviewer: auto
+  date: 2026-06-04
+
+change_plan:
+  - target: "概念库/Speaker Verification.md"
+    action: append
+    detail: "append key_papers (10/12, under limit): [[论文笔记/TruS|TruS]]; no body text change needed"
+    risk: low
+    rationale: "TruS uses ECAPA-TDNN SIM metric in inverted direction (lower=better for unlearning), direct relevance"
+
+  - target: "概念库/Voice Cloning Taxonomy.md"
+    action: append
+    detail: "append key_papers (10/12, under limit): [[论文笔记/TruS|TruS]]; no body text change needed"
+    risk: low
+    rationale: "TruS extends protection taxonomy with training-free inference-time unlearning paradigm"
+
+  - target: "概念库/Speaker Embedding.md"
+    action: skip
+    detail: "key_papers at 64 (>>12 limit), skip. TruS's insight about identity-in-structured-directions is interesting but not essential to append to this already-large page"
+    risk: none
+
+  - target: "概念库/Conditional Flow Matching.md"
+    action: skip
+    detail: "key_papers at 67 (>>12 limit), skip. TruS operates on F5-TTS but doesn't contribute new CFM knowledge"
+    risk: none
+
+  - target: "概念库/Speech Factorization.md"
+    action: skip
+    detail: "key_papers at 30 (>>12 limit), skip. TruS's connection to factorization is conceptual, not a direct contribution"
+    risk: none
+
+  - target: "任务库/Zero-shot Speech Synthesis.md"
+    action: skip
+    detail: "key_papers at 62 (>>12 limit), skip. TruS is about unlearning, not ZS-TTS quality improvement"
+    risk: none
+
+  - target: "数据集/Emilia.md"
+    action: skip
+    detail: "key_papers at 18 (>12 limit), skip. TruS merely uses Emilia for evaluation"
+    risk: none
+
+conclusion: pass
+conclusion_rationale: "2 append updates to under-limit pages, 5 skips. All appends are low-risk (key_papers only, no substantive changes). No new pages needed."
+issues: []

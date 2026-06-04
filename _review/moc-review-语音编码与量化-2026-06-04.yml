@@ -1,0 +1,42 @@
+moc: "语音编码与量化"
+file: "_MOC/语音编码与量化.md"
+date: "2026-06-04"
+conclusion: revise
+
+principles:
+  navigable:
+    score: 8
+    judgment: "scope 清晰,按 codec 演进组织论文,代表模型 3 个精炼"
+  no_mixing:
+    score: 6
+    judgment: "核心概念 7 项平铺未按 R2 分组(量化方法/模块/训练技巧)"
+  traceable:
+    score: 5
+    judgment: "6 处强判断词(首个 x4, 开创 x1, SOTA x1)无来源标注"
+  no_decay:
+    score: 8
+    judgment: "无重复 wikilink,年份一致,代表模型链接指向模型库实体页(待验证)"
+  no_overload:
+    score: 8
+    judgment: "论文区 ~33 条,远在 50 条阈值内"
+
+stats:
+  total_papers: 33
+  total_concepts: 7
+  duplicate_entries: 0
+  unattributed_judgments: 6
+
+issues:
+  - severity: high
+    type: unattributed-judgment
+    principle: traceable
+    location: "lines 19,24,25,32,49,55"
+    detail: "6 处 首个/开创/SOTA 无来源标注"
+    suggestion: "补充 (作者 claim) 标注"
+
+  - severity: medium
+    type: layer-mixing
+    principle: no_mixing
+    location: "核心概念 (lines 10-16)"
+    detail: "7 个概念平铺未按 R2 分组"
+    suggestion: "分为 量化方法(RVQ/FSQ) / 训练病理与技巧(Codebook Collapse/Quantizer Dropout) / 网络模块(Speech Tokenizer/Snake Activation/MS-STFT-D)"

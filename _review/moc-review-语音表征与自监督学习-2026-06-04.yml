@@ -1,0 +1,41 @@
+moc: "语音表征与自监督学习"
+file: "_MOC/语音表征与自监督学习.md"
+date: "2026-06-04"
+conclusion: minor-revise
+
+principles:
+  navigable:
+    score: 8
+    judgment: "scope 清晰, 代表模型 5 个覆盖主要系列, 论文列表简洁"
+  no_mixing:
+    score: 7
+    judgment: "核心概念未分组但数量适中(5个); 论文区无显式分组但数量少(13篇)"
+  traceable:
+    score: 6
+    judgment: "3 处 SOTA 无 benchmark 来源标注(WavLM/XEUS/BEATs)"
+  no_decay:
+    score: 8
+    judgment: "无重复条目, 年份一致, 相关任务区为空"
+  no_overload:
+    score: 9
+    judgment: "论文区仅 13 篇, 远在阈值内"
+
+stats:
+  total_papers: 13
+  total_concepts: 5
+  unattributed_judgments: 3
+
+issues:
+  - severity: high
+    type: unattributed-judgment
+    principle: traceable
+    location: "lines 26, 30, 31"
+    detail: "3 处 SOTA 无 benchmark 标注: WavLM SUPERB SOTA, XEUS ML-SUPERB SOTA, BEATs AudioSet SOTA"
+    suggestion: "WavLM → (benchmark: SUPERB), XEUS → (benchmark: ML-SUPERB), BEATs → (benchmark: AudioSet)"
+
+  - severity: low
+    type: empty-section
+    principle: navigable
+    location: "相关任务 (line 37)"
+    detail: "相关任务区为空"
+    suggestion: "添加 ASR/SER 等相关任务, 或移除该节"
