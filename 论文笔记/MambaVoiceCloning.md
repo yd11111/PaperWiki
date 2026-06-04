@@ -309,22 +309,6 @@ MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Ta
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pass | 四个 WHY 段落 + 速查可借鉴具体可迁移,机制解释充分 |
-> | 可信赖 | pass | 数字出处覆盖率 >90%,指标名正确,无方向性错误 |
-> | 可区分 | pass | [论文原文]/[agent解读] 覆盖率 ~85%,1 处已修正 |
-> | 可定位 | pass | 3 confirmed KB 页面谱系分析 + Mamba-TTS 对比表 |
-> | 不污染 | pass | 仅 append 更新,无新建页,无 factual-error 风险 |
-> 
-> Issues: 3 (high: 0, medium: 1, low: 2)
-> 详见 `_review/MambaVoiceCloning-review.yml`
-
-## 审阅
-
-> [!review] 审阅 (2026-06-04, auto)
-> **结论**: pass
-> 
-> | 原则 | 状态 | 备注 |
-> |------|------|------|
 > | 可复述 | pass | 三模块WHY解释充分,关键设计选择4个WHY段落,速查可借鉴含4个具体trick |
 > | 可信赖 | pass | 数字claim出处覆盖>95%,指标名正确,无方向性错误 |
 > | 可区分 | pass | [论文原文]/[agent解读]标注覆盖率>85%,KB背景标注完整 |
