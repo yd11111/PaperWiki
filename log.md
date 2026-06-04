@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[SonoEdit]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Phoneme Representation]](pending-review), [[Text-to-Speech Pipeline]](pending-review)
+- [ingest/deep] [[SonoEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (Phoneme Representation key_papers+正文)
+- [review/auto] [[SonoEdit]] — pass, 3 issues (0 high, 1 medium, 2 low)
+- [review/kb] [[SonoEdit]] — pass, 0 issues
+- [skip/update] [[LLM-based TTS]] — key_papers 已达上限(103),跳过追加
+- [skip/update] [[Codec Language Model]] — key_papers 已达上限(44),跳过追加
+- [skip/update] [[Speaker Embedding]] — key_papers 已达上限(69),跳过追加
+- [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(80),跳过追加
+- [lint/local] SonoEdit — 通过
 - [kb/search] [[MambaVoiceCloning]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[MambaVoiceCloning]] — 精读完善(局限性/点评/可复用idea补充), kb_sources=3, 新建 0, 追加 1 (Attention-based TTS key_papers+演进线)
 - [review/auto] [[MambaVoiceCloning]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
