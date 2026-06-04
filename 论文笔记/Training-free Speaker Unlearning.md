@@ -164,4 +164,10 @@ TruS 的核心价值在于将 speaker unlearning 从训练范式转向推理范�
 2. **两阶段动态阈值 (global stats + local refinement)**: 先用全局 mu+sigma 选 layer,再用 layer-level mean 选 step。这种"先粗后细"的 intervention selection 比固定 top-k 更 robust,可用于 LLM interpretability 中的 activation patching
 3. **投影减法做属性消除**: 将激活投影到目标属性方向的正交补空间,是一种通用的 training-free 属性控制方法,理论上可扩展到任何在隐层有结构化方向编码的属性
 
+## 审阅
+
+> [!review] 审阅结论: pass (2026-06-04)
+> checklist v1.1 | 0 issues (0 high / 0 medium / 0 low)
+> 方法四个设计选择均有 WHY 解释和消融支撑,因果来源标注完整 ([论文原文]/[agent 解读]),数字标注覆盖充分,KB 背景精准定位 (Kim et al. 后继 + 四层防线),局限性分析诚实 (安全性弱于 TGU/缺 alpha 消融/无恢复攻击)。详见 `_review/Training-free Speaker Unlearning-review.yml`。
+
 检索命中: [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Verification]][待确认], [[Anti-spoofing and Deepfake Detection]][待确认], [[Voice Cloning Taxonomy]][待确认] | 过滤: 无 | 未命中但可能相关: [[Emotion Control in TTS]]
