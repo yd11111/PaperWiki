@@ -13,6 +13,7 @@
 - [ingest/deep] [[EmoSteer-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Emotion Control in TTS/CFM/CosyVoice 2 key_papers), 实质追加 1 (Emotion Control in TTS 新增 activation steering 路线节+演进线更新), MOC 更新 1 (TTS-总览)
 - [review/auto] [[EmoSteer-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
 - [lint/local] EmoSteer-TTS — 通过 (0 死链)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核
 - [kb/search] [[DiFlow-TTS]] — 命中 7 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[DiFlow-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/Speech Factorization/Duration Predictor/Speech Tokenizer/RVQ/Prosody Modeling/Non-autoregressive TTS key_papers + CFM 演进新增 DFM 条目), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[DiFlow-TTS]] — conclusion: pass-with-fixes, 3 issues (0 high / 1 medium / 2 low), 修正: 移除 Masked Generative Modeling 概念挂接 + 来源标注补充
