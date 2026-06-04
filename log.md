@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[SpeechWeave]] — 命中 5 页(取 5): [[Speaker Embedding]]✓, [[Cross-lingual Voice Cloning]]✓ | 过滤: [[Text-to-Speech Pipeline]](pending-review), [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review)
+- [ingest/deep] [[SpeechWeave]] — 精读, kb_sources=5, 新建 0, 追加 3 (Speaker Embedding key_papers, Text-to-Speech Pipeline key_papers, Phoneme Representation key_papers), MOC 更新 1 (TTS训练与评估)
+- [review/auto] [[SpeechWeave]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] SpeechWeave — 通过 (0 死链)
 - [kb/search] [[MPO]] — 命中 3 页(confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speaker Verification]](pending-review)
 - [ingest/deep] [[MPO]] — 精读, kb_sources=3, 新建 0, 追加 3 (Differentiable Reward Optimization key_papers+演进线, LLM-based TTS key_papers, TTS Evaluation key_papers), MOC 更新 2 (TTS训练与评估, 零样本语音合成)
 - [review/auto] [[MPO]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
