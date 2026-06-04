@@ -1,0 +1,27 @@
+reviewer: auto
+date: 2026-06-04
+note: "论文笔记/Lightweight Prompt Biasing.md"
+
+change_plan:
+  - target: "模型库/Whisper.md"
+    action: append
+    content: "追加 key_papers: [[论文笔记/Lightweight Prompt Biasing|Lightweight Prompt Biasing]] — 本文直接受 Whisper multitask token format 启发,扩展到 contextual biasing"
+  - target: "概念库/LLM-enhanced ASR.md"
+    action: skip
+    content: "本文不属于 LLM-enhanced ASR 方向(明确声称 leaving LLM integration for future research),frontmatter 中的 concepts 链接仅用于 KB 定位对比"
+
+principles:
+  factual_accuracy:
+    verdict: pass
+    reason: "Whisper 的 multitask token format 确实是本文的直接灵感来源 [§III-A],append 内容准确"
+  dedup_check:
+    verdict: pass
+    reason: "Whisper key_papers 中无重复(当前 5 条,上限 12)"
+  append_vs_substantive:
+    verdict: pass
+    reason: "仅 append key_papers,不修改定义/关系,属于 append 操作"
+
+issues: []
+
+conclusion: pass
+issue_summary: "0 issues"
