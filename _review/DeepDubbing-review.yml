@@ -1,0 +1,41 @@
+paper: "DeepDubbing"
+reviewer: agent-auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节清晰解释了 TTT 和 CA-Instruct-TTS 的 WHY(为什么用 CFM、为什么显式性别控制、为什么解耦 pipeline),速查卡片可借鉴字段列出 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "所有数字标注了 Table/Section 出处,指标名正确(SA/AA/CMS/MOS-N/MOS-E/WER),无方向性错误"
+  可区分:
+    satisfied: true
+    notes: "因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率约 90%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景谱系定位清晰(CosyVoice → DeepDubbing),创新判断以 DreamVoice/PromptTTS 系列为对比基准"
+  不污染:
+    satisfied: true
+    notes: "未新建概念页,反向更新仅为追加 key_papers"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    detail: "BookVoice-50h 是本文新数据集,数据集/ 中无对应页面;作为合成数据集(由本文模型生成),价值有限,暂不建议建页"
+    suggestion: "保持字符串格式即可,如后续有其他论文引用再建页"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法:训练策略"
+    detail: "4000+ 小时数据和 300K+ 标注的具体数字缺少出处标注"
+    suggestion: "补充 [§3.1.1] 标注"
+
+conclusion: pass
+summary: "笔记在 5 个原则上均达标。方法节因果解释充分,来源标注清晰,KB 背景谱系定位具体。仅有 2 个 low 级问题(数据集建页判断 + 训练策略出处标注),不阻塞反向更新。"
+issue_count:
+  high: 0
+  medium: 0
+  low: 2

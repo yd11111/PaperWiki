@@ -96,7 +96,7 @@ DeepDubbing 是一个三步 pipeline [§2.1, Fig 1(a)]:
 
 - **TTT**: OT-CFM 框架,CFG (conditional dropout 0.2),Qwen3-Embedding-0.6B 作文本编码器 [§3.1.2]
 - **CA-Instruct-TTS**: 从 QinYu 基座模型继续训练(continuous training) [§2.3]
-- **数据**: 4000+ 小时内部多角色有声书数据,LLM 自动标注 300K+ 音色描述和 2M+ emotion-scene instructions [§3.1.1]
+- **数据**: 4000+ 小时内部多角色有声书数据 [§3.1.1],LLM 自动标注 300K+ 音色描述和 2M+ emotion-scene instructions [§3.1.1]
 - **Speaker embedding 提取**: 训练时用 Cam++ 模型提取每段语音的 speaker embedding 作为 TTT 的 ground truth [§3.1.1]
 
 ## 实验
@@ -149,3 +149,9 @@ DeepDubbing 是一个三步 pipeline [§2.1, Fig 1(a)]:
 2. **显式性别标签注入**: 当文本描述中的某个属性(如性别)需要高可靠控制时,可以将其从文本中抽出作为独立条件通道,避免文本编码器的模糊性
 3. **Emotion-scene instruction 模板**: "[单句情感]|[上下文场景]|[待合成文本]" 三元组格式,可用于任何需要上下文感知情感合成的场景,LLM 自动生成 instruction 降低标注成本
 4. **LLM 驱动的结构化标注 pipeline**: 用 LLM 从原始文本自动生成 300K+ 音色描述和 2M+ emotion-scene instructions,是大规模合成数据标注的实用方案
+
+> [!review] 审阅 (2026-06-04, agent-auto, checklist v1.1)
+> **结论: pass** | high: 0, medium: 0, low: 2
+> - (low) frontmatter.datasets: BookVoice-50h 为本文合成数据集,暂不建页
+> - (low) 训练策略节数据量出处已补 [§3.1.1]
+> 详见 `_review/DeepDubbing-review.yml`
