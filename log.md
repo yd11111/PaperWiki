@@ -5,6 +5,12 @@
 - [ingest/deep] [[CosyEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 演进线)
 - [review/auto] [[CosyEdit]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
 - [review/kb] [[CosyEdit]] — pass, 0 issues
+- [skip/update] [[Conditional Flow Matching]] — key_papers 已达上限(76),跳过追加
+- [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(81),跳过追加
+- [skip/update] [[Speaker Embedding]] — key_papers 已达上限(64),跳过追加
+- [skip/update] [[LLM-based TTS]] — key_papers 已达上限(83),跳过追加
+- [skip/update] [[Speech-Text Alignment]] — key_papers 已达上限(13),跳过追加
+- [skip/update] [[Zero-shot Speech Synthesis]] — key_papers 已达上限(66),跳过追加
 - [lint/local] CosyEdit — 通过
 - [kb/search] [[MambaVoiceCloning]] — 命中 3 页(取 3): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[MambaVoiceCloning]] — 精读, kb_sources=3, 新建 0, 追加 0 (已有 5 个 KB 页面已引用)
