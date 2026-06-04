@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[DisCo-Speech]] — 命中 6 页(取 6): [[Speech Factorization]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gradient Reversal Layer]](pending-review)
+- [ingest/deep] [[DisCo-Speech]] — 精读, kb_sources=6, 新建 0, 追加 1 (Gradient Reversal Layer key_papers)
+- [review/auto] [[DisCo-Speech]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
+- [review/kb] [[DisCo-Speech]] — pass, 0 issues
+- [skip/update] [[Speech Factorization]] — key_papers 已达上限(32),跳过追加
+- [skip/update] [[Codec Language Model]] — key_papers 已达上限(44),跳过追加
+- [skip/update] [[Finite Scalar Quantization]] — key_papers 已达上限(16),跳过追加
+- [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(80),跳过追加
+- [skip/update] [[Prosody Modeling]] — key_papers 已达上限(52),跳过追加
+- [lint/local] DisCo-Speech — 通过
 - [kb/search] [[RRPO]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[RRPO]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页正文 (key_papers 超限跳过)
 - [review/auto] [[RRPO]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
