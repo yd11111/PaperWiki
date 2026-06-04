@@ -1117,3 +1117,4 @@
 - [moc] TTS-总览 — 新增"歌声合成 (SVS)"子主题, 收录 TechSinger
 - [moc] TTS训练与评估 Post-training: +FPO; 零样本语音合成 2025: +FPO
 [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
+- [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
