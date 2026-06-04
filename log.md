@@ -1,5 +1,12 @@
 # Log
 
+## 2026-06-04
+- [kb/search] [[EME-TTS]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Duration Predictor]](pending-review), [[F0 Modeling]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[EME-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Emotion Control in TTS key_papers+贡献描述, Prosody Modeling key_papers), MOC 更新 1 (TTS-总览)
+- [review/auto] [[EME-TTS]] — pass, 0 issues
+- [lint/local] EME-TTS — 通过 (0 死链)
+- [alert/backlog] pending-review: 70, draft deep/repro: 208 — 建议抽空审核
+
 ## 2026-06-03
 - [kb/search] [[StreamMel]] — 命中 6 页(取 Top 6): [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓ | 过滤: [[模型库/MELLE|MELLE]](pending-review), [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review)
 - [ingest/deep] [[StreamMel]] — 精读, kb_sources=6, 新建 0, 追加 7 (MELLE key_papers+后续工作, CosyVoice 2 key_papers+baseline, Mel Spectrogram key_papers, LLM-based TTS key_papers, VAE for TTS key_papers, Codec LM key_papers, Zero-shot Speech Synthesis key_models), MOC 更新 2 (零样本语音合成, TTS-总览)
