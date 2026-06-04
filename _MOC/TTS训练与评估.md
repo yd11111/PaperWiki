@@ -45,6 +45,7 @@
 - [[论文笔记/InstructTTSEval|InstructTTSEval]] — 2025, 首个指令遵循 TTS benchmark, 3 层任务(APS/DSD/RP) x 12 特征 x 2 语言, Gemini-as-Judge
 - [[论文笔记/AudioMOS Challenge 2025|AudioMOS Challenge 2025]] — 2025, 首个语音/音乐/通用音频自动 MOS 预测挑战赛, 3 赛道(TTM/Audiobox/多采样率), 24 队, SSL+集成为主流方案
 - [[论文笔记/Vox-Evaluator|Vox-Evaluator]] — 2025, 统一多级评估器 (error localization + transcription + quality score), 驱动 inference-time 语音纠正 + DPO 偏好对齐
+- [[论文笔记/ProsodyEval|ProsodyEval]] — 2025, DS-WED (semantic token 加权编辑距离韵律多样性指标) + 首个人类标注韵律多样性 benchmark
 
 ### Security & Traceability
 - [[论文笔记/TraceableSpeech|TraceableSpeech]] — 2024, Interspeech, VALL-E+HiFiCodec 端到端水印联合训练, frame-wise broadcast, PESQ 3.641/MOS 3.959
