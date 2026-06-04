@@ -1,0 +1,48 @@
+review:
+  paper: "VoiceSculptor"
+  date: "2026-06-04"
+  reviewer: "auto (independent)"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    status: pass
+    reason: "方法节包含完整因果解释 — WHY CoT (显式解耦属性), WHY RAG (补偿 OOD 泛化), WHY design/clone 解耦 (避免单模型承担过多);每个设计选择有动机解释;速查卡片可借鉴字段具体可操作"
+  可信赖:
+    score: 9
+    status: pass
+    reason: "所有数字标注出处 ([Table N], [§X.X]);指标名 APS/DSD/RP/AVG/IMOS 使用正确;速查指标含具体数字+数据集+baseline 对比;无方向性错误"
+  可区分:
+    score: 9
+    status: pass
+    reason: "[论文原文] / [agent 解读] 标注一致贯穿全文;因果解释来源标注覆盖率 ~90%;推断与断言界限清晰;'开源 SOTA' 有 Table 1 数据支撑"
+  可定位:
+    score: 8
+    status: pass
+    reason: "KB 背景清晰定位在 instruction-guided synthesis 演进线上,与 VoxInstruct/InstructAudio 的区别明确;创新判断 (design/clone 解耦) 有对比基准;frontmatter 字段完整"
+  不污染:
+    score: 9
+    status: pass
+    reason: "无新建概念页需求;反向更新将为 append 操作;概念挂接合理"
+
+issues:
+  - type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter concepts"
+    detail: "Speaker Embedding 在 concepts 中,但论文并未显式讨论 speaker embedding 技术,focus 是 NL-driven timbre design;CosyVoice2 内部可能使用 x-vector 但论文未展开"
+    suggestion: "保留但可考虑替换为更贴切的概念如 Style Transfer in TTS;当前不阻塞"
+  - type: "traceability-gap"
+    severity: "low"
+    location: "方法 §整体架构"
+    detail: "XCodec2 (LLaSA 的 audio codec) 仅一笔带过,未解释其与 EnCodec/SoundStream 等的区别或选择原因"
+    suggestion: "可在架构节补充一句 XCodec2 的定位;不影响可信赖性"
+
+learning_signals: []
+
+summary:
+  total_issues: 2
+  high: 0
+  medium: 1
+  low: 1
+  recommendation: "pass — 笔记质量高,结构完整,因果解释充分,出处标注到位。1 个 medium issue 不阻塞反向更新。"

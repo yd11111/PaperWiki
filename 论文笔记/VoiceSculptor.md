@@ -192,3 +192,19 @@ VoiceSculptor 由两个解耦模块组成 [§2.1, Fig 1]:
 2. **Attribute token dropout as regularizer**: 训练时以 p=0.2 随机 drop 显式控制 token,迫使模型从 NL 指令本身推断意图,防止对显式信号的过拟合。通用于任何使用辅助 conditioning token 的系统
 3. **Design/Clone decoupled architecture**: 将"理解指令设计声音"和"高保真合成"分到两个模块,用中间 prompt waveform 作为通用接口。VC 模块可热插拔替换,VD 产出的 prompt 也可被缓存复用
 4. **Multi-model cross-validation for emotion annotation**: 用 4 个互补模型独立标注情感后交叉验证,显著提升标注可靠性,适用于任何主观属性的大规模标注场景
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,WHY CoT/RAG/解耦均有动机 |
+> | 可信赖 | pass | 数字标注覆盖完整,指标名正确 |
+> | 可区分 | pass | 论文原文/agent 解读标注覆盖率 ~90% |
+> | 可定位 | pass | KB 背景定位清晰,与 VoxInstruct/InstructAudio 区分明确 |
+> | 不污染 | pass | 无新概念页需求,反向更新为 append |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/VoiceSculptor-review.yml`
