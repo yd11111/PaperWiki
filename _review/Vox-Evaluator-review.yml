@@ -1,0 +1,49 @@
+paper: "Vox-Evaluator"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节有清晰的 WHY 解释(为何用 BART unit encoder 而非 ASR pipeline, 为何用 focal loss); 关键设计选择有因果解释; 速查卡片可借鉴字段列出了具体 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 均有 [Table N]/[Fig N]/[§X] 标注; 指标名使用正确; 速查卡片指标含具体数字+数据集+出处"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 或 [agent 解读]; 方法节中推断性分析均明确标注"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(与 TTSDS2/GSRM/SpeechJudge/FPO/DiffRO 对比); 创新判断有对比基准; 点评节将 WER 与 CosyVoice3/PilotTTS/Qwen3-TTS 横向比较"
+  不污染:
+    satisfied: true
+    notes: "本次不新建概念页; 反向更新均为追加 key_papers (不改 status); 无 factual error 或 overclaim"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter → models"
+    detail: "models 列了 CosyVoice 和 NaturalSpeech 3,但本文未使用这两个模型做实验,仅在 Table 3 作为 baseline 对比。按 checklist v1.1 语义规则,models 应列本文模型+直接对比 baseline。CosyVoice/NaturalSpeech 3 作为 Table 3 baseline 列入可接受,但 Whisper/WavLM 仅作为评估工具使用,不应列为 models"
+    suggestion: "将 Whisper 和 WavLM 从 models 移除(它们是评估工具,不是 TTS 模型对比 baseline); 保留 wav2vec 2.0(作为 evaluator 的核心组件)、CosyVoice、NaturalSpeech 3(作为 correction baseline)"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "方法 → Fine-grained Preference Alignment"
+    detail: "DPO 的具体训练步数 2000 步在 Fig 3 描述中提到,但 DPO 的 learning rate、batch size、beta 等超参数未在笔记中记录"
+    suggestion: "论文原文也未详细报告 DPO 超参数,可标注 [论文未报告]"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "可复用的 idea → #2 Focal loss"
+    detail: "Focal loss 用于不平衡分类已是常见做法,作为可复用 idea 的独特性偏弱"
+    suggestion: "可保留但降低优先级,或补充具体的 gamma/alpha 参数配置(论文未报告)"
+
+conclusion: pass
+conclusion_reason: "5 个原则均基本满足,无 high issue,3 个 low issues 不影响反向更新质量"

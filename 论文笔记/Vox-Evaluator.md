@@ -9,7 +9,7 @@ year: 2025
 venue: "AAAI 2026"
 tags: [TTS, evaluation, speech-correction, preference-alignment, DPO, zero-shot, error-detection, reward-model]
 concepts: ["[[TTS Evaluation]]", "[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Differentiable Reward Optimization]]", "[[Speech-Text Alignment]]", "[[Self-Supervised Speech Representation]]", "[[Masked Generative Modeling]]", "[[Speaker Verification]]"]
-models: ["[[wav2vec 2.0]]", "[[Whisper]]", "[[WavLM]]", "[[CosyVoice]]", "[[NaturalSpeech 3]]"]
+models: ["[[wav2vec 2.0]]", "[[CosyVoice]]", "[[NaturalSpeech 3]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
@@ -207,5 +207,5 @@ Quality score 预测的 PCC 0.541 在 TTS evaluation 领域偏低,对比 TTSDS2 
 
 5. **Segment-level attentive DPO loss**: 在 diffusion DPO 中仅对 error segments 计算 loss,避免 full-utterance DPO 的信息冗余。这个思路可扩展到 flow matching / 连续扩散 TTS 的 preference optimization。
 
-> [!review] 审阅状态
-> 待审阅。详见 [[_review/Vox-Evaluator-review.yml]]
+> [!review] 审阅: pass (2026-06-04)
+> 5 原则均满足, 3 low issues (template-compliance/traceability-gap/weak-reusability)。详见 `_review/Vox-Evaluator-review.yml`
