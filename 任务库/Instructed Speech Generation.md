@@ -4,7 +4,7 @@ title: "Instructed Speech Generation"
 aliases: [指令式语音生成, Instruction-following TTS]
 tags: [TTS, controllable, instruction-following, emotion, style]
 key_approaches: ["Natural language instruction", "Fine-grained markers", "Style prompt"]
-key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/Survey-Controllable TTS|Xie et al. Survey 2024]]", "[[论文笔记/DeepDubbing|DeepDubbing]]", "[[论文笔记/HD-PPT|HD-PPT]]"]
+key_models: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/Survey-Controllable TTS|Xie et al. Survey 2024]]", "[[论文笔记/DeepDubbing|DeepDubbing]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]"]
 benchmarks: ["[[CV3-Eval]]", "[[论文笔记/InstructTTSEval|InstructTTSEval]]", "[[论文笔记/UltraVoice|UltraVoice]]"]
 metrics: [Style Similarity, WER, MOS, Emotion Accuracy]
 status: confirmed
@@ -62,3 +62,4 @@ updated: 2026-06-01
 - 歌唱风格生成尚未纳入
 - 指令理解的精确度: 复杂组合指令(同时控制情感+语速+方言)的效果
 - 评估难题: InstructTTSEval (2025) 迈出第一步,但 Gemini-as-Judge 存在 self-preference bias (Gemini TTS 得分超过 reference audio),且仅 True/False 二分评估粒度粗
+- **Spoken dialogue 场景**: UltraVoice (Tu et al., 2025) 首次将多维度风格控制从 TTS 迁移到端到端 spoken dialogue 模型 (SLAM-Omni/VocalNet),830h 六维度 (emotion/speed/volume/accent/language/composite) 数据集 SFT 后 IFR +14-40pp, MOS +29-42%,且通用对话能力同步提升 (URO-Bench +8-11%)。详见 [[论文笔记/UltraVoice|UltraVoice]]。

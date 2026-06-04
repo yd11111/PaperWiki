@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/HD-PPT|HD-PPT]]"]
+key_papers: ["[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/WeSCon|WeSCon]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
 status: confirmed

@@ -65,6 +65,7 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 - **ASVspoof Challenge 系列**: 推动 anti-spoofing 技术发展的标准化竞赛 (Survey 未展开但属于该领域核心)
 - **Watermark-free Traceability**: [[论文笔记/Traceable TTS|Traceable TTS]] (Zhao et al., 2025) 提出不依赖显式水印的 TTS 模型溯源方案,通过反转 GAN generator loss 实现 TTS 模型与 discriminator (wav2vec 2.0 + LCNN) 的协同训练,使模型自然产生可追溯的隐式指纹。域外泛化 EER 11.5% vs baseline 18.99%
 - **Machine Unlearning (模型级遗忘)**: [[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]] (Kim et al., ICML 2025) 首次在 ZS-TTS 中提出 speaker identity unlearning,通过 Teacher-Guided Unlearning (TGU) 直接修改模型权重使其丧失复制特定说话人的能力。与 SafeSpeech(数据端防护)和 Traceable TTS(事后溯源)互补,构成 ZS-TTS 安全的三层防线: 预防(unlearning) + 防护(perturbation) + 溯源(watermark/fingerprint)
+- **LLM-TTS + E2E 防护**: [[论文笔记/E2E-VGuard|E2E-VGuard]] (Zhang et al., NeurIPS 2025) 将 SafeSpeech 的防护扩展到 LLM-based TTS 和 ASR-driven E2E 场景。通过 encoder ensemble(6 种 speaker encoder + MFCC)保护 timbre,同时用 ASR 对抗攻击破坏发音,加上心理声学模型保证扰动不可感知。在 19 个 TTS 模型(含 3 个商业 API)上验证有效
 
 ## 在 TTS 中的应用
 

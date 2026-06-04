@@ -5,7 +5,7 @@ aliases: [CV3-Eval benchmark, CosyVoice 3 Eval]
 domain: "TTS evaluation (multilingual)"
 scale: "9 languages x 500 samples + cross-lingual + emotion subsets"
 tags: [benchmark, TTS, multilingual, zero-shot, evaluation, in-the-wild]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/VoxCPM|VoxCPM]]"]
+used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/Audiobook-CC|Audiobook-CC]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity, MOS, DNSMOS, Emotion Accuracy]
 url: ""
 status: pending-review

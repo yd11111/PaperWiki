@@ -7,7 +7,7 @@ year: 2022
 tags: [self-supervised-learning, speech-representation, masked-prediction, speech-denoising, full-stack, speaker-verification, speech-separation, diarization, ASR]
 key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Self-Supervised Speech Representation]]"]
 tasks: []
-key_papers: ["[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Vec-Tok Speech|Vec-Tok Speech]]", "[[论文笔记/LM-SPT|LM-SPT]]"]
+key_papers: ["[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Vec-Tok Speech|Vec-Tok Speech]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]"]
 supersedes: ["[[模型库/HuBERT|HuBERT]]"]
 superseded_by: []
 status: pending-review
