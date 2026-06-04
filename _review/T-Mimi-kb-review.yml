@@ -1,0 +1,34 @@
+kb_review:
+  paper: "T-Mimi"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass
+
+  change_plan:
+    - target: "任务库/Neural Audio Compression.md"
+      action: append
+      detail: "追加 key_papers: [[论文笔记/T-Mimi|T-Mimi]]。T-Mimi 直接贡献于 on-device neural audio codec 部署优化,当前页 6 key_papers (限 12)"
+
+  skipped:
+    - target: "概念库/Speech Tokenizer.md"
+      reason: "T-Mimi 仅使用 Mimi tokenizer,未贡献 tokenizer 设计"
+    - target: "概念库/Multi-scale STFT Discriminator.md"
+      reason: "T-Mimi 使用 MS-STFT-D 但未改进判别器设计"
+    - target: "概念库/Codec Training Objectives.md"
+      reason: "训练目标组合 (GAN+Feat+Rec) 非新增;两阶段训练是策略而非目标"
+    - target: "概念库/Audio Tokenizer Taxonomy.md"
+      reason: "T-Mimi 未提出新分类贡献"
+    - target: "概念库/Neural Vocoder.md"
+      reason: "key_papers 已 18 条超限;T-Mimi 是 codec decoder 而非独立 vocoder"
+    - target: "概念库/Token Rate and Bitrate Trade-offs.md"
+      reason: "key_papers 已达 12 条上限;T-Mimi 不直接贡献于 bitrate trade-off 理论"
+    - target: "模型库/EnCodec.md"
+      reason: "key_papers 已 15 条超限;无直接关系"
+    - target: "模型库/SoundStream.md"
+      reason: "无直接贡献关系"
+
+  new_pages: []
+
+  issues: []
+
+  summary: "变更计划极简: 仅追加 1 个 key_papers 条目到 Neural Audio Compression 任务页。无实质修改,无新建页,风险极低。"
