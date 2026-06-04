@@ -1,0 +1,33 @@
+reviewer: auto
+date: 2026-06-04
+note: "论文笔记/Lightweight Prompt Biasing.md"
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    reason: "方法节包含充分的因果解释(WHY): task token 的必要性有 Table I/II 对比实验支撑; entity filtering 的动机有 EWER 随列表增大而恶化的定量证据; shallow fusion 的局限性有清晰的机制分析。关键设计选择均回答了'为什么选这个'。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: "数字型 claim 标注覆盖率高(≥90%),所有表格数据均标注了 [Table III]/[Table V] 来源。指标名(EWER/WER)使用正确且一致。速查卡片指标字段含具体数字+数据集名+来源。"
+  distinguishable:
+    score: 9
+    verdict: pass
+    reason: "来源标注覆盖率优秀。方法节中每个因果解释均标注了 [论文原文] 或 [agent 解读],边界清晰。无把推断写成断言的情况。"
+  positionable:
+    score: 7
+    verdict: pass
+    reason: "KB 背景有具体谱系定位(对比 CLAS/TCPGen/PromptASR/LLM-enhanced ASR),创新判断有基准。frontmatter 字段完整。但因 KB 中无 contextual biasing 专页,定位依赖间接关联(Whisper/LLM-enhanced ASR)。"
+  non-polluting:
+    score: 9
+    verdict: pass
+    reason: "frontmatter 中 concepts/models 引用合理。未提议创建新实体页(contextual biasing 虽重要但本 vault 以 TTS 为核心,此 ASR 技术不满足概念页准入规则)。反向更新仅涉及已有页 append。"
+
+issues: []
+
+conclusion: pass
+issue_summary: "0 issues (high: 0, medium: 0, low: 0)"
+
+learning_signals: []

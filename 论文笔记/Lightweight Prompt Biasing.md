@@ -136,3 +136,19 @@ updated: 2026-06-04
 1. **Task Token 作为条件控制开关**: 在多任务框架中,用 special tokens 让模型学会"何时该关注 prompt、何时该忽略",可推广到任何需要可选条件输入的场景(如 TTS 中的可选 style prompt、可选 emotion tag)
 2. **Prompt Tokens 的双重身份**: 让 prompt 部分既作为条件输入又作为预测目标,一次训练同时学 biasing 和 filtering——这种 multi-objective on shared input 的思路可迁移到其他需要"先筛选再利用"外部信息的任务
 3. **Entity Filtering by Hit Probability**: 用主模型自身的置信度(对 `<hit>` token 的预测概率)来过滤候选,比训练单独的 reranker 更轻量,可推广到 retrieval-augmented generation 中对 retrieved context 的过滤
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,task token 必要性有对比实验支撑 |
+> | 可信赖 | pass | 数字标注覆盖率 ≥90%,指标名正确一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰,无推断冒充断言 |
+> | 可定位 | pass | KB 背景谱系定位具体(CLAS/TCPGen/PromptASR/LLM-enhanced ASR) |
+> | 不污染 | pass | 未提议新实体页,引用合理 |
+> 
+> Issues: 0 (high: 0, medium: 0, low: 0)
+> 详见 `_review/Lightweight Prompt Biasing-review.yml`
