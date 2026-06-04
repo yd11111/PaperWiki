@@ -20,6 +20,8 @@
 
 **status 行为**: "保持当前 status 不变" — confirmed 的页面 append 后仍为 confirmed，pending-review 的页面 append 后仍为 pending-review。
 
+**key_papers 上限守卫**: 追加 key_papers 前**必须**检查当前条数。已达 12 条上限时,**跳过追加**,改为在正文"相关工作"段追加一行引用,并在 log 中记录 `[skip/update] [[页名]] — key_papers 已达上限(12),改追加到正文`。
+
 ### Substantive Update（→ 触发自动审阅）
 
 | 操作 | 示例 |
@@ -40,15 +42,18 @@
 
 AI 生成内容通过自动化质量门后自动进入可信层。人的纠正是系统校准信号,不是必经审批。
 
-| 操作 | 质量门 | 通过后 status |
-|------|--------|---------------|
-| 新建实体页 | entity-review pass + lint pass | confirmed |
+| 操作 | 质量门 | status 变更 |
+|------|--------|-------------|
+| 新建实体页 | entity-review pass + lint pass | → confirmed |
 | Append 更新 | 不改 status(已有规则) | 保持不变 |
-| Substantive 更新 | — | pending-review(等待定期审阅) |
-| 定期实体页审阅 | entity-review pass | confirmed |
-| 定期实体页审阅 | entity-review revise/restructure | 保持 pending-review |
+| Substantive 更新 | — | → pending-review(等待定期审阅) |
+| 定期实体页审阅 | entity-review pass | pending-review → confirmed |
+| 定期实体页审阅 | entity-review pass-with-fixes | 保持当前 status,标注待修正 |
+| 定期实体页审阅 | entity-review revise/restructure (对 pending-review 页) | 保持 pending-review |
+| 定期实体页审阅 | entity-review revise/restructure (对 confirmed 页) | **confirmed → pending-review** |
 
-**自动晋升的唯一路径**: entity-review 结论为 pass → auto-confirmed。KB 审阅检查单次变更安全性,entity-review 检查页面整体质量。
+**自动晋升的唯一路径**: entity-review pass → auto-confirmed。
+**降级路径**: confirmed 页面 entity-review 结论为 revise/restructure → 降级为 pending-review,log 记录 `[lifecycle/downgrade] [[页名]] — entity-review {结论}`。
 
 ### status 含义
 
@@ -123,6 +128,55 @@ AI 生成内容通过自动化质量门后自动进入可信层。人的纠正�
 2. 如果找到语义相近的已有页 → 追加到那个页 + 把新术语加入 aliases
 3. 如果不确定是否同一概念 → 先追加到最相近的页（拆比合容易）
 4. 确实没有且满足准入规则 → 才新建
+
+## 概念页结构规则
+
+### 职责限定
+
+概念页只保留:
+1. 定义(是什么)
+2. 重要性(为什么重要)
+3. 核心机制/分类(主流技术路线)
+4. 与相邻概念的边界(怎么区分)
+5. 少量代表工作(≤ 12 key_papers)
+6. 指向更细页面的链接
+
+不允许:
+- 无限追加"逐论文摘要"(>3 行的论文专属段落 ≤ 3 个)
+- 兼做 topic page / mini-MOC / 研究综述
+- 包含"研究演进时间线"(属于 MOC)
+
+### key_papers 规则
+
+- 硬上限: ≤ 12 条
+- 必须是"奠基/代表/转折"级文献
+- 格式统一: 全部使用 `[[论文笔记/xxx|显示名]]`
+- 超出限额 → 多余的放到正文"相关工作"段或 MOC
+
+### 强判断来源化
+
+以下触发词要求来源标注:
+- 首个 / 首次 / 开创 / 最优 / 全面超越 / 代表了 / 核心 / 主流 / 关键发现
+
+改写为:
+- "X 论文声称……" / "Survey Y 指出……" / "在作者报告的实验中……"
+
+### 结构阈值
+
+| 指标 | 阈值 | 超出处理 |
+|------|------|----------|
+| 一级标题数 | ≤ 6 | 拆分子概念页 |
+| 论文专属段落(>3行) | ≤ 3 | 精简到 1-2 行或移除 |
+| 页面行数(不含 frontmatter) | ≤ 200 | 拆分 |
+| key_papers | ≤ 12 | 精简 |
+
+### frontmatter 规范
+
+- `origin_paper`: "触发创建本页的来源论文",非必填(大概念可空)
+- `category`: 受控枚举 — technique / component / model-family / representation / problem / design-choice / taxonomy / trade-off
+- `aliases`: 仅限同一概念的不同名称,不含近义概念/子概念/相关任务
+
+---
 
 ### Deprecate 操作（仅用户可执行）
 

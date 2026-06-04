@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""PaperWiki vault linter — 9 mechanizable checks.
+"""PaperWiki vault linter — 18 mechanizable checks.
 
 Usage:
-    python3 scripts/lint.py                       # full check (L1-L9)
+    python3 scripts/lint.py                       # full check (L1-L18)
     python3 scripts/lint.py --per-ingest FILE      # per-ingest subset (L1,L6,L7,L8)
     python3 scripts/lint.py --check L1,L3,L5       # specific checks only
     python3 scripts/lint.py --check L9 --fix       # update CLAUDE.md vault stats
 
 Exit code: 0 = all pass, 1 = errors found.
 Each error line: ERROR [Lx] file: agent-readable fix instruction.
+Each warning line: WARNING [Lx] file: advisory (does not affect exit code).
 """
 
 import argparse
@@ -577,13 +578,256 @@ def check_l9():
 
 
 # ---------------------------------------------------------------------------
+# L10-L16: Extended checks (formerly manual)
+# ---------------------------------------------------------------------------
+
+warnings: list[str] = []
+
+def warn(check: str, file: str, msg: str):
+    warnings.append(f"WARNING [{check}] {file}: {msg}")
+
+
+# L10: Orphan pages — entity pages with zero inlinks
+def check_l10():
+    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    entity_files = collect_md_files(*entity_dirs)
+    if not entity_files:
+        return
+
+    entity_names: dict[str, Path] = {}
+    for f in entity_files:
+        stem = f.stem
+        entity_names[stem.lower()] = f
+
+    all_md_dirs = [DIRS["notes"], DIRS["concepts"], DIRS["models"],
+                   DIRS["datasets"], DIRS["tasks"], DIRS["moc"]]
+    all_files = collect_md_files(*all_md_dirs)
+
+    inlink_count: dict[str, int] = defaultdict(int)
+
+    for f in all_files:
+        content = read_content(f)
+        links = extract_wikilinks(content)
+        for target, _ in links:
+            base = target.split("/")[-1].lower()
+            if base in entity_names:
+                inlink_count[base] += 1
+
+    for name_lower, path in entity_names.items():
+        fm = parse_frontmatter(path)
+        if fm and fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        if inlink_count[name_lower] == 0:
+            err("L10", path.relative_to(VAULT).as_posix(),
+                "实体页无入链(孤儿页) — 考虑合并到相关页或从 MOC/论文笔记中引用")
+
+
+# L11: Stale concepts — active concept pages not updated in 90+ days
+def check_l11():
+    concept_files = collect_md_files(DIRS["concepts"])
+    today = date.today()
+    for f in concept_files:
+        fm = parse_frontmatter(f)
+        if not fm:
+            continue
+        if fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        updated_str = fm.get("updated", "")
+        if not updated_str or not isinstance(updated_str, str):
+            continue
+        try:
+            parts = updated_str.replace("/", "-").split("-")
+            updated_date = date(int(parts[0]), int(parts[1]), int(parts[2]))
+        except (ValueError, IndexError):
+            continue
+        days_stale = (today - updated_date).days
+        if days_stale > 90:
+            err("L11", f.relative_to(VAULT).as_posix(),
+                f"概念页超过 {days_stale} 天未更新(阈值 90 天) — 考虑用新论文刷新或标记 deprecated")
+
+
+# L12: Review backlog — pending-review >= 10 or draft deep/repro >= 5
+def check_l12():
+    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    pending_count = 0
+    for f in collect_md_files(*entity_dirs):
+        fm = parse_frontmatter(f)
+        if fm and fm.get("status") == "pending-review":
+            pending_count += 1
+
+    draft_deep_count = 0
+    for f in collect_md_files(DIRS["notes"]):
+        fm = parse_frontmatter(f)
+        if fm and fm.get("status") == "draft" and fm.get("tier") in ("deep", "repro"):
+            draft_deep_count += 1
+
+    if pending_count >= 10:
+        err("L12", "概念库+模型库+数据集+任务库",
+            f"审阅积压: {pending_count} 个实体页 pending-review(阈值 10) — 触发批量审阅或用户手动确认")
+    if draft_deep_count >= 5:
+        err("L12", "论文笔记",
+            f"审阅积压: {draft_deep_count} 个 draft deep/repro 笔记(阈值 5) — 需审阅确认")
+
+
+# L13: Trust-layer progress — confirmed / total active entities (info only)
+def check_l13():
+    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    total_active = 0
+    confirmed = 0
+    for f in collect_md_files(*entity_dirs):
+        fm = parse_frontmatter(f)
+        if not fm:
+            continue
+        if fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        total_active += 1
+        if fm.get("status") == "confirmed":
+            confirmed += 1
+    if total_active > 0:
+        ratio = confirmed / total_active * 100
+        print(f"INFO [L13] 可信层进度: {confirmed}/{total_active} ({ratio:.1f}%) active 实体页为 confirmed")
+
+
+# L14: Log completeness — paper note count vs log.md ingest entries
+def check_l14():
+    note_count = len(collect_md_files(DIRS["notes"]))
+    log_path = VAULT / "log.md"
+    if not log_path.exists():
+        warn("L14", "log.md", "log.md 不存在 — 无法验证 log 完整性")
+        return
+    log_content = read_content(log_path)
+    ingest_count = len(re.findall(r'\[ingest/', log_content))
+    diff = abs(note_count - ingest_count)
+    if diff > 5:
+        warn("L14", "log.md",
+             f"论文笔记数({note_count}) 与 log ingest 条目数({ingest_count})差异 {diff}(阈值 5) — 检查是否有遗漏的 log 条目")
+
+
+# L15: MOC capacity — paper references > 40 in a single MOC
+def check_l15():
+    moc_files = collect_md_files(DIRS["moc"])
+    for f in moc_files:
+        content = read_content(f)
+        paper_refs = re.findall(r'\[\[论文笔记/', content)
+        count = len(paper_refs)
+        if count > 40:
+            warn("L15", f.relative_to(VAULT).as_posix(),
+                 f"MOC 内论文引用数 {count}(阈值 40,上限 50) — 考虑拆分 sub-MOC")
+
+
+# L16: Stale pending — pending-review entities not updated in 30+ days
+def check_l16():
+    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    today = date.today()
+    stale_pages = []
+    for f in collect_md_files(*entity_dirs):
+        fm = parse_frontmatter(f)
+        if not fm:
+            continue
+        if fm.get("status") != "pending-review":
+            continue
+        if fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        updated_str = fm.get("updated", "")
+        if not updated_str or not isinstance(updated_str, str):
+            continue
+        try:
+            parts = updated_str.replace("/", "-").split("-")
+            updated_date = date(int(parts[0]), int(parts[1]), int(parts[2]))
+        except (ValueError, IndexError):
+            continue
+        days_stale = (today - updated_date).days
+        if days_stale > 30:
+            stale_pages.append(f.relative_to(VAULT).as_posix())
+
+    if stale_pages:
+        warn("L16", f"{len(stale_pages)} 页",
+             f"{len(stale_pages)} 个实体页 pending-review 超 30 天未更新 — 建议触发批量实体页审阅")
+
+
+# L17: Undigested learning_signals in review reports
+_LS_ACTIONABLE_KEYS = {
+    "new_issue_type", "rule_gap", "checklist_upgrade_suggestion",
+    "system_upgrade_suggestion", "checks_passed_but_principle_failed",
+}
+_LS_SKIP_VALUES = {"", "none", "无", "false", "无新类型", "[]"}
+
+
+def _parse_learning_signals(text: str) -> dict[str, str]:
+    """Extract learning_signals block from a review YAML (no yaml dep)."""
+    lines = text.split("\n")
+    result: dict[str, str] = {}
+    in_block = False
+    for line in lines:
+        stripped = line.rstrip()
+        if re.match(r'^learning_signals\s*:', stripped):
+            rest = stripped.split(":", 1)[1].strip()
+            if rest in ("[]", ""):
+                in_block = rest == ""
+            else:
+                break
+            continue
+        if in_block:
+            if stripped == "" or (not stripped.startswith(" ") and stripped != ""):
+                break
+            m = re.match(r'^\s+([\w_-]+)\s*:\s*"?(.*?)"?\s*$', stripped)
+            if m:
+                result[m.group(1)] = m.group(2)
+    return result
+
+
+def check_l17():
+    review_dir = VAULT / "_review"
+    if not review_dir.exists():
+        return
+
+    suggestions: list[tuple[str, str, str]] = []
+    for f in sorted(review_dir.glob("*.yml")):
+        text = read_content(f)
+        ls = _parse_learning_signals(text)
+        if not ls:
+            continue
+        if ls.get("digested", "").lower() in ("true", "rejected"):
+            continue
+        for key in _LS_ACTIONABLE_KEYS:
+            val = ls.get(key, "")
+            if val.lower().strip('"') in _LS_SKIP_VALUES:
+                continue
+            suggestions.append((f.name, key, val))
+
+    if suggestions:
+        print(f"INFO [L17] 未消化 learning_signals 汇总:")
+        for fname, key, val in suggestions:
+            print(f"  [{fname}] {key}: {val}")
+        print(f"共 {len(suggestions)} 条未消化建议。请评估后在审阅报告中标记 digested: true/rejected")
+
+
+# L18: key_papers count exceeds limit
+def check_l18():
+    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    for f in collect_md_files(*entity_dirs):
+        fm = parse_frontmatter(f)
+        if not fm:
+            continue
+        if fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        kp = fm.get("key_papers", [])
+        if isinstance(kp, list) and len(kp) > 12:
+            err("L18", f.relative_to(VAULT).as_posix(),
+                f"key_papers 有 {len(kp)} 条(上限 12) — "
+                f"请精简为奠基/代表/转折级文献,多余的移到正文'相关工作'段或 MOC")
+
+
+# ---------------------------------------------------------------------------
 # Runner
 # ---------------------------------------------------------------------------
 
 ALL_CHECKS = {
     "L1": check_l1, "L2": check_l2, "L3": check_l3, "L4": check_l4,
     "L5": check_l5, "L6": check_l6, "L7": check_l7, "L8": check_l8,
-    "L9": check_l9,
+    "L9": check_l9, "L10": check_l10, "L11": check_l11, "L12": check_l12,
+    "L13": check_l13, "L14": check_l14, "L15": check_l15, "L16": check_l16,
+    "L17": check_l17, "L18": check_l18,
 }
 
 PER_INGEST_CHECKS = ["L1", "L6", "L7", "L8"]
@@ -625,13 +869,20 @@ def main():
     else:
         run_full()
 
+    if warnings:
+        for w in warnings:
+            print(w)
+
     if errors:
         for e in errors:
             print(e)
-        print(f"\n{len(errors)} error(s) found.")
+        print(f"\n{len(errors)} error(s), {len(warnings)} warning(s).")
         sys.exit(1)
     else:
-        print("All checks passed.")
+        if warnings:
+            print(f"\nNo errors. {len(warnings)} warning(s).")
+        else:
+            print("All checks passed.")
         sys.exit(0)
 
 

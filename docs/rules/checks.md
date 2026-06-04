@@ -32,7 +32,7 @@ python3 scripts/lint.py --per-ingest "论文笔记/{笔记名}.md"
 python3 scripts/lint.py
 ```
 
-8 项自动化检查:
+18 项自动化检查:
 - L1: Frontmatter 字段存在性验证
 - L2: Frontmatter year vs MOC section year 一致性
 - L3: 同 MOC 内重复 wikilink 检测
@@ -41,38 +41,66 @@ python3 scripts/lint.py
 - L6: 审阅 callout 存在性
 - L7: source 字段指向的 PDF 存在性
 - L8: Wikilink 目标文件存在性
+- L9: CLAUDE.md vault 状态自动检查(--fix 可自动更新)
+- L10: 孤儿页 — 没有入链的实体页
+- L11: 概念过时 — active 概念页超过 90 天未更新
+- L12: 审阅积压 — pending-review ≥ 10 或 draft deep/repro ≥ 5
+- L13: 可信层进度 — confirmed 占 active 实体页比例(信息输出,不报 error)
+- L14: Log 完整 — 论文笔记数 vs log.md ingest 条目数差异 > 5
+- L15: MOC 容量 — MOC 内论文引用数 > 40(接近 50 阈值)
+- L16: Stale pending — pending-review 且 updated > 30 天(提醒批量审阅)
+- L17: Learning signals 消化 — 审阅报告中未处理的建议汇总(info,不报 error)
+- L18: key_papers 上限 — 实体页 key_papers > 12 条(应精简为奠基/代表/转折级)
 
-按系统四条底线补充人工检查:
+按系统四条底线组织:
 
 ### 可导航
-| 检查项 | 说明 |
-|--------|------|
-| MOC 覆盖 | L5 自动化 |
-| 死链 | L8 自动化 |
-| 孤儿页 | 没有入链的实体页(人工检查) |
+| 检查项 | Lint ID | 说明 |
+|--------|---------|------|
+| MOC 覆盖 | L5 | deep/repro 被至少一个 MOC 引用 |
+| 死链 | L8 | wikilink 目标文件存在 |
+| 孤儿页 | L10 | 实体页至少有一个入链 |
+| MOC 容量 | L15 | MOC 内论文数不超 40(warning) |
 
 ### 可溯源
-| 检查项 | 说明 |
-|--------|------|
-| 审阅覆盖 | L6 自动化 |
-| Frontmatter 一致性 | L1 自动化 |
-| 可信层进度 | confirmed/reviewed 比例是否在增长(人工检查) |
+| 检查项 | Lint ID | 说明 |
+|--------|---------|------|
+| 审阅覆盖 | L6 | deep/repro 有 review callout |
+| Frontmatter 一致性 | L1 | schema 验证 |
+| 可信层进度 | L13 | confirmed/total 比例(info) |
 
 ### 不腐烂
-| 检查项 | 说明 |
-|--------|------|
-| 概念过时 | active 概念页超过 3 月未更新(人工检查) |
-| 概念去重 | L4 自动化 |
-| 概念溯源 | key_papers ≥ 3 且 origin_paper 为空(人工检查) |
-| 审阅积压 | pending-review ≥ 10 或 draft deep ≥ 5(人工检查) |
+| 检查项 | Lint ID | 说明 |
+|--------|---------|------|
+| 概念过时 | L11 | 90 天未更新的 active 概念页 |
+| 概念去重 | L4 | title/aliases 重叠 |
+| 审阅积压 | L12 | pending-review ≥ 10 或 draft deep ≥ 5 |
+| Stale pending | L16 | pending-review 超 30 天(warning) |
 
 ### 系统完整性
-| 检查项 | 说明 |
-|--------|------|
-| CLAUDE.md 状态 | vault 数据快照是否反映当前(人工检查) |
-| Log 完整 | ingest 条目数 ≈ 论文笔记数(人工检查) |
+| 检查项 | Lint ID | 说明 |
+|--------|---------|------|
+| CLAUDE.md 状态 | L9 | vault 数据快照(--fix 自动更新) |
+| Log 完整 | L14 | ingest 条目数 ≈ 论文笔记数 |
+| Learning signals | L17 | 审阅报告中未消化建议汇总(info) |
 
 产出: `_lint/YYYY-MM-DD-system-check.md`
+
+### learning_signals 消化流程
+
+lint L17 自动扫描所有审阅报告 (`_review/*.yml`) 中的 learning_signals,输出未消化建议汇总。
+
+```bash
+python3 scripts/lint.py --check L17
+```
+
+处理步骤:
+1. 运行上述命令获取汇总
+2. 逐条评估:
+   - **采纳** → 更新对应规则文件 (docs/rules/*.md) 或检查项,在审阅报告中标记 `digested: true`
+   - **拒绝** → 在审阅报告中标记 `digested: rejected`,附理由
+   - **延后** → 不标记,下次扫描仍会出现
+3. 产出合并到系统检查报告 `_lint/YYYY-MM-DD-system-check.md`
 
 ## 深度分析 (手动触发,成本高)
 

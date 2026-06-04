@@ -96,7 +96,7 @@ Append(不改 status) vs Substantive(→ pending-review)。实体页生命周期
 
 ## 12. 系统检查
 
-自动化: `python3 scripts/lint.py`(8 项机械化检查)。人工补充: 孤儿页、概念过时、审阅积压等。
+自动化: `python3 scripts/lint.py`(18 项机械化检查,含孤儿页/概念过时/审阅积压/可信层进度/MOC 容量/key_papers 上限等)。
 
 **完整规则**: [docs/rules/checks.md](docs/rules/checks.md)
 
@@ -104,7 +104,9 @@ Append(不改 status) vs Substantive(→ pending-review)。实体页生命周期
 
 ## 审阅系统
 
-三种审阅模式: 笔记审阅 / KB 更新审阅 / MOC 审阅。独立 subagent 运行,两层评估。
+四种审阅模式: 笔记审阅 / KB 更新审阅 / MOC 审阅 / 实体页审阅。独立 subagent 运行,两层评估。
+
+自动晋升: entity-review pass → status 自动升为 confirmed(唯一路径)。
 
 **完整规则**: [docs/rules/review.md](docs/rules/review.md)
 
@@ -188,12 +190,17 @@ Tier 2 规则加载:
 - Reviewer (笔记): review.md
 - Reviewer (KB): review.md + kb.md
 - Reviewer (MOC): review.md + moc.md
+- Reviewer (实体页): review.md + kb.md
 - MOC Agent: moc.md
 - System Check: checks.md
 
+自动晋升:
+- entity-review pass → status 自动升为 confirmed(唯一路径)
+- 存量页: 批量审阅 → pass 则晋升, revise 则标注待重构
+
 其他规则:
-- 新概念出现 → 创建实体页(pending-review) → 更新 MOC
+- 新概念出现 → 创建实体页(pending-review) → entity-review → pass 则 confirmed
 - Append → 保持 status; Substantive → status=pending-review
 - 每次 ingest 后 → 检查 MOC 是否需刷新
-- 永不: 自行升级层级 / 自行 merge/deprecate / 修改 trusted 内容
+- 永不: 自行升级层级 / 自行 merge/deprecate
 ```
