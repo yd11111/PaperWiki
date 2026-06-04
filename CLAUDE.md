@@ -1,6 +1,6 @@
 # PaperWiki — TTS 方向个人知识库
 
-本 vault 是一个 AI+人共同维护的 TTS 论文知识库。**操作前必须读 `AGENTS.md` 了解完整规则。**
+本 vault 是一个 AI+人共同维护的 TTS 论文知识库。**操作前必须读 `AGENTS.md`(系统总纲)+ 按任务加载 `docs/rules/` 下的 Tier 2 规则文件。**
 
 ## Skill 使用声明 (严格遵守)
 
@@ -36,8 +36,9 @@
 ③ 生成笔记草稿（含速查卡片 + KB 背景）
 ④ 审阅（独立 subagent dispatch）: dispatch reviewer agent,输出 _review/xxx-review.yml
 ⑤ Git commit 草稿 + 审阅报告
-⑥ 反向更新（仅审阅通过后）
-⑦ 自动检查 + Git commit + log（frontmatter/MOC/wikilink 检查,有遗漏当场补）
+⑥ KB 更新审阅（独立 subagent dispatch）: 审阅反向更新变更计划
+⑦ 反向更新（仅 KB 审阅通过后）
+⑧ 自动检查 (lint script) + Git commit + log
 ```
 
 ## 概念页更新规则
@@ -62,9 +63,11 @@ Types: ingest|update|create|check|review|alert|skip|moc|kb|lifecycle|init
 ## 文件结构
 
 ```
-AGENTS.md          ← 完整规则(必读)
+AGENTS.md          ← 系统总纲 (Tier 1, ~200 行)
+docs/rules/        ← Tier 2 详细规则 (sources/notes/kb/moc/review/checks)
 docs/使用手册.md    ← 用户操作速查
-_templates/        ← 页面模板(生成时参考)
+_templates/        ← 页面模板 + 审阅标准 (review/moc-review/kb-review checklist)
+scripts/           ← 自动化脚本 (lint.py)
 论文笔记/          ← 所有论文笔记(4 层共存)
 概念库/            ← 概念实体页(KB 检索数据源)
 模型库/            ← 模型实体页
@@ -74,6 +77,7 @@ _MOC/              ← 导航页(主视图)
 DailyPapers/       ← 每日推荐索引
 _inbox/            ← 零承诺缓冲
 _lint/             ← 系统检查报告
+_review/           ← 审阅报告 (笔记/KB/MOC)
 log.md             ← 操作日志
 Sources/           ← PDF(gitignored)
 ```
@@ -92,3 +96,4 @@ Sources/           ← PDF(gitignored)
 - 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇) + 系统同步修复
 - 审阅模块: 已实装(两层评估: 原则层 + 检查项层, 独立 subagent dispatch)
 - MOC 治理: AGENTS.md §11 完整规则体系 (宪法 5 原则 + R1-R8 规则) + moc-review-checklist.md (17 检查项)
+- Harness Batch 2: AGENTS.md 瘦身 (653→199 行, 6 个 Tier 2 规则文件) + KB 审阅门 (kb-review-checklist) + Lint 脚本 (8 项自动化检查)
