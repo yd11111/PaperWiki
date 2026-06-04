@@ -1,6 +1,22 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[LibriQuote]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Natural Language Description for TTS]](pending-review)
+- [ingest/deep] [[LibriQuote]] — 精读, kb_sources=6, 新建 1 (数据集/LibriQuote), 追加 6 (CFM/Prosody Modeling/Emotion Control/NL Description/TTS Evaluation/Zero-shot Speech Synthesis key_papers), MOC 更新 2 (零样本语音合成/TTS训练与评估)
+- [review/auto] [[LibriQuote]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low), 已修复
+- [lint/local] LibriQuote — 通过 (0 死链)
+- [kb/search] [[VARSTok]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Duration Predictor]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[VARSTok]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Token Rate/Single-codebook/Codebook Collapse/Duration Predictor/Neural Audio Compression key_papers), MOC 更新 1 (语音编码与量化)
+- [review/auto] [[VARSTok]] — pass, 0 issues
+- [lint/local] VARSTok — 通过 (0 dead links)
+- [kb/search] [[EmoSteer-TTS]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Diffusion-based TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Mel Spectrogram]](pending-review)
+- [ingest/deep] [[EmoSteer-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Emotion Control in TTS/CFM/CosyVoice 2 key_papers), 实质追加 1 (Emotion Control in TTS 新增 activation steering 路线节+演进线更新), MOC 更新 1 (TTS-总览)
+- [review/auto] [[EmoSteer-TTS]] — pass-with-fixes, 3 issues (0 high, 0 medium, 3 low)
+- [lint/local] EmoSteer-TTS — 通过 (0 死链)
+- [kb/search] [[DiFlow-TTS]] — 命中 7 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review)
+- [ingest/deep] [[DiFlow-TTS]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/Speech Factorization/Duration Predictor/Speech Tokenizer/RVQ/Prosody Modeling/Non-autoregressive TTS key_papers + CFM 演进新增 DFM 条目), MOC 更新 1 (零样本语音合成)
+- [review/auto] [[DiFlow-TTS]] — conclusion: pass-with-fixes, 3 issues (0 high / 1 medium / 2 low), 修正: 移除 Masked Generative Modeling 概念挂接 + 来源标注补充
+- [lint/local] DiFlow-TTS — 通过, 0 死链
 - [kb/search] [[AudioMOS Challenge 2025]] — 命中 6 页(全部 pending-review): [[TTS Evaluation]], [[Self-Supervised Speech Representation]], [[Audio-Language Pretraining]], [[SVS Evaluation Metrics]], [[WavLM]], [[Audio Understanding]] | 过滤: 全部 pending-review
 - [ingest/deep] [[AudioMOS Challenge 2025]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTS Evaluation/Audio-Language Pretraining key_papers + TTS Evaluation 新增 AudioMOS 段落), MOC 更新 1 (TTS训练与评估)
 - [review/auto] [[AudioMOS Challenge 2025]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
