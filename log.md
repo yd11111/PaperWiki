@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[WeSCon]] — 命中 6 页(取 6): [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓, [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[WeSCon]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers + 1 概念页内容追加 + 1 模型页 baseline 追加, MOC 更新 1 (零样本语音合成)
+- [review/auto] [[WeSCon]] — pass-with-fixes, 1 low issue (BigVGAN removed from models)
+- [lint/local] WeSCon — 通过 (0 死链), MOC 已包含 (TTS-总览 + 零样本语音合成)
+- [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
 - [kb/search] [[SAC]] — 命中 6 页(取 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Neural Audio Compression]]✓, [[Speech Factorization]]✓, [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓ | 过滤: 无
 - [ingest/deep] [[SAC]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers
 - [review/auto] [[SAC]] — pass-with-fixes, 3 issues (1 medium, 2 low)
