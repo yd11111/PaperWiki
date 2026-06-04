@@ -141,7 +141,7 @@ AudioMOS Challenge 2025 (AMC) 是 VoiceMOS Challenge 系列的扩展版,从 spee
 
 T09 超越 baseline 20.8% (musical quality) 和 30.4% (textual alignment) [§IV-B]。
 
-**关键发现**: musical quality 和 textual alignment 表现高度相关但不完全线性 — 共享特征编码器贡献一致性,任务特定输出头允许部分解耦 [§IV-B]。textual alignment 一致性地低于 musical quality (如 T10: 0.965 vs 0.902),说明跨模态理解比单模态质量评估更难 [§IV-B]。
+**关键发现**: musical quality 和 textual alignment 表现高度相关但不完全线性 — 共享特征编码器贡献一致性,任务特定输出头允许部分解耦 [§IV-B]。textual alignment SRCC 一致低于 musical quality (如 T10: 0.965 vs 0.902),可能反映跨模态理解比单模态质量评估更难建模 [agent 解读]。
 
 ### Track 2 关键结果
 
@@ -235,6 +235,15 @@ T09 超越 baseline 20.8% (musical quality) 和 30.4% (textual alignment) [§IV-
 4. **自然样本训练→合成样本测试的 benchmark 设计**: Track 2 的设计范式可用于评估任何"from natural to synthetic"的 domain transfer 能力,可推广到 TTS/voice conversion 等场景的 MOS predictor 开发 [§II-B]。
 
 5. **Multi-scale convolution 适配多采样率 Mel spectrogram**: T17 的方案可迁移到需要处理不同采样率输入的任何频谱分析任务 [§V-B3]。
+
+---
+
+> [!review] 审阅 (2026-06-04, agent-v2)
+> **结论**: pass-with-fixes (0 high, 1 medium, 2 low)
+> - (medium) fact-inference-mixing: Track 1 "跨模态理解更难"推断已补标来源 [agent 解读] — 已修正
+> - (low) traceability-gap: Track 1 SRCC 数值为从 Fig 1 估计的近似值
+> - (low) template-compliance: frontmatter tasks/datasets 为空
+> 详见 `_review/AudioMOS Challenge 2025-review.yml`
 
 ---
 

@@ -1,0 +1,51 @@
+paper: EmoSSLSphere
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    principle: can-locate
+    location: frontmatter.models
+    detail: >
+      models 字段仅列了 HuBERT,未列 baseline 模型 NATSpeech。
+      但 NATSpeech (PortaSpeech) 无独立模型页,创建一个仅为本文 baseline 的模型页不满足准入规则。
+    suggestion: 保持现状,NATSpeech 作为 baseline 在实验节充分描述。
+    fixed: false
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    principle: can-trust
+    location: "方法 > 关键设计选择 > 3. 语义编码器"
+    detail: >
+      原文对 DeBERTaV3 如何通过 cross-attention 条件化情感/韵律模块的描述极为简略
+      ("semantic embeddings are first used to condition the emotional and prosodic modules
+      through cross-attention mechanisms"),缺乏具体的 cross-attention 结构说明。
+      笔记中对其作用的分析 (间接条件化) 已标注 [agent 解读]。
+    suggestion: 标注已完成,可放行。如有代码可补充具体实现。
+    fixed: true
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    principle: can-retell
+    location: "可复用的 idea > 第 3 点"
+    detail: >
+      "语义编码器通过 cross-attention 间接条件化"是通用设计模式,
+      但论文未给出具体 cross-attention 的结构细节 (query/key/value 来源),
+      使可复用性受限。
+    suggestion: 后续如有代码开源可补充实现细节。
+    fixed: false
+
+summary:
+  strengths:
+    - 因果解释充分,每个设计选择的 WHY 都有标注
+    - KB 背景谱系定位清晰,与 EmoSphere-TTS 和 EmoSphere++ 的关系明确
+    - 速查卡片 5 字段均有实质内容和具体数据
+    - 消融实验覆盖全面
+  weaknesses:
+    - 论文本身评估规模极小,限制了笔记能提供的证据质量
+    - 语义编码器的 cross-attention 机制细节不足 (论文限制,非笔记问题)
