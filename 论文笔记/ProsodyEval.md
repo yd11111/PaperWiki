@@ -11,7 +11,7 @@ tags: [TTS, evaluation, prosody, prosody-diversity, semantic-tokens, zero-shot, 
 concepts: ["[[Prosody Modeling]]", "[[Self-Supervised Speech Representation]]", "[[Semantic vs Acoustic Tokens]]", "[[TTS Evaluation]]", "[[Conditional Flow Matching]]", "[[Masked Generative Modeling]]", "[[Non-autoregressive TTS]]"]
 models: ["[[HuBERT]]", "[[WavLM]]", "[[CosyVoice]]", "[[CosyVoice 2]]", "[[EnCodec]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
+datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-04
@@ -118,9 +118,9 @@ $$DS\text{-}WED(c_1, c_2) = \min_{\pi \in A(c_1, c_2)} \sum_{(i,j,o) \in \pi} w_
 
 | 系统 | 范式 | DS-WED (LS) | DS-WED (Seed) | 出处 |
 | --- | --- | --- | --- | --- |
-| MaskGCT | NAR-MGM | **139.75** | **80.36** | [Table 2] |
+| MaskGCT | NAR-MGM | **139.75** | 80.36 | [Table 2] |
 | CosyVoice 2 | AR | 134.34 | 88.04 | [Table 2] |
-| XTTS-v2 | AR | 127.84 | 93.15 | [Table 2] |
+| XTTS-v2 | AR | 127.84 | **93.15** | [Table 2] |
 | CosyVoice | AR | 120.59 | 75.74 | [Table 2] |
 | ZipVoice | NAR-FM | 114.52 | 58.56 | [Table 2] |
 | E2 TTS | NAR-FM | 84.91 | 52.35 | [Table 2] |
@@ -177,3 +177,11 @@ $$DS\text{-}WED(c_1, c_2) = \min_{\pi \in A(c_1, c_2)} \sum_{(i,j,o) \in \pi} w_
 2. **Duration perturbation 作为韵律诊断工具**: 通过在推理时对 NAR 系统施加时长扰动,可以快速诊断韵律单调是否源于时长控制缺失
 3. **加权编辑距离的感知定制**: 根据人类感知特性调整不同编辑操作的权重,可推广到其他离散序列的感知距离度量
 4. **"RL 削弱多样性" 的启发**: 在 TTS 后训练中使用 DPO/RLHF 时,需监控韵律多样性的退化,可能需要在 reward 中加入多样性保护项
+
+> [!review] 审阅 (agent-v2, 2026-06-04)
+> **结论: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
+> 
+> - **[medium] factual-error**: Benchmark 表中 MaskGCT Seed-TTS DS-WED (80.36) 原被加粗标为最高,但 XTTS-v2 (93.15) 才是 Seed-TTS 最高 → **已修正**
+> - **[low] template-compliance**: datasets 字段原含 [[Emilia]],但 Emilia 是被评测系统的训练数据,非本文直接使用 → **已修正**
+> 
+> 详见 `_review/ProsodyEval-review.yml`

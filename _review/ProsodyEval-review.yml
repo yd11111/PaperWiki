@@ -1,0 +1,44 @@
+paper: "ProsodyEval"
+reviewer: agent-v2
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 2
+high_count: 0
+medium_count: 1
+low_count: 1
+
+principles:
+  comprehensible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  navigable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    principle: trustworthy
+    location: "实验 > Benchmark 结果表"
+    detail: >
+      Benchmark 表中 MaskGCT 的 Seed-TTS DS-WED (80.36) 被加粗标
+      为最高值,但实际上 XTTS-v2 (93.15) 在 Seed-TTS test-en 上的
+      DS-WED 才是所有系统中最高的。MaskGCT 仅在 LibriSpeech test-clean
+      上排名最高 (139.75)。
+    suggestion: >
+      将 MaskGCT Seed-TTS 列取消加粗,XTTS-v2 Seed-TTS 列加粗。
+    status: fixed
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    principle: navigable
+    location: "frontmatter > datasets"
+    detail: >
+      datasets 字段原含 [[Emilia]],但 Emilia 是被评测系统
+      (E2 TTS, F5-TTS, ZipVoice, MaskGCT) 的训练数据,
+      非本文直接使用的数据集。本文直接使用的是 ProsodyEval
+      (自建) 和 LibriSpeech test-clean / Seed-TTS test-en。
+    suggestion: >
+      移除 [[Emilia]],仅保留 [[SEED-TTS-Eval]]。
+    status: fixed
