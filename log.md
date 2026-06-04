@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Llasa+]] — 命中 6 页(取 Top 3 confirmed): [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Streaming Spoken Dialogue]](pending-review)
+- [ingest/deep] [[Llasa+]] — 精读, kb_sources=3, 新建 0, 追加 7 (LLM-based TTS/Speech Tokenizer/Codec Language Model/Single-codebook vs Multi-codebook/Streaming Spoken Dialogue key_papers, SEED-TTS-Eval used_by, Zero-shot Speech Synthesis key_models), MOC 更新 2 (语音编码与量化/零样本语音合成), Streaming Spoken Dialogue 延迟表追加 2 条
+- [review/auto] [[Llasa+]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] Llasa+ — 通过 (0 死链)
+- [kb/search] [[DAIEN-TTS]] — 命中 6 页(取 Top 6): [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Speaker Embedding]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Masked Generative Modeling]](pending-review)
+- [ingest/deep] [[DAIEN-TTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (Conditional Flow Matching/Classifier-Free Guidance/Speech Factorization/Zero-shot Speech Synthesis key_papers), MOC 更新 1 (零样本语音合成)
+- [review/auto] [[DAIEN-TTS]] — pass-with-fixes, 1 issue (0 high, 1 medium fixed, 0 low)
+- [lint/local] DAIEN-TTS — 通过 (0 死链)
 - [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
 - [ingest/deep] [[DeepDubbing]] — 精读, kb_sources=6, 新建 0, 追加 10 (CFM/Speaker Embedding/CosyVoice/LLM-based TTS/Instruction-Guided SS/NL Description TTS/CFG/Emotion Control/BigVGAN/Prosody Modeling key_papers + Instructed Speech Generation key_models), MOC 更新 1 (TTS-总览)
 - [review/auto] [[DeepDubbing]] — pass, 2 issues (0 high, 0 medium, 2 low)
