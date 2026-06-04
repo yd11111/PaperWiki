@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[E2E-VGuard]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Anti-spoofing and Deepfake Detection]](pending-review), [[Speaker Verification]](pending-review), [[Voice Cloning Taxonomy]](pending-review)
+- [ingest/deep] [[E2E-VGuard]] — 精读, kb_sources=6, 新建 0, 追加 5 实体页 key_papers (Anti-spoofing + Speaker Verification + Speaker Embedding + Voice Cloning Taxonomy + LLM-based TTS) + Anti-spoofing 正文追加 1 行
+- [review/auto] [[E2E-VGuard]] — pass-with-fixes, 1 medium (traceability-gap) + 1 low (template-compliance)
+- [lint/local] E2E-VGuard — 通过, 0 死链
 - [kb/search] [[Vox-Evaluator]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review)
 - [ingest/deep] [[Vox-Evaluator]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers/used_by
 - [review/auto] [[Vox-Evaluator]] — pass, 3 low issues (template-compliance/traceability-gap/weak-reusability)
