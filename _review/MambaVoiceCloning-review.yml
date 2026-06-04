@@ -1,0 +1,61 @@
+review:
+  paper: "MambaVoiceCloning"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass-with-fixes
+
+  principles:
+    可复述:
+      score: 9
+      status: pass
+      reasoning: "方法节对三个 SSM 模块的 WHY 解释充分 (为何 gated fusion/为何 AdaLN/为何丢弃 aligner),核心设计选择分析节提供了四个 WHY 段落。速查可借鉴列出具体可迁移 trick (gated fusion, AdaLN + Mamba, training-time removal, protocol-matched eval)。读完笔记可以向同事完整复述为何 MVC work。"
+
+    可信赖:
+      score: 9
+      status: pass
+      reasoning: "所有关键数字均标注出处 ([Table 1]-[Table 15], [Eq. 1]-[Eq. 10], [§X.X])。指标名使用正确 (MOS-N/MOS-S/F0 RMSE/MCD/WER/PESQ/RTF/CMOS-N 均未混淆)。速查指标字段含 6 组具体数字+数据集名+来源。无方向性错误。数字核验: MOS-N 4.22 [Table 1]、PESQ 3.85 [Table 4]、RTF 0.0169 [Table 4] 均与原文一致。"
+
+    可区分:
+      score: 8
+      status: pass
+      reasoning: "方法节和局限性节均使用 [论文原文]/[agent解读] 标注。因果解释来源标注覆盖率约 85%。KB 背景节全部标注为 [agent解读]。一处需改进: L84 'Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合' 应标注 [论文原文]。"
+
+    可定位:
+      score: 9
+      status: pass
+      reasoning: "KB 背景含 3 个 confirmed 页面 + 1 个 pending-review 页面的具体谱系分析。与已有 Mamba-TTS 系统的对比表 (Table 10 还原) 清晰定位 MVC 的差异。frontmatter 字段完整: concepts 8 个, models 3 个, tasks 1 个, datasets 4 个。速查 5 字段均有实质内容。"
+
+    不污染:
+      score: 9
+      status: pass
+      reasoning: "无需创建新概念页 (SSM/Mamba 不满足概念页准入规则 — 虽多篇引用但不是 TTS 领域的核心前置知识)。反向更新为 append (key_papers 追加),不涉及实质修改。已有 KB 页面中已包含 MambaVoiceCloning 引用,无 factual-error 风险。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: fact-inference-mixing
+      location: "方法: MVC > Gated Bi-Mamba Text Encoder, L84"
+      detail: "'Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合' 是论文作者的 claim (§3.2.1),但缺少 [论文原文] 标注,读者可能误解为已确认事实。"
+      suggestion: "在句末添加 [论文原文] 标注"
+
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "方法节标题"
+      detail: "模板要求 '## 方法: 它怎么 work',当前为 '## 方法: MVC'。"
+      suggestion: "保持当前标题即可,使用论文模型名更具辨识度,属于合理变体。"
+
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: "整体结构"
+      detail: "'论文贡献与意义' 节与 '点评' 节有部分内容重叠 (SSM-only 可行性验证)。"
+      suggestion: "'论文贡献与意义' 可精简或合并入点评节。当前重叠不严重,不阻塞。"
+
+  summary:
+    total_issues: 3
+    high: 0
+    medium: 1
+    low: 2
+
+  learning_signals: []

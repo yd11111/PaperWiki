@@ -81,7 +81,7 @@ h_{T,s} = AdaLN(h_T, e)                        [Eq. 4, style conditioning]
 - 改善长文本的韵律一致性,减少漂移 [Tables 2, 3]
 - 消融: 去除 gating → MOS-long 降至 4.02 (vs 4.16); 去除 AdaLN → 3.95 [Table 8]
 
-**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1]
+**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1] [论文原文]
 
 #### 2. Expressive Mamba Encoder [§3.2.2]
 
@@ -301,6 +301,22 @@ MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Ta
 4. **Protocol-matched baseline 评估方法**: 所有 baseline 在完全相同的 preprocessing / decoder / vocoder / optimizer / training schedule 下重训,是隔离 encoder architecture 效果的最佳实践。这种实验设计值得在任何 "模块替换" 类研究中推广 [§4.1, Appendix C.2]
 
 5. **三路 conditioning 分解 (text/rhythm/prosody)**: 将 conditioning 信号按语言学维度分解为三个独立 SSM 模块,各模块可独立消融验证其贡献。这种模块化设计比单一 monolithic encoder 更利于理解和迭代 [§3.2, Table 6]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四个 WHY 段落 + 速查可借鉴具体可迁移,机制解释充分 |
+> | 可信赖 | pass | 数字出处覆盖率 >90%,指标名正确,无方向性错误 |
+> | 可区分 | pass | [论文原文]/[agent解读] 覆盖率 ~85%,1 处已修正 |
+> | 可定位 | pass | 3 confirmed KB 页面谱系分析 + Mamba-TTS 对比表 |
+> | 不污染 | pass | 仅 append 更新,无新建页,无 factual-error 风险 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/MambaVoiceCloning-review.yml`
 
 ---
 
