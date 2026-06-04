@@ -12,6 +12,7 @@
 |---|---|---|
 | "精读这篇"/"读一下"/"帮我读"/"深读" | **paperwiki-reader** | ~~paper-reader~~ |
 | "审阅这篇笔记"/"审阅" | **paperwiki-reviewer** | — |
+| "审阅 MOC"/"审阅这个 MOC" | **paperwiki-reviewer** (MOC mode) | — |
 | "复现分析" | **paperwiki-reader** (repro mode) | ~~paper-reader~~ |
 
 **如何确认用对了 skill:** 检查输出路径是 `/Users/xiangshu/PaperWiki/论文笔记/`,不是 `/Users/xiangshu/DailyPaper/`。
@@ -33,7 +34,7 @@
 ① 读原文 PDF
 ② KB 检索（搜索 confirmed 实体页）
 ③ 生成笔记草稿（含速查卡片 + KB 背景）
-④ 审阅（反向更新前）: 对照 checklist 检查,输出 _review/xxx-review.yml
+④ 审阅（独立 subagent dispatch）: dispatch reviewer agent,输出 _review/xxx-review.yml
 ⑤ Git commit 草稿 + 审阅报告
 ⑥ 反向更新（仅审阅通过后）
 ⑦ 自动检查 + Git commit + log（frontmatter/MOC/wikilink 检查,有遗漏当场补）
@@ -77,7 +78,7 @@ log.md             ← 操作日志
 Sources/           ← PDF(gitignored)
 ```
 
-## 当前 vault 状态 (2026-06-03)
+## 当前 vault 状态 (2026-06-04)
 
 - 论文笔记: 105 篇 (88 deep + 2 repro + 2 enhanced-card + 13 card)
 - 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed / 70 pending-review
@@ -89,4 +90,5 @@ Sources/           ← PDF(gitignored)
 - 死链: 0
 - Git tags: p0-foundation → p5-specification-ready → review-module-v1
 - 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇) + 系统同步修复
-- 审阅模块: 已实装(两层评估: 原则层 + 检查项层)
+- 审阅模块: 已实装(两层评估: 原则层 + 检查项层, 独立 subagent dispatch)
+- MOC 治理: AGENTS.md §11 完整规则体系 (宪法 5 原则 + R1-R8 规则) + moc-review-checklist.md (17 检查项)
