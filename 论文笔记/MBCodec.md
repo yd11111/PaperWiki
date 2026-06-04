@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [audio-codec, RVQ, disentanglement, subband-decomposition, quantizer-dropout, PQMF, semantic-acoustic-disentanglement]
 concepts: ["[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Quantizer Dropout]]", "[[Speech Factorization]]", "[[Codebook Collapse]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
-models: ["[[SoundStream]]", "[[EnCodec]]", "[[HuBERT]]", "[[DAC]]", "[[SpeechTokenizer]]"]
+models: ["[[SoundStream]]", "[[EnCodec]]", "[[HuBERT]]", "[[DAC]]"]
 tasks: ["[[Neural Audio Compression]]"]
 datasets: ["[[Emilia]]", "[[AudioSet]]"]
 kb_context_sources: 6

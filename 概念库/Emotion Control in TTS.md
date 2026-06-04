@@ -163,3 +163,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## Training-free 激活 Steering (EmoSteer-TTS)
 
 [[论文笔记/EmoSteer-TTS|EmoSteer-TTS]] (Xie et al., 2025) 提出首个完全 training-free 的细粒度情感可控 TTS 方法,将 LLM 领域的 activation steering 技术迁移到 flow-matching TTS。核心发现: flow-matching TTS 的 DiT 层内部激活值隐式编码了情感信息,通过 difference-in-means 提取情感/中性语音对的激活差,筛选 top-k 情感相关 token 构造稀疏 steering vector,在推理时通过强度参数 α 注入激活实现连续控制。支持四种操作: 情感转换 (α>0)、插值 (连续 α)、擦除 (投影减法)、多情感组合 (加法)。在 F5-TTS/E2-TTS/CosyVoice2 三个模型上验证,F5-TTS+EmoSteer EI-MOS 4.00 超越 EmoSphere++ (3.50) 和 HED-TTS (2.59),EE-MOS 4.02。与所有已有路线的根本区别: 不需要任何训练或微调,仅需 ~7k 条情感语音构造 steering vectors。与 TTS-CtrlNet 的对比: TTS-CtrlNet 需训练 ControlNet 旁挂,支持帧级时变控制; EmoSteer-TTS 零训练,支持全局连续强度控制和多情感组合。详见 [[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]。
+
+## 多语言球面情感 + SSL 离散 token (EmoSSLSphere)
+
+[[论文笔记/EmoSSLSphere|EmoSSLSphere]] (Park & Nakamura, SSW 2025) 在 EmoSphere-TTS 基础上向多语言和 SSL 韵律建模方向扩展。核心增量: (1) HuBERT 第 9 层特征经语言分别 k-means (K=200) 离散化为韵律 token,提供与球面 AVD 互补的局部韵律控制信号; (2) DeBERTaV3 语义编码器通过 cross-attention 条件化情感/韵律模块,实现语义感知的情感生成。在英日双语 (ESD/JVNV) 上优于 EmoSphere-TTS (EN WER 19.58% vs 20.96%, JA CER 18.33% vs 19.26%; nMOS EN 4.13 vs 4.05, JA 3.94 vs 3.63 [Table 1, 2])。消融显示 k-means 离散化优于连续 HuBERT 特征,语言分别聚类的 token 实际捕获了通用韵律模式。局限: 仅单说话人小规模实验,无零样本能力,未与 EmoSphere++ 或 LLM-TTS 对比。详见 [[论文笔记/EmoSSLSphere|EmoSSLSphere]]。

@@ -4,7 +4,7 @@ title: "Neural Audio Compression"
 aliases: [Neural Audio Codec, Learned Audio Compression, End-to-End Audio Codec]
 category: "audio-processing"
 tags: [audio-codec, compression, discrete-representation, speech-tokenization]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
 related_tasks: ["[[Zero-shot Speech Synthesis]]"]
 metrics: [ViSQOL, Mel-distance, STFT-distance, SI-SDR, MUSHRA, Bitrate-efficiency]
 status: confirmed
