@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[NonverbalTTS]] — 命中 3 页(confirmed): [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review)
+- [ingest/deep] [[NonverbalTTS]] — 精读, kb_sources=3, 新建 0, 追加 3 (CosyVoice key_papers, CosyVoice 2 key_papers+baseline, Emotion Control key_papers), MOC 更新 2 (TTS-总览, 零样本语音合成)
+- [review/auto] [[NonverbalTTS]] — pass-with-fixes, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] NonverbalTTS — 通过 (0 死链)
 - [kb/search] [[SpeechWeave]] — 命中 5 页(取 5): [[Speaker Embedding]]✓, [[Cross-lingual Voice Cloning]]✓ | 过滤: [[Text-to-Speech Pipeline]](pending-review), [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review)
 - [ingest/deep] [[SpeechWeave]] — 精读, kb_sources=5, 新建 0, 追加 3 (Speaker Embedding key_papers, Text-to-Speech Pipeline key_papers, Phoneme Representation key_papers), MOC 更新 1 (TTS训练与评估)
 - [review/auto] [[SpeechWeave]] — pass, 2 issues (0 high, 0 medium, 2 low)
