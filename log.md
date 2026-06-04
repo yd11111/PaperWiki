@@ -3,7 +3,7 @@
 ## 2026-06-04
 - [kb/search] [[CosyEdit]] — 命中 6 页(取 6): [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review)
 - [ingest/deep] [[CosyEdit]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 演进线)
-- [review/auto] [[CosyEdit]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [review/auto] [[CosyEdit]] — pass, 4 issues (0 high, 0 medium, 4 low, frontmatter fixes applied)
 - [review/kb] [[CosyEdit]] — pass, 0 issues
 - [skip/update] [[Conditional Flow Matching]] — key_papers 已达上限(76),跳过追加
 - [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(81),跳过追加
