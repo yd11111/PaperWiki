@@ -133,7 +133,7 @@ Scale = sqrt(||Y_S_spk||^2 / ||Y_S_env||^2)
 1. **训练数据规模有限**: 仅 LibriTTS 580h,远小于当前零样本 TTS 主流系统 (如 CosyVoice 3 用 200K+ h, Seed-TTS 用大规模数据),环境音也是人工混合而非真实录音场景 [agent 解读]
 2. **SES 模块的分离质量上限**: STFT 域 masking 对于复杂混响、多源重叠场景的分离能力受限;论文未报告 SES 模块本身的分离指标 (如 SI-SDR, PESQ) [agent 解读]
 3. **无真实环境数据评估**: 测试集也是合成混合的 (SeedTTS test-en + SoundBible 环境音),未在真实录音场景 (如街头录音、咖啡厅对话) 中评估 [§3.1]
-4. **推理效率未讨论**: 未报告 RTF,DCFG 需要 3 次 forward pass (正常 + speech-only + env-only + null) per step,计算开销较大 [agent 解读]
+4. **推理效率未讨论**: 未报告 RTF,DCFG 需要 4 次 forward pass (正常 + speech-only + env-only + null) per step,计算开销较大 [agent 解读]
 5. **无流式推理**: 与 CosyVoice 2 的 chunk-aware causal flow matching 不同,DAIEN-TTS 是全序列推理 [agent 解读]
 6. **SIM-o 在环境场景下偏低**: bg env 下 SIM-o 仅 0.55,远低于 vocoder 上界 0.65,说明 environment 重建对 speaker similarity 有干扰 [Table 1]
 7. **speech-environment 交互未建模**: 作者在 conclusion 中承认未探索 speech 与 background environment 的相互影响 (如 Lombard effect) [§5]
@@ -153,5 +153,11 @@ Scale = sqrt(||Y_S_spk||^2 / ||Y_S_env||^2)
 3. **SNR adaptation via magnitude spectrogram scaling**: 在推理时通过简单的 magnitude scaling 对齐环境 prompt 的 SNR。虽然是启发式方法,但非常实用,可推广到任何需要控制混合信号能量比的场景。
 4. **概率性数据增强训练**: 50% 概率混合环境音 + 50% 使用静音段的训练策略,既学习环境重建又保持 text-speech alignment 学习,是一种平衡多任务的简单有效方法。
 
-> [!review] 审阅状态
-> 待审阅。
+> [!review] 审阅 (auto, 2026-06-04)
+> **结论**: pass-with-fixes
+> - [medium/factual-error] 局限性第4条:DCFG forward pass 数量从3修正为4 — 已修复
+> - 可复述: 通过 (4 个设计选择均有 WHY 解释)
+> - 可信赖: 通过 (所有数字 claim 均有 [Table 1]/[§X.X] 标注)
+> - 可区分: 通过 (因果解释来源标注覆盖率 ~90%)
+> - 可定位: 通过 (KB 背景含 6 实体页谱系定位 + 创新判断)
+> - 不污染: 通过 (反向更新均为追加操作)

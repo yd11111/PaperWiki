@@ -1,0 +1,28 @@
+paper: "DAIEN-TTS"
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+issues:
+  - type: factual-error
+    severity: medium
+    location: "局限性 第4条"
+    detail: "DCFG forward pass 数量写成3,实际需要4次 (v(x,z,c_spk,c_env) + v(x,z,c_spk,null) + v(x,null,null,c_env) + v(x,null,null,null))"
+    suggestion: "修正为4次"
+    status: fixed
+
+principle_assessment:
+  可复述:
+    pass: true
+    notes: "4个设计选择均有WHY解释和替代方案对比"
+  可信赖:
+    pass: true
+    notes: "所有数字claim均有[Table 1]/[§X.X]标注; 指标名(WER/SIM-o/MOS/SSMOS/ESMOS)使用正确"
+  可区分:
+    pass: true
+    notes: "因果解释来源标注覆盖率约90%; [论文原文]和[agent解读]区分清晰"
+  可定位:
+    pass: true
+    notes: "KB背景含6实体页,谱系定位到F5-TTS/IDEA-TTS/UmbraTTS;创新判断有对比基准"
+  不污染:
+    pass: true
+    notes: "反向更新均为追加key_papers,不涉及实质修改"
