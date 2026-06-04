@@ -1,0 +1,41 @@
+kb_review:
+  paper: "PURE Codec"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass
+
+change_plan:
+  - target: "概念库/Residual Vector Quantization.md"
+    action: append
+    detail: "在 '## 演进' 末尾追加 PURE Codec (2025, enhancement-guided decomposition)。属于演进时间线末尾追加,不修改已有内容。"
+    status_change: none
+    risk: low
+
+  - target: "任务库/Neural Audio Compression.md"
+    action: append
+    detail: "向 key_papers 追加 [[论文笔记/PURE Codec|PURE Codec]]。当前 6 条,追加后 7 条,未超限。"
+    status_change: none
+    risk: low
+
+skipped:
+  - target: "概念库/Residual Vector Quantization.md"
+    field: key_papers
+    reason: "已有 45 条,远超 12 条上限。跳过 key_papers 追加,改追加到演进时间线。"
+
+  - target: "概念库/Codebook Collapse.md"
+    reason: "PURE Codec 解决的是训练不稳定而非 codebook collapse 本身。不直接相关,不追加。"
+
+  - target: "概念库/Quantizer Dropout.md"
+    reason: "PURE Codec 使用 quantizer dropout 但无新贡献。不追加。"
+
+  - target: "概念库/Speech Tokenizer.md"
+    reason: "key_papers 已有 77 条,远超上限,且页面已被标记为 revise。不追加。"
+
+  - target: "概念库/Multi-scale STFT Discriminator.md"
+    reason: "PURE Codec 使用标准 discriminator 但无新贡献。不追加。"
+
+new_pages: []
+  # 不创建新实体页。PURE Codec 引入的 'enhancement-aware supervision' 目前仅此一篇论文使用,
+  # 不满足准入规则(多篇引用)。
+
+issues: []
