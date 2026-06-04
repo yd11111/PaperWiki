@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[ZipVoice-Dialog]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review), [[Speech-Text Alignment]](pending-review), [[Spoken Dialogue Evaluation]](pending-review)
+- [ingest/deep] [[ZipVoice-Dialog]] — 精读, kb_sources=6, 新建 0, 追加 7 (CFM/NAR-TTS/Turn-taking/Zero-shot/Speech-Text Alignment/Spoken Dialogue Evaluation/CFG key_papers), MOC 更新 2 (零样本语音合成/语音大模型与对话)
+- [review/auto] [[ZipVoice-Dialog]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low), 1 fixed
+- [lint/local] ZipVoice-Dialog — 通过 (0 死链)
 - [kb/search] [[EmoSSLSphere]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[Cross-lingual Voice Cloning]]✓ | 参考: [[Emotion Control in TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[HuBERT]](pending-review)
 - [ingest/deep] [[EmoSSLSphere]] — 精读, kb_sources=6, 新建 0, 追加 7 (Emotion Control/SSL Speech Rep/Prosody Modeling/Mel Spectrogram/Speaker Embedding/Non-autoregressive TTS/HuBERT key_papers), MOC 更新 1 (TTS-总览)
 - [review/auto] [[EmoSSLSphere]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
