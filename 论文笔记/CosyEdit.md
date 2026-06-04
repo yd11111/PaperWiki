@@ -7,11 +7,11 @@ source: "Sources/CosyEdit.pdf"
 authors: [Junyang Chen, Yuhang Jia, Hui Wang, Jiaming Zhou, Yaxin Han, Mengying Feng, Yong Qin]
 year: 2026
 venue: "arXiv"
-tags: [speech-editing, end-to-end, post-training, transfer-learning, flow-matching, AR-NAR]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Speech-Text Alignment]]", "[[Codec Language Model]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]"]
+tags: [speech-editing, end-to-end, post-training, transfer-learning, flow-matching, AR-NAR, cost-effective, zero-shot-TTS-adaptation]
+concepts: ["[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Speech-Text Alignment]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]"]
 tasks: ["[[Zero-shot Speech Synthesis]]"]
-datasets: []
+datasets: ["[[GigaSpeech]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-04
@@ -31,7 +31,7 @@ updated: 2026-06-04
 >
 > **Speech-Text Alignment 视角 [待确认]**: 传统 cascade speech editing 依赖外部强制对齐器 (MFA) 获取语音-文本时间戳。CosyEdit 通过 AR LLM 的 next-token prediction 隐式内化对齐。这与 SpeechLM 中的 concatenated speech-text 建模方式一致,但增加了 training/inference 不对称设计。
 >
-> **Zero-shot TTS → Speech Editing 迁移**: 论文的核心假设是零样本 TTS 已具备 (1) 自然语音生成、(2) in-context learning、(3) 潜在时间对齐能力,通过 task-specific post-training 即可解锁编辑能力,无需从头训练。这是首次系统验证 TTS→editing 迁移路径的可行性。
+> **Zero-shot TTS → Speech Editing 迁移**: 论文的核心假设是零样本 TTS 已具备 (1) 自然语音生成、(2) in-context learning、(3) 潜在时间对齐能力,通过 task-specific post-training 即可解锁编辑能力,无需从头训练。[agent 解读] 这是对 TTS→editing 迁移路径可行性的系统验证。
 >
 > 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: 无
 
@@ -179,3 +179,17 @@ GOT-CFM 的核心改进: 在 OT-CFM 的基础上,将原始语音的**完整** me
 2. **Training-inference asymmetry**: 训练时故意隐藏某些条件信息以防止 shortcut learning,推理时再提供以提升精度。这个策略可应用于任何存在"容易退化为 copy"风险的条件生成任务
 3. **Reference-guided flow matching (GOT-CFM)**: 将原始信号的完整去噪轨迹作为目标信号的引导条件。不仅限于 speech editing,任何需要保持原始信号部分不变的生成/编辑任务 (图像 inpainting, video editing) 都可借鉴
 4. **Low-cost editing dataset construction**: 从现有语音数据集通过 MFA 对齐 + 系统化删除/插入/替换操作派生监督数据,成本极低 (250h 即可) 且天然保证一致性
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三个关键设计选择的WHY解释充分,速查卡片可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率~90%,指标名正确,无方向性错误 |
+> | 可区分 | pass | 来源标注覆盖率~85%,[论文原文]/[agent解读]系统使用 |
+> | 可定位 | pass-with-fixes | KB背景谱系清晰;frontmatter遗漏已修正(+Speaker Embedding, +baselines, +datasets) |
+> | 不污染 | pass | 点评判断合理,无overclaim |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/CosyEdit-review.yml`

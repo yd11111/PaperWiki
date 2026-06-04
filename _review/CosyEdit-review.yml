@@ -1,0 +1,58 @@
+review:
+  paper: "CosyEdit"
+  note_path: "论文笔记/CosyEdit.md"
+  reviewer: auto
+  date: 2026-06-04
+  conclusion: pass-with-fixes
+
+  principles:
+    可复述:
+      score: 9
+      status: pass
+      rationale: "方法节包含清晰的因果解释 — 三个关键设计选择(AR重构、GOT-CFM、训练-推理非对称)均回答了WHY。速查卡片可借鉴字段列出4个具体可迁移trick。"
+    可信赖:
+      score: 9
+      status: pass
+      rationale: "数字型claim标注覆盖率 ~90%。指标名称使用正确(WER/SpkSIM/EMOS/SMOS/MCD)。速查卡片指标字段含具体数字+数据集+标注。无方向性错误。"
+    可区分:
+      score: 9
+      status: pass
+      rationale: "因果解释来源标注覆盖率 ~85%。方法节系统使用[论文原文]和[agent解读]标注。未发现将推断写成断言的问题。"
+    可定位:
+      score: 7
+      status: pass-with-fixes
+      rationale: "KB背景节有具体谱系定位和创新判断。但frontmatter存在遗漏: concepts缺Speaker Embedding, models仅列基座模型未列对比baseline, datasets为空。"
+    不污染:
+      score: 8
+      status: pass
+      rationale: "点评节判断合理,无overclaim。反向更新需验证。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: template-compliance
+      location: frontmatter.concepts
+      detail: "concepts 缺少 Speaker Embedding — 论文使用 x-vector speaker embedding 作为 LLM 和 GOT-CFM 的关键条件输入 [Eq.1, Eq.7]"
+      suggestion: "在 concepts 中追加 [[Speaker Embedding]]"
+    - id: 2
+      severity: medium
+      type: template-compliance
+      location: frontmatter.models
+      detail: "models 仅列 CosyVoice(基座模型),未列已有笔记的对比 baseline。Step-Audio-EditX 和 Ming-UniAudio 均有论文笔记"
+      suggestion: "追加 [[论文笔记/Step-Audio-EditX|Step-Audio-EditX]], [[论文笔记/Ming-UniAudio|Ming-UniAudio]]"
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: frontmatter.datasets
+      detail: "datasets 为空,但论文使用了 GigaSpeech(GigaEdit 的基础数据集)"
+      suggestion: "追加 [[GigaSpeech]]"
+    - id: 4
+      severity: low
+      type: overclaim
+      location: "KB背景.Zero-shot TTS → Speech Editing 迁移"
+      detail: "'首次系统验证 TTS→editing 迁移路径的可行性' — 缺少来源归属,应标注为论文作者的声明或 agent 判断"
+      suggestion: "改为'论文声称这是首次系统验证...'或标注[agent 解读]"
+
+  learning_signals: []
+
+  summary: "笔记整体质量高,方法理解深入,因果解释充分,实验数据标注完整。主要问题集中在frontmatter字段遗漏(Speaker Embedding、baselines、datasets),不影响反向更新安全性。"
