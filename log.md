@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[SAC]] — 命中 6 页(取 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Neural Audio Compression]]✓, [[Speech Factorization]]✓, [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓ | 过滤: 无
+- [ingest/deep] [[SAC]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers
+- [review/auto] [[SAC]] — pass-with-fixes, 3 issues (1 medium, 2 low)
+- [lint/local] SAC — 通过 (0 死链), MOC 已包含 (语音编码与量化)
+- [kb/search] [[ARDM-DPO]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Next-Token Diffusion]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Diffusion-based TTS]](pending-review), [[Classifier-Free Guidance]](pending-review)
+- [ingest/deep] [[ARDM-DPO]] — 精读, kb_sources=6, 新建 0, 追加 3 概念页 + 1 任务页 + 1 数据集 key_papers, MOC 更新 1 (零样本语音合成)
+- [review/auto] [[ARDM-DPO]] — pass-with-fixes, 3 low issues
+- [lint/local] ARDM-DPO — 通过, 0 死链, MOC 已包含 (TTS训练与评估 + 零样本语音合成)
+- [待决] DiTAR 模型页 — ARDM-DPO 的 base model,待 DiTAR 原始论文精读后创建
 - [kb/search] [[Audiobook-CC]] — 命中 6 页(取 6): [[CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review)
 - [ingest/deep] [[Audiobook-CC]] — 精读, kb_sources=6, 新建 0, 追加 12 实体页 key_papers, MOC 更新 2 (TTS-总览 + 零样本语音合成)
 - [review/auto] [[Audiobook-CC]] — pass, 0 issues
