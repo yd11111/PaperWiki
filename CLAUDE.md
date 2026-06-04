@@ -84,16 +84,11 @@ Sources/           ← PDF(gitignored)
 
 ## 当前 vault 状态 (2026-06-04)
 
-- 论文笔记: 105 篇 (88 deep + 2 repro + 2 enhanced-card + 13 card)
-- 实体页: 92 个 (62 概念 + 20 模型 + 4 任务 + 6 数据集), 其中 22 confirmed / 70 pending-review
-- 可信层: 22 confirmed 实体 + 1 reviewed 笔记 (CosyVoice 3)
-- MOC: 6 个 (TTS-总览 / 语音编码与量化 / 零样本语音合成 / 语音表征与自监督学习 / 语音大模型与对话 / TTS训练与评估)
-- MOC 覆盖: 90/90 deep/repro (全覆盖)
-- 审阅覆盖: 12/90 deep/repro 有 review callout
-- 审阅报告: 21 个 (_review/*.yml)
-- 死链: 0
-- Git tags: p0-foundation → p5-specification-ready → review-module-v1
-- 已完成: 综述冷启动(11 篇) + 本地文献库批量精读(~80 篇) + 系统同步修复
-- 审阅模块: 已实装(两层评估: 原则层 + 检查项层, 独立 subagent dispatch)
-- MOC 治理: AGENTS.md §11 完整规则体系 (宪法 5 原则 + R1-R8 规则) + moc-review-checklist.md (17 检查项)
-- Harness Batch 2: AGENTS.md 瘦身 (653→199 行, 6 个 Tier 2 规则文件) + KB 审阅门 (kb-review-checklist) + Lint 脚本 (8 项自动化检查)
+- 论文笔记: 257 篇 (242 deep + 2 repro + 2 enhanced-card + 11 card)
+- 实体页: 93 个 (62 概念 + 20 模型 + 4 任务 + 7 数据集), 其中 22 confirmed / 71 pending-review
+- 可信层: 22 confirmed 实体 + 1 reviewed 笔记
+- MOC: 9 个
+- MOC 覆盖: 243/244 deep/repro
+- 审阅覆盖: 176/244 deep/repro 有 review callout
+- 审阅报告: 173 个 (_review/*.yml)
+

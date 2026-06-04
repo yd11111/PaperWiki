@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""PaperWiki vault linter — 8 mechanizable checks.
+"""PaperWiki vault linter — 9 mechanizable checks.
 
 Usage:
-    python3 scripts/lint.py                       # full check (L1-L8)
+    python3 scripts/lint.py                       # full check (L1-L9)
     python3 scripts/lint.py --per-ingest FILE      # per-ingest subset (L1,L6,L7,L8)
     python3 scripts/lint.py --check L1,L3,L5       # specific checks only
+    python3 scripts/lint.py --check L9 --fix       # update CLAUDE.md vault stats
 
 Exit code: 0 = all pass, 1 = errors found.
 Each error line: ERROR [Lx] file: agent-readable fix instruction.
@@ -15,6 +16,7 @@ import os
 import re
 import sys
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 VAULT = Path(__file__).resolve().parent.parent
@@ -420,6 +422,160 @@ def check_l8_single(path: Path):
                 f"请创建对应页面或修正 wikilink")
 
 
+# L9: CLAUDE.md vault stats accuracy
+FIX_MODE = False
+
+def compute_vault_stats() -> dict:
+    stats = {}
+    tiers = defaultdict(int)
+    for f in collect_md_files(DIRS["notes"]):
+        fm = parse_frontmatter(f)
+        if fm:
+            tiers[fm.get("tier", "unknown")] += 1
+    stats["total_notes"] = sum(tiers.values())
+    stats["tiers"] = dict(tiers)
+
+    entity_counts = {}
+    confirmed = 0
+    pending = 0
+    for label, d in [("概念", DIRS["concepts"]), ("模型", DIRS["models"]),
+                      ("任务", DIRS["tasks"]), ("数据集", DIRS["datasets"])]:
+        count = 0
+        for f in collect_md_files(d):
+            fm = parse_frontmatter(f)
+            if fm:
+                count += 1
+                s = fm.get("status", "")
+                if s == "confirmed":
+                    confirmed += 1
+                elif s == "pending-review":
+                    pending += 1
+        entity_counts[label] = count
+    stats["entities"] = entity_counts
+    stats["entity_total"] = sum(entity_counts.values())
+    stats["confirmed"] = confirmed
+    stats["pending"] = pending
+
+    reviewed_notes = 0
+    for f in collect_md_files(DIRS["notes"]):
+        fm = parse_frontmatter(f)
+        if fm and fm.get("status") == "reviewed":
+            reviewed_notes += 1
+    stats["reviewed_notes"] = reviewed_notes
+
+    moc_files = list(DIRS["moc"].glob("*.md")) if DIRS["moc"].exists() else []
+    stats["moc_count"] = len(moc_files)
+    stats["moc_names"] = sorted(f.stem for f in moc_files)
+
+    deep_repro = []
+    for f in collect_md_files(DIRS["notes"]):
+        fm = parse_frontmatter(f)
+        if fm and fm.get("tier") in ("deep", "repro"):
+            deep_repro.append(f)
+    stats["deep_repro_count"] = len(deep_repro)
+
+    moc_targets: set[str] = set()
+    for mf in moc_files:
+        content = read_content(mf)
+        for m in WIKILINK_RE.finditer(content):
+            t = m.group(1).split("|")[0].strip()
+            if t.startswith("论文笔记/"):
+                moc_targets.add(t[len("论文笔记/"):])
+            else:
+                moc_targets.add(t)
+    covered = sum(1 for f in deep_repro if f.stem in moc_targets)
+    stats["moc_coverage"] = f"{covered}/{len(deep_repro)}"
+
+    with_review = 0
+    for f in deep_repro:
+        content = read_content(f)
+        if "[!review]" in content:
+            with_review += 1
+    stats["review_coverage"] = f"{with_review}/{len(deep_repro)}"
+
+    review_dir = VAULT / "_review"
+    review_count = len(list(review_dir.glob("*-review.yml"))) if review_dir.exists() else 0
+    stats["review_reports"] = review_count
+
+    return stats
+
+
+def format_vault_section(stats: dict) -> str:
+    t = stats["tiers"]
+    tier_parts = []
+    for tier in ["deep", "repro", "enhanced-card", "card"]:
+        if t.get(tier, 0) > 0:
+            tier_parts.append(f"{t[tier]} {tier}")
+    tier_str = " + ".join(tier_parts)
+
+    e = stats["entities"]
+    entity_parts = [f"{v} {k}" for k, v in e.items() if v > 0]
+    entity_str = " + ".join(entity_parts)
+
+    today = date.today().strftime("%Y-%m-%d")
+
+    lines = [
+        f"## 当前 vault 状态 ({today})",
+        "",
+        f"- 论文笔记: {stats['total_notes']} 篇 ({tier_str})",
+        f"- 实体页: {stats['entity_total']} 个 ({entity_str}), 其中 {stats['confirmed']} confirmed / {stats['pending']} pending-review",
+        f"- 可信层: {stats['confirmed']} confirmed 实体 + {stats['reviewed_notes']} reviewed 笔记",
+        f"- MOC: {stats['moc_count']} 个",
+        f"- MOC 覆盖: {stats['moc_coverage']} deep/repro",
+        f"- 审阅覆盖: {stats['review_coverage']} deep/repro 有 review callout",
+        f"- 审阅报告: {stats['review_reports']} 个 (_review/*.yml)",
+    ]
+    return "\n".join(lines)
+
+
+def check_l9():
+    claude_md = VAULT / "CLAUDE.md"
+    if not claude_md.exists():
+        err("L9", "CLAUDE.md", "文件不存在")
+        return
+
+    stats = compute_vault_stats()
+    new_section = format_vault_section(stats)
+
+    content = read_content(claude_md)
+    m = re.search(r'^## 当前 vault 状态.*', content, re.MULTILINE)
+    if not m:
+        err("L9", "CLAUDE.md", "找不到 '## 当前 vault 状态' section。请添加此 section")
+        return
+
+    section_start = m.start()
+    next_section = re.search(r'\n## [^\n]', content[section_start + 1:])
+    if next_section:
+        section_end = section_start + 1 + next_section.start()
+    else:
+        section_end = len(content)
+
+    old_section = content[section_start:section_end].rstrip()
+
+    new_lines = new_section.split("\n")
+    mismatches = []
+    for line in new_lines:
+        if line.startswith("- "):
+            key = line.split(":")[0].strip("- ")
+            if key in old_section:
+                old_line = [l for l in old_section.split("\n") if key in l]
+                if old_line and old_line[0].strip() != line.strip():
+                    mismatches.append(key)
+
+    if not mismatches:
+        return
+
+    if FIX_MODE:
+        remaining = content[section_end:].lstrip("\n")
+        updated = content[:section_start] + new_section + "\n\n" + remaining
+        claude_md.write_text(updated, encoding="utf-8")
+        print(f"FIXED [L9] CLAUDE.md: vault 状态已更新 ({', '.join(mismatches)})")
+    else:
+        err("L9", "CLAUDE.md",
+            f"vault 状态数字过时 ({', '.join(mismatches)})。"
+            f"运行 python3 scripts/lint.py --check L9 --fix 自动更新")
+
+
 # ---------------------------------------------------------------------------
 # Runner
 # ---------------------------------------------------------------------------
@@ -427,6 +583,7 @@ def check_l8_single(path: Path):
 ALL_CHECKS = {
     "L1": check_l1, "L2": check_l2, "L3": check_l3, "L4": check_l4,
     "L5": check_l5, "L6": check_l6, "L7": check_l7, "L8": check_l8,
+    "L9": check_l9,
 }
 
 PER_INGEST_CHECKS = ["L1", "L6", "L7", "L8"]
@@ -454,7 +611,11 @@ def main():
     parser = argparse.ArgumentParser(description="PaperWiki vault linter")
     parser.add_argument("--per-ingest", metavar="FILE", help="Run per-ingest checks on a single file")
     parser.add_argument("--check", metavar="L1,L2,...", help="Run specific checks only (comma-separated)")
+    parser.add_argument("--fix", action="store_true", help="Auto-fix fixable issues (currently: L9 vault stats)")
     args = parser.parse_args()
+
+    global FIX_MODE
+    FIX_MODE = args.fix
 
     if args.per_ingest:
         run_per_ingest(args.per_ingest)
