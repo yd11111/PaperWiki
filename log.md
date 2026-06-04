@@ -1,7 +1,14 @@
 # Log
 
 ## 2026-06-04
-- [kb/search] [[SecoustiCodec]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
+- [kb/search] [[AudioMOS Challenge 2025]] — 命中 6 页(全部 pending-review): [[TTS Evaluation]], [[Self-Supervised Speech Representation]], [[Audio-Language Pretraining]], [[SVS Evaluation Metrics]], [[WavLM]], [[Audio Understanding]] | 过滤: 全部 pending-review
+- [ingest/deep] [[AudioMOS Challenge 2025]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTS Evaluation/Audio-Language Pretraining key_papers + TTS Evaluation 新增 AudioMOS 段落), MOC 更新 1 (TTS训练与评估)
+- [review/auto] [[AudioMOS Challenge 2025]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] AudioMOS Challenge 2025 — 通过 (0 死链)
+- [kb/search] [[MiSTR]] — 命中 4 页(取 Top 4): [[Neural Vocoder]]✓, [[Prosody Modeling]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[F0 Modeling]](pending-review)
+- [ingest/deep] [[MiSTR]] — 精读, kb_sources=4, 新建 0, 追加 4 (Neural Vocoder/Prosody Modeling/Mel Spectrogram/F0 Modeling key_papers), MOC 更新 1 (TTS-总览)
+- [review/auto] [[MiSTR]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] MiSTR — 通过 (0 死链)- [kb/search] [[SecoustiCodec]] — 命中 6 页(取 Top 6): [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review)
 - [ingest/deep] [[SecoustiCodec]] — 精读, kb_sources=6, 新建 0, 追加 6 (FSQ/Semantic vs Acoustic Tokens/Single-codebook vs Multi-codebook/Speech Factorization/Codebook Collapse/RVQ key_papers), 实质追加 3 (Speech Factorization 关键论文/Single-codebook 代表工作表/Codebook Collapse 关键论文), MOC 更新 1 (语音编码与量化)
 - [review/auto] [[SecoustiCodec]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] SecoustiCodec — 通过 (0 死链)
@@ -22,7 +29,8 @@
 - [ingest/deep] [[DAIEN-TTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (Conditional Flow Matching/Classifier-Free Guidance/Speech Factorization/Zero-shot Speech Synthesis key_papers), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[DAIEN-TTS]] — pass-with-fixes, 1 issue (0 high, 1 medium fixed, 0 low)
 - [lint/local] DAIEN-TTS — 通过 (0 死链)
-- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核- [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核
+- [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
 - [ingest/deep] [[DeepDubbing]] — 精读, kb_sources=6, 新建 0, 追加 10 (CFM/Speaker Embedding/CosyVoice/LLM-based TTS/Instruction-Guided SS/NL Description TTS/CFG/Emotion Control/BigVGAN/Prosody Modeling key_papers + Instructed Speech Generation key_models), MOC 更新 1 (TTS-总览)
 - [review/auto] [[DeepDubbing]] — pass, 2 issues (0 high, 0 medium, 2 low)
 - [lint/local] DeepDubbing — 通过 (0 死链)
@@ -115,7 +123,8 @@
 - [ingest/deep] [[Spotlight-TTS]] — 精读, kb_sources=6, 新建 0, 追加 8 (Style Transfer in TTS, Global Style Tokens, Residual Vector Quantization, Prosody Modeling, Speech Factorization, Mel Spectrogram, F0 Modeling, Emotion Control in TTS)
 - [review/auto] [[Spotlight-TTS]] — pass-with-fixes, 0 high + 1 medium (fact-inference-mixing, fixed) + 2 low
 - [lint/local] Spotlight-TTS — 通过 (0 dead links, MOC 已更新: TTS-总览)
-- [alert/backlog] pending-review: 70, draft deep/repro: 183 — 建议抽空审核- [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [alert/backlog] pending-review: 70, draft deep/repro: 183 — 建议抽空审核
+- [kb/search] [[OpenS2S]] — 命中 6 页(取 Top 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[OpenS2S]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Language Model, Streaming Spoken Dialogue, Emotion Control in TTS, CosyVoice 2, Modality Adaptation for Speech LLM, Emilia)
 - [review/auto] [[OpenS2S]] — pass-with-fixes, 0 high / 2 medium / 1 low
 - [lint/local] OpenS2S — 通过, 0 死链
