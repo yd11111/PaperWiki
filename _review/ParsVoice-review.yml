@@ -1,0 +1,40 @@
+paper: ParsVoice
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    met: true
+    notes: "方法节对 5 个关键设计选择均给出 WHY 解释(ASR vs OCR、句子完整性分类器、二分搜索边界优化、质量评估、两阶段 speaker ID),不是组件罗列。速查卡片可借鉴字段列出 3 个具体可迁移技术。"
+  可信赖:
+    met: true
+    notes: "数字型 claim 标注覆盖率 ~90%。指标名正确(MOS/SMOS/WER/CER/Speaker Similarity)。速查卡片指标字段含具体数字+评估条件+出处。"
+  可区分:
+    met: true
+    notes: "5 个设计选择均有 [论文原文]/[agent 解读] 标注。agent 解读仅在推断处使用(如 ASR 稳定性作为隐式对齐信号、不完整句子对韵律的影响)。覆盖率 ≥ 80%。"
+  可定位:
+    met: true
+    notes: "KB 背景有具体谱系定位(对比 CosyVoice/Seed-TTS/Emilia/XTTS),创新判断有对比基准(Emilia 101K h vs ParsVoice 2.2K h)。frontmatter 完整且语义正确。"
+  不污染:
+    met: true
+    notes: "本篇不需新建概念页。反向更新为追加(key_papers),不涉及实质修改。"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片 > 一句话"
+    detail: "'25 times larger' 这一对比数字未标注出处"
+    suggestion: "速查已在路线字段标注了出处,但一句话中的定量对比可补上 [§1]"
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但本文评估使用了 Persian Common Voice (参考说话人来源) 和 Google FLEURS (WER 对照)"
+    suggestion: "可考虑将评估中使用的数据集列入,但非关键"
+
+summary: |
+  ParsVoice 笔记整体质量良好。方法节对数据构建 pipeline 的每个阶段都给出了设计动机(WHY)和具体机制(HOW),而非简单罗列。因果解释来源标注清晰。
+  KB 背景定位准确,指出这是数据集论文而非模型论文,对比了 KB 中已有的 XTTS 笔记和 Emilia 数据集。
+  速查卡片可借鉴字段提取了 3 个具体可迁移技术,实用性强。
+  仅有 2 个 low severity 问题,均不影响反向更新安全性。结论: pass-with-fixes,可继续反向更新。

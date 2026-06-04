@@ -174,7 +174,10 @@ ParsVoice 是一篇扎实的数据集工程论文。它的核心价值不在于�
 
 ---
 
-> [!review] 审阅
-> 待审阅。
+> [!review] 审阅 (2026-06-04, auto)
+> **结论: pass-with-fixes** (0 high, 0 medium, 2 low)
+> - (low) traceability-gap: 速查卡片"一句话"中 "25 times larger" 未标出处
+> - (low) template-compliance: datasets 字段为空,评估用的 Persian Common Voice / FLEURS 可选列入
+> 详见 `_review/ParsVoice-review.yml`
 
 检索命中: [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: 无
