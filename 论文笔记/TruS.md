@@ -44,7 +44,7 @@ updated: 2026-06-04
 
 2. **为什么可以在推理时抑制身份?** 关键假设: speaker identity 编码在 TTS 模型隐层表示的结构化方向中 [§2.1]。如果 identity 是可识别的方向而非弥散地分布在所有维度上,则可以通过定向投影减法将其消除 [论文原文]。
 
-3. **为什么不是所有层都需要干预?** Fig. 3 显示 cosine similarity between ID-prototype and target activation 在不同层/不同 flow step 动态变化: 浅层在后期 step 相似度降低,深层在早期 step 相似度降低 [§2.3]。全层干预 (all) 虽能略降 SIM-SO,但 WER 大幅恶化 [Table 4],证明过度干预破坏了语言内容。
+3. **为什么不是所有层都需要干预?** Fig. 3 显示 cosine similarity between ID-prototype and target activation 在不同层/不同 flow step 动态变化: 浅层在后期 step 相似度降低,深层在早期 step 相似度降低 [论文原文,§2.3,Fig 3]。全层干预 (all) 虽能略降 SIM-SO,但 WER 大幅恶化 [Table 4],证明过度干预破坏了语言内容。
 
 ## 方法: 它怎么 work
 
@@ -143,7 +143,7 @@ $\bar{X}_{Opt}^{(\ell',t')} = X_{Opt}^{(\ell',t')} - \alpha (X_{Opt}^{(\ell',t')
 
 TruS 的核心贡献是范式转换: 将 speaker unlearning 从"修改模型权重"重构为"推理时信号处理"。这带来了三个实质性优势: (1) 零训练成本; (2) 可处理 unseen speakers; (3) 不影响 retain speakers。这种"按需干预"的思路在 TTS 安全领域具有独特价值 -- 它使 opt-out 机制变成可热插拔的推理插件,而非需要服务中断的模型重训练。
 
-方法设计上,从 NLP 领域的 activation steering (Rimsky et al., 2024; Turner et al., 2023) 迁移到 TTS 是合理的,但 TruS 增加了 TTS 特有的两个关键设计: (1) 利用 flow step 维度的动态性(NLP 中无此对应物); (2) FFN 输出作为 identity 信号的载体(NLP 中通常操作 residual stream)。
+方法设计上,从 NLP 领域的 activation steering (Rimsky et al. [22]; Turner et al. [23]) 迁移到 TTS 是合理的,但 TruS 增加了 TTS 特有的两个关键设计: (1) 利用 flow step 维度的动态性(NLP 中无此对应物); (2) FFN 输出作为 identity 信号的载体(NLP 中通常操作 residual stream)。
 
 局限在于: 方法的理论基础偏弱 -- "identity 编码在结构化方向中"是一个假设而非证明,论文仅通过 cosine similarity 的统计分布间接支持 [Fig. 3]。此外,仅在一个模型 (F5-TTS) 上验证,泛化性声明尚需更多实验。
 
@@ -156,3 +156,19 @@ TruS 的核心贡献是范式转换: 将 speaker unlearning 从"修改模型权�
 3. **推理时投影减法**: $\bar{X} = X - \alpha (X \cdot S) S$ 是一个极简的属性控制公式。如果能找到 emotion/prosody/accent 的 steering direction,同一框架可复用于细粒度语音属性编辑。与 EmoSteer-TTS 的 top-k channel selection 形成互补: TruS 做方向级操作,EmoSteer 做通道级操作。
 
 4. **Training-free safety 插件模式**: 不修改模型权重 → 可在任意已部署模型上热加载 → 适合 production 环境的安全合规需求。这种"安全即插件"的设计思想值得 TTS 服务架构参考。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4个设计选择均有WHY解释,速查卡片具体 |
+> | 可信赖 | pass | 数字引用覆盖>80%,指标方向正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注充分 |
+> | 可定位 | pass | 谱系定位清晰(Kim et al.→TruS范式转换) |
+> | 不污染 | pass | 反向更新以append为主,无overclaim |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/TruS-review.yml`

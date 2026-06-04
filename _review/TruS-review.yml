@@ -1,0 +1,47 @@
+review:
+  paper: "TruS"
+  reviewer: auto
+  date: 2026-06-04
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节清晰解释了4个关键设计选择的WHY,包含因果解释(为什么选FFN输出、为什么动态选层、为什么投影减法),速查卡片'可借鉴'给出3个具体可迁移trick"
+  可信赖:
+    score: 9
+    rationale: "实验表格完整引用[Table 1-5],数字与原文一致,指标方向标注正确(SIM-SO↓/SIM-R↑),速查卡片指标字段含具体数字+数据集+来源"
+  可区分:
+    score: 9
+    rationale: "方法节始终标注[论文原文]和[agent 解读],局限性中5条有3条标注[agent 解读],因果解释来源覆盖率>80%"
+  可定位:
+    score: 9
+    rationale: "KB背景节给出明确谱系定位(Kim et al.→TruS范式转换),与已有KB页面的关系清晰,与EmoSteer-TTS的对比定位准确"
+  不污染:
+    score: 8
+    rationale: "frontmatter concepts/models/tasks/datasets合理,无overclaim风险;反向更新以append为主,无factual error风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "核心问题 #3"
+    detail: "关于浅层/深层在不同step的相似度变化方向的描述('浅层在后期step相似度降低,深层在早期step相似度降低')与Fig 3描述一致,但未标注[论文原文]"
+    suggestion: "添加[论文原文]标注"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter models"
+    detail: "models字段为空列表,但F5-TTS是本文的baseline platform,SGU/TGU是对比方法"
+    suggestion: "不需要改——本文未提出新模型,F5-TTS/SGU/TGU作为baseline已在正文充分讨论,frontmatter models 用于本文提出的模型"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "点评段落"
+    detail: "提到'Rimsky et al., 2024; Turner et al., 2023'但未给出具体论文title或引用编号"
+    suggestion: "改为引用编号[22][23],与论文references对应"
+
+conclusion: pass
+conclusion_rationale: "五原则全部满足,无high/medium issue,3个low issue均不影响可信性或反向更新安全性"
+
+learning_signals: []
