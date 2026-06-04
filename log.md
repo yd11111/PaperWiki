@@ -8,7 +8,8 @@
 - [kb/search] [[ParsVoice]] — 命中 4 页(取 4): [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review)
 - [ingest/deep] [[ParsVoice]] — 精读, kb_sources=4, 新建 0, 追加 3 实体页 key_papers
 - [review/auto] [[ParsVoice]] — pass-with-fixes, 2 low issues (traceability-gap, template-compliance)
-- [lint/local] ParsVoice — 通过/0 死链, MOC 已包含 (TTS训练与评估)- [kb/search] [[Ming-UniAudio]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Speech Language Model]]✓ | 参考: [[Variational Autoencoder for TTS]](pending-review), [[Next-Token Diffusion]](pending-review)
+- [lint/local] ParsVoice — 通过/0 死链, MOC 已包含 (TTS训练与评估)
+- [kb/search] [[Ming-UniAudio]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Speech Language Model]]✓ | 参考: [[Variational Autoencoder for TTS]](pending-review), [[Next-Token Diffusion]](pending-review)
 - [ingest/deep] [[Ming-UniAudio]] — 精读, kb_sources=6, 新建 0, 追加 8 概念 + 1 任务 + 2 数据集 key_papers, MOC 更新 2 (语音大模型与对话 + 语音编码与量化)
 - [review/auto] [[Ming-UniAudio]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
 - [lint/local] Ming-UniAudio — 通过 (0 dead links)
