@@ -161,7 +161,7 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025) → Prosody Diversity 专项评估 (ProsodyEval/DS-WED, ICASSP 2026)
 
 ### InstructTTSEval: Instruction-Following Benchmark
 
@@ -170,3 +170,7 @@ Huang et al. (2025) 提出 InstructTTSEval,首个专门评估 TTS 指令遵循�
 ### AudioMOS Challenge 2025: 自动 MOS 预测拓展至音乐与通用音频
 
 Huang et al. (2025) 组织 AudioMOS Challenge 2025,将 VoiceMOS Challenge 系列从 speech-only 拓展到语音/音乐/通用音频三种模态。三个赛道: (1) TTM MOS 预测 (MusicEval 数据集); (2) Audiobox Aesthetics 四轴 (PQ/PC/CE/CU) 预测 (自然样本训练→合成样本测试); (3) 多采样率语音 MOS 预测。24 队参赛,所有赛道冠军均使用模型集成。关键发现: 数据质量/匹配度比规模重要 (Track 2 baseline 用 500h in-house 数据,被仅用 ~3K 样本训练的队伍超越); SSL 特征 (CLAP/WavLM/MuQ) + 集成是主流路线; 16 kHz 在混合采样率评估中最难预测。详见 [[论文笔记/AudioMOS Challenge 2025|AudioMOS Challenge 2025]]。
+
+### ProsodyEval: 韵律多样性评估 (DS-WED)
+
+Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distance),首个专门度量零样本 TTS 韵律多样性的客观指标,与人类 PMOS 判断相关性 r=0.77 (vs log F0 RMSE 0.30, MCD 0.66)。方法: 对合成语音用 SSL 模型 (HuBERT/WavLM 中间层) 离散化为 semantic tokens,然后计算加权 Levenshtein 编辑距离,权重根据人类感知特性调整 (替换 > 插入/删除)。配套发布 ProsodyEval 数据集 (7 系统 x 1000 样本 + 2000 人类评分)。DS-WED 还验证了 Gemini 2.5 Pro 作为韵律评估者不可靠 (r=0.27),与 GSRM/SpeechJudge 发现的"speech LLM 提取细粒度韵律 cues 的瓶颈"一致。详见 [[论文笔记/ProsodyEval|ProsodyEval]]。
