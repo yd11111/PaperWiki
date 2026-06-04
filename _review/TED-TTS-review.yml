@@ -1,0 +1,32 @@
+review:
+  note: "论文笔记/TED-TTS.md"
+  reviewer: auto
+  date: 2026-06-04
+  checklist_version: v1.1
+  conclusion: pass
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含 5 个关键设计选择,每个都有 WHY + HOW 因果解释。速查卡片可借鉴字段给出具体可迁移思路(2D causal mask, MSA)而非泛泛之谈。核心问题节清晰界定了从 utterance-level 到 intra-utterance 的 gap。"
+    pass: true
+  可信赖:
+    score: 9
+    rationale: "实验表中 14 个数据点全部标注出处 [Table 1/2/4, Fig 6]。速查卡片指标字段含具体数字+基准+数据集。指标命名正确(SMOS/NMOS/EMOS/DNSM/SSIM/NISQA)。关键发现中的数字经交叉验证与原文一致。"
+    pass: true
+  可区分:
+    score: 9
+    rationale: "方法节中所有因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率 100%。Agent 解读部分提供了有价值的对比分析(与 WeSCon DEAB、Glow-TTS MAS 的比较)且明确标注为推断。实验发现中对 EMOS 下降的解释分别标注了论文观点和 agent 观点。"
+    pass: true
+  可定位:
+    score: 9
+    rationale: "KB 背景节从三个维度定位: (1) Emotion Control 演进链中紧接 EmoSteer-TTS 和 WeSCon; (2) Duration 控制区别于 NAR/独立 duration 模块路线; (3) 回应 LLM-based TTS 已确认的细粒度控制局限。与 EmoSteer-TTS、WeSCon 的具体差异分析详实。"
+    pass: true
+  不污染:
+    score: 8
+    rationale: "当前笔记不涉及新建实体页。反向更新计划合理: 向 Emotion Control in TTS 和 Duration Predictor 追加 key_papers 属于 append 操作。无 factual error 或 overclaim 风险。"
+    pass: true
+
+issues: []
+
+learning_signals: []
