@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [TTS, emotion, reinforcement-learning, post-training, GRPO, expressiveness, prosody, RLAIF]
 concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]"]
-models: ["[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+models: ["[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]  # Whisper/WavLM 为评估工具; base model 为 MiniCPM-O 2.6 + Chat-TTS (无模型页)
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -109,7 +109,7 @@ RLAIF-SPA 是一个两步框架 [Fig 1]:
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | WER↓ | 5.80 | 7.85 | **4.87** | 6.90 | 9.25 | LibriSpeech | [Table I] |
 | SIM-O↑ | **0.72** | 0.66 | 0.70 | 0.71 | 0.68 | LibriSpeech | [Table I] |
-| CMOS↑ | **7.23** | 5.99 | 6.97 | 7.10 | 6.18 | LibriSpeech | [Table I] |
+| CMOS↑ (综合MOS, 7分制) | **7.23** | 5.99 | 6.97 | 7.10 | 6.18 | LibriSpeech | [Table I] |
 | Emotion MOS↑ | **6.53** | 5.75 | 5.93 | 6.12 | 5.73 | LibriSpeech | [Table I] |
 | SER Avg↑ | **30.08** | 25.01 | 22.33 | 21.12 | 19.86 | LibriSpeech | [Table I] |
 | WER↓ | **8.92** | 19.64 | 9.07 | 9.57 | 15.54 | MELD | [Table I] |
@@ -122,7 +122,7 @@ RLAIF-SPA 是一个两步框架 [Fig 1]:
 **消融实验** [Table II]:
 | 配置 | WER↓ | SIM-O↑ | CMOS↑ | Emotion MOS↑ | SER Avg↑ | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| RLAIF-SPA | **5.80** | **0.72** | **7.23** | **6.53** | **30.08** | LibriSpeech | [Table II] |
+| RLAIF-SPA | **5.80** | **0.72** | **7.23** (综合MOS) | **6.53** | **30.08** | LibriSpeech | [Table II] |
 | w/o Label Reward | 8.08 | 0.65 | 5.78 | 5.31 | 24.39 | LibriSpeech | [Table II] |
 | Base (No Post-training) | 8.89 | 0.63 | 5.59 | 5.33 | 23.36 | LibriSpeech | [Table II] |
 
@@ -158,5 +158,12 @@ RLAIF-SPA 是一个两步框架 [Fig 1]:
 3. **Attribute-wise binary match reward**: 相比连续 reward,离散匹配指标 (Eq. 3) 更简单稳定,可迁移到其他需要多维离散属性对齐的场景
 
 ---
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes (0 high, 2 medium, 1 low)
+> - [medium] frontmatter models 列了评估工具 (Whisper/WavLM) 而非本文 base model (MiniCPM-O + Chat-TTS) — 已加注释说明
+> - [medium] CMOS 实为综合 MOS (7分制),非标准差分 CMOS — 已在表格标注
+> - [low] 可复用 idea 第3条偏抽象 — 可后续补充具体场景
+> 详见 `_review/RLAIF-SPA-review.yml`
 
 检索命中: [[Prosody Modeling]], [[LLM-based TTS]], [[Speech Language Model]] | 过滤: [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无

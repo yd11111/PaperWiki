@@ -1,0 +1,50 @@
+paper: "RLAIF-SPA"
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含因果解释 (WHY 4维标签/WHY GRPO/WHY LLM标注),关键设计选择有对比分析。速查卡片可借鉴字段具体 (4维分解+LLM标注迁移性)。"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率高 (>90%),所有表格数据标注 [Table I]/[Table II]。指标名使用正确 (WER/SIM-O/CMOS/Emotion MOS/SER)。速查指标含具体数字+数据集+来源。"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率约 85% — 方法节主要 WHY 解释均标注了 [论文原文] 或 [agent 解读]。局限性中的推断也标注了 [agent 解读]。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位 (Emo-DPO → RLAIF-SPA),与 DiffRO/Multi-Reward GRPO/EmoSteer-TTS/TTS-CtrlNet 多路线对比清晰。创新判断有对比基准。"
+  不污染:
+    satisfied: true
+    notes: "反向更新预期为 append (加 key_papers),不改 status。无新建概念页需求。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter models 字段
+    detail: "models 字段列了 Whisper 和 WavLM,它们是评估工具而非本文提出或主要对比的 baseline 模型。Chat-TTS (base model) 和 MiniCPM-O (backbone) 未列入。"
+    suggestion: "models 改为 Chat-TTS (未有模型页,可省略) 和对比 baseline,或标注为评估工具。至少说明 MiniCPM-O 2.6 作为 base model。"
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: 速查卡片 指标字段
+    detail: "CMOS 值 7.23 标注为 [Table I],但论文 Table I 的 CMOS 列标题为 'CMOS↑' 实际上应为绝对 MOS 分数 (7分制),不是标准 CMOS (差分 MOS)。笔记中标签写作 'CMOS' 可能误导读者认为是差分值。"
+    suggestion: "确认论文中 CMOS 的定义。根据论文描述 'CMOS for overall quality (covering clarity, naturalness, and high-frequency details)' [§IV],这是绝对 MOS 而非差分 MOS。在笔记中注明 '论文使用 CMOS 指代绝对综合 MOS (7分制),非标准差分 CMOS'。"
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: 可复用的 idea 第3条
+    detail: "'Attribute-wise binary match reward' 描述较抽象,可加入具体应用场景。"
+    suggestion: "补充示例: 例如多语言 TTS 中可对 language/accent/register 各维度做 binary match reward。"
