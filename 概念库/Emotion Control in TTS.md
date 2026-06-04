@@ -176,6 +176,10 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 [[论文笔记/EmoSSLSphere|EmoSSLSphere]] (Park & Nakamura, SSW 2025) 在 EmoSphere-TTS 基础上向多语言和 SSL 韵律建模方向扩展。核心增量: (1) HuBERT 第 9 层特征经语言分别 k-means (K=200) 离散化为韵律 token,提供与球面 AVD 互补的局部韵律控制信号; (2) DeBERTaV3 语义编码器通过 cross-attention 条件化情感/韵律模块,实现语义感知的情感生成。在英日双语 (ESD/JVNV) 上优于 EmoSphere-TTS (EN WER 19.58% vs 20.96%, JA CER 18.33% vs 19.26%; nMOS EN 4.13 vs 4.05, JA 3.94 vs 3.63 [Table 1, 2])。消融显示 k-means 离散化优于连续 HuBERT 特征,语言分别聚类的 token 实际捕获了通用韵律模式。局限: 仅单说话人小规模实验,无零样本能力,未与 EmoSphere++ 或 LLM-TTS 对比。详见 [[论文笔记/EmoSSLSphere|EmoSSLSphere]]。
 
+## Robust Reward Model for Emotional TTS (RRPO)
+
+[[论文笔记/RRPO|RRPO]] (Wang et al., Tongyi Lab, 2026) 从 reward model 鲁棒性角度切入情感控制: 在 DiffRO 框架中,vanilla SER RM 会被 policy 通过生成声学伪影 (嘴部咔嗒声、爆破音) 欺骗获取虚假奖励 (reward hacking),导致 E-MOS 提升但 N-MOS 反降。核心方法: 三层混合正则化 fine-tune RM — Label Smoothing (修正过度自信) + Energy-Adaptive Mixup (基于语音能量平滑决策边界) + Adversarial Training (在高层 embedding 上增强扰动鲁棒性)。CosyVoice2 上 E-MOS 3.78 / N-MOS 3.81 均为最优; SER WA ESD 64.4→81.7% [RRPO Table 1, Table 2]。与 DiffRO-MTR 路线 (零样本情感) 互补: DiffRO-MTR 关注"用 SER reward 引导情感学习",RRPO 关注"确保 SER reward 本身可靠"。与 RLAIF-SPA 的区别: RLAIF-SPA 在 audio 空间用多维结构化反馈,RRPO 在 token 空间通过加固 RM 从根源阻止 hacking。详见 [[论文笔记/RRPO|RRPO]]。
+
 ## Self-Training 词级情感控制 (WeSCon)
 
 [[论文笔记/WeSCon|WeSCon]] (Wang et al., NeurIPS 2025) 提出首个不依赖含 intra-sentence 情感转换数据的 word-level 情感和语速联合控制框架。核心方法: 两阶段 self-training — (1) Teacher: 冻结 CosyVoice2 backbone,通过多轮推理 (每段用不同情感 prompt) + transition smoothing (tail-to-head linkage) + dynamic speed control (prompt token 插值/下采样) 实现 word-level 控制; (2) Student: CosyVoice2 + Dynamic Emotional Attention Bias (DEAB,7 种预定义 attention bias 模板的加权组合) 在 teacher 伪标签上 self-training,实现端到端单次推理。仅用 ~500h 公开 ESD 数据 (无情感转换标注),Emo2v. 0.882 / DNSV 4.361 (EN) 全面超越 CosyVoice2 (0.866 / 7.894) 和 F5-TTS/Index-TTS,EMOS 3.70±0.17, NMOS 3.93±0.20; 零样本 TTS 性能几乎无损 (CER 1.47 vs 1.45)。与 EmoCtrl-TTS 的核心区别: 不需要 27k h 含情感转换的伪标签数据; 与 TTS-CtrlNet 的区别: 控制粒度为词级 (非帧级),通过 self-training 蒸馏而非 ControlNet 旁挂。详见 [[论文笔记/WeSCon|WeSCon]]。

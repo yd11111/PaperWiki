@@ -93,3 +93,7 @@ Liu et al. (2025) [[论文笔记/GRPO-TTS|GRPO-TTS]] 提出用现成 ASR 模型 
 ## DPO for Autoregressive Diffusion / ARDM-DPO (CUHK-SZ + ByteDance, 2025)
 
 Liu et al. (2025) [[论文笔记/ARDM-DPO|ARDM-DPO]] 首次将 DPO 扩展到**连续 token 自回归扩散模型 (ARDM)**,填补了 next-token diffusion 范式下偏好对齐的空白。核心推导: 将 ARDM 采样视为 (token index n, diffusion time t) 双重索引的马尔可夫链,通过 Jensen 不等式近似将 DPO 目标分解为逐 token-timestep 的 denoising loss 比较。在 DiTAR (0.4B) 上验证: Task A (F0V 14.2→29.2 Hz, 表现力翻倍) + Task B (CER 8.37→6.32, 鲁棒性 25% 改善),均保持 SIM 无显著损失 (KL ~0.01)。与 DiffRO/GRPO 等路线的核心区别: 对象是连续 token ARDM 而非离散 token LM 或 NAR diffusion。
+
+## Robust Reward Model for DiffRO / RRPO (Tongyi Lab, 2026)
+
+Wang et al. (2026) [[论文笔记/RRPO|RRPO]] 识别并解决了 DiffRO 的 reward hacking 脆弱性: DiffRO 的全可微优化使 RM 缺陷被解析梯度精确放大,vanilla SER RM 的过度自信、脆弱决策边界和扰动敏感性使 policy 可通过生成声学伪影 (如不自然的嘴部咔嗒声) 骗取虚假奖励。核心方法: 三层混合正则化 fine-tune RM — (1) Label Smoothing 修正离散情感标签导致的过度自信; (2) Energy-Adaptive Mixup 基于语音能量自适应混合平滑决策边界; (3) Adversarial Training 在高层 embedding 上增强扰动鲁棒性。在 CosyVoice2 上验证: E-MOS 3.78 / N-MOS 3.81 (DiffRO: 3.65 / 3.61); SER WA 在 ESD 上 64.4→81.7%,跨语言 IEMOCAP 66.0→68.0% [RRPO Table 1, Table 2]。与 DiffRO 的核心区别: 不改 policy optimization 算法,仅强化 RM 质量;填补了 DiffRO 演进线中"RM 鲁棒性保障"的空白。
