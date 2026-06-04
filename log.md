@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[MCLP]] — 命中 6 页(取 6): [[LLM-based TTS]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Style Transfer in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[MCLP]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTS Evaluation, Differentiable Reward Optimization)
+- [skip/update] [[LLM-based TTS]] — key_papers 已达上限(103),连接过于泛化跳过
+- [skip/update] [[Style Transfer in TTS]] — key_papers 已达上限(40),本文关注 stylistic consistency 而非 style transfer
+- [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(65),本文论点是情感分类不足以衡量 role-play style
+- [skip/update] [[Instruction-Guided Speech Synthesis]] — key_papers 已达上限(26),本文非 instruct-TTS 系统
+- [review/auto] [[MCLP]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [review/kb] [[MCLP]] — pass, 0 issues
+- [lint/local] MCLP — 通过/0 issues
 - [kb/search] [[TED-TTS]] — 命中 6 页(取 6): [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓, [[CosyVoice 2]]✓ | 过滤: [[Emotion Control in TTS]](pending-review)
 - [ingest/deep] [[TED-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 2)
 - [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(65),已有 TED-TTS 演进线+段落(前次操作)
