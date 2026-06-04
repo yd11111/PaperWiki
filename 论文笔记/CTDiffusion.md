@@ -90,7 +90,7 @@ OPT-125M (causal LLM backbone)
 - **变长控制**: LM head 预测 `<speech_bos>` 启动语音生成,每帧预测 `<cont_speech_gen>` 表示继续生成,预测 `<eos>` 终止。这让模型自主决定语音长度,无需外部 duration predictor 或 oracle endpoint。
 - **多任务兼容**: 保留 LM head 使模型可在 MLLM 框架内与其他模态任务共存,不需要额外的 classifier 模块。
 
-[agent 解读] `<cont_speech_gen>` token 虽然推理时不被输出到序列中,但训练时对每帧都提供 dense cross-entropy supervision,这避免了模型在只有首尾 boundary token 监督时可能出现的 premature EOS 问题。这个设计比 VALL-E 的外部 classifier [§3.2] 更优雅。
+[agent 解读] `<cont_speech_gen>` token 虽然推理时不被输出到序列中,但训练时对每帧都提供 dense cross-entropy supervision,可能缓解模型在只有首尾 boundary token 监督时的 premature EOS 倾向(论文未做该消融,仅称"reduces the risk" [§3.2])。这个设计比 VALL-E 的外部 classifier 更统一。
 
 **2. Masked training — 为什么 30% 是最优?**
 
@@ -176,7 +176,7 @@ OPT-125M (causal LLM backbone)
 
 1. **Two-stage training for LM + diffusion head**: 先联合训练使 LM 适应任务,再冻结 LM 单独优化 diffusion head。这个策略对任何 "backbone + lightweight generative head" 架构都适用,核心洞察是 head 需要稳态输入分布才能精细优化。
 2. **Dense control token supervision**: 在每帧位置用 `<cont_speech_gen>` 提供 cross-entropy supervision 信号,而非仅在 boundary 提供。可推广到所有需要变长生成的场景。
-3. **Masking ratio 调参**: 30% 是连续 AR 语音生成中 exposure bias mitigation 的经验最优点,比 BERT 的 15% 高,比 50% 低。
+3. **Masking ratio 调参**: 在本文的 3-layer diffusion head + 64-dim VAE 设置下,30% 是连续 AR 语音生成中 exposure bias mitigation 的经验最优点,比 BERT 的 15% 高,比 50% 低。不同 head depth 或 latent 维度下最优值可能不同。
 
 > [!review] 审阅
 > 待审阅 — 见 `_review/CTDiffusion-review.yml`

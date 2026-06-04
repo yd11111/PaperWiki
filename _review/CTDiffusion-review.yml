@@ -1,0 +1,50 @@
+paper: "[[论文笔记/CTDiffusion]]"
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含完整因果解释(WHY): dual-head 保留多任务兼容性, masked training 缓解 exposure bias, two-stage 解决 distribution drift。每个设计选择有'为什么选这个'的解释。速查卡片可借鉴字段列出 3 个具体可迁移 trick。"
+  可信赖:
+    satisfied: true
+    notes: "所有数字均有来源标注 ([Table N], [§X.X])。指标名正确 (WER/SIM/UTMOS)。速查卡片指标字段含具体数字+数据集+来源。"
+  可区分:
+    satisfied: true
+    notes: "方法节中 [论文原文] 和 [agent 解读] 标注覆盖率 ~90%。主要推断性分析均有 [agent 解读] 标记。"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位(LatentLM→CLEAR→VibeVoice 路线)。创新判断有对比基准(与 LatentLM、CLEAR 的差异)。frontmatter 字段齐全。"
+  不污染:
+    satisfied: true
+    notes: "不创建新概念页。反向更新仅 append key_papers,不改 status。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter.datasets
+    detail: "datasets 字段为空 [],但论文使用 LibriVox 50K h 训练 + LibriSpeech(PC) test-clean 评估。应至少引用评估数据集。"
+    suggestion: "无对应数据集实体页,记为 [待决],不创建。在 frontmatter datasets 中注释说明。"
+    action: "标注后放行"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "方法节 - 关键设计选择 1"
+    detail: "Dual-head 的 [agent 解读] 中提到 'premature EOS 问题',此判断缺少论文实验佐证。论文只说 'reduces the risk' [§3.2] 但未做消融对比有无 <cont_speech_gen> 的 EOS 准确率差异。"
+    suggestion: "将 'premature EOS 问题' 的措辞弱化为 '可能缓解 premature EOS 倾向',保持 [agent 解读] 标记。"
+    action: "建议修正但不阻塞"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea - 第 3 条"
+    detail: "'30% 是经验最优点' 的表述过于绝对,这只是本文 3-layer diffusion head 的消融结果,12-layer 是否相同未验证。"
+    suggestion: "加限定语: '在本文的 3-layer head + VAE 64-dim 设置下'。"
+    action: "建议修正,可后续批量改善"
