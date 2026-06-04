@@ -2,7 +2,7 @@ review:
   paper: "MambaVoiceCloning"
   reviewer: auto
   date: 2026-06-04
-  conclusion: pass-with-fixes
+  conclusion: pass
 
   principles:
     可复述:
@@ -37,6 +37,7 @@ review:
       location: "方法: MVC > Gated Bi-Mamba Text Encoder, L84"
       detail: "'Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合' 是论文作者的 claim (§3.2.1),但缺少 [论文原文] 标注,读者可能误解为已确认事实。"
       suggestion: "在句末添加 [论文原文] 标注"
+      status: fixed
 
     - id: 2
       severity: low
