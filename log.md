@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[FuseCodec]] — 命中 6 页(取 6): [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[模型库/EnCodec|EnCodec]]✓, [[模型库/SoundStream|SoundStream]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review), [[Codec Language Model]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
+- [ingest/deep] [[FuseCodec]] — 精读, kb_sources=6, 新建 0, 追加 4 (RVQ/Speech Tokenizer/Semantic vs Acoustic Tokens/SoundStream key_papers), MOC 更新 1 (语音编码与量化)
+- [review/auto] [[FuseCodec]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed, 1 low)
+- [lint/local] FuseCodec — 通过 (0 死链)
 - [kb/search] [[LatinX]] — 命中 6 页(取 Top 6): [[LLM-based TTS]]✓, [[Cross-lingual Voice Cloning]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](待确认), [[Codec Language Model]](待确认), [[Voice Cloning Taxonomy]](待确认)
 - [ingest/deep] [[LatinX]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS/Codec Language Model/Cross-lingual Voice Cloning/Speaker Embedding/Differentiable Reward Optimization/Voice Cloning Taxonomy key_papers), MOC 更新 2 (零样本语音合成/TTS训练与评估)
 - [review/auto] [[LatinX]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed, 1 low)
