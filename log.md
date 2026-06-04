@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[TED-TTS]] — 命中 6 页(取 6): [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓, [[CosyVoice 2]]✓ | 过滤: [[Emotion Control in TTS]](pending-review)
+- [ingest/deep] [[TED-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 2)
+- [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(65),已有 TED-TTS 演进线+段落(前次操作)
+- [skip/update] [[Prosody Modeling]] — key_papers 已达上限(52),页面过载跳过
+- [review/auto] [[TED-TTS]] — pass, 0 issues
+- [review/kb] [[TED-TTS]] — pass, 0 issues
+- [lint/local] TED-TTS — 通过/0 issues
 - [review/auto] [[MambaVoiceCloning]] — pass, 2 issues (0 high, 0 medium, 2 low); 补充局限性/点评/可复用idea,修正source字段,去重review callout
 - [lint/local] MambaVoiceCloning — 通过/0 issues
 - [skip/update] [[Duration Predictor]] — key_papers 已达上限(22),跳过追加
