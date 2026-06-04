@@ -17,7 +17,7 @@
 - [ingest/deep] [[DAIEN-TTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (Conditional Flow Matching/Classifier-Free Guidance/Speech Factorization/Zero-shot Speech Synthesis key_papers), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[DAIEN-TTS]] — pass-with-fixes, 1 issue (0 high, 1 medium fixed, 0 low)
 - [lint/local] DAIEN-TTS — 通过 (0 死链)
-- [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核- [kb/search] [[DeepDubbing]] — 命中 6 页(取 6): [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认)
 - [ingest/deep] [[DeepDubbing]] — 精读, kb_sources=6, 新建 0, 追加 10 (CFM/Speaker Embedding/CosyVoice/LLM-based TTS/Instruction-Guided SS/NL Description TTS/CFG/Emotion Control/BigVGAN/Prosody Modeling key_papers + Instructed Speech Generation key_models), MOC 更新 1 (TTS-总览)
 - [review/auto] [[DeepDubbing]] — pass, 2 issues (0 high, 0 medium, 2 low)
 - [lint/local] DeepDubbing — 通过 (0 死链)
