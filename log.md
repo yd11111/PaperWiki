@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[No Verifiable Reward for Prosody]] — 命中 6 页(取 6): [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 参考(待确认): [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[F0 Modeling]]
+- [ingest/deep] [[No Verifiable Reward for Prosody]] — 精读, kb_sources=6, 新建 0, 追加 4 实体页 key_papers + 1 实体页内容段落
+- [review/auto] [[No Verifiable Reward for Prosody]] — pass, 0 issues
+- [lint/local] No Verifiable Reward for Prosody — 通过 (0 dead links), MOC 已包含 (TTS训练与评估)
 - [kb/search] [[HiStyle]] — 命中 6 页(取 6): [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion Model]](pending-review)
 - [ingest/deep] [[HiStyle]] — 精读, kb_sources=6, 新建 0, 追加 6 实体页 key_papers, MOC 已包含 (TTS-总览)
 - [review/auto] [[HiStyle]] — pass, 2 issues (0 high, 0 medium, 2 low)
