@@ -9,7 +9,7 @@ year: 2026
 venue: "Preprint"
 tags: [unified-audio-generation, audio-scene, flow-matching, DiT, structured-caption, semantic-acoustic-representation, text-to-audio, text-to-speech, text-to-music]
 concepts: ["[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Semantic vs Acoustic Tokens]]", "[[Audio-Language Pretraining]]", "[[Diffusion-based TTS]]"]
-models: ["[[VITS]]", "[[EnCodec]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -144,8 +144,8 @@ DiT 每层包含 self-attention + cross-attention:
 
 ### 人类评估 (Fig 4)
 
-- OVL (整体质量): Dasheng AudioGen 与 ground truth 差异仅在 0M0/0MA 显著 (dz=0.54, p<0.05); 所有语音混合类别 (S00/S0A/SM0/SMA) 显著优于 Expert-Pipeline (p<0.01, dz>0.85)
-- REL (文本相关性): 仅 S0A 类别与 ground truth 有显著差异; Expert-Pipeline 在所有语音类别与 ground truth 均有显著差距 (dz=1.89-2.54)
+- OVL (整体质量): Dasheng AudioGen 与 ground truth 差异仅在 0M0/0MA 显著 (dz=0.54, p<0.05) [Fig 4]; 所有语音混合类别 (S00/S0A/SM0/SMA) 显著优于 Expert-Pipeline (p<0.01, dz>0.85) [Fig 4]
+- REL (文本相关性): 仅 S0A 类别与 ground truth 有显著差异; Expert-Pipeline 在所有语音类别与 ground truth 均有显著差距 (dz=1.89-2.54) [Fig 4]
 
 ## 局限性
 
@@ -180,3 +180,19 @@ DiT 每层包含 self-attention + cross-attention:
 ---
 
 检索命中: [[Conditional Flow Matching]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Audio-Language Pretraining]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Diffusion-based TTS]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,设计选择有对比论证 |
+> | 可信赖 | pass | 数字 claim 出处覆盖率 >90%,指标正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 100% |
+> | 可定位 | pass | KB 谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 无新建实体页,反向更新为安全追加 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/Dasheng AudioGen-review.yml`

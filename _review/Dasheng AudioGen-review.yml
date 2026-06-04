@@ -1,0 +1,37 @@
+reviewer: auto
+date: 2026-06-04
+note: "论文笔记/Dasheng AudioGen.md"
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节包含清晰的因果解释(为什么用结构化 caption、为什么用高维表征替代 VAE latent),设计选择有对比论证。速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: 9
+    reason: "数字型 claim 均有 [Table N]/[§X.X] 标注,覆盖率 >90%。指标名使用正确,无方向性错误。速查卡片指标字段含具体数字+数据集+baseline 对比。"
+  可区分:
+    score: 9
+    reason: "方法节严格区分了 [论文原文] 和 [agent 解读],覆盖率 100%。无推断写成断言的情况。'首个非自回归统一模型'等 claim 均有论文原文支撑。"
+  可定位:
+    score: 8
+    reason: "KB 背景有具体谱系定位(CosyVoice 系列、UniAudio、AudioX、UniFlow-Audio),创新判断有对比基准。但 frontmatter models 字段语义不够精确。"
+  不污染:
+    score: 9
+    reason: "未提议新建概念页。concepts 引用均为已有实体。反向更新仅为追加 key_papers,不涉及实质修改。"
+
+issues:
+  - id: 1
+    type: bad-linking
+    severity: medium
+    location: "frontmatter.models"
+    detail: "models 字段列出 [[VITS]] 和 [[EnCodec]],但两者均非本文主要 baseline。VITS 仅在 Related Work 简单提及,EnCodec 仅作为 MusicGen 的组件间接出现。本文的实际 baseline 是 AudioLDM2/TangoFlux/MusicGen/Qwen3-TTS/AudioX/UniFlow-Audio,但多数无现有模型页。"
+    suggestion: "清空 models 字段(无现有模型页可合理链接),或等对应模型页建立后再补充。"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验节 人类评估段"
+    detail: "人类评估结果引用了 'dz=0.54, p<0.05' 等统计量但未标注 [Fig 4]。"
+    suggestion: "补充 [Fig 4] 出处标注。"
+
+learning_signals: []
