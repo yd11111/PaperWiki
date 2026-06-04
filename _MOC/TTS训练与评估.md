@@ -55,6 +55,7 @@
 - [[论文笔记/TITW|TITW]] — 2024, 首批标准化 noisy-TTS 训练数据集(VoxCeleb1→TITW-Easy 173h/Hard 189h), DNSMOS 过滤 pipeline + KSKT/KSUT 评估协议
 - [[论文笔记/StoryTTS|StoryTTS]] — 2024, 61h 中文评书表现力数据集, LLM 五维度文本表现力标注, MOS 4.09
 - [[论文笔记/SpeechWeave|SpeechWeave]] — 2025, ACL Industry, 合成 TTS 训练数据管线(keyphrase diversity + at-source normalization + 跨语言说话人标准化), 多样性↑10-48%, 规范化准确率 97%
+- [[论文笔记/LibriQuote|LibriQuote]] — 2025 (ACL 2026 Findings), 叙事感知有声书表现力数据集(5.3K h 台词 + 12.7K h 叙述 + speech verb/adverb 伪标签), LALM-based 表现力评估 (ContextMOS/Win-Rate), F5-TTS 微调显著优于 SparkTTS 微调
 
 ## 相关任务
 - [[Zero-shot Speech Synthesis]]
