@@ -13,6 +13,7 @@
 - [ingest/deep] [[TTS-1]] — 精读, kb_sources=6, 新建 0, 追加 6 (LLM-based TTS/Speech Language Model/Differentiable Reward Optimization/Single-codebook vs Multi-codebook/Emotion Control in TTS/Zero-shot Speech Synthesis key_papers + SEED-TTS-Eval used_by), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[TTS-1]] — pass-with-fixes, 4 issues (1 medium, 3 low)
 - [lint/local] TTS-1 — 通过 (0 dead links)
+- [alert/backlog] pending-review: 71, draft deep/repro: 177 — 建议抽空审核
 - [kb/search] [[VARSTok]] — 命中 6 页(取 6): [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Duration Predictor]](pending-review), [[Codec Language Model]](pending-review)
 - [ingest/deep] [[VARSTok]] — 精读, kb_sources=6, 新建 0, 追加 6 (Speech Tokenizer/Token Rate/Single-codebook/Codebook Collapse/Duration Predictor/Neural Audio Compression key_papers), MOC 更新 1 (语音编码与量化)
 - [review/auto] [[VARSTok]] — pass, 0 issues
