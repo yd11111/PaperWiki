@@ -1,0 +1,59 @@
+paper: Ming-UniAudio
+reviewer: agent
+date: 2026-06-04
+conclusion: pass-with-fixes
+issue_count: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  reproducible: pass
+  trustworthy: pass-with-fixes
+  distinguishable: pass
+  navigable: pass
+  no_pollution: pass
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "局限性 §1 / 速查卡片 局限"
+    detail: "原写 SIM 0.55-0.64 来自消融表 Table 5 (Qwen-0.5B 小模型),不代表最终 16.8B 模型表现"
+    suggestion: "已修正为引用 Table 3 MingTok-Audio-TTS 数据 (SIM 0.75/0.68),标注最终模型未报告"
+    fixed: true
+
+  - type: traceability-gap
+    severity: medium
+    location: "实验 / 语音生成 (TTS)"
+    detail: "Table 13 中 Ming-UniAudio 的 SIM 列为空,论文未解释;笔记标注了 '未报告' 但无法确认原因"
+    suggestion: "保留当前标注;如论文后续版本补充则更新"
+    fixed: false
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea §6"
+    detail: "Pooling > Cross-Attention 结论仅在 Qwen-0.5B 上验证 [Table 4],大模型迁移性未知"
+    suggestion: "已在笔记中标注出处 [Table 4],读者可自行判断"
+    fixed: false
+
+checklist:
+  method_has_why: true
+  design_choices_why_not: true
+  quickcard_reusable_concrete: true
+  claim_citation_coverage: ">90%"
+  metric_names_correct: true
+  quickcard_metrics_specific: true
+  no_direction_errors: true
+  source_labels_present: true
+  source_label_coverage: ">90%"
+  no_inference_as_assertion: true
+  strong_claims_supported: true
+  kb_lineage_specific: true
+  kb_innovation_has_baseline: true
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true
+  quickcard_all_five_substantive: true
+  new_concepts_meet_criteria: N/A
+  dedup_check_done: N/A
+  reverse_update_no_error: pending
+  reverse_update_correct_type: pending

@@ -43,7 +43,7 @@ updated: 2026-06-04
 > - **路线**: 音频 → MingTok-Audio (causal transformer VAE, 3 阶段训练) → 统一特征 Zuni (高维, LLM 输入) / Zlatent (低维, flow matching 用) → MoE LLM (16.8B, 2.8B active) → text head (理解) / per-token flow matching head (生成/编辑) → MingTok-Audio decoder → 波形
 > - **指标**: 中文 voice cloning Seed-TTS-WER **0.95%** (SOTA) [Table 13]; ContextASR 12 项中 **8 项 SOTA** [Table 12]; tokenizer PESQ **4.21** vs MiMo 2.71 / EnCodec 2.19 [Table 2]
 > - **可借鉴**: (1) semantic module freezing 策略 — 联合训练初期冻结 tokenizer 中的语义模块防 representation drift,性能差异显著 (AVG WER 4.35 vs 6.86) [Table 5]; (2) 语义编辑用 CoT + [MASK] 显式定位编辑区域; (3) diffusion head 预训练初始化可 2x 加速收敛 [Table 5, Fig 5b]
-> - **局限**: SIM 指标偏低 (Seed-zh 0.75 vs CosyVoice 3 的 0.78, Seed-en SIM 未报告); 语义编辑 deletion accuracy 偏低 (zh 100/83%, en 82/85%); pitch alteration 的 SIM 仅 0.36/0.24; 无 MOS 主观评测
+> - **局限**: SIM 指标偏低 (MingTok-Audio-TTS: Seed-zh SIM 0.75, Seed-en SIM 0.68 [Table 3],低于 CosyVoice 3 的 0.78;最终统一模型未报告 SIM); 语义编辑 deletion WER 偏高 (22.92/27.60) [Table 14]; pitch alteration 的 SIM 仅 0.36/0.24 [Table 14]; 无 MOS 主观评测
 
 ## 核心问题
 
@@ -191,8 +191,12 @@ ContextASR: 12 项 subtask 中 **8 项 SOTA**,尤其在 NE-WER 和 NE-FNR 指标
 5. **Stopping criterion 的弱监督策略**: 对连续 token 的 EOS 检测采用 online hard negative mining,仅标注最后一帧为正样本,实用且低成本 [§5.2]
 6. **Pooling > Cross-Attention 做 token 压缩**: 简单 pooling 在理解和生成上都优于复杂的 cross-attention compressor [Table 4],提示 "简单传递" 比 "复杂变换" 更保真
 
-> [!review] 审阅状态
-> 待审阅 — 将在 Step 3.5 自动触发
+> [!review] 审阅: pass-with-fixes (2 medium, 1 low)
+> - **[medium/traceability-gap]** 局限性 §1 原写 "SIM 0.55-0.64" 来自消融表 (Qwen-0.5B 小模型),与最终 16.8B 模型不可直接对应 → 已修正为引用 Table 3 MingTok-Audio-TTS 数据 + 标注最终模型未报告
+> - **[medium/traceability-gap]** Table 13 SIM 列 Ming-UniAudio 空缺,但论文未解释原因;笔记中已标注 "未报告" 但无法确认是有意回避还是遗漏
+> - **[low/weak-reusability]** "Pooling > Cross-Attention" 结论仅在 Qwen-0.5B 小模型上验证 [Table 4],对大模型的迁移性未知
+> 
+> 审阅通过,可继续反向更新。
 
 ---
 
