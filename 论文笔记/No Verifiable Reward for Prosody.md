@@ -174,5 +174,6 @@ Llasa-1B checkpoint
 4. **F0 分布可视化作为韵律诊断工具**: logF0 distribution 比较是检测韵律坍缩的简单有效手段 [Fig 2]
 5. **反面教训 — speaker-similarity 作为 reward 的不稳定性**: 提醒设计 multi-reward 时需注意各 reward 维度之间的兼容性
 
-> [!review] 审阅状态
-> 待审阅。审阅报告见 `_review/No Verifiable Reward for Prosody-review.yml`。
+> [!review] 审阅: pass (2026-06-04)
+> 5 原则均满足,无 high/medium issue。datasets 字段为空 (KoCC-TTS 未建页) 为 low severity,不阻塞。
+> 详见 `_review/No Verifiable Reward for Prosody-review.yml`。

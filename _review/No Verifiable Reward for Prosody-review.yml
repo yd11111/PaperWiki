@@ -1,0 +1,130 @@
+paper: "No Verifiable Reward for Prosody"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含因果解释 (WHY),不是组件罗列;GRPO 失败原因、DPO 设计选择均有解释"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 有出处标注,指标名正确 (CER/ELO),速查卡片含具体数字"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读],区分清晰"
+  可定位:
+    satisfied: true
+    notes: "KB 背景有具体谱系定位,包含论文名和演进路线;与 Multi-Reward GRPO/FPO/DiffRO 的对比关系清晰"
+  不污染:
+    satisfied: true
+    notes: "反向更新仅为 key_papers 追加,不涉及实质修改;无新概念页需创建"
+
+checks:
+  - id: mechanism-explanation
+    principle: 可复述
+    result: pass
+    detail: "方法节解释了 WHY: 调和平均 reward 的设计动机、speaker-similarity 失败原因、moving reference 的理由"
+
+  - id: design-choice-why
+    principle: 可复述
+    result: pass
+    detail: "三个关键设计选择均有'为什么选这个'的解释"
+
+  - id: reusability-concrete
+    principle: 可复述
+    result: pass
+    detail: "速查'可借鉴'描述具体 (moving reference + 不跨轮复用的设计);可复用 idea 有 5 条具体条目"
+
+  - id: claim-traceability
+    principle: 可信赖
+    result: pass
+    detail: "CER/ELO 数字标注 [Table 1],GRPO 韵律坍缩引用 [§4.3, Fig 2],reward 公式引用 [§3.3.1]。覆盖率 >80%"
+
+  - id: metric-correctness
+    principle: 可信赖
+    result: pass
+    detail: "CER(字符错误率)和ELO正确使用;CER↓/ELO↑方向标注正确"
+
+  - id: quickcard-metrics
+    principle: 可信赖
+    result: pass
+    detail: "速查指标字段含具体数字 + 来源标注 [Table 1]"
+
+  - id: no-direction-error
+    principle: 可信赖
+    result: pass
+    detail: "无方向性错误"
+
+  - id: source-annotation
+    principle: 可区分
+    result: pass
+    detail: "方法节中的 WHY 解释均标注了 [论文原文] 或 [agent 解读]"
+
+  - id: source-annotation-coverage
+    principle: 可区分
+    result: pass
+    detail: "因果解释来源标注覆盖率 ~90%"
+
+  - id: no-assertion-without-evidence
+    principle: 可区分
+    result: pass
+    detail: "推断语句使用'作者假设'(§4.5)、'agent 解读'标注;无断言性推测"
+
+  - id: strong-claim-check
+    principle: 可区分
+    result: pass
+    detail: "无'SOTA/唯一/全面优于'等过强断言"
+
+  - id: kb-lineage
+    principle: 可定位
+    result: pass
+    detail: "KB 背景节谱系定位含具体论文名和演进路线"
+
+  - id: kb-innovation-baseline
+    principle: 可定位
+    result: pass
+    detail: "创新判断以 SpeechAlign/FPO/DiffRO 为对比基准"
+
+  - id: frontmatter-present
+    principle: 可定位
+    result: pass-with-note
+    severity: low
+    detail: "datasets 为空 — 论文发布了 KoCC-TTS 数据集但 vault 中无对应页面,可待后续创建"
+    location: "frontmatter"
+    suggestion: "可在 datasets 中标注 KoCC-TTS 或在数据集库创建页面"
+
+  - id: frontmatter-semantics
+    principle: 可定位
+    result: pass
+    detail: "models 列了 Llasa (本文 backbone) 和 Whisper (ASR 工具);concepts 覆盖主要概念"
+
+  - id: quickcard-completeness
+    principle: 可定位
+    result: pass
+    detail: "速查 5 字段均有实质内容"
+
+  - id: concept-admission
+    principle: 不污染
+    result: pass
+    detail: "未新建概念页"
+
+  - id: dedup-check
+    principle: 不污染
+    result: pass
+    detail: "未新建实体页,无去重需求"
+
+  - id: backward-update-accuracy
+    principle: 不污染
+    result: pass
+    detail: "反向更新仅追加 key_papers,无实质性修改"
+
+  - id: backward-update-classification
+    principle: 不污染
+    result: pass
+    detail: "追加操作不改变 status,分类正确"
+
+issues: []
+
+conclusion: pass
+summary: "笔记质量良好。机制解释充分,来源标注清晰,KB 定位准确。唯一 minor 点是 datasets 字段为空 (KoCC-TTS 未创建实体页),不影响反向更新。可直接进行反向更新。"
