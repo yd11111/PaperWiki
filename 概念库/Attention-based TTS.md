@@ -4,7 +4,7 @@ title: "Attention-based TTS"
 aliases: [Tacotron系列, Encoder-Attention-Decoder TTS, Seq2Seq TTS, 注意力机制TTS]
 category: "model-family"
 tags: [TTS, autoregressive, attention, seq2seq, acoustic-model]
-key_papers: ["[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]"]
+key_papers: ["[[论文笔记/Very Attentive Tacotron|Very Attentive Tacotron (Battenberg et al., 2025)]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Text-to-Speech Pipeline]]", "[[Neural Vocoder]]"]
 status: pending-review
@@ -111,4 +111,4 @@ TTS 中的注意力需满足三个约束:
 
 ## 演进
 
-Tacotron (2017) → Tacotron 2 (2017.12) → TransformerTTS (2018) → **FastSpeech 取代 attention** (2019) → DurIAN/Non-Att Tacotron (混合形态) → 现代 LLM-TTS 回归 AR 但用 discrete tokens (VALL-E, 2023) → **Very Attentive Tacotron** (2025, 用 IRPB + latent alignment 解决 attention robustness,保留多头多层 cross-attention 的灵活性)
+Tacotron (2017) → Tacotron 2 (2017.12) → TransformerTTS (2018) → **FastSpeech 取代 attention** (2019) → DurIAN/Non-Att Tacotron (混合形态) → 现代 LLM-TTS 回归 AR 但用 discrete tokens (VALL-E, 2023) → **Very Attentive Tacotron** (2025, 用 IRPB + latent alignment 解决 attention robustness,保留多头多层 cross-attention 的灵活性) → **MambaVoiceCloning** (2026, 用 SSM 完全替代推理时 attention conditioning,gated bi-Mamba + AdaLN 在 protocol-matched 实验下小幅超越 StyleTTS2)

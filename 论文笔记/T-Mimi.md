@@ -8,9 +8,9 @@ authors: [Haibin Wu, Bach Viet Do, Naveen Suda, Julian Chan, Madhavan C R, Gene-
 year: 2026
 venue: "arXiv"
 tags: [audio-codec, on-device, quantization, transformer, streaming-TTS, latency-optimization, neural-vocoder]
-concepts: ["[[Codec Training Objectives]]", "[[Multi-scale STFT Discriminator]]", "[[Speech Tokenizer]]", "[[Audio Tokenizer Taxonomy]]", "[[Neural Vocoder]]", "[[Token Rate and Bitrate Trade-offs]]"]
-models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]"]
-tasks: ["[[任务库/Neural Audio Compression|Neural Audio Compression]]"]
+concepts: ["[[Speech Tokenizer]]", "[[Codec Training Objectives]]", "[[Multi-scale STFT Discriminator]]", "[[Neural Vocoder]]", "[[Semantic vs Acoustic Tokens]]", "[[Token Rate and Bitrate Trade-offs]]"]
+models: ["[[模型库/Moshi|Moshi]]"]
+tasks: []
 datasets: []
 kb_context_sources: 6
 status: draft

@@ -47,7 +47,14 @@ updated: 2026-06-02
 
 效果: SIM 从 0.491 → 0.753 [Table 6]。优势:不改 AR LM 结构,不需外部工具。
 
-### 4. 辅助技术
+### 4. Loss Weighting + Speaker Embedding 条件化
+
+通过多目标训练的 loss 权重隐式控制 token 的属性编码偏好:
+- **Phonological Tokenizer** (Onda et al., 2026): 对 SSL phonetic tokens 做 ASR + resynthesis 多目标微调, alpha 权重连续调控 token 在 phonetic-acoustic 属性谱上的位置; vocoder 接收预训练 ECAPA-TDNN speaker embedding 作为辅助输入, 让 token 被动丢弃 speaker identity [§3.2]。ER acc 51.7% vs baseline 41.7%, SID acc 29.5% (低, 接近 phonetic baseline), 证明韵律-说话人解耦有效。详见 [[论文笔记/Phonological Tokenizer|Phonological Tokenizer]]。
+
+与对抗训练相比: 无需 GRL 或额外分类器, 解耦程度可能稍弱但实现简单; 与 self-distillation (Seed-TTS) 相比: 不需要外部 VC/TTS 构造训练对, 仅靠 loss 权重调控。
+
+### 5. 辅助技术
 
 - KL 正则化: 约束隐空间防止属性间信息共享
 - 量化: 离散化表示天然限制信息容量

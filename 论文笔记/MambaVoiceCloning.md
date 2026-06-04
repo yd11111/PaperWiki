@@ -81,7 +81,7 @@ h_{T,s} = AdaLN(h_T, e)                        [Eq. 4, style conditioning]
 - 改善长文本的韵律一致性,减少漂移 [Tables 2, 3]
 - 消融: 去除 gating → MOS-long 降至 4.02 (vs 4.16); 去除 AdaLN → 3.95 [Table 8]
 
-**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1] [论文原文]
+**Gated Bi-Mamba + AdaLN 是首次出现在 Mamba-TTS 中的组合** [§3.2.1] [论文原文] [论文原文]
 
 #### 2. Expressive Mamba Encoder [§3.2.2]
 
