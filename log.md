@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[EmoSSLSphere]] — 命中 6 页(取 Top 6): [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[Cross-lingual Voice Cloning]]✓ | 参考: [[Emotion Control in TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[HuBERT]](pending-review)
+- [ingest/deep] [[EmoSSLSphere]] — 精读, kb_sources=6, 新建 0, 追加 7 (Emotion Control/SSL Speech Rep/Prosody Modeling/Mel Spectrogram/Speaker Embedding/Non-autoregressive TTS/HuBERT key_papers), MOC 更新 1 (TTS-总览)
+- [review/auto] [[EmoSSLSphere]] — pass-with-fixes, 3 issues (0 high, 2 medium, 1 low)
+- [lint/local] EmoSSLSphere — 通过 (0 死链)
 - [kb/search] [[Cross-Lingual F5-TTS]] — 命中 7 页(取 7): [[Conditional Flow Matching]]✓, [[Cross-lingual Voice Cloning]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[Cross-Lingual F5-TTS]] — 精读, kb_sources=7, 新建 0, 追加 7 (CFM/Cross-lingual Voice Cloning/Duration Predictor/Non-autoregressive TTS/Zero-shot Speech Synthesis key_papers + Emilia/SEED-TTS-Eval used_by), MOC 更新 1 (零样本语音合成)
 - [review/auto] [[Cross-Lingual F5-TTS]] — conclusion: pass-with-fixes, 2 issues (0 high / 1 medium fixed / 1 low)
