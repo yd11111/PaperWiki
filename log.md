@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[RRPO]] — 命中 6 页(取 6): [[LLM-based TTS]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[Codec Language Model]](pending-review)
+- [ingest/deep] [[RRPO]] — 精读, kb_sources=6, 新建 0, 追加 3 实体页正文 (key_papers 超限跳过)
+- [review/auto] [[RRPO]] — pass-with-fixes, 2 issues (0 high, 1 medium fixed, 1 low)
+- [review/kb] [[RRPO]] — pass, 0 issues
+- [skip/update] [[Differentiable Reward Optimization]] — key_papers 已达上限(25),改追加到正文
+- [skip/update] [[Emotion Control in TTS]] — key_papers 已达上限(53),改追加到正文
+- [skip/update] [[CosyVoice 2]] — key_papers 已达上限(23),改追加到正文
+- [lint/local] RRPO — 通过
 - [kb/search] [[Lightweight Prompt Biasing]] — 命中 2 页(取 2): [[Whisper]](pending-review), [[LLM-enhanced ASR]](pending-review) | 过滤: 无
 - [ingest/deep] [[Lightweight Prompt Biasing]] — 精读, kb_sources=2, 新建 0, 追加 1 模型页 key_papers (Whisper)
 - [review/auto] [[Lightweight Prompt Biasing]] — pass, 0 issues
