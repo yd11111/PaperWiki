@@ -1,0 +1,39 @@
+paper: DiaMoE-TTS
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含四阶段设计的 WHY 解释,MoE 的动机(防止风格平均化)和 IPA 的价值(跨方言共享)均有因果解释"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 均标注了出处(Table 2/3, §节号);指标名(WER/MOS/UTMOSv2)使用正确"
+  可区分:
+    satisfied: true
+    notes: "因果解释标注了 [论文原文] 和 [agent 解读],覆盖率 > 80%"
+  可定位:
+    satisfied: true
+    notes: "KB 背景包含与 Cross-Lingual F5-TTS 的路线对比、与主流 zero-shot TTS (CosyVoice 3 / Qwen3-TTS) 的差距定位"
+  不污染:
+    satisfied: true
+    notes: "不新建概念页;反向更新仅为追加 key_papers(不改 status)"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "速查 > 路线"
+    detail: "路线描述中 Vocoder 未标注具体使用的 vocoder 型号(论文也未提及)"
+    suggestion: "可补注 '论文未指定 vocoder' 以标明此为推断"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 仅列 CosyVoice 2 作为 baseline,Edge TTS 和 Qwen-TTS 也是对比 baseline 但未列入"
+    suggestion: "考虑将 Edge TTS 和 Qwen-TTS 加入 models(但这两者无独立模型页,可不加)"
+
+conclusion: pass
+conclusion_reason: "五原则均满足,无 high/medium issue,仅 2 个 low issue 不阻塞反向更新"
