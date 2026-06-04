@@ -41,6 +41,7 @@
   - [[论文笔记/HiStyle|HiStyle]] — 2025, 层级 style embedding 预测器 (timbre→style 两阶段 diffusion), 文本描述引导可控语音合成
   - [[论文笔记/ParaStyleTTS|ParaStyleTTS]] — 2025, 两级风格建模 (音素级韵律 GTU + 句子级副语言 FiLM), VITS 架构文本提示可控 TTS
   - [[论文笔记/HD-PPT|HD-PPT]] — 2026, SCUT, ASR+CLAP 双监督 preference token codec + hierarchical LLM decoder 实现 Instruct-TTS 精细控制, MOS-N 4.108/MOS-S 4.167 超越 CosyVoice 2
+  - [[论文笔记/BatonVoice|BatonVoice]] — 2025, Tencent/Soochow, operationalism 范式: LLM conductor 将 NL 指令解码为显式 vocal features (pitch/energy/spectral centroid) + BatonTTS orchestra (Qwen3+CosyVoice2 decoder), 零指令数据, Emotion Acc. 57.6% 超 Minimax-2.5-HD 48.6%, 零样本跨语言中文 56.2%
 - 歌声合成 (SVS) — singing voice synthesis, technique control
   - [[论文笔记/TechSinger|TechSinger]] — 2025 (AAAI), Zhejiang Univ, 首个 flow matching 多语言多技巧 SVS, CFG 技巧控制 + 自动技巧标注 + NL prompt, MOS-C 4.10
 - 流式与实时 — streaming, low-latency
@@ -57,8 +58,8 @@
   - [[论文笔记/Traceable TTS|Traceable TTS]] — 2025, SJTU, watermark-free TTS traceability, 反转 GAN loss 实现 F5-TTS + discriminator 协同训练, 域外 AUC 0.9421 / EER 11.50%
   - [[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning]] — 2025 (ICML), 首次 ZS-TTS speaker unlearning, Teacher-Guided Unlearning 使 VoiceBox 对 forget speaker 生成随机音色
   - [[论文笔记/E2E-VGuard|E2E-VGuard]] — 2025, encoder ensemble timbre 扰动 + ASR 对抗攻击 + 心理声学感知优化, 防护 LLM-based TTS 和端到端语音克隆
-  - [[论文笔记/BatonVoice|BatonVoice]] — 2025, LLM 将 NL 指令解码为显式 vocal features (pitch/energy/spectral centroid), 再由专用 TTS 生成, 可控语音合成
   - [[论文笔记/WeSCon|WeSCon]] — 2025, 两阶段 self-training, 首次无情感转换数据条件下实现零样本 TTS word-level 情感和语速联合控制
+  - [[论文笔记/Audiobook-CC|Audiobook-CC]] — 2025, CosyVoice 2 有声书专用框架, 上下文序列建模 + prompt-target 解耦 + 情感自蒸馏, 章节级多角色可控
 - 语音工具 — forced alignment, preprocessing
   - [[论文笔记/BFA|BFA]] — 2025, CTC + universal phoneme encoder 强制对齐, 比 MFA 快 240 倍, 多语言, 显式建模音素间隙
 
