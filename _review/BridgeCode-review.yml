@@ -1,0 +1,38 @@
+paper: BridgeCode
+reviewer: agent-auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: "方法节包含 4 个 WHY 设计选择,每个有论文原文+agent解读双标注;速查卡片可借鉴字段列出 3 个具体可迁移 trick"
+  可信赖:
+    satisfied: true
+    notes: "数字型 claim 标注覆盖率 ~90%;指标名 WER/SMOS/QMOS/UTMOS/RTF 正确;方向性无误"
+  可区分:
+    satisfied: true
+    notes: "因果解释来源标注覆盖率 100% (4/4 设计选择全标注);无断言式推断"
+  可定位:
+    satisfied: true
+    notes: "KB 背景含具体谱系定位 (对比 LatentLM/CLEAR/MELLE/CosyVoice);创新判断有对比基准"
+  不污染:
+    satisfied: true
+    notes: "本次不新建概念页;反向更新为追加 (key_papers);无 factual error 风险"
+
+issues:
+  - id: 1
+    type: fact-inference-mixing
+    severity: low
+    location: "KB 背景 > 已有认知 bullet 3"
+    detail: "描述 'sparse tokens (压缩语义) vs dense continuous features (完整声学)' 中 '压缩语义' 表述不精确——BridgeCode 的 sparse tokens 压缩自 wav2vec 2.0 features (自监督表征,含语义+声学),并非纯 semantic tokens"
+    suggestion: "改为 'sparse tokens (压缩表征)' 或 'sparse tokens (压缩自监督特征)'"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "VALL-E, UniAudio, GPT-Talker 作为实验基线出现在 Table 1 但未列入 models 字段 (因无对应模型页)"
+    suggestion: "可接受——frontmatter 仅列有页面的 wikilink;实验表中已完整展示所有基线"
+
+conclusion: pass-with-fixes
+summary: "笔记质量良好。方法节因果解释充分,来源标注全覆盖。2 个 low issue: (1) KB 背景中 sparse tokens 描述用词可更精确; (2) frontmatter models 未列无页面的基线模型 (可接受)。无 high/medium issue,可放行反向更新。"

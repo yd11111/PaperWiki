@@ -28,7 +28,7 @@ updated: 2026-06-04
 **已有认知**:
 - [[Residual Vector Quantization]] 覆盖了 RVQ 的多种变体 (GVQ/MSRVQ/CSRVQ 等),BridgeCode 使用的 hierarchical RVQ (将 2304d 向量分 3 组,每组 3 级 RVQ) 接近 GVQ 的分组量化思路,但独特之处在于只保留每组第一层 index 实现极端压缩。
 - [[Speech Tokenizer]] 中的 continuous VAE tokenizer 路线 (LatentLM/CLEAR/VibeVoice) 是解决 rate-quality trade-off 的另一条路线——完全绕过离散量化,BridgeCode 则保留离散 token 但通过 bridging module 恢复连续特征,是一种"两者共存"的折中。
-- [[Semantic vs Acoustic Tokens]] 的核心二分法在 BridgeCode 中以另一种形式出现: sparse tokens (压缩语义) vs dense continuous features (完整声学),通过 SparseBridge/DenseBridge 双向转换。
+- [[Semantic vs Acoustic Tokens]] 的核心二分法在 BridgeCode 中以另一种形式出现: sparse tokens (压缩自监督表征) vs dense continuous features (完整声学),通过 SparseBridge/DenseBridge 双向转换。
 
 **创新判断**: BridgeCode 的核心创新不是设计新 codec/tokenizer,而是在已有表征 (wav2vec 2.0 features) 基础上增加双向 bridging 模块,使 AR 循环内可以用 10 Hz sparse tokens 做高效预测,同时通过 DenseBridge 恢复 50 Hz dense features 供 vocoder 使用。feature loss 作为补充监督信号的思路与 MELLE (连续 mel 预测) 异曲同工,但 BridgeTTS 保留了离散+连续双重训练目标。相比 [[LLM-based TTS]] 中记录的 Hybrid 架构 (LLM + Flow),BridgeTTS 不使用 flow/diffusion 后处理,而是直接用 learned bridging module 实现 sparse-to-dense 转换。
 
@@ -151,5 +151,8 @@ BridgeCode 提出了一个简洁优雅的方案来解决 AR TTS 的 token rate-q
 
 3. **Hierarchical RVQ + code selection**: 将高维特征分组 RVQ 后只保留每组第一层 code,实现极端压缩,丢失的信息由 code predictor 恢复。这种"先压缩再恢复"的设计可用于任何需要降低 AR 序列长度的场景。
 
-> [!review] 审阅待补
-> 此笔记尚未经过审阅。待审阅后补充 review callout。
+> [!review] 审阅: pass-with-fixes (2026-06-04)
+> - **结论**: pass-with-fixes, 2 low issues, 0 medium/high
+> - **issue 1** (low, fact-inference-mixing): KB 背景中 sparse tokens 描述用词已修正 (压缩语义→压缩自监督表征)
+> - **issue 2** (low, template-compliance): frontmatter models 未列无页面的基线模型 (VALL-E/UniAudio/GPT-Talker),可接受
+> - 详见 `_review/BridgeCode-review.yml`
