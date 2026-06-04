@@ -1,0 +1,45 @@
+review:
+  paper: "DisCo-Speech"
+  date: 2026-06-04
+  reviewer: auto (independent)
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    status: pass
+    rationale: "方法节详细解释了 WHY (为什么选 phone model 而非 SSL, 为什么 soft 而非 hard constraint, 为什么两阶段分别优化),每个关键设计都有因果解释。速查可借鉴列出 3 个具体可迁移技巧。"
+  可信赖:
+    score: 9
+    status: pass
+    rationale: "数字型 claim 出处标注覆盖率 >90%,实验表格完整标注 [Table N]。指标名正确使用(SSIM=Speaker SIMilarity 与论文一致)。无方向性错误。"
+  可区分:
+    score: 9
+    status: pass
+    rationale: "[论文原文] 和 [agent 解读] 标注清晰,方法节中 5 处显式标注来源。核心设计选择均标注为论文原文或 agent 解读。"
+  可定位:
+    score: 9
+    status: pass
+    rationale: "KB 背景与 NaturalSpeech 3 做了 4 个维度的具体对比(分离粒度/量化方案/解耦约束/韵律建模),引用 Speech Factorization 概念页的演进线准确定位。"
+  不污染:
+    score: 8
+    status: pass-with-fixes
+    rationale: "concepts 和 tasks 挂接合理,models 字段仅列 NaturalSpeech 3 但遗漏 CosyVoice 2(论文中重要比较对象且模型库有页)。无 factual error 或 overclaim。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: frontmatter models
+    detail: "models 仅列 NaturalSpeech 3,但 CosyVoice 2 是论文中 codec reconstruction/VC/cloning 三个维度的重要 baseline 且模型库已有页面,应补充"
+    suggestion: "在 models 中追加 [[CosyVoice 2]]"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "## 点评 优势 4"
+    detail: "VC 任务上取得最高 SSIM + F0cor 缺少 [Table 2] 标注"
+    suggestion: "补充 [Table 2] 出处"
+
+conclusion: pass-with-fixes
+issue_summary: "1 medium, 1 low"
+learning_signals: []

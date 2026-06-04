@@ -175,7 +175,7 @@ Stage 1 decoder 镜像 content encoder 架构,从三流表征重建波形(仅用
 1. 问题切入精准 -- 在 codec 层面解决 timbre-prosody 纠缠,而非在 LM 或后端做 patch,这是从根源解决问题的思路
 2. Soft orthogonality constraint 是一个优雅的工程设计,通过 beta 系数灵活调控不同属性对之间的解耦强度,比 hard orthogonality 更符合语音属性的内在关系
 3. 两阶段训练范式将 disentanglement 和 reconstruction 分别优化,是处理这对矛盾的合理策略
-4. VC 任务上取得最高 SSIM + F0cor,验证了解耦质量
+4. VC 任务上取得最高 SSIM + F0cor [Table 2],验证了解耦质量
 
 **不足**:
 1. Voice cloning SSIM 显著落后多阶段系统(0.597 vs 0.706),说明单阶段 AR + codec decoder 的音色建模能力仍有瓶颈
@@ -189,6 +189,22 @@ Stage 1 decoder 镜像 content encoder 架构,从三流表征重建波形(仅用
 2. **Residual FSQ for hierarchical attribute modeling**: 第一层 FSQ 建模主要属性(F0),第二层捕捉残差。可推广到其他分层属性建模场景
 3. **Two-stage codec design pattern**: Stage 1 解耦(冻结后) → Stage 2 融合+重建。这种"先分再合"的范式可用于任何需要在 codec 中同时实现解耦和高质量重建的系统
 4. **Content-prosody fusion for LM-friendly output**: 将多流 token 合并为单流供标准 LM 使用,避免多流预测的复杂度。这是一个实用的工程模式
+
+## 审阅
+
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 数字出处标注覆盖率 >90%,指标使用正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰,5 处显式标注 |
+> | 可定位 | pass | 与 NaturalSpeech 3 四维度对比,KB 背景谱系定位精准 |
+> | 不污染 | pass-with-fixes | models 已由 lint 补全; 无 factual error |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/DisCo-Speech-review.yml`
 
 ---
 
