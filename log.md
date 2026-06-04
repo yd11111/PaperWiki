@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-04
+- [kb/search] [[Fun-Audio-Chat]] — 命中 6 页(取 6): [[Speech Language Model]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[CosyVoice 3]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review)
+- [ingest/deep] [[Fun-Audio-Chat]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 3)
+- [skip/update] [[Speech Language Model]] — key_papers 已达上限(45),跳过追加
+- [skip/update] [[Full-duplex Spoken Dialogue]] — key_papers 已达上限(27),跳过追加
+- [skip/update] [[Speech Tokenizer]] — key_papers 已达上限(77),跳过追加
+- [review/auto] [[Fun-Audio-Chat]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [review/kb] [[Fun-Audio-Chat]] — pass, 0 issues
+- [lint/local] Fun-Audio-Chat — 通过
 - [review/auto] [[MambaVoiceCloning]] — pass, 2 issues (0 high, 0 medium, 2 low); 去重review callout,修正source tagging
 - [lint/local] MambaVoiceCloning — 通过/0 issues
 - [skip/update] [[Duration Predictor]] — key_papers 已达上限(22),跳过追加
