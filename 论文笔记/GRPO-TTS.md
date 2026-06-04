@@ -168,3 +168,6 @@ NLL reward 的设计思路值得借鉴: 它本质上是将 ASR 模型当作"diff
 2. **调和平均组合 reward**: 相比算术平均,对单维度极差值更敏感,防止"高分掩盖低分"。可用于任何多 reward RL 系统。
 3. **跨架构 RL 验证**: 用同一 RL 方法同时验证 semantic token 和 acoustic token 两类 TTS 系统,发现差异化效果。这种实验设计对理解 RL + TTS 的交互很有价值。
 4. **极少数据高效 RL**: 仅 4000 句训练数据即可显著改善两类 TTS 系统的可懂度,说明 GRPO 的样本效率很高,适合作为低成本 post-training 手段。
+
+> [!review] 审阅状态: pass-with-fixes (2026-06-04)
+> 3 个 low 级问题: (1) frontmatter concepts 含外围概念 (Gumbel-Softmax/Speaker Verification/TTS Evaluation); (2) KB 背景 CosyVoice2 CER 引用 KB 值 (1.45%) vs 论文实测值 (1.41) 有微小差异,属正常评估方差; (3) 均不阻塞反向更新。详见 `_review/GRPO-TTS-review.yml`

@@ -1,0 +1,45 @@
+paper: "GRPO-TTS"
+arxiv_id: "2509.18798"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+principles:
+  comprehensible:
+    status: pass
+    notes: "方法节包含 4 个 WHY 设计选择 (CER+NLL 互补性、调和平均、GRPO vs PPO、跨架构验证); 速查卡片可借鉴字段列出 3 个具体可迁移 trick"
+  trustworthy:
+    status: pass
+    notes: "数字型 claim 标注覆盖率约 90%; 指标名正确 (CER/WER/MOS/SIM); Table 1/2 数据与原文一致"
+  distinguishable:
+    status: pass
+    notes: "因果解释源标注覆盖率 >80%; [论文原文] vs [agent 解读] 清晰区分; 推断性句子有合理限定词"
+  navigable:
+    status: pass
+    notes: "KB 背景有完整谱系定位 (Seed-TTS→SpeechAlign→DiffRO→Multi-Reward GRPO→本文); 创新判断有多个对比基准; frontmatter 完整"
+  no_pollution:
+    status: pass
+    notes: "反向更新仅追加 key_papers (不改 status); 无新概念页创建; 无 overclaim"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter concepts"
+    detail: "[[Gumbel-Softmax]] 仅在 intro 比较 DiffRO 时提及,非本文核心概念"
+    suggestion: "可从 concepts 移除,保留在 KB 背景文字中即可"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "KB 背景 CosyVoice 2 条目"
+    detail: "CosyVoice2 基线 CER 引用 KB 实体页数据 (1.45%),与本文 Table 1 实测值 (1.41) 有微小差异;两处数据来源不同 (CosyVoice 3 论文 vs 本文),属正常评估方差"
+    suggestion: "无需修改,实验表格已使用论文原始数据"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter concepts"
+    detail: "[[Speaker Verification]] 和 [[TTS Evaluation]] 是外围概念 (评估相关),非方法核心"
+    suggestion: "可选择保留或移除,不影响质量"
+
+conclusion: pass-with-fixes
+issue_summary: "3 low issues, 0 medium, 0 high. 均不阻塞反向更新。"
