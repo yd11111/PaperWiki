@@ -11,6 +11,7 @@ url: "{{url}}"
 status: pending-review
 lifecycle: active
 merged_into: ""
+deprecated_reason: ""
 created: {{date}}
 updated: {{date}}
 ---

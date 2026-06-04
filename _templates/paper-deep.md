@@ -56,3 +56,19 @@ updated: {{date}}
 ## 点评
 
 ## 可复用的 idea
+
+## 审阅
+
+> [!review] 审阅 ({{date}}, auto)
+> **结论**: {{pass / pass-with-fixes / revise / reject-as-deep}}
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | {{pass/fail}} | {{简述}} |
+> | 可信赖 | {{pass/fail}} | {{简述}} |
+> | 可区分 | {{pass/fail}} | {{简述}} |
+> | 可定位 | {{pass/fail}} | {{简述}} |
+> | 不污染 | {{pass/fail}} | {{简述}} |
+> 
+> Issues: {{N}} ({{high: X, medium: Y, low: Z}})
+> 详见 `_review/{{论文名}}-review.yml`
