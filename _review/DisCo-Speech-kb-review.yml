@@ -1,0 +1,49 @@
+kb_review:
+  paper: "DisCo-Speech"
+  date: 2026-06-04
+  reviewer: auto (independent)
+
+change_plan:
+  - target: "概念库/Gradient Reversal Layer.md"
+    action: append
+    content: "追加 key_papers entry + 在 TTS 应用节追加 DisCodec 用法描述"
+    safety: safe
+    rationale: "当前 5 条 key_papers (< 12 上限), GRL 在 DisCodec prosody branch 的 speaker classifier 上使用是一个有意义的新用例"
+
+  - target: "概念库/Speech Factorization.md"
+    action: skip
+    content: "key_papers 已达 32 条 (>> 12 上限)"
+    safety: safe
+    rationale: "跳过 key_papers 追加; DisCo-Speech 的 soft orthogonality 方法已被 Speech Factorization 页的演进线覆盖(属于 information bottleneck + adversarial 混合路线)"
+
+  - target: "概念库/Codec Language Model.md"
+    action: skip
+    content: "key_papers 已达 44 条 (>> 12 上限)"
+    safety: safe
+    rationale: "跳过追加"
+
+  - target: "概念库/Finite Scalar Quantization.md"
+    action: skip
+    content: "key_papers 已达 16 条 (> 12 上限)"
+    safety: safe
+    rationale: "跳过追加"
+
+  - target: "概念库/Speech Tokenizer.md"
+    action: skip
+    content: "key_papers 已达 80 条 (>> 12 上限)"
+    safety: safe
+    rationale: "跳过追加"
+
+  - target: "概念库/Prosody Modeling.md"
+    action: skip
+    content: "key_papers 已达 52 条 (>> 12 上限)"
+    safety: safe
+    rationale: "跳过追加"
+
+principles:
+  factual_accuracy: pass
+  dedup_check: pass
+  append_substantive_classification: pass
+
+conclusion: pass
+issue_summary: "0 issues"
