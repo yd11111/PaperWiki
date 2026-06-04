@@ -1,0 +1,28 @@
+kb_review:
+  paper: "论文笔记/RRPO.md"
+  date: 2026-06-04
+  reviewer: auto
+
+  change_plan:
+    - target: "概念库/Differentiable Reward Optimization.md"
+      action: append
+      detail: "追加 RRPO 段落到正文 (reward hacking 解决方案); key_papers 已达 25 条超出上限,跳过 key_papers 追加"
+
+    - target: "概念库/Emotion Control in TTS.md"
+      action: append
+      detail: "追加 RRPO 段落到正文 (RL-based robust RM 情感控制路线); key_papers 已达 53 条超出上限,跳过 key_papers 追加"
+
+    - target: "模型库/CosyVoice 2.md"
+      action: append
+      detail: "追加 RRPO 到 '作为 Baseline 被引用' 段落; key_papers 已达 23 条超出上限,跳过 key_papers 追加"
+
+    - target: "概念库/Gumbel-Softmax.md"
+      action: skip
+      detail: "RRPO 使用 Gumbel-Softmax 但无新贡献,DiffRO 已覆盖"
+
+    - target: "概念库/LLM-based TTS.md"
+      action: skip
+      detail: "RRPO 对 LLM-based TTS 广义概念无新贡献"
+
+  conclusion: pass
+  issues: []
