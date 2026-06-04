@@ -1,0 +1,77 @@
+paper: "DialoSpeech"
+reviewer: auto
+date: 2026-06-04
+checklist_version: v1.1
+
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含因果解释 (WHY): 为什么选 S3Tokenizer, 为什么 dual-track 而非 single-stream,
+      为什么 chunked FM; 每个关键设计选择有对比说明; 速查卡片"可借鉴"给出了三个具体可迁移 trick。
+  可信赖:
+    satisfied: true
+    notes: >
+      实验表格完整还原 Table I/II 数据, 所有数字标注出处 [Table I]/[Table II]/[§X.X];
+      指标名使用正确 (CER/WER/SIM-O/UTMOS/MOS); 速查卡片指标字段含数字+数据集+出处。
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释来源标注覆盖率约 85%: 方法节中的 WHY 解释均标注了 [论文原文] 或 [agent 解读];
+      未发现把推断写成断言的情况。
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景节有具体谱系定位 (dGSLM/CoVoMix/MoonCast/FireRedTTS 2/VibeVoice),
+      创新判断有三条对比基准, frontmatter 字段齐全。
+  不污染:
+    satisfied: true
+    notes: >
+      未新建概念页; 反向更新仅追加 key_papers (不改 status);
+      无 factual-error 或 overclaim 风险。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    principle: 可定位
+    location: frontmatter.models
+    detail: >
+      frontmatter models 仅列本文模型组件 (CosyVoice 2, BigVGAN) 和对比 baseline,
+      但遗漏了 CoVoMix 和 MoonCast 这两个主要对比 baseline。
+      按 review-checklist 要求 "models 列本文模型+对比 baseline"。
+    suggestion: >
+      在 models 字段追加 CoVoMix 和 MoonCast。由于 vault 中无 CoVoMix/MoonCast 模型页,
+      以纯文本形式列出即可,不需要 wikilink。
+    action_taken: will-fix
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    principle: 可信赖
+    location: "## 方法 → 训练策略"
+    detail: >
+      训练策略节中 "8x NVIDIA A6000 48GB, batch size 64, lr=1e-4, 150K steps" 等
+      超参数均来自 §IV-B,但未逐一标注 [§IV-B],读者无法确认是原文数据还是推断。
+    suggestion: >
+      在训练策略节的 DiaLM 和 Chunked CFM 小节末尾各加一个 [§IV-B] 标注。
+    action_taken: will-fix
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    principle: 可复述
+    location: "## 可复用的 idea → #3"
+    detail: >
+      "<SIL> token 隐式 turn-taking" 描述中说"比 [spkchange] 等显式控制更灵活",
+      但实际上 DialoSpeech 同时使用了 <SIL> 和 [spkchange],两者并非替代关系。
+    suggestion: >
+      修正为 "DialoSpeech 组合使用 [spkchange] (显式 turn boundary) + <SIL> (隐式 timing),
+      这种混合策略值得参考"。
+    action_taken: will-fix

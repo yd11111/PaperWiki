@@ -180,8 +180,14 @@ $$L = E_{t \sim U(0,1)} \left[ \log \sigma \left( d^{-1}\beta E_n[\text{ref loss
 
 4. **KL divergence 监控指标 [Eq. 17]**: 定义 token-average KL 作为 policy 偏离度的在线监控,辅助 early stopping 决策
 
-> [!review] 审阅待补充
-> 审阅将在下一步自动执行。
+> [!review] 审阅结论: pass-with-fixes (2026-06-04)
+> - **可复述** ✓ 因果解释链完整 (为什么不能直接用 LLM DPO → 边际化 → Jensen 近似 → denoising loss 比较)
+> - **可信赖** ✓ 数字标注覆盖率 ~95%, 指标名无混淆, 无方向性错误
+> - **可区分** ✓ [论文原文]/[agent 解读] 标注覆盖率 ~90%, 无推断写成断言
+> - **可定位** ✓ KB 背景列举 7 条 TTS RL 路线,创新判断有对比基准
+> - **不污染** ✓ 不新建概念页,反向更新仅追加
+> - 3 low issues: DiTAR 模型页待决 / v-prediction 公式可补充 / 维度归一化 β 的 why 可补充
+> - 详见 `_review/ARDM-DPO-review.yml`
 
 ---
 

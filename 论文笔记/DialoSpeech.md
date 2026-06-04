@@ -9,7 +9,7 @@ year: 2025
 venue: "APSIPA ASC 2025"
 tags: [dialogue-TTS, dual-track, flow-matching, LLM-TTS, multi-speaker, zero-shot, cross-lingual]
 concepts: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[Turn-taking in Spoken Dialogue]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]"]
+models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]", "CoVoMix", "MoonCast"]
 tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]", "[[任务库/Cross-lingual Voice Cloning|Cross-lingual Voice Cloning]]"]
 datasets: []
 kb_context_sources: 6
@@ -130,14 +130,14 @@ $$M_{i,j} = \begin{cases} 1, & \text{block}(i) - \text{block}(j) \leq \tau \\ 0,
 ### 训练策略
 
 **DiaLM** [§IV-B]:
-- 0.5B 参数 LLaMA (16 层, hidden 1024, 16 heads)
-- 8x NVIDIA A6000 48GB, batch size 64
-- 预训练: lr=1e-4, cosine annealing, 150K steps
-- SFT: lr=2e-5, 50K steps (高质量数据微调)
+- 0.5B 参数 LLaMA (16 层, hidden 1024, 16 heads) [§IV-B]
+- 8x NVIDIA A6000 48GB, batch size 64 [§IV-B]
+- 预训练: lr=1e-4, cosine annealing, 150K steps [§IV-B]
+- SFT: lr=2e-5, 50K steps (高质量数据微调) [§IV-B]
 
 **Chunked CFM** [§IV-B]:
-- DiT backbone, 22 Transformer 层, hidden 768, ~150M 参数
-- 从 16kHz mel spectrogram 重建, BigVGAN-v2 上采样到 24kHz
+- DiT backbone, 22 Transformer 层, hidden 768, ~150M 参数 [§IV-B]
+- 从 16kHz mel spectrogram 重建, BigVGAN-v2 上采样到 24kHz [§IV-B]
 
 **数据** [§IV-A]:
 - 总计 10,000 小时:
@@ -193,9 +193,12 @@ DialoSpeech 的核心贡献在于提出了一个 **完整且可复现的对话 T
 
 2. **Dual-track 数据处理 pipeline**: VAD → Paraformer ASR → Pyannote diarization → word-speaker alignment → punctuation restoration → OSD (Conformer+XLSR) → SpatialNet separation → multi-stage filtering (SNR/clustering/similarity/DNSMOS)。这是构建 dual-track 对话数据集的实用参考。
 
-3. **<SIL> token 隐式 turn-taking**: 在 dual-stream LM 中,非活跃说话人生成 <SIL>,模型自主学习何时切换、沉默、重叠,无需显式 timing 控制信号。比 [spkchange] 等显式控制更灵活。
+3. **混合式 turn-taking 建模**: DialoSpeech 组合使用 [spkchange] (显式 turn boundary 标记) + <SIL> token (隐式 timing 学习),在 dual-stream LM 中让模型自主决定何时切换、沉默、重叠。这种显式+隐式混合策略值得参考。
 
 ---
 
-> [!review] 审阅状态
-> 待审阅 — 见 `_review/DialoSpeech-review.yml`
+> [!review] 审阅: pass-with-fixes (0 high, 2 medium, 1 low)
+> - [medium] frontmatter models 补充 CoVoMix/MoonCast baseline — 已修正
+> - [medium] 训练策略节超参数补充 [§IV-B] 出处标注 — 已修正
+> - [low] 可复用 idea #3 修正 <SIL> 与 [spkchange] 的关系描述 — 已修正
+> 详见 `_review/DialoSpeech-review.yml`

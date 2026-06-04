@@ -1,0 +1,81 @@
+paper: ARDM-DPO
+reviewer: agent-auto
+date: 2026-06-04
+version: v1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含完整因果解释链: 为什么不能直接用 LLM DPO → 为什么需要中间状态边际化 →
+      为什么 Jensen 近似有效 → 为什么最终等价于 denoising loss 比较。
+      每个关键设计选择均回答了"为什么"。
+
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率约 95%。指标名使用正确 (F0V/SIM/WER/CER/NLL/KL 均无混淆)。
+      速查卡片指标字段包含具体数字+数据集+来源。无方向性错误。
+
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释来源标注覆盖率约 90%。所有推断性分析标注为 [agent 解读],
+      论文事实标注为 [论文原文]。未发现推断被写成断言的情况。
+      "首次" claim 来自论文原文 [§1]。
+
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景列举了 7 条 TTS RL/偏好优化路线,具体到论文名和年份。
+      创新判断有明确对比基准 (离散 token AR vs NAR diffusion vs 连续 token ARDM)。
+      frontmatter 字段完整,语义合理。
+
+  不污染:
+    satisfied: true
+    notes: >
+      不新建概念页。反向更新仅追加 key_papers (不改 status)。
+      无 factual error 或 overclaim。
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter models 字段
+    detail: >
+      DiTAR 是本文的核心 base model,但 vault 中无 DiTAR 模型页,因此 models 字段仅列
+      Whisper (评估工具)。DiTAR 模型页的缺失不阻塞本次 ingest,但应记录为待决。
+    suggestion: >
+      在 log.md 记录 [待决] DiTAR 模型页。当 DiTAR 原始论文 (arXiv:2502.xxxxx 或 ICML 2025)
+      精读后再创建模型页。
+    action: deferred
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 方法节 "4. DiTAR v-prediction 适配"
+    detail: >
+      最终训练目标 Eq. 16 的文字描述用 "ref loss_n - policy loss_n" 简化表示,
+      未完整写出 v-prediction 版本的具体公式中 ẋ_n^t 的定义。
+    suggestion: >
+      可选: 在公式后补充一行说明 ẋ_n^t = α̇_t x_n^0 + σ̇_t x_n^1 的含义。
+      不影响理解,可批量改善时处理。
+    action: optional
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: 可复用的 idea #3
+    detail: >
+      "维度归一化 β" 虽然具体,但缺少 why 解释 — 为什么用 1/d 而不是 1/sqrt(d) 或其他归一化。
+    suggestion: >
+      补充: "论文选择 1/d 可能因为 denoising loss 是 d 维向量的 L2 norm,
+      除以 d 使 β 的量纲与 per-dimension loss 一致"。
+    action: optional
+
+total_issues: 3
+high: 0
+medium: 0
+low: 3
