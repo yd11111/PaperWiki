@@ -11,7 +11,7 @@ tags: [streaming-TTS, non-autoregressive, neural-audio-codec, discrete-token, de
 concepts: ["[[ResidualVectorQuantization]]", "[[Non-autoregressiveTTS]]", "[[NeuralVocoder]]", "[[DurationPredictor]]", "[[MelSpectrogram]]", "[[SemanticvsAcousticTokens]]", "[[TokenRateandBitrateTrade-offs]]"]
 models: ["[[VITS]]"]
 tasks: []
-datasets: []
+datasets: ["LJSpeech", "Malaysian-TTS-v2"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -165,7 +165,7 @@ $$L_{total} = L_{token} + \lambda_{dur} L_{dur} + L_{pitch} + L_{energy} + \lamb
 
 1. **英语合成质量不够好**: MOS 2.51 在绝对意义上属于"可懂但不自然"的范围,距离实际部署的质量门槛(通常要求 MOS > 3.5)有明显差距。论文将其定位为 efficiency-quality trade-off,但 6x 速度优势的实际价值取决于是否有质量可接受的应用场景 [agent 解读]
 2. **仅单说话人**: 未验证多说话人/zero-shot 场景,严重限制了实用性。论文在 Future Work 中提到将扩展到 multi-speaker 和 zero-shot voice cloning [§5.2]
-3. **Mimi 重建上限约束**: Topline (Mimi reconstruction) MCD 6.27 本身就高于 VITS 7.31 同一量级,意味着即使预测完美也受限于 Mimi 的离散压缩损失 [agent 解读]
+3. **Mimi 重建上限约束**: Topline (Mimi reconstruction) MCD 6.27 与 VITS 7.31 处于同一量级(仅低 ~1 dB),意味着即使预测完美也受限于 Mimi 的离散压缩损失,天花板不高 [agent 解读]
 4. **评估方法学问题**: 英语 MOS 由非母语听众评估,马来语由母语评估,两组结果不可直接横向比较 [论文原文, §4.3]
 5. **代码未公开**: "Custom code and models are not publicly available" [Data Availability Statement],复现需要从零实现
 6. **数据规模有限**: LJSpeech 24h + Malay 13h,均为小规模单说话人,未验证在大规模数据上的 scaling 行为
@@ -193,4 +193,16 @@ $$L_{total} = L_{token} + \lambda_{dur} L_{dur} + L_{pitch} + L_{energy} + \lamb
 
 ## 审阅
 
-(待独立审阅 agent 填充)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 4 个设计选择的 WHY 因果解释,速查卡片可借鉴字段具体可迁移 |
+> | 可信赖 | pass | 数字出处覆盖率 >90%,指标名正确,方向性无误(修正后) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >80%,无推断当断言 |
+> | 可定位 | pass | KB 背景谱系定位含 SoundStorm/VALL-E/AudioLM 具体对比,创新判断有基准 |
+> | 不污染 | pass | 反向更新内容合理,概念挂接准确 |
+> 
+> Issues: 3 (high: 1 (已修正), medium: 1 (已修正), low: 1)
+> 详见 `_review/UltraLowLatencyTTS-review.yml`
