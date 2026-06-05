@@ -9,7 +9,7 @@ year: 2023
 venue: "Interspeech 2023"
 tags: [TTS, emotion-control, zero-shot, diffusion, domain-adversarial-training, classifier-free-guidance, style-transfer]
 concepts: ["[[EmotionControlinTTS]]", "[[Classifier-FreeGuidance]]", "[[GradientReversalLayer]]", "[[Diffusion-basedTTS]]", "[[GlobalStyleTokens]]"]
-models: ["[[论文笔记/ZET-Speech|ZET-Speech]]"]
+models: ["[[论文笔记/ZET-Speech|ZET-Speech]]", "Grad-StyleSpeech"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -146,3 +146,19 @@ ZET-Speech 提出了一个清晰且实际的问题: 如何在零样本 TTS 中�
 ---
 
 检索命中: [[Zero-shotSpeechSynthesis]]✓, [[EmotionControlinTTS]][待确认], [[Classifier-FreeGuidance]][待确认], [[GradientReversalLayer]][待确认], [[Diffusion-basedTTS]][待确认], [[GlobalStyleTokens]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY+HOW 因果解释完整,速查可借鉴有具体 trick |
+> | 可信赖 | pass | 所有数字经 PDF 交叉验证无误,出处覆盖率 >90% |
+> | 可区分 | pass | 来源标注覆盖率约 85%,论文原文/agent 解读边界清晰 |
+> | 可定位 | pass | 谱系定位精确,与 6 个 KB 页面关系清晰 |
+> | 不污染 | pass | 概念引用合理,models 字段已补充 baseline |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ZET-Speech-review.yml`

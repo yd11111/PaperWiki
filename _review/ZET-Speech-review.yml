@@ -1,0 +1,46 @@
+reviewer: auto
+date: 2026-06-06
+note: 论文笔记/ZET-Speech.md
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节包含清晰的 WHY+HOW 因果解释,两个核心设计选择 (DAT 解耦 + guidance 增强) 均有完整动机-机制-效果链。速查可借鉴字段列出三个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    reason: "所有关键数字均经 PDF 交叉验证无误。出处标注覆盖率高 (>90%),指标名称使用正确 (ECA/CER/SECS/MOS/SMOS)。"
+  可区分:
+    score: 8
+    reason: "因果解释来源标注 ([论文原文]/[agent 解读]) 覆盖率约 85%。点评节和局限性节中的 agent 判断与论文原文 claim 边界清晰。"
+  可定位:
+    score: 9
+    reason: "KB 背景节的谱系定位精确 — 明确指出 ZET-Speech 在 EmotionControlinTTS 演进线中的位置 (2022 跨说话人情感迁移 → ZET-Speech 2023 → Emo-DPO 2024),与 6 个 KB 页面的关系清晰。创新判断有多个后续方法作为对比基准。"
+  不污染:
+    score: 8
+    reason: "frontmatter 字段基本正确,概念引用合理。models 字段仅列本文模型,缺少对比 baseline (Grad-StyleSpeech)。datasets 字段为空。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: "models 字段仅列 ZET-Speech 自身,未列对比 baseline Grad-StyleSpeech。按 checklist 'models 列本文模型+对比 baseline',应补充。"
+    suggestion: "在 models 中添加 Grad-StyleSpeech (无实体页,使用字符串)。"
+  - type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    detail: "datasets 字段为空,但论文使用了 ESD、LibriTTS、AIHub Korean emotional speech 等数据集。"
+    suggestion: "补充 datasets 字段,至少填入有用的数据集名称。"
+  - type: traceability-gap
+    severity: low
+    location: 局限性第2条
+    detail: "'仅支持离散情感标签,不支持连续情感维度' 标注为 [agent 解读],但论文确实没有讨论连续情感控制,此标注合理;不过该局限在论文中并未被显式讨论。"
+    suggestion: "可保持现状,agent 解读标注已足够。"
+
+learning_signals: []
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
