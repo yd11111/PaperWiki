@@ -1,0 +1,68 @@
+review:
+  paper: "MOSS-VoiceGenerator"
+  note_path: "论文笔记/MOSS-VoiceGenerator.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节清晰解释了为什么用影视数据、为什么选 1.7B、为什么做 instruction rewriting。数据 pipeline 的 WHY/HOW 层次清楚。速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: 6
+    rationale: "数字标注覆盖率 >80%,指标名正确。但实验表中 MIMO-Audio 和 Qwen3-TTS-VD 的 baseline 数字存在混淆,属于 factual error。修正后可提升至 8 分。"
+  可区分:
+    score: 8
+    rationale: "[论文原文] 和 [agent 解读] 标注明确且分布合理。因果解释来源标注覆盖率 ~85%,少数 WHY 语句仅有 [§X.X] 但未显式标注 [论文原文]。无将推断写成断言的情况。"
+  可定位:
+    score: 9
+    rationale: "KB 背景谱系定位具体,列出了 PromptTTS→Parler-TTS→VoxInstruct→VoiceSculptor 演进线并清晰定位本文差异点。创新判断有对比基准 (架构复用 vs 数据工程创新)。frontmatter 完整。"
+  不污染:
+    score: 8
+    rationale: "无新建概念页需求。反向更新预计为 append 类型 (向已有页追加 key_papers)。无 factual-error 或 overclaim 会流入 KB。"
+
+issues:
+  - id: 1
+    severity: high
+    type: factual-error
+    location: "实验表 APS (EN) 行和 RP (EN) 行"
+    detail: |
+      Baseline 数字混淆:
+      1. APS (EN): 写 "MIMO-Audio 78.4%" 实为 Qwen3-TTS-VD EN APS; MIMO-Audio EN APS 应为 80.6%
+      2. APS (EN): 写 "Qwen3-TTS-VD 78.0% (ZH)" — 78.0% 是 MOSS 自身 ZH APS,非 Qwen3-TTS-VD (EN=78.4%, ZH=84.3%)
+      3. RP (EN): 写 "MIMO-Audio 72.0%" 实为 Qwen3-TTS-VD EN RP; MIMO-Audio EN RP 应为 59.5%
+    suggestion: "核对 Table 1 修正所有 baseline 数字,区分 MIMO-Audio 和 Qwen3-TTS-VD"
+    fixed: true
+
+  - id: 2
+    severity: medium
+    type: overclaim
+    location: "客观评估分析段落"
+    detail: |
+      称 "EN-RP (68.7%) 超越 Gemini-TTS-Pro (67.2%)" 但未提及 Qwen3-TTS-VD EN RP = 72.0% 高于 MOSS。
+      选择性对比造成误导印象。
+    suggestion: "补充 Qwen3-TTS-VD 72.0% 的对比,或改为更中性的表述"
+    fixed: true
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空 []。InstructTTSEval 虽已在 models 中引用,但作为主要评估 benchmark 也可列入 datasets 或保持空但在 note 中说明。"
+    suggestion: "保持现状可接受,InstructTTSEval 已通过 models 引用"
+
+  - id: 4
+    severity: low
+    type: traceability-gap
+    location: "方法节部分 WHY 语句"
+    detail: "少数 WHY 语句 (如'影视数据的优势在于内在的场景、角色和说话风格多样性 [§2.2]') 有章节标注但未显式加 [论文原文] tag。"
+    suggestion: "非阻塞,覆盖率已 >80%"
+
+learning_signals: []
+
+summary: |
+  笔记整体质量良好,KB 背景定位准确,方法节因果解释充分。
+  主要问题: 实验表中 MIMO-Audio 和 Qwen3-TTS-VD 的 baseline 数字存在 3 处混淆 (high),
+  客观评估分析有 1 处选择性对比 (medium)。
+  修正后结论为 pass-with-fixes。

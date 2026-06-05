@@ -127,9 +127,9 @@ MOSS-VoiceGenerator 的模型架构直接复用 MOSS-TTS [§2.1],由三部分组
 
 | 指标 | 本文 | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| APS (EN) | 68.2% | Gemini-TTS-Pro 87.6%, MIMO-Audio 78.4%, Qwen3-TTS-VD 78.0% (ZH) | InstructTTSEval-EN | [Table 1] |
-| DSD (EN) | 82.0% | Gemini-TTS-Pro 86.0%, MIMO-Audio 78.8% | InstructTTSEval-EN | [Table 1] |
-| RP (EN) | 68.7% | Gemini-TTS-Pro 67.2%, MIMO-Audio 72.0% | InstructTTSEval-EN | [Table 1] |
+| APS (EN) | 68.2% | Gemini-TTS-Pro 87.6%, MIMO-Audio 80.6%, Qwen3-TTS-VD 78.4% | InstructTTSEval-EN | [Table 1] |
+| DSD (EN) | 82.0% | Gemini-TTS-Pro 86.0%, Qwen3-TTS-VD 78.8%, MIMO-Audio 77.6% | InstructTTSEval-EN | [Table 1] |
+| RP (EN) | 68.7% | Qwen3-TTS-VD 72.0%, Gemini-TTS-Pro 67.2%, MIMO-Audio 59.5% | InstructTTSEval-EN | [Table 1] |
 | APS (ZH) | 78.0% | Gemini-TTS-Pro 89.0%, Qwen3-TTS-VD 84.3% | InstructTTSEval-ZH | [Table 1] |
 | DSD (ZH) | 80.0% | Gemini-TTS-Pro 90.1%, Qwen3-TTS-VD 82.9% | InstructTTSEval-ZH | [Table 1] |
 | RP (ZH) | 74.0% | Gemini-TTS-Pro 75.5%, Qwen3-TTS-VD 77.4% | InstructTTSEval-ZH | [Table 1] |
@@ -140,7 +140,7 @@ MOSS-VoiceGenerator 的模型架构直接复用 MOSS-TTS [§2.1],由三部分组
 | Naturalness vs MiniMax | 50.3% win | 36.5% lose | Internal 100 pairs | [Fig 4] |
 | Instruction Following vs MIMO-Audio | 60.0% win | 30.0% lose | Internal 100 pairs | [Fig 4] |
 
-**客观评估分析**: 在 InstructTTSEval 上,MOSS-VoiceGenerator 在 DSD 和 RP 两个需要更强泛化能力的任务上表现突出 -- 特别是 EN-DSD (82.0%) 超过 Gemini-TTS-Pro 以外的所有模型,EN-RP (68.7%) 超越 Gemini-TTS-Pro (67.2%)。但在 APS (显式指定 12 属性的精细控制) 上不如 Gemini-TTS-Pro 和 Qwen3-TTS-VD [Table 1]。
+**客观评估分析**: 在 InstructTTSEval 上,MOSS-VoiceGenerator 在 DSD 任务上表现突出 -- EN-DSD (82.0%) 超过 Gemini-TTS-Pro 以外的所有模型。EN-RP (68.7%) 超越 Gemini-TTS-Pro (67.2%) 但低于 Qwen3-TTS-VD (72.0%)。在 APS (显式指定 12 属性的精细控制) 上不如 Gemini-TTS-Pro、MIMO-Audio 和 Qwen3-TTS-VD,是所有列出模型中最低的 [Table 1]。
 
 [agent 解读] APS 弱但 DSD/RP 强这一模式可能反映了影视数据训练的特点: 影视数据中的语音自然携带复杂混合属性,模型更擅长从自由描述/角色场景中推断声学特征,但在逐一精确控制 12 个离散属性时不如专门为此优化的模型。
 
@@ -176,3 +176,19 @@ MOSS-VoiceGenerator 的模型架构直接复用 MOSS-TTS [§2.1],由三部分组
 2. **Style-guided embedding mining**: 训练 speech-text alignment embedding 模型,用风格描述作为 query 从大规模中性数据中检索表达性片段。这个思路可泛化到任何"属性稀缺但数据充足"的场景
 3. **Instruction rewriting 增强少资源语言**: 对同一音频生成多个语义等价指令变体,有效翻倍训练信号,无需额外音频采集。可用于解决多语言 TTS 中的数据不平衡问题
 4. **DNSMOS 阈值 + 去噪组合策略**: 先去噪再以 DNSMOS >= 3.0 过滤,在数据保留率和质量之间取得平衡。5% → 45% 的保留率提升数字值得参考
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,设计选择 WHY 清楚 |
+> | 可信赖 | pass-with-fixes | baseline 数字有 3 处混淆 (已修正) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~85% |
+> | 可定位 | pass | KB 背景谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 无 KB 安全风险 |
+> 
+> Issues: 4 (high: 1, medium: 1, low: 2)
+> 详见 `_review/MOSS-VoiceGenerator-review.yml`
