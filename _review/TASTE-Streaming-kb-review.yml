@@ -15,16 +15,13 @@ principles:
     notes: "追加条目含 wikilink [[论文笔记/TASTE-Streaming|TASTE-S]]"
 
 change_plan_summary:
-  total_targets: 1
-  appends: 1
+  total_targets: 0
+  appends: 0
   substantive: 0
   new_pages: 0
 
-change_plan:
-  - target: "概念库/Speech-TextAlignment.md"
-    action: append
-    detail: "追加 key_papers: TASTE-S (text-aligned tokenization 的流式化方案)"
-    status_change: none
+change_plan: []
+  # 原计划 append Speech-TextAlignment key_papers,但实际 key_papers 已有 13 条(>12 上限),跳过
 
 skipped:
   - target: "概念库/SpeechTokenizer.md"

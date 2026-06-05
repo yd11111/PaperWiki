@@ -1,5 +1,11 @@
 # Log
 
+## 2026-06-06
+- [kb/search] [[TASTE-Streaming]] — 命中 6 页(取 6): [[SpeechTokenizer]]✓, [[SpeechLanguageModel]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 参考(pending-review): [[FiniteScalarQuantization]], [[Speech-TextAlignment]]
+- [ingest/deep] [[TASTE-Streaming]] — 精读, kb_sources=6, 新建 0, 追加 0 (全部 KB 页 key_papers 超限跳过)
+- [skip/update] [[Speech-TextAlignment]] — key_papers 已达 13 条(上限 12),跳过追加
+- [lint/local] TASTE-Streaming — 通过
+
 ## 2026-06-05
 - [kb/search] [[SpeakerPoisoning]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓, [[SpeakerVerification]](pending-review), [[DiffusionModel]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[TTSEvaluation]](pending-review) | 过滤: 无
 - [ingest/deep] [[SpeakerPoisoning]] — 精读, kb_sources=6, 新建 0, 追加 4 (Anti-spoofing key_papers+描述, SV key_papers, VoiceCloningTaxonomy key_papers, ZS-TTS key_models)
