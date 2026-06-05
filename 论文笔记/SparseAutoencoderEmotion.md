@@ -9,7 +9,7 @@ year: 2026
 venue: "ICML 2026"
 tags: [TTS, emotion-control, sparse-autoencoder, activation-steering, interpretability, LLM-TTS, training-free, IndexTTS2]
 concepts: ["[[EmotionControlinTTS]]", "[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[ProsodyModeling]]", "[[SemanticvsAcousticTokens]]"]
-models: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/CoCoEmo|CoCoEmo]]", "VALL-E-X", "Spark-TTS", "EmoVoice", "CosyVoice"]
+models: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/CoCoEmo|CoCoEmo]]", "VALL-E-X", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/CosyVoice|CosyVoice]]"]
 tasks: []
 datasets: ["IEMOCAP"]
 kb_context_sources: 6
@@ -191,3 +191,19 @@ L_aux = ||(x - x_hat) - x_tilde||^2 [Eq. 3]
 4. **稀疏方向组合 vs 稠密单方向**: 将控制信号分解为多个独立可调的方向,相比单一 mean-difference 方向,在强 steering 下更鲁棒 (WER 0.57% vs 2.86%)。
 
 5. **Controlled emotion analysis 实验设计**: 固定 text+speaker、仅变 emotion reference 的 paired 设计,消除词汇和说话人混淆,可迁移到其他属性的 disentanglement 分析。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4个设计选择均有WHY解释,速查可借鉴具体 |
+> | 可信赖 | pass | 数字出处覆盖>90%,交叉验证全部正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注全面 |
+> | 可定位 | pass | 与EmoSteer-TTS/CoCoEmo/DUET三方对比清晰 |
+> | 不污染 | pass | models字段wikilink已修正,反向更新计划合理 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/SparseAutoencoderEmotion-review.yml`
