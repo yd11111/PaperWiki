@@ -128,6 +128,12 @@ Survey (Sec 5.2) 指出的关键挑战:
 
 Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026)
 
+## 评估 Benchmark
+
+### MINT-Bench (Chen et al., 2026)
+
+[[论文笔记/MINT-Bench|MINT-Bench]] 是首个结构化多语言 instruction-following TTS benchmark。基于分层多轴 taxonomy (10 原子属性 x Easy/Hard/Special 难度) 和三层评估协议 (内容一致性 → 指令遵循 → 条件感知质量),在 10 语言上系统评估指令遵循能力。关键发现: Easy 控制已相对可靠,但 compositional (Dynamic/Layered/Conflict) 和 extra-vocal (Disfluency/Dysphonia) 控制仍是瓶颈; 中文场景下 Qwen3-TTS 已超越所有商用系统 [Table 3]。与 InstructTTSEval 的区别: InstructTTSEval 用 True/False 二分判断,MINT-Bench 提供三级评分 + 条件感知质量奖励的更细粒度诊断。
+
 ## Open-Vocabulary 指令范式 (OV-InstructTTS)
 
 [[论文笔记/OV-InstructTTS|OV-InstructTTS]] (Ren et al., CASIA/Tsinghua, 2026) 提出将 InstructTTS 从"声学属性的组合/复述"推向"源自叙事上下文的开放词汇指令"。核心方法: 构造 OV-Speech 数据集 (从有声书小说上下文提取结构化元素合成导演式指令,316K utterances) + reasoning-driven 框架 OV-InstructTTS-TEP (基于 Step-Audio-2-mini-Base LALM,先通过 `<think>` 推理链推断情感/声学/副语言属性,再生成 interleaved text+audio tokens)。消融显示 reasoning + enriched transcription 协同效应显著 (Gemini Score 71.57 vs 单独 reasoning 68.71 或单独 EP 66.98)。MOS 4.28 超越 GroundTruth (4.10), ICMOS 3.91 [Table 2]。与 VoxInstruct 的区别: VoxInstruct 统一了 content+style,OV-InstructTTS 进一步将指令空间从预定义属性开放化为叙事指令,并用 reasoning chain 桥接语义鸿沟。

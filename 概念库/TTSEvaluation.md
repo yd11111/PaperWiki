@@ -161,7 +161,7 @@ Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊�
 
 ## 演进
 
-基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025) → Prosody Diversity 专项评估 (ProsodyEval/DS-WED, ICASSP 2026) → Stylistic Consistency via Continuation Likelihood (MCLP, ICML 2026) → Iterative Evaluation Protocol (I2D, 2026)
+基础指标 (MCD, F0 RMSE, 2000s) → MOS + WER 双轨 (2010s) → SIM 加入 (ECAPA-TDNN, 2020) → Predicted MOS 自动化 (DNSMOS, 2021) → Distributional Evaluation 首创 (TTSDS, 2024) → LLM-as-Judge + Audio Turing Test (2025-2026) → Responsible Evaluation 三层框架 (Yang et al., 2026) → Naturalness-specific GRM (SpeechJudge, 2025) → Distributional TTS Benchmark 升级 (TTSDS2, 2026) → Multi-dimensional Diagnostic (TTS-PRISM, 2026) → Instruction-following Benchmark (InstructTTSEval, 2025) → Structured Multilingual IF Benchmark (MINT-Bench, 2026) → Prosody Diversity 专项评估 (ProsodyEval/DS-WED, ICASSP 2026) → Stylistic Consistency via Continuation Likelihood (MCLP, ICML 2026) → Iterative Evaluation Protocol (I2D, 2026)
 
 ### InstructTTSEval: Instruction-Following Benchmark
 
@@ -180,6 +180,10 @@ Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distan
 ### NV-Bench: 副语言发声评估 Benchmark
 
 Ni et al. (2026) 提出 NV-Bench,首个针对 NV-capable TTS 的标准化评估框架。基于 Batliner et al. 的功能分类学,将 14 类非语言发声分为三层 (Vegetative/Affect Bursts/Conversational Grunts),提供 1,651 条中英双语 paired GT 数据。引入 PCER (Paralinguistic CER) 隔离 NV 事件的编辑距离,与人类 IMOS 评分显著相关 (Spearman rho=-0.65, p<0.001) [Table 5, §4.2.4]。双维评估 (指令对齐 + 声学保真度) 成功区分了"未生成 NV"和"NV 质量差"两种失败模式。与 InstructTTSEval 的区别: InstructTTSEval 评估通用指令遵循 (True/False 二分),NV-Bench 专攻离散副语言事件 (连续 CER)。详见 [[论文笔记/NV-Bench|NV-Bench]]。
+
+### MINT-Bench: Structured Multilingual IF Benchmark
+
+[[论文笔记/MINT-Bench|MINT-Bench]] (Chen et al., NPU, 2026) 提出首个结构化多语言 instruction-following TTS benchmark。与 InstructTTSEval 的 True/False 二分判断不同,MINT-Bench 引入分层多轴 taxonomy (10 原子属性 x 4 轴: 难度/控制域/控制规格/细粒度模式) + 三阶段数据构建 pipeline (taxonomy node → structured label plan → instruction-text pair) + 三层评估协议 (WER 内容一致性系数 → LALM 指令遵循 1-3 分 → 条件感知质量奖励)。覆盖 10 语言,890 对/语言 (大分割) + 274 对/语言 (迷你分割)。关键发现: Gemini 2.5-Flash EN Overall PE 3.66 最高,但 Qwen3-TTS ZH PE 3.12 超越所有商用系统; compositional 和 extra-vocal 控制仍是主要瓶颈; LALM-human agreement Spearman 67-77 接近人类间 69-79 [Table 3, 5]。与 InstructTTSEval 的根本区别: InstructTTSEval 评估"是否遵循" (二分),MINT-Bench 评估"遵循得多好"(三级) + "遵循后质量如何"(条件奖励)。详见 [[论文笔记/MINT-Bench|MINT-Bench]]。
 
 ### MCLP: Stylistic Consistency via Continuation Likelihood
 
