@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[CapTalk]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓ | 参考(pending-review): [[NaturalLanguageDescriptionforTTS]], [[VariationalAutoencoderforTTS]], [[CodecLanguageModel]], [[EmotionControlinTTS]]
+- [ingest/deep] [[CapTalk]] — 精读, kb_sources=6, 新建 0, 追加 4 (NaturalLanguageDescriptionforTTS 正文, SpeechFactorization 正文, VariationalAutoencoderforTTS 正文, EmotionControlinTTS 正文)
+- [skip/update] [[SpeakerEmbedding]], [[CodecLanguageModel]], [[ProsodyModeling]] — key_papers 均已达上限且无实质新知识需追加
+- [review/auto] [[CapTalk]] — pass-with-fixes, 2 issues (0 high, 1 medium: 核心问题计数不一致, 1 low: frontmatter models 链接格式)
+- [lint/local] CapTalk — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[T5Gemma-TTS]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓ | 参考(pending-review): [[CodecLanguageModel]], [[Single-codebookvsMulti-codebook]], [[DurationPredictor]], [[VoiceCloningTaxonomy]], [[PhonemeRepresentation]]
 - [ingest/deep] [[T5Gemma-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (CodecLanguageModel 正文, DurationPredictor 正文, PhonemeRepresentation key_papers+正文)
 - [skip/update] [[LLM-basedTTS]], [[Single-codebookvsMulti-codebook]], [[VoiceCloningTaxonomy]] — key_papers 均已达上限或无实质新知识需追加
