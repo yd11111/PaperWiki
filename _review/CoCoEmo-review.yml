@@ -1,0 +1,60 @@
+paper: "CoCoEmo"
+reviewer: agent
+date: "2026-06-05"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    notes: "方法节清楚解释了 WHY (cross-conditioning diagnostic 证明 SLM 是情感编码主体) 和 HOW (discriminability-driven site selection + mean-difference steering vector + 加权组合)。四个关键设计选择逐一回答了 why this vs that。3个月后回看可以复述核心逻辑。"
+  trustworthy:
+    score: 7
+    verdict: pass-with-fixes
+    notes: "大部分数字有出处标注。Table 1/2/3/8/9 的数字经交叉验证均正确。但 datasets 字段为空(应填 ESD/RAVDESS/CREMA-D/IEMOCAP),且 Ins2 WER=0.06 这个数字在 Table 2 中确实如此但非常异常(可能是该方法的特殊设定),笔记未标注此异常值。"
+  distinguishable:
+    score: 8
+    verdict: pass
+    notes: "因果解释来源标注覆盖率高,几乎每段都有 [论文原文] 或 [agent 解读] 标注。推断性内容清楚标识为 agent 解读。"
+  positionable:
+    score: 8
+    verdict: pass
+    notes: "KB 背景节提供了详细的谱系定位,特别是与 EmoSteer-TTS 的四点核心差异对比。创新判断有具体对比基准。速查卡片 5 字段均有实质内容。"
+  no_pollution:
+    score: 7
+    verdict: pass-with-fixes
+    notes: "frontmatter datasets 字段为空,反向更新时可能遗漏数据集关联。tasks 字段也为空但可以理解(本文不直接对应任务库中的任务)。EmotionControlinTTS 已严重超出 key_papers 上限(56条),不应再追加。"
+
+issues:
+  - severity: medium
+    type: template-compliance
+    principle: trustworthy
+    location: "frontmatter, line 14"
+    detail: "datasets 字段为空,但论文使用了 ESD、RAVDESS、CREMA-D、IEMOCAP 四个数据集"
+    suggestion: "填充 datasets 字段,至少包含论文实际使用的数据集"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "实验表, line 131"
+    detail: "Ins2 WER=0.06 在 Table 2 CREMA-D ID 行确实如此(Instruction2 对 WER 的优化极强),但这个异常低值应标注说明,否则读者可能误以为是笔误"
+    suggestion: "在实验表该行旁添加注释,说明 Ins2 (percentage-based instruction) 的 WER 极低可能与其 prompt 格式有关"
+
+  - severity: low
+    type: template-compliance
+    principle: positionable
+    location: "frontmatter, line 12"
+    detail: "models 字段仅列 CosyVoice 2,但 IndexTTS2 也是重要实验 backbone"
+    suggestion: "models 应同时包含 CosyVoice 2 和 IndexTTS2(如果 IndexTTS2 有实体页)"
+
+  - severity: low
+    type: weak-reusability
+    principle: reproducible
+    location: "速查卡片, line 43"
+    detail: "指标字段列出的数字较多但缺少 single-emotion steering 的核心指标对比(仅列了 Table 8 一行)"
+    suggestion: "可精简为最有代表性的 2-3 组指标,突出 mixed-emotion 和 high-mismatch 两个核心场景的改进幅度"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "datasets 字段在模板中为空列表,但 notes.md 未明确要求必填;建议明确 datasets 至少填写论文使用的核心数据集"
+  checklist_upgrade_suggestion: ""

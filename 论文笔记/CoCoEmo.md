@@ -11,7 +11,7 @@ tags: [TTS, emotion-control, activation-steering, mixed-emotion, text-emotion-mi
 concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechLanguageModel]]", "[[ProsodyModeling]]", "[[StyleTransferinTTS]]"]
 models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
 tasks: []
-datasets: []
+datasets: ["ESD", "RAVDESS", "CREMA-D", "IEMOCAP"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-05
@@ -179,3 +179,19 @@ $$\tilde{\mathbf{h}}_i^{(l,o)} = \mathbf{h}_i^{(l,o)} + \alpha \cdot \mathbf{v}^
 3. **Multi-rater consensus as steering weights**: 将标注者分歧直接建模为混合比例,避免了强制单标签的信息损失
 4. **重归一化 trick**: $\tilde{h} \leftarrow \frac{\|h\|}{\|\tilde{h}\|} \cdot \tilde{h}$ 简单但有效,保持激活尺度一致性,可迁移到任何 activation steering 场景
 5. **WER-constrained layer selection**: 在可控性和语义完整性之间做 Pareto 权衡的实用方法 [Table 9, Appendix I]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四个设计选择的 WHY/HOW 清晰,3 个月后可复述 |
+> | 可信赖 | pass-with-fixes | 核心数字均有出处;datasets frontmatter 缺失已修正 |
+> | 可区分 | pass | 来源标注覆盖率高,agent 解读明确标识 |
+> | 可定位 | pass | KB 背景谱系定位详细,与 EmoSteer-TTS 四点差异清晰 |
+> | 不污染 | pass-with-fixes | EmotionControlinTTS key_papers 已超限,反向更新需改为正文追加 |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/CoCoEmo-review.yml`
