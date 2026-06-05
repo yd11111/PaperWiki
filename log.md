@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MelShield]] — 命中 4 页(取 4): [[NeuralVocoder]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[Text-to-SpeechPipeline]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)
+- [ingest/deep] [[MelShield]] — 精读, kb_sources=4, 新建 0, 追加 1 (Anti-spoofingandDeepfakeDetection key_papers+正文)
+- [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),跳过追加 (MelShield 使用 vocoder 作为 black-box,非 vocoder 贡献)
+- [skip/update] [[MelSpectrogram]] — key_papers 已达上限(21),跳过追加 (使用 mel 域但非 mel 表示本身的贡献)
+- [lint/local] MelShield — 通过
 - [kb/search] [[UniSonate]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[PhonemeRepresentation]](pending-review)
 - [ingest/deep] [[UniSonate]] — 精读, kb_sources=6, 新建 0, 追加 3 (Instruction-GuidedSpeechSynthesis 正文+演进, NaturalLanguageDescriptionforTTS 正文+演进, PhonemeRepresentation key_papers+正文+演进)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过追加 (UniSonate 不创新 CFM 本身)
