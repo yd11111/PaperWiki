@@ -1,0 +1,55 @@
+review:
+  paper: "LongCat-AudioDiT"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节包含丰富的因果解释(WHY),每个关键设计选择都有动机阐述。Wav-VAE 架构、训练-推理不匹配的诊断、APG 替代 CFG 的原理均有清晰的 WHY 解释。速查卡片的可借鉴字段具体可操作。"
+  trustworthy:
+    score: 8
+    rationale: "数字型 claim 标注覆盖率高(>90%),指标名使用正确。发现一处 SIM 值错误(MaskGCT ZH-Hard 写成 0.718 实为 0.713,0.718 是 E2 TTS)。速查卡片指标字段含具体数字+数据集+出处。"
+  distinguishable:
+    score: 9
+    rationale: "因果解释均标注了 [论文原文] / [agent 解读],边界清晰。方法节中 agent 解读标注充分(如 shortcut path 类比 ResNet、training-inference mismatch 对 VoiceBox/F5-TTS 的推测性分析)。"
+  positionable:
+    score: 9
+    rationale: "KB 背景节有具体谱系定位(与 F5-TTS/VoiceBox/Seed-DiT/CosyVoice 对比),创新判断有对比基准。frontmatter 字段齐全,concepts/models/tasks 语义正确。"
+  non-polluting:
+    score: 8
+    rationale: "反向更新涉及的概念页(CFM, CFG, VAE-TTS, Diffusion-basedTTS, MelSpectrogram, NAR-TTS)均为 append 操作(追加 key_papers)。无 factual error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "实验表格第6行 MaskGCT SIM (ZH-Hard)"
+    detail: "笔记写 MaskGCT ZH-Hard SIM 为 '0.718%',实际论文 Table 1 中 MaskGCT ZH-Hard SIM 为 0.713,0.718 是 E2 TTS 的值。另外 SIM 不应加百分号。"
+    suggestion: "修正为 0.713 (去掉%)"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "实验表格第6行 F5-TTS ZH-Hard"
+    detail: "F5-TTS 在论文 Table 1 中 ZH-Hard 列为空('-'),笔记中 SIM 列写了 0.718 但标了百分号,实际 F5-TTS ZH-Hard 无数据"
+    suggestion: "F5-TTS ZH-Hard SIM 应为 '-'(无数据),CER 也为 '-'"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "方法节 §6 其他技术选择"
+    detail: "REPA、Long-skip connections、Global AdaLN 等技术的 ablation 数据未在实验节体现(论文也未单独消融这些)"
+    suggestion: "可在注释中标明'论文未提供独立 ablation',当前处理已可接受"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter models"
+    detail: "models 字段列了 CosyVoice3 和 CosyVoice2 作为对比 baseline,但 Table 1 中 CosyVoice3.5 才是主要对比对象。另外 Seed-TTS(Seed-DiT)是最重要的直接可比模型,未列入"
+    suggestion: "考虑加入 Seed-TTS 到 models 或保持当前(因 Seed-TTS 已有单独笔记,不在模型库)"
+
+learning_signals:
+  - "SIM 指标是无量纲数(cosine similarity),不应加百分号 — 与 CER/WER 不同"
+  - "pdftotext 提取的表格数据需逐列对齐验证,容易串行错位"

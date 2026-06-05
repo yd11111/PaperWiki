@@ -146,7 +146,7 @@ APG 的核心思想(来自 Sadat et al., 2024): 将 guidance residual 分解为�
 | WER (EN) ↓ | 1.50% | 1.78% | 1.73% | 1.83% | 2.62% | 1.57% | Seed-EN | [Table 1] |
 | SIM (EN) ↑ | **0.786** | 0.762 | 0.790 | 0.647 | 0.714 | 0.738 | Seed-EN | [Table 1] |
 | CER (ZH-Hard) ↓ | 6.04% | 6.33% | 10.27% | 8.79% | 8.67% | 5.71% | Seed-Hard | [Table 1] |
-| SIM (ZH-Hard) ↑ | **0.797** | 0.787 | 0.748 | 0.718% | 0.713 | 0.786 | Seed-Hard | [Table 1] |
+| SIM (ZH-Hard) ↑ | **0.797** | 0.787 | 0.748 | - | 0.713 | 0.786 | Seed-Hard | [Table 1] |
 
 **Wav-VAE 重建** [Table 2]:
 - PESQ 3.237, STOI 0.967, UTMOS 4.013 (11.72 Hz, dim=64)
@@ -204,4 +204,16 @@ APG 的核心思想(来自 Sadat et al., 2024): 将 guidance residual 分解为�
 
 ## 审阅
 
-(待独立审阅 agent 填充)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY 解释充分,速查卡片可借鉴字段具体 |
+> | 可信赖 | pass | 数字标注覆盖率 >90%; 发现 1 处 SIM 值串行 (已修正) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰 |
+> | 可定位 | pass | KB 背景谱系定位具体,含对比模型名 |
+> | 不污染 | pass | 反向更新均为 append,无 overclaim |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/LongCat-AudioDiT-review.yml`
