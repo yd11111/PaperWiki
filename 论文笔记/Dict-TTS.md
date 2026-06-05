@@ -138,7 +138,7 @@ Dict-TTS 与同期工作 NLR [16] 都利用字典知识,但有五点本质区别
 | Avg Pitch Error | 1232.3 | 1308.8 (pypinyin) | 1424.6 | Biaobei | [Table 6] |
 
 **跨语言验证** [Table 1]:
-- **日语 (JSUT)**: PER-O 3.73% (字符 1.55%), PER-S 2.57% (phoneme/pyopenjtalk 0.92%) — Dict-TTS 不如开源 G2P,因为日语 kanji 的音读/训读选择需要经验规则而非纯语义
+- **日语 (JSUT)**: Dict-TTS PER-O 3.73% vs phoneme/pyopenjtalk PER-O 1.55%; PER-S 2.57% vs phoneme 0.92% — Dict-TTS 不如开源 G2P,因为日语 kanji 的音读/训读选择需要经验规则而非纯语义
 - **粤语 (Common Voice HK)**: PER-S 1.23% (phoneme/pycantonese 1.45%) — Dict-TTS 超越开源 G2P
 
 **消融实验** [Table 4]:
@@ -181,3 +181,19 @@ Dict-TTS 的核心贡献是将"查字典"这一朴素直觉形式化为可微的
 ---
 
 检索命中: [[ProsodyModeling]]✓, [[PhonemeRepresentation]][待确认], [[Gumbel-Softmax]][待确认], [[Text-to-SpeechPipeline]][待确认], [[MelSpectrogram]][待确认], [[VariationalAutoencoderforTTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,WHY 覆盖完整 |
+> | 可信赖 | pass | 1 个 high issue 已修正(JSUT 数据归因) |
+> | 可区分 | pass | 来源标注覆盖率 > 80% |
+> | 可定位 | pass | KB 背景谱系定位准确 |
+> | 不污染 | pass | 未创建新概念页,判断合理 |
+> 
+> Issues: 3 (high: 1 fixed, medium: 1, low: 1)
+> 详见 `_review/Dict-TTS-review.yml`

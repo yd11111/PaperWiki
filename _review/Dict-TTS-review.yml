@@ -1,0 +1,58 @@
+review:
+  paper: "Dict-TTS"
+  note_path: "论文笔记/Dict-TTS.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节有充分因果解释(语义空间 vs 声学空间的分析,Gumbel-Softmax vs softmax 的消融),关键设计选择均回答了 WHY。速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: 7
+    reason: "主要结果表数据准确(已与 PDF Table 1-4 交叉验证)。发现 1 个 high issue: 跨语言验证 JSUT 段落错误归因(已修正)。指标名和方向均正确。出处标注覆盖率 > 80%。"
+  可区分:
+    score: 8
+    reason: "[论文原文] 和 [agent 解读] 标注一致使用,覆盖率 > 80%。无推断被写成断言的情况。"
+  可定位:
+    score: 8
+    reason: "KB 背景有具体谱系定位(G2P 演进脉络 + Gumbel-Softmax 时间线 + 韵律建模方法对比)。创新判断有对比基准(vs 规则 G2P, vs 端到端 character-based, vs NLR)。frontmatter 大部分字段非空。"
+  不污染:
+    score: 9
+    reason: "未创建新概念页(polyphone disambiguation 和 S2PA 作为单篇论文技术不满足准入规则,判断合理)。引用的 6 个已有概念页均相关。"
+
+issues:
+  - id: 1
+    type: "factual-error"
+    severity: "high"
+    location: "跨语言验证 > 日语 (JSUT)"
+    detail: "原文写 'PER-O 3.73% (字符 1.55%)',但 1.55% 是 Phoneme(pyopenjtalk)的 PER-O,不是 Character 的。Character-based 系统不产生显式音素预测,Table 1 中 Character PER-O 为空。"
+    suggestion: "改为 'Dict-TTS PER-O 3.73% vs phoneme/pyopenjtalk PER-O 1.55%'"
+    status: "fixed"
+
+  - id: 2
+    type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter > models"
+    detail: "models 字段为空 [],但 Dict-TTS 基于 PortaSpeech 构建,NLR 和 BERT Embedding 是对比 baseline。"
+    suggestion: "models 字段保持空可接受,因 PortaSpeech/NLR 不是本文提出的模型,也不是 TTS 领域独立模型实体。"
+    status: "accepted-as-is"
+
+  - id: 3
+    type: "traceability-gap"
+    severity: "low"
+    location: "frontmatter > venue"
+    detail: "venue 标为 'NeurIPS 2022',但论文本身写 'Preprint. Under review.'。无法从论文文本直接确认发表会议。"
+    suggestion: "可改为 'arXiv preprint' 或保留(NeurIPS 2022 是已知事实但非从论文文本可验证)。"
+    status: "accepted-as-is"
+
+learning_signals: []
+
+summary:
+  total_issues: 3
+  high: 1
+  medium: 1
+  low: 1
+  fixed: 1
+  note: "唯一的 high issue(JSUT 数据归因错误)已当场修正。其余为低优先级格式和可追溯性问题。笔记整体质量良好,机制解释充分,KB 背景定位准确。"
