@@ -127,6 +127,7 @@ WavChat 将 E2E streaming spoken dialogue 的设计归结为三项核心技术:
 | MTP + Verification | Llasa+ | frozen backbone + plug-and-play MTP 模块 + top-k 验证 | 1.48x 加速 |
 | Causal codec decoder | Llasa+ (XCodec2-S) | X-Codec2 decoder 因果化 + conv1d adapter | 流式波形重建 |
 | ARIA + Hybrid MoE | Qwen3.5-Omni | 自适应速率 text-speech 交错 + chunked prefilling + GDN | Plus 435ms (audio, 1 conc.) |
+| Causal encoder swap | Raon-SpeechChat | Voxtral-Mini-4B (causal sliding window 15s) 替换非因果 AuT encoder + text lookahead | 流式全双工 |
 
 ## Text-guided vs W/o Text-guided 的延迟 Trade-off
 

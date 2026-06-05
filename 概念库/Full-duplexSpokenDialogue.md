@@ -91,6 +91,15 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - 对话性能仅略低于半双工版 (URO-Bench 中文 AlpacaEval 84.90 vs 90.02)
 - 详见 [[论文笔记/Covo-Audio|Covo-Audio]]
 
+### Raon-SpeechChat (KRAFTON, 2026)
+- 9.8B 英韩双语全双工 SpeechLM,从半双工 Raon-Speech 扩展而来
+- 单一自回归序列交错三种模态 (user speech / assistant text / assistant speech),区别于 Moshi 的并行双流
+- 三种状态 token: **SIL** (沉默监听) / **BOW** (beginning of word, 分离 when-to-speak 与 what-to-say) / **BC** (backchannel, 独立控制回传频率)
+- Text lookahead: 文本先于语音生成,减少全双工场景下的语义漂移
+- Causal encoder: Voxtral-Mini-4B-Realtime (因果 sliding window 15s),替换非因果 AuT encoder 实现流式输入
+- FDB v1.0: interruption TOR 0.980 (best), backchannel TOR 0.091 (best); FDB v2.0 多轮长对话弱于 MiniCPM-o 4.5
+- 详见 [[论文笔记/Raon-Speech|Raon-Speech]]
+
 ## Interactive Period Recognition (IPR)
 
 Survey 特别提出 IPR 作为全双工的配套能力:
@@ -172,4 +181,4 @@ WavChat survey 进一步梳理了全双工系统的更多实现:
 
 ## 演进
 
-Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025)
+Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026)

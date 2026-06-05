@@ -136,6 +136,14 @@ WavChat 定义了交互系统需具备的五项关键能力:
   - **State 2**: 用户输入完成,模型准备生成完整响应
 - 自然支持 turn-taking 和 backchannel 行为
 
+### Raon-SpeechChat (KRAFTON, 2026)
+- **SIL/BOW/BC 三状态建模**: 将全双工交互行为分解为三种显式特殊 token,区别于 Moshi 的单一 PAD token 和 Freeze-Omni 的 State 0/1/2:
+  - **SIL** (silence): 显式编码沉默监听,让模型区分"主动沉默"和"说话中的填充"
+  - **BOW** (beginning of word): 在每个 assistant text token 前发出,分离 when-to-speak 和 what-to-say
+  - **BC** (backchannel): 专用于回传信号,推理时可独立控制回传频率甚至完全禁用
+- FDB v1.0: interruption TOR 0.980, backchannel TOR 0.091 (均为 best); user backchannel resume 率 0.398 (弱于 MiniCPM-o 0.520)
+- 详见 [[论文笔记/Raon-Speech|Raon-Speech]]
+
 ## VAD 的局限
 
 最早期的全双工系统使用 Voice Activity Detection (VAD) 判断用户是否有打断意图。然而 VAD 存在根本性局限:
@@ -166,4 +174,4 @@ WavChat 定义了交互系统需具备的五项关键能力:
 
 ## 演进
 
-VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024)
+VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026)
