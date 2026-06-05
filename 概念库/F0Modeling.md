@@ -4,7 +4,7 @@ title: "F0 Modeling"
 aliases: [基频建模, Pitch Modeling, Fundamental Frequency, 音高建模, F0 Prediction, Pitch Contour]
 category: "technique"
 tags: [SVS, TTS, pitch, F0, vibrato, prosody, acoustic-feature]
-key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/NoVerifiableRewardforProsody|No Verifiable Reward for Prosody]]", "[[论文笔记/WhispSynth|WhispSynth]]"]
+key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/NoVerifiableRewardforProsody|No Verifiable Reward for Prosody]]", "[[论文笔记/WhispSynth|WhispSynth]]", "[[论文笔记/UniVocal|UniVocal]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[SingingVoiceSynthesis]]", "[[ProsodyModeling]]", "[[MusicalScoreEncoder]]", "[[DurationPredictor]]", "[[Diffusion-basedTTS]]"]
 status: pending-review
@@ -74,6 +74,9 @@ VITS, Glow-TTS 等系统中 F0 被生成模型隐式捕获,不作为显式预测
 
 ### LLM 时代
 VALL-E / CosyVoice 等系统中 F0 信息编码在 codec token 中,由 in-context learning 隐式复制。
+
+### Refined Cent Token (显式 F0 离散化补充 Semantic Tokens)
+[[论文笔记/UniVocal|UniVocal]] (Shi et al., 2026) 提出 refined cent token 作为 LLM-based TTS 中显式补充 F0 信息的方案。将 F0 转为对数 cent scale ($f_{cent} = 1200 \times \log_2(f_{Hz}/440)$),通过 mod 1200 投影到单八度范围,离散化为 1200-bin token (+ 1 unvoiced token)。量化误差仅 ~0.08% 频率偏差。在 CosyVoice 2 的 causal Transformer 中与 semantic token 交替生成 (CoT interleaved generation),先预测 pitch 再预测 content,实现 prosodic planning。消融实验显示 1200-bin 在 empathetic speech (E-MOS(O) 1.85) 上远优于 12-bin (1.57) [UniVocal Table 12]。
 
 ## SVS 的 F0 评估指标
 

@@ -1,0 +1,44 @@
+kb_review:
+  paper: "UniVocal"
+  note_path: "论文笔记/UniVocal.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+change_plan:
+  - target: "模型库/CosyVoice2.md"
+    action: append
+    detail: "追加 '作为 Baseline 被引用' 段 — UniVocal 以 CosyVoice2 为 backbone,Empathy E-MOS 2.26 vs CosyVoice2 1.78"
+    status_change: false
+
+  - target: "概念库/F0Modeling.md"
+    action: append
+    detail: "追加 key_papers + '在 LM-based 系统中的 F0 离散化' 小节 — refined cent token (1200-bin) 方案"
+    status_change: false
+
+  - target: "概念库/SingingVoiceSynthesis.md"
+    action: append
+    detail: "追加 key_papers — UniVocal 定义 SCS 任务,统一 speech+singing 生成"
+    status_change: false
+
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: skip
+    detail: "UniVocal 使用标准 CFM,无新贡献;key_papers 已有 84 项"
+
+  - target: "概念库/LLM-basedTTS.md"
+    action: skip
+    detail: "key_papers 已有 84 项;UniVocal 对 LLM-TTS 范式无新架构贡献"
+
+  - target: "概念库/SemanticvsAcousticTokens.md"
+    action: skip
+    detail: "key_papers 已有 64 项;cent token 属 F0Modeling 领域更合适"
+
+  - target: "概念库/ProsodyModeling.md"
+    action: skip
+    detail: "key_papers 已有 51 项"
+
+  - target: "概念库/Instruction-GuidedSpeechSynthesis.md"
+    action: skip
+    detail: "key_papers 已达 12 上限"
+
+issues: []

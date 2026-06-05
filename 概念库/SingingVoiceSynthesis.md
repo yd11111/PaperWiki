@@ -4,7 +4,7 @@ title: "Singing Voice Synthesis"
 aliases: [SVS, 歌声合成, 歌唱合成, Singing Synthesis, 歌声生成]
 category: "task"
 tags: [SVS, singing, music, vocal-synthesis, score-conditioned, pitch-control]
-key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/InstructAudio|InstructAudio]]"]
+key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/SongGen|SongGen]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/InstructAudio|InstructAudio]]", "[[论文笔记/UniVocal|UniVocal]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[Text-to-SpeechPipeline]]", "[[MusicalScoreEncoder]]", "[[F0Modeling]]", "[[SVSEvaluationMetrics]]", "[[ProsodyModeling]]", "[[NeuralVocoder]]", "[[StyleTransferinTTS]]", "[[Diffusion-basedTTS]]"]
 status: pending-review
@@ -143,4 +143,8 @@ Singing Voice Synthesis (SVS) 从文本歌词和符号化乐谱 (musical score) 
 
 ## 演进
 
-VOCALOID (拼接合成, 2004) → HMM-based SVS (Saino et al., 2006) → XiaoiceSing (FastSpeech→SVS, 2020) → DiffSinger (扩散声学模型, 2022) → VISinger (VITS→SVS 端到端, 2022) → TCSinger (零样本+风格控制, 2024) → TechSinger (歌唱技巧+flow matching, 2025) → Text-to-Song (YuE/Suno, 2025)
+VOCALOID (拼接合成, 2004) → HMM-based SVS (Saino et al., 2006) → XiaoiceSing (FastSpeech→SVS, 2020) → DiffSinger (扩散声学模型, 2022) → VISinger (VITS→SVS 端到端, 2022) → TCSinger (零样本+风格控制, 2024) → TechSinger (歌唱技巧+flow matching, 2025) → Text-to-Song (YuE/Suno, 2025) → Speech-Singing Code-Switching (UniVocal, 2026)
+
+## Speech-Singing Code-Switching (SCS)
+
+[[论文笔记/UniVocal|UniVocal]] (Shi et al., 2026) 定义了 SCS 任务: 在单条输出中根据文本语义自动在语音和歌声之间切换。不同于传统 SVS 需要乐谱输入,也不同于统一框架 (UniSyn, UniAudio) 仅按 instruction 生成单一模式。UniVocal 基于 CosyVoice 2,通过两阶段 curriculum learning 对齐 speech/singing 表示,再学习自动切换。SCSBench-Mixed F1(O) 0.871,但纯 implicit cue 切换仍具挑战 [UniVocal Table 1, §5.3]。
