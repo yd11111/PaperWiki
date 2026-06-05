@@ -4,7 +4,7 @@ title: "Cross-lingual Voice Cloning"
 aliases: [跨语言语音克隆, Cross-lingual TTS, Cross-lingual Speech Synthesis]
 tags: [TTS, cross-lingual, voice-cloning, multilingual]
 key_approaches: ["Multilingual LLM + shared tokenizer", "Language-agnostic speaker embedding"]
-key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/Cross-LingualF5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/DialoSpeech|DialoSpeech]]"]
+key_models: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/Cross-LingualF5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/DialoSpeech|DialoSpeech]]", "[[论文笔记/PFluxTTS|PFluxTTS]]"]
 benchmarks: ["[[CV3-Eval]]"]
 metrics: [WER, CER, Speaker Similarity, MOS]
 status: confirmed
@@ -33,6 +33,7 @@ updated: 2026-06-01
 - [[论文笔记/CosyVoice3|CosyVoice 3]] (2025): 支持 zh/en/ja/ko 等多方向跨语言克隆,WER 显著优于前代
 - CosyVoice 2 (2024): 仅支持中英,日文方向因字符转换问题表现差
 - [[论文笔记/Cross-LingualF5-TTS|Cross-Lingual F5-TTS]] (Liu et al., 2025): 首个 NAR flow-matching 跨语言系统,通过 MMS forced alignment + speaking rate predictor 移除 prompt transcript 依赖,cross-lingual test-en WER 2.496%, SIM 0.543
+- [[论文笔记/PFluxTTS|PFluxTTS]] (Pankov et al., 2026): 混合 DG+AF flow-matching 系统,通过推理时向量场融合兼得稳定性和自然度; FLUX 架构 sequence prompt embeddings 实现跨语言克隆 (无需 prompt transcript); 33 语言 cross-lingual 评估 WER 6.9%, SPK-SIM 0.68 [Table 2]
 
 ## 评估
 
