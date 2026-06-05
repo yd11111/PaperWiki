@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[UniVocal]] — 命中 6 页(取 Top 6): [[CosyVoice2]]✓, [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[SingingVoiceSynthesis]](pending-review), [[F0Modeling]](pending-review)
+- [ingest/deep] [[UniVocal]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice2 baseline段, F0Modeling key_papers+正文段, SingingVoiceSynthesis key_papers+正文段)
+- [lint/local] UniVocal — 通过
+- [review/auto] [[UniVocal]] — pass-with-fixes, 0 high / 2 medium / 2 low
+- [review/kb] [[UniVocal]] — pass, 3 append updates
 - [kb/search] [[SparseAutoencoderEmotion]] — 命中 6 页(取 Top 6): [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
 - [ingest/deep] [[SparseAutoencoderEmotion]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 正文段 + 演进线)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(>12),改追加到正文
