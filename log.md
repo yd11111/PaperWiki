@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[WAND]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
+- [ingest/deep] [[WAND]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice2 baseline引用)
+- [skip/update] [[LLM-basedTTS]], [[CodecLanguageModel]], [[FiniteScalarQuantization]], [[Single-codebookvsMulti-codebook]] — key_papers 均已达上限且连接间接
+- [review/auto] [[WAND]] — pass-with-fixes, 4 issues (0 high, 2 medium: models字段不完整+速查卡片跨语言claim需限定, 2 low)
+- [lint/local] WAND — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[CapTalk]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓ | 参考(pending-review): [[NaturalLanguageDescriptionforTTS]], [[VariationalAutoencoderforTTS]], [[CodecLanguageModel]], [[EmotionControlinTTS]]
 - [ingest/deep] [[CapTalk]] — 精读, kb_sources=6, 新建 0, 追加 4 (NaturalLanguageDescriptionforTTS 正文, SpeechFactorization 正文, VariationalAutoencoderforTTS 正文, EmotionControlinTTS 正文)
 - [skip/update] [[SpeakerEmbedding]], [[CodecLanguageModel]], [[ProsodyModeling]] — key_papers 均已达上限且无实质新知识需追加
