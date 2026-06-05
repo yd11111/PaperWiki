@@ -6,7 +6,7 @@ arxiv_id: "2512.18699"
 source: "Sources/TaskVectorTTS.pdf"
 authors: [Pengchao Feng, Yao Xiao, Ziyang Ma, Zhikang Niu, Shuai Fan, Yao Li, Sheng Wang, Xie Chen]
 year: 2025
-venue: "ICASSP 2025 (推测,arXiv Dec 2025)"
+venue: "ICASSP 2026 (推测,arXiv Dec 2025)"
 tags: [TTS, task-vector, dialect, emotion, zero-shot, LoRA, F5-TTS, style-transfer, parameter-space, fine-tuning]
 concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]", "[[SpeakerAdaptation]]"]
 models: ["[[CosyVoice2]]"]
@@ -101,9 +101,9 @@ updated: 2026-06-05
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 方言 MOS (Avg, Mandarin prompt) | 3.18 | — | 2.62 | 1.85 | 2.85 | 3.69 | 8 方言 in-house | [Table 2] |
 | LoRA E-Vector MOS (Avg) | 2.35 | — | 2.62 | — | — | 3.69 | 同上 | [Table 2] |
-| 情感方言 MOS (Avg) | — | 2.83 | 1.87 | — | — | — | 8 方言 + 4 情感 | [Table 3] |
-| Fully E-Vector MOS (Avg) | — | — | — | — | — | — | 同上 | [Table 3] |
-| Fully E-Vector MOS: 2.76 | — | — | — | — | — | — | — | [Table 3] |
+| 情感方言 MOS (Avg, HE-Vector) | — | 2.83 | 1.87 | — | — | — | 8 方言 + 4 情感 | [Table 3] |
+| 情感方言 MOS (Avg, Fully E-Vector) | — | 2.76 | 1.87 | — | — | — | 同上 | [Table 3] |
+| 情感方言 MOS (Avg, Dual-stage) | — | 2.56 | 1.87 | — | — | — | 同上 | [Table 3] |
 | 方言 Avg WER (%) | 15.41 | — | 14.49 | 9.04 | 7.43 | 16.59 | 粤/沪/川/陕 | [Table 4] |
 | 方言 Avg SIM-O | 0.70 | — | 0.72 | 0.65 | 0.65 | 0.63 | 同上 | [Table 4] |
 
@@ -121,7 +121,7 @@ updated: 2026-06-05
 
 1. **模型适用性有限**: 仅在 F5-TTS 上有效。应用于 CosyVoice 时质量下降,原因是 E-Vector 增强干扰了 LLM 文本编码器与 flow matching 声学模型之间的协调 [§5]。[agent 解读] 这暗示 task vector 方法更适合端到端单阶段模型,而非多组件级联系统。
 2. **非线性参数偏移**: 分析显示微调过程中的参数偏移并非严格线性,这是线性缩放 E-Vector 的理论局限 [§5]。为不同 DiT 层分配不同系数也未带来显著增益。
-3. **绝对 MOS 偏低**: 方言 MOS 3.18, 情感方言 MOS 2.83,均低于商业部署标准 (通常 > 4.0)。[agent 解读] 10h/方言的数据量和仅 60k 步微调可能是主要瓶颈。
+3. **绝对 MOS 偏低**: 方言 MOS 3.18, 情感方言 MOS 2.83,绝对分值不高。[agent 解读] 10h/方言的数据量和仅 60k 步微调可能是主要瓶颈;不过方言 MOS 评分普遍偏低 (GT 也仅 3.69 [Table 2]),可能反映方言评估本身的特殊性。
 4. **评估局限**: 方言 ASR 评估仅覆盖 4 种方言 (粤/沪/川/陕),且 ASR 本身在方言上有误差 [Table 4 注释]。情感方言任务无客观指标报告。
 5. **LoRA 变体效果差**: LoRA E-Vector MOS 2.35 远低于全参数 E-Vector 3.18,参数效率与表达力的 trade-off 未被有效解决 [Table 2]。
 6. **数据集非公开**: 方言语料为 in-house,无法复现。
@@ -144,3 +144,19 @@ updated: 2026-06-05
 1. **参数空间 CFG 类比**: 在 flow matching TTS 中,task vector 缩放 (θ_pre + α·τ) 类似于在参数空间做 classifier-free guidance。这个视角可能启发其他基于参数操作的条件控制方法
 2. **层级 LoRA 分配**: 按风格属性对应的模型层分配 LoRA,实现多维度解耦控制。可扩展到音色/韵律/情感/方言四维分离
 3. **E-Vector 作为风格探针**: 比较不同方言/情感的 task vector 方向可用于分析 TTS 模型的内部风格表示结构
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY 解释充分,三个设计选择都有因果链 |
+> | 可信赖 | pass-with-fixes | 核心数字验证通过; venue 已修正; 表格格式已修正 |
+> | 可区分 | pass | 来源标注覆盖率 ~85%,无推断写成断言 |
+> | 可定位 | pass | KB 背景有具体谱系,点评节有路线对比 |
+> | 不污染 | pass | 概念链接合理,反向更新为追加操作 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2) — 已当场修正
+> 详见 `_review/TaskVectorTTS-review.yml`
