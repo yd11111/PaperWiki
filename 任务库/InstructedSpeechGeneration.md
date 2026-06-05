@@ -58,6 +58,10 @@ updated: 2026-06-01
 
 - [[论文笔记/VoiceSculptor|VoiceSculptor]] (ASLP@NPU, 2026): 开源 voice design + voice clone 解耦架构,通过 CoT 属性推理 + RAG 指令增强实现 NL 驱动的细粒度语音属性控制; InstructTTSEval-Zh 开源 SOTA (AVG 67.6%, 超越 MiMo-Audio 7B 64.5%)
 
+### Open-Vocabulary 指令 (OV-InstructTTS)
+
+[[论文笔记/OV-InstructTTS|OV-InstructTTS]] (Ren et al., CASIA/Tsinghua, 2026): 将 InstructTTS 指令空间从预定义声学属性的组合推向叙事上下文衍生的开放词汇指令。基于 Step-Audio-2-mini-Base LALM + reasoning chain (先推断情感/声学/副语言属性再生成),在 OV-Speech 数据集 (316K utterances from 83 novels) 上训练。Gemini Score 70.42, MOS 4.28, ICMOS 3.91 [Table 2]。
+
 ## 开放问题
 
 - 音色(timbre)尚不可通过文本指令控制,需要额外研究
