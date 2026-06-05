@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [benchmark, evaluation, nonverbal-vocalizations, paralinguistic, TTS, ASR, controllability, expressive-speech]
 concepts: ["[[TTSEvaluation]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[AudioUnderstanding]]"]
-models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[模型库/SenseVoice|SenseVoice]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[模型库/SenseVoice|SenseVoice]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "Orpheus-TTS"]
 tasks: []
 datasets: ["NV-Bench", "Emilia-NV", "SMIIP-NV", "NVTTS", "DisfluencySpeech", "NVS", "SynParaSpeech"]
 kb_context_sources: 6
@@ -64,7 +64,7 @@ NV-Bench 由三个组件构成 [Fig 1]:
 - **Affect bursts** (情感爆发): Laughter, Surprise-ah/oh, Dissatisfaction-hnn — 传达瞬时情感
 - **Conversational grunts** (对话管理): Uhm, Confirmation-en, Question-ei/ah/en/oh — 消歧交互意图
 
-[agent 解读] 这一分类法使评估从 acoustic event detection 升维到 pragmatic function assessment。中文有 14 类,英文有 8 类 (少了部分 affect bursts 和 conversational grunts 的细分),反映了不同语言的副语言差异 [Table 2]。
+[agent 解读] 这一分类法使评估从 acoustic event detection 升维到 pragmatic function assessment。中文有 13 类 (3+4+6),英文有 7 类 (3+2+2),两语言并集共 14 个唯一 NV 类型 [Table 2]。英文缺少 Surprise-ah, Dissatisfaction-hnn, Confirmation-en, Question-ei/ah/en/oh 等中文特有的细粒度语用类别,反映了不同语言的副语言差异。
 
 **为什么需要自训 NVASR 而非用现成 ASR?** [论文原文] 通用 ASR 无法识别 NV 标签; Qwen2.5-Omni 虽经 NV 微调但在 NVTTS 上 OCER 高达 26.95% [Table 3],不足以作为可靠评估器。作者选择 SenseVoice-Small 为基座 [§2.1.1],因其多任务预训练 (ASR + AED + SER + LID) 使其已具备丰富声学特征捕获能力 [论文原文]。
 
@@ -120,15 +120,15 @@ NV-Bench 由三个组件构成 [Fig 1]:
 | PCER (%) ZH single | **27.69** | 31.08 | 57.69 | 40.00 | 75.64 | 88.77 | 9.38 | NV-Bench ZH single | [Table 4] |
 | OCER (%) ZH single | **4.90** | 8.15 | 5.86 | 6.64 | 11.34 | 13.91 | 4.07 | NV-Bench ZH single | [Table 4] |
 | PCER (%) ZH multi | **30.04** | 39.37 | 61.94 | 48.74 | 77.20 | 84.85 | 23.71 | NV-Bench ZH multi | [Table 4] |
-| SIM ZH single | 0.768 | 0.748 | **0.764** | 0.740 | 0.719 | — | 0.781 | NV-Bench ZH single | [Table 4] |
+| SIM ZH single | **0.768** | 0.748 | 0.764 | 0.740 | 0.719 | — | 0.781 | NV-Bench ZH single | [Table 4] |
 | DNSMOS ZH single | 3.29 | 3.22 | 3.30 | 3.21 | 3.22 | **3.43** | 3.12 | NV-Bench ZH single | [Table 4] |
 | PCER (%) EN single | **46.13** | 50.43 | 62.75 | 55.30 | 56.80 | 71.92 | 8.31 | NV-Bench EN single | [Table 4] |
-| FAD | — | 0.29 | 0.90 | 1.08 | 1.32 | 5.71 | — | NV-Bench full | [Table 5] |
+| FAD | 0.86 | **0.29** | 0.90 | 1.08 | 1.32 | 5.71 | — | NV-Bench full | [Table 5] |
 | FD (PANNs) | 3.94 | **2.72** | 9.46 | 5.57 | 6.71 | 24.49 | — | NV-Bench full | [Table 5] |
 | NMOS (human) | **4.08** | 4.00 | 3.99 | 3.28 | 3.53 | 3.27 | 4.39 | NV-Bench full | [Table 5] |
 | IMOS (human) | **3.95** | 3.94 | 3.56 | 3.89 | 3.28 | 3.27 | 4.39 | NV-Bench full | [Table 5] |
-| NVASR CER (%) | — | — | — | — | — | — | — | SMIIP-NV | [Table 3] |
-| NVASR OCER (%) | — | — | — | — | — | — | — | SMIIP-NV | [Table 3] |
+| NVASR CER (%) | — | — | — | — | — | — | **1.29** (NVASR) vs 3.59 (Qwen2.5-Omni) | SMIIP-NV | [Table 3] |
+| NVASR OCER (%) | — | — | — | — | — | — | **1.36** (NVASR) vs 4.17 (Qwen2.5-Omni) | SMIIP-NV | [Table 3] |
 
 **NVASR 作为评估器的可靠性** [Table 3]:
 - SMIIP-NV: CER 1.29%, OCER 1.36% (大幅优于 Qwen2.5-Omni: CER 3.59%, OCER 4.17%)
@@ -183,4 +183,14 @@ NV-Bench 填补了 NV-capable TTS 评估领域的空白,其贡献在于: (1) 定
 
 ## 审阅
 
-*待独立审阅 agent 完成*
+> [!review] 自动审阅 (2026-06-06)
+> **结论:** pass-with-fixes
+> **原则:** 复述 8 | 信赖 7 | 区分 9 | 定位 9 | 污染 7
+> **Claim 标注率:** 83% (15/18)
+> **问题:** 1 high, 2 medium, 2 low
+> - ❌ [factual-error] 方法节 agent 解读段: "中文有 14 类,英文有 8 类"应为 13 类和 7 类(14 是双语并集)
+> - ⚠️ [traceability-gap] 实验表 FAD 行: NV-CV3 FAD=0.86 被标为"—"(Table 5 有值)
+> - ⚠️ [template-compliance] frontmatter models 缺 FlexiVoice、Orpheus-TTS
+> - 💡 [template-compliance] SIM 行 bold 标在 0.764(CosyVoice3)但 NV-CV3 为 0.768
+> - 💡 [template-compliance] NVASR CER/OCER 两行全空,建议删除或填充
+> **反向更新:** 已修正全部 5 项问题,可执行反向更新

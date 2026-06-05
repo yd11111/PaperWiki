@@ -1,0 +1,85 @@
+paper: "NV-Bench"
+file: "论文笔记/NV-Bench.md"
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+# 第一层: 原则判断
+principles:
+  reproducible:     # 可复述
+    score: 8
+    judgment: "方法节用三个结构化 'why' 问题清晰解释了功能分类学选择、自训 NVASR 必要性、CTC loss 适配性;PCER 指标设计的因果链完整;评估协议双维分离的逻辑在 Orpheus-TTS 案例中得到有力佐证。可向同事解释这篇论文为什么 work。"
+  trustworthy:      # 可信赖
+    score: 7
+    judgment: "大多数数字有 [Table N]/[§X.X] 标注,指标名正确无方向错误;但存在一处 factual error(NV 类别数 14→13/8→7)和一处数据遗漏(NV-CV3 FAD=0.86 被标为'—'),影响数据表可靠性。"
+  distinguishable:  # 可区分
+    score: 9
+    judgment: "[论文原文]/[agent 解读] 标注贯穿全文,尤其在方法节的 WHY 解释和关键发现的解读中边界清晰。局限性节所有推断均标注 [agent 解读]。无推断被写成断言的情况。"
+  positioned:       # 可定位
+    score: 9
+    judgment: "KB 背景提供了与 TTSEvaluation(InstructTTSEval/TTSDS2 定位对比)、ProsodyModeling(NVSpeech 的评估端延伸)、CosyVoice2/3 baseline 关系的具体谱系定位;点评节将 PCER 类比 InstructTTSEval 的 True/False,精准定位创新点。"
+  non_polluting:    # 不污染
+    score: 7
+    judgment: "KB 背景连接准确,概念挂接合理;但 NV 类别数的 factual error 如果流入概念页(如 ProsodyModeling 的 NV 节)会引入错误信息。修正此错误后不污染风险消除。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 18
+    annotated: 15
+    rate: "83%"
+  metric_names_correct: true
+  source_labels_present: true   # [论文原文]/[agent 解读]
+  speed_card_complete: true
+  frontmatter_complete: false   # models 字段缺少 FlexiVoice、Orpheus-TTS
+  concept_admission_ok: true
+  causal_explanation_coverage: "100%"   # 8/8 WHY 解释有来源标注
+
+# 发现的问题
+issues:
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "方法节 > 关键设计选择 > 功能分类学 [agent 解读] 段落"
+    detail: "笔记写'中文有 14 类,英文有 8 类',但 Table 2 显示 Mandarin 有 13 类(3 vegetative + 4 affect bursts + 6 conversational grunts = 13),English 有 7 类(3+2+2=7)。14 是两种语言的并集(13 + Question-huh),不是中文单语类别数。数学验证: 650 ZH / 50 per category = 13; 350 EN / 50 = 7。"
+    suggestion: "将'中文有 14 类,英文有 8 类'改为'中文有 13 类,英文有 7 类(两种语言共覆盖 14 个独立 NV 类型)'。"
+
+  - severity: medium
+    type: traceability-gap
+    principle: trustworthy
+    location: "实验 > 实验数据表 > FAD 行"
+    detail: "NV-CV3 FAD 在表中标为'—',但 PDF Table 5 明确列出 NV-CV3 FAD = 0.86。这是数据遗漏,非原文缺失。"
+    suggestion: "将 FAD 行 NV-CV3 列从'—'改为'0.86'。"
+
+  - severity: medium
+    type: template-compliance
+    principle: positioned
+    location: "frontmatter > models"
+    detail: "models 字段列出 CosyVoice2、CosyVoice3、SenseVoice,但缺少 FlexiVoice(NV-FlexiVoice 的基座)和 Orpheus-TTS(重要 baseline)。按模板规则 models 应列本文模型+对比 baseline。"
+    suggestion: "在 models 中补充 FlexiVoice 和 Orpheus-TTS(需确认是否已有实体页或需链接外部)。"
+
+  - severity: low
+    type: template-compliance
+    principle: trustworthy
+    location: "实验 > 实验数据表 > SIM ZH single 行"
+    detail: "SIM 行 bold 标记在 CosyVoice3 (0.764),但 NV-CV3 (0.768) 数值更高。如果 bold 表示 best,应标在 0.768。如果有意区分'baseline best'和'paper model best',应加注说明。"
+    suggestion: "将 bold 移至 NV-CV3 的 0.768,或添加注释说明 bold 含义。"
+
+  - severity: low
+    type: template-compliance
+    principle: trustworthy
+    location: "实验 > 实验数据表 > NVASR CER / NVASR OCER 两行"
+    detail: "两行全为'—',无实质数据。Table 3 的 NVASR 性能数据已在文字段落中覆盖,这两行空行无信息价值。"
+    suggestion: "删除这两行空行,或填入 Table 3 对应数据(CER 1.29%, OCER 1.36%)。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: false
+  safe_for_trusted_layer: false
+  reason: "NV 类别数 factual error(14→13, 8→7)如果流入 ProsodyModeling 的 NV 节或新增概念页会引入错误。修正后可安全反向更新。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: "Benchmark 类论文的数据统计数字(如类别数、样本数)建议在精读时通过数学验证(如 total/per_category = categories)交叉校验,避免将论文 abstract 中的总数误植为单语数。"
+  checklist_upgrade_suggestion: "可增加检查项: '关键统计量数学一致性'(如 total = categories * per_category),这类简单交叉验证可机械化执行。"
