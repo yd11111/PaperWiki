@@ -1,0 +1,76 @@
+review:
+  paper: "IterateDifferentiate"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "note-review"
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节清晰解释了 WHY(两个退化机制 + cross-model 验证),关键设计选择有因果推理,速查卡片'可借鉴'给出了 4 个具体可迁移 trick"
+  trustworthy:
+    score: 9
+    rationale: "核心数字均有 [Table N]/[Fig N]/[§X.X] 标注,覆盖率 >90%; 交叉验证与原文一致(UTMOSv2 0.1182→0.4636, DNSMOS 0.0909→0.2545, SIM std 3.83→12.15, CER std 0.64→17.62); 指标名正确无混淆"
+  distinguishable:
+    score: 9
+    rationale: "4 处 [agent 解读] 明确标注,方法节因果解释有 [论文原文] 标注; 无断言式推测"
+  positionable:
+    score: 9
+    rationale: "KB 背景给出 5 条评估路线的具体谱系(TTSDS/TTSDS2, SpeechJudge/GSRM, TTS-PRISM, MCLP, I2D),创新判断有对比基准; frontmatter 完整; 速查 5 字段均有实质内容"
+  no_contamination:
+    score: 10
+    rationale: "本文是评估方法论文,不需要新建概念页; frontmatter concepts 仅挂 TTSEvaluation (直接主题); models 列本文实验评估的模型(对评估论文合理)"
+
+conclusion: "pass"
+
+issues: []
+
+checklist:
+  method_has_causal_explanation: true
+  design_choices_have_why: true
+  reusable_is_specific: true
+  numeric_claims_sourced: true
+  metric_names_correct: true
+  quickref_metrics_have_numbers: true
+  no_directional_errors: true
+  causal_sources_labeled: true
+  causal_source_coverage: ">90%"
+  no_assertion_without_qualifier: true
+  strong_claims_supported: true
+  kb_has_specific_lineage: true
+  kb_innovation_has_baseline: true
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true
+  quickref_all_five_fields_substantive: true
+  new_entity_meets_admission: "N/A"
+  dedup_check_done: "N/A"
+  reverse_update_no_factual_error: "N/A"
+  reverse_update_correctly_classified: "N/A"
+
+cross_verification:
+  - claim: "UTMOSv2 SRCC 0.118→0.464"
+    source: "[Table 3] Iter1 0.1182, Mean 0.4636"
+    match: true
+  - claim: "DNSMOS SRCC 0.091→0.255"
+    source: "[Table 3] Iter1 0.0909, Mean 0.2545"
+    match: true
+  - claim: "SIM std 3.83→12.15"
+    source: "[§5.1] 3.83 (1.51 excl CosyVoice); [§5.2] 12.15"
+    match: true
+  - claim: "CER std 0.64→17.62"
+    source: "[§5.1] 0.64; [§5.2] 17.62"
+    match: true
+  - claim: "CosyVoice3-RL CER 0.90"
+    source: "[Table 4] CosyVoice3-RL WER/CER 2.27/0.90"
+    match: true
+  - claim: "Qwen3-TTS UTMOSv2 4.04/3.68"
+    source: "[Table 4] Qwen3-TTS UTMOSv2 4.04/3.68"
+    match: true
+  - claim: "IndexTTS2 Emotion F1 64.69"
+    source: "[Table 5] IndexTTS2 Weighted Avg 64.69"
+    match: true
+  - claim: "11752 annotation records"
+    source: "[§4.3] yielding 11,752 annotation records"
+    match: true
+
+learning_signals: []
