@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[LearningToSpeakFromText]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Attention-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[LearningToSpeakFromText]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation 跨语言统一表示段, Cross-lingualVoiceCloning 早期探索段)
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
+- [review/auto] [[LearningToSpeakFromText]] — pass, 0 high / 0 medium / 2 low (inline review)
+- [lint/local] LearningToSpeakFromText — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 333 — 建议抽空审核
 - [kb/search] [[OverFlow]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[Attention-basedTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review), [[VITS]](pending-review)
 - [ingest/deep] [[OverFlow]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [review/auto] [[OverFlow]] — pass-with-fixes, 0 high / 1 medium (Time to 5% WER 数值修正) / 2 low
