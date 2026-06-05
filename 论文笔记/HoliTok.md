@@ -123,8 +123,8 @@ HoliTok 是一个基于低延迟 VAE 的语音 tokenizer, 将 48 kHz 波形编�
 | EMOSIM | **0.995** | 0.993 | 0.992 | 0.988 | LibriSpeech test-other | [Table 1] |
 | CR / TPS | **7.5x / 25** | 2.73x / 40 | 2.19x / 50 | 2.00x / 86 | — | [Table 1] |
 | TTS WER (Seed-en) | **1.33%** | 1.42% | 1.84% | — | Seed-TTS-Eval en | [Table 2] |
-| TTS Win-Rate (Emotion) | **25.5%** | 14.3% | 8.4% | — | Emergent-TTS | [Table 2] |
-| TTS Win-Rate (Paralingistic) | **53.6%** | 44.2% | 39.8% | — | Emergent-TTS | [Table 2] |
+| TTS Win-Rate (Emotion) | **25.5%** | 14.3% | 8.4% | — | Emergent-TTS (vs GPT-4o-mini-TTS) | [Table 2] |
+| TTS Win-Rate (Paralinguistic) | **53.6%** | 44.2% | 39.8% | — | Emergent-TTS (vs GPT-4o-mini-TTS) | [Table 2] |
 | Unified TTS WER (Seed-en) | 7.20% (Unite) | 102.32% | 51.06% | — | Seed-TTS-Eval en | [Table 3] |
 | Unified ASR WER (AISHELL-1) | 5.93% (Unite) | 15.81% | **5.01%** | — | AISHELL-1 test | [Table 3] |
 
@@ -169,4 +169,20 @@ HoliTok 准确识别了当前连续 tokenizer 的核心痛点——在统一生�
 2. **多任务 LM 监督作为 tokenizer 训练的正则化**: 不仅仅是为了理解任务, 消融显示它对 **生成鲁棒性** 也至关重要 (去掉后 TTS 崩溃) [Table 8]。这暗示: 向 tokenizer 注入下游任务信号可以改善 latent space 的结构, 使其对 AR 生成更友好。
 3. **DiT TTS-only 预初始化**: 在统一训练前用 TTS-only 数据预训练 DiT head, 对所有表示都有效 [Table 8]。简单但高效的 trick。
 4. **Compression ratio 作为评估维度**: 论文用 CR = (f_s · ceil(log2(f_s))) / (f_z · d_z · 32) 统一量化了不同表示的信息压缩效率 [Eq. 13], 使得跨表示的公平对比更容易。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (9/10) | 三阶段训练的 WHY 解释充分,设计选择含因果解释 |
+> | 可信赖 | pass (9/10) | 所有关键数字与 PDF 交叉验证正确,出处标注覆盖率高 |
+> | 可区分 | pass (8/10) | 大部分因果解释标注了来源,少量隐含推断可更显式 |
+> | 可定位 | pass (9/10) | KB 背景谱系定位精确,与 Semantic-VAE/MingTok-Audio/LatentLM 关系清晰 |
+> | 不污染 | pass (9/10) | frontmatter 语义正确,点评客观无 overclaim |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/HoliTok-review.yml`
 

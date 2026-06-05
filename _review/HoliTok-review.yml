@@ -1,0 +1,81 @@
+review:
+  paper: "HoliTok"
+  note_path: "论文笔记/HoliTok.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    可复述:
+      score: 9
+      rationale: "方法节详细解释了三阶段渐进训练的 WHY (为什么不能一步到位、为什么先 AE 再 VAE、为什么需要多任务监督)。关键设计选择 1-4 均包含因果解释。速查卡片可借鉴具体可迁移 (渐进式 AE→VAE、DiT 预初始化)。"
+    可信赖:
+      score: 9
+      rationale: "所有关键数字均有 [Table N] / [Eq. N] / [§X.X] 标注,与 PDF 原文交叉验证全部正确。指标名使用正确。速查指标含具体数字+数据集+出处。"
+    可区分:
+      score: 8
+      rationale: "大部分因果解释标注了 [论文原文] 或 [agent 解读]。有少量隐含推断未显式标注来源 (如 LSTM bottleneck 的作用分析)。整体覆盖率约 85%。"
+    可定位:
+      score: 9
+      rationale: "KB 背景节详细定位了 HoliTok 在连续 VAE tokenizer 路线中的位置,与 Semantic-VAE/MingTok-Audio/LatentLM 的关系清晰。创新判断有具体对比基准。"
+    不污染:
+      score: 9
+      rationale: "frontmatter 字段语义正确。concepts/models/tasks/datasets 挂接合理。未过度声称 SOTA。点评部分对 claim 的存疑分析客观。"
+
+  conclusion: "pass-with-fixes"
+
+  issues:
+    - id: 1
+      type: "factual-error"
+      severity: "low"
+      location: "实验表 Emergent-TTS Win-Rate 行"
+      detail: "'Paralingistic' 拼写错误,应为 'Paralinguistic'"
+      suggestion: "修正拼写"
+    - id: 2
+      type: "traceability-gap"
+      severity: "low"
+      location: "实验表 Emergent-TTS Win-Rate 说明"
+      detail: "Win-rate 的比较对象是 GPT-4o-mini-TTS [§4.3],但表中和文中未明确标注"
+      suggestion: "在实验表注释或文中说明 'win rate against GPT-4o-mini-TTS'"
+    - id: 3
+      type: "traceability-gap"
+      severity: "low"
+      location: "方法节 Temporal Variational Bottleneck"
+      detail: "[agent 解读] 关于 LSTM 建模帧间依赖使 latent 更平滑的分析,虽标注了 [agent 解读],但与 LatentLM 的对比 ('与 LatentLM 的 per-frame 独立后验不同') 未引用 LatentLM 的具体章节"
+      suggestion: "可加注 [agent 解读, 对比 LatentLM §2.1] 或移除对 LatentLM 的具体技术对比"
+
+  issue_summary:
+    high: 0
+    medium: 0
+    low: 3
+
+  learning_signals: []
+
+  factual_verification:
+    - claim: "PESQ 4.10/4.01"
+      source: "Table 1"
+      verified: true
+    - claim: "SPKSIM 0.968 best"
+      source: "Table 1"
+      verified: true
+    - claim: "TTS WER 1.33% Seed-TTS-en"
+      source: "Table 2"
+      verified: true
+    - claim: "Semantic-VAE unified TTS WER 102.32%"
+      source: "Table 3"
+      verified: true
+    - claim: "HoliTok-Unite avg TTS WER 8.59%"
+      source: "Table 3, computed: (7.20+1.78+16.79)/3=8.59"
+      verified: true
+    - claim: "HoliTok-Unite avg ASR WER 8.02%"
+      source: "Table 3, computed: (5.48+12.65+5.93)/3=8.02"
+      verified: true
+    - claim: "500K hours training data"
+      source: "§4.1"
+      verified: true
+    - claim: "680M semantic encoder"
+      source: "Table 6"
+      verified: true
+    - claim: "w/o supervision TTS WER 110%"
+      source: "Table 8, Seed-TTS-en WER 110.05%"
+      verified: true
