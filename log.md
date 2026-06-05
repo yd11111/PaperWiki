@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MOSS-TTS]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[QuantizerDropout]]✓, [[LLM-basedTTS]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[AudioTokenizerTaxonomy]](pending-review)
+- [ingest/deep] [[MOSS-TTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (QuantizerDropout, AudioTokenizerTaxonomy, SEED-TTS-Eval, CV3-Eval)
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45条),改跳过
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限(44条),改跳过
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(68条),改跳过
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(103条),改跳过
+- [review/auto] [[MOSS-TTS]] — pass-with-fixes: 0 high, 2 medium (结构/标签已修正), 1 low
+- [lint/local] MOSS-TTS — 通过
 - [kb/search] [[NV-Bench]] — 命中 6 页(取 6): [[ProsodyModeling]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 参考(pending-review): [[TTSEvaluation]], [[Instruction-GuidedSpeechSynthesis]], [[AudioUnderstanding]], [[EmotionControlinTTS]]
 - [ingest/deep] [[NV-Bench]] — 精读, kb_sources=6, 新建 0, 追加 3 (TTSEvaluation, ProsodyModeling, CosyVoice2)
 - [skip/update] [[Instruction-GuidedSpeechSynthesis]] — key_papers 已达上限,论文仅间接相关 (NV tags as instructions)
