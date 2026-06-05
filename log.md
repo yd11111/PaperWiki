@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[IterateDifferentiate]] — 命中 6 页(取 6): [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓, [[ConditionalFlowMatching]]✓ | 参考(pending-review): [[TTSEvaluation]], [[CosyVoice3]], [[CV3-Eval]]
+- [ingest/deep] [[IterateDifferentiate]] — 精读, kb_sources=6, 新建 0, 追加 3 (TTSEvaluation 正文, SEED-TTS-Eval used_by, CV3-Eval used_by)
+- [skip/update] [[TTSEvaluation]] — key_papers 已达上限(28/12),改追加到正文
+- [lint/local] IterateDifferentiate — 通过
 - [kb/search] [[HowOpenIsOpenTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 参考(pending-review): [[VITS]], [[Diffusion-basedTTS]], [[TTSEvaluation]], [[SpeakerAdaptation]]
 - [ingest/deep] [[HowOpenIsOpenTTS]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] 全部 6 页 — benchmark 论文使用已有系统/指标但未推进概念,key_papers 均已达上限,贡献不足以 append 正文
