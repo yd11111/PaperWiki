@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [flow-matching, distillation, one-step-generation, TTS, efficiency, DiT]
 concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[Diffusion-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[ScoreMatching]]", "[[MelSpectrogram]]"]
-models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/VITS|VITS]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/VITS|VITS]]", "[[论文笔记/E2TTS|E2 TTS]]"]
 tasks: []
 datasets: ["[[数据集/Emilia|Emilia]]", "[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -220,3 +220,19 @@ Student-teacher gap 在不同语言和域上保持稳定 (MOS-N 差 0.10-0.12, S
 3. **蒸馏后弱 CFG**: 蒸馏会内化 teacher 的 CFG,但保持 unconditional branch 有效 (极低正则化 λ=0.01) 允许推理时微弱调控。适用于任何 CFG-trained model 的蒸馏。
 
 4. **模块化蒸馏框架**: 三个组件可按需选用 -- dual supervision 和 weak CFG 对所有架构有效,step-aware token 仅限 adaLN 架构。这种模块化设计方法论值得借鉴。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三个组件的 WHY 解释清晰,可借鉴字段具体可迁移 |
+> | 可信赖 | pass | 数字出处覆盖率 ~95%,交叉验证与 PDF 一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率接近 100% |
+> | 可定位 | pass | KB 背景准确定位蒸馏分支,列举同类工作对比 |
+> | 不污染 | pass | 反向更新为追加,无 factual-error |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/DSFlow-review.yml`

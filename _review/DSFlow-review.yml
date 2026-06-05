@@ -1,0 +1,88 @@
+review:
+  note: "论文笔记/DSFlow.md"
+  reviewer: auto
+  date: 2026-06-05
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节清晰解释了三个组件的 WHY (不只是 WHAT),每个设计选择都有因果推理。dual supervision 为何优于单一 endpoint/velocity、step-aware token 的信息论动机、weak CFG 的反直觉发现都有充分解释。速查卡片可借鉴字段给出三个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    reason: "关键数字全部标注 [Table N]/[§X.X] 出处。交叉验证: MOS-N 4.32, RTF 0.012, 118M params 均与 PDF Table 1 一致。指标名使用正确 (MOS-N/MOS-Q/SMOS/SIM-o/WER/RTF)。速查指标字段含具体数字+数据集+出处。"
+  可区分:
+    score: 9
+    reason: "每个因果解释都标注了 [论文原文] 或 [agent 解读],覆盖率接近 100%。agent 解读的推断性分析 (如 mean velocity 本质是差商、CFG 反转现象的解释) 边界清晰,不会被误认为论文原始 claim。"
+  可定位:
+    score: 8
+    reason: "KB 背景节准确定位了 DSFlow 在 flow matching 加速/蒸馏分支中的位置,列举了同类工作 (OZSpeech, RapFlow-TTS, SFM) 作为对比。CFG 在蒸馏中的特殊行为与 KB 页形成良好交叉引用。frontmatter models 字段可更完整。"
+  不污染:
+    score: 9
+    reason: "无新建概念页需求。反向更新为追加 key_papers,内容准确无 overclaim。不会对 KB 引入错误信息。"
+
+checklist:
+  可复述:
+    - check: "方法含因果解释"
+      result: pass
+    - check: "设计选择有 why-not 对比"
+      result: pass
+    - check: "可借鉴具体可迁移"
+      result: pass
+
+  可信赖:
+    - check: "数字出处覆盖率 ≥ 80%"
+      result: pass
+      detail: "估算覆盖率 ~95%"
+    - check: "指标名正确"
+      result: pass
+    - check: "速查指标含数字+数据集+出处"
+      result: pass
+    - check: "无方向性错误"
+      result: pass
+
+  可区分:
+    - check: "因果来源标注覆盖率 ≥ 80%"
+      result: pass
+      detail: "覆盖率接近 100%"
+    - check: "推断-断言区分"
+      result: pass
+    - check: "强断言有支撑"
+      result: pass
+
+  可定位:
+    - check: "KB 背景有谱系定位"
+      result: pass
+    - check: "创新判断有对比基准"
+      result: pass
+    - check: "frontmatter 字段存在"
+      result: pass
+    - check: "frontmatter 语义正确"
+      result: pass-with-note
+      detail: "models 字段仅列 CosyVoice2 和 VITS。E2-TTS 作为跨架构 baseline 也在 vault 中有笔记 (E2TTS.md),可追加。StepTTS (teacher) 和 F5-TTS 无 vault 笔记故不列入合理。"
+    - check: "速查 5 字段实质"
+      result: pass
+
+  不污染:
+    - check: "反向更新无 factual-error"
+      result: pass
+    - check: "反向更新分类正确"
+      result: pass
+
+issues:
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "models 字段列了 CosyVoice2 和 VITS,但遗漏了 E2-TTS (vault 中有 论文笔记/E2TTS.md)。E2-TTS 是 Table 1 中跨架构验证的重要 baseline 之一。"
+    suggestion: "追加 \"[[论文笔记/E2TTS|E2 TTS]]\" 到 models 列表"
+
+  - severity: low
+    type: traceability-gap
+    location: "训练策略 lr=5e-4"
+    detail: "论文 §4.1.2 写 lr=5e-4,但 Appendix A.1 写 lr=1e-4。笔记跟随主文 §4.1.2,但未标注此不一致。"
+    suggestion: "可在训练策略处加注 '(Appendix A.1 写 1e-4,与主文不一致)'"
+
+learning_signals: []
+
+conclusion: pass-with-fixes
+summary: "高质量精读笔记。三个核心组件的机制解释清晰,因果来源标注完善,数字可信。KB 定位准确。1 个 medium issue (frontmatter models 遗漏 E2-TTS) + 1 个 low issue (论文内部 lr 不一致未标注)。不阻塞反向更新。"
