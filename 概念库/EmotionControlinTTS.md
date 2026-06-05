@@ -128,6 +128,8 @@ EmoCtrl-TTS (Wu et al., 2024) 在 flow-matching zero-shot TTS 上同时使用两
 
 NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建模抽象情感状态,而是建模具体的副语言行为 (笑声、叹气、犹豫等),这些行为是情感的外在表现。通过在文本中显式插入 `[Laughter]`、`[Breathing]` 等标签实现 token-level 控制。与传统情感控制互补: 情感控制提供高层意图,PV 控制提供底层行为实现。详见 [[论文笔记/NVSpeech|NVSpeech]]。
 
+[[论文笔记/NaturalEmotionalTTS|NaturalEmotionalTTS]] (Zhou et al., NAIST, 2026) 从**数据标注方案**角度切入 NV 控制,提出频率-时长编码标注方案: 离散发声 (如 laughter) 用音节重复控制频率,连续发声 (如 crying) 用字符重复控制时长。基于 Grad-TTS + arousal-valence emotion encoder 构建 NV emotional TTS。评估显示细粒度 NV 显著提升 eMOS (4.20 vs verbal-only 3.81) 和情感识别率 (82.0% vs 62.1%),尤其 fear (+36%) 和 happy (+17%) 受益最大,angry 改善有限 (缺乏专属 NV)。与 NVSpeech/EmoCtrl-TTS 的区别: 不依赖 LLM-based TTS 或大规模数据,纯数据标注驱动; 局限在于 backbone 过时 (Grad-TTS) 且规模极小 (739 条 NV)。
+
 ## 演进
 
 规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026)
