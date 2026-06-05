@@ -1,0 +1,91 @@
+review:
+  paper: "EmotionCoherentAugmentation"
+  reviewer: "auto"
+  date: "2026-06-05"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 8
+      rationale: "方法节包含清晰的 WHY 解释 (为什么 emotion-coherent 而非随机拼接, 为什么 masking 而非 pitch shifting), 三个关键设计选择都有因果论证。速查卡片可借鉴字段列出了三个具体可迁移技巧。整体架构和训练流程描述完整。"
+    trustworthy:
+      score: 9
+      rationale: "所有关键数字均有出处标注 ([Table IV], [Table V], [§IV-A], [§IV-C] 等), 覆盖率 >90%。数字经交叉验证与 PDF 原文完全一致。指标名称使用正确。无方向性错误。"
+    distinguishable:
+      score: 8
+      rationale: "方法节中的因果解释清楚标注了 [论文原文] 和 [agent 解读], 覆盖率约 85%。推断性分析明确标注为 agent 解读。点评节中的价值判断有论据支撑。"
+    positionable:
+      score: 8
+      rationale: "KB 背景节提供了具体的谱系定位 (GST-Tacotron 2018 之后, LLM-TTS 之前), 创新判断有对比基准 (training strategy vs architecture innovation)。frontmatter concepts 列出了 6 个相关概念页, 覆盖面合理。"
+    non-polluting:
+      score: 9
+      rationale: "不涉及新建概念页。concepts 引用的 6 个实体页都是已有的、语义正确的概念。models/datasets 为空是合理的 (无对应实体页)。反向更新内容预计为追加 key_papers, 无 overclaim 风险。"
+
+  checklist:
+    reproducible:
+      - item: "方法节含因果解释(WHY)"
+        status: pass
+      - item: "关键设计选择回答了为什么"
+        status: pass
+      - item: "速查可借鉴字段是具体可迁移 trick"
+        status: pass
+    trustworthy:
+      - item: "数字型 claim 有出处标注 (≥80%)"
+        status: pass
+        detail: "覆盖率约 92%, 仅训练阶段 epochs 数等非争议性描述性数字未标注"
+      - item: "指标名使用正确"
+        status: pass
+      - item: "速查指标字段含具体数字+数据集+来源"
+        status: pass
+      - item: "无方向性错误"
+        status: pass
+    distinguishable:
+      - item: "因果解释标注了来源"
+        status: pass
+      - item: "来源标注覆盖率 ≥80%"
+        status: pass
+        detail: "约 85%"
+      - item: "无推断写成断言"
+        status: pass
+      - item: "强断言有数字+出处"
+        status: pass
+    positionable:
+      - item: "KB 背景有具体谱系定位"
+        status: pass
+      - item: "创新判断有对比基准"
+        status: pass
+      - item: "frontmatter 字段存在且非空"
+        status: pass
+      - item: "frontmatter 字段语义正确"
+        status: pass-with-note
+        detail: "models 为空, 因论文未提出命名模型且 vault 中无 Tacotron2/WaveGlow 实体页, 合理"
+      - item: "速查卡片 5 字段都有实质内容"
+        status: pass
+    non-polluting:
+      - item: "新建概念页满足准入规则"
+        status: n/a
+        detail: "不涉及新建"
+      - item: "已有概念库中无语义相近页"
+        status: n/a
+      - item: "反向更新无 factual-error 或 overclaim"
+        status: pass
+      - item: "反向更新正确分类"
+        status: pass
+
+  issues:
+    - type: "template-compliance"
+      severity: low
+      location: "frontmatter datasets"
+      detail: "论文使用了 Blizzard Challenge 2017, LJSpeech, LibriTTS, ESD 四个数据集, 但 datasets 字段为空"
+      suggestion: "因 vault 中无对应实体页, 保持空即可; 若未来创建 ESD 等数据集页, 回填"
+
+    - type: "traceability-gap"
+      severity: low
+      location: "方法 > 训练策略"
+      detail: "三阶段训练的 epochs 数 (300/200/100) 未标注出处"
+      suggestion: "追加 [§IV-A] 标注"
+
+  conclusion: "pass"
+  summary: "笔记质量良好, 机制解释清晰, 数字全部交叉验证通过, 来源标注覆盖率高。仅有 2 个 low severity 问题, 不影响反向更新。"
+
+  learning_signals: []

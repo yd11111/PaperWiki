@@ -151,3 +151,19 @@ updated: 2026-06-05
 1. **Emotion-coherent data curation 原则**: 在构建多句训练数据时,按情感/风格一致性筛选拼接,而非简单取连续句。这个原则可以迁移到任何需要多句或长文本训练的现代 TTS 系统 (如 Audiobook-CC 的数据处理)
 2. **Contrastive regularization for style encoder**: 用 SimCLR loss 对 style/reference encoder 做正则化,强制其对同一 utterance 的不同扰动产生一致 embedding。这可以应用于任何使用 reference encoder 的系统 (包括现代 flow matching TTS 的 style conditioning)
 3. **句间停顿的正态分布建模**: 从真实数据拟合停顿分布 → 在数据增强中采样插入,是一种简单有效的长文本 TTS 训练技巧
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 WHY 解释,速查可借鉴具体 |
+> | 可信赖 | pass | 数字出处覆盖率 >90%,交叉验证全部通过 |
+> | 可区分 | pass | 来源标注覆盖率约 85%,[论文原文]/[agent 解读] 区分清晰 |
+> | 可定位 | pass | KB 背景谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 不涉及新建,反向更新为追加,无风险 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/EmotionCoherentAugmentation-review.yml`
