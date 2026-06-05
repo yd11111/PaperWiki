@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[EntropyGRVQ]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[CodecTrainingObjectives]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
+- [ingest/deep] [[EntropyGRVQ]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[ResidualVectorQuantization]] 变体表+演进, [[CodebookCollapse]] 演进, [[NeuralAudioCompression]] key_papers)
+- [review/auto] [[EntropyGRVQ]] — pass, 0 high, 0 medium, 2 low
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),改追加到变体表和演进
+- [skip/update] [[CodebookCollapse]] — key_papers 已达上限(12),改追加到演进
+- [skip/update] [[TokenRateandBitrateTrade-offs]] — key_papers 已达上限(12),跳过
+- [lint/local] EntropyGRVQ — 通过
 - [kb/search] [[EmotionCoherentAugmentation]] — 命中 6 页(取 6): [[ProsodyModeling]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[EmotionControlinTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[StyleTransferinTTS]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[EmotionCoherentAugmentation]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[GlobalStyleTokens]] 正文)
 - [review/auto] [[EmotionCoherentAugmentation]] — pass, 0 high, 0 medium, 2 low
