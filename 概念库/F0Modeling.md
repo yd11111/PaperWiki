@@ -60,6 +60,9 @@ Kim et al. (2022) 引入对抗多任务学习框架,解耦 timbre 和 pitch 特�
 ### 4. 端到端隐式 F0
 VITS 类端到端系统 (VISinger) 中 F0 被隐式编码在 VAE latent 中,不作为显式中间表示。
 
+### 5. Yingram 替代 F0 (PITS)
+[[论文笔记/PITS|PITS]] (Lee et al., 2023) 提出用 Yingram(基于 YIN 自相关算法的多通道 pitch 表示)完全替代 F0,避免 F0 在 unvoiced segments 未定义的问题。在 VITS 上添加 Yingram encoder 作为第二 posterior encoder,通过 scope-shift(通道偏移)实现推理时的半音级 pitch 控制。这是一种从表示层面而非预测层面解决 F0 局限性的路径。VCTK 上 PITS (A+D) MOS 4.01 与 GT 4.04 无统计显著差异 [PITS Table 1]。
+
 ## 在 TTS 中的 F0 建模
 
 ### Variance Adaptor (FastSpeech 2)
