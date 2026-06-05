@@ -165,6 +165,8 @@ NVSpeech (Liao et al., 2025) 将韵律建模扩展至副语言发声维度 — �
 
 与传统韵律建模的区别: 传统方法建模 pitch/duration/energy 等连续韵律维度; PV 建模关注离散的副语言事件 (如 `[Laughter]`, `[Breathing]`) 的检测和可控合成。两者互补。详见 [[论文笔记/NVSpeech|NVSpeech]]。
 
+**评估标准化**: [[论文笔记/NV-Bench|NV-Bench]] (Ni et al., 2026) 为 NV 生成能力建立了首个标准化 benchmark,含 1,651 条 paired GT 数据和 PCER (Paralinguistic CER) 指标。NV-CV3 (CosyVoice 3 微调) PCER 27.69% (ZH single-label),NV-FlexiVoice FAD 0.29 (最接近真实分布) [Table 4, 5]。PCER 与人类 IMOS 评分显著相关 (rho=-0.65),验证了自动评估的可靠性。
+
 ## SSL 模型中的超音段韵律表征
 
 de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模型 (wav2vec 2.0, HuBERT, WavLM) 对超音段特征 (stress, tone, accent) 的内在表征: 超音段表征在中间层 (8-9) 最强,且是抽象的语言学类别 (与 F0 追踪能力不直接相关)。语言特异性仅在 context network (Transformer 层) 出现,CNN 层对所有语言一致。ASR fine-tuning 增强词级韵律 (stress, tone) 但对短语级 accent 效果弱。详见 [[论文笔记/SSLSuprasegmentalAnalysis|SSL Suprasegmental Analysis]]。

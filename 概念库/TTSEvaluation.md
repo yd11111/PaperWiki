@@ -177,4 +177,10 @@ Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distan
 
 ### MCLP: Stylistic Consistency via Continuation Likelihood
 
+### NV-Bench: 副语言发声评估 Benchmark
+
+Ni et al. (2026) 提出 NV-Bench,首个针对 NV-capable TTS 的标准化评估框架。基于 Batliner et al. 的功能分类学,将 14 类非语言发声分为三层 (Vegetative/Affect Bursts/Conversational Grunts),提供 1,651 条中英双语 paired GT 数据。引入 PCER (Paralinguistic CER) 隔离 NV 事件的编辑距离,与人类 IMOS 评分显著相关 (Spearman rho=-0.65, p<0.001) [Table 5, §4.2.4]。双维评估 (指令对齐 + 声学保真度) 成功区分了"未生成 NV"和"NV 质量差"两种失败模式。与 InstructTTSEval 的区别: InstructTTSEval 评估通用指令遵循 (True/False 二分),NV-Bench 专攻离散副语言事件 (连续 CER)。详见 [[论文笔记/NV-Bench|NV-Bench]]。
+
+### MCLP: Stylistic Consistency via Continuation Likelihood
+
 Ren et al. (ICML 2026) 提出 MCLP (Mean Continuation Log-Probability),首个利用 LALM continuation likelihood 量化**风格一致性**的客观指标。核心思路: 构造 `[transcript, eval_audio, transcript]` 的 dual-turn context,计算 LALM 对 ground-truth audio tokens 的平均 log-probability。通过固定 transcript 消除 content 变量,使 likelihood 变化仅反映 style 差异。使用 semantic tokenizer (Step-Audio-2) 进一步偏向风格而非声学相似。在 Role-Play TTS 场景的 human MOS correlation 实验中,当 ∆MCLP > 0.1 时 win rate 超过 0.8 [Fig 5]。MCLP 同时被用作 GRPO reward signal,与 CER 组合为 gated hybrid reward,在 WenetSpeech-RP-TTS 上 MOS 3.576 (vs 最强 baseline 2.864) [Table 2]。与 GSRM (acoustic-feature-grounded)、SpeechJudge (pairwise preference)、TTSDS2 (distributional)、TTS-PRISM (multi-dimensional diagnostic) 路线不同,MCLP 走"LALM latent space continuation"路线,填补了**跨轮次风格一致性**评估的空白。详见 [[论文笔记/MCLP|MCLP]]。
