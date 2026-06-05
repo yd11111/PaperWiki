@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[T5Gemma-TTS]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓ | 参考(pending-review): [[CodecLanguageModel]], [[Single-codebookvsMulti-codebook]], [[DurationPredictor]], [[VoiceCloningTaxonomy]], [[PhonemeRepresentation]]
+- [ingest/deep] [[T5Gemma-TTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (CodecLanguageModel 正文, DurationPredictor 正文, PhonemeRepresentation key_papers+正文)
+- [skip/update] [[LLM-basedTTS]], [[Single-codebookvsMulti-codebook]], [[VoiceCloningTaxonomy]] — key_papers 均已达上限或无实质新知识需追加
+- [review/auto] [[T5Gemma-TTS]] — pass-with-fixes, 3 issues (0 high, 2 medium: 表格 bold 格式 + Kokoro 非 ZS 说明, 1 low)
+- [lint/local] T5Gemma-TTS — 通过
+- [alert/backlog] pending-review: 70, draft deep/repro: 12 — 建议抽空审核
 - [update/deep] [[MambaVoiceCloning]] — camera-ready 元数据更新: arxiv_id 2604.00292, 作者去匿名化 (Patel/Kumar/Wang/Zhang), venue ICLR 2026 确认; Sources/MambaVoiceCloning.pdf 替换为 camera-ready 版
 - [kb/search] [[LongCat-AudioDiT]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓ | 参考(pending-review): [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[VariationalAutoencoderforTTS]], [[MelSpectrogram]], [[Non-autoregressiveTTS]]
 - [ingest/deep] [[LongCat-AudioDiT]] — 精读, kb_sources=6, 新建 0, 追加 6 (全部正文 append,key_papers 均已超限)
