@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[W3AR]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review), [[Speech-TextAlignment]](pending-review), [[CodecLanguageModel]](pending-review), [[Whisper]](pending-review)
+- [ingest/deep] [[W3AR]] — 精读, kb_sources=6, 追加 DifferentiableRewardOptimization prose + Whisper key_papers
+- [review/auto] [[W3AR]] — pass-with-fixes, 5 issues (2 high fixed: timeline error + loss formula, 2 medium fixed, 1 low fixed)
+- [review/kb] [[W3AR]] — pass, 2 append ops (DiffRO prose + Whisper key_papers), 1 skip (CosyVoice over limit)
+- [skip/update] [[DifferentiableRewardOptimization]] — key_papers 已达上限(25),改追加到正文
+- [skip/update] [[CosyVoice]] — key_papers 已达上限(15),W3AR 仅为 baseline 用户,不追加
+- [lint/local] W3AR — 通过
 - [ingest/repro] [[OmniVoice]] — deep→repro 升级, GitHub 代码仓库分析 (k2-fsa/OmniVoice), 新增模块细节+训练策略+推理pipeline+复现要点 7 节
 - [review/auto] [[OmniVoice]] — pass, 0 high, 0 medium, 3 low (修正: 消融 WER 不一致, 补 ZipVoice 到 models, 补 CMOS/SMOS 置信区间)
 - [kb/update] [[Classifier-FreeGuidance]] — 追加"离散空间 CFG"小节 (OmniVoice 的 log-softmax CFG 扩展)
