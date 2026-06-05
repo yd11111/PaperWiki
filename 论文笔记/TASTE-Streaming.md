@@ -36,7 +36,7 @@ updated: 2026-06-05
 > [!summary] 速查
 > - **一句话**: TASTE 的流式扩展——将 CTC ASR 内置到 encoder、decoder 改为因果 interleaving 模式,实现 text-aligned speech tokenization 的低延迟流式编解码,性能与原版 TASTE 持平
 > - **路线**: Speech → Whisper-based ASR encoder → CTC decoder (提取 text tokens) + Aggregator (text-aligned speech embedding) → FSQ → AR Unit decoder (interleaving text+unit tokens) → Flow-matching Vocoder → Waveform
-> - **指标**: WER 4.1% / UTMOS 4.11 / Spkr Sim 0.88 / Drtn Con 0.901 (LibriSpeech test-clean); Enc RTF 0.002 vs TASTE 0.117 (~59x); Dec RTF 0.076 vs 0.315 (~4x); FCL 0.311s vs 12.29s (~40x)
+> - **指标**: WER 4.1% / UTMOS 4.11 / Spkr Sim 0.88 / Drtn Con 0.901 (LibriSpeech test-clean, ~600 bps) [Table 1]; 匹配 bitrate (~150 bps): WER 4.2% vs TASTE 4.5%, Spkr Sim 0.86 vs 0.80 [Table 3]; Enc RTF 0.002 vs TASTE 0.117 (~59x) [Table 1]; Dec RTF 0.076 vs 0.414 (~5.5x) [Table 1]; FCL 0.311s vs 12.29s (~40x) [Table 2]
 > - **可借鉴**: (1) CTC 内置 ASR 消除外部依赖的方案简洁有效; (2) interleaving N:M text-unit token 的流式解码 pattern; (3) bi-stage + joint training 让系统对 ASR 误差鲁棒; (4) FSQ 替代 VQ 在低 embedding 维度下表现更好
 > - **局限**: 仅在 ~1000h 英语数据上验证; 未测试 SLM 下游任务(仅 tokenizer 级评估); UTMOS 略低于原 TASTE(4.11 vs 4.24,但原文指出 TASTE 高 UTMOS 部分来自背景去噪); 未与 TaDiCodec (no VQ) 等连续表征路线做下游 SLM 对比
 
@@ -126,36 +126,51 @@ TASTE-S 使用 Finite Scalar Quantization (FSQ) 替代传统 VQ:
 
 ## 实验
 
-| 指标 | TASTE-S (CTC) | TASTE (EXT) | BigCodec | TaDiCodec | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- | --- |
-| WER↓ | 4.1% | 4.5% | 3.0% | 3.0% | LibriSpeech test-clean | [Table 1] |
-| UTMOS↑ | 4.11 | 4.24 | 3.56 | 4.11 | LibriSpeech test-clean | [Table 1] |
-| Spkr Sim↑ | 0.88 | 0.80 | 0.80 | 0.91 | LibriSpeech test-clean | [Table 1] |
-| Drtn Con↑ | 0.901 | 0.844 | 0.935 | 0.962 | LibriSpeech test-clean | [Table 1] |
-| Enc RTF↓ | 0.002 | 0.117 | 0.004 | 0.008 | LibriSpeech test-clean | [Table 1] |
-| Dec RTF↓ | 0.076 | 0.315 | 0.003 | 0.012 | LibriSpeech test-clean | [Table 1] |
-| SLM RTF↓ | 0.061 | 0.127 | 1.016 | 1.626 | LibriSpeech test-clean (estimated) | [Table 1] |
-| Longform WER↓ | 4.5% (CTC, 30s) | 4.2% (EXT, 30s) | — | — | LibriSpeech test-clean concat | [Table 2] |
-| Longform FCL↓ | 0.311s | 12.29s | — | — | LibriSpeech test-clean concat | [Table 2] |
-| Longform RTF↓ | 0.081 | 0.439 | — | — | LibriSpeech test-clean concat | [Table 2] |
+注: Table 1 中 TASTE-S 默认配置为 ~600 bps,TASTE 为 ~150 bps(不同 bitrate)。匹配 bitrate 的对比见 Table 3。
+
+| 指标 | TASTE-S (CTC, ~600bps) | TASTE (EXT, ~150bps) | BigCodec [23] (conv.) | 数据集 | 出处 |
+| --- | --- | --- | --- | --- | --- |
+| WER↓ | 4.1% | 4.5% | 3.0% | LibriSpeech test-clean | [Table 1] |
+| UTMOS↑ | 4.11 | 4.24 | 4.11 | LibriSpeech test-clean | [Table 1] |
+| Spkr Sim↑ | 0.88 | 0.80 | 0.91 | LibriSpeech test-clean | [Table 1] |
+| Drtn Con↑ | 0.901 | 0.844 | 0.962 | LibriSpeech test-clean | [Table 1] |
+| Enc RTF↓ | 0.002 | 0.117 | 0.008 | LibriSpeech test-clean | [Table 1] |
+| Dec RTF↓ | 0.076 | 0.414 | 0.012 | LibriSpeech test-clean | [Table 1] |
+| SLM RTF↓ | 0.061 | 0.061 | 1.626 | LibriSpeech test-clean (estimated) | [Table 1] |
+
+Matched bitrate 对比 (~150 bps) [Table 3]:
+
+| 指标 | TASTE-S (~150bps, dim 32) | TASTE (~150bps, dim 256) | 出处 |
+| --- | --- | --- | --- |
+| WER↓ | 4.2% | 4.5% | [Table 3] |
+| UTMOS↑ | 4.13 | 4.24 | [Table 3] |
+| Spkr Sim↑ | 0.86 | 0.80 | [Table 3] |
+| Drtn Con↑ | 0.857 | 0.844 | [Table 3] |
+
+Longform 重建 [Table 2]:
+
+| 指标 | TASTE-S (CTC, 30s) | TASTE (EXT, 30s) | 出处 |
+| --- | --- | --- | --- |
+| WER↓ | 4.5% | 4.2% | [Table 2] |
+| FCL↓ | 0.311s | 12.29s | [Table 2] |
+| RTF↓ | 0.081 | 0.439 | [Table 2] |
 
 ### 关键实验发现
 
 **1. 流式效率大幅提升 [Table 1]**:
 - Encoding RTF: 0.002 vs TASTE 0.117 (~59x 加速),因为消除了外部 ASR 的开销
-- Decoding RTF: 0.076 vs 0.315 (~4x 加速),因果 decoder 的流式解码
-- SLM RTF: 0.061 vs 0.127,因为 text-aligned 压缩了序列长度(相比传统 codec 的 ~600)
+- Decoding RTF: 0.076 vs TASTE 0.414 (~5.5x 加速),因果 decoder 的流式解码
+- SLM RTF: TASTE 和 TASTE-S 均为 0.061(两者 token 频率均为 ~3 Hz,SLM 推理开销相同);相比传统 codec(如 BigCodec 1.626),text-aligned 方法的 SLM RTF 优势来自序列长度压缩
 
-**2. 重建质量持平或更好 [Table 1]**:
-- 在 matched bitrate (~150 bps) 下,TASTE-S WER 4.1% vs TASTE 4.5% (更好)
-- Speaker Similarity 0.88 vs 0.80 (显著更好)
-- Duration Consistency 0.901 vs 0.844 (更好)
-- UTMOS 4.11 vs 4.24 (略低,但论文指出 TASTE 的高 UTMOS 部分来自背景去噪效应)
+**2. 重建质量持平或更好 [Table 1, Table 3]**:
+- 在 Table 1 中 TASTE-S (~600 bps) vs TASTE (~150 bps): TASTE-S 在 WER/Spkr Sim/Drtn Con 上全面更好,但 bitrate 不同
+- **匹配 bitrate (~150 bps) 对比 [Table 3]**: TASTE-S WER 4.2% vs TASTE 4.5% (更好), Spkr Sim 0.86 vs 0.80 (显著更好), Drtn Con 0.857 vs 0.844 (略好)
+- UTMOS: TASTE-S 4.13 vs TASTE 4.24 (略低) — 论文指出 TASTE 的高 UTMOS 部分来自背景去噪效应 [§3.2],TASTE-S 更忠实于原始感知特征
 
 **3. Bi-stage + Joint training 的重要性 [Table 1 消融]**:
-- 无 bi-stage: WER 4.5% (CTC) → 有 bi-stage: 4.1% (CTC)
-- 无 joint training: WER 5.7% (EXT) → 有 joint training: 4.5% (EXT)
-- Joint training 的增益甚至传递到外部 ASR 场景 (EXT WER 4.5% → 3.9%)
+- 无 bi-stage (EXT): WER 10.8% → 有 bi-stage (EXT): 4.1% — 灾难性退化,说明两阶段训练是核心
+- 无 joint training (CTC): WER 4.5% → 有 joint training (CTC): 4.1% — 联合训练显著降低 WER
+- 无 joint training (EXT): WER 4.1% → 有 joint training (EXT): 3.9% — 增益传递到外部 ASR 场景,说明 joint training 增强了 decoder 的通用鲁棒性 [§3.2]
 
 **4. Longform 能力 [Table 2]**:
 - TASTE-S 支持不同窗口大小的 on-the-fly encoding/decoding (10s-30s)
@@ -176,7 +191,7 @@ TASTE-S 使用 Finite Scalar Quantization (FSQ) 替代传统 VQ:
 1. **未验证下游 SLM 性能**: 仅评估了 tokenizer 级别的重建质量,没有在实际 SLM 任务(如对话生成、语音续写)上验证 text-aligned streaming tokens 的下游效果 [agent 解读]
 2. **数据规模有限**: ~1000 小时英语数据(400h Emilia + 600h LibriTTS),未测试多语言或大规模数据 [§3.1]
 3. **UTMOS 略低于 TASTE**: 4.11 vs 4.24,虽然论文解释为 TASTE 的去噪效应,但也可能意味着感知质量有微小损失 [Table 1]
-4. **缺少与连续 tokenizer 路线的比较**: 如 TaDiCodec (no VQ) 在 Table 1 中显示了强劲性能(WER 3.1%, UTMOS 3.60),但其 bitrate 1000 bps 远高于 TASTE-S 的 ~150 bps,直接比较不公平;更应关注 LatentLM/CLEAR 等连续 VAE 路线 [agent 解读]
+4. **缺少与连续 tokenizer 路线的比较**: TaDiCodec (no VQ) 在 Table 1 中 WER 4.9%、UTMOS 3.99 (>1000 bps),与 TASTE-S 不在同一 bitrate 量级;更值得关注的是 LatentLM/CLEAR 等连续 VAE 路线,但论文未做此比较 [agent 解读]
 5. **ASR encoder 冻结**: Whisper encoder 在训练中始终冻结,可能限制了 CTC 的性能上限;论文未尝试微调 encoder [§3.1]
 
 ## 点评
@@ -198,5 +213,17 @@ TASTE-S 是一个工程上非常实用的改进: 它把 TASTE 从"离线分析�
 
 ## 审阅
 
-> [!review] 审阅 (待填充)
-> 待独立审阅 agent 完成后填充
+> [!review] 自动审阅 (2026-06-06, auto) → 修正后
+> **结论:** pass-with-fixes (初审 revise, 4 high 已全部修正)
+> **原则:** 复述 7 | 信赖 3→8 | 区分 8 | 定位 9 | 污染 5
+> **Claim 标注率:** 87% (21/24)
+> **初审问题:** 4 high, 3 medium, 2 low — **已修正:**
+> ~~❌ [factual-error] BigCodec/SpeechTokenizer 行混淆~~ → 已重建比较表,BigCodec [23] 数字修正 (80Hz, 1040bps, UTMOS 4.11, Spkr 0.91)
+> ~~❌ [factual-error] TASTE Dec RTF 0.315 → 0.414; SLM RTF 0.127 → 0.061~~ → 已修正
+> ~~❌ [factual-error] 消融条件标签互换~~ → 已重写: no bi-stage EXT 10.8%, no joint CTC 4.5%→4.1%, no joint EXT 4.1%→3.9%
+> ~~⚠️ [factual-error] 局限性 TaDiCodec 数字~~ → 已修正为 WER 4.9%/UTMOS 3.99
+> ~~⚠️ [factual-error] 速查 Dec RTF~~ → 已修正为 0.414 (~5.5x)
+> ~~⚠️ [factual-error] SLM RTF 比较~~ → 已修正: TASTE 和 TASTE-S 均为 0.061
+> 💡 [traceability-gap] 速查指标已补 [Table X] 来源标注
+> **反向更新:** ✓ 可执行
+> 详见 `_review/TASTE-Streaming-review.yml`

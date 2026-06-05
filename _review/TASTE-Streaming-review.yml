@@ -1,0 +1,113 @@
+paper: "TASTE-Streaming"
+file: "论文笔记/TASTE-Streaming.md"
+date: "2026-06-06"
+conclusion: revise
+
+# 第一层: 原则判断
+principles:
+  reproducible:
+    score: 7
+    judgment: "方法节的因果解释优秀——CTC 为什么能流式、interleaving 如何实现 chunk-by-chunk、FSQ 为什么适合低维场景,三个关键设计选择的 WHY 都解释清楚。但实验比较叙事(vs BigCodec/TaDiCodec)建立在错误数字上,削弱了'为什么 work'的论证。"
+  trustworthy:
+    score: 3
+    judgment: "交叉验证发现系统性数字错误: (1) 比较表中 BigCodec/TaDiCodec 两列整体错位(BigCodec 列实为 SpeechTokenizer 数字,TaDiCodec 列实为 BigCodec 数字); (2) TASTE 的 Dec RTF 和 SLM RTF 引用了 TaDiCodec 的值; (3) 消融分析将 no-joint 效果误标为 no-bi-stage; (4) 局限性节中 TaDiCodec 数字实为 Mimi 数字。这些错误涉及 7+ 个指标值,且分布在表格、叙事分析、速查卡片多处。"
+  distinguishable:
+    score: 8
+    judgment: "[论文原文]/[agent 解读] 标注覆盖全面,方法节每个因果解释都标了来源,推断与事实的边界清晰。扣分原因: 错误数字被标注为 [Table 1] 来源,形式上'可区分'但实质不可信。"
+  positioned:
+    score: 9
+    judgment: "KB 背景节提供了清晰的谱系定位(TASTE → TASTE-S 流式扩展),与 SpeechTokenizer 分类体系、Speech-TextAlignment 策略、CosyVoice 2 技术借鉴的关系都交代清楚。创新判断有对比基准(4 条具体创新点 vs TASTE 原版)。"
+  non_polluting:
+    score: 5
+    judgment: "方法机制描述准确,概念挂接合理,不会污染概念页的核心定义。但比较表中的错误数字如果通过反向更新流入实体页(如 SpeechTokenizer 或 BigCodec 页的 key_papers 附注),会引入错误信息。必须先修正数字再执行反向更新。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 24
+    annotated: 21
+    rate: "87%"
+    note: "覆盖率达标,但多个标注了 [Table 1] 的数字与 PDF 原文不符——覆盖率高不等于准确率高"
+  metric_names_correct: true
+  source_labels_present: true
+  speed_card_complete: true
+  frontmatter_complete: true
+  concept_admission_ok: true
+
+# 发现的问题
+issues:
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "实验 > 比较表 BigCodec 列 (全部 7 个指标)"
+    detail: "表中标为 'BigCodec' 的列(WER 3.0%, UTMOS 3.56, Spkr Sim 0.80, Drtn Con 0.935, Enc RTF 0.004, Dec RTF 0.003, SLM RTF 1.016)实际是 PDF Table 1 中 SpeechTokenizer [21] (2000 bps) 的数字。真实 BigCodec [23] 数字为: WER 3.0%, UTMOS 4.11, Spkr Sim 0.91, Drtn Con 0.962, Enc RTF 0.008, Dec RTF 0.012, SLM RTF 1.626。"
+    suggestion: "将 BigCodec 列替换为 PDF Table 1 中 BigCodec [23] 的实际数字。"
+
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "实验 > 比较表 TaDiCodec 列 (全部 7 个指标)"
+    detail: "表中标为 'TaDiCodec' 的列(WER 3.0%, UTMOS 4.11, Spkr Sim 0.91, Drtn Con 0.962 等)实际是 BigCodec [23] 的数字。真实 TaDiCodec [25] 数字为: WER 5.1%, UTMOS 3.96, Spkr Sim 0.81, Drtn Con 0.843, Enc RTF 0.117, Dec RTF 0.315, SLM RTF 0.127。本质上 BigCodec 与 TaDiCodec 两列的标签整体互换了。"
+    suggestion: "交换两列标签,或按 PDF Table 1 重新填入各模型的正确数字。考虑是否仍需要这两个 baseline(bitrate 差异大),或替换为更匹配的 baseline(如 Mimi ~1000 bps)。"
+
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "实验 > 比较表 TASTE (EXT) 行 — Dec RTF 和 SLM RTF"
+    detail: "TASTE Dec RTF 标为 0.315,实际为 0.414(0.315 是 TaDiCodec 的 Dec RTF)。TASTE SLM RTF 标为 0.127,实际为 0.061(0.127 是 TaDiCodec 的 SLM RTF)。这导致速查卡片中 'Dec RTF 0.076 vs 0.315 (~4x)' 也是错的——正确为 vs 0.414 (~5.5x)。"
+    suggestion: "修正 TASTE Dec RTF 为 0.414、SLM RTF 为 0.061。同步更新速查卡片中的比较和倍数。注意: TASTE 和 TASTE-S 的 SLM RTF 实际相同(均为 0.061),说明 SLM 推理速度的提升来自序列压缩而非其他因素,叙事需调整。"
+
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "实验 > 关键实验发现 > 3. Bi-stage + Joint training 的重要性"
+    detail: "消融归因错误: (1) '无 bi-stage: WER 4.5% (CTC) → 有 bi-stage: 4.1% (CTC)' — PDF 中 WER 4.5% CTC 是 TASTE-S (no joint) 行,不是 no bi-stage;TASTE-S (no bi-stage) 只有 EXT 行(WER 10.8%),无 CTC 行。此处实际展示的是 joint training 的效果,不是 bi-stage 的效果。(2) '无 joint training: WER 5.7% (EXT) → 有 joint training: 4.5% (EXT)' — WER 5.7% 是 Text-only 行,不是 TASTE-S (no joint);TASTE-S (no joint) EXT = 4.1%。此处实际比较的是 Text-only vs TASTE,不是 joint training 消融。"
+    suggestion: "按 PDF Table 1 重写消融分析: bi-stage 效果 = TASTE-S (no bi-stage) EXT 10.8% → TASTE-S (no joint) EXT 4.1%(消除初期 ASR 不稳定); joint training 效果 = TASTE-S (no joint) CTC 4.5% → TASTE-S CTC 4.1%(适配 CTC 输出)。"
+
+  - severity: medium
+    type: factual-error
+    principle: trustworthy
+    location: "局限性 > 第 4 点"
+    detail: "'TaDiCodec (no VQ) 在 Table 1 中显示了强劲性能(WER 3.1%, UTMOS 3.60)' — WER 3.1% 和 UTMOS 3.60 是 Mimi [9] 的数字,不是 TaDiCodec (no VQ) 的。TaDiCodec (no VQ) 实际为 WER 4.9%, UTMOS 3.99, bitrate >1000。"
+    suggestion: "修正为 TaDiCodec (no VQ) 的实际数字(WER 4.9%, UTMOS 3.99),或替换讨论对象为 Mimi(WER 3.1%, UTMOS 3.60, 1000 bps)——后者更适合作为连续 tokenizer 路线的代表。"
+
+  - severity: medium
+    type: factual-error
+    principle: trustworthy
+    location: "速查 > 指标字段"
+    detail: "速查卡片中 'Dec RTF 0.076 vs 0.315 (~4x)' 继承了比较表中 TASTE Dec RTF 的错误值 0.315。正确应为 vs 0.414 (~5.5x)。"
+    suggestion: "修正为 'Dec RTF 0.076 vs 0.414 (~5.5x)'。"
+
+  - severity: medium
+    type: factual-error
+    principle: trustworthy
+    location: "实验 > 关键实验发现 > 1. 流式效率大幅提升"
+    detail: "'SLM RTF: 0.061 vs 0.127,因为 text-aligned 压缩了序列长度' — PDF 中 TASTE 和 TASTE-S 的 SLM RTF 均为 0.061,没有差异;0.127 是 TaDiCodec 的 SLM RTF。此处的比较对象实际是 TaDiCodec 而非 TASTE。"
+    suggestion: "明确比较对象: 如果是 TASTE-S vs TaDiCodec,说明是跨系统比较;如果是 TASTE-S vs TASTE,需删除此行(两者 SLM RTF 相同)。"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "速查 > 指标字段"
+    detail: "速查卡片指标列出了具体数字和数据集名,但缺少 [Table 1]/[Table 2] 来源标注。"
+    suggestion: "在指标字段末尾加注来源,如 '(Table 1, Table 2)'。"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "实验 > 4. Longform 能力"
+    detail: "'ΔLen 最小 (0.7±0.6%)' 缺少出处标注。"
+    suggestion: "加注 [Table 2]。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: false
+  safe_for_trusted_layer: false
+  reason: "比较表中 BigCodec/TaDiCodec 两列整体错位,TASTE RTF 数字部分错误,消融分析条件标签互换——这些错误如果通过反向更新流入实体页(如 SpeechTokenizer/BigCodec/TaDiCodec 相关描述),会传播错误信息。必须先修正所有 high issue 再执行反向更新。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: "claim_coverage 87% (pass) 但 trustworthy 3/10 (fail)。说明 '标注覆盖率' 检查项只衡量了形式完备性(有没有标来源),没衡量内容准确性(标的数字对不对)。需要增加 '交叉验证命中率' 检查项:对比较表中非本文模型的数字,抽样与 PDF 原表核对。"
+  new_issue_type: "baseline-number-swap — 比较表中多个 baseline 的数字整体互换/混淆,不是单个数字错误而是模型身份映射错误。与 factual-error 的区别: 每个数字单独看都是 PDF 中存在的真实数字,但被归到了错误的模型名下。根因可能是 agent 读取 PDF 表格时行偏移。"
+  system_upgrade_suggestion: "Reader agent 在提取多模型比较表时,应对每个 baseline 的数字做至少一项交叉验证(如用文中叙述段落中提到的数字与表格数字核对),防止行偏移导致的系统性错误。"
+  checklist_upgrade_suggestion: "增加检查项: '比较表非本文模型数字准确性(抽样 ≥ 2 个 baseline 与 PDF 原表核对)' — 服务可信赖原则。当前 claim_coverage 检查项只看'有没有标注',不看'标注的数字对不对',这是一个重要 gap。"
