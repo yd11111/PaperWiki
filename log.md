@@ -1,5 +1,11 @@
 # Log
 
+## 2026-06-05
+- [ingest/repro] [[OmniVoice]] — deep→repro 升级, GitHub 代码仓库分析 (k2-fsa/OmniVoice), 新增模块细节+训练策略+推理pipeline+复现要点 7 节
+- [review/auto] [[OmniVoice]] — pass, 0 high, 0 medium, 3 low (修正: 消融 WER 不一致, 补 ZipVoice 到 models, 补 CMOS/SMOS 置信区间)
+- [kb/update] [[Classifier-FreeGuidance]] — 追加"离散空间 CFG"小节 (OmniVoice 的 log-softmax CFG 扩展)
+- [lint/local] OmniVoice — 通过
+
 ## 2026-06-04
 - [kb/search] [[Fun-Audio-Chat]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[CosyVoice3]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
 - [ingest/deep] [[Fun-Audio-Chat]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice 3)
