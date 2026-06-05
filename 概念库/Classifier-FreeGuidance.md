@@ -98,6 +98,12 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 [[论文笔记/DSFlow|DSFlow]] (Lin et al., 2026) 揭示了 CFG 在知识蒸馏中的 **内化现象**: student 从 teacher@w=0.7 的输出学习后,其最优推理 CFG 从 w=0.7 降至 w=0.05。继续增大 w 反而退化 (w=0.2 时 MOS-N 从 4.32 降至 4.10,w=0.5 降至 3.78) [DSFlow Table 5]。为保持弱 CFG 的可用性,DSFlow 引入轻量正则化 (λ=0.01) 防止 unconditional branch collapse,使推理时仍可微调质量。这表明 CFG 不仅是推理时的技术,在蒸馏 pipeline 中其效果会被隐式转移。
 
+## 多条件 AR TTS 中的 CFG
+
+[[论文笔记/VoXtream2|VoXtream2]] (Torgashov et al., 2026) 将 CFG 推广到 AR full-stream TTS 的三个条件信号: text (PT 输入, 10% mask), audio prompt (TT 输入, 10% mask), speaker embedding (DT 输入, 10% drop)。不同条件使用不同 γ: γ_temp=1.5 (TT, 允许韵律变化), γ_depth=3.0 (DT, 精确音色)。Ablation 显示逐步叠加 CFG 的效果: text CFG 主要改善 WER (2.29→1.37), audio CFG 主要提升 SPK-SIM (0.578→0.661), speaker CFG 进一步增强 SPK-SIM (→0.674) [VoXtream2 Table 6]。
+
+关键发现: 虽然 CFG 不直接应用于 duration token 采样,γ_temp 仍间接影响语速控制 -- γ_temp 越大快速语音 WER 越低而慢速 WER 越高,反之亦然 [VoXtream2 Fig 9]。这表明 CFG 的条件增强效果会跨模态传播,即使在不直接被引导的维度上也产生影响。
+
 ## 演进
 
-Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用
+Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导)

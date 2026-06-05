@@ -122,7 +122,7 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing) → Inference-time AR duration steering (TED-TTS, 2026; training-free segment-level duration embedding + EOS logit modulation)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing) → Inference-time AR duration steering (TED-TTS, 2026; training-free segment-level duration embedding + EOS logit modulation) → Sampling-time distribution matching (VoXtream2, 2026; 在线直方图匹配 + 滑动窗口自校正,支持动态 mid-utterance 变速)
 
 ### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
 
@@ -155,3 +155,11 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **与已有方法的根本区别**: DMOSpeech 2/FlexSpeech/FNH-TTS 都是训练/优化 duration predictor 模块; TED-TTS 完全不训练,在 AR 解码过程中通过 embedding lookup 和 logit 修改实现控制
 - **Duration error**: 全设置 3.21-3.39% (vs baseline 5.78-12.03%),且不同 scaling factor 下误差保持稳定 [Table 4]
 - 详见 [[论文笔记/TED-TTS|TED-TTS]]
+
+### VoXtream2 Distribution Matching SRC (Torgashov et al., 2026)
+
+- **Sampling-time distribution matching**: 不修改 duration predictor 本身,在 AR 推理时通过直方图匹配校正 duration token 采样分布。给定目标 SPS 对应的 duration state 直方图 (Ptarget),计算当前预测分布 (Pcurrent) 与过去 3s 窗口累积分布 (Pacc) 的差异,用 W = exp(β * (log10(Ptarget) - log10(Pacc))) 重加权采样 [§3.5, Eq. 2-3]
+- **Self-correcting 机制**: 滑动窗口 Pacc 使控制信号自动适应实际生成状态,偏差越大校正力度越强;β=5 为 controllability-intelligibility trade-off
+- **动态 mid-utterance 变速**: Ptarget 可在生成过程中随时改变,实现帧级语速控制;渐变场景 Pearson corr 0.70-0.83,突变场景 0.62-0.66 [VoXtream2 Table 5]
+- **与已有方法的根本区别**: DMOSpeech 2/FlexSpeech/FNH-TTS 修改/优化 duration predictor 模块; TED-TTS 通过 embedding steering 控制; VoXtream2 在 token 采样概率空间做在线分布匹配,三者正交
+- 详见 [[论文笔记/VoXtream2|VoXtream2]]
