@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[PITS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[SpeechFactorization]]✓ | 过滤: [[VITS]](pending-review), [[F0Modeling]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[DurationPredictor]](pending-review)
+- [ingest/deep] [[PITS]] — 精读, kb_sources=6, 新建 0, 追加 2 (VITS 相关工作段, F0Modeling Yingram 替代段)
+- [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到正文
+- [skip/update] [[F0Modeling]] — key_papers 已达上限(13),改追加到正文
+- [review/auto] [[PITS]] — pass, 0 high / 0 medium / 2 low (inline review)
+- [lint/local] PITS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 (total draft: 339) — 建议抽空审核
 - [kb/search] [[LearningToSpeakFromText]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Attention-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[LearningToSpeakFromText]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation 跨语言统一表示段, Cross-lingualVoiceCloning 早期探索段)
 - [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
