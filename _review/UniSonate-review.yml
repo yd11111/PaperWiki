@@ -1,0 +1,58 @@
+review:
+  paper: "UniSonate"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    可复述:
+      score: 8
+      reason: "方法节包含清晰的因果解释(WHY dynamic token injection, WHY curriculum learning),架构描述完整。速查卡片可借鉴字段具体可操作。"
+    可信赖:
+      score: 9
+      reason: "所有数字型 claim 均有 [Table N] / [§X.X] 标注,交叉验证与 PDF 原文一致。指标方向无误。"
+    可区分:
+      score: 8
+      reason: "因果解释标注了 [论文原文] 和 [agent 解读],区分清晰。点评节的推测性分析有合理依据。"
+    可定位:
+      score: 9
+      reason: "KB 背景明确定位 UniSonate 为 InstructAudio 后继,与 CFM/Instruction-Guided 的关系清楚。创新判断有对比基准。"
+    不污染:
+      score: 8
+      reason: "frontmatter concepts/models 列表合理。反向更新计划中无明显 factual error。"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "medium"
+      location: "方法节 > 关键设计选择 > 2. Dynamic Token Injection"
+      detail: "文中提到 T_audio 和 T_target 两个变量名,论文 §3.2 先用 T_audio 描述目标时长后切换为 T_target (Eq. 3),笔记中仅用 T_target,但未标注 [§3.2] 于该段落首次出现处。"
+      suggestion: "在 Dynamic Token Injection 段首句补充 [§3.2]。"
+
+    - id: 2
+      type: "template-compliance"
+      severity: "low"
+      location: "实验节 > TTS 指令控制表"
+      detail: "InstructAudio 的 Age Acc 为 86.67%,笔记中 Age 列缺失,未在表中显示。"
+      suggestion: "TTS 指令控制表补充 Age Acc 行: UniSonate 86.67%, InstructAudio 86.67%。"
+
+    - id: 3
+      type: "weak-reusability"
+      severity: "low"
+      location: "可复用的 idea > 第3点"
+      detail: "'正向迁移作为统一建模的验证信号' 偏 meta 层面,不如前两点具体可操作。"
+      suggestion: "可补充具体消融设计方法(保持模型/超参不变,仅变数据组成)作为方法论层面的可复用模式。"
+
+    - id: 4
+      type: "traceability-gap"
+      severity: "medium"
+      location: "方法节 > 训练策略"
+      detail: "curriculum learning 的 Stage 1 = 1 epoch, Stage 2 = 2 epochs 这一关键超参来自 Algorithm 1,但笔记中未标注出处。"
+      suggestion: "补充 [Algorithm 1] 标注。"
+
+  issue_summary:
+    high: 0
+    medium: 2
+    low: 2
+
+  learning_signals: []

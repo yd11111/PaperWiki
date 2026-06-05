@@ -100,7 +100,7 @@ Single DiT (6 layers): 仅 audio self-attention,细化声学细节
 
 **问题**: SFX 没有语言学内容,无法用 phoneme 序列表示。如果不解决这个问题,就需要修改 phoneme 驱动架构或放弃 SFX 支持。
 
-**解决方案**: 引入可学习的 [SFX] special token 作为伪音素 [§3.2]。关键不在于引入 token 本身,而在于如何确定 token 数量:
+**解决方案** [§3.2]: 引入可学习的 [SFX] special token 作为伪音素。关键不在于引入 token 本身,而在于如何确定 token 数量:
 
 1. 从语音语料计算全局缩放因子 lambda = (1/N) * sum(len(P_i) / duration(A_i)),即平均 phoneme-to-duration 比率 [Eq. 2]
 2. 对于目标时长为 T_target 的 SFX,content 序列为: C_sfx = [SFX] × floor(lambda · T_target) [Eq. 3]
@@ -113,10 +113,10 @@ Single DiT (6 layers): 仅 audio self-attention,细化声学细节
 
 [论文原文] 直接联合训练会导致优化冲突和负迁移——SFX 的高方差会使模型难以收敛于语音的精细发音细节 [§3.3]。
 
-训练按复杂度递增分三阶段 [Algorithm 1]:
-- **Stage 1 (Speech Anchoring)**: 1 epoch,仅用 speech 数据 D_S,建立精细发音能力
-- **Stage 2 (Semantic Expansion)**: 2 epochs,加入 music 数据 D_S ∪ D_M,扩展到半结构化内容
-- **Stage 3 (Universal Generalization)**: 直到收敛,全数据 D_S ∪ D_M ∪ D_E
+训练按复杂度递增分三阶段 [Algorithm 1, §3.3]:
+- **Stage 1 (Speech Anchoring)**: E1=1 epoch,仅用 speech 数据 D_S,建立精细发音能力 [Algorithm 1]
+- **Stage 2 (Semantic Expansion)**: E2=2 epochs,加入 music 数据 D_S ∪ D_M,扩展到半结构化内容 [Algorithm 1]
+- **Stage 3 (Universal Generalization)**: 直到收敛,全数据 D_S ∪ D_M ∪ D_E [Algorithm 1]
 
 [agent 解读] 课程学习的关键假设是: 语音是最结构化的模态,先锚定精确的时间对齐能力,再逐步引入更低结构化的模态,使模型在保持结构化能力的基础上适应非结构化数据。这与 pretrain→finetune 思路不同——三个阶段使用同一目标函数,只改变数据组成。
 
@@ -208,4 +208,20 @@ L_CFM = E_{t,x_0,x_1,C_text} ||v_θ(t, C_text, x_t) - (x_1 - x_0)||²
 
 2. **课程学习的结构化→非结构化渐进策略**: 多模态联合训练时,按模态的"结构化程度"从高到低渐进引入,可以先锚定精确对齐能力再泛化。这个策略在其他多模态系统(如 text+image+video)中也可能适用。
 
-3. **正向迁移作为统一建模的验证信号**: 如果联合训练后各单任务都提升,说明统一架构有效;如果某个任务下降,说明架构/训练策略需要改进。消融实验设计值得参考。
+3. **正向迁移作为统一建模的验证信号**: 如果联合训练后各单任务都提升,说明统一架构有效;如果某个任务下降,说明架构/训练策略需要改进。消融实验设计值得参考——保持模型架构和超参完全不变,仅改变数据组成,是验证多任务联合训练效果的干净方法。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法因果解释清晰,速查卡片具体 |
+> | 可信赖 | pass | 数字均有出处标注,交叉验证一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖良好 |
+> | 可定位 | pass | KB 背景定位清楚,与 InstructAudio 关系明确 |
+> | 不污染 | pass | concepts/models 合理,无 overclaim |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/UniSonate-review.yml`
