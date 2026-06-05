@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[DSFlow]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[ScoreMatching]](pending-review)
+- [ingest/deep] [[DSFlow]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[ConditionalFlowMatching]] 演进, [[Classifier-FreeGuidance]] 蒸馏行为, [[模型库/CosyVoice2|CosyVoice 2]] baseline)
+- [review/auto] [[DSFlow]] — pass-with-fixes, 0 high, 1 medium (frontmatter models), 1 low (lr 不一致)
+- [review/kb] [[DSFlow]] — pass, 3 append + 4 skipped
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到演进段
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),改追加到正文
+- [skip/update] [[模型库/CosyVoice2|CosyVoice 2]] — key_papers 已达上限,追加到 baseline 段
+- [lint/local] DSFlow — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 277 — 建议抽空审核
 - [kb/search] [[SiTok]] — 命中 6 页(取 6): [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[SiTok]] — 精读更新(元数据修正+KB扩展+审阅), kb_sources=6, 新建 0, 追加 2 ([[CodecTrainingObjectives]] key_papers+表, [[CodebookCollapse]] body)
 - [review/auto] [[SiTok]] — pass-with-fixes, 0 high, 1 medium, 2 low
