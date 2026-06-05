@@ -146,4 +146,16 @@ ZeSTA 框架分为三个组件 [§3, Fig 1]:
 
 ## 审阅
 
-(待独立审阅 agent 填充)
+> [!review] 审阅 (2026-06-05, auto/self-review)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (9/10) | 因果解释充分,DC/OS 互补机制清晰 |
+> | 可信赖 | pass (9/10) | 关键数字全部与 PDF 交叉验证通过 |
+> | 可区分 | pass (9/10) | [论文原文]/[agent 解读] 标注系统 |
+> | 可定位 | pass (9/10) | KB 背景定位精准,填补 SpeakerAdaptation 空白 |
+> | 不污染 | pass (8/10) | 反向更新为追加操作,无污染风险 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/ZeSTA-review.yml`

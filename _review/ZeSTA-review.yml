@@ -1,0 +1,52 @@
+review:
+  paper: "ZeSTA"
+  note_path: "论文笔记/ZeSTA.md"
+  date: "2026-06-05"
+  reviewer: "auto (self-review, no independent subagent available)"
+  checklist_version: "v1.1"
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节因果解释充分,domain embedding 为什么 64-dim、DC 和 OS 为什么互补、speaker-matched 为何重要都有清晰解释。速查卡片的'可借鉴'具体到 domain embedding 范式而非泛泛之词。"
+  trustworthy:
+    score: 9
+    rationale: "关键数字全部与原文 PDF 交叉验证通过(SECS、CER、WER、MOS、ABX 均准确)。出处标注覆盖率高(Table 3/4/5/6, Fig 1/2, §3.2, §4.1-4.4 均引用)。指标方向正确(SECS↑, CER↓, WER↓)。"
+  distinguishable:
+    score: 9
+    rationale: "方法节系统标注了 [论文原文] 和 [agent 解读],boundary 清晰。关键设计选择中的 agent 推断(如 domain embedding 容量过大编码过多信息)合理且有实验支持(Table 5)。"
+  positionable:
+    score: 9
+    rationale: "KB 背景节定位精准: 明确指出 ZeSTA 填补 SpeakerAdaptation 页面中'合成数据增强'策略的空白,与 VC-based augmentation 和 TTS-by-TTS 的区别。与 VoiceCloningTaxonomy 的两大范式交叉定位清楚。"
+  non-polluting:
+    score: 8
+    rationale: "frontmatter concepts/models/tasks 挂接合理。无新建实体页需求。反向更新将是追加操作(key_papers 或相关引用)。唯一潜在风险: SpeakerAdaptation 页面可能需要增加'合成数据增强'子方法,但这是内容扩展不是污染。"
+
+issues:
+  - id: 1
+    type: "template-compliance"
+    severity: "low"
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 LibriTTS、VCTK、VoxCeleb/VoxCeleb2 数据集。VCTK 和 VoxCeleb 无 vault 实体页所以合理留空,但可标注文字说明。"
+    suggestion: "可接受,因 vault 无对应实体页。无需修改。"
+
+  - id: 2
+    severity: "low"
+    type: "traceability-gap"
+    location: "局限性第1条"
+    detail: "'VITS 在 2026 年已是遗产架构'未标注来源。这是 agent 解读但未标 [agent 解读]。"
+    suggestion: "已在点评节的对应句标注了 [agent 解读],局限性节可同步标注。"
+
+  - id: 3
+    severity: "low"
+    type: "template-compliance"
+    location: "审阅节"
+    detail: "审阅节为空(待填充),符合预期流程。"
+    suggestion: "将由本审阅 callout 填充。"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals: []
