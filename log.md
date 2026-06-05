@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MINT-Bench]] — 命中 6 页(取 6): [[SpeechFactorization]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[TTSEvaluation]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[EmotionControlinTTS]](pending-review)
+- [ingest/deep] [[MINT-Bench]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTSEvaluation 演进+段落, Instruction-GuidedSpeechSynthesis 评估段)
+- [skip/update] [[TTSEvaluation]] — key_papers 已达上限(26+),改追加到正文
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]] — key_papers 已达上限(19+),改追加到正文
+- [skip/update] [[NaturalLanguageDescriptionforTTS]] — 连接较弱,跳过反向更新
+- [lint/local] MINT-Bench — 通过
 - [kb/search] [[AST-Edit]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[CodecLanguageModel]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[AST-Edit]] — 精读, kb_sources=6, 新建 0, 追加 1 (ConditionalFlowMatching 演进段)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到正文演进段
