@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[SelfTTS]] — 命中 6 页(取 6): [[SpeechFactorization]]✓, [[SpeakerEmbedding]]✓ | 参考(pending-review): [[GradientReversalLayer]], [[StyleTransferinTTS]], [[EmotionControlinTTS]], [[VITS]]
+- [ingest/deep] [[SelfTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (GradientReversalLayer key_papers+body, VITS body)
+- [skip/update] [[StyleTransferinTTS]] — key_papers 已达上限,论文无新概念贡献
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限,对抗解耦方法已覆盖
+- [skip/update] [[SpeechFactorization]] — key_papers 已达上限,cosine-based GRL 已通过 GRL 页记录
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,无新 speaker embedding 贡献
+- [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到正文相关工作
+- [review/auto] [[SelfTTS]] — pass-with-fixes: 0 high, 1 medium (datasets 字段补充), 1 low
+- [lint/local] SelfTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — pending-review 实体页积压
 - [kb/search] [[BorderlessLongSpeech]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[ProsodyModeling]]✓ | 参考(pending-review): [[Instruction-GuidedSpeechSynthesis]], [[EmotionControlinTTS]], [[NaturalLanguageDescriptionforTTS]], [[GlobalStyleTokens]]
 - [ingest/deep] [[BorderlessLongSpeech]] — 精读, kb_sources=6, 新建 0, 追加 2 (LLM-basedTTS 演进线, NaturalLanguageDescriptionforTTS 扩展方向)
 - [skip/update] [[LLM-basedTTS]] — key_papers 已达上限,改追加到演进线
