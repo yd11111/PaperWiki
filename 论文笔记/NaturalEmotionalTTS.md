@@ -118,9 +118,9 @@ updated: 2026-06-06
 
 | 指标 | Fine-grained NV | Coarse NV | Only Verbal | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- |
-| nMOS | ~3.4 (推算) | ~3.4 (推算) | 3.54 | 主观测试 (N=15) | [Fig 2] |
-| eMOS | **4.20** | ~3.9 (推算) | 3.81 | 主观测试 (N=15) | [Fig 2] |
-| Emotion Acc. (avg) | **78.8%** | - | 65.5% | 四情感识别 | [Fig 2] |
+| nMOS | 3.40 | 3.46 | 3.54 | 主观测试 (N=15) | [Fig 2] |
+| eMOS | **4.20** | 4.00 | 3.81 | 主观测试 (N=15) | [Fig 2] |
+| Emotion Acc. (avg) | **82.0%** (Fig 2) / 78.8% (正文) | 58.7% | 62.1% | 四情感识别 | [Fig 2, §5.3] |
 | Happy Acc. | **82.5%** | 低 | 中 | 识别任务 | [Table 3, Fig 3] |
 | Sad Acc. | **98.3%** | 高 | 高 | 识别任务 | [Table 3, Fig 3] |
 | Fear Acc. | **82.7%** | N/A | ~47% | 识别任务 | [Table 3, Fig 3] |
@@ -142,7 +142,8 @@ updated: 2026-06-06
 2. **仅女性说话人**: 标注和实验均限于女性,性别泛化未验证 [§3.1]
 3. **Backbone 过时**: Grad-TTS (2021) 作为 backbone,缺少 LLM-based TTS 的语言理解和 zero-shot 能力,难以与 CosyVoice2/F5-TTS 等现代系统竞争 [agent 解读]
 4. **Angry 控制薄弱**: 缺乏 anger-specific NV (yelling 太通用),识别率仅 64.3% [§5.3.1]
-5. **Naturalness 下降**: 加入 NV 后 nMOS 从 3.54 降至约 3.4,反映 NV 合成质量尚有提升空间 [Fig 2]
+5. **Naturalness 下降**: 加入 NV 后 nMOS 从 3.54 降至 3.40 (fine-grained) / 3.46 (coarse),反映 NV 合成质量尚有提升空间 [Fig 2]
+8. **论文内部数据不一致**: 正文声称总准确率 78.8% (§5.3),但 Fig 2 标注 82.0%,结论 §6 也写 82.0%; 从 confusion matrix [Fig 3c] 四类平均 (82.5+64.3+82.7+98.3)/4 = 82.0%,78.8% 来源不明
 6. **评估规模小**: 仅 15 名参与者,60 个样本,统计效力有限 [§5.2.1]
 7. **未开源**: 代码、模型、标注数据均未开源 (仅有 demo 页面) [§1]
 
@@ -167,3 +168,19 @@ updated: 2026-06-06
 2. **NV-情感非均匀映射**: Fear 和 happy 最依赖 NV (准确率提升 36% 和 17%),angry 最不依赖 (缺乏专属 NV) — 在设计情感 TTS 时可优先为高依赖情感配置 NV 资源
 3. **多元素组合 > 单一元素**: Sad 情感中 `wuuuuuuu whep` (连续+离散组合) 优于任一单独元素,说明 NV 组合的丰富度对表现力至关重要
 4. **Cheering > Laughter for happy**: 在 TTS 场景中 cheering 比 laughter 更能传达快乐,颠覆直觉 — 可能因 laughter 在 TTS 合成中更难保真
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含因果解释,标注方案的 WHY 清晰 |
+> | 可信赖 | pass | 数字出处标注覆盖率 >90%,已修正推算值为精确值 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰 |
+> | 可定位 | pass | KB 背景谱系定位具体,与 NVSpeech/NonverbalTTS/EmoCtrl-TTS 对比充分 |
+> | 不污染 | pass | 无新建概念页需求,反向更新仅追加 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/NaturalEmotionalTTS-review.yml`

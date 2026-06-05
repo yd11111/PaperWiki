@@ -1,0 +1,45 @@
+paper: NaturalEmotionalTTS
+reviewer: auto
+date: 2026-06-06
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节清晰解释了标注方案的设计原理(频率/时长编码)和NV Processor的工作流程,包含因果解释和[agent 解读]标注"
+  trustworthy:
+    score: 7
+    reason: "数字出处标注覆盖率>90%,但原始草稿中nMOS/eMOS/accuracy使用了推算值而非Fig 2中的精确值,已修正; 论文本身存在准确率数据不一致(78.8% vs 82.0%)"
+  distinguishable:
+    score: 8
+    reason: "[论文原文]和[agent 解读]标注清晰,因果解释来源标注覆盖率>80%"
+  positionable:
+    score: 9
+    reason: "KB背景节谱系定位优秀,与NVSpeech/NonverbalTTS/EmoCtrl-TTS三条NV路线形成具体对比,创新判断有明确对比基准"
+  non-polluting:
+    score: 9
+    reason: "无新建概念页需求,反向更新仅为追加key_papers,不涉及实质修改"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "实验表格"
+    detail: "原始草稿中Fine-grained nMOS写为'~3.4(推算)',Coarse nMOS写为'~3.4(推算)',Coarse eMOS写为'~3.9(推算)',但Fig 2中有精确数值(3.40, 3.46, 4.00)"
+    suggestion: "已修正为精确值"
+    fixed: true
+
+  - type: factual-note
+    severity: medium
+    location: "实验表格, Emotion Acc."
+    detail: "论文正文§5.3声称总准确率78.8%,但Fig 2标注82.0%,结论§6也写82.0%; 从confusion matrix [Fig 3c]四类平均=(82.5+64.3+82.7+98.3)/4=82.0%,78.8%来源不明"
+    suggestion: "已在表格中标注两个数值并在局限性中说明论文内部数据不一致"
+    fixed: true
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models"
+    detail: "models字段列了CosyVoice2,但CosyVoice2仅在related work中讨论,非本文使用的模型或直接baseline; 本文backbone是Grad-TTS"
+    suggestion: "CosyVoice2在§2.2中被详细讨论且其NV方法被批评,保留在models中可接受,但更准确的做法是列在concepts或移除"
+    fixed: false
+
+learning_signals: []
