@@ -127,4 +127,4 @@ Survey 在训练目标章节中进一步总结了 collapse 的解决方案分类
 
 ## 演进
 
-VQ-VAE 原始 collapse (2017) → EMA + k-means (SoundStream/EnCodec, 2021-2022) → Factorized codes + L2-norm (DAC, 2023) → FSQ 去码本化 (2024) → ERVQ 双层优化 (2025) → Entropy penalties + Euclidean normalization (ESC/NDVQ, 2024) → 理论解释 + Robust R-FSQ (2026)
+VQ-VAE 原始 collapse (2017) → EMA + k-means (SoundStream/EnCodec, 2021-2022) → Factorized codes + L2-norm (DAC, 2023) → FSQ 去码本化 (2024) → ERVQ 双层优化 (2025) → Entropy penalties + Euclidean normalization (ESC/NDVQ, 2024) → 理论解释 + Robust R-FSQ (2026) → EG-GRVQ 结构均衡分组 (2026, 通过信道方差均衡分组缓解 GRVQ 中的层间利用率不均,与 ERVQ 训练策略路线互补)

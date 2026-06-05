@@ -50,6 +50,7 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 | **CSRVQ** (Cross-Scale RVQ) | 在 encoder/decoder 不同层级间做残差量化; coarse-to-fine 多分辨率 | ESC (Gu & Diao 2024), Disen-TF-Codec |
 | **RNDVQ** (Residual Normal Distribution VQ) | 将量化公式化为概率选择而非确定性最近邻; 改善 codebook 利用率和鲁棒性 | NDVQ (Niu et al. 2024) |
 | **GRVQ** (Grouped RVQ) | GVQ + RVQ 的结合; 分组后做残差量化 | Prompt Codec, HiFi-Codec |
+| **EG-GRVQ** (Entropy-Guided GRVQ) | 用信道方差作为信息量代理,不等分组使每组信息量均衡; 改善 codebook 利用率 | [[论文笔记/EntropyGRVQ\|EntropyGRVQ]] (Ren et al. 2026) |
 
 ### GVQ 数学形式 [§2.2.1]
 
@@ -89,4 +90,4 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 
 ## 演进
 
-VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → GVQ/GRVQ (HiFi-Codec, 2023) → FSQ (2024, 去码本化) → MSRVQ (SNAC, 2024, 多尺度) → CSRVQ (ESC, 2024, 跨尺度) → RNDVQ (2024, 概率化) → 单码本回归 (BigCodec/WavTokenizer, 2024) → PURE Codec (2025, enhancement-guided entropy decomposition: 用 speech enhancement 模型引导第一层量化低熵表征,训练范式改进而非结构改进)
+VQ-VAE (2017) → RVQ/SoundStream (2021) → EnCodec (2022, EMA codebook) → DAC (2023, factorized codes) → GVQ/GRVQ (HiFi-Codec, 2023) → FSQ (2024, 去码本化) → MSRVQ (SNAC, 2024, 多尺度) → CSRVQ (ESC, 2024, 跨尺度) → RNDVQ (2024, 概率化) → 单码本回归 (BigCodec/WavTokenizer, 2024) → PURE Codec (2025, enhancement-guided entropy decomposition: 用 speech enhancement 模型引导第一层量化低熵表征,训练范式改进而非结构改进) → EG-GRVQ (2026, 信道方差均衡分组: 用方差≈熵的信息论关系指导 GRVQ 不等分组,改善超低比特率下 codebook 利用率)
