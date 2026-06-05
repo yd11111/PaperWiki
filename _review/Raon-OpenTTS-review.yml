@@ -1,0 +1,62 @@
+review:
+  paper: "Raon-OpenTTS"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节清晰解释了数据收集、过滤、训练的 WHY 和 HOW。架构复用 F5-TTS 的设计动机明确。速查卡片具体实用。核心问题拆解清晰。"
+  trustworthy:
+    score: 8
+    reason: "关键数字均有 Table/Section 标注。初始草稿中 CV3-Hard-EN 表格混用了 VoxCPM/CosyVoice 2 的数值标为 CosyVoice 3/MaskGCT,Wild WER 误标为 2.77(实为 Expressive WER),已在审阅中修正。修正后数字准确。"
+  distinguishable:
+    score: 8
+    reason: "因果解释来源标注覆盖率较高,明确区分了 [论文原文] 和 [agent 解读]。点评节的推断性分析与事实描述界限清晰。"
+  positionable:
+    score: 9
+    reason: "KB 背景节谱系定位精准 — 在 CFM/DiT/F5-TTS 路线上定位,与 Emilia/CosyVoice 3/Qwen3-TTS 的数据规模对比清晰。创新判断准确聚焦于'开放数据缩小差距'。"
+  non-polluting:
+    score: 9
+    reason: "未新建概念页。反向更新仅涉及追加 key_papers,不改变已有页面 status。frontmatter 字段合理。"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: high
+    location: "实验 > CV3-Hard-EN 表格"
+    detail: "CosyVoice 3 CV3-Hard-EN WER 被标为 6.44(实为 VoxCPM 的值,CosyVoice 3 应为 10.77);MaskGCT 的 WER/SIM/DNSMOS 均误标为 CosyVoice 2 的值"
+    suggestion: "已在审阅中修正: CosyVoice 3→10.77, 替换为 VoxCPM 列(6.44/0.670/3.78)"
+    status: fixed
+
+  - id: 2
+    type: factual-error
+    severity: high
+    location: "实验 > Raon-OpenTTS-Eval 表格"
+    detail: "Wild WER 误标为 2.77%(实为 Expressive WER),1B 的 Wild WER 应为 5.61%"
+    suggestion: "已在审阅中修正: Wild WER 改为 5.61%,增加 Expressive WER 行"
+    status: fixed
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "训练策略"
+    detail: "1B 模型 9K GPU-hours 的数字缺少出处标注"
+    suggestion: "补充 [§3.3] 标注"
+    status: open
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "F5-TTS 在模型库中无对应文件,wikilink 指向不存在的 论文笔记/F5-TTS"
+    suggestion: "保留 wikilink 指向论文笔记(正确格式),但标注为红链。F5-TTS 是本文架构基础,应优先创建笔记。"
+    status: open
+
+summary:
+  high: 2 (all fixed)
+  medium: 0
+  low: 2
+
+learning_signals: []

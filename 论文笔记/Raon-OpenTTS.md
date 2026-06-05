@@ -145,13 +145,13 @@ Raon-1B 在 open-weight 模型中 SIM 第一、WER 第二 (仅次于 Qwen3-TTS)�
 
 ### CV3-Hard-EN [Table 5]
 
-| 指标 | 本文 (1B) | CosyVoice 3 | Qwen3-TTS | MaskGCT | 数据集 | 出处 |
+| 指标 | 本文 (1B) | VoxCPM | Qwen3-TTS | CosyVoice 3 | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
-| WER (%) ↓ | **6.15** | 6.44 | 7.89 | 10.28 | CV3-Hard-EN | [Table 5] |
-| SIM ↑ | **0.775** | 0.740 | 0.666 | 0.710 | CV3-Hard-EN | [Table 5] |
-| DNSMOS ↑ | 3.85 | **3.98** | 3.87 | 3.95 | CV3-Hard-EN | [Table 5] |
+| WER (%) ↓ | **6.15** | 6.44 | 7.89 | 10.77 | CV3-Hard-EN | [Table 5] |
+| SIM ↑ | **0.775** | 0.670 | 0.666 | 0.740 | CV3-Hard-EN | [Table 5] |
+| DNSMOS ↑ | 3.85 | 3.78 | 3.87 | **3.98** | CV3-Hard-EN | [Table 5] |
 
-CV3-Hard 上 Raon-1B WER 和 SIM 双第一,展示了在复杂语言文本上的优势。
+CV3-Hard 上 Raon-1B WER 和 SIM 双第一,展示了在复杂语言文本上的优势。F5-TTS 因无法处理长文本输入而在 CV3-Hard-EN 上大部分样本生成失败 [Table 5 footnote]。
 
 ### Raon-OpenTTS-Eval [Table 6]
 
@@ -159,9 +159,10 @@ CV3-Hard 上 Raon-1B WER 和 SIM 双第一,展示了在复杂语言文本上的�
 | --- | --- | --- | --- | --- | --- | --- |
 | Overall WER (%) ↓ | **2.81** | 4.43 | 9.48 | 25.08 | Raon-Eval | [Table 6] |
 | Overall SIM ↑ | **0.695** | 0.647 | 0.642 | 0.542 | Raon-Eval | [Table 6] |
-| Wild WER (%) ↓ | **2.77** | 8.31 | 43.83 | 136.03 | Raon-Eval Wild | [Table 6] |
+| Wild WER (%) ↓ | **5.61** | 8.31 | 43.83 | 136.03 | Raon-Eval Wild | [Table 6] |
+| Expressive WER (%) ↓ | **2.77** | 5.49 | 2.66 | 3.46 | Raon-Eval Expressive | [Table 6] |
 
-Wild 条件下的优势尤为突出 — F5-TTS WER 136.03% (近乎崩溃) vs Raon 2.77%,说明多源 in-the-wild 训练数据对鲁棒性至关重要。
+Wild 条件下的优势尤为突出 — F5-TTS WER 136.03% (近乎崩溃) vs Raon 5.61%,说明多源 in-the-wild 训练数据对鲁棒性至关重要。多个 AR baseline (CosyVoice 2 Wild WER 49.73%, Qwen3-TTS 79.14%) 在 Wild 条件下均显著退化,凸显了非自回归 + 多源训练的鲁棒性优势 [§5.3]。
 
 ### 数据消融
 
@@ -200,3 +201,19 @@ SMOS: Raon-1B 3.70 (最高), Qwen3-TTS 3.59, MaskGCT 3.58。
 2. **YouTube-Commons 预处理管线**: UVR-MDX → PyAnnote → Silero VAD → Whisper-large-v3 的五步流程,可直接复用于大规模 in-the-wild 语音数据构建
 3. **四声学域评估框架**: Clean/Noisy/Wild/Expressive 分域评估,每域多数据集,通过 stratified sampling 确保覆盖。可作为任何零样本 TTS 系统的标准化鲁棒性测试
 4. **控制变量的实验设计**: 固定架构仅变数据,是验证数据贡献的教科书级实验设计
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY/HOW 清晰,速查卡片具体 |
+> | 可信赖 | pass | 数字标注覆盖率高;初始 2 处表格数字错误已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰 |
+> | 可定位 | pass | KB 背景谱系定位精准 |
+> | 不污染 | pass | 仅追加更新,无新建概念页 |
+> 
+> Issues: 4 (high: 2 fixed, medium: 0, low: 2 open)
+> 详见 `_review/Raon-OpenTTS-review.yml`
