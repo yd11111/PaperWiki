@@ -1,0 +1,107 @@
+review:
+  paper: "AST-Edit"
+  note_path: "论文笔记/AST-Edit.md"
+  reviewer: "auto (inline fallback, no subagent dispatch available)"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节清晰解释了 latent inversion → word-level alignment → AWFG 三阶段的 WHY 和 HOW;每个关键设计选择都回答了'为什么选这个而不是那个';速查卡片可借鉴字段具体。"
+  可信赖:
+    score: 9
+    rationale: "所有关键数字均标注了出处 [Table 2]/[Fig 5]/[Fig 6]/[Eq N];指标名正确使用;与 PDF 原文交叉验证无误。"
+  可区分:
+    score: 8
+    rationale: "方法节标注了 [论文原文] 和 [agent 解读] 来源;但部分因果解释的来源标注可以更精确(如 '核心 insight' 的描述虽标了 [论文原文] 但引用的是 §1 的概括性表述,非原文逐字引用)。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节详细定位了 AST-Edit 在 AM-FM 范式中的位置,与 CFM/LLM-TTS/CFG 的关系清晰;创新判断有明确对比基准。"
+  不污染:
+    score: 9
+    rationale: "concepts/models frontmatter 挂接合理;无 overclaim;反向更新计划为追加操作,风险低。"
+
+checklist:
+  可复述:
+    - item: "方法节含因果解释"
+      result: pass
+    - item: "设计选择有 WHY"
+      result: pass
+    - item: "速查可借鉴具体"
+      result: pass
+
+  可信赖:
+    - item: "数字有出处标注"
+      result: pass
+      note: "覆盖率 ~95%, 所有 Table 2/Fig 5/Fig 6 数字均有标注"
+    - item: "指标名正确"
+      result: pass
+    - item: "速查指标有数字+数据集+来源"
+      result: pass
+    - item: "无方向性错误"
+      result: pass
+
+  可区分:
+    - item: "因果解释有来源标注"
+      result: pass
+    - item: "来源标注覆盖率 ≥ 80%"
+      result: pass
+      note: "估计 ~85%"
+    - item: "无推断写成断言"
+      result: pass
+    - item: "强断言有数字支撑"
+      result: pass
+
+  可定位:
+    - item: "KB 背景有具体谱系定位"
+      result: pass
+    - item: "创新判断有对比基准"
+      result: pass
+    - item: "frontmatter 字段存在且非空"
+      result: pass
+    - item: "frontmatter 语义正确"
+      result: pass-with-fixes
+      note: "models 字段未列 SSR-Speech baseline"
+    - item: "速查卡片 5 字段有实质内容"
+      result: pass
+
+  不污染:
+    - item: "新建概念页满足准入"
+      result: n/a
+      note: "无新建计划"
+    - item: "去重检查"
+      result: n/a
+    - item: "反向更新无 factual-error"
+      result: pass
+    - item: "反向更新分类正确"
+      result: pass
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 字段列了 IndexTTS2 和 Step-Audio-EditX,但遗漏了 SSR-Speech 这个主要 baseline"
+    suggestion: "追加 SSR-Speech 到 models 列表(如有笔记页则用 wikilink)"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "核心问题 → 核心 insight"
+    detail: "标注 [论文原文] 但实际是对 §1 多段落的概括,并非逐字引用"
+    suggestion: "可改为 [论文原文, §1] 更精确"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "局限性 #5"
+    detail: "'未开源' 的 [agent 解读] 标注可能随时过期"
+    suggestion: "保持原样,后续有代码发布时更新"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 2
+
+learning_signals: []

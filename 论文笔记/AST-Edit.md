@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [speech-editing, training-free, flow-matching, latent-inversion, TTS, autoregressive, guidance]
 concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]"]
-models: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]"]
+models: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "SSR-Speech"]
 tasks: []
 datasets: [LibriSpeech, LibriSpeech-Edit]
 kb_context_sources: 6
@@ -145,3 +145,19 @@ WDTW 作为新指标有实用价值,但目前仅在 LibriSpeech-Edit 上验证,b
 2. **Deviation-based adaptive guidance**: AWFG 的核心是 "根据当前状态与 reference 的偏差动态调节约束强度"。这比固定 guidance scale 更鲁棒,可推广到其他需要 localized control 的生成任务
 3. **Word-level alignment for variable-length editing**: 使用 LCS + forced alignment 处理编辑导致的时长变化,是语音编辑场景下处理 temporal mismatch 的有效方案
 4. **WDTW 指标**: 对需要评估 "局部时域一致性" 的任务 (speech editing, dubbing, voice conversion with alignment),WDTW 比全局 DTW 更 informative
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三阶段 WHY/HOW 清晰,设计选择有因果解释 |
+> | 可信赖 | pass | 数字出处覆盖率 ~95%,与 PDF 交叉验证无误 |
+> | 可区分 | pass | 来源标注覆盖率 ~85% |
+> | 可定位 | pass | KB 背景谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 反向更新为追加操作,风险低 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/AST-Edit-review.yml`
