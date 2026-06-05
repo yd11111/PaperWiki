@@ -1,0 +1,117 @@
+review:
+  paper: "ImmersiveTTS"
+  date: 2026-06-06
+  reviewer: auto
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节清晰解释了 WHY (为什么用 MM-DiT 双流、为什么 dual-teacher REPA),关键设计选择都有因果解释且标注了来源。速查卡片5字段都有实质内容。"
+  trustworthy:
+    score: 8
+    reason: "实验数字全部标注出处 [Table N],与 PDF 原文交叉验证全部正确。指标名使用正确 (WER/FAD/CLAP/MOS)。速查卡片指标含具体数字+数据集+标注。"
+  distinguishable:
+    score: 7
+    reason: "因果解释基本标注了 [论文原文] 和 [agent 解读],但方法节第一段整体架构描述中存在部分未标注来源的解释性陈述。覆盖率约 75%。"
+  positionable:
+    score: 9
+    reason: "KB 背景节包含详细谱系定位(VoiceLDM, UmbraTTS, VoiceDiT),创新判断有具体对比基准。frontmatter 字段完整且语义正确。"
+  non_polluting:
+    score: 8
+    reason: "反向更新内容可预期为追加 key_papers 到现有概念页,无 overclaim 风险。frontmatter concepts 列举合理。"
+
+checklist:
+  reproducible:
+    - item: "方法节包含因果解释(WHY)"
+      status: pass
+      note: "每个关键设计选择都回答了'为什么选这个'"
+    - item: "速查卡片可借鉴是具体可迁移 trick"
+      status: pass
+      note: "列出了 3 个具体可迁移的 trick,非泛泛'提出了新方法'"
+
+  trustworthy:
+    - item: "数字型 claim 有出处标注 (>=80%)"
+      status: pass
+      note: "估计覆盖率 ~90%,所有实验表格数字都标注了 [Table N]"
+    - item: "指标名正确"
+      status: pass
+      note: "WER/FAD/CLAP/MOS/SECS/UTMOS 使用正确"
+    - item: "速查卡片指标字段含数字+数据集+标注"
+      status: pass
+      note: "AudioCaps WER 8.06% / FAD 5.80 / CLAP 0.308 / SN-MOS 4.20 [Table 1]"
+    - item: "无方向性错误"
+      status: pass
+      note: "WER越低越好、FAD越低越好、CLAP越高越好,方向正确"
+
+  distinguishable:
+    - item: "因果解释标注了来源"
+      status: pass-with-note
+      note: "整体架构段有少量未标注的解释性陈述,覆盖率约75%,略低于80%目标"
+    - item: "无断言缺限定词"
+      status: pass
+      note: "点评中的评价有数据支撑"
+    - item: "强断言有数字支撑"
+      status: pass
+      note: "'采样效率出色'有 25 vs 200 NFEs 支撑"
+
+  positionable:
+    - item: "KB 背景有具体谱系定位"
+      status: pass
+      note: "包含 VoiceLDM, UmbraTTS, VoiceDiT 的具体定位和对比"
+    - item: "创新判断有对比基准"
+      status: pass
+      note: "三点创新都与具体已有方法做了对比"
+    - item: "frontmatter 字段存在且非空"
+      status: pass
+      note: "所有必需字段都存在"
+    - item: "frontmatter 语义正确"
+      status: pass-with-note
+      note: "models 仅列 WavLM,可考虑增加 VITS(Glow-TTS 框架的关联)作为 baseline,但非必须"
+    - item: "速查5字段有实质内容"
+      status: pass
+      note: "5个字段均有具体内容"
+
+  non_polluting:
+    - item: "新建概念页满足准入规则"
+      status: not-applicable
+      note: "未计划新建概念页"
+    - item: "已有概念库无重复"
+      status: not-applicable
+      note: ""
+    - item: "反向更新无 factual-error"
+      status: pass
+      note: "预期追加 key_papers,内容准确"
+    - item: "追加/实质分类正确"
+      status: pass
+      note: "均为 append 类型,不改 status"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "方法节 > 整体架构 > 第一段"
+    detail: "处理流程概述中的6个步骤是对论文的总结,混合了原文描述和推断,但未逐条标注 [论文原文]/[agent 解读]"
+    suggestion: "在处理流程列表项中加上来源标注,或在段首统一声明'以下基于 [论文原文] 的流程总结'"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter > datasets"
+    detail: "datasets 字段为空,但论文使用了 LibriTTS, WavCaps, AudioCaps, Seed-TTS test-en 等数据集"
+    suggestion: "补充 datasets 字段,至少包含 LibriTTS 和 AudioCaps 的 wikilink (如果实体页存在)"
+
+  - id: 3
+    severity: low
+    type: bad-linking
+    location: "frontmatter > models"
+    detail: "models 仅列 WavLM,但论文的直接对比 baseline 包括 VoiceLDM 和 VoiceDiT (虽然这些可能没有实体页)"
+    suggestion: "如果 VoiceLDM/VoiceDiT 有实体页则补充;无则可忽略"
+
+conclusion: pass-with-fixes
+issues_summary:
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []

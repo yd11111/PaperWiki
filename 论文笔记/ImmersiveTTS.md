@@ -150,3 +150,19 @@ ImmersiveTTS 提出了 environment-aware TTS 的一个有说服力的架构: MM-
 2. **不对称 alignment target**: 语音 teacher 对齐 clean 信号,环境 teacher 对齐 mixed 信号。这种根据 teacher 专长设计 target 的思路可迁移到任何多条件生成场景。
 3. **MM-DiT 用于 heterogeneous audio modalities**: 将 Flux 的 image-text 双流适配为 speech-environment 双流,验证了 MM-DiT 在音频领域的跨模态融合能力。后续可探索 speech-music、speech-effects 等组合。
 4. **Dual CFG 的 sensitivity 分析方法**: 固定一个 guidance scale 扫另一个,展现两个条件之间的 trade-off 曲面,对任何多条件生成系统都有参考价值。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释清晰,速查卡片实质 |
+> | 可信赖 | pass | 数字全部标注出处,与 PDF 交叉验证正确 |
+> | 可区分 | pass | 来源标注覆盖率~75%,整体架构段略低 |
+> | 可定位 | pass | KB 背景谱系定位详细,创新判断有对比基准 |
+> | 不污染 | pass | 反向更新为追加类型,无 factual-error 风险 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ImmersiveTTS-review.yml`
