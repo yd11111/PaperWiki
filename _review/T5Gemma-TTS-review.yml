@@ -1,0 +1,56 @@
+review:
+  paper: "T5Gemma-TTS"
+  note_path: "论文笔记/T5Gemma-TTS.md"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    verdict: pass
+    reason: "方法节清晰解释了 WHY encoder-decoder(文本 dilution 问题)、WHY PM-RoPE(进度感知)、WHY subword(多语言工程成本)。每个设计选择有对比论证。速查卡片可借鉴字段具体可操作。"
+  可信赖:
+    score: 7
+    verdict: pass-with-fixes
+    reason: "数字均已验证正确,出处标注覆盖率高(>90%)。但实验表格 bold 格式有误(ZH CER 行标粗了 3 个值而非仅最优值),且缺少 Kokoro 非 zero-shot 系统的关键说明。"
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "[论文原文]/[agent 解读] 标注在方法节中使用一致且清晰。KB 背景中的创新判断明确标注为定位分析。无断言式推断。"
+  可定位:
+    score: 8
+    verdict: pass
+    reason: "KB 背景提供了 5 个维度的谱系定位(codec LM 变体、单码本趋势、duration control、phoneme vs subword、创新判断),均引用了具体 KB 页面和论文名。创新判断平衡——明确指出是系统级组合而非方法级创新。"
+  不污染:
+    score: 9
+    verdict: pass
+    reason: "反向更新目标均为 append(追加 key_papers),无实质性修改。concepts/models/tasks/datasets 字段引用准确。无 overclaim 风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "## 实验 表格 ZH CER↓ 行"
+    detail: "ZH CER 行标粗了 XTTS v2(0.126)、CosyVoice 2(0.076)和 Kokoro(0.071)三个值。按 Table 2 惯例(best per row bold),仅 Kokoro 的 0.071 应加粗。当前格式暗示三者都是 best,误导读者。"
+    suggestion: "仅保留 Kokoro 的 **0.071±0.030** 加粗,其余去粗。"
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "## 实验 表格和关键发现"
+    detail: "Kokoro 不是 zero-shot voice cloning 系统(使用固定 preset voices,不做 speaker adaptation)。论文 §4.1 和 Table 1 明确声明此点并用 † 标注。笔记中未提及,导致读者可能误解 Kokoro 的低 SIM 值(0.185/0.279/0.096)是 cloning 失败而非系统设计限制。"
+    suggestion: "在实验表格下方或表格脚注补充: '† Kokoro 非 zero-shot 系统(固定 preset voices),SIM 值不反映 voice cloning 能力,仅作 intelligibility/naturalness 参考 [§4.1]。'"
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "## 实验 表格"
+    detail: "表格使用了比 Table 2 显示更精确的数值(如 0.131 vs 0.13, 0.046 vs 0.05)。这些值来自 §5.1-§5.2 的正文讨论,数学上与表格四舍五入一致,但读者直接查 Table 2 可能找不到精确匹配。"
+    suggestion: "可选: 统一使用 Table 2 显示精度(2位小数),或在表格脚注标注'部分数值取自正文讨论的更精确报告'。"
+
+summary:
+  high: 0
+  medium: 2
+  low: 1
+  total: 3
+
+learning_signals: []

@@ -129,7 +129,7 @@ D̂ = (D_ref / N_ref) × N_tgt
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | JA CER↓ | **0.126±0.018** | 0.177±0.031 | 1.138±0.110 | 0.213±0.032 | 0.139±0.016 | JSUT | [Table 2] |
 | JA SIM↑ | **0.677±0.016** | 0.622±0.017 | 0.642±0.020 | 0.497±0.019 | 0.185±0.011 | JSUT | [Table 2] |
-| ZH CER↓ | 0.131±0.039 | **0.126±0.028** | 0.155±0.032 | **0.076±0.032** | **0.071±0.030** | AISHELL-1 | [Table 2] |
+| ZH CER↓ | 0.131±0.039 | 0.126±0.028 | 0.155±0.032 | 0.076±0.032 | **0.071±0.030** | AISHELL-1 | [Table 2] |
 | ZH SIM↑ | 0.722±0.017 | 0.623±0.014 | **0.864±0.015** | 0.612±0.018 | 0.279±0.021 | AISHELL-1 | [Table 2] |
 | EN WER↓ | 0.128±0.060‡ | **0.052±0.026** | 1.069±0.058 | 0.193±0.033 | 0.077±0.064 | LibriSpeech‡ | [Table 2] |
 | KO CER↓ (unseen) | 0.082±0.026 | **0.046±0.012** | 0.934±0.022 | 0.090±0.032 | 1.514±0.101 | FLEURS | [Table 2] |
@@ -139,6 +139,7 @@ D̂ = (D_ref / N_ref) × N_tgt
 | CER (PM-RoPE off) | 0.982±0.037 | — | — | — | — | JSUT 50 utt | [Table 3] |
 
 ‡ 英语结果为上界估计,LibriHeavy 是 LibriSpeech 超集,存在训练/测试重叠 [§4.1]。
+† Kokoro 非 zero-shot voice cloning 系统(使用固定 preset voices,不做 speaker adaptation),SIM 值不反映 voice cloning 能力,仅作 intelligibility/naturalness 参考 [§4.1]。
 
 **关键发现**:
 
@@ -176,3 +177,19 @@ D̂ = (D_ref / N_ref) × N_tgt
 2. **PM-RoPE 作为通用进度信号**: 在 cross-attention 中注入归一化 progress 的思路可用于任何需要控制输出长度的生成任务(如 code generation 控制长度、music generation 控制段落)
 3. **Subword 替代 phoneme 降低多语言门槛**: 直接复用 LLM tokenizer 的 subword vocabulary 可省去 G2P 工程,对快速扩展语言覆盖有实际价值
 4. **统计报告范式**: bootstrap CI + 明确标注数据泄漏风险 + 区分 statistically significant vs numerically highest,值得其他 TTS 评估论文学习
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY/HOW 清晰,设计选择有对比论证 |
+> | 可信赖 | pass-with-fixes | 数字验证正确,出处覆盖>90%;表格 bold 和 Kokoro 说明已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致,无断言式推断 |
+> | 可定位 | pass | KB 背景 5 维度谱系定位,创新判断平衡 |
+> | 不污染 | pass | 反向更新均为 append,无 factual error 风险 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/T5Gemma-TTS-review.yml`
