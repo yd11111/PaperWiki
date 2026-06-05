@@ -1,0 +1,48 @@
+kb_review:
+  paper: "WhispSynth"
+  note_path: "论文笔记/WhispSynth.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+change_plan:
+  - target: "模型库/CosyVoice3.md"
+    action: append
+    detail: "追加 key_papers: WhispSynth (CosyVoice3 的 CFM fine-tune 用于耳语合成)"
+    key_papers_before: 7
+    key_papers_after: 8
+    status_change: false
+    risk: low
+
+  - target: "概念库/F0Modeling.md"
+    action: append
+    detail: "追加 key_papers: WhispSynth (F0 移除/pitch-free 是 F0 建模的反向应用)"
+    key_papers_before: 10
+    key_papers_after: 11
+    status_change: false
+    risk: low
+
+  - target: "模型库/BigVGAN.md"
+    action: append
+    detail: "追加 key_papers: WhispSynth (BigVGAN MRD+SPD 判别器用于 DDSP vocoder 对抗训练)"
+    key_papers_before: 6
+    key_papers_after: 7
+    status_change: false
+    risk: low
+
+skipped:
+  - target: "概念库/ConditionalFlowMatching.md"
+    reason: "key_papers 远超 12 条上限;且本文对 CFM 的使用是标准 fine-tune,无新知识贡献"
+  - target: "概念库/NeuralVocoder.md"
+    reason: "key_papers 超 12 条上限;本文使用 DDSP 做后处理而非 vocoder 创新"
+  - target: "概念库/SpeakerEmbedding.md"
+    reason: "key_papers 远超 12 条上限;本文仅用 ECAPA-TDNN 做评估,无新贡献"
+
+issues: []
+
+summary:
+  total_changes: 3
+  append: 3
+  substantive: 0
+  new_pages: 0
+  risk_assessment: "所有变更均为 key_papers 追加,不修改已有内容,不改变 status"
