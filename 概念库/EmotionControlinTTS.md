@@ -132,7 +132,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 ## 演进
 
-规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026) → 双空间跨架构 plug-and-play (DUET, 2026)
+规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026) → 双空间跨架构 plug-and-play (DUET, 2026) → SAE 稀疏特征 steering (SAE-Emotion, ICML 2026)
 
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
@@ -209,3 +209,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## CoT 显式规划对话 Turn-level 表达 (CapTalk)
 
 [[论文笔记/CapTalk|CapTalk]] (Su et al., Hello Group, 2026) 提出了一条不同于 embedding/steering/reward 的情感-表达控制路线: 在对话 TTS 中使用 Chain-of-Thought 控制序列显式规划 turn-level 动态属性。CoT 包含 5 个属性 (emotion/tone/pitch/energy/speed),其中 emotion/tone 是高层情感-交际意图,pitch/energy/speed 是低层韵律实现 (建模为 speaker-internal relative prosody,归一化到各说话人基线)。CoT 在训练时通过 Qwen3-Omni 从语音中提取,推理时由模型从对话上下文自回归预测。400 样本评估中 CoT prediction accuracy 0.7675-0.9125,controllability success rate 0.7675-0.8675 [Table 3]; w/ CoT vs w/o CoT 人工偏好 65.5% vs 34.5% [Table 4]。与已有路线的根本区别: 不在 embedding/activation/参数空间操作情感表征,而是将表达意图外化为可读的文本 token 序列,作为生成的前置规划。详见 [[论文笔记/CapTalk|CapTalk]]。
+
+## SAE 稀疏特征可解释情感 Steering (SAE-Emotion)
+
+[[论文笔记/SparseAutoencoderEmotion|SAE-Emotion]] (Du et al., William & Mary, ICML 2026) 将 mechanistic interpretability 社区的 Sparse Autoencoder (SAE) 工具引入 TTS 情感控制,首次在 AR semantic backbone (IndexTTS2 layer-16 residual stream) 上分解情感信号为稀疏可解释 latent features。核心方法: 训练 k-sparse autoencoder (4096 维, Top-32 active) 将 residual stream 映射为 overcomplete 稀疏激活,通过 sentence-level selectivity score (paired emotion-neutral 激活频率差异) 选出 top-6 情感相关 features,等权组合后通过 SAE decoder 方向做 bidirectional steering (alpha>0 诱导, alpha<0 抑制)。关键发现: (1) 情感信号稀疏分布 — 绝大多数 features 的 selectivity 集中在 0 附近,仅极少数显著正偏; (2) 不同情感 top-6 features 无重叠; (3) 单 feature 对应可解释声学属性 (F0 +23.11 Hz, spectral centroid 单调变化); (4) 强 steering 下 WER 0.57% vs global steering 2.86%。Emo-SIM anger 0.912 / happiness 0.885 / sadness 0.880 (induction), EMOS 3.22 / NMOS 3.49 (人类评估最高) [Table 1, 2]。与 EmoSteer-TTS 的区别: EmoSteer-TTS 在 flow-matching DiT 中用 difference-in-means 稠密方向 + top-k token 选择,SAE-Emotion 在 AR semantic backbone 中用 SAE 分解为 feature-level 稀疏方向; 与 CoCoEmo 的区别: CoCoEmo 也在 SLM 层操作但用 linear probe + last-token steering,SAE-Emotion 在所有 token 位置操作; 与 DUET 的区别: DUET 用 SVD 多方向跨 5 种架构,SAE-Emotion 仅验证 1 种架构但可解释性更深。局限: 仅 IndexTTS2 完整验证,仅 3 类离散情感,SAE 训练需 56k activations。详见 [[论文笔记/SparseAutoencoderEmotion|SAE-Emotion]]。
