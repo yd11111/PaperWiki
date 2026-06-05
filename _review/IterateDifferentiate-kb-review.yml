@@ -1,0 +1,23 @@
+kb_review:
+  paper: "IterateDifferentiate"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "kb-update-review"
+
+change_plan:
+  - target: "概念库/TTSEvaluation.md"
+    action: "append"
+    content: "追加 I2D 子节到'新兴评估方法'区块; key_papers 已达 28 条(远超 12 上限),跳过 key_papers 追加"
+    safety: "safe — append only, 不改已有内容"
+  - target: "数据集/SEED-TTS-Eval.md"
+    action: "append"
+    content: "追加 I2D 到 used_by 列表"
+    safety: "safe — mechanical append"
+  - target: "数据集/CV3-Eval.md"
+    action: "append"
+    content: "追加 I2D 到 used_by 列表"
+    safety: "safe — mechanical append"
+
+conclusion: "pass"
+issues: []
+notes: "全部为 append 操作,无实质修改,无 status 变更需求。TTSEvaluation key_papers 已严重超限(28/12),记录 skip。"
