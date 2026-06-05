@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[VoXtream2]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 参考(pending-review): [[Classifier-FreeGuidance]], [[DurationPredictor]]
+- [ingest/deep] [[VoXtream2]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice2/DurationPredictor/CFG body text)
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限,跳过追加
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,跳过追加
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,跳过追加
+- [lint/local] VoXtream2 — 通过
 - [kb/search] [[TASTE-Streaming]] — 命中 6 页(取 6): [[SpeechTokenizer]]✓, [[SpeechLanguageModel]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 参考(pending-review): [[FiniteScalarQuantization]], [[Speech-TextAlignment]]
 - [ingest/deep] [[TASTE-Streaming]] — 精读, kb_sources=6, 新建 0, 追加 0 (全部 KB 页 key_papers 超限跳过)
 - [skip/update] [[Speech-TextAlignment]] — key_papers 已达 13 条(上限 12),跳过追加
