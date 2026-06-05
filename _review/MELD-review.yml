@@ -1,0 +1,59 @@
+review:
+  paper: "MELD"
+  note_path: "论文笔记/MELD.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    status: pass
+    rationale: "方法节包含清晰的因果解释,每个设计选择(离散vs高斯/冻结codebook/EOS合并/BPE vs phoneme)都回答了'为什么',速查卡片可借鉴字段列出4个具体可迁移trick"
+  可信赖:
+    score: 9
+    status: pass
+    rationale: "关键数字全部交叉验证通过(Table 2/3/4/5/6/7数据准确),出处标注覆盖率>90%,指标名使用正确"
+  可区分:
+    score: 9
+    status: pass
+    rationale: "方法节一致使用[论文原文]/[agent 解读]标注,覆盖率>80%,推断性分析有明确标记"
+  可定位:
+    score: 8
+    status: pass
+    rationale: "KB背景清晰定位MELD在SpeechLM mel-based AR分支的位置,创新判断有MELLE和codec-based对比基准,frontmatter字段完整"
+  不污染:
+    score: 9
+    status: pass
+    rationale: "无新建概念页需求,反向更新均为追加操作,factual accuracy已交叉验证"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "## 局限性 > 第5点"
+    detail: "引用KB数据'IndexTTS2 SIM 0.865 on SEED-TTS-Eval'做跨评估体系对比时,未注明两者使用不同speaker similarity模型(MELD用WavLM-based sv,IndexTTS2用ERes2Net),可能误导读者认为数字可直接比较"
+    suggestion: "删除跨体系的具体数字对比,改为'与当前SOTA系统不在同一评估体系下,无法直接比较'"
+
+  - id: 2
+    severity: medium
+    type: fact-inference-mixing
+    location: "## 点评 > Joint TTS-STT 的意义"
+    detail: "'这暗示mel-spectrogram作为中间表征可能比codec tokens更适合多任务统一建模'虽然标注了[agent 解读],但基于960h/200M单一实验条件的推断过于宽泛"
+    suggestion: "加入限定条件:'在LibriSpeech 960h/200M规模下'"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "## 速查 > 可借鉴"
+    detail: "4个可借鉴trick缺少论文章节引用"
+    suggestion: "补充 [§3.1] [§2.3] [§5.2] [§2.3+§5.6] 等出处"
+
+  - id: 4
+    severity: low
+    type: template-compliance
+    location: "## 实验"
+    detail: "实验表格'关键发现'第1点中'降低约50%(vs MELLE)和55%(vs Codec-LM)'的百分比计算基于WER差值,实际WER从4.8→2.4是50%相对降低,从5.3→2.4是55%,计算正确但建议明确是相对降低"
+    suggestion: "保持现状,计算正确"
+
+learning_signals: []

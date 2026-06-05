@@ -146,7 +146,7 @@ $$\mathcal{L}_{VLB} = \sum_t \left[ KL(q(z_t|x_t) \| p(z_t|x_{<t}, y)) - \mathbb
 
 4. **任务覆盖有限**: 只验证了 TTS 和 STT,未探索 QA、翻译、情感等更广泛的语音任务 [§7]。
 
-5. **Speaker similarity 仍有提升空间**: SIM 0.872 在 LibriSpeech 内 benchmark 尚可,但与当前 SOTA (IndexTTS2 SIM 0.865 on SEED-TTS-Eval) 不在同一评估体系下,无法直接比较。
+5. **Speaker similarity 仍有提升空间**: SIM 0.872 在 LibriSpeech 内 benchmark 尚可,但与当前 SOTA 系统使用不同评估体系 (不同数据集、不同 speaker embedding 模型),无法直接比较。
 
 ## 点评
 
@@ -156,7 +156,7 @@ MELD 的核心贡献是在 mel-spectrogram AR 建模中引入了一种优雅的�
 
 **冻结 codebook 的巧妙之处**: 将 VQ 训练问题完全回避,让 k-means 提供一个"足够好"的离散化锚点,reconstruction network 负责精细恢复。这是一种实用主义的工程选择,降低了训练复杂度。
 
-**Joint TTS-STT 的意义**: 证明了在同一个 mel-spectrogram AR 框架下可以同时做 TTS 和 STT,且相比独立训练只有很小的性能折损 (TTS WER +0.4/+0.3, STT WER +0.7/+2.1)。这暗示 mel-spectrogram 作为中间表征可能比 codec tokens 更适合多任务统一建模 [agent 解读]。
+**Joint TTS-STT 的意义**: 证明了在同一个 mel-spectrogram AR 框架下可以同时做 TTS 和 STT,且相比独立训练只有很小的性能折损 (TTS WER +0.4/+0.3, STT WER +0.7/+2.1)。在 LibriSpeech 960h / 200M 规模下,这暗示 mel-spectrogram 作为中间表征可能比 codec tokens 更适合多任务统一建模 [agent 解读]。
 
 **不足**: 实验规模偏小 (960h, 200M),在大数据大模型时代说服力有限。与 MELLE 的对比可能受到复现质量的影响。没有与 flow-matching 等非 AR 方法对比。
 
@@ -169,3 +169,19 @@ MELD 的核心贡献是在 mel-spectrogram AR 建模中引入了一种优雅的�
 3. **Repetition penalty 抑制静音循环**: 对前一步 top-p 候选码词施加固定惩罚分 (-1),简单有效地减少重复/静音。可迁移到任何使用离散 token 的 AR 生成系统。
 
 4. **变分框架统一 TTS+STT**: 通过将 BPE tokens 和离散隐变量合并到统一词表,用特殊 token 切换任务模式,实现单模型多任务。训练策略为 TTS-first (80k) + joint fine-tuning。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,每个设计选择有 WHY 分析,可借鉴具体 |
+> | 可信赖 | pass | 关键数字全部交叉验证通过,出处标注覆盖>90% |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注一致,覆盖>80% |
+> | 可定位 | pass | KB 背景定位清晰,创新判断有对比基准 |
+> | 不污染 | pass | 无新建概念页需求,反向更新均为追加 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/MELD-review.yml`
