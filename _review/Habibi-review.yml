@@ -1,0 +1,43 @@
+review:
+  note: "论文笔记/Habibi.md"
+  reviewer: auto
+  date: 2026-06-05
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含 4 个关键设计选择,每个都有 WHY 解释(CPS 过滤原理、课程学习的语言学理由、regional identifier 的假设)。速查的可借鉴字段具体可迁移(CPS 过滤法、桥梁语体策略等)。对 diglossia 特性的 agent 解读增加了理解深度。"
+  可信赖:
+    score: 9
+    rationale: "关键数字均有 [Table N] / [§X.X] 标注。抽查验证: DMOS MSA 4.24 vs 4.12 [Table 4]、SMOS ALG 4.10 vs 2.48 [Table 4]、SIM MSA 0.809 vs 0.567 [Table 5]、UTMOS MSA 2.81 vs 3.35 [Table 5] 均与 PDF 一致。指标名称正确无混淆。WER-O 6/7 方言更低的 claim 与论文 §3.3 原文一致。"
+  可区分:
+    score: 8
+    rationale: "因果解释始终标注 [论文原文] 或 [agent 解读],覆盖率约 90%。方法节 diglossia 解读明确标注为 [agent 解读]。课程学习有效性的解释标注为 [论文原文, §3.5]。无发现将推断写成断言的情况。"
+  可定位:
+    score: 8
+    rationale: "KB 背景节提供了具体谱系定位(F5-TTS → CFM → NAR TTS),与已有 KB 知识的关系明确(Cross-Lingual F5-TTS 作为最近先驱)。创新判断有对比基准(KB 中无阿拉伯语多方言先例)。frontmatter 字段完整,语义基本正确。"
+  不污染:
+    score: 9
+    rationale: "笔记不涉及新概念页创建。反向更新计划为追加操作(向 ConditionalFlowMatching、Zero-shotSpeechSynthesis、Cross-lingualVoiceCloning 的 key_papers 追加)。无 factual error 或 overclaim 风险。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter models 字段"
+    detail: "models 字段仅列 Cross-Lingual F5-TTS,未包含 F5-TTS(本文 backbone)。F5-TTS 在 KB 中无独立模型页,但作为核心依赖应以某种形式标注。"
+    suggestion: "无需修改 — F5-TTS 无 KB 页面,且在方法节中已充分说明。未来如创建 F5-TTS 模型页可回补。"
+
+  - type: traceability-gap
+    severity: low
+    location: "实验表格选择性"
+    detail: "实验表格选取了 Habibi 优势明显的指标(DMOS MSA, SMOS ALG 等),对 ElevenLabs 领先的 NMOS 指标仅在局限性中提及,未在表格中列出具体数字。"
+    suggestion: "当前处理方式可接受 — 表格已包含 ElevenLabs WER-O MSA 更优的数据点(7.83 vs 6.77),体现了诚实性。NMOS 在局限性节有讨论。"
+
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片指标字段"
+    detail: "指标字段引用了 [Table 4, 5] 但未给出各方言独立数据集名称(均为 Habibi Benchmark),可能对不熟悉该 benchmark 的读者不够清晰。"
+    suggestion: "可接受 — 因为 Habibi Benchmark 是本文提出的新 benchmark,已在方法节 §2.3 详细描述。"
+
+learning_signals: []
