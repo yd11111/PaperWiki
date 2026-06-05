@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[UltraLowLatencyTTS]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
+- [ingest/deep] [[UltraLowLatencyTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Non-autoregressiveTTS 演进, TokenRateandBitrateTrade-offs 应用)
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(30),改追加到正文演进段
+- [skip/update] [[TokenRateandBitrateTrade-offs]] — key_papers 已达上限(12),改追加到正文应用段
+- [lint/local] UltraLowLatencyTTS — 通过
 - [kb/search] [[WAND]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
 - [ingest/deep] [[WAND]] — 精读, kb_sources=6, 新建 0, 追加 1 (CosyVoice2 baseline引用)
 - [skip/update] [[LLM-basedTTS]], [[CodecLanguageModel]], [[FiniteScalarQuantization]], [[Single-codebookvsMulti-codebook]] — key_papers 均已达上限且连接间接
