@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[X-Voice]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[PhonemeRepresentation]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
+- [ingest/deep] [[X-Voice]] — 精读, kb_sources=6, 新建 0, 追加 8 (CFM 演进, CFG DCFG+A-Warmup, PhonemeRepresentation key_papers+IPA, NAR 演进, Cross-lingualVC key_models+代表模型, ZeroShotTTS 正文, Emilia 使用记录, SEED-TTS-Eval 结果)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到演进节正文
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),改追加到正文新建 DCFG 节
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(28),改追加到演进节
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限(63),改追加到正文
+- [review/auto] X-Voice — pass-with-fixes, 0 high, 1 medium (Table 7 cross-lingual 数字修正), 2 low
+- [review/kb] X-Voice — pass, 8 appends, 0 substantive changes
+- [lint/local] X-Voice — 通过
 - [kb/search] [[Tibetan-TTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review)
 - [ingest/deep] [[Tibetan-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation key_papers, Cross-lingualVoiceCloning 开放问题)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),论文仅使用 FM 无方法贡献
