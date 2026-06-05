@@ -121,6 +121,10 @@ Survey 指出 description-based datasets 的特点:
 
 [[论文笔记/InstructAudio|InstructAudio]] (Qiang et al., 2025) 将 NL description 范式从 TTS 扩展到统一 TTS+TTM。NL instruction 同时控制 timbre (gender, age)、paralinguistic (emotion, style, accent) 和 musical (genre, instrument, rhythm, atmosphere) 属性,消除了对参考音频的依赖。在 Seed-TTS WER 上超越所有 baseline (EN 1.52%, ZH 1.35%),但 MOS 低于使用参考音频的 CosyVoice2 (NMOS 3.46 vs 3.65),体现了纯文本控制的 one-to-many mapping 固有代价。详见 [[论文笔记/InstructAudio|InstructAudio]]。
 
+## 影视数据驱动的 Voice Design (MOSS-VoiceGenerator)
+
+[[论文笔记/MOSS-VoiceGenerator|MOSS-VoiceGenerator]] (OpenMOSS, 2026) 从数据来源角度切入 NL description voice design: 用影视内容 (电影/电视剧) 替代录音棚数据构建 ~25K h 训练集,使生成的声音具备更强的"真实感" (自然呼吸、节奏不规则性、自发情感变化)。数据 pipeline 包含影视音频去噪过滤 (DNSMOS >= 3.0, 保留率 5%→45%) + speech-text alignment embedding 做 style-guided mining 从中性数据中定向挖掘表达性片段。主观 pairwise preference 全面优于 MIMO-Audio / MiniMax / Qwen3-TTS-VD [Fig 4],但客观 InstructTTSEval APS 分数偏低 (EN 68.2%),说明精细属性控制仍有差距。详见 [[论文笔记/MOSS-VoiceGenerator|MOSS-VoiceGenerator]]。
+
 ## 演进
 
 Style tagging (GST, 离散标签, 2018) → Reference encoder (从音频提取, 2018-2022) → PromptTTS (文本描述5属性, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (三阶段NL理解, 2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (灵活多提示, 2025) → 统一 TTS+TTM NL description (InstructAudio, 2025)

@@ -57,6 +57,7 @@ updated: 2026-06-01
 | CosyVoice 3-1.5B + DiffRO-EMO | Emotion Acc (happy, text-related) | 0.98 | CV3-Eval | CosyVoice 3 Table 9 |
 
 - [[论文笔记/VoiceSculptor|VoiceSculptor]] (ASLP@NPU, 2026): 开源 voice design + voice clone 解耦架构,通过 CoT 属性推理 + RAG 指令增强实现 NL 驱动的细粒度语音属性控制; InstructTTSEval-Zh 开源 SOTA (AVG 67.6%, 超越 MiMo-Audio 7B 64.5%)
+- [[论文笔记/MOSS-VoiceGenerator|MOSS-VoiceGenerator]] (OpenMOSS, 2026): 以影视数据为核心的 NL description voice design 模型; InstructTTSEval EN DSD 82.0% (超过 Qwen3-TTS-VD/MIMO-Audio) [Table 1]; 主观 pairwise preference 全维度优于 MIMO-Audio (63.1%) / MiniMax (61.9%) / Qwen3-TTS-VD (61.9%) [Fig 4]
 
 ### Open-Vocabulary 指令 (OV-InstructTTS)
 
