@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[EditContentPreserveAcoustics]] — 命中 6 页(取 6): [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[CodecLanguageModel]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[CosyVoice3]](pending-review)
+- [ingest/deep] [[EditContentPreserveAcoustics]] — 精读, kb_sources=6, 新建 0, 追加 2 ([[DifferentiableRewardOptimization]] 正文, [[SemanticvsAcousticTokens]] 正文)
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[DifferentiableRewardOptimization]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] EditContentPreserveAcoustics — 通过
 - [kb/search] [[Habibi]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[MelSpectrogram]](pending-review), [[TTSEvaluation]](pending-review)
 - [ingest/deep] [[Habibi]] — 精读, kb_sources=6, 新建 0, 追加 0 (所有相关页 key_papers 已超上限, 且本文为领域应用非方法创新, 不追加)
 - [review/auto] [[Habibi]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
