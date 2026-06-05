@@ -75,6 +75,7 @@ Survey (Cui et al., 2024) 明确指出: "Some studies directly model the codec t
    - Flattening vs interleaving 策略
    - 基于 delay pattern 的 codebook 排列
    - 在 LM 层面做 token 压缩: [[论文笔记/C2F-LM|C2F-LM]] 将长距离 speech token 压缩为 5Hz 紧凑表征,通过 attention mask + 压缩 token 实现信息瓶颈,兼容单/多码本 codec 和各种 LM 架构
+   - 仅建模前 N 层 RVQ 以换取更长上下文: [[论文笔记/MOSS-TTSD|MOSS-TTSD]] 仅用 16 层 RVQ (2kbps/12.5Hz) + 65K token 上下文实现 3600 秒训练上下文,支持 60 分钟单次对话生成
 
 ## 在 Speech LM 中的角色
 

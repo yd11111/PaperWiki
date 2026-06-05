@@ -4,7 +4,7 @@ title: "Spoken Dialogue Evaluation"
 aliases: [口语对话评估, Speech Dialogue Metrics, 语音对话系统评估, Spoken Dialogue Benchmarks, 语音对话基准测试]
 category: "evaluation"
 tags: [speech-LM, evaluation, benchmark, metrics, dialogue, MOS, WER, interaction]
-key_papers: ["VoiceBench (Chen et al., 2024)", "SUPERB (2024)", "AudioBench (2024)", "AirBench (2024)", "SpokenWOZ (2024)", "SD-EVAL (Ao et al., 2024)", "SuperCLUE (2024)", "MMAU (2024)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]"]
+key_papers: ["VoiceBench (Chen et al., 2024)", "SUPERB (2024)", "AudioBench (2024)", "AirBench (2024)", "SpokenWOZ (2024)", "SD-EVAL (Ao et al., 2024)", "SuperCLUE (2024)", "MMAU (2024)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]", "[[论文笔记/MOSS-TTSD|MOSS-TTSD (Zhang et al., 2026)]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[Full-duplexSpokenDialogue]]", "[[Turn-takinginSpokenDialogue]]", "[[StreamingSpokenDialogue]]"]
 status: pending-review
@@ -155,6 +155,10 @@ WavChat (Table 3 & Section 6.3) 总结了 8 个主要 benchmark:
 - 实时性 (streaming latency)
 - 安全性 (security)
 - 多模态 (multimodal)
+
+## Script-to-Dialogue 评估: TTSD-eval
+
+[[论文笔记/MOSS-TTSD|MOSS-TTSD]] (Zhang et al., 2026) 提出 TTSD-eval,专门针对 script-to-dialogue(非交互式对话合成)场景。核心思路: 当输入脚本已知说话人归属时,用 MMS-FA (forced alignment) 做词级对齐直接获取 speaker 标签,绕过 speaker diarization 误差。指标包括 Speaker Attribution Accuracy (ACC)、Speaker Similarity (SIM)、WER。相比 cpWER/cpSIM,TTSD-eval 在多说话人(3-5 人)场景中评估更可靠。
 
 ## 开放问题
 

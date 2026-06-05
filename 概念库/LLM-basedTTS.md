@@ -89,6 +89,7 @@ VALL-E 开创的典型两阶段:
 **Dialogue/Multi-speaker 扩展**:
 - FireRedTTS-2 (Xie et al., 2025): Text-speech interleaved format + dual-transformer (backbone + decoder) 实现长对话语音生成,支持 podcast 和交互式聊天;12.5Hz streaming tokenizer 缩短序列长度
 - VibeVoice (Peng et al., 2025): next-token diffusion + 3200x causal tokenizer (7.5Hz) + Qwen2.5 7B,支持最多 4 说话人、最长 90 分钟对话,Preference/Realism/Richness MOS 均超越 Gemini 2.5 Pro
+- [[论文笔记/MOSS-TTSD|MOSS-TTSD]] (Zhang et al., 2026): Qwen3-8B-base + MOSS-Audio-Tokenizer (16 层 RVQ, 2kbps/12.5Hz) + multi-head delay pattern,支持 5 说话人、60 分钟单次生成、零样本声音克隆;提出基于 forced alignment 的 TTSD-eval 评估框架;三阶段 curriculum learning 从单人到多人对话
 
 ## 在可控性方面的特点
 
