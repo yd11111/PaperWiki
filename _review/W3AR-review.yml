@@ -1,0 +1,67 @@
+review:
+  note: "论文笔记/W3AR.md"
+  reviewer: auto
+  date: 2026-06-05
+  conclusion: revise
+
+  principles:
+    可复述:
+      score: 8
+      reason: "方法的 WHY (ASR cross-attention vs WER) 和 HOW (purity/monotonicity/GRPO) 解释清晰,5 个设计选择结构化良好,因果链完整。速查卡片具体。"
+    可信赖:
+      score: 5
+      reason: "存在一个关键时间线 factual error (W3AR 2025.11 被声称早于 FPO 2025.02);总 loss 公式遗漏 L_RL 项;消融解读有误导性。数字出处标注覆盖率高。"
+    可区分:
+      score: 8
+      reason: "[论文原文]/[agent 解读] 标注覆盖率高,区分清晰。推断性分析合理且有标注。"
+    可定位:
+      score: 7
+      reason: "KB 背景谱系定位具体,与 DiffRO/FPO/GRPO-TTS 对比有实质内容。但时间线定位有 factual error 影响可信度。"
+    不污染:
+      score: 7
+      reason: "反向更新计划合理 (追加 key_papers 到 DifferentiableRewardOptimization/TTSEvaluation/Whisper),不涉及实质修改。models 字段不完整可能导致 KB 检索遗漏。"
+
+  issues:
+    - id: 1
+      severity: high
+      type: factual-error
+      location: "KB 背景 L28, 点评 L175"
+      detail: "笔记声称 'W3AR 在时间线上早于 FPO/DiffRO (arXiv 2511, 2025 年 11 月)',点评中也说 'W3AR (2025.11) 早于 FPO (2025.02 arXiv但技术路线不同)。2511 表示 2025 年 11 月,2502 表示 2025 年 2 月。W3AR 实际上晚于 FPO (2025.02→2025.11)。"
+      suggestion: "修正为 'W3AR (arXiv 2025.11) 晚于 FPO (2025.02) 但早于 DiffRO (2025.07 的独立论文)';点评中修正时间线描述。注: FPO arXiv 2502 是 2025年2月, DiffRO 独立论文 2507 是 2025年7月, W3AR 2511 是 2025年11月。"
+
+    - id: 2
+      severity: high
+      type: factual-error
+      location: "设计选择 5, L105"
+      detail: "公式写为 'L_total = L_train + γ * L_KL(π_ref || π_θ)',完全遗漏了 L_RL (策略梯度 loss) 项。论文 Algorithm 1 line 20 为 'L_total = L_train + γ*L_RL',后文补充 KL 约束 'L_total = L_RL + γ*L_kl'。完整公式应包含 L_train、L_RL、L_KL 三项。"
+      suggestion: "修正公式为 'L_total = L_train + L_RL + γ * L_KL(π_ref || π_θ)',并说明 L_RL 是 word-level advantage 加权的策略梯度 loss,L_KL 是 KL 约束,γ=0.1。"
+
+    - id: 3
+      severity: medium
+      type: overclaim
+      location: "消融实验, L137"
+      detail: "'去掉 Purity Reward ... 清晰度指标退化最多' 有误导性。实际上去掉 Monotonicity Reward 导致的 in-domain WER 退化 (3.21→4.98, Δ=1.77) 大于去掉 Purity (3.21→4.15, Δ=0.94)。'清晰度指标退化最多' 暗示 purity 对 WER 影响最大,与数据矛盾。"
+      suggestion: "改为客观描述: '去掉 Purity Reward: in-domain WER 3.21→4.15 — 发音清晰度维度缺失';去掉 Monotonicity 的描述也对应修正。不做跨消融比较的排序断言。"
+
+    - id: 4
+      severity: medium
+      type: template-compliance
+      location: "frontmatter models 字段, L12"
+      detail: "models 仅列 CosyVoice 和 Whisper,遗漏了论文中实际使用的 VoiceCraft 和 MaskGCT (Table 3 跨模型泛化验证)。checklist 要求 'models 列本文模型+对比 baseline'。"
+      suggestion: "models 字段补充 VoiceCraft 和 MaskGCT。"
+
+    - id: 5
+      severity: low
+      type: traceability-gap
+      location: "KB 背景, L23"
+      detail: "声称 '基于 4 个已确认实体页 + 2 个待确认实体页',但实际 6 个 KB 页中只有 LLM-basedTTS 是 confirmed。DifferentiableRewardOptimization, TTSEvaluation, Speech-TextAlignment, CodecLanguageModel, Whisper 均为 pending-review。CosyVoice (confirmed) 在 models 字段中。"
+      suggestion: "修正为 '基于 1 个已确认实体页 + 5 个待确认实体页'。"
+
+  learning_signals: []
+
+  summary:
+    total_issues: 5
+    high: 2
+    medium: 2
+    low: 1
+    note: "2 个 high issue 均为 factual error (时间线方向错误、loss 公式遗漏项),需修正后重审。笔记整体机制理解深入,KB 背景定位有实质对比,速查卡片具体。"

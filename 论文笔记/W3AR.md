@@ -9,7 +9,7 @@ year: 2025
 venue: "AAAI 2026"
 tags: [TTS, reinforcement-learning, ASR, reward-model, attention, word-level, policy-optimization, zero-shot, CosyVoice]
 concepts: ["[[DifferentiableRewardOptimization]]", "[[TTSEvaluation]]", "[[Speech-TextAlignment]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[ProsodyModeling]]"]
-models: ["[[CosyVoice]]", "[[Whisper]]"]
+models: ["[[CosyVoice]]", "[[Whisper]]", "VoiceCraft", "MaskGCT"]
 tasks: []
 datasets: ["LibriTTS", "Emilia", "GigaSpeech"]
 kb_context_sources: 6
@@ -20,12 +20,12 @@ updated: 2026-06-05
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
+> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: W3AR 处于 TTS RL post-training 演进线的 "ASR cross-attention reward" 分支。与已有 KB 知识对照:
 
-- **DifferentiableRewardOptimization** [待确认] 页面记录了 TTS RL 的完整演进: RLHF→Seed-TTS (audio-level REINFORCE)→SpeechAlign (DPO)→FPO (token-level selective DPO)→DiffRO (token-level differentiable)→Multi-Reward GRPO→GRPO-TTS。W3AR 在时间线上早于 FPO/DiffRO (arXiv 2511, 2025 年 11 月),提出的 ASR cross-attention reward 是一种新型的 word-level reward 信号来源,与 FPO 的 error segment 标注和 DiffRO 的 Token2Text reward model 形成三条不同的细粒度 reward 获取路线。
+- **DifferentiableRewardOptimization** [待确认] 页面记录了 TTS RL 的完整演进: RLHF→Seed-TTS (audio-level REINFORCE)→SpeechAlign (DPO)→FPO (token-level selective DPO)→DiffRO (token-level differentiable)→Multi-Reward GRPO→GRPO-TTS。W3AR (arXiv 2511, 2025 年 11 月) 晚于 FPO (arXiv 2502, 2025 年 2 月) 但与 DiffRO 独立论文 (arXiv 2507, 2025 年 7 月) 大致同期,提出的 ASR cross-attention reward 是一种新型的 word-level reward 信号来源,与 FPO 的 error segment 标注和 DiffRO 的 Token2Text reward model 形成三条不同的细粒度 reward 获取路线。
 - **TTSEvaluation** [待确认] 页面指出 WER 作为评估指标的三大局限(ASR 自身错误、非线性感知对应、直接优化导致韵律坍缩)。W3AR 不直接优化 WER,而是通过 ASR cross-attention 的 purity/monotonicity 两个指标间接改善 WER,这在一定程度上规避了直接 WER reward 的韵律坍缩风险。
 - **LLM-basedTTS** [已确认] 页面描述了 autoregressive codec LM TTS 的标准范式(text+prompt→AR token→vocoder/flow),W3AR 正是在这一范式的 post-training 阶段进行优化,基础模型 CosyVoice 属于 semantic token+CFM hybrid 路线。
 - **Whisper** [待确认] 页面记录了 Whisper 的 encoder-decoder 架构和 cross-attention 机制。W3AR 的核心洞察正是利用 Whisper 的 cross-attention map 作为 speech-text alignment 质量的 proxy,这是对 Whisper 注意力机制的一种非标准用法(不做 ASR,而做 TTS 质量评估)。
@@ -102,9 +102,9 @@ A(y_i)^{(n)} = R(y_i)^{(n)} - (1/N) Σ_{k=1}^{N} R(y_i)^{(k)}
 
 **设计选择 5: 联合训练目标**
 
-L_total = L_train + γ * L_KL(π_ref || π_θ)
+L_total = L_train + L_RL + γ * L_KL(π_ref || π_θ)
 
-其中 L_train 是原始 CE loss(ground-truth tokens),γ=0.1 [§Training Details]。RL loss 与 supervised loss 联合训练,KL 约束防止策略偏离参考模型。
+其中 L_train 是原始 CE loss(ground-truth tokens),L_RL 是 word-level advantage 加权的策略梯度 loss,L_KL 是 KL 约束防止策略偏离参考模型,γ=0.1 [Algorithm 1, §Policy Optimization]。SFT 与 RL 联合训练,三项 loss 同时优化。
 
 [agent 解读] 这种 SFT+RL 联合训练的设计比纯 RL post-training 更稳定,但也意味着 reward 信号必须与 supervised signal 兼容——如果 reward 鼓励的方向与 ground-truth 的方向冲突,可能导致优化困难。
 
@@ -134,8 +134,8 @@ L_total = L_train + γ * L_KL(π_ref || π_θ)
 | MOS-N ↑ | 4.15±0.06 | 3.81±0.07 | Emilia/GigaSpeech (OOD) | [Table 1] |
 
 **消融实验** [Table 2]:
-- 去掉 Purity Reward: in-domain WER 3.21→4.15, OOD WER 4.54→5.62 — 清晰度指标退化最多
-- 去掉 Monotonicity Reward: in-domain WER 3.21→4.98, OOD WER 4.54→5.98 — 流畅性退化
+- 去掉 Purity Reward: in-domain WER 3.21→4.15, OOD WER 4.54→5.62 — 发音清晰度维度缺失
+- 去掉 Monotonicity Reward: in-domain WER 3.21→4.98, OOD WER 4.54→5.98 — 韵律流畅性维度缺失,WER 退化幅度最大
 - 去掉 Group-Relative Opt: in-domain WER 3.21→4.41, OOD WER 4.54→7.23 — OOD 退化最严重,证明 group normalization 对泛化至关重要
 
 **与其他 TTS 优化方法对比** [Table 2]:
@@ -172,10 +172,26 @@ OOD 泛化是本文最强的实验亮点——W3AR 在 OOD 场景下 WER 几乎�
 
 但论文的主要缺陷是缺少韵律分析。在 RL-for-TTS 领域,韵律坍缩已被 Shin et al. (2026) 证明是 WER-driven RL 的核心风险。虽然 W3AR 的 monotonicity reward 理论上对冲了部分风险,但没有 F0 分布或 ProsodyEval 数据来验证。
 
-时间线上,W3AR (2025.11) 早于 FPO (2025.02 arXiv但技术路线不同)、DiffRO (2025.07)、GRPO-TTS (2025)。作为较早的 fine-grained TTS RL 工作,其 ASR attention reward 的思路对后续工作有启发价值。
+时间线上,W3AR (arXiv 2025.11) 晚于 FPO (arXiv 2025.02) 和 DiffRO 独立论文 (arXiv 2025.07),但 AAAI 2026 的投稿时间 (2025 年 8 月) 与 FPO/DiffRO 大致同期,说明这几条路线是独立并行发展的。W3AR 的 ASR attention reward 思路与 FPO 的 error-segment DPO、DiffRO 的 token-level differentiable optimization 形成互补视角。
 
 ## 可复用的 idea
 
 1. **ASR cross-attention 作为免训练的 speech-text alignment 质量度量**: 任何需要评估合成语音质量的场景(评估指标、reward model、quality filter)都可以尝试用 ASR attention purity/monotonicity 替代或补充 WER/MOS
 2. **Word-level GRPO**: 将 GRPO 的 advantage 计算从 sequence-level 下沉到 word-level,可迁移到任何有 fine-grained reward 信号的生成任务
 3. **Purity + Monotonicity 二分法**: 将 alignment 质量分解为"局部聚焦度"和"全局单调性"两个正交维度,可迁移到 attention-based 的质量评估/正则化中
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 5 个设计选择因果链完整,WHY/HOW 覆盖好 |
+> | 可信赖 | pass-with-fixes | 时间线和 loss 公式已修正;消融描述已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率高 |
+> | 可定位 | pass | KB 背景谱系定位具体,与 DiffRO/FPO/GRPO-TTS 有实质对比 |
+> | 不污染 | pass | 反向更新仅追加 key_papers,无实质修改 |
+> 
+> Issues: 5 (high: 2 已修正, medium: 2 已修正, low: 1 已修正)
+> 详见 `_review/W3AR-review.yml`
