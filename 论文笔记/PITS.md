@@ -149,7 +149,7 @@ L_total = L_mel + L_KL + L_dur + L_adv(G) + L_fm(G)           [VITS 原有]
 3. **Pitch-shift 改变说话人身份**: EER 随 shift 增大,说明 pitch 和 speaker identity 仍有耦合 [Table 2]
 4. **Yingram 频率范围有限**: 30.8-508 Hz,对高音域说话人或歌声可能不够 [§3.3]
 5. **Voice conversion 质量受限**: 附录 A 中 VC 需要迭代合成(3 次迭代)且质量仍不如 TTS 用途 [Appendix A]
-6. **训练成本**: 14-18 天 4xV100,Yingram encoder 增加了约 50% 的参数量 [agent 解读]
+6. **训练成本**: 14-18 天 4xV100,Yingram encoder 增加额外参数和计算开销 [§3.2]
 
 ## 点评
 
@@ -168,3 +168,19 @@ Q-VAE 的失败是一个有价值的负面结果。它揭示了在 VITS 的 flow
 3. **Adversarial training of augmented outputs**: 对训练时生成的 pitch-shifted/augmented 样本做对抗训练,确保变换后的输出质量,可迁移到其他受控生成任务
 4. **负指数 Yingram loss**: 对 pitch 表示取负指数后计算重建 loss,强调谐波区域的低值,适用于自相关类 pitch 特征的重建
 5. **Q-VAE 的负面教训**: 在含 normalizing flow 的 VAE 框架中直接量化 latent 可能破坏训练稳定性,需要更精心的梯度隔离设计
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (8) | 方法节 WHY 解释充分,设计选择有因果分析 |
+> | 可信赖 | pass (9) | 数字标注覆盖率高,与 PDF 交叉验证无误 |
+> | 可区分 | pass (8) | [论文原文]/[agent 解读] 覆盖约 90% |
+> | 可定位 | pass (8) | KB 背景定位到 VITS 谱系 + F0 替代路线 |
+> | 不污染 | pass (9) | concepts/models 准确,无 overclaim |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/PITS-review.yml`

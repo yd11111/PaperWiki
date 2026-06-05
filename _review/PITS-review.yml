@@ -1,0 +1,51 @@
+review:
+  paper: "PITS"
+  note_path: "论文笔记/PITS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+  principles:
+    可复述:
+      score: 8
+      reason: "方法节对每个设计选择都有 WHY 解释(为什么用 Yingram 不用 F0、为什么需要双 encoder、为什么 Yingram decoder、为什么 adversarial shifted training),Q-VAE 失败有因果分析。速查卡片可借鉴字段具体可迁移。"
+    可信赖:
+      score: 9
+      reason: "所有关键数字均有 [Table 1]/[Table 2]/[§X.X] 标注,指标名使用正确(MOS/CER/EER),速查卡片指标字段含具体数字+数据集+出处。与 PDF 原文交叉验证无误。"
+    可区分:
+      score: 8
+      reason: "方法节中 [论文原文] 和 [agent 解读] 标注覆盖率约 90%,因果解释与事实陈述边界清晰。无断言式推断。"
+    可定位:
+      score: 8
+      reason: "KB 背景定位到 VITS 谱系、F0 Modeling 替代路线、SpeechFactorization 解耦方法,有具体对比基准。创新判断明确(从表示层面解决 F0 局限)。"
+    不污染:
+      score: 9
+      reason: "concepts/models 字段准确,models 仅列 VITS(基础模型),无后续系统。反向更新为 append 操作(追加 key_papers),不涉及实质修改。"
+
+  issues:
+    - type: traceability-gap
+      severity: low
+      location: "局限性 §6"
+      detail: "'Yingram encoder 增加了约 50% 的参数量' 是 agent 估计,无论文原文支撑"
+      suggestion: "改为 '[agent 解读] Yingram encoder 增加额外参数量' 或移除具体百分比"
+    - type: template-compliance
+      severity: low
+      location: "速查卡片 路线"
+      detail: "路线字段偏长,包含了训练和推理两个流程"
+      suggestion: "可精简为推理时的核心路线,训练细节在方法节已覆盖"
+
+  issue_summary:
+    high: 0
+    medium: 0
+    low: 2
+
+  cross_validation:
+    numbers_checked:
+      - "Table 1: MOS/CER/EER for all models — all match PDF"
+      - "Table 2: Architecture search results at s=0 — all match PDF"
+      - "§3.1: VCTK 44 hours, 108 speakers — matches"
+      - "§3.2: 3000 epochs, 4 V100, batch 48, 14-18 days — matches"
+      - "§3.3: 80 channels, 24 notes/octave, 30.8-508 Hz — matches"
+    discrepancies: []
+
+  learning_signals: []
