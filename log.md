@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[HoliTok]] — 命中 6 页(取 Top 6): [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 参考: [[VariationalAutoencoderforTTS]](pending-review), [[Next-TokenDiffusion]](pending-review), [[CodecTrainingObjectives]](pending-review)
+- [ingest/deep] [[HoliTok]] — 精读, kb_sources=6, 新建 0, 追加 2 (Next-TokenDiffusion key_papers+演进, CodecTrainingObjectives key_papers+progressive training), prose追加 1 (VariationalAutoencoderforTTS)
+- [skip/update] [[SpeechTokenizer]] — entity review 为 revise,需先重构,跳过反向更新
+- [skip/update] [[ConditionalFlowMatching]], [[SemanticvsAcousticTokens]], [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(>12),跳过追加
+- [review/auto] [[HoliTok]] — pass-with-fixes, 0 high / 0 medium / 3 low
+- [lint/local] HoliTok — 通过
 - [kb/search] [[MELD]] — 命中 6 页(取 Top 6): [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[MelSpectrogram]](pending-review), [[MELLE]](pending-review)
 - [ingest/deep] [[MELD]] — 精读, kb_sources=6, 新建 0, 追加 1 (MELLE key_papers)
 - [skip/update] [[SpeechLanguageModel]], [[CodecLanguageModel]], [[MelSpectrogram]], [[VariationalAutoencoderforTTS]], [[ResidualVectorQuantization]], [[Zero-shotSpeechSynthesis]] — key_papers 已达上限(>12),跳过追加
