@@ -1,0 +1,72 @@
+review:
+  paper: "Covo-Audio"
+  note_path: "论文笔记/Covo-Audio.md"
+  reviewer: "auto"
+  date: "2026-06-05"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节对三大设计选择 (tri-modal interleaving, intelligence-speaker decoupling, native full-duplex) 都提供了 WHY 解释和与替代方案的对比。速查卡片可借鉴字段具体可迁移 (masked text loss 解耦技术)。"
+  可信赖:
+    score: 9
+    rationale: "实验表中 18 个指标全部标注出处 [Table N]。抽查 URO-Bench AlpacaEval 90.02、turn-taking 99.7%、MMSU 66.64、codebook 16384 等关键数字均与原文一致。指标名正确,方向标注无误。"
+  可区分:
+    score: 8
+    rationale: "方法节有 3 处 [论文原文] 和 3 处 [agent 解读] 标注,覆盖主要因果解释。点评节明确为评论性内容。未发现将推断写成断言的句子。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节有具体谱系定位,引用 6 个实体页并与 Moshi、GLM-4-Voice 等具体系统对比。continuous-in/discrete-out 混合模式的定位准确且有创新判断。frontmatter 字段完整,concepts/models 语义正确。"
+  不污染:
+    score: 9
+    rationale: "所有引用的概念页和模型页均已存在于 KB 中。反向更新将为 append (追加 key_papers),不涉及实质修改。无新建实体页需求。"
+
+checklist:
+  可复述:
+    mechanism_not_summary: pass
+    design_choice_why: pass
+    reusable_concrete: pass
+  可信赖:
+    source_annotation_coverage: pass  # ≥80%
+    metric_names_correct: pass
+    quick_card_metrics: pass
+    no_directional_error: pass
+  可区分:
+    causal_source_tagged: pass
+    source_tag_coverage: pass  # ≥80%
+    no_unmarked_assertions: pass
+    strong_claims_backed: pass
+  可定位:
+    kb_lineage_specific: pass
+    innovation_baseline: pass
+    fields_present: pass
+    fields_semantically_correct: pass
+    quick_card_substantive: pass
+  不污染:
+    new_concept_admission: not_applicable  # no new pages
+    dedup_check: not_applicable
+    factual_accuracy: pass
+    append_vs_substantive: pass
+
+issues:
+  - id: 1
+    severity: low
+    type: traceability-gap
+    location: "KB 背景, line 27"
+    detail: "'大多数系统要么全连续 (Qwen2.5-Omni) 要么全离散 (GLM-4-Voice)' 是 agent 概括,Qwen2.5-Omni 实际采用 Thinker-Talker 包含文本 token 中介,并非纯连续"
+    suggestion: "改为 '大多数系统采用单一集成方式 (如 GLM-4-Voice 全离散 interleaving, Qwen-Omni Thinker-Talker 文本中介)'"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,论文使用了 URO-Bench, VCB-Bench, VStyle, MMAU, MMSU, AIR-Bench 等评估集,可考虑引用已有数据集页"
+    suggestion: "如 vault 中有对应数据集页,可追加到 datasets 字段; 否则保持空"
+
+issue_summary:
+  high: 0
+  medium: 0
+  low: 2
+
+learning_signals: []

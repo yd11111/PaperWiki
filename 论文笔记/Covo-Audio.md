@@ -191,6 +191,22 @@ Covo-Audio 由四个组件构成 [§2.1, Fig 2]:
 4. **GRPO + 复合 reward 用于音频推理** [§2.7]: R_accuracy + R_format + R_consistency + R_thinking 四分量 reward,可用于提升音频/语音 LLM 的 CoT 推理质量
 5. **KL distillation 防智力退化** [§2.3]: 在跨模态训练中用强 text LLM 的 top-K logits 做软目标,防止 T2T 能力下降。通用于任何将 text LLM 扩展到新模态的场景
 
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三大设计选择有 WHY 解释,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 18 指标全标注出处,抽查数字与原文一致 |
+> | 可区分 | pass | 3+3 处来源标注覆盖主要因果解释 |
+> | 可定位 | pass | KB 背景 6 页,谱系定位具体,与 Moshi/GLM-4-Voice 对比明确 |
+> | 不污染 | pass | 仅 append 更新,无新建页,无 factual error |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/Covo-Audio-review.yml`
+
 ---
 
 检索命中: [[SpeechLanguageModel]], [[Full-duplexSpokenDialogue]], [[SpeechTokenizer]], [[ModalityAdaptationforSpeechLLM]], [[ConditionalFlowMatching]], [[Speech-LLMIntegrationTaxonomy]] | 过滤: 无 | 未命中但可能相关: 无
