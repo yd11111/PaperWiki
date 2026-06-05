@@ -1,34 +1,43 @@
 ---
+type: paper
 tier: deep
 title: "SiTok"
-aliases: [Speech Diffusion Tokenizer, SiTok Tokenizer]
-authors: ["Anonymous"]
+aliases: [Speech Diffusion Tokenizer, SiTok Tokenizer, Scaling Speech Tokenizers with Diffusion Autoencoders]
+authors: ["Yuancheng Wang", "Zhenyu Tang", "Yun Wang", "Arthur Hinsvark", "Yingru Liu", "Yinghao Li", "Kainan Peng", "Junyi Ao", "Mingbo Ma", "Mike Seltzer", "Qing He", "Xubo Liu"]
 year: 2026
-arxiv_id: ""
+arxiv_id: "2602.06602"
 source: "Sources/SiTok.pdf"
-venue: "ICLR 2026 (under review)"
+venue: "ICLR 2026"
 tags: [speech-tokenizer, diffusion-autoencoder, semantic-regularization, CTC, low-bitrate, flow-matching, speech-codec, speech-understanding]
-level: deep
 status: draft
-concepts: ["[[SpeechTokenizer]]", "[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]", "[[CodebookCollapse]]"]
+concepts: ["[[SpeechTokenizer]]", "[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]", "[[CodebookCollapse]]", "[[SpeechLanguageModel]]", "[[TokenRateandBitrateTrade-offs]]", "[[Single-codebookvsMulti-codebook]]", "[[CodecTrainingObjectives]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]"]
-tasks: [speech-tokenization, speech-reconstruction, ASR, emotion-recognition, speaker-verification, keyword-spotting]
+tasks: [speech-tokenization, speech-reconstruction, ASR, emotion-recognition, speaker-verification, keyword-spotting, zero-shot-TTS]
 datasets: ["[[SEED-TTS-Eval]]"]
 created: 2026-06-03
-updated: 2026-06-03
-kb_sources: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Classifier-FreeGuidance]]"]
+updated: 2026-06-05
+kb_context_sources: 6
+kb_sources: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[CodebookCollapse]]", "[[SpeechLanguageModel]]"]
 ---
-tier: deep
 
 ## KB 背景
 
-本文涉及以下已有知识:
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[SpeechLanguageModel]])
+> 自动生成,不保证完整覆盖所有相关知识。
 
-- **[[SpeechTokenizer]]** (confirmed): SiTok 提出用 diffusion autoencoder 替代传统 RVQ-GAN 作为 speech tokenizer。与已知的三类 tokenizer (自监督/监督/声学) 不同,SiTok 是第四条路线 -- diffusion-based tokenizer,通过端到端联合训练 VQ + diffusion decoder 实现极低 token rate (12.5 Hz) 和 bitrate (0.2 kbps) [§1, §2.1]。[agent 解读]
-- **[[ConditionalFlowMatching]]** (confirmed): SiTok 的 decoder 使用 flow matching 目标训练。其 diffusion decoder 学习预测速度场 v_phi(x_t, t, z_q) -> x - epsilon,将噪声 mel spectrogram 映射回 clean mel [§2.1, Eq]。这与 TTS 中 CFM 用于 mel 生成一致,但 SiTok 中 CFM 用于 codec reconstruction 而非 text-conditioned generation [agent 解读]。
-- **[[ResidualVectorQuantization]]** (confirmed): SiTok 默认使用单 codebook VQ,但消融实验 [§3.4, Table 5] 证实 RVQ (CN=2,4) 可系统性提升质量: CN=4 时 WER 从 4.06 降至 2.80,SIM 从 0.641 升至 0.660,代价是 bitrate 从 0.20 升至 0.70 kbps。
-- **[[SemanticvsAcousticTokens]]** (confirmed): SiTok 通过 CTC semantic regularization 明确解决 semantic-acoustic trade-off。传统 acoustic tokenizer 语义弱,自监督 semantic tokenizer 声学差。SiTok 在量化后的 latent space 上施加 CTC loss,使离散 codes 同时编码语义和声学信息 [§2.2]。
-- **[[Classifier-FreeGuidance]]** [待确认]: SiTok 采用 Token CFG -- 训练时 10% 概率随机 drop 所有 input tokens,推理时融合 conditional + unconditional prediction 增强重建质量 [§2.4]。这是 CFG 在 speech tokenizer 中的新应用,不同于 TTS 中 drop text/speaker condition [agent 解读]。
+**谱系定位**: SiTok 属于 speech tokenizer 领域中 "diffusion-based tokenizer" 路线,与概念库中记录的三类传统路线(自监督 semantic / 监督式 semantic / 声学 RVQ-GAN)形成第四条路线。对比 [[SpeechTokenizer]] 页中记录的 Mixed Objective Tokenizer (SpeechTokenizer/Mimi),SiTok 不是在 RVQ 层间分配语义/声学信息,而是用 diffusion autoencoder 端到端联合训练 VQ + 生成式 decoder,同时通过 CTC loss 注入语义 [§1, §2]。[agent 解读]
+
+**已有认知**:
+- **[[SpeechTokenizer]]** (confirmed): 已有概念库中记录了四条 tokenizer 路线(自监督/监督/声学/mixed)+ 连续 VAE 新路线。SiTok 开辟 diffusion-based 路线,通过 flow matching 替代对抗训练 [§2.1]。在 Survey Benchmark 中 "no single tokenizer excels across all tasks",SiTok 试图同时解决 reconstruction + understanding。
+- **[[ConditionalFlowMatching]]** (confirmed): SiTok 的 decoder 使用 flow matching 目标训练 — 学习预测速度场 v_phi(x_t, t, z_q) -> x - epsilon [§2.1]。这与 TTS 中 CFM 用于 mel 生成一致,但 SiTok 中 CFM 用于 codec reconstruction 而非 text-conditioned generation [agent 解读]。
+- **[[ResidualVectorQuantization]]** (confirmed): SiTok 默认使用单 codebook VQ (65536 entries),但消融实验 [§3.4, Table 5] 证实 RVQ (CN=2/4/8) 可系统性提升质量。这与 KB 中 RVQ "层级信息结构" 一致 — 多 codebook 提供更大表达力。
+- **[[SemanticvsAcousticTokens]]** (confirmed): SiTok 通过 CTC semantic regularization 明确解决 semantic-acoustic trade-off。与 KB 中记录的 Mixed Tokens 路线 (SpeechTokenizer RVQ 层间分离) 不同,SiTok 让每个离散 code 同时编码语义和声学信息 [§2.2]。
+- **[[CodebookCollapse]]** (confirmed): SiTok 使用 EMA + 大规模训练 (2M hrs) 实现 codebook utilization >95% [Appendix C.3]。KB 中记录的 DAC factorized codes 方案也达 99%,IndexTTS 实验则证明充足训练数据本身可缓解 collapse — SiTok 的经验与此一致。
+- **[[SpeechLanguageModel]]** (confirmed): SiTok 的核心定位是为 SpeechLM 提供统一 tokenizer — 同时支持 understanding (ASR/ER/SV/KS) 和 generation (zero-shot TTS) [§3.2]。在 SpeechLM 三组件 (tokenizer + LM + vocoder) 框架下,SiTok 兼任 tokenizer + partial decoder 角色。
+
+**创新判断**: 相对于 KB 中已有认知,SiTok 的关键创新在于: (1) 首次将 diffusion autoencoder 作为端到端 speech tokenizer (非两阶段); (2) CTC 直接监督 VQ latent space (比 semantic distillation 更直接); (3) Token CFG (CFG 用于 codec 而非 TTS); (4) 在 0.2 kbps 极低 bitrate 下实现 reconstruction + understanding 双优。[agent 解读]
+
+**过滤**: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[MelSpectrogram]](pending-review) — 均参考但标注 [待确认]
 
 > [!summary] 速查
 > - **一句话**: 用 diffusion autoencoder 替代 RVQ-GAN 构建 speech tokenizer,通过 CTC semantic regularization 使 12.5 Hz / 0.2 kbps 单 codebook 离散表征同时支持高保真重建和强语义理解
@@ -134,17 +143,17 @@ L_total = L_rec (flow matching) + lambda_ctc * CTC(D_ctc(z_q), y) + L_vq [论文
 
 ## 局限性
 
-1. **2M 小时私有数据**: 训练数据不公开,完全不可复现 [agent 解读]
-2. **非因果架构**: Encoder causal 但 decoder non-causal,不支持 streaming [agent 解读]
+1. **2M 小时私有数据**: Meta 内部训练数据不公开,完全不可复现 [agent 解读]
+2. **非因果架构**: Encoder causal 但 decoder non-causal,不支持 streaming; 论文在 Appendix E 也承认这是关键局限,正在研究 chunk-wise AR diffusion [§Appendix E] [论文原文]
 3. **推理成本**: 默认 16 步 diffusion 推理; shortcut 可降到 4 步但质量有轻微损失 [§3.3.5] [论文原文]
 4. **Vocoder 依赖**: 需外部 Vocos vocoder,非端到端到波形 [agent 解读]
-5. **匿名投稿**: 代码/模型尚未开放,设计细节有待验证 [agent 解读]
+5. **连续表征仍优**: 论文承认 SiTok 的离散表征仍落后于连续特征表征 [§Appendix E] [论文原文]
 
 ## 点评
 
-SiTok 代表了 speech tokenizer 设计的范式转移: 从 RVQ-GAN 到 diffusion autoencoder。其核心洞见是 **diffusion 目标学到的 representation 本身就更适合下游任务** -- 不仅是 decoder 更强,而是 encoder 也在 diffusion 训练目标下学到了更好的 latent space [Table 5, D vs R] [agent 解读]。CTC semantic regularization 简洁有效,直接解决了 acoustic tokenizer 语义缺失的痛点。12.5 Hz / 0.2 kbps 的极致压缩率对 LLM-based TTS 有重大实用价值 -- 序列长度缩短 2-4x 意味着显著降低 AR 推理成本 [agent 解读]。
+SiTok (Meta Superintelligence Labs + CUHK-SZ, ICLR 2026) 代表了 speech tokenizer 设计的范式转移: 从 RVQ-GAN 到 diffusion autoencoder。其核心洞见是 **diffusion 目标学到的 representation 本身就更适合下游任务** -- 不仅是 decoder 更强,而是 encoder 也在 diffusion 训练目标下学到了更好的 latent space [Table 5, D vs R] [agent 解读]。CTC semantic regularization 简洁有效,直接解决了 acoustic tokenizer 语义缺失的痛点。12.5 Hz / 0.2 kbps 的极致压缩率对 LLM-based TTS 有重大实用价值 -- 序列长度缩短 2-4x 意味着显著降低 AR 推理成本 [agent 解读]。
 
-**不足**: 对 Scaling 的分析 (Table 4) 揭示了一个有趣但未充分解释的现象 -- 最大模型 XL 的理解指标反而下降。论文推测 "过大容量可能过度关注 fine-grained acoustic details",但缺乏消融验证 [agent 解读]。
+**不足**: 对 Scaling 的分析 (Table 4) 揭示了一个有趣但未充分解释的现象 -- 最大模型 XL 的理解指标反而下降。论文推测 "过大容量可能过度关注 fine-grained acoustic details",但缺乏消融验证 [agent 解读]。此外,2M 小时 Meta 内部数据使得结果无法被外部复现,但论文承诺将发布推理代码和公开数据预训练模型 [§Reproducibility Statement] [论文原文]。
 
 ## 可复用的 idea
 
@@ -155,4 +164,4 @@ SiTok 代表了 speech tokenizer 设计的范式转移: 从 RVQ-GAN 到 diffusio
 
 ---
 
-检索命中: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[MelSpectrogram]](pending-review), [[CodebookCollapse]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[SpeechLanguageModel]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[MelSpectrogram]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无
