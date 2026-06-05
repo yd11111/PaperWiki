@@ -109,3 +109,7 @@ Wang & Sun (2025) [[论文笔记/W3AR|W3AR]] 提出第六条路线: 利用 froze
 ## Self-Consistency Rewards GRPO for Speech Editing (CASIA/Tsinghua, ICME 2026)
 
 Ren et al. (2026) [[论文笔记/EditContentPreserveAcoustics|Edit Content, Preserve Acoustics]] 首次将 GRPO 从 TTS 扩展到 **text-based speech editing** 领域。核心创新是 self-consistency reward: 用预训练 TTS 模型 (CosyVoice 3) 的条件 log-probability 作为编辑区与上下文融合质量的隐式评估,理论上等价于最小化 policy 与 TTS 先验的交叉熵 (Eq. 5)。配合 ASR WER + duration 一致性的 gated reward aggregation (不满足阈值的样本直接置零)。在 semantic token 空间做 editing + GRPO 对齐,Insertion WER 4.97% (vs VoiceCraft 12.94%), MOS 4.06 (vs 3.64) [Table I]。与 MCLP 的相似点: 两者独立提出了 gated reward 设计 (WER/CER 阈值硬门控); 与 MCLP 的区别: 本文的 self-consistency reward 衡量上下文融合 (editing coherence),MCLP 衡量风格一致性 (style continuity)。
+
+## ICL-Based Online RL for Conversational TTS (Meta AI, 2026)
+
+Ouyang et al. (2026) [[论文笔记/ConversationalTTS-RL|ConversationalTTS-RL]] 在对话 TTS 场景中将 ICL (audio prompting) 与 online RL 耦合。核心方法: AR prosody model 以 human-curated audio prompt 作为 ICL 条件,用 AES-CE (aesthetic quality) reward + CTC alignment loss 正则化组成 composite reward (R = alpha_AES * AES - alpha_CTC * L_CTC),通过 KL-regularized policy gradient 在线优化。CTC 正则化有效抑制了 AES-only 优化导致的 text hallucination。RL-AES-CTC vs SFT-only: CMOS net win rate +7.1% (95% CI: 3.97-10.23%) [Table 2]。与已有路线的区别: (1) RL policy 与 ICL audio prompt 耦合训练 (非 unconditioned RL); (2) 在 audio-level 操作 (类似 Seed-TTS REINFORCE),不需要 token-level reward model; (3) CTC alignment 作为 text faithfulness 约束,与 MCLP/Edit Content 的 gated WER/CER reward 思路互补。
