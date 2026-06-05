@@ -1,0 +1,48 @@
+review:
+  paper: "ManchuTTS"
+  note_path: "论文笔记/ManchuTTS.md"
+  reviewer: "auto"
+  date: "2026-06-05"
+  conclusion: "pass-with-fixes"
+  note: "独立审阅基础设施不可用,本次审阅由生成者执行,审阅独立性受限"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含充分的因果解释(WHY),四个设计选择均回答了'为什么选这个而不是那个'。速查卡片可借鉴字段具体可操作(黏着语迁移、三层attention结构)。"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 标注覆盖率约 90%,指标名称使用正确。关键数字(MOS 4.52, AWPA 31%, RTF 0.12等)与原文 Table III/IV/VI 交叉验证一致。CBVC baseline 数据遗漏扣分。"
+  可区分:
+    score: 9
+    rationale: "因果解释来源标注覆盖率高(>90%)。[论文原文]/[agent 解读]区分一致,点评节的推断均标注了 agent 来源。无事实与推断混淆。"
+  可定位:
+    score: 8
+    rationale: "KB 背景节有具体谱系定位(列举了 CosyVoice/F5-TTS/Matcha-TTS/VoiceFlow),创新判断有对比基准。frontmatter models 字段为空,应包含 VITS(有模型库页面且为 baseline)。"
+  不污染:
+    score: 9
+    rationale: "无新建概念页计划。反向更新仅为追加 key_papers,不涉及实质修改。信息无 factual error。"
+
+issues:
+  - id: 1
+    type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter models 字段"
+    detail: "models 字段为空,但 VITS 既是本文 baseline 又存在于模型库/VITS.md。按 checklist 要求应链接对比 baseline 中有模型页的系统。"
+    suggestion: "添加 models: [\"[[VITS]]\"]"
+
+  - id: 2
+    type: "traceability-gap"
+    severity: "medium"
+    location: "实验节主对比表"
+    detail: "Table III 包含 7 个对比系统(含 CBVC MOS 4.28),但笔记的实验表仅列 6 个,遗漏了 CBVC baseline。CBVC 是与 ManchuTTS 差距最小的 baseline(MOS 4.28 vs 4.52),遗漏影响完整性。"
+    suggestion: "在实验表中补充 CBVC 行: MOS 4.28±0.10, MCD 5.91±0.22, F0-RMSE 19.5±2.2, WER 14.1±1.9, SIM 81.8±3.3, PESQ 3.15±0.08 [Table III]"
+
+  - id: 3
+    type: "traceability-gap"
+    severity: "low"
+    location: "推理效率节"
+    detail: "'首 token 延迟 86ms' 用语不准确。原文 Table VI 列名为 '1st-Token Lat. (ms)',但该系统为 NAR 架构,不存在 token-level 生成。论文 Fig 7 标注为 'First-chunk latency',更准确的表述应为'首帧/首 chunk 延迟'。"
+    suggestion: "改为 '首 chunk 延迟 86ms' 或保留原文 'first-chunk latency 86ms'"
+
+learning_signals: []
