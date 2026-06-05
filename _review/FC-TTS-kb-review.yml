@@ -1,0 +1,39 @@
+kb_review:
+  paper: "FC-TTS"
+  note_path: "论文笔记/FC-TTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+change_plan:
+  - target: "模型库/NaturalSpeech3.md"
+    action: append
+    detail: "追加 key_papers: [[论文笔记/FC-TTS|FC-TTS]]。当前 7 条,追加后 8 条,未超 12 上限。FC-TTS 直接基于 FACodec 构建,展示了 FACodec 在 dual-reference TTS 中的应用及局限性。"
+    safe: true
+  - target: "概念库/SpeechFactorization.md"
+    action: skip
+    detail: "key_papers 已 32 条,远超 12 上限。FC-TTS 使用 FACodec 解耦但非解耦方法论突破,不追加。"
+    safe: true
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: skip
+    detail: "key_papers 已超 12 上限。FC-TTS 使用标准 CFM decoder,无 CFM 方法论贡献,不追加。"
+    safe: true
+  - target: "概念库/StyleTransferinTTS.md"
+    action: skip
+    detail: "key_papers 已超 12 上限。FC-TTS 的 dual-reference 风格控制有贡献但不足以作为奠基/转折级工作。"
+    safe: true
+  - target: "概念库/ProsodyModeling.md"
+    action: skip
+    detail: "key_papers 已超 12 上限。FC-TTS 使用 prosody tokens 但无韵律建模方法论贡献。"
+    safe: true
+  - target: "概念库/FiniteScalarQuantization.md"
+    action: skip
+    detail: "key_papers 已 15 条超 12 上限。FC-TTS 使用 FSQ 作为 TCF 模块组件,非 FSQ 方法论贡献。"
+    safe: true
+
+issues: []
+
+summary:
+  total_changes: 1
+  skipped: 5
+  recommendation: "pass: 仅 1 项 append 操作(NaturalSpeech3 key_papers),安全可执行。其余 5 个实体页 key_papers 超上限,全部跳过。"
