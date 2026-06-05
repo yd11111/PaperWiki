@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[EmotionCoherentAugmentation]] — 命中 6 页(取 6): [[ProsodyModeling]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[EmotionControlinTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[StyleTransferinTTS]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[EmotionCoherentAugmentation]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[GlobalStyleTokens]] 正文)
+- [review/auto] [[EmotionCoherentAugmentation]] — pass, 0 high, 0 medium, 2 low
+- [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限,且关联度不足,跳过
+- [lint/local] EmotionCoherentAugmentation — 通过
 - [kb/search] [[CTC-TTS]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓ | 过滤: [[Speech-TextAlignment]](pending-review), [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review)
 - [ingest/deep] [[CTC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[PhonemeRepresentation]] key_papers)
 - [review/auto] [[CTC-TTS]] — pass-with-fixes, 0 high, 1 medium, 3 low
