@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[NV-Bench]] — 命中 6 页(取 6): [[ProsodyModeling]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 参考(pending-review): [[TTSEvaluation]], [[Instruction-GuidedSpeechSynthesis]], [[AudioUnderstanding]], [[EmotionControlinTTS]]
+- [ingest/deep] [[NV-Bench]] — 精读, kb_sources=6, 新建 0, 追加 3 (TTSEvaluation, ProsodyModeling, CosyVoice2)
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]] — key_papers 已达上限,论文仅间接相关 (NV tags as instructions)
+- [skip/update] [[AudioUnderstanding]] — key_papers 已达上限,论文仅用 NVASR 作评估器
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限 + body 接近上限,论文仅间接相关 (Affect Bursts 评估)
+- [review/auto] [[NV-Bench]] — pass-with-fixes: 1 high (NV类别数修正), 2 medium, 2 low — 全部已修正
+- [lint/local] NV-Bench — 通过
 - [kb/search] [[WhispSynth]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 参考(pending-review): [[CosyVoice3]], [[F0Modeling]], [[BigVGAN]]
 - [ingest/deep] [[WhispSynth]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice3, F0Modeling, BigVGAN)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限,论文仅标准 fine-tune CFM
