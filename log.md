@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[TaskVectorTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review)
+- [ingest/deep] [[TaskVectorTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (EmotionControlinTTS prose, CosyVoice2 baseline, CFG 参数空间类比)
+- [review/auto] [[TaskVectorTTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed: venue 修正, 2 low fixed: 表格+溯源)
+- [review/kb] [[TaskVectorTTS]] — pass, 3 append ops, 0 new pages
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限,改追加到正文
+- [skip/update] [[CosyVoice2]] — key_papers 已达上限,改追加到 baseline 引用段
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限,改追加到正文
+- [lint/local] TaskVectorTTS — 通过
 - [kb/search] [[W3AR]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review), [[Speech-TextAlignment]](pending-review), [[CodecLanguageModel]](pending-review), [[Whisper]](pending-review)
 - [ingest/deep] [[W3AR]] — 精读, kb_sources=6, 追加 DifferentiableRewardOptimization prose + Whisper key_papers
 - [review/auto] [[W3AR]] — pass-with-fixes, 5 issues (2 high fixed: timeline error + loss formula, 2 medium fixed, 1 low fixed)
