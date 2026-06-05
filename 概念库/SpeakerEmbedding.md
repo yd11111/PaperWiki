@@ -122,6 +122,10 @@ Survey 汇总的在 SECS 计算和 TTS 训练中常用的 speaker encoder:
 | H/ASP | 多层注意力统计池化 | YourTTS 多语言 |
 | ResCNN | 残差 CNN | 双语 speaker embedding (Chen et al.) |
 
+### Visual-Driven Speaker Identity Extraction
+
+[[论文笔记/VividVoice|VividVoice]] (Ma et al., 2026) 将 speaker identity 的来源从音频参考扩展到**视觉输入**(人脸图像)。通过 Decoupled Memory Bank 架构 (D-MSVA),用 Character-Key Memory Bank 编码视觉中的"人物"概念,再用 Timbre-Value Memory Bank 检索对应的音色原型,实现 face→timbre 的跨模态映射。A/B preference test 显示 53% 偏好率优于 attention-based fusion baseline [§3.5]。
+
 ### Speaker Embedding 在跨语言 Voice Cloning 中的扩展
 
 Survey Section IV.D 表明跨语言 voice cloning 对 speaker embedding 提出额外挑战:
