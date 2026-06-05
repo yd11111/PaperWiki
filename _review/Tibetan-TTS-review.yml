@@ -1,0 +1,86 @@
+review:
+  paper: "Tibetan-TTS"
+  note_path: "论文笔记/Tibetan-TTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 7
+    status: pass
+    reasoning: >
+      方法节包含因果解释(WHY),三个关键设计选择(数据治理/tokenizer 适配/跨语言微调)都解释了为什么这样做。
+      但由于原文本身技术深度有限(跨语言适配策略描述笼统),笔记忠实反映了这一限制,
+      方法理解的深度受到原文质量的约束而非笔记写作质量的问题。
+      速查卡片"可借鉴"给出了具体可迁移的策略(tokenizer 双策略、数据治理定位)。
+  可信赖:
+    score: 8
+    status: pass
+    reasoning: >
+      所有数字型 claim 均有出处标注: MOS [Table 1], 预训练数据量 [§2], 方言描述 [§1/§5]。
+      指标名使用正确(MOS, 音节发音准确率)。速查卡片指标字段含具体数字+数据集+出处。
+      无方向性错误。唯一扣分点:速查"一句话"中"业界首个"未标注为论文声称。
+  可区分:
+    score: 9
+    status: pass
+    reasoning: >
+      方法节全程使用 [论文原文]/[agent 解读] 标注,覆盖率接近 100%。
+      agent 解读部分(如骨干模型与 CosyVoice 的相似性推测、数据治理 pipeline 的价值判断)
+      与论文原文陈述有清晰的边界。未发现将推断写成断言的句子。
+  可定位:
+    score: 8
+    status: pass
+    reasoning: >
+      KB 背景节有具体谱系定位(明确提到 CosyVoice 系列、F5-TTS、XTTS 等具体系统)。
+      创新判断有对比基准("创新不在模型架构,而在适配实践")。
+      frontmatter 字段完整且语义正确(models 为空合理,论文未命名独立模型)。
+      速查 5 字段均有实质内容。
+  不污染:
+    score: 8
+    status: pass
+    reasoning: >
+      未提议创建新概念页。frontmatter concepts/tasks 挂接合理。
+      反向更新范围仅为已有概念页的追加操作,无实质修改风险。
+
+issues:
+  - id: 1
+    severity: medium
+    type: overclaim
+    location: "速查 > 一句话"
+    detail: >
+      "业界首个大模型藏语 TTS 系统"直接作为笔记陈述,但原文使用了"to the best of our knowledge, the first"
+      这一限定语。应标注为论文声称,避免笔记无条件背书。
+    suggestion: >
+      改为"论文声称的业界首个大模型藏语 TTS 系统"或"据作者所知的首个..."
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "整体架构 > agent 解读"
+    detail: >
+      "这一数据规模和架构选择与 CosyVoice 系列高度一致"是 agent 推断,
+      虽已标注 [agent 解读],但"高度一致"的判断缺少具体对比依据。
+    suggestion: >
+      可添加一句补充:"CosyVoice 使用 170K 小时预训练 + AR LM + OT-CFM 两阶段,
+      本文 200K 小时 + AR LM + FM 在规模和范式上相近"。
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: >
+      models 字段为空。虽然论文未命名具体模型,但论文引用了 CosyVoice 2 [12]、
+      VALL-E [13] 等作为技术路线参考。不过这些并非 baseline 对比模型,
+      仅为文献引用,空值是合理的。
+    suggestion: >
+      保持为空即可,因为 models 字段应列本文模型或直接对比 baseline,
+      论文引用的参考文献不属于此字段。
+
+issues_summary:
+  high: 0
+  medium: 1
+  low: 2
+  total: 3
+
+learning_signals: []
