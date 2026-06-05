@@ -13,6 +13,16 @@
 - [skip/update] [[CosyVoice2]] — key_papers 已达上限(23),改追加到被引用段
 - [lint/local] CoCoEmo — 通过
 - [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
+- [kb/search] [[ARCHI-TTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[Speech-TextAlignment]](pending-review)
+- [ingest/deep] [[ARCHI-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 ([[Emilia]] used_by, [[SEED-TTS-Eval]] used_by)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过追加
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,跳过追加
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限,跳过追加
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限,跳过追加
+- [skip/update] [[VariationalAutoencoderforTTS]] — key_papers 已达上限,跳过追加
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限,跳过追加
+- [lint/local] ARCHI-TTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[VividVoice]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[VITS]](pending-review), [[DurationPredictor]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[AudioSet]](pending-review)
 - [ingest/deep] [[VividVoice]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[SpeakerEmbedding]] 正文)
 - [skip/update] [[Diffusion-basedTTS]] — key_papers 已达上限(12),VividVoice 非核心贡献,跳过
