@@ -1,0 +1,74 @@
+review:
+  paper: "SiTok"
+  note_path: "论文笔记/SiTok.md"
+  reviewer: "auto"
+  date: "2026-06-05"
+  checklist_version: "v1.1"
+
+  conclusion: "pass-with-fixes"
+
+  principles:
+    可复述:
+      score: 8
+      status: pass
+      rationale: "方法节对所有关键设计选择(mel vs waveform, CTC vs distillation, diffusion vs regression)给出了因果解释(WHY),不是组件罗列。速查卡片'可借鉴'字段具体可操作(4个独立trick)。"
+    可信赖:
+      score: 8
+      status: pass
+      rationale: "数字型claim标注覆盖率约90%(Table/§引用)。实验表格数据经交叉验证基本准确。一处表号引用错误(Table 9→Table 8)。"
+    可区分:
+      score: 8
+      status: pass
+      rationale: "[论文原文]和[agent 解读]标注贯穿全文,覆盖率约85%。KB背景中'创新判断'标注为[agent 解读]。"
+    可定位:
+      score: 9
+      status: pass
+      rationale: "KB背景包含6个confirmed实体页的具体谱系定位,有对比基准(vs SpeechTokenizer/Mimi的Mixed路线, vs TaDiCodec的两阶段diffusion)。创新判断有4个对比点。"
+    不污染:
+      score: 8
+      status: pass
+      rationale: "笔记不创建新概念页。KB引用准确。KB背景中'首次'声明需修正(TaDiCodec也是diffusion-based tokenizer)。"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "medium"
+      location: "关键发现 #5 (line ~141)"
+      detail: "VQ vs FSQ 对比引用 '[Table 9]',但论文中该对比位于 Table 8 (Appendix C.3)。"
+      suggestion: "改 '[Table 9]' 为 '[Table 8]'"
+
+    - id: 2
+      type: "overclaim"
+      severity: "low"
+      location: "KB 背景 创新判断 (line ~38)"
+      detail: "'首次将 diffusion autoencoder 作为端到端 speech tokenizer' — TaDiCodec (Wang et al., 2025b) 也使用 diffusion autoencoder 进行 speech tokenization,论文 §B Related Work 明确提到。SiTok 的创新在于'端到端联合训练 VQ + diffusion decoder'(不分两阶段),不是'首次 diffusion autoencoder'。"
+      suggestion: "改为'将 diffusion autoencoder 作为端到端(非两阶段)speech tokenizer'"
+
+    - id: 3
+      type: "template-compliance"
+      severity: "low"
+      location: "frontmatter models 字段"
+      detail: "models 列了 EnCodec 和 SoundStream,但实验主要 baseline 是 SpeechTokenizer/Mimi/StableCodec 等。EnCodec 仅出现在 Table 2 understanding 对比中,SoundStream 未出现在实验表格中。"
+      suggestion: "考虑替换为论文实际对比的主要 baselines,或保持不变(因 EnCodec/SoundStream 是概念性对比对象)"
+
+  issue_summary:
+    high: 0
+    medium: 1
+    low: 2
+    total: 3
+
+  learning_signals: []
+
+  cross_validation:
+    - check: "Table 1 SiTok CN=1 reconstruction numbers"
+      result: "WER 4.06, SIM 0.641, UTMOS 3.44 — verified correct"
+    - check: "Table 1 SpeechTokenizer baseline"
+      result: "WER 7.98, SIM 0.468, UTMOS 2.47 — verified correct"
+    - check: "Table 2 LLM-ASR WER"
+      result: "SiTok CN=1: 4.95, CN=4: 4.49 — verified correct"
+    - check: "Table 7 Zero-shot TTS"
+      result: "WER 2.46, SIM 0.64, RTF 0.234 — verified correct"
+    - check: "CTC weight ablation (Table 5)"
+      result: "lambda=0 → WER 33.0, lambda=0.1 → WER 4.06 — verified correct"
+    - check: "Table 4 model scaling"
+      result: "L(1.12B) ASR 4.95 vs XL(1.61B) ASR 5.07 — verified correct, L is sweet spot"

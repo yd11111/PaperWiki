@@ -35,7 +35,7 @@ kb_sources: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[ResidualVe
 - **[[CodebookCollapse]]** (confirmed): SiTok 使用 EMA + 大规模训练 (2M hrs) 实现 codebook utilization >95% [Appendix C.3]。KB 中记录的 DAC factorized codes 方案也达 99%,IndexTTS 实验则证明充足训练数据本身可缓解 collapse — SiTok 的经验与此一致。
 - **[[SpeechLanguageModel]]** (confirmed): SiTok 的核心定位是为 SpeechLM 提供统一 tokenizer — 同时支持 understanding (ASR/ER/SV/KS) 和 generation (zero-shot TTS) [§3.2]。在 SpeechLM 三组件 (tokenizer + LM + vocoder) 框架下,SiTok 兼任 tokenizer + partial decoder 角色。
 
-**创新判断**: 相对于 KB 中已有认知,SiTok 的关键创新在于: (1) 首次将 diffusion autoencoder 作为端到端 speech tokenizer (非两阶段); (2) CTC 直接监督 VQ latent space (比 semantic distillation 更直接); (3) Token CFG (CFG 用于 codec 而非 TTS); (4) 在 0.2 kbps 极低 bitrate 下实现 reconstruction + understanding 双优。[agent 解读]
+**创新判断**: 相对于 KB 中已有认知,SiTok 的关键创新在于: (1) 将 diffusion autoencoder 作为端到端(非两阶段) speech tokenizer; (2) CTC 直接监督 VQ latent space (比 semantic distillation 更直接); (3) Token CFG (CFG 用于 codec 而非 TTS); (4) 在 0.2 kbps 极低 bitrate 下实现 reconstruction + understanding 双优。[agent 解读]
 
 **过滤**: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[MelSpectrogram]](pending-review) — 均参考但标注 [待确认]
 
@@ -138,7 +138,7 @@ L_total = L_rec (flow matching) + lambda_ctc * CTC(D_ctc(z_q), y) + L_vq [论文
 2. **Understanding 全面领先**: 在 ER/SV/KS 三个理解任务上始终优于所有 baseline [Table 2] [论文原文]
 3. **Scaling 存在 sweet spot**: XL (1.61B) 重建最优但理解反而下降,L (1.12B) 是最优平衡 [Table 4] [论文原文]
 4. **Zero-shot TTS 可行**: SiTok-AR-TTS (0.5B LLM on top) 达 WER 2.46 / SIM 0.64 / RTF 0.234,优于 CosyVoice 2 和 SparkTTS [Table 7] [论文原文]
-5. **VQ vs FSQ**: VQ (WER 4.06) 优于 FSQ (WER 5.23),因为大规模训练 + EMA + diffusion 使 VQ codebook 利用率 >95%,FSQ 优势不再显著 [Table 9] [论文原文]
+5. **VQ vs FSQ**: VQ (WER 4.06) 优于 FSQ (WER 5.23),因为大规模训练 + EMA + diffusion 使 VQ codebook 利用率 >95%,FSQ 优势不再显著 [Table 8] [论文原文]
 
 ## 局限性
 
@@ -160,6 +160,22 @@ SiTok (Meta Superintelligence Labs + CUHK-SZ, ICLR 2026) 代表了 speech tokeni
 2. **CTC semantic regularization**: 在 VQ latent space 后接 CTC 预测文本,最小成本强制语义编码 -- 可迁移到任何需要 "语义+声学" 统一 tokenizer 的系统
 3. **Token CFG**: 训练时随机 drop all tokens 学习 unconditional generation,推理时 conditional-unconditional 融合 -- 通用增强 codec 重建质量的手段
 4. **Shortcut fine-tuning**: 使 diffusion 模型支持 2-4 步解码而不显著损失质量 -- 可用于任何 diffusion codec/vocoder
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY 解释充分,4 个关键设计选择均有因果分析 |
+> | 可信赖 | pass | 数字标注覆盖~90%,交叉验证通过,1 处表号引用已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖~85% |
+> | 可定位 | pass | 6 confirmed KB 页,谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 无新建页,KB 引用准确,'首次'overclaim 已修正 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/SiTok-review.yml`
 
 ---
 
