@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [speech-LM, single-codebook, knowledge-distillation, WavLM, self-supervised, speech-tokenizer, autoregressive, streaming, next-chunk-prediction]
 concepts: ["[[SpeechLanguageModel]]", "[[SemanticvsAcousticTokens]]", "[[Single-codebookvsMulti-codebook]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeechTokenizer]]"]
-models: ["[[模型库/WavLM|WavLM]]"]
+models: ["[[模型库/WavLM|WavLM]]", "FocalCodec-Stream", "LLaMA-Mimi", "TWIST", "SpiRit-LM", "Moshi"]
 tasks: []
 datasets: ["Libri-Light", "LibriSpeech"]
 kb_context_sources: 6
@@ -75,7 +75,7 @@ WavSLM 的架构巧妙地将 WavLM 一分为二 [§2, Fig 1]:
 
 **1. 为什么选 WavLM layer 6?**
 
-作者选择 WavLM-large 第 6 层 Transformer 输出作为 tokenization 目标 [§2.1]。理由是: 这些中层表征在语义丰富度和声学细节之间取得平衡 [论文原文: "which strike a balance between semantic richness and fine-grained acoustic detail" §2.1]。这与 KB 中 [[Self-SupervisedSpeechRepresentation]] 记录的发现一致: SSL 中间层编码了丰富的韵律信息,选中间层而非最后层更适合需要兼顾语义和声学的任务 [agent 解读]。
+作者选择 WavLM-large 第 6 层 Transformer 输出作为 tokenization 目标 [§2.1]。理由是: 这些中层表征在语义丰富度和声学细节之间取得平衡 [论文原文: "which strike a balance between semantic richness and fine-grained acoustic detail" §2.1]。这与 [[Self-SupervisedSpeechRepresentation]] 页记录的发现一致: SSL 中间层编码了丰富的韵律信息,选中间层而非最后层更适合需要兼顾语义和声学的任务 [agent 解读, 基于 KB]。
 
 **2. 为什么是单码本 + 单流?**
 
@@ -106,7 +106,7 @@ WavSLM 的架构巧妙地将 WavLM 一分为二 [§2, Fig 1]:
 - **LR schedule**: validation loss 改善 < 0.0025 时 lr *= 0.9; 某些 run 在收敛后重置 lr 获得额外提升 [§3]
 - **硬件**: 单张 NVIDIA H100 (80 GB) [§3]
 
-训练效率极高: 相比 LLaMA-Mimi 等需要数百 GPU 的系统,WavSLM 在单卡上完成训练 [agent 解读]。
+单卡 H100 即可完成全部训练 [§3],训练资源需求远低于大规模 SLM 系统 [agent 解读]。
 
 ## 实验
 
@@ -171,3 +171,19 @@ WavSLM 的核心价值不在绝对性能,而在于它作为 **概念验证 (proo
 1. **SSL 模型分层复用**: 将预训练 SSL 模型按层拆分 — 下层做 tokenizer 的 encoder,上层做 LM backbone。这个思路可推广到任何层级 SSL 模型 (HuBERT, w2v-BERT 等),避免 tokenizer 和 LM 分别训练的 representation gap
 2. **Chunk-aligned prediction**: 让 LM 的预测粒度与 tokenizer 的 chunk size 对齐,在不损失分辨率的前提下减少 AR 步数。这个 trick 在任何需要流式推理的 AR 系统中都可借鉴
 3. **零填充代替 EOS**: 用波形级零填充 (对应静音 token) 代替显式 EOS token,天然兼容流式和无限长度生成
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含因果解释,设计选择有对比论证 |
+> | 可信赖 | pass | 数字标注覆盖率>90%,经 PDF 交叉验证正确 |
+> | 可区分 | pass-with-fixes | 来源标注覆盖率~75%,两处已修正 |
+> | 可定位 | pass | KB 背景有具体谱系定位和对比基准 |
+> | 不污染 | pass | 无新建概念页,反向更新均为 append |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/WavSLM-review.yml`
