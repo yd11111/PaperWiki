@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[ZeSTA]] — 命中 6 页(取 6): [[Zero-shotSpeechSynthesis]]✓, [[CosyVoice2]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VITS]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
+- [ingest/deep] [[ZeSTA]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[SpeakerAdaptation]] key_papers+演进, [[CosyVoice2]] baseline引用, [[VITS]] 相关工作)
+- [review/auto] [[ZeSTA]] — pass, 0 high, 0 medium, 3 low (self-review)
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,跳过
+- [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到相关工作正文
+- [skip/update] [[CosyVoice2]] — key_papers 已达上限(23),改追加到 baseline 引用正文
+- [lint/local] ZeSTA — 通过
 - [kb/search] [[EntropyGRVQ]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[CodecTrainingObjectives]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
 - [ingest/deep] [[EntropyGRVQ]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[ResidualVectorQuantization]] 变体表+演进, [[CodebookCollapse]] 演进, [[NeuralAudioCompression]] key_papers)
 - [review/auto] [[EntropyGRVQ]] — pass, 0 high, 0 medium, 2 low
