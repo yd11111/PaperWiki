@@ -1,0 +1,39 @@
+kb_review:
+  note: "论文笔记/DSFlow.md"
+  reviewer: auto
+  date: 2026-06-05
+
+change_plan:
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: append
+    section: "演进"
+    content: "追加 DSFlow 蒸馏加速工作到演进/相关概念节末尾"
+    risk: low
+    rationale: "DSFlow 是 flow matching 的重要蒸馏加速方法,key_papers 已超 12 上限,改为正文追加"
+
+  - target: "概念库/Classifier-FreeGuidance.md"
+    action: append
+    section: "在 TTS 中的应用"
+    content: "追加 CFG 在蒸馏中的行为发现"
+    risk: low
+    rationale: "DSFlow 发现蒸馏后 CFG 内化现象 (teacher w=0.7 → student 最优 w=0.05),是 CFG 行为的新认知。key_papers 超上限,追加到正文"
+
+  - target: "模型库/CosyVoice2.md"
+    action: append
+    section: "作为 Baseline 被引用"
+    content: "追加 DSFlow 跨架构验证引用"
+    risk: low
+    rationale: "CosyVoice2 作为 U-Net 架构代表被 DSFlow 用于跨架构验证。key_papers 超上限"
+
+  skipped:
+    - target: "概念库/Diffusion-basedTTS.md"
+      reason: "DSFlow 是 flow matching 蒸馏,不是 diffusion TTS 的直接贡献"
+    - target: "概念库/Non-autoregressiveTTS.md"
+      reason: "DSFlow 在 NAR 范式下工作但不推进 NAR 本身"
+    - target: "概念库/ScoreMatching.md"
+      reason: "仅理论背景引用,无实质贡献"
+    - target: "概念库/MelSpectrogram.md"
+      reason: "mel 仅作为输出格式,无贡献"
+
+conclusion: pass
+summary: "3 个 append 操作,均为列表/段落末尾追加,不改已有内容,不改 status。3 个跳过(关联度不够)。无安全风险。"

@@ -94,6 +94,10 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 [[论文笔记/TaskVectorTTS|TaskVectorTTS]] (Feng et al., 2025) 将 task vector 增强 (θ_enhanced = θ_pre + α·τ,其中 τ = θ_ft - θ_pre) 类比为参数空间的 CFG [§3.1.2]。传统 CFG 在输出/激活空间操作 (条件-无条件差值外推),task vector 则在参数空间操作 (微调-预训练参数差值外推)。两者共享相同的数学结构: 沿条件方向做线性外推以增强条件信号。这一类比表明 CFG 原理可推广到参数空间,为基于模型编辑的条件控制提供理论支撑。
 
+## 蒸馏中的 CFG 行为
+
+[[论文笔记/DSFlow|DSFlow]] (Lin et al., 2026) 揭示了 CFG 在知识蒸馏中的 **内化现象**: student 从 teacher@w=0.7 的输出学习后,其最优推理 CFG 从 w=0.7 降至 w=0.05。继续增大 w 反而退化 (w=0.2 时 MOS-N 从 4.32 降至 4.10,w=0.5 降至 3.78) [DSFlow Table 5]。为保持弱 CFG 的可用性,DSFlow 引入轻量正则化 (λ=0.01) 防止 unconditional branch collapse,使推理时仍可微调质量。这表明 CFG 不仅是推理时的技术,在蒸馏 pipeline 中其效果会被隐式转移。
+
 ## 演进
 
 Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用
