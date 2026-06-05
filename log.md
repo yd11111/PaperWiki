@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MELD]] — 命中 6 页(取 Top 6): [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[MelSpectrogram]](pending-review), [[MELLE]](pending-review)
+- [ingest/deep] [[MELD]] — 精读, kb_sources=6, 新建 0, 追加 1 (MELLE key_papers)
+- [skip/update] [[SpeechLanguageModel]], [[CodecLanguageModel]], [[MelSpectrogram]], [[VariationalAutoencoderforTTS]], [[ResidualVectorQuantization]], [[Zero-shotSpeechSynthesis]] — key_papers 已达上限(>12),跳过追加
+- [lint/local] MELD — 通过
 - [kb/search] [[FineGrainedStyleControl]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review)
 - [ingest/deep] [[FineGrainedStyleControl]] — 精读, kb_sources=6, 新建 0, 追加 1 (StyleTransferinTTS training-free 推理时风格控制节)
 - [review/auto] [[FineGrainedStyleControl]] — pass-with-fixes, 0 high / 1 medium / 2 low
