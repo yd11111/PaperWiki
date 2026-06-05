@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[DUET]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[DUET]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 正文段 + 演进线)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(>12),改追加到正文
+- [lint/local] DUET — 通过
+- [review/auto] [[DUET]] — pass, 0 high / 0 medium / 2 low
 - [kb/search] [[ImmersiveTTS]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[模型库/WavLM|WavLM]](pending-review)
 - [ingest/deep] [[ImmersiveTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (WavLM key_papers, NaturalLanguageDescriptionforTTS 环境感知段)
 - [kb/search] [[UNISON]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review)

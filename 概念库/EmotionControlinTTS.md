@@ -132,7 +132,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 ## 演进
 
-规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026)
+规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026) → 双空间跨架构 plug-and-play (DUET, 2026)
 
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
@@ -201,6 +201,10 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## Multi-Agent 闭环 Composite-Instruction 控制 (AgentSteerTTS)
 
 [[论文笔记/AgentSteerTTS|AgentSteerTTS]] (Kang et al., ICML 2026) 首次系统性地解决 composite-instruction 场景下的情感控制问题 — 即多属性组合指令 (如 "Happy but slightly Arrogant") 的可靠生成。论文识别出两个根本瓶颈: (1) 确定性映射在多模态分布下产生 mode averaging,导致 target attribute suppression 25-45%; (2) speaker-emotion entanglement 造成 composite 控制中 timbre-prosody trade-off。提出三模块闭环方案: Adversarial Disentanglement Module (双向 GRL + cross-covariance 正交约束) 解耦 speaker-emotion → Dual-Stream Anchoring Controller (检索 acoustic prototype + gated fusion) 锚定目标区域 → Fast-Slow Feedback Agent (latent gradient correction + MLLM perceptual critique) 推理时校准。在 composite benchmark 上 E-SIM 0.955 (vs IndexTTS2 0.864),CSR 0.78,S-SIM 0.841 [Table 2, 3]。与已有路线的区别: PUE/Daisy-TTS/EmoSteer-TTS/CoCoEmo 从嵌入空间/激活空间操作混合情感,AgentSteerTTS 通过检索增强 + 闭环校准在声学空间直接解决 composite alignment。局限: 依赖 100h 人工筛选 prototype library 和外部 MLLM evaluator。详见 [[论文笔记/AgentSteerTTS|AgentSteerTTS]]。
+
+## 双空间 Plug-and-Play 跨架构情感控制 (DUET)
+
+[[论文笔记/DUET|DUET]] (Zhang et al., Macquarie Univ., 2026) 在 EmoSteer-TTS 的 activation steering 基础上做了两项关键扩展: (1) 从 DiT-only 泛化到 5 种架构差异巨大的 backbone (DiT/Transformer/U-Net, 覆盖 diffusion 和 flow-matching 两大范式); (2) 在 hidden space steering 之外增加 mel-space guidance (通过可微 vocoder Vocos 反传 SER 梯度修正频谱细节),形成双空间联合控制。核心发现: 预训练 TTS 的 hidden states 中情感方向与说话人方向近正交 (|cos θ| = 0.029, F5-TTS),情感仅占 variance 的 8.5% 但 linearly decodable [Fig 1]。方法: linear probe 定位情感最可分层 → SVD 提取多方向判别子空间 (超越 EmoSteer-TTS 的 difference-in-means) → norm-adaptive steering (按 ||h|| 缩放) + cosine-scheduled mel guidance (trust-region 约束)。消融: hidden steering -24.3%, mel guidance -19.5% (互补) [Table 2]。在 ESD 上 DUET+GradTTS Avg 75.5% vs 最强 baseline Qwen3-TTS 46.8%; EMOS 3.93 (最高) [Table 1, 3]。与 EmoSteer-TTS 的区别: DUET 用 linear probe + SVD 多方向而非 difference-in-means, 增加了 mel-space guidance, 泛化到 diffusion backbone; 与 CoCoEmo 的区别: DUET 在 flow-matching/diffusion denoiser 内部操作,CoCoEmo 在 SLM 层操作,两者可互补。局限: 仅 3 类离散情感,angry 表现弱 (仅达 GT ceiling 49%),未验证连续 AV 控制。详见 [[论文笔记/DUET|DUET]]。
 
 ## CoT 显式规划对话 Turn-level 表达 (CapTalk)
 
