@@ -1,0 +1,54 @@
+review:
+  paper: "UniVocal"
+  note_path: "论文笔记/UniVocal.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节为每个关键设计选择 (cent token, CoT, data pipeline, curriculum learning) 提供了清晰的 WHY 解释和因果链; 速查卡片的可借鉴字段有 3 个具体可迁移技巧"
+  可信赖:
+    score: 8
+    reason: "所有关键数字均经 PDF 交叉验证正确; 出处标注覆盖率高 (≥90%); 但消融实验段的 E-MOS 对比措辞令人困惑, 且 F1 指标的 (O)/(S) 变体切换未充分说明"
+  可区分:
+    score: 9
+    reason: "方法节全部因果解释标注了 [论文原文] 或 [agent 解读]; agent 解读使用了恰当的限定词 ('可能', '直觉是'); 无断言式推断"
+  可定位:
+    score: 9
+    reason: "KB 背景有具体谱系定位 (CosyVoice 2 → UniVocal); 与 pGSLM/SPIRIT-LM 的差异对比明确; 创新判断有对比基准"
+  不污染:
+    score: 9
+    reason: "frontmatter 概念引用合理 (7 个 concepts 均有对应实体页); 无不当新建; models 仅列 CosyVoice2 (唯一有实体页的 backbone)"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "消融实验段, line ~134"
+    detail: "消融部分说 'w/o CoT: SCS F1 0.810 (略升)' — 此处 0.810 来自 Table 5 (可能是 F1(S)), 而主实验 Table 1 的 F1(O) 为 0.871 (standard config)。两个 F1 变体 (O vs S) 的切换未说明, 且 '略升' 相对于 expressive 的 0.716 实际是显著提升"
+    suggestion: "改为: 'w/o CoT: SCS F1(S) 从 0.716 升至 0.810 (注: Table 1 主结果使用 standard config, F1(O)=0.871)'"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "消融实验段, line ~134"
+    detail: "'E-MOS 2.03→1.78 的差距变小至 2.03' 语义不通"
+    suggestion: "改为: 'E-MOS 从 UniVocal 的 2.26 降至 2.03, 但仍高于 CosyVoice 2 baseline 的 1.78'"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "方法/关键设计选择/1. Refined Cent Token, line ~76"
+    detail: "消融引用 Table 12 的 E-MOS 1.57/1.85 实际为 E-MOS(O) (Gemini 客观评估), 与主结果 Table 3b 的 E-MOS(S) (人类主观评估, 2.26) 是不同指标变体, 未标注 (O)"
+    suggestion: "改为 'E-MOS(O) 1.57' 和 'E-MOS(O) 1.85'"
+
+  - id: 4
+    severity: low
+    type: template-compliance
+    location: "frontmatter"
+    detail: "datasets 字段为空, 但论文使用了 LibriTTS, GTSinger, Suno, SCSBench 等数据集; 其中无一在数据集/ 目录有实体页, 为空合理但值得注明"
+    suggestion: "保持空值即可, 无需修改"
+
+learning_signals: []

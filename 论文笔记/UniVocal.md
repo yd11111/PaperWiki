@@ -73,7 +73,7 @@ UniVocal 构建于 CosyVoice 2 框架之上 [§3],核心 backbone 是 24 层 cau
 
 [agent 解读] mod 1200 操作丢弃了绝对八度信息,这意味着 cent token 编码的是相对音高轮廓而非绝对频率。这是有意为之: (1) 对语音而言,韵律的关键是 pitch contour 的形状而非绝对值; (2) 对歌声而言,模型需要学习旋律模式,绝对音高可由 speaker embedding 和 flow matching 恢复。
 
-消融实验验证了 1200-bin 是最优: 12-bin 在 empathetic speech (E-MOS 1.57) 上远弱于 1200-bin (1.85); 480-bin 也略弱 [Table 12, Appendix D.3]。
+消融实验验证了 1200-bin 是最优: 12-bin 在 empathetic speech (E-MOS(O) 1.57) 上远弱于 1200-bin (E-MOS(O) 1.85); 480-bin 也略弱 [Table 12, Appendix D.3]。
 
 **2. Chain-of-Thought Interleaved Generation — 为什么先 pitch 后 content?**
 
@@ -130,8 +130,8 @@ UniVocal 构建于 CosyVoice 2 框架之上 [§3],核心 backbone 是 24 层 cau
 | N-MOS (SVS) | 2.23 | Vevo 1.5: 2.17, LeVo: 2.41 | Fullsong | [Table 4] |
 | M-MOS (SVS) | 2.18 | Vevo 1.5: 2.08, LeVo: 2.34 | Fullsong | [Table 4] |
 
-**消融实验** [Table 5]:
-- w/o CoT: SCS F1 0.810 (略升), E-MOS 2.03→1.78 的差距变小至 2.03, M-MOS 2.18→1.86 (显著下降) — CoT 对表现力任务至关重要
+**消融实验** [Table 5] (注: Table 5 中 "UniVocal" 行为 expressive 配置; Table 1 主结果 SCS 使用 standard 配置即 w/o CoT,参见 §4.3.3):
+- w/o CoT (= standard 配置): SCS F1 从 expressive 的 0.716 升至 0.810 (standard 配置对 SCS 更优); E-MOS 从 2.26 降至 2.03 (但仍高于 CosyVoice 2 baseline 的 1.78); M-MOS 从 2.18 降至 1.86 — CoT 对表现力任务至关重要,但会轻微影响 SCS 对齐稳定性
 - w/o CL (无 curriculum learning): SCS F1 0.496 (大幅下降), WER 14.46 (最差) — 证明两阶段训练的必要性
 - Empathy 能力来源: stage-1 的 emotionally diverse singing data 解锁表现力,CoT 进一步放大 [§5.2]
 
@@ -170,3 +170,19 @@ refined cent token + CoT interleaved generation 是本文最有启发性的设�
 3. **LLM-driven SCS data synthesis pipeline**: 用大模型生成语义连贯的 "boundary-blurring" 脚本 + 用 stage-1 模型合成音频 + WER 过滤的三步 pipeline,可推广到任何缺乏自然数据的跨模式任务 (如语音中插入音效、对话中插入 whisper 等)。
 
 4. **Two-stage curriculum for cross-domain unification**: 先在混合数据上对齐表示空间 (stage-1: representation alignment),再用任务数据学习新能力 (stage-2: capability learning)。这种 "先共存后协作" 的训练策略可迁移到任何需要在已有模型上扩展新模态/任务的场景。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 每个设计选择有清晰的 WHY 解释; 速查卡片可借鉴具体 |
+> | 可信赖 | pass | 所有关键数字经 PDF 交叉验证正确; 消融段措辞已修正 |
+> | 可区分 | pass | 因果解释来源标注覆盖率高; agent 解读有恰当限定词 |
+> | 可定位 | pass | KB 背景有具体谱系定位和差异对比 |
+> | 不污染 | pass | frontmatter 引用合理; 无不当新建 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/UniVocal-review.yml`
