@@ -122,7 +122,7 @@ SVS 中的时长预测与 TTS 有本质差异 [Pan et al., 2026, §4.1]:
 
 ## 演进
 
-HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing) → Inference-time AR duration steering (TED-TTS, 2026; training-free segment-level duration embedding + EOS logit modulation) → Sampling-time distribution matching (VoXtream2, 2026; 在线直方图匹配 + 滑动窗口自校正,支持动态 mid-utterance 变速)
+HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration Predictor (FastSpeech, 2019; 回归显式 duration) → Monotonic Alignment Search (Glow-TTS, 2020; 内部对齐) → E2E differentiable duration (EATS, 2021) → T2D model (MaskGCT, 2024; 独立 duration 生成阶段) → RL-optimized duration policy (DMOSpeech 2, 2025; GRPO 优化总时长预测) → AR duration + DPO (FlexSpeech, 2025; phone-level AR next-token prediction + DPO 偏好对齐) → MoE-DP (FNH-TTS, 2026; Switch-Transformer 多专家结构 + speaker-conditioned routing) → Inference-time AR duration steering (TED-TTS, 2026; training-free segment-level duration embedding + EOS logit modulation) → Sampling-time distribution matching (VoXtream2, 2026; 在线直方图匹配 + 滑动窗口自校正,支持动态 mid-utterance 变速) → Duration-as-external-condition (MAGIC-TTS, 2026; token-level duration+pause 作为外部数值 conditioning,而非内部预测/对齐变量)
 
 ### DMOSpeech 2 RL-based Duration Optimization (Li et al., AAAI 2026)
 
@@ -170,3 +170,13 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **动态 mid-utterance 变速**: Ptarget 可在生成过程中随时改变,实现帧级语速控制;渐变场景 Pearson corr 0.70-0.83,突变场景 0.62-0.66 [VoXtream2 Table 5]
 - **与已有方法的根本区别**: DMOSpeech 2/FlexSpeech/FNH-TTS 修改/优化 duration predictor 模块; TED-TTS 通过 embedding steering 控制; VoXtream2 在 token 采样概率空间做在线分布匹配,三者正交
 - 详见 [[论文笔记/VoXtream2|VoXtream2]]
+
+### MAGIC-TTS Duration-as-External-Condition (Mai et al., 2026)
+
+- **Duration 从预测变量变为外部条件**: 与上述所有方法根本不同 — MAGIC-TTS 不优化 duration 的预测准确性,而是训练 acoustic generator 可靠地遵从外部给定的 token-level content duration 和 pause 数值。将 duration 视为 conditioning signal 而非 alignment intermediate [§3.1]
+- **Zero-value correction**: 零值 pause 贡献零残差 (g(x)-g(0)),防止大量 pause=0 的 token 产生 dense bias 淹没 content duration 控制信号 [§3.4]
+- **Cross-validated supervision**: Stable-ts × MFA 交叉验证筛选高置信度时长标签 (B@150, 202K utterances / 230h from 13.6M entries),解决 content duration 对标注边界精度的高敏感性 [§3.3]
+- **控制效果**: C-MAE 10.56ms / C-Corr 0.918 (controlled),spontaneous 模式 C-MAE 36.88ms / C-Corr 0.588 (与 F5-TTS Base 相当) [Table 1]
+- **Quality trade-off**: Seed-TTS-Eval EN WER 1.993→3.434,ZH CER 1.665→2.215 (spontaneous mode) [Table 7]
+- **与本页其他方法的互补性**: DMOSpeech/FlexSpeech/TED-TTS 优化"预测更好的 duration",MAGIC-TTS 优化"遵从外部给定的 duration"。两个方向可组合: predictor 提供 default,用户通过 MAGIC-style interface 局部编辑
+- 详见 [[论文笔记/MAGIC-TTS|MAGIC-TTS]]
