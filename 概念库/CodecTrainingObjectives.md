@@ -4,7 +4,7 @@ title: "Codec Training Objectives"
 aliases: [Codec 训练目标, Codec Loss Landscape, Audio Codec Training Losses, Neural Codec 损失函数]
 category: "training-technique"
 tags: [training-objective, audio-codec, GAN, reconstruction, perceptual-loss]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/AffectCodec|AffectCodec]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/AffectCodec|AffectCodec]]", "[[论文笔记/HoliTok|HoliTok]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[AudioTokenizerTaxonomy]]", "[[ResidualVectorQuantization]]", "[[Multi-scaleSTFTDiscriminator]]", "[[CodebookCollapse]]"]
 status: pending-review
@@ -128,7 +128,11 @@ encoder/quantizer/decoder 同时训练,常见于 acoustic tokenizer:
 
 ## 演进
 
-手工 codec (Opus, 无学习) → VQ-VAE reconstruction-only (2017) → SoundStream GAN+Feat+Rec (2021) → EnCodec 加入 EMA+balancer (2022) → DAC 完善 multi-band discriminator (2023) → Diffusion-based decoder (LaDiffCodec, 2024) → SSL masked prediction 路线 (Discrete WavLM, 2024) → 多目标联合优化 (PAST/TAAE, 2025)
+手工 codec (Opus, 无学习) → VQ-VAE reconstruction-only (2017) → SoundStream GAN+Feat+Rec (2021) → EnCodec 加入 EMA+balancer (2022) → DAC 完善 multi-band discriminator (2023) → Diffusion-based decoder (LaDiffCodec, 2024) → SSL masked prediction 路线 (Discrete WavLM, 2024) → 多目标联合优化 (PAST/TAAE, 2025) → 渐进式多阶段训练 (HoliTok, 2026)
+
+### 9. Progressive Multi-Stage Training (HoliTok)
+
+[[论文笔记/HoliTok|HoliTok]] (Li et al., 2026) 提出渐进式三阶段训练策略,解决"强 KL 正则化在 decoder 尚未学好重建流形时会迫使表示丢弃声学细节"的问题。Stage I 仅训练 AE 重建 (Rec+GAN+Feat, 500K steps); Stage II 冻结 encoder/decoder,仅训练 variational bottleneck (弱 KL β=0.1, 50K steps); Stage III 解冻全部参数,联合优化 Rec+GAN+Feat + 强 KL (β=7) + WavLM 帧级蒸馏 + x-vector 话语级蒸馏 + 多任务 LM 监督 (ASR/emotion/captioning/SED) (200K steps) [HoliTok Eq. 1-6]。关键发现: 消融显示多任务 LM 监督不仅帮助理解,去掉后 TTS WER 从 27.85%→110%,说明下游监督对生成鲁棒性也至关重要 [HoliTok Table 8]。
 
 ### 7. Relation-Preserving Distillation Loss (L_rela)
 

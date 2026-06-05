@@ -135,3 +135,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## FHVAE-Inspired 层次化变分条件 (CapTalk)
 
 [[论文笔记/CapTalk|CapTalk]] (Su et al., 2026) 将 FHVAE (Hsu & Glass, 2018) 的核心分层思想从语音分析迁移到 TTS 生成场景,用于解决 voice design 中的 timbre-expression 纠缠问题。与传统 TTS VAE 用于建模 one-to-many mapping 不同,CapTalk 的 VAE 模块专注于**属性解耦**: utterance-level speaker encoder (global pooling) 提取稳定 e_spk,segment-level posterior q(z2|s) 通过 KL 正则化向 utterance-conditioned prior p(z2|e_spk)=N(f(e_spk), I) 靠拢,使 z2 保留 timbre 而抑制 segment-specific 情感变化。Fixed e_spk 跨 utterance SIM 0.92 vs resampled 0.42 [Table 10]。这是 VAE 在 TTS 中从"生成建模"向"属性解耦条件化"角色转变的一个实例。详见 [[论文笔记/CapTalk|CapTalk]]。
+
+## HoliTok: 渐进式 AE→VAE 训练解决 KL-vs-Fidelity 困境
+
+[[论文笔记/HoliTok|HoliTok]] (Li et al., 2026) 提出渐进式三阶段训练策略,直接回应了 Semantic-VAE 发现的**重建-生成困境**: 不是在高维 latent 上加语义正则化 (Semantic-VAE 路线),也不是选低维 latent + 大模型 (LongCat-AudioDiT 路线),而是通过分阶段引入正则化来保持两者兼顾。Stage I 训练确定性 AE 建立高保真重建流形; Stage II 冻结 encoder/decoder 仅训练 LSTM variational bottleneck (β=0.1),利用"implicit fidelity transfer"使 VAE 采样留在 AE 的高保真区域; Stage III 解冻全部参数,联合优化强 KL (β=7) + WavLM/x-vector 多粒度蒸馏 + 多任务 LM 监督。结果: 25Hz/128-dim (7.5x 压缩) 下 PESQ 4.10, SPKSIM 0.968 最优; 在统一 AR+DiT 生成-理解架构中是唯一稳健运行的表示 (Semantic-VAE TTS WER 崩至 102%) [HoliTok Table 1, 3]。关键发现: 多任务 LM 监督对**生成鲁棒性**也至关重要,去掉后 TTS WER 从 27.85%→110% [Table 8]。

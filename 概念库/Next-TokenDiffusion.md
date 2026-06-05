@@ -4,7 +4,7 @@ title: "Next-Token Diffusion"
 aliases: [Per-Token Diffusion, Token-Level Diffusion Head, 逐token扩散, Next-Token Diffusion Head]
 category: "technique"
 tags: [diffusion, autoregressive, continuous-representation, language-model, TTS, multimodal]
-key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]"]
+key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/HoliTok|HoliTok]]"]
 origin_paper: "Sun et al., Multimodal Latent Language Modeling with Next-Token Diffusion, 2024 (arXiv:2412.08635)"
 related_concepts: ["[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[VariationalAutoencoderforTTS]]"]
 status: pending-review
@@ -72,4 +72,8 @@ Next-Token Diffusion 不是要取代 sequence-level diffusion,而是用于**与 
 
 ## 演进
 
-MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM (2024, per-token DDPM head, sigma-VAE, multimodal) → CLEAR (2025, per-token rectified flow head, enhanced VAE, streaming TTS) → VibeVoice (2025, industrial-scale, long-form multi-speaker, Qwen2.5 backbone) → SemaVoice (2026, SFM-guided VAE alignment, patch-wise LocDiT)
+MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM (2024, per-token DDPM head, sigma-VAE, multimodal) → CLEAR (2025, per-token rectified flow head, enhanced VAE, streaming TTS) → VibeVoice (2025, industrial-scale, long-form multi-speaker, Qwen2.5 backbone) → SemaVoice (2026, SFM-guided VAE alignment, patch-wise LocDiT) → HoliTok (2026, holistic VAE tokenizer + AR+DiT, 渐进式三阶段训练, 统一生成-理解)
+
+## HoliTok: AR+DiT 统一建模的 holistic tokenizer
+
+[[论文笔记/HoliTok|HoliTok]] (Li et al., 2026) 将 AR+DiT 范式的瓶颈从架构端转移到 tokenizer 端。其 AR+DiT 下游架构与 DiTAR/Ming-UniAudio 相同 (Qwen2.5-0.5B + 18-layer DiT flow-matching head),但核心贡献在于: 通过渐进式三阶段训练 (AE→VAE→downstream-aware enrichment) 构建的 25Hz/128-dim VAE latent 是测试的所有连续表示中唯一能在统一 TTS+ASR 架构中稳健运行的表示。Semantic-VAE 在统一设置中 TTS WER 崩至 102%, MingTok-Audio 崩至 51%, 而 HoliTok-Unite 仅 8.59% [Table 3]。消融显示多任务 LM 监督不仅帮助理解,对 **生成鲁棒性** 也至关重要——去掉后 TTS WER 从 27.85% 升至 110% [Table 8]。
