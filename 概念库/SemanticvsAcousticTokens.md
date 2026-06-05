@@ -84,6 +84,7 @@ Token 类型的选择直接决定 SpeechLM 的能力侧重:
 - **多数 SpeechLM 选择 semantic tokens** (GSLM, TWIST, SpeechGPT, AudioPaLM, OmniFlatten, SLAM-Omni): 语义理解是口语交互的核心
 - **Codec-focused 系统选择 acoustic tokens** (VioLA, Parrot): 侧重高保真生成
 - **前沿系统转向 mixed tokens** (Moshi, SpeechGPT-Gen): 兼顾理解和保真度
+- **Speech editing 场景验证 semantic tokens 优势**: [[论文笔记/EditContentPreserveAcoustics|Edit Content, Preserve Acoustics]] (Ren et al., ICME 2026) 在 text-based speech editing 中系统性对比 semantic space vs acoustic space editing。在 semantic token 空间做 PSM infilling + Flow Matching 渲染,WER 全面优于 acoustic token AR baseline (VoiceCraft, 4.97% vs 12.94% on Insertion) 和 NAR baseline (FluentSpeech),且 speaker similarity 不受影响 (timbre 由 frozen FM decoder 统一重建)。实验证据支持: 当任务要求"改内容不改风格"时,semantic space 的 content-style 解耦是结构性优势。
 
 ## 关键论文
 
