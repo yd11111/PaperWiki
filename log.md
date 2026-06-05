@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[SiTok]] — 命中 6 页(取 6): [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[SiTok]] — 精读更新(元数据修正+KB扩展+审阅), kb_sources=6, 新建 0, 追加 2 ([[CodecTrainingObjectives]] key_papers+表, [[CodebookCollapse]] body)
+- [review/auto] [[SiTok]] — pass-with-fixes, 0 high, 1 medium, 2 low
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过追加
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(26),跳过追加
+- [skip/update] [[CodebookCollapse]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] SiTok — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 276 — 建议抽空审核
 - [kb/search] [[PFluxTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Cross-lingualVoiceCloning]]✓, [[NeuralVocoder]]✓ | 过滤: [[DurationPredictor]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
 - [ingest/deep] [[PFluxTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[Cross-lingualVoiceCloning]] key_models + 代表模型)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过追加
