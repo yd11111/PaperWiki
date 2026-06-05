@@ -1,6 +1,17 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[FC-TTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[NaturalSpeech3]](pending-review), [[FiniteScalarQuantization]](pending-review)
+- [ingest/deep] [[FC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (NaturalSpeech3 key_papers)
+- [review/auto] [[FC-TTS]] — pass-with-fixes, 0 high, 1 medium (Table 1 F5-TTS 行拆分)
+- [review/kb] [[FC-TTS]] — pass, 1 append (NaturalSpeech3), 5 skipped (key_papers over limit)
+- [skip/update] [[SpeechFactorization]] — key_papers 已达上限(32),跳过
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限,论文仅使用标准 CFM,跳过
+- [skip/update] [[StyleTransferinTTS]] — key_papers 已达上限,跳过
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,跳过
+- [skip/update] [[FiniteScalarQuantization]] — key_papers 已达上限(15),跳过
+- [lint/local] FC-TTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 实体页积压,建议抽空批量审阅
 - [kb/search] [[Raon-Speech]] — 命中 6 页: [[SpeechLanguageModel]]✓, [[Full-duplexSpokenDialogue]][待确认], [[ModalityAdaptationforSpeechLLM]][待确认], [[Turn-takinginSpokenDialogue]][待确认], [[StreamingSpokenDialogue]][待确认], [[Speech-LLMIntegrationTaxonomy]][待确认]
 - [ingest/deep] [[Raon-Speech]] — 精读, kb_sources=6, 新建 0, 追加 8 (ModalityAdaptationforSpeechLLM/Speech-LLMIntegrationTaxonomy/SpokenDialogueEvaluation/Whisper key_papers, Full-duplexSpokenDialogue/Turn-takinginSpokenDialogue/StreamingSpokenDialogue 正文+演进, SEED-TTS-Eval used_by)
 - [review/auto] [[Raon-Speech]] — pass, 0 high, 1 medium (OpenAudioBench 81.33→70.21 修正)
