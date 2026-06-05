@@ -1,0 +1,66 @@
+review:
+  paper: "StreamWise"
+  note_path: "论文笔记/StreamWise.md"
+  reviewer: "auto"
+  date: "2026-06-05"
+  checklist_version: "v1.1"
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节结构清晰,五个关键设计选择都有 WHY 解释并标注了来源([论文原文]/[agent 解读])。StreamCast 流水线表格直观。作为系统论文,核心贡献(组合优化)解释充分。略欠缺的是对贪心算法本身的详细描述(如何生成初始配置、如何迭代改进)。"
+  trustworthy:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率高(>90%),几乎所有数字都有 [§X.X]/[Table N]/[Fig N] 标注。指标使用正确(TTFF, TBF, cost, energy)。速查卡片指标字段含具体数字+条件+出处。"
+  distinguishable:
+    score: 9
+    rationale: "因果解释来源标注覆盖率高。每段设计选择的解释都标注了 [论文原文] 或 [agent 解读]。局限性中的 agent 推断也有标注。不存在将推断写成断言的句子。"
+  positionable:
+    score: 8
+    rationale: "KB 背景节有具体谱系定位,清晰区分了本文(系统论文)与 KB 中已有的 TTS/模型论文的差异。与 StreamingSpokenDialogue 的类比(TTFF 类比 first-token latency)有启发性。frontmatter 字段完整。models 字段列了 StreamWise 本身而非 baseline,但作为系统论文(非提出新模型),这是合理的。"
+  non_polluting:
+    score: 9
+    rationale: "概念挂接合理(DiffusionModel, CFG, StreamingSpokenDialogue)。反向更新计划仅涉及追加 key_papers,不涉及实质修改。无 factual error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    type: "template-compliance"
+    severity: "low"
+    principle: "positionable"
+    location: "frontmatter models"
+    detail: "models 字段列了 [[论文笔记/StreamWise|StreamWise]],但 StreamWise 是一个系统而非模型。作为系统论文,models 字段可留空或列对比系统(HexGen, Helix)。"
+    suggestion: "改为 models: [] 或在 frontmatter 中添加自定义字段 systems: [StreamWise, HexGen, Helix]"
+
+  - id: 2
+    type: "traceability-gap"
+    severity: "low"
+    principle: "trustworthy"
+    location: "播客视频生成流水线表格, 延迟列"
+    detail: "表中延迟数字(如 1.2s, 0.9s)来自 Table 4 的 cost-efficient 配置的 TTFF 列,但表头标注的是 '延迟' 而非 'TTFF'。TTFF 和端到端延迟含义不同。"
+    suggestion: "将列标题改为 'TTFF' 或在表格下方注明这些是 cost-efficient 配置下的 TTFF 值。"
+
+  - id: 3
+    type: "traceability-gap"
+    severity: "low"
+    principle: "trustworthy"
+    location: "实验表格, vs HexGen/Helix 行"
+    detail: "'3x lower cost, 5x lower TTFF' 是从 Fig 11 目视估算的,原文未给出精确倍数。"
+    suggestion: "标注为 '约 3x'/'约 5x' 或添加 '(目视估算)' 说明。"
+
+  - id: 4
+    type: "summary-without-mechanism"
+    severity: "low"
+    principle: "reproducible"
+    location: "方法节, 整体架构"
+    detail: "贪心算法的具体步骤(初始配置生成、迭代改进的搜索空间、终止条件)未详细展开。原文 §4.4 有更多细节。"
+    suggestion: "可在关键设计选择中增加一段简述贪心算法的工作流程(初始单GPU配置 → 增删硬件/切换GPU类型/调整模型实例 → 贪心模拟DAG → 比较cost x TTFF)。"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+total_issues: 4
+
+learning_signals:
+  - "系统论文的 models 字段语义需要特殊处理 — 系统不是模型,但 frontmatter 模板假设论文提出或对比模型"
+  - "系统论文的实验数据常需从图表目视估算,traceability 标注应明确区分精确数字和估算数字"
