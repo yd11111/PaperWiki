@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[Covo-Audio]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[Full-duplexSpokenDialogue]]✓, [[SpeechTokenizer]]✓, [[ModalityAdaptationforSpeechLLM]]✓, [[ConditionalFlowMatching]]✓, [[Speech-LLMIntegrationTaxonomy]]✓ | 过滤: 无
+- [ingest/deep] [[Covo-Audio]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[Full-duplexSpokenDialogue]] 代表系统)
+- [review/auto] [[Covo-Audio]] — pass, 0 high, 0 medium, 2 low
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(30+),跳过
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过
+- [skip/update] [[AudioUnderstanding]] — key_papers 已达上限(13),跳过
+- [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(12),跳过
+- [lint/local] Covo-Audio — 通过
 - [kb/search] [[DSFlow]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[ScoreMatching]](pending-review)
 - [ingest/deep] [[DSFlow]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[ConditionalFlowMatching]] 演进, [[Classifier-FreeGuidance]] 蒸馏行为, [[模型库/CosyVoice2|CosyVoice 2]] baseline)
 - [review/auto] [[DSFlow]] — pass-with-fixes, 0 high, 1 medium (frontmatter models), 1 low (lr 不一致)
