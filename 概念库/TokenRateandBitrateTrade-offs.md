@@ -110,6 +110,7 @@ TTS 系统对 token rate 和 bitrate 有特殊需求:
 - **最优实践**: CosyVoice 系列使用 25 Hz / 1 codebook; VALL-E 使用 75 Hz / 8 codebook (AR first + NAR rest)
 
 Survey TTS 实验 [Table 11]: Discrete WavLM (6 codebooks, 3 kbps, semantic) 达到 UTMOS 3.42, dWER 7.45, SpkSim 0.90 — 语义 tokenizer 在有限数据条件下更稳定。
+- **极低帧率 + 深 RVQ**: [[论文笔记/UltraLowLatencyTTS|UltraLowLatencyTTS]] (Su et al., 2026) 使用 Mimi 12.5 Hz x 32 层 codebook (2048 entries),通过 depth-wise sequential decoding 在帧内逐层预测。消融显示 16→32 层 WER 仅降 0.18pp (9.07→8.89%),佐证 Survey "8Q→32Q 改善微弱但 token rate 增 4 倍" 的发现。极端低帧率的优势在 attention 计算量(序列仅 125 帧/10s)和 RTF(0.0033)上体现。
 
 ## 关键论文
 
