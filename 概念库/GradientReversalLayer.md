@@ -4,7 +4,7 @@ title: "Gradient Reversal Layer"
 aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]", "[[论文笔记/AgentSteerTTS|AgentSteerTTS]]"]
 origin_paper: ""
 related_concepts: ["[[SpeechTokenizer]]"]
 status: pending-review
@@ -58,4 +58,13 @@ Gradient Reversal Layer (GRL) 是一种对抗训练技术,前向传播时为恒�
 
 ## 演进
 
-Domain Adaptation GRL (2016) → Style-Content Disentanglement → Emotion-Speaker Disentanglement in TTS (IndexTTS2, 2025)
+在 [[论文笔记/AgentSteerTTS|AgentSteerTTS]] (Kang et al., ICML 2026) 中,GRL 用于 composite-instruction TTS 中的双向 speaker-emotion disentanglement:
+- 采用 **双向 GRL** 架构: D_id 从 z_emo 预测 speaker + D_emo 从 z_id 预测 emotion,同时反转两个方向的梯度
+- 配合 **cross-covariance 正交约束** L_orth = ||Cov(z_id, z_emo)||_F,在 batch 统计层面进一步减少两个子空间的相关性
+- 联合损失 L_ADM = L_rec + lambda_adv * L_adv + lambda_orth * L_orth
+- 效果: E-SIM vs S-SIM 相关性从 r=0.544 降至 r=-0.032 (近正交); z_emo 的 speaker 预测准确率从 97.5% 降至 64.4% [Appendix B.2]
+- 与 IndexTTS2 的单向 GRL 相比,双向设计确保 z_id 和 z_emo 各自对对方属性不变; 与 SelfTTS 的 cosine-based GRL 相比,AgentSteerTTS 使用传统 CE loss + GRL 但增加了正交约束作为补充
+
+## 演进
+
+Domain Adaptation GRL (2016) → Style-Content Disentanglement → Emotion-Speaker Disentanglement in TTS (IndexTTS2, 2025) → Bidirectional GRL + Cross-covariance Orthogonality (AgentSteerTTS, 2026)
