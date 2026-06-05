@@ -1,0 +1,35 @@
+review:
+  paper: "KineticOptimalTTS"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "kb-update-review"
+
+  change_plan:
+    - target: "概念库/ConditionalFlowMatching.md"
+      action: "append-body"
+      detail: "Skip key_papers (67 >> 12 limit). Append to 演进 section about MI-DFM first TTS application."
+      safety: "safe - body append only, no status change"
+
+    - target: "概念库/MaskedGenerativeModeling.md"
+      action: "append"
+      detail: "Append key_papers entry (10 < 12). Append to 演进 section."
+      safety: "safe - under limit, append only"
+
+    - target: "数据集/SEED-TTS-Eval.md"
+      action: "append"
+      detail: "Append used_by entry. Append GibbsTTS results to body."
+      safety: "safe - append only"
+
+    - target: "数据集/CV3-Eval.md"
+      action: "append"
+      detail: "Append used_by entry (5 < 12). Append GibbsTTS results to body."
+      safety: "safe - append only"
+
+    - target: "数据集/Emilia.md"
+      action: "append"
+      detail: "Append used_by entry."
+      safety: "safe - append only"
+
+  conclusion: "pass"
+  issues: []
+  summary: "All 5 updates are append-only. No substantive modifications. No new entity pages needed (MI-DFM is a sub-topic of flow matching, not an independent concept). No dedup concerns."
