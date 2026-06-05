@@ -167,7 +167,7 @@ L_total = lambda_mel * L_mel + lambda_adv * L_adv + lambda_feat * L_feat + lambd
 
 **创新性**: AffectCodec 的核心贡献是**重新定义了 codec 的优化目标** -- 将情感从"评估维度"提升为"训练目标"。这一方向性转变很有价值。三阶段框架设计合理且互补:EG-Latent 在量化前注入信息,RP-Distill 在量化后保护拓扑结构,EW-Align 通过 importance weighting 重点保护脆弱帧。特别是帧级情感差分加权 (d_t = ||e_t - e_{t-1}||) 的 idea 简洁有效,可迁移性强。
 
-**实验设计**: 评估全面 (重建 + SER + TTS),消融深入 (每个模块 + 注意力机制 + 蒸馏方式 + RVQ 层选择 + emotion encoder)。EMO-SUPERB 是标准化 benchmark,增强可比性。但 baseline 选择中缺少 X-Codec/X-Codec 2 (同为 semantic-enhanced codec),以及 FACodec (在 Emo SIM 上表现不错)。
+**实验设计**: 评估全面 (重建 + SER + TTS),消融深入 (每个模块 + 注意力机制 + 蒸馏方式 + RVQ 层选择 + emotion encoder)。EMO-SUPERB 是标准化 benchmark,增强可比性。Baseline 覆盖较全面,包含 FACodec、Llasa (X-Codec 2)、EnCodec、DAC 等主要 codec 变体;可考虑补充原版 X-Codec 的对比。
 
 **局限性讨论不充分**: 论文仅在 Limitations 节讨论了计算效率,未讨论情感类别偏差、跨语言/跨域泛化、teacher model 依赖、以及情感标注的主观性问题。
 
@@ -180,3 +180,19 @@ L_total = lambda_mel * L_mel + lambda_adv * L_adv + lambda_feat * L_feat + lambd
 3. **Cross-attention before projection 策略**: 在投影到共享空间之前做跨模态交互,保留更丰富的原始特征信息,可用于其他多模态 fusion 设计
 4. **Stochastic dropout on modulation terms**: 对多个辅助信号的调制分量独立做 dropout,增强对单一信号的鲁棒性
 5. **RVQ 第一层聚焦监督**: 新增目标函数仅约束 Q(1) 而非所有层,与"RVQ-1 编码最紧凑信息"的先验一致,减少对深层残差学习的干扰
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 4 个设计选择的因果解释 + 消融证据 |
+> | 可信赖 | pass | 全部数字经 PDF 交叉验证,指标名/方向正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >90% |
+> | 可定位 | pass-with-fixes | KB 背景谱系定位准确; 点评中 baseline 覆盖判断已修正 |
+> | 不污染 | pass | frontmatter 引用准确,反向更新计划无 overclaim |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/AffectCodec-review.yml`

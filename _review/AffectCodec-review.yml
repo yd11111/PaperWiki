@@ -1,0 +1,49 @@
+review:
+  paper: "AffectCodec"
+  note_path: "论文笔记/AffectCodec.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      rationale: "方法节包含 4 个设计选择的因果解释(WHY),每个都有消融证据支撑; 速查卡片的'可借鉴'列出 5 个具体可迁移 trick; 整体架构描述清晰,三阶段框架的逻辑关系明确"
+    trustworthy:
+      score: 9
+      rationale: "所有实验数字经 PDF 原文交叉验证,Table 2/3/4/5 数据均正确; 指标方向和名称准确; 来源标注覆盖率高(>90%)"
+    distinguishable:
+      score: 9
+      rationale: "因果解释严格标注 [论文原文] 和 [agent 解读]; 强断言有数字+出处支撑; '首个' claim 引用了论文自身的声明"
+    positionable:
+      score: 8
+      rationale: "KB 背景节有详细谱系定位,定位到 codec 优化目标扩展线上; 创新判断有对比基准(SpeechTokenizer/X-Codec/EmoCodec); 但点评中有一处 baseline 覆盖声明不准确(见 issue #1)"
+    no_contamination:
+      score: 9
+      rationale: "frontmatter 概念/模型/任务引用准确; 反向更新计划中无 overclaim; 笔记信息进入概念页后会改善 KB 背景质量"
+
+  conclusion: pass-with-fixes
+
+  issues:
+    - id: 1
+      severity: medium
+      type: factual-error
+      location: "点评 > 实验设计"
+      detail: "声称'baseline 选择中缺少 X-Codec/X-Codec 2 (同为 semantic-enhanced codec),以及 FACodec'。但 FACodec 在 Table 2 中作为 baseline (Emo SIM 0.88),Llasa (= X-Codec 2 tokenizer) 也在 Table 2/3/4 中。这一批评不成立。"
+      suggestion: "删除该句或修正为'baseline 覆盖较全面,包含了主要 codec 变体;可考虑补充 X-Codec (原版) 的对比'"
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "全文"
+      detail: "论文 demo URL (https://jiachengqaq.github.io/affectcodec_demo/) 未在笔记中记录"
+      suggestion: "可在速查卡片或 frontmatter 中补充 demo 链接"
+    - id: 3
+      severity: low
+      type: traceability-gap
+      location: "实验 > 重建评估"
+      detail: "Emo SIM 和 Pros SIM 的具体定义未在笔记中说明(Emo SIM = emotion2vec cosine similarity, Pros SIM = pitch/energy/duration-based AutoPCP similarity)"
+      suggestion: "在实验节首次使用这些指标时简要注明来源模型"
+
+  learning_signals: []
+
+  summary: "笔记整体质量高,方法解释有深度,数字可信,KB 定位准确。1 个 medium issue(点评中 baseline 覆盖判断错误)需修正,2 个 low issue 可选择性改善。不阻塞反向更新。"
