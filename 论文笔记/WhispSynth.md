@@ -145,7 +145,7 @@ CosyVoice3 合成初始耳语 → DDSP pitch detection 检测残留 F0 段 →
 ## 局限性
 
 1. **WER 问题**: CosyWhisper 的 WER (29.22%) 显著高于 CosyVoice3 (9.81%),虽然 W-MOS 更高但清晰度有所牺牲 [Table 4]。[agent 解读] 这暗示 CFM fine-tune 在追求耳语真实感时可能损害了发音清晰度,存在 intelligibility-whisperness trade-off
-2. **对 CosyVoice3 的依赖**: 整个 pipeline 依赖 CosyVoice3 的预训练能力,且官方脚本需要 hack 才能支持 CFM fine-tune [§4, Appendix B]。可复现性受限于 CosyVoice3 的开源程度
+2. **对 CosyVoice3 的依赖**: 整个 pipeline 依赖 CosyVoice3 的预训练权重和开源生态,且官方脚本仅支持 LLM 训练,需要自行扩展才能支持 CFM fine-tune [§4, Appendix B]
 3. **多语言验证有限**: 日语/韩语验证数据来自 YouTube ASMR 视频手动整理,每种语言仅 4 个说话人(2男2女),统计效力不足 [Appendix D]
 4. **评估指标局限**: 作者自己指出现有客观指标与耳语特性对齐不佳(poorly aligned),人工评估仍不可替代 [§5.2]
 5. **麦克风差异未评估**: 不同录音设备对模型性能的影响未系统测试 [Limitations]
@@ -169,3 +169,19 @@ CosyVoice3 合成初始耳语 → DDSP pitch detection 检测残留 F0 段 →
 ---
 
 检索命中: [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[CosyVoice3]](pending-review), [[F0Modeling]](pending-review), [[BigVGAN]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY 解释充分,设计选择有因果论证,可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率>90%,指标名正确;已修正闭源描述 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率>90% |
+> | 可定位 | pass | KB 背景有具体谱系+创新判断+对比基准 |
+> | 不污染 | pass | 无新建页,反向更新均为 append |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/WhispSynth-review.yml`
