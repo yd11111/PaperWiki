@@ -1,0 +1,55 @@
+kb_review:
+  paper: "RobustSpeechFlow"
+  note_path: "论文笔记/RobustSpeechFlow.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+change_plan:
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: "append"
+    detail: >
+      skip key_papers (67 entries, limit 12).
+      Append 1-line reference to 演进 section about contrastive FM
+      applied to TTS with failure-mode hard negatives.
+    status_change: none
+    risk: low
+
+  - target: "数据集/SEED-TTS-Eval.md"
+    action: "append"
+    detail: >
+      Append to used_by list + 最新结果 section.
+      RobustSpeechFlow: WER 1.38 (test-en), SIM 0.60.
+    status_change: none
+    risk: low
+
+  - target: "概念库/Classifier-FreeGuidance.md"
+    action: "skip"
+    detail: >
+      key_papers at 36 (limit 12). Paper merely uses CFG (weight=3.0)
+      at inference, no conceptual contribution to CFG. Skip.
+    status_change: none
+
+  - target: "概念库/Non-autoregressiveTTS.md"
+    action: "skip"
+    detail: >
+      key_papers at 28 (limit 12). Paper is NAR but doesn't advance
+      NAR architecture — it's a training strategy paper. Skip.
+    status_change: none
+
+  - target: "任务库/Zero-shotSpeechSynthesis.md"
+    action: "skip"
+    detail: >
+      key_models at 64 (limit 12). Paper achieves strong WER but
+      SIM 0.60 is low-tier; no SOTA contribution worth adding to body.
+      Skip.
+    status_change: none
+
+issues: []
+
+summary:
+  total_changes: 2
+  appends: 2
+  substantive: 0
+  new_pages: 0
+  skipped: 3
