@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Tibetan-TTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review)
+- [ingest/deep] [[Tibetan-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation key_papers, Cross-lingualVoiceCloning 开放问题)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),论文仅使用 FM 无方法贡献
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(103),论文使用已有范式
+- [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(15),适配策略描述笼统
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限(42),非直接贡献
+- [lint/local] Tibetan-TTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 312 — 建议抽空审核
 - [kb/search] [[MelShield]] — 命中 4 页(取 4): [[NeuralVocoder]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[Text-to-SpeechPipeline]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)
 - [ingest/deep] [[MelShield]] — 精读, kb_sources=4, 新建 0, 追加 1 (Anti-spoofingandDeepfakeDetection key_papers+正文)
 - [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),跳过追加 (MelShield 使用 vocoder 作为 black-box,非 vocoder 贡献)
