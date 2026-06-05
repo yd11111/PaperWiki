@@ -165,7 +165,7 @@ KO scheduler 在 Seed-TTS test-en 上 UTMOS +0.034, WER -0.016pp, SIM +0.014 相
 
 去掉 corrector 后全部指标一致下降(UTMOS -0.248, WER +0.343pp, SIM -0.020 on Seed test-en)。在不同 NFE (16/32/64) 和不同 scheduler 下均观察到一致增益 [Tables 11,12]。
 
-### Ablation: Full-codebook vs Per-layer
+### Ablation: Full-codebook vs Per-layer (Base variant, 178M)
 
 Full-codebook (32 NFE) vs Per-layer 最佳配置 (66 NFE): SIM 0.711 vs 0.675, WER 1.961% vs 3.377% on Seed test-en [Table 8]。Full-codebook 在更少 NFE 下实现更好的 intelligibility 和 similarity。
 
@@ -202,3 +202,16 @@ Full-codebook (32 NFE) vs Per-layer 最佳配置 (66 NFE): SIM 0.711 vs 0.675, W
 
 ## 审阅
 
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | KO scheduler 和 moment correction 的 WHY 解释清晰,3 个具体可迁移 trick |
+> | 可信赖 | pass | 数字标注覆盖率高,核心数字经交叉验证无误 |
+> | 可区分 | pass | [论文原文] vs [agent 解读] 标注明确 |
+> | 可定位 | pass | KB 背景具体定位与 DiFlow-TTS/连续 CFM 的关系 |
+> | 不污染 | pass | 反向更新均为追加,无过度声明 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/KineticOptimalTTS-review.yml`

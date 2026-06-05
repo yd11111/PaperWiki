@@ -1,0 +1,50 @@
+review:
+  paper: "KineticOptimalTTS"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "note-review"
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节详细解释了 KO scheduler 的推导动机(Cauchy-Schwarz → 恒速)和 moment correction 的设计哲学(不改方向只调概率);所有关键设计选择都回答了 WHY;速查可借鉴字段有 3 个具体可迁移 trick"
+    trustworthy:
+      score: 9
+      reason: "数字型 claim 出处标注覆盖率高(Table/Section/Appendix);指标名称使用正确;速查指标字段含具体数字+数据集+来源;所有核心数字经交叉验证无误"
+    distinguishable:
+      score: 9
+      reason: "因果解释清晰标注了 [论文原文] vs [agent 解读];推断性分析有明确限定词;方法节区分了论文主张和 agent 解读"
+    locatable:
+      score: 9
+      reason: "KB 背景具体定位了与 DiFlow-TTS(mask-source DFM)和连续 CFM 的关系;创新判断有对比基准;frontmatter 字段完整且语义正确"
+    non-polluting:
+      score: 9
+      reason: "反向更新均为追加类型(向已有 KB 页追加 key_papers);无新概念页需创建;无过度声明风险"
+
+  conclusion: "pass-with-fixes"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "medium"
+      location: "实验 > Ablation: Full-codebook vs Per-layer"
+      detail: "Table 8 数字来自 GibbsTTS-Base (178M) 变体而非 Large (399M),但笔记未注明。读者可能误认为这是与主实验(Large)同等规模的对比。"
+      suggestion: "在该段开头注明 '(Base variant, 178M)'。"
+
+    - id: 2
+      type: "traceability-gap"
+      severity: "low"
+      location: "实验 > Ablation: KO Scheduler vs Grid-searched"
+      detail: "Ablation 差值计算正确,但未标注这些差值是在哪个 test set (Seed-TTS test-en) 上计算的,需要读者推断。"
+      suggestion: "已标注 test-en,无需修改。保持现状即可。"
+
+    - id: 3
+      type: "template-compliance"
+      severity: "low"
+      location: "速查 > 指标"
+      detail: "速查卡片指标中 Qwen3-TTS 的 1.7B 参数量从 SOTA 比较表可知,但速查中未提及 GibbsTTS 自身参数量 (399M Large)。"
+      suggestion: "可在路线或指标中补充 '(399M, 32 NFE)' 便于快速参照。"
+
+  summary: "1 medium + 2 low issues. 笔记质量高: 理论推导的因果解释清晰,数字准确,KB 定位具体。唯一中等问题是 Base/Large variant 标注。"
+
+  learning_signals: []
