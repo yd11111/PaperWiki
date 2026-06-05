@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[ManchuTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review), [[MelSpectrogram]](pending-review), [[PhonemeRepresentation]](pending-review)
+- [ingest/deep] [[ManchuTTS]] — 精读, kb_sources=6, 新建 0, 追加 0 (所有6页 key_papers 均超上限,且本文为应用型论文无方法论贡献,跳过反向更新)
+- [review/auto] [[ManchuTTS]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed: CBVC baseline 补充+models 字段, 1 low fixed: first-chunk 术语)
+- [lint/local] ManchuTTS — 通过
 - [kb/search] [[TaskVectorTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review)
 - [ingest/deep] [[TaskVectorTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (EmotionControlinTTS prose, CosyVoice2 baseline, CFG 参数空间类比)
 - [review/auto] [[TaskVectorTTS]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed: venue 修正, 2 low fixed: 表格+溯源)
