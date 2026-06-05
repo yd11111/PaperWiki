@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[HowOpenIsOpenTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 参考(pending-review): [[VITS]], [[Diffusion-basedTTS]], [[TTSEvaluation]], [[SpeakerAdaptation]]
+- [ingest/deep] [[HowOpenIsOpenTTS]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [skip/update] 全部 6 页 — benchmark 论文使用已有系统/指标但未推进概念,key_papers 均已达上限,贡献不足以 append 正文
+- [lint/local] HowOpenIsOpenTTS — 通过
 - [kb/search] [[SelfTTS]] — 命中 6 页(取 6): [[SpeechFactorization]]✓, [[SpeakerEmbedding]]✓ | 参考(pending-review): [[GradientReversalLayer]], [[StyleTransferinTTS]], [[EmotionControlinTTS]], [[VITS]]
 - [ingest/deep] [[SelfTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (GradientReversalLayer key_papers+body, VITS body)
 - [skip/update] [[StyleTransferinTTS]] — key_papers 已达上限,论文无新概念贡献
