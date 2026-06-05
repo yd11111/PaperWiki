@@ -4,7 +4,7 @@ title: "Codec Training Objectives"
 aliases: [Codec 训练目标, Codec Loss Landscape, Audio Codec Training Losses, Neural Codec 损失函数]
 category: "training-technique"
 tags: [training-objective, audio-codec, GAN, reconstruction, perceptual-loss]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[AudioTokenizerTaxonomy]]", "[[ResidualVectorQuantization]]", "[[Multi-scaleSTFTDiscriminator]]", "[[CodebookCollapse]]"]
 status: pending-review
@@ -89,6 +89,7 @@ M 为二值 mask,l 为交叉熵。用于 HuBERT、WavLM 等 SSL 模型,以及 Di
 | Diff + VQ | LaDiffCodec | 扩散替代 GAN |
 | GAN + Rec + Feat + VQ + SD | SpeechTokenizer, PAST | 加入语义蒸馏 |
 | MP | Discrete WavLM, Best-RQ | 纯 SSL 方案 |
+| Diff + CTC + VQ | SiTok | Flow matching 重建 + CTC 语义正则化 + VQ commitment; 端到端联合训练,CTC 直接预测文本而非蒸馏 SSL 特征 |
 
 ## 训练策略 [§2.4.1]
 

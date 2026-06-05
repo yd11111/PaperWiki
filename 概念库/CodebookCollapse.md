@@ -106,6 +106,7 @@ Zheng et al. (2024, IEEE/ACM TASLP 2025) 提出双层优化:
 - Lu, "Rethinking Codebook Collapse in Vector Quantization" (2026): 理论分析证明 encoder non-stationarity 是根本原因
 - Mentzer et al., "Finite Scalar Quantization" (ICLR 2024): 结构性解决方案,完全消除码本
 - [[论文笔记/IndexTTS|IndexTTS]] (Deng et al., 2025): VQ vs FSQ 系统对比实验 — 6k h 数据下 VQ 利用率仅 55%,但 34k h 数据下 VQ 接近 100%,与 FSQ 无显著差异。表明充足训练数据本身是缓解 codebook collapse 的有效途径
+- [[论文笔记/SiTok|SiTok]] (Wang et al., ICLR 2026): 在 2M 小时数据 + EMA 更新 + diffusion-based 训练下,VQ codebook (65536 entries) 利用率 >95%,VQ 在 WER/SIM/ASR 上全面优于 FSQ (WER 4.06 vs 5.23) [Table 8]。进一步证实大规模训练是缓解 collapse 的有效途径
 - [[论文笔记/SecoustiCodec|SecoustiCodec]] (Qiang et al., 2025): VAE+FSQ 混合方案 — VAE 的 KL 正则化使量化输入分布更均匀 + FSQ 固定网格保证高利用率,达 98.06% 利用率且 token 分布接近均匀(大多数频率 < 0.2%)。对比: 纯 VQ-VAE 仅 9.7%, 纯 SimVQ 仅 8.61%, 纯 FSQ 97.41%
 
 ## 相关概念
