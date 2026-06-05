@@ -1,0 +1,55 @@
+review:
+  paper: "MOSS-TTS"
+  note_path: "论文笔记/MOSS-TTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    status: pass
+    reason: "方法节有清晰的 WHY 解释,4 个关键设计选择均回答了替代方案对比。速查卡片可借鉴字段有 5 个具体可迁移 trick。"
+  trustworthy:
+    score: 8
+    status: pass
+    reason: "关键数字 (SIM 79.62%, AbsErr 0.7%, CER 1.86%) 交叉验证正确。指标名使用无误。CosyVoice3 标签有小错但数字正确。"
+  distinguishable:
+    score: 9
+    status: pass
+    reason: "一致使用 [论文原文] 和 [agent 解读] 标注,覆盖率约 90%。无断言性推断。"
+  positionable:
+    score: 9
+    status: pass
+    reason: "KB 背景有具体谱系定位 (CodecLM 路线 + Transformer tokenizer 区分点),创新判断对标 CNN-based codec 和已有 mixed token 方案。"
+  no_pollution:
+    score: 8
+    status: pass
+    reason: "frontmatter concepts/models 语义正确。反向更新计划安全 (追加 key_papers 为主)。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "方法节 line ~116-147"
+    detail: "出现两个 '### 训练策略' 标题: 第一个在 '关键设计选择' 下的 item 4,第二个是独立 section (覆盖数据 pipeline)。结构混乱。"
+    suggestion: "将 item 4 标题改为 '### 4. Generator 训练 curriculum',或将数据 pipeline 部分重命名为 '### 数据 pipeline'"
+
+  - type: traceability-gap
+    severity: medium
+    location: "实验 > Voice Cloning 表格 line ~170-172"
+    detail: "CosyVoice3 标注为 '(open)' 和 '(closed)',但论文 Table 3 的区分是模型规模 (0.5B vs 1.5B) + codebook 层数 (4 vs 8),非开源/闭源。两个 CosyVoice3 变体均为开源。"
+    suggestion: "改为 'CosyVoice3 (0.5B, 4-layer)' 和 'CosyVoice3 (1.5B, 8-layer)' 或直接标注参数"
+
+  - type: missing-detail
+    severity: low
+    location: "方法节"
+    detail: "§4.2 提到 generator 使用 Progressive Sequence Dropout (来自 MOSS-Audio-Tokenizer 论文) 支持可变比特率音频生成,笔记未提及。"
+    suggestion: "在 Local Transformer 段末追加一句"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 2
+  low: 1
+
+learning_signals: []

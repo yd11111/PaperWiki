@@ -113,7 +113,7 @@ L_sem = -sum_t log p_LLM(s_t | T, q, s_{<t})
 
 [agent 解读] 这实际上是 MusicGen delay pattern 和 Moshi RQ-Transformer 在同一 tokenizer 下的公平对比。1.7B Local-Transformer 在 SIM 上超过 8B Delay,说明 frame-local AR 的归纳偏置比模型规模对 speaker preservation 更重要。但 Delay 的优势在工程侧: 单 backbone → 更容易做 KV-cache 优化、流式推理、长序列推理。
 
-#### 4. 训练策略
+#### 4. Generator 训练 curriculum
 
 **Tokenizer 训练** [§3.3]:
 - 百万小时多域数据 (speech + music + sound effects)
@@ -133,9 +133,9 @@ L_sem = -sum_t log p_LLM(s_t | T, q, s_{<t})
 
 [论文原文] P2 刻意过度上采样 clone 数据的原因: "prompt-conditioned timbre transfer is both harder and more fragile than ordinary text-to-speech, and if it is introduced too weakly it tends to remain a tail capability" [§5.2]。P3 恢复均衡是因为"oversampling timbre-cloning data for too long biases the model toward prompt copying" [§5.2]。P4 推迟长上下文的原因: "Training with a very long window from the beginning is significantly less efficient" [§5.2]。
 
-### 训练策略
+### 数据 pipeline
 
-**数据 pipeline** [§5.1] 分三阶段:
+**数据处理** [§5.1] 分三阶段:
 1. **预处理** [§5.1.1]: MossFormer2-SE-48K 降噪 → FLAC 格式统一 → RMS 音量归一化 (target -20 dBFS, ±3 dB clamp) → DiariZen 说话人分割 + 合并 (同说话人相邻段合并,上限 1h)
 2. **过滤** [§5.1.2]: ASR 转写 (MOSS-Transcribe-Diarize) → 规则过滤 (空/重复/非语音) → LLM 精修 (诊断 + 清洗) → 单说话人验证 → 联合过滤 (DNSMOS > 2.8, Meta PQ > 6.5, 语言一致性, 时长-文本一致性)
 3. **数据合成** [§5.1.3]:
@@ -167,8 +167,8 @@ MOSS-Audio-Tokenizer 在各比特率段 (750-4000 bps) 一致优于开源 baseli
 | MOSS-TTS-LT | Clone | 1.7B | 1.87 | 71.74 | 1.33 | 77.24 | [Table 3] |
 | MOSS-TTS-LT | Continuation | 1.7B | 1.93 | 73.28 | 1.44 | 79.62 | [Table 3] |
 | Qwen3-TTS | — | 1.7B | 1.50 | 71.45 | 1.33 | 76.72 | [Table 3] |
-| CosyVoice3 (open) | — | 0.5B | 2.02 | 71.80 | 1.16 | 78.00 | [Table 3] |
-| CosyVoice3 (closed) | — | 1.5B | 2.22 | 72.00 | 1.12 | 78.10 | [Table 3] |
+| CosyVoice3 | — | 0.5B | 2.02 | 71.80 | 1.16 | 78.00 | [Table 3] |
+| CosyVoice3 | — | 1.5B | 2.22 | 72.00 | 1.12 | 78.10 | [Table 3] |
 | Seed-TTS | — | — | 2.25 | 76.20 | 1.12 | 79.60 | [Table 3] |
 
 MOSS-TTS-LT Continuation 在开源模型中 ZH SIM 最高 (79.62%),EN SIM 73.28% 亦具竞争力 [Table 3]。但 Seed-TTS (closed) 仍在 EN SIM (76.20%) 上领先。
@@ -232,3 +232,19 @@ MOSS-TTS-LT Continuation 在开源模型中 ZH SIM 最高 (79.62%),EN SIM 73.28%
 3. **4 阶段 curriculum 设计模式**: P1 (基础对齐) → P2 (重采样难任务) → P3 (恢复均衡 + LR decay) → P4 (上下文扩展)。"先让难能力成为 first-class,再恢复分布平衡"的策略对任何多任务预训练都适用
 4. **Duration control 通过双变体训练**: 同一数据序列化为 duration-conditioned 和 free-duration 两个变体,全程预训练,无需专门 fine-tune 阶段。原理是让 duration 成为一个 optional conditioning signal
 5. **Head-wise weighted CE loss**: 对 33 个 prediction head 使用不等权重 λ = (1,3,3,3,2,2,2,1,...),前几层 coarse RVQ 权重更高。可借鉴用于任何 multi-codebook AR 系统
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4 个设计选择有清晰 WHY,速查可借鉴 5 项具体 trick |
+> | 可信赖 | pass | 关键数字交叉验证正确,CosyVoice3 标签有小错已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率约 90% |
+> | 可定位 | pass | KB 背景谱系定位清晰,创新判断有对比基准 |
+> | 不污染 | pass | frontmatter 语义正确,反向更新计划安全 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/MOSS-TTS-review.yml`
