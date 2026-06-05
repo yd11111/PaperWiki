@@ -7,6 +7,12 @@
 - [review/auto] [[WAND]] — pass-with-fixes, 4 issues (0 high, 2 medium: models字段不完整+速查卡片跨语言claim需限定, 2 low)
 - [lint/local] WAND — 通过
 - [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
+- [kb/search] [[ConversationalTTS-RL]] — 命中 6 页(取 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 参考(pending-review): [[DifferentiableRewardOptimization]], [[EmotionControlinTTS]], [[StyleTransferinTTS]], [[Diffusion-basedTTS]]
+- [ingest/deep] [[ConversationalTTS-RL]] — 精读, kb_sources=6, 新建 0, 追加 1 (DifferentiableRewardOptimization 正文追加 ICL-based online RL 段)
+- [skip/update] [[ProsodyModeling]], [[LLM-basedTTS]], [[EmotionControlinTTS]], [[StyleTransferinTTS]], [[Diffusion-basedTTS]] — key_papers 均已达上限且连接间接
+- [review/auto] [[ConversationalTTS-RL]] — pass-with-fixes, 3 issues (0 high, 1 medium: 速查指标 net win rate 描述修正, 2 low)
+- [lint/local] ConversationalTTS-RL — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[CapTalk]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓ | 参考(pending-review): [[NaturalLanguageDescriptionforTTS]], [[VariationalAutoencoderforTTS]], [[CodecLanguageModel]], [[EmotionControlinTTS]]
 - [ingest/deep] [[CapTalk]] — 精读, kb_sources=6, 新建 0, 追加 4 (NaturalLanguageDescriptionforTTS 正文, SpeechFactorization 正文, VariationalAutoencoderforTTS 正文, EmotionControlinTTS 正文)
 - [skip/update] [[SpeakerEmbedding]], [[CodecLanguageModel]], [[ProsodyModeling]] — key_papers 均已达上限且无实质新知识需追加
