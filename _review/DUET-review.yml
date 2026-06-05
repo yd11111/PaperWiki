@@ -1,0 +1,100 @@
+review:
+  paper: "DUET"
+  note_path: "论文笔记/DUET.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节以 5 个编号设计选择展开,每个都回答了 WHY (为什么用 linear probe 而不是 difference-in-means, 为什么需要两种 probing 模式, 为什么 norm-adaptive 等)。速查卡片'可借鉴'给出了 3 个具体可迁移 trick (linear probe 方法论、norm-adaptive perturbation、generation-time probing)。读完笔记可以向同事解释 DUET 为什么 work。"
+  可信赖:
+    score: 9
+    reason: "所有关键数字均经 PDF 交叉验证: Table 1 (75.5% vs 46.8%), Table 2 (消融), Table 3 (EMOS 3.93), Fig 1 (8.5% variance, |cos|=0.029), Fig 2a (49% GT ceiling)。指标名正确使用 (SER accuracy, EMOS, NMOS)。出处标注覆盖率高,数字 claim 均有 [Table N]/[Fig N]/[§X.X] 标注。"
+  可区分:
+    score: 9
+    reason: "方法节中因果解释一致标注了 [论文原文] 或 [agent 解读]。例如 norm-adaptive steering 的工程理由标为 [论文原文, §3.1.3],Fisher 线性判别分析类比标为 [agent 解读]。未发现把推断写成断言的情况。"
+  可定位:
+    score: 9
+    reason: "KB 背景节提供了详细谱系定位: 直接继承 EmoSteer-TTS → 两项扩展 (跨架构 + 双空间)。与 TTS-CtrlNet、DiffRO/RLAIF-SPA 做了对比。创新判断有对比基准。frontmatter 字段完整,concepts/models 语义正确。"
+  不污染:
+    score: 8
+    reason: "无新建概念页。反向更新将追加到 EmotionControlinTTS (key_papers 已满,需追加到正文)。无 factual-error 或 overclaim 风险。扣 1 分因为 frontmatter datasets 为空 (ESD/CREMA-D/IEMOCAP 未在数据集库中)。"
+
+checklist:
+  可复述:
+    - item: "方法节含因果解释"
+      status: pass
+    - item: "设计选择回答 WHY"
+      status: pass
+    - item: "速查可借鉴具体"
+      status: pass
+
+  可信赖:
+    - item: "数字 claim 有出处标注"
+      status: pass
+      note: "覆盖率 ~95%"
+    - item: "指标名正确"
+      status: pass
+    - item: "速查指标含数字+数据集+来源"
+      status: pass
+    - item: "无方向性错误"
+      status: pass
+
+  可区分:
+    - item: "因果解释标注来源"
+      status: pass
+      note: "覆盖率 ~90%"
+    - item: "来源标注覆盖率 ≥ 80%"
+      status: pass
+    - item: "无推断写成断言"
+      status: pass
+    - item: "强断言有数字支撑"
+      status: pass
+
+  可定位:
+    - item: "KB 背景有具体谱系定位"
+      status: pass
+    - item: "创新判断有对比基准"
+      status: pass
+    - item: "frontmatter 字段存在且非空"
+      status: pass
+      note: "datasets 为空但库中无对应页,合理"
+    - item: "frontmatter 语义正确"
+      status: pass
+    - item: "速查卡片 5 字段实质内容"
+      status: pass
+
+  不污染:
+    - item: "新建页满足准入规则"
+      status: n/a
+      note: "无新建概念页"
+    - item: "去重检查"
+      status: n/a
+    - item: "反向更新无 factual-error"
+      status: pass
+    - item: "反向更新分类正确"
+      status: pass
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets"
+    detail: "ESD, CREMA-D, IEMOCAP 是本文核心评估数据集,但 datasets 字段为空。"
+    suggestion: "数据集库中无对应页,保持为空是合理的。可在未来批量创建数据集页后补充。"
+  - id: 2
+    severity: low
+    type: weak-reusability
+    location: "局限性 §7"
+    detail: "未提及 DUET 的推理效率开销 (每步需额外一次 vocoder forward + SER forward + gradient backward)。"
+    suggestion: "论文未报告 RTF,但可在局限性中补充注释。"
+
+conclusion: pass
+issue_summary:
+  high: 0
+  medium: 0
+  low: 2
+
+learning_signals: []

@@ -185,3 +185,19 @@ steering 方向一次提取,固定用于全部评估 [§4.1]。
 3. **Generation-time probing**: 对 text-only backbone,用模型自身生成 + 外部标注器伪标签做 probe 训练。解决了"offline anchor 与 online generation 表示不对齐"的通用问题。
 4. **Cosine schedule + trust region 组合**: 控制 gradient-based guidance 的时间窗口和步长上限,比单一超参 η 更鲁棒。可用于任何 classifier-guidance 场景。
 5. **Dual-space 互补框架**: 将 representation-level intervention 与 output-level gradient guidance 组合的思路,可推广到其他可控生成场景 (如 image style transfer + pixel-level refinement)。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 5 个编号设计选择各回答 WHY; 可借鉴给出 3 个具体 trick |
+> | 可信赖 | pass | 所有关键数字经 PDF 交叉验证; 出处标注覆盖率 ~95% |
+> | 可区分 | pass | 因果解释一致标注 [论文原文]/[agent 解读]; 来源覆盖率 ~90% |
+> | 可定位 | pass | KB 背景含 EmoSteer-TTS/TTS-CtrlNet/DiffRO 对比谱系 |
+> | 不污染 | pass | 无新建概念页; 反向更新仅追加 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/DUET-review.yml`
