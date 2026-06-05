@@ -4,7 +4,7 @@ title: "Gradient Reversal Layer"
 aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]", "[[论文笔记/AgentSteerTTS|AgentSteerTTS]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]", "[[论文笔记/AgentSteerTTS|AgentSteerTTS]]", "[[论文笔记/ZET-Speech|ZET-Speech]]"]
 origin_paper: ""
 related_concepts: ["[[SpeechTokenizer]]"]
 status: pending-review

@@ -47,6 +47,7 @@ MsEmoTTS (Lei et al., 2022) 的多尺度方法:
 将情感与说话人身份分离:
 - Cross-speaker emotion transfer (Li et al., 2022): 对抗训练消除 speaker 信息
 - 结果: 可将一个说话人的情感迁移到另一个说话人声音中
+- [[论文笔记/ZET-Speech|ZET-Speech]] (Kang et al., 2023): 在零样本自适应 TTS 中使用 GRL+DAT 解耦 style vector 中的情感信息,结合 diffusion guidance (CG/CFG) 增强情感表达,是将零样本 TTS 与情感控制结合的早期工作
 
 ### 4. DPO/RLHF 优化
 
