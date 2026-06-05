@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Raon-Speech]] — 命中 6 页: [[SpeechLanguageModel]]✓, [[Full-duplexSpokenDialogue]][待确认], [[ModalityAdaptationforSpeechLLM]][待确认], [[Turn-takinginSpokenDialogue]][待确认], [[StreamingSpokenDialogue]][待确认], [[Speech-LLMIntegrationTaxonomy]][待确认]
+- [ingest/deep] [[Raon-Speech]] — 精读, kb_sources=6, 新建 0, 追加 8 (ModalityAdaptationforSpeechLLM/Speech-LLMIntegrationTaxonomy/SpokenDialogueEvaluation/Whisper key_papers, Full-duplexSpokenDialogue/Turn-takinginSpokenDialogue/StreamingSpokenDialogue 正文+演进, SEED-TTS-Eval used_by)
+- [review/auto] [[Raon-Speech]] — pass, 0 high, 1 medium (OpenAudioBench 81.33→70.21 修正)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34),跳过
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(64),跳过
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),跳过
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限(64),跳过
+- [skip/update] [[EnCodec]] — key_papers 已达上限(15),且论文选择 Mimi 非 EnCodec,跳过
+- [lint/local] Raon-Speech — 通过
 - [kb/search] [[RobustSpeechFlow]] — 命中 6 页(取 Top 3): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
 - [ingest/deep] [[RobustSpeechFlow]] — 精读, kb_sources=3, 新建 0, 追加 2 (ConditionalFlowMatching 正文, SEED-TTS-Eval used_by+最新结果)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到正文演进节
