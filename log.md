@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Qwen3.5-Omni]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓ | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Full-duplexSpokenDialogue]](pending-review), [[Speech-TextAlignment]](pending-review)
+- [ingest/deep] [[Qwen3.5-Omni]] — 精读, kb_sources=6, 新建 0, 追加 2 (StreamingSpokenDialogue 延迟表+演进, Speech-TextAlignment 演进)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34),跳过追加
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(44),跳过追加
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(87),跳过追加
+- [skip/update] [[StreamingSpokenDialogue]] — key_papers 已达上限(16),改追加到正文延迟表和演进段
+- [skip/update] [[Speech-TextAlignment]] — key_papers 已达上限(13),改追加到正文演进段
+- [lint/local] Qwen3.5-Omni — 通过
 - [kb/search] [[UltraLowLatencyTTS]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
 - [ingest/deep] [[UltraLowLatencyTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (Non-autoregressiveTTS 演进, TokenRateandBitrateTrade-offs 应用)
 - [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(30),改追加到正文演进段
