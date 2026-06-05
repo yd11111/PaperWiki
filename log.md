@@ -8,6 +8,7 @@
 - [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),且论文不对该概念做实质贡献
 - [skip/update] [[StreamingSpokenDialogue]] — key_papers 已达上限(20),且论文不对该概念做实质贡献
 - [lint/local] StreamWise — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 284 — 建议抽空审核
 - [kb/search] [[WavSLM]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[模型库/WavLM|WavLM]](pending-review)
 - [ingest/deep] [[WavSLM]] — 精读, kb_sources=6, 新建 0, 追加 5 ([[SpeechLanguageModel]] 关键论文, [[SemanticvsAcousticTokens]] 演进, [[Single-codebookvsMulti-codebook]] SLM验证, [[Self-SupervisedSpeechRepresentation]] 分层复用, [[模型库/WavLM|WavLM]] key_papers)
 - [review/auto] [[WavSLM]] — pass-with-fixes, 0 high, 2 medium, 1 low (self-review, fixes applied)
