@@ -1,0 +1,78 @@
+review:
+  paper: "WAND"
+  note_path: "论文笔记/WAND.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节包含清晰的 WHY 解释(为什么分区、为什么 KD、为什么 curriculum);三个关键设计选择均回答了'为什么选这个';速查卡片可借鉴字段有 3 个具体可迁移 trick"
+  可信赖:
+    score: 8
+    verdict: pass-with-fixes
+    reason: "数字型 claim 标注覆盖率 >90%;所有关键数字经 PDF 交叉验证正确;速查卡片指标含具体数字+数据集;但速查卡片'跨语言 CER 退化 <0.1%' 对 SparkTTS 实际 +0.21% 构成 overclaim"
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "方法节有清晰的 [论文原文]/[agent 解读] 标注,覆盖率 ~90%;点评节有清晰的来源区分;未发现将推断写成断言的句子"
+  可定位:
+    score: 9
+    verdict: pass
+    reason: "KB 背景有具体谱系定位(列出 5 条既有路径 + WAND 的第五条路);创新判断有对比基准(vs MamTra/RWKVTTS);frontmatter 字段存在且语义基本正确,但 models 缺少 IndexTTS 和 SparkTTS"
+  不污染:
+    score: 9
+    verdict: pass
+    reason: "未提议新建概念页;反向更新将为 append-only(追加 key_papers);无 factual error 或 overclaim 在反向更新相关内容中"
+
+conclusion: pass-with-fixes
+high_issues: 0
+medium_issues: 2
+low_issues: 2
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    principle: 可定位
+    location: "frontmatter models 字段"
+    detail: "models 仅列 CosyVoice 2,遗漏了 IndexTTS 1.5 和 SparkTTS 两个同等重要的 baseline 模型。checklist 要求 'models 列本文模型+对比 baseline'"
+    suggestion: "添加 IndexTTS 和 Spark-TTS 到 models 列表"
+
+  - id: 2
+    severity: medium
+    type: overclaim
+    principle: 可信赖
+    location: "速查卡片 > 指标"
+    detail: "声称'跨语言 CER 退化 <0.1%'但 SparkTTS 实际 CER 从 2.14% 退化到 2.35% (+0.21%),超过 0.1% 界限 [Table 3]。虽然局限性节已标注此问题,但速查卡片作为快速参考不应包含 overclaim"
+    suggestion: "改为'跨语言 CER 退化 <0.1% (CosyVoice 2/IndexTTS),SparkTTS +0.21%'"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    principle: 可信赖
+    location: "速查卡片 > 指标"
+    detail: "'GFLOPs -46.9%' 未注明是 IndexTTS 的最大值;CosyVoice 2 实际为 -35.6%,SparkTTS 为 -34.0%"
+    suggestion: "改为 'GFLOPs -34~47% (max IndexTTS)'"
+
+  - id: 4
+    severity: low
+    type: overclaim
+    principle: 可区分
+    location: "KB 背景 > 创新判断"
+    detail: "'WAND 是首个在 pretrained AR-TTS 上验证 sliding-window + KD 的工作' — 这是基于 KB 检索推断,非论文原文的 claim,应标注来源"
+    suggestion: "在句首添加'[基于 KB 检索]'标注"
+
+cross_validation:
+  numbers_checked: 28
+  numbers_correct: 28
+  key_verifications:
+    - "Table 1 所有 WER/UTMOS/NMOS/SSIM/KV/GFLOPs 数字 — 全部正确"
+    - "Table 2 注意力分布数字 — 全部正确"
+    - "Table 3 跨语言 CER 数字 — 全部正确"
+    - "Table 4 消融 WER 数字 — 全部正确"
+    - "Table 5 curriculum 消融 — 全部正确"
+
+learning_signals: []

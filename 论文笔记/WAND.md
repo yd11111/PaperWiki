@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [TTS, efficient-inference, sliding-window-attention, knowledge-distillation, KV-cache, autoregressive, LLM-based, curriculum-learning]
 concepts: ["[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[FiniteScalarQuantization]]", "[[Single-codebookvsMulti-codebook]]"]
-models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[论文笔记/IndexTTS|IndexTTS 1.5]]", "[[论文笔记/Spark-TTS|SparkTTS]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[LibriTTS]]"]
 kb_context_sources: 6
@@ -36,7 +36,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 通过将 AR-TTS 的注意力分为 global (conditioning) + local sliding-window (generated tokens),配合 KD 和 curriculum learning,实现常数内存/计算推理,且几乎无质量损失
 > - **路线**: Pretrained AR-TTS → 注意力分区 (global + local window W) → curriculum scheduling (W_start→W) → KD (L_CE + λL_KL) from full-attention teacher → 1 epoch fine-tuning on 100h
-> - **指标**: KV cache -66.2% (IndexTTS), GFLOPs -46.9%, speedup 1.51-1.89x, WER 持平或改善 (CosyVoice 2: 1.94→1.72%), 跨语言 CER 退化 <0.1% [Table 1, Table 3]
+> - **指标**: KV cache -50~66% (max IndexTTS -66.2%), GFLOPs -34~47% (max IndexTTS -46.9%), speedup 1.51-1.89x, WER 持平或改善 (CosyVoice 2: 1.94→1.72%), 跨语言 CER 退化 <0.1% (CosyVoice 2/IndexTTS), SparkTTS +0.21% [Table 1, Table 3]
 > - **可借鉴**: (1) global/local 注意力分区策略可推广到所有 prefix-conditioned AR 生成模型; (2) 注意力质量分布分析方法(量化 prompt vs generated 的注意力占比)可用于验证窗口大小选择; (3) curriculum + soft mask 渐进训练策略
 > - **局限**: 仅验证 ≤0.5B 模型 + 10s 生成; window size 需根据 token rate 手动选择; 未在 >1B 模型或分钟级生成上验证; 无开源代码
 
@@ -178,4 +178,16 @@ L = L_CE + λ·L_KL
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY 解释清晰,3 个关键设计选择均有因果说明 |
+> | 可信赖 | pass-with-fixes | 28 个数字全部正确;速查卡片跨语言 CER claim 需限定范围 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖 ~90% |
+> | 可定位 | pass | KB 背景有具体谱系(5 条路径) + 创新对比基准 |
+> | 不污染 | pass | 反向更新均为 append-only,无污染风险 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/WAND-review.yml`
