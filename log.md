@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[StreamWise]] — 命中 3 页(取 3): [[DiffusionModel]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 过滤: 无
+- [ingest/deep] [[StreamWise]] — 精读, kb_sources=3, 新建 0, 追加 0 (系统论文,不对概念页做实质贡献)
+- [review/auto] [[StreamWise]] — pass, 0 high, 0 medium, 4 low (self-review)
+- [skip/update] [[DiffusionModel]] — key_papers 已达上限(16),且论文不对该概念做实质贡献
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),且论文不对该概念做实质贡献
+- [skip/update] [[StreamingSpokenDialogue]] — key_papers 已达上限(20),且论文不对该概念做实质贡献
+- [lint/local] StreamWise — 通过
 - [kb/search] [[WavSLM]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[模型库/WavLM|WavLM]](pending-review)
 - [ingest/deep] [[WavSLM]] — 精读, kb_sources=6, 新建 0, 追加 5 ([[SpeechLanguageModel]] 关键论文, [[SemanticvsAcousticTokens]] 演进, [[Single-codebookvsMulti-codebook]] SLM验证, [[Self-SupervisedSpeechRepresentation]] 分层复用, [[模型库/WavLM|WavLM]] key_papers)
 - [review/auto] [[WavSLM]] — pass-with-fixes, 0 high, 2 medium, 1 low (self-review, fixes applied)
