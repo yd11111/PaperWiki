@@ -240,3 +240,17 @@ VoXtream2 在 VoXtream 的 full-stream 基础上做了三个实质性推进: (1)
 4. **Acoustic prompt enhancement 对冲 CFG 音质退化**: 当 CFG 增强 speaker similarity 时,生成质量趋近 prompt 质量。预处理增强 prompt 是一个低成本的缓解方案 (仅处理 prompt,不增加推理延迟)。
 
 5. **隐式 filler 生成**: 训练时从转录中移除 filler words 并合并时长,模型自动学会根据 duration state (慢速时长 phoneme → 插入 filler) 决定 filler 位置。这比显式 filler 标注更自然、更可扩展。
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 5 个设计选择均有因果解释,distribution matching 机制解释详尽 |
+> | 可信赖 | pass | 数字出处标注 >90%,与 PDF 交叉验证一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注贯穿方法节,覆盖率 ~90% |
+> | 可定位 | pass | KB 背景引用 DurationPredictor 演进线 + CosyVoice 2 SRC 做对比基准 |
+> | 不污染 | pass | 笔记内容无 overclaim,KB 更新待执行 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/VoXtream2-review.yml`

@@ -1,0 +1,44 @@
+review:
+  paper: "VoXtream2"
+  note_path: "论文笔记/VoXtream2.md"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节为每个设计选择提供了清晰的 WHY 解释 (5 个关键设计选择均有因果分析);distribution matching 的 self-correcting 机制、CFG 不应用于 duration 的理由、prompt text masking 保留 gradient 的原因均有充分说明"
+  trustworthy:
+    score: 9
+    reason: "数字型 claim 的出处标注覆盖率 >90%;实验表格数据与 PDF 原文 Table 2/4/5 交叉验证一致;指标名称 (WER/SPK-SIM/UTMOS/MUSHRA/Corr) 使用准确无混淆"
+  distinguishable:
+    score: 9
+    reason: "方法节因果解释来源标注覆盖率约 90%;[论文原文] 和 [agent 解读] 标注贯穿全文;agent 解读的推断性质明确 (如 self-correcting 特性、audio CFG 的 similarity-quality trade-off)"
+  positionable:
+    score: 9
+    reason: "KB 背景具体引用 DurationPredictor 的 GRPO/DPO/MoE 演进线做对比;CosyVoice 2 的 SRC 范围限制 (3-4 SPS) 作为基准;与 VoXtream v1 的定量对比清晰 (SPK-SIM 0.529→0.656)"
+  non_polluting:
+    score: 9
+    reason: "KB 更新尚未执行;frontmatter 概念引用合理;笔记内容无 overclaim"
+
+issues:
+  - type: "traceability-gap"
+    severity: "low"
+    location: "速查卡片 一句话"
+    detail: "\"达到公开 baseline 水平\" 表述模糊;实际表现是 MUSHRA 最高但非所有单项指标最优 (如 SEED-en SPK-SIM 0.656 低于 MaskGCT 0.712)"
+    suggestion: "改为 \"MUSHRA 自然度最高,客观指标与公开 baseline 基本持平\" 或直接引用具体表现"
+  - type: "template-compliance"
+    severity: "low"
+    location: "frontmatter models"
+    detail: "仅列 CosyVoice 2,但论文 Table 2 对比了 6 个 baseline。不影响笔记质量 -- models 字段不要求穷举所有 baseline,CosyVoice 2 是最核心对比对象且有独立模型页"
+    suggestion: "可选择性增加 MaskGCT 或 F5-TTS 等有独立笔记的 baseline,但非必要"
+
+learning_signals: []
+
+summary:
+  total_issues: 2
+  high: 0
+  medium: 0
+  low: 2
+  verdict: "笔记质量高,5 项原则均达 9/10。distribution matching SRC 的机制解释详尽,CFG ablation 分析清晰,数字验证通过。2 个 low issue 不阻塞反向更新。"
