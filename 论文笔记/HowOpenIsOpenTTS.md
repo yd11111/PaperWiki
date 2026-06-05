@@ -90,14 +90,16 @@ updated: 2026-06-06
 | 社区支持 | Active (289开/575关) | Moderate (156开/57关) | Moderate (23开/11关) | **Active** (18开/93关) | [Table 2] |
 | 语言适配 | 需修改 text processor | 需修改 text processor | 需社区补丁 + text processor | 仅需 text processor + 配置文件 | [Table 2] |
 
-### 核心客观指标 (1000 samples, 4000 iterations)
+### 核心客观指标 (1000 samples, best across iterations; F=女 M=男)
 
 | 指标 | FastPitch | VITS | Grad-TTS | Matcha-TTS | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
-| WER ↓ | **2.1%** (F) / 4.4% (M) | 10.4% / 19.8% | 9.6% / 9.2% | 4.0% / 5.5% | SWARA | [Fig 1] |
-| UTMOS ↑ | 3.02 / 2.99 | 2.94 / 3.00 | 2.71 / 2.78 | **3.08** / 2.91 | SWARA | [Fig 2] |
-| SECS ↑ | 0.89 / 0.87 | **0.92** / 0.90 | 0.87 / 0.88 | 0.91 / 0.88 | SWARA | [Fig 3] |
-| MCD ↓ | 4.60 / 5.36 | 4.04 / 3.99 | 5.54 / 6.25 | **3.84** / 3.86 | SWARA | [Fig 7] |
+| WER ↓ | **2.1%** (F) | >10% (F/M) | >10% (F) | <6% (F/M) | SWARA | [§4.2.1, Fig 1] |
+| UTMOS ↑ | **3.02** (F, peak) | 竞争力 | 最低 | 稳定但 1000-sample 时 F 有下降 | SWARA | [§4.2.2, Fig 2] |
+| SECS ↑ | 0.89-0.92 | **0.92** (peak) | 最低 | 0.91-0.92 | SWARA | [§4.2.3, Fig 3] |
+| MCD ↓ | 4.60-5.36 | 3.99-4.07 | 5.54-6.25 (最弱) | **3.83-3.86** | SWARA | [§4.2.5, Fig 7] |
+
+注: UTMOS 全局峰值 3.12 出现在 Matcha-TTS 10-sample/4000-iter 条件 [Fig 2]; FastPitch UTMOS peak 3.02 出现在 1000-sample 条件 [§4.2.2]; VITS male WER 随训练增加从 17% 恶化至 19% [§4.2.1]。
 
 ### 主观听感测试 (1000 samples, 4000 iterations, 31 listeners)
 
@@ -108,15 +110,17 @@ updated: 2026-06-06
 
 ANOVA + Tukey HSD 显示 FastPitch 和 Matcha-TTS 之间无显著差异 (p > 0.05) [§4.3]。
 
-### 极低资源场景 (10 samples, 120 iterations)
+### 极低资源场景 (10 samples, 120 finetuning steps)
 
-| 指标 | FastPitch | Matcha-TTS | 出处 |
+论文在 §4.2.6 给出了两个代表性数据点:
+
+| 指标 | FastPitch (M) | Matcha-TTS (F) | 出处 |
 | --- | --- | --- | --- |
-| WER ↓ | 3.6% (F) / 6.3% (M) | 4.6% / 4.4% (F/M) | [Fig 1] |
-| UTMOS ↑ | 2.82 / 2.91 | 2.64 / 2.81 | [Fig 2] |
-| SECS ↑ | 0.84 / 0.73 | 0.87 / 0.84 | [Fig 3] |
+| WER ↓ | 3% | 5% | [§4.2.6] |
+| UTMOS ↑ | 2.94 | 2.98 | [§4.2.6] |
+| SECS ↑ | 0.72 | 0.87 | [§4.2.6] |
 
-[论文原文] FastPitch 和 Matcha-TTS "perform well even in little data conditions" [§4.2.6]。
+[论文原文] "FastPitch achieves a WER of 0.03, a SECS of 0.72 and an UTMOS of 2.94 for the male speaker using only 10 training samples and 120 finetuning steps, matching or surpassing baseline scores. Similarly, Matcha-TTS reaches a WER of 0.05, a SECS score of 0.87 and a UTMOS of 2.98 for the female speaker under comparable conditions." [§4.2.6]
 
 ## 局限性
 
@@ -145,3 +149,19 @@ ANOVA + Tukey HSD 显示 FastPitch 和 Matcha-TTS 之间无显著差异 (p > 0.0
 2. **Eigen-voice 基线 + 极端 finetuning 实验设计**: 10-sample/1000-sample x 多个 checkpoint 的网格搜索,适用于快速评估新 TTS 架构在低资源场景下的鲁棒性
 3. **客观-主观不一致的检查清单**: 在 TTS 评估中应始终包含主观测试来验证客观指标;UTMOS/WER 的域外误差在非英语场景可能很大
 4. **统一 text pipeline 的实验控制**: 评估多个 TTS 系统时,先统一 text frontend (phonemizer + symbol set) 再对比,消除前端差异的混淆因素
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | benchmark 论文的实验设计选择解释充分 |
+> | 可信赖 | pass | 极低资源表已改用 §4.2.6 明确文本数字;主表用范围+趋势描述规避图表读数误差 |
+> | 可区分 | pass | 因果解释来源标注完整 ([论文原文]/[agent 解读]) |
+> | 可定位 | pass | KB 背景谱系定位(三条技术主线)具体且有对比基准 |
+> | 不污染 | pass | 反向更新仅 append key_papers,无实质修改风险 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/HowOpenIsOpenTTS-review.yml`

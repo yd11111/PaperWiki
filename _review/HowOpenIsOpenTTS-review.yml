@@ -1,0 +1,49 @@
+review:
+  paper: "HowOpenIsOpenTTS"
+  date: "2026-06-06"
+  reviewer: "auto (inline, no independent subagent)"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    reproducible:
+      score: 8
+      reason: "方法节清楚解释了评估框架的两个维度和四个系统的核心区别。但本文是 benchmark 论文不是方法论文,WHY 更多是关于实验设计选择(如统一 text pipeline、eigen-voice 基线)而非新方法原理。设计选择均有合理解释。"
+    trustworthy:
+      score: 7
+      reason: "主要数字有出处标注([§X.X]/[Fig N]/[Table N])。极低资源表格已改用论文 §4.2.6 的明确文本数字。主表因图表值难以精确读取,改用范围/趋势描述+文本引述,诚实标注不确定性。存在少量 medium issues。"
+    distinguishable:
+      score: 8
+      reason: "因果解释标注了 [论文原文] 和 [agent 解读] 来源。推断性分析(如 eigen-voice 相当于 speaker-agnostic 预训练)明确标注为 agent 解读。点评节的论文-笔记边界清晰。"
+    positionable:
+      score: 9
+      reason: "KB 背景节有具体谱系定位(三条技术主线),创新判断有对比基准(与已有 survey 的区别)。将论文定位为工程导向评估(非方法创新),定位准确。"
+    non_polluting:
+      score: 8
+      reason: "frontmatter concepts/models 合理,未过度挂接。反向更新仅涉及 append(key_papers 追加),不涉及实质修改。无新建实体页需求。"
+
+  issues:
+    - type: "traceability-gap"
+      severity: "medium"
+      location: "主表 UTMOS/WER 列"
+      detail: "原版使用从 bar chart 读取的具体数字,但 pdftotext 对图表提取不可靠。已修正为范围描述+文本引述,但部分 MCD 具体数字仍为图表读取值。"
+      suggestion: "MCD 数字标注 [approx from Fig 7] 或改用 §4.2.5 文本中的峰值描述。"
+
+    - type: "template-compliance"
+      severity: "low"
+      location: "frontmatter datasets"
+      detail: "datasets 字段为空,但论文使用 SWARA 语料库作为核心数据集。"
+      suggestion: "SWARA 无独立实体页且仅此一文使用,保持空可接受;如后续有更多 Romanian TTS 研究可考虑创建。"
+
+    - type: "weak-reusability"
+      severity: "low"
+      location: "可复用的 idea 第 3 条"
+      detail: "'客观-主观不一致的检查清单'描述稍泛,可更具体。"
+      suggestion: "可补充: 对非英语场景建议同时使用 Whisper 之外的 ASR(如本语言专用 ASR)做 WER 交叉验证。"
+
+  learning_signals:
+    - type: "chart-number-verification"
+      detail: "对 bar chart 中的数字,pdftotext 提取极不可靠(标签位置错乱)。后续审阅应优先使用论文正文中明确引述的数字,图表值仅作参考并标注近似性。"
+    - type: "benchmark-paper-method-section"
+      detail: "benchmark/evaluation 论文的方法节侧重实验设计(为什么这样评/怎么控制变量)而非新方法原理,审阅'可复述'原则时应调整预期。"
+
+  summary: "pass-with-fixes: 3 issues (0 high, 1 medium, 2 low)。笔记对这篇 benchmark 论文的核心贡献(工程可用性评估+客观-主观不一致证据)把握准确。主表已从不可靠的图表读数修正为范围描述+文本引述,极低资源表改用论文明确文本数字。KB 背景定位质量高。建议修正 MCD 近似标注。"
