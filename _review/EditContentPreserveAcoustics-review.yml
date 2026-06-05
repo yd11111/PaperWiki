@@ -1,0 +1,48 @@
+review:
+  target: "论文笔记/EditContentPreserveAcoustics.md"
+  reviewer: auto
+  date: 2026-06-05
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节包含三个清晰的 WHY 问题 (为什么 semantic space / 为什么 TTS log-prob / 为什么 gated aggregation),每个都有因果解释。速查卡片的可借鉴字段列出了具体可迁移 trick (TTS log-prob as coherence reward, gated aggregation)。"
+
+  可信赖:
+    score: 8
+    verdict: pass
+    reason: "Table I 和 Table II 所有关键数字经交叉验证均正确。claim 标注覆盖率约 85%。指标名称使用正确 (WER/SIM/DNSMOS/MOS),无方向性错误。"
+
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "因果解释 100% 标注了 [论文原文] 或 [agent 解读]。agent 解读部分清晰标注且质量高 (如 CosyVoice 架构迁移的解读、critic 质量上限的分析)。无推断写成断言的情况。"
+
+  可定位:
+    score: 7
+    verdict: pass-with-fixes
+    reason: "KB 背景谱系定位良好 (CosyEdit 对比、GRPO 演进线、CFM 角色),创新判断有具体对比基准。但 frontmatter models 字段仅列 CosyVoice3 (backbone),缺少对比 baseline 模型。"
+
+  不污染:
+    score: 9
+    verdict: pass
+    reason: "无新建概念页计划。反向更新预期为 append-only (追加 key_papers)。笔记中无 factual error 或 overclaim。"
+
+conclusion: pass-with-fixes
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: "models 字段仅列 CosyVoice3 (backbone/frozen components),缺少对比 baseline: VoiceCraft, FluentSpeech, Ming-UniAudio。根据 checklist,models 应列本文模型+对比 baseline。"
+    suggestion: "在 models 中追加 VoiceCraft、FluentSpeech、Ming-UniAudio 的 wikilink (如有对应笔记) 或 plain text。"
+
+  - type: traceability-gap
+    severity: low
+    location: "训练策略 第1条"
+    detail: "'Libriheavy (~50K h)' 中 '~50K h' 缺少出处标注。"
+    suggestion: "补充 [§III-A] 标注 (原文: 'approximately 50,000 hours')。"
+
+learning_signals: []

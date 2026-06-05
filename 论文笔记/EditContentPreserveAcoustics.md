@@ -9,7 +9,7 @@ year: 2026
 venue: "ICME 2026"
 tags: [speech-editing, semantic-token, reinforcement-learning, GRPO, flow-matching, text-based-editing, self-consistency, perceptual-alignment]
 concepts: ["[[SemanticvsAcousticTokens]]", "[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]", "[[CodecLanguageModel]]", "[[Non-autoregressiveTTS]]", "[[LLM-basedTTS]]"]
-models: ["[[模型库/CosyVoice3|CosyVoice 3]]"]
+models: ["[[模型库/CosyVoice3|CosyVoice 3]]", "VoiceCraft", "FluentSpeech", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]"]
 tasks: []
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -103,7 +103,7 @@ I_valid = (WER ≤ τ_wer) ∧ (|L_gen - L_gt| / L_gt ≤ τ_len)
 
 ### 训练策略
 
-1. **SFT 阶段**: Semantic Token LLM 在 Libriheavy (~50K h) 上训练,lr=1e-5, max 10 epochs,PSM infilling 目标 [§III-A]
+1. **SFT 阶段**: Semantic Token LLM 在 Libriheavy (~50,000 h [§III-A]) 上训练,lr=1e-5, max 10 epochs,PSM infilling 目标 [§III-A]
 2. **GRPO 阶段**: lr=1e-6, batch=4, group_size=8 rollouts, β_KL=0.01, 400 steps, gradient accumulation=10 [§III-A]
 3. **Frozen 组件**: Semantic tokenizer, Flow Matching decoder, HiFi-GAN vocoder 均来自 CosyVoice 3,全程冻结 [§III-A]
 4. **Reward 计算**: Log-prob reward 由 CosyVoice 3 TTS 模型计算; ASR reward 由 SenseVoiceSmall 计算 [§III-A]
@@ -163,3 +163,19 @@ I_valid = (WER ≤ τ_wer) ∧ (|L_gen - L_gt| / L_gt ≤ τ_len)
 2. **Gated reward aggregation**: 用 WER/CER 阈值作为硬门控,不满足最低质量的样本直接 reward=0,比线性组合更能防止 reward hacking。已在 MCLP 中独立验证
 3. **PSM (Prefix-Suffix-Middle) 格式**: 将 editing 转化为 conditional infilling 问题的格式化策略,可复用于任何需要双向上下文条件生成的场景
 4. **Semantic space editing 的一般原则**: 当任务要求"改内容不改风格"时,应在内容-风格解耦的表征空间操作,而非在耦合空间操作。这一原则可推广到 image editing、video editing 等跨模态场景
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三个 WHY 设计选择解释清晰,速查可借鉴具体 |
+> | 可信赖 | pass | Table I/II 数字全部交叉验证正确,标注覆盖率 ~85% |
+> | 可区分 | pass | 因果解释来源标注 100%,agent 解读质量高 |
+> | 可定位 | pass-with-fixes | KB 谱系定位好,但 models 字段缺 baseline (已修) |
+> | 不污染 | pass | 无新建页,反向更新预期 append-only |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/EditContentPreserveAcoustics-review.yml`
