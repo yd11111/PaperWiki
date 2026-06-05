@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [TTS, emotion, nonverbal-vocalization, data-augmentation, codec-LM, expressive-speech, VoiceCraft, EnCodec]
 concepts: ["[[EmotionControlinTTS]]", "[[CodecLanguageModel]]", "[[ProsodyModeling]]", "[[Self-SupervisedSpeechRepresentation]]", "[[MaskedGenerativeModeling]]"]
-models: ["[[模型库/EnCodec|EnCodec]]"]
+models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/CosyVoice2|CosyVoice2]]", "[[模型库/CosyVoice3|CosyVoice3]]"]
 tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -114,11 +114,12 @@ Affectron 是 VoiceCraft (Peng et al., 2024) 的 fine-tuning 框架,不修改模
 | NV Location Acc@5 | 44.06% | - | NonverbalTTS | [Table 2] |
 | NV Location JSD | 0.0523 | - | NonverbalTTS | [Table 2] |
 
-**消融结论** [Table 1, Fig 4]:
-- w/o Data Augmentation (DA): NV-Acc 暴跌 (58.78→37.75 seen 方向看,DA 对 NV 分类能力提升最大),但 NV-EECS 反而最高 — [论文原文] 无增强时模型过拟合输入中的情感信息 [§6.2]
-- w/o EDNM: NV 多样性增加 (NV-Acc/NTN-MOS 上升) 但情感一致性下降 (EECS 下降) — 随机匹配增加了 NV 类型覆盖但丧失情感对齐 [§6.2]
-- w/o EAR: 情感表达力下降,NV 与 verbal 的整合不够自然 [§6.2]
-- w/o NSM: 自然度和表达力均下降,说明双向 verbal 上下文对 NV 生成很关键 [§6.2]
+**消融结论** [Table 1, Fig 4] (注: Table 1 的消融是累加式设计,从 DA-only 逐步加入 EDNM → EAR → NSM):
+- DA-only (DA✓, EDNM✗, EAR✗, NSM✗): NV-Acc 58.78 (seen),随机 NV 拼接增加了 NV 类型覆盖但 NV-EECS 仅 0.5455 — 缺少情感匹配 [§6.2]
+- +EDNM (DA✓, EDNM✓, EAR✗, NSM✗): NV-Acc 降至 35.83 但 NV-EECS 升至 0.5648 — 情感匹配牺牲 NV 多样性换取情感一致性 [§6.2]
+- +EAR (DA✓, EDNM✓, EAR✓, NSM✗): NV-EECS 进一步升至 0.5707,位置路由改善 NV-verbal 情感整合 [§6.2]
+- +NSM (Full, DA✓, EDNM✓, EAR✓, NSM✓): NV-Acc 回升至 37.75,NV-EECS 达 0.5748,NV-Sim 最高 0.6118 — 双向 verbal 上下文条件化 NV 生成是关键 [§6.2]
+- VoiceCraft baseline (全✗): NV-Acc 仅 10.49 (seen),NV-EECS 却最高 0.6149 — [论文原文] 无增强时模型过拟合输入中的情感信息 [§6.2]
 
 **与 NV-capable zero-shot TTS 对比** [Appendix F, Table 6]:
 - CosyVoice2-0.5B / Fun-CosyVoice3-0.5B: verbal 指标强 (WER 1.97/1.65) 但 NV 相关指标弱 (NV-Acc 25.00/27.38)
@@ -151,3 +152,17 @@ Affectron 是 VoiceCraft (Peng et al., 2024) 的 fine-tuning 框架,不修改模
 4. **Decoupled corpus 利用**: 用分开录制的 verbal 和 NV 语料构造增强样本,避免昂贵的对齐标注 — 适用于低资源场景
 
 ## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,设计选择有明确理由和实验支撑 |
+> | 可信赖 | pass | 数字标注覆盖率高,消融分析误读已修正 |
+> | 可区分 | pass | 来源标注覆盖率高,事实/推断边界清晰 |
+> | 可定位 | pass | KB 背景谱系定位清晰,创新判断有具体基准 |
+> | 不污染 | pass | 无需新建概念页,反向更新为追加操作 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1) — 均已当场修正
+> 详见 `_review/Affectron-review.yml`
