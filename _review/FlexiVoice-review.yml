@@ -1,0 +1,64 @@
+review:
+  paper: "FlexiVoice"
+  reviewer: auto
+  date: 2026-06-05
+  conclusion: pass-with-fixes
+  note_path: "论文笔记/FlexiVoice.md"
+  pdf_verified: true
+
+principles:
+  explainable:
+    score: 9
+    reason: "方法节有清晰的因果解释链: 每个 PPT 阶段解释了 WHY (为什么需要这个阶段) + HOW (如何实现); S2 在 S1 之后的理由、progressive vs joint 的理由都有消融实验支撑; 速查卡片可借鉴具体可迁移 (PPT curriculum, multi-obj GRPO, LLM annotation)"
+  trustworthy:
+    score: 8
+    reason: "数字 claim 出处标注覆盖率 ≥ 85%; 指标名使用正确 (ACC-I/ACC-T/ACC-R/SV/WER/CER/CMOS/Q-MOS); 方向标注正确; InstructTTSEval ZH 数据曾有错误 (EN 数据复制到 ZH 列) 已在本次审阅前修正"
+  distinguishable:
+    score: 9
+    reason: "[论文原文] vs [agent 解读] 标注覆盖率 ≥ 85%; 关键断言有数字支撑; 点评节中的对比 (vs VoxInstruct, vs CosyVoice2) 正确标注为 [agent 解读]"
+  positionable:
+    score: 8
+    reason: "KB 背景 3 个 confirmed 页定位清晰; 与 CosyVoice2/VoxInstruct 的对比明确; 但 frontmatter models 字段为空, 缺少比较 baseline 的实体页引用"
+  non_polluting:
+    score: 8
+    reason: "反向更新已完成 (4 个追加更新); 无明显 factual error 或 overclaim 流入 KB; 速查卡片中 '首个' 措辞为轻度 overclaim 但未进入实体页"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models: [] 为空, 但论文对比了 CosyVoice2 (有实体页 模型库/CosyVoice2.md), 应列入以增强可追溯性"
+    suggestion: "添加 models: [\"[[CosyVoice2]]\"]"
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "整体架构节 + 训练策略节"
+    detail: "缺少关键架构细节: LLM backbone 为 Phi-3.5-mini-instruct (3.8B params), speech tokenizer 为 DualCodec semantic codes, vocoder 为 Vocos [Appendix A.1]; 训练超参 (S1: 3epochs/lr=1e-5/β=0.1/2h; S2: G=8/2epochs/36h; S3: G=6/2epochs/42h; total 3.5 days on 8xA800) [Appendix A.10] 未捕获"
+    suggestion: "在整体架构节补充具体组件名称; 在训练策略节补充关键超参数"
+  - id: 3
+    severity: low
+    type: overclaim
+    location: "速查卡片 一句话"
+    detail: "'首个通过 PPT 系统性解决...' — 论文原文未使用 '首个/first' 措辞, 而是 'we propose FlexiVoice, a TTS system that enables flexible and precise style control'"
+    suggestion: "改为 '通过 Progressive Post-Training (DPO→Decoupling GRPO→Instruction GRPO) 系统性解决...' 去掉 '首个'"
+  - id: 4
+    severity: low
+    type: traceability-gap
+    location: "训练策略节"
+    detail: "S1 DPO 的 β=0.1, S2 GRPO 的 G=8, S3 GRPO 的 G=6 等具体超参数未列出, 仅写了 'β hyperparameter' 等占位"
+    suggestion: "补充: S1 DPO β=0.1, 3 epochs, lr=1e-5; S2 GRPO G=8, 2 epochs; S3 GRPO G=6, 2 epochs"
+  - id: 5
+    severity: low
+    type: traceability-gap
+    location: "FlexiVoice-Instruct Dataset 节"
+    detail: "4316 hours 分配细节: Emilia + game voice acting, 但未标注各自具体小时数 (论文未明确分别给出)"
+    suggestion: "可保持现状, 论文仅给了总量 4316h"
+
+summary:
+  total: 5
+  high: 0
+  medium: 2
+  low: 3
+
+learning_signals: []

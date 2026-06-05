@@ -9,7 +9,7 @@ year: 2026
 venue: "Preprint"
 tags: [TTS, instruction-following, style-control, zero-shot, DPO, GRPO, disentanglement, progressive-post-training, emotion-control, LLM-TTS]
 concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[NaturalLanguageDescriptionforTTS]]", "[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[DifferentiableRewardOptimization]]"]
-models: []
+models: ["[[CosyVoice2]]"]
 tasks: []
 datasets: ["[[Emilia]]"]
 kb_context_sources: 3
@@ -32,7 +32,7 @@ updated: 2026-06-05
 ## 速查
 
 > [!summary] 速查
-> - **一句话**: 首个通过 Progressive Post-Training (DPO→Decoupling GRPO→Instruction GRPO) 系统性解决 zero-shot TTS 中 Style-Timbre-Content conflict 的 instruction-following TTS 系统 [论文原文]
+> - **一句话**: 通过 Progressive Post-Training (DPO→Decoupling GRPO→Instruction GRPO) 系统性解决 zero-shot TTS 中 Style-Timbre-Content conflict 的 instruction-following TTS 系统 [论文原文]
 > - **路线**: Text + Instruction + Reference Speech → LLM (pre-trained on Emilia + FlexiVoice-Instruct) → Speech Tokens → Flow Matching → Mel → Vocoder → Waveform; Post-training: S1 (DPO on emotion) → S2 (Decoupling GRPO with r_ser + r_sv rewards) → S3 (Instruction GRPO with ALM reward) [§3, Fig.1]
 > - **指标**: TO-Easy ACC-I: 97.4% EN / 99.8% ZH (vs CosyVoice2 baseline N/A); TO-Hard ACC-I: 89.4% (vs VoxInstruct 17.8%); TR-Easy ACC-I: 89.4% EN / 81.8% ZH with SV 91.0% / 98.8%; InstructTTSEval Avg: 79.3 EN / 70.8 ZH (vs Gemini-pro 80.3 / 84.8, MiMo-Audio 72.6 / 70.5); CMOS up to +0.9 vs FlexiVoice-Base [Table 2, 3, 4]
 > - **可借鉴**: (1) Progressive Post-Training curriculum (easy emotions → hard disentanglement → complex instructions), 证明顺序至关重要 (逆序 Avg 54.7 vs 正序 88.7) [Table 5]; (2) Multi-objective GRPO 用 SER + SV rewards 实现 style-timbre 解耦 [§3.2.2]; (3) FlexiVoice-Instruct 4316hrs 指令-语音数据集构建方法 (LLM metadata annotation) [§4]
@@ -55,7 +55,7 @@ updated: 2026-06-05
 
 ### 整体架构
 
-FlexiVoice = LLM core + frozen speech tokenizer + flow matching vocoder [§3]:
+FlexiVoice = Phi-3.5-mini-instruct LLM (3.8B params) + frozen DualCodec speech tokenizer (semantic codes) + flow matching decoder + Vocos vocoder [§3, Appendix A.1, A.10]:
 
 ```
 Pre-training:
@@ -120,10 +120,11 @@ $$A^i_{\text{emo}} = \frac{r^i_{\text{ser}} - \text{mean}(r^i_{\text{ser}})}{\te
 
 ### 训练策略
 
-- Pre-training: LLM core only, other modules frozen [§3.1]
-- S1 DPO: β hyperparameter, ESD 数据, 简单情感模板 [§3.2.1]
-- S2 GRPO: K completions per input, Emotion2vec-Large + CAM++ rewards, conflicting scenarios [§3.2.2]
-- S3 GRPO: Kimi-Audio-7B-Instruct reward, instruction+text only (no reference), mix S2 data [§3.2.3]
+- **Hardware**: 8x NVIDIA A800 (80GB), 总训练时间约 3.5 天 [Appendix A.10]
+- **Pre-training**: LLM core only, other modules frozen [§3.1]
+- **S1 DPO**: β=0.1, lr=1e-5, 3 epochs, ESD 数据, 简单情感模板, 约 2 小时 [§3.2.1, Appendix A.10]
+- **S2 GRPO**: G=8 (group size), lr=1e-5, β=0.1, 2 epochs, Emotion2vec-Large + CAM++ rewards, conflicting scenarios, 约 36 小时 [§3.2.2, Appendix A.10]
+- **S3 GRPO**: G=6, 2 epochs, Kimi-Audio-7B-Instruct reward, instruction+text only (no reference), mix S2 data, 约 42 小时 [§3.2.3, Appendix A.10]
 
 ## 实验
 
@@ -184,6 +185,22 @@ $$A^i_{\text{emo}} = \frac{r^i_{\text{ser}} - \text{mean}(r^i_{\text{ser}})}{\te
 1. **Progressive Post-Training (PPT) curriculum**: DPO (简单对齐) → Multi-objective GRPO (hard disentanglement) → ALM-reward GRPO (complex generalization) — 可迁移到任何需要多属性解耦的生成任务
 2. **Multi-objective GRPO for disentanglement**: r_ser (style) + r_sv (timbre) 双 reward 显式解耦 — 可扩展到更多维度 (如 r_prosody, r_content)
 3. **LLM metadata annotation for instruction dataset**: 利用 Emilia 的 source metadata 让 LLM 生成自然指令 — 低成本构建大规模指令数据集
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 9/10 — 因果解释链完整, 每阶段 WHY 有消融支撑 |
+> | 可信赖 | pass | 8/10 — 出处标注 ≥ 85%, InstructTTSEval ZH 数据错误已修正 |
+> | 可区分 | pass | 9/10 — [论文原文]/[agent 解读] 覆盖率 ≥ 85% |
+> | 可定位 | pass | 8/10 — KB 定位清晰, models 字段已补充 |
+> | 不污染 | pass | 8/10 — 反向更新已完成, 无 KB 污染风险 |
+> 
+> Issues: 5 (high: 0, medium: 2, low: 3)
+> 详见 `_review/FlexiVoice-review.yml`
 
 ---
 
