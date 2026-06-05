@@ -125,3 +125,9 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## Semantic-VAE: 语义对齐正则化解决重建-生成困境
 
 [[论文笔记/Semantic-VAE|Semantic-VAE]] (Niu et al., ICASSP 2026) 发现 vanilla acoustic VAE 存在 **重建-生成困境**: 高维 latent (dim=64) 重建好但下游 TTS 可懂度差,低维 latent (dim=16) 可懂度好但重建差 [Fig 1]。解决方案是在 VAE 训练中引入 frozen WavLM 第 23 层特征的 cosine similarity 正则化,引导高维 latent space 学习语义结构而不牺牲信息量。集成到 F5-TTS 后,WER 从 2.23%→1.95%,SIM 从 0.60→0.64 (LibriSpeech-PC) [Table 1]。
+
+## Wav-VAE: 直接在波形域编码的 VAE
+
+[[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 提出 **Wav-VAE** (157M 参数),直接将原始波形编码为连续 latent (D=64, 11.72 Hz),绕过 mel spectrogram 中间表示。使用 Oobleck block (dilated residual units + Snake activation) 和 non-parametric shortcut path 实现极端降采样 (~2000x)。两阶段对抗训练 (warmup → multi-scale STFT discriminator)。PESQ 3.237, STOI 0.967 (LibriTTS test-clean) [Table 2]。
+
+关键发现 (与 Semantic-VAE 呼应): **VAE 重建质量与下游 TTS 生成质量呈非单调关系** — dim 越高 VAE 重建越好,但 TTS 生成越差。即使 3.5B 参数的 DiT 也无法弥补 dim=128 的 modeling burden [Fig 3]。最优配置 dim=64, 11.72 Hz。这佐证了 Semantic-VAE 发现的重建-生成困境,但提出了不同的解决路径: 不通过语义正则化改善高维 latent,而是选择低维 latent + 更大生成模型。

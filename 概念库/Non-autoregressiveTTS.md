@@ -120,4 +120,4 @@ Survey 从可控性角度对比 NAR vs AR/LLM 架构:
 
 ## 演进
 
-Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024) → Hybrid: LLM + NAR Flow (CosyVoice, 2024) → OmniVoice (2026, 单阶段 discrete NAR + LLM 初始化, 首个成功将 AR LLM 权重迁移至 NAR 架构的 TTS, 600+ 语言)
+Tacotron (AR+Attention, 2017) → FastSpeech (NAR+Duration, 2019) → FastSpeech 2 (直接训练, 2020) → Glow-TTS/VITS (NAR+Flow, 2020-21) → **LLM-based TTS 回归 AR** (VALL-E, 2023) → Masked generation (NAR 新形态, MaskGCT, 2024) → Hybrid: LLM + NAR Flow (CosyVoice, 2024) → OmniVoice (2026, 单阶段 discrete NAR + LLM 初始化, 首个成功将 AR LLM 权重迁移至 NAR 架构的 TTS, 600+ 语言) → LongCat-AudioDiT (2026, 纯 NAR diffusion 在 waveform latent 空间建模, SIM SOTA on Seed)

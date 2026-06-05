@@ -65,4 +65,8 @@ Mel spectrogram 在 neural TTS pipeline 中扮演**声学模型与声码器之�
 
 ## 演进
 
-MGC/MCC+BAP+F0 (SPSS时代) → Linear Spectrogram (Tacotron, 2017) → **Mel Spectrogram** (Tacotron 2, 2018; 成为主流) → Discrete Speech Tokens (VALL-E, 2023; LLM-TTS 时代)
+MGC/MCC+BAP+F0 (SPSS时代) → Linear Spectrogram (Tacotron, 2017) → **Mel Spectrogram** (Tacotron 2, 2018; 成为主流) → Discrete Speech Tokens (VALL-E, 2023; LLM-TTS 时代) → Waveform Latent (LongCat-AudioDiT, 2026; 绕过 mel 直接编码波形)
+
+## Mel Spectrogram 的 compounding error 问题
+
+[[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 实验量化了 mel spectrogram 作为中间表示的 compounding error: 在相同 1B DiT 下,Wav-VAE (直接编码波形) 相比 Mel-VAE,speaker similarity 从 0.706→0.812 (Seed-ZH), 0.696→0.787 (Seed-Hard) [Table 3]。论文指出 mel 丢弃的相位和高频细节对 voice cloning 至关重要,latent→mel→waveform 的两次转换放大了预测误差。

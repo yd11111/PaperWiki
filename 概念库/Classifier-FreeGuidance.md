@@ -106,4 +106,8 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 ## 演进
 
-Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导)
+Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导) --> APG 替代 CFG (LongCat-AudioDiT, 2026, Adaptive Projection Guidance 衰减平行分量消除 oversaturation)
+
+## Adaptive Projection Guidance (APG) 替代方案
+
+[[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 在 flow matching TTS 中发现标准 CFG 在高 guidance scale (α=4.0) 下产生 audible artifacts (oversaturation)。引入 APG (Sadat et al., 2024,源自图像生成),将 guidance residual 几何分解为平行于 conditional prediction 的分量和正交分量,选择性衰减平行分量 (η=0.5) 并保留正交分量。效果: CER/SIM 不变,UTMOS 3.06→3.16, DNSMOS 3.38→3.40 [Table 4]。同时发现计算 unconditional velocity 时必须 drop 显式构造的 noisy prompt latent 以避免信息泄漏。
