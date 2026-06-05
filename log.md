@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[AccentVector]] — 命中 6 页(取 6): [[SpeakerAdaptation]](pending-review), [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[StyleTransferinTTS]](pending-review), [[Zero-shotSpeechSynthesis]]✓ | 过滤: 无
+- [ingest/deep] [[AccentVector]] — 精读, kb_sources=6, 新建 0, 追加 2 (SpeakerAdaptation key_papers+演进, Cross-lingualVoiceCloning 开放问题)
+- [review/auto] [[AccentVector]] — pass, 0 high, 0 medium, 2 low (inline reviewer)
+- [lint/local] AccentVector — 通过
 - [kb/search] [[StreamWise]] — 命中 3 页(取 3): [[DiffusionModel]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 过滤: 无
 - [ingest/deep] [[StreamWise]] — 精读, kb_sources=3, 新建 0, 追加 0 (系统论文,不对概念页做实质贡献)
 - [review/auto] [[StreamWise]] — pass, 0 high, 0 medium, 4 low (self-review)
