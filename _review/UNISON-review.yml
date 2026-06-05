@@ -1,0 +1,75 @@
+paper: UNISON
+reviewer: auto
+date: 2026-06-06
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节清晰解释了 WHY (depth-matched conditioning 的层级语义动机) 和 HOW (uniform sampling + linear projection + ephemeral text tokens),包含消融验证。速查卡片的可借鉴字段具体可迁移。"
+  trustworthy:
+    score: 8
+    reason: "核心数字(FAD 1.558, CLAP 0.503, WER 1.27%, CER 0.92%, FD 12.38, CLAP 0.364 等)经交叉验证与原文一致。出处标注覆盖率高,所有指标均标注 [Table N]。缺少部分 traceability gap (见 issues)。"
+  distinguishable:
+    score: 8
+    reason: "因果解释标注了 [论文原文] 和 [agent 解读],覆盖率 >80%。方法节中的 WHY 解释大部分有来源标注。"
+  positionable:
+    score: 9
+    reason: "KB 背景节提供了详细的谱系定位,与 AudioBox/UniSonate/Audio-Omni 的对比清晰,创新判断有对比基准。frontmatter 字段完整且语义正确。"
+  non-polluting:
+    score: 8
+    reason: "frontmatter concepts/models/tasks/datasets 引用合理,无 overclaim。反向更新为追加操作,不会污染已有知识。"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "方法节 - 训练策略 - 训练数据"
+    detail: "~36M clips (~57K hours) 的训练数据规模描述缺少 [Table 11] 出处标注"
+    suggestion: "在训练数据描述末尾添加 [Table 11]"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法节 - 训练策略 - 训练配置"
+    detail: "AdamW 配置和 batch size 等训练超参缺少 [Table 13] 出处标注"
+    suggestion: "在训练配置描述末尾添加 [Table 13] (当前仅标注了 [§4.1])"
+
+  - type: template-compliance
+    severity: low
+    location: "实验表格"
+    detail: "实验表格中部分 baseline 最强值缺少具体出处标注 (如 GenAU-L 0.561 应标注 [Table 1])"
+    suggestion: "在 Baseline 列添加 [Table N] 标注"
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea #5"
+    detail: "Online GPU-side data synthesis 描述偏概括,缺少具体的 RMS mixing 公式或 SNR 控制参数"
+    suggestion: "可补充: SNR in [-3, 3] dB for editing, 0 dB for T2AS, 10 dB for speech-in-scene [§4.2]"
+
+checklist:
+  reproducible:
+    mechanism_explanation: pass
+    design_choices_why: pass
+    reusable_tricks: pass
+  trustworthy:
+    claim_traceability: pass-with-fixes  # 2 medium/low traceability gaps
+    metric_naming: pass
+    quick_card_metrics: pass
+    no_direction_error: pass
+  distinguishable:
+    source_annotation: pass
+    source_coverage: pass  # >80%
+    no_assertion_without_qualifier: pass
+    strong_claims_supported: pass
+  positionable:
+    kb_lineage: pass
+    innovation_benchmark: pass
+    fields_present: pass
+    fields_semantically_correct: pass
+    quick_card_complete: pass
+  non_polluting:
+    concept_admission: pass  # no new concept pages proposed
+    dedup_check: pass
+    no_factual_error: pass
+    update_classification: pass
+
+learning_signals: []

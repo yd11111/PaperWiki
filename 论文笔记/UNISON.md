@@ -109,9 +109,9 @@ UNISON 是一个 latent diffusion (flow matching) 框架,所有任务共享同�
 
 **Task-homogeneous batching**: 每个 mini-batch 只包含单一任务类型,防止 batch 内梯度冲突 [§3.7]。
 
-**训练配置**: AdamW (beta1=0.9, beta2=0.95), lr=1e-4 cosine decay + 2000 step warmup, batch 56/GPU x 8 H800, BF16, EMA 0.999, CFG dropout 0.1 [§4.1, Table 13]。
+**训练配置**: AdamW (beta1=0.9, beta2=0.95), lr=1e-4 cosine decay + 2000 step warmup, batch 56/GPU x 8 H800, BF16, EMA 0.999, CFG dropout 0.1 [§4.1] [Table 13]。
 
-**训练数据**: ~36M clips (~57K hours): 2.3M audio clips (WavCaps + AudioSet + VGGSound, ~6.4K h) + 33.7M speech clips (LibriTTS + WenetSpeech + [[Emilia]] EN/ZH, ~50.7K h) [Table 11]。
+**训练数据**: ~36M clips (~57K hours): 2.3M audio clips (WavCaps + AudioSet + VGGSound, ~6.4K h) + 33.7M speech clips (LibriTTS + WenetSpeech + [[Emilia]] EN/ZH, ~50.7K h) [Table 11]。编辑评估: SNR in [-3, 3] dB (audio editing), 0 dB (T2AS), 10 dB (speech-in-scene) [§4.2]。
 
 ## 实验
 
@@ -173,3 +173,19 @@ UNISON 的核心价值在于用极简的 task-specific 设计(一个标量 mask 
 ---
 
 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,消融验证清晰 |
+> | 可信赖 | pass | 核心数字交叉验证通过,2 处 traceability gap (medium/low) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >80% |
+> | 可定位 | pass | KB 背景谱系定位详细,创新判断有对比基准 |
+> | 不污染 | pass | 无新概念页,反向更新均为追加操作 |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/UNISON-review.yml`
