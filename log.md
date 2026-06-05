@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MOSS-VoiceGenerator]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[InstructedSpeechGeneration]]✓ | 参考(pending-review): [[Instruction-GuidedSpeechSynthesis]], [[NaturalLanguageDescriptionforTTS]], [[CodecLanguageModel]]
+- [ingest/deep] [[MOSS-VoiceGenerator]] — 精读, kb_sources=6, 新建 0, 追加 2 (NaturalLanguageDescriptionforTTS 正文, InstructedSpeechGeneration 正文)
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]], [[LLM-basedTTS]], [[CodecLanguageModel]], [[ResidualVectorQuantization]] — key_papers 均已达上限且 MOSS-VoiceGenerator 无新架构贡献,不追加
+- [review/auto] [[MOSS-VoiceGenerator]] — pass-with-fixes, 4 issues (1 high fixed: baseline 数字混淆, 1 medium fixed: 选择性对比, 2 low)
+- [lint/local] MOSS-VoiceGenerator — 通过
 - [kb/search] [[IterateDifferentiate]] — 命中 6 页(取 6): [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓, [[ConditionalFlowMatching]]✓ | 参考(pending-review): [[TTSEvaluation]], [[CosyVoice3]], [[CV3-Eval]]
 - [ingest/deep] [[IterateDifferentiate]] — 精读, kb_sources=6, 新建 0, 追加 3 (TTSEvaluation 正文, SEED-TTS-Eval used_by, CV3-Eval used_by)
 - [skip/update] [[TTSEvaluation]] — key_papers 已达上限(28/12),改追加到正文
