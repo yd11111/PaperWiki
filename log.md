@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[WavSLM]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[模型库/WavLM|WavLM]](pending-review)
+- [ingest/deep] [[WavSLM]] — 精读, kb_sources=6, 新建 0, 追加 5 ([[SpeechLanguageModel]] 关键论文, [[SemanticvsAcousticTokens]] 演进, [[Single-codebookvsMulti-codebook]] SLM验证, [[Self-SupervisedSpeechRepresentation]] 分层复用, [[模型库/WavLM|WavLM]] key_papers)
+- [review/auto] [[WavSLM]] — pass-with-fixes, 0 high, 2 medium, 1 low (self-review, fixes applied)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34),改追加到关键论文正文
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(63),改追加到演进正文
+- [skip/update] [[Single-codebookvsMulti-codebook]] — key_papers 已达上限(18),改追加到演进正文
+- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(25),改追加到演进正文
+- [skip/update] [[SpeechTokenizer]] — 跳过反向更新(审阅状态 revise,需先重构)
+- [lint/local] WavSLM — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 283 — 建议抽空审核
 - [kb/search] [[ZeSTA]] — 命中 6 页(取 6): [[Zero-shotSpeechSynthesis]]✓, [[CosyVoice2]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VITS]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
 - [ingest/deep] [[ZeSTA]] — 精读, kb_sources=6, 新建 0, 追加 3 ([[SpeakerAdaptation]] key_papers+演进, [[CosyVoice2]] baseline引用, [[VITS]] 相关工作)
 - [review/auto] [[ZeSTA]] — pass, 0 high, 0 medium, 3 low (self-review)
