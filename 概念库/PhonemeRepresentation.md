@@ -89,6 +89,7 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 
 - **IPA (International Phonetic Alphabet)**: 国际音标,可统一表示所有语言的发音
 - **Byte representation**: 直接使用 UTF-8 bytes,无需任何语言学知识
+- [[论文笔记/LearningToSpeakFromText|Saeki et al. (IJCAI 2023)]]: 在多语言文本上做 MLM 预训练后,byte-based TTS 在 7 种欧洲语言上全面超过 IPA baseline (de CER 3.79% vs 9.76%),且实现了未见语言的零样本 TTS (es CER 11.69%) [Table 2, 3]。证明通过预训练可以绕过 G2P,关键在于冻结预训练的 language-aware embedding
 - **Phoneme embedding mapping**: 将不同语言的音素嵌入映射到共享空间
 - [[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026): 30 语言 IPA 统一表示的大规模实践。中文使用 Pinyin (高度标准化音节结构),其他语言使用 eSpeak-NG,泰/日/韩使用专用 G2P 工具 (PyThaiNLP/PyOpenJTalk/g2pK)。两个设计要点: (1) 显式保留 stress markers 区分语义 (如希腊语同形词仅靠重音位置区分含义); (2) 将 articulatory units 与 suprasegmental modifiers (长度/送气/声调) 分解但统一 embedding (引用 Zhang et al. 2021 的 NAR TTS 实验证明分离 embedding 无显著差异)。420K 小时 30 语言训练验证了此表示的可扩展性
 

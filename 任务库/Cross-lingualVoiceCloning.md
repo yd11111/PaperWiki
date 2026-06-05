@@ -59,6 +59,10 @@ updated: 2026-06-01
 | Qwen3-TTS-12Hz-1.7B | WER en-to-zh | 4.77 | CV3-Eval | Qwen3-TTS Table 7 |
 | Qwen3-TTS-12Hz-1.7B | WER zh-to-ko | 4.82 | CV3-Eval | Qwen3-TTS Table 7 |
 
+## 早期探索: 纯文本跨语言 TTS
+
+- [[论文笔记/LearningToSpeakFromText|Saeki et al. (IJCAI 2023)]]: 在多语言文本上做 MLM 预训练 + 冻结 language-aware embedding,仅用文本数据 (无语音) 实现未见语言的零样本 TTS。未见语言 (西班牙语) CER 11.69%,与 oracle 的 5.32% 仍有 gap [Table 3]。证明了跨语言迁移在极低资源场景的可行性,但效果依赖于已见语言中是否存在相似语言
+
 ## 开放问题
 
 - 低资源语言方向的跨语言克隆质量仍有提升空间
