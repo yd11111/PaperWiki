@@ -142,11 +142,11 @@ x_skip[s1:T-l] <- x[s1+l:T]
 
 2. **SIM 不变**: 三个变体的 SIM 均为 0.60,说明 WER 改善完全来自对齐改进而非说话人条件的偏移 [§5.1]。但 SIM 0.60 在 benchmark 上处于低位,作者认为这是 compact 架构的限制 [§6]。
 
-3. **低 NFE 下优势更显著**: 在 ZERO500-ko NFE=12 条件下,RobustSpeechFlow CER 从 baseline 的 0.93% 降至 0.57% (39% 相对改善),而 NFE=24 时改善幅度虽然依然显著但相对较小 [Table 2, §5.2]。
+3. **低 NFE 下优势更显著**: 在 ZERO500-ko NFE=12 条件下,RobustSpeechFlow CER 从 baseline 的 0.93% 降至 0.57% (约 39% 相对改善 [agent 计算]),而 NFE=24 时改善幅度虽然依然显著但相对较小 [Table 2, §5.2]。
 
 4. **韩语改善大于英语**: ZERO500-ko 的 CER 改善幅度(0.93→0.57% at NFE=12)远大于英语(0.55→0.43%),论文认为韩语有更高的韵律变化使得 failure-mode negatives 特别有效 [§5.3]。
 
-5. **训练稳定性**: Fig 1 显示 RobustSpeechFlow 在 300K 步之后建立了最一致的优化轨迹,在 NFE=24 英语上从 300K 步开始超越所有方法。作者假设显式惩罚 skip/repeat 相关的 latent 区域有效稳定了 cross-attention alignment 的 loss landscape [§5.3]。
+5. **训练稳定性**: Fig 1 显示 RobustSpeechFlow 在 300K 步之后建立了最一致的优化轨迹,在 NFE=24 英语上从 300K 步开始超越所有方法 [Fig 1b]。作者假设显式惩罚 skip/repeat 相关的 latent 区域有效稳定了 cross-attention alignment 的 loss landscape [§5.3]。
 
 6. **ContrastiveFM 的不一致性**: 标准 ContrastiveFM 在英语 NFE=12 上有微弱优势 (CER 0.41% vs 0.43%),但其收益不能跨语言和 NFE 设置一致迁移 [§5.2]。
 
@@ -188,3 +188,19 @@ RobustSpeechFlow 的核心贡献是一个优雅而实用的 idea: **将 TTS 的 
 2. **长度保持 augmentation**: 在 latent 空间做 overwrite 而非 insert/delete,保持序列长度不变。这一设计原则可迁移到任何需要在固定长度序列上做数据增强的场景
 
 3. **Contrastive FM 在 TTS 中的应用**: 本文验证了 Contrastive Flow Matching (原为图像生成)在 TTS 中的可行性,且 domain-specific negatives 显著优于 random negatives。未来可探索更多 TTS-specific 负样本构造(如 pitch distortion、speaker mixing)
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY/HOW 清晰, 设计选择有因果解释, 速查卡片可借鉴具体 |
+> | 可信赖 | pass | 全部数字经 PDF 交叉验证正确, 出处标注覆盖率 >90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注系统, 覆盖率约 85% |
+> | 可定位 | pass | KB 背景有具体谱系定位和对比基准, frontmatter 完整 |
+> | 不污染 | pass | 无新建概念页, 反向更新计划合理 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/RobustSpeechFlow-review.yml`
