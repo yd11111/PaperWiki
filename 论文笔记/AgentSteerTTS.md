@@ -11,7 +11,7 @@ tags: [TTS, emotion-control, disentanglement, multi-agent, composite-instruction
 concepts: ["[[EmotionControlinTTS]]", "[[GradientReversalLayer]]", "[[SpeechFactorization]]", "[[SpeakerEmbedding]]", "[[ProsodyModeling]]", "[[Instruction-GuidedSpeechSynthesis]]"]
 models: ["[[CosyVoice]]", "[[CosyVoice2]]"]
 tasks: []
-datasets: []
+datasets: ["ESD (Zhou et al., 2021)", "MSP-Podcast (Busso et al., 2025)"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -125,7 +125,7 @@ Slow Agent: 生成最终波形后,Supervisor Agent (MLLM backend, Gemini3 或 Qw
 | WER (%) | 1.34 | 1.57 | 1.81 | 1.88 | Composite benchmark | [Table 2] |
 | CSR | 0.78 | — | — | — | Composite benchmark | [Table 3] |
 | Leakage | 0.14 | — | — | — | Composite benchmark | [Table 3] |
-| DMOS | 3.82 | 3.83 | 4.24 | 4.31 | Composite benchmark | [Table 2] |
+| DMOS | 3.82 | 3.83 | 4.24±0.19 | 4.31±0.11 | Composite benchmark | [Table 2] |
 | ESMOS (ESD) | 4.35 | 4.42 | — | — | ESD | [Table 1] |
 | SNMOS (ESD) | 4.45 | 4.52 | — | — | ESD | [Table 1] |
 | SSMOS (ESD) | 4.25 | 4.31 | — | — | ESD | [Table 1] |
@@ -169,3 +169,19 @@ Slow Agent: 生成最终波形后,Supervisor Agent (MLLM backend, Gemini3 或 Qw
 2. **Latent scaling 的推理时梯度校准** — 用 LCP 在 Mel 空间预测 embedding 并调整注入强度 alpha,避免跑 vocoder。这种"先快速验证再全量生成"的模式可迁移到任何需要推理时微调控制参数的 TTS 系统
 3. **Perceptual cropping 筛选 prototype 相关窗口** — 检索到的 prototype 音频中可能包含不相关段(静音、非目标情感),用 cosine similarity sliding window 选最一致的时间片段。适用于任何 retrieval-augmented 语音系统
 4. **Confidence-gated fusion for retrieval** — 检索置信度低时降低 acoustic stream 权重,避免不匹配 prototype 污染生成。B5 bucket (最低置信度) CSR 提升 +0.430 [Fig 6]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,速查卡片可借鉴有4个具体 trick |
+> | 可信赖 | pass | 所有数字与原文交叉验证一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注覆盖率高 |
+> | 可定位 | pass | KB 背景谱系定位覆盖三条路线 |
+> | 不污染 | pass | frontmatter 挂接合理 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/AgentSteerTTS-review.yml`

@@ -1,0 +1,51 @@
+review:
+  paper: "AgentSteerTTS"
+  note_path: "论文笔记/AgentSteerTTS.md"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含充分的因果解释(WHY),每个模块的设计动机清晰(mode averaging→ADM, neutral drift→DAC, inference stochasticity→Fast-Slow)。速查卡片可借鉴字段有4个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    rationale: "所有数字型 claim 均与原文 Table 1/2/3 交叉验证一致。指标名正确(E-SIM, S-SIM, CSR, WER, MCD, ESMOS/SNMOS/SSMOS)。速查卡片指标字段有具体数字+数据集+来源。"
+  可区分:
+    score: 9
+    rationale: "因果解释来源标注覆盖率高,方法节中每段 WHY 解释都标注了[论文原文]或[agent 解读]。点评中明确区分了论文的自我评价和 agent 独立判断。"
+  可定位:
+    score: 8
+    rationale: "KB 背景节谱系定位详细,覆盖对抗解耦、混合情感、闭环控制三条路线。创新判断有明确对比基准。可补充: composite instruction 作为研究方向在已有工作中的覆盖程度。"
+  不污染:
+    score: 9
+    rationale: "暂无反向更新,frontmatter concepts/models 挂接合理。"
+
+issues:
+  - id: 1
+    severity: "low"
+    type: "template-compliance"
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 ESD (Zhou et al., 2021) 和 MSP-Podcast (Busso et al., 2025) 两个数据集用于训练和评估,虽然它们不在数据集库中,但可记录为字符串引用。"
+    suggestion: "在 datasets 字段添加 ESD 和 MSP-Podcast 的文本引用(非 wikilink),如 [\"ESD (Zhou et al., 2021)\", \"MSP-Podcast (Busso et al., 2025)\"]"
+  - id: 2
+    severity: "low"
+    type: "traceability-gap"
+    location: "实验表"
+    detail: "实验表中 CosyVoice2 的 DMOS 列为空,但 Table 2 原文显示 CosyVoice2 DMOS 为 4.31±0.11。"
+    suggestion: "补充 CosyVoice2 和 IndexTTS2 在 DMOS 列的数据"
+  - id: 3
+    severity: "low"
+    type: "traceability-gap"
+    location: "速查卡片 指标字段"
+    detail: "ESD 结果标注为 Qwen3 backend,composite benchmark 结果标注为 Gemini3 backend,但速查卡片未说明两组数字来自不同 backend。"
+    suggestion: "速查卡片指标字段标明 backend 类型,或统一使用最佳配置的数据"
+
+learning_signals: []
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 0
+  low: 3
