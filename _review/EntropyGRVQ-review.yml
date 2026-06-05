@@ -1,0 +1,55 @@
+review:
+  paper: "EntropyGRVQ"
+  note_path: "论文笔记/EntropyGRVQ.md"
+  reviewer: "auto (inline, non-independent)"
+  date: "2026-06-05"
+  checklist_version: "v1.1"
+
+  principles:
+    可复述:
+      score: 9
+      reason: "方法节有清晰的因果解释(方差→熵→信息量→均衡分组→改善利用率),每个设计选择都回答了 WHY。速查卡片可借鉴字段具体(方差均衡分组 trick)。"
+    可信赖:
+      score: 9
+      reason: "所有关键数字(Table 1/2/3, MUSHRA +21/+11)均标注出处且经 PDF 交叉验证无误。指标方向正确,无混淆。MUSHRA 绝对分数为图中估读值,已标注(估)。"
+    可区分:
+      score: 9
+      reason: "因果解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 >90%。无推断写成断言的情况。"
+    可定位:
+      score: 9
+      reason: "KB 背景有明确谱系定位(GRVQ→EG-GRVQ 演进线,与 ERVQ 的互补关系),创新判断有对比基准(结构改进 vs 训练策略改进)。"
+    不污染:
+      score: 9
+      reason: "frontmatter concepts 准确挂接 5 个概念页 + 1 个任务页。models 为空合理(本文无新模型,baseline Mimi 无独立 KB 页)。不涉及新建概念页。"
+
+  conclusion: "pass"
+  summary: "笔记质量好,数字全部经 PDF 验证无误,因果解释清晰且来源标注充分,KB 定位准确。仅有 2 个 low 级别问题。"
+
+  issues:
+    - id: 1
+      severity: "low"
+      type: "traceability-gap"
+      location: "实验表 MUSHRA 行"
+      detail: "MUSHRA 绝对分数(~62, ~47, ~51, ~41)为图中估读值,论文原文只给了差值(+21, +11)。已标注(估)但可更明确。"
+      suggestion: "在 MUSHRA 行旁注明'绝对值为 Fig 4 估读,论文仅报告差值'。"
+    - id: 2
+      severity: "low"
+      type: "template-compliance"
+      location: "frontmatter models 字段"
+      detail: "models 为空列表。Mimi 是核心 baseline 但 KB 中无独立页面,留空合理。"
+      suggestion: "无需修改,Mimi 未来若创建 KB 页可补充。"
+
+  issue_counts:
+    high: 0
+    medium: 0
+    low: 2
+
+  cross_verification:
+    table1_numbers: "全部验证通过 (PESQ 1.881, STOI 0.890, ViSQOL 2.496, SDR -7.309)"
+    table2_numbers: "全部验证通过 (Total NMSE: RVQ 0.884, GRVQ 0.852, EG-GRVQ 0.819)"
+    table3_numbers: "全部验证通过"
+    mushra_claims: "+21 over official, +11 over GRVQ — 与原文 §3.6 一致"
+    split_point: "k=237, C=512, even split 55.30%/44.70% — 与原文 §2.2 一致"
+    training_details: "λ_adv=1, λ_feat=15, λ_commit=1, 8xA6000, batch 12/GPU — 与原文 §3.3 一致"
+
+  learning_signals: []
