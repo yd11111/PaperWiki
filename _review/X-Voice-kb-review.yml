@@ -1,0 +1,48 @@
+kb_review:
+  paper: "X-Voice"
+  note_path: "论文笔记/X-Voice.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+change_plan:
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: "append-body"
+    detail: "key_papers 已达上限(67),跳过追加。在演进节末尾追加 X-Voice 的 Dual-Level LID + DCFG 贡献。"
+    risk: "low"
+  - target: "概念库/Classifier-FreeGuidance.md"
+    action: "append-body"
+    detail: "key_papers 已达上限(36),跳过追加。在多条件 CFG 相关节追加 DCFG + A-Warmup 方案。"
+    risk: "low"
+  - target: "概念库/PhonemeRepresentation.md"
+    action: "append-key_papers+body"
+    detail: "key_papers 当前 10 条(< 12),可追加。在跨语言统一表示节追加 X-Voice IPA 方案细节。"
+    risk: "low"
+  - target: "概念库/Non-autoregressiveTTS.md"
+    action: "append-body"
+    detail: "key_papers 已达上限(28),跳过追加。在演进节末尾追加 X-Voice。"
+    risk: "low"
+  - target: "任务库/Cross-lingualVoiceCloning.md"
+    action: "append-key_models+body"
+    detail: "key_models 当前 10 条(< 12),可追加。在代表模型节追加 X-Voice。"
+    risk: "low"
+  - target: "任务库/Zero-shotSpeechSynthesis.md"
+    action: "append-body"
+    detail: "key_models 已达上限(63),跳过追加。在正文追加引用。"
+    risk: "low"
+  - target: "数据集/Emilia.md"
+    action: "append"
+    detail: "追加 X-Voice 使用记录。"
+    risk: "low"
+  - target: "数据集/SEED-TTS-Eval.md"
+    action: "append"
+    detail: "追加 X-Voice 使用记录。"
+    risk: "low"
+
+issues: []
+
+summary:
+  total_changes: 8
+  all_append: true
+  status_changes: 0
+  new_pages: 0
