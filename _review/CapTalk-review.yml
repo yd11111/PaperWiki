@@ -1,0 +1,54 @@
+review:
+  paper: "CapTalk"
+  note_path: "论文笔记/CapTalk.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+  conclusion: pass-with-fixes
+  summary: "高质量精读笔记。机制解释清晰完整,FHVAE-inspired 层次化变分条件的 WHY/HOW 均有充分阐述。所有关键数字经 PDF 原文交叉验证无误。来源标注覆盖率约 90%。KB 背景定位准确,创新判断有对比基准。仅发现 1 个 medium 和 1 个 low 问题,均不阻塞反向更新。"
+
+  principles:
+    reproducible:
+      score: 9
+      verdict: pass
+      reason: "方法节包含充分的因果解释。三个关键设计选择 (统一框架/FHVAE timbre conditioning/CoT) 均回答了 WHY。速查卡片可借鉴字段列出 4 个具体可迁移 trick。读完笔记能向同事解释 CapTalk 为什么 work。"
+    trustworthy:
+      score: 9
+      verdict: pass
+      reason: "数字型 claim 来源标注覆盖率约 90%。所有 Table 1-10 的关键数字经 PDF 原文逐一验证无误。指标名使用正确 (SIM/MOS/accuracy 等)。无方向性错误。"
+    distinguishable:
+      score: 9
+      verdict: pass
+      reason: "因果解释清晰区分 [论文原文] 和 [agent 解读],覆盖率约 90%。4 处 [agent 解读] 均为合理推断,未超出论文证据范围。无将推断写成断言的情况。"
+    locatable:
+      score: 9
+      verdict: pass
+      reason: "KB 背景节提供了完整的谱系定位 (NL description for TTS 演进路线),创新判断列出 3 个维度并有 VoiceSculptor 作为对比基准。6 个 KB 页面的匹配与引用质量良好,confirmed/pending-review 标注正确。frontmatter 字段完整且语义正确。"
+    no_pollution:
+      score: 9
+      verdict: pass
+      reason: "笔记内容准确反映论文原文,反向更新预期为追加操作 (向 NaturalLanguageDescriptionforTTS 等页面追加 key_papers 引用),安全性高。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: template-compliance
+      location: "## 核心问题"
+      detail: "文本说'面临两个未解问题',但实际列出了三个编号项: (1) 对话场景空白, (2) Timbre-expression 纠缠, (3) 评估体系不足。计数与内容不一致。"
+      suggestion: "将'两个'改为'三个',或将第三项 (评估体系不足) 合并到第一项 (对话场景空白) 中作为子点。"
+
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "frontmatter models 字段"
+      detail: "models 字段中 [[Qwen3-TTS]] 使用短链接,按 AGENTS.md §13 消歧规则,应使用 [[论文笔记/Qwen3-TTS|Qwen3-TTS]] 格式以避免与可能的模型库页面混淆。"
+      suggestion: "改为 [[论文笔记/Qwen3-TTS|Qwen3-TTS]]。"
+
+  cross_verification:
+    tables_checked: [1, 2, 3, 4, 5, 6, 7, 8, 10]
+    all_numbers_match: true
+    equations_referenced: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 15, 16]
+    sections_referenced: ["§1", "§3.1", "§3.2", "§3.3", "§4.1", "§4.2", "§4.3", "§5.1.1", "§5.2", "§5.3", "§6", "§A", "Appendix B", "Appendix C"]
+
+  learning_signals: []

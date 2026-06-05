@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, voice-design, caption-conditioned, dialogue, autoregressive, FHVAE, CoT, timbre-reuse, controllability]
 concepts: ["[[NaturalLanguageDescriptionforTTS]]", "[[SpeakerEmbedding]]", "[[SpeechFactorization]]", "[[VariationalAutoencoderforTTS]]", "[[CodecLanguageModel]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
-models: ["[[Qwen3-TTS]]", "VoiceSculptor", "Ming-omni-tts-0.5B", "Fish Speech S2 Pro"]
+models: ["[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "VoiceSculptor", "Ming-omni-tts-0.5B", "Fish Speech S2 Pro"]
 tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: ["InstructTTSEval-ZH"]
 kb_context_sources: 6
@@ -47,7 +47,7 @@ updated: 2026-06-06
 
 ## 核心问题
 
-Voice design (从 NL 描述生成目标语音) 在 single-utterance 上已有较好探索,但面临两个未解问题:
+Voice design (从 NL 描述生成目标语音) 在 single-utterance 上已有较好探索,但面临三个未解问题:
 
 1. **对话场景的空白**: 现有方法 (FlexiVoice, VoiceSculptor, Qwen3TTS-VD 等) 聚焦 single-utterance,缺乏对多轮对话中 speaker identity 一致性和 turn-level 表达控制的系统性研究 [§1]。
 
@@ -195,4 +195,16 @@ CapTalk 由三部分组成 [§3.1, Fig 1]:
 
 ## 审阅
 
-*(待独立 subagent 审阅)*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 机制解释充分,WHY/HOW 覆盖完整,速查可借鉴具体 |
+> | 可信赖 | pass | 所有 Table 1-10 数字经 PDF 交叉验证无误,标注覆盖率 ~90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 区分清晰,4 处推断均合理 |
+> | 可定位 | pass | KB 背景谱系定位完整,创新判断有 VoiceSculptor 对比基准 |
+> | 不污染 | pass | 反向更新预期为追加操作,安全性高 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/CapTalk-review.yml`
