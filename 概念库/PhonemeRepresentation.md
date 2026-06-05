@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]", "[[论文笔记/UniSonate|UniSonate]]", "[[论文笔记/Tibetan-TTS|Tibetan-TTS]]", "[[论文笔记/X-Voice|X-Voice]]"]
+key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]", "[[论文笔记/UniSonate|UniSonate]]", "[[论文笔记/Tibetan-TTS|Tibetan-TTS]]", "[[论文笔记/X-Voice|X-Voice]]", "[[论文笔记/Dict-TTS|Dict-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-SpeechPipeline]]", "[[Attention-basedTTS]]", "[[Non-autoregressiveTTS]]"]
 status: pending-review
@@ -53,6 +53,7 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - 字形已覆盖全部"字符",但多音字需消歧
 - 核心问题: Polyphone disambiguation (基于上下文)
 - 代表: 条件神经网络 + 多级 embedding
+- 字典知识注入: [[论文笔记/Dict-TTS|Dict-TTS]] (Jiang et al., NeurIPS 2022) 提出 Semantics-to-Pronunciation Attention (S2PA),用在线字典作为结构化先验知识,通过注意力匹配输入语义与字典条目实现无监督多音字消歧。Biaobei PER-S 1.08% (接近 pypinyin 1.14%),预训练后 0.79% [Table 1, 2]。核心 insight: 将字符表示保持在语义空间(而非被 mel loss 拉向声学空间),由 Gumbel-Softmax 实现可微的离散发音选择。跨中/日/粤三语验证,但日语效果受限于 kanji 音读/训读的经验性规则
 
 ## 在不同 TTS 范式中的角色
 

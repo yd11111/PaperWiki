@@ -4,7 +4,7 @@ title: "Gumbel-Softmax"
 aliases: [Gumbel Softmax, Gumbel-Softmax Trick, Concrete Distribution]
 category: "optimization-technique"
 tags: [differentiable-sampling, discrete-optimization, gradient-estimation, reparameterization]
-key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/wav2vec2.0|wav2vec 2.0]]", "[[论文笔记/NAST|NAST]]"]
+key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/wav2vec2.0|wav2vec 2.0]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/Dict-TTS|Dict-TTS]]"]
 origin_paper: "Jang et al., Categorical Reparameterization with Gumbel-Softmax, ICLR 2017"
 related_concepts: ["[[DifferentiableRewardOptimization]]", "[[FiniteScalarQuantization]]", "[[ResidualVectorQuantization]]"]
 status: pending-review
@@ -70,6 +70,16 @@ wav2vec 2.0 (Baevski et al., NeurIPS 2020) 使用 Gumbel-Softmax 实现端到端
 - 配合 diversity loss 最大化 codebook 使用熵,防止 codebook collapse [§3.2]
 
 [agent 解读] wav2vec 2.0 是 Gumbel-Softmax 在语音 SSL 中的里程碑应用;后续 HuBERT 用离线 k-means 替代了它,避免了温度退火等超参数,但丧失了端到端可微性
+
+### 在多音字消歧中的应用 (Dict-TTS)
+
+[[论文笔记/Dict-TTS|Dict-TTS]] (Jiang et al., NeurIPS 2022) 将 Gumbel-Softmax 用于 TTS 前端的多音字(polyphone)消歧:
+- 每个多音字有 m 个候选发音,S2PA 模块计算各发音的语义匹配权重 w_{i,j}
+- Gumbel-Softmax 对权重采样,近似选择最可能的发音: w̃ = softmax((log(w) + g) / τ) [§3.3, Eq. 2-3]
+- 温度 τ 按 Jang et al. 2017 的策略退火,训练时从大到小
+- 消融实验证实 Gumbel-Softmax 优于直接 softmax 加权: PER-S 从 1.19%→1.08%, SER-S 从 7.75%→6.50% [Table 4]
+
+[agent 解读] Dict-TTS 是 Gumbel-Softmax 在 TTS 中的早期应用(2022),在时间线上早于 CosyVoice 3 的 DiffRO(2025)。应用场景不同: Dict-TTS 用于前端离散发音选择,DiffRO 用于后训练阶段的 token-level reward 优化
 
 ## 关键论文
 
