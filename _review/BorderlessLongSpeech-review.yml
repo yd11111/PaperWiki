@@ -1,0 +1,130 @@
+reviewer: auto
+date: 2026-06-06
+note: 论文笔记/BorderlessLongSpeech.md
+pdf: Sources/BorderlessLongSpeech.pdf
+kb_refs:
+  - 概念库/LLM-basedTTS.md (confirmed)
+  - 概念库/Instruction-GuidedSpeechSynthesis.md (pending-review)
+  - 概念库/EmotionControlinTTS.md (pending-review)
+  - 概念库/ProsodyModeling.md (confirmed)
+  - 概念库/NaturalLanguageDescriptionforTTS.md (pending-review)
+  - 概念库/GlobalStyleTokens.md (pending-review)
+
+# 第一层: 原则判断
+
+principles:
+  可复述:
+    score: 8
+    reason: >
+      方法节对三大支柱(数据策略/CoT/Native Agentic)都给出了 WHY 解释,
+      关键设计选择有因果链(如为什么 label don't filter — 因为表现力数据与噪声强相关)。
+      Dimension Dropout 的 WHY 也清晰。唯一不足是 backbone 架构未详述,
+      但这是论文本身的信息缺失而非笔记的遗漏。
+  可信赖:
+    score: 7
+    reason: >
+      本文几乎无定量数据,笔记正确反映了这一点。所有 claim 均标注了章节出处 [§X.X]。
+      "10-30%" 数据保留率的数字来源标注正确(TouchTTS [12], §2.1)。"90%以上" 数据利用率
+      也正确引用了 §2.1。由于论文无表格/图表数字,可信赖性主要体现在忠实反映论文声明。
+      速查卡片指标字段如实写"无定量评估结果",合规。
+  可区分:
+    score: 9
+    reason: >
+      因果解释来源标注覆盖率高,方法节中几乎每段都有 [论文原文] 或 [agent 解读] 标注。
+      agent 解读部分(如 Dimension Dropout 与 CFG/Quantizer Dropout 的类比,CoT 与
+      RALL-E/OV-InstructTTS 的对比)明确标记为推断。点评节的质疑("更像 position paper")
+      是 agent 观点,语境中可区分。
+  可定位:
+    score: 9
+    reason: >
+      KB 背景节有具体谱系定位(VALL-E → CosyVoice → 本文的 Gen 4 框架),
+      与 5 个已有概念页的对比具体(Instruction-GuidedSpeechSynthesis 的演进线、
+      EmotionControlinTTS 的 Gap 1 诊断、ProsodyModeling 的显式化反转)。
+      创新判断有对比基准(不在模型架构,而在数据哲学/分层标注/系统观)。
+  不污染:
+    score: 8
+    reason: >
+      frontmatter concepts 挂接合理(5 个概念页均与论文内容直接相关)。
+      models 仅列 CosyVoice(论文引用的 Gen 3 代表),未列后续系统。
+      无新建概念页需求(本文的核心概念如 GST schema、Dimension Dropout
+      目前不满足多篇引用的准入规则)。反向更新为追加操作,风险低。
+
+conclusion: pass-with-fixes
+
+# 第二层: 检查项
+
+checklist:
+  可复述:
+    method_has_why: pass
+    design_choices_explained: pass
+    reusability_specific: pass
+  可信赖:
+    claims_sourced: pass
+    metric_names_correct: pass  # 论文本身无指标,笔记正确描述了评估缺失
+    quickcard_metrics: pass  # 如实写"无定量评估"
+    no_directional_error: pass
+  可区分:
+    source_labels_present: pass
+    source_label_coverage: pass  # ≥80%
+    no_assertion_without_qualifier: pass-with-note  # 见 issue 1
+    strong_claims_supported: pass
+  可定位:
+    kb_lineage_specific: pass
+    innovation_has_baseline: pass
+    frontmatter_present: pass
+    frontmatter_semantically_correct: pass-with-note  # 见 issue 2
+    quickcard_five_fields: pass
+  不污染:
+    new_concepts_meet_criteria: N/A  # 无新建
+    dedup_check: N/A
+    reverse_update_no_error: pass
+    reverse_update_correctly_classified: pass
+
+# 问题列表
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "速查卡片 → 指标字段"
+    detail: >
+      速查卡片指标字段写"无定量评估结果 -- 作者明确指出 Gen 4 TTS 的评估框架是开放问题 [§5]"。
+      虽然如实反映了论文现状,但未提及论文有 demo 音频可供定性评估这一信息。
+    suggestion: >
+      在指标字段补充 "作者鼓励通过 demo 直接聆听评估 [§5]",让读者知道存在定性评估途径。
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: frontmatter → models
+    detail: >
+      models 仅列 CosyVoice,但论文也引用了 VALL-E [7], VITS [6], TouchTTS [12]
+      作为代际演进的参照点。CosyVoice 引用的是 CosyVoice 2 [8] 而非 CosyVoice 1。
+    suggestion: >
+      models 字段的定位是"本文模型+对比 baseline"。本文无自己的模型名,
+      引用的系统是演进背景而非直接对比。当前只列 CosyVoice 是合理的简化,
+      但可考虑去掉(因为本文不是 CosyVoice 的工作)或改为空列表。
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea → 第 3 点"
+    detail: >
+      "分层控制协议栈"描述较抽象,缺少具体的接口格式示例。
+    suggestion: >
+      可补充一个 GST schema 的 pseudo-format 示例(如 Global: {scene: "...", speakers: [...]} /
+      Sentence: [{tone: "...", pace: "..."}] / Token: [{stress: "...", liaison: "..."}]),
+      让读者更具体地理解如何落地。
+
+summary:
+  total: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals:
+  - type: no-quantitative-paper
+    detail: >
+      本论文是一篇无定量实验的框架/立场论文。现有 checklist 对此类论文的处理是
+      "如实描述缺失",但可考虑增加专门检查项:对于无定量数据的论文,
+      笔记是否充分标注了这一局限并评估了其对结论可信度的影响。
