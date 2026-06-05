@@ -195,3 +195,7 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## 参数空间 Task Vector 情感控制 (TaskVectorTTS)
 
 [[论文笔记/TaskVectorTTS|TaskVectorTTS]] (Feng et al., SJTU, 2025) 提出在参数空间而非激活/嵌入空间操作的情感控制方法。核心方法: 对 F5-TTS 分别在情感数据上微调,计算 task vector (微调参数差 τ = θ_ft - θ_pre),通过缩放系数 β 连续控制情感强度 (ε = β·τ)。在跨风格 (方言+情感) 场景中,通过层级合并策略 (Hierarchical Merging) 将情感 LoRA E-Vector 分配到 DiT 后半层,避免与方言控制干扰。情感方言合成 MOS 2.83 (HE-Vector) vs CosyVoice2 1.87 [Table 3]。与 EmoSteer-TTS 的区别: EmoSteer 在激活空间操作且 training-free,TaskVectorTTS 在参数空间操作需微调; 与 TTS-CtrlNet 的区别: TTS-CtrlNet 用 ControlNet 旁挂,TaskVectorTTS 用 task vector 直接修改权重。局限: 仅在 F5-TTS 上有效,应用于 CosyVoice 时质量下降。详见 [[论文笔记/TaskVectorTTS|TaskVectorTTS]]。
+
+## CoT 显式规划对话 Turn-level 表达 (CapTalk)
+
+[[论文笔记/CapTalk|CapTalk]] (Su et al., Hello Group, 2026) 提出了一条不同于 embedding/steering/reward 的情感-表达控制路线: 在对话 TTS 中使用 Chain-of-Thought 控制序列显式规划 turn-level 动态属性。CoT 包含 5 个属性 (emotion/tone/pitch/energy/speed),其中 emotion/tone 是高层情感-交际意图,pitch/energy/speed 是低层韵律实现 (建模为 speaker-internal relative prosody,归一化到各说话人基线)。CoT 在训练时通过 Qwen3-Omni 从语音中提取,推理时由模型从对话上下文自回归预测。400 样本评估中 CoT prediction accuracy 0.7675-0.9125,controllability success rate 0.7675-0.8675 [Table 3]; w/ CoT vs w/o CoT 人工偏好 65.5% vs 34.5% [Table 4]。与已有路线的根本区别: 不在 embedding/activation/参数空间操作情感表征,而是将表达意图外化为可读的文本 token 序列,作为生成的前置规划。详见 [[论文笔记/CapTalk|CapTalk]]。

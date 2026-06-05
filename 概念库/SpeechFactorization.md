@@ -60,6 +60,8 @@ updated: 2026-06-02
 - 量化: 离散化表示天然限制信息容量
 - 预训练模型引导: 利用 emotion classifier / speaker verifier 指导分离
 
+**FHVAE-inspired 层次化 KL 正则化** (CapTalk, Su et al., 2026): [[论文笔记/CapTalk|CapTalk]] 将 FHVAE 的核心思想 (用层次化隐变量分离稳定因子和变化因子) 应用于 voice design TTS 中的 timbre-expression 解耦。具体做法: utterance-level speaker encoder 提取全局 e_spk (编码稳定 timbre),segment-level latent z2 捕获局部 timbre+情感,通过 KL(q(z2|s) || p(z2|e_spk)) 正则化使 z2 向 utterance-conditioned prior 靠拢,抑制 segment-specific 的情感变化。Fixed e_spk timbre reuse SIM 0.92 vs resampled 0.42 [Table 10],验证了解耦效果。与 self-distillation (Seed-TTS) 的区别: 不需要外部 VC 构造训练对,仅靠 KL 约束实现。
+
 ## 解耦的属性维度
 
 | 属性 | 解耦对象 | 典型应用 |

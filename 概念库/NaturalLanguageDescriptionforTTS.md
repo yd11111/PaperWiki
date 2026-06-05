@@ -127,4 +127,8 @@ Survey 指出 description-based datasets 的特点:
 
 ## 演进
 
-Style tagging (GST, 离散标签, 2018) → Reference encoder (从音频提取, 2018-2022) → PromptTTS (文本描述5属性, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (三阶段NL理解, 2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (灵活多提示, 2025) → 统一 TTS+TTM NL description (InstructAudio, 2025)
+Style tagging (GST, 离散标签, 2018) → Reference encoder (从音频提取, 2018-2022) → PromptTTS (文本描述5属性, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (三阶段NL理解, 2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (灵活多提示, 2025) → 统一 TTS+TTM NL description (InstructAudio, 2025) → Dialogue voice design (CapTalk, 2026)
+
+## 对话 Voice Design (CapTalk)
+
+[[论文笔记/CapTalk|CapTalk]] (Su et al., Hello Group, 2026) 首次将 NL description voice design 从 single-utterance 系统性扩展到多轮对话场景。核心方法: (1) speaker-level caption 描述稳定说话人特征 + CoT 序列 (emotion/tone/pitch/energy/speed) 显式控制 turn-level 动态表达; (2) FHVAE-inspired 层次化变分条件通过 utterance-conditioned KL prior 实现 timbre-expression 解耦,支持设计后的 timbre reuse (fixed e_spk SIM 0.92 vs resampled 0.42); (3) 三种 caption style (APS/DSD/RP) 数据增强。InstructTTSEval-ZH AVG 73.73 (best overall, 特别是 RP 61.70 远超第二名 55.20) [Table 1]; 对话 Context Coherence 4.18, MOS 4.12 (均优于 Fish S2 Pro) [Table 7]。解决了 VoiceSculptor 两阶段 design-then-clone 的 timbre-expression 纠缠问题。详见 [[论文笔记/CapTalk|CapTalk]]。

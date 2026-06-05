@@ -1,0 +1,47 @@
+kb_review:
+  paper: "CapTalk"
+  note_path: "论文笔记/CapTalk.md"
+  reviewer: auto
+  date: 2026-06-06
+
+  conclusion: pass
+  summary: "变更计划为 4 个 append 操作,均为在正文相关段落末尾追加 1-2 行 CapTalk 的贡献描述。所有目标页 key_papers 已超 12 条上限,全部跳过 key_papers 追加。无新建页。无实质修改。安全性高。"
+
+  change_plan:
+    - target: "概念库/NaturalLanguageDescriptionforTTS.md"
+      action: append
+      detail: "在演进末尾追加 CapTalk 作为首个 dialogue voice design 工作"
+      key_papers_skip: true
+      key_papers_reason: "已有 15+ wikilinks,超出 12 条上限"
+
+    - target: "概念库/SpeechFactorization.md"
+      action: append
+      detail: "在辅助技术 KL 正则化段落后追加 CapTalk 的 FHVAE-inspired 方案"
+      key_papers_skip: true
+      key_papers_reason: "已有 30+ wikilinks,超出 12 条上限"
+
+    - target: "概念库/EmotionControlinTTS.md"
+      action: append
+      detail: "追加 CapTalk 的 CoT 对话表达控制作为新范式"
+      key_papers_skip: true
+      key_papers_reason: "已有 53+ wikilinks,超出 12 条上限"
+
+    - target: "概念库/VariationalAutoencoderforTTS.md"
+      action: append
+      detail: "追加 CapTalk 的 FHVAE-inspired 层次化变分条件"
+      key_papers_skip: true
+      key_papers_reason: "已有 17+ wikilinks,超出 12 条上限"
+
+    - target: "概念库/SpeakerEmbedding.md"
+      action: skip
+      detail: "CapTalk 使用 speaker encoder 但未对 speaker embedding 技术本身做出独立贡献"
+
+    - target: "概念库/CodecLanguageModel.md"
+      action: skip
+      detail: "CapTalk 使用 codec LM 架构但未对 codec LM 范式做出独立贡献"
+
+    - target: "概念库/ProsodyModeling.md"
+      action: skip
+      detail: "CapTalk 的 relative prosody 设计是 CoT 的子组件,不构成对韵律建模的独立贡献"
+
+  issues: []

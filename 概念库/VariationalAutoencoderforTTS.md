@@ -131,3 +131,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 [[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 提出 **Wav-VAE** (157M 参数),直接将原始波形编码为连续 latent (D=64, 11.72 Hz),绕过 mel spectrogram 中间表示。使用 Oobleck block (dilated residual units + Snake activation) 和 non-parametric shortcut path 实现极端降采样 (~2000x)。两阶段对抗训练 (warmup → multi-scale STFT discriminator)。PESQ 3.237, STOI 0.967 (LibriTTS test-clean) [Table 2]。
 
 关键发现 (与 Semantic-VAE 呼应): **VAE 重建质量与下游 TTS 生成质量呈非单调关系** — dim 越高 VAE 重建越好,但 TTS 生成越差。即使 3.5B 参数的 DiT 也无法弥补 dim=128 的 modeling burden [Fig 3]。最优配置 dim=64, 11.72 Hz。这佐证了 Semantic-VAE 发现的重建-生成困境,但提出了不同的解决路径: 不通过语义正则化改善高维 latent,而是选择低维 latent + 更大生成模型。
+
+## FHVAE-Inspired 层次化变分条件 (CapTalk)
+
+[[论文笔记/CapTalk|CapTalk]] (Su et al., 2026) 将 FHVAE (Hsu & Glass, 2018) 的核心分层思想从语音分析迁移到 TTS 生成场景,用于解决 voice design 中的 timbre-expression 纠缠问题。与传统 TTS VAE 用于建模 one-to-many mapping 不同,CapTalk 的 VAE 模块专注于**属性解耦**: utterance-level speaker encoder (global pooling) 提取稳定 e_spk,segment-level posterior q(z2|s) 通过 KL 正则化向 utterance-conditioned prior p(z2|e_spk)=N(f(e_spk), I) 靠拢,使 z2 保留 timbre 而抑制 segment-specific 情感变化。Fixed e_spk 跨 utterance SIM 0.92 vs resampled 0.42 [Table 10]。这是 VAE 在 TTS 中从"生成建模"向"属性解耦条件化"角色转变的一个实例。详见 [[论文笔记/CapTalk|CapTalk]]。
