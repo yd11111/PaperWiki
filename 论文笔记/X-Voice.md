@@ -29,7 +29,7 @@ updated: 2026-06-06
 >
 > **已有认知**:
 > - [[ConditionalFlowMatching]] (confirmed): X-Voice 基于 OT-CFM,与 F5-TTS 相同的训练目标。KB 中已记录 CFM 在 CosyVoice 系列、F5-TTS、MaskGCT、Seed-TTS 等系统中的广泛应用。X-Voice 的创新不在 CFM 本身,而在其上叠加的 language conditioning 和 guidance 策略。
-> - [[Cross-lingualVoiceCloning]] (confirmed): 核心任务。当前 SOTA 为 CosyVoice 3 (WER to-en 2.98%) 和 Qwen3-TTS (WER zh-to-en 2.77%),均为 LLM-based 架构。X-Voice 作为 NAR 系统,在 cross-lingual WER 上与 Qwen3-TTS 竞争 (en→it 4.70 vs 2.69, zh→ru 2.15 vs 2.91),但 SIM 仍有差距。
+> - [[Cross-lingualVoiceCloning]] (confirmed): 核心任务。当前 SOTA 为 CosyVoice 3 (WER to-en 2.98%) 和 Qwen3-TTS (WER zh-to-en 2.77%),均为 LLM-based 架构。X-Voice 作为 NAR 系统,在 cross-lingual WER 上与 Qwen3-TTS 竞争 (en→it 4.70 vs 2.69, zh→ru 2.85 vs 2.91),但 SIM 仍有差距。
 > - [[Classifier-FreeGuidance]] [待确认]: X-Voice 的 Decoupled CFG + Asymmetric Warmup + Decay 策略是本文重要贡献。KB 中已记录 CFG 从 Ho & Salimans (2022) 原始方法到 OmniVoice 离散空间 CFG、VoXtream2 多条件 CFG、LongCat-AudioDiT APG 的演进。X-Voice 的 DCFG 独立控制 acoustic vs linguistic guidance 的方向和强度,并首次引入 Asymmetric Warmup (linguistic guidance 从 0 线性升,acoustic guidance 全程满值),代表了 CFG 在多语言 TTS 场景的又一种实用化变体。
 > - [[PhonemeRepresentation]] [待确认]: X-Voice 使用 IPA 作为统一多语言表示,中文用 Pinyin,其他语言用 eSpeak-NG/PyThaiNLP/PyOpenJTalk/g2pK。显式保留 stress markers 和分解 articulatory units + suprasegmental modifiers。
 > - [[Non-autoregressiveTTS]] [待确认]: X-Voice 属于 NAR flow-matching 范式。相比 AR 系统 (Qwen3-TTS RTF 1.754, Fish S2 RTF 4.801), X-Voice RTF 仅 0.073,快 24x-65x。
@@ -175,10 +175,10 @@ X-Voice 基于 F5-TTS (Chen et al., 2025b) 架构,采用 DiT + OT-CFM 的 text-g
 | 方向 | X-Voice_s2 | Qwen3-TTS | LEMAS-TTS | OmniVoice | 出处 |
 | --- | --- | --- | --- | --- | --- |
 | en→it | 4.70 | 2.69 | 6.11 | 4.48 | [Table 7] |
-| zh→ru | 2.15 | 2.91 | — | 11.56 | [Table 7] |
-| ko→en | 2.58 | 2.46 | — | 3.56 | [Table 7] |
-| ru→ko | 3.10 | 14.15 | 18.63 | 5.36 | [Table 7] |
-| it→en | 2.31 | 2.38 | 9.95 | 2.44 | [Table 7] |
+| zh→ru | 2.85 | 2.91 | 5.13 | 3.94 | [Table 7] |
+| ko→en | 2.15 | 2.46 | — | 3.56 | [Table 7] |
+| ru→ko | 3.00 | 14.15 | — | 5.36 | [Table 7] |
+| it→en | 2.31 | 2.38 | 4.04 | 2.44 | [Table 7] |
 
 ### Ablation: LID Injection (Table 8)
 
@@ -243,3 +243,17 @@ X-Voice 是 F5-TTS → Cross-Lingual F5-TTS 路线的重要进化,将系统从�
 4. **Zero-Init for Auxiliary Conditioning Layers**: 新增的条件注入层 (LID injection) 使用零初始化,确保从预训练 checkpoint 微调时不破坏已有表示。这是从 ControlNet 借鉴的标准做法,但在 flow-matching TTS 的 language conditioning 场景下再次验证了其有效性。
 
 5. **Language-Specific G2P Pipeline**: 不使用单一 G2P 工具覆盖所有语言,而是为特殊语言 (泰语/日语/韩语) 提供专用工具,务实地提升表示质量。这一 "统一框架 + 特殊适配" 的工程策略值得在多语言系统中效仿。
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,4 个设计选择均有 WHY 解释 |
+> | 可信赖 | pass | 关键数字均有出处标注;Table 7 列映射错误已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~90% |
+> | 可定位 | pass | KB 背景谱系清晰,前作 Cross-Lingual F5-TTS 定位明确 |
+> | 不污染 | pass | 待反向更新后评估 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/X-Voice-review.yml`

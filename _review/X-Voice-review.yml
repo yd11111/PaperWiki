@@ -1,0 +1,58 @@
+review:
+  paper: "X-Voice"
+  note_path: "论文笔记/X-Voice.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节详细解释了每个设计选择的 WHY (Dual-Level LID 为什么用 FiLM, A-Warmup 的动力学动机, 两阶段 SFT 比 forced alignment 更简洁的原因)。速查卡片可借鉴字段给出 5 个具体可迁移 trick。读完笔记可以向同事解释 X-Voice 为什么 work。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字均有 [Table N] 标注。Table 7 cross-lingual 数字已修正 (原因: pdftotext 表格解析导致列映射错误)。指标名使用正确 (WER/SIM-o/UTMOS/IMOS/SMOS 区分清晰)。速查指标含具体数字+数据集+来源。部分内联文本数字 (如核心问题中的 RTF 范围) 缺出处标注,但不影响引用可靠性。"
+  distinguishable:
+    score: 9
+    rationale: "方法节中因果解释全部标注了 [论文原文] 或 [agent 解读],覆盖率 ~90%。点评节的判断用 '说明/暗示/可能' 等限定词,未出现将推断写成断言的情况。"
+  locatable:
+    score: 9
+    rationale: "KB 背景节有详细谱系定位: 明确了 F5-TTS → Cross-Lingual F5-TTS → X-Voice 的演进路线,与 Qwen3-TTS/LEMAS-TTS/OmniVoice 的竞品定位清晰。创新判断有 4 个具体对比基准。frontmatter 字段齐全,models 为空但合理 (vault 无对应模型页)。速查 5 字段均有实质内容。"
+  no_pollution:
+    score: 8
+    rationale: "反向更新尚未执行,待 KB 审阅后评估。frontmatter concepts/tasks/datasets 挂接合理。无 overclaim 风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "Cross-lingual Performance Table 7"
+    detail: "原始草稿中 5 行 cross-lingual Table 7 有 4 个 X-Voice_s2 数字和 3 个 baseline 数字因 pdftotext 列映射错误而张冠李戴。zh→ru 原写 2.15(实为 ko→en),ko→en 原写 2.58(实为 ko→ru),ru→ko 原写 3.10(实为 en→ko); OmniVoice zh→ru 原写 11.56(实为 ko→ru),LEMAS ru→ko 原写 18.63(实为 ko→ru), it→en 原写 9.95(实为 zh→it)。"
+    suggestion: "已在审阅过程中修正为正确值。建议未来使用 Read 工具直接读 PDF 交叉验证关键表格数字。"
+    status: fixed
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "核心问题 §1"
+    detail: "内联文本 'RTF 0.643-4.801' 和 '420K-hour' 等数字缺少具体出处标注 ([Table N] 或 [§X.X])。"
+    suggestion: "为非表格引用的数字添加来源标注,如 RTF 数字来自 [Table 3],420K 来自 [§2.1]。"
+    status: open
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "models 字段为空。本文对比了 Qwen3-TTS, LEMAS-TTS, MOSS-TTS, Fish Audio S2, OmniVoice 等,但 vault 模型库中无对应实体页。"
+    suggestion: "可接受。vault 无 LEMAS-TTS/MOSS-TTS/Fish Audio S2 模型页,不需要为了填字段而创建。"
+    status: accepted
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+  fixed_during_review: 1
+
+learning_signals:
+  - "pdftotext 对多列表格 (>6 列) 的提取可靠性低,尤其是跨页表格。关键数字表应用 Read 工具直接读 PDF 交叉验证。"
