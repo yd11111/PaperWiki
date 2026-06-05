@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[UniSonate]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[PhonemeRepresentation]](pending-review)
+- [ingest/deep] [[UniSonate]] — 精读, kb_sources=6, 新建 0, 追加 3 (Instruction-GuidedSpeechSynthesis 正文+演进, NaturalLanguageDescriptionforTTS 正文+演进, PhonemeRepresentation key_papers+正文+演进)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过追加 (UniSonate 不创新 CFM 本身)
+- [skip/update] [[Diffusion-basedTTS]] — key_papers 已达上限(20),跳过追加 (无新 diffusion 贡献)
+- [skip/update] [[VariationalAutoencoderforTTS]] — key_papers 已达上限(17),跳过追加 (使用同 InstructAudio 的 Mel-VAE)
+- [lint/local] UniSonate — 通过
 - [kb/search] [[MAGIC-TTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[MAGIC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (DurationPredictor 演进+正文, ConditionalFlowMatching 演进)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(79),改追加到正文演进段
