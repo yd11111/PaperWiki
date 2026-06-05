@@ -71,6 +71,7 @@ Natural Language Description for TTS 是一种通过自然语言文本描述来�
 - AST-LDM (Kim et al., 2024b): 扩展 AudioLDM 实现环境条件化
 - MS2KU-VTTS (He et al., 2024): 混合环境图像到 prompt,沉浸式语音
 - [[论文笔记/UmbraTTS|UmbraTTS]] (Glazer et al., ICML 2025 Workshop): 基于 flow matching (F5-TTS 框架) 联合生成语音+环境音,引入 SER 连续控制背景音量,是首个 flow matching 基础的环境感知 TTS
+- [[论文笔记/ImmersiveTTS|ImmersiveTTS]] (Yun et al., 2026): 基于 MM-DiT (Flux 架构) 的环境感知 TTS,用 dual-stream joint attention 显式建模语音-环境音交互 + domain-specific dual-teacher REPA (WavLM for speech, ATST-Frame for audio)。AudioCaps SN-MOS 4.20 / WER 8.06%,仅 25 NFEs vs VoiceLDM/VoiceDiT 200 NFEs [Table 1]
 
 ### Speaker 描述增强
 - PromptSpeaker (Zhang et al., 2023c): 说话人特征的文本描述

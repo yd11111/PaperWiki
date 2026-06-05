@@ -11,7 +11,7 @@ tags: [environment-aware-TTS, diffusion-transformer, MM-DiT, flow-matching, repr
 concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[Diffusion-basedTTS]]", "[[Self-SupervisedSpeechRepresentation]]", "[[NaturalLanguageDescriptionforTTS]]", "[[DurationPredictor]]", "[[MelSpectrogram]]", "[[NeuralVocoder]]"]
 models: ["[[模型库/WavLM|WavLM]]"]
 tasks: []
-datasets: []
+datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
