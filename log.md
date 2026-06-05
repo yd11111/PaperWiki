@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[CoCoEmo]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[SpeechLanguageModel]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[ProsodyModeling]]✓
+- [ingest/deep] [[CoCoEmo]] — 精读, kb_sources=6, 新建 0, 追加 2 ([[EmotionControlinTTS]] 正文, [[CosyVoice2]] 被引用)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(56),改追加到正文
+- [skip/update] [[CosyVoice2]] — key_papers 已达上限(23),改追加到被引用段
+- [lint/local] CoCoEmo — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[VividVoice]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[VITS]](pending-review), [[DurationPredictor]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[AudioSet]](pending-review)
 - [ingest/deep] [[VividVoice]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[SpeakerEmbedding]] 正文)
 - [skip/update] [[Diffusion-basedTTS]] — key_papers 已达上限(12),VividVoice 非核心贡献,跳过
