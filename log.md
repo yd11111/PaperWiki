@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[SpeakerPoisoning]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓, [[SpeakerVerification]](pending-review), [[DiffusionModel]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[TTSEvaluation]](pending-review) | 过滤: 无
+- [ingest/deep] [[SpeakerPoisoning]] — 精读, kb_sources=6, 新建 0, 追加 4 (Anti-spoofing key_papers+描述, SV key_papers, VoiceCloningTaxonomy key_papers, ZS-TTS key_models)
+- [review/auto] [[SpeakerPoisoning]] — pass-with-fixes, 0 high, 2 medium (SSIM-F/FSSIM 命名修正 + AUC overclaim 修正)
+- [review/kb] [[SpeakerPoisoning]] — pass, 0 issues
+- [lint/local] SpeakerPoisoning — 通过
 - [kb/search] [[AccentVector]] — 命中 6 页(取 6): [[SpeakerAdaptation]](pending-review), [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[StyleTransferinTTS]](pending-review), [[Zero-shotSpeechSynthesis]]✓ | 过滤: 无
 - [ingest/deep] [[AccentVector]] — 精读, kb_sources=6, 新建 0, 追加 2 (SpeakerAdaptation key_papers+演进, Cross-lingualVoiceCloning 开放问题)
 - [review/auto] [[AccentVector]] — pass, 0 high, 0 medium, 2 low (inline reviewer)
