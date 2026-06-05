@@ -1,0 +1,53 @@
+paper: "SpeakerPoisoning"
+reviewer: agent
+date: "2026-06-05"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 7
+    verdict: pass
+    notes: "方法节对 TGP/EGP/triplet loss 的 WHY 解释清晰,特别是 EGP 绕过同容量蒸馏瓶颈的理论动机和 triplet loss 在多说话人时失效的机制。[agent 解读] 标记准确。可改进: diffusion module 如何具体编码 identity 的细节可以更深。"
+  trustworthy:
+    score: 8
+    verdict: pass-with-fixes
+    notes: "所有数字经 PDF Table 1/2 交叉验证均正确。速查卡片指标字段有一处命名混淆 (SSIM-F 写为 F-SSIM),在 1-speaker 场景下 FSSIM 指标不存在 (仅 Table 2 引入)。其余标注覆盖率 > 90%。"
+  distinguishable:
+    score: 9
+    verdict: pass
+    notes: "[论文原文] 和 [agent 解读] 标记一致且合理。方法节 6 处 WHY 解释中 5 处标了来源,1 处 agent 解读也已标明。无推断写成断言的情况。"
+  positionable:
+    score: 9
+    verdict: pass
+    notes: "KB 背景出色: 三篇工作的三条技术路线对比清晰 (TGU/TGP+EGP/TruS),创新判断有具体证据。与 SpeakerIdentityUnlearning 和 Training-freeSpeakerUnlearning 的关系定位准确。"
+  no_pollution:
+    score: 8
+    verdict: pass
+    notes: "concepts 挂接合理,models 仅列 WavLM (评估用)也合理。反向更新为 append 操作,不会污染已有概念页的核心定义。"
+
+issues:
+  - severity: medium
+    type: traceability-gap
+    principle: trustworthy
+    location: "速查卡片 > 指标"
+    detail: "1-speaker 行写 'F-SSIM 0.48',但 Table 1 中该列名为 'SSIM F↓',FSSIM 指标仅在 Table 2 (15/100 speaker) 中出现。F-SSIM 与 FSSIM 容易混淆。"
+    suggestion: "改为 'SSIM-F 0.48 [Table 1]' 以区分 SSIM(F) 和 FSSIM 两个不同指标。15/100 speaker 行的 F-SSIM 也应明确标为 SSIM-F 或 Avg-FSSIM。"
+
+  - severity: medium
+    type: overclaim
+    principle: trustworthy
+    location: "关键发现 > 第3点"
+    detail: "'100 speaker 时所有方法的 AUC 都接近 0.5 (随机水平)' 不准确。EGP+Trip. AUC=0.64,距离 0.5 有 0.14,不能说'接近 0.5'。TGP (0.53) 和 TGP+Trip (0.51) 确实接近 0.5。"
+    suggestion: "改为 '100 speaker 时 TGP 变体的 AUC 降至 0.51-0.53 (接近随机),EGP+Trip. 仍达 0.64 但远低于 1-speaker 的 0.95'。"
+
+  - severity: low
+    type: template-compliance
+    principle: reproducible
+    location: "训练策略"
+    detail: "论文中 'forget ratio' 符号用 α (§5.2),但方法描述节 (§3.3, Fig 1 caption) 用 p_forget。笔记中两者混用 (训练策略用 α,速查用 p_forget)。"
+    suggestion: "统一为论文主体用法: 训练策略节同时写 'Forget ratio p_forget (论文 §5.2 记为 α) = 0.5'。"
+
+learning_signals:
+  new_issue_type: "metric-naming-ambiguity — 当同一论文中存在名称相近但语义不同的指标 (SSIM-F vs FSSIM) 时,笔记需在首次出现时明确区分"
+  rule_gap: ""
+  checklist_upgrade_suggestion: "考虑增加检查项: 速查卡片指标字段中的指标名是否与论文原文表头一致"

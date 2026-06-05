@@ -36,7 +36,7 @@ updated: 2026-06-05
 > [!summary] 速查
 > - **一句话**: 将 speaker identity erasure (poisoning) 从 VoiceBox 迁移到 StyleTTS2,提出 Encoder-Guided Poisoning (EGP) 绕过 teacher 生成瓶颈,引入 AUC + FSSIM 分布级评估框架,揭示多说话人 scalability 限制
 > - **路线**: pre-trained StyleTTS2 → 冻结 text encoder/decoder/discriminator,仅微调 diffusion module → TGP: teacher 用 retain speaker 生成 mel target, student 训练时以 p_forget 概率替换 retain ref 为 forget ref → EGP: 改用 style encoder 输出替代 teacher 生成的 mel 作为 target → 可选加 triplet loss 显式推开 forget embedding → 60K steps, AdamW, lr=1e-4
-> - **指标**: 1-speaker: EGP+Trip. AUC 0.95 (最高), F-SSIM 0.48 (最低) [Table 1]; 15-speaker: EGP+Trip. AUC 0.76, F-SSIM 0.71 [Table 2]; 100-speaker: EGP+Trip. AUC 0.64, Max-FSSIM 0.91 [Table 2]; EGP retain WER 2.90 (vs pretrained 2.75) [Table 1]
+> - **指标**: 1-speaker: EGP+Trip. AUC 0.95 (最高), SSIM-F 0.48 (最低) [Table 1]; 15-speaker: EGP+Trip. AUC 0.76, SSIM-F 0.71, Avg-FSSIM 0.69 [Table 2]; 100-speaker: EGP+Trip. AUC 0.64, Avg-FSSIM 0.71, Max-FSSIM 0.91 [Table 2]; EGP retain WER 2.90 (vs pretrained 2.75) [Table 1]
 > - **可借鉴**: (1) EGP 的核心 insight -- 当 teacher 和 student 架构相同时,用 encoder 输出替代 teacher 生成输出可提供更干净的优化信号,这一思路可迁移到其他同架构蒸馏场景; (2) AUC 作为 retain/forget 分布可分离性的度量,比单一 cosine similarity 阈值更鲁棒; (3) Max-FSSIM 概念 -- 衡量生成语音与 forget set 中**任意**说话人的最大相似度,揭示 worst-case leakage
 > - **局限**: (1) 仅在 StyleTTS2 (diffusion-based) 上验证,未测试 AR 或 LLM-based TTS; (2) 100 speaker 时 AUC 仅 0.64,Max-FSSIM 高达 0.91,scalability 问题未解决; (3) triplet loss 在多说话人场景效果大幅下降 -- 推开一个 negative 会推向另一个 [Sohn 2016]; (4) 训练代码和模型权重尚未公开 (upon acceptance); (5) 未讨论 forget speaker 与 retain speaker 声音高度相似时的误伤问题
 
@@ -164,7 +164,7 @@ $$L_{triplet} = \max(||x - a||^2_2 - ||x - n||^2_2 + \beta, 0)$$
 
 1. **EGP > TGP**: EGP 在所有设定下都优于 TGP,验证了"同容量 teacher-student 蒸馏效率低"的假设 [§6.1]
 2. **Triplet loss 的双面性**: 1-speaker 时大幅提升 privacy (AUC 0.79→0.95),但 WER-F 从 3.00 飙升至 7.86;100-speaker 时仅微弱改善 AUC (0.57→0.64) [Table 1, Table 2]
-3. **Scalability 瓶颈**: 100 speaker 时所有方法的 AUC 都接近 0.5 (随机水平),Max-FSSIM 持续高于 0.91,说明即使 Avg-FSSIM 达标,worst-case 仍有严重泄露 [§6.2]
+3. **Scalability 瓶颈**: 100 speaker 时 TGP 变体的 AUC 降至 0.51-0.53 (接近随机),EGP+Trip. 仍达 0.64 但远低于 1-speaker 的 0.95;Max-FSSIM 持续高于 0.91,说明即使 Avg-FSSIM 达标,worst-case 仍有严重泄露 [§6.2]
 4. **GT Filtering 的参考价值**: PT+GTF 在所有设定下保持高 AUC (0.90-0.91),说明 identity erasure 的理论上限很高,当前 parameter-modification 方法还有很大提升空间 [agent 解读]
 
 ## 局限性
@@ -197,4 +197,16 @@ $$L_{triplet} = \max(||x - a||^2_2 - ||x - n||^2_2 + \beta, 0)$$
 
 ## 审阅
 
-*待独立审阅 agent 填写*
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY 解释清晰,EGP/triplet 理论动机充分 |
+> | 可信赖 | pass-with-fixes | 数字全部正确;速查卡片 SSIM-F/FSSIM 命名曾混淆(已修正) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标记一致,覆盖率 > 80% |
+> | 可定位 | pass | 三条技术路线对比出色,与 KB 已有 2 篇 unlearning 笔记定位清晰 |
+> | 不污染 | pass | concepts/models 挂接合理,反向更新均为 append |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/SpeakerPoisoning-review.yml`
