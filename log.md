@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[CosyEdit2]] — 命中 6 页(取 Top 6): [[CosyVoice2]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechLanguageModel]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review)
+- [ingest/deep] [[CosyEdit2]] — 精读, kb_sources=6, 新建 0, 追加 2 (CosyVoice2 baseline引用节, DiffRO 演进节)
+- [review/auto] [[CosyEdit2]] — pass, 0 high, 0 medium, 4 low
+- [lint/local] CosyEdit2 — 通过
+- [skip/update] [[LLM-basedTTS]] — key_papers 已超上限(103),CosyEdit2 非 LLM-TTS 范式贡献,跳过
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已超上限(67),GOT-CFM 沿用 CosyEdit 设计无新贡献,跳过
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_papers 已超上限,CosyEdit2 主要贡献在 editing 非 TTS,跳过
 - [kb/search] [[NaturalEmotionalTTS]] — 命中 6 页(取 Top 6): [[NeuralVocoder]]✓, [[ProsodyModeling]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[NaturalEmotionalTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS NV节)
 - [review/auto] [[NaturalEmotionalTTS]] — pass-with-fixes, 0 high, 2 medium (推算值修正 + 论文内部数据不一致标注)
