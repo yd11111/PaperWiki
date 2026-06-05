@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ChainOfDetails]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review)
+- [ingest/deep] [[ChainOfDetails]] — 精读, kb_sources=6, 新建 0, 追加 1 (MaskedGenerativeModeling key_papers+演进)
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),跳过追加
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(28),跳过追加
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),跳过追加
+- [skip/update] [[DurationPredictor]] — key_papers 已达上限(22),跳过追加
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(60),跳过追加
+- [lint/local] ChainOfDetails — 通过
 - [kb/search] [[MINT-Bench]] — 命中 6 页(取 6): [[SpeechFactorization]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[TTSEvaluation]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[EmotionControlinTTS]](pending-review)
 - [ingest/deep] [[MINT-Bench]] — 精读, kb_sources=6, 新建 0, 追加 2 (TTSEvaluation 演进+段落, Instruction-GuidedSpeechSynthesis 评估段)
 - [skip/update] [[TTSEvaluation]] — key_papers 已达上限(26+),改追加到正文
