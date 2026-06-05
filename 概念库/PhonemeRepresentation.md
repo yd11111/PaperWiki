@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]"]
+key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-SpeechPipeline]]", "[[Attention-basedTTS]]", "[[Non-autoregressiveTTS]]"]
 status: pending-review
@@ -71,6 +71,7 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - 部分系统 (如 CosyVoice) 使用 text tokenizer 的 BPE tokens
 - 趋势: 随着模型规模增大,character 输入也能工作
 - 发音修正新方向: SonoEdit (Singh et al., 2026) 证明可通过 knowledge editing (causal tracing + null-space constrained weight update) 在不重训练的情况下 one-shot 修正 LLM-TTS 中特定词的发音错误,绕过 G2P 前端直接编辑模型内部的 text-to-pronunciation 映射
+- Subword 输入 + PM-RoPE duration control: [[论文笔记/T5Gemma-TTS|T5Gemma-TTS]] (Arata & Kurihara, 2026) 直接使用 T5Gemma SentencePiece 256K subword vocabulary(无 phoneme 转换）,配合 PM-RoPE 在 cross-attention 中注入生成进度信号实现 duration control。牺牲了 phoneme 的单调对齐特性,但避免了多语言 phonemizer 工程成本;phoneme vs subword 对 PM-RoPE 效果的影响是 open question
 
 ## Character vs Phoneme 的取舍
 

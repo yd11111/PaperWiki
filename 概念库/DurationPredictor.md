@@ -156,6 +156,13 @@ HMM state duration (SPSS) → Attention alignment (Tacotron, 2017) → Duration 
 - **Duration error**: 全设置 3.21-3.39% (vs baseline 5.78-12.03%),且不同 scaling factor 下误差保持稳定 [Table 4]
 - 详见 [[论文笔记/TED-TTS|TED-TTS]]
 
+### T5Gemma-TTS PM-RoPE Multilingual Validation (Arata & Kurihara, 2026)
+
+- **PM-RoPE 多语言验证**: 首次在预训练多语言 encoder-decoder 骨干(T5Gemma 4B)上验证 VoiceStar 的 PM-RoPE 对英语以外语言的泛化性。170K 小时三语言(EN/ZH/JA)训练后,日语 DA 0.79(phoneme-count 估计)/ 1.00(oracle target);关闭 PM-RoPE 导致 CER 0.129→0.982,近乎完全合成失败 [Table 3]
+- **Subword 输入的 open question**: 与 VoiceStar 使用 phoneme 不同,T5Gemma-TTS 使用 SentencePiece subword 输入,牺牲单调对齐特性;phoneme vs subword 对 PM-RoPE 效果的影响未做消融
+- **与 VoiceStar 的区别**: VoiceStar 从零训练 + phoneme 输入 + 英语 only; T5Gemma-TTS 预训练初始化 + subword + 多语言
+- 详见 [[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]
+
 ### VoXtream2 Distribution Matching SRC (Torgashov et al., 2026)
 
 - **Sampling-time distribution matching**: 不修改 duration predictor 本身,在 AR 推理时通过直方图匹配校正 duration token 采样分布。给定目标 SPS 对应的 duration state 直方图 (Ptarget),计算当前预测分布 (Pcurrent) 与过去 3s 窗口累积分布 (Pacc) 的差异,用 W = exp(β * (log10(Ptarget) - log10(Pacc))) 重加权采样 [§3.5, Eq. 2-3]

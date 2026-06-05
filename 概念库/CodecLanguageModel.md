@@ -60,6 +60,14 @@ Survey (Cui et al., 2024) 明确指出: "Some studies directly model the codec t
 - 建立了 semantic → acoustic 的层级 codec 建模范式
 - 启发了后续 VALL-E、SoundStorm 等系统
 
+### T5Gemma-TTS (Arata & Kurihara, 2026)
+- Codec LM 领域罕见的 **encoder-decoder** 变体(vs 主流 decoder-only)
+- T5Gemma 2B+2B 预训练骨干 + XCodec2 (单码本 65536, 50Hz)
+- 通过 cross-attention 注入文本表征,解决 decoder-only 的文本 conditioning 稀释问题
+- PM-RoPE 注入生成进度信号实现 duration control
+- 170K 小时多语言训练,日语 SIM 最高(0.677, CI 不重叠 vs XTTS v2 0.622)
+- 详见 [[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]
+
 ## 关键技术挑战
 
 1. **多层 RVQ 建模**: codec tokens 有多个量化层 (通常 4-8 层), 如何高效建模?
