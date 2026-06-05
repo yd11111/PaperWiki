@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ZET-Speech]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[GradientReversalLayer]](pending-review), [[Diffusion-basedTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
+- [ingest/deep] [[ZET-Speech]] — 精读, kb_sources=6, 新建 0, 追加 2 (GRL key_papers, EmotionControl 对抗训练解耦段)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(58),改追加到正文
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),ZET-Speech 无独特 CFG 贡献,跳过
+- [skip/update] [[Diffusion-basedTTS]] — key_papers 已达上限(20),跳过
+- [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12),ZET-Speech 仅作 baseline,跳过
+- [review/auto] [[ZET-Speech]] — pass-with-fixes, 0 high / 1 medium / 2 low (inline review)
+- [review/kb] [[ZET-Speech]] — pass, 2 appends / 0 substantive / 3 skipped
+- [lint/local] ZET-Speech — 通过
 - [kb/search] [[PITS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[SpeechFactorization]]✓ | 过滤: [[VITS]](pending-review), [[F0Modeling]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[DurationPredictor]](pending-review)
 - [ingest/deep] [[PITS]] — 精读, kb_sources=6, 新建 0, 追加 2 (VITS 相关工作段, F0Modeling Yingram 替代段)
 - [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到正文
