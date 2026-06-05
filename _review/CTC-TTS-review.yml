@@ -1,0 +1,61 @@
+review:
+  target: "论文笔记/CTC-TTS.md"
+  date: "2026-06-05"
+  reviewer: "auto (independent)"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    可复述:
+      score: 8
+      status: pass
+      reason: "方法节包含充分的因果解释: CTC 对齐为何足够(结构性对应而非帧级精确)、bi-word 为何优于 uni-word(compact look-ahead)、L vs F 的 trade-off 清晰。速查卡片'可借鉴'列出 3 个具体可迁移 trick。"
+    可信赖:
+      score: 9
+      status: pass
+      reason: "所有关键数字经 PDF 交叉验证准确。Table 1/2/3 指标全部正确。出处标注覆盖率高(>90%)。指标名使用正确(WER/CER/UTMOS/FPL-A/SPK/MOS/SMOS)。点评中对 UTMOS > GT 的异常有合理质疑。"
+    可区分:
+      score: 8
+      status: pass
+      reason: "因果解释一致使用 [论文原文] 和 [agent 解读] 标注。bi-word 动机标注为 [agent 解读]、CTC 对齐充分性标注为 [论文原文]。覆盖率约 85%。消融分析第 3 点的作者解释遗漏来源标注。"
+    可定位:
+      score: 8
+      status: pass
+      reason: "KB 背景谱系定位清晰: VALL-E → CosyVoice 2 → ELLA-V → CTC-TTS。区分了 Speech-TextAlignment 页的'表征对齐'与本文的'forced alignment'是不同层面。创新判断有对比基准(vs MFA pipeline, vs ELLA-V local advance)。"
+    不污染:
+      score: 9
+      status: pass
+      reason: "frontmatter 概念/模型链接均指向已有页面。无新概念页创建需求。反向更新内容为追加型(key_papers),不涉及实质修改。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "## 消融分析关键发现 #3"
+      detail: "'MFA 在 in-domain continuation 上有优势...但 cross-speaker 场景反转'是论文 §5.2 作者的原文解释,但未标注 [论文原文]"
+      suggestion: "在该句末尾追加 [论文原文, §5.2] 标注"
+    - id: 2
+      severity: low
+      type: factual-error
+      location: "## 方法 → 3. 两种 Interleaving 实现 → CTC-TTS-F"
+      detail: "描述 CTC-TTS-F 时写'phoneme 256d + speech 768d',但这是多说话人配置;单说话人配置为 256 text + 512 speech [§4.2]"
+      suggestion: "明确标注此处描述的是多说话人配置,或补充单说话人配置"
+    - id: 3
+      severity: low
+      type: traceability-gap
+      location: "## 点评"
+      detail: "'MFA 需要 GMM-HMM pipeline + Kaldi 工具链'中 Kaldi 的提及来自 MFA 原始论文(ref 8),非本文原文直接说明"
+      suggestion: "改为'MFA 是 GMM-HMM pipeline [ref 8]'或标注来源"
+    - id: 4
+      severity: low
+      type: template-compliance
+      location: "## 实验"
+      detail: "单说话人和多说话人实验使用不同 ASR 模型评测 WER/CER(whisper-large-v3 vs Conformer-Transducer [§4.3]),但笔记未提及此区别"
+      suggestion: "在各实验小节或脚注中注明使用的 ASR 模型"
+
+  summary:
+    high: 0
+    medium: 1
+    low: 3
+    total: 4
+
+  learning_signals: []

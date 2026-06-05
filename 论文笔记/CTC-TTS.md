@@ -164,7 +164,7 @@ b_k = [当前词 phonemes] + [separator] + [下一词 phonemes] + [当前词 spe
 
 1. **CTC alignment > MFA alignment 在 cross-speaker (OOD) 场景**: CTC+ELLA-V WER 20.86% vs MFA+ELLA-V 34.89% [Table 3],作者指出 CTC 对齐在 out-of-domain 场景泛化更好 [§5.2]
 2. **bi-word > ELLA-V 的 local advance**: 在两种对齐方式下,bi-word 序列都大幅优于 ELLA-V 序列 (CTC-TTS-L WER 4.82% vs CTC+ELLA-V 12.01%) [Table 2],作者归因于 ELLA-V local advance 机制提供的上下文有限 [§5.2]
-3. **MFA 在 in-domain continuation 上有优势**: MFA+ELLA-V continuation WER 10.98 优于 CTC+ELLA-V 12.01,但 cross-speaker 场景反转 [§5.2]
+3. **MFA 在 in-domain continuation 上有优势**: MFA+ELLA-V continuation WER 10.98 优于 CTC+ELLA-V 12.01,但 cross-speaker 场景反转。[论文原文] 作者指出"MFA alignment performs well for in-domain continuation, while CTC alignment generalizes better to out-of-domain cross-speaker scenarios" [§5.2]
 4. **-L vs -F 的 trade-off**: CTC-TTS-L 在所有质量指标上优于 CTC-TTS-F,但 FPL-A 更高 (210ms vs 159ms) [Table 1]
 
 ## 局限性
@@ -192,6 +192,22 @@ bi-word interleaving 策略的设计直觉清晰: 一个词的 look-ahead 足以
 1. **CTC blank 归并策略**: 将 CTC 对齐路径中的 blank 归并到后续 phoneme,再按固定帧率比(1:3)映射到 speech tokens — 这个方案可用于任何需要 phoneme-speech 帧级对应的场景(如 duration predictor 的训练标签构造)
 2. **bi-word interleaving 作为 compact look-ahead**: 仅一个词的 look-ahead 就能有效提升合成质量,这一发现对设计其他 streaming pipeline 的 buffer 策略有参考价值
 3. **L vs F 两种变体的设计模式**: 同一对齐方案通过不同的序列组织方式(length concat vs feature stack)实现质量-延迟 trade-off,这种"一种对齐,两种实现"的思路可复用
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分: WHY CTC 够用、WHY bi-word、L vs F trade-off |
+> | 可信赖 | pass | 全部数字经 PDF 验证正确,出处覆盖 >90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致,覆盖约 85% |
+> | 可定位 | pass | 谱系清晰,KB 背景区分了表征对齐 vs forced alignment |
+> | 不污染 | pass | 仅追加型 KB 更新,无实质修改 |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/CTC-TTS-review.yml`
 
 ---
 
