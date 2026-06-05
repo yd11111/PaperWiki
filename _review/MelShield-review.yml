@@ -1,0 +1,51 @@
+review:
+  paper: "MelShield"
+  note_path: "论文笔记/MelShield.md"
+  reviewer: "auto (in-context)"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      rationale: "方法节包含 5 个关键设计选择,每个都有 WHY 解释和 [论文原文]/[agent 解读] 区分。spread-spectrum 编码机制、adaptive mask、mid-frequency band 选择等设计选择的因果逻辑清晰。速查卡片的路线字段涵盖完整 pipeline。"
+    trustworthy:
+      score: 8
+      rationale: "数字型 claim 大部分有 [Table N] / [§X.X] / [Fig N] 标注,覆盖率约 90%。指标名使用正确(PESQ/STOI/DNSMOS/BitAcc)。有一处 GROOT 列对齐可能有误(见 issues),但不影响 MelShield 自身数据的准确性。"
+    distinguishable:
+      score: 9
+      rationale: "方法节中因果解释全部标注了 [论文原文] 或 [agent 解读],区分清晰。未发现将推断写成断言的情况。局限性中 [agent 解读] 标注的条目明确是分析推断。"
+    locatable:
+      score: 9
+      rationale: "KB 背景节有具体谱系定位: 与 TraceableSpeech(codec latent space)、GROOT(diffusion noise)的对比清晰。创新判断有明确对比基准。frontmatter 字段完整。速查卡片 5 字段均有实质内容。"
+    non_polluting:
+      score: 9
+      rationale: "本文不触发新建概念页(Audio Watermarking 作为概念尚不满足准入规则,仅 2 篇论文引用)。反向更新仅为 append(追加 key_papers),不涉及实质修改。"
+
+  issues:
+    - id: 1
+      type: "factual-error"
+      severity: "medium"
+      location: "实验 > 鲁棒性 > DiffWave 平台 Table 2, GROOT 行"
+      detail: "GROOT 在 Table 2 的 pdftotext 提取中缺少 LP 和 Echo 列数据。当前笔记将 GROOT 的 N20(0.990)、N10(0.988)、N5(0.942) 分别错误标注为 LP(0.990)、N20(0.988)、N10(0.942),导致列错位。GROOT N5=0.942 在笔记中被标为 '—'(缺失)。"
+      suggestion: "将 GROOT 行修正为: LP=—, N20=0.990, N10=0.988, N5=0.942, Echo=—。或在表格下方注明 GROOT 部分列数据不可用。"
+
+    - id: 2
+      type: "traceability-gap"
+      severity: "low"
+      location: "实验 > 鲁棒性 > DiffWave 平台 Table 2, MelShield LP 列"
+      detail: "MelShield 在 DiffWave 上的 LP ACC 值(1.000)来源于论文文本'above 0.99 across all non-noise conditions'的推断,非直接从表格读取(pdftotext 提取缺失该列)。HiFi-GAN 平台的 LP ACC=0.9996,DiffWave 可能也略低于 1.0。"
+      suggestion: "保持 1.000 但在表格后注明数据来源为论文文本概述,或标注为 ≥0.99。"
+
+    - id: 3
+      type: "template-compliance"
+      severity: "low"
+      location: "frontmatter > concepts"
+      detail: "TTSEvaluation 列入 concepts 但在 KB 背景中未检索或引用该页,属于弱关联。"
+      suggestion: "可保留(PESQ/STOI/DNSMOS 确实是 TTS 评估指标),但 KB 背景节应提及 TTSEvaluation 页的引用依据。"
+
+  conclusion: "pass-with-fixes"
+  summary: "总计 3 个 issue (0 high, 1 medium, 2 low)。笔记整体质量好: 机制理解深入, 设计选择的 WHY 解释充分, KB 定位清晰, 与 TraceableSpeech/GROOT 的对比有实质内容。GROOT 列错位是唯一需修正的 medium issue。"
+
+  learning_signals:
+    - "pdftotext 对复杂表格的列提取不可靠,尤其是多方法对比表中部分方法缺少某些列的情况。建议后续对关键数字表做人工 spot-check。"
