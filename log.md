@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[LongCat-AudioDiT]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓ | 参考(pending-review): [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[VariationalAutoencoderforTTS]], [[MelSpectrogram]], [[Non-autoregressiveTTS]]
+- [ingest/deep] [[LongCat-AudioDiT]] — 精读, kb_sources=6, 新建 0, 追加 6 (全部正文 append,key_papers 均已超限)
+- [skip/update] [[ConditionalFlowMatching]], [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[VariationalAutoencoderforTTS]], [[MelSpectrogram]], [[Non-autoregressiveTTS]] — key_papers 均已达上限,改追加到正文
+- [review/auto] [[LongCat-AudioDiT]] — pass-with-fixes, 4 issues (0 high, 1 medium: MaskGCT ZH-Hard SIM 值串行, 3 low)
+- [lint/local] LongCat-AudioDiT — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[MOSS-VoiceGenerator]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[InstructedSpeechGeneration]]✓ | 参考(pending-review): [[Instruction-GuidedSpeechSynthesis]], [[NaturalLanguageDescriptionforTTS]], [[CodecLanguageModel]]
 - [ingest/deep] [[MOSS-VoiceGenerator]] — 精读, kb_sources=6, 新建 0, 追加 2 (NaturalLanguageDescriptionforTTS 正文, InstructedSpeechGeneration 正文)
 - [skip/update] [[Instruction-GuidedSpeechSynthesis]], [[LLM-basedTTS]], [[CodecLanguageModel]], [[ResidualVectorQuantization]] — key_papers 均已达上限且 MOSS-VoiceGenerator 无新架构贡献,不追加
