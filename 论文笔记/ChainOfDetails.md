@@ -199,3 +199,13 @@ CoD-TTS 的核心贡献是提出了一个与现有 coarse-to-fine (RVQ 层级) �
 5. **Biased temporal level sampling**: 训练时偏向高分辨率 level (probability [0.2, 0.3, 0.5]),确保最终输出质量。
 
 检索命中: [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review) | 未命中但可能相关: 无
+
+> [!review] 自动审阅 (2026-06-06)
+> **结论:** pass
+> **原则:** 复述 9 | 信赖 9 | 区分 9 | 定位 9 | 污染 8
+> **Claim 标注率:** 97% (44/45)
+> **问题:** 0 high, 0 medium, 3 low
+> - 💡 [template-compliance] frontmatter models: 仅列 NaturalSpeech3,可补充 MaskGCT/VALL-E baseline
+> - 💡 [template-compliance] 文件末尾: 检索命中行与 KB 背景 header 重复
+> - 💡 [traceability-gap] 核心问题 item 3: 因果推理缺 [论文原文] 来源标签
+> **反向更新:** 安全

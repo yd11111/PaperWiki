@@ -1,0 +1,73 @@
+paper: "ChainOfDetails"
+file: "论文笔记/ChainOfDetails.md"
+date: "2026-06-06"
+conclusion: pass
+
+# 第一层: 原则判断
+principles:
+  reproducible:     # 可复述
+    score: 9
+    judgment: "方法节包含 5 个关键设计选择的 WHY 解释 (temporal decimation vs RVQ 层级、共享 decoder 可行性、CFG scale 衰减策略、previous-level augmentation、biased sampling),每个都回答了'为什么选这个而不是那个'。速查卡片可借鉴字段列出 3 个具体可迁移 trick。读完能向同事解释 CoD 为什么 work。"
+  trustworthy:      # 可信赖
+    score: 9
+    judgment: "~45 个数字型 claim 中约 44 个有 [§X.X]/[Table N] 标注,覆盖率约 97%。指标名统一使用 WER,无方向性错误。速查卡片指标含具体数字+数据集+来源。唯一未标注的数字是局限性中引用的其他系统通用数据 (MaskGCT 1B/100k hrs, CosyVoice 170k hrs),属于领域常识。"
+  distinguishable:  # 可区分
+    score: 9
+    judgment: "方法节开头有明确的来源区分 callout。3 处 [论文原文] 标注论文作者解释 (含直接引文),9 处 [agent 解读] 标注推断性分析。所有 agent 解读使用限定语 ('可能是'、'假设'、'隐含优势')。局限性 4 条 agent 解读均有标注。事实-推断边界清晰。"
+  positioned:       # 可定位
+    score: 9
+    judgment: "KB 背景提供精确谱系定位: CoD 属于 NAR masked generative 路线,与 SoundStorm/MaskGCT 系出同源但引入时间维度 coarse-to-fine。创新判断有明确对比基准 (MaskGCT text->semantic->acoustic layer vs CoD temporal level 1->2->3)。命中 3 个 confirmed + 3 个 pending 实体页,状态标注清晰。"
+  non_polluting:    # 不污染
+    score: 8
+    judgment: "笔记引用的 6 个概念页均已存在,不创建新页。核心信息 (temporal coarse-to-fine 与 RVQ 层级正交) 准确且为现有 KB 提供有价值的新视角。CFG 离散空间应用与 Classifier-FreeGuidance 页已有的 OmniVoice 记录一致。无 factual-error 或 overclaim 风险。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 45
+    annotated: 44
+    rate: "97%"
+  metric_names_correct: true
+  source_labels_present: true  # [论文原文]/[agent 解读]
+  source_label_coverage: "100%"  # 方法节 WHY 解释全部标注
+  speed_card_complete: true
+  frontmatter_complete: true
+  frontmatter_semantically_correct: true
+  concept_admission_ok: true  # 无新建概念页
+
+# 发现的问题
+issues:
+  - severity: low
+    type: template-compliance
+    principle: positioned
+    location: "frontmatter models 字段"
+    detail: "models 仅列 [[NaturalSpeech3]],但 VALL-E 和 MaskGCT 是论文重点对比的 baseline 且在 vault 中有论文笔记 (论文笔记/VALL-E.md, 论文笔记/MaskGCT.md),可补充提升导航性。"
+    suggestion: "在 models 中追加 [[论文笔记/MaskGCT|MaskGCT]] 和 [[论文笔记/VALL-E|VALL-E]]。"
+
+  - severity: low
+    type: template-compliance
+    principle: trustworthy
+    location: "文件末尾 (line 201)"
+    detail: "末尾存在独立的 '检索命中' 元数据行,与 KB 背景 header 中的命中信息重复。"
+    suggestion: "删除末尾独立的检索命中行,保留 KB 背景 header 中的版本。"
+
+  - severity: low
+    type: traceability-gap
+    principle: distinguishable
+    location: "核心问题 item 3 (line 53)"
+    detail: "因果推理 '因此一个 bidirectional transformer decoder 可以处理所有 level' 使用 [§III-A] 引用但缺少 [论文原文]/[agent 解读] 来源类型标注。"
+    suggestion: "在该句前补充 [论文原文] 标签 (如内容确实来自论文 §III-A)。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "所有原则得分 >= 8,无 high/medium issue。引用的概念页均已存在,信息准确且与现有 KB 一致。temporal coarse-to-fine 的描述为现有 MaskedGenerativeModeling 和 RVQ 页面提供有价值的补充视角。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: ""
+  checklist_upgrade_suggestion: ""
+  positive_pattern: "本篇笔记在来源标注方面是典范: 97% claim 覆盖率 + 100% 方法节 WHY 解释标注率 + 恰当使用限定语。可作为后续精读的质量参考。"
