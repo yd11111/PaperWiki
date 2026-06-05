@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[OverFlow]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[Attention-basedTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review), [[VITS]](pending-review)
+- [ingest/deep] [[OverFlow]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [review/auto] [[OverFlow]] — pass-with-fixes, 0 high / 1 medium (Time to 5% WER 数值修正) / 2 low
+- [lint/local] OverFlow — 通过
 - [kb/search] [[Dict-TTS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Gumbel-Softmax]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
 - [ingest/deep] [[Dict-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation key_papers+中文G2P段, Gumbel-Softmax key_papers+多音字消歧段)
 - [lint/local] Dict-TTS — 通过
