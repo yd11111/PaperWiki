@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MOSS-TTSD]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[ResidualVectorQuantization]]✓ | 参考(pending-review): [[CodecLanguageModel]], [[VoiceCloningTaxonomy]], [[Turn-takinginSpokenDialogue]], [[SpokenDialogueEvaluation]]
+- [ingest/deep] [[MOSS-TTSD]] — 精读, kb_sources=6, 新建 0, 追加 4 (LLM-basedTTS body, CodecLanguageModel body, SpokenDialogueEvaluation key_papers+body, VoiceCloningTaxonomy key_papers)
+- [skip/update] [[ResidualVectorQuantization]] — 论文仅使用 RVQ,无创新贡献
+- [skip/update] [[Turn-takinginSpokenDialogue]] — 论文用 script-based speaker tags,非新的 turn-taking 机制
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限,改追加到正文 Dialogue/Multi-speaker 段
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限,改追加到正文序列长度段
+- [review/auto] [[MOSS-TTSD]] — pass-with-fixes: 0 high, 1 medium (消融表分源标注), 3 low
+- [lint/local] MOSS-TTSD — 通过
 - [kb/search] [[MOSS-TTS]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[QuantizerDropout]]✓, [[LLM-basedTTS]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[AudioTokenizerTaxonomy]](pending-review)
 - [ingest/deep] [[MOSS-TTS]] — 精读, kb_sources=6, 新建 0, 追加 4 (QuantizerDropout, AudioTokenizerTaxonomy, SEED-TTS-Eval, CV3-Eval)
 - [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45条),改跳过
