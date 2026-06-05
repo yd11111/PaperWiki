@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[WhispSynth]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 参考(pending-review): [[CosyVoice3]], [[F0Modeling]], [[BigVGAN]]
+- [ingest/deep] [[WhispSynth]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice3, F0Modeling, BigVGAN)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限,论文仅标准 fine-tune CFM
+- [skip/update] [[NeuralVocoder]] — key_papers 已达上限,论文用 DDSP 做后处理非 vocoder 创新
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,论文仅用 ECAPA-TDNN 做评估
+- [review/auto] [[WhispSynth]] — pass-with-fixes: 0 high, 1 medium (闭源描述已修正), 1 low
+- [review/kb] [[WhispSynth]] — pass: 3 append, 0 substantive, 0 new
+- [lint/local] WhispSynth — 通过
 - [kb/search] [[Affectron]] — 命中 6 页(取 6): [[EnCodec]]✓, [[ProsodyModeling]]✓ | 参考(pending-review): [[EmotionControlinTTS]], [[CodecLanguageModel]], [[MaskedGenerativeModeling]], [[Self-SupervisedSpeechRepresentation]]
 - [ingest/deep] [[Affectron]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] [[EmotionControlinTTS]] — key_papers 53/12 已达上限 + body 197/200 行接近上限,跳过追加
