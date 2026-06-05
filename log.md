@@ -8,6 +8,7 @@
 - [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(28),论文不贡献 NAR 架构创新,跳过
 - [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限(64),跳过
 - [lint/local] RobustSpeechFlow — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 实体页积压,建议抽空批量审阅
 - [kb/search] [[Raon-OpenTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[TTSEvaluation]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[Raon-OpenTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (CV3-Eval used_by)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(82),跳过
