@@ -1,0 +1,50 @@
+review:
+  paper: "MAGIC-TTS"
+  note_path: "论文笔记/MAGIC-TTS.md"
+  reviewer: "inline (no independent subagent available)"
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节包含清晰的因果解释: 为什么用 g(x)-g(0) (防止 dense bias), 为什么交叉验证 (标注质量对 content duration 更敏感), 为什么 duration dropout (保持无控制模式)。速查卡片可借鉴字段给出 4 个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    reason: "所有关键数字经 PDF 交叉验证: Table 1 六指标、Table 2 编辑指标、Table 3 ablation、Table 7 Seed-TTS-Eval 均准确。指标名使用正确,方向性标注无误。"
+  可区分:
+    score: 8
+    reason: "方法节标注了 [论文原文] 和 [agent 解读] 来源。覆盖率约 85%。有一处未标注的 agent 判断: '这是 MAGIC-TTS 最关键的训练技巧' 未标 [agent 解读]。"
+  可定位:
+    score: 9
+    reason: "KB 背景节有具体谱系定位 (flow matching NAR lineage), 创新判断有对比基准 (vs DurationPredictor 演进), 点评节将 MAGIC-TTS 定位在 duration-following vs duration-prediction 正交方向上。"
+  不污染:
+    score: 9
+    reason: "反向更新尚未执行,但 concepts/models/tasks/datasets frontmatter 挂接合理。models 仅列 MAGIC-TTS 自身,可考虑加 F5-TTS 作为 backbone,但不影响 KB 安全性。"
+
+issues:
+  - id: 1
+    type: fact-inference-mixing
+    severity: low
+    location: "方法节 > 关键设计选择 > 1. 残差注入"
+    detail: "'这是 MAGIC-TTS 最关键的训练技巧' 是 agent 判断,未标注 [agent 解读]"
+    suggestion: "改为 '这是 MAGIC-TTS 最关键的训练技巧 [agent 解读]'"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 仅列 MAGIC-TTS 自身。F5-TTS Base 作为 backbone 和 baseline (Tables 1, 7) 可被列入。"
+    suggestion: "可选: 在 models 中增加 F5-TTS Base 的引用,但非强制。"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "点评节"
+    detail: "点评节中 'EN WER 从 1.993 升至 3.434 (~72% 增长)' 的百分比计算是 agent 推算,未标注来源且原文无此百分比。"
+    suggestion: "标注 [agent 解读] 或删除百分比,保留原始数字对比。"
+
+conclusion: "pass"
+conclusion_reason: "5 原则均基本满足,无 high issue。3 个 low issue 均为边缘改进,不影响笔记的可用性和可信赖性。数字交叉验证全部通过。方法解释充分,因果链清晰。"
+
+learning_signals: []

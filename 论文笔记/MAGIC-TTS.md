@@ -161,4 +161,16 @@ MAGIC-TTS 解决了一个真实且被忽视的问题: **token-level 局部时长
 
 ## 审阅
 
-(待审阅 agent 填写)
+> [!review] 审阅 (2026-06-06, inline — no independent subagent available)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分: why zero-correction, why cross-validation, why dropout |
+> | 可信赖 | pass | 全部数字经 PDF 交叉验证通过,指标名/方向均正确 |
+> | 可区分 | pass | 来源标注覆盖率 ~85%,1 处 agent 判断未标注 |
+> | 可定位 | pass | KB 背景谱系定位清晰,创新判断有对比基准 |
+> | 不污染 | pass | frontmatter 挂接合理,models 可选增加 F5-TTS |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/MAGIC-TTS-review.yml`
