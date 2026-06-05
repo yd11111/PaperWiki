@@ -1,0 +1,52 @@
+paper: ARCHI-TTS
+reviewer: auto
+date: 2026-06-05
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节每个设计选择都有 WHY/HOW 解释,与替代方案对比清晰。速查卡片可借鉴字段列出 4 个具体可迁移 trick。Semantic Aligner 的 transformer 块数 (6) 未在正文提及,但不影响理解。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字经交叉验证均正确。初稿有 2 个表格格式错误 (F5-TTS RTF 漏报, Seed-ZH WER 错误 bold),已在审阅中修正。指标名正确,出处标注覆盖率高。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖所有因果解释。18:4 比例的推理、低 token rate 与 speaker embedding 关系等均明确标注为 agent 解读。"
+  positionable:
+    score: 8
+    rationale: "KB 背景有具体谱系定位 (对标 F5-TTS/E2 TTS padding 路线, 对比 DMDSpeech/E1-TTS 蒸馏路线)。创新判断有对比基准。frontmatter 字段完整。"
+  non-polluting:
+    score: 9
+    rationale: "无新建概念页。反向更新均为 key_papers 追加 (append),不涉及实质修改。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "实验表 RTF 行"
+    detail: "F5-TTS RTF 列为 '-' 但原文 Table 1 报告 F5-TTS RTF=0.31"
+    suggestion: "已修正为 0.31"
+    status: fixed
+
+  - type: factual-error
+    severity: medium
+    location: "实验表 Seed-ZH WER 行"
+    detail: "ARCHI-TTS 1.42% 被 bold 标注为最优,但 DiTAR 1.02% 更低"
+    suggestion: "已修正 bold 到 DiTAR 1.02%"
+    status: fixed
+
+  - type: traceability-gap
+    severity: medium
+    location: "实验表 MOS 行 (NMOS/SMOS/CMOS)"
+    detail: "CosyVoice 列混合了 Table 1/2 的 CosyVoice (原版) 和 Table 3 的 CosyVoice2,两者是不同模型"
+    suggestion: "已追加注释说明 Table 3 对比的是 CosyVoice2,并补充 CosyVoice2 的 Seed-TTS 数据"
+    status: fixed
+
+  - type: template-compliance
+    severity: low
+    location: "方法节 设计1"
+    detail: "Semantic Aligner 由 6 个 Transformer blocks 构成 [§3.2] 未在正文提及"
+    suggestion: "可在整体架构或设计1中补充 '6 Transformer blocks'"
+    status: noted
+
+learning_signals: []

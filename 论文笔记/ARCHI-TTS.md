@@ -128,14 +128,16 @@ L_CTC = -log p_CTC(y | Φ_i(v_t(x_t, x_ref, z, s; θ)))
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | WER(%)↓ | **1.98** | 2.42 | 2.39 | 3.59 | 2.72 | 2.95 | LibriSpeech-PC | [Table 1] |
 | SSIM↑ | **0.70** | 0.66 | 0.67 | 0.66 | 0.69 | 0.69 | LibriSpeech-PC | [Table 1] |
-| RTF↓ | 0.21 | - | - | 0.92 | 0.84 | 0.68 | LibriSpeech-PC | [Table 1] |
+| RTF↓ | 0.21 | 0.31 | - | 0.92 | 0.84 | 0.68 | LibriSpeech-PC | [Table 1] |
 | WER(%)↓ | **1.47** | 1.83 | 1.69 | - | 2.62 | 2.19 | Seed-EN | [Table 2] |
 | SSIM↑ | 0.68 | 0.67 | **0.74** | - | 0.72 | 0.71 | Seed-EN | [Table 2] |
-| WER(%)↓ | **1.42** | 1.56 | 1.02 | - | 2.27 | 1.97 | Seed-ZH | [Table 2] |
+| WER(%)↓ | 1.42 | 1.56 | **1.02** | - | 2.27 | 1.97 | Seed-ZH | [Table 2] |
 | SSIM↑ | 0.70 | 0.76 | 0.75 | - | 0.77 | 0.73 | Seed-ZH | [Table 2] |
 | NMOS | 3.53 | **3.62** | - | - | - | - | Seed subset | [Table 3] |
 | SMOS | 3.48 | **3.54** | - | 3.32 | - | - | Seed subset | [Table 3] |
 | CMOS | +0.09 | -0.03 | - | +0.10 | - | - | Seed subset | [Table 3] |
+
+注: Table 1/2 中 CosyVoice 列为原版 CosyVoice [4]; Table 3 (MOS) 中对比的是 **CosyVoice2** [3],非同一模型。Table 2 中 CosyVoice 2 Seed-EN WER 2.57%/SSIM 0.65, Seed-ZH WER 1.45%/SSIM 0.75 [Table 2]。
 
 **参数与资源**: 289M params (最小), 100K hours, 8×RTX5090 4天 [§3.4]。对比: F5-TTS 336M, MaskGCT ~1.1B。
 
@@ -171,3 +173,19 @@ ARCHI-TTS 在 NAR flow-matching TTS 的两个核心痛点上给出了简洁有�
 2. **Learnable mask embedding 作为 temporal canvas**: 用可学习的 mask embedding 序列表示目标长度,让 transformer 在文本特征和 mask 之间学习对齐。比 padding 更高效 (mask embedding 共享参数),比 hard duration 更灵活。
 3. **CTC loss 在 DiT 中间层做语义监督**: 在生成模型的中间层添加 CTC 约束,确保隐表示保持文本可解码性。这是一种低成本的语义正则化方法,可能适用于任何条件生成模型。
 4. **低 token rate VAE + 显式 speaker embedding 的互补**: 当音频表示被极度压缩时,说话人身份信息丢失严重,需要外部 speaker encoder 补偿。这对设计低帧率 audio tokenizer 是重要提醒。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节每个设计选择都有 WHY 解释,速查卡片"可借鉴"具体可迁移 |
+> | 可信赖 | pass | 关键数字经交叉验证,出处标注覆盖率高;已修正 F5-TTS RTF 和 Seed-ZH bold |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰,覆盖率 >80% |
+> | 可定位 | pass | KB 背景有具体谱系定位和对比基准,5 字段速查均有实质内容 |
+> | 不污染 | pass | 无新建概念页,反向更新均为 append |
+> 
+> Issues: 4 (high: 0, medium: 3, low: 1)
+> 详见 `_review/ARCHI-TTS-review.yml`
