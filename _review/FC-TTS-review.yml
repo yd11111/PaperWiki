@@ -1,0 +1,52 @@
+review:
+  paper: "FC-TTS"
+  note_path: "论文笔记/FC-TTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节包含充分的 WHY 解释(两阶段分离、TCF 三重瓶颈、CCL 交叉条件化),速查卡片可借鉴字段具体可迁移。核心问题节清晰回答了三个关键设计动机。"
+  可信赖:
+    score: 8
+    reason: "主要数字均有 [Table N] 标注并经 PDF 交叉验证。Table 1 中 F5-TTS 的 UTMOS 4.03 归属需确认(原版 vs 重训)。其他表格数字准确。"
+  可区分:
+    score: 8
+    reason: "[论文原文] 和 [agent 解读] 标注覆盖率高(约 85%),方法节中的推断性分析均有标注。"
+  可定位:
+    score: 9
+    reason: "KB 背景节有具体谱系定位(NS3→FC-TTS 的继承、与 DiFlow-TTS 的路线对比、与 EmoSphere++/IndexTTS2 的方案对比),创新判断有明确对比基准。"
+  不污染:
+    score: 9
+    reason: "不需新建实体页。反向更新仅追加 key_papers,无 factual-error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "实验 > Zero-shot TTS 表格"
+    detail: "Table 1 中 F5-TTS 有两行(原版 336M 和重训 F5-TTS† 205M),笔记合并为单行 'F5-TTS (retrained)' 并标注 UTMOS 4.03。但 4.03 可能是原版 F5-TTS 从原论文报告的值,非重训版本。需确认归属。"
+    suggestion: "拆分为两行: F5-TTS (336M, 原论文数据) 和 F5-TTS† (205M, 重训 LibriHeavy),UTMOS 4.03 归原版行,重训行 UTMOS 标 '-'。"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "实验 > Zero-shot TTS 表格"
+    detail: "NS3 的 UTMOS 在 Table 1 中未报告(原论文不使用 UTMOS),笔记标 '-' 正确,但 F5-TTS 原版(336M)的 WER 2.42 和 SPK 0.66 未在笔记中体现。"
+    suggestion: "在表格中增加 F5-TTS 原版行,或在注释中说明两版差异。"
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "审阅 section"
+    detail: "笔记末尾缺少 [!review] callout(将在审阅完成后追加)。"
+    suggestion: "追加 review callout。"
+
+learning_signals: []
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+  recommendation: "pass-with-fixes: 笔记质量整体良好,机制理解深入,KB 定位准确。Table 1 的 F5-TTS 行需拆分以提高可信度。无 high issue,不阻塞反向更新。"

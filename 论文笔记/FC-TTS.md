@@ -124,12 +124,14 @@ TCF = Transformer + Cross-attention + FSQ,在架构中实例化两次(phoneme-le
 
 ### Zero-shot TTS (LibriSpeech test-clean) [Table 1]
 
-| 指标 | FC-TTS | NS3 | F5-TTS (retrained) | DiTTo-TTS | CLaM-TTS | GT | 出处 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| UTMOS ↑ | 4.22 | - | 4.03 | 4.30 | - | 4.10 | [Table 1] |
-| WER (%) ↓ | 1.88 | 1.81 | 3.30 | 2.69 | 5.11 | 2.07 | [Table 1] |
-| SPK ↑ | 0.60 | 0.67 | 0.67 | 0.60 | 0.50 | 0.71 | [Table 1] |
-| Params | 204M | 500M | 205M | 508M | 584M | - | [Table 1] |
+| 指标 | FC-TTS | NS3 | F5-TTS | F5-TTS† | DiTTo-TTS | CLaM-TTS | GT | 出处 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| UTMOS ↑ | 4.22 | - | 4.03 | - | 4.30 | - | 4.10 | [Table 1] |
+| WER (%) ↓ | 1.88 | 1.81 | 2.42 | 3.30 | 2.69 | 5.11 | 2.07 | [Table 1] |
+| SPK ↑ | 0.60 | 0.67 | 0.66 | 0.67 | 0.60 | 0.50 | 0.71 | [Table 1] |
+| Params | 204M | 500M | 336M | 205M | 508M | 584M | - | [Table 1] |
+
+(F5-TTS†: 在 LibriHeavy 上重训,参数量与 FC-TTS 对齐; F5-TTS 为原论文报告值。部分 UTMOS 原论文未报告,标 "-"。)
 
 FC-TTS 在参数量最小(204M)的情况下 WER 接近最优,UTMOS 超过 GT 和 F5-TTS,但 SPK 落后于 NS3 和 F5-TTS。作者将 SPK 差距归因于:(1) 刻意排除 cc/cd 的设计选择;(2) 两阶段 pipeline 的 bottleneck 约束;(3) FACodec 不完美解耦的残留 timbre 泄露 [§4.2.1]。
 
@@ -206,3 +208,19 @@ FACodec-VC 用 ground-truth discrete tokens + unmatched speaker embedding 模拟
 3. **CCL 的交叉条件化**: 在 predictor 中引入非目标条件作为额外输入,锐化 posterior 引导梯度。这是对传统 classifier guidance 的有效扩展,适用于任何多属性生成任务
 4. **MAE loss 作为 coarse stage 目标**: MAE 天然鼓励 over-smoothing,可用于生成中间 coarse 表示而无需预计算 target。比额外的 blur/downsample 预处理更优雅
 5. **训练时 same-file speaker perturbation**: 从同一长音频随机选另一段作为 speaker reference,保持录音条件一致同时打破 exact match,用于增强 timbre 泛化
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY 解释充分,速查卡片具体可迁移 |
+> | 可信赖 | pass | 主要数字经 PDF 交叉验证,Table 1 F5-TTS 行已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率约 85% |
+> | 可定位 | pass | KB 背景谱系定位具体,含 NS3/DiFlow-TTS/EmoSphere++ 对比 |
+> | 不污染 | pass | 无需新建实体页,反向更新仅追加 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/FC-TTS-review.yml`
