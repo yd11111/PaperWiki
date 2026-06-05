@@ -13,7 +13,7 @@ models: ["[[Moshi]]", "[[EnCodec]]", "[[Whisper]]"]
 tasks: []
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
-status: draft
+status: reviewed
 created: 2026-06-06
 updated: 2026-06-06
 ---
@@ -160,7 +160,7 @@ Raon-Speech 要回答两个层次的问题:
 | Speech Gen WER | 1.93 | 3.42 (HyperCLOVA X) | Seed | [Table 4] |
 | Speech Gen UTMOS | 3.26 | 3.83 (Step-Audio 2) | LibriSpeech-clean | [Table 4] |
 | VoiceBench avg | 76.79 | 76.06 (Fun-Audio-Chat) | VoiceBench | [Table 4] |
-| OpenAudioBench | 81.33 | 74.82 (MiniCPM-o 4.5) | OpenAudioBench | [Table 4] |
+| OpenAudioBench | 70.21 | 74.82 (MiniCPM-o 4.5) | OpenAudioBench | [Table 4, 9] |
 | MMAU (Speech) | 78.68 | 77.18 (Qwen2.5-Omni) | MMAU test-mini | [Table 4] |
 | MMAU-Pro | 64.65 | 62.74 (Qwen2.5-Omni) | MMAU-Pro | [Table 4] |
 | MMLU-Pro | 64.05 | 61.12 (Qwen2.5-Omni) | MMLU-Pro | [Table 4] |
@@ -229,4 +229,14 @@ Raon-Speech 是一个工程完成度非常高的系统级报告。几个值得�
 
 ## 审阅
 
-(待审阅 subagent 填充)
+> [!review] 审阅: pass, 0 high (2026-06-06)
+> 详见 `_review/Raon-Speech-review.yml`
+>
+> **结论**: pass — 无 high issue,1 medium issue 已修正
+>
+> **已修正**:
+> - OpenAudioBench 数值误标 81.33 → 实际 70.21 (非 best,论文原文 §5.1 说 "remaining competitive") [factual-error, medium → fixed]
+>
+> **低风险遗留**:
+> - frontmatter tasks 字段为空 (论文定义的任务可映射到 spoken QA / ASR / TTS / full-duplex dialogue,但 vault 中无对应任务页) [template-compliance, low]
+> - frontmatter models 仅列 3 个模型,未列 Qwen3-VL-8B (backbone) 和 Voxtral (因 vault 无页面) [template-compliance, low]

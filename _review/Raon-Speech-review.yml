@@ -1,0 +1,70 @@
+paper: Raon-Speech
+reviewer: auto
+date: 2026-06-06
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节对每个关键设计选择都给出了 WHY 解释 (backbone 选择、codec 选择、RCP 初始化、on-policy KD、SimPO、SIL/BOW/BC 分离),且明确标注 [论文原文] vs [agent 解读]。速查卡片可借鉴字段列出 5 个具体可迁移 trick。四阶段训练策略表含可训练/冻结模块、数据和步数等关键细节。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字均有 [§X.X]/[Table N] 标注。初稿有 1 个事实错误 (OpenAudioBench 81.33 → 实际 70.21),审阅中已修正。实验表涵盖英韩 + 全双工三个维度。指标方向 (WER↓/TOR↑/TOR↓) 标注正确。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖所有因果解释。输入连续-输出离散的折衷方案定位、VL backbone 选择推测、Mimi vs EnCodec 推测均明确标注为 agent 解读。论文原文引用精确到 §。"
+  positionable:
+    score: 9
+    rationale: "KB 背景有具体谱系定位 (对标 Moshi 并行双流、Freeze-Omni chunk-level state prediction、PersonaPlex)。创新判断有 4 点具体对比。frontmatter concepts 列 10 个实体,kb_context_sources 标注 6。"
+  non-polluting:
+    score: 9
+    rationale: "无新建概念页。反向更新计划均为 key_papers 追加 (append),不涉及实质修改。OpenAudioBench 事实错误已在反向更新前修正。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "实验表 OpenAudioBench 行"
+    detail: "初稿将 Raon-Speech OpenAudioBench 标为 81.33 (best),但 Table 9 (Appendix E) 显示实际为 70.21,且论文 §5.1 明确说 remaining competitive (非 best)。81.33 系 PDF 文本提取中列对齐错误导致的误标。"
+    suggestion: "已修正为 70.21,baseline 标注 74.82 (MiniCPM-o 4.5)"
+    status: fixed
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter tasks 字段"
+    detail: "tasks 字段为空数组,论文涉及的任务 (spoken QA, ASR, TTS, full-duplex dialogue) 可映射但 vault 中暂无对应任务页"
+    suggestion: "待任务库扩展后补充"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "仅列 Moshi, EnCodec, Whisper 三个模型,未列 Qwen3-VL-8B (backbone) 和 Voxtral-Mini (causal encoder),因 vault 中无对应页面"
+    suggestion: "待模型库扩展后补充"
+    status: noted
+
+checklist:
+  reproducible:
+    method_has_causal_explanation: true
+    design_choices_justified: true
+    reusable_ideas_concrete: true
+  trustworthy:
+    claims_have_sources: true
+    metrics_correct: true
+    quick_card_has_numbers: true
+    no_direction_errors: true
+  distinguishable:
+    causal_explanations_labeled: true
+    label_coverage_above_80pct: true
+    no_inference_as_assertion: true
+    strong_claims_supported: true
+  positionable:
+    kb_background_has_lineage: true
+    innovation_has_baseline: true
+    frontmatter_fields_present: true
+    frontmatter_semantically_correct: true
+    quick_card_5_fields_substantive: true
+  non_polluting:
+    new_concept_pages_meet_criteria: na
+    no_semantic_duplicates: na
+    reverse_updates_no_errors: pending
+    reverse_updates_correctly_classified: pending
