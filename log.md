@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[AgentSteerTTS]] — 命中 6 页(取 6): [[SpeechFactorization]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GradientReversalLayer]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review)
+- [ingest/deep] [[AgentSteerTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (GradientReversalLayer key_papers+正文, EmotionControlinTTS 正文)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限,改追加到正文
+- [skip/update] [[SpeechFactorization]] — key_papers 已达上限,跳过
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限,跳过
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,跳过
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]] — key_papers 已达上限,跳过
+- [lint/local] AgentSteerTTS — 通过
 - [kb/search] [[AffectCodec]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[CodecTrainingObjectives]](pending-review), [[AudioTokenizerTaxonomy]](pending-review)
 - [ingest/deep] [[AffectCodec]] — 精读, kb_sources=6, 新建 0, 追加 2 (CodecTrainingObjectives key_papers+L_rela/L_align, AudioTokenizerTaxonomy key_papers)
 - [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),跳过
