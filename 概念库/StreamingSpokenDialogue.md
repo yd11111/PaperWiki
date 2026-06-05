@@ -126,6 +126,7 @@ WavChat 将 E2E streaming spoken dialogue 的设计归结为三项核心技术:
 | AR TTS LM + Read-Write | LLaMA-Omni 2 | CosyVoice 2 式 R:W 交替 + gate fusion | ~583ms (R=3,W=10) |
 | MTP + Verification | Llasa+ | frozen backbone + plug-and-play MTP 模块 + top-k 验证 | 1.48x 加速 |
 | Causal codec decoder | Llasa+ (XCodec2-S) | X-Codec2 decoder 因果化 + conv1d adapter | 流式波形重建 |
+| ARIA + Hybrid MoE | Qwen3.5-Omni | 自适应速率 text-speech 交错 + chunked prefilling + GDN | Plus 435ms (audio, 1 conc.) |
 
 ## Text-guided vs W/o Text-guided 的延迟 Trade-off
 
@@ -165,4 +166,4 @@ WavChat (Section 3.3.4 & 4.3) 讨论了一个关键延迟权衡:
 
 ## 演进
 
-Batch processing (完整输入→完整输出) → Streaming ASR+TTS 组合 (级联系统, 2023) → Chain-of-modality text→speech (SpeechGPT, 高延迟, 2023) → Delayed parallel decoding (Mini-Omni, 2024) → NAR CTC decoder (LLaMA-Omni, 2024) → Fully causal architecture + RQ-Transformer (Moshi, 160ms, 2024) → GroupFormer (IntrinsicVoice, 2024) → Block-by-block + time-sync (OmniFlatten/SyncLLM, 2024) → Chunk-wise streaming (Freeze-Omni, 2024)
+Batch processing (完整输入→完整输出) → Streaming ASR+TTS 组合 (级联系统, 2023) → Chain-of-modality text→speech (SpeechGPT, 高延迟, 2023) → Delayed parallel decoding (Mini-Omni, 2024) → NAR CTC decoder (LLaMA-Omni, 2024) → Fully causal architecture + RQ-Transformer (Moshi, 160ms, 2024) → GroupFormer (IntrinsicVoice, 2024) → Block-by-block + time-sync (OmniFlatten/SyncLLM, 2024) → Chunk-wise streaming (Freeze-Omni, 2024) → ARIA unified interleaved single-stream + Hybrid MoE (Qwen3.5-Omni, 435ms, 2026)

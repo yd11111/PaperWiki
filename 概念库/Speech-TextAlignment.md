@@ -149,4 +149,4 @@ Survey 的核心发现:
 
 ## 演进
 
-Speech-only modeling (GSLM, 2021, 无对齐) → Concatenated speech-text (SUTLM, 2023) → Alternating speech-text (SPIRIT-LM, 2024) → Multi-sequence 并行 (Mini-Omni/Moshi, 2024) → Post-alignment DPO (Align-SLM/SpeechAlign, 2024) → 开放问题: text-present vs text-independent 推理
+Speech-only modeling (GSLM, 2021, 无对齐) → Concatenated speech-text (SUTLM, 2023) → Alternating speech-text (SPIRIT-LM, 2024) → Multi-sequence 并行 (Mini-Omni/Moshi, 2024) → Post-alignment DPO (Align-SLM/SpeechAlign, 2024) → ARIA 自适应速率单通道交错 (Qwen3.5-Omni, 2026: 将 dual-channel 统一为 single-channel,用 prefix ratio ≤ global ratio 约束动态对齐,解决跨语言编码效率不匹配) → 开放问题: text-present vs text-independent 推理
