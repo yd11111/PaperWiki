@@ -81,6 +81,16 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - Codec-free 的全双工 LLM
 - 直接在语音理解和生成任务间无缝切换
 
+### Covo-Audio-Chat-FD (Tencent, 2026)
+- 7B 端到端 LALM 的全双工变体,从 Covo-Audio-Chat 半双工模型演进而来
+- 采用 **hybrid dual-stream** (连续输入 + 离散输出),不需要 word-level text-speech alignment
+- Chunk streaming encoder + 1:4 用户-模型流交错 (输入 6.25Hz vs 输出 25Hz)
+- 三种特殊 token: THINK (listening) / SHIFT (开始说话) / BREAK (停止说话)
+- 全双工直接放入预训练阶段 (而非多阶段渐进微调),单步训练优于 OmniFlatten 方案 [§2.5]
+- Turn-taking 99.7%, Pause handling 97.6%, Backchanneling 93.89%, Interruption 96.81% [Table 9]
+- 对话性能仅略低于半双工版 (URO-Bench 中文 AlpacaEval 84.90 vs 90.02)
+- 详见 [[论文笔记/Covo-Audio|Covo-Audio]]
+
 ## Interactive Period Recognition (IPR)
 
 Survey 特别提出 IPR 作为全双工的配套能力:
