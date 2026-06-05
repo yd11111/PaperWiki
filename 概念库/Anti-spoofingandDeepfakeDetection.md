@@ -4,7 +4,7 @@ title: "Anti-spoofing and Deepfake Detection"
 aliases: [反欺骗检测, Audio Deepfake Detection, Voice Anti-spoofing, 深伪语音检测, Speech Deepfake, 语音伪造检测]
 category: "security"
 tags: [voice-cloning, deepfake, anti-spoofing, ethics, safety, speaker-verification, TTS]
-key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/TraceableTTS|Traceable TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]", "[[论文笔记/SpeakerPoisoning|Speaker Poisoning (Trachu et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/TraceableTTS|Traceable TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]", "[[论文笔记/SpeakerPoisoning|Speaker Poisoning (Trachu et al., 2026)]]", "[[论文笔记/MelShield|MelShield]]"]
 origin_paper: ""
 related_concepts: ["[[SpeakerVerification]]", "[[VoiceCloningTaxonomy]]", "[[SpeakerEmbedding]]"]
 status: pending-review
@@ -60,7 +60,7 @@ Survey 本身聚焦于生成端,但引用的相关 survey 覆盖了检测技术:
 Survey 中提到的一些系统在设计时考虑了安全性:
 
 - **Speaker verification as quality gate**: 多个系统用 SV 验证克隆质量,这同时可作为检测基线
-- **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印; [[论文笔记/TraceableSpeech|TraceableSpeech]] (Zhou et al., Interspeech 2024) 将水印嵌入与 codec LM TTS 端到端联合训练,实现 proactive traceability
+- **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印; [[论文笔记/TraceableSpeech|TraceableSpeech]] (Zhou et al., Interspeech 2024) 将水印嵌入与 codec LM TTS 端到端联合训练,实现 proactive traceability; [[论文笔记/MelShield|MelShield]] (Jin et al., 2026) 在 mel spectrogram 域通过 keyed spread-spectrum 扰动嵌入水印,无需训练或修改 vocoder,实现跨架构(DiffWave/HiFi-GAN)的 plug-and-play in-generation watermarking
 - **Proactive Voice Protection**: [[论文笔记/SafeSpeech|SafeSpeech]] (Zhang et al., USENIX Security 2025) 在上传前嵌入不可感知扰动,使 TTS 模型在 fine-tuning 和 zero-shot 场景下均无法合成高质量语音,代表从"被动检测"到"主动防护"的范式转变
 - **ASVspoof Challenge 系列**: 推动 anti-spoofing 技术发展的标准化竞赛 (Survey 未展开但属于该领域核心)
 - **Watermark-free Traceability**: [[论文笔记/TraceableTTS|Traceable TTS]] (Zhao et al., 2025) 提出不依赖显式水印的 TTS 模型溯源方案,通过反转 GAN generator loss 实现 TTS 模型与 discriminator (wav2vec 2.0 + LCNN) 的协同训练,使模型自然产生可追溯的隐式指纹。域外泛化 EER 11.5% vs baseline 18.99%
