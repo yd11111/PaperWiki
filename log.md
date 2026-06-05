@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[VividVoice]] — 命中 6 页(取 6): [[SpeakerEmbedding]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[VITS]](pending-review), [[DurationPredictor]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[AudioSet]](pending-review)
+- [ingest/deep] [[VividVoice]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[SpeakerEmbedding]] 正文)
+- [skip/update] [[Diffusion-basedTTS]] — key_papers 已达上限(12),VividVoice 非核心贡献,跳过
+- [lint/local] VividVoice — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 273 — 建议抽空审核
 - [kb/search] [[EditContentPreserveAcoustics]] — 命中 6 页(取 6): [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[CodecLanguageModel]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[CosyVoice3]](pending-review)
 - [ingest/deep] [[EditContentPreserveAcoustics]] — 精读, kb_sources=6, 新建 0, 追加 2 ([[DifferentiableRewardOptimization]] 正文, [[SemanticvsAcousticTokens]] 正文)
 - [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(12),改追加到正文
