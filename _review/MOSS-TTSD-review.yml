@@ -1,0 +1,59 @@
+review:
+  paper: "MOSS-TTSD"
+  note_path: "论文笔记/MOSS-TTSD.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    reason: "方法节包含 WHY 解释(16 层 RVQ 的原因、multi-head delay pattern 的优势、合成数据的动机);关键设计选择有因果推理;速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: "Table 1 数字全部验证正确;出处标注覆盖率高(§/Table/Fig);一处消融表混用两个评估框架的数据(Table 4 Seed-TTS-eval SIM + Table 5 TTSD-eval ACC/WER)"
+  distinguishable:
+    score: 9
+    verdict: pass
+    reason: "[论文原文]/[agent 解读] 标注一致且覆盖率高;推断性陈述使用恰当限定词;overclaim 判断有数字支撑(Fig 5 EN vs Eleven V3)"
+  positionable:
+    score: 8
+    verdict: pass
+    reason: "KB 背景定位到 LLM-basedTTS > CodecLM > Dialogue/Multi-speaker 方向;与 VibeVoice/FireRedTTS-2 对比清晰;创新判断有对比基准"
+  non_polluting:
+    score: 9
+    verdict: pass
+    reason: "无新建概念页;反向更新均为 key_papers 追加;无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "## 实验 > Voice cloning 消融 表"
+    detail: "消融表混用了 Table 4 (Seed-TTS-eval) 的 EN SIM/ZH SIM 和 Table 5 (TTSD-eval) 的 ZH ACC/ZH WER,这两个是不同评估框架下的结果,直接放在同一行可能误导读者认为它们来自同一实验"
+    suggestion: "将消融表拆为两部分或在表头标注数据来源: SIM 列标注 [Table 4, Seed-TTS-eval], ACC/WER 列标注 [Table 5, TTSD-eval]"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: "ZipVoice-Dialog 和 DialoSpeech 不是本文的实验对比 baseline,仅作为 cpWER metric 的引用文献出现在 references 中"
+    suggestion: "从 models 中移除 ZipVoice-Dialog 和 DialoSpeech,或添加注释说明它们是 related work 而非 baseline"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "## 实验 > 主结果表"
+    detail: "VibeVoice 1.5B 在 PDF Table 1 中有完整数据但笔记主结果表中未列出"
+    suggestion: "补充 VibeVoice 1.5B 数据行或在表注中说明仅列部分 baseline"
+
+  - id: 4
+    severity: low
+    type: traceability-gap
+    location: "## 实验 > 主结果表"
+    detail: "MOSS-TTSD EN WER (9.88%) 实际略高于 VibeVoice 7B (9.46%),但正文未显式提及这一 trade-off"
+    suggestion: "在实验节或局限性中明确指出 MOSS-TTSD 在 EN WER 上不是最优"
+
+learning_signals: []

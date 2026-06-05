@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv"
 tags: [spoken-dialogue, multi-speaker, long-form, voice-cloning, codec-LM, autoregressive, RVQ, evaluation, multilingual]
 concepts: ["[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[ResidualVectorQuantization]]", "[[VoiceCloningTaxonomy]]", "[[Turn-takinginSpokenDialogue]]", "[[SpokenDialogueEvaluation]]", "[[AudioTokenizerTaxonomy]]"]
-models: ["[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/FireRedTTS2|FireRedTTS 2]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]", "[[论文笔记/DialoSpeech|DialoSpeech]]"]
+models: ["[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/FireRedTTS2|FireRedTTS 2]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -140,13 +140,21 @@ MOSS-TTSD 结合两种声音克隆方式 [§4.3, Fig 2]:
 - vs Gemini-2.5-pro (EN): Win 45.5%, Tie 21.2%, Lose 33.3%
 - vs Eleven V3 (EN): Win 33.3%, Tie 25.3%, Lose 41.4%
 
-**Voice cloning 消融** [Table 4-5, Appendix C]:
+**Voice cloning 消融 — Seed-TTS-eval SIM** [Table 4, Appendix C]:
 
-| 配置 | EN SIM | ZH SIM | ZH ACC | ZH WER |
-| --- | --- | --- | --- | --- |
-| voice_clone only | 0.6075 | 0.7160 | 0.9387 | 6.07% |
-| continuation only | 0.6579 | 0.7513 | 0.9254 | 5.46% |
-| voice_clone + continuation | **0.6828** | **0.7590** | **0.9587** | 4.85% |
+| 配置 | EN SIM | ZH SIM | ZH (hard) SIM |
+| --- | --- | --- | --- |
+| voice_clone only | 0.6075 | 0.7160 | 0.6964 |
+| continuation only | 0.6579 | 0.7513 | 0.7248 |
+| voice_clone + continuation | **0.6828** | **0.7590** | **0.7401** |
+
+**Voice cloning 消融 — TTSD-eval** [Table 5, Appendix C]:
+
+| 配置 | ZH ACC | ZH SIM | ZH WER | EN ACC | EN SIM | EN WER |
+| --- | --- | --- | --- | --- | --- | --- |
+| voice_clone only | 0.9387 | 0.7852 | 6.07% | 0.9680 | 0.7228 | 9.39% |
+| continuation only | 0.9254 | 0.7740 | 5.46% | 0.9209 | 0.7107 | 9.07% |
+| voice_clone + continuation | **0.9587** | **0.7949** | **4.85%** | **0.9626** | **0.7326** | 9.88% |
 
 **测试集设计** [§5.1]: 中英各 50 个对话样本,20 对人工收集的说话人参考 + 30 对来自 seed-tts-eval,对话文本由 Gemini 2.5 Pro 生成,音频时长 30~720 秒,覆盖 podcast/配音/体育解说/相声等场景。
 
@@ -184,3 +192,19 @@ MOSS-TTSD 结合两种声音克隆方式 [§4.3, Fig 2]:
 3. **三阶段 curriculum 策略**: 从单人→双人→多人的渐进训练,配合 DNSMOS 和采样率的逐步收紧,是扩展 TTS 到多说话人场景的实用训练方案。
 4. **合成多说话人数据的拼接策略**: 对同一 speaker 的单人段做聚类,然后按规则交错拼接模拟多人对话。选择 DNSMOS ≥ 3.4 + 同采样率确保拼接自然度。解决了真实多人标注数据稀缺的问题。
 5. **仅建模前 N 层 RVQ 以换取更长上下文**: 牺牲部分重建精度(只用 16 层而非全部层)来减少序列长度,使相同上下文窗口覆盖更长时间的音频。适用于需要长上下文但对音质要求可接受的场景。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 WHY 推理,关键设计选择有因果解释 |
+> | 可信赖 | pass | 数字验证正确,出处标注覆盖率高;消融表已修正为分源标注 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致且覆盖率高 |
+> | 可定位 | pass | KB 定位到 LLM-basedTTS > CodecLM > Dialogue/Multi-speaker |
+> | 不污染 | pass | 反向更新均为 key_papers 追加,无 factual error 风险 |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/MOSS-TTSD-review.yml`
