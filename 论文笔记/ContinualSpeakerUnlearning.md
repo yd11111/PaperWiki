@@ -186,7 +186,18 @@ CORTIS 在 TGU (Teacher-Guided Unlearning) 之上运行。TGU 的基本原理沿
 
 ---
 
-> [!review] 审阅
-> *待审阅 subagent dispatch*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 两层机制(Fisher 定位 + 正交投影)的 WHY/HOW 因果链完整,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 所有关键数字有 Table/Fig/Appendix 标注,与 PDF 交叉验证一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率高,推断集中在对偶类比不与原文混淆 |
+> | 可定位 | pass | KB 背景精确定位与前作 TGU/TruS 的三角关系,创新判断有对比基准 |
+> | 不污染 | pass | 无新建概念页,反向更新以 append 为主 |
+> 
+> Issues: 0 (high: 0, medium: 0, low: 0)
+> 详见 `_review/ContinualSpeakerUnlearning-review.yml`
 
 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerVerification]][待确认], [[Anti-spoofingandDeepfakeDetection]][待确认] | 过滤: 无 | 未命中但可能相关: [[VoiceCloningTaxonomy]][待确认]

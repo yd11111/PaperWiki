@@ -1,0 +1,37 @@
+review:
+  paper: "ContinualSpeakerUnlearning"
+  reviewer: "auto"
+  checklist_version: "v1.1"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节详细解释了两层机制(参数级 Fisher 定位 + 方向级正交投影)的 WHY 和 HOW,包含公式引用和设计动机。因果链完整: 灾难性再学习的根因分析 → 参数级保护不够 → 方向级保护的必要性。速查卡片可借鉴字段具体且可迁移。"
+
+  trustworthy:
+    score: 9
+    rationale: "所有关键数字均有 [Table N]/[Fig N]/[Appendix X] 标注。实验表格从 PDF 交叉验证,数值准确。指标名称使用正确(SIM/WER/S-R/S-f_i)。方向性无误(SIM 越低=遗忘越成功)。"
+
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖率高,方法节中每个 WHY 解释都有来源标注。agent 解读集中在对偶类比分析(continual learning vs continual unlearning),不与论文原文混淆。"
+
+  positionable:
+    score: 10
+    rationale: "KB 背景节精确定位了与前作(TGU)、TruS(推理时遗忘)的三角关系。创新判断有对比基准(一次性 vs 增量)。与 KB 中 Anti-spoofing 页的三层防线框架衔接清晰。frontmatter 字段完整且语义正确。"
+
+  no_contamination:
+    score: 9
+    rationale: "无新概念页创建需求。反向更新将以追加 key_papers 为主,安全。concepts/models/tasks 字段引用已有实体页,无生造链接。"
+
+issues: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0
+
+learning_signals: []
