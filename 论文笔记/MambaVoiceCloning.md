@@ -2,11 +2,11 @@
 type: paper
 tier: deep
 title: "MambaVoiceCloning: Efficient and Expressive Text-to-Speech via State-Space Modeling and Diffusion Control"
-arxiv_id: ""
+arxiv_id: "2604.00292"
 source: "Sources/MambaVoiceCloning.pdf"
-authors: [Anonymous]
+authors: [Namrataben Patel, Sahil Kumar, Honggang Wang, Youshan Zhang]
 year: 2026
-venue: "ICLR 2026 (under review)"
+venue: "ICLR 2026"
 tags: [TTS, SSM, Mamba, diffusion, voice-cloning, streaming, efficiency, encoder-design, state-space-model]
 concepts: ["[[Diffusion-basedTTS]]", "[[ProsodyModeling]]", "[[F0Modeling]]", "[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[Attention-basedTTS]]"]
 models: ["[[VITS]]"]
@@ -15,7 +15,7 @@ datasets: ["[[LJSpeech]]", "[[LibriTTS]]", "[[VCTK]]", "[[CSS10]]"]
 kb_context_sources: 3
 status: draft
 created: 2026-06-03
-updated: 2026-06-04
+updated: 2026-06-06
 ---
 
 ## KB 背景
@@ -272,8 +272,7 @@ MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Ta
 3. **Diffusion decoder 仍是延迟瓶颈**: encoder 侧的 SSM 改进仅影响 31.4% 的延迟,diffusion decoder 占 54.2%,整体 RTF 从 0.0174 降至 0.0169,改善幅度有限 [Table 15]
 4. **公平性存疑**: 论文大量强调 "protocol-matched" 对比,但所有 Mamba baseline (Hybrid-Mamba, Bi-Mamba Concat-only) 均为作者重新实现,非原作者发布版本,无法完全排除实现差异 [agent解读]
 5. **绝对改善幅度小**: MOS 改善 +0.07 (4.15→4.22),虽统计显著但实际感知差异有限;WER 上 StyleTTS2 (6.50%) 略优于 MVC (6.52%) [Table 1, Table 4]
-6. **double-blind review 匿名**: 无法验证 github 代码可复现性 (github.com/aiai-9/MVC 链接在审稿阶段可能受限) [§1]
-7. **未评估端到端替代**: diffusion decoder 是瓶颈,但论文未讨论将 conditioning 改进与更快的 decoder (如 flow matching) 结合的可能性 [agent解读]
+6. **未评估端到端替代**: diffusion decoder 是瓶颈,但论文未讨论将 conditioning 改进与更快的 decoder (如 flow matching) 结合的可能性 [agent解读]
 
 ## 点评
 
