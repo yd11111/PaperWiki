@@ -1,0 +1,50 @@
+kb_review:
+  paper: "PITS"
+  note_path: "论文笔记/PITS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+  change_plan:
+    - target: "模型库/VITS.md"
+      action: append
+      description: "追加 PITS 到相关工作段(key_papers 已达 14 条,超 12 上限)"
+      classification: append
+      status_change: none
+
+    - target: "概念库/F0Modeling.md"
+      action: append
+      description: "在端到端隐式 F0 小节后追加 Yingram 替代 F0 的方法说明(key_papers 已达 13 条,超 12 上限)"
+      classification: append
+      status_change: none
+
+    - target: "概念库/VariationalAutoencoderforTTS.md"
+      action: skip
+      description: "PITS 扩展 VITS VAE 为双 posterior encoder,但不是 VAE 技术本身的创新;page key_papers 17 条远超上限"
+      classification: skip
+      status_change: none
+
+    - target: "概念库/SpeechFactorization.md"
+      action: skip
+      description: "双 encoder 解耦是已有思路(NANSY),非重大新方法;page key_papers 32 条远超上限"
+      classification: skip
+      status_change: none
+
+    - target: "概念库/ProsodyModeling.md"
+      action: skip
+      description: "Pitch 控制属 prosody 维度但贡献不在 prosody modeling 本身;page key_papers 52 条远超上限"
+      classification: skip
+      status_change: none
+
+    - target: "概念库/DurationPredictor.md"
+      action: skip
+      description: "PITS 沿用 VITS stochastic duration predictor,duration 方面无创新"
+      classification: skip
+      status_change: none
+
+  issues: []
+
+  issue_summary:
+    high: 0
+    medium: 0
+    low: 0
