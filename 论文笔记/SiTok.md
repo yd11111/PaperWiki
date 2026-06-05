@@ -44,7 +44,7 @@ kb_sources: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[ResidualVe
 > - **路线**: Mel(50Hz,128-bin) → 4x downsample → Llama Encoder(16L) → VQ(65536) → Llama Diffusion Decoder(16L, non-causal, flow matching) → Mel → Vocos → Wav(24kHz); 辅助 CTC Decoder(4L) → text
 > - **指标**: WER 4.06 / SIM 0.641 / UTMOS 3.44 (CN=1, 0.2kbps); WER 2.80 / SIM 0.660 / UTMOS 3.46 (CN=4, 0.7kbps); LLM-ASR WER 4.95; 显著优于 Mimi/WavTokenizer/StableCodec 等 on SeedTTS test-en [Table 1,2]
 > - **可借鉴**: (1) Diffusion autoencoder 作为 speech tokenizer 的新范式 (2) CTC loss 直接监督 VQ latent space 保证语义性 (3) Token CFG 增强 codec 重建 (4) Shortcut fine-tuning 实现 2-4 步高质量解码
-> - **局限**: 匿名投稿,代码/模型未开源; 2M 小时内部数据不可复现; diffusion decoder 推理仍需多步 (默认 16 步); 非因果架构不支持 streaming
+> - **局限**: 2M 小时 Meta 内部数据不可复现; diffusion decoder 推理仍需多步 (默认 16 步); 非因果架构不支持 streaming; 离散表征仍落后于连续特征
 
 ## 核心问题
 
@@ -119,17 +119,16 @@ L_total = L_rec (flow matching) + lambda_ctc * CTC(D_ctc(z_q), y) + L_vq [论文
 
 ## 实验
 
-| 指标 | SiTok (CN=1) | SiTok (CN=4) | EnCodec | Mimi | StableCodec | 数据集 | 出处 |
+| 指标 | SiTok (CN=1) | SiTok (CN=4) | SpeechTokenizer | Mimi | StableCodec | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Token Rate (Hz) | 12.5 | 12.5 | 50 | 12.5 | 25 | - | [Table 1] |
-| Bitrate (kbps) | 0.20 | 0.70 | 1.5 | 1.1 | 0.40 | - | [Table 1] |
-| WER | 4.06 | 2.80 | 7.98 | 4.51 | 3.35 | SeedTTS test-en | [Table 1] |
-| SIM | 0.641 | 0.660 | 0.468 | 0.527 | 0.597 | SeedTTS test-en | [Table 1] |
+| Bitrate (kbps) | 0.20 | 0.70 | 1.00 | 0.825 | 0.40 | - | [Table 1] |
+| WER (recon) | 4.06 | 2.80 | 7.98 | 4.51 | 11.1 | SeedTTS test-en | [Table 1] |
+| SIM | 0.641 | 0.660 | 0.468 | 0.527 | 0.410 | SeedTTS test-en | [Table 1] |
 | UTMOS | 3.44 | 3.46 | 2.47 | 3.09 | 3.87 | SeedTTS test-en | [Table 1] |
-| LLM-ASR WER | 4.95 | 4.49 | - | - | - | LibriSpeech test-clean | [Table 2] |
+| LLM-ASR WER | 4.95 | 4.49 | - | 23.1 | 28.0 | LibriSpeech test-clean | [Table 2] |
 | CTC-ASR WER | 9.50 | 8.30 | - | - | - | LibriSpeech test-clean | [Table 2] |
-| ER (Emotion Recog.) | 63.5 | 64.4 | 47.4 | 54.3 | - | DASB | [Table 2] |
-| CMOS vs Mimi | -1.65 | - | - | 0.00 (ref) | - | in-the-wild | [Table 8] |
+| ER (Emotion Recog.) | 63.5 | 64.4 | - | 54.3 | - | DASB | [Table 2] |
 | Zero-shot TTS WER | 2.46 | - | - | - | - | SeedTTS test-en | [Table 7] |
 | Zero-shot TTS RTF | 0.234 | - | - | - | - | A100 GPU | [Table 7] |
 
