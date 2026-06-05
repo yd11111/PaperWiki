@@ -4,7 +4,7 @@ title: "F0 Modeling"
 aliases: [基频建模, Pitch Modeling, Fundamental Frequency, 音高建模, F0 Prediction, Pitch Contour]
 category: "technique"
 tags: [SVS, TTS, pitch, F0, vibrato, prosody, acoustic-feature]
-key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/NoVerifiableRewardforProsody|No Verifiable Reward for Prosody]]"]
+key_papers: ["[[论文笔记/Survey-SyntheticSingers|Synthetic Singers (Pan et al., 2026)]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Make-A-Voice|Make-A-Voice]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/MambaVoiceCloning|MambaVoiceCloning (2026)]]", "[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[论文笔记/TechSinger|TechSinger]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/MiSTR|MiSTR]]", "[[论文笔记/NoVerifiableRewardforProsody|No Verifiable Reward for Prosody]]", "[[论文笔记/WhispSynth|WhispSynth]]"]
 origin_paper: "Pan et al., Synthetic Singers: A Review of Deep-Learning-based SVS Approaches, 2026"
 related_concepts: ["[[SingingVoiceSynthesis]]", "[[ProsodyModeling]]", "[[MusicalScoreEncoder]]", "[[DurationPredictor]]", "[[Diffusion-basedTTS]]"]
 status: pending-review
