@@ -9,6 +9,7 @@
 - [skip/update] [[ProsodyModeling]] — NV 已由 NVSpeech 节充分覆盖,跳过
 - [skip/update] [[MelSpectrogram]] — 标准 80-dim mel 使用,跳过
 - [lint/local] NaturalEmotionalTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 320 — 建议抽空审核
 - [kb/search] [[FC-TTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[NaturalSpeech3]](pending-review), [[FiniteScalarQuantization]](pending-review)
 - [ingest/deep] [[FC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (NaturalSpeech3 key_papers)
 - [review/auto] [[FC-TTS]] — pass-with-fixes, 0 high, 1 medium (Table 1 F5-TTS 行拆分)
