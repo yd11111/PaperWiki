@@ -4,7 +4,7 @@ title: "Codec Training Objectives"
 aliases: [Codec 训练目标, Codec Loss Landscape, Audio Codec Training Losses, Neural Codec 损失函数]
 category: "training-technique"
 tags: [training-objective, audio-codec, GAN, reconstruction, perceptual-loss]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/AffectCodec|AffectCodec]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[AudioTokenizerTaxonomy]]", "[[ResidualVectorQuantization]]", "[[Multi-scaleSTFTDiscriminator]]", "[[CodebookCollapse]]"]
 status: pending-review
@@ -129,6 +129,14 @@ encoder/quantizer/decoder 同时训练,常见于 acoustic tokenizer:
 ## 演进
 
 手工 codec (Opus, 无学习) → VQ-VAE reconstruction-only (2017) → SoundStream GAN+Feat+Rec (2021) → EnCodec 加入 EMA+balancer (2022) → DAC 完善 multi-band discriminator (2023) → Diffusion-based decoder (LaDiffCodec, 2024) → SSL masked prediction 路线 (Discrete WavLM, 2024) → 多目标联合优化 (PAST/TAAE, 2025)
+
+### 7. Relation-Preserving Distillation Loss (L_rela)
+
+[[论文笔记/AffectCodec|AffectCodec]] (Shi et al., 2026) 引入关系保持蒸馏损失,约束 RVQ 第一层量化输出 Q(1) 的帧间 pairwise 距离与 teacher 空间 (emotion + semantic) 一致: L_rela = (1/T'^2) * sum(alpha * d(r^uni, r^emo) + beta * d(r^uni, r^sem)),其中 d 为 L1 discrepancy,r 为帧对欧氏距离。保护离散化过程中的情感-语义拓扑结构,优于直接 feature matching (recall 0.48 vs 0.42) [AffectCodec Table 7]。
+
+### 8. Emotion-Weighted Semantic Alignment Loss (L_align)
+
+同为 AffectCodec 引入,在 Q(1) 与文本语义 teacher 之间做 soft alignment,但用帧级情感差分 d_t = ||e_t - e_{t-1}||_1 经 softmax 生成权重 gamma_t,使情感变化大的帧获得更强语义对齐监督: L_align = -(1/T') * sum(gamma_t * log(sigma(cos(Q^(1)_t, c*_t))))。核心 idea: 情感变化大的帧更易受量化失真影响,需要更强的锚定 [AffectCodec §3.2.3]。
 
 ---
 

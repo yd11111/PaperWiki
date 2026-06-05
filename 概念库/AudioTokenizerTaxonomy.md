@@ -4,7 +4,7 @@ title: "Audio Tokenizer Taxonomy"
 aliases: [音频分词器分类体系, Tokenizer Taxonomy, Discrete Audio Token Taxonomy]
 category: "taxonomy"
 tags: [taxonomy, audio-codec, discrete-token, tokenization, survey]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]", "[[论文笔记/AffectCodec|AffectCodec]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[FiniteScalarQuantization]]", "[[CodecTrainingObjectives]]", "[[Single-codebookvsMulti-codebook]]"]
 status: pending-review
