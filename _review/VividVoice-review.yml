@@ -1,0 +1,51 @@
+review:
+  paper: "VividVoice"
+  note_path: "论文笔记/VividVoice.md"
+  reviewer: auto
+  date: 2026-06-05
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节详细解释了 D-MSVA 的双路径机制、4 个 memory bank 的角色分工和训练策略,包含 WHY 解释。数据构建流程也清晰完整。读完笔记可以向同事解释这个系统为什么 work。"
+  trustworthy:
+    score: 8
+    reason: "关键数字(WER/FAD/KL/MOS/消融结果)均有 [Table N] 标注,训练细节有 [§3.1] 标注。指标名称使用正确。速查卡片指标字段含具体数字+数据集+来源。"
+  distinguishable:
+    score: 7
+    reason: "方法节中因果解释标注了 [论文原文] 和 [agent 解读],覆盖率较好。但部分推断性分析(如'为什么用 memory bank 而非直接映射')虽标注了 [agent 解读],论述较长,可能给读者造成论文原文有此讨论的印象。"
+  locatable:
+    score: 8
+    reason: "KB 背景节有具体的谱系定位,明确标识了与 VITS/AudioLDM/MFVA 的关系,创新判断有对比基准(VoiceLDM/FaceTTS/SSV2A)。frontmatter 字段完整且语义正确。速查卡片 5 字段均有实质内容。"
+  non_polluting:
+    score: 9
+    reason: "未新建概念页。反向更新计划仅涉及 SpeakerEmbedding 正文追加(key_papers 已超限)。风险极低。"
+
+conclusion: pass-with-fixes
+total_issues: 3
+high: 0
+medium: 2
+low: 1
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "方法 > 关键设计选择 > 为什么用 memory bank 而非直接映射"
+    detail: "该段标注为 [agent 解读],但 §3.4 消融实验实际上就是论文对此问题的回答。可以补充论文原文的消融论证,减少纯推断占比。"
+    suggestion: "将消融实验数据(FAD 16.0% / KL 9.5% 相对改善)直接引入该段作为论文原文证据,而非仅在实验节引用。"
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "局限性 > 第5点 MOS-TI 与 GT 差距大"
+    detail: "MOS-TI 3.08 vs GT 4.03 的差距论述缺少出处标注。"
+    suggestion: "补充 [Table 1] 标注。"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea > 第3点 双路径训练"
+    detail: "'先确保自编码质量,再对齐跨模态'的表述偏泛。"
+    suggestion: "补充一个具体的迁移场景示例(如 text→image 风格控制)使其更 actionable。"
+
+learning_signals: []
