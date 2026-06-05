@@ -40,7 +40,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 提出 cascaded prompting (textual style token + human-curated audio prompt) 与 ICL-based online RL (AES-CE reward + CTC regularization) 相结合的对话 TTS 框架,实现数据高效的细粒度风格控制
 > - **路线**: LLM 生成 style token → AR prosody model (fine-grained audio prompt) → discrete prosody tokens → diffusion acoustic model (coarse-grained audio prompt) → BigVGAN vocoder → waveform
-> - **指标**: ICL vs Zero-shot baseline: naturalness CMOS +7.5%, CVAD CMOS +79.6%; ICL vs GPT-4o: CVAD CMOS +5.6%; RL-AES-CTC vs SFT only: CMOS +7.1% (95% CI: 3.97%-10.23%) [Table 1, Table 2]
+> - **指标**: ICL vs Zero-shot: naturalness net win rate +7.5%, CVAD net win rate +79.6%; ICL vs GPT-4o: CVAD net win rate +5.6%; RL-AES-CTC vs SFT only: CMOS net win rate +7.1% (95% CI: 3.97%-10.23%) [Table 1, Table 2]
 > - **可借鉴**: (1) AR/diffusion 两阶段使用不同粒度 style prompt 减少 speaker drift; (2) CTC loss 作为 RL 正则化防止 reward hacking 和 text hallucination; (3) human-in-the-loop prompt selection 用 Monte Carlo estimation 的 lower-bound AES-CE score
 > - **局限**: 全部使用 in-house 数据和模型,无标准 benchmark 对比; 仅英语评估; 人工 prompt selection 虽然 data-efficient 但仍需 human effort; RL 仅在 AR prosody model 上验证
 
@@ -192,4 +192,16 @@ $$J(\theta) = E_{\tau \sim \pi_\theta}[R(\tau)] - \beta \cdot KL(\pi_\theta \| \
 
 ## 审阅
 
-*(待独立审阅 agent 填充)*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,关键设计选择均回答 WHY |
+> | 可信赖 | pass | 出处覆盖率 >90%,速查指标已修正为 net win rate |
+> | 可区分 | pass | 来源标注覆盖率 >80%,无推断写成断言 |
+> | 可定位 | pass | KB 谱系定位优秀,与 DiffRO/GRPO 等对比清晰 |
+> | 不污染 | pass | 无新概念页,反向更新均为 append |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ConversationalTTS-RL-review.yml`

@@ -1,0 +1,52 @@
+review:
+  paper: "ConversationalTTS-RL"
+  date: "2026-06-06"
+  reviewer: "auto (inline, no independent subagent)"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节包含充分因果解释,关键设计选择均回答了 WHY (cascaded prompting 动机、不同粒度 prompt 原因、CTC 正则化必要性),速查卡片可借鉴字段具体可操作"
+  trustworthy:
+    score: 7
+    reason: "数字 claim 出处覆盖率高 (>90%),指标名使用基本正确。但速查卡片中 +7.5%/+79.6% 的描述为 CMOS 可能引起混淆 — 实际是 net win rate 而非 CMOS 分数差"
+  distinguishable:
+    score: 8
+    reason: "[论文原文]/[agent 解读] 标注覆盖率 >80%,方法节中几乎所有因果解释都有来源标注,无显著推断写成断言问题"
+  positionable:
+    score: 9
+    reason: "KB 背景谱系定位优秀,与 DiffRO/Seed-TTS/GRPO 等 RL-for-TTS 演进线的对比清晰具体,创新判断有明确对比基准"
+  non-polluting:
+    score: 9
+    reason: "不涉及新概念页创建,反向更新均为 append 类型,无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "速查卡片 > 指标"
+    detail: "指标字段描述 'naturalness CMOS +7.5%, CVAD CMOS +79.6%' — 实际 +7.5% 和 +79.6% 是 Net Win Rate (%) 而非 CMOS 分数差值。将 net win rate 写成 CMOS 容易误导读者以为是 MOS 量级的差异"
+    suggestion: "改为 'ICL vs Zero-shot: naturalness net win rate +7.5%, CVAD net win rate +79.6% [Table 1]' 或在百分号前注明 (net win rate)"
+
+  - id: 2
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea > #4"
+    detail: "'ICL-conditioned RL: RL 训练时使用与推理相同的 ICL 条件' 这一点较为 obvious,缺乏具体操作指导"
+    suggestion: "可补充更具体的实现方式,如 'audio prompt 不做 data augmentation 而是严格复用推理时的 prompt pool,确保 RL 训练分布与推理分布一致'"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "实验表格"
+    detail: "实验表格中 '本文 (ICL)' 和 'Baseline (Zero-shot)' 列全为 '—',仅有对比列有值。由于原文只报告 net win rate 不报告绝对分数,这是合理的,但可在表格下方补充说明"
+    suggestion: "在表格下方添加注释: '注: 原文仅报告 net win rate,未公布绝对 CMOS/CVAD 分数'"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []
