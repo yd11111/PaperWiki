@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[NaturalEmotionalTTS]] — 命中 6 页(取 Top 6): [[NeuralVocoder]]✓, [[ProsodyModeling]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[NaturalEmotionalTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS NV节)
+- [review/auto] [[NaturalEmotionalTTS]] — pass-with-fixes, 0 high, 2 medium (推算值修正 + 论文内部数据不一致标注)
+- [review/kb] [[NaturalEmotionalTTS]] — pass, 1 append (EmotionControlinTTS), 3 skipped (非核心贡献)
+- [skip/update] [[Diffusion-basedTTS]] — 论文仅使用 Grad-TTS 作为 backbone,非 diffusion TTS 方法贡献,跳过
+- [skip/update] [[ProsodyModeling]] — NV 已由 NVSpeech 节充分覆盖,跳过
+- [skip/update] [[MelSpectrogram]] — 标准 80-dim mel 使用,跳过
+- [lint/local] NaturalEmotionalTTS — 通过
 - [kb/search] [[FC-TTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[NaturalSpeech3]](pending-review), [[FiniteScalarQuantization]](pending-review)
 - [ingest/deep] [[FC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (NaturalSpeech3 key_papers)
 - [review/auto] [[FC-TTS]] — pass-with-fixes, 0 high, 1 medium (Table 1 F5-TTS 行拆分)
