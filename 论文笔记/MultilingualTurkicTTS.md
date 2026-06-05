@@ -6,12 +6,12 @@ arxiv_id: "2305.15749"
 source: "Sources/MultilingualTurkicTTS.pdf"
 authors: [Rustem Yeshpanov, Saida Mussakhojayeva, Yerbolat Khassanov]
 year: 2023
-venue: "Interspeech 2023"
+venue: "Interspeech 2023 (arXiv:2305.15749)"
 tags: [TTS, multilingual, zero-shot, Turkic-languages, IPA, transliteration, low-resource, cross-lingual, Tacotron2]
 concepts: ["[[PhonemeRepresentation]]", "[[Attention-basedTTS]]", "[[NeuralVocoder]]", "[[MelSpectrogram]]", "[[TTSEvaluation]]"]
 models: []
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]"]
-datasets: []
+datasets: ["KazakhTTS2"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -157,3 +157,19 @@ updated: 2026-06-06
 1. **语系内 IPA 桥接策略**: 选择字母表最大的语言作为源语言,最大化音素覆盖率。这个原则可推广到其他语系(如南亚语系、班图语系)的低资源 TTS
 2. **三维评估框架**: 质量 + 可理解度 + 可辨度的三维评估比单一 MOS 更全面,尤其适合跨语言场景中区分"听着不自然但能理解"和"完全听不懂"两种失败模式
 3. **分支-迁移效果矩阵**: 用语系分支结构预测跨语言迁移效果的好坏,可用于优先级排序
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY 解释充分,设计选择有因果链 |
+> | 可信赖 | pass | 数字标注覆盖率 ~95%,指标名正确 |
+> | 可区分 | pass | 来源标注覆盖率 ~100%,无混淆 |
+> | 可定位 | pass | KB 谱系定位清晰,与现代系统对比具体 |
+> | 不污染 | pass | 无新建,反向更新均为追加 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/MultilingualTurkicTTS-review.yml`

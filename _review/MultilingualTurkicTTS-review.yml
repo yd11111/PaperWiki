@@ -1,0 +1,113 @@
+review:
+  paper: "MultilingualTurkicTTS"
+  date: "2026-06-06"
+  reviewer: "auto (inline, no separate subagent available)"
+  checklist_version: "v1.1"
+
+  principles:
+    可复述:
+      score: 8
+      rationale: "方法节详细解释了 WHY (为什么选哈萨克语、为什么用 IPA、为什么只用一个说话人),设计选择有明确的因果链。速查卡片'可借鉴'具体到'选择字母最多的语言最大化音素覆盖'。扣分: 论文本身方法较简单,导致方法节的'怎么 work'部分偏平铺直叙。"
+    可信赖:
+      score: 8
+      rationale: "实验数据全部标注出处 [Table 3],指标名使用正确 (MOS/comprehensibility/intelligibility),数字与原文 PDF 交叉验证一致。扣分: venue 标注为 Interspeech 2023 但原文未明确注明 venue(仅有 arXiv 标识)。"
+    可区分:
+      score: 9
+      rationale: "方法节中因果解释全部标注了 [论文原文] 或 [agent 解读],覆盖率接近 100%。关键发现的推断部分清晰标注为 [agent 解读],无事实与推断混淆。"
+    可定位:
+      score: 9
+      rationale: "KB 背景节谱系定位清晰,明确了与现代零样本 TTS (CosyVoice 3, X-Voice) 的代际差距,与 PhonemeRepresentation 页的 IPA 实践对比具体。创新判断有对比基准。"
+    不污染:
+      score: 9
+      rationale: "概念引用均为已有实体页,无新建请求。反向更新范围合理(仅追加 key_papers 到已有页面)。无 overclaim,定位明确为'pre-LLM 时代的低资源工作'。"
+
+  checklist:
+    可复述:
+      - check: "方法节含因果解释(WHY)"
+        result: pass
+        detail: "三个'为什么'设计选择均有 WHY 解释"
+      - check: "关键设计回答了'为什么选这个而不是那个'"
+        result: pass
+        detail: "IPA vs 直接映射, 哈萨克语 vs 其他源语言, 单说话人评估均有解释"
+      - check: "速查卡片'可借鉴'具体可迁移"
+        result: pass
+        detail: "'选择字母最多的语言最大化音素覆盖'是具体策略"
+
+    可信赖:
+      - check: "数字型 claim 有出处标注 (≥80%)"
+        result: pass
+        detail: "实验表所有数字标注 [Table 3],架构细节标注 [§4.2],覆盖率约 95%"
+      - check: "指标名正确"
+        result: pass
+        detail: "MOS, comprehensibility, intelligibility 使用准确"
+      - check: "速查卡片指标含数字+数据集+来源"
+        result: pass-with-note
+        detail: "含 MOS 3.25, 可理解度 92%, 可辨度 41%, 评估者 548 人, 但缺少明确数据集名 (KazakhTTS2 合成的评估数据)"
+      - check: "无方向性错误"
+        result: pass
+        detail: "无此类错误"
+
+    可区分:
+      - check: "因果解释标注 [论文原文] 或 [agent 解读]"
+        result: pass
+        detail: "全部标注,覆盖率 ~100%"
+      - check: "无断言缺限定词"
+        result: pass
+        detail: "未发现无来源的强断言"
+      - check: "'SOTA/唯一' 等强断言有支撑"
+        result: pass
+        detail: "KB 背景中的'首次'表述指向论文原文 §1 的 claim"
+
+    可定位:
+      - check: "KB 背景有具体谱系定位"
+        result: pass
+        detail: "与 CosyVoice 3, X-Voice, Seed-TTS 的对比定位清晰"
+      - check: "创新判断有对比基准"
+        result: pass
+        detail: "明确对比了现代 LLM-TTS 路线"
+      - check: "frontmatter 字段存在且非空"
+        result: pass-with-note
+        detail: "models 为空列表 -- 本文未提出独立模型,使用标准 Tacotron 2,合理;datasets 为空但可考虑加 KazakhTTS2"
+      - check: "frontmatter 语义正确"
+        result: pass
+        detail: "concepts 引用了 PhonemeRepresentation, Attention-basedTTS 等与论文直接相关的概念"
+      - check: "速查卡片 5 字段有实质内容"
+        result: pass
+        detail: "全部非空且有具体信息"
+
+    不污染:
+      - check: "新建概念页满足准入规则"
+        result: not-applicable
+        detail: "无新建请求"
+      - check: "去重检查"
+        result: not-applicable
+        detail: "无新建请求"
+      - check: "反向更新无 factual-error"
+        result: pass
+        detail: "待执行,计划内容合理"
+      - check: "反向更新分类正确"
+        result: pass
+        detail: "全部为追加操作"
+
+  issues:
+    - id: 1
+      type: template-compliance
+      severity: medium
+      location: "frontmatter datasets field"
+      detail: "datasets 为空,但论文使用了 KazakhTTS2 语料库,应记录"
+      suggestion: "添加 datasets: [\"KazakhTTS2\"] 或在笔记中说明 KazakhTTS2 未创建独立数据集页"
+
+    - id: 2
+      type: traceability-gap
+      severity: low
+      location: "frontmatter venue field"
+      detail: "venue 标注为 Interspeech 2023,但 PDF 仅显示 arXiv 预印本标识 (arXiv:2305.15749v1),未见明确的会议接收信息"
+      suggestion: "确认 venue,如无法确认改为 arXiv preprint"
+
+  conclusion: pass-with-fixes
+  summary: "笔记质量良好。方法节的 WHY 解释充分,来源标注覆盖率高,KB 定位准确。2 个 medium/low 问题(datasets 字段缺失、venue 不确定),不阻塞反向更新。"
+  high_count: 0
+  medium_count: 1
+  low_count: 1
+
+  learning_signals: []
