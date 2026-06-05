@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[SparseAutoencoderEmotion]] — 命中 6 页(取 Top 6): [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
+- [ingest/deep] [[SparseAutoencoderEmotion]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 正文段 + 演进线)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(>12),改追加到正文
+- [lint/local] SparseAutoencoderEmotion — 通过
+- [review/auto] [[SparseAutoencoderEmotion]] — pass-with-fixes, 0 high / 1 medium / 2 low
+- [alert/backlog] pending-review: 71, draft deep/repro: 329 — 建议抽空审核
 - [kb/search] [[DUET]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[DUET]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 正文段 + 演进线)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(>12),改追加到正文
