@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ContinualSpeakerUnlearning]] — 命中 5 页(取 Top 5): [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[SpeakerVerification]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review)
+- [ingest/deep] [[ContinualSpeakerUnlearning]] — 精读, kb_sources=5, 新建 0, 追加 1 (Anti-spoofingandDeepfakeDetection 安全意识设计节)
+- [review/auto] [[ContinualSpeakerUnlearning]] — pass, 0 issues
+- [lint/local] ContinualSpeakerUnlearning — 通过
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已超上限(83),本文非 CFM 贡献,跳过
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已超上限(65),本文仅使用 WavLM-TDCNN 评估,跳过
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已超上限(68),本文非 ZS-TTS 系统,跳过
+- [skip/update] [[SpeakerVerification]] — key_papers 已达上限(12),本文仅使用 SIM 评估,跳过
+- [skip/update] [[VoiceCloningTaxonomy]] — key_papers 已超上限(14),前作已收录,跳过
 - [kb/search] [[CosyEdit2]] — 命中 6 页(取 Top 6): [[CosyVoice2]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechLanguageModel]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review)
 - [ingest/deep] [[CosyEdit2]] — 精读, kb_sources=6, 新建 0, 追加 2 (CosyVoice2 baseline引用节, DiffRO 演进节)
 - [review/auto] [[CosyEdit2]] — pass, 0 high, 0 medium, 4 low
