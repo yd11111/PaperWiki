@@ -1,6 +1,7 @@
 # Log
 
 ## 2026-06-06
+- [update/deep] [[MambaVoiceCloning]] — camera-ready 元数据更新: arxiv_id 2604.00292, 作者去匿名化 (Patel/Kumar/Wang/Zhang), venue ICLR 2026 确认; Sources/MambaVoiceCloning.pdf 替换为 camera-ready 版
 - [kb/search] [[LongCat-AudioDiT]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓ | 参考(pending-review): [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[VariationalAutoencoderforTTS]], [[MelSpectrogram]], [[Non-autoregressiveTTS]]
 - [ingest/deep] [[LongCat-AudioDiT]] — 精读, kb_sources=6, 新建 0, 追加 6 (全部正文 append,key_papers 均已超限)
 - [skip/update] [[ConditionalFlowMatching]], [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[VariationalAutoencoderforTTS]], [[MelSpectrogram]], [[Non-autoregressiveTTS]] — key_papers 均已达上限,改追加到正文
