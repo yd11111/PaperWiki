@@ -5,9 +5,9 @@ aliases: [Encodec, Meta EnCodec]
 org: "Meta AI (FAIR)"
 year: 2022
 tags: [audio-codec, neural-compression, RVQ, speech-tokenizer]
-key_concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]"]
-tasks: ["[[Neural Audio Compression]]"]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech 3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/MAE Style-Rich TTS|MAE Style-Rich TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/FuseCodec|FuseCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
+key_concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]"]
+tasks: ["[[NeuralAudioCompression]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/MAEStyle-RichTTS|MAE Style-Rich TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/FuseCodec|FuseCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
 supersedes: ["[[模型库/SoundStream|SoundStream]]"]
 superseded_by: []
 status: confirmed

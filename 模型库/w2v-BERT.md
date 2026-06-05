@@ -5,10 +5,10 @@ aliases: [w2v-BERT XL, w2v-BERT XXL, w2v-BERT 2.0, W2V-BERT]
 org: "Google Brain / MIT"
 year: 2021
 tags: [self-supervised-learning, speech-representation, contrastive-learning, masked-prediction, conformer, ASR, voice-search]
-key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Codebook Collapse]]", "[[Self-Supervised Speech Representation]]"]
+key_concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[CodebookCollapse]]", "[[Self-SupervisedSpeechRepresentation]]"]
 tasks: []
 key_papers: ["[[论文笔记/w2v-BERT|w2v-BERT]]"]
-supersedes: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
+supersedes: ["[[模型库/wav2vec2.0|wav2vec 2.0]]"]
 superseded_by: []
 status: pending-review
 lifecycle: active
@@ -60,4 +60,4 @@ w2v-BERT 2.0 是 w2v-BERT 的大规模多语言扩展 (Barrault et al., 2023):
 - 权重公开但训练数据/代码闭源
 - 作为 SeamlessM4T v2 的核心语音编码器
 - XEUS (Chen et al., 2024) 在 ML-SUPERB 上以更少数据/参数超越 w2v-BERT 2.0 v2 (SUPERB_s 956 vs 826/916),说明预训练目标设计 (dereverberation) 可弥补数据量差距
-- 详见 [[论文笔记/w2v-BERT 2.0|w2v-BERT 2.0]]
+- 详见 [[论文笔记/w2v-BERT2.0|w2v-BERT 2.0]]

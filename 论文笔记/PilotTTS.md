@@ -8,9 +8,9 @@ authors: [Bowen Li, Shaotong Guo, Zhen Wang, Yang Xiang, Mingli Jin, Yihang Lin,
 year: 2026
 venue: "Amap Voice Technical Report"
 tags: [TTS, zero-shot, autoregressive, LLM-based, Q-Former, data-engineering, emotion, paralinguistic, dialect, coarse-to-fine]
-concepts: ["[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[LLM-based TTS]]", "[[Emotion Control in TTS]]", "[[Single-codebook vs Multi-codebook]]"]
-models: ["[[模型库/CosyVoice 3|CosyVoice 3]]", "[[模型库/w2v-BERT|w2v-BERT]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[LLM-basedTTS]]", "[[EmotionControlinTTS]]", "[[Single-codebookvsMulti-codebook]]"]
+models: ["[[模型库/CosyVoice3|CosyVoice 3]]", "[[模型库/w2v-BERT|w2v-BERT]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Conditional Flow Matching]], [[Speaker Embedding]], [[Speech Tokenizer]], [[LLM-based TTS]], [[Zero-shot Speech Synthesis]], [[SEED-TTS-Eval]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SpeechTokenizer]], [[LLM-basedTTS]], [[Zero-shotSpeechSynthesis]], [[SEED-TTS-Eval]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: PilotTTS 属于 LLM-based TTS 的 "Hybrid 架构" 路线 (LLM 生成 semantic tokens + CFM 合成语音),与 CosyVoice 系列、Seed-TTS 同属 coarse-to-fine 范式。具体而言,它直接复用 CosyVoice 3 的 FSQ 单码本 speech tokenizer 和 HiFi-GAN vocoder,使用 Qwen3-0.6B 作为 AR backbone,但在 speaker conditioning 上提出了独特的 Q-Former 双路径设计,这与 CosyVoice 系列的 prompt 续写方式和 Seed-TTS 的 self-distillation 解耦方式形成对比。
 >
 > **已有认知**: 
-> - [[Conditional Flow Matching]] 是 coarse-to-fine TTS 中 "fine stage" 的标配,CosyVoice 3 已将 CFM 扩至 300M DiT backbone;PilotTTS 沿用相同配置 [§3.4]
-> - [[Speaker Embedding]] 在零样本 TTS 中有两种范式:audio token continuation (高保真但长 prompt 成本高) vs speaker encoder (鲁棒但丢细节);PilotTTS 提出 Q-Former + CAMPPlus 双路径融合两者优点
-> - [[Speech Tokenizer]] 在 TTS 中的核心 trade-off 是语义编码 vs 声学保留;PilotTTS 复用 CosyVoice 3 的 FSQ 单码本 tokenizer (25 Hz, codebook 6561),免去了多码本建模的复杂性
+> - [[ConditionalFlowMatching]] 是 coarse-to-fine TTS 中 "fine stage" 的标配,CosyVoice 3 已将 CFM 扩至 300M DiT backbone;PilotTTS 沿用相同配置 [§3.4]
+> - [[SpeakerEmbedding]] 在零样本 TTS 中有两种范式:audio token continuation (高保真但长 prompt 成本高) vs speaker encoder (鲁棒但丢细节);PilotTTS 提出 Q-Former + CAMPPlus 双路径融合两者优点
+> - [[SpeechTokenizer]] 在 TTS 中的核心 trade-off 是语义编码 vs 声学保留;PilotTTS 复用 CosyVoice 3 的 FSQ 单码本 tokenizer (25 Hz, codebook 6561),免去了多码本建模的复杂性
 > - [[SEED-TTS-Eval]] 是当前零样本 TTS 的标准 benchmark;此前最高 SIM 为 Seed-TTS (test-zh 0.796, test-en 0.762),PilotTTS 刷新至 0.862/0.815
 >
 > **创新判断 (基于 KB)**: PilotTTS 的核心创新不在模型架构,而在 (1) Q-Former 双路径 conditioning 设计实现 speaker-style 解耦,(2) 200K 小时数据下通过可复现数据管线达到 SOTA 级性能,降低了零样本 TTS 的数据门槛。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Emotion Control in TTS]](pending-review), [[CosyVoice 3]](pending-review), [[w2v-BERT]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: Q-Former(无独立概念页)
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[EmotionControlinTTS]](pending-review), [[CosyVoice3]](pending-review), [[w2v-BERT]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: Q-Former(无独立概念页)
 
 ## 速查
 
@@ -193,7 +193,7 @@ PilotTTS 采用四阶段 coarse-to-fine 架构 [§3.1, Fig 3]:
 
 **不足**:
 - **对 CosyVoice 3 组件的依赖**: 直接复用 CosyVoice 3 的 tokenizer + HiFi-GAN,系统的技术独立性有限;如果 CosyVoice 3 tokenizer 有局限,PilotTTS 同样受限。
-- **SIM 评估方法未详细说明**: 使用哪个 speaker encoder 计算 cosine similarity?不同 encoder 的 SIM 结果可差 0.1-0.3 (参见 [[Speaker Embedding]] 关于 SECS 的讨论),需注意跨论文可比性。
+- **SIM 评估方法未详细说明**: 使用哪个 speaker encoder 计算 cosine similarity?不同 encoder 的 SIM 结果可差 0.1-0.3 (参见 [[SpeakerEmbedding]] 关于 SECS 的讨论),需注意跨论文可比性。
 - **200K h 数据的来源模糊**: "collected from publicly available sources" 未具体列出数据集名称,实际复现仍有一定障碍。
 
 ## 可复用的 idea

@@ -8,7 +8,7 @@ authors: [Qing Yang, Zhenghao Liu, Yangfan Du, Pengcheng Huang, Tong Xiao]
 year: 2025
 venue: "arXiv"
 tags: [TTS, emotion, reinforcement-learning, post-training, GRPO, expressiveness, prosody, RLAIF]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[DifferentiableRewardOptimization]]", "[[TTSEvaluation]]"]
 models: ["[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]  # Whisper/WavLM 为评估工具; base model 为 MiniCPM-O 2.6 + Chat-TTS (无模型页)
 tasks: []
 datasets: []
@@ -20,15 +20,15 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Prosody Modeling]], [[LLM-based TTS]], [[Speech Language Model]]; 3 个待确认实体页: [[Emotion Control in TTS]], [[Differentiable Reward Optimization]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ProsodyModeling]], [[LLM-basedTTS]], [[SpeechLanguageModel]]; 3 个待确认实体页: [[EmotionControlinTTS]], [[DifferentiableRewardOptimization]], [[TTSEvaluation]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: RLAIF-SPA 位于 Emotion Control in TTS 演进线的 "DPO/RLHF 对齐" 分支,是 Emo-DPO (Gao et al., 2024) 之后的下一步演进。与 Emo-DPO 使用整体偏好信号不同,RLAIF-SPA 将反馈分解为结构化的属性级维度 (Structure/Emotion/Speed/Tone),属于 structured reward 路线。
 
 **与已有方法的关系**:
 - **vs DiffRO** [待确认]: DiffRO 在 token 空间通过 Gumbel-Softmax 做可微优化; RLAIF-SPA 在 audio 空间通过 GRPO 做 group-relative 优化。DiffRO 侧重内容准确性,RLAIF-SPA 侧重情感表达力。
-- **vs Multi-Reward GRPO** ([[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]): 两者都用 GRPO + 多维 reward,但 Multi-Reward GRPO 用 5 维 reward (WER+SIM+length+entropy+prosody) 且基于 LLaSA 单码本模型; RLAIF-SPA 用 2 维 reward (WER+label alignment) 且基于 MiniCPM-O 多模态模型,情感维度更细粒度 (4 子维度)。
+- **vs Multi-Reward GRPO** ([[论文笔记/Multi-RewardGRPO|Multi-Reward GRPO]]): 两者都用 GRPO + 多维 reward,但 Multi-Reward GRPO 用 5 维 reward (WER+SIM+length+entropy+prosody) 且基于 LLaSA 单码本模型; RLAIF-SPA 用 2 维 reward (WER+label alignment) 且基于 MiniCPM-O 多模态模型,情感维度更细粒度 (4 子维度)。
 - **vs EmoSteer-TTS**: EmoSteer-TTS 是 training-free 的激活 steering 方法; RLAIF-SPA 需要 GRPO 训练但提供更精确的属性级控制。
 - **vs TTS-CtrlNet**: TTS-CtrlNet 用 ControlNet 旁挂实现帧级情感控制; RLAIF-SPA 通过 RL post-training 全局优化情感一致性。
 
@@ -166,4 +166,4 @@ RLAIF-SPA 是一个两步框架 [Fig 1]:
 > - [low] 可复用 idea 第3条偏抽象 — 可后续补充具体场景
 > 详见 `_review/RLAIF-SPA-review.yml`
 
-检索命中: [[Prosody Modeling]], [[LLM-based TTS]], [[Speech Language Model]] | 过滤: [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]], [[LLM-basedTTS]], [[SpeechLanguageModel]] | 过滤: [[EmotionControlinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: 无

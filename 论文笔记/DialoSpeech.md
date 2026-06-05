@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "DialoSpeech: Dual-Speaker Dialogue Generation with LLM and Flow Matching"
 arxiv_id: "2510.08373"
-source: "https://arxiv.org/abs/2510.08373"
+source: "Sources/DialoSpeech.pdf"
 authors: [Hanke Xie, Dake Guo, Chengyou Wang, Yue Li, Wenjie Tian, Xinfa Zhu, Xinsheng Wang, Xiulin Li, Guanqiong Miao, Bo Liu, Lei Xie]
 year: 2025
 venue: "APSIPA ASC 2025"
 tags: [dialogue-TTS, dual-track, flow-matching, LLM-TTS, multi-speaker, zero-shot, cross-lingual]
-concepts: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[Turn-taking in Spoken Dialogue]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]", "CoVoMix", "MoonCast"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]", "[[任务库/Cross-lingual Voice Cloning|Cross-lingual Voice Cloning]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeechLanguageModel]]", "[[SemanticvsAcousticTokens]]", "[[SpeakerEmbedding]]", "[[Turn-takinginSpokenDialogue]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]", "CoVoMix", "MoonCast"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]", "[[任务库/Cross-lingualVoiceCloning|Cross-lingual Voice Cloning]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Language Model]], [[Semantic vs Acoustic Tokens]], [[Speaker Embedding]], [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechLanguageModel]], [[SemanticvsAcousticTokens]], [[SpeakerEmbedding]], [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: DialoSpeech 位于 LLM-based TTS 从单说话人向多说话人对话扩展的分支。在 KB 中,这条路线的先驱包括 dGSLM (dual-tower DLM, 隐式 turn-taking)、CoVoMix (dual-channel zero-shot 混合语音生成)、MoonCast (长对话 podcast)、FireRedTTS 2 (text-speech interleaved dual-transformer)、VibeVoice (next-token diffusion, 4 说话人 90 分钟)。DialoSpeech 延续 dGSLM/CoVoMix 的 dual-track 路线,但引入 LLM backbone + chunked flow matching,试图在更小数据/模型规模下实现可比质量。
@@ -29,7 +29,7 @@ updated: 2026-06-04
 >
 > **创新判断**: 对比 KB 已有系统,DialoSpeech 的关键差异在于: (a) 将 LLM (LLaMA) 与显式 dual-track token 预测结合,而非 dGSLM 的冷启动小 transformer 或 Moshi 的 multi-stream RQ-Transformer; (b) 引入 block-wise guided attention 实现 chunked CFM 解码,解决长对话的内存/延迟问题; (c) 提出完整的 dual-track 数据处理 pipeline (VAD+ASR+diarization+OSD+separation),解决对话数据稀缺问题。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Turn-taking in Spoken Dialogue]](pending-review), [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Turn-takinginSpokenDialogue]](pending-review), [[Full-duplexSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 双轨架构 (LLM 生成 dual-track semantic tokens + chunked flow matching 合成波形),实现零样本双说话人对话语音合成,仅 10K 小时数据 + 0.5B 模型即达到与百万小时级系统可比的对话自然度

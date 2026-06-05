@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Measuring Prosody Diversity in Zero-Shot TTS: A New Metric, Benchmark, and Exploration"
 arxiv_id: "2509.19928"
-source: "Sources/2509.19928.pdf"
+source: "Sources/ProsodyEval.pdf"
 authors: [Yifan Yang, Bing Han, Hui Wang, Long Zhou, Wei Wang, Mingyu Cui, Xu Tan, Xie Chen]
 year: 2025
 venue: "ICASSP 2026"
 tags: [TTS, evaluation, prosody, prosody-diversity, semantic-tokens, zero-shot, benchmark, metrics]
-concepts: ["[[Prosody Modeling]]", "[[Self-Supervised Speech Representation]]", "[[Semantic vs Acoustic Tokens]]", "[[TTS Evaluation]]", "[[Conditional Flow Matching]]", "[[Masked Generative Modeling]]", "[[Non-autoregressive TTS]]"]
-models: ["[[HuBERT]]", "[[WavLM]]", "[[CosyVoice]]", "[[CosyVoice 2]]", "[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ProsodyModeling]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SemanticvsAcousticTokens]]", "[[TTSEvaluation]]", "[[ConditionalFlowMatching]]", "[[MaskedGenerativeModeling]]", "[[Non-autoregressiveTTS]]"]
+models: ["[[HuBERT]]", "[[WavLM]]", "[[CosyVoice]]", "[[CosyVoice2]]", "[[EnCodec]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文属于 TTS 评估方法论领域,填补了韵律多样性定量评估的空白。在已有 KB 中,[[TTS Evaluation]] [待确认] 记录了评估体系从 MOS/WER/SIM 到分布级评估 (TTSDS/TTSDS2) 再到 LLM-as-Judge (GSRM, SpeechJudge, TTS-PRISM) 的演进,但对**韵律多样性**这一维度几乎没有专门的评估方法。[[Prosody Modeling]] 已详细记录了韵律建模从 GST 到 LLM-based in-context learning 的演进,以及 SSL 中间层对超音段韵律的编码能力 (de la Fuente & Jurafsky, 2024: 中间层 8-9 韵律表征最强),但缺少对 TTS 系统韵律输出**多样性**的量化手段。本文恰好连接了 [[Self-Supervised Speech Representation]] [待确认] 中 HuBERT/WavLM 的 semantic token 表征与 [[Semantic vs Acoustic Tokens]] 中 "semantic tokens 编码语义但丢失声学细节" 的知识,将 semantic tokens 重新定位为韵律多样性度量的载体。
+> **谱系定位**: 本文属于 TTS 评估方法论领域,填补了韵律多样性定量评估的空白。在已有 KB 中,[[TTSEvaluation]] [待确认] 记录了评估体系从 MOS/WER/SIM 到分布级评估 (TTSDS/TTSDS2) 再到 LLM-as-Judge (GSRM, SpeechJudge, TTS-PRISM) 的演进,但对**韵律多样性**这一维度几乎没有专门的评估方法。[[ProsodyModeling]] 已详细记录了韵律建模从 GST 到 LLM-based in-context learning 的演进,以及 SSL 中间层对超音段韵律的编码能力 (de la Fuente & Jurafsky, 2024: 中间层 8-9 韵律表征最强),但缺少对 TTS 系统韵律输出**多样性**的量化手段。本文恰好连接了 [[Self-SupervisedSpeechRepresentation]] [待确认] 中 HuBERT/WavLM 的 semantic token 表征与 [[SemanticvsAcousticTokens]] 中 "semantic tokens 编码语义但丢失声学细节" 的知识,将 semantic tokens 重新定位为韵律多样性度量的载体。
 >
-> **已有认知**: [[Conditional Flow Matching]] 记录了 flow matching 在 TTS 中作为 fine-stage renderer 的应用; [[Masked Generative Modeling]] [待确认] 记录了 MaskGCT 的迭代 mask-and-prediction 范式。这些与本文对 AR/NAR/MGM 三种范式的韵律多样性对比直接相关。
+> **已有认知**: [[ConditionalFlowMatching]] 记录了 flow matching 在 TTS 中作为 fine-stage renderer 的应用; [[MaskedGenerativeModeling]] [待确认] 记录了 MaskGCT 的迭代 mask-and-prediction 范式。这些与本文对 AR/NAR/MGM 三种范式的韵律多样性对比直接相关。
 >
 > **创新判断**: 已有 KB 中 TTS 评估体系聚焦于 naturalness (MOS), intelligibility (WER), speaker similarity (SIM), 以及最近的分布级整体质量 (TTSDS2) 和多维诊断 (TTS-PRISM),但缺少 prosody diversity 这一独立评估维度。本文首次提供了 human-annotated prosody diversity benchmark + 客观指标 (DS-WED),是 TTS 评估体系的重要补充。
 >
-> 检索命中: [[Prosody Modeling]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

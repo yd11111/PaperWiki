@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Next Tokens Denoising for Speech Synthesis"
 arxiv_id: "2507.22746"
-source: "Sources/2507.22746.pdf"
+source: "Sources/Dragon-FM.pdf"
 authors: [Yanqing Liu, Ruiqing Xue, Chong Zhang, Yufei Liu, Gang Wang, Bohan Li, Yao Qian, Lei He, Shujie Liu, Sheng Zhao]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, flow-matching, autoregressive, chunk-AR, codec, FSQ, podcast, hybrid-AR-diffusion, low-frame-rate]
-concepts: ["[[Conditional Flow Matching]]", "[[Finite Scalar Quantization]]", "[[Next-Token Diffusion]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Language Model]]", "[[Mel Spectrogram]]", "[[Multi-scale STFT Discriminator]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[FiniteScalarQuantization]]", "[[Next-TokenDiffusion]]", "[[TokenRateandBitrateTrade-offs]]", "[[Single-codebookvsMulti-codebook]]", "[[CodecLanguageModel]]", "[[MelSpectrogram]]", "[[Multi-scaleSTFTDiscriminator]]"]
 models: []
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: Dragon-FM 处于 AR-diffusion 混合路线上,与 KB 中 [[Next-Token Diffusion]] 页记录的 LatentLM/CLEAR 系列密切相关,但采用了不同的粒度选择:LatentLM/CLEAR 是 per-token diffusion head(每个 token 位置独立去噪),Dragon-FM 是 per-chunk flow matching(25 个 token 组成一个 chunk 同时去噪)。这一 chunk 粒度设计介于传统逐 token AR(如 VALL-E)与全序列 NAR(如 E2 TTS)之间,是"AR 步长"这一设计轴上的新探索点。
+**谱系定位**: Dragon-FM 处于 AR-diffusion 混合路线上,与 KB 中 [[Next-TokenDiffusion]] 页记录的 LatentLM/CLEAR 系列密切相关,但采用了不同的粒度选择:LatentLM/CLEAR 是 per-token diffusion head(每个 token 位置独立去噪),Dragon-FM 是 per-chunk flow matching(25 个 token 组成一个 chunk 同时去噪)。这一 chunk 粒度设计介于传统逐 token AR(如 VALL-E)与全序列 NAR(如 E2 TTS)之间,是"AR 步长"这一设计轴上的新探索点。
 
-**已有认知**: [[Conditional Flow Matching]] 页(confirmed)记录了 CFM 在 TTS 中作为 fine-stage renderer 的标准用法(CosyVoice 系列),Dragon-FM 将 CFM 从 sequence-level 改为 chunk-level,与 CosyVoice 2 的 chunk-aware causal flow matching 有共鸣但实现不同——CosyVoice 2 用 attention mask 实现 chunk-aware,Dragon-FM 用 chunk-AR + chunk-内并行去噪。[[Finite Scalar Quantization]] 页 [待确认] 记录了 FSQ 的工作机制和 CosyVoice 系列的应用,Dragon-FM 的 codec 也采用 FSQ,但在 48kHz/12.5Hz 的极低帧率下,验证了 FSQ 在比 CosyVoice (25Hz) 更低帧率下的可行性。[[Token Rate and Bitrate Trade-offs]] 页 [待确认] 记录了帧率-质量的权衡和 Survey 发现(FSQ 在高采样率下可能退化),Dragon-FM 在 48kHz 高采样率 + 12.5Hz 极低帧率的组合下仍保持 SIM 0.916、WER 2.74,是对这一 trade-off 的新数据点。
+**已有认知**: [[ConditionalFlowMatching]] 页(confirmed)记录了 CFM 在 TTS 中作为 fine-stage renderer 的标准用法(CosyVoice 系列),Dragon-FM 将 CFM 从 sequence-level 改为 chunk-level,与 CosyVoice 2 的 chunk-aware causal flow matching 有共鸣但实现不同——CosyVoice 2 用 attention mask 实现 chunk-aware,Dragon-FM 用 chunk-AR + chunk-内并行去噪。[[FiniteScalarQuantization]] 页 [待确认] 记录了 FSQ 的工作机制和 CosyVoice 系列的应用,Dragon-FM 的 codec 也采用 FSQ,但在 48kHz/12.5Hz 的极低帧率下,验证了 FSQ 在比 CosyVoice (25Hz) 更低帧率下的可行性。[[TokenRateandBitrateTrade-offs]] 页 [待确认] 记录了帧率-质量的权衡和 Survey 发现(FSQ 在高采样率下可能退化),Dragon-FM 在 48kHz 高采样率 + 12.5Hz 极低帧率的组合下仍保持 SIM 0.916、WER 2.74,是对这一 trade-off 的新数据点。
 
 **创新判断**: 对比 KB 中已有方法,Dragon-FM 的独特贡献在于:(1) 在"AR 步长"轴上提出了 chunk-level 这个中间方案,不同于 per-token(VALL-E/LatentLM)和 full-sequence(E2 TTS);(2) 提出 FSQ token embedding 作为连续向量直接被 flow matching 模型去噪预测,bridging discrete/continuous 的方式不同于 LatentLM 的 VAE latent;(3) 12.5Hz + 48kHz 的 codec 设计将帧率压缩到极限。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[Finite Scalar Quantization]][待确认], [[Next-Token Diffusion]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认], [[Single-codebook vs Multi-codebook]][待确认], [[Codec Language Model]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[FiniteScalarQuantization]][待确认], [[Next-TokenDiffusion]][待确认], [[TokenRateandBitrateTrade-offs]][待确认], [[Single-codebookvsMulti-codebook]][待确认], [[CodecLanguageModel]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 
@@ -151,4 +151,4 @@ Dragon-FM 提出了一个在概念上优雅的 AR-FM 统一框架,"next-token de
 
 ---
 
-检索命中: [[Conditional Flow Matching]]✓, [[Finite Scalar Quantization]][待确认], [[Next-Token Diffusion]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认], [[Single-codebook vs Multi-codebook]][待确认], [[Codec Language Model]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]]✓, [[FiniteScalarQuantization]][待确认], [[Next-TokenDiffusion]][待确认], [[TokenRateandBitrateTrade-offs]][待确认], [[Single-codebookvsMulti-codebook]][待确认], [[CodecLanguageModel]][待确认] | 过滤: 无 | 未命中但可能相关: 无

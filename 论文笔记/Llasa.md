@@ -8,9 +8,9 @@ authors: [Zhen Ye, Xinfa Zhu, Chi-Min Chan, Xinsheng Wang, Xu Tan, Jiahe Lei, Yi
 year: 2025
 venue: "ICML 2025"
 tags: [TTS, LLM-based-TTS, scaling-law, inference-time-compute, speech-codec, single-codebook, autoregressive, zero-shot, FSQ, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Single-codebookvsMulti-codebook]]", "[[TokenRateandBitrateTrade-offs]]"]
 models: ["[[CosyVoice]]", "[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[CosyVoice]]✓, [[Zero-shot Speech Synthesis]]✓)
+> [!info] KB 背景 (基于 6 个实体页: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[CosyVoice]]✓, [[Zero-shotSpeechSynthesis]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: LLM-based TTS 领域已形成两条主流路线: (1) AR+NAR 多阶段 (VALL-E 系列) 或 AR+Diffusion 混合 (CosyVoice, Seed-TTS, FireRedTTS),使用 RVQ 多层 codec 或 semantic+acoustic 两阶段 token; (2) 连续值 AR (LatentLM, CLEAR),绕过离散量化。Llasa 提出第三条路线: **单层 VQ codec + 单 Transformer**,完全对齐文本 LLM 范式,是目前该方向最系统的尝试。
@@ -29,7 +29,7 @@ updated: 2026-06-03
 >
 > **创新判断**: Llasa 的核心创新不在架构本身 (单 Transformer + codec LM 并不新),而在两个实验性贡献: (a) 系统验证了 TTS 领域的 train-time scaling law (1B→3B→8B, 80k→160k→250k hours); (b) 首次将 inference-time compute scaling (best-of-N, beam search with verifiers) 引入 TTS,提出 partial PRM 策略平衡 speaker similarity 和内容准确性。
 >
-> 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[CosyVoice]], [[Zero-shot Speech Synthesis]] | 过滤: [[Finite Scalar Quantization]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[MELLE]](pending-review), [[Emilia]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[CosyVoice]], [[Zero-shotSpeechSynthesis]] | 过滤: [[FiniteScalarQuantization]](pending-review), [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[MELLE]](pending-review), [[Emilia]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 将 TTS 完全对齐标准 LLM 范式 (单层 VQ codec X-codec2 + LLaMA 初始化的单 Transformer),系统验证 train-time 和 inference-time scaling 效果

@@ -8,8 +8,8 @@ authors: [Zhisheng Zhang, Derui Wang, Yifan Mi, Zhiyong Wu, Jie Gao, Yuxin Cao, 
 year: 2025
 venue: "NeurIPS 2025"
 tags: [voice-protection, adversarial-perturbation, voice-cloning, anti-spoofing, deepfake-defense, speaker-verification, LLM-TTS, end-to-end, psychoacoustic-model, ASR-attack]
-concepts: ["[[Anti-spoofing and Deepfake Detection]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]"]
-models: ["[[VITS]]", "[[CosyVoice]]", "[[WavLM]]", "[[Whisper]]", "[[wav2vec 2.0]]"]
+concepts: ["[[Anti-spoofingandDeepfakeDetection]]", "[[SpeakerVerification]]", "[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]"]
+models: ["[[VITS]]", "[[CosyVoice]]", "[[WavLM]]", "[[Whisper]]", "[[wav2vec2.0]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[Speaker Embedding]], [[LLM-based TTS]], [[Speech Tokenizer]], [[Anti-spoofing and Deepfake Detection]], [[Speaker Verification]], [[Voice Cloning Taxonomy]])
+> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[SpeakerEmbedding]], [[LLM-basedTTS]], [[SpeechTokenizer]], [[Anti-spoofingandDeepfakeDetection]], [[SpeakerVerification]], [[VoiceCloningTaxonomy]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文是 [[Anti-spoofing and Deepfake Detection]] 中"主动防御"分支的最新进展,由 [[论文笔记/SafeSpeech|SafeSpeech]] 同一一作(Zhisheng Zhang)推进。SafeSpeech (USENIX Security 2025) 通过 unlearnable examples + pivotal objective (mel L1) + SPEC (KL 散度引导输出趋近噪声) 实现 fine-tuning 阶段的语音保护,但其防护范围限于 DNN-based TTS(VITS/StyleTTS2 等连续 embedding 模型)。E2E-VGuard 将防护扩展到两个 SafeSpeech 未覆盖的关键场景: (1) LLM-based TTS(离散 speech token 架构)和 (2) ASR-driven 端到端攻击场景。
+> **谱系定位**: 本文是 [[Anti-spoofingandDeepfakeDetection]] 中"主动防御"分支的最新进展,由 [[论文笔记/SafeSpeech|SafeSpeech]] 同一一作(Zhisheng Zhang)推进。SafeSpeech (USENIX Security 2025) 通过 unlearnable examples + pivotal objective (mel L1) + SPEC (KL 散度引导输出趋近噪声) 实现 fine-tuning 阶段的语音保护,但其防护范围限于 DNN-based TTS(VITS/StyleTTS2 等连续 embedding 模型)。E2E-VGuard 将防护扩展到两个 SafeSpeech 未覆盖的关键场景: (1) LLM-based TTS(离散 speech token 架构)和 (2) ASR-driven 端到端攻击场景。
 >
-> **已有认知**: [[Speaker Embedding]] 页(confirmed)记录了 speaker encoder 在 TTS 中的注入方式和架构演进(d-vector → ECAPA-TDNN → CAM++),E2E-VGuard 正是利用这些 encoder 的 ensemble 来最大化 timbre 扰动。[[LLM-based TTS]] 页(confirmed)记录了 LLM-TTS 通过 speech tokenizer 将音频编码为离散 token 供 LM 建模的核心架构,这正是 E2E-VGuard 需要新防护机制的原因 -- SafeSpeech 的 mel L1 扰动无法有效作用于离散量化后的 token。[[Speech Tokenizer]] 页(confirmed)记录了语音离散化的三类方案(自监督/监督 semantic/声学),理解这些有助于理解 E2E-VGuard 为何引入 MFCC extractor 来补充对 LLM 组件的防护。
+> **已有认知**: [[SpeakerEmbedding]] 页(confirmed)记录了 speaker encoder 在 TTS 中的注入方式和架构演进(d-vector → ECAPA-TDNN → CAM++),E2E-VGuard 正是利用这些 encoder 的 ensemble 来最大化 timbre 扰动。[[LLM-basedTTS]] 页(confirmed)记录了 LLM-TTS 通过 speech tokenizer 将音频编码为离散 token 供 LM 建模的核心架构,这正是 E2E-VGuard 需要新防护机制的原因 -- SafeSpeech 的 mel L1 扰动无法有效作用于离散量化后的 token。[[SpeechTokenizer]] 页(confirmed)记录了语音离散化的三类方案(自监督/监督 semantic/声学),理解这些有助于理解 E2E-VGuard 为何引入 MFCC extractor 来补充对 LLM 组件的防护。
 >
-> **创新判断**: 相较 KB 中已有的 SafeSpeech 记录,E2E-VGuard 的核心新贡献在于: (a) 用 encoder ensemble + MFCC extractor 替代 SafeSpeech 的单代理模型 pivotal objective,实现对 LLM-based TTS(离散 token)的 timbre 防护; (b) 新增 ASR 对抗攻击维度,破坏 E2E 场景下的文本-发音对齐; (c) 用心理声学模型替代 SafeSpeech 的 STOI+STFT 感知优化。KB 中 [[Voice Cloning Taxonomy]] 的四分类(SA/FS/ZS/ML)下,E2E-VGuard 覆盖 fine-tuning + zero-shot 两种场景,且首次在 3 个商业 API 上验证有效性。
+> **创新判断**: 相较 KB 中已有的 SafeSpeech 记录,E2E-VGuard 的核心新贡献在于: (a) 用 encoder ensemble + MFCC extractor 替代 SafeSpeech 的单代理模型 pivotal objective,实现对 LLM-based TTS(离散 token)的 timbre 防护; (b) 新增 ASR 对抗攻击维度,破坏 E2E 场景下的文本-发音对齐; (c) 用心理声学模型替代 SafeSpeech 的 STOI+STFT 感知优化。KB 中 [[VoiceCloningTaxonomy]] 的四分类(SA/FS/ZS/ML)下,E2E-VGuard 覆盖 fine-tuning + zero-shot 两种场景,且首次在 3 个商业 API 上验证有效性。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[Anti-spoofingandDeepfakeDetection]][待确认], [[SpeakerVerification]][待确认], [[VoiceCloningTaxonomy]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 
@@ -167,9 +167,9 @@ s.t. ||x' - x||_p <= epsilon,  x' in [-1, 1]^T
 - 发音保护的 targeted ASR 依赖是设计性妥协,但在产品化场景中(不知道对方用什么 ASR)可能成为瓶颈
 
 **在 KB 语境下的定位**:
-从 [[Anti-spoofing and Deepfake Detection]] 的三层防线视角(unlearning + perturbation + watermark)看,E2E-VGuard 属于 perturbation 层的最新进展,将防护从 DNN-TTS 扩展到 LLM-TTS。与 SafeSpeech(数据端,mel-level 扰动)互补,E2E-VGuard(特征端,encoder-level 扰动)更适合对抗新一代 codec LM 架构。两者共同构成了语音主动防护领域最完整的方案组合。
+从 [[Anti-spoofingandDeepfakeDetection]] 的三层防线视角(unlearning + perturbation + watermark)看,E2E-VGuard 属于 perturbation 层的最新进展,将防护从 DNN-TTS 扩展到 LLM-TTS。与 SafeSpeech(数据端,mel-level 扰动)互补,E2E-VGuard(特征端,encoder-level 扰动)更适合对抗新一代 codec LM 架构。两者共同构成了语音主动防护领域最完整的方案组合。
 
-从 [[Voice Cloning Taxonomy]] 的角度看,E2E-VGuard 首次在 19 个 TTS 模型(覆盖 SA/ZS 两大类 + ICL-based 子类)和 3 个商业 API 上验证了防护有效性,是目前覆盖面最广的 voice protection 工作。
+从 [[VoiceCloningTaxonomy]] 的角度看,E2E-VGuard 首次在 19 个 TTS 模型(覆盖 SA/ZS 两大类 + ICL-based 子类)和 3 个商业 API 上验证了防护有效性,是目前覆盖面最广的 voice protection 工作。
 
 ## 可复用的 idea
 

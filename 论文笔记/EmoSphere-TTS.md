@@ -8,7 +8,7 @@ authors: [Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim, Sang-Hoon Lee, Seong-Wha
 year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, emotion, controllable, adversarial-training, expressiveness, prosody, spherical-coordinates]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[F0 Modeling]]", "[[Global Style Tokens]]", "[[Non-autoregressive TTS]]", "[[Mel Spectrogram]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[F0Modeling]]", "[[GlobalStyleTokens]]", "[[Non-autoregressiveTTS]]", "[[MelSpectrogram]]"]
 models: ["[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]"]
 tasks: []
 datasets: ["ESD"]
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Prosody Modeling]]✓, [[Emotion Control in TTS]][待确认], [[F0 Modeling]][待确认], [[Global Style Tokens]][待确认], [[Non-autoregressive TTS]][待确认], [[Mel Spectrogram]][待确认])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ProsodyModeling]]✓, [[EmotionControlinTTS]][待确认], [[F0Modeling]][待确认], [[GlobalStyleTokens]][待确认], [[Non-autoregressiveTTS]][待确认], [[MelSpectrogram]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Prosody Modeling]], [[Emotion Control in TTS]], [[F0 Modeling]], [[Global Style Tokens]], [[Non-autoregressive TTS]], [[Mel Spectrogram]] | 过滤: 5 页 pending-review | 未命中但可能相关: [[Style Transfer in TTS]], [[Speech Factorization]]
+> 检索命中: [[ProsodyModeling]], [[EmotionControlinTTS]], [[F0Modeling]], [[GlobalStyleTokens]], [[Non-autoregressiveTTS]], [[MelSpectrogram]] | 过滤: 5 页 pending-review | 未命中但可能相关: [[StyleTransferinTTS]], [[SpeechFactorization]]
 
-**谱系定位**: EmoSphere-TTS 处于情感可控 TTS 演进线的中段 — 在 Emotion Embedding (2021) 和多尺度层级建模 (MsEmoTTS, 2022) 之后,在零样本情感控制 (EmoSphere++, 2024) 和 LLM 自由文本情感 (EmoVoice, 2025) 之前。概念页 [[Emotion Control in TTS]][待确认] 已记录其扩展版 EmoSphere++ 作为"球面空间建模情感分布"的代表。本文是 EmoSphere++ 的前身/会议版本。
+**谱系定位**: EmoSphere-TTS 处于情感可控 TTS 演进线的中段 — 在 Emotion Embedding (2021) 和多尺度层级建模 (MsEmoTTS, 2022) 之后,在零样本情感控制 (EmoSphere++, 2024) 和 LLM 自由文本情感 (EmoVoice, 2025) 之前。概念页 [[EmotionControlinTTS]][待确认] 已记录其扩展版 EmoSphere++ 作为"球面空间建模情感分布"的代表。本文是 EmoSphere++ 的前身/会议版本。
 
-**已有认知**: 情感控制的核心挑战在于情感与 timbre/prosody 的深度纠缠 ([[Prosody Modeling]]✓)。现有方法要么用离散 emotion label (如 FastSpeech 2 w/ emotion ID),要么用 reference encoder (如 [[Global Style Tokens]][待确认]),但前者丢失细粒度,后者受 reference mismatch 限制。AVD (arousal, valence, dominance) 维度提供连续描述,但此前缺乏直觉可控的参数化方案。
+**已有认知**: 情感控制的核心挑战在于情感与 timbre/prosody 的深度纠缠 ([[ProsodyModeling]]✓)。现有方法要么用离散 emotion label (如 FastSpeech 2 w/ emotion ID),要么用 reference encoder (如 [[GlobalStyleTokens]][待确认]),但前者丢失细粒度,后者受 reference mismatch 限制。AVD (arousal, valence, dominance) 维度提供连续描述,但此前缺乏直觉可控的参数化方案。
 
 **创新判断**: 本文的核心创新是将 AVD 从笛卡尔坐标变换到球面坐标,使"情感强度"(径向距离 r)和"情感风格"(角度 θ, φ)自然解耦。这一几何变换赋予了物理可解释的控制维度,区别于 relative attribute (学习排序函数) 和 scaling factor (直接缩放 embedding) 等参数化方式。
 
@@ -176,4 +176,4 @@ h_emo = LN(softplus(concat(h_sty, h_cls))) + h_int
 
 ---
 
-检索命中: [[Prosody Modeling]]✓, [[Emotion Control in TTS]](pending-review), [[F0 Modeling]](pending-review), [[Global Style Tokens]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Mel Spectrogram]](pending-review) | 过滤: 无 | 未命中但可能相关: [[Style Transfer in TTS]], [[Speech Factorization]]
+检索命中: [[ProsodyModeling]]✓, [[EmotionControlinTTS]](pending-review), [[F0Modeling]](pending-review), [[GlobalStyleTokens]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[MelSpectrogram]](pending-review) | 过滤: 无 | 未命中但可能相关: [[StyleTransferinTTS]], [[SpeechFactorization]]

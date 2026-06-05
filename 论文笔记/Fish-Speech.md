@@ -8,7 +8,7 @@ authors: [Shijia Liao, Yuxuan Wang, Tianyu Li, Yifan Cheng, Ruoyi Zhang, Rongzhi
 year: 2024
 venue: "Technical Report"
 tags: [TTS, LLM, dual-AR, GFSQ, vocoder, multilingual, zero-shot, voice-cloning, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]", "[[Semantic vs Acoustic Tokens]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ResidualVectorQuantization]]", "[[NeuralVocoder]]", "[[SemanticvsAcousticTokens]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,19 +20,19 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Neural Vocoder]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[NeuralVocoder]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Neural Vocoder]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review) | 未命中但可能相关: 无
 
-**[[LLM-based TTS]]**: Fish-Speech 属于 LLM-based TTS 范式。与 VALL-E 等使用 codec tokens 不同, Fish-Speech 使用 LLM 直接处理文本输入 (无需 G2P),并引入 Dual-AR 架构处理 GFSQ codebook tokens。这在 LLM-based TTS 的演进中代表了"用 LLM 替代传统文本前端"的路线。
+**[[LLM-basedTTS]]**: Fish-Speech 属于 LLM-based TTS 范式。与 VALL-E 等使用 codec tokens 不同, Fish-Speech 使用 LLM 直接处理文本输入 (无需 G2P),并引入 Dual-AR 架构处理 GFSQ codebook tokens。这在 LLM-based TTS 的演进中代表了"用 LLM 替代传统文本前端"的路线。
 
-**[[Speech Tokenizer]]**: Fish-Speech 使用 Grouped Finite Scalar Vector Quantization (GFSQ) 作为 speech tokenizer 的量化层,与 CosyVoice 系列的 FSQ 路线类似,但采用分组策略。GFSQ 声称实现 100% codebook 利用率,解决了 RVQ 的 codebook collapse 问题。
+**[[SpeechTokenizer]]**: Fish-Speech 使用 Grouped Finite Scalar Vector Quantization (GFSQ) 作为 speech tokenizer 的量化层,与 CosyVoice 系列的 FSQ 路线类似,但采用分组策略。GFSQ 声称实现 100% codebook 利用率,解决了 RVQ 的 codebook collapse 问题。
 
-**[[Neural Vocoder]]**: Fish-Speech 提出了 Firefly-GAN (FF-GAN) 作为 vocoder,基于 EVA-GAN 改进,用 ParallelBlock 替代 HiFi-GAN 的 MRF 模块,并集成 GFSQ 量化层。
+**[[NeuralVocoder]]**: Fish-Speech 提出了 Firefly-GAN (FF-GAN) 作为 vocoder,基于 EVA-GAN 改进,用 ParallelBlock 替代 HiFi-GAN 的 MRF 模块,并集成 GFSQ 量化层。
 
-**[[Residual Vector Quantization]]**: GFSQ 是 RVQ 的替代方案。Fish-Speech 在消融实验中对比了 GFSQ 与 RFSQ、RVQ、GRFSQ,GFSQ 表现最优。
+**[[ResidualVectorQuantization]]**: GFSQ 是 RVQ 的替代方案。Fish-Speech 在消融实验中对比了 GFSQ 与 RFSQ、RVQ、GRFSQ,GFSQ 表现最优。
 
-**[[Semantic vs Acoustic Tokens]]**: Fish-Speech 的 Dual-AR 设计隐式处理了 semantic-acoustic 的分离: Slow Transformer 处理文本→semantic tokens,Fast Transformer 处理 codebook→acoustic details。
+**[[SemanticvsAcousticTokens]]**: Fish-Speech 的 Dual-AR 设计隐式处理了 semantic-acoustic 的分离: Slow Transformer 处理文本→semantic tokens,Fast Transformer 处理 codebook→acoustic details。
 
 > [!summary] 速查
 > - **一句话**: Dual-AR (Slow+Fast Transformer) + GFSQ + LLM 替代 G2P 的多语言 TTS 框架,用 FF-GAN 解码
@@ -167,4 +167,4 @@ Fish-Speech 的核心贡献在于 Dual-AR + GFSQ 的架构组合和 LLM 替代 G
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Neural Vocoder]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Finite Scalar Quantization]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[NeuralVocoder]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[FiniteScalarQuantization]](pending-review) | 未命中但可能相关: 无

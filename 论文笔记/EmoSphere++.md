@@ -8,9 +8,9 @@ authors: [Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim, Seong-Whan Lee]
 year: 2025
 venue: "IEEE Transactions on Affective Computing (submitted)"
 tags: [emotional-TTS, zero-shot, emotion-control, style-transfer, flow-matching, disentanglement, VAD, spherical-coordinates]
-concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Speaker Embedding]]", "[[Gradient Reversal Layer]]", "[[Duration Predictor]]"]
-models: ["[[模型库/BigVGAN]]", "[[模型库/WavLM]]", "[[模型库/Whisper]]", "[[模型库/wav2vec 2.0]]", "[[模型库/HuBERT]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[StyleTransferinTTS]]", "[[GlobalStyleTokens]]", "[[SpeakerEmbedding]]", "[[GradientReversalLayer]]", "[[DurationPredictor]]"]
+models: ["[[模型库/BigVGAN]]", "[[模型库/WavLM]]", "[[模型库/Whisper]]", "[[模型库/wav2vec2.0]]", "[[模型库/HuBERT]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis]]"]
 datasets: ["ESD", "IEMOCAP", "MSP-Podcast"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: EmoSphere++ 位于 **情感可控零样本 TTS** 的交叉点。在 [[Emotion Control in TTS]] 的演进线上,它代表了从离散情感标签向连续维度建模的跃迁,同时是首个将情感风格/强度的球面参数化与零样本能力结合的系统。在 [[Conditional Flow Matching]] 的应用谱上,不同于 CosyVoice/F5-TTS 等将 CFM 用于 token→mel 渲染的范式,EmoSphere++ 用 CFM 直接生成 mel spectrogram(类似 Matcha-TTS 架构),但额外注入了情感-说话人联合属性嵌入。在 [[Zero-shot Speech Synthesis]] 任务中,它聚焦的不是音色克隆质量(SS)而是情感迁移能力(ECA/EECS),是该任务下少数专门处理情感维度泛化的工作。
+> **谱系定位**: EmoSphere++ 位于 **情感可控零样本 TTS** 的交叉点。在 [[EmotionControlinTTS]] 的演进线上,它代表了从离散情感标签向连续维度建模的跃迁,同时是首个将情感风格/强度的球面参数化与零样本能力结合的系统。在 [[ConditionalFlowMatching]] 的应用谱上,不同于 CosyVoice/F5-TTS 等将 CFM 用于 token→mel 渲染的范式,EmoSphere++ 用 CFM 直接生成 mel spectrogram(类似 Matcha-TTS 架构),但额外注入了情感-说话人联合属性嵌入。在 [[Zero-shotSpeechSynthesis]] 任务中,它聚焦的不是音色克隆质量(SS)而是情感迁移能力(ECA/EECS),是该任务下少数专门处理情感维度泛化的工作。
 >
-> **已有认知**: [[Speaker Embedding]] 的 confirmed 页面详述了 speaker encoder (WavLM/ECAPA-TDNN 等)在零样本 TTS 中的角色; [[Conditional Flow Matching]] confirmed 页总结了 CFM 作为 ODE-based 生成器的优势。[[Style Transfer in TTS]] [待确认] 梳理了从 GST 到 GenerSpeech 的风格迁移路线。[[Gradient Reversal Layer]] [待确认] 记录了 GRL 在 emotion-speaker disentanglement 中的应用(IndexTTS2)。
+> **已有认知**: [[SpeakerEmbedding]] 的 confirmed 页面详述了 speaker encoder (WavLM/ECAPA-TDNN 等)在零样本 TTS 中的角色; [[ConditionalFlowMatching]] confirmed 页总结了 CFM 作为 ODE-based 生成器的优势。[[StyleTransferinTTS]] [待确认] 梳理了从 GST 到 GenerSpeech 的风格迁移路线。[[GradientReversalLayer]] [待确认] 记录了 GRL 在 emotion-speaker disentanglement 中的应用(IndexTTS2)。
 >
 > **创新判断**: 与 KB 中已有工作相比,EmoSphere++ 的核心新颖性在于:(1) emotion-adaptive coordinate transformation — 不使用固定中心而是根据目标情感分布自适应计算球面中心; (2) 将 normalized orthogonality loss 应用于 batch 内所有 speaker-emotion 对(而非仅同一音频内的 pair); (3) 提出 SVAS 指标评估情感角度相似度。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Gradient Reversal Layer]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[GradientReversalLayer]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -183,7 +183,7 @@ L_ort = Σ_j Σ_i || (s_i^T · e_j) / (||s_i|| · ||e_j||) ||^2
 **局限**:
 - 整体实验在小规模 ESD 数据集上进行,与工业级系统的差距无法评估
 - 论文多次强调"不需要额外 discriminator",但 CFM decoder 本身(U-Net + Transformer)参数量并不小,这个优势需要相对化看待 [agent 解读]
-- 与 KB 中 [[Emotion Control in TTS]] 演进线对比: EmoSphere++ 的 emotion-adaptive 建模是有意义的推进,但整体框架仍停留在 non-autoregressive mel-based 范式,未触及 LLM-TTS 时代的新范式
+- 与 KB 中 [[EmotionControlinTTS]] 演进线对比: EmoSphere++ 的 emotion-adaptive 建模是有意义的推进,但整体框架仍停留在 non-autoregressive mel-based 范式,未触及 LLM-TTS 时代的新范式
 
 ## 可复用的 idea
 

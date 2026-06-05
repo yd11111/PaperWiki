@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Emilia: An Extensive, Multilingual, and Diverse Speech Dataset for Large-Scale Speech Generation"
 arxiv_id: "2407.05361"
-source: "https://arxiv.org/abs/2407.05361"
+source: "Sources/Emilia.pdf"
 authors: [Haorui He, Zengqiang Shang, Chaoren Wang, Xuyuan Li, Yicheng Gu, Hua Hua, Liwei Liu, Chen Yang, Jiaqi Li, Peiyang Shi, Yuancheng Wang, Kai Chen, Pengyuan Zhang, Zhizheng Wu]
 year: 2024
 venue: "IEEE SLT 2024"
 tags: [dataset, large-scale, multilingual, in-the-wild, speech-generation, TTS, preprocessing-pipeline, open-source]
-concepts: ["[[Speech Tokenizer]]", "[[Self-Supervised Speech Representation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[Self-SupervisedSpeechRepresentation]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: ["[[数据集/Emilia|Emilia]]"]
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认实体页: [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 1 个已确认实体页: [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **[[Speech Tokenizer]]** (confirmed): Speech Tokenizer 将连续波形转为离散 token。本文不直接涉及 tokenizer 设计,但 Emilia 数据集是训练高质量 speech tokenizer 和 TTS 模型的关键数据来源。Survey 发现 domain-specific 训练数据对 tokenizer/TTS 质量至关重要 — Emilia 的 in-the-wild 多样性正是解决现有 audiobook 数据风格单一问题的关键。
+> **[[SpeechTokenizer]]** (confirmed): Speech Tokenizer 将连续波形转为离散 token。本文不直接涉及 tokenizer 设计,但 Emilia 数据集是训练高质量 speech tokenizer 和 TTS 模型的关键数据来源。Survey 发现 domain-specific 训练数据对 tokenizer/TTS 质量至关重要 — Emilia 的 in-the-wild 多样性正是解决现有 audiobook 数据风格单一问题的关键。
 >
-> **[[Self-Supervised Speech Representation]]** [待确认]: Emilia 数据集的 diversity 分析使用了 WavLM 提取 acoustic features 和 Sentence-BERT 提取 semantic features,展示了 SSL 表征在数据集分析中的应用。
+> **[[Self-SupervisedSpeechRepresentation]]** [待确认]: Emilia 数据集的 diversity 分析使用了 WavLM 提取 acoustic features 和 Sentence-BERT 提取 semantic features,展示了 SSL 表征在数据集分析中的应用。
 >
-> 检索命中: [[Speech Tokenizer]] | 过滤: [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

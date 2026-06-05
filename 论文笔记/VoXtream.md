@@ -8,9 +8,9 @@ authors: [Nikita Torgashov, Gustav Eje Henter, Gabriel Skantze]
 year: 2025
 venue: "IEEE (推测 ICASSP 2026, 论文含 IEEE copyright 但未明确标注)"
 tags: [TTS, streaming, zero-shot, autoregressive, low-latency, full-stream]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Duration Predictor]]", "[[Phoneme Representation]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeakerEmbedding]]", "[[LLM-basedTTS]]", "[[DurationPredictor]]", "[[PhonemeRepresentation]]", "[[Speech-TextAlignment]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speaker Embedding]], [[LLM-based TTS]], [[Zero-shot Speech Synthesis]], [[模型库/CosyVoice 2|CosyVoice 2]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeakerEmbedding]], [[LLM-basedTTS]], [[Zero-shotSpeechSynthesis]], [[模型库/CosyVoice2|CosyVoice 2]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: VoXtream 属于 LLM-based TTS 的自回归路线,但与 VALL-E/CosyVoice 等主流方案有根本分歧 -- 它不使用 text LLM 做骨干,而是设计了三层专用 transformer (Phoneme/Temporal/Depth),且核心创新在于输入侧流式处理(full-stream)。在 [[LLM-based TTS]] 概念页中,streaming 方向主要由 CosyVoice 2 和 XTTS 代表,但它们都是 output-streaming(全文就绪后流式输出音频)或依赖 NAR flow-matching 解码器引入延迟。VoXtream 是首个在 input-side 实现增量处理的全 AR 系统。
+> **谱系定位**: VoXtream 属于 LLM-based TTS 的自回归路线,但与 VALL-E/CosyVoice 等主流方案有根本分歧 -- 它不使用 text LLM 做骨干,而是设计了三层专用 transformer (Phoneme/Temporal/Depth),且核心创新在于输入侧流式处理(full-stream)。在 [[LLM-basedTTS]] 概念页中,streaming 方向主要由 CosyVoice 2 和 XTTS 代表,但它们都是 output-streaming(全文就绪后流式输出音频)或依赖 NAR flow-matching 解码器引入延迟。VoXtream 是首个在 input-side 实现增量处理的全 AR 系统。
 >
-> **已有认知**: [[Speech Tokenizer]] 记录了 Mimi codec 作为 mixed tokenizer 的设计(单 VQ 语义 + 额外 RVQ 声学,12.5Hz),VoXtream 直接使用 Mimi 的 12 层 codebook。[[Semantic vs Acoustic Tokens]] 的层级建模方案中,VoXtream 的 Temporal Transformer 预测 semantic tokens(第1层 codebook),Depth Transformer 预测 acoustic tokens(第2-12层),是典型的 coarse-to-fine 策略。[[Speaker Embedding]] 页提到 ECAPA-TDNN 等 encoder,VoXtream 使用 ReDimNet speaker encoder (100K+ identities 预训练),属于该页未记录的新型 speaker encoder。[[模型库/CosyVoice 2|CosyVoice 2]] 是 VoXtream 的关键 baseline,其 full-stream 模式下 FPL=1643ms,远高于 VoXtream 的 102ms。
+> **已有认知**: [[SpeechTokenizer]] 记录了 Mimi codec 作为 mixed tokenizer 的设计(单 VQ 语义 + 额外 RVQ 声学,12.5Hz),VoXtream 直接使用 Mimi 的 12 层 codebook。[[SemanticvsAcousticTokens]] 的层级建模方案中,VoXtream 的 Temporal Transformer 预测 semantic tokens(第1层 codebook),Depth Transformer 预测 acoustic tokens(第2-12层),是典型的 coarse-to-fine 策略。[[SpeakerEmbedding]] 页提到 ECAPA-TDNN 等 encoder,VoXtream 使用 ReDimNet speaker encoder (100K+ identities 预训练),属于该页未记录的新型 speaker encoder。[[模型库/CosyVoice2|CosyVoice 2]] 是 VoXtream 的关键 baseline,其 full-stream 模式下 FPL=1643ms,远高于 VoXtream 的 102ms。
 >
 > **创新判断**: VoXtream 的核心创新 -- incremental phoneme transformer + 受限 look-ahead 的 full-stream 设计 -- 在 KB 中没有对应概念页。将输入流式化(word-by-word 接收并立即开始生成)是对现有 streaming TTS 方案的实质性推进,而非增量改进。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Speech-Text Alignment]](pending-review), [[Phoneme Representation]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: [[DurationPredictor]](pending-review), [[Speech-TextAlignment]](pending-review), [[PhonemeRepresentation]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 首个 full-stream(输入侧+输出侧同时流式) zero-shot TTS,通过 incremental phoneme transformer + 有限 look-ahead 实现 102ms 首包延迟,以 9k 小时数据比肩大规模非流式系统

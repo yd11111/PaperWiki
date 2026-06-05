@@ -8,9 +8,9 @@ authors: [Wenrui Liu, Qian Chen, Wen Wang, Yafeng Chen, Jin Xu, Zhifang Guo, Gua
 year: 2025
 venue: "ACM (under review)"
 tags: [codec-language-model, speech-generation, token-compression, attention-mechanism, long-context, zero-shot-TTS, VALL-E]
-concepts: ["[[Codec Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Speech-Text Alignment]]"]
+concepts: ["[[CodecLanguageModel]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[TokenRateandBitrateTrade-offs]]", "[[Single-codebookvsMulti-codebook]]", "[[Speech-TextAlignment]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/HuBERT|HuBERT]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["LibriSpeech", "LibriTTS", "MLS"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: 本文属于 [[Codec Language Model]] 范式下的工作,针对 neural codec LM 中长序列 speech token 建模的核心难题提出通用解法。与已有 KB 中记载的路线相比:
+**谱系定位**: 本文属于 [[CodecLanguageModel]] 范式下的工作,针对 neural codec LM 中长序列 speech token 建模的核心难题提出通用解法。与已有 KB 中记载的路线相比:
 
-- **与 codec 端压缩的区别**: [[Token Rate and Bitrate Trade-offs]] 页记载了从 50Hz→4-5Hz 的 ultra-high-compression tokenizer (SyllableLM, Sylber),但这些方案在 codec 端高压缩会损失声学细节 [论文原文]。本文将压缩从 codec 层转移到 LM 层,codec 保持原始帧率以保证重建质量。
+- **与 codec 端压缩的区别**: [[TokenRateandBitrateTrade-offs]] 页记载了从 50Hz→4-5Hz 的 ultra-high-compression tokenizer (SyllableLM, Sylber),但这些方案在 codec 端高压缩会损失声学细节 [论文原文]。本文将压缩从 codec 层转移到 LM 层,codec 保持原始帧率以保证重建质量。
 
-- **与多码本 vs 单码本选择的区别**: [[Single-codebook vs Multi-codebook]] 页记载了单码本 (WavTokenizer, BigCodec) 降低 token rate 的趋势。本文不改变码本数,而是在 LM 注意力层面做压缩,因此兼容单码本和多码本 codec。
+- **与多码本 vs 单码本选择的区别**: [[Single-codebookvsMulti-codebook]] 页记载了单码本 (WavTokenizer, BigCodec) 降低 token rate 的趋势。本文不改变码本数,而是在 LM 注意力层面做压缩,因此兼容单码本和多码本 codec。
 
-- **与已有 alignment 方案的区别**: [[Speech-Text Alignment]] 页记载的对齐技术主要面向 SpeechLM 的语义对齐。本文关注的是 TTS 任务中 text token 与 speech token 之间的 monotonic alignment,通过缩短有效序列长度来改善 attention 稀疏性导致的对齐退化。
+- **与已有 alignment 方案的区别**: [[Speech-TextAlignment]] 页记载的对齐技术主要面向 SpeechLM 的语义对齐。本文关注的是 TTS 任务中 text token 与 speech token 之间的 monotonic alignment,通过缩短有效序列长度来改善 attention 稀疏性导致的对齐退化。
 
-- **已有认知**: [[Semantic vs Acoustic Tokens]] 页确认 RVQ 第一层编码 semantic 信息、后续层编码 acoustic 信息的分层特性 (SpeechTokenizer 发现); 本文的实验进一步验证了这一点 — AR decoder 主要受益于 WER 改善 (语义), NAR decoder 主要受益于 SIM 改善 (声学)。
+- **已有认知**: [[SemanticvsAcousticTokens]] 页确认 RVQ 第一层编码 semantic 信息、后续层编码 acoustic 信息的分层特性 (SpeechTokenizer 发现); 本文的实验进一步验证了这一点 — AR decoder 主要受益于 WER 改善 (语义), NAR decoder 主要受益于 SIM 改善 (声学)。
 
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Codec Language Model]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认], [[Single-codebook vs Multi-codebook]][待确认], [[Speech-Text Alignment]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[模型库/EnCodec|EnCodec]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[CodecLanguageModel]][待确认], [[TokenRateandBitrateTrade-offs]][待确认], [[Single-codebookvsMulti-codebook]][待确认], [[Speech-TextAlignment]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 

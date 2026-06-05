@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "w2v-BERT: Combining Contrastive Learning and Masked Language Modeling for Self-Supervised Speech Pre-Training"
 arxiv_id: "2108.06209"
-source: "https://arxiv.org/abs/2108.06209"
+source: "Sources/w2v-BERT.pdf"
 authors: [Yu-An Chung, Yu Zhang, Wei Han, Chung-Cheng Chiu, James Qin, Ruoming Pang, Yonghui Wu]
 year: 2021
 venue: "ASRU 2021"
 tags: [self-supervised-learning, speech-representation, contrastive-learning, masked-prediction, conformer, ASR, voice-search]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Codebook Collapse]]", "[[Speech Language Model]]", "[[Self-Supervised Speech Representation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[CodebookCollapse]]", "[[SpeechLanguageModel]]", "[[Self-SupervisedSpeechRepresentation]]"]
 models: ["[[模型库/w2v-BERT|w2v-BERT]]"]
 tasks: []
 datasets: []
@@ -20,15 +20,15 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Codebook Collapse]], [[Speech Language Model]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[SpeechLanguageModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed), [[Semantic vs Acoustic Tokens]]✓(confirmed), [[Codebook Collapse]]✓(confirmed), [[Speech Language Model]]✓(confirmed) | 过滤: [[Gumbel-Softmax]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed), [[SemanticvsAcousticTokens]]✓(confirmed), [[CodebookCollapse]]✓(confirmed), [[SpeechLanguageModel]]✓(confirmed) | 过滤: [[Gumbel-Softmax]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: w2v-BERT 在 SpeechLM 体系中被 AudioLM 采用作为 semantic tokenizer;其隐层特征经 k-means 后产生的 semantic tokens 是后续 TTS 系统 (如 MaskGCT) 的基础 ✓
-- [[Semantic vs Acoustic Tokens]]: AudioLM 使用 w2v-BERT semantic tokens → SoundStream acoustic tokens 的层级生成框架 ✓
-- [[Codebook Collapse]]: w2v-BERT 明确指出 contrastive loss 是防止 end-to-end 量化中 codebook collapse 的关键;移除 contrastive module 后 diversity loss 趋向 1 (最大 collapse) ✓
-- [[Speech Language Model]]: w2v-BERT 的表征被后续 AudioLM 等 SpeechLM 系统广泛采用 ✓
+- [[SpeechTokenizer]]: w2v-BERT 在 SpeechLM 体系中被 AudioLM 采用作为 semantic tokenizer;其隐层特征经 k-means 后产生的 semantic tokens 是后续 TTS 系统 (如 MaskGCT) 的基础 ✓
+- [[SemanticvsAcousticTokens]]: AudioLM 使用 w2v-BERT semantic tokens → SoundStream acoustic tokens 的层级生成框架 ✓
+- [[CodebookCollapse]]: w2v-BERT 明确指出 contrastive loss 是防止 end-to-end 量化中 codebook collapse 的关键;移除 contrastive module 后 diversity loss 趋向 1 (最大 collapse) ✓
+- [[SpeechLanguageModel]]: w2v-BERT 的表征被后续 AudioLM 等 SpeechLM 系统广泛采用 ✓
 
 ## 速查
 
@@ -102,7 +102,7 @@ updated: 2026-06-03
 - [论文原文] 没有 contrastive module 时,quantizer 可以"cheat" — 让所有 masked positions 的 token 坍缩到同一个 code vector,MLM trivially solved 但没学到任何有用表征 [§5.2]
 - [论文原文] contrastive loss 强制 codebook entries 具有区分性 (discriminative),从而为 MLM 提供有意义的 prediction targets [§5.2]
 
-[agent 解读] 这一发现对 KB 中 [[Codebook Collapse]] 概念提供了重要补充:在端到端 contrastive + MLM 框架中,contrastive loss 本身就是最有效的 anti-collapse 机制,无需额外的 EMA / dead code replacement / factorized codes 等技巧
+[agent 解读] 这一发现对 KB 中 [[CodebookCollapse]] 概念提供了重要补充:在端到端 contrastive + MLM 框架中,contrastive loss 本身就是最有效的 anti-collapse 机制,无需额外的 EMA / dead code replacement / factorized codes 等技巧
 
 #### 5. Contrastive Module 的最优层数 [§5.2, Table 3]
 
@@ -171,9 +171,9 @@ updated: 2026-06-03
 **历史地位**: [agent 解读] w2v-BERT 是 SSL 语音预训练从 "contrastive only" 向 "contrastive + masked prediction" 融合的关键一步。它优雅地证明了两种自监督目标的互补性:contrastive loss 产生有区分性的离散 tokens (防止 collapse),MLM loss 在这些 tokens 上学习高层语义表征。这一洞察直接影响了后续 AudioLM 等系统选择 w2v-BERT 作为 semantic tokenizer。
 
 **与知识库已有知识的关联**:
-- w2v-BERT 2.0 (Chung et al., 2022,更大规模版本) 被 AudioLM 采用为 semantic tokenizer,其 semantic tokens 被 MaskGCT 进一步用 VQ-VAE 量化 [[Speech Tokenizer]]
-- w2v-BERT 对 codebook collapse 的分析 (Fig 2) 直接证实了 [[Codebook Collapse]] 中 contrastive loss 作为 anti-collapse 机制的有效性
-- w2v-BERT 是 [[Semantic vs Acoustic Tokens]] 中 "串联" 策略 (AudioLM) 的 semantic 端
+- w2v-BERT 2.0 (Chung et al., 2022,更大规模版本) 被 AudioLM 采用为 semantic tokenizer,其 semantic tokens 被 MaskGCT 进一步用 VQ-VAE 量化 [[SpeechTokenizer]]
+- w2v-BERT 对 codebook collapse 的分析 (Fig 2) 直接证实了 [[CodebookCollapse]] 中 contrastive loss 作为 anti-collapse 机制的有效性
+- w2v-BERT 是 [[SemanticvsAcousticTokens]] 中 "串联" 策略 (AudioLM) 的 semantic 端
 
 **方法论贡献**:
 1. **End-to-end contrastive + MLM**: 证明无需 HuBERT 的多轮迭代,可端到端联合训练
@@ -189,4 +189,4 @@ updated: 2026-06-03
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓, [[Speech Language Model]]✓ | 过滤: [[Gumbel-Softmax]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Gumbel-Softmax]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无

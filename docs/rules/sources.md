@@ -14,20 +14,25 @@
 
 ## 命名规范
 
-PDF 文件名 **必须** 与论文笔记文件名一致（不含 .md 后缀）：
+PDF 文件名 **必须** 与论文笔记文件名一致（不含 .md 后缀）。文件名**禁止包含空格**。
 
 | 笔记文件 | PDF 文件 | 正确 |
 |----------|----------|------|
-| 论文笔记/CosyVoice 3.md | Sources/CosyVoice 3.pdf | ✓ |
+| 论文笔记/CosyVoice3.md | Sources/CosyVoice3.pdf | ✓ |
 | 论文笔记/Dragon-FM.md | Sources/Dragon-FM.pdf | ✓ |
-| 论文笔记/Dragon-FM.md | Sources/2507.22746.pdf | ✗ |
-| 论文笔记/BASE TTS.md | Sources/BaseTTS.pdf | ✗ |
+| 论文笔记/BASETTS.md | Sources/BASETTS.pdf | ✓ |
+| 论文笔记/CosyVoice 3.md | Sources/CosyVoice 3.pdf | ✗ (含空格) |
+| 论文笔记/Dragon-FM.md | Sources/2507.22746.pdf | ✗ (arXiv ID) |
 
 **规则**：
-1. 文件名 = 笔记简称（与 .md 文件名相同），保留空格和大小写
-2. 禁止使用 arxiv ID 作为文件名
-3. 禁止使用下划线替代空格、驼峰合并等变体
-4. `source` frontmatter 字段必须指向实际存在的文件
+1. 文件名 = 笔记简称（与 .md 文件名相同），**不含空格**，保留大小写和连字符
+2. 版本号紧跟名称不加空格（CosyVoice2, IndexTTS2, DMOSpeech2）
+3. 多词名称直接拼接（BASETTS, ConditionalFlowMatching, ShallowFlowMatching）
+4. 连字符保留（Cross-LingualF5-TTS, Step-Audio-EditX）
+5. 禁止使用 arxiv ID 作为文件名
+6. 禁止使用下划线替代空格
+7. 禁止附加会议名后缀（EmotionThinker-AAAI.pdf ✗）
+8. `source` frontmatter 字段必须指向实际存在的文件
 
 ## 下载规则
 

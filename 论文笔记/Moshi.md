@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Moshi: a speech-text foundation model for real-time dialogue"
 arxiv_id: "2410.00037"
-source: "https://arxiv.org/abs/2410.00037"
+source: "Sources/Moshi.pdf"
 authors: [Alexandre Defossez, Laurent Mazare, Manu Orsini, Amelie Royer, Patrick Perez, Herve Jegou, Edouard Grave, Neil Zeghidour]
 year: 2024
 venue: "arXiv"
 tags: [full-duplex, speech-LM, real-time, streaming, audio-codec, RVQ, inner-monologue, multi-stream, speech-to-speech]
-concepts: ["[[Full-duplex Spoken Dialogue]]", "[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Streaming Spoken Dialogue]]"]
+concepts: ["[[Full-duplexSpokenDialogue]]", "[[SpeechLanguageModel]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[StreamingSpokenDialogue]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Speech Language Model]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[LLM-basedTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓ | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Spoken Dialogue Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: 无
 >
 > **Speech Language Model**: SpeechLM 是端到端处理和生成语音的自回归基础模型。Moshi 属于 SpeechLM 的前沿形态——首个全双工 real-time 对话系统。KB 已收录 GSLM→AudioLM→TWIST→SPIRIT-LM→SpeechGPT→Moshi 的演进链。
 >

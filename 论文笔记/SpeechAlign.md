@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "SpeechAlign: Aligning Speech Generation to Human Preferences"
 arxiv_id: "2404.05600"
-source: "https://arxiv.org/abs/2404.05600"
+source: "Sources/SpeechAlign.pdf"
 authors: [Dong Zhang, Zhaowei Li, Shimin Li, Xin Zhang, Pengyu Wang, Yaqian Zhou, Xipeng Qiu]
 year: 2024
 venue: "arXiv"
 tags: [RLHF, DPO, preference-optimization, codec-LM, zero-shot-TTS, self-improvement, distribution-gap]
-concepts: ["[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[TTS Evaluation]]"]
+concepts: ["[[CodecLanguageModel]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[TTSEvaluation]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[TTSEvaluation]])
 > LLM-based TTS 将 TTS 重构为 codec language modeling,核心是 AR 模型生成 coarse tokens + NAR 模型补充细节 (VALL-E 开创)。训练时 NAR 模型使用 golden AR tokens,推理时却接收 synthetic AR tokens,产生 distribution gap。此前所有 codec LM 均通过 SFT 训练,未有工作将人类偏好学习引入 speech generation。TTS Evaluation 指出 WER 和 SIM 是标准客观指标但各有局限。
-> 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[TTSEvaluation]] | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -123,7 +123,7 @@ SpeechAlign 基于 AR+NAR 两阶段 codec LM (SpeechGPT AR + SoundStorm NAR),使
 SpeechAlign 是 **首篇将偏好学习系统性引入 codec language model** 的工作,填补了 LLM-based TTS 在 alignment 方向的空白。其最大洞见在于: 利用 golden vs synthetic AR tokens 的天然对比,无需人工标注即可构建偏好数据集。迭代 DPO 的持续改进也很有说服力。
 
 **与后续工作的关系**:
-- SpeechAlign 在 token 层面做 DPO,后续 CosyVoice 3 的 [[Differentiable Reward Optimization]] [待确认] 进一步在 token 层面实现可微 reward 优化,可视为更高效的方案
+- SpeechAlign 在 token 层面做 DPO,后续 CosyVoice 3 的 [[DifferentiableRewardOptimization]] [待确认] 进一步在 token 层面实现可微 reward 优化,可视为更高效的方案
 - RIO (同期工作) 提出 reverse inference 作为自动偏好选择,不需要 pairwise 数据
 
 **方法论价值**: 证明了 (1) codec LM 可以像 text LM 一样做 alignment, (2) 迭代自改进在语音领域有效, (3) DPO 优于 PPO 在此场景下

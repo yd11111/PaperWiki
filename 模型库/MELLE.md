@@ -5,7 +5,7 @@ aliases: [Mel Language Model, Continuous Token TTS]
 org: "CUHK / Microsoft"
 year: 2024
 tags: [TTS, zero-shot, autoregressive, continuous-token, mel-spectrogram, codec-free, LLM-TTS]
-key_concepts: ["[[Mel Spectrogram]]", "[[Variational Autoencoder for TTS]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Neural Vocoder]]"]
+key_concepts: ["[[MelSpectrogram]]", "[[VariationalAutoencoderforTTS]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[NeuralVocoder]]"]
 tasks: [TTS, zero-shot-TTS]
 key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]"]
 supersedes: []

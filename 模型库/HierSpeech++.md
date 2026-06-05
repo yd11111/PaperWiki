@@ -5,9 +5,9 @@ aliases: [HierSpeechpp, HierSpeech Plus Plus, 层级语音合成]
 org: "Korea University"
 year: 2023
 tags: [TTS, voice-conversion, zero-shot, hierarchical-VAE, non-autoregressive, speech-super-resolution]
-key_concepts: ["[[Variational Autoencoder for TTS]]", "[[Speech Factorization]]", "[[Semantic vs Acoustic Tokens]]", "[[F0 Modeling]]", "[[Neural Vocoder]]"]
+key_concepts: ["[[VariationalAutoencoderforTTS]]", "[[SpeechFactorization]]", "[[SemanticvsAcousticTokens]]", "[[F0Modeling]]", "[[NeuralVocoder]]"]
 tasks: [TTS, voice-conversion, speech-super-resolution]
-key_papers: ["[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Low-Resource ForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]"]
+key_papers: ["[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/Low-ResourceForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]"]
 supersedes: ["HierSpeech (Lee et al., 2022)", "HierVST (Lee et al., 2023)"]
 superseded_by: []
 status: pending-review

@@ -5,7 +5,7 @@ aliases: [Emilia Dataset]
 domain: "Large-scale speech generation training"
 scale: "101K+ hours, multilingual"
 tags: [training-data, large-scale, multilingual, TTS]
-used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/CapSpeech|CapSpeech]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/Training-free Speaker Unlearning|TruS (Lee et al., 2026)]]"]
+used_by: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-VC|Seed-VC]]", "[[论文笔记/NVSpeech|NVSpeech]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/FlexiVoice|FlexiVoice]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/CapSpeech|CapSpeech]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/Cross-LingualF5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]"]
 metrics_reported_on: []
 url: ""
 status: pending-review

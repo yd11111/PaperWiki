@@ -8,8 +8,8 @@ authors: [Zhuangfei Cheng, Guangyan Zhang, Zehai Tu, Yangyang Song, Shuiyang Mao
 year: 2025
 venue: "arXiv"
 tags: [TTS, voice-conversion, accent-conversion, LLM-based, discrete-token, speech-tokenization, VQ, CTC, multitask-learning, disentanglement]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Speech Factorization]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]"]
-models: ["[[模型库/VITS|VITS]]", "[[模型库/CosyVoice|CosyVoice]]", "[[模型库/Whisper|Whisper]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[SpeechFactorization]]", "[[SpeakerEmbedding]]", "[[ProsodyModeling]]"]
+models: ["[[模型库/VITS|VITS]]", "[[模型库/CosyVoice|CosyVoice]]", "[[模型库/Whisper|Whisper]]", "[[模型库/NaturalSpeech2|NaturalSpeech 2]]"]
 tasks: []
 datasets: ["L2-ARCTIC", "AISHELL-1", "LibriSpeech", "JVS", "LJSpeech"]
 kb_context_sources: 6
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Factorization]], [[CosyVoice]], [[Speaker Embedding]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeechFactorization]], [[CosyVoice]], [[SpeakerEmbedding]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: SpeechAccentLLM 处于 LLM-based TTS 的应用扩展方向,将 LLM 语音生成范式从 TTS 延伸到 Foreign Accent Conversion (FAC)。在 speech tokenizer 谱系中,SpeechCodeVAE 属于"监督式 semantic tokenizer"一族,与 CosyVoice 的 S3 tokenizer 同源(均基于 ASR encoder 特征 + VQ),但创新点在于用 CTC loss 直接约束 codebook 离散化,而非 ASR loss 端到端监督。在 speech factorization 谱系中,SpeechCodeVAE 的三因子分离 (content V / speaker S / prosody P) 属于 information bottleneck 路线,与 NaturalSpeech 3 的 factorized diffusion codec 和 Mega-TTS 的四维分解属同族方法。
@@ -29,7 +29,7 @@ updated: 2026-06-03
 >
 > **创新判断**: SpeechCodeVAE 的核心新意在于将 CTC 引入 VQ codebook 训练(KB 中无先例),以及 SpeechRestorer 的 BERT-style token 修复机制(KB 中 LLM-based TTS 的推理错误修复尚无专门方案)。Multitask FAC+TTS 联合训练则属于已知策略在新任务上的应用。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[CosyVoice]]✓, [[Speaker Embedding]]✓ | 过滤: [[模型库/VITS|VITS]](待确认), [[Variational Autoencoder for TTS]](待确认), [[Codec Language Model]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓, [[SpeechFactorization]]✓, [[CosyVoice]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[模型库/VITS|VITS]](待确认), [[VariationalAutoencoderforTTS]](待确认), [[CodecLanguageModel]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

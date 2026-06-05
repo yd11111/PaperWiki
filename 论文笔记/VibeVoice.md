@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "VibeVoice Technical Report"
 arxiv_id: "2508.19205"
-source: "https://arxiv.org/abs/2508.19205"
+source: "Sources/VibeVoice.pdf"
 authors: [Zhiliang Peng, Jianwei Yu, Wenhui Wang, Yaoyao Chang, Yutao Sun, Li Dong, Yi Zhu, Weijiang Xu, Hangbo Bao, Zehua Wang, Shaohan Huang, Yan Xia, Furu Wei]
 year: 2025
 venue: "arXiv"
 tags: [TTS, long-form, multi-speaker, conversational, next-token-diffusion, LLM-TTS, streaming, sigma-VAE, podcast]
-concepts: ["[[Classifier-Free Guidance]]", "[[Speech Tokenizer]]", "[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Diffusion Model]]"]
+concepts: ["[[Classifier-FreeGuidance]]", "[[SpeechTokenizer]]", "[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[DiffusionModel]]"]
 models: ["[[MELLE]]"]
 tasks: [long-form-TTS, multi-speaker-TTS, conversational-speech-generation, zero-shot-TTS]
 datasets: [SEED-TTS-Eval, LibriTTS, CommonVoice]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Classifier-Free Guidance]], [[Diffusion Model]])
+> [!info] KB 背景 (基于 5 个实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[Classifier-FreeGuidance]], [[DiffusionModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **长对话语音生成的挑战**: 当前 LLM-based TTS 在短句合成上表现优异 [[LLM-based TTS]],但长对话 (podcast、audiobook) 场景面临三重挑战: (1) 序列长度导致 attention 计算爆炸; (2) 多说话人 turn-taking 建模; (3) 生成稳定性。FireRedTTS 2 通过 12.5Hz streaming tokenizer 缩短序列,CosyVoice 2 用 chunk-aware causal flow matching 实现流式,但多数方案仍受限于生成长度和稳定性。
+> **长对话语音生成的挑战**: 当前 LLM-based TTS 在短句合成上表现优异 [[LLM-basedTTS]],但长对话 (podcast、audiobook) 场景面临三重挑战: (1) 序列长度导致 attention 计算爆炸; (2) 多说话人 turn-taking 建模; (3) 生成稳定性。FireRedTTS 2 通过 12.5Hz streaming tokenizer 缩短序列,CosyVoice 2 用 chunk-aware causal flow matching 实现流式,但多数方案仍受限于生成长度和稳定性。
 >
-> **Continuous representation 路线**: [[Semantic vs Acoustic Tokens]] 的核心 trade-off 在于保真度 vs 序列长度。LatentLM (Sun et al., 2024) 提出 next-token diffusion + sigma-VAE 框架,以极高压缩比 (1600-6400x) 将连续数据编码为短序列,在 TTS 上以 10x 更少解码步数超越 VALL-E 2。
+> **Continuous representation 路线**: [[SemanticvsAcousticTokens]] 的核心 trade-off 在于保真度 vs 序列长度。LatentLM (Sun et al., 2024) 提出 next-token diffusion + sigma-VAE 框架,以极高压缩比 (1600-6400x) 将连续数据编码为短序列,在 TTS 上以 10x 更少解码步数超越 VALL-E 2。
 >
 > **本文定位**: VibeVoice 将 LatentLM 框架应用于**长对话多说话人**场景,引入 3200x 因果语音 tokenizer (7.5 Hz)、双 tokenizer (acoustic + semantic) 混合表示,结合 Qwen2.5 LLM backbone,实现最长 90 分钟、最多 4 人的对话语音合成。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -82,7 +82,7 @@ VibeVoice 由四个组件组成 [§2, Fig 2]:
 - 训练: ASR proxy task — 输出被数层 Transformer decoder 解码以预测 text transcripts [§2.1] [论文原文]
 - 预训练后丢弃 ASR decoder,仅保留 encoder 用于特征提取 [§2.1]
 
-**为什么双 tokenizer?** [agent 解读] Acoustic tokenizer 保留声学细节但语义信息分散,semantic tokenizer 显式对齐文本内容。混合两者的特征为 LLM 提供更丰富的上下文,有助于长对话的内容一致性和生成稳定性。这延续了 [[Semantic vs Acoustic Tokens]] 的混合路线思想。
+**为什么双 tokenizer?** [agent 解读] Acoustic tokenizer 保留声学细节但语义信息分散,semantic tokenizer 显式对齐文本内容。混合两者的特征为 LLM 提供更丰富的上下文,有助于长对话的内容一致性和生成稳定性。这延续了 [[SemanticvsAcousticTokens]] 的混合路线思想。
 
 #### 2. Input Representation [§2.2]
 
@@ -178,4 +178,4 @@ VibeVoice 是 LatentLM 框架在工业级 TTS 场景的成功落地,证明了 ne
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无

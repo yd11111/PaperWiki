@@ -4,12 +4,12 @@ tier: deep
 title: "SpeechJudge"
 aliases: [SpeechJudge, SpeechJudge-Data, SpeechJudge-Eval, SpeechJudge-GRM]
 arxiv_id: "2511.07931"
-source: "https://arxiv.org/abs/2511.07931"
+source: "Sources/SpeechJudge.pdf"
 authors: [Xueyao Zhang, Chaoren Wang, Huan Liao, Ziniu Li, Yuancheng Wang, Li Wang, Dongya Jia, Yuanzhe Chen, Xiulin Li, Zhuo Chen, Zhizheng Wu]
 year: 2025
 venue: "arXiv 2025 (ByteDance Seed + CUHK Shenzhen)"
 tags: [TTS-evaluation, naturalness, reward-model, GRPO, SFT, human-feedback, pairwise-preference, benchmark, AudioLLM, speech-quality]
-concepts: ["[[TTS Evaluation]]", "[[Differentiable Reward Optimization]]", "[[Audio Understanding]]"]
+concepts: ["[[TTSEvaluation]]", "[[DifferentiableRewardOptimization]]", "[[AudioUnderstanding]]"]
 models: []
 tasks: [speech-naturalness-judgment, reward-modeling, TTS-post-training]
 datasets: [SpeechJudge-Data, SpeechJudge-Eval]
@@ -23,11 +23,11 @@ updated: 2026-06-03
 
 > [!info] KB 背景 (基于 3 个实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: 无 confirmed 命中 | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+> 检索命中: 无 confirmed 命中 | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无
 
-- **[[TTS Evaluation]]** [待确认]: SpeechJudge 直接针对 TTS 评估的核心痛点 -- naturalness 维度。现有客观指标 (WER, SIM, UTMOS) 与人类偏好弱相关 [Table 2, 最高 Gemini-2.5-Flash 仅 69.1%]; MOS 主观评估存在 ceiling effect 和不可比性。SpeechJudge 构建的 99K pairwise preference 数据集和 GRM 填补了 naturalness-specific reward model 的空白 [agent 解读]。
-- **[[Differentiable Reward Optimization]]** [待确认]: SpeechJudge-GRM 使用 GRPO (与 DiffRO 同属 RL 后训练范式) 训练 reward model。与 CosyVoice 3 的 DiffRO 不同,SpeechJudge-GRM 的 GRPO 直接在 AudioLLM 上做 RLVR,reward 为 human preference label (pairwise),不需要 token-level 反传。SpeechJudge-GRM 还可反向作为 TTS 后训练的 reward function (§5.4) [agent 解读]。
-- **[[Audio Understanding]]** [待确认]: SpeechJudge-Eval 发现 AudioLLM 在 naturalness 判断上有潜力但表现参差 -- 最好的 Gemini-2.5-Flash 也仅 69.1%,部分模型接近随机 (GPT-4o mini Audio 50.5%) [Table 2]。这揭示了 AudioLLM 理解 fine-grained 语音质量差异的能力瓶颈 [agent 解读]。
+- **[[TTSEvaluation]]** [待确认]: SpeechJudge 直接针对 TTS 评估的核心痛点 -- naturalness 维度。现有客观指标 (WER, SIM, UTMOS) 与人类偏好弱相关 [Table 2, 最高 Gemini-2.5-Flash 仅 69.1%]; MOS 主观评估存在 ceiling effect 和不可比性。SpeechJudge 构建的 99K pairwise preference 数据集和 GRM 填补了 naturalness-specific reward model 的空白 [agent 解读]。
+- **[[DifferentiableRewardOptimization]]** [待确认]: SpeechJudge-GRM 使用 GRPO (与 DiffRO 同属 RL 后训练范式) 训练 reward model。与 CosyVoice 3 的 DiffRO 不同,SpeechJudge-GRM 的 GRPO 直接在 AudioLLM 上做 RLVR,reward 为 human preference label (pairwise),不需要 token-level 反传。SpeechJudge-GRM 还可反向作为 TTS 后训练的 reward function (§5.4) [agent 解读]。
+- **[[AudioUnderstanding]]** [待确认]: SpeechJudge-Eval 发现 AudioLLM 在 naturalness 判断上有潜力但表现参差 -- 最好的 Gemini-2.5-Flash 也仅 69.1%,部分模型接近随机 (GPT-4o mini Audio 50.5%) [Table 2]。这揭示了 AudioLLM 理解 fine-grained 语音质量差异的能力瓶颈 [agent 解读]。
 
 > [!summary] 速查
 > - **一句话**: 首个针对 TTS naturalness 的完整评估套件: 99K pairwise 人类偏好数据集 (SpeechJudge-Data) + 1K 高一致性 benchmark (SpeechJudge-Eval) + 基于 GRPO 训练的 generative reward model (SpeechJudge-GRM, 77.2% accuracy)
@@ -172,4 +172,4 @@ GRM 相比 BTRM 的优势主要来自两点: (1) CoT reasoning 提供了 inferen
 
 ---
 
-检索命中: 无 confirmed 命中 | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+检索命中: 无 confirmed 命中 | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无

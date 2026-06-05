@@ -8,9 +8,9 @@ authors: [Hualei Wang, Na Li, Chuke Wang, Shu Wu, Zhifeng Li, Dong Yu]
 year: 2025
 venue: "AAAI 2026"
 tags: [TTS, evaluation, speech-correction, preference-alignment, DPO, zero-shot, error-detection, reward-model]
-concepts: ["[[TTS Evaluation]]", "[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Differentiable Reward Optimization]]", "[[Speech-Text Alignment]]", "[[Self-Supervised Speech Representation]]", "[[Masked Generative Modeling]]", "[[Speaker Verification]]"]
-models: ["[[wav2vec 2.0]]", "[[CosyVoice]]", "[[NaturalSpeech 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[TTSEvaluation]]", "[[ConditionalFlowMatching]]", "[[Non-autoregressiveTTS]]", "[[DifferentiableRewardOptimization]]", "[[Speech-TextAlignment]]", "[[Self-SupervisedSpeechRepresentation]]", "[[MaskedGenerativeModeling]]", "[[SpeakerVerification]]"]
+models: ["[[wav2vec2.0]]", "[[CosyVoice]]", "[[NaturalSpeech3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -29,7 +29,7 @@ updated: 2026-06-04
 >
 > **创新判断**: Vox-Evaluator 的核心创新在于将"评估→纠错→偏好优化"三步统一到一个 evaluator 模型中,不依赖外部 ASR+MFA 的复杂 pipeline。与 FPO 相比,Vox-Evaluator 自己检测 error segments 而非依赖外部标注; 与 DiffRO 相比,Vox-Evaluator 在 inference-time 纠错而非训练时优化; 这种"评估驱动的迭代纠错"是一个相对少见的范式。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

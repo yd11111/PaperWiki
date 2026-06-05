@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Mega-TTS: Zero-Shot Text-to-Speech at Scale with Intrinsic Inductive Bias"
 arxiv_id: "2306.03509"
-source: "https://arxiv.org/abs/2306.03509"
+source: "Sources/Mega-TTS.pdf"
 authors: [Ziyue Jiang, Yi Ren, Zhenhui Ye, Jinglin Liu, Chen Zhang, Qian Yang, Shengpeng Ji, Rongjie Huang, Chunfeng Wang, Xiang Yin, Zejun Ma, Zhou Zhao]
 year: 2023
 venue: "arXiv (Zhejiang University & ByteDance)"
 tags: [TTS, zero-shot, speech-factorization, prosody-LLM, VQGAN, inductive-bias, timbre-disentanglement, speech-editing, cross-lingual]
-concepts: ["[[Speech Factorization]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]"]
+concepts: ["[[SpeechFactorization]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Speech Factorization]], [[Prosody Modeling]], [[Speaker Embedding]], [[LLM-based TTS]], [[Speech Tokenizer]])
-> Mega-TTS 是 [[Speech Factorization]] 中信息瓶颈方案的代表工作,实现 content/timbre/prosody/phase 四维分解。[[Prosody Modeling]] 页记录了从 reference encoder (GST) 到 in-context learning (VALL-E) 的韵律建模演进,Mega-TTS 的 P-LLM 是其中独特的中间路线。[[Voice Cloning Taxonomy]] [待确认] 将 Mega-TTS 归类为 zero-shot disentanglement-based cloning。
-> 检索命中: [[Speech Factorization]], [[Prosody Modeling]], [[Speaker Embedding]], [[LLM-based TTS]], [[Speech Tokenizer]] | 过滤: [[Voice Cloning Taxonomy]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SpeechFactorization]], [[ProsodyModeling]], [[SpeakerEmbedding]], [[LLM-basedTTS]], [[SpeechTokenizer]])
+> Mega-TTS 是 [[SpeechFactorization]] 中信息瓶颈方案的代表工作,实现 content/timbre/prosody/phase 四维分解。[[ProsodyModeling]] 页记录了从 reference encoder (GST) 到 in-context learning (VALL-E) 的韵律建模演进,Mega-TTS 的 P-LLM 是其中独特的中间路线。[[VoiceCloningTaxonomy]] [待确认] 将 Mega-TTS 归类为 zero-shot disentanglement-based cloning。
+> 检索命中: [[SpeechFactorization]], [[ProsodyModeling]], [[SpeakerEmbedding]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[VoiceCloningTaxonomy]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

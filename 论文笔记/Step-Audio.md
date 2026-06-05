@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Step-Audio: Unified Understanding and Generation in Intelligent Speech Interaction"
 arxiv_id: "2502.11946"
-source: "https://arxiv.org/abs/2502.11946"
+source: "Sources/Step-Audio.pdf"
 authors: [Step-Audio Team, StepFun]
 year: 2025
 venue: "arXiv"
 tags: [speech-LM, multimodal, dual-codebook, voice-cloning, instruction-control, RLHF, TTS, ASR, dialogue, open-source]
-concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[EmotionControlinTTS]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Language Model]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[LLM-basedTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[EmotionControlinTTS]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review) | 未命中但可能相关: 无
 >
 > **Speech Language Model**: Step-Audio 采用 130B 参数 LLM (Step-1) 作为 backbone,是目前参数量最大的开源 SpeechLM。其 AQTA (audio-question, text-answer) + TTS 的混合架构与 KB 中典型 SpeechLM 范式不同——理解和生成不在同一模型中端到端完成,而是用 130B LLM 做理解+文本生成,用 3B speech decoder 做语音合成。
 >

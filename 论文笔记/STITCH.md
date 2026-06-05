@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "STITCH: Simultaneous Thinking and Talking with Chunked Reasoning for Spoken Language Models"
 arxiv_id: ""
-source: "ICLR 2026"
+source: "Sources/STITCH.pdf"
 authors: [Cheng-Han Chiang, Xiaofei Wang, Linjie Li, Chung-Ching Lin, Kevin Lin, Shujie Liu, Zhendong Wang, Zhengyuan Yang, Hung-yi Lee, Lijuan Wang]
 year: 2026
 venue: "ICLR 2026"
 tags: [speech-LM, reasoning, chain-of-thought, interleaved-generation, latency, spoken-dialogue, math-QA]
-concepts: ["[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Streaming Spoken Dialogue]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[SpeechTokenizer]]", "[[StreamingSpokenDialogue]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Speech Language Model]], [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Codec Language Model]](pending-review), [[LLM-based TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[CodecLanguageModel]](pending-review), [[LLM-basedTTS]](pending-review) | 未命中但可能相关: 无
 >
 > **Speech Language Model**: SpeechLM 的演进路线从 GSLM→AudioLM→TWIST→Moshi 形成了从单模态到全双工的连续发展。STITCH 在此演进中定位为 interleaved SLM 的推理增强,填补了 SpeechLM "只能重复不能思考" 的空白。KB 记录了 text-speech interleaved 范式 (GLM-4-Voice) 和 thinker-talker 范式 (Qwen2.5-Omni),STITCH 在前者基础上首次引入 unspoken reasoning。[agent解读]
 >
@@ -202,4 +202,4 @@ t₁ ∘ s₁ ∘ z₁ ∘ t₂ ∘ s₂ ∘ z₂ ∘ ... [论文原文]
 
 ---
 
-检索命中: [[Speech Language Model]], [[Speech Tokenizer]] | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechLanguageModel]], [[SpeechTokenizer]] | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: 无

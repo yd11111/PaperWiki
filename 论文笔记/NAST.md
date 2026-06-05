@@ -8,7 +8,7 @@ authors: [Shoval Messica, Yossi Adi]
 year: 2024
 venue: "Interspeech 2024"
 tags: [speech-tokenizer, speech-representation, noise-robustness, discrete-token, self-supervised-learning, GSLM, disentanglement]
-concepts: ["[[Speech Tokenizer]]", "[[Gumbel-Softmax]]", "[[Self-Supervised Speech Representation]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]"]
+concepts: ["[[SpeechTokenizer]]", "[[Gumbel-Softmax]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]"]
 models: ["[[模型库/HuBERT|HuBERT]]"]
 tasks: []
 datasets: ["LibriSpeech", "LibriLight", "DNS Challenge"]
@@ -23,19 +23,19 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: NAST 处于 speech tokenizer 演进线中"自监督 semantic tokenizer"分支,直接回应 HuBERT k-means 量化方案的鲁棒性缺陷。在 [[Speech Tokenizer]] 的三类体系中,NAST 属于第一类(自监督 tokenizer),但用可学习的 Gumbel-Softmax 量化替代了传统的 k-means 后处理聚类。这与 wav2vec 2.0 使用 [[Gumbel-Softmax]] 端到端量化的设计理念一脉相承,但 NAST 额外引入了显式的增强不变性训练目标。
+**谱系定位**: NAST 处于 speech tokenizer 演进线中"自监督 semantic tokenizer"分支,直接回应 HuBERT k-means 量化方案的鲁棒性缺陷。在 [[SpeechTokenizer]] 的三类体系中,NAST 属于第一类(自监督 tokenizer),但用可学习的 Gumbel-Softmax 量化替代了传统的 k-means 后处理聚类。这与 wav2vec 2.0 使用 [[Gumbel-Softmax]] 端到端量化的设计理念一脉相承,但 NAST 额外引入了显式的增强不变性训练目标。
 
 **已有认知**:
-- [[Speech Tokenizer]] (confirmed) 记载了三类 tokenizer 路线(自监督/监督/声学),HuBERT k-means 是自监督路线的标准方案;Survey benchmark 发现 HuBERT 25Hz 在语义任务上仍最强,但"no single tokenizer excels across all tasks"
-- [[Semantic vs Acoustic Tokens]] (confirmed) 指出 semantic tokens 与文本对齐良好但缺乏高频声学细节;NAST 的 local/global 分离设计隐式实现了语义-说话人的解耦
-- [[Speech Language Model]] (confirmed) 描述了 GSLM pipeline(tokenizer → unit-LM → vocoder),NAST 正是为这一 pipeline 设计的 tokenizer 组件
+- [[SpeechTokenizer]] (confirmed) 记载了三类 tokenizer 路线(自监督/监督/声学),HuBERT k-means 是自监督路线的标准方案;Survey benchmark 发现 HuBERT 25Hz 在语义任务上仍最强,但"no single tokenizer excels across all tasks"
+- [[SemanticvsAcousticTokens]] (confirmed) 指出 semantic tokens 与文本对齐良好但缺乏高频声学细节;NAST 的 local/global 分离设计隐式实现了语义-说话人的解耦
+- [[SpeechLanguageModel]] (confirmed) 描述了 GSLM pipeline(tokenizer → unit-LM → vocoder),NAST 正是为这一 pipeline 设计的 tokenizer 组件
 - [[Gumbel-Softmax]] [待确认] 记录了该技术在 wav2vec 2.0 和 CosyVoice 3 中的使用,NAST 是又一个将其用于端到端语音离散化的工作
-- [[Self-Supervised Speech Representation]] [待确认] 提供了 SSL 方法的全景,NAST 的输入即 HuBERT 9th layer 的 SSL 表征
+- [[Self-SupervisedSpeechRepresentation]] [待确认] 提供了 SSL 方法的全景,NAST 的输入即 HuBERT 9th layer 的 SSL 表征
 - [[模型库/HuBERT|HuBERT]] [待确认] 是 NAST 的上游 backbone,提供 50Hz 帧级连续表征
 
 **创新判断**: NAST 的核心创新在于将增强不变性(robustness loss)和 local/global 信息分离(residual encoder)引入端到端可学习 speech tokenizer,相较 k-means(后处理、不可微、对扰动敏感)和 Gat et al. 2023(teacher-student、继承 k-means bias)是方法论上的推进。
 
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 参考: [[Gumbel-Softmax]](待确认), [[Self-Supervised Speech Representation]](待确认), [[模型库/HuBERT|HuBERT]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 参考: [[Gumbel-Softmax]](待确认), [[Self-SupervisedSpeechRepresentation]](待确认), [[模型库/HuBERT|HuBERT]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

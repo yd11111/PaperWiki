@@ -8,9 +8,9 @@ authors: [Na Li, Chuke Wang, Yu Gu, Zhifeng Li]
 year: 2025
 venue: "arXiv"
 tags: [voice-conversion, timbre-leakage, content-representation, semantic-dictionary, zero-shot, any-to-many, universal]
-concepts: ["[[Self-Supervised Speech Representation]]", "[[Speech Factorization]]", "[[Residual Vector Quantization]]", "[[Codec Language Model]]", "[[Diffusion Model]]"]
+concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[SpeechFactorization]]", "[[ResidualVectorQuantization]]", "[[CodecLanguageModel]]", "[[DiffusionModel]]"]
 models: ["[[模型库/VITS|VITS]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/EnCodec|EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 5
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Speech Factorization]], [[Residual Vector Quantization]], [[Speaker Embedding]], [[Prosody Modeling]], [[Neural Vocoder]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SpeechFactorization]], [[ResidualVectorQuantization]], [[SpeakerEmbedding]], [[ProsodyModeling]], [[NeuralVocoder]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Neural Vocoder]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Diffusion Model]](pending-review), [[Codec Language Model]](pending-review), [[VITS]](model, pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechFactorization]]✓, [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[NeuralVocoder]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[DiffusionModel]](pending-review), [[CodecLanguageModel]](pending-review), [[VITS]](model, pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: USM-VC (2025.04) 提出了一种全新的 content representation 方法,通过 Universal Semantic Dictionary 构建 timbre-free 的内容表征。在 KB 中 [[Speech Factorization]] 记录的四类解耦方法 (对抗训练、信息瓶颈、self-distillation、辅助技术) 之外,USM-VC 开辟了第五条路线: 基于全局语音学字典的特征重表达 (Content Feature Re-expression)。其核心思路与离散化方法 (VQ/k-means) 类似但更精细 — 不是简单量化,而是将每帧内容表征重新表达为字典条目的加权组合。
+**谱系定位**: USM-VC (2025.04) 提出了一种全新的 content representation 方法,通过 Universal Semantic Dictionary 构建 timbre-free 的内容表征。在 KB 中 [[SpeechFactorization]] 记录的四类解耦方法 (对抗训练、信息瓶颈、self-distillation、辅助技术) 之外,USM-VC 开辟了第五条路线: 基于全局语音学字典的特征重表达 (Content Feature Re-expression)。其核心思路与离散化方法 (VQ/k-means) 类似但更精细 — 不是简单量化,而是将每帧内容表征重新表达为字典条目的加权组合。
 
 **已有认知**:
-- [[Speech Factorization]] 页记录: "content-timbre 解耦已相对成熟,fine-grained prosody disentanglement 是开放前沿"。USM-VC 提出的方法在 content-timbre 解耦维度上实现了新的 SOTA。
+- [[SpeechFactorization]] 页记录: "content-timbre 解耦已相对成熟,fine-grained prosody disentanglement 是开放前沿"。USM-VC 提出的方法在 content-timbre 解耦维度上实现了新的 SOTA。
 - KB 中已有多种 VC 框架: VITS-based (any-to-many), LM-based (zero-shot, VALL-E style), Diffusion-based (CoMoSVC style)。USM-VC 的关键创新是 USM residual block 可以作为**即插即用模块**应用于所有这些框架。
-- [[Self-Supervised Speech Representation]] [待确认] 页记录了 HuBERT 和 PPG 两类 content extractor,USM-VC 正是在这两类 extractor 基础上叠加 USM block 实现 timbre 去除。
+- [[Self-SupervisedSpeechRepresentation]] [待确认] 页记录了 HuBERT 和 PPG 两类 content extractor,USM-VC 正是在这两类 extractor 基础上叠加 USM block 实现 timbre 去除。
 
 > [!summary] 速查
 > - **一句话**: 提出 Universal Semantic Matching (USM) 残差模块,通过离线构建的全局语义字典 + Content Feature Re-expression (CFR) + 加权 skip connection,将任意 content representation 转换为 timbre-free 版本,在 VITS/LM/Diffusion 三种 VC 框架上均显著提升 speaker similarity
@@ -195,4 +195,4 @@ Source speech → Content Extractor backbone → Content Layer → Softmax layer
 
 ---
 
-检索命中: [[Speech Factorization]], [[Residual Vector Quantization]], [[Speaker Embedding]], [[Prosody Modeling]], [[Neural Vocoder]] | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Diffusion Model]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechFactorization]], [[ResidualVectorQuantization]], [[SpeakerEmbedding]], [[ProsodyModeling]], [[NeuralVocoder]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[DiffusionModel]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无

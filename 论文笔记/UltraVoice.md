@@ -8,9 +8,9 @@ authors: [Wenming Tu, Guanrou Yang, Ruiqi Yan, Wenxi Chen, Ziyang Ma, Yipeng Kan
 year: 2025
 venue: "arXiv preprint"
 tags: [spoken-dialogue, style-control, dataset, emotion, controllable-TTS, instruction-following, SFT, expressive-speech]
-concepts: ["[[Emotion Control in TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Style Transfer in TTS]]", "[[Speech Language Model]]", "[[Spoken Dialogue Evaluation]]", "[[Natural Language Description for TTS]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[StyleTransferinTTS]]", "[[SpeechLanguageModel]]", "[[SpokenDialogueEvaluation]]", "[[NaturalLanguageDescriptionforTTS]]"]
 models: ["[[CosyVoice]]", "[[Whisper]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: UltraVoice 定位在 **spoken dialogue 数据集** 与 **controllable TTS 数据集** 的交叉点。KB 中 [[Instructed Speech Generation]] (confirmed) 记录了通过自然语言指令控制语音属性的任务定义,当前 SOTA 以 CosyVoice 3 为代表,但侧重 TTS 场景而非对话场景。[[Speech Language Model]] (confirmed) 定义了端到端 spoken dialogue 模型的技术范畴 (SLAM-Omni、VocalNet 等均属此类),其核心问题之一是"模型能说但不知道怎么说"。[[CosyVoice]] (confirmed) 在本文中作为语音合成工具用于数据构建。
+> **谱系定位**: UltraVoice 定位在 **spoken dialogue 数据集** 与 **controllable TTS 数据集** 的交叉点。KB 中 [[InstructedSpeechGeneration]] (confirmed) 记录了通过自然语言指令控制语音属性的任务定义,当前 SOTA 以 CosyVoice 3 为代表,但侧重 TTS 场景而非对话场景。[[SpeechLanguageModel]] (confirmed) 定义了端到端 spoken dialogue 模型的技术范畴 (SLAM-Omni、VocalNet 等均属此类),其核心问题之一是"模型能说但不知道怎么说"。[[CosyVoice]] (confirmed) 在本文中作为语音合成工具用于数据构建。
 >
-> **已有认知 vs 本文增量**: [[Emotion Control in TTS]] [待确认] 和 [[Instruction-Guided Speech Synthesis]] [待确认] 详细记录了情感控制和指令引导合成的技术演进,但均聚焦于 TTS 系统本身的可控性。[[Style Transfer in TTS]] [待确认] 梳理了风格控制从 GST 到 instruction-guided 的演进线。UltraVoice 的增量在于: **将多维度风格控制从 TTS 领域迁移到 spoken dialogue 领域**,填补了对话场景缺乏风格控制训练数据的空白。
+> **已有认知 vs 本文增量**: [[EmotionControlinTTS]] [待确认] 和 [[Instruction-GuidedSpeechSynthesis]] [待确认] 详细记录了情感控制和指令引导合成的技术演进,但均聚焦于 TTS 系统本身的可控性。[[StyleTransferinTTS]] [待确认] 梳理了风格控制从 GST 到 instruction-guided 的演进线。UltraVoice 的增量在于: **将多维度风格控制从 TTS 领域迁移到 spoken dialogue 领域**,填补了对话场景缺乏风格控制训练数据的空白。
 >
 > **创新判断**: KB 中 Instructed Speech Generation 任务页已记录 InstructTTSEval benchmark,但其仅评估 TTS 系统; UltraVoice 的新贡献是构建了一个 dialogue-native 的风格控制数据集,使 spoken dialogue 模型 (非 TTS 模型) 首次获得多维度风格控制能力。
 >
-> 检索命中: [[Instructed Speech Generation]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[InstructedSpeechGeneration]]✓, [[CosyVoice]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -163,7 +163,7 @@ Step 4: Quality Control & Filtering
 
 **最有价值的发现**: SFT on UltraVoice 不仅提升风格控制能力,还**同时提升**了通用对话能力 (URO-Bench +8-11%)。这违反了"风格控制 vs 对话质量 trade-off"的直觉。[agent 解读] 可能的解释是: (1) UltraVoice 的文本质量 (GPT-4o 生成) 本身高于原始训练数据; (2) 风格多样性作为一种数据增强,提升了模型的泛化能力。
 
-**与 KB 已有知识的关系**: KB 中 [[Instruction-Guided Speech Synthesis]] 记录的演进线是从 style tagging→reference prompt→NL description→instruction-guided,UltraVoice 将这条线从 TTS 延伸到 spoken dialogue。但值得注意的是,UltraVoice 的"指令"仍然是 content+style 分离的格式 (用户说一句话并附带风格要求),而非真正的对话式指令 (如"从现在开始用悲伤的语气跟我聊天")。
+**与 KB 已有知识的关系**: KB 中 [[Instruction-GuidedSpeechSynthesis]] 记录的演进线是从 style tagging→reference prompt→NL description→instruction-guided,UltraVoice 将这条线从 TTS 延伸到 spoken dialogue。但值得注意的是,UltraVoice 的"指令"仍然是 content+style 分离的格式 (用户说一句话并附带风格要求),而非真正的对话式指令 (如"从现在开始用悲伤的语气跟我聊天")。
 
 **潜在问题**: 全合成 pipeline 的可复现性高但也意味着上限受限于 GPT-4o。如果 GPT-4o 的情感表达本身有偏差 (如某些情感类别表现力弱),这些偏差会传递到训练数据和下游模型。
 

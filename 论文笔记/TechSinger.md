@@ -8,7 +8,7 @@ authors: [Wenxiang Guo, Yu Zhang, Changhao Pan, Rongjie Huang, Li Tang, Ruiqi Li
 year: 2025
 venue: "AAAI 2025"
 tags: [SVS, flow-matching, technique-control, pitch-control, prompt-based, multilingual, CFG, singing]
-concepts: ["[[Singing Voice Synthesis]]", "[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[F0 Modeling]]", "[[SVS Evaluation Metrics]]", "[[Musical Score Encoder]]", "[[Natural Language Description for TTS]]", "[[Neural Vocoder]]"]
+concepts: ["[[SingingVoiceSynthesis]]", "[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[F0Modeling]]", "[[SVSEvaluationMetrics]]", "[[MusicalScoreEncoder]]", "[[NaturalLanguageDescriptionforTTS]]", "[[NeuralVocoder]]"]
 models: ["[[模型库/VITS|VITS]]"]
 tasks: []
 datasets: []
@@ -20,21 +20,21 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Conditional Flow Matching]]✓, [[Singing Voice Synthesis]], [[Classifier-Free Guidance]], [[F0 Modeling]], [[SVS Evaluation Metrics]], [[Musical Score Encoder]])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ConditionalFlowMatching]]✓, [[SingingVoiceSynthesis]], [[Classifier-FreeGuidance]], [[F0Modeling]], [[SVSEvaluationMetrics]], [[MusicalScoreEncoder]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: TechSinger 属于 SVS 的 **可控合成 (Controllable Synthesis)** 分支 [Singing Voice Synthesis §2],采用**级联架构** (乐谱+歌词 → acoustic model → mel → vocoder)。在生成范式上,它是首个将 [[Conditional Flow Matching]] 引入 SVS 的系统,此前 flow matching 已在 TTS 中广泛应用 (CosyVoice, Matcha-TTS, VoiceFlow),但 SVS 领域仍以 diffusion (DiffSinger) 和 VAE (VISinger) 为主。在控制维度上,TechSinger 聚焦于 **歌唱技巧** (vocal techniques) 的细粒度控制,而非音色/情感/风格迁移,这与 TCSinger (零样本风格迁移) 和 PromptSinger (自然语言控制性别/音量) 形成互补。
+**谱系定位**: TechSinger 属于 SVS 的 **可控合成 (Controllable Synthesis)** 分支 [Singing Voice Synthesis §2],采用**级联架构** (乐谱+歌词 → acoustic model → mel → vocoder)。在生成范式上,它是首个将 [[ConditionalFlowMatching]] 引入 SVS 的系统,此前 flow matching 已在 TTS 中广泛应用 (CosyVoice, Matcha-TTS, VoiceFlow),但 SVS 领域仍以 diffusion (DiffSinger) 和 VAE (VISinger) 为主。在控制维度上,TechSinger 聚焦于 **歌唱技巧** (vocal techniques) 的细粒度控制,而非音色/情感/风格迁移,这与 TCSinger (零样本风格迁移) 和 PromptSinger (自然语言控制性别/音量) 形成互补。
 
 **已有认知**:
-- [[Conditional Flow Matching]] (confirmed): 学习确定性 ODE 路径将噪声映射到数据,比 diffusion 推理步数更少。TechSinger 使用 rectified flow matching 变体,与 VoiceFlow 的方案一致。
-- [[F0 Modeling]] [待确认]: SVS 中 F0 是核心约束维度,需精确到半音级。此前方法包括 L1 回归 (FastSpeech 2 式)、扩散预测 (RMSSinger)。TechSinger 提出 flow matching pitch predictor,是 F0 建模的新范式。
-- [[Classifier-Free Guidance]] [待确认]: 训练时随机丢弃条件使模型同时学会条件/无条件生成,推理时外推增强条件信号。TechSinger 将其应用于歌唱技巧条件。
-- [[Musical Score Encoder]] [待确认]: SVS 特有的乐谱输入编码,TechSinger 使用 phoneme encoder + note encoder 分别处理歌词和乐谱。
-- [[Natural Language Description for TTS]] [待确认]: 自然语言描述控制合成。TechSinger 的 technique predictor 将 NL prompt 映射为 phoneme-level technique sequence,比 PromptSinger 更细粒度。
+- [[ConditionalFlowMatching]] (confirmed): 学习确定性 ODE 路径将噪声映射到数据,比 diffusion 推理步数更少。TechSinger 使用 rectified flow matching 变体,与 VoiceFlow 的方案一致。
+- [[F0Modeling]] [待确认]: SVS 中 F0 是核心约束维度,需精确到半音级。此前方法包括 L1 回归 (FastSpeech 2 式)、扩散预测 (RMSSinger)。TechSinger 提出 flow matching pitch predictor,是 F0 建模的新范式。
+- [[Classifier-FreeGuidance]] [待确认]: 训练时随机丢弃条件使模型同时学会条件/无条件生成,推理时外推增强条件信号。TechSinger 将其应用于歌唱技巧条件。
+- [[MusicalScoreEncoder]] [待确认]: SVS 特有的乐谱输入编码,TechSinger 使用 phoneme encoder + note encoder 分别处理歌词和乐谱。
+- [[NaturalLanguageDescriptionforTTS]] [待确认]: 自然语言描述控制合成。TechSinger 的 technique predictor 将 NL prompt 映射为 phoneme-level technique sequence,比 PromptSinger 更细粒度。
 
 **创新判断**: TechSinger 的核心创新在于 (1) 用 flow matching 替代 L1 回归/diffusion 进行 F0 预测,解决技巧-F0 复杂映射; (2) CFG flow matching postnet 增强技巧可控性; (3) 自动 technique detector 扩展训练数据; (4) prompt-to-technique predictor 降低使用门槛。这些组件在 SVS 中均属首次。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[Singing Voice Synthesis]], [[Classifier-Free Guidance]], [[F0 Modeling]], [[SVS Evaluation Metrics]], [[Musical Score Encoder]] | 过滤: 无 (所有命中页 lifecycle=active) | 未命中但可能相关: [[Natural Language Description for TTS]] (通过关键词补充命中)
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SingingVoiceSynthesis]], [[Classifier-FreeGuidance]], [[F0Modeling]], [[SVSEvaluationMetrics]], [[MusicalScoreEncoder]] | 过滤: 无 (所有命中页 lifecycle=active) | 未命中但可能相关: [[NaturalLanguageDescriptionforTTS]] (通过关键词补充命中)
 
 ## 速查
 
@@ -90,11 +90,11 @@ $$L_{pflow} = \mathbb{E}_{t, p_1(x_1|c), p_0(x_0)} \|v_p(x, t|c; \theta) - (x_1 
 
 **向量场估计器**: 使用非因果 WaveNet 架构 (12 层, kernel=3, residual channel=192, hidden=256, 100 训练步) [Table 8, Fig 5]。
 
-[agent 解读] 这是 [[Conditional Flow Matching]] 从 TTS mel 生成向 SVS F0 预测的降维应用。相比 RMSSinger 的扩散 F0 predictor,flow matching 的确定性 ODE 路径理论上推理步数更少。
+[agent 解读] 这是 [[ConditionalFlowMatching]] 从 TTS mel 生成向 SVS F0 预测的降维应用。相比 RMSSinger 的扩散 F0 predictor,flow matching 的确定性 ODE 路径理论上推理步数更少。
 
 #### 2. CFG Flow Matching Mel Postnet (CFGFMP) [§CFG Flow Matching Postnet]
 
-第二阶段使用 flow matching 精炼 coarse mel,同时引入 [[Classifier-Free Guidance]] 增强技巧条件的影响力:
+第二阶段使用 flow matching 精炼 coarse mel,同时引入 [[Classifier-FreeGuidance]] 增强技巧条件的影响力:
 
 - **训练**: 条件 $c$ = coarse mel + 音色 + 技巧编码。以 0.1 概率随机 drop 技巧标签 (设为 unconditional label 2),使模型同时学会条件/无条件生成 [§CFG Flow Matching Postnet]。
 - **推理**: 修改向量场 [Eq.8]:

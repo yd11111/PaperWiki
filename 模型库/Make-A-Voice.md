@@ -5,7 +5,7 @@ aliases: [MakeAVoice, Make A Voice]
 org: "Zhejiang University / Tencent AI Lab"
 year: 2023
 tags: [TTS, voice-conversion, SVS, zero-shot, unified-framework, discrete-token, coarse-to-fine, autoregressive]
-key_concepts: ["[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]", "[[LLM-based TTS]]", "[[F0 Modeling]]", "[[Singing Voice Synthesis]]"]
+key_concepts: ["[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[NeuralVocoder]]", "[[LLM-basedTTS]]", "[[F0Modeling]]", "[[SingingVoiceSynthesis]]"]
 tasks: [TTS, voice-conversion, singing-voice-synthesis]
 key_papers: ["[[论文笔记/Make-A-Voice|Make-A-Voice]]"]
 supersedes: []

@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "FireRedTTS: A Foundation Text-To-Speech Framework for Industry-Level Generative Speech Applications"
 arxiv_id: "2409.03283"
-source: "Sources/fireredTTS.pdf"
+source: "Sources/FireRedTTS.pdf"
 authors: [Hao-Han Guo, Kun Liu, Fei-Yu Shen, Yi-Chen Wu, Feng-Long Xie, Kun Xie, Kai-Tuo Xu]
 year: 2024
 venue: "arXiv"
 tags: [TTS, LLM-based, foundation-model, voice-cloning, chatbot, speech-tokenizer, flow-matching, zero-shot, emotion-control, instruction-tuning, data-pipeline]
-concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]", "[[Neural Vocoder]]", "[[LLM-based TTS]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]", "[[SemanticvsAcousticTokens]]", "[[NeuralVocoder]]", "[[LLM-basedTTS]]", "[[EmotionControlinTTS]]"]
 models: ["[[HuBERT]]", "[[BigVGAN]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]], [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speaker Embedding]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Classifier-Free Guidance]](待确认), [[Emotion Control in TTS]](待确认), [[Voice Cloning Taxonomy]](待确认) | 未命中但可能相关: Instruction-Guided Speech Synthesis
+> 检索命中: [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓ | 过滤: [[Classifier-FreeGuidance]](待确认), [[EmotionControlinTTS]](待确认), [[VoiceCloningTaxonomy]](待确认) | 未命中但可能相关: Instruction-Guided Speech Synthesis
 
 **谱系定位:** FireRedTTS (2024.09, 小红书) 是工业级 foundation TTS 框架,在谱系上属于 "LLM + semantic token + flow matching" 路线。它与 CosyVoice (2024.07, 阿里) 同期,比 Seed-TTS (2024.06, 字节) 稍晚。三者均采用语义 token + AR LM + 声学渲染的 coarse-to-fine 架构,但 FireRedTTS 强调完整的数据处理管线和下游应用(配音+聊天机器人)。
 
@@ -156,4 +156,4 @@ FireRedTTS 的核心价值在于**系统完整性**而非单点突破。它展�
 
 ---
 
-检索命中: [[Speech Tokenizer]], [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speaker Embedding]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Emotion Control in TTS]](pending-review), [[Voice Cloning Taxonomy]](pending-review) | 未命中但可能相关: Instruction-Guided Speech Synthesis
+检索命中: [[SpeechTokenizer]], [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[EmotionControlinTTS]](pending-review), [[VoiceCloningTaxonomy]](pending-review) | 未命中但可能相关: Instruction-Guided Speech Synthesis

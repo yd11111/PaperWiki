@@ -8,9 +8,9 @@ authors: [Siyi Zhou, Yiquan Zhou, Yi He, Xun Zhou, Jinchao Wang, Wei Deng, Jingc
 year: 2025
 venue: "AAAI 2026"
 tags: [TTS, zero-shot, autoregressive, emotion-control, duration-control]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Gradient Reversal Layer]]"]
-models: ["[[BigVGAN]]", "[[CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[GradientReversalLayer]]"]
+models: ["[[BigVGAN]]", "[[CosyVoice2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 3
 status: draft
@@ -20,8 +20,8 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Zero-shot Speech Synthesis]])
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Instructed Speech Generation]](pending-review), [[BigVGAN]](pending-review), [[CosyVoice 2]](pending-review)
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[Zero-shotSpeechSynthesis]])
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[InstructedSpeechGeneration]](pending-review), [[BigVGAN]](pending-review), [[CosyVoice2]](pending-review)
 
 **谱系定位**: IndexTTS2 属于 Zero-shot TTS 任务页记录的 "LLM + 离散 token" 路线,使用 MaskGCT 的 semantic codec 作为 Speech Tokenizer,下游用 CFM 生成声学特征。在 SEED-TTS-Eval 基准上达到当前最优。
 
@@ -50,7 +50,7 @@ IndexTTS2 同时解决两个问题:
 
 三模块级联设计 [Fig 1]:
 1. **Text-to-Semantic (T2S)**: 自回归 Transformer,从文本 + timbre/style prompt + 可选 token 数生成 semantic tokens
-2. **Semantic-to-Mel (S2M)**: 基于 [[Conditional Flow Matching]] 的非自回归模型,生成 mel spectrogram
+2. **Semantic-to-Mel (S2M)**: 基于 [[ConditionalFlowMatching]] 的非自回归模型,生成 mel spectrogram
 3. **Vocoder**: [[BigVGAN]]v2 将 mel spectrogram 转为波形
 
 ### 关键设计选择
@@ -61,7 +61,7 @@ IndexTTS2 同时解决两个问题:
 
 **为什么能 work**: 自回归系统在生成时依赖位置编码判断"当前生成到第几个 token"。通过让 duration embedding 和 positional embedding 共享同一张表,模型在接收到 duration 信号时等价于"预知了终点位置",从而精确对齐位置信息与目标时长,在指定长度处自然终止生成。推理时 p=0 即退化为自由生成模式 [§Proposed Method]。
 
-**2. Emotion-Speaker Disentanglement — [[Gradient Reversal Layer]]** [§Proposed Method, Emotional Control]
+**2. Emotion-Speaker Disentanglement — [[GradientReversalLayer]]** [§Proposed Method, Emotional Control]
 
 输入序列为 [c+e, p, e_BT, E_text, e_BA, E_sem]:
 - c: speaker embedding (来自 frozen speaker perceiver conditioner,编码音色)

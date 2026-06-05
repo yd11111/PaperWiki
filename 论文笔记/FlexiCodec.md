@@ -8,7 +8,7 @@ authors: [Anonymous]
 year: 2026
 venue: "Under review at ICLR 2026"
 tags: [audio-codec, low-frame-rate, dynamic-frame-rate, ASR-feature, dual-stream, FSQ, speech-tokenizer, token-merging]
-concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Conditional Flow Matching]]", "[[Multi-scale STFT Discriminator]]", "[[Quantizer Dropout]]", "[[Finite Scalar Quantization]]", "[[Token Rate and Bitrate Trade-offs]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ConditionalFlowMatching]]", "[[Multi-scaleSTFTDiscriminator]]", "[[QuantizerDropout]]", "[[FiniteScalarQuantization]]", "[[TokenRateandBitrateTrade-offs]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]"]
 tasks: []
 datasets: []
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Conditional Flow Matching]], [[Multi-scale STFT Discriminator]], [[Quantizer Dropout]])
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Multi-scale STFT Discriminator]]✓, [[Quantizer Dropout]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 6 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ConditionalFlowMatching]], [[Multi-scaleSTFTDiscriminator]], [[QuantizerDropout]])
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[QuantizerDropout]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
 
-**[[Residual Vector Quantization]]**: FlexiCodec 在 acoustic stream 使用标准 (N-1) 层 RVQ 量化残差声学信息 (24 层, codebook 4096x512d)。与 SNAC 的 MSRVQ 不同, FlexiCodec 的"多尺度"不在 RVQ 层间做, 而是在 frame merging 阶段统一处理, RVQ 本身在 dynamic-rate 序列上正常运行。FlexiCodec 也使用 [[Quantizer Dropout]] 训练 (随机选 n in [1,N])。
+**[[ResidualVectorQuantization]]**: FlexiCodec 在 acoustic stream 使用标准 (N-1) 层 RVQ 量化残差声学信息 (24 层, codebook 4096x512d)。与 SNAC 的 MSRVQ 不同, FlexiCodec 的"多尺度"不在 RVQ 层间做, 而是在 frame merging 阶段统一处理, RVQ 本身在 dynamic-rate 序列上正常运行。FlexiCodec 也使用 [[QuantizerDropout]] 训练 (随机选 n in [1,N])。
 
-**[[Speech Tokenizer]]**: FlexiCodec 属于"声学+语义双流"tokenizer。语义流通过 ASR encoder (SenseVoice-Small) 提取特征, 经 FSQ 量化为 RVQ-1 token; 声学流通过卷积 codec encoder 提取波形特征, 经 RVQ-rest 量化。这种双流设计与 DualCodec, Mimi 等属于混合 tokenizer 家族。
+**[[SpeechTokenizer]]**: FlexiCodec 属于"声学+语义双流"tokenizer。语义流通过 ASR encoder (SenseVoice-Small) 提取特征, 经 FSQ 量化为 RVQ-1 token; 声学流通过卷积 codec encoder 提取波形特征, 经 RVQ-rest 量化。这种双流设计与 DualCodec, Mimi 等属于混合 tokenizer 家族。
 
-**[[Semantic vs Acoustic Tokens]]**: FlexiCodec 显式分离 semantic (RVQ-1, 由 ASR 特征+FSQ 得到) 和 acoustic (RVQ-rest, 由波形特征+RVQ 得到) 两类 token。关键创新在于两类 token 都在 dynamic frame rate 下工作, 通过 frame merging 动态分配时间分辨率。
+**[[SemanticvsAcousticTokens]]**: FlexiCodec 显式分离 semantic (RVQ-1, 由 ASR 特征+FSQ 得到) 和 acoustic (RVQ-rest, 由波形特征+RVQ 得到) 两类 token。关键创新在于两类 token 都在 dynamic frame rate 下工作, 通过 frame merging 动态分配时间分辨率。
 
-**[[Conditional Flow Matching]]**: FlexiCodec 的下游 TTS 实验使用 AR LM + NAR model 的标准 codec LM pipeline [Appendix B]。FlexiCodec 的低帧率特性直接缩短 AR 阶段序列长度, 加速 TTS 推理。
+**[[ConditionalFlowMatching]]**: FlexiCodec 的下游 TTS 实验使用 AR LM + NAR model 的标准 codec LM pipeline [Appendix B]。FlexiCodec 的低帧率特性直接缩短 AR 阶段序列长度, 加速 TTS 推理。
 
-**[[Multi-scale STFT Discriminator]]**: FlexiCodec 使用 MPD + MRSD (Multi-Resolution Spectrogram Discriminator) 作为 GAN 损失的判别器 [§3, Eq.1], 与 DAC 方案一致。
+**[[Multi-scaleSTFTDiscriminator]]**: FlexiCodec 使用 MPD + MRSD (Multi-Resolution Spectrogram Discriminator) 作为 GAN 损失的判别器 [§3, Eq.1], 与 DAC 方案一致。
 
-**[[Quantizer Dropout]]**: FlexiCodec 在训练时随机选择 n in [1, N] 层 RVQ 解码, 实现 scalable bitrate [§3]。当 n=1 时仅使用 semantic stream, 这对 AR LM 下游任务尤为重要。
+**[[QuantizerDropout]]**: FlexiCodec 在训练时随机选择 n in [1, N] 层 RVQ 解码, 实现 scalable bitrate [§3]。当 n=1 时仅使用 semantic stream, 这对 AR LM 下游任务尤为重要。
 
 ## 速查
 
@@ -183,4 +183,4 @@ FlexiCodec@6.25Hz (0.64 kbps/8q, 216M) 在 semantic 指标上优于 SpeechTokeni
 
 ---
 
-检索命中: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Conditional Flow Matching]], [[Multi-scale STFT Discriminator]], [[Quantizer Dropout]] | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ConditionalFlowMatching]], [[Multi-scaleSTFTDiscriminator]], [[QuantizerDropout]] | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无

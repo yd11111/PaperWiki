@@ -8,9 +8,9 @@ authors: [Zhikang Niu, Shujie Hu, Jeongsoo Choi, Yushen Chen, Peining Chen, Peng
 year: 2025
 venue: "ICASSP 2026"
 tags: [TTS, VAE, latent-diffusion, semantic-alignment, self-supervised-learning, flow-matching, zero-shot-TTS]
-concepts: ["[[Variational Autoencoder for TTS]]", "[[Self-Supervised Speech Representation]]", "[[Conditional Flow Matching]]", "[[Semantic vs Acoustic Tokens]]", "[[Codec Training Objectives]]", "[[Mel Spectrogram]]"]
+concepts: ["[[VariationalAutoencoderforTTS]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ConditionalFlowMatching]]", "[[SemanticvsAcousticTokens]]", "[[CodecTrainingObjectives]]", "[[MelSpectrogram]]"]
 models: ["[[模型库/WavLM|WavLM]]", "[[模型库/HuBERT|HuBERT]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文处于 NAR TTS 从 mel spectrogram 向 VAE latent representation 迁移的前沿。已有知识库中,[[Variational Autoencoder for TTS]] [待确认] 记录了 VAE 在 TTS 中的演进:从表现力建模 (VAE-TTS 2019) 到端到端合成 (VITS 2021),再到作为 tokenizer 的角色复兴 (LatentLM 2024)。本文延续了 "VAE 作为连续 tokenizer" 的路线,但聚焦于解决 vanilla acoustic VAE 在高维隐空间中的重建-生成困境 (reconstruction-generation dilemma)。
+> **谱系定位**: 本文处于 NAR TTS 从 mel spectrogram 向 VAE latent representation 迁移的前沿。已有知识库中,[[VariationalAutoencoderforTTS]] [待确认] 记录了 VAE 在 TTS 中的演进:从表现力建模 (VAE-TTS 2019) 到端到端合成 (VITS 2021),再到作为 tokenizer 的角色复兴 (LatentLM 2024)。本文延续了 "VAE 作为连续 tokenizer" 的路线,但聚焦于解决 vanilla acoustic VAE 在高维隐空间中的重建-生成困境 (reconstruction-generation dilemma)。
 >
-> **已有认知**: [[Conditional Flow Matching]] (confirmed) 详细记录了 F5-TTS 等系统如何用 flow matching 生成 mel spectrogram 或 VAE latent。[[Semantic vs Acoustic Tokens]] (confirmed) 揭示了 semantic 与 acoustic 表征的核心 trade-off,且指出"没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果"——本文正是试图在连续 latent 空间中缓解这一矛盾。[[Self-Supervised Speech Representation]] [待确认] 记录了 WavLM 的层级信息分离特性 (bottom → speaker, top → content),以及 SSL 中间层编码丰富韵律信息的发现,这与本文选择 WavLM 第 23 层作为语义对齐目标的决策直接相关。[[Codec Training Objectives]] [待确认] 系统记录了 reconstruction + adversarial + feature matching + VQ 的经典训练目标组合,本文在此基础上新增了 semantic alignment loss。
+> **已有认知**: [[ConditionalFlowMatching]] (confirmed) 详细记录了 F5-TTS 等系统如何用 flow matching 生成 mel spectrogram 或 VAE latent。[[SemanticvsAcousticTokens]] (confirmed) 揭示了 semantic 与 acoustic 表征的核心 trade-off,且指出"没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果"——本文正是试图在连续 latent 空间中缓解这一矛盾。[[Self-SupervisedSpeechRepresentation]] [待确认] 记录了 WavLM 的层级信息分离特性 (bottom → speaker, top → content),以及 SSL 中间层编码丰富韵律信息的发现,这与本文选择 WavLM 第 23 层作为语义对齐目标的决策直接相关。[[CodecTrainingObjectives]] [待确认] 系统记录了 reconstruction + adversarial + feature matching + VQ 的经典训练目标组合,本文在此基础上新增了 semantic alignment loss。
 >
 > **创新判断**: 已有知识库中,semantic alignment 用于离散 codec (SpeechTokenizer 的语义蒸馏) 和 DiT 加速 (Choi et al., 2025) 已有记录,但将 semantic regularization 引入连续 VAE latent space 并验证其改善下游 flow matching TTS 性能,是本文的独特贡献。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[CodecTrainingObjectives]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -87,7 +87,7 @@ Semantic-VAE 的训练框架包含三个组件 [Fig 2]:
 - 全层平均 (Avg.): WER 2.31%, SIM 0.63 — 引入更多信息但也增加冗余 [论文原文]
 - **第 23 层**: WER 2.10%, SIM 0.64 — 在 SUPERB benchmark 中该层对 WER 权重最高,提供最丰富的语义表征,实现 WER-SIM 最优 trade-off [论文原文]
 
-这一发现与 KB 中 [[Self-Supervised Speech Representation]] 页面记录的 "SSL 中间层已编码丰富的韵律信息; 如果需要 prosody-aware tokens,应选择中间层而非最后层" 完全吻合 [agent 解读]。
+这一发现与 KB 中 [[Self-SupervisedSpeechRepresentation]] 页面记录的 "SSL 中间层已编码丰富的韵律信息; 如果需要 prosody-aware tokens,应选择中间层而非最后层" 完全吻合 [agent 解读]。
 
 **4. Decoder 改进: AMP Block 替代原始卷积 decoder**
 
@@ -151,7 +151,7 @@ $$L_{\text{total}} = L_{\text{VAE}} + \lambda_{\text{Align}} L_{\text{Align}}$$
 
 5. **Align MLP 的设计细节不明**: 论文提到用 Interpolation + 1D Conv 对齐 SSL 特征和 VAE latent 的时间/特征维度 [Eq. 4],但未详述 MLP 的具体配置和参数量。
 
-6. **未讨论 posterior collapse**: VAE for TTS 的经典问题 (见 KB 中 [[Variational Autoencoder for TTS]]),本文 λ_KL=0.01 极小,可能已隐式规避,但未分析 KL 项的行为。
+6. **未讨论 posterior collapse**: VAE for TTS 的经典问题 (见 KB 中 [[VariationalAutoencoderforTTS]]),本文 λ_KL=0.01 极小,可能已隐式规避,但未分析 KL 项的行为。
 
 ## 点评
 

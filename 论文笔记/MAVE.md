@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Speak, Edit, Repeat: High-Fidelity Voice Editing and Zero-Shot TTS with Cross-Attentive Mamba"
 arxiv_id: "2510.04738"
-source: "Sources/SpeakEditRepeat.pdf"
+source: "Sources/MAVE.pdf"
 authors: [Baher Mohammad, Magauiya Zhussip, Stamatios Lefkimmiatis]
 year: 2025
 venue: "arXiv preprint"
 tags: [speech-editing, zero-shot-TTS, Mamba, SSM, cross-attention, codec-LM, autoregressive, RVQ, efficiency]
-concepts: ["[[Codec Language Model]]", "[[Residual Vector Quantization]]", "[[Speech-Text Alignment]]", "[[Non-autoregressive TTS]]", "[[TTS Evaluation]]", "[[Phoneme Representation]]"]
+concepts: ["[[CodecLanguageModel]]", "[[ResidualVectorQuantization]]", "[[Speech-TextAlignment]]", "[[Non-autoregressiveTTS]]", "[[TTSEvaluation]]", "[[PhonemeRepresentation]]"]
 models: ["[[Whisper]]", "[[WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,21 +23,21 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: MAVE 属于 [[Codec Language Model]] 范式,在 X-Codec (RVQ 8 codebooks, 50 Hz) 的离散 acoustic tokens 上做自回归生成。与 VALL-E 等典型 codec LM 不同,MAVE 用 Mamba (SSM) 替换 Transformer decoder 来建模 audio token 依赖,用 cross-attention 替换 token 拼接来实现文本条件注入。这是一条"高效 backbone + 显式跨模态注意力"的路线,区别于:
+**谱系定位**: MAVE 属于 [[CodecLanguageModel]] 范式,在 X-Codec (RVQ 8 codebooks, 50 Hz) 的离散 acoustic tokens 上做自回归生成。与 VALL-E 等典型 codec LM 不同,MAVE 用 Mamba (SSM) 替换 Transformer decoder 来建模 audio token 依赖,用 cross-attention 替换 token 拼接来实现文本条件注入。这是一条"高效 backbone + 显式跨模态注意力"的路线,区别于:
 - **标准 AR codec LM** (VALL-E、VoiceCraft): Transformer decoder + text-audio 拼接,二次复杂度
 - **NAR/Flow 方法** (FluentSpeech、VoiceBox、F5-TTS): 扩散/flow matching 并行生成,牺牲时序连贯性
 - **Hybrid 方法** (CosyVoice): LLM 生成 semantic tokens + flow model 渲染 acoustic
 
 **已有认知**: 
-- [[Residual Vector Quantization]] 的层级信息结构 (前层 coarse → 后层 fine) 是 codec LM 加权 loss 设计的基础 [confirmed]
-- [[Zero-shot Speech Synthesis]] 当前 SOTA (CosyVoice 3, Seed-TTS, IndexTTS2) 的 WER/SIM 数字远优于 MAVE 的实验结果,但这些系统规模大得多 (>1B, 100K+ h 数据) [confirmed]
-- [[Speech-Text Alignment]] 归纳了 4 种 speech-text token 建模方式 (speech-only / text-only / concatenated / alternating),MAVE 的 cross-attention 方案不在这个分类中,因为它不把 text 和 audio 放入同一个序列 [待确认]
-- [[Codec Language Model]] 的"序列长度"挑战 (200-400 tokens/s vs 12 phonemes/s) 正是 MAVE 用 Mamba 替换 Transformer 的核心动机 [待确认]
-- [[Non-autoregressive TTS]] 中 FluentSpeech 作为扩散方法代表,是 MAVE 的主要 NAR 对比基线 [待确认]
+- [[ResidualVectorQuantization]] 的层级信息结构 (前层 coarse → 后层 fine) 是 codec LM 加权 loss 设计的基础 [confirmed]
+- [[Zero-shotSpeechSynthesis]] 当前 SOTA (CosyVoice 3, Seed-TTS, IndexTTS2) 的 WER/SIM 数字远优于 MAVE 的实验结果,但这些系统规模大得多 (>1B, 100K+ h 数据) [confirmed]
+- [[Speech-TextAlignment]] 归纳了 4 种 speech-text token 建模方式 (speech-only / text-only / concatenated / alternating),MAVE 的 cross-attention 方案不在这个分类中,因为它不把 text 和 audio 放入同一个序列 [待确认]
+- [[CodecLanguageModel]] 的"序列长度"挑战 (200-400 tokens/s vs 12 phonemes/s) 正是 MAVE 用 Mamba 替换 Transformer 的核心动机 [待确认]
+- [[Non-autoregressiveTTS]] 中 FluentSpeech 作为扩散方法代表,是 MAVE 的主要 NAR 对比基线 [待确认]
 
 **创新判断**: MAVE 的核心创新是将 Mamba SSM 引入 codec LM 用于音频生成,并通过 cross-attention 解决 SSM 在跨模态条件注入上的固有缺陷。这在已有 KB 背景中没有先例 — 现有 codec LM 均基于 Transformer。但需要注意,论文仅与 VoiceCraft (2024) 和 FluentSpeech (2023) 对比,未与当前更强系统 (Seed-TTS, F5-TTS, MaskGCT) 进行比较。
 
-> 检索命中: [[Residual Vector Quantization]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review), [[Non-autoregressive TTS]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[Speech-TextAlignment]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

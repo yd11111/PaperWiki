@@ -8,9 +8,9 @@ authors: [Keyu An, Zhiyu Zhang, Changfeng Gao, Yabin Li, Zhendong Peng, Haoxu Wa
 year: 2025
 venue: "arXiv"
 tags: [TTS, diffusion, autoregressive, mel-generation, continuous-features, representation-alignment, zero-shot, streaming]
-concepts: ["[[Diffusion-based TTS]]", "[[Mel Spectrogram]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Neural Vocoder]]"]
-models: ["[[CosyVoice]]", "[[CosyVoice 2]]", "[[CosyVoice 3]]", "[[SenseVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Diffusion-basedTTS]]", "[[MelSpectrogram]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]", "[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[NeuralVocoder]]"]
+models: ["[[CosyVoice]]", "[[CosyVoice2]]", "[[CosyVoice3]]", "[[SenseVoice]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,17 +20,17 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Diffusion-based TTS]][待确认], [[CosyVoice]]✓, [[Speech Tokenizer]]✓)
+> [!info] KB 背景 (基于 6 个实体页: [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[Diffusion-basedTTS]][待确认], [[CosyVoice]]✓, [[SpeechTokenizer]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speaker Embedding]], [[Diffusion-based TTS]], [[CosyVoice]], [[Speech Tokenizer]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeakerEmbedding]], [[Diffusion-basedTTS]], [[CosyVoice]], [[SpeechTokenizer]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: MELA-TTS 属于 **continuous-valued AR** 路线,与 LatentLM、CLEAR、DiTAR 同属一个新兴分支 — 直接自回归生成连续表征,绕过离散 speech tokenizer。这条路线在 KB 中被 [[Speech Tokenizer]] 页面记录为 "Continuous VAE Tokenizer" 演进线,在 [[LLM-based TTS]] 中被归为 "Continuous-valued AR (Next-Token Diffusion) 路线"。
+**谱系定位**: MELA-TTS 属于 **continuous-valued AR** 路线,与 LatentLM、CLEAR、DiTAR 同属一个新兴分支 — 直接自回归生成连续表征,绕过离散 speech tokenizer。这条路线在 KB 中被 [[SpeechTokenizer]] 页面记录为 "Continuous VAE Tokenizer" 演进线,在 [[LLM-basedTTS]] 中被归为 "Continuous-valued AR (Next-Token Diffusion) 路线"。
 
 **已有认知**:
-- [[Semantic vs Acoustic Tokens]]: 传统 discrete-token TTS 面临 semantic-acoustic 两阶段的信息损失和级联误差。MELA-TTS 的核心立场是完全绕过离散化,直接从 mel-spectrogram 端到端生成。
+- [[SemanticvsAcousticTokens]]: 传统 discrete-token TTS 面临 semantic-acoustic 两阶段的信息损失和级联误差。MELA-TTS 的核心立场是完全绕过离散化,直接从 mel-spectrogram 端到端生成。
 - [[CosyVoice]]: 同一团队(阿里巴巴)的前作,采用监督式 S3 semantic tokens + LLM + OT-CFM 的 coarse-to-fine 两阶段架构。MELA-TTS 是该团队对 tokenizer-free 路线的探索,与 CosyVoice 系列形成对照实验。
-- [[Diffusion-based TTS]]: MELA-TTS 的 diffusion module 用 DiT 架构在 mel chunk 上做去噪,属于 "两阶段中的声学生成器" 角色,但与 Diff-TTS/Grad-TTS 不同的是它接收的条件来自自回归 transformer 而非 text encoder。
-- [[Speaker Embedding]]: MELA-TTS 使用双 embedding (speaker embedding via 3D-Speaker + utterance embedding via transformer encoder),与 CosyVoice 的 x-vector 方案类似但增加了 utterance-level 建模。
+- [[Diffusion-basedTTS]]: MELA-TTS 的 diffusion module 用 DiT 架构在 mel chunk 上做去噪,属于 "两阶段中的声学生成器" 角色,但与 Diff-TTS/Grad-TTS 不同的是它接收的条件来自自回归 transformer 而非 text encoder。
+- [[SpeakerEmbedding]]: MELA-TTS 使用双 embedding (speaker embedding via 3D-Speaker + utterance embedding via transformer encoder),与 CosyVoice 的 x-vector 方案类似但增加了 utterance-level 建模。
 
 **创新判断**: MELA-TTS 的核心创新 — representation alignment module (用 ASR encoder 输出对齐 AR decoder 隐表征) — 是对 "连续表征 AR 建模困难" 这一公认挑战的直接回应。相比 DiTAR 用 flow matching head、CLEAR/LatentLM 用 VAE tokenizer,MELA-TTS 选择保留 raw mel + 用 ASR 语义监督中间表征,思路更接近 CosyVoice 的监督式 token 理念,但在连续空间而非离散空间实现。
 
@@ -164,4 +164,4 @@ MELA-TTS 由三个核心模块组成 [§2, Fig 1]:
 > 3 个 low 问题,不阻塞反向更新。方法的 WHY 解释充分,数据标注覆盖率高,KB 背景有具体谱系定位。
 > 详见 `_review/MELA-TTS-review.yml`
 
-检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speaker Embedding]], [[Diffusion-based TTS]], [[CosyVoice]], [[Speech Tokenizer]] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeakerEmbedding]], [[Diffusion-basedTTS]], [[CosyVoice]], [[SpeechTokenizer]] | 过滤: 无 | 未命中但可能相关: 无

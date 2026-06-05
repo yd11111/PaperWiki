@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "ARDM-DPO: Direct Preference Optimization for Speech Autoregressive Diffusion Models"
 arxiv_id: "2509.18928"
-source: "Sources/2509.18928.pdf"
+source: "Sources/ARDM-DPO.pdf"
 authors: [Zhijun Liu, Dongya Jia, Xiaoqiang Wang, Chenpeng Du, Shuai Wang, Zhuo Chen, Haizhou Li]
 year: 2025
 venue: "arXiv preprint"
 tags: [DPO, preference-optimization, autoregressive-diffusion, zero-shot-TTS, post-training, RLHF, continuous-representation, expressiveness, robustness]
-concepts: ["[[Next-Token Diffusion]]", "[[Differentiable Reward Optimization]]", "[[Diffusion Model]]", "[[Classifier-Free Guidance]]", "[[Score Matching]]", "[[Diffusion-based TTS]]"]
+concepts: ["[[Next-TokenDiffusion]]", "[[DifferentiableRewardOptimization]]", "[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[ScoreMatching]]", "[[Diffusion-basedTTS]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ + 4 个待确认实体页: [[Next-Token Diffusion]], [[Differentiable Reward Optimization]], [[Diffusion-based TTS]], [[Classifier-Free Guidance]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ + 4 个待确认实体页: [[Next-TokenDiffusion]], [[DifferentiableRewardOptimization]], [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: TTS 领域的 RL/偏好优化已形成多条路线: (1) 音频级 RL (Seed-TTS 的 REINFORCE, 2024); (2) utterance-level DPO (SpeechAlign, 2024); (3) token-level 选择性 DPO (FPO, 2025); (4) token-level 可微优化 (DiffRO/CosyVoice 3, 2025); (5) GRPO (Multi-Reward GRPO, TTS-1, 2025); (6) DDPM 去噪 MDP 上的 RL (DLPO, 2025)。这些工作几乎全部针对**离散 token AR** 或 **NAR diffusion** 系统。ARDM-DPO 开辟了第七条路线: 首次将 DPO 适配到**连续 token 自回归扩散模型 (ARDM)**,填补了 next-token diffusion 范式下的偏好对齐空白。
 >
-> **已有认知**: [[Next-Token Diffusion]] 页 [待确认] 记录了 ARDM 的核心机制 — 在 causal Transformer 每个位置上挂 diffusion/flow head 逐 token 生成连续 latent。代表模型: LatentLM → CLEAR → VibeVoice → SemaVoice。但该页未提及 DiTAR (本文的 base model),也未记录任何 ARDM 上的 RL/DPO 工作。[[Differentiable Reward Optimization]] 页 [待确认] 记录了完整的 TTS RL 演进线,其中 Diffusion-DPO (Wallace et al., CVPR 2024) 是本文方法的直接前驱 — 将 DPO 扩展到 sequence-level diffusion model。ARDM-DPO 的技术贡献在于将 Diffusion-DPO 进一步适配到 token-level autoregressive diffusion 的马尔可夫链结构。
+> **已有认知**: [[Next-TokenDiffusion]] 页 [待确认] 记录了 ARDM 的核心机制 — 在 causal Transformer 每个位置上挂 diffusion/flow head 逐 token 生成连续 latent。代表模型: LatentLM → CLEAR → VibeVoice → SemaVoice。但该页未提及 DiTAR (本文的 base model),也未记录任何 ARDM 上的 RL/DPO 工作。[[DifferentiableRewardOptimization]] 页 [待确认] 记录了完整的 TTS RL 演进线,其中 Diffusion-DPO (Wallace et al., CVPR 2024) 是本文方法的直接前驱 — 将 DPO 扩展到 sequence-level diffusion model。ARDM-DPO 的技术贡献在于将 Diffusion-DPO 进一步适配到 token-level autoregressive diffusion 的马尔可夫链结构。
 >
 > **创新判断**: 对比 KB 中已有的 TTS 偏好优化工作,ARDM-DPO 的独特性在于: (a) 对象是连续 token ARDM 而非离散 token LM 或 NAR diffusion; (b) 推导了完整的 ARDM-specific DPO 目标函数,处理了 token 维度和 diffusion 维度的双重边际化; (c) 首次为 DiTAR 级别的 SOTA zero-shot TTS 引入偏好对齐。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Next-Token Diffusion]], [[Differentiable Reward Optimization]], [[Diffusion-based TTS]], [[Classifier-Free Guidance]] | 过滤: 无 | 未命中但可能相关: [[F0 Modeling]](pending-review, 与 Task A expressiveness 相关)
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Next-TokenDiffusion]], [[DifferentiableRewardOptimization]], [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]] | 过滤: 无 | 未命中但可能相关: [[F0Modeling]](pending-review, 与 Task A expressiveness 相关)
 
 ## 速查
 
@@ -191,4 +191,4 @@ $$L = E_{t \sim U(0,1)} \left[ \log \sigma \left( d^{-1}\beta E_n[\text{ref loss
 
 ---
 
-检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Next-Token Diffusion]][待确认], [[Differentiable Reward Optimization]][待确认], [[Diffusion-based TTS]][待确认], [[Classifier-Free Guidance]][待确认] | 过滤: 无 | 未命中但可能相关: [[F0 Modeling]](pending-review)
+检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Next-TokenDiffusion]][待确认], [[DifferentiableRewardOptimization]][待确认], [[Diffusion-basedTTS]][待确认], [[Classifier-FreeGuidance]][待确认] | 过滤: 无 | 未命中但可能相关: [[F0Modeling]](pending-review)

@@ -8,9 +8,9 @@ authors: [Jingyuan Xing, Mingru Yang, Zhipeng Li, Xiaofen Xing, Xiangmin Xu]
 year: 2025
 venue: "arXiv"
 tags: [zero-shot-TTS, autoregressive, speech-representation, token-rate, discrete-continuous, RVQ, dual-representation]
-concepts: ["[[Residual Vector Quantization]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Neural Vocoder]]", "[[Codec Language Model]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[TokenRateandBitrateTrade-offs]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[NeuralVocoder]]", "[[CodecLanguageModel]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/wav2vec2.0|wav2vec 2.0]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: [LibriTTS]
 kb_context_sources: 6
 status: draft
@@ -20,19 +20,19 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓, [[Token Rate and Bitrate Trade-offs]][待确认])
+> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓, [[TokenRateandBitrateTrade-offs]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: BridgeCode/BridgeTTS 位于 LLM-based TTS 的 AR codec language model 路线上,直接针对 AR TTS 中 token rate 与合成质量的固有 trade-off。在 [[Token Rate and Bitrate Trade-offs]][待确认] 概念页记录的典型参数范围中,现有 AR TTS 系统的 token rate 通常在 25-50 Hz (CosyVoice 25 Hz, VALL-E/EnCodec 50 Hz),BridgeTTS 的 10 Hz 是已知最低的 AR TTS token rate。
+**谱系定位**: BridgeCode/BridgeTTS 位于 LLM-based TTS 的 AR codec language model 路线上,直接针对 AR TTS 中 token rate 与合成质量的固有 trade-off。在 [[TokenRateandBitrateTrade-offs]][待确认] 概念页记录的典型参数范围中,现有 AR TTS 系统的 token rate 通常在 25-50 Hz (CosyVoice 25 Hz, VALL-E/EnCodec 50 Hz),BridgeTTS 的 10 Hz 是已知最低的 AR TTS token rate。
 
 **已有认知**:
-- [[Residual Vector Quantization]] 覆盖了 RVQ 的多种变体 (GVQ/MSRVQ/CSRVQ 等),BridgeCode 使用的 hierarchical RVQ (将 2304d 向量分 3 组,每组 3 级 RVQ) 接近 GVQ 的分组量化思路,但独特之处在于只保留每组第一层 index 实现极端压缩。
-- [[Speech Tokenizer]] 中的 continuous VAE tokenizer 路线 (LatentLM/CLEAR/VibeVoice) 是解决 rate-quality trade-off 的另一条路线——完全绕过离散量化,BridgeCode 则保留离散 token 但通过 bridging module 恢复连续特征,是一种"两者共存"的折中。
-- [[Semantic vs Acoustic Tokens]] 的核心二分法在 BridgeCode 中以另一种形式出现: sparse tokens (压缩自监督表征) vs dense continuous features (完整声学),通过 SparseBridge/DenseBridge 双向转换。
+- [[ResidualVectorQuantization]] 覆盖了 RVQ 的多种变体 (GVQ/MSRVQ/CSRVQ 等),BridgeCode 使用的 hierarchical RVQ (将 2304d 向量分 3 组,每组 3 级 RVQ) 接近 GVQ 的分组量化思路,但独特之处在于只保留每组第一层 index 实现极端压缩。
+- [[SpeechTokenizer]] 中的 continuous VAE tokenizer 路线 (LatentLM/CLEAR/VibeVoice) 是解决 rate-quality trade-off 的另一条路线——完全绕过离散量化,BridgeCode 则保留离散 token 但通过 bridging module 恢复连续特征,是一种"两者共存"的折中。
+- [[SemanticvsAcousticTokens]] 的核心二分法在 BridgeCode 中以另一种形式出现: sparse tokens (压缩自监督表征) vs dense continuous features (完整声学),通过 SparseBridge/DenseBridge 双向转换。
 
-**创新判断**: BridgeCode 的核心创新不是设计新 codec/tokenizer,而是在已有表征 (wav2vec 2.0 features) 基础上增加双向 bridging 模块,使 AR 循环内可以用 10 Hz sparse tokens 做高效预测,同时通过 DenseBridge 恢复 50 Hz dense features 供 vocoder 使用。feature loss 作为补充监督信号的思路与 MELLE (连续 mel 预测) 异曲同工,但 BridgeTTS 保留了离散+连续双重训练目标。相比 [[LLM-based TTS]] 中记录的 Hybrid 架构 (LLM + Flow),BridgeTTS 不使用 flow/diffusion 后处理,而是直接用 learned bridging module 实现 sparse-to-dense 转换。
+**创新判断**: BridgeCode 的核心创新不是设计新 codec/tokenizer,而是在已有表征 (wav2vec 2.0 features) 基础上增加双向 bridging 模块,使 AR 循环内可以用 10 Hz sparse tokens 做高效预测,同时通过 DenseBridge 恢复 50 Hz dense features 供 vocoder 使用。feature loss 作为补充监督信号的思路与 MELLE (连续 mel 预测) 异曲同工,但 BridgeTTS 保留了离散+连续双重训练目标。相比 [[LLM-basedTTS]] 中记录的 Hybrid 架构 (LLM + Flow),BridgeTTS 不使用 flow/diffusion 后处理,而是直接用 learned bridging module 实现 sparse-to-dense 转换。
 
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: [[Codec Language Model]]
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: [[CodecLanguageModel]]
 
 ## 速查
 

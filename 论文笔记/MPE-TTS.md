@@ -8,9 +8,9 @@ authors: [Zhichao Wu, Yueteng Kang, Songjun Cao, Long Ma, Qiulin Li, Qun Yang]
 year: 2025
 venue: "arXiv (Interspeech submission)"
 tags: [TTS, zero-shot, emotion, multi-modal, disentanglement, diffusion, prosody]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Speech Factorization]]", "[[Natural Language Description for TTS]]", "[[Speaker Embedding]]", "[[Diffusion-based TTS]]", "[[Global Style Tokens]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[SpeechFactorization]]", "[[NaturalLanguageDescriptionforTTS]]", "[[SpeakerEmbedding]]", "[[Diffusion-basedTTS]]", "[[GlobalStyleTokens]]"]
 models: ["GenerSpeech", "Meta-StyleSpeech", "MM-TTS"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriTTS", "MEAD-TTS"]
 kb_context_sources: 6
 status: draft
@@ -24,16 +24,16 @@ updated: 2026-06-03
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: MPE-TTS 位于 **多模态情感可控零样本 TTS** 的交叉领域。在 KB 已有认知中:
-- [[Zero-shot Speech Synthesis]] 的主流方案已演进到 LLM + 离散 token 范式 (CosyVoice, Seed-TTS 等,使用 100K+ 小时数据),MPE-TTS 采用的是更传统的 conformer encoder + diffusion decoder 路线,规模较小 (LibriTTS 585h + MEAD-TTS 36h)
-- [[Speech Factorization]] 记录了从 GST → 对抗训练 → Information bottleneck → Self-distillation 的解耦演进,MPE-TTS 采用的是 bottleneck + 输入设计的组合策略,属于中期方案
-- [[Prosody Modeling]] 梳理了显式 (FastSpeech 2 variance adaptor) 到隐式 (VAE/Flow/LLM in-context) 的韵律建模演进,MPE-TTS 的 LLM-like AR prosody predictor 介于两者之间 — 用 AR Transformer 在 VQ prosody code 上建模
-- [[Emotion Control in TTS]] [待确认] 记录了情感建模从 embedding → 层级建模 → 对抗解耦 → DPO → 球面向量的演进,MPE-TTS 的 Emotion2Vec + CLIP adapter 多模态方案是该维度的新扩展
-- [[Natural Language Description for TTS]] [待确认] 梳理了从 PromptTTS → InstructTTS → Parler-TTS 的文本描述路线,MPE-TTS 进一步将描述扩展到图像和语音模态
-- [[Speaker Embedding]] 记录了 ECAPA-TDNN 作为当前最常用的 speaker encoder,MPE-TTS 也采用类似架构
+- [[Zero-shotSpeechSynthesis]] 的主流方案已演进到 LLM + 离散 token 范式 (CosyVoice, Seed-TTS 等,使用 100K+ 小时数据),MPE-TTS 采用的是更传统的 conformer encoder + diffusion decoder 路线,规模较小 (LibriTTS 585h + MEAD-TTS 36h)
+- [[SpeechFactorization]] 记录了从 GST → 对抗训练 → Information bottleneck → Self-distillation 的解耦演进,MPE-TTS 采用的是 bottleneck + 输入设计的组合策略,属于中期方案
+- [[ProsodyModeling]] 梳理了显式 (FastSpeech 2 variance adaptor) 到隐式 (VAE/Flow/LLM in-context) 的韵律建模演进,MPE-TTS 的 LLM-like AR prosody predictor 介于两者之间 — 用 AR Transformer 在 VQ prosody code 上建模
+- [[EmotionControlinTTS]] [待确认] 记录了情感建模从 embedding → 层级建模 → 对抗解耦 → DPO → 球面向量的演进,MPE-TTS 的 Emotion2Vec + CLIP adapter 多模态方案是该维度的新扩展
+- [[NaturalLanguageDescriptionforTTS]] [待确认] 梳理了从 PromptTTS → InstructTTS → Parler-TTS 的文本描述路线,MPE-TTS 进一步将描述扩展到图像和语音模态
+- [[SpeakerEmbedding]] 记录了 ECAPA-TDNN 作为当前最常用的 speaker encoder,MPE-TTS 也采用类似架构
 
 **创新判断**: 与 KB 已有的情感控制方案 (EmoCtrl-TTS 的帧级 arousal-valence, EmoSphere-TTS 的球面向量, Daisy-TTS 的韵律嵌入分解) 相比,MPE-TTS 的独特之处在于 **多模态情感输入** (文本/图像/语音三选一) + **Emotion2Vec 作为统一情感锚点**。但在解耦精细度和数据规模上不如前沿系统。
 
-> 检索命中: [[Prosody Modeling]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[SpeechFactorization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

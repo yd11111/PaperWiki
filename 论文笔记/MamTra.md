@@ -8,9 +8,9 @@ authors: [Tan Dat Nguyen, Sangmin Bae, Joon Son Chung, Ji-Hoon Kim]
 year: 2026
 venue: "Interspeech 2026 (submitted)"
 tags: [TTS, hybrid-architecture, Mamba, SSM, Transformer, knowledge-distillation, efficiency, LLM-based-TTS]
-concepts: ["[[LLM-based TTS]]", "[[Non-autoregressive TTS]]", "[[Speech Language Model]]", "[[Attention-based TTS]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[SpeechLanguageModel]]", "[[Attention-basedTTS]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 5
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个实体页: [[LLM-based TTS]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Codec Language Model]], [[Speech Language Model]]✓, [[SEED-TTS-Eval]]✓)
+> [!info] KB 背景 (基于 5 个实体页: [[LLM-basedTTS]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[CodecLanguageModel]], [[SpeechLanguageModel]]✓, [[SEED-TTS-Eval]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: MamTra 处于 LLM-based TTS 的效率优化分支。当前 LLM-based TTS 主流路线(VALL-E, CosyVoice 系列, Llasa)均依赖自回归 Transformer backbone,带来 O(L^2) 复杂度和大 KV cache 问题。已有两类优化方向: (1) 推理优化(GQA, KV cache compression, speculative decoding),本质不改变 attention 的二次复杂度; (2) 架构替代,用 Mamba 等线性模型替换 attention,但纯 Mamba 在 TTS 中尚未被系统研究。MamTra 属于第 (2) 类,且是首个系统研究 Mamba-Transformer 混合架构在 TTS 中的工作。
 >
-> **已有认知**: KB 中 [[LLM-based TTS]] 已记录 Hybrid 趋势(LLM + Flow/Diffusion),但尚未涉及 Mamba 替代 attention 层的效率优化方向。CosyVoice 2 作为 baseline 在 KB 中有详细记录(WER 2.57% test-en, CER 1.45% test-zh on SEED-TTS-Eval),且已知其使用 Qwen2.5 backbone。Zonos-v0.1 是唯一已有的混合 TTS 系统但细节未公开。
+> **已有认知**: KB 中 [[LLM-basedTTS]] 已记录 Hybrid 趋势(LLM + Flow/Diffusion),但尚未涉及 Mamba 替代 attention 层的效率优化方向。CosyVoice 2 作为 baseline 在 KB 中有详细记录(WER 2.57% test-en, CER 1.45% test-zh on SEED-TTS-Eval),且已知其使用 Qwen2.5 backbone。Zonos-v0.1 是唯一已有的混合 TTS 系统但细节未公开。
 >
 > **创新判断**: MamTra 的核心新颖性在于: (1) 首次系统地探索 Mamba 在 TTS backbone 中的位置和比例; (2) 提出从预训练 Transformer 到 Mamba 的结构化权重转移(Q→C, K→B, V→x 映射); (3) 仅用 2% 训练数据通过蒸馏恢复性能。这填补了 KB 中"LLM-based TTS 效率优化"维度的空白。
 >
-> 检索命中: [[LLM-based TTS]](confirmed), [[模型库/CosyVoice 2|CosyVoice 2]](confirmed), [[Speech Language Model]](confirmed), [[SEED-TTS-Eval]](confirmed) | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]](confirmed), [[模型库/CosyVoice2|CosyVoice 2]](confirmed), [[SpeechLanguageModel]](confirmed), [[SEED-TTS-Eval]](confirmed) | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -169,7 +169,7 @@ Ablation [Table 4] 表明: 去除 L_CE 导致最严重的 WER 退化(3.48→6.70
 - **与 Zonos 对比不公平**: Zonos 是 1.6B/46层/200kh 的模型,MamTra 是 0.5B/24层/0.5kh 微调,模型规模和数据量差异巨大,Table 3 的直接对比需审慎解读
 - **缺少端到端延迟**: 论文仅报告 VRAM 和 FLOPs,未报告实际推理速度(tokens/sec)或首 token 延迟
 
-**在知识库中的定位**: 这篇论文填补了 [[LLM-based TTS]] 在**架构效率优化**维度的空白。之前 KB 中的效率优化主要是推理层面(speculative decoding, KV cache compression),MamTra 首次提供了**架构层面**的替代方案。其 Attention→Mamba 权重映射技术也为其他语音任务(ASR, 对话)中的模型压缩提供了可复用思路。
+**在知识库中的定位**: 这篇论文填补了 [[LLM-basedTTS]] 在**架构效率优化**维度的空白。之前 KB 中的效率优化主要是推理层面(speculative decoding, KV cache compression),MamTra 首次提供了**架构层面**的替代方案。其 Attention→Mamba 权重映射技术也为其他语音任务(ASR, 对话)中的模型压缩提供了可复用思路。
 
 ## 可复用的 idea
 

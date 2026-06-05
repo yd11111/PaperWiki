@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "InstructTTSEval: Benchmarking Complex Natural-Language Instruction Following in Text-to-Speech Systems"
 arxiv_id: "2506.16381"
-source: "https://arxiv.org/abs/2506.16381"
+source: "Sources/InstructTTSEval.pdf"
 authors: [Kexin Huang, Qian Tu, Liwei Fan, Chenchen Yang, Dong Zhang, Shimin Li, Zhaoye Fei, Qinyuan Cheng, Xipeng Qiu]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, evaluation, benchmark, instruction-following, controllability, style-control, paralinguistic, LLM-as-judge]
-concepts: ["[[TTS Evaluation]]", "[[Natural Language Description for TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+concepts: ["[[TTSEvaluation]]", "[[NaturalLanguageDescriptionforTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -25,11 +25,11 @@ updated: 2026-06-03
 >
 > **谱系定位**: 本文位于 TTS Evaluation 的最新演进节点 — 专门面向 instruction-following 能力的评估。在已有评估工作线中,TTS 评估经历了 WER/SIM 客观指标 → MOS 主观评估 → TTSDS 分布级评估 → LLM-as-Judge → Responsible Evaluation 框架 → SpeechJudge 自然度 GRM → TTS-PRISM 多维诊断的演进。InstructTTSEval 填补的是"指令遵循度"这一维度 — 之前的评估体系几乎不涉及。
 >
-> **已有认知**: [[Instruction-Guided Speech Synthesis]] [待确认] 概念页已记录 VoxInstruct、CosyVoice 等系统的指令控制方法,并指出"评估: 传统指标难以衡量指令遵循度"是关键挑战。[[Natural Language Description for TTS]] [待确认] 记录了从 PromptTTS 到 Parler-TTS 的描述控制演进,指出"描述与语音的匹配度难以自动量化"的技术挑战。[[TTS Evaluation]] [待确认] 详细记录了 WER/SIM/MOS 等指标的局限,以及 LLM-as-Judge 等新兴方法。[[Instructed Speech Generation]] (confirmed) 明确列出"缺乏标准化的 style controllability benchmark"为开放问题。
+> **已有认知**: [[Instruction-GuidedSpeechSynthesis]] [待确认] 概念页已记录 VoxInstruct、CosyVoice 等系统的指令控制方法,并指出"评估: 传统指标难以衡量指令遵循度"是关键挑战。[[NaturalLanguageDescriptionforTTS]] [待确认] 记录了从 PromptTTS 到 Parler-TTS 的描述控制演进,指出"描述与语音的匹配度难以自动量化"的技术挑战。[[TTSEvaluation]] [待确认] 详细记录了 WER/SIM/MOS 等指标的局限,以及 LLM-as-Judge 等新兴方法。[[InstructedSpeechGeneration]] (confirmed) 明确列出"缺乏标准化的 style controllability benchmark"为开放问题。
 >
 > **创新判断**: 相比已有 style description datasets (TextrolSpeech 5 标签, SpeechCraft 8 标签, ParaSpeechCraft 11 标签) 和 general TTS evaluation benchmarks,InstructTTSEval 首次构建了分层级 (APS/DSD/RP) 的指令遵循评估框架,从细粒度声学参数到抽象角色扮演,覆盖 12 个副语言特征,且使用 free-form 而非 fixed-tag 标注。Gemini-as-a-Judge 方案也是首次在指令遵循 TTS 评估中系统验证。
 >
-> 检索命中: [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -8,7 +8,7 @@ authors: [Peijie Chen, Wenhao Guan, Kaidi Wang, Weijie Wu, Hukai Huang, Qingyang
 year: 2025
 venue: "arXiv (Interspeech submission)"
 tags: [audio-codec, single-codebook, VQ, product-quantization, dual-stage-training, speech-reconstruction]
-concepts: ["[[Residual Vector Quantization]]", "[[Single-codebook vs Multi-codebook]]", "[[Codebook Collapse]]", "[[Codec Training Objectives]]", "[[Speech Tokenizer]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[Single-codebookvsMulti-codebook]]", "[[CodebookCollapse]]", "[[CodecTrainingObjectives]]", "[[SpeechTokenizer]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: []
 datasets: ["LibriSpeech", "LJSpeech"]
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Residual Vector Quantization]], [[Codebook Collapse]], [[Speech Tokenizer]], [[模型库/EnCodec|EnCodec]]; 2 个待确认: [[Single-codebook vs Multi-codebook]][待确认], [[Codec Training Objectives]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[ResidualVectorQuantization]], [[CodebookCollapse]], [[SpeechTokenizer]], [[模型库/EnCodec|EnCodec]]; 2 个待确认: [[Single-codebookvsMulti-codebook]][待确认], [[CodecTrainingObjectives]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
 ### 谱系定位
@@ -38,7 +38,7 @@ DS-Codec 位于 **single-codebook neural speech codec** 的演进线上。这条
 
 与现有工作的区别: (1) 训练策略的方向反转: 先镜像后非镜像,而非 APCodec+ 的先联合后 decoder; (2) 保留第一阶段 decoder 权重而非重新初始化; (3) 在 PQ 方案中用 4 个小码本 (16x16x16x16=65536) 替代单个大码本。
 
-> 检索命中: [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Speech Tokenizer]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Training Objectives]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[SpeechTokenizer]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[CodecTrainingObjectives]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -167,4 +167,4 @@ DS-Codec 提出了一个简洁且有实验支撑的训练策略: 利用镜像结
 
 ---
 
-检索命中: [[Residual Vector Quantization]], [[Codebook Collapse]], [[Speech Tokenizer]], [[模型库/EnCodec|EnCodec]] | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Training Objectives]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[CodebookCollapse]], [[SpeechTokenizer]], [[模型库/EnCodec|EnCodec]] | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[CodecTrainingObjectives]](pending-review) | 未命中但可能相关: 无

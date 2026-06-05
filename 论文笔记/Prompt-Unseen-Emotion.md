@@ -8,7 +8,7 @@ authors: [Xiaoxue Gao, Huayun Zhang, Nancy F. Chen]
 year: 2025
 venue: "arXiv (Interspeech 2025 投稿)"
 tags: [TTS, emotion, zero-shot, mixed-emotion, LLM-based, prompt-learning, in-context-learning, CosyVoice, Plutchik]
-concepts: ["[[Emotion Control in TTS]]", "[[LLM-based TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Natural Language Description for TTS]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[LLM-basedTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[NaturalLanguageDescriptionforTTS]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]]; 4 个待确认实体页: [[Emotion Control in TTS]], [[Instruction-Guided Speech Synthesis]], [[Natural Language Description for TTS]], [[Conditional Flow Matching]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]]; 4 个待确认实体页: [[EmotionControlinTTS]], [[Instruction-GuidedSpeechSynthesis]], [[NaturalLanguageDescriptionforTTS]], [[ConditionalFlowMatching]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: PUE 处于**混合情感 TTS** 这一子领域,在 [[Emotion Control in TTS]] [待确认] 的演进线上位于: 离散情感标签 (Tacotron, 2020) → Plutchik 结构模型 + 韵律嵌入分解 ([[论文笔记/Daisy-TTS|Daisy-TTS]], 2024) → VITS-based rank scheme 混合情感 (Zhou et al., 2022) → **LLM prompt-based 混合情感 (PUE, 2025)**。PUE 是混合情感 TTS 中首次使用 LLM in-context learning 能力的工作。架构上基于 [[模型库/CosyVoice|CosyVoice]] (confirmed) 的 LLM + flow-matching + HiFi-GAN pipeline,属于 [[LLM-based TTS]] (confirmed) 的 hybrid 路线。
+> **谱系定位**: PUE 处于**混合情感 TTS** 这一子领域,在 [[EmotionControlinTTS]] [待确认] 的演进线上位于: 离散情感标签 (Tacotron, 2020) → Plutchik 结构模型 + 韵律嵌入分解 ([[论文笔记/Daisy-TTS|Daisy-TTS]], 2024) → VITS-based rank scheme 混合情感 (Zhou et al., 2022) → **LLM prompt-based 混合情感 (PUE, 2025)**。PUE 是混合情感 TTS 中首次使用 LLM in-context learning 能力的工作。架构上基于 [[模型库/CosyVoice|CosyVoice]] (confirmed) 的 LLM + flow-matching + HiFi-GAN pipeline,属于 [[LLM-basedTTS]] (confirmed) 的 hybrid 路线。
 >
-> **已有认知**: KB 中 [[LLM-based TTS]] (confirmed) 已系统梳理了 LLM-based TTS 的核心设计 (离散 token、两阶段生成、in-context learning),并将 CosyVoice 归类为 "LLM + Flow/Diffusion hybrid" 路线。[[模型库/CosyVoice|CosyVoice]] (confirmed) 记录了 S3 supervised semantic tokenizer + LLM + OT-CFM 的具体架构和 CosyVoice-Instruct 变体。[[Speech Tokenizer]] (confirmed) 分析了监督式 semantic tokenizer 的设计权衡。[[Emotion Control in TTS]] [待确认] 中 Daisy-TTS 的条目已记录了基于 Plutchik 模型的韵律嵌入分解方法,Zhou et al. (2022) 的 VITS-based rank scheme 是唯一的 prior work for mixed-emotion TTS。
+> **已有认知**: KB 中 [[LLM-basedTTS]] (confirmed) 已系统梳理了 LLM-based TTS 的核心设计 (离散 token、两阶段生成、in-context learning),并将 CosyVoice 归类为 "LLM + Flow/Diffusion hybrid" 路线。[[模型库/CosyVoice|CosyVoice]] (confirmed) 记录了 S3 supervised semantic tokenizer + LLM + OT-CFM 的具体架构和 CosyVoice-Instruct 变体。[[SpeechTokenizer]] (confirmed) 分析了监督式 semantic tokenizer 的设计权衡。[[EmotionControlinTTS]] [待确认] 中 Daisy-TTS 的条目已记录了基于 Plutchik 模型的韵律嵌入分解方法,Zhou et al. (2022) 的 VITS-based rank scheme 是唯一的 prior work for mixed-emotion TTS。
 >
 > **创新判断**: 相比 KB 中已有知识,PUE 的关键新贡献是: (1) 将混合情感建模从 VITS 架构的 rank-based 方案升级到 LLM-based 架构的 prompt-based 方案,利用 LLM 的 in-context learning 而非手工设计的混合机制; (2) 通过 emotion-guided prompt (α/β/γ/ε/λ 百分比) 实现训练时单一情感、推理时任意混合,是一种 zero-shot compositionality; (3) 比 Daisy-TTS 的 PCA 分解更简洁直接 — 不需要额外的 embedding 空间操作,直接通过 prompt 文本控制。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Conditional Flow Matching]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[ConditionalFlowMatching]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -168,4 +168,4 @@ $$L_{PUE} = KL(P_\theta || P) = E_{d_i \sim D_e} \left[ p(s_i | EP, t_i) \log \f
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Conditional Flow Matching]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[ConditionalFlowMatching]](pending-review) | 未命中但可能相关: 无

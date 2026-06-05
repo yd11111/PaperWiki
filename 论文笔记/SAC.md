@@ -8,9 +8,9 @@ authors: [Wenxi Chen, Xinsheng Wang, Ruiqi Yan, Yushen Chen, Zhikang Niu, Ziyang
 year: 2025
 venue: "arXiv"
 tags: [audio-codec, speech-tokenizer, disentanglement, dual-stream, semantic-acoustic, single-codebook, LLM-TTS, VQ-GAN]
-concepts: ["[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]", "[[Speech Factorization]]", "[[Residual Vector Quantization]]", "[[Codec Training Objectives]]", "[[Codebook Collapse]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Speaker Embedding]]", "[[Multi-scale STFT Discriminator]]"]
+concepts: ["[[SemanticvsAcousticTokens]]", "[[SpeechTokenizer]]", "[[SpeechFactorization]]", "[[ResidualVectorQuantization]]", "[[CodecTrainingObjectives]]", "[[CodebookCollapse]]", "[[Single-codebookvsMulti-codebook]]", "[[TokenRateandBitrateTrade-offs]]", "[[SpeakerEmbedding]]", "[[Multi-scaleSTFTDiscriminator]]"]
 models: ["[[EnCodec]]", "[[SoundStream]]", "[[HuBERT]]", "[[WavLM]]"]
-tasks: ["[[Neural Audio Compression]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,19 +20,19 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]], [[Neural Audio Compression]], [[Speech Factorization]], [[LLM-based TTS]], [[Residual Vector Quantization]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SemanticvsAcousticTokens]], [[SpeechTokenizer]], [[NeuralAudioCompression]], [[SpeechFactorization]], [[LLM-basedTTS]], [[ResidualVectorQuantization]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: SAC 处于语音 tokenizer 演进的"dual-stream 显式解耦"节点。在 [[Semantic vs Acoustic Tokens]] 的核心 trade-off 中,已有方案分三类:(1) 混合 tokenizer 路线 (SpeechTokenizer 用 RVQ 第一层蒸馏 HuBERT;Mimi 用单 VQ 语义 + RVQ 声学;LM-SPT 用 dual encoder + Split RVQ);(2) 语义注入路线 (X-Codec/XY-Tokenizer 在量化前融合语义-声学);(3) 语义-声学分流但不彻底 (SemantiCodec 用 AudioMAE 分离但残留显著声学信息)。SAC 开创了第四种:"冻结语义 + 独立声学 + 解码端融合"的完全分离架构,与前三类的本质区别在于:语义流完全不参与声学重建优化,声学流完全不承担语义编码。
+**谱系定位**: SAC 处于语音 tokenizer 演进的"dual-stream 显式解耦"节点。在 [[SemanticvsAcousticTokens]] 的核心 trade-off 中,已有方案分三类:(1) 混合 tokenizer 路线 (SpeechTokenizer 用 RVQ 第一层蒸馏 HuBERT;Mimi 用单 VQ 语义 + RVQ 声学;LM-SPT 用 dual encoder + Split RVQ);(2) 语义注入路线 (X-Codec/XY-Tokenizer 在量化前融合语义-声学);(3) 语义-声学分流但不彻底 (SemantiCodec 用 AudioMAE 分离但残留显著声学信息)。SAC 开创了第四种:"冻结语义 + 独立声学 + 解码端融合"的完全分离架构,与前三类的本质区别在于:语义流完全不参与声学重建优化,声学流完全不承担语义编码。
 
 **已有认知**:
-- [[Speech Factorization]] 记录了从 GST → 对抗训练 → 信息瓶颈 → Self-distillation → Factorized codec → Cascaded residual 的解耦演进,SAC 在 codec 层面实现了截然不同的方案:不是后处理或训练技巧上的解耦,而是架构级的物理分离
-- [[Residual Vector Quantization]] 是主流 codec 的核心量化方式;SAC 反其道而行,每个流只用单码本(16384 entries),属于 [[Single-codebook vs Multi-codebook]] 的单码本阵营,但通过双流补偿弥补单码本表达力不足
-- [[LLM-based TTS]] 记录的 VALL-E 系 AR+NAR 两阶段在 SAC 下简化为单阶段 AR(interleaved semantic + acoustic tokens),显著降低建模复杂度
+- [[SpeechFactorization]] 记录了从 GST → 对抗训练 → 信息瓶颈 → Self-distillation → Factorized codec → Cascaded residual 的解耦演进,SAC 在 codec 层面实现了截然不同的方案:不是后处理或训练技巧上的解耦,而是架构级的物理分离
+- [[ResidualVectorQuantization]] 是主流 codec 的核心量化方式;SAC 反其道而行,每个流只用单码本(16384 entries),属于 [[Single-codebookvsMulti-codebook]] 的单码本阵营,但通过双流补偿弥补单码本表达力不足
+- [[LLM-basedTTS]] 记录的 VALL-E 系 AR+NAR 两阶段在 SAC 下简化为单阶段 AR(interleaved semantic + acoustic tokens),显著降低建模复杂度
 
 **创新判断**: SAC 的核心创新不在某个模块的改进,而在架构范式:将"如何在一个 tokenizer 中平衡语义和声学"这个公认难题转化为"根本不平衡,各司其职"。这一设计带来了迄今最干净的语义-声学解耦(semantic-only WER 3.99 vs SemantiCodec 30.67),且在重建和下游 TTS 上均取得 SOTA。
 
-> 检索命中: [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Neural Audio Compression]]✓, [[Speech Factorization]]✓, [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓ | 过滤: 无 | 未命中但可能相关: [[Codec Language Model]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review)
+> 检索命中: [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[NeuralAudioCompression]]✓, [[SpeechFactorization]]✓, [[LLM-basedTTS]]✓, [[ResidualVectorQuantization]]✓ | 过滤: 无 | 未命中但可能相关: [[CodecLanguageModel]](pending-review), [[AudioTokenizerTaxonomy]](pending-review)
 
 ## 速查
 
@@ -174,7 +174,7 @@ SAC 在 codec 类模型中遥遥领先,平均准确率超过第二名 XY-Tokeniz
 - TTS 实验中 SIM 的下降虽有帧率解释,但也可能说明双流 interleaved 方案在音色传递上存在信息损失
 - 与 CosyVoice 系列使用相似的语义 tokenizer 路线(ASR 监督),但未直接对比同源 tokenizer 的效果
 
-**对知识库的贡献**: SAC 为 [[Semantic vs Acoustic Tokens]] 的"层级建模方案"新增了"完全分离 + 解码端融合"这一新范式;为 [[Speech Factorization]] 新增了"架构级物理分离"方案;为 [[Single-codebook vs Multi-codebook]] 提供了"双流各单码本"的新 trade-off 数据点。
+**对知识库的贡献**: SAC 为 [[SemanticvsAcousticTokens]] 的"层级建模方案"新增了"完全分离 + 解码端融合"这一新范式;为 [[SpeechFactorization]] 新增了"架构级物理分离"方案;为 [[Single-codebookvsMulti-codebook]] 提供了"双流各单码本"的新 trade-off 数据点。
 
 ## 可复用的 idea
 

@@ -8,9 +8,9 @@ authors: [Ziqi Dai, Yiting Chen, Jiacheng Xu, Liufei Xie, Yuchen Wang, Zhenchuan
 year: 2025
 venue: "arXiv"
 tags: [TTS, audiobook, text-to-timbre, instruct-TTS, flow-matching, multi-speaker, emotion-control, context-aware]
-concepts: ["[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Natural Language Description for TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Classifier-Free Guidance]]", "[[Prosody Modeling]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[NaturalLanguageDescriptionforTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[Classifier-FreeGuidance]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/BigVGAN|BigVGAN]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: ["BookVoice-50h"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DeepDubbing 属于 LLM-based TTS 的 hybrid 路线(LLM + CFM),架构直接继承自 [[模型库/CosyVoice|CosyVoice]] 系列。与 CosyVoice 的核心区别在于: (1) 增加了 Text-to-Timbre (TTT) 模块,用 CFM 从文本描述生成 speaker embedding,属于 [[Natural Language Description for TTS]] 的延伸; (2) 引入 context-aware emotion-scene instructions,属于 [[Instruction-Guided Speech Synthesis]] 范畴,但特化为 audiobook 场景。
+> **谱系定位**: DeepDubbing 属于 LLM-based TTS 的 hybrid 路线(LLM + CFM),架构直接继承自 [[模型库/CosyVoice|CosyVoice]] 系列。与 CosyVoice 的核心区别在于: (1) 增加了 Text-to-Timbre (TTT) 模块,用 CFM 从文本描述生成 speaker embedding,属于 [[NaturalLanguageDescriptionforTTS]] 的延伸; (2) 引入 context-aware emotion-scene instructions,属于 [[Instruction-GuidedSpeechSynthesis]] 范畴,但特化为 audiobook 场景。
 >
 > **已有认知**:
-> - [[Conditional Flow Matching]]: OT-CFM 已被 CosyVoice、F5-TTS、MaskGCT 等广泛验证,用于 mel spectrogram 生成;DeepDubbing 的创新在于将其扩展到 speaker embedding 空间的生成(TTT 模块)
-> - [[Speaker Embedding]]: 传统方式(lookup table / speaker encoder)从音频获取;DeepDubbing 的 TTT 提出从文本描述直接生成,绕过了对参考音频的依赖
+> - [[ConditionalFlowMatching]]: OT-CFM 已被 CosyVoice、F5-TTS、MaskGCT 等广泛验证,用于 mel spectrogram 生成;DeepDubbing 的创新在于将其扩展到 speaker embedding 空间的生成(TTT 模块)
+> - [[SpeakerEmbedding]]: 传统方式(lookup table / speaker encoder)从音频获取;DeepDubbing 的 TTT 提出从文本描述直接生成,绕过了对参考音频的依赖
 > - [[模型库/CosyVoice|CosyVoice]]: LLM + OT-CFM 的 coarse-to-fine 架构,CA-Instruct-TTS 直接复用该架构并做了改造(DiT flow matching + NSF-BigVGAN vocoder)
-> - [[LLM-based TTS]]: 12 层 Transformer LLM 自回归生成 speech tokens,属于该范式的标准路线
+> - [[LLM-basedTTS]]: 12 层 Transformer LLM 自回归生成 speech tokens,属于该范式的标准路线
 >
-> **创新判断**: TTT 模块(用 CFM 从文本描述生成 speaker embedding)在 KB 中尚无先例——[[Natural Language Description for TTS]] 页面记录的 PromptTTS/InstructTTS 系列都是直接用描述条件化 TTS 模型,而非先独立生成 speaker embedding 再注入;最接近的是 DreamVoice(条件扩散模型生成 speaker embedding),但 DeepDubbing 用 OT-CFM 替代 diffusion 并增加了显式性别控制。
+> **创新判断**: TTT 模块(用 CFM 从文本描述生成 speaker embedding)在 KB 中尚无先例——[[NaturalLanguageDescriptionforTTS]] 页面记录的 PromptTTS/InstructTTS 系列都是直接用描述条件化 TTS 模型,而非先独立生成 speaker embedding 再注入;最接近的是 DreamVoice(条件扩散模型生成 speaker embedding),但 DeepDubbing 用 OT-CFM 替代 diffusion 并增加了显式性别控制。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](待确认), [[Natural Language Description for TTS]](待确认) | 未命中但可能相关: [[Prosody Modeling]], [[Emotion Control in TTS]]
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](待确认), [[NaturalLanguageDescriptionforTTS]](待确认) | 未命中但可能相关: [[ProsodyModeling]], [[EmotionControlinTTS]]
 
 ## 速查
 

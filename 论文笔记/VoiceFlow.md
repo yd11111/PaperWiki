@@ -8,7 +8,7 @@ authors: [Yiwei Guo, Chenpeng Du, Ziyang Ma, Xie Chen, Kai Yu]
 year: 2023
 venue: "ICASSP 2024"
 tags: [TTS, flow-matching, rectified-flow, acoustic-model, efficiency, NAR, mel-generation]
-concepts: ["[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]", "[[Neural Vocoder]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Diffusion-basedTTS]]", "[[DiffusionModel]]", "[[ScoreMatching]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[MelSpectrogram]]", "[[NeuralVocoder]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,11 +20,11 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Conditional Flow Matching]]✓, [[Diffusion-based TTS]]✓, [[Diffusion Model]]✓, [[Score Matching]]✓, [[Non-autoregressive TTS]]✓, [[Duration Predictor]]✓)
+> [!info] KB 背景 (基于 6 个实体页: [[ConditionalFlowMatching]]✓, [[Diffusion-basedTTS]]✓, [[DiffusionModel]]✓, [[ScoreMatching]]✓, [[Non-autoregressiveTTS]]✓, [[DurationPredictor]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Conditional Flow Matching]], [[Diffusion-based TTS]], [[Diffusion Model]], [[Score Matching]], [[Non-autoregressive TTS]], [[Duration Predictor]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]], [[Diffusion-basedTTS]], [[DiffusionModel]], [[ScoreMatching]], [[Non-autoregressiveTTS]], [[DurationPredictor]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: VoiceFlow 是 Diffusion-based TTS 向 Flow Matching 演进过程中的关键节点。在已有知识库中,Grad-TTS (Popov et al., 2021) 代表了 SDE-based diffusion TTS 的基线 [Diffusion-based TTS 页],而 [[Conditional Flow Matching]] 概念页记录了 CFM 的核心优势: 直接学习 ODE 向量场,推理步数从 50-1000 降至 4-20。VoiceFlow 正是这一演进的实证: 它首次将 rectified flow matching 应用于 TTS 声学模型,填补了从 diffusion (SDE) 到 flow matching (ODE) 之间的具体实验验证空缺。
+**谱系定位**: VoiceFlow 是 Diffusion-based TTS 向 Flow Matching 演进过程中的关键节点。在已有知识库中,Grad-TTS (Popov et al., 2021) 代表了 SDE-based diffusion TTS 的基线 [Diffusion-based TTS 页],而 [[ConditionalFlowMatching]] 概念页记录了 CFM 的核心优势: 直接学习 ODE 向量场,推理步数从 50-1000 降至 4-20。VoiceFlow 正是这一演进的实证: 它首次将 rectified flow matching 应用于 TTS 声学模型,填补了从 diffusion (SDE) 到 flow matching (ODE) 之间的具体实验验证空缺。
 
 **已有认知**: 概念库中已有 Diffusion Model → probability flow ODE → Conditional Flow Matching 的理论连接 [Diffusion Model 页 §SDE/ODE 统一视角]。Score Matching 页记录了 Grad-TTS 基于 SDE 形式化的 score 估计方法。Non-autoregressive TTS 页记录了 duration predictor + parallel generation 的基本范式。
 
@@ -165,4 +165,4 @@ VoiceFlow 是一篇方法清晰、实验设计严谨的工作。其核心价值�
 > **Issues**: 1 medium (models 字段已修正), 1 low (datasets 待数据集页创建后回填)
 > 详见 `_review/VoiceFlow-review.yml`
 
-检索命中: [[Conditional Flow Matching]], [[Diffusion-based TTS]], [[Diffusion Model]], [[Score Matching]], [[Non-autoregressive TTS]], [[Duration Predictor]] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[Diffusion-basedTTS]], [[DiffusionModel]], [[ScoreMatching]], [[Non-autoregressiveTTS]], [[DurationPredictor]] | 过滤: 无 | 未命中但可能相关: 无

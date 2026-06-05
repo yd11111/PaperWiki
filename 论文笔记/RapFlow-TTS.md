@@ -8,7 +8,7 @@ authors: [Hyun Joon Park, Jeongmin Liu, Jin Sob Kim, Jeong Yeol Yang, Sung Won H
 year: 2025
 venue: "arXiv 2025"
 tags: [TTS, flow-matching, consistency-model, few-step-generation, acoustic-model, efficiency, adversarial-learning, NAR, mel-generation]
-concepts: ["[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Mel Spectrogram]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Diffusion-basedTTS]]", "[[DiffusionModel]]", "[[ScoreMatching]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[MelSpectrogram]]"]
 models: ["[[论文笔记/VoiceFlow|VoiceFlow]]"]
 tasks: []
 datasets: ["LJSpeech", "VCTK"]
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[Conditional Flow Matching]]✓, [[Diffusion-based TTS]][待确认], [[Diffusion Model]][待确认], [[Score Matching]][待确认], [[Non-autoregressive TTS]][待确认], [[Duration Predictor]][待确认])
+> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[ConditionalFlowMatching]]✓, [[Diffusion-basedTTS]][待确认], [[DiffusionModel]][待确认], [[ScoreMatching]][待确认], [[Non-autoregressiveTTS]][待确认], [[DurationPredictor]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Conditional Flow Matching]], [[Diffusion-based TTS]], [[Diffusion Model]], [[Score Matching]], [[Non-autoregressive TTS]], [[Duration Predictor]] | 过滤: 无 | 未命中但可能相关: [[Mel Spectrogram]]
+> 检索命中: [[ConditionalFlowMatching]], [[Diffusion-basedTTS]], [[DiffusionModel]], [[ScoreMatching]], [[Non-autoregressiveTTS]], [[DurationPredictor]] | 过滤: 无 | 未命中但可能相关: [[MelSpectrogram]]
 
 **谱系定位**: RapFlow-TTS 处于 Diffusion-based TTS 向高效生成演进的最前沿。在已有知识库中,这条演进线已清晰记录: Grad-TTS (SDE-based, 2021) → VoiceFlow (rectified flow matching, 2023) → Matcha-TTS (CFM, 2024)。RapFlow-TTS 在这条线上引入了**第四个节点: consistency flow matching**,将 consistency model (Song et al., 2023) 与 flow matching 的直轨迹优势相结合。这填补了知识库中"如何在 flow matching 框架下构建有效 consistency model"的空缺。
 
-**已有认知**: [[Conditional Flow Matching]] 概念页(confirmed)已记录 CFM 的核心优势: 直接学习 ODE 向量场,推理步数从 diffusion 的 50-1000 降至 4-20。同一页还记录了 ComoSpeech 使用 consistency distillation 加速 diffusion TTS 的方案。[[论文笔记/VoiceFlow|VoiceFlow]] 精读笔记详细分析了 rectified flow 如何通过轨迹拉直实现 2 步可用合成(MOS 3.92 vs Grad-TTS 2.98)。[[Diffusion Model]] 页记录了 diffusion → probability flow ODE → flow matching 的理论连接。
+**已有认知**: [[ConditionalFlowMatching]] 概念页(confirmed)已记录 CFM 的核心优势: 直接学习 ODE 向量场,推理步数从 diffusion 的 50-1000 降至 4-20。同一页还记录了 ComoSpeech 使用 consistency distillation 加速 diffusion TTS 的方案。[[论文笔记/VoiceFlow|VoiceFlow]] 精读笔记详细分析了 rectified flow 如何通过轨迹拉直实现 2 步可用合成(MOS 3.92 vs Grad-TTS 2.98)。[[DiffusionModel]] 页记录了 diffusion → probability flow ODE → flow matching 的理论连接。
 
 **创新判断**: RapFlow-TTS 的核心新颖性在于: (1) 首次在 TTS 中引入 consistency flow matching (Yang et al., 2024),在 FM 的直轨迹上施加速度一致性约束,使 2 步合成质量逼近多步; (2) 对比知识库中已有的 VoiceFlow (rectified flow) 和 ComoSpeech (consistency distillation on diffusion),RapFlow-TTS 在理论上更优 — 在直轨迹上建一致性比在弯曲 diffusion 轨迹上建一致性更容易; (3) 五项工程改进技术(shared dropout, Huber loss, delta scheduling, adversarial learning, encoder freeze)均为首次在 consistency FM 中探索。
 
@@ -179,4 +179,4 @@ RapFlow-TTS 在"如何让 ODE-based TTS 做到极少步高质量合成"这个问
 
 ---
 
-检索命中: [[Conditional Flow Matching]]✓, [[Diffusion-based TTS]][待确认], [[Diffusion Model]][待确认], [[Score Matching]][待确认], [[Non-autoregressive TTS]][待确认], [[Duration Predictor]][待确认] | 过滤: 无 | 未命中但可能相关: [[Mel Spectrogram]]
+检索命中: [[ConditionalFlowMatching]]✓, [[Diffusion-basedTTS]][待确认], [[DiffusionModel]][待确认], [[ScoreMatching]][待确认], [[Non-autoregressiveTTS]][待确认], [[DurationPredictor]][待确认] | 过滤: 无 | 未命中但可能相关: [[MelSpectrogram]]

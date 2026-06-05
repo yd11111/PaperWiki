@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Improving Robustness of Diffusion-Based Zero-Shot Speech Synthesis via Stable Formant Generation"
 arxiv_id: "2409.09311"
-source: "Sources/StableFormant.pdf"
+source: "Sources/StableForm-TTS.pdf"
 authors: [Changjin Han, Seokgi Lee, Gyuhyeon Nam, Gyeongsu Chae]
 year: 2024
 venue: "arXiv (ICASSP format)"
 tags: [TTS, diffusion, zero-shot, source-filter, formant, robustness, pronunciation]
-concepts: ["[[Diffusion-based TTS]]", "[[Score Matching]]", "[[Speech Factorization]]", "[[Non-autoregressive TTS]]", "[[F0 Modeling]]", "[[Prosody Modeling]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]"]
+concepts: ["[[Diffusion-basedTTS]]", "[[ScoreMatching]]", "[[SpeechFactorization]]", "[[Non-autoregressiveTTS]]", "[[F0Modeling]]", "[[ProsodyModeling]]", "[[MelSpectrogram]]", "[[DurationPredictor]]"]
 models: ["[[论文笔记/StableForm-TTS|StableForm-TTS]]", "[[Grad-TTS]]", "[[Grad-StyleSpeech]]", "[[FastPitchFormant]]", "[[HiFi-GAN]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[LibriTTS]]", "[[LibriTTS-R]]", "[[VCTK]]"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: StableForm-TTS 属于 [[Diffusion-based TTS]] 范式中 Grad-TTS / Grad-StyleSpeech 一脉,是非自回归 diffusion 声学模型的改进工作。在 [[Diffusion-based TTS]] 演进链中,Grad-TTS (2021, SDE 形式化) → Grad-StyleSpeech (2023, 零样本多说话人适配) → StableForm-TTS (2024, 解决零样本场景下的发音鲁棒性)。当前领域主流已从 diffusion 转向 [[Conditional Flow Matching]] (Voicebox, Matcha-TTS, F5-TTS),且 [[Zero-shot Speech Synthesis]] 的 SOTA 由 LLM+discrete token 方案主导 (CosyVoice 3, Seed-TTS)。
+**谱系定位**: StableForm-TTS 属于 [[Diffusion-basedTTS]] 范式中 Grad-TTS / Grad-StyleSpeech 一脉,是非自回归 diffusion 声学模型的改进工作。在 [[Diffusion-basedTTS]] 演进链中,Grad-TTS (2021, SDE 形式化) → Grad-StyleSpeech (2023, 零样本多说话人适配) → StableForm-TTS (2024, 解决零样本场景下的发音鲁棒性)。当前领域主流已从 diffusion 转向 [[ConditionalFlowMatching]] (Voicebox, Matcha-TTS, F5-TTS),且 [[Zero-shotSpeechSynthesis]] 的 SOTA 由 LLM+discrete token 方案主导 (CosyVoice 3, Seed-TTS)。
 
-**已有认知**: [[Speech Factorization]] (confirmed) 页记录了语音属性解耦的主流方法 (对抗训练、信息瓶颈、self-distillation),但主要聚焦 content-timbre 解耦。StableForm-TTS 引入的是**源-滤波器 (source-filter)** 分解 — 一种物理声学层面的分解,将 excitation (源,载体声带激励/韵律) 与 formant (滤波器,声道共振/音素内容) 分离,与现有知识库中记录的统计学解耦方法正交。[[F0 Modeling]] [待确认] 中提到 SiFiSinger 也采用源滤波器模型,但应用于 SVS 而非 TTS diffusion。
+**已有认知**: [[SpeechFactorization]] (confirmed) 页记录了语音属性解耦的主流方法 (对抗训练、信息瓶颈、self-distillation),但主要聚焦 content-timbre 解耦。StableForm-TTS 引入的是**源-滤波器 (source-filter)** 分解 — 一种物理声学层面的分解,将 excitation (源,载体声带激励/韵律) 与 formant (滤波器,声道共振/音素内容) 分离,与现有知识库中记录的统计学解耦方法正交。[[F0Modeling]] [待确认] 中提到 SiFiSinger 也采用源滤波器模型,但应用于 SVS 而非 TTS diffusion。
 
 **创新判断**: 本文是首个将 source-filter theory 引入 diffusion TTS 的工作 — 核心 insight 是仅对 excitation pathway 施加 diffusion,formant pathway 绕过扩散过程直接生成,从而保护发音关键信号不被扩散随机性破坏。这与已有 diffusion TTS 方法 (Grad-TTS, ProDiff 等) 将整个 mel spectrogram 送入 diffusion 过程截然不同。
 
-> 检索命中: [[Speech Factorization]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Score Matching]](pending-review), [[F0 Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechFactorization]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[ScoreMatching]](pending-review), [[F0Modeling]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

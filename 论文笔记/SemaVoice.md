@@ -8,9 +8,9 @@ authors: [Huimeng Wang, Hui Lu, Jiajun Deng, Haoning Xu, Youjun Chen, Xueyuan Ch
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, continuous-AR, VAE, semantic-alignment, diffusion, LLM-based, patch-diffusion]
-concepts: ["[[Self-Supervised Speech Representation]]", "[[Variational Autoencoder for TTS]]", "[[Next-Token Diffusion]]", "[[Classifier-Free Guidance]]", "[[LLM-based TTS]]", "[[Diffusion-based TTS]]", "[[Semantic vs Acoustic Tokens]]"]
-models: ["[[模型库/WavLM|WavLM]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/MELLE|MELLE]]", "[[论文笔记/VoxCPM|VoxCPM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[VariationalAutoencoderforTTS]]", "[[Next-TokenDiffusion]]", "[[Classifier-FreeGuidance]]", "[[LLM-basedTTS]]", "[[Diffusion-basedTTS]]", "[[SemanticvsAcousticTokens]]"]
+models: ["[[模型库/WavLM|WavLM]]", "[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/MELLE|MELLE]]", "[[论文笔记/VoxCPM|VoxCPM]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -23,18 +23,18 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: SemaVoice 属于 [[LLM-based TTS]] 中的 **continuous-valued AR (Next-Token Diffusion) 路线**,与 [[论文笔记/LatentLM|LatentLM]]、[[论文笔记/CLEAR|CLEAR]]、[[论文笔记/VibeVoice|VibeVoice]]、[[论文笔记/VoxCPM|VoxCPM]] 同属一族。该路线的共同模式是: VAE encoder → 连续 latent → causal Transformer → per-token diffusion/flow head → VAE decoder → waveform。SemaVoice 的独特贡献点在 VAE 表示学习阶段,而非生成架构本身。
+**谱系定位**: SemaVoice 属于 [[LLM-basedTTS]] 中的 **continuous-valued AR (Next-Token Diffusion) 路线**,与 [[论文笔记/LatentLM|LatentLM]]、[[论文笔记/CLEAR|CLEAR]]、[[论文笔记/VibeVoice|VibeVoice]]、[[论文笔记/VoxCPM|VoxCPM]] 同属一族。该路线的共同模式是: VAE encoder → 连续 latent → causal Transformer → per-token diffusion/flow head → VAE decoder → waveform。SemaVoice 的独特贡献点在 VAE 表示学习阶段,而非生成架构本身。
 
 **已有认知**:
-- [[Next-Token Diffusion]] [待确认]: 该技术由 LatentLM 奠基,用 sigma-VAE + per-token DDPM head 实现单阶段连续值 AR 生成。SemaVoice 采用相同范式但将 DDPM head 替换为 patch-wise LocDiT (类似 DiTAR)。
-- [[Variational Autoencoder for TTS]] [待确认]: sigma-VAE 已在 LatentLM/CLEAR/VibeVoice 中被验证有效。SemaVoice 在 sigma-VAE 训练中引入 SFM 对齐损失作为核心创新。
-- [[Semantic vs Acoustic Tokens]]: 当前知识库已明确 semantic-acoustic trade-off 是该领域核心难题。SemaVoice 直接针对"连续表示偏向重建而忽视语义"这一变体问题提出方案。
-- [[LLM-based TTS]]: 概念页已收录该路线的演进。SemaVoice 使用 Qwen2.5-1.5B 初始化 LLM backbone,与 CosyVoice 2 的 text-based LLM 初始化策略一致。
-- [[模型库/CosyVoice 2|CosyVoice 2]]: 作为离散 AR+NAR 路线的代表 baseline,在 Seed-TTS-Eval 上 WER 2.57% (en) / CER 1.45% (zh)。
+- [[Next-TokenDiffusion]] [待确认]: 该技术由 LatentLM 奠基,用 sigma-VAE + per-token DDPM head 实现单阶段连续值 AR 生成。SemaVoice 采用相同范式但将 DDPM head 替换为 patch-wise LocDiT (类似 DiTAR)。
+- [[VariationalAutoencoderforTTS]] [待确认]: sigma-VAE 已在 LatentLM/CLEAR/VibeVoice 中被验证有效。SemaVoice 在 sigma-VAE 训练中引入 SFM 对齐损失作为核心创新。
+- [[SemanticvsAcousticTokens]]: 当前知识库已明确 semantic-acoustic trade-off 是该领域核心难题。SemaVoice 直接针对"连续表示偏向重建而忽视语义"这一变体问题提出方案。
+- [[LLM-basedTTS]]: 概念页已收录该路线的演进。SemaVoice 使用 Qwen2.5-1.5B 初始化 LLM backbone,与 CosyVoice 2 的 text-based LLM 初始化策略一致。
+- [[模型库/CosyVoice2|CosyVoice 2]]: 作为离散 AR+NAR 路线的代表 baseline,在 Seed-TTS-Eval 上 WER 2.57% (en) / CER 1.45% (zh)。
 
 **创新判断**: SemaVoice 的 SFM guided alignment 是对 VAE 表示空间的语义增强,与 Semantic-VAE (Niu et al., 2025) 的蒸馏方向类似但针对连续 AR 场景;与 VoxCPM 的 hierarchical semantic-acoustic 分层不同,SemaVoice 不引入额外的离散语义层,而是在连续表示内部注入语义结构。这是一个轻量但针对性强的设计。
 
-> 检索命中: [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[SEED-TTS-Eval]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Next-Token Diffusion]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: DiTAR (无实体页)
+> 检索命中: [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[SEED-TTS-Eval]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Next-TokenDiffusion]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: DiTAR (无实体页)
 
 ## 速查
 

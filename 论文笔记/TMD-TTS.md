@@ -8,7 +8,7 @@ authors: [Yutong Liu, Ziyue Zhang, Ban Ma-bao, Renzeng Duojie, Yuqing Cai, Yongb
 year: 2026
 venue: "ICASSP 2026 (submitted)"
 tags: [TTS, multi-dialect, low-resource, Tibetan, dynamic-routing, flow-matching, dataset-generation]
-concepts: ["[[Conditional Flow Matching]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Non-autoregressive TTS]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[MelSpectrogram]]", "[[DurationPredictor]]", "[[NeuralVocoder]]", "[[SpeakerEmbedding]]", "[[Non-autoregressiveTTS]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -23,18 +23,18 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: TMD-TTS 构建于 Matcha-TTS 之上,而 Matcha-TTS 本身使用 [[Conditional Flow Matching]] (CFM/OT-CFM) 作为生成骨架。在 TTS 知识库中,CFM 是一类以 ODE 路径代替 SDE 的高效生成范式,已被 CosyVoice、F5-TTS、MaskGCT 等大量工作采用。TMD-TTS 的特殊之处在于它并非追求零样本语音克隆或大规模预训练,而是解决低资源多方言 TTS 的方言一致性问题。
+> **谱系定位**: TMD-TTS 构建于 Matcha-TTS 之上,而 Matcha-TTS 本身使用 [[ConditionalFlowMatching]] (CFM/OT-CFM) 作为生成骨架。在 TTS 知识库中,CFM 是一类以 ODE 路径代替 SDE 的高效生成范式,已被 CosyVoice、F5-TTS、MaskGCT 等大量工作采用。TMD-TTS 的特殊之处在于它并非追求零样本语音克隆或大规模预训练,而是解决低资源多方言 TTS 的方言一致性问题。
 >
 > **已有认知**:
-> - [[Speaker Embedding]]✓ 提供了从说话人身份到嵌入向量的标准范式(lookup table / speaker encoder);TMD-TTS 的 dialect embedding 在形式上等价于 speaker embedding 的特例,不同之处在于它编码的是方言身份而非个体身份。
-> - [[Neural Vocoder]]✓ 记录了 HiFi-GAN → BigVGAN 的演进;TMD-TTS 使用 BigVGAN 作为外部 vocoder,属于典型的 semi-end-to-end 两阶段架构。
-> - [[Duration Predictor]][待确认] 描述了 NAR TTS 中从音素序列预测帧时长的标准组件;TMD-TTS 复用 Matcha-TTS 的 duration predictor。
-> - [[Mel Spectrogram]][待确认] 是 TMD-TTS 的中间表示。
+> - [[SpeakerEmbedding]]✓ 提供了从说话人身份到嵌入向量的标准范式(lookup table / speaker encoder);TMD-TTS 的 dialect embedding 在形式上等价于 speaker embedding 的特例,不同之处在于它编码的是方言身份而非个体身份。
+> - [[NeuralVocoder]]✓ 记录了 HiFi-GAN → BigVGAN 的演进;TMD-TTS 使用 BigVGAN 作为外部 vocoder,属于典型的 semi-end-to-end 两阶段架构。
+> - [[DurationPredictor]][待确认] 描述了 NAR TTS 中从音素序列预测帧时长的标准组件;TMD-TTS 复用 Matcha-TTS 的 duration predictor。
+> - [[MelSpectrogram]][待确认] 是 TMD-TTS 的中间表示。
 > - [[VITS]][待确认] 是本文实验中的 baseline 之一(以 VITS2 形式出现)。
 >
-> **创新判断**: KB 中已有的 [[Speaker Embedding]] 和 [[Conditional Flow Matching]] 都关注高资源/通用场景,对低资源多方言场景的适配方案(dialect-specific dynamic routing)尚无记录。TMD-TTS 的 DSDR-Net(public+private FFN)在形式上类似 Mixture-of-Experts 的条件计算思路,但 KB 中尚无 MoE/条件计算的专门概念页。
+> **创新判断**: KB 中已有的 [[SpeakerEmbedding]] 和 [[ConditionalFlowMatching]] 都关注高资源/通用场景,对低资源多方言场景的适配方案(dialect-specific dynamic routing)尚无记录。TMD-TTS 的 DSDR-Net(public+private FFN)在形式上类似 Mixture-of-Experts 的条件计算思路,但 KB 中尚无 MoE/条件计算的专门概念页。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Mel Spectrogram]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DurationPredictor]](pending-review), [[MelSpectrogram]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

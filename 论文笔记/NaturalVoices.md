@@ -6,16 +6,16 @@ authors: [Ali N. Salman, Zongyang Du, Shreeram Suresh Chandra, Ismail Rasim Ulge
 year: 2024
 venue: arXiv
 arxiv_id: "2406.04494"
-source: "https://arxiv.org/abs/2406.04494"
+source: "Sources/NaturalVoices.pdf"
 tags: [dataset, voice-conversion, spontaneous-speech, emotional-speech, podcast-data, data-pipeline]
 level: deep
 status: draft
 created: 2026-06-03
 updated: 2026-06-03
-concepts: ["[[Speaker Embedding]]", "[[Emotion Control in TTS]]", "[[Prosody Modeling]]"]
+concepts: ["[[SpeakerEmbedding]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
 models: []
 datasets: []
-kb_sources: ["[[Speaker Embedding]]", "[[Emotion Control in TTS]]", "[[Prosody Modeling]]"]
+kb_sources: ["[[SpeakerEmbedding]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
 
@@ -23,9 +23,9 @@ tier: deep
 
 ## KB 背景
 
-- **[[Speaker Embedding]]** [confirmed]: NaturalVoices 的 pipeline 包含说话人识别模块 (PyAnnote diarization + global speaker consolidation)，为 VC 模型提供 speaker identity 标注 [论文原文]
-- **[[Emotion Control in TTS]]** [confirmed]: 数据集包含 4 类情感标注 (neutral/sad/angry/happy) + 3 维情感属性 (arousal/dominance/valence)，可用于情感语音合成和转换 [论文原文]
-- **[[Prosody Modeling]]** [confirmed]: 自发语音数据集天然包含丰富韵律变化 (停顿、犹豫、笑声)，与朗读语音截然不同 [论文原文]
+- **[[SpeakerEmbedding]]** [confirmed]: NaturalVoices 的 pipeline 包含说话人识别模块 (PyAnnote diarization + global speaker consolidation)，为 VC 模型提供 speaker identity 标注 [论文原文]
+- **[[EmotionControlinTTS]]** [confirmed]: 数据集包含 4 类情感标注 (neutral/sad/angry/happy) + 3 维情感属性 (arousal/dominance/valence)，可用于情感语音合成和转换 [论文原文]
+- **[[ProsodyModeling]]** [confirmed]: 自发语音数据集天然包含丰富韵律变化 (停顿、犹豫、笑声)，与朗读语音截然不同 [论文原文]
 
 > [!summary] 速查
 > - **一句话**: 首个大规模自发、表达性、情感语音数据集 (3,846h, 2,467+ speakers)，附带自动化数据标注 pipeline，面向 Voice Conversion
@@ -137,4 +137,4 @@ Voice Conversion (VC) 研究长期依赖**朗读/表演语音数据集** (VCTK 4
 
 ---
 
-检索命中: [[Speaker Embedding]], [[Emotion Control in TTS]], [[Prosody Modeling]] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[SpeakerEmbedding]], [[EmotionControlinTTS]], [[ProsodyModeling]] | 过滤: 无 | 未命中但可能相关: 无

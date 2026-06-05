@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "GLM-TTS Technical Report"
 arxiv_id: "2512.14291"
-source: "https://arxiv.org/abs/2512.14291"
+source: "Sources/GLM-TTS.pdf"
 authors: [Jiayan Cui, Zhihan Yang, Naihan Li, Jiankun Tian, Xingyu Ma, Yi Zhang, Guangyu Chen, Runxuan Yang, Zijian Huang, Yuqing Cheng, Yizhi Zhou, Guochen Yu, Xiaotao Gu, Jie Tang]
 year: 2025
 venue: "Technical Report (Zhipu AI)"
 tags: [TTS, LLM, GRPO, reinforcement-learning, LoRA, vocoder, production-level, speech-tokenizer, phoneme, zero-shot, voice-cloning, emotion]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Neural Vocoder]]", "[[Differentiable Reward Optimization]]", "[[Speaker Adaptation]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[NeuralVocoder]]", "[[DifferentiableRewardOptimization]]", "[[SpeakerAdaptation]]"]
 models: []
 tasks: []
 datasets: ["[[SEED-TTS-Eval]]"]
@@ -20,21 +20,21 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Neural Vocoder]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[NeuralVocoder]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Speaker Adaptation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[SpeakerAdaptation]](pending-review) | 未命中但可能相关: 无
 
-**[[LLM-based TTS]]**: GLM-TTS 遵循 CosyVoice 开创的 "Text-to-Token AR + Token-to-Wav Diffusion" 两阶段范式。1.5B 参数,100K 小时训练数据即达 SOTA,体现了工程优化的重要性。GRPO RL 对齐方法是 LLM-based TTS 中 RL post-training 的新探索,与 Seed-TTS 的 REINFORCE 和 CosyVoice 3 的 DiffRO 形成三条 RL 路线。
+**[[LLM-basedTTS]]**: GLM-TTS 遵循 CosyVoice 开创的 "Text-to-Token AR + Token-to-Wav Diffusion" 两阶段范式。1.5B 参数,100K 小时训练数据即达 SOTA,体现了工程优化的重要性。GRPO RL 对齐方法是 LLM-based TTS 中 RL post-training 的新探索,与 Seed-TTS 的 REINFORCE 和 CosyVoice 3 的 DiffRO 形成三条 RL 路线。
 
-**[[Speech Tokenizer]]**: GLM-TTS 基于 Whisper-VQ 进行深度优化: token rate 从 12.5Hz 倍增至 25Hz、词表从 16K 扩至 32K、引入 Pitch Estimator 模块、改为非因果架构。这与 CosyVoice 系列使用 ASR encoder + FSQ 的路线不同,属于"从成熟 ASR 模型出发做 tokenizer 定制"的工程路线。
+**[[SpeechTokenizer]]**: GLM-TTS 基于 Whisper-VQ 进行深度优化: token rate 从 12.5Hz 倍增至 25Hz、词表从 16K 扩至 32K、引入 Pitch Estimator 模块、改为非因果架构。这与 CosyVoice 系列使用 ASR encoder + FSQ 的路线不同,属于"从成熟 ASR 模型出发做 tokenizer 定制"的工程路线。
 
-**[[Conditional Flow Matching]]**: GLM-TTS 的第二阶段使用 token-to-waveform diffusion model (FLOW) 从 speech tokens 合成 mel spectrogram,再经 vocoder 转为波形 [Fig 1]。与 CosyVoice 3 的 DiT-based CFM 属于同一设计范式。
+**[[ConditionalFlowMatching]]**: GLM-TTS 的第二阶段使用 token-to-waveform diffusion model (FLOW) 从 speech tokens 合成 mel spectrogram,再经 vocoder 转为波形 [Fig 1]。与 CosyVoice 3 的 DiT-based CFM 属于同一设计范式。
 
-**[[Neural Vocoder]]**: GLM-TTS 提出 Vocos2D vocoder,将 Vocos 的 1D 卷积改为 2D 卷积以改善频率子带建模,去除 MPD 仅保留 MRD,添加 discriminator augmentation (DA)。Vocos2D 在 NISQA/UTMOS/MOS 上全面优于原始 Vocos [Table 8]。
+**[[NeuralVocoder]]**: GLM-TTS 提出 Vocos2D vocoder,将 Vocos 的 1D 卷积改为 2D 卷积以改善频率子带建模,去除 MPD 仅保留 MRD,添加 discriminator augmentation (DA)。Vocos2D 在 NISQA/UTMOS/MOS 上全面优于原始 Vocos [Table 8]。
 
-**[待确认]** [[Differentiable Reward Optimization]]: GLM-TTS 使用 GRPO (Group Relative Policy Optimization) 而非 CosyVoice 3 的 DiffRO。GRPO 在 audio level 操作 (生成完整语音后计算 CER/SIM/Emotion/Laughter 四维 reward),而 DiffRO 在 token level 操作。两种方法代表了 TTS RL 的不同粒度。
+**[待确认]** [[DifferentiableRewardOptimization]]: GLM-TTS 使用 GRPO (Group Relative Policy Optimization) 而非 CosyVoice 3 的 DiffRO。GRPO 在 audio level 操作 (生成完整语音后计算 CER/SIM/Emotion/Laughter 四维 reward),而 DiffRO 在 token level 操作。两种方法代表了 TTS RL 的不同粒度。
 
-**[待确认]** [[Speaker Adaptation]]: GLM-TTS 的 LoRA 定制方案 (15% 参数、1 小时数据、80% 成本节省) 属于 parameter-efficient speaker adaptation 路线,与 AdaSpeech 的 CLN tuning 和 CosyVoice 3 的 LoRA 定制思路一致。
+**[待确认]** [[SpeakerAdaptation]]: GLM-TTS 的 LoRA 定制方案 (15% 参数、1 小时数据、80% 成本节省) 属于 parameter-efficient speaker adaptation 路线,与 AdaSpeech 的 CLN tuning 和 CosyVoice 3 的 LoRA 定制思路一致。
 
 > [!summary] 速查
 > - **一句话**: 1.5B 参数的生产级 LLM-based TTS, 通过 GRPO 多奖励 RL + 优化 Whisper-VQ tokenizer + Vocos2D vocoder + Phoneme-in 混合输入, 100K 小时训练达开源 SOTA
@@ -232,4 +232,4 @@ Phoneme-in 混合输入是面向中文 TTS 部署的实用创新,精准解决了
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Neural Vocoder]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Speaker Adaptation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[NeuralVocoder]] | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[SpeakerAdaptation]](pending-review) | 未命中但可能相关: 无

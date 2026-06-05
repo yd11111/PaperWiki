@@ -8,9 +8,9 @@ authors: [Rui Wang, Qianguo Sun, Tianrong Chen, Zhiyun Zeng, Junlong Wu, Jiaxing
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, LLM-based-TTS, audio-codec, single-codebook, codec-distillation, universal-audio, DPO, alignment]
-concepts: ["[[Residual Vector Quantization]]", "[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Speech Tokenizer]]", "[[Codebook Collapse]]", "[[Codec Training Objectives]]"]
-models: ["[[CosyVoice 2]]", "[[EnCodec]]", "[[SoundStream]]"]
-tasks: ["[[Neural Audio Compression]]", "[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[Single-codebookvsMulti-codebook]]", "[[SpeechTokenizer]]", "[[CodebookCollapse]]", "[[CodecTrainingObjectives]]"]
+models: ["[[CosyVoice2]]", "[[EnCodec]]", "[[SoundStream]]"]
+tasks: ["[[NeuralAudioCompression]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[Residual Vector Quantization]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]], [[Codebook Collapse]], [[Single-codebook vs Multi-codebook]])
+> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[ResidualVectorQuantization]], [[LLM-basedTTS]], [[SemanticvsAcousticTokens]], [[SpeechTokenizer]], [[CodebookCollapse]], [[Single-codebookvsMulti-codebook]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[CodebookCollapse]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: UniTTS 位于 LLM-based TTS 的 single-codebook + 不做 semantic-acoustic 解耦路线上。与主流方案(CosyVoice 系列的监督式 semantic tokens + CFM, VALL-E 系列的多码本 AR+NAR, Spark-TTS/Llasa 的 X-codec2/BiCodec 语义对齐单码本)不同, UniTTS 明确放弃 semantic alignment, 使用知识蒸馏将多码本 NAC 压缩为超大单码本(32768 codes)的 DistilCodec, 让 LLM 直接建模完整声学信息。
 
-**已有认知**: KB 中 [[Single-codebook vs Multi-codebook]] [待确认] 记录了从多码本向单码本回归的趋势(BigCodec/WavTokenizer/Llasa), 但已有单码本方案通常仍依赖 semantic distillation(如 SpeechTokenizer 蒸馏 HuBERT, X-codec2 蒸馏 semantic 信息)。[[Codebook Collapse]] 页面记录了大码本的核心挑战: DAC 用 factorized codes + L2-norm 将利用率从 62% 提升到 99%, FSQ 从结构上消除码本。UniTTS 的 DistilCodec 声称 32768 大码本实现接近 100% 利用率, 这在已有 KB 中属于新方案。
+**已有认知**: KB 中 [[Single-codebookvsMulti-codebook]] [待确认] 记录了从多码本向单码本回归的趋势(BigCodec/WavTokenizer/Llasa), 但已有单码本方案通常仍依赖 semantic distillation(如 SpeechTokenizer 蒸馏 HuBERT, X-codec2 蒸馏 semantic 信息)。[[CodebookCollapse]] 页面记录了大码本的核心挑战: DAC 用 factorized codes + L2-norm 将利用率从 62% 提升到 99%, FSQ 从结构上消除码本。UniTTS 的 DistilCodec 声称 32768 大码本实现接近 100% 利用率, 这在已有 KB 中属于新方案。
 
 **创新判断**: 相对于 KB 已记录的工作, UniTTS 的核心创新在于: (1) 提出 DMS (多码本→单码本蒸馏)算法, 通过 encoder/decoder 参数继承实现高效蒸馏; (2) 不做 semantic alignment, 用 universal audio 训练 NAC, 支持非语音音频; (3) 三任务预训练(audio AR + text AR + cross-modal)在同一 LLM 中统一文本和音频能力。这是一条与 CosyVoice/Llasa/Spark-TTS 都不同的路线。
 
@@ -228,4 +228,4 @@ UniTTS 代表了 LLM-based TTS 中"去解耦"路线的一个有意义的探索�
 > - Issues: 3 low (速查指标密度高 / MOS 来源 / LPO 细节)
 > - 详见 `_review/UniTTS-review.yml`
 
-检索命中: [[Residual Vector Quantization]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]], [[Codebook Collapse]] | 过滤: [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[LLM-basedTTS]], [[SemanticvsAcousticTokens]], [[SpeechTokenizer]], [[CodebookCollapse]] | 过滤: [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无

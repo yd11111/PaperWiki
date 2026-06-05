@@ -8,9 +8,9 @@ authors: [Kangxiang Xia, Xinfa Zhu, Jixun Yao, Lei Xie]
 year: 2025
 venue: "arXiv (Interspeech format)"
 tags: [RLHF, DPO, preference-optimization, zero-shot-TTS, multidimensional-alignment, regularization, codec-LM, post-training]
-concepts: ["[[LLM-based TTS]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Single-codebook vs Multi-codebook]]"]
+concepts: ["[[LLM-basedTTS]]", "[[DifferentiableRewardOptimization]]", "[[TTSEvaluation]]", "[[SpeechTokenizer]]", "[[SpeakerEmbedding]]", "[[Single-codebookvsMulti-codebook]]"]
 models: []
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 3
 status: draft
@@ -20,14 +20,14 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Speaker Embedding]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SpeakerEmbedding]])
 > **谱系定位**: TTS 偏好优化已形成清晰的演进线: (1) SpeechAlign (2024) 首次将 DPO 引入 codec LM,用 golden vs synthetic AR tokens 构建偏好对; (2) UNO (2024) 处理 unpaired 主观评估中的标注不确定性; (3) RIO (2024) 用反向推理自动选择偏好样本; (4) FPO (2025, 同一实验室 NWPU) 将 loss 下沉到 error segment tokens 实现 3-4x 数据效率; (5) DiffRO/CosyVoice 3 (2025) 在 token 层做端到端可微 reward 优化; (6) Multi-Reward GRPO (2025) 在 audio-level 用多奖励 GRPO。MPO 处于路线 (1)-(3) 的同期工作,解决两个这些前驱未系统性解决的问题: (a) 如何在多个评估维度上同时优化 (已有方法多为单维度或简单 ranking 合并); (b) DPO 训练中的过拟合退化问题。
 >
 > **已有认知**: LLM-based TTS (confirmed) 将 TTS 重构为条件语言建模任务,decoder-only transformer 自回归生成 speech tokens; MPO 的 base model 使用 LLaMA 架构 + 单码本 neural codec (codebook 8192),属于典型 single-codebook codec LM 路线。Speaker Embedding (confirmed) 中 WavLM-large speaker verification 是标准 SIM 评估工具。TTS Evaluation [待确认] 中 WER/CER + SIM + MOS 是标准三件套。
 >
 > **创新判断**: 与已有工作对比,MPO 的两个贡献是互补的: (1) preference set 将"每维度选最优/最差"替代"所有维度综合 ranking",使多维度对比更 sharp (FPO 同实验室但聚焦 token-level,不涉及多维度); (2) CE loss 正则化解决 DPO 退化是工程上有效但理论贡献有限的方案 (NLP 中已有类似做法如 DPOP, SimPO 等)。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speaker Verification]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review), [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[SpeakerVerification]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -147,4 +147,4 @@ MPO 是一篇解决实际工程问题的论文,两个贡献 (preference set + CE
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Speaker Verification]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review), [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[SpeakerVerification]](pending-review) | 未命中但可能相关: 无

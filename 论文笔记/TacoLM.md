@@ -8,9 +8,9 @@ authors: [Yakun Song, Zhuo Chen, Xiaofei Wang, Ziyang Ma, Guanrou Yang, Xie Chen
 year: 2024
 venue: "Interspeech 2024 (inferred from format)"
 tags: [zero-shot-TTS, codec-language-model, gated-attention, MEGA, efficiency, VALL-E, autoregressive]
-concepts: ["[[Codec Language Model]]", "[[Residual Vector Quantization]]", "[[LLM-based TTS]]", "[[Non-autoregressive TTS]]", "[[Speech-Text Alignment]]"]
+concepts: ["[[CodecLanguageModel]]", "[[ResidualVectorQuantization]]", "[[LLM-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[Speech-TextAlignment]]"]
 models: ["[[EnCodec]]", "VALL-E"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriSpeech"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: TacoLM 属于 [[Codec Language Model]] 范式中 VALL-E 的直接改进。VALL-E 开创了 AR+NAR 两阶段 codec LM TTS,TacoLM 继承此框架但将标准 multi-head attention 替换为 MEGA gated attention + gated cross-attention。在 [[LLM-based TTS]] 的 VALL-E 系列演进中,TacoLM 的定位与 VALL-E 2 (鲁棒性)、VALL-E R (对齐) 等改进并列,但关注点独特地聚焦于**计算效率**。
+> **谱系定位**: TacoLM 属于 [[CodecLanguageModel]] 范式中 VALL-E 的直接改进。VALL-E 开创了 AR+NAR 两阶段 codec LM TTS,TacoLM 继承此框架但将标准 multi-head attention 替换为 MEGA gated attention + gated cross-attention。在 [[LLM-basedTTS]] 的 VALL-E 系列演进中,TacoLM 的定位与 VALL-E 2 (鲁棒性)、VALL-E R (对齐) 等改进并列,但关注点独特地聚焦于**计算效率**。
 >
 > **已有认知**:
-> - [[Residual Vector Quantization]]: TacoLM 使用 EnCodec 的 8 层 RVQ (1024 entries/layer, 75Hz),AR 模型生成第 1 层 tokens,NAR 模型补全第 2-8 层。这是标准 VALL-E 的 RVQ 使用方式。
+> - [[ResidualVectorQuantization]]: TacoLM 使用 EnCodec 的 8 层 RVQ (1024 entries/layer, 75Hz),AR 模型生成第 1 层 tokens,NAR 模型补全第 2-8 层。这是标准 VALL-E 的 RVQ 使用方式。
 > - [[EnCodec]]: 论文使用的 audio codec,24kHz 采样率,75Hz token rate。已知 EnCodec 存在 codebook collapse 问题和纯 acoustic token 语义信息稀疏的限制。
-> - [[Zero-shot Speech Synthesis]]: 当前 SOTA 已远超 TacoLM 时代 (2024 年中)。CosyVoice 3、Seed-TTS 等在更大数据集上训练,WER 可达 <1%。TacoLM 仅在 LibriSpeech 960h 上训练,规模有限。
-> - [[Speech-Text Alignment]] [待确认]: TacoLM 的 gated cross-attention 本质上是解决 decoder-only 模型中 text-audio 注意力退化问题的一种显式对齐手段,与 RALL-E、ELLA-V 等方法目标一致但路径不同。
+> - [[Zero-shotSpeechSynthesis]]: 当前 SOTA 已远超 TacoLM 时代 (2024 年中)。CosyVoice 3、Seed-TTS 等在更大数据集上训练,WER 可达 <1%。TacoLM 仅在 LibriSpeech 960h 上训练,规模有限。
+> - [[Speech-TextAlignment]] [待确认]: TacoLM 的 gated cross-attention 本质上是解决 decoder-only 模型中 text-audio 注意力退化问题的一种显式对齐手段,与 RALL-E、ELLA-V 等方法目标一致但路径不同。
 >
 > **创新判断**: TacoLM 的核心创新是将 MEGA (Moving Average Equipped Gated Attention) 引入 codec LM,实现 10x 参数压缩 + 5.2x 推理加速,在 2024 年中这是首个系统性探索 codec LM 效率优化的工作。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓, [[Zero-shot Speech Synthesis]]✓, [[EnCodec]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[EnCodec]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 用 MEGA gated attention 替换标准 multi-head attention,实现 10x 参数压缩 + 5.2x 推理加速的 VALL-E 变体,同时通过 gated cross-attention 改善 text-audio 对齐
@@ -180,4 +180,4 @@ TacoLM 是一篇目标明确、执行简洁的工作。它从 NLP 领域借用�
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Residual Vector Quantization]]✓, [[Zero-shot Speech Synthesis]]✓, [[EnCodec]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[EnCodec]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: 无

@@ -8,8 +8,8 @@ authors: [Xi Wang, Jie Wang, Xingchen Song, Baijun Song, Jingran Xie, Jiahe Shao
 year: 2026
 venue: "Interspeech 2026 (submitted)"
 tags: [TTS, evaluation, speech-quality, multi-dimensional, instruction-tuning, audio-LLM, interpretable, Mandarin]
-concepts: ["[[TTS Evaluation]]", "[[Prosody Modeling]]", "[[Audio Understanding]]", "[[Emotion Control in TTS]]", "[[Instruction-Guided Speech Synthesis]]"]
-models: ["[[CosyVoice 3]]"]
+concepts: ["[[TTSEvaluation]]", "[[ProsodyModeling]]", "[[AudioUnderstanding]]", "[[EmotionControlinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]"]
+models: ["[[CosyVoice3]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[Prosody Modeling]]✓, [[TTS Evaluation]][待确认], [[Audio Understanding]][待确认], [[Emotion Control in TTS]][待确认], [[Instruction-Guided Speech Synthesis]][待确认], [[CosyVoice 3]][待确认])
+> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[ProsodyModeling]]✓, [[TTSEvaluation]][待确认], [[AudioUnderstanding]][待确认], [[EmotionControlinTTS]][待确认], [[Instruction-GuidedSpeechSynthesis]][待确认], [[CosyVoice3]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: TTS-PRISM 属于 [[TTS Evaluation]] 的 **LLM-as-a-Judge** 路线,但与先前工作的差异显著。在评估概念页的演进线上,它位于 "Distributional TTS Benchmark (TTSDS2)" 和 "Naturalness-specific GRM (SpeechJudge)" 之后,但走了一条不同的路: 不追求单一综合分数或偏好排序,而是提供 12 维逐维度诊断 + 可解释推理。
+**谱系定位**: TTS-PRISM 属于 [[TTSEvaluation]] 的 **LLM-as-a-Judge** 路线,但与先前工作的差异显著。在评估概念页的演进线上,它位于 "Distributional TTS Benchmark (TTSDS2)" 和 "Naturalness-specific GRM (SpeechJudge)" 之后,但走了一条不同的路: 不追求单一综合分数或偏好排序,而是提供 12 维逐维度诊断 + 可解释推理。
 
 **与 [[论文笔记/GSRM|GSRM]] 的对比**: GSRM 将 naturalness 分解为 vowel-level acoustic features (pitch/intensity/duration) + CoT reasoning,发现 frontier speech LLM (Gemini-2.5-Pro) 直接评估时 PCC 为 -0.050。TTS-PRISM 对此问题的回答是: 不依赖通用 LLM 的泛化能力,而是通过 schema-driven instruction tuning 将显式评分标准嵌入模型。
 
 **与 [[论文笔记/SpeechJudge|SpeechJudge]] 的对比**: SpeechJudge 专注 naturalness 的 pairwise preference,揭示了所有现有指标在 naturalness 判断上接近随机的困境。TTS-PRISM 不做 pairwise 比较,而是逐维度绝对评分 + 推理,侧重诊断性而非排序性。
 
-**[[Prosody Modeling]] 背景**: TTS-PRISM 的 12 维中有 3 个直接对应韵律维度 (Intonation, Pauses, Speech Rate),2 个涉及高级韵律 (Stress, Lengthening)。概念页指出现代 LLM-TTS 的隐式韵律建模使细粒度控制困难 — TTS-PRISM 的诊断正是为了量化这一局限。
+**[[ProsodyModeling]] 背景**: TTS-PRISM 的 12 维中有 3 个直接对应韵律维度 (Intonation, Pauses, Speech Rate),2 个涉及高级韵律 (Stress, Lengthening)。概念页指出现代 LLM-TTS 的隐式韵律建模使细粒度控制困难 — TTS-PRISM 的诊断正是为了量化这一局限。
 
-**[[Emotion Control in TTS]] 背景**: TTS-PRISM 将情感评估拆分为 Emotion Expression (高级表达) 和 Emotion Consistency (基本一致性) 两个维度,这比传统 emotion accuracy 更细致,区分了"能否表达"和"是否一致"两个层面。
+**[[EmotionControlinTTS]] 背景**: TTS-PRISM 将情感评估拆分为 Emotion Expression (高级表达) 和 Emotion Consistency (基本一致性) 两个维度,这比传统 emotion accuracy 更细致,区分了"能否表达"和"是否一致"两个层面。
 
-> 检索命中: [[Prosody Modeling]]✓, [[TTS Evaluation]][待确认], [[Audio Understanding]][待确认], [[Emotion Control in TTS]][待确认], [[Instruction-Guided Speech Synthesis]][待确认], [[CosyVoice 3]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[TTSEvaluation]][待确认], [[AudioUnderstanding]][待确认], [[EmotionControlinTTS]][待确认], [[Instruction-GuidedSpeechSynthesis]][待确认], [[CosyVoice3]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 
@@ -213,7 +213,7 @@ OOD 下降幅度可控 (LCC 约 -0.04),模型对未见 TTS 系统和真实录音
 
 **RSC 悖论的洞察**: 通用模型 (Qwen3-Omni RSC=0.88) 展现了"逻辑自洽但声学脱节"的推理模式 — 推理过程读起来合理,但结论与实际声学质量不匹配。这与 GSRM 发现 Gemini 直接评估 PCC 为 -0.050 的现象一致,提示通用 Audio-LLM 在细粒度感知上可能存在系统性盲区。
 
-**与知识库已有工作的关系**: TTS-PRISM 填补了 [[TTS Evaluation]] 演进线中"细粒度可解释诊断"的位置。GSRM 走 acoustic-feature-grounded 路线,SpeechJudge 走 pairwise preference 路线,TTSDS2 走 distributional 路线 — TTS-PRISM 走"显式 schema + 端到端模型"路线,四条路径互补而非竞争。
+**与知识库已有工作的关系**: TTS-PRISM 填补了 [[TTSEvaluation]] 演进线中"细粒度可解释诊断"的位置。GSRM 走 acoustic-feature-grounded 路线,SpeechJudge 走 pairwise preference 路线,TTSDS2 走 distributional 路线 — TTS-PRISM 走"显式 schema + 端到端模型"路线,四条路径互补而非竞争。
 
 ## 可复用的 idea
 

@@ -43,15 +43,15 @@ Section 7: Conclusion — 开放问题汇总
 
 | 概念 | 核心内容 |
 |------|----------|
-| [[Turn-taking in Spoken Dialogue]] | 轮次切换三类交互 (interruption/backchannel/normal), 五项交互能力, 级联 vs E2E 实现 |
-| [[Streaming Spoken Dialogue]] | 三项核心技术 (causal conv/attention/queue), E2E streaming 系统, 延迟优化汇总 |
-| [[Spoken Dialogue Evaluation]] | 11 维度两级评估框架, 8 个 benchmark 对照, 开放问题 |
+| [[Turn-takinginSpokenDialogue]] | 轮次切换三类交互 (interruption/backchannel/normal), 五项交互能力, 级联 vs E2E 实现 |
+| [[StreamingSpokenDialogue]] | 三项核心技术 (causal conv/attention/queue), E2E streaming 系统, 延迟优化汇总 |
+| [[SpokenDialogueEvaluation]] | 11 维度两级评估框架, 8 个 benchmark 对照, 开放问题 |
 
 ### 更新概念页 (1 个)
 
 | 概念 | 更新内容 |
 |------|----------|
-| [[Full-duplex Spoken Dialogue]] | 追加 SyncLLM/Parrot/Freeze-Omni/CleanS2S 系统, 交叉引用新建页 |
+| [[Full-duplexSpokenDialogue]] | 追加 SyncLLM/Parrot/Freeze-Omni/CleanS2S 系统, 交叉引用新建页 |
 
 ## 关键分类体系
 

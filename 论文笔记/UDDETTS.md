@@ -8,8 +8,8 @@ authors: [Jiaxuan Liu, Yang Xiang, Han Zhao, Xiangang Li, Yingying Gao, Shilei Z
 year: 2025
 venue: "Preprint"
 tags: [TTS, emotion, LLM-based, flow-matching, controllable, semi-supervised, ADV-space]
-concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]"]
-models: ["[[CosyVoice 3]]", "[[CosyVoice]]", "[[CosyVoice 2]]", "[[MinMo]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]"]
+models: ["[[CosyVoice3]]", "[[CosyVoice]]", "[[CosyVoice2]]", "[[MinMo]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Emotion Control in TTS]][待确认], [[Finite Scalar Quantization]][待确认], [[CosyVoice 3]][待确认])
+> [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[EmotionControlinTTS]][待确认], [[FiniteScalarQuantization]][待确认], [[CosyVoice3]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: UDDETTS 位于 LLM-based Emotional TTS 的交叉点上。在 [[LLM-based TTS]] 的演进中,情感控制一直是薄弱环节 — 现有 LLM-TTS (CosyVoice, Spark-TTS, VALL-E 等) 主要依赖离散标签提示,无法捕捉情感的连续性和维度解耦。[[Emotion Control in TTS]] 概念页 [待确认] 记录了从 emotion embedding → 层级建模 → 对抗解耦 → DPO/RLHF → 球面空间(EmoSphere-TTS/EmoSphere++) 的演进线。UDDETTS 的直接前驱是 EmoSphere-TTS/EmoSphere++,它们首次在 non-LLM TTS 中引入 ADV 空间,但使用笛卡尔→球面坐标变换,存在情感簇扭曲和重叠问题。UDDETTS 的核心创新在于: (1) 在 LLM-TTS 中首次引入 ADV 空间并用非线性分箱替代球面变换; (2) 用半监督训练统一异构情感标注数据集。
+**谱系定位**: UDDETTS 位于 LLM-based Emotional TTS 的交叉点上。在 [[LLM-basedTTS]] 的演进中,情感控制一直是薄弱环节 — 现有 LLM-TTS (CosyVoice, Spark-TTS, VALL-E 等) 主要依赖离散标签提示,无法捕捉情感的连续性和维度解耦。[[EmotionControlinTTS]] 概念页 [待确认] 记录了从 emotion embedding → 层级建模 → 对抗解耦 → DPO/RLHF → 球面空间(EmoSphere-TTS/EmoSphere++) 的演进线。UDDETTS 的直接前驱是 EmoSphere-TTS/EmoSphere++,它们首次在 non-LLM TTS 中引入 ADV 空间,但使用笛卡尔→球面坐标变换,存在情感簇扭曲和重叠问题。UDDETTS 的核心创新在于: (1) 在 LLM-TTS 中首次引入 ADV 空间并用非线性分箱替代球面变换; (2) 用半监督训练统一异构情感标注数据集。
 
-**已有认知**: [[Conditional Flow Matching]]✓ 记录了 OT-CFM 在 TTS 中作为 "fine stage 渲染器" 的典型用法 (CosyVoice 系列使用 CFM 将离散 token → mel spectrogram)。[[Speech Tokenizer]]✓ 记录了监督式 semantic tokenizer 的设计 (CosyVoice 3 的 FSQ-MinMo)。[[Finite Scalar Quantization]][待确认] 记录了 FSQ 无码本、100% 利用率的优势。UDDETTS 的 speech tokenizer 直接受 [[CosyVoice 3]][待确认] 启发,在 MinMo 的 FSQ 模块基础上增加了情感识别 (SELR) 和 ADV 识别 (SADVR) 多任务训练,使 token 富含情感副语言信息。
+**已有认知**: [[ConditionalFlowMatching]]✓ 记录了 OT-CFM 在 TTS 中作为 "fine stage 渲染器" 的典型用法 (CosyVoice 系列使用 CFM 将离散 token → mel spectrogram)。[[SpeechTokenizer]]✓ 记录了监督式 semantic tokenizer 的设计 (CosyVoice 3 的 FSQ-MinMo)。[[FiniteScalarQuantization]][待确认] 记录了 FSQ 无码本、100% 利用率的优势。UDDETTS 的 speech tokenizer 直接受 [[CosyVoice3]][待确认] 启发,在 MinMo 的 FSQ 模块基础上增加了情感识别 (SELR) 和 ADV 识别 (SADVR) 多任务训练,使 token 富含情感副语言信息。
 
 **创新判断**: UDDETTS 相对 KB 已有知识的新增贡献在于: (a) ADV 空间的非线性分箱量化方案 (基于聚类的自适应分箱,解决情感分布不均衡); (b) 半监督训练框架统一 4 种标注类型的数据集; (c) OT-CFM 中的 emotional mixture encoder (融合 ADV 和 label 条件)。这些在 KB 中均无对应记录。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Finite Scalar Quantization]](pending-review), [[CosyVoice 3]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[FiniteScalarQuantization]](pending-review), [[CosyVoice3]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

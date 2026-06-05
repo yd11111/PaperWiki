@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "XEUS: Towards Robust Speech Representation Learning for Thousands of Languages"
 arxiv_id: "2407.00837"
-source: "https://arxiv.org/abs/2407.00837"
+source: "Sources/XEUS.pdf"
 authors: [William Chen, Wangyou Zhang, Yifan Peng, Xinjian Li, Jinchuan Tian, Jiatong Shi, Xuankai Chang, Soumi Maiti, Karen Livescu, Shinji Watanabe]
 year: 2024
 venue: "arXiv (CMU / Shanghai Jiaotong / Toyota Tech)"
 tags: [self-supervised-learning, speech-representation, multilingual, massively-multilingual, E-Branchformer, dereverberation, SSL, ASR, speech-translation, ML-SUPERB, SUPERB]
-concepts: ["[[Self-Supervised Speech Representation]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]"]
+concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]"]
 models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/w2v-BERT|w2v-BERT]]"]
 tasks: []
 datasets: []
@@ -20,15 +20,15 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Codebook Collapse]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed), [[Semantic vs Acoustic Tokens]]✓(confirmed), [[Codebook Collapse]]✓(confirmed) | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed), [[SemanticvsAcousticTokens]]✓(confirmed), [[CodebookCollapse]]✓(confirmed) | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: 自监督 tokenizer (HuBERT, w2v-BERT 2.0) 通过 masked prediction 学习表征后做 k-means 聚类离散化;w2v-BERT 2.0 tokens 被 AudioLM 采用,MaskGCT 用 VQ-VAE 量化其第 17 层特征 ✓
-- [[Semantic vs Acoustic Tokens]]: SSL 表征产生 semantic tokens,语义连贯但缺乏声学细节;HuBERT 25Hz 在 SALMon benchmark 中语义任务最强 ✓
-- [[Codebook Collapse]]: w2v-BERT 首次发现 contrastive loss 是防止端到端量化中 codebook collapse 的必要条件 ✓
-- [[Self-Supervised Speech Representation]] [待确认]: XEUS 结合了 HuBERT 的 masked prediction + WavLM 的 denoising + 新提出的 dereverberation,属于 Combined 范式的进一步演进
+- [[SpeechTokenizer]]: 自监督 tokenizer (HuBERT, w2v-BERT 2.0) 通过 masked prediction 学习表征后做 k-means 聚类离散化;w2v-BERT 2.0 tokens 被 AudioLM 采用,MaskGCT 用 VQ-VAE 量化其第 17 层特征 ✓
+- [[SemanticvsAcousticTokens]]: SSL 表征产生 semantic tokens,语义连贯但缺乏声学细节;HuBERT 25Hz 在 SALMon benchmark 中语义任务最强 ✓
+- [[CodebookCollapse]]: w2v-BERT 首次发现 contrastive loss 是防止端到端量化中 codebook collapse 的必要条件 ✓
+- [[Self-SupervisedSpeechRepresentation]] [待确认]: XEUS 结合了 HuBERT 的 masked prediction + WavLM 的 denoising + 新提出的 dereverberation,属于 Combined 范式的进一步演进
 
 ## 速查
 
@@ -152,7 +152,7 @@ XEUS 基于 HuBERT 架构并做了多项修改 [§4.3, Fig 2]:
 3. **E-Branchformer 替代**: 证明了 E-Branchformer 在大规模 SSL 中的有效性,提供了 Conformer/Transformer 之外的选择
 
 **与已有知识的关系**: [agent 解读]
-- XEUS 是 [[Self-Supervised Speech Representation]] 演进链中"大规模多语言"方向的最新里程碑
+- XEUS 是 [[Self-SupervisedSpeechRepresentation]] 演进链中"大规模多语言"方向的最新里程碑
 - 其 teacher model (WavLabLM) 和预训练目标 (masked prediction + denoising) 直接继承自 [[模型库/HuBERT|HuBERT]] 和 [[模型库/WavLM|WavLM]]
 - 与 w2v-BERT 2.0 v2 的直接对比显示: 更好的预训练目标设计 (dereverberation) + 更多样的数据可以弥补训练数据总量的差距 (1M vs 4.5M hours)
 
@@ -166,4 +166,4 @@ XEUS 基于 HuBERT 架构并做了多项修改 [§4.3, Fig 2]:
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无

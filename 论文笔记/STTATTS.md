@@ -8,8 +8,8 @@ authors: ["Hawau Olamide Toyin", "Hao Li", "Hanan Aldarmaki"]
 year: 2024
 venue: "arXiv"
 tags: [multi-task-learning, ASR, TTS, encoder-decoder, parameter-efficient, speech-text-unified, low-resource, Arabic-TTS, voice-conversion]
-concepts: ["[[Self-Supervised Speech Representation]]", "[[Speaker Embedding]]", "[[Neural Vocoder]]", "[[Mel Spectrogram]]", "[[Speech-Text Alignment]]", "[[Attention-based TTS]]", "[[Text-to-Speech Pipeline]]", "[[TTS Evaluation]]"]
-models: ["[[模型库/Whisper|Whisper]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
+concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[SpeakerEmbedding]]", "[[NeuralVocoder]]", "[[MelSpectrogram]]", "[[Speech-TextAlignment]]", "[[Attention-basedTTS]]", "[[Text-to-SpeechPipeline]]", "[[TTSEvaluation]]"]
+models: ["[[模型库/Whisper|Whisper]]", "[[模型库/wav2vec2.0|wav2vec 2.0]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: STTATTS 属于统一 speech-text encoder-decoder 模型家族,与近年 Speech Language Model 的发展方向相关但路线不同。SpeechLM 领域主流路线是离散 speech token + LLM 自回归建模 ([[Speech Language Model]]),而 STTATTS 延续 SpeechT5 的连续表征 + mel spectrogram 路线。从 [[Speech-Text Alignment]] 视角看,STTATTS 采用 concatenated/shared encoder-decoder 方式,而非当前主流的 alternating tokens 或 multi-sequence 对齐。
+> **谱系定位**: STTATTS 属于统一 speech-text encoder-decoder 模型家族,与近年 Speech Language Model 的发展方向相关但路线不同。SpeechLM 领域主流路线是离散 speech token + LLM 自回归建模 ([[SpeechLanguageModel]]),而 STTATTS 延续 SpeechT5 的连续表征 + mel spectrogram 路线。从 [[Speech-TextAlignment]] 视角看,STTATTS 采用 concatenated/shared encoder-decoder 方式,而非当前主流的 alternating tokens 或 multi-sequence 对齐。
 >
 > **已有认知**:
-> - [[Speaker Embedding]]: STTATTS 使用 x-vector 做多说话人 TTS,这是经典的 speaker encoder 方案,在 KB 中属于 "Speaker Encoder (零样本)" 类别中的 TDNN-based 统计池化方法。
-> - [[Neural Vocoder]]: STTATTS 使用 HiFi-GAN 做波形合成,这是 2020-2023 最广泛使用的 vocoder,在 KB 中有详细记录 (MRF 生成器 + MPD+MSD 判别器)。
-> - [[Mel Spectrogram]] [待确认]: 80-dim log mel-filterbank 作为 TTS 输出目标,是中期 neural TTS 的标准中间表示。
-> - [[Self-Supervised Speech Representation]] [待确认]: SpeechT5 的预训练属于 speech-text 联合自监督学习,与 wav2vec 2.0/HuBERT 的纯语音 SSL 不同,但共享 encoder 架构。
+> - [[SpeakerEmbedding]]: STTATTS 使用 x-vector 做多说话人 TTS,这是经典的 speaker encoder 方案,在 KB 中属于 "Speaker Encoder (零样本)" 类别中的 TDNN-based 统计池化方法。
+> - [[NeuralVocoder]]: STTATTS 使用 HiFi-GAN 做波形合成,这是 2020-2023 最广泛使用的 vocoder,在 KB 中有详细记录 (MRF 生成器 + MPD+MSD 判别器)。
+> - [[MelSpectrogram]] [待确认]: 80-dim log mel-filterbank 作为 TTS 输出目标,是中期 neural TTS 的标准中间表示。
+> - [[Self-SupervisedSpeechRepresentation]] [待确认]: SpeechT5 的预训练属于 speech-text 联合自监督学习,与 wav2vec 2.0/HuBERT 的纯语音 SSL 不同,但共享 encoder 架构。
 >
 > **创新判断**: STTATTS 的核心创新不在单项模块,而在于 multi-task 联合训练策略——通过一个 task fusion module 在同一 encoder-decoder 中同时优化 ASR 和 TTS,参数量仅为单任务模型之和的 ~50%。这与 SpeechT5 (分别微调) 和 VoxtLM (离散 token + decoder-only) 形成差异。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Neural Vocoder]]✓, [[Speech Language Model]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: SpeechT5, ArTST (无实体页)
+> 检索命中: [[SpeakerEmbedding]]✓, [[NeuralVocoder]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: SpeechT5, ArTST (无实体页)
 
 ## 速查
 

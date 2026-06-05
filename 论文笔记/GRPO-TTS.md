@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Group Relative Policy Optimization for Text-to-Speech with Large Language Models"
 arxiv_id: "2509.18798"
-source: "Sources/GRPO-TTS-2509.18798.pdf"
+source: "Sources/GRPO-TTS.pdf"
 authors: [Chang Liu, Ya-Jun Hu, Ying-Ying Gao, Shi-Lei Zhang, Zhen-Hua Ling]
 year: 2025
 venue: "arXiv (ICASSP submission, 4 pages)"
 tags: [TTS, reinforcement-learning, GRPO, post-training, LLM-TTS, reward-design, CER, NLL]
-concepts: ["[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Speaker Verification]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]", "[[Gumbel-Softmax]]"]
-models: ["[[Whisper]]", "[[CosyVoice 2]]", "[[WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[SpeakerVerification]]", "[[DifferentiableRewardOptimization]]", "[[TTSEvaluation]]", "[[Gumbel-Softmax]]"]
+models: ["[[Whisper]]", "[[CosyVoice2]]", "[[WavLM]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -26,16 +26,16 @@ updated: 2026-06-04
 > **谱系定位**: 本文位于 "RL post-training for LLM-based TTS" 研究线上。演进路径: Seed-TTS (2024, PPO/REINFORCE with WER+SIM) -> SpeechAlign (2024, DPO preference optimization) -> DiffRO/CosyVoice 3 (2025, token-level differentiable RL) -> Multi-Reward GRPO (2025, audio-level 多奖励 GRPO on LLaSA) -> 本文 GRPO-TTS (2025, CER+NLL composite reward on CosyVoice2 + LLaSA)。本文与 Multi-Reward GRPO 是同期独立工作,核心差异在于 reward 设计: Multi-Reward GRPO 用 5 个 reward (WER+SIM+length+entropy+prosody),本文用 CER+NLL 加权调和平均,且同时验证了两类 LLM-TTS 架构 (semantic token 路线 CosyVoice2 + acoustic token 路线 Llasa-1B)。
 >
 > **已有认知**:
-> - [[LLM-based TTS]] (confirmed): LLM-based TTS 分两大类: (1) 直接建模 acoustic codec token 的系统 (VALL-E, Llasa); (2) 建模 semantic token + flow matching 补充声学细节的系统 (CosyVoice 系列)。本文首次在同一 RL 框架下同时微调这两类系统,验证 GRPO 对不同 token 路线的普适性。
-> - [[Semantic vs Acoustic Tokens]] (confirmed): 语义 token 与文本对齐良好但缺高频声学细节,声学 token 保真度高但语义对齐差。CosyVoice2 使用 ASR 监督的 semantic tokens (S3 tokenizer),Llasa-1B 使用 neural codec acoustic tokens。本文发现 GRPO 在两类系统上均能显著降低 CER/WER,但只有 semantic token 路线的 CosyVoice2 在自然度 (MOS) 上也获得显著改进,acoustic token 路线的 Llasa-1B 自然度无显著变化。
-> - [[CosyVoice 2]] (confirmed): Tongyi Lab 的流式零样本 TTS,使用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching,支持多语言和指令控制。基线性能: CER 1.45% (zh), WER 2.57% (en) on SEED-TTS-Eval。本文以 CosyVoice2 为基线验证 GRPO 有效性。
-> - [[Speaker Embedding]] (confirmed): 本文使用 WavLM fine-tuned for speaker verification 提取说话人嵌入计算余弦相似度 (SIM) 作为评估指标,这与 SEED-TTS-Eval benchmark 的标准评估方式一致。
-> - [[Differentiable Reward Optimization]] [待确认]: DiffRO 在 token 空间操作,需要 Gumbel-Softmax 和预训练 token-to-text reward model。本文的 GRPO 在 audio 空间操作,使用现成 ASR 模型 (Whisper) 计算 reward,避免了额外模型训练,是 DiffRO 的竞争替代方案。本文在 introduction 中明确将 DiffRO 作为对比方法批评其"额外计算和数据成本"。
+> - [[LLM-basedTTS]] (confirmed): LLM-based TTS 分两大类: (1) 直接建模 acoustic codec token 的系统 (VALL-E, Llasa); (2) 建模 semantic token + flow matching 补充声学细节的系统 (CosyVoice 系列)。本文首次在同一 RL 框架下同时微调这两类系统,验证 GRPO 对不同 token 路线的普适性。
+> - [[SemanticvsAcousticTokens]] (confirmed): 语义 token 与文本对齐良好但缺高频声学细节,声学 token 保真度高但语义对齐差。CosyVoice2 使用 ASR 监督的 semantic tokens (S3 tokenizer),Llasa-1B 使用 neural codec acoustic tokens。本文发现 GRPO 在两类系统上均能显著降低 CER/WER,但只有 semantic token 路线的 CosyVoice2 在自然度 (MOS) 上也获得显著改进,acoustic token 路线的 Llasa-1B 自然度无显著变化。
+> - [[CosyVoice2]] (confirmed): Tongyi Lab 的流式零样本 TTS,使用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching,支持多语言和指令控制。基线性能: CER 1.45% (zh), WER 2.57% (en) on SEED-TTS-Eval。本文以 CosyVoice2 为基线验证 GRPO 有效性。
+> - [[SpeakerEmbedding]] (confirmed): 本文使用 WavLM fine-tuned for speaker verification 提取说话人嵌入计算余弦相似度 (SIM) 作为评估指标,这与 SEED-TTS-Eval benchmark 的标准评估方式一致。
+> - [[DifferentiableRewardOptimization]] [待确认]: DiffRO 在 token 空间操作,需要 Gumbel-Softmax 和预训练 token-to-text reward model。本文的 GRPO 在 audio 空间操作,使用现成 ASR 模型 (Whisper) 计算 reward,避免了额外模型训练,是 DiffRO 的竞争替代方案。本文在 introduction 中明确将 DiffRO 作为对比方法批评其"额外计算和数据成本"。
 > - [[Whisper]] [待确认]: 本文使用 Whisper-large-v3 作为 reward model 的核心组件: (1) 计算 CER reward (ASR 转写 → 与 ground truth 比对); (2) 计算 NLL reward (ASR decoder 对 ground truth text 的负对数似然)。Whisper 同时服务于 reward 计算和评估 (英文 WER)。
 >
 > **创新判断**: 本文的核心创新是利用现成 ASR 模型的 NLL 作为 CER 的互补 reward 信号,通过加权调和平均 (harmonic mean) 组合两者。相比 Multi-Reward GRPO 的 5 维 reward,本文的设计更简约,且不需要额外模型 (如 DeepSeek-R1 做韵律标注)。另一个重要发现是 GRPO 对不同 token 类型 TTS 系统的差异化效果。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[CosyVoice 2]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Whisper]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[CosyVoice2]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[Whisper]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -8,7 +8,7 @@ authors: [Run Luo, Ting-En Lin, Haonan Zhang, Yuchuan Wu, Xiong Liu, Min Yang, Y
 year: 2025
 venue: "arXiv"
 tags: [omnimodal, speech-LM, emotional-TTS, DPO, CTC, multimodal-alignment, real-time, zero-shot]
-concepts: ["[[Speech Language Model]]", "[[Emotion Control in TTS]]", "[[Speech Tokenizer]]", "[[Speech-LLM Integration Taxonomy]]", "[[Modality Adaptation for Speech LLM]]", "[[Non-autoregressive TTS]]", "[[Streaming Spoken Dialogue]]", "[[Differentiable Reward Optimization]]", "[[Speech-Text Alignment]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[EmotionControlinTTS]]", "[[SpeechTokenizer]]", "[[Speech-LLMIntegrationTaxonomy]]", "[[ModalityAdaptationforSpeechLLM]]", "[[Non-autoregressiveTTS]]", "[[StreamingSpokenDialogue]]", "[[DifferentiableRewardOptimization]]", "[[Speech-TextAlignment]]"]
 models: ["[[模型库/Whisper|Whisper]]", "[[模型库/CosyVoice|CosyVoice]]"]
 tasks: [omnimodal-understanding, speech-to-text, text-to-speech, emotional-speech-synthesis, image-text-QA]
 datasets: [OmniBench, MMBench, MMStar, HallusionBench, MathVista, MMMU, AI2D, RealWorldQA, LibriSpeech, AIShell-2, AV-Odyssey-Bench, EO2S-9K, O2S-300K]
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Speech Language Model]], [[Speech Tokenizer]]; 4 个待确认页参考)
+> [!info] KB 背景 (基于 2 个已确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]]; 4 个待确认页参考)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: OpenOmni 属于 Omnimodal Language Model (OLLM) 范畴, 即 [[Speech Language Model]] 演进中的 VITA/MiniCPM-o 阶段 — 同时处理 text+image+speech 的多模态模型。在 [[Speech-LLM Integration Taxonomy]] 中, 其输入侧使用 latent-representation-based 集成 (Whisper encoder + 语音投影器 → LLM), 输出侧使用 audio-token-based 集成 (LLM hidden states → CTC speech decoder → discrete units → vocoder)。
+**谱系定位**: OpenOmni 属于 Omnimodal Language Model (OLLM) 范畴, 即 [[SpeechLanguageModel]] 演进中的 VITA/MiniCPM-o 阶段 — 同时处理 text+image+speech 的多模态模型。在 [[Speech-LLMIntegrationTaxonomy]] 中, 其输入侧使用 latent-representation-based 集成 (Whisper encoder + 语音投影器 → LLM), 输出侧使用 audio-token-based 集成 (LLM hidden states → CTC speech decoder → discrete units → vocoder)。
 
 **已有认知**: 
 - Speech LLM 的三大组件 (tokenizer + LM + vocoder) 已由 Cui et al. (2024) 系统化; OpenOmni 遵循此范式但增加了 image encoder 成为 omnimodal [§1]
-- [[Emotion Control in TTS]] 中 Emo-DPO (Gao et al., 2024) 已探索用 DPO 优化情感语音 [待确认]; OpenOmni 的 DEPO 将 DPO 从独立 TTS 扩展到 omnimodal 模型的 speech decoder 
-- [[Streaming Spoken Dialogue]] 中 LLaMA-Omni 已使用 NAR CTC decoder 实现流式语音生成 [待确认]; OpenOmni 的 NAR 模式采用相似架构但增加了 MOE 稳定层和 AR 模式切换
-- [[Modality Adaptation for Speech LLM]] 中 convolutional downsampling 是最基础的适配策略 [待确认]; OpenOmni 使用投影器 (projector) 对齐视觉/语音和 LLM embedding space
+- [[EmotionControlinTTS]] 中 Emo-DPO (Gao et al., 2024) 已探索用 DPO 优化情感语音 [待确认]; OpenOmni 的 DEPO 将 DPO 从独立 TTS 扩展到 omnimodal 模型的 speech decoder 
+- [[StreamingSpokenDialogue]] 中 LLaMA-Omni 已使用 NAR CTC decoder 实现流式语音生成 [待确认]; OpenOmni 的 NAR 模式采用相似架构但增加了 MOE 稳定层和 AR 模式切换
+- [[ModalityAdaptationforSpeechLLM]] 中 convolutional downsampling 是最基础的适配策略 [待确认]; OpenOmni 使用投影器 (projector) 对齐视觉/语音和 LLM embedding space
 
 **创新判断**: 核心创新是 **language-as-pivot 的零样本跨模态对齐** — 利用 LLM 内部表征的泛化能力, 分别做 speech-text 和 image-text 对齐后, 隐式获得 speech-image 对齐, 避免依赖稀缺的三模态数据。这与 VITA 等依赖三模态数据的路线形成对比。第二个创新是将 DPO 应用于 CTC speech decoder 的情感注入。
 
-检索命中: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "FuseCodec: Semantic-Contextual Fusion and Supervision for Neural Codecs"
 arxiv_id: "2509.11425"
-source: "Sources/2509.11425.pdf"
+source: "Sources/FuseCodec.pdf"
 authors: [Md Mubtasim Ahasan, Rafat Hasan Khan, Tasnim Mohiuddin, Aman Chadha, Tariq Iqbal, M Ashraful Amin, Amin Ahsan Ali, Md Mofijul Islam, A K M Mahbubur Rahman]
 year: 2025
 venue: "arXiv preprint"
 tags: [audio-codec, speech-tokenizer, RVQ, semantic-distillation, contextual-supervision, cross-modal-alignment, zero-shot-TTS]
-concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Self-Supervised Speech Representation]]", "[[Codec Training Objectives]]", "[[Codec Language Model]]"]
-models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[Self-SupervisedSpeechRepresentation]]", "[[CodecTrainingObjectives]]", "[[CodecLanguageModel]]"]
+models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/NaturalSpeech3|NaturalSpeech 3]]"]
 tasks: ["speech tokenization", "zero-shot TTS", "speech reconstruction"]
 datasets: ["LibriSpeech", "LibriTTS", "VCTK"]
 kb_context_sources: 6
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个已确认模型页: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speech Factorization]], [[模型库/EnCodec|EnCodec]], [[模型库/SoundStream|SoundStream]])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个已确认模型页: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeechFactorization]], [[模型库/EnCodec|EnCodec]], [[模型库/SoundStream|SoundStream]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[模型库/EnCodec|EnCodec]]✓, [[模型库/SoundStream|SoundStream]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Codec Training Objectives]](pending-review), [[Codec Language Model]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechFactorization]]✓, [[模型库/EnCodec|EnCodec]]✓, [[模型库/SoundStream|SoundStream]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[CodecTrainingObjectives]](pending-review), [[CodecLanguageModel]](pending-review), [[AudioTokenizerTaxonomy]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: FuseCodec 属于 mixed speech tokenizer 路线,直接继承 SpeechTokenizer (Zhang et al., ICLR 2024) 的"RVQ 第一层蒸馏语义表征"思路,并扩展为三模态融合 (acoustic + semantic + contextual)。在知识库的 [[Semantic vs Acoustic Tokens]] 中,SpeechTokenizer 和 Mimi 是 mixed tokenizer 的代表;FuseCodec 可视为这一路线的进一步深化,特别是新增了来自预训练 LM (BERT) 的 contextual representation 这一维度。FuseCodec 的直接前驱是同一团队的 DM-Codec (Ahasan et al., 2024),后者首次尝试将 BERT contextual embedding 与 RVQ token 对齐,但缺乏有效的跨模态对齐机制。
+**谱系定位**: FuseCodec 属于 mixed speech tokenizer 路线,直接继承 SpeechTokenizer (Zhang et al., ICLR 2024) 的"RVQ 第一层蒸馏语义表征"思路,并扩展为三模态融合 (acoustic + semantic + contextual)。在知识库的 [[SemanticvsAcousticTokens]] 中,SpeechTokenizer 和 Mimi 是 mixed tokenizer 的代表;FuseCodec 可视为这一路线的进一步深化,特别是新增了来自预训练 LM (BERT) 的 contextual representation 这一维度。FuseCodec 的直接前驱是同一团队的 DM-Codec (Ahasan et al., 2024),后者首次尝试将 BERT contextual embedding 与 RVQ token 对齐,但缺乏有效的跨模态对齐机制。
 
 **已有认知**:
-- [[Residual Vector Quantization]]: FuseCodec 沿用标准 8 层 RVQ (codebook size 1024, dim 1024) 结构。知识库记录了 RVQ 前面层编码 coarse 信息、后面层编码 fine details 的层级特性,这正是 FuseCodec 选择只对第一层 RVQ 施加语义-上下文监督的理论基础。
-- [[Speech Tokenizer]]: 知识库已记录 SpeechTokenizer 的 HuBERT 语义蒸馏方案和 Mimi 的 Split VQ 方案。FuseCodec 的创新点在于同时引入语义 (HuBERT) 和上下文 (BERT) 两个监督信号,并提出三种不同的融合策略。
-- [[Semantic vs Acoustic Tokens]]: 知识库指出 "没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果 → 联合建模仍是开放挑战"。FuseCodec 正试图解决这一问题,通过直接将语义和上下文信号融入 encoder latent space 或用于监督 RVQ token。
+- [[ResidualVectorQuantization]]: FuseCodec 沿用标准 8 层 RVQ (codebook size 1024, dim 1024) 结构。知识库记录了 RVQ 前面层编码 coarse 信息、后面层编码 fine details 的层级特性,这正是 FuseCodec 选择只对第一层 RVQ 施加语义-上下文监督的理论基础。
+- [[SpeechTokenizer]]: 知识库已记录 SpeechTokenizer 的 HuBERT 语义蒸馏方案和 Mimi 的 Split VQ 方案。FuseCodec 的创新点在于同时引入语义 (HuBERT) 和上下文 (BERT) 两个监督信号,并提出三种不同的融合策略。
+- [[SemanticvsAcousticTokens]]: 知识库指出 "没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果 → 联合建模仍是开放挑战"。FuseCodec 正试图解决这一问题,通过直接将语义和上下文信号融入 encoder latent space 或用于监督 RVQ token。
 - [[模型库/EnCodec|EnCodec]] / [[模型库/SoundStream|SoundStream]]: FuseCodec 的 encoder-decoder 架构沿用 SoundStream/EnCodec 的全卷积设计 (4 stage downsampling: 2x4x5x8, BiLSTM, 3 discriminators)。
 
 **创新判断**: FuseCodec 的核心创新不在架构本身 (沿用标准 codec backbone),而在于提出三种将语义和上下文信息注入 RVQ 量化空间的策略。与 SpeechTokenizer (仅语义蒸馏) 和 DM-Codec (仅 padded similarity matching) 相比,FuseCodec 通过 latent fusion + 全局监督 + 时间对齐监督三种互补方案覆盖了从粗粒度到细粒度的对齐。

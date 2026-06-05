@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "PersonaPlex: Voice and Role Control for Full Duplex Conversational Speech Models"
 arxiv_id: "2602.06053"
-source: "https://arxiv.org/abs/2602.06053"
+source: "Sources/PersonaPlex.pdf"
 authors: [Rajarshi Roy, Jonathan Raiman, Sang-gil Lee, Teodor-Dumitru Ene, Robert Kirby, Sungwon Kim, Jaehyeon Kim, Bryan Catanzaro]
 year: 2026
 venue: "ICASSP 2026 (under review)"
 tags: [full-duplex, voice-cloning, role-conditioning, duplex-speech, speaker-similarity, conversational-AI, NVIDIA]
-concepts: ["[[Full-duplex Spoken Dialogue]]", "[[Turn-taking in Spoken Dialogue]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Embedding]]", "[[Spoken Dialogue Evaluation]]", "[[Streaming Spoken Dialogue]]"]
+concepts: ["[[Full-duplexSpokenDialogue]]", "[[Turn-takinginSpokenDialogue]]", "[[VoiceCloningTaxonomy]]", "[[SpeakerEmbedding]]", "[[SpokenDialogueEvaluation]]", "[[StreamingSpokenDialogue]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Speaker Embedding]], [[Prosody Modeling]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[SpeakerEmbedding]], [[ProsodyModeling]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Spoken Dialogue Evaluation]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[SpokenDialogueEvaluation]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无
 >
 > **Speaker Embedding** [待确认]: PersonaPlex 通过 voice prompt (短音频样本) 实现 zero-shot voice cloning,属于 KB 中 "Speaker Encoder (零样本)" 范式的全双工对话场景延伸。KB 记录了 d-vector→x-vector→ECAPA-TDNN→in-context prompt (VALL-E) 的演进,PersonaPlex 的 voice prompt 继承了这一路线但应用于 Moshi 风格的全双工架构。使用 WavLM-TDNN speaker verification 模型评估 speaker similarity (SSIM)。[agent解读]
 >
@@ -208,4 +208,4 @@ PersonaPlex 在交互维度表现:
 
 ---
 
-检索命中: [[Speaker Embedding]], [[Prosody Modeling]] | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Spoken Dialogue Evaluation]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeakerEmbedding]], [[ProsodyModeling]] | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[SpokenDialogueEvaluation]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无

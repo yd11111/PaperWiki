@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Fine-Tuning Text-to-Speech Diffusion Models Using Reinforcement Learning with Human Feedback"
 arxiv_id: "2508.03123"
-source: "Sources/2508.03123.pdf"
+source: "Sources/DLPO.pdf"
 authors: [Jingyi Chen, Ju Seung Byun, Micha Elsner, Pichao Wang, Andrew Perrault]
 year: 2025
 venue: "Interspeech 2025 (arXiv preprint)"
 tags: [TTS, diffusion, RLHF, reinforcement-learning, fine-tuning, waveform-generation, non-autoregressive, reward-model]
-concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Diffusion-based Vocoder]]", "[[Non-autoregressive TTS]]", "[[TTS Evaluation]]", "[[Differentiable Reward Optimization]]"]
+concepts: ["[[DiffusionModel]]", "[[Diffusion-basedTTS]]", "[[Diffusion-basedVocoder]]", "[[Non-autoregressiveTTS]]", "[[TTSEvaluation]]", "[[DifferentiableRewardOptimization]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: []
@@ -20,20 +20,20 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个待确认实体页: [[Diffusion-based TTS]], [[Diffusion Model]], [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[Diffusion-based Vocoder]], [[Non-autoregressive TTS]])
+> [!info] KB 背景 (基于 6 个待确认实体页: [[Diffusion-basedTTS]], [[DiffusionModel]], [[DifferentiableRewardOptimization]], [[TTSEvaluation]], [[Diffusion-basedVocoder]], [[Non-autoregressiveTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。所有引用页面均为 pending-review 状态,仅供参考 [待确认]。
 
-**谱系定位**: 本文将 RLHF 引入 diffusion-based 端到端 TTS (WaveGrad 2) 的微调,位于 **Diffusion-based TTS + RL post-training** 的交叉点。这一交叉点在知识库中已有丰富积累: [[Differentiable Reward Optimization]] 页面记录了 TTS RL 后训练的完整演进线 (Seed-TTS REINFORCE → SpeechAlign DPO → DiffRO token-level → Multi-Reward GRPO → Component-level GRPO),但这些工作的 RL 对象均为 **LLM-based 或 flow-matching TTS**,而非直接在 **DDPM 去噪过程** 上做 RL。本文是知识库中首篇将 RLHF 直接应用于 DDPM 去噪 MDP 的工作。
+**谱系定位**: 本文将 RLHF 引入 diffusion-based 端到端 TTS (WaveGrad 2) 的微调,位于 **Diffusion-based TTS + RL post-training** 的交叉点。这一交叉点在知识库中已有丰富积累: [[DifferentiableRewardOptimization]] 页面记录了 TTS RL 后训练的完整演进线 (Seed-TTS REINFORCE → SpeechAlign DPO → DiffRO token-level → Multi-Reward GRPO → Component-level GRPO),但这些工作的 RL 对象均为 **LLM-based 或 flow-matching TTS**,而非直接在 **DDPM 去噪过程** 上做 RL。本文是知识库中首篇将 RLHF 直接应用于 DDPM 去噪 MDP 的工作。
 
 **已有认知**:
-- [[Diffusion-based TTS]] 记录了 WaveGrad 2 作为端到端 diffusion TTS 的地位: 音素→波形,集成 Tacotron 2 encoder + 非注意力 duration [§3.4]
-- [[Diffusion-based Vocoder]] 记录了 WaveGrad 系列的起源和高效化路线 (BDDM 7步, PriorGrad 自适应先验)
-- [[TTS Evaluation]] 详细记录了 UTMOS/NISQA 等 predicted MOS 的局限: 领域不匹配、缺乏 uncertainty estimation、跨域泛化差
-- [[Differentiable Reward Optimization]] 演进线显示: 2024-2025 年 TTS RL 后训练已从 audio-level REINFORCE 进化到 token-level DiffRO/FPO/GRPO,而本文回到 **audio-level + denoising trajectory-level** 的 RL 方案
+- [[Diffusion-basedTTS]] 记录了 WaveGrad 2 作为端到端 diffusion TTS 的地位: 音素→波形,集成 Tacotron 2 encoder + 非注意力 duration [§3.4]
+- [[Diffusion-basedVocoder]] 记录了 WaveGrad 系列的起源和高效化路线 (BDDM 7步, PriorGrad 自适应先验)
+- [[TTSEvaluation]] 详细记录了 UTMOS/NISQA 等 predicted MOS 的局限: 领域不匹配、缺乏 uncertainty estimation、跨域泛化差
+- [[DifferentiableRewardOptimization]] 演进线显示: 2024-2025 年 TTS RL 后训练已从 audio-level REINFORCE 进化到 token-level DiffRO/FPO/GRPO,而本文回到 **audio-level + denoising trajectory-level** 的 RL 方案
 
-**创新判断**: 本文的独特性在于将 text-to-image diffusion RL 方法 (RWR/DDPO/DPOK/KLinR) 系统地迁移到 TTS diffusion 并诊断其失败原因,然后提出 DLPO 这一 diffusion loss 正则化的 RLHF 方案。但对比知识库中同期更先进的 RL-for-TTS 方法 (DiffRO/Multi-Reward GRPO/FPO/F5R-TTS),本文的实验规模较小 (单说话人 LJSpeech, WaveGrad 2R 复现模型),且 UTMOS 作为 reward model 的 reward hacking 风险已被 [[TTS Evaluation]] 文献充分讨论。
+**创新判断**: 本文的独特性在于将 text-to-image diffusion RL 方法 (RWR/DDPO/DPOK/KLinR) 系统地迁移到 TTS diffusion 并诊断其失败原因,然后提出 DLPO 这一 diffusion loss 正则化的 RLHF 方案。但对比知识库中同期更先进的 RL-for-TTS 方法 (DiffRO/Multi-Reward GRPO/FPO/F5R-TTS),本文的实验规模较小 (单说话人 LJSpeech, WaveGrad 2R 复现模型),且 UTMOS 作为 reward model 的 reward hacking 风险已被 [[TTSEvaluation]] 文献充分讨论。
 
-> 检索命中: [[Diffusion-based TTS]], [[Diffusion Model]], [[Differentiable Reward Optimization]], [[TTS Evaluation]], [[Diffusion-based Vocoder]], [[Non-autoregressive TTS]] | 过滤: 全部 pending-review | 未命中但可能相关: [[Prosody Modeling]](confirmed)
+> 检索命中: [[Diffusion-basedTTS]], [[DiffusionModel]], [[DifferentiableRewardOptimization]], [[TTSEvaluation]], [[Diffusion-basedVocoder]], [[Non-autoregressiveTTS]] | 过滤: 全部 pending-review | 未命中但可能相关: [[ProsodyModeling]](confirmed)
 
 ## 速查
 
@@ -133,7 +133,7 @@ E_{c~p(c)} E_{p_θ(x_{0:T}|c)} [-α·r(x_0, c) - β·||ε̃(x_t, t) - ε_θ(x_t,
 
 1. **实验规模受限**: 仅在单说话人 LJSpeech + WaveGrad 2R 复现模型上验证。WaveGrad 2R 本身 UTMOS 仅 2.90 (ground truth 4.20),说明基础模型质量较低,DLPO 的改进可能部分来自"低基线效应" [agent 解读]
 
-2. **Reward hacking 风险**: 以 UTMOS 作为 reward model,用 NISQA 独立评估虽然是好的实践,但 UTMOS 和 NISQA 都是 predicted MOS 系统,共享类似偏差。[[TTS Evaluation]] 已记录: predicted MOS 领域不匹配且缺乏 uncertainty estimation [§3.1]。67% 的人类偏好率部分缓解了这一担忧,但样本量 (11 人, 20 对) 偏小
+2. **Reward hacking 风险**: 以 UTMOS 作为 reward model,用 NISQA 独立评估虽然是好的实践,但 UTMOS 和 NISQA 都是 predicted MOS 系统,共享类似偏差。[[TTSEvaluation]] 已记录: predicted MOS 领域不匹配且缺乏 uncertainty estimation [§3.1]。67% 的人类偏好率部分缓解了这一担忧,但样本量 (11 人, 20 对) 偏小
 
 3. **未与现代 TTS RL 方法对比**: 同期的 DiffRO (CosyVoice 3)、Multi-Reward GRPO、FPO 等方法在更大规模、更强 baseline 上取得了更显著的改进。本文的 RL 方案在 audio-level denoising trajectory 上操作,计算成本高于 token-level 方法
 

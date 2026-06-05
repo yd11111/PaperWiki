@@ -8,9 +8,9 @@ authors: [Chunyu Qiang, Haoyu Wang, Cheng Gong, Tianrui Wang, Ruibo Fu, Tao Wang
 year: 2025
 venue: "arXiv preprint"
 tags: [speech-codec, semantic-disentanglement, single-codebook, streaming, contrastive-learning, FSQ, VAE, low-bitrate, cross-modal]
-concepts: ["[[Finite Scalar Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Speech Factorization]]", "[[Codebook Collapse]]", "[[Residual Vector Quantization]]"]
-models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[Neural Audio Compression]]"]
+concepts: ["[[FiniteScalarQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Single-codebookvsMulti-codebook]]", "[[SpeechFactorization]]", "[[CodebookCollapse]]", "[[ResidualVectorQuantization]]"]
+models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: ["AISHELL-3", "LibriTTS"]
 kb_context_sources: 6
 status: draft
@@ -20,20 +20,20 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[Semantic vs Acoustic Tokens]], [[Speech Factorization]], [[Codebook Collapse]], [[Residual Vector Quantization]], [[Finite Scalar Quantization]][待确认], [[Single-codebook vs Multi-codebook]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[SemanticvsAcousticTokens]], [[SpeechFactorization]], [[CodebookCollapse]], [[ResidualVectorQuantization]], [[FiniteScalarQuantization]][待确认], [[Single-codebookvsMulti-codebook]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: SecoustiCodec 属于 single-codebook semantic disentanglement codec 谱系。该谱系从 RVQ 多码本 (SoundStream/EnCodec) 出发,经历了混合 tokenizer (SpeechTokenizer/MimiCodec 用 HuBERT/WavLM 蒸馏做语义解耦) 和 factorized codec (NaturalSpeech 3/FACodec 用 GRL 做属性解耦) 两条路线,最终汇聚到 single-codebook 回归趋势 (BigCodec/WavTokenizer/TAAE)。SecoustiCodec 的独特之处在于同时追求三个目标: 单码本 + 语义解耦 + 流式支持,这在已有知识库中是首次出现的组合。
 
 **已有认知**:
-- [[Semantic vs Acoustic Tokens]]: 传统二分法(语义 vs 声学)已被 Survey (Mousavi 2025) 指出局限性。SecoustiCodec 提出三分法(semantic + paralinguistic + acoustic)是对这一维度的进一步细化。
-- [[Speech Factorization]]: 已有方案包括对抗训练(GRL)、信息瓶颈(多分支编码器)、self-distillation(Seed-TTS)。SecoustiCodec 的 contrastive learning 方案属于 cross-modal alignment 路线,与 CosyVoice 的 ASR loss 监督路线形成对比。
-- [[Codebook Collapse]]: FSQ 从结构上消除了 codebook collapse(100% utilization)。SecoustiCodec 的 VAE+FSQ 方案延续了这一思路,且实验证实 98.06% 利用率。
-- [[Single-codebook vs Multi-codebook]]: 当前趋势是从多码本向少码本回归。SecoustiCodec 加入了 BigCodec/WavTokenizer/TAAE 等单码本阵营,但额外实现了流式(causal)能力,这是 BigCodec/WavTokenizer/TAAE 不具备的。
+- [[SemanticvsAcousticTokens]]: 传统二分法(语义 vs 声学)已被 Survey (Mousavi 2025) 指出局限性。SecoustiCodec 提出三分法(semantic + paralinguistic + acoustic)是对这一维度的进一步细化。
+- [[SpeechFactorization]]: 已有方案包括对抗训练(GRL)、信息瓶颈(多分支编码器)、self-distillation(Seed-TTS)。SecoustiCodec 的 contrastive learning 方案属于 cross-modal alignment 路线,与 CosyVoice 的 ASR loss 监督路线形成对比。
+- [[CodebookCollapse]]: FSQ 从结构上消除了 codebook collapse(100% utilization)。SecoustiCodec 的 VAE+FSQ 方案延续了这一思路,且实验证实 98.06% 利用率。
+- [[Single-codebookvsMulti-codebook]]: 当前趋势是从多码本向少码本回归。SecoustiCodec 加入了 BigCodec/WavTokenizer/TAAE 等单码本阵营,但额外实现了流式(causal)能力,这是 BigCodec/WavTokenizer/TAAE 不具备的。
 
 **创新判断**: 与已有知识对比,SecoustiCodec 的主要新增点是 (1) 用帧级 contrastive learning 做 text-speech 对齐实现语义解耦(区别于 HuBERT/WavLM 蒸馏和 ASR loss),(2) 引入 paralinguistic encoder 显式建模 S+G≈A 关系,使语义编码能独立重建,(3) VAE+FSQ 混合量化兼顾连续采样和固定网格量化。
 
-> 检索命中: [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SemanticvsAcousticTokens]]✓, [[SpeechFactorization]]✓, [[CodebookCollapse]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

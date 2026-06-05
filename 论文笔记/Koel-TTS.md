@@ -8,9 +8,9 @@ authors: [Shehzeen Hussain, Paarth Neekhara, Xuesong Yang, Edresson Casanova, Su
 year: 2025
 venue: "Preprint (NVIDIA)"
 tags: [TTS, LLM-based-TTS, preference-alignment, DPO, RPO, classifier-free-guidance, zero-shot-TTS, autoregressive, codec-language-model, encoder-decoder, multilingual, speaker-similarity]
-concepts: ["[[Classifier-Free Guidance]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Differentiable Reward Optimization]]", "[[Speaker Verification]]", "[[Finite Scalar Quantization]]", "[[Speech-Text Alignment]]"]
-models: ["[[XTTS]]", "[[论文笔记/E2 TTS|E2 TTS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Classifier-FreeGuidance]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[DifferentiableRewardOptimization]]", "[[SpeakerVerification]]", "[[FiniteScalarQuantization]]", "[[Speech-TextAlignment]]"]
+models: ["[[XTTS]]", "[[论文笔记/E2TTS|E2 TTS]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 7
 status: draft
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 7 个实体页: [[Classifier-Free Guidance]], [[LLM-based TTS]], [[Codec Language Model]], [[Differentiable Reward Optimization]], [[Speaker Verification]], [[Finite Scalar Quantization]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 7 个实体页: [[Classifier-FreeGuidance]], [[LLM-basedTTS]], [[CodecLanguageModel]], [[DifferentiableRewardOptimization]], [[SpeakerVerification]], [[FiniteScalarQuantization]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: Koel-TTS 属于 [[LLM-based TTS]] 中的 encoder-decoder 自回归路线,区别于 decoder-only 的 VALL-E 系列和 CosyVoice 的 hybrid (LLM + CFM) 路线。其核心创新集中在 post-training 阶段:将 NLP 领域的偏好对齐 (DPO/RPO) 和 [[Classifier-Free Guidance]] 引入自回归 codec token 预测模型。
+> **谱系定位**: Koel-TTS 属于 [[LLM-basedTTS]] 中的 encoder-decoder 自回归路线,区别于 decoder-only 的 VALL-E 系列和 CosyVoice 的 hybrid (LLM + CFM) 路线。其核心创新集中在 post-training 阶段:将 NLP 领域的偏好对齐 (DPO/RPO) 和 [[Classifier-FreeGuidance]] 引入自回归 codec token 预测模型。
 >
 > **已有认知**:
-> - [[Classifier-Free Guidance]] 在 TTS 中主要用于 diffusion/flow-based 非自回归模型 (如 CosyVoice, NaturalSpeech 3),在 LLM-based 自回归 token 预测模型中的应用尚少——仅有 Parakeet (Darefsky et al. 2024) 初步尝试,且只处理了 text-independent 条件 dropout
-> - [[Differentiable Reward Optimization]] 页面记录了 TTS 偏好对齐的演进: SpeechAlign (2024, DPO on codec LM) → Seed-TTS (2024, REINFORCE audio-level) → CosyVoice 3 (2025, DiffRO token-level) → GRPO (2025)。Koel-TTS 的 DPO/RPO 方案在时间线上与 SpeechAlign 并行,但方法论上有显著差异
-> - [[Speaker Verification]] 在 zero-shot TTS 中既作为评估指标 (SECS/SSIM) 又作为训练信号,Koel-TTS 同时利用了这两个角色
-> - [[Finite Scalar Quantization]] 被用于 Koel-TTS 采用的 Low Frame-rate Speech Codec (LFSC, Casanova et al. 2025),该 codec 以 21.5 FPS 和 1.89 kbps 运行,8 个独立 codebook,codebook 独立性使并行预测成为可能
+> - [[Classifier-FreeGuidance]] 在 TTS 中主要用于 diffusion/flow-based 非自回归模型 (如 CosyVoice, NaturalSpeech 3),在 LLM-based 自回归 token 预测模型中的应用尚少——仅有 Parakeet (Darefsky et al. 2024) 初步尝试,且只处理了 text-independent 条件 dropout
+> - [[DifferentiableRewardOptimization]] 页面记录了 TTS 偏好对齐的演进: SpeechAlign (2024, DPO on codec LM) → Seed-TTS (2024, REINFORCE audio-level) → CosyVoice 3 (2025, DiffRO token-level) → GRPO (2025)。Koel-TTS 的 DPO/RPO 方案在时间线上与 SpeechAlign 并行,但方法论上有显著差异
+> - [[SpeakerVerification]] 在 zero-shot TTS 中既作为评估指标 (SECS/SSIM) 又作为训练信号,Koel-TTS 同时利用了这两个角色
+> - [[FiniteScalarQuantization]] 被用于 Koel-TTS 采用的 Low Frame-rate Speech Codec (LFSC, Casanova et al. 2025),该 codec 以 21.5 FPS 和 1.89 kbps 运行,8 个独立 codebook,codebook 独立性使并行预测成为可能
 >
 > **创新判断**: 相比已有工作,Koel-TTS 的贡献在于: (1) 将 CFG 从仅 text-independent dropout 扩展到同时 dropout text 和 context audio 两种条件; (2) 用 ASR + SV 自动化 reward 构建偏好对,避免了 SpeechAlign 使用 ground-truth 作 chosen 的分布不匹配问题; (3) 系统对比了三种 context conditioning 架构。
 >
-> 检索命中: [[Classifier-Free Guidance]] [待确认], [[LLM-based TTS]]✓, [[Codec Language Model]] [待确认], [[Differentiable Reward Optimization]] [待确认], [[Speaker Verification]] [待确认], [[Finite Scalar Quantization]] [待确认], [[Zero-shot Speech Synthesis]]✓ | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[Classifier-FreeGuidance]] [待确认], [[LLM-basedTTS]]✓, [[CodecLanguageModel]] [待确认], [[DifferentiableRewardOptimization]] [待确认], [[SpeakerVerification]] [待确认], [[FiniteScalarQuantization]] [待确认], [[Zero-shotSpeechSynthesis]]✓ | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 
@@ -55,7 +55,7 @@ Koel-TTS 要解决的核心问题是: **自回归 LLM-based TTS 模型在推理�
 
 ### 整体架构
 
-Koel-TTS 是一个 encoder-decoder Transformer,text 通过 NAR encoder 编码后经 cross-attention 注入 AR decoder,decoder 在每个时间步并行预测 N=8 个 codebook 的 token [§2.2]。使用 Low Frame-rate Speech Codec (LFSC, Casanova et al. 2025),帧率仅 21.5 FPS (bitrate 1.89 kbps),采用 [[Finite Scalar Quantization]] 保证 codebook 独立性,因此可以在单个时间步并行预测所有 codebook,不需要 delay pattern 或额外 NAR 阶段 [§2.1] [论文原文]。
+Koel-TTS 是一个 encoder-decoder Transformer,text 通过 NAR encoder 编码后经 cross-attention 注入 AR decoder,decoder 在每个时间步并行预测 N=8 个 codebook 的 token [§2.2]。使用 Low Frame-rate Speech Codec (LFSC, Casanova et al. 2025),帧率仅 21.5 FPS (bitrate 1.89 kbps),采用 [[FiniteScalarQuantization]] 保证 codebook 独立性,因此可以在单个时间步并行预测所有 codebook,不需要 delay pattern 或额外 NAR 阶段 [§2.1] [论文原文]。
 
 三种 context audio conditioning 方案 [§2.2, Fig 1]:
 
@@ -172,6 +172,6 @@ l_cfg = gamma * l_c + (1 - gamma) * l_u
 
 > [!review] 审阅状态 (2026-06-03, agent)
 > **结论: pass-with-fixes** | 2 issues (0 high, 1 medium, 1 low)
-> - (medium) concepts 字段中 [[Differentiable Reward Optimization]] 关联间接——本文用 DPO/RPO 而非 DiffRO,概念页虽覆盖但命名可能误导
+> - (medium) concepts 字段中 [[DifferentiableRewardOptimization]] 关联间接——本文用 DPO/RPO 而非 DiffRO,概念页虽覆盖但命名可能误导
 > - (low) datasets 字段为空,论文实际使用 LibriTTS/HiFiTTS/MLS/CML
 > 详见 `_review/Koel-TTS-review.yml`

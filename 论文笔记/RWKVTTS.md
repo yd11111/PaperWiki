@@ -8,9 +8,9 @@ authors: [Lin Yueyu, Liu Xiao]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, RWKV, RNN, LLM-based-TTS, efficiency, zero-shot, CosyVoice]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Codec Language Model]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[CodecLanguageModel]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[LLM-based TTS]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓, [[Residual Vector Quantization]]✓, [[Codec Language Model]][待确认])
+> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[LLM-basedTTS]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[SpeechTokenizer]]✓, [[Zero-shotSpeechSynthesis]]✓, [[ResidualVectorQuantization]]✓, [[CodecLanguageModel]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: RWKVTTS 处于 LLM-based TTS 的"效率优化"分支,与 [[论文笔记/MamTra|MamTra]] (Mamba-Transformer 混合架构替换 CosyVoice 2 的 Transformer 层) 属于同一方向但不同技术路线。当前 LLM-based TTS 主流架构 (VALL-E, CosyVoice 系列, Llasa, Fish-Speech) 均使用 Transformer backbone,RWKVTTS 是首个将 RWKV-7 (RNN-based 线性复杂度模型) 作为 LLM backbone 完整替换到 CosyVoice 2.0 框架中的工作。另一个相关工作 Lina-Speech (Lemerle et al., 2024) 已验证 gated linear attention (RWKV-related) 在 TTS 中的可行性,但未直接使用 RWKV-7 且未集成进主流 TTS 框架。
 >
-> **已有认知**: KB 中 [[LLM-based TTS]] 已记录 LLM-based TTS 的演进路线: 传统 CNN/RNN → Flow-based → LLM-based → Hybrid; KB 中 [[模型库/CosyVoice 2|CosyVoice 2]] 详细记录了 CosyVoice 2 的架构 (FSQ-SenseVoice tokenizer + text-based LLM 初始化 + 双向流式), 其 baseline 性能 (CER 1.45% test-zh, WER 2.57% test-en on SEED-TTS-Eval)。[[Speech Tokenizer]] 中覆盖了 VQ-VAE 到 continuous tokenizer 的完整演进。RWKVTTS 使用 CosyVoice 2.0 的 VQ-VAE tokenizer,属于 acoustic codec token 路线。
+> **已有认知**: KB 中 [[LLM-basedTTS]] 已记录 LLM-based TTS 的演进路线: 传统 CNN/RNN → Flow-based → LLM-based → Hybrid; KB 中 [[模型库/CosyVoice2|CosyVoice 2]] 详细记录了 CosyVoice 2 的架构 (FSQ-SenseVoice tokenizer + text-based LLM 初始化 + 双向流式), 其 baseline 性能 (CER 1.45% test-zh, WER 2.57% test-en on SEED-TTS-Eval)。[[SpeechTokenizer]] 中覆盖了 VQ-VAE 到 continuous tokenizer 的完整演进。RWKVTTS 使用 CosyVoice 2.0 的 VQ-VAE tokenizer,属于 acoustic codec token 路线。
 >
 > **创新判断**: RWKVTTS 的核心卖点是效率: 用 RWKV-7 (O(L) 复杂度, 无 KV cache) 替换 Transformer (O(L^2)),声称在保持质量的同时降低计算成本。与同属 CosyVoice backbone 替换路线的 MamTra 相比,RWKVTTS 是完整替换 (不是混合比例),但论文的实验部分显著薄弱: 仅与 FireRedTTS-1S 做对比,无标准 benchmark (如 SEED-TTS-Eval),评估指标 (Production Quality / Content Enjoyment 等) 非领域标准 (WER/CER/Speaker Similarity/MOS),且缺少消融实验和效率数据。
 >
-> 检索命中: [[LLM-based TTS]](confirmed), [[模型库/CosyVoice 2|CosyVoice 2]](confirmed), [[Speech Tokenizer]](confirmed), [[Zero-shot Speech Synthesis]](confirmed), [[Residual Vector Quantization]](confirmed) | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]](confirmed), [[模型库/CosyVoice2|CosyVoice 2]](confirmed), [[SpeechTokenizer]](confirmed), [[Zero-shotSpeechSynthesis]](confirmed), [[ResidualVectorQuantization]](confirmed) | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -168,4 +168,4 @@ RWKVTTS 在方向上有价值 -- 探索非 Transformer 架构作为 LLM-based TT
 > - [low] template-compliance: models 缺少对比 baseline FireRedTTS-1S
 > 详见 `_review/RWKVTTS-review.yml`
 
-检索命中: [[LLM-based TTS]], [[模型库/CosyVoice 2|CosyVoice 2]], [[Speech Tokenizer]], [[Zero-shot Speech Synthesis]], [[Residual Vector Quantization]] | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[模型库/CosyVoice2|CosyVoice 2]], [[SpeechTokenizer]], [[Zero-shotSpeechSynthesis]], [[ResidualVectorQuantization]] | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无

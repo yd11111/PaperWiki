@@ -8,9 +8,9 @@ authors: [Dan Luo, Chengyuan Ma, Weiqin Li, Jun Wang, Wei Chen, Zhiyong Wu]
 year: 2025
 venue: "ICME 2025"
 tags: [TTS, style-control, RAG, retrieval-augmented, CosyVoice, flow-matching, embedding, podcast]
-concepts: ["[[Style Transfer in TTS]]", "[[Speech Factorization]]", "[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Emotion Control in TTS]]", "[[Global Style Tokens]]"]
+concepts: ["[[StyleTransferinTTS]]", "[[SpeechFactorization]]", "[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[EmotionControlinTTS]]", "[[GlobalStyleTokens]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["EXPRESSO", "Common Voice", "DiDiSpeech-2", "IEMOCAP", "M3ED"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: AutoStyle-TTS 处于 [[Style Transfer in TTS]] 演进线的最新阶段。现有风格控制方法从 GST (2018) 的无监督风格发现,经过 reference speech prompt (2021-2023) 和 NL descriptions (2023-2024),到 instruction-guided (2024-)。AutoStyle-TTS 提出了一个正交路线: 不改进风格表示本身,而是用 RAG 技术自动选择最合适的 style prompt,解决的是 "如何选对 prompt" 而非 "如何更好地建模风格"。
+> **谱系定位**: AutoStyle-TTS 处于 [[StyleTransferinTTS]] 演进线的最新阶段。现有风格控制方法从 GST (2018) 的无监督风格发现,经过 reference speech prompt (2021-2023) 和 NL descriptions (2023-2024),到 instruction-guided (2024-)。AutoStyle-TTS 提出了一个正交路线: 不改进风格表示本身,而是用 RAG 技术自动选择最合适的 style prompt,解决的是 "如何选对 prompt" 而非 "如何更好地建模风格"。
 >
-> **已有认知**: CosyVoice 系统已被充分分析 ([[模型库/CosyVoice|CosyVoice]], confirmed),其 LLM + OT-CFM 的 coarse-to-fine 两阶段架构和 x-vector 分离音色建模是本文 backbone 的基础。[[Speech Factorization]] (confirmed) 中的 style-timbre 解耦是本文的核心前提 — 只有将风格与音色解耦后,才能独立替换 style prompt 而不影响音色。[[Conditional Flow Matching]] (confirmed) 提供了从 speech tokens 到 mel spectrogram 的生成路径。
+> **已有认知**: CosyVoice 系统已被充分分析 ([[模型库/CosyVoice|CosyVoice]], confirmed),其 LLM + OT-CFM 的 coarse-to-fine 两阶段架构和 x-vector 分离音色建模是本文 backbone 的基础。[[SpeechFactorization]] (confirmed) 中的 style-timbre 解耦是本文的核心前提 — 只有将风格与音色解耦后,才能独立替换 style prompt 而不影响音色。[[ConditionalFlowMatching]] (confirmed) 提供了从 speech tokens 到 mel spectrogram 的生成路径。
 >
-> **创新判断**: 本文的核心创新不在 TTS 模型本身(backbone 就是 CosyVoice),而在于引入 RAG 实现风格 prompt 的自动选择,这是现有概念页([[Style Transfer in TTS]] [待确认])尚未覆盖的方向。将 LLM embedding (Llama + fine-tuned PER-LLM-Embedder + Moka) 用于语音风格匹配是新颖尝试,但实验规模偏小。
+> **创新判断**: 本文的核心创新不在 TTS 模型本身(backbone 就是 CosyVoice),而在于引入 RAG 实现风格 prompt 的自动选择,这是现有概念页([[StyleTransferinTTS]] [待确认])尚未覆盖的方向。将 LLM embedding (Llama + fine-tuned PER-LLM-Embedder + Moka) 用于语音风格匹配是新颖尝试,但实验规模偏小。
 >
-> 检索命中: [[Speech Factorization]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[LLM-based TTS]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechFactorization]]✓, [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[LLM-basedTTS]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

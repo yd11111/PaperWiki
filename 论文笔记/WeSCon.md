@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Word-Level Emotional Expression Control in Zero-Shot Text-to-Speech Synthesis"
 arxiv_id: "2509.24629"
-source: "Sources/2509.24629.pdf"
+source: "Sources/WeSCon.pdf"
 authors: [Tianrui Wang, Haoyu Wang, Meng Ge, Cheng Gong, Chunyu Qiang, Ziyang Ma, Zikang Huang, Guanrou Yang, Xiaobao Wang, Eng Siong Chng, Xie Chen, Longbiao Wang, Jianwu Dang]
 year: 2025
 venue: "NeurIPS 2025"
 tags: [TTS, emotion-control, zero-shot, self-training, word-level-control, speaking-rate-control, attention-bias, CosyVoice2]
-concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[Prosody Modeling]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[ProsodyModeling]]", "[[SpeechTokenizer]]", "[[SpeakerEmbedding]]", "[[Speech-TextAlignment]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]", "[[模型库/wav2vec2.0|wav2vec 2.0]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: WeSCon 属于 [[Emotion Control in TTS]] 中的 word-level 细粒度控制方向,以 [[模型库/CosyVoice 2|CosyVoice 2]] 为 backbone。在情感控制的演进线上,它位于 EmoCtrl-TTS (帧级 arousal-valence 连续 embedding, 2024) 和 ELaTE (flow-matching 笑声控制, 2024) 之后,但路线显著不同: EmoCtrl-TTS/ELaTE 依赖大规模含情感转换的训练数据 (EmoCtrl-TTS 用 27k 小时伪标签数据),WeSCon 提出不依赖此类数据的 self-training 方案。在 [[Prosody Modeling]] 中,WeSCon 与 word-level prosody 控制相关 (词级重音/节奏),但同时扩展到情感和语速的联合词级控制。CosyVoice 2 的 LM + [[Conditional Flow Matching]] 架构为本文提供了语义-声学解耦基础: LM 编码语义/情感,flow matching 控制音色,这使得多轮推理中的 speaker consistency 可通过 flow matching 保证。[[Speech Tokenizer]] 的监督式设计 (FSQ-SenseVoice) 使 speech token 主要编码语义信息,为情感切换提供了操作空间。
+> **谱系定位**: WeSCon 属于 [[EmotionControlinTTS]] 中的 word-level 细粒度控制方向,以 [[模型库/CosyVoice2|CosyVoice 2]] 为 backbone。在情感控制的演进线上,它位于 EmoCtrl-TTS (帧级 arousal-valence 连续 embedding, 2024) 和 ELaTE (flow-matching 笑声控制, 2024) 之后,但路线显著不同: EmoCtrl-TTS/ELaTE 依赖大规模含情感转换的训练数据 (EmoCtrl-TTS 用 27k 小时伪标签数据),WeSCon 提出不依赖此类数据的 self-training 方案。在 [[ProsodyModeling]] 中,WeSCon 与 word-level prosody 控制相关 (词级重音/节奏),但同时扩展到情感和语速的联合词级控制。CosyVoice 2 的 LM + [[ConditionalFlowMatching]] 架构为本文提供了语义-声学解耦基础: LM 编码语义/情感,flow matching 控制音色,这使得多轮推理中的 speaker consistency 可通过 flow matching 保证。[[SpeechTokenizer]] 的监督式设计 (FSQ-SenseVoice) 使 speech token 主要编码语义信息,为情感切换提供了操作空间。
 >
 > **已有认知**: 知识库已记录多种情感控制路线 — embedding-based (EmoSphere-TTS), DPO-based (Emo-DPO), activation steering (EmoSteer-TTS), ControlNet (TTS-CtrlNet), reward-guided (DiffRO-MTR)。其中 TTS-CtrlNet 与本文最相关: 两者都在 CosyVoice2/F5-TTS 上实现词级情感控制,但 TTS-CtrlNet 用 ControlNet 旁挂冻结模型 + 小数据训练,WeSCon 用 self-training 蒸馏 + 注意力偏置。EmoCtrl-TTS 通过 chunk-wise arousal-valence embedding 实现帧级控制,但需要大量含情感转换的训练数据。
 >
 > **创新判断**: 相比知识库已有方法,WeSCon 的核心新贡献是: (1) 首个不依赖含情感转换数据的 word-level 情感控制框架 (通过 self-training 绕过数据瓶颈); (2) 多轮推理 + transition smoothing 的 teacher 设计实现情感段衔接; (3) Dynamic Emotional Attention Bias (DEAB) 机制引导 student 模型在端到端推理中关注正确的情感 prompt。
 >
-> 检索命中: [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓, [[Prosody Modeling]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[模型库/CosyVoice2|CosyVoice 2]]✓, [[ConditionalFlowMatching]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓, [[ProsodyModeling]]✓, [[SpeechTokenizer]]✓ | 过滤: [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

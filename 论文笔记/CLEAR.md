@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "CLEAR: Continuous Latent Autoregressive Modeling for High-quality and Low-latency Speech Synthesis"
 arxiv_id: "2508.19098"
-source: "https://arxiv.org/abs/2508.19098"
+source: "Sources/CLEAR.pdf"
 authors: [Chun Yat Wu, Jiajun Deng, Guinan Li, Qiuqiang Kong, Simon Lui]
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, continuous-representation, autoregressive, rectified-flow, VAE, streaming, low-latency]
-concepts: ["[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Speech Tokenizer]]", "[[LLM-based TTS]]", "[[Diffusion Model]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[SpeechTokenizer]]", "[[LLM-basedTTS]]", "[[DiffusionModel]]"]
 models: ["[[MELLE]]"]
 tasks: [zero-shot-TTS, streaming-TTS]
 datasets: [LibriSpeech, LibriHeavy, LibriTTS]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Tokenizer]], [[Diffusion Model]], [[Classifier-Free Guidance]], [[Diffusion-based TTS]])
+> [!info] KB 背景 (基于 6 个实体页: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]], [[DiffusionModel]], [[Classifier-FreeGuidance]], [[Diffusion-basedTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **AR-based TTS 的离散 vs 连续之争**: 主流 LLM-based TTS (VALL-E, CosyVoice) 使用离散 codec tokens + 自回归生成 [[LLM-based TTS]]。离散化存在有损压缩问题,高比特率序列过长,低比特率质量损失 [[Speech Tokenizer]]。MELLE 率先在连续 mel-spectrogram 空间做 AR,但使用高斯分布假设限制了建模能力 [[MELLE]]。
+> **AR-based TTS 的离散 vs 连续之争**: 主流 LLM-based TTS (VALL-E, CosyVoice) 使用离散 codec tokens + 自回归生成 [[LLM-basedTTS]]。离散化存在有损压缩问题,高比特率序列过长,低比特率质量损失 [[SpeechTokenizer]]。MELLE 率先在连续 mel-spectrogram 空间做 AR,但使用高斯分布假设限制了建模能力 [[MELLE]]。
 >
-> **Flow matching 在 TTS 中的角色**: [[Conditional Flow Matching]] 已广泛用于 coarse-to-fine TTS 的 "fine stage" (CosyVoice 用 OT-CFM, F5-TTS 用 flow matching),但多作为独立的第二阶段。Rectified flow 是 flow matching 的一种变体,学习直线 ODE 路径 [论文原文]。
+> **Flow matching 在 TTS 中的角色**: [[ConditionalFlowMatching]] 已广泛用于 coarse-to-fine TTS 的 "fine stage" (CosyVoice 用 OT-CFM, F5-TTS 用 flow matching),但多作为独立的第二阶段。Rectified flow 是 flow matching 的一种变体,学习直线 ODE 路径 [论文原文]。
 >
 > **本文定位**: CLEAR 将 rectified flow 作为轻量 MLP head 直接挂在 AR language model 上,用增强 VAE 编码连续 latent,实现**单阶段**端到端连续值 AR TTS。与 LatentLM 思路相似但独立发展,专注 TTS 场景并强调流式和低延迟。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review), [[Diffusion-based TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[Diffusion-basedTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -165,4 +165,4 @@ CLEAR 与 LatentLM 几乎同时期提出了相似的核心思想 (连续 VAE lat
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Tokenizer]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review), [[Diffusion-based TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[Diffusion-basedTTS]](pending-review) | 未命中但可能相关: 无

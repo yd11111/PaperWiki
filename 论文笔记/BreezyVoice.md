@@ -8,9 +8,9 @@ authors: [Chan-Jan Hsu, Yi-Cheng Lin, Chia-Chun Lin, Wei-Chih Chen, Ho Lam Chung
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, voice-cloning, Taiwanese-Mandarin, polyphone-disambiguation, code-switching, LLM-based, flow-matching, domain-adaptation]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[SemanticvsAcousticTokens]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[LLM-based TTS]], [[Speaker Embedding]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[LLM-basedTTS]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: BreezyVoice 是 CosyVoice (Du et al., 2024) 的 Taiwanese Mandarin domain adaptation。CosyVoice 是阿里巴巴提出的 LLM + OT-CFM coarse-to-fine TTS 架构,核心创新为监督式 S3 tokenizer (ASR encoder + VQ)。在知识库中,CosyVoice 已有完整的模型页和精读笔记,后续演进为 CosyVoice 2 (streaming) → CosyVoice 3 (MinMo tokenizer + DiffRO)。
@@ -34,7 +34,7 @@ updated: 2026-06-03
 >
 > **创新判断基准**: 相对于 CosyVoice 原系统,BreezyVoice 的主要创新在于 (1) Taiwanese Mandarin 的域适配方案,(2) 多音字消歧的 phonetic augmentation,(3) 对 CosyVoice pipeline 中错误源的系统性分析,(4) Iconic Unit Augmented Speech Cloning 策略。后两项提供了对 LLM + CFM 管线内部机制的深入洞察。
 >
-> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[VoiceCloningTaxonomy]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 将 CosyVoice 适配到 Taiwanese Mandarin,通过 phonetic augmentation 解决多音字消歧问题,并提出 Iconic Unit Augmented Speech Cloning 将 PER 降低 61.2%,同时系统性揭示了 LLM 生成的 speech units 是 voice cloning 失败的主要原因

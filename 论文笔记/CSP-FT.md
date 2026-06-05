@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Efficient Emotion and Speaker Adaptation in LLM-Based TTS via Characteristic-Specific Partial Fine-Tuning"
 arxiv_id: "2501.14273"
-source: "https://arxiv.org/abs/2501.14273"
+source: "Sources/CSP-FT.pdf"
 authors: [Tianrui Wang, Meng Ge, Cheng Gong, Chunyu Qiang, Haoyu Wang, Zikang Huang, Yu Jiang, Ye Ni, Yuheng Lu, Xiaobao Wang, Engsiong Chng, Xie Chen, Longbiao Wang, Jianwu Dang]
 year: 2026
 venue: "arXiv (v2, Mar 2026)"
 tags: [TTS, domain-adaptation, fine-tuning, parameter-efficient, codec-language-model, emotion, speaker-adaptation, catastrophic-forgetting]
-concepts: ["[[Codec Language Model]]", "[[Speaker Adaptation]]", "[[Emotion Control in TTS]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Self-Supervised Speech Representation]]"]
+concepts: ["[[CodecLanguageModel]]", "[[SpeakerAdaptation]]", "[[EmotionControlinTTS]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[Self-SupervisedSpeechRepresentation]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/VITS|VITS]]", "[[模型库/EnCodec|EnCodec]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/Whisper|Whisper]]", "[[模型库/SenseVoice|SenseVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[LLM-based TTS]], [[Speaker Embedding]]; 3 个待确认实体页: [[Speaker Adaptation]] [待确认], [[Codec Language Model]] [待确认], [[Emotion Control in TTS]] [待确认])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[LLM-basedTTS]], [[SpeakerEmbedding]]; 3 个待确认实体页: [[SpeakerAdaptation]] [待确认], [[CodecLanguageModel]] [待确认], [[EmotionControlinTTS]] [待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文处于 [[Speaker Adaptation]] 的演进线末端 — 从传统 CLN/adapter 参数高效方法,到本文提出的基于层贡献分析的选择性微调。Speaker Adaptation 概念页记录的演进路线到 "In-context learning 逐渐取代微调 (VALL-E era, 2023-)" 为止,但本文指出 in-context learning 的 zero-shot 能力在 unseen 情感和说话人上仍不稳定,因此目标数据可用时仍需微调。本文的方法学定位是: 在 full fine-tuning (全参数,遗忘严重) 和 LoRA/PEFT (轻量但盲目) 之间找到一条中间路线 — 通过任务驱动的层贡献分析来选择性微调。
+> **谱系定位**: 本文处于 [[SpeakerAdaptation]] 的演进线末端 — 从传统 CLN/adapter 参数高效方法,到本文提出的基于层贡献分析的选择性微调。Speaker Adaptation 概念页记录的演进路线到 "In-context learning 逐渐取代微调 (VALL-E era, 2023-)" 为止,但本文指出 in-context learning 的 zero-shot 能力在 unseen 情感和说话人上仍不稳定,因此目标数据可用时仍需微调。本文的方法学定位是: 在 full fine-tuning (全参数,遗忘严重) 和 LoRA/PEFT (轻量但盲目) 之间找到一条中间路线 — 通过任务驱动的层贡献分析来选择性微调。
 >
-> **已有认知**: [[Codec Language Model]] 页描述了 codec LM 的核心架构 (autoregressive Transformer on discrete tokens),本文直接在此架构上操作。[[Emotion Control in TTS]] 页记录了情感控制从 embedding 到 DPO 的演进,但缺少从微调层选择角度的工作。[[Speaker Embedding]] 页记录了 x-vector/ECAPA-TDNN 在评估中的角色,本文使用 Resemblyzer 和 Emotion2vec 进行评估。[[模型库/CosyVoice|CosyVoice]] 页详细描述了其 S3 tokenizer + LLM + OT-CFM 架构,本文将其作为四个实验平台之一。
+> **已有认知**: [[CodecLanguageModel]] 页描述了 codec LM 的核心架构 (autoregressive Transformer on discrete tokens),本文直接在此架构上操作。[[EmotionControlinTTS]] 页记录了情感控制从 embedding 到 DPO 的演进,但缺少从微调层选择角度的工作。[[SpeakerEmbedding]] 页记录了 x-vector/ECAPA-TDNN 在评估中的角色,本文使用 Resemblyzer 和 Emotion2vec 进行评估。[[模型库/CosyVoice|CosyVoice]] 页详细描述了其 S3 tokenizer + LLM + OT-CFM 架构,本文将其作为四个实验平台之一。
 >
 > **创新判断**: 相比 Speaker Adaptation 页记录的方法 (CLN tuning、module freezing、residual adapters、structured pruning),本文的创新在于用下游任务 (情感识别 + 说话人识别) 的 weighted-sum 分析来动态确定哪些层最相关,而非凭经验选择或均匀处理。这是一种 task-driven layer selection 策略,在概念库中尚无对应条目。
 >
-> 检索命中: [[Speaker Adaptation]]✓, [[Codec Language Model]]✓, [[Emotion Control in TTS]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: 前三者为 pending-review | 未命中但可能相关: 无
+> 检索命中: [[SpeakerAdaptation]]✓, [[CodecLanguageModel]]✓, [[EmotionControlinTTS]]✓, [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: 前三者为 pending-review | 未命中但可能相关: 无
 
 ## 速查
 
@@ -188,7 +188,7 @@ CSP-FT 分两个阶段 [§2.1, Fig 2]:
 1. **架构限制**: 仅在 autoregressive Transformer 架构上验证,未测试 diffusion-based (如 NaturalSpeech 3)、NAR (如 SoundStorm) 或 hybrid 架构 [agent 解读]
 2. **层选择的平均策略**: 情感和说话人权重取算术平均,对于两种权重分布差异大的模型 (如 CosyVoice) 可能不是最优 [§4.6.2, Table 6]
 3. **情感类别局限**: 实验仅涵盖 8 种离散情感类别,未测试连续维度 (arousal-valence) 或更细粒度的情感控制 [agent 解读]
-4. **评估局限**: SS 使用 Resemblyzer (非 ECAPA-TDNN),ERS 使用 Emotion2vec,不同评估工具可能给出不同结论 — [[Speaker Embedding]] 页指出 SECS 结果高度依赖所选 encoder [agent 解读]
+4. **评估局限**: SS 使用 Resemblyzer (非 ECAPA-TDNN),ERS 使用 Emotion2vec,不同评估工具可能给出不同结论 — [[SpeakerEmbedding]] 页指出 SECS 结果高度依赖所选 encoder [agent 解读]
 5. **Stage 1 的数据需求**: 需要带有情感和说话人标注的语音数据来做 characteristic-specific analysis,虽然可跨数据集迁移但仍需标注数据 [§3.1]
 
 ## 点评

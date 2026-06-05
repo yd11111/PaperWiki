@@ -8,9 +8,9 @@ authors: [Tao Li, Wenshuo Ge, Zhichao Wang, Zihao Cui, Yong Ma, Yingying Gao, Ch
 year: 2026
 venue: "arXiv"
 tags: [TTS, zero-shot, disentanglement, speech-codec, prosody-control, voice-cloning, FSQ, GRL, controllable-TTS]
-concepts: ["[[Speech Factorization]]", "[[Codec Language Model]]", "[[Finite Scalar Quantization]]", "[[Gradient Reversal Layer]]", "[[Speech Tokenizer]]", "[[Prosody Modeling]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[SpeechFactorization]]", "[[CodecLanguageModel]]", "[[FiniteScalarQuantization]]", "[[GradientReversalLayer]]", "[[SpeechTokenizer]]", "[[ProsodyModeling]]"]
+models: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/BigVGAN|BigVGAN]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]", "[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -22,14 +22,14 @@ updated: 2026-06-04
 
 > [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Factorization]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gradient Reversal Layer]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechFactorization]]✓, [[SpeechTokenizer]]✓, [[ProsodyModeling]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[FiniteScalarQuantization]](pending-review), [[GradientReversalLayer]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: DisCo-Speech 处于 [[Speech Factorization]] 的前沿,属于 "信息瓶颈 + 对抗训练" 混合路线。与 NaturalSpeech 3 的 factorized diffusion codec 不同,DisCodec 在 codec 内部完成三因子分离,且输出统一的 content-prosody token 供标准 AR LM 使用,不需要 diffusion 后端。在概念页记录的演进线上,这属于 "Factorized codec (NaturalSpeech 3, 2024)" 之后的进一步发展,关键差异在于:
+**谱系定位**: DisCo-Speech 处于 [[SpeechFactorization]] 的前沿,属于 "信息瓶颈 + 对抗训练" 混合路线。与 NaturalSpeech 3 的 factorized diffusion codec 不同,DisCodec 在 codec 内部完成三因子分离,且输出统一的 content-prosody token 供标准 AR LM 使用,不需要 diffusion 后端。在概念页记录的演进线上,这属于 "Factorized codec (NaturalSpeech 3, 2024)" 之后的进一步发展,关键差异在于:
 
 1. **分离粒度**: NaturalSpeech 3 分出 content/prosody/timbre/acoustic detail 四因子,依赖 diffusion 模型生成; DisCodec 分三因子(content/prosody/timbre),用 fusion stage 将 content+prosody 合并为统一 token,使标准 AR LM 只需预测单流。
-2. **量化方案**: 使用 [[Finite Scalar Quantization]] 而非 RVQ,content codebook 65536,prosody 46656(residual FSQ 两层),timbre 46656。FSQ 天然无 codebook collapse,利用率 100%。
-3. **解耦约束**: 引入 soft orthogonality constraint(可调 beta),在 hard orthogonality(信息丢失)和无约束(属性泄漏)之间取折中; 使用 [[Gradient Reversal Layer]] 在 prosody branch 去除 timbre 信息。
-4. **韵律建模**: 相较 [[Prosody Modeling]] 页记录的传统方法(reference encoder / VAE / variance adaptor),DisCodec 的 prosody tokenizer 用 residual FSQ 层次化建模 F0 + 非 pitch 韵律,比单一 prosody embedding 更精细。
+2. **量化方案**: 使用 [[FiniteScalarQuantization]] 而非 RVQ,content codebook 65536,prosody 46656(residual FSQ 两层),timbre 46656。FSQ 天然无 codebook collapse,利用率 100%。
+3. **解耦约束**: 引入 soft orthogonality constraint(可调 beta),在 hard orthogonality(信息丢失)和无约束(属性泄漏)之间取折中; 使用 [[GradientReversalLayer]] 在 prosody branch 去除 timbre 信息。
+4. **韵律建模**: 相较 [[ProsodyModeling]] 页记录的传统方法(reference encoder / VAE / variance adaptor),DisCodec 的 prosody tokenizer 用 residual FSQ 层次化建模 F0 + 非 pitch 韵律,比单一 prosody embedding 更精细。
 
 **已有认知**: Speech Factorization 概念页指出 "content-timbre 解耦已相对成熟,fine-grained prosody disentanglement 是开放前沿"。DisCo-Speech 正面攻克这一问题,通过 codec 级别的 tri-factor 分离和两阶段训练缓解 disentanglement-reconstruction trade-off。
 
@@ -208,4 +208,4 @@ Stage 1 decoder 镜像 content encoder 架构,从三流表征重建波形(仅用
 
 ---
 
-检索命中: [[Speech Factorization]], [[Speech Tokenizer]], [[Prosody Modeling]] | 过滤: [[Codec Language Model]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gradient Reversal Layer]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechFactorization]], [[SpeechTokenizer]], [[ProsodyModeling]] | 过滤: [[CodecLanguageModel]](pending-review), [[FiniteScalarQuantization]](pending-review), [[GradientReversalLayer]](pending-review) | 未命中但可能相关: 无

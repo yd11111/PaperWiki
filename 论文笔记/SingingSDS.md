@@ -8,7 +8,7 @@ authors: [Jionghao Han, Jiatong Shi, Masao Someki, Yuxun Tang, Lan Liu, Yiwen Zh
 year: 2025
 venue: "EAIM2026 at AAAI"
 tags: [spoken-dialogue-system, singing-voice-synthesis, SVS, roleplay, cascaded-pipeline, LLM, ASR, melody-control, interactive, VISinger, open-source]
-concepts: ["[[Singing Voice Synthesis]]", "[[SVS Evaluation Metrics]]", "[[Musical Score Encoder]]", "[[Spoken Dialogue Evaluation]]"]
+concepts: ["[[SingingVoiceSynthesis]]", "[[SVSEvaluationMetrics]]", "[[MusicalScoreEncoder]]", "[[SpokenDialogueEvaluation]]"]
 models: ["[[模型库/VITS|VITS]]", "[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: []
@@ -22,17 +22,17 @@ updated: 2026-06-04
 
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Singing Voice Synthesis]](pending-review), [[SVS Evaluation Metrics]](pending-review), [[Musical Score Encoder]](pending-review), [[Spoken Dialogue Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[SingingVoiceSynthesis]](pending-review), [[SVSEvaluationMetrics]](pending-review), [[MusicalScoreEncoder]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: SingingSDS 处于 Spoken Dialogue Systems 与 [[Singing Voice Synthesis]] 的交叉地带,将传统 SDS 的 speech-out 替换为 singing-out。在 SVS 谱系中,它不聚焦于合成质量或技巧控制的突破,而是关注将 SVS 嵌入交互式对话系统的**系统集成**问题。采用级联 ASR-LLM-SVS pipeline,SVS 后端为 VISinger 2 (基于 VITS 架构的端到端 SVS [Singing Voice Synthesis §端到端]),这是一种成熟但非前沿的 SVS 方案。
+**谱系定位**: SingingSDS 处于 Spoken Dialogue Systems 与 [[SingingVoiceSynthesis]] 的交叉地带,将传统 SDS 的 speech-out 替换为 singing-out。在 SVS 谱系中,它不聚焦于合成质量或技巧控制的突破,而是关注将 SVS 嵌入交互式对话系统的**系统集成**问题。采用级联 ASR-LLM-SVS pipeline,SVS 后端为 VISinger 2 (基于 VITS 架构的端到端 SVS [Singing Voice Synthesis §端到端]),这是一种成熟但非前沿的 SVS 方案。
 
 **已有认知**:
-- [[LLM-based TTS]] (confirmed): LLM 在 TTS 中主要用于 codec token 生成,但 SingingSDS 中 LLM 的角色不同 -- 它仅负责生成歌词文本响应,不参与语音/歌声 token 生成,更接近传统 NLG 用法。
-- [[Speaker Embedding]] (confirmed): SingingSDS 的双语 VISinger 2 模型使用 192 维 learned speaker embedding 实现多歌手建模,中文模型则使用 Speaker ID 条件化 [Appendix C]。
-- [[Singing Voice Synthesis]] [待确认]: SingingSDS 使用的 VISinger 2 属于端到端 SVS 架构 (VITS→SVS),在已有分类中属于"高保真合成"基础目标,未涉及技巧控制或风格迁移。
-- [[Musical Score Encoder]] [待确认]: SingingSDS 不使用传统的 Musical Score Encoder (无完整乐谱输入),而是通过 melody controller 提供 note-level 约束 (pitch + start/end time),比标准 SVS 的乐谱输入更松散。
-- [[SVS Evaluation Metrics]] [待确认]: SingingSDS 使用 SingMOS (自动歌声质量预测) + PER (音素错误率,取代 SVS 中常用的 CER),并新增面向娱乐性的人工评估维度 (Novelty & Fun, Character Consistency, Lyric Quality),这些维度在现有 SVS 评估体系中不存在。
-- [[Spoken Dialogue Evaluation]] [待确认]: SingingSDS 的评估超越了传统 SDS 评估 (文本智能/语音质量/延迟),引入了娱乐价值和角色一致性维度,但评估规模较小 (20 prompts, 6 listeners)。
+- [[LLM-basedTTS]] (confirmed): LLM 在 TTS 中主要用于 codec token 生成,但 SingingSDS 中 LLM 的角色不同 -- 它仅负责生成歌词文本响应,不参与语音/歌声 token 生成,更接近传统 NLG 用法。
+- [[SpeakerEmbedding]] (confirmed): SingingSDS 的双语 VISinger 2 模型使用 192 维 learned speaker embedding 实现多歌手建模,中文模型则使用 Speaker ID 条件化 [Appendix C]。
+- [[SingingVoiceSynthesis]] [待确认]: SingingSDS 使用的 VISinger 2 属于端到端 SVS 架构 (VITS→SVS),在已有分类中属于"高保真合成"基础目标,未涉及技巧控制或风格迁移。
+- [[MusicalScoreEncoder]] [待确认]: SingingSDS 不使用传统的 Musical Score Encoder (无完整乐谱输入),而是通过 melody controller 提供 note-level 约束 (pitch + start/end time),比标准 SVS 的乐谱输入更松散。
+- [[SVSEvaluationMetrics]] [待确认]: SingingSDS 使用 SingMOS (自动歌声质量预测) + PER (音素错误率,取代 SVS 中常用的 CER),并新增面向娱乐性的人工评估维度 (Novelty & Fun, Character Consistency, Lyric Quality),这些维度在现有 SVS 评估体系中不存在。
+- [[SpokenDialogueEvaluation]] [待确认]: SingingSDS 的评估超越了传统 SDS 评估 (文本智能/语音质量/延迟),引入了娱乐价值和角色一致性维度,但评估规模较小 (20 prompts, 6 listeners)。
 
 **创新判断**: SingingSDS 的创新不在单一技术组件,而在于**首次将 SVS 集成到交互式 SDS 中**的系统级贡献 -- melody-constrained lyric generation (LLM prompt 中嵌入音节约束) + melody alignment strategies (pitch-based vs lyric-aware) + 模块化架构 (350 种配置组合)。这是一个系统工程导向的工作,填补了 SDS 与 SVS 之间的空白。
 

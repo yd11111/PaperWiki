@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "TKTO: Data-efficient Targeted Token-level Preference Optimization for LLM-based TTS"
 arxiv_id: "2510.05799"
-source: "Sources/Data-efficient-Targeted-Token-level-PO.pdf"
+source: "Sources/TKTO.pdf"
 authors: [Rikuto Kotoge, Yuichi Sasaki]
 year: 2025
 venue: "arXiv (SpiralAI)"
 tags: [preference-optimization, token-level-optimization, KTO, LLM-based-TTS, data-efficiency, pronunciation, Japanese-TTS, polyphonic-disambiguation]
-concepts: ["[[LLM-based TTS]]", "[[Differentiable Reward Optimization]]", "[[Speech Tokenizer]]"]
-models: ["[[CosyVoice 2]]"]
+concepts: ["[[LLM-basedTTS]]", "[[DifferentiableRewardOptimization]]", "[[SpeechTokenizer]]"]
+models: ["[[CosyVoice2]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,13 +20,13 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[CosyVoice 2]], [[Speech Tokenizer]], [[Conditional Flow Matching]]; 2 个待确认: [[Differentiable Reward Optimization]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[CosyVoice2]], [[SpeechTokenizer]], [[ConditionalFlowMatching]]; 2 个待确认: [[DifferentiableRewardOptimization]], [[TTSEvaluation]])
 > **谱系定位**: TTS 偏好优化已形成多条路线: (1) 音频级 RL (Seed-TTS REINFORCE, 2024); (2) utterance-level DPO/KTO (SpeechAlign, 2024); (3) token-level 选择性 DPO (FPO, 2025); (4) token-level 可微优化 (DiffRO/CosyVoice 3, 2025); (5) GRPO 多奖励 (Multi-Reward GRPO / TTS-1, 2025)。TKTO 处于路线 (2) 和 (3) 之间——将 KTO 从 utterance-level 扩展到 token-level,但与 FPO 不同的是不需要显式标注 error segments,而是通过 contrastive LLMs 自动估计 token-level importance weights。
 >
 > **已有认知**: SpeechAlign 首次将 DPO 引入 codec LM; FPO 将 DPO loss 下沉到 error token segments (3-4x 数据效率); DiffRO 通过 Gumbel-Softmax + token-level reward model 实现端到端可微优化。KTO (Kahneman-Tversky Optimization) 作为 DPO 的无配对数据替代方案在 NLP 已有应用,但此前未被扩展到 token-level 用于 TTS。CosyVoice 2 是阿里通义实验室的 LLM-based TTS 模型,采用 FSQ-SenseVoice tokenizer + chunk-aware flow matching。
 >
 > **创新判断**: TKTO 的核心贡献不是 KTO 用于 TTS 本身 (Tian et al. 2025 已做过 DPO for TTS),而是 (a) 通过 contrastive LLM pair (label-flipped KTO) 自动估计 token-level importance,无需 error segment 标注; (b) 将 KTO 从 sequence-level 推广到 token-level weighted optimization; (c) 消除对配对数据的依赖,实现 6x 数据利用率。
-> 检索命中: [[LLM-based TTS]], [[CosyVoice 2]], [[Speech Tokenizer]], [[Conditional Flow Matching]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[CosyVoice2]], [[SpeechTokenizer]], [[ConditionalFlowMatching]] | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -161,4 +161,4 @@ TKTO 将 KTO 的 value function 从 sequence-level 分解到每个 token 位置:
 
 ---
 
-检索命中: [[LLM-based TTS]], [[CosyVoice 2]], [[Speech Tokenizer]], [[Conditional Flow Matching]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[CosyVoice2]], [[SpeechTokenizer]], [[ConditionalFlowMatching]] | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: 无

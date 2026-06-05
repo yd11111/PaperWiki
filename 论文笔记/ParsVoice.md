@@ -8,9 +8,9 @@ authors: [Mohammad Javad Ranjbar Kalahroodi, Heshaam Faili, Azadeh Shakery]
 year: 2026
 venue: "arXiv"
 tags: [TTS, dataset, low-resource, Persian, multi-speaker, speech-corpus, audiobook, data-pipeline, zero-shot]
-concepts: ["[[Speaker Embedding]]", "[[TTS Evaluation]]", "[[Phoneme Representation]]"]
+concepts: ["[[SpeakerEmbedding]]", "[[TTSEvaluation]]", "[[PhonemeRepresentation]]"]
 models: ["[[论文笔记/XTTS|XTTS (XTTSv2)]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 4
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个实体页: [[Speaker Embedding]], [[Zero-shot Speech Synthesis]], [[TTS Evaluation]], [[Phoneme Representation]])
+> [!info] KB 背景 (基于 4 个实体页: [[SpeakerEmbedding]], [[Zero-shotSpeechSynthesis]], [[TTSEvaluation]], [[PhonemeRepresentation]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: ParsVoice 是一篇**数据集论文**,聚焦低资源语言(波斯语)的大规模 TTS 语料库构建。与本 KB 中已有的众多零样本 TTS 模型论文(CosyVoice, Seed-TTS, IndexTTS2 等)不同,它不提出新模型架构,而是解决**数据稀缺**这一前置瓶颈。KB 中已有 [[论文笔记/XTTS|XTTS]] 笔记,ParsVoice 正是用 XTTS 作为下游验证模型。
 >
-> **已有认知**: [[Speaker Embedding]] 页记录了 ECAPA-TDNN 作为当前最常用的说话人编码器,ParsVoice 的 speaker identification pipeline 正是基于它。[[TTS Evaluation]] 页指出 MOS 跨研究不可比(Yang et al. 2025),ParsVoice 论文本身也承认其 MOS 与 DeepMine 系统不可直接比较。[[Phoneme Representation]] 页记录了传统 TTS 依赖 G2P 前端,ParsVoice 的一个重要特点是使用 XTTS 实现**无音素**的波斯语 TTS,绕过了波斯语 G2P 的复杂性。
+> **已有认知**: [[SpeakerEmbedding]] 页记录了 ECAPA-TDNN 作为当前最常用的说话人编码器,ParsVoice 的 speaker identification pipeline 正是基于它。[[TTSEvaluation]] 页指出 MOS 跨研究不可比(Yang et al. 2025),ParsVoice 论文本身也承认其 MOS 与 DeepMine 系统不可直接比较。[[PhonemeRepresentation]] 页记录了传统 TTS 依赖 G2P 前端,ParsVoice 的一个重要特点是使用 XTTS 实现**无音素**的波斯语 TTS,绕过了波斯语 G2P 的复杂性。
 >
 > **创新判断**: ParsVoice 的创新主要在数据工程层面(句子完整性验证、边界优化、波斯语特定质量评估),而非模型层面。相比 KB 中 [[数据集/Emilia|Emilia]](101K h 多语言)等大规模数据集,ParsVoice 规模较小(2.2K h)但针对极度低资源的波斯语场景。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -159,7 +159,7 @@ ParsVoice 是一篇扎实的数据集工程论文。它的核心价值不在于�
 
 **需要注意的**:
 - MOS 3.6/5 在当前 TTS 水平下不算高(对比英语 SOTA 系统通常 4.0+),但考虑到这是低资源语言且使用通用多语言模型的微调结果,是合理的基线。
-- 论文谨慎指出了跨研究 MOS 不可比的问题,这一态度与 KB 中 [[TTS Evaluation]] 页记录的 Responsible Evaluation 框架一致。
+- 论文谨慎指出了跨研究 MOS 不可比的问题,这一态度与 KB 中 [[TTSEvaluation]] 页记录的 Responsible Evaluation 框架一致。
 - 使用 Google ASR 同时作为 pipeline 组件和评估器存在循环性问题,论文通过引入独立的 Whisper 评估器缓解了这一点(WER gap 相近: 3.87pp vs 4.13pp) [Table 4]。
 
 **局限点评**: 仅有声书风格的数据在对话 TTS 场景下价值有限。波斯语 TTS 的下一步可能需要对话/自发语音数据集。性别不平衡也是公开数据集的常见问题。
@@ -180,4 +180,4 @@ ParsVoice 是一篇扎实的数据集工程论文。它的核心价值不在于�
 > - (low) template-compliance: datasets 字段为空,评估用的 Persian Common Voice / FLEURS 可选列入
 > 详见 `_review/ParsVoice-review.yml`
 
-检索命中: [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: 无

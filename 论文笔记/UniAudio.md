@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "UniAudio: An Audio Foundation Model Toward Universal Audio Generation"
 arxiv_id: "2310.00704"
-source: "https://arxiv.org/abs/2310.00704"
+source: "Sources/UniAudio.pdf"
 authors: [Dongchao Yang, Jinchuan Tian, Xu Tan, Rongjie Huang, Songxiang Liu, Xuankai Chang, Jiatong Shi, Sheng Zhao, Jiang Bian, Xixin Wu, Zhou Zhao, Shinji Watanabe, Helen Meng]
 year: 2023
 venue: "Under review, ICLR 2024"
 tags: [audio-generation, LLM, multi-task, TTS, voice-conversion, speech-enhancement, singing-voice, text-to-sound, text-to-music, audio-edit, speech-dereverberation, multi-scale-transformer, neural-codec, RVQ, universal-model]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Codec Language Model]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]", "[[CodecLanguageModel]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,21 +20,21 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[Speech Language Model]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
-**[[LLM-based TTS]]**: UniAudio 将 LLM-based TTS 的思想从 TTS 单任务推广到 11 种音频生成任务。与 VALL-E 专注于 TTS 不同,UniAudio 验证了 codec LM 范式在 universal audio generation 中的可行性。其 TTS 性能 (SIM 0.708, WER 2.0) 在当时与 NaturalSpeech 2 和 VoiceBox 可比 [Table 10]。
+**[[LLM-basedTTS]]**: UniAudio 将 LLM-based TTS 的思想从 TTS 单任务推广到 11 种音频生成任务。与 VALL-E 专注于 TTS 不同,UniAudio 验证了 codec LM 范式在 universal audio generation 中的可行性。其 TTS 性能 (SIM 0.708, WER 2.0) 在当时与 NaturalSpeech 2 和 VoiceBox 可比 [Table 10]。
 
-**[[Speech Tokenizer]]**: UniAudio 自建 neural codec (RVQ, n_q=3) 作为通用 audio tokenizer,将 speech/sound/music/singing 统一编码为同一类 audio tokens。同时使用 HuBERT 的 semantic tokens 作为 condition (k-means 500 clusters) [§2.1]。这是典型的 acoustic tokenizer + semantic condition 双路设计。
+**[[SpeechTokenizer]]**: UniAudio 自建 neural codec (RVQ, n_q=3) 作为通用 audio tokenizer,将 speech/sound/music/singing 统一编码为同一类 audio tokens。同时使用 HuBERT 的 semantic tokens 作为 condition (k-means 500 clusters) [§2.1]。这是典型的 acoustic tokenizer + semantic condition 双路设计。
 
-**[[Residual Vector Quantization]]**: UniAudio 使用 3 层 RVQ (n_q=3) 量化 audio codec。RVQ 的多层结构直接导致了序列长度挑战: T 帧 x 3 层 = 3T tokens,这是 multi-scale transformer 设计的直接动因 [§2.3]。
+**[[ResidualVectorQuantization]]**: UniAudio 使用 3 层 RVQ (n_q=3) 量化 audio codec。RVQ 的多层结构直接导致了序列长度挑战: T 帧 x 3 层 = 3T tokens,这是 multi-scale transformer 设计的直接动因 [§2.3]。
 
-**[[Semantic vs Acoustic Tokens]]**: UniAudio 同时使用两类 token: HuBERT semantic tokens 作为 voice conversion 的条件输入,RVQ acoustic tokens 作为所有任务的目标输出。这体现了 semantic tokens 用于条件控制、acoustic tokens 用于高保真生成的分工 [Table 1]。
+**[[SemanticvsAcousticTokens]]**: UniAudio 同时使用两类 token: HuBERT semantic tokens 作为 voice conversion 的条件输入,RVQ acoustic tokens 作为所有任务的目标输出。这体现了 semantic tokens 用于条件控制、acoustic tokens 用于高保真生成的分工 [Table 1]。
 
-**[[Speech Language Model]]**: UniAudio 是 SpeechLM 向 "universal audio generation" 的泛化尝试。它支持 speech/sound/music/singing 四种音频类型的 11 种生成任务,超越了 SpeechLM 通常聚焦的 speech-only 范围。Multi-scale Transformer 设计兼顾了 inter-frame (global) 和 intra-frame (local) 两个层级的建模。
+**[[SpeechLanguageModel]]**: UniAudio 是 SpeechLM 向 "universal audio generation" 的泛化尝试。它支持 speech/sound/music/singing 四种音频类型的 11 种生成任务,超越了 SpeechLM 通常聚焦的 speech-only 范围。Multi-scale Transformer 设计兼顾了 inter-frame (global) 和 intra-frame (local) 两个层级的建模。
 
-**[待确认]** [[Codec Language Model]]: UniAudio 直接在 neural codec 的 RVQ tokens 上做 next-token prediction,是 CodecLM 范式在多任务场景的代表。与 VioLA (ASR+TTS+ST) 类似但任务覆盖更广。
+**[待确认]** [[CodecLanguageModel]]: UniAudio 直接在 neural codec 的 RVQ tokens 上做 next-token prediction,是 CodecLM 范式在多任务场景的代表。与 VioLA (ASR+TTS+ST) 类似但任务覆盖更广。
 
 > [!summary] 速查
 > - **一句话**: 首个支持 11 种音频生成任务的统一 LLM-based 音频基础模型, 通过统一 tokenization + 统一 task formulation + multi-scale transformer 实现跨任务迁移
@@ -239,4 +239,4 @@ Multi-Scale Transformer 的设计思路 (global inter-frame + local intra-frame)
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[Speech Language Model]] | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]] | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无

@@ -5,17 +5,17 @@ aliases: [FlowDec Codec, Flow-based Audio Codec]
 authors: ["Simon Welker", "Matthew Le", "Ricky T.Q. Chen", "Wei-Ning Hsu", "Timo Gerkmann", "Alexander Richard", "Yi-Chiao Wu"]
 year: 2025
 arxiv_id: ""
-source: "https://github.com/facebookresearch/FlowDec"
+source: "Sources/FlowDec.pdf"
 venue: "ICLR 2025"
 tags: [audio-codec, flow-matching, postfilter, non-adversarial, full-band, 48kHz, general-audio, neural-codec]
 level: deep
 status: draft
-concepts: ["[[Conditional Flow Matching]]", "[[Score Matching]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]", "[[Diffusion-based Vocoder]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[ScoreMatching]]", "[[ResidualVectorQuantization]]", "[[NeuralVocoder]]", "[[Diffusion-basedVocoder]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: [audio-codec, speech-enhancement, audio-generation]
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]"]
+kb_sources: ["[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[NeuralVocoder]]"]
 ---
 tier: deep
 
@@ -23,11 +23,11 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[Conditional Flow Matching]]** (confirmed): FlowDec 使用一种新的 joint flow matching 变体作为 stochastic postfilter。与 TTS 中 CFM 用于 mel spectrogram 生成不同,FlowDec 将 CFM 用于 **audio codec 后处理** — 增强 deterministic decoder 输出的感知质量。其 shifted prior q_0(x_0|x_1) = N(x; y, Sigma_y) 是对标准 CFM 的关键改进 [§3.2]。
-- **[[Residual Vector Quantization]]** (confirmed): FlowDec 的底层 codec (NDAC) 基于 DAC 架构,使用 RVQ 进行量化。NDAC-75 使用 10 个 codebook (0.75-7.50 kbit/s); NDAC-25 使用 16 个 codebook (0.25-4.00 kbit/s)。通过控制推理时启用的 codebook 数量实现可变比特率 [§3.4, Table 2]。
-- **[[Neural Vocoder]]** (confirmed): FlowDec 的 postfilter 在概念上类似于 diffusion-based vocoder — 都是从中间表示恢复高质量波形。但 FlowDec 的 postfilter 操作在 STFT 域而非 mel 域,且目标是增强而非生成。
-- **[[Score Matching]]** [待确认]: FlowDec 的前身 ScoreDec 基于 SGMSE/SGMSE+ (score-based generative models for speech enhancement)。FlowDec 用 flow matching 替代 score-based SDE,将 DNN evaluations 从 60 减至 6 [§1]。
-- **[[Diffusion-based Vocoder]]** [待确认]: FlowDec 与 diffusion vocoder 的关系: 两者都是从中间表示 (codec output / mel spectrogram) 恢复高质量音频。但 FlowDec 是 postfilter (增强已有输出),diffusion vocoder 是 generator (从条件特征生成波形)。
+- **[[ConditionalFlowMatching]]** (confirmed): FlowDec 使用一种新的 joint flow matching 变体作为 stochastic postfilter。与 TTS 中 CFM 用于 mel spectrogram 生成不同,FlowDec 将 CFM 用于 **audio codec 后处理** — 增强 deterministic decoder 输出的感知质量。其 shifted prior q_0(x_0|x_1) = N(x; y, Sigma_y) 是对标准 CFM 的关键改进 [§3.2]。
+- **[[ResidualVectorQuantization]]** (confirmed): FlowDec 的底层 codec (NDAC) 基于 DAC 架构,使用 RVQ 进行量化。NDAC-75 使用 10 个 codebook (0.75-7.50 kbit/s); NDAC-25 使用 16 个 codebook (0.25-4.00 kbit/s)。通过控制推理时启用的 codebook 数量实现可变比特率 [§3.4, Table 2]。
+- **[[NeuralVocoder]]** (confirmed): FlowDec 的 postfilter 在概念上类似于 diffusion-based vocoder — 都是从中间表示恢复高质量波形。但 FlowDec 的 postfilter 操作在 STFT 域而非 mel 域,且目标是增强而非生成。
+- **[[ScoreMatching]]** [待确认]: FlowDec 的前身 ScoreDec 基于 SGMSE/SGMSE+ (score-based generative models for speech enhancement)。FlowDec 用 flow matching 替代 score-based SDE,将 DNN evaluations 从 60 减至 6 [§1]。
+- **[[Diffusion-basedVocoder]]** [待确认]: FlowDec 与 diffusion vocoder 的关系: 两者都是从中间表示 (codec output / mel spectrogram) 恢复高质量音频。但 FlowDec 是 postfilter (增强已有输出),diffusion vocoder 是 generator (从条件特征生成波形)。
 
 > [!summary] 速查
 > - **一句话**: 基于 conditional flow matching 的 stochastic postfilter,将非对抗训练的 neural codec (NDAC) 输出增强到与 GAN-based codec (DAC) 相当的感知质量,同时支持低至 4 kbit/s 的全频段 48kHz 音频编码
@@ -251,4 +251,4 @@ FlowDec-75m (主模型) 在几乎所有比特率下:
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[Residual Vector Quantization]], [[Neural Vocoder]] | 过滤: [[Score Matching]](pending-review), [[Diffusion-based Vocoder]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[NeuralVocoder]] | 过滤: [[ScoreMatching]](pending-review), [[Diffusion-basedVocoder]](pending-review) | 未命中但可能相关: 无

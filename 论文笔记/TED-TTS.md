@@ -8,9 +8,9 @@ authors: [Qifan Liang, Yuansen Liu, Ruixin Wei, Nan Lu, Junchuan Zhao, Ye Wang]
 year: 2026
 venue: "arXiv"
 tags: [TTS, emotion-control, duration-control, training-free, inference-time, zero-shot, autoregressive, controllable-TTS, intra-utterance]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -29,16 +29,16 @@ updated: 2026-06-04
 - 与 EmoCtrl-TTS (27kh 帧级控制) 和 TTS-CtrlNet (ControlNet 旁挂) 相比,代价最低但控制粒度受限于 segment 级
 
 **已有认知**:
-- [[Emotion Control in TTS]] [待确认]: 情感控制演进线从 emotion embedding 到 training-free activation steering 到 self-training word-level,TED-TTS 代表 training-free 路线中面向 AR TTS 的分支
-- [[Prosody Modeling]]: LLM-TTS 的核心局限是"隐式建模使细粒度韵律控制困难",TED-TTS 通过 inference-time 干预回应此局限
-- [[Zero-shot Speech Synthesis]]: [[论文笔记/IndexTTS2|IndexTTS2]] 是 TED-TTS 的 baseline,已是 AR zero-shot TTS 中 duration control 的 SOTA
-- [[LLM-based TTS]]: AR TTS 中语义 token 连续生成,缺少显式 segment boundary,使 intra-utterance 控制成为根本性挑战
-- [[Speech Tokenizer]]: IndexTTS2 使用 MaskGCT semantic codec 作为 speech tokenizer,TED-TTS 继承此设计
-- [[模型库/CosyVoice 2|CosyVoice 2]]: 作为对比模型,在 instruction-following 情感控制上表现较弱
+- [[EmotionControlinTTS]] [待确认]: 情感控制演进线从 emotion embedding 到 training-free activation steering 到 self-training word-level,TED-TTS 代表 training-free 路线中面向 AR TTS 的分支
+- [[ProsodyModeling]]: LLM-TTS 的核心局限是"隐式建模使细粒度韵律控制困难",TED-TTS 通过 inference-time 干预回应此局限
+- [[Zero-shotSpeechSynthesis]]: [[论文笔记/IndexTTS2|IndexTTS2]] 是 TED-TTS 的 baseline,已是 AR zero-shot TTS 中 duration control 的 SOTA
+- [[LLM-basedTTS]]: AR TTS 中语义 token 连续生成,缺少显式 segment boundary,使 intra-utterance 控制成为根本性挑战
+- [[SpeechTokenizer]]: IndexTTS2 使用 MaskGCT semantic codec 作为 speech tokenizer,TED-TTS 继承此设计
+- [[模型库/CosyVoice2|CosyVoice 2]]: 作为对比模型,在 instruction-following 情感控制上表现较弱
 
 **创新判断**: 首个在 AR TTS 上实现 training-free segment-level emotion+duration 联合控制的框架。相比 EmoSteer-TTS 操作 flow-matching DiT 激活,TED-TTS 操作 AR 解码器的注意力掩码和对齐信念,属于不同技术路线。
 
-> 检索命中: [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Prosody Modeling]]✓, [[CosyVoice 2]]✓ | 过滤: [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: [[Duration Predictor]]
+> 检索命中: [[Zero-shotSpeechSynthesis]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ProsodyModeling]]✓, [[CosyVoice2]]✓ | 过滤: [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: [[DurationPredictor]]
 
 ## 速查
 

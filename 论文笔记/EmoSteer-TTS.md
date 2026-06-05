@@ -8,9 +8,9 @@ authors: [Tianxin Xie, Shan Yang, Chenxing Li, Dong Yu, Li Liu]
 year: 2025
 venue: "arXiv"
 tags: [TTS, emotion-control, activation-steering, training-free, flow-matching, DiT, interpretability, zero-shot]
-concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[Style Transfer in TTS]]", "[[Mel Spectrogram]]", "[[Classifier-Free Guidance]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[StyleTransferinTTS]]", "[[MelSpectrogram]]", "[[Classifier-FreeGuidance]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,7 +23,7 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: EmoSteer-TTS 属于 [[Emotion Control in TTS]] 的新范式 — "推理时激活操控"路线,与已有的五条路线形成互补:
+**谱系定位**: EmoSteer-TTS 属于 [[EmotionControlinTTS]] 的新范式 — "推理时激活操控"路线,与已有的五条路线形成互补:
 
 | 路线 | 代表 | 是否需训练 | 控制粒度 |
 |------|------|-----------|----------|
@@ -34,11 +34,11 @@ updated: 2026-06-04
 | PCA 韵律分解 | Daisy-TTS | 需要 emotion discriminator | 嵌入空间操作 |
 | **Activation steering** [待确认] | **EmoSteer-TTS** | **完全不需训练** | 连续、可组合 |
 
-**已有认知 (confirmed)**: [[Conditional Flow Matching]] 页记录了 flow matching 在 TTS 中的核心角色 — CFM 用 ODE 路径将噪声映射到 mel spectrogram,DiT 作为 backbone。EmoSteer-TTS 的关键发现是:这些 DiT 层的中间激活值已经隐式编码了情感信息,可以直接操控。[[模型库/CosyVoice 2|CosyVoice 2]] (confirmed) 是本文测试的三个模型之一,56 层 DiT + 10 步 CFM。
+**已有认知 (confirmed)**: [[ConditionalFlowMatching]] 页记录了 flow matching 在 TTS 中的核心角色 — CFM 用 ODE 路径将噪声映射到 mel spectrogram,DiT 作为 backbone。EmoSteer-TTS 的关键发现是:这些 DiT 层的中间激活值已经隐式编码了情感信息,可以直接操控。[[模型库/CosyVoice2|CosyVoice 2]] (confirmed) 是本文测试的三个模型之一,56 层 DiT + 10 步 CFM。
 
 **创新判断**: 区别于所有已有方法 (EmoSphere++、EmoVoice、EmoCtrl-TTS、TTS-CtrlNet 等均需训练/微调),EmoSteer-TTS 是首个完全 training-free 的细粒度情感控制方法。其核心思路来自 LLM 领域的 activation steering (truthfulness control),首次迁移到 TTS。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]][待确认], [[Diffusion-based TTS]][待确认], [[Style Transfer in TTS]][待确认], [[Mel Spectrogram]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]][待确认], [[Diffusion-basedTTS]][待确认], [[StyleTransferinTTS]][待确认], [[MelSpectrogram]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -160,7 +160,7 @@ EmoSteer-TTS 本身无需训练。但需要构造情感语音数据集来计算 
 
 **实验局限** [agent 解读]: 8 名评估者的主观评估规模偏小; 基线对比使用 demo 样本而非重现实验 [§Experiment],可能引入偏差; 缺少与 TTS-CtrlNet 的直接对比。
 
-**对知识库的价值**: 为 [[Emotion Control in TTS]] 增加了一条全新路线 (activation steering),与现有的 label-based / description-based / AV-based / ControlNet / PCA 路线形成完整光谱。其 training-free 特性使其成为快速原型验证的理想工具。
+**对知识库的价值**: 为 [[EmotionControlinTTS]] 增加了一条全新路线 (activation steering),与现有的 label-based / description-based / AV-based / ControlNet / PCA 路线形成完整光谱。其 training-free 特性使其成为快速原型验证的理想工具。
 
 ## 可复用的 idea
 

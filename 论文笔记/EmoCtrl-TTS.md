@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Laugh Now Cry Later: Controlling Time-Varying Emotional States of Flow-Matching-Based Zero-Shot Text-to-Speech"
 arxiv_id: "2407.12229"
-source: "Sources/LaughNowCryLater.pdf"
+source: "Sources/EmoCtrl-TTS.pdf"
 authors: [Haibin Wu, Xiaofei Wang, Sefik Emre Eskimez, Manthan Thakker, Daniel Tompkins, Chung-Hsien Tsai, Canrun Li, Zhen Xiao, Sheng Zhao, Jinyu Li, Naoyuki Kanda]
 year: 2024
 venue: "arXiv"
 tags: [TTS, emotion-control, zero-shot, flow-matching, nonverbal-vocalizations, speech-to-speech-translation, arousal-valence, laughter-generation]
-concepts: ["[[Conditional Flow Matching]]", "[[Emotion Control in TTS]]", "[[Classifier-Free Guidance]]", "[[Prosody Modeling]]", "[[Mel Spectrogram]]", "[[Style Transfer in TTS]]", "[[Speaker Embedding]]", "[[Self-Supervised Speech Representation]]"]
-models: ["[[模型库/Whisper|Whisper]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[EmotionControlinTTS]]", "[[Classifier-FreeGuidance]]", "[[ProsodyModeling]]", "[[MelSpectrogram]]", "[[StyleTransferinTTS]]", "[[SpeakerEmbedding]]", "[[Self-SupervisedSpeechRepresentation]]"]
+models: ["[[模型库/Whisper|Whisper]]", "[[模型库/wav2vec2.0|wav2vec 2.0]]", "[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/WavLM|WavLM]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: EmoCtrl-TTS 属于 flow-matching-based zero-shot TTS 的情感控制扩展。在 [[Conditional Flow Matching]] 的谱系中,它与 Voicebox (Le et al., 2024) 和 ELaTE (Kanda et al., 2024) 同源,是 Voicebox → ELaTE → EmoCtrl-TTS 的渐进扩展链。ELaTE 已在概念库中被 [[Emotion Control in TTS]] 页面提及为"NV 控制"的代表,但仅覆盖笑声; EmoCtrl-TTS 将控制范围扩展至任意 NV (笑声、哭泣) 和任意情感状态。
+> **谱系定位**: EmoCtrl-TTS 属于 flow-matching-based zero-shot TTS 的情感控制扩展。在 [[ConditionalFlowMatching]] 的谱系中,它与 Voicebox (Le et al., 2024) 和 ELaTE (Kanda et al., 2024) 同源,是 Voicebox → ELaTE → EmoCtrl-TTS 的渐进扩展链。ELaTE 已在概念库中被 [[EmotionControlinTTS]] 页面提及为"NV 控制"的代表,但仅覆盖笑声; EmoCtrl-TTS 将控制范围扩展至任意 NV (笑声、哭泣) 和任意情感状态。
 >
-> **已有认知**: 知识库已有 [[Prosody Modeling]] 中关于副语言发声 (NVSpeech) 的记录,该工作通过在文本中显式插入 PV 标签实现控制;与 EmoCtrl-TTS 的连续 embedding 方法路线不同。[[Emotion Control in TTS]] [待确认] 页面列出了多种情感建模方法 (emotion embedding、层级建模、DPO 等),但缺少帧级 arousal-valence 条件控制的记录。[[Classifier-Free Guidance]] [待确认] 在 TTS 中已广泛使用,本文使用 guidance strength 1.0。
+> **已有认知**: 知识库已有 [[ProsodyModeling]] 中关于副语言发声 (NVSpeech) 的记录,该工作通过在文本中显式插入 PV 标签实现控制;与 EmoCtrl-TTS 的连续 embedding 方法路线不同。[[EmotionControlinTTS]] [待确认] 页面列出了多种情感建模方法 (emotion embedding、层级建模、DPO 等),但缺少帧级 arousal-valence 条件控制的记录。[[Classifier-FreeGuidance]] [待确认] 在 TTS 中已广泛使用,本文使用 guidance strength 1.0。
 >
 > **创新判断**: 相比知识库已记录的方法,本文核心新贡献有二: (1) 同时使用 NV embedding + arousal-valence embedding 实现帧级多维情感控制; (2) 27k 小时大规模真实情感数据 (对比前人 <500 小时有标注/staged 数据)。这两点在现有概念页中均未被覆盖。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

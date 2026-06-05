@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "DualSpeechLM: Towards Unified Speech Understanding and Generation via Dual Speech Token Modeling with Large Language Models"
 arxiv_id: "2508.08961"
-source: "Sources/2508.08961.pdf"
+source: "Sources/DualSpeechLM.pdf"
 authors: [Yuanyuan Wang, Dongchao Yang, Yiwen Shao, Hangting Chen, Jiankun Zhao, Zhiyong Wu, Helen Meng, Xixin Wu]
 year: 2025
 venue: "AAAI 2026"
 tags: [speech-LM, speech-tokenizer, dual-token, unified-model, understanding-generation, LoRA, semantic-token, acoustic-token]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Self-Supervised Speech Representation]]", "[[Modality Adaptation for Speech LLM]]", "[[Audio Understanding]]", "[[Residual Vector Quantization]]", "[[Codec Language Model]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ModalityAdaptationforSpeechLLM]]", "[[AudioUnderstanding]]", "[[ResidualVectorQuantization]]", "[[CodecLanguageModel]]"]
 models: ["[[HuBERT]]", "[[Whisper]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓, [[Self-Supervised Speech Representation]], [[Modality Adaptation for Speech LLM]], [[Audio Understanding]])
+> [!info] KB 背景 (基于 6 个实体页: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓, [[Self-SupervisedSpeechRepresentation]], [[ModalityAdaptationforSpeechLLM]], [[AudioUnderstanding]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DualSpeechLM 处于 SpeechLM 统一理解-生成的前沿。该领域的核心 trade-off 是 [[Semantic vs Acoustic Tokens]] 之间的信息取舍 — semantic tokens (HuBERT) 语义对齐好但缺声学细节, acoustic tokens (EnCodec/SoundStream) 保真度高但语义弱。现有方案包括: (1) 串联建模 (AudioLM: semantic→acoustic 两阶段), (2) Mixed tokenizer (SpeechTokenizer: RVQ 第一层蒸馏 HuBERT; Mimi/Moshi: 单 VQ 语义 + 额外 RVQ 声学), (3) 监督式 semantic tokens (CosyVoice: ASR encoder 内插 VQ)。DualSpeechLM 提出了第四种路线 — 不在 tokenizer 层面混合,而是在 LLM 建模层面分离: USToken 作为 LLM 输入 (understanding), acoustic token 作为 LLM 输出 (generation)。
+> **谱系定位**: DualSpeechLM 处于 SpeechLM 统一理解-生成的前沿。该领域的核心 trade-off 是 [[SemanticvsAcousticTokens]] 之间的信息取舍 — semantic tokens (HuBERT) 语义对齐好但缺声学细节, acoustic tokens (EnCodec/SoundStream) 保真度高但语义弱。现有方案包括: (1) 串联建模 (AudioLM: semantic→acoustic 两阶段), (2) Mixed tokenizer (SpeechTokenizer: RVQ 第一层蒸馏 HuBERT; Mimi/Moshi: 单 VQ 语义 + 额外 RVQ 声学), (3) 监督式 semantic tokens (CosyVoice: ASR encoder 内插 VQ)。DualSpeechLM 提出了第四种路线 — 不在 tokenizer 层面混合,而是在 LLM 建模层面分离: USToken 作为 LLM 输入 (understanding), acoustic token 作为 LLM 输出 (generation)。
 >
-> **已有认知**: [[Speech Tokenizer]] 页记录了 tokenizer 从 Mel→VQ-VAE→HuBERT→监督式→Mixed→连续 VAE 的演进。[[Modality Adaptation for Speech LLM]] 页讨论了语音编码器到 LLM 的适配方法 (Conv downsampling / CTC compression / Q-Former)。DualSpeechLM 的 USTokenizer 可视为一种新的模态适配: 用 understanding-driven loss 直接在 tokenizer 训练阶段对齐 LLM 输入空间,而非事后用 adapter 桥接。
+> **已有认知**: [[SpeechTokenizer]] 页记录了 tokenizer 从 Mel→VQ-VAE→HuBERT→监督式→Mixed→连续 VAE 的演进。[[ModalityAdaptationforSpeechLLM]] 页讨论了语音编码器到 LLM 的适配方法 (Conv downsampling / CTC compression / Q-Former)。DualSpeechLM 的 USTokenizer 可视为一种新的模态适配: 用 understanding-driven loss 直接在 tokenizer 训练阶段对齐 LLM 输入空间,而非事后用 adapter 桥接。
 >
 > **创新判断**: 相对于已有知识库记录,DualSpeechLM 的核心新颖性在于 "input/output token 解耦" 设计 — 现有系统 (SpeechGPT, SpiritLM, Moshi) 都使用相同类型 token 作为 LLM 的输入和输出,DualSpeechLM 首次系统性地将两者分离。USTokenizer 的 understanding-driven loss (冻结 LLM 反向传播优化 VQ) 在概念上类似 CosyVoice 的监督式 tokenizer,但直接对齐 LLM 输入空间而非仅用 ASR 任务监督。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

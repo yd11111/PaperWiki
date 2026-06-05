@@ -8,9 +8,9 @@ authors: [Jaeseok Jeong, Yuna Lee, Mingi Kwon, Youngjung Uh]
 year: 2025
 venue: "arXiv"
 tags: [TTS, emotion-control, zero-shot, flow-matching, ControlNet, DiT, arousal-valence, time-varying-control, F5-TTS]
-concepts: ["[[Conditional Flow Matching]]", "[[Emotion Control in TTS]]", "[[Mel Spectrogram]]", "[[Self-Supervised Speech Representation]]", "[[Speaker Embedding]]", "[[Diffusion-based TTS]]"]
-models: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]", "[[模型库/Whisper|Whisper]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[EmotionControlinTTS]]", "[[MelSpectrogram]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeakerEmbedding]]", "[[Diffusion-basedTTS]]"]
+models: ["[[模型库/wav2vec2.0|wav2vec 2.0]]", "[[模型库/Whisper|Whisper]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: TTS-CtrlNet 位于 flow-matching zero-shot TTS 的情感可控扩展分支。在 [[Conditional Flow Matching]] 谱系中,它以 F5-TTS (Chen et al., 2024) 为 backbone,而非 Voicebox 系列。与 [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]] (Wu et al., 2024) 解决相同问题 (时变情感控制),但路线截然不同: EmoCtrl-TTS 采用全模型微调 (87k 小时数据,修改所有参数); TTS-CtrlNet 借鉴图像领域 ControlNet (Zhang et al., 2023) 的思路,冻结原始模型,仅训练一个可学习副本,用约 400 小时公开数据即可达到甚至超越 EmoCtrl-TTS 的情感控制性能。
+> **谱系定位**: TTS-CtrlNet 位于 flow-matching zero-shot TTS 的情感可控扩展分支。在 [[ConditionalFlowMatching]] 谱系中,它以 F5-TTS (Chen et al., 2024) 为 backbone,而非 Voicebox 系列。与 [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]] (Wu et al., 2024) 解决相同问题 (时变情感控制),但路线截然不同: EmoCtrl-TTS 采用全模型微调 (87k 小时数据,修改所有参数); TTS-CtrlNet 借鉴图像领域 ControlNet (Zhang et al., 2023) 的思路,冻结原始模型,仅训练一个可学习副本,用约 400 小时公开数据即可达到甚至超越 EmoCtrl-TTS 的情感控制性能。
 >
-> **已有认知**: 知识库中 [[Emotion Control in TTS]] [待确认] 已记录了 EmoCtrl-TTS 的帧级 arousal-valence 条件方案及其数据策略。[[Zero-shot Speech Synthesis]] 任务页记录了 F5-TTS 作为非自回归 flow matching 方法的定位。[[Diffusion-based TTS]] [待确认] 记录了 flow matching 取代 diffusion 成为主流的演进趋势。ControlNet 概念在知识库中尚无独立页面。
+> **已有认知**: 知识库中 [[EmotionControlinTTS]] [待确认] 已记录了 EmoCtrl-TTS 的帧级 arousal-valence 条件方案及其数据策略。[[Zero-shotSpeechSynthesis]] 任务页记录了 F5-TTS 作为非自回归 flow matching 方法的定位。[[Diffusion-basedTTS]] [待确认] 记录了 flow matching 取代 diffusion 成为主流的演进趋势。ControlNet 概念在知识库中尚无独立页面。
 >
 > **创新判断**: 相比知识库已记录的方法,本文核心新贡献有三: (1) 首次将 ControlNet 范式从图像扩散模型迁移至 flow-matching TTS; (2) 发现 emotion-specific flow step 区间 -- 情感信息仅在 flow step [0, temo] 区间内决定,训练和推理都只需在此区间应用 ControlNet; (3) 通过 DiT block-level 消融找到关键 block 并将其排除在 ControlNet 连接之外,在几乎不损害 WER 的前提下实现情感控制。以上三点均未在已有概念页中覆盖。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Diffusion-based TTS]](pending-review), [[Mel Spectrogram]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[MelSpectrogram]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

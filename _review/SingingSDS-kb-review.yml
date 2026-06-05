@@ -1,0 +1,29 @@
+paper: SingingSDS
+reviewer: auto
+date: 2026-06-04
+type: kb-update-review
+
+updates:
+  - target: "概念库/Singing Voice Synthesis.md"
+    action: append
+    scope: "key_papers 追加 1 条"
+    safety: safe
+    reason: "SingingSDS 是首个将 SVS 嵌入交互式 SDS 的系统,符合 key_papers 收录标准 (转折级: SVS 从非交互到交互)"
+    current_key_papers_count: 5
+    after_count: 6
+    within_limit: true
+
+  - target: "概念库/SVS Evaluation Metrics.md"
+    action: append
+    scope: "正文末尾追加 SingingSDS 的娱乐性评估维度段落 (≤3行)"
+    safety: safe
+    reason: "SingingSDS 引入 N&F, Char. Cons., Lyric Qual. 三个 SVS 评估新维度,属于评估方法论扩展,追加到现有页面丰富覆盖"
+
+  - target: "概念库/Musical Score Encoder.md"
+    action: append
+    scope: "正文'在 SVS 中的应用'节末尾追加 SingingSDS melody controller 段落 (≤3行)"
+    safety: safe
+    reason: "SingingSDS 的 melody controller 是 Musical Score Encoder 的松散变体 (note-level pitch+timing 而非完整乐谱),值得记录为对比案例"
+
+conclusion: pass
+conclusion_reason: "3 项更新均为 append (不改 status), 各 key_papers 未超限, 正文追加 ≤3 行, 无 factual error 风险"

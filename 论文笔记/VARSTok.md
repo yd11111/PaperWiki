@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "VARSTok: Variable-Frame-Rate Speech Tokenization via Adaptive Clustering and Implicit Duration Coding"
 arxiv_id: "2509.04685"
-source: "Sources/2509.04685.pdf"
+source: "Sources/VARSTok.pdf"
 authors: [Rui-Chen Zheng, Wenrui Liu, Hui-Peng Du, Qinglin Zhang, Chong Deng, Qian Chen, Wen Wang, Yang Ai, Zhen-Hua Ling]
 year: 2025
 venue: "arXiv (USTC + Alibaba Tongyi Fun Team)"
 tags: [audio-codec, speech-tokenizer, variable-frame-rate, single-codebook, VQ, clustering, duration-modeling, TTS, compression]
-concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Single-codebook vs Multi-codebook]]", "[[Duration Predictor]]", "[[Codec Language Model]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[CodebookCollapse]]", "[[TokenRateandBitrateTrade-offs]]", "[[Single-codebookvsMulti-codebook]]", "[[DurationPredictor]]", "[[CodecLanguageModel]]"]
 models: ["[[模型库/WavLM|WavLM]]", "[[模型库/Whisper|Whisper]]"]
-tasks: ["[[任务库/Neural Audio Compression|Neural Audio Compression]]", "[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+tasks: ["[[任务库/NeuralAudioCompression|Neural Audio Compression]]", "[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: VARSTok 属于 acoustic tokenizer 路线 ([[Speech Tokenizer]]),但它挑战了该路线默认的 fixed-frame-rate 范式。在 [[Single-codebook vs Multi-codebook]] 的设计轴上,VARSTok 延续了 WavTokenizer 的单码本 SVQ 选择 (K=4096),符合 "单码本回归" 趋势。但它在 [[Token Rate and Bitrate Trade-offs]] 维度上独辟蹊径:不是通过减少码本数/降低帧率来压缩,而是通过 content-adaptive 的 variable frame rate 实现动态压缩,这在 acoustic tokenizer 中尚属首例。
+> **谱系定位**: VARSTok 属于 acoustic tokenizer 路线 ([[SpeechTokenizer]]),但它挑战了该路线默认的 fixed-frame-rate 范式。在 [[Single-codebookvsMulti-codebook]] 的设计轴上,VARSTok 延续了 WavTokenizer 的单码本 SVQ 选择 (K=4096),符合 "单码本回归" 趋势。但它在 [[TokenRateandBitrateTrade-offs]] 维度上独辟蹊径:不是通过减少码本数/降低帧率来压缩,而是通过 content-adaptive 的 variable frame rate 实现动态压缩,这在 acoustic tokenizer 中尚属首例。
 >
-> **已有认知**: 概念库中 [[Token Rate and Bitrate Trade-offs]] 已记录 fixed bitrate / adaptive bitrate / scalable bitrate 三类策略,但缺少 "variable frame rate" 这一类别 — VARSTok 代表了一种新的压缩策略:帧率本身随内容变化。[[Duration Predictor]] 页面记录了从 FastSpeech 到 RL-optimized duration 的演进,VARSTok 的 implicit duration coding 提出了一种完全不同的思路:将 duration 编码进 token index,消除对独立 duration predictor 的需求。[[Codebook Collapse]] 页面记录了多种解决方案,VARSTok 的 codebook utilization 分析 (K=4096 时 100%) 提供了小码本 + 数据充足时 collapse 不严重的新证据。
+> **已有认知**: 概念库中 [[TokenRateandBitrateTrade-offs]] 已记录 fixed bitrate / adaptive bitrate / scalable bitrate 三类策略,但缺少 "variable frame rate" 这一类别 — VARSTok 代表了一种新的压缩策略:帧率本身随内容变化。[[DurationPredictor]] 页面记录了从 FastSpeech 到 RL-optimized duration 的演进,VARSTok 的 implicit duration coding 提出了一种完全不同的思路:将 duration 编码进 token index,消除对独立 duration predictor 的需求。[[CodebookCollapse]] 页面记录了多种解决方案,VARSTok 的 codebook utilization 分析 (K=4096 时 100%) 提供了小码本 + 数据充足时 collapse 不严重的新证据。
 >
 > **创新判断**: 相比概念库中已有的 fixed-rate tokenizer (WavTokenizer, BigCodec, DAC 等), VARSTok 的核心新意在于: (1) temporal-aware density peak clustering 实现真正动态帧率 (非 TFC 那种从预定义帧率中选择的 "pseudo-dynamic"); (2) implicit duration coding 将 duration 嵌入 token index,无需修改下游 LM 架构。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]][待确认], [[Single-codebook vs Multi-codebook]][待确认], [[Duration Predictor]][待确认], [[Codec Language Model]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]][待确认], [[Single-codebookvsMulti-codebook]][待确认], [[DurationPredictor]][待确认], [[CodecLanguageModel]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -185,7 +185,7 @@ VARSTok 在所有语义任务上优于 WavTokenizer,尤其在 AudioMNIST 上提�
 | 8192 | 32768 | 72.72% | 3.9042 | [Table 6] |
 | 16384 | 65536 | 40.17% | 3.9390 | [Table 6] |
 
-K=4096 是最佳平衡: 100% utilization + 0.43 kbps + UTMOS 3.89 [论文原文, Appendix K]。更大码本改善微弱但 utilization 骤降 — 与 [[Codebook Collapse]] 的 "充足数据缓解 collapse" 发现一致 (此处 585h 对 K=4096 够用,对 K=16384 不够) [agent 解读]。
+K=4096 是最佳平衡: 100% utilization + 0.43 kbps + UTMOS 3.89 [论文原文, Appendix K]。更大码本改善微弱但 utilization 骤降 — 与 [[CodebookCollapse]] 的 "充足数据缓解 collapse" 发现一致 (此处 585h 对 K=4096 够用,对 K=16384 不够) [agent 解读]。
 
 ## 局限性
 
@@ -225,4 +225,4 @@ VARSTok 的核心贡献清晰且有说服力: 它证明了 variable-frame-rate a
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]][待确认], [[Single-codebook vs Multi-codebook]][待确认], [[Duration Predictor]][待确认], [[Codec Language Model]][待确认] | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]][待确认], [[Single-codebookvsMulti-codebook]][待确认], [[DurationPredictor]][待确认], [[CodecLanguageModel]][待确认] | 未命中但可能相关: 无

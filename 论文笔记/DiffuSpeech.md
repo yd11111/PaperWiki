@@ -8,8 +8,8 @@ authors: [Yuxuan Lou, Ziming Wu, Yaochen Wang, Yong Liu, Yingxuan Ren, Fuming La
 year: 2026
 venue: "Preprint (arXiv)"
 tags: [speech-LM, diffusion, masked-diffusion, speech-to-speech, chain-of-thought, reasoning, multimodal, non-autoregressive]
-concepts: ["[[Speech Language Model]]", "[[Masked Generative Modeling]]", "[[Diffusion-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Neural Vocoder]]", "[[LLM-based TTS]]"]
-models: ["[[论文笔记/Moshi|Moshi]]", "[[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/CoT-ST|CoT-ST]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[MaskedGenerativeModeling]]", "[[Diffusion-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[NeuralVocoder]]", "[[LLM-basedTTS]]"]
+models: ["[[论文笔记/Moshi|Moshi]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/CoT-ST|CoT-ST]]"]
 tasks: []
 datasets: []
 kb_context_sources: 4
@@ -20,11 +20,11 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Language Model]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]], [[LLM-based TTS]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechLanguageModel]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]], [[LLM-basedTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓, [[LLM-based TTS]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: DiffuSpeech 是首个将 masked diffusion language model (MDLM) 扩展到 speech-text 双模态的统一生成系统,同时支持语音理解和生成。在 [[Speech Language Model]] 的分类体系中,它属于 "continued pre-training + instruction-tuning" 训练路线,但独特之处在于用 diffusion (而非自回归) 作为生成范式 -- 此前所有 SpeechLM (GSLM, SpiritLM, Moshi, SpeechGPT, Mini-Omni) 均为 autoregressive。在 [[Semantic vs Acoustic Tokens]] 的光谱中,DiffuSpeech 使用 HuBERT semantic tokens (25Hz, 500 codes),属于纯 semantic token 路线,声学细节由 frozen HiFi-GAN [[Neural Vocoder]] 恢复。与 [[LLM-based TTS]] 中主流 AR 路线 (VALL-E 系列, CosyVoice) 的最大区别在于: DiffuSpeech 通过双向 attention + 迭代去噪实现 speech 和 text 的联合生成,而非单向左到右。
+**谱系定位**: DiffuSpeech 是首个将 masked diffusion language model (MDLM) 扩展到 speech-text 双模态的统一生成系统,同时支持语音理解和生成。在 [[SpeechLanguageModel]] 的分类体系中,它属于 "continued pre-training + instruction-tuning" 训练路线,但独特之处在于用 diffusion (而非自回归) 作为生成范式 -- 此前所有 SpeechLM (GSLM, SpiritLM, Moshi, SpeechGPT, Mini-Omni) 均为 autoregressive。在 [[SemanticvsAcousticTokens]] 的光谱中,DiffuSpeech 使用 HuBERT semantic tokens (25Hz, 500 codes),属于纯 semantic token 路线,声学细节由 frozen HiFi-GAN [[NeuralVocoder]] 恢复。与 [[LLM-basedTTS]] 中主流 AR 路线 (VALL-E 系列, CosyVoice) 的最大区别在于: DiffuSpeech 通过双向 attention + 迭代去噪实现 speech 和 text 的联合生成,而非单向左到右。
 
 **创新判断对比**: DiFFA (Zhou et al., 2025) 是此前最接近的工作,将 diffusion 用于 speech-to-text 理解,但不支持语音生成。DiffuSpeech 补全了 speech generation 这一环。在 reasoning 方面,TARS (Wang et al., 2026) 探索了 SpeechLM 的 CoT 推理,但只输出文本; DiffuSpeech 的 "Silent Thought, Spoken Answer" 范式首次实现了 text reasoning + speech reply 的联合生成。
 
@@ -164,4 +164,4 @@ x = [τ_s2s, <|sos|>, s_user, <|eos|>, <|sot|>, t_think, <|eot|>, <|sos|>, s_rep
 > [!review] 审阅 (pending)
 > 待 dispatch reviewer subagent
 
-检索命中: [[Speech Language Model]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]], [[LLM-based TTS]] | 过滤: [[Diffusion-based TTS]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechLanguageModel]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]], [[LLM-basedTTS]] | 过滤: [[Diffusion-basedTTS]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无

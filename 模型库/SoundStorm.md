@@ -5,8 +5,8 @@ aliases: []
 org: "Google Research"
 year: 2023
 tags: [audio-generation, non-autoregressive, masked-generative, parallel-decoding, acoustic-model]
-key_concepts: ["[[Masked Generative Modeling]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+key_concepts: ["[[MaskedGenerativeModeling]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 key_papers: ["[[论文笔记/SoundStorm|SoundStorm]]"]
 supersedes: []
 superseded_by: []

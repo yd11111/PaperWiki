@@ -8,9 +8,9 @@ authors: [Jingyu Li, Guangyan Zhang, Zhen Ye, Yiwen Guo]
 year: 2025
 venue: "arXiv (v3, Feb 2026)"
 tags: [audio-codec, disentanglement, low-bitrate, TTS, voice-conversion, multi-stream, factorization, zero-shot]
-concepts: ["[[Speech Factorization]]", "[[Residual Vector Quantization]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]", "[[Prosody Modeling]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Codec Training Objectives]]"]
-models: ["[[HuBERT]]", "[[CosyVoice 2]]", "[[EnCodec]]", "[[SoundStream]]", "[[NaturalSpeech 3]]"]
-tasks: ["[[Neural Audio Compression]]", "[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[SpeechFactorization]]", "[[ResidualVectorQuantization]]", "[[SpeakerEmbedding]]", "[[SemanticvsAcousticTokens]]", "[[ProsodyModeling]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[TokenRateandBitrateTrade-offs]]", "[[CodecTrainingObjectives]]"]
+models: ["[[HuBERT]]", "[[CosyVoice2]]", "[[EnCodec]]", "[[SoundStream]]", "[[NaturalSpeech3]]"]
+tasks: ["[[NeuralAudioCompression]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 7
 status: draft
@@ -20,18 +20,18 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 7 个已确认实体页: [[Speech Factorization]], [[Residual Vector Quantization]], [[Speaker Embedding]], [[Semantic vs Acoustic Tokens]], [[Prosody Modeling]], [[LLM-based TTS]], [[Neural Audio Compression]])
+> [!info] KB 背景 (基于 7 个已确认实体页: [[SpeechFactorization]], [[ResidualVectorQuantization]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]], [[ProsodyModeling]], [[LLM-basedTTS]], [[NeuralAudioCompression]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Neural Audio Compression]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Codec Language Model]](pending-review), [[Codec Training Objectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech 3]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechFactorization]]✓, [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓, [[SemanticvsAcousticTokens]]✓, [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecLanguageModel]](pending-review), [[CodecTrainingObjectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech3]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: MSR-Codec 处于 **factorized codec** 路线,直接继承 [[论文笔记/NaturalSpeech 3|NaturalSpeech 3]] 的 speech factorization 思路,但在实现方式上有本质区别。NaturalSpeech 3 依赖对抗训练 (GRL + information bottleneck) 强制解耦 content/prosody/timbre/acoustic detail 四维度,并用 factorized diffusion 生成;MSR-Codec 则提出通过级联残差架构(cascaded residual connections)实现**隐式解耦**,不需要对抗训练,训练更简单稳定。
+**谱系定位**: MSR-Codec 处于 **factorized codec** 路线,直接继承 [[论文笔记/NaturalSpeech3|NaturalSpeech 3]] 的 speech factorization 思路,但在实现方式上有本质区别。NaturalSpeech 3 依赖对抗训练 (GRL + information bottleneck) 强制解耦 content/prosody/timbre/acoustic detail 四维度,并用 factorized diffusion 生成;MSR-Codec 则提出通过级联残差架构(cascaded residual connections)实现**隐式解耦**,不需要对抗训练,训练更简单稳定。
 
 **已有认知**:
-- [[Speech Factorization]] 记录了从对抗训练到信息瓶颈再到 self-distillation 的演进线,MSR-Codec 的"级联残差隐式解耦"是一条新路线
-- [[Residual Vector Quantization]] 中的 MSRVQ (multi-scale RVQ) 变体与 MSR-Codec 的多尺度处理有概念相似性,但 MSR-Codec 不是标准 RVQ 级联,而是在不同语义层级各用独立 VQ
-- [[Semantic vs Acoustic Tokens]] 的 semantic + acoustic 二分法在 MSR-Codec 中被细化为四路分流(semantic/timbre/prosody/residual)
-- [[Prosody Modeling]] 记录了韵律建模从显式 predictor 到隐式 in-context learning 的演进;MSR-Codec 在 codec 层面显式建模韵律(F0/energy 监督),这个做法更接近 FastSpeech 2 的 variance predictor 但放在了 codec 端
-- [[LLM-based TTS]] 的两阶段范式(semantic → acoustic)被 MSR-Codec 的 TTS 模型采用,但做了精简:Semantic Decoder 预测语义 token,Acoustic Decoder 预测韵律+残差 token
+- [[SpeechFactorization]] 记录了从对抗训练到信息瓶颈再到 self-distillation 的演进线,MSR-Codec 的"级联残差隐式解耦"是一条新路线
+- [[ResidualVectorQuantization]] 中的 MSRVQ (multi-scale RVQ) 变体与 MSR-Codec 的多尺度处理有概念相似性,但 MSR-Codec 不是标准 RVQ 级联,而是在不同语义层级各用独立 VQ
+- [[SemanticvsAcousticTokens]] 的 semantic + acoustic 二分法在 MSR-Codec 中被细化为四路分流(semantic/timbre/prosody/residual)
+- [[ProsodyModeling]] 记录了韵律建模从显式 predictor 到隐式 in-context learning 的演进;MSR-Codec 在 codec 层面显式建模韵律(F0/energy 监督),这个做法更接近 FastSpeech 2 的 variance predictor 但放在了 codec 端
+- [[LLM-basedTTS]] 的两阶段范式(semantic → acoustic)被 MSR-Codec 的 TTS 模型采用,但做了精简:Semantic Decoder 预测语义 token,Acoustic Decoder 预测韵律+残差 token
 
 **创新判断**: MSR-Codec 的核心新意在于用**结构设计**(级联残差)替代**训练技巧**(对抗损失)来实现语音因子分解。这是一种更工程友好的解耦范式。其 TTS 系统在仅 0.2B 参数 + 45k 小时数据条件下达到具有竞争力的效果,突出了数据效率优势。
 
@@ -227,4 +227,4 @@ Voice conversion 结果验证了解耦效果 [§3.3.3]:
 
 ---
 
-检索命中: [[Speech Factorization]], [[Residual Vector Quantization]], [[Speaker Embedding]], [[Semantic vs Acoustic Tokens]], [[Prosody Modeling]], [[LLM-based TTS]], [[Neural Audio Compression]] | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Codec Language Model]](pending-review), [[Codec Training Objectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech 3]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechFactorization]], [[ResidualVectorQuantization]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]], [[ProsodyModeling]], [[LLM-basedTTS]], [[NeuralAudioCompression]] | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecLanguageModel]](pending-review), [[CodecTrainingObjectives]](pending-review), [[HuBERT]](pending-review), [[NaturalSpeech3]](pending-review) | 未命中但可能相关: 无

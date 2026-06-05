@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "FunAudioLLM: Voice Understanding and Generation Foundation Models for Natural Interaction Between Humans and LLMs"
 arxiv_id: "2407.04051"
-source: "https://arxiv.org/abs/2407.04051"
+source: "Sources/FunAudioLLM.pdf"
 authors: [Tongyi SpeechTeam, Alibaba Group]
 year: 2024
 venue: "arXiv"
 tags: [speech-LM, ASR, TTS, SER, AED, multilingual, zero-shot, voice-cloning, instruction-following, supervised-token, flow-matching, open-source]
-concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Self-Supervised Speech Representation]]", "[[Audio Understanding]]", "[[Emotion Control in TTS]]", "[[Speaker Embedding]]", "[[Instruction-Guided Speech Synthesis]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Self-SupervisedSpeechRepresentation]]", "[[AudioUnderstanding]]", "[[EmotionControlinTTS]]", "[[SpeakerEmbedding]]", "[[Instruction-GuidedSpeechSynthesis]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/SenseVoice|SenseVoice]]", "[[模型库/Whisper|Whisper]]", "[[模型库/HuBERT|HuBERT]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Tokenizer]], [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speaker Embedding]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeakerEmbedding]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review), [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review), [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
 >
 > **Speech Tokenizer**: FunAudioLLM 提出 S^3 (Supervised Semantic Speech) tokenizer,即 CosyVoice 系列的核心 tokenizer。KB 已记录此 tokenizer 基于 SenseVoice-Large ASR encoder 第 6 层后插入 VQ (单码本, 4096 entries)。本论文是 S^3 tokenizer 的原始出处,详细描述了其设计动机和架构。
 >
@@ -223,4 +223,4 @@ FunAudioLLM 的核心贡献是**系统级的**: 它将语音理解 (SenseVoice) 
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review), [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review), [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无

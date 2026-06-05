@@ -8,7 +8,7 @@ authors: [Haibin Wu, Bach Viet Do, Naveen Suda, Julian Chan, Madhavan C R, Gene-
 year: 2026
 venue: "arXiv"
 tags: [audio-codec, on-device, quantization, transformer, streaming-TTS, latency-optimization, neural-vocoder]
-concepts: ["[[Speech Tokenizer]]", "[[Codec Training Objectives]]", "[[Multi-scale STFT Discriminator]]", "[[Neural Vocoder]]", "[[Semantic vs Acoustic Tokens]]", "[[Token Rate and Bitrate Trade-offs]]"]
+concepts: ["[[SpeechTokenizer]]", "[[CodecTrainingObjectives]]", "[[Multi-scaleSTFTDiscriminator]]", "[[NeuralVocoder]]", "[[SemanticvsAcousticTokens]]", "[[TokenRateandBitrateTrade-offs]]"]
 models: ["[[模型库/Moshi|Moshi]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[Speech Tokenizer]], [[Multi-scale STFT Discriminator]], [[Semantic vs Acoustic Tokens]], [[Neural Vocoder]], [[Codec Training Objectives]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[SpeechTokenizer]], [[Multi-scaleSTFTDiscriminator]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]], [[CodecTrainingObjectives]][待确认], [[TokenRateandBitrateTrade-offs]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Multi-scale STFT Discriminator]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓ | 过滤: [[CodecTrainingObjectives]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: 无
 >
 > **Speech Tokenizer**: Mimi 属于 "Mixed Objective Tokenizer",通过 split RVQ (1 VQ semantic + 7 RVQ acoustic) 在 12.5Hz 低帧率下同时编码语义和声学信息。T-Mimi 不改变 encoder 和量化器,仅替换 decoder 架构,因此 tokenizer 特性保持不变。
 >
@@ -189,4 +189,4 @@ T-Mimi 是一项目标明确、执行干净的工程改进工作。它的核心�
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Multi-scale STFT Discriminator]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Neural Vocoder]]✓ | 过滤: [[Codec Training Objectives]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[SemanticvsAcousticTokens]]✓, [[NeuralVocoder]]✓ | 过滤: [[CodecTrainingObjectives]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: 无

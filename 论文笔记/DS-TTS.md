@@ -8,9 +8,9 @@ authors: [Ming Meng, Ziyi Yang, Jian Yang, Zhenjie Su, Yonggui Zhu, Zhaoxin Fan]
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, voice-cloning, speaker-encoding, style-transfer, FiLM, dynamic-network, non-autoregressive]
-concepts: ["[[Speaker Embedding]]", "[[Style Transfer in TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Voice Cloning Taxonomy]]", "[[Global Style Tokens]]"]
+concepts: ["[[SpeakerEmbedding]]", "[[StyleTransferinTTS]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[VoiceCloningTaxonomy]]", "[[GlobalStyleTokens]]"]
 models: []
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriTTS", "VCTK"]
 kb_context_sources: 6
 status: draft
@@ -23,18 +23,18 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DS-TTS 属于 [[Voice Cloning Taxonomy]] 中的 **Zero-shot Voice Cloning → Speaker Encoding** 路线。在该路线中,核心思路是从参考音频提取 speaker embedding 作为条件注入 TTS 模型,无需对目标说话人做微调。DS-TTS 的基础架构是 FastSpeech 2 ([[Non-autoregressive TTS]]),属于典型的 NAR + variance adaptor 范式。
+> **谱系定位**: DS-TTS 属于 [[VoiceCloningTaxonomy]] 中的 **Zero-shot Voice Cloning → Speaker Encoding** 路线。在该路线中,核心思路是从参考音频提取 speaker embedding 作为条件注入 TTS 模型,无需对目标说话人做微调。DS-TTS 的基础架构是 FastSpeech 2 ([[Non-autoregressiveTTS]]),属于典型的 NAR + variance adaptor 范式。
 >
 > **已有认知**: 
-> - [[Speaker Embedding]] (confirmed): Speaker encoding 是 zero-shot VC 的核心,常见注入方式包括 concatenation、addition、Conditional LayerNorm、FiLM conditioning、cross-attention 和 prefix/prompt。DS-TTS 的 SGF 机制是 FiLM conditioning 的扩展变体。
-> - [[Zero-shot Speech Synthesis]] (confirmed): 当前 SOTA 已由 LLM + codec 方案 (CosyVoice 3, Seed-TTS) 主导,WER 降至 1% 以下,speaker similarity >0.8。DS-TTS 走的是传统 speaker encoder + NAR 路线。
-> - [[Style Transfer in TTS]] [待确认]: 风格迁移从 GST (2018) → MetaStyleSpeech (2021) → StyleTTS 2 (2023) 演进。DS-TTS 的双编码器架构与 MetaStyleSpeech 的 Mel-Style Encoder 有直接传承关系。
-> - [[Duration Predictor]] [待确认]: FastSpeech 2 的 variance adaptor 包含 duration/pitch/energy predictor。DS-TTS 创新性地引入 dynamic variance adaptor,按序列长度选择不同预测器架构。
-> - [[Global Style Tokens]] [待确认]: GST 开创了从参考音频无监督提取风格表示的范式。DS-TTS 的 DuSEN 可视为 GST 思路的演化 — 从单一 reference encoder 扩展到 mel + MFCC 双编码器。
+> - [[SpeakerEmbedding]] (confirmed): Speaker encoding 是 zero-shot VC 的核心,常见注入方式包括 concatenation、addition、Conditional LayerNorm、FiLM conditioning、cross-attention 和 prefix/prompt。DS-TTS 的 SGF 机制是 FiLM conditioning 的扩展变体。
+> - [[Zero-shotSpeechSynthesis]] (confirmed): 当前 SOTA 已由 LLM + codec 方案 (CosyVoice 3, Seed-TTS) 主导,WER 降至 1% 以下,speaker similarity >0.8。DS-TTS 走的是传统 speaker encoder + NAR 路线。
+> - [[StyleTransferinTTS]] [待确认]: 风格迁移从 GST (2018) → MetaStyleSpeech (2021) → StyleTTS 2 (2023) 演进。DS-TTS 的双编码器架构与 MetaStyleSpeech 的 Mel-Style Encoder 有直接传承关系。
+> - [[DurationPredictor]] [待确认]: FastSpeech 2 的 variance adaptor 包含 duration/pitch/energy predictor。DS-TTS 创新性地引入 dynamic variance adaptor,按序列长度选择不同预测器架构。
+> - [[GlobalStyleTokens]] [待确认]: GST 开创了从参考音频无监督提取风格表示的范式。DS-TTS 的 DuSEN 可视为 GST 思路的演化 — 从单一 reference encoder 扩展到 mel + MFCC 双编码器。
 >
 > **创新判断**: DS-TTS 的两个核心创新 (DuSEN + DyGN) 均是对已有模块的组合改进: (1) 双编码器思路在语音情感识别中已有先例 (Zou et al., ICASSP 2022),DS-TTS 将其引入 TTS 风格编码; (2) 按序列长度动态选择网络架构是 dynamic neural network 思想在 TTS 中的首次应用。SGF 机制是 FiLM + gating 的组合,增加了两个调制参数 (eta, delta)。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: FiLM (无独立页)
+> 检索命中: [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[VoiceCloningTaxonomy]](pending-review), [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: FiLM (无独立页)
 
 ## 速查
 
@@ -190,4 +190,4 @@ SGF 扩展:
 
 ---
 
-检索命中: [[Speaker Embedding]], [[Zero-shot Speech Synthesis]] | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: FiLM (无独立页)
+检索命中: [[SpeakerEmbedding]], [[Zero-shotSpeechSynthesis]] | 过滤: [[VoiceCloningTaxonomy]](pending-review), [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: FiLM (无独立页)

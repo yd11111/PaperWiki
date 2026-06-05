@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "GSRM: Generative Speech Reward Model for Speech RLHF"
 arxiv_id: "2602.13891"
-source: "https://arxiv.org/abs/2602.13891"
+source: "Sources/GSRM.pdf"
 authors: [Maohao Shen, Tejas Jayashankar, Osama Hanna, Naoyuki Kanda, Yancheng Wang, Katerina Zmolikova, Ruiming Xie, Niko Moritz, Anfeng Xu, Yashesh Gaur, Gregory Wornell, Qing He, Jilong Wu]
 year: 2026
 venue: "arXiv"
 tags: [reward-model, generative-reward, RLHF, speech-naturalness, CoT-reasoning, acoustic-features, TTS-evaluation, online-RL]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[TTS Evaluation]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[TTSEvaluation]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[TTSEvaluation]])
 > TTS Evaluation 中传统 MOS 预测器 (NISQA, UTMOSv2) 本质是标量回归器,缺乏可解释性且跨域泛化差;LLM-as-a-Judge 是新兴方向,但 frontier speech LLM (如 Gemini) 在 naturalness 判断上能力有限。LLM-based TTS 系统 (GPT-4o Voice Mode, Gemini Live) 的合成语音 naturalness 仍落后于人类。RLHF 在文本 LLM 中已成为关键对齐手段,但 speech RLHF 的 reward model 设计仍处于早期。
-> 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[TTSEvaluation]] | 过滤: [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -140,8 +140,8 @@ GSRM 是 **speech RLHF reward modeling 的重要突破**,核心洞见在于:
 3. **首次 online speech RLHF**: 将 GSRM 作为 universal verifier 接入 online RL loop,82% naturalness win rate 证明了端到端的有效性
 
 **与 KB 已有知识的关系**:
-- 与 [[TTS Evaluation]] 的核心议题直接相关: GSRM 回应了 "为什么传统 MOS predictor 不够" 的问题,提供了可解释的替代方案
-- 与 [[Differentiable Reward Optimization]] [待确认] 互补: DiffRO 解决 "如何用 reward 优化 TTS",GSRM 解决 "如何获得好的 reward signal"
+- 与 [[TTSEvaluation]] 的核心议题直接相关: GSRM 回应了 "为什么传统 MOS predictor 不够" 的问题,提供了可解释的替代方案
+- 与 [[DifferentiableRewardOptimization]] [待确认] 互补: DiffRO 解决 "如何用 reward 优化 TTS",GSRM 解决 "如何获得好的 reward signal"
 - 与 SpeechAlign 的关系: SpeechAlign 用 golden-vs-synthetic 构建 implicit reward,GSRM 用 explicit human feedback 构建 generative reward model
 
 ## 可复用的 idea

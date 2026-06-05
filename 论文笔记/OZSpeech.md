@@ -8,9 +8,9 @@ authors: [Hieu-Nghia Huynh-Nguyen, Ngoc Son Nguyen, Huynh Nguyen Dang, Thieu Vo,
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, flow-matching, one-step-sampling, neural-codec, FACodec, non-autoregressive, efficiency]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Factorization]]", "[[Duration Predictor]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeechFactorization]]", "[[DurationPredictor]]", "[[ResidualVectorQuantization]]", "[[Non-autoregressiveTTS]]"]
+models: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech2|NaturalSpeech 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]], [[Speech Factorization]], [[Residual Vector Quantization]]; 2 个待确认实体页: [[模型库/NaturalSpeech 3|NaturalSpeech 3]] [待确认], [[Duration Predictor]] [待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]], [[SpeechFactorization]], [[ResidualVectorQuantization]]; 2 个待确认实体页: [[模型库/NaturalSpeech3|NaturalSpeech 3]] [待确认], [[DurationPredictor]] [待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: OZSpeech 属于 Zero-shot TTS 的 non-autoregressive/flow-based 阵营。其核心技术路线——使用 CFM 将中间分布映射到目标分布——与 CosyVoice 系列、F5-TTS、VoiceFlow 等系统同源,但 OZSpeech 的独特切入点在于: (1) 用 learned prior 替代 Gaussian noise 作为 flow matching 起点, 从而实现单步采样; (2) 直接在 FACodec 的离散 token 空间操作, 而非 mel spectrogram 空间。
@@ -33,7 +33,7 @@ updated: 2026-06-03
 >
 > **创新判断**: OZSpeech 的核心创新在于将 OT-CFM 的起始分布从 Gaussian noise 替换为 learned prior, 并证明当 prior 足够接近 target 时可实现单步采样。这与 Consistency Models (蒸馏已训练的 diffusion model) 和 Shortcut Models (额外训练约束) 的加速路线不同, OZSpeech 不需要预训练 teacher 或额外约束, 仅一次联合训练即可。但其 UTMOS/SIM 指标不如基线, 说明单步采样在音质-速度 trade-off 上的代价仍然显著。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[模型库/NaturalSpeech 3|NaturalSpeech 3]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeechFactorization]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[模型库/NaturalSpeech3|NaturalSpeech 3]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

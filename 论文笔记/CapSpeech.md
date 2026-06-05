@@ -8,9 +8,9 @@ authors: [Helin Wang, Jiarui Hai, Dading Chong, Karan Thakkar, Tiantian Feng, Do
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, style-captioned, benchmark, dataset, emotion, accent, sound-event, autoregressive, flow-matching]
-concepts: ["[[Natural Language Description for TTS]]", "[[Classifier-Free Guidance]]", "[[Conditional Flow Matching]]", "[[Codec Language Model]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]"]
+concepts: ["[[NaturalLanguageDescriptionforTTS]]", "[[Classifier-FreeGuidance]]", "[[ConditionalFlowMatching]]", "[[CodecLanguageModel]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]"]
 models: ["[[模型库/BigVGAN|BigVGAN]]"]
-tasks: ["[[任务库/Instructed Speech Generation|Instructed Speech Generation]]"]
+tasks: ["[[任务库/InstructedSpeechGeneration|Instructed Speech Generation]]"]
 datasets: ["[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,17 +20,17 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Conditional Flow Matching]], [[Natural Language Description for TTS]], [[Instruction-Guided Speech Synthesis]], [[Emotion Control in TTS]], [[Classifier-Free Guidance]], [[Codec Language Model]])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ConditionalFlowMatching]], [[NaturalLanguageDescriptionforTTS]], [[Instruction-GuidedSpeechSynthesis]], [[EmotionControlinTTS]], [[Classifier-FreeGuidance]], [[CodecLanguageModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Conditional Flow Matching]]✓, [[Natural Language Description for TTS]]✓, [[Classifier-Free Guidance]]✓, [[Codec Language Model]]✓, [[Emotion Control in TTS]]✓, [[Style Transfer in TTS]]✓ | 过滤: 以上除 CFM 外均为 pending-review [待确认] | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[NaturalLanguageDescriptionforTTS]]✓, [[Classifier-FreeGuidance]]✓, [[CodecLanguageModel]]✓, [[EmotionControlinTTS]]✓, [[StyleTransferinTTS]]✓ | 过滤: 以上除 CFM 外均为 pending-review [待确认] | 未命中但可能相关: 无
 
 ### 谱系定位
 
 CapSpeech 处于 **Natural Language Description for TTS** 范式的数据/基准层面。知识库已追踪这一范式的演进: Style tagging (GST, 2018) → Reference encoder (2018-2022) → PromptTTS (文本描述, 2023) → PromptTTS 2 (variation network, 2023) → InstructTTS (2024) → Parler-TTS (大规模合成标注, 2024) → FleSpeech (2025)。CapSpeech 延续 Parler-TTS 的路线,但将重心从"模型创新"转向"统一数据基准 + 下游任务定义",填补了该范式缺乏统一评测标准的空白。
 
-在知识库中,已有概念页 [[Natural Language Description for TTS]] 明确指出该领域的核心挑战之一是"评估困难: 描述与语音的匹配度难以自动量化"以及"训练数据: 高质量描述标注成本高"。CapSpeech 直接回应这两个痛点。
+在知识库中,已有概念页 [[NaturalLanguageDescriptionforTTS]] 明确指出该领域的核心挑战之一是"评估困难: 描述与语音的匹配度难以自动量化"以及"训练数据: 高质量描述标注成本高"。CapSpeech 直接回应这两个痛点。
 
-模型侧,CapSpeech-AR 基于 Parler-TTS (属 [[Codec Language Model]] 范式), CapSpeech-NAR 基于 F5-TTS (属 [[Conditional Flow Matching]] 范式)。两者均使用 [[Classifier-Free Guidance]] 进行推理控制。EmoCapTTS 子任务与 [[Emotion Control in TTS]] 中从离散标签到自由文本描述的演进一致。
+模型侧,CapSpeech-AR 基于 Parler-TTS (属 [[CodecLanguageModel]] 范式), CapSpeech-NAR 基于 F5-TTS (属 [[ConditionalFlowMatching]] 范式)。两者均使用 [[Classifier-FreeGuidance]] 进行推理控制。EmoCapTTS 子任务与 [[EmotionControlinTTS]] 中从离散标签到自由文本描述的演进一致。
 
 ### 已有认知
 
@@ -166,4 +166,4 @@ NAR on CapSpeech PT: Style-ACC 62.1% vs ParaSpeechCaps 51.8% [Table 3]
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[Natural Language Description for TTS]], [[Classifier-Free Guidance]], [[Codec Language Model]], [[Emotion Control in TTS]], [[Style Transfer in TTS]] | 过滤: 除 CFM 外均为 pending-review [待确认] | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[NaturalLanguageDescriptionforTTS]], [[Classifier-FreeGuidance]], [[CodecLanguageModel]], [[EmotionControlinTTS]], [[StyleTransferinTTS]] | 过滤: 除 CFM 外均为 pending-review [待确认] | 未命中但可能相关: 无

@@ -8,9 +8,9 @@ authors: [Haiyang Sun, Shujie Hu, Shujie Liu, Lingwei Meng, Hui Wang, Bing Han, 
 year: 2025
 venue: "arXiv"
 tags: [TTS, streaming, zero-shot, transducer, autoregressive, mel-spectrogram, semantic-token, frame-by-frame, low-latency]
-concepts: ["[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]"]
+concepts: ["[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[MelSpectrogram]]", "[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[SpeakerEmbedding]]"]
 models: ["[[模型库/MELLE|MELLE]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["LibriSpeech", "LibriTTS"]
 kb_context_sources: 6
 status: draft
@@ -26,16 +26,16 @@ updated: 2026-06-03
 > **谱系定位**: SMLLE 处于 streaming TTS 与 LLM-based zero-shot TTS 两条路线的交汇点。当前 LLM-based TTS (VALL-E 系列, CosyVoice 系列) 在零样本质量上已接近人类水平,但它们是句子级系统——必须拿到整句文本才开始生成,延迟高。而 streaming TTS 方案 (如 LiveSpeech 2 的 chunk-level 生成) 要么依赖 lookahead 机制引入额外延迟,要么在逐帧模式下质量严重退化 (如 LiveSpeech2-limit WER 40.7%)。SMLLE 的定位是首个在逐帧 (frame-by-frame) 模式下实现零样本质量的 streaming TTS。
 >
 > **已有认知**:
-> - [[Semantic vs Acoustic Tokens]] (confirmed): SMLLE 使用 SpeechTokenizer 的第一层 codec 作为 semantic tokens,属于 mixed tokenizer 路线中的语义层。Semantic tokens 与文本对齐好但缺声学细节;SMLLE 的 Transducer 将文本转为 semantic tokens,再由 AR 模型从 semantic tokens 恢复 mel spectrogram,形成两阶段解耦。
-> - [[LLM-based TTS]] (confirmed): SMLLE 的 AR 阶段直接继承 MELLE 的连续 mel-spectrogram 自回归框架,包括 latent sampling module 和 spectrogram flux loss。SMLLE 与 VALL-E 系列的竞争关系不在于取代 LLM-based TTS 的质量,而在于为其增加 streaming 能力。
-> - [[Speech Tokenizer]] (confirmed): SMLLE 使用 SpeechTokenizer (Zhang et al., ICLR 2024) 的第一层 RVQ codes 作为 semantic tokens。SpeechTokenizer 是 mixed tokenizer——第一层蒸馏 HuBERT 语义,后续层编码声学残差。SMLLE 仅使用第一层,因此操作的是纯语义表示。
-> - [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] (confirmed): SMLLE 在 LibriSpeech test-clean (unseen speakers) 上评估零样本能力,SIM 0.516,与 VALL-E (0.580) 可比。当前 SOTA (CosyVoice 3, IndexTTS2) 已远超此水平。
-> - [[Mel Spectrogram]] [待确认]: SMLLE 的 AR 模型输出 80-dim log-magnitude mel spectrogram,通过 BigVGAN-V2 vocoder 合成波形。与离散 codec token 路线不同,SMLLE 延续了 MELLE 的"连续 mel 预测"范式。
-> - [[Duration Predictor]] [待确认]: SMLLE 完全避免了显式 duration predictor。Transducer 的对齐路径隐式提供 duration 信息 (通过 blank 符号在 lattice 中的分布),text 沿垂直路径复制得到 duration-aligned text X'。这类似于 TTS-Transducer 的做法,但 SMLLE 将此对齐信息直接传入 AR 阶段而非 NAR 阶段。
+> - [[SemanticvsAcousticTokens]] (confirmed): SMLLE 使用 SpeechTokenizer 的第一层 codec 作为 semantic tokens,属于 mixed tokenizer 路线中的语义层。Semantic tokens 与文本对齐好但缺声学细节;SMLLE 的 Transducer 将文本转为 semantic tokens,再由 AR 模型从 semantic tokens 恢复 mel spectrogram,形成两阶段解耦。
+> - [[LLM-basedTTS]] (confirmed): SMLLE 的 AR 阶段直接继承 MELLE 的连续 mel-spectrogram 自回归框架,包括 latent sampling module 和 spectrogram flux loss。SMLLE 与 VALL-E 系列的竞争关系不在于取代 LLM-based TTS 的质量,而在于为其增加 streaming 能力。
+> - [[SpeechTokenizer]] (confirmed): SMLLE 使用 SpeechTokenizer (Zhang et al., ICLR 2024) 的第一层 RVQ codes 作为 semantic tokens。SpeechTokenizer 是 mixed tokenizer——第一层蒸馏 HuBERT 语义,后续层编码声学残差。SMLLE 仅使用第一层,因此操作的是纯语义表示。
+> - [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]] (confirmed): SMLLE 在 LibriSpeech test-clean (unseen speakers) 上评估零样本能力,SIM 0.516,与 VALL-E (0.580) 可比。当前 SOTA (CosyVoice 3, IndexTTS2) 已远超此水平。
+> - [[MelSpectrogram]] [待确认]: SMLLE 的 AR 模型输出 80-dim log-magnitude mel spectrogram,通过 BigVGAN-V2 vocoder 合成波形。与离散 codec token 路线不同,SMLLE 延续了 MELLE 的"连续 mel 预测"范式。
+> - [[DurationPredictor]] [待确认]: SMLLE 完全避免了显式 duration predictor。Transducer 的对齐路径隐式提供 duration 信息 (通过 blank 符号在 lattice 中的分布),text 沿垂直路径复制得到 duration-aligned text X'。这类似于 TTS-Transducer 的做法,但 SMLLE 将此对齐信息直接传入 AR 阶段而非 NAR 阶段。
 >
 > **创新判断**: Transducer + AR mel prediction 的组合是新颖的流式 TTS 架构。与 TTS-Transducer (Bataev et al., 2025) 对比: TTS-Transducer 用 Transducer 直接预测 codec tokens (非流式),SMLLE 用 Transducer 预测 semantic tokens 再接 AR mel 生成 (流式)。与 Transduce-and-Speak / VALL-T 对比: 它们的最终语音生成仍是句子级,SMLLE 的 AR 阶段也是逐帧流式。Delete <Bos> Mechanism 是本文独创的工程技巧。
 >
-> 检索命中: [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 首个逐帧流式零样本 TTS——Transducer 实时生成 semantic tokens 并提供 duration 对齐,AR 模型逐帧将 semantic tokens + 对齐文本转为 mel spectrogram,Delete <Bos> Mechanism 以最小延迟获取未来文本信息。
@@ -203,4 +203,4 @@ SMLLE 是一个两阶段流式 TTS 框架 [§2, Fig 1]:
 > - 2 low: frontmatter concepts 中 Speaker Embedding 和 Non-autoregressive TTS 的挂接偏弱 (不影响反向更新)
 > 详见 `_review/SMLLE-review.yml`
 
-检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Tokenizer]], [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] | 过滤: [[Mel Spectrogram]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeechTokenizer]], [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]] | 过滤: [[MelSpectrogram]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: 无

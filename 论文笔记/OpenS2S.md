@@ -8,8 +8,8 @@ authors: [Chen Wang, Tianyu Peng, Wen Yang, Yinan Bai, Guangfu Wang, Jun Lin, La
 year: 2025
 venue: "arXiv preprint (Technical Report)"
 tags: [speech-LM, empathetic, end-to-end, streaming, interleaved-decoding, open-source, data-construction]
-concepts: ["[[Speech Language Model]]", "[[Streaming Spoken Dialogue]]", "[[Emotion Control in TTS]]", "[[Speech Tokenizer]]", "[[Modality Adaptation for Speech LLM]]", "[[Conditional Flow Matching]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/MinMo|MinMo]]", "Kimi-Audio", "GLM-4-Voice", "LLaMA-Omni2", "Qwen2-Audio"]
+concepts: ["[[SpeechLanguageModel]]", "[[StreamingSpokenDialogue]]", "[[EmotionControlinTTS]]", "[[SpeechTokenizer]]", "[[ModalityAdaptationforSpeechLLM]]", "[[ConditionalFlowMatching]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/MinMo|MinMo]]", "Kimi-Audio", "GLM-4-Voice", "LLaMA-Omni2", "Qwen2-Audio"]
 tasks: []
 datasets: ["[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 6
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Language Model]], [[Speech Tokenizer]], [[CosyVoice 2]]; 3 个待确认实体页: [[Streaming Spoken Dialogue]][待确认], [[Modality Adaptation for Speech LLM]][待确认], [[Emotion Control in TTS]][待确认])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[CosyVoice2]]; 3 个待确认实体页: [[StreamingSpokenDialogue]][待确认], [[ModalityAdaptationforSpeechLLM]][待确认], [[EmotionControlinTTS]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: OpenS2S 属于 modular SpeechLM 路线 — 用预训练语音编码器 + LLM + 流式语音解码器构建端到端对话系统。这条路线的代表系统包括 LLaMA-Omni 2、Freeze-Omni、MinMo。与 Moshi (全因果 RQ-Transformer) 路线不同,OpenS2S 沿用 LLaMA-Omni 2/MinMo 的 interleaved text-speech streaming decoding 架构。
@@ -34,7 +34,7 @@ updated: 2026-06-03
 >
 > **创新判断基准**: OpenS2S 的核心差异化在于 (1) 将 empathy 作为第一优先级设计目标(区别于侧重指令遵循的 LLaMA-Omni 2),(2) 提出自动化共情对话数据构建 pipeline(区别于手动标注或简单 TTS 合成的已有数据集),(3) 完全开源(数据 + 代码 + 权重)。架构本身与 LLaMA-Omni 2/MinMo 高度相似。
 >
-> 检索命中: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓ | 过滤: [[Streaming Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓ | 过滤: [[StreamingSpokenDialogue]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

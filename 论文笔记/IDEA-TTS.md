@@ -8,9 +8,9 @@ authors: [Ye-Xin Lu, Hui-Peng Du, Zheng-Yan Sheng, Yang Ai, Zhen-Hua Ling]
 year: 2024
 venue: "ICASSP 2025"
 tags: [TTS, zero-shot, disentanglement, environment-aware, speech-enhancement, acoustic-environment, VITS, spectral-masking]
-concepts: ["[[Speech Factorization]]", "[[Speaker Embedding]]", "[[Variational Autoencoder for TTS]]", "[[Style Transfer in TTS]]"]
+concepts: ["[[SpeechFactorization]]", "[[SpeakerEmbedding]]", "[[VariationalAutoencoderforTTS]]", "[[StyleTransferinTTS]]"]
 models: ["[[VITS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: IDEA-TTS 位于 [[Speech Factorization]] 的演进线上,但聚焦于一个被主流 TTS 忽略的维度 -- **acoustic environment**。现有解耦研究主要围绕 content-speaker-prosody-emotion 四维展开 (NaturalSpeech 3, Mega-TTS, Seed-TTS),环境因素通常被视为"噪声"而非可控属性。IDEA-TTS 将 environment 提升为与 speaker 并列的一等因子,这是对 [[Speech Factorization]] 解耦维度的扩展。
+> **谱系定位**: IDEA-TTS 位于 [[SpeechFactorization]] 的演进线上,但聚焦于一个被主流 TTS 忽略的维度 -- **acoustic environment**。现有解耦研究主要围绕 content-speaker-prosody-emotion 四维展开 (NaturalSpeech 3, Mega-TTS, Seed-TTS),环境因素通常被视为"噪声"而非可控属性。IDEA-TTS 将 environment 提升为与 speaker 并列的一等因子,这是对 [[SpeechFactorization]] 解耦维度的扩展。
 >
-> **已有认知**: [[Speaker Embedding]] 页记录的 ECAPA-TDNN 和 H/ASP 正是本文分别用于环境编码器和说话人编码器的架构。[[Variational Autoencoder for TTS]] [待确认] 页详述的 VITS CVAE + normalizing flow 框架是本文的 backbone。[[Zero-shot Speech Synthesis]] 页的主流方法以 LLM-based 和 diffusion-based 为主,IDEA-TTS 仍基于 VITS (2021),属于 VAE+Flow+GAN 范式。
+> **已有认知**: [[SpeakerEmbedding]] 页记录的 ECAPA-TDNN 和 H/ASP 正是本文分别用于环境编码器和说话人编码器的架构。[[VariationalAutoencoderforTTS]] [待确认] 页详述的 VITS CVAE + normalizing flow 框架是本文的 backbone。[[Zero-shotSpeechSynthesis]] 页的主流方法以 LLM-based 和 diffusion-based 为主,IDEA-TTS 仍基于 VITS (2021),属于 VAE+Flow+GAN 范式。
 >
-> **创新判断**: 与 [[Speech Factorization]] 已有方法 (对抗训练/信息瓶颈/self-distillation) 不同,IDEA-TTS 提出 "先环境后说话人" 的级联式解耦,利用 speech enhancement 中的 spectral masking 技术实现环境分离,是解耦策略上的新思路。但 backbone (VITS) 和数据规模 (12h) 与当前 SOTA 差距明显。
+> **创新判断**: 与 [[SpeechFactorization]] 已有方法 (对抗训练/信息瓶颈/self-distillation) 不同,IDEA-TTS 提出 "先环境后说话人" 的级联式解耦,利用 speech enhancement 中的 spectral masking 技术实现环境分离,是解耦策略上的新思路。但 backbone (VITS) 和数据规模 (12h) 与当前 SOTA 差距明显。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[VITS]](pending-review), [[Variational Autoencoder for TTS]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓, [[Zero-shotSpeechSynthesis]]✓ | 参考: [[VITS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

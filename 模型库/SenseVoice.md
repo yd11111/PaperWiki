@@ -5,7 +5,7 @@ aliases: [SenseVoice-Small, SenseVoice-Large, SenseVoice-S, SenseVoice-L]
 org: "Alibaba (Tongyi SpeechTeam)"
 year: 2024
 tags: [ASR, SER, AED, LID, multilingual, non-autoregressive, speech-understanding, open-source]
-key_concepts: ["[[Self-Supervised Speech Representation]]", "[[Audio Understanding]]", "[[Speech Tokenizer]]"]
+key_concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[AudioUnderstanding]]", "[[SpeechTokenizer]]"]
 tasks: []
 key_papers: ["[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]"]
 supersedes: []

@@ -8,9 +8,9 @@ authors: [Vladimir Bataev, Subhankar Ghosh, Vitaly Lavrukhin, Jason Li]
 year: 2025
 venue: "arXiv"
 tags: [TTS, neural-transducer, RNNT, audio-codec, monotonic-alignment, end-to-end, zero-shot]
-concepts: ["[[Residual Vector Quantization]]", "[[Duration Predictor]]", "[[Global Style Tokens]]", "[[Non-autoregressive TTS]]", "[[Codec Language Model]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[DurationPredictor]]", "[[GlobalStyleTokens]]", "[[Non-autoregressiveTTS]]", "[[CodecLanguageModel]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["LibriTTS-R", "VCTK"]
 kb_context_sources: 6
 status: draft
@@ -23,19 +23,19 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: TTS-Transducer 处于 LLM-based TTS 范式 (VALL-E 系列) 与传统 NAR TTS (FastSpeech 系列) 之间的独特位置。它借鉴了 VALL-E 的"预测 audio codec tokens"思路,但用 ASR 领域成熟的 neural transducer (RNNT) 替代自回归 decoder-only Transformer,以获得单调对齐约束。这与 VALL-E 系列的核心差异在于: VALL-E 隐式学习文本-语音对齐 (自回归 + cross-attention),TTS-Transducer 则通过 RNNT lattice 显式强制单调对齐,从而避免了 LLM-based TTS 常见的跳字/重复问题,也避免了 NAR TTS 对显式 [[Duration Predictor]] 的依赖。
+> **谱系定位**: TTS-Transducer 处于 LLM-based TTS 范式 (VALL-E 系列) 与传统 NAR TTS (FastSpeech 系列) 之间的独特位置。它借鉴了 VALL-E 的"预测 audio codec tokens"思路,但用 ASR 领域成熟的 neural transducer (RNNT) 替代自回归 decoder-only Transformer,以获得单调对齐约束。这与 VALL-E 系列的核心差异在于: VALL-E 隐式学习文本-语音对齐 (自回归 + cross-attention),TTS-Transducer 则通过 RNNT lattice 显式强制单调对齐,从而避免了 LLM-based TTS 常见的跳字/重复问题,也避免了 NAR TTS 对显式 [[DurationPredictor]] 的依赖。
 >
 > **已有认知**:
-> - [[Residual Vector Quantization]] (confirmed): TTS-Transducer 直接操作 RVQ 产生的多层 codec tokens,第一层由 transducer 预测,剩余层由 NAR Transformer 迭代预测。这与 VALL-E 的 AR+NAR 两阶段结构类似,但第一阶段的建模方式从 decoder-only LM 变为 transducer。
-> - [[LLM-based TTS]] (confirmed): VALL-E 系列是当前主流 zero-shot TTS 范式,核心是 codec LM + in-context learning。TTS-Transducer 提供了一种不依赖大规模预训练的替代路线,仅用 464h 数据即可达到可比性能。
-> - [[Speaker Embedding]] (confirmed): TTS-Transducer 使用 [[Global Style Tokens]] [待确认] 从参考语音提取说话人 embedding,通过 conditional LayerNorm 注入 encoder 和 RCH,而非 VALL-E 的 in-context prompt 方式。
+> - [[ResidualVectorQuantization]] (confirmed): TTS-Transducer 直接操作 RVQ 产生的多层 codec tokens,第一层由 transducer 预测,剩余层由 NAR Transformer 迭代预测。这与 VALL-E 的 AR+NAR 两阶段结构类似,但第一阶段的建模方式从 decoder-only LM 变为 transducer。
+> - [[LLM-basedTTS]] (confirmed): VALL-E 系列是当前主流 zero-shot TTS 范式,核心是 codec LM + in-context learning。TTS-Transducer 提供了一种不依赖大规模预训练的替代路线,仅用 464h 数据即可达到可比性能。
+> - [[SpeakerEmbedding]] (confirmed): TTS-Transducer 使用 [[GlobalStyleTokens]] [待确认] 从参考语音提取说话人 embedding,通过 conditional LayerNorm 注入 encoder 和 RCH,而非 VALL-E 的 in-context prompt 方式。
 > - [[模型库/EnCodec|EnCodec]] (confirmed): 本文使用的三种 codec 之一,也是 VALL-E 的默认 codec。
-> - [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] (confirmed): TTS-Transducer 在 unseen speakers 上展示了零样本能力,speaker similarity 0.868-0.881 (LibriTTS-R unseen speakers) [Table I]。
-> - [[Codec Language Model]] [待确认]: TTS-Transducer 是 CodecLM 的一个替代方案——同样预测 codec tokens,但用 transducer 而非 language model 建模。
+> - [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]] (confirmed): TTS-Transducer 在 unseen speakers 上展示了零样本能力,speaker similarity 0.868-0.881 (LibriTTS-R unseen speakers) [Table I]。
+> - [[CodecLanguageModel]] [待确认]: TTS-Transducer 是 CodecLM 的一个替代方案——同样预测 codec tokens,但用 transducer 而非 language model 建模。
 >
 > **创新判断**: 将 RNNT 引入 TTS codec token 预测是新颖的组合。已有 Transduce-and-Speak (ASRU 2023) 和 VALL-T (arXiv 2024) 探索过 transducer+TTS,但前者需要两阶段分开训练且依赖 semantic tokens,后者内存开销极大;TTS-Transducer 通过 transducer (第一码本) + RCH (剩余码本) 的分离设计解决了多码本 RNNT 的内存问题,且支持端到端联合训练。
 >
-> 检索命中: [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[模型库/EnCodec|EnCodec]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[模型库/EnCodec|EnCodec]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 将 ASR 领域的 neural transducer (RNNT) 引入 TTS,端到端预测 audio codec tokens,利用单调对齐约束避免显式 duration predictor 和自回归 hallucination。
@@ -171,4 +171,4 @@ TTS-Transducer 由两个端到端联合训练的组件构成 [§III, Fig 1]:
 > - 2 low: frontmatter models 未含 baseline (不阻塞); BPE vs IPA 推断标注充分
 > 详见 `_review/TTS-Transducer-review.yml`
 
-检索命中: [[Residual Vector Quantization]], [[LLM-based TTS]], [[Speaker Embedding]], [[模型库/EnCodec|EnCodec]], [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]] | 过滤: [[Codec Language Model]](pending-review), [[Global Style Tokens]](pending-review), [[Duration Predictor]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[LLM-basedTTS]], [[SpeakerEmbedding]], [[模型库/EnCodec|EnCodec]], [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]] | 过滤: [[CodecLanguageModel]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review) | 未命中但可能相关: 无

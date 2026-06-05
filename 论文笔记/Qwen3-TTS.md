@@ -8,9 +8,9 @@ authors: [Hangrui Hu, Xinfa Zhu, Ting He, Dake Guo, Bin Zhang, Xiong Wang, Zhifa
 year: 2026
 venue: "arXiv"
 tags: [TTS, LLM-based, streaming, multilingual, voice-cloning, instruction-following, speech-tokenizer, codec, zero-shot, cross-lingual, controllable]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Single-codebook vs Multi-codebook]]", "[[Residual Vector Quantization]]", "[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Instruction-Guided Speech Synthesis]]", "[[Token Rate and Bitrate Trade-offs]]"]
-models: ["[[CosyVoice 3]]", "[[BigVGAN]]", "[[WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[Single-codebookvsMulti-codebook]]", "[[ResidualVectorQuantization]]", "[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[TokenRateandBitrateTrade-offs]]"]
+models: ["[[CosyVoice3]]", "[[BigVGAN]]", "[[WavLM]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,10 +20,10 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[LLM-based TTS]], [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: Qwen3-TTS 属于 LLM-based TTS 家族中 hybrid 路线(LLM + Flow/Codec)的最新成员。与 CosyVoice 系列(semantic token + CFM renderer)、Seed-TTS(AR + token diffusion)平行竞争。其独特之处是同时提供两种 tokenizer:25Hz 单码本(类似 CosyVoice 路线)和 12Hz 多码本(类似 Mimi/FireRedTTS 2 路线),覆盖了 [[Single-codebook vs Multi-codebook]] 两侧设计空间。
+> **谱系定位**: Qwen3-TTS 属于 LLM-based TTS 家族中 hybrid 路线(LLM + Flow/Codec)的最新成员。与 CosyVoice 系列(semantic token + CFM renderer)、Seed-TTS(AR + token diffusion)平行竞争。其独特之处是同时提供两种 tokenizer:25Hz 单码本(类似 CosyVoice 路线)和 12Hz 多码本(类似 Mimi/FireRedTTS 2 路线),覆盖了 [[Single-codebookvsMulti-codebook]] 两侧设计空间。
 >
 > **已有认知**:
 > - Speech Tokenizer 领域正在从纯 semantic/acoustic 二分走向混合方案(SpeechTokenizer/Mimi),且出现了 continuous VAE tokenizer 新路线 [待确认]
@@ -35,7 +35,7 @@ updated: 2026-06-03
 >
 > **创新判断**: Qwen3-TTS 的核心创新在于(1)双 tokenizer 设计覆盖不同延迟-质量 trade-off,(2)12Hz 极低帧率 + 16 层 RVQ 实现超低延迟流式,(3)dual-track LM + MTP 统一处理多码本生成,(4)5M 小时训练数据规模远超同类工作。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Language Model]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review), [[Voice Cloning Taxonomy]](pending-review) | 未命中但可能相关: Differentiable Reward Optimization(DPO/GSPO 相关)
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[CodecLanguageModel]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[VoiceCloningTaxonomy]](pending-review) | 未命中但可能相关: Differentiable Reward Optimization(DPO/GSPO 相关)
 
 ## 速查
 
@@ -100,7 +100,7 @@ Qwen3-TTS 由三个核心模块组成 [§3, Fig 3]:
 
 [论文原文] 作者表示 12Hz tokenizer 的设计动机是 25Hz 单码本在超低延迟场景下不适用:单码本 + DiT 需要等待 lookahead tokens,增加延迟。
 
-[agent 解读] 这实际上印证了 KB 中 [[Single-codebook vs Multi-codebook]] 的核心 trade-off: 单码本更适合 LM 建模但需要更重的 decoder,多码本信息自足但需要多流建模。Qwen3-TTS 的解法是两者都做,让用户按需选择。12Hz tokenizer 在 reconstruction benchmark 上全面 SOTA(PESQ_WB 3.21, SIM 0.95) [Table 4],说明 16 层 RVQ + 低帧率的组合确实在质量和效率上达到了很好的平衡。
+[agent 解读] 这实际上印证了 KB 中 [[Single-codebookvsMulti-codebook]] 的核心 trade-off: 单码本更适合 LM 建模但需要更重的 decoder,多码本信息自足但需要多流建模。Qwen3-TTS 的解法是两者都做,让用户按需选择。12Hz tokenizer 在 reconstruction benchmark 上全面 SOTA(PESQ_WB 3.21, SIM 0.95) [Table 4],说明 16 层 RVQ + 低帧率的组合确实在质量和效率上达到了很好的平衡。
 
 ### LM 架构差异
 

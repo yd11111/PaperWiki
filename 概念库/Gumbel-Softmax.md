@@ -4,9 +4,9 @@ title: "Gumbel-Softmax"
 aliases: [Gumbel Softmax, Gumbel-Softmax Trick, Concrete Distribution]
 category: "optimization-technique"
 tags: [differentiable-sampling, discrete-optimization, gradient-estimation, reparameterization]
-key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/wav2vec 2.0|wav2vec 2.0]]", "[[论文笔记/NAST|NAST]]"]
+key_papers: ["[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/wav2vec2.0|wav2vec 2.0]]", "[[论文笔记/NAST|NAST]]"]
 origin_paper: "Jang et al., Categorical Reparameterization with Gumbel-Softmax, ICLR 2017"
-related_concepts: ["[[Differentiable Reward Optimization]]", "[[Finite Scalar Quantization]]", "[[Residual Vector Quantization]]"]
+related_concepts: ["[[DifferentiableRewardOptimization]]", "[[FiniteScalarQuantization]]", "[[ResidualVectorQuantization]]"]
 status: pending-review
 lifecycle: active
 merged_into: ""
@@ -80,8 +80,8 @@ wav2vec 2.0 (Baevski et al., NeurIPS 2020) 使用 Gumbel-Softmax 实现端到端
 
 ## 相关概念
 
-- [[Differentiable Reward Optimization]]: CosyVoice 3 中 Gumbel-Softmax 的应用场景
-- [[Finite Scalar Quantization]]: 另一种离散化方案,训练时用 STE 而非 Gumbel-Softmax
+- [[DifferentiableRewardOptimization]]: CosyVoice 3 中 Gumbel-Softmax 的应用场景
+- [[FiniteScalarQuantization]]: 另一种离散化方案,训练时用 STE 而非 Gumbel-Softmax
 - REINFORCE: 不需要可微路径的替代方案,但方差高
 - Straight-Through Estimator (STE): 类似思路,但不加 Gumbel 噪声
 

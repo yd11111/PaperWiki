@@ -8,9 +8,9 @@ authors: [Wenhao Guan, Zhikang Niu, Ziyue Jiang, Kaidi Wang, Peijie Chen, Qingya
 year: 2025
 venue: "arXiv (Work in Progress)"
 tags: [TTS, ASR, unified-model, flow-matching, autoregressive, LLM, zero-shot, continuous-representation]
-concepts: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Language Model]]", "[[Classifier-Free Guidance]]", "[[Mel Spectrogram]]", "[[Speaker Embedding]]"]
-models: ["[[Whisper]]", "[[BigVGAN]]", "[[CosyVoice]]", "[[NaturalSpeech 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeechLanguageModel]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]", "[[SpeakerEmbedding]]"]
+models: ["[[Whisper]]", "[[BigVGAN]]", "[[CosyVoice]]", "[[NaturalSpeech2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: [LibriHeavy, LibriSpeech]
 kb_context_sources: 6
 status: draft
@@ -20,21 +20,21 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Zero-shot Speech Synthesis]], [[Speaker Embedding]], [[CosyVoice]], [[Speech Language Model]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[Zero-shotSpeechSynthesis]], [[SpeakerEmbedding]], [[CosyVoice]], [[SpeechLanguageModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: UniVoice 位于 SpeechLM 中"统一模型"赛道,与 SpeechT5、LauraGPT、OpusLM 同类。但不同于 SpeechT5 的 encoder-decoder 架构、LauraGPT 的"continuous-in, discrete-out"设计、OpusLM 的全离散 multi-stream token 方案,UniVoice 选择**全程连续表征**(continuous-in, continuous-out),并在一个 transformer 中同时嵌入 AR (用于 ASR) 和 flow matching (用于 TTS)。
 >
 > **已有认知**:
-> - [[Conditional Flow Matching]] 在 TTS 中已有成熟应用(CosyVoice 系列、F5-TTS、Matcha-TTS),通常作为独立的 second-stage renderer 将 speech tokens 转为 mel spectrogram。[[CLEAR]] 首次将 rectified flow 嵌入 AR LM 的每个 token 位置实现单阶段生成,但仅限 TTS。
-> - [[LLM-based TTS]] 的主流架构是 LLM 生成离散 token + NAR/CFM 补充声学细节的两阶段管线(CosyVoice、Seed-TTS)。连续表征路线(MELLE、LatentLM、CLEAR)正在兴起,用 per-token diffusion/flow head 替代离散 codebook。
-> - [[Zero-shot Speech Synthesis]] 主流方法是 speech prompt in-context learning 或 speech infilling (Voicebox, F5-TTS),UniVoice 的 text-prefix-conditioned infilling 属于后者。
-> - [[Speaker Embedding]] 在 LLM-TTS 时代逐步被 in-context prompt 取代;XLSR-53 是跨语言 speaker encoder 的典型选择。
+> - [[ConditionalFlowMatching]] 在 TTS 中已有成熟应用(CosyVoice 系列、F5-TTS、Matcha-TTS),通常作为独立的 second-stage renderer 将 speech tokens 转为 mel spectrogram。[[CLEAR]] 首次将 rectified flow 嵌入 AR LM 的每个 token 位置实现单阶段生成,但仅限 TTS。
+> - [[LLM-basedTTS]] 的主流架构是 LLM 生成离散 token + NAR/CFM 补充声学细节的两阶段管线(CosyVoice、Seed-TTS)。连续表征路线(MELLE、LatentLM、CLEAR)正在兴起,用 per-token diffusion/flow head 替代离散 codebook。
+> - [[Zero-shotSpeechSynthesis]] 主流方法是 speech prompt in-context learning 或 speech infilling (Voicebox, F5-TTS),UniVoice 的 text-prefix-conditioned infilling 属于后者。
+> - [[SpeakerEmbedding]] 在 LLM-TTS 时代逐步被 in-context prompt 取代;XLSR-53 是跨语言 speaker encoder 的典型选择。
 > - [[CosyVoice]] 的 LLM+OT-CFM 两阶段架构是 UniVoice 的直接对比基准。CosyVoice 用 x-vector 显式分离说话人建模,而 UniVoice-infilling 通过 masked context 隐式获取 speaker identity。
 >
 > **创新判断**: UniVoice 的核心创新点 --- 在单个 LLM 中通过 dual attention mask 同时训练 AR-ASR 和 FM-TTS --- 在已有知识库中没有先例。CLEAR 实现了 AR+flow 单阶段 TTS,但未涉及 ASR。VioLA/LauraGPT 做了统一但用离散 token。UniVoice 是首个在连续空间同时统一 ASR 和 TTS 的 LLM 框架。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[CosyVoice]]✓, [[Speech Language Model]]✓ | 过滤: [[Classifier-Free Guidance]](待确认), [[Mel Spectrogram]](待确认), [[Codec Language Model]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓, [[CosyVoice]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Classifier-FreeGuidance]](待确认), [[MelSpectrogram]](待确认), [[CodecLanguageModel]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

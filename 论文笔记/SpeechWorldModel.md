@@ -12,10 +12,10 @@ level: deep
 status: draft
 created: 2026-06-03
 updated: 2026-06-03
-concepts: ["[[Speech Language Model]]", "[[Audio Understanding]]", "[[Prosody Modeling]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]"]
 models: []
 datasets: []
-kb_sources: ["[[Speech Language Model]]", "[[Audio Understanding]]", "[[Prosody Modeling]]"]
+kb_sources: ["[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
 
@@ -23,9 +23,9 @@ tier: deep
 
 ## KB 背景
 
-- **[[Speech Language Model]]** [confirmed]: SWM 挑战了当前 SLM 的"黑箱理解"范式，提出用显式因果图结构化语音理解的模块化方案，作为 SLM 推理能力增强的新路线 [论文原文]
-- **[[Audio Understanding]]** [confirmed]: SWM 将语音理解分解为 4 个认知模块 (WMA/ToM/SA/Prag)，覆盖场景感知、情感识别、言语行为分类和语用意图推理，与 Audio Understanding 的多任务体系直接对应 [论文原文]
-- **[[Prosody Modeling]]** [confirmed]: SWM 使用 openSMILE 提取韵律特征 (prosody z) 作为因果图的输入之一，韵律信息直接影响 Theory of Mind (情感) 和 Speech Act (言语行为) 模块的推理 [论文原文]
+- **[[SpeechLanguageModel]]** [confirmed]: SWM 挑战了当前 SLM 的"黑箱理解"范式，提出用显式因果图结构化语音理解的模块化方案，作为 SLM 推理能力增强的新路线 [论文原文]
+- **[[AudioUnderstanding]]** [confirmed]: SWM 将语音理解分解为 4 个认知模块 (WMA/ToM/SA/Prag)，覆盖场景感知、情感识别、言语行为分类和语用意图推理，与 Audio Understanding 的多任务体系直接对应 [论文原文]
+- **[[ProsodyModeling]]** [confirmed]: SWM 使用 openSMILE 提取韵律特征 (prosody z) 作为因果图的输入之一，韵律信息直接影响 Theory of Mind (情感) 和 Speech Act (言语行为) 模块的推理 [论文原文]
 
 > [!summary] 速查
 > - **一句话**: 首个基于因果图的模块化语音理解模型，将语音理解分解为 4 个认知模块 (WMA→ToM→SA→Prag) 构成 DAG，显式推理链引导 LLM 生成，在情感识别上超越 Gemini 2.5 Pro
@@ -180,4 +180,4 @@ S̃_{i,u→v} = τ · onehot(y_{i,u}) + (1-τ) · stopgrad(S_{i,u}),  τ ~ Berno
 
 ---
 
-检索命中: [[Speech Language Model]], [[Audio Understanding]], [[Prosody Modeling]] | 过滤: 无 | 未命中但可能相关: [[Emotion Control in TTS]]
+检索命中: [[SpeechLanguageModel]], [[AudioUnderstanding]], [[ProsodyModeling]] | 过滤: 无 | 未命中但可能相关: [[EmotionControlinTTS]]

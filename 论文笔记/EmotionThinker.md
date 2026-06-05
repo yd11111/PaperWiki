@@ -5,18 +5,18 @@ aliases: [EmotionThinker, GRPO-PTR, EmotionCoT-35K]
 authors: ["Anonymous"]
 year: 2026
 arxiv_id: ""
-source: "ICLR 2026 submission"
+source: "Sources/EmotionThinker.pdf"
 venue: "ICLR 2026 (under review)"
 tags: [speech-emotion-recognition, SER, reinforcement-learning, GRPO, reasoning, prosody, SpeechLLM, chain-of-thought, explainable-AI]
 level: deep
 status: draft
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Speech Language Model]]", "[[Audio Understanding]]", "[[Differentiable Reward Optimization]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[DifferentiableRewardOptimization]]"]
 models: []
 tasks: [speech-emotion-recognition, emotion-reasoning, prosody-perception]
 datasets: []
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Speech Language Model]]", "[[Audio Understanding]]"]
+kb_sources: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[SpeechLanguageModel]]", "[[AudioUnderstanding]]"]
 ---
 tier: deep
 
@@ -24,10 +24,10 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[Prosody Modeling]]** (confirmed): EmotionThinker 的核心假设是 **prosody 是情感推理的先决条件**。现有 SpeechLLM 缺乏细粒度韵律感知 (pitch, energy, speed, stress, intonation contour),导致情感识别退化为简单分类。EmotionThinker-Base 通过 prosody-centric SFT (Stress-17K + prosodic attribute classification + comparative augmentation) 显著提升韵律感知能力: pitch 准确率 25.71% → 75.11%, speed 29.94% → 68.70% [Table 5]。[论文原文]
-- **[[Emotion Control in TTS]]** [待确认]: EmotionThinker 解决的是情感理解 (SER) 而非情感合成,但两者共享对韵律-情感关联的建模需求。SER 需要从 prosodic cues 推断情感,TTS 情感控制需要将情感意图注入韵律参数 -- 是同一问题的正/反向 [agent 解读]。
-- **[[Speech Language Model]]** (confirmed): EmotionThinker 基于 Qwen2.5-Omni-7B 构建,属于 SpeechLLM 的理解任务分支。其三阶段训练 (Prosody SFT → RL) 展示了如何为 SpeechLLM 注入特定能力 [agent 解读]。
-- **[[Audio Understanding]]** [待确认]: EmotionThinker 将传统的分类式 SER 重新定义为 "可解释情感推理" -- 不仅预测 emotion label,还生成 CoT 形式的推理过程 (speaker traits + prosodic cues + semantic analysis → emotion judgment)。这扩展了 Audio Understanding 中 paralinguistic 任务的边界 [agent 解读]。
+- **[[ProsodyModeling]]** (confirmed): EmotionThinker 的核心假设是 **prosody 是情感推理的先决条件**。现有 SpeechLLM 缺乏细粒度韵律感知 (pitch, energy, speed, stress, intonation contour),导致情感识别退化为简单分类。EmotionThinker-Base 通过 prosody-centric SFT (Stress-17K + prosodic attribute classification + comparative augmentation) 显著提升韵律感知能力: pitch 准确率 25.71% → 75.11%, speed 29.94% → 68.70% [Table 5]。[论文原文]
+- **[[EmotionControlinTTS]]** [待确认]: EmotionThinker 解决的是情感理解 (SER) 而非情感合成,但两者共享对韵律-情感关联的建模需求。SER 需要从 prosodic cues 推断情感,TTS 情感控制需要将情感意图注入韵律参数 -- 是同一问题的正/反向 [agent 解读]。
+- **[[SpeechLanguageModel]]** (confirmed): EmotionThinker 基于 Qwen2.5-Omni-7B 构建,属于 SpeechLLM 的理解任务分支。其三阶段训练 (Prosody SFT → RL) 展示了如何为 SpeechLLM 注入特定能力 [agent 解读]。
+- **[[AudioUnderstanding]]** [待确认]: EmotionThinker 将传统的分类式 SER 重新定义为 "可解释情感推理" -- 不仅预测 emotion label,还生成 CoT 形式的推理过程 (speaker traits + prosodic cues + semantic analysis → emotion judgment)。这扩展了 Audio Understanding 中 paralinguistic 任务的边界 [agent 解读]。
 
 > [!summary] 速查
 > - **一句话**: 首个将 RL (GRPO) 应用于语音情感推理的框架,通过 prosody-centric SFT + Progressive Trust-aware Reasoning Reward (GRPO-PTR) 使 SpeechLLM 输出可解释的情感判断
@@ -164,4 +164,4 @@ Prosody-centric SFT 作为 RL 冷启动的必要性被充分验证: 没有它 (V
 
 ---
 
-检索命中: [[Prosody Modeling]](confirmed), [[Speech Language Model]](confirmed) | 过滤: [[Emotion Control in TTS]](pending-review), [[Audio Understanding]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]](confirmed), [[SpeechLanguageModel]](confirmed) | 过滤: [[EmotionControlinTTS]](pending-review), [[AudioUnderstanding]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无

@@ -8,8 +8,8 @@ authors: [Tongyi Fun Team, Alibaba Group]
 year: 2026
 venue: "arXiv"
 tags: [speech-LM, LALM, full-duplex, dual-resolution, DPO, model-merging, spoken-dialogue, audio-understanding, post-training]
-concepts: ["[[Speech Language Model]]", "[[Full-duplex Spoken Dialogue]]", "[[Speech Tokenizer]]", "[[Modality Adaptation for Speech LLM]]", "[[Speech-LLM Integration Taxonomy]]", "[[Conditional Flow Matching]]"]
-models: ["[[CosyVoice 3]]", "[[Whisper]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[Full-duplexSpokenDialogue]]", "[[SpeechTokenizer]]", "[[ModalityAdaptationforSpeechLLM]]", "[[Speech-LLMIntegrationTaxonomy]]", "[[ConditionalFlowMatching]]"]
+models: ["[[CosyVoice3]]", "[[Whisper]]"]
 tasks: []
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
@@ -20,11 +20,11 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Speech Language Model]]✓, [[Speech Tokenizer]]✓, [[Full-duplex Spoken Dialogue]], [[Modality Adaptation for Speech LLM]], [[CosyVoice 3]], [[Speech-LLM Integration Taxonomy]])
+> [!info] KB 背景 (基于 6 个实体页: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[Full-duplexSpokenDialogue]], [[ModalityAdaptationforSpeechLLM]], [[CosyVoice3]], [[Speech-LLMIntegrationTaxonomy]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]], [[Speech Tokenizer]], [[Full-duplex Spoken Dialogue]], [[Modality Adaptation for Speech LLM]], [[CosyVoice 3]], [[Speech-LLM Integration Taxonomy]] | 过滤: [[Full-duplex Spoken Dialogue]](pending-review), [[Modality Adaptation for Speech LLM]](pending-review), [[CosyVoice 3]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[Full-duplexSpokenDialogue]], [[ModalityAdaptationforSpeechLLM]], [[CosyVoice3]], [[Speech-LLMIntegrationTaxonomy]] | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[CosyVoice3]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: Fun-Audio-Chat 属于 Speech Language Model 中的 **Parallel Joint Speech-Text Model** 路线,与 Moshi 同属在 LLM 内同时生成 text 和 speech tokens 的范式。在 [[Speech-LLM Integration Taxonomy]] 中,它处于 audio-token-based integration 类别。与近期同类 LALM (Kimi-Audio, Step-Audio2-Mini, MiMo-Audio, Baichuan-Audio) 的区别在于: (1) 不做大规模 audio-text 预训练,仅做 post-training; (2) 采用 dual-resolution 架构 (5Hz LLM + 25Hz SRH) 降低计算成本。
+**谱系定位**: Fun-Audio-Chat 属于 Speech Language Model 中的 **Parallel Joint Speech-Text Model** 路线,与 Moshi 同属在 LLM 内同时生成 text 和 speech tokens 的范式。在 [[Speech-LLMIntegrationTaxonomy]] 中,它处于 audio-token-based integration 类别。与近期同类 LALM (Kimi-Audio, Step-Audio2-Mini, MiMo-Audio, Baichuan-Audio) 的区别在于: (1) 不做大规模 audio-text 预训练,仅做 post-training; (2) 采用 dual-resolution 架构 (5Hz LLM + 25Hz SRH) 降低计算成本。
 
 **已有认知**: CosyVoice 3 的 S3Tokenizer (FSQ 量化, 25Hz, MinMo backbone, 530K 小时多任务监督训练) 被本文直接采用且冻结,验证了该 tokenizer 的跨场景迁移能力。Full-duplex Spoken Dialogue 领域已有 Moshi (RQ-Transformer)、FreezeOmni (chunk-level state prediction)、OmniFlatten 等系统,Fun-Audio-Chat-Duplex 的 parallel input stream 方案是又一种实现路径。
 

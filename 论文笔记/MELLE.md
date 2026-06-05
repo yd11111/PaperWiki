@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "MELLE: Autoregressive Speech Synthesis without Vector Quantization"
 arxiv_id: "2407.08551"
-source: "https://arxiv.org/abs/2407.08551"
+source: "Sources/MELLE.pdf"
 authors: [Lingwei Meng, Long Zhou, Shujie Liu, Sanyuan Chen, Bing Han, Shujie Hu, Yanqing Liu, Jinyu Li, Sheng Zhao, Xixin Wu, Helen Meng, Furu Wei]
 year: 2024
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, autoregressive, continuous-token, mel-spectrogram, variational-inference, LLM-TTS, codec-free]
-concepts: ["[[Mel Spectrogram]]", "[[Variational Autoencoder for TTS]]", "[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Neural Vocoder]]", "[[Residual Vector Quantization]]"]
+concepts: ["[[MelSpectrogram]]", "[[VariationalAutoencoderforTTS]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[NeuralVocoder]]", "[[ResidualVectorQuantization]]"]
 models: ["[[模型库/MELLE|MELLE]]"]
 tasks: [TTS, zero-shot-TTS]
 datasets: [Libriheavy, LibriSpeech]
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Mel Spectrogram]], [[Variational Autoencoder for TTS]], [[LLM-based TTS]], [[Codec Language Model]], [[Neural Vocoder]], [[Residual Vector Quantization]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[MelSpectrogram]], [[VariationalAutoencoderforTTS]], [[LLM-basedTTS]], [[CodecLanguageModel]], [[NeuralVocoder]], [[ResidualVectorQuantization]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Codec Language Model]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Factorization]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[CodecLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[NeuralVocoder]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechFactorization]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
 
 - **LLM-based TTS**: MELLE 属于 LLM-based TTS 范式但颠覆了其核心假设 -- 不使用离散 token,直接在连续 mel-spectrogram 上做自回归语言建模。KB 已有 VALL-E 等系统均依赖 codec discrete tokens。
 - **Codec Language Model**: MELLE 的核心创新是绕过 VQ,直接预测连续值。KB 中 CodecLM 的关键挑战之一是"多层 RVQ 建模" -- MELLE 通过消除 RVQ 从根本上避免了这个问题。
@@ -212,4 +212,4 @@ MELLE-R4 仅需 1.40s 生成 10s 语音,超越所有对比系统 [Table 5]。
 4. **Reduction factor $r$**: 多帧预测加速推理,适用于任何帧级 AR 模型 (mel, latent 等)
 5. **Ground truth mel > EnCodec**: Table 1 直接证明从 mel reconstruction 比从 EnCodec reconstruction 有更好的 WER 和 SIM,为"回归连续表示"提供实证支持
 
-检索命中: [[LLM-based TTS]], [[Codec Language Model]], [[Residual Vector Quantization]], [[Neural Vocoder]], [[Semantic vs Acoustic Tokens]], [[Speech Factorization]] | 过滤: [[Mel Spectrogram]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[CodecLanguageModel]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[SemanticvsAcousticTokens]], [[SpeechFactorization]] | 过滤: [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无

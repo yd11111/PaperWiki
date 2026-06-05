@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "WavLM: Large-Scale Self-Supervised Pre-Training for Full Stack Speech Processing"
 arxiv_id: "2110.13900"
-source: "https://arxiv.org/abs/2110.13900"
+source: "Sources/WavLM.pdf"
 authors: [Sanyuan Chen, Chengyi Wang, Zhengyang Chen, Yu Wu, Shujie Liu, Zhuo Chen, Jinyu Li, Naoyuki Kanda, Takuya Yoshioka, Xiong Xiao, Jian Wu, Long Zhou, Shuo Ren, Yanmin Qian, Yao Qian, Jian Wu, Michael Zeng, Xiangzhan Yu, Furu Wei]
 year: 2022
 venue: "IEEE Journal of Selected Topics in Signal Processing"
 tags: [self-supervised-learning, speech-representation, masked-prediction, speech-denoising, multi-task, speaker-verification, speech-separation, diarization, ASR, full-stack]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[Speech Language Model]]", "[[Speech Factorization]]", "[[Self-Supervised Speech Representation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeakerEmbedding]]", "[[SpeechLanguageModel]]", "[[SpeechFactorization]]", "[[Self-SupervisedSpeechRepresentation]]"]
 models: ["[[模型库/WavLM|WavLM]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speaker Embedding]], [[Speech Language Model]], [[Speech Factorization]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeakerEmbedding]], [[SpeechLanguageModel]], [[SpeechFactorization]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed), [[Semantic vs Acoustic Tokens]]✓(confirmed), [[Speaker Embedding]]✓(confirmed), [[Speech Language Model]]✓(confirmed), [[Speech Factorization]]✓(confirmed) | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed), [[SemanticvsAcousticTokens]]✓(confirmed), [[SpeakerEmbedding]]✓(confirmed), [[SpeechLanguageModel]]✓(confirmed), [[SpeechFactorization]]✓(confirmed) | 过滤: 无 | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: Survey benchmark 中 WavLM (DWavL-S-16) 在声学属性建模上表现最佳;在 SpeechLM 中 Mimi tokenizer 使用 WavLM 作为 semantic 信号源 ✓
-- [[Semantic vs Acoustic Tokens]]: WavLM 在 SALMon benchmark 中声学一致性最强 (Gender 92.0%, Spk 86.5%),但语义任务不如 HuBERT ✓
-- [[Speaker Embedding]]: WavLM 表征可用于 speaker verification,在 VoxCeleb 上超越 ECAPA-TDNN SOTA ✓
-- [[Speech Language Model]]: WavLM 作为通用 speech foundation model,覆盖 content/speaker/semantic/paralinguistic 多维度 ✓
-- [[Speech Factorization]]: WavLM 不同层自然分离内容和说话人信息 — bottom layers 编码 speaker,top layers 编码 content ✓
+- [[SpeechTokenizer]]: Survey benchmark 中 WavLM (DWavL-S-16) 在声学属性建模上表现最佳;在 SpeechLM 中 Mimi tokenizer 使用 WavLM 作为 semantic 信号源 ✓
+- [[SemanticvsAcousticTokens]]: WavLM 在 SALMon benchmark 中声学一致性最强 (Gender 92.0%, Spk 86.5%),但语义任务不如 HuBERT ✓
+- [[SpeakerEmbedding]]: WavLM 表征可用于 speaker verification,在 VoxCeleb 上超越 ECAPA-TDNN SOTA ✓
+- [[SpeechLanguageModel]]: WavLM 作为通用 speech foundation model,覆盖 content/speaker/semantic/paralinguistic 多维度 ✓
+- [[SpeechFactorization]]: WavLM 不同层自然分离内容和说话人信息 — bottom layers 编码 speaker,top layers 编码 content ✓
 
 ## 速查
 
@@ -190,4 +190,4 @@ $$r_{i-j} = d_{|i-j|} + g_i^{(\text{update})} d_{i-j} + (1 - g_i^{(\text{update}
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Speech Language Model]]✓, [[Speech Factorization]]✓ | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓, [[SpeechLanguageModel]]✓, [[SpeechFactorization]]✓ | 过滤: 无 | 未命中但可能相关: 无

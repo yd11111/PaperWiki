@@ -4,13 +4,13 @@ tier: deep
 title: "TTSDS - Text-to-Speech Distribution Score"
 aliases: [TTSDS, Text-to-Speech Distribution Score, TTS Distribution Score]
 arxiv_id: "2407.12707"
-source: "https://arxiv.org/abs/2407.12707"
+source: "Sources/TTSDS.pdf"
 authors: [Christoph Minixhofer, Ondřej Klejch, Peter Bell]
 year: 2024
 venue: "INTERSPEECH 2024"
 tags: [TTS-evaluation, benchmark, distributional-metrics, Wasserstein-distance, objective-metrics, MOS-correlation, factor-analysis]
-concepts: ["[[TTS Evaluation]]", "[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Speaker Verification]]"]
-models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/wav2vec 2.0|wav2vec 2.0]]", "[[模型库/Whisper|Whisper]]"]
+concepts: ["[[TTSEvaluation]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]", "[[SpeakerVerification]]"]
+models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/wav2vec2.0|wav2vec 2.0]]", "[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: []
 kb_context_sources: 5
@@ -21,14 +21,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个实体页: [[TTS Evaluation]], [[Self-Supervised Speech Representation]], [[Speaker Embedding]], [[Prosody Modeling]], [[Speaker Verification]])
+> [!info] KB 背景 (基于 5 个实体页: [[TTSEvaluation]], [[Self-SupervisedSpeechRepresentation]], [[SpeakerEmbedding]], [[ProsodyModeling]], [[SpeakerVerification]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-- **[[TTS Evaluation]]** [pending-review]: TTSDS 是 distributional TTS evaluation 路线的开创性工作,提出"分布距离替代逐样本评分"的范式。后续 TTSDS2 (ICLR 2026) 基于此改进,移除了 ENVIRONMENT 因子、改用 ASR 激活值替代 WER。该概念页已记录 TTS 评估从 MOS → Predicted MOS → LLM-as-Judge → Distributional 的演进线。TTSDS 是这条演进线中 distributional 范式的起点 [待确认]
-- **[[Self-Supervised Speech Representation]]** [pending-review]: TTSDS 的 GENERAL 因子直接使用 HuBERT base 和 wav2vec 2.0 base 的中间层表征作为分布特征。PROSODY 因子也使用了 HuBERT token length 作为时长代理。SSL 模型在此充当特征提取器而非下游任务模型 [待确认]
-- **[[Prosody Modeling]]** [confirmed]: TTSDS 的 PROSODY 因子通过三类特征衡量韵律: WORLD F0 (pitch)、Masked Prosody Model (SSL prosody representations)、HuBERT token length (segmental duration 代理)。这与概念页中"韵律的物理维度: Duration/Pitch/Energy"对应前两维
-- **[[Speaker Embedding]]** [confirmed]: TTSDS 的 SPEAKER 因子使用 d-vector 和 WeSpeaker 两种 speaker encoder。概念页记录了 d-vector 是 DNN 倒数第二层输出的早期 speaker embedding 方法; WeSpeaker 是更新的 speaker verification 系统
-- **[[Speaker Verification]]** [pending-review]: TTSDS 的 SPEAKER 因子本质上利用了 speaker verification 系统的表征来衡量合成语音与真实语音的说话人分布差异,而非传统的逐样本 SECS 比较 [待确认]
+- **[[TTSEvaluation]]** [pending-review]: TTSDS 是 distributional TTS evaluation 路线的开创性工作,提出"分布距离替代逐样本评分"的范式。后续 TTSDS2 (ICLR 2026) 基于此改进,移除了 ENVIRONMENT 因子、改用 ASR 激活值替代 WER。该概念页已记录 TTS 评估从 MOS → Predicted MOS → LLM-as-Judge → Distributional 的演进线。TTSDS 是这条演进线中 distributional 范式的起点 [待确认]
+- **[[Self-SupervisedSpeechRepresentation]]** [pending-review]: TTSDS 的 GENERAL 因子直接使用 HuBERT base 和 wav2vec 2.0 base 的中间层表征作为分布特征。PROSODY 因子也使用了 HuBERT token length 作为时长代理。SSL 模型在此充当特征提取器而非下游任务模型 [待确认]
+- **[[ProsodyModeling]]** [confirmed]: TTSDS 的 PROSODY 因子通过三类特征衡量韵律: WORLD F0 (pitch)、Masked Prosody Model (SSL prosody representations)、HuBERT token length (segmental duration 代理)。这与概念页中"韵律的物理维度: Duration/Pitch/Energy"对应前两维
+- **[[SpeakerEmbedding]]** [confirmed]: TTSDS 的 SPEAKER 因子使用 d-vector 和 WeSpeaker 两种 speaker encoder。概念页记录了 d-vector 是 DNN 倒数第二层输出的早期 speaker embedding 方法; WeSpeaker 是更新的 speaker verification 系统
+- **[[SpeakerVerification]]** [pending-review]: TTSDS 的 SPEAKER 因子本质上利用了 speaker verification 系统的表征来衡量合成语音与真实语音的说话人分布差异,而非传统的逐样本 SECS 比较 [待确认]
 
 **谱系定位**: TTSDS 处于 TTS 评估从"逐样本 MOS/predicted MOS"到"分布级评估"的范式转折点。它从计算机视觉的 FID (Fréchet Inception Distance) 和音频领域的 Fréchet Audio Distance 汲取灵感,但创新在于(1)多因子分解而非单一距离,(2)在 TTS 低样本量下仍能保持鲁棒相关性。TTSDS2 继承并扩展了这一范式。
 
@@ -191,4 +191,4 @@ TTSDS 使用三个跨时代的数据集验证,覆盖 2008-2024 年的 35 个 TTS
 
 ---
 
-检索命中: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Prosody Modeling]]✓, [[Speaker Embedding]]✓, [[Speaker Verification]](pending-review) | 过滤: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Speaker Verification]](pending-review) | 未命中但可能相关: 无
+检索命中: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓, [[SpeakerVerification]](pending-review) | 过滤: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[SpeakerVerification]](pending-review) | 未命中但可能相关: 无

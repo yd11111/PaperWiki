@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Differentiable Reward Optimization for LLM based TTS system"
 arxiv_id: "2507.05911"
-source: "Sources/2507.05911.pdf"
+source: "Sources/DiffRO.pdf"
 authors: [Changfeng Gao, Zhihao Du, Shiliang Zhang]
 year: 2025
 venue: "arXiv (Interspeech format)"
 tags: [reinforcement-learning, DiffRO, TTS, reward-model, Gumbel-Softmax, RLHF, multi-task-reward, emotion-control, CosyVoice]
-concepts: ["[[Differentiable Reward Optimization]]", "[[Gumbel-Softmax]]", "[[Emotion Control in TTS]]", "[[TTS Evaluation]]", "[[Speech Language Model]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/SenseVoice|SenseVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[DifferentiableRewardOptimization]]", "[[Gumbel-Softmax]]", "[[EmotionControlinTTS]]", "[[TTSEvaluation]]", "[[SpeechLanguageModel]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/SenseVoice|SenseVoice]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -21,10 +21,10 @@ updated: 2026-06-04
 ## KB 背景
 
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
-> **谱系定位**: 本文是 DiffRO 方法的原始独立论文 (2025-07),出自阿里通义实验室 Speech Team。[[Differentiable Reward Optimization]] [待确认] 概念页已记录了该方法在 CosyVoice 3 中的集成及其与 GRPO 的后续对比 (RL-for-Audio-LLM, 同一第一作者)。本文聚焦于 DiffRO 的核心机制提出和独立验证。
-> **已有认知**: [[Speech Language Model]] (confirmed) 定义了 neural codec LM TTS 的标准四组件架构 (tokenizer + LM + FM + vocoder); [[模型库/CosyVoice 2|CosyVoice 2]] (confirmed) 是本文的 baseline 系统; [[Gumbel-Softmax]] [待确认] 是 DiffRO 实现可微采样的核心技术; [[Emotion Control in TTS]] [待确认] 已记录 Emo-DPO 等情感控制路线; [[TTS Evaluation]] [待确认] 讨论了 WER 作为 reward 的局限性。
+> **谱系定位**: 本文是 DiffRO 方法的原始独立论文 (2025-07),出自阿里通义实验室 Speech Team。[[DifferentiableRewardOptimization]] [待确认] 概念页已记录了该方法在 CosyVoice 3 中的集成及其与 GRPO 的后续对比 (RL-for-Audio-LLM, 同一第一作者)。本文聚焦于 DiffRO 的核心机制提出和独立验证。
+> **已有认知**: [[SpeechLanguageModel]] (confirmed) 定义了 neural codec LM TTS 的标准四组件架构 (tokenizer + LM + FM + vocoder); [[模型库/CosyVoice2|CosyVoice 2]] (confirmed) 是本文的 baseline 系统; [[Gumbel-Softmax]] [待确认] 是 DiffRO 实现可微采样的核心技术; [[EmotionControlinTTS]] [待确认] 已记录 Emo-DPO 等情感控制路线; [[TTSEvaluation]] [待确认] 讨论了 WER 作为 reward 的局限性。
 > **创新判断**: 对比已有 RL for TTS 方法 (Seed-TTS 的 audio-level REINFORCE, Emo-DPO 的 preference-based),DiffRO 的核心新意在于: (1) 在 token 空间而非 audio 空间计算 reward; (2) 通过 Gumbel-Softmax 实现端到端可微优化,无需 PPO/DPO 的 RL loop; (3) 首次提出 Multi-Task Reward (MTR) 模型统一多维度反馈。
-> 检索命中: [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[EmotionControlinTTS]](pending-review), [[TTSEvaluation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -153,4 +153,4 @@ SER reward 为 log P(A_emo = E | U_tilde),同时保留 ASR reward [§4.3.1]。
 > - [low] traceability-gap: 训练超参数段落标注可更精确
 > 详见 `_review/DiffRO-review.yml`
 
-检索命中: [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechLanguageModel]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[EmotionControlinTTS]](pending-review), [[TTSEvaluation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无

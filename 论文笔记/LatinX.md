@@ -8,9 +8,9 @@ authors: [Luís Felipe Chary, Miguel Arjona Ramírez]
 year: 2025
 venue: "arXiv (preprint)"
 tags: [TTS, multilingual, DPO, zero-shot, voice-cloning, autoregressive, codec-LM, cross-lingual, preference-optimization, decoder-only]
-concepts: ["[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Differentiable Reward Optimization]]"]
+concepts: ["[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[DifferentiableRewardOptimization]]"]
 models: ["[[XTTS]]"]
-tasks: ["[[Cross-lingual Voice Cloning]]", "[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Cross-lingualVoiceCloning]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,13 +20,13 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页: [[LLM-based TTS]], [[Cross-lingual Voice Cloning]], [[Speaker Embedding]], [[Differentiable Reward Optimization]]⁺, [[Codec Language Model]]⁺, [[Voice Cloning Taxonomy]]⁺)
+> [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页: [[LLM-basedTTS]], [[Cross-lingualVoiceCloning]], [[SpeakerEmbedding]], [[DifferentiableRewardOptimization]]⁺, [[CodecLanguageModel]]⁺, [[VoiceCloningTaxonomy]]⁺)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Cross-lingual Voice Cloning]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](待确认), [[Codec Language Model]](待确认), [[Voice Cloning Taxonomy]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DifferentiableRewardOptimization]](待确认), [[CodecLanguageModel]](待确认), [[VoiceCloningTaxonomy]](待确认) | 未命中但可能相关: 无
 
-**谱系定位**: LatinX 属于 [[LLM-based TTS]] 范式中 codec token + decoder-only Transformer 路线, 与 VALL-E 同源但规模更小 (210M vs VALL-E 的 370M+)。它在 [[Codec Language Model]] 谱系中属于 **单码本 + 自回归** 架构, 使用自研 Spectrogram Patch Codec (VQ-VAE, 4096 codebook) 而非主流 RVQ 方案 (EnCodec/DAC), 从而避免了多层 RVQ 的序列长度问题。
+**谱系定位**: LatinX 属于 [[LLM-basedTTS]] 范式中 codec token + decoder-only Transformer 路线, 与 VALL-E 同源但规模更小 (210M vs VALL-E 的 370M+)。它在 [[CodecLanguageModel]] 谱系中属于 **单码本 + 自回归** 架构, 使用自研 Spectrogram Patch Codec (VQ-VAE, 4096 codebook) 而非主流 RVQ 方案 (EnCodec/DAC), 从而避免了多层 RVQ 的序列长度问题。
 
-**已有认知**: KB 中 [[Differentiable Reward Optimization]] [待确认] 已系统整理了 TTS 后训练对齐的演进线: RLHF → Seed-TTS (audio-level RL) → SpeechAlign (DPO for codec LM, 2024) → FPO (token-level DPO) → DiffRO (token-level differentiable, 2025) → GRPO。LatinX 使用的是 **utterance-level DPO**, 与 SpeechAlign 同一路线但差异在于: (1) SpeechAlign 用 golden vs synthetic AR tokens 构建偏好, LatinX 用 WER+speaker-similarity Pareto dominance 自动标注; (2) SpeechAlign 是 iterative self-improvement, LatinX 是 one-shot DPO。
+**已有认知**: KB 中 [[DifferentiableRewardOptimization]] [待确认] 已系统整理了 TTS 后训练对齐的演进线: RLHF → Seed-TTS (audio-level RL) → SpeechAlign (DPO for codec LM, 2024) → FPO (token-level DPO) → DiffRO (token-level differentiable, 2025) → GRPO。LatinX 使用的是 **utterance-level DPO**, 与 SpeechAlign 同一路线但差异在于: (1) SpeechAlign 用 golden vs synthetic AR tokens 构建偏好, LatinX 用 WER+speaker-similarity Pareto dominance 自动标注; (2) SpeechAlign 是 iterative self-improvement, LatinX 是 one-shot DPO。
 
 **创新判断**: 相对 KB 已有知识, LatinX 的主要新颖点在于: (1) 首次在多语言 TTS 上系统性验证 DPO 的跨语言效果; (2) 揭示客观 speaker similarity 与主观感知的显著 gap; (3) 提出 Pareto dominance 标注策略确保无歧义偏好信号。但在 DPO/RL for TTS 的技术深度上不如 DiffRO/FPO, 架构规模和数据量也远小于 CosyVoice 系列。
 
@@ -123,9 +123,9 @@ $$\mathcal{L}_{\text{DPO}}(\theta) = -\mathbb{E}_{(x,y^+,y^-)\sim\mathcal{D}} \l
 
 LatinX 的核心价值在于在 **小规模系统 (210M, <10K h)** 上系统性验证了 DPO 对多语言 TTS 的效果, 并提出了几个有实用价值的发现:
 
-1. **Pareto dominance 标注** 是一个简洁优雅的方案, 解决了多指标偏好标注的歧义问题。虽然牺牲数据效率, 但确保了偏好信号的纯净性。这与 KB 中 [[Differentiable Reward Optimization]] [待确认] 记录的 reward hacking 问题 (Seed-TTS 发现) 形成互补 — Pareto dominance 从数据端而非算法端解决 reward conflation。
+1. **Pareto dominance 标注** 是一个简洁优雅的方案, 解决了多指标偏好标注的歧义问题。虽然牺牲数据效率, 但确保了偏好信号的纯净性。这与 KB 中 [[DifferentiableRewardOptimization]] [待确认] 记录的 reward hacking 问题 (Seed-TTS 发现) 形成互补 — Pareto dominance 从数据端而非算法端解决 reward conflation。
 
-2. **客观-主观 gap** 的发现对 TTS 评估有重要启示。KB 中 [[Speaker Embedding]] 已记录 SECS 结果高度依赖 speaker encoder 选择 (跨论文差 0.1-0.3), LatinX 进一步证明即使同一 encoder (TitaNet), 其排序也可能与人类感知不一致。这暗示 TTS 对齐应该纳入更多感知相关的 proxy。
+2. **客观-主观 gap** 的发现对 TTS 评估有重要启示。KB 中 [[SpeakerEmbedding]] 已记录 SECS 结果高度依赖 speaker encoder 选择 (跨论文差 0.1-0.3), LatinX 进一步证明即使同一 encoder (TitaNet), 其排序也可能与人类感知不一致。这暗示 TTS 对齐应该纳入更多感知相关的 proxy。
 
 3. 但论文的**局限也很明显**: 210M 模型 + <10K h 数据 + 自研非开源组件, 在当前动辄 1B+ 模型 + 100K+ h 数据的背景下, 系统实力与 CosyVoice 3/Qwen3-TTS 等不在一个量级。跨语言评估缺乏中/日/韩等高需求语言。评估者偏差 (非母语评估小语种) 也削弱了主观实验的说服力。
 
@@ -145,4 +145,4 @@ LatinX 的核心价值在于在 **小规模系统 (210M, <10K h)** 上系统性�
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Cross-lingual Voice Cloning]]✓, [[Speaker Embedding]]✓ | 过滤: [[Differentiable Reward Optimization]](待确认), [[Codec Language Model]](待确认), [[Voice Cloning Taxonomy]](待确认) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DifferentiableRewardOptimization]](待确认), [[CodecLanguageModel]](待确认), [[VoiceCloningTaxonomy]](待确认) | 未命中但可能相关: 无

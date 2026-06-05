@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "Explore the Reinforcement Learning for the LLM based ASR and TTS system"
 arxiv_id: "2509.18569"
-source: "https://arxiv.org/abs/2509.18569"
+source: "Sources/RL-for-Audio-LLM.pdf"
 authors: [Changfeng Gao, Yabin Li, Keyu An, Zhifu Gao, Zhihao Du, Han Zhao, Xiangang Li]
 year: 2025
 venue: "arXiv"
 tags: [reinforcement-learning, GRPO, DiffRO, ASR, TTS, reward-design, audio-LLM, CosyVoice, FunAudio-ASR]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[TTS Evaluation]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[TTSEvaluation]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
 tasks: []
 datasets: []
 kb_context_sources: 4
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[TTSEvaluation]])
 > LLM-based TTS 使用 decoder-only transformer 生成离散 speech tokens,CosyVoice 系列采用 semantic tokens + CFM 解码。Differentiable Reward Optimization (DiffRO) [待确认] 是 CosyVoice 3 提出的 token-level 可微 RL 方法。TTS Evaluation 中 WER 和 SIM 是标准客观指标,但 WER 作为 reward 可能导致韵律坍缩。
-> 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[TTSEvaluation]] | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -131,7 +131,7 @@ updated: 2026-06-03
 2. **GRPO vs DiffRO 对比**: 首次在同一框架下公平对比两种方法,揭示了 DiffRO 更稳定但可能伤 speaker similarity 的 trade-off
 3. **Sample filter 的工程价值**: 虽然简单,但解决了 GRPO+DiffRO 直接组合的实际问题
 
-**与 KB 已有知识的关系**: 本文的 DiffRO 实现延续了 CosyVoice 3 的方案 (Gumbel-Softmax + ASR reward),但首次将其与 GRPO 在同一框架下对比。R^2/R^3 reward 设计 (duration + diversity) 是对纯 WER reward 的有益补充,与 [[TTS Evaluation]] 中关于 WER 作为 reward 的局限性讨论一致。
+**与 KB 已有知识的关系**: 本文的 DiffRO 实现延续了 CosyVoice 3 的方案 (Gumbel-Softmax + ASR reward),但首次将其与 GRPO 在同一框架下对比。R^2/R^3 reward 设计 (duration + diversity) 是对纯 WER reward 的有益补充,与 [[TTSEvaluation]] 中关于 WER 作为 reward 的局限性讨论一致。
 
 ## 可复用的 idea
 

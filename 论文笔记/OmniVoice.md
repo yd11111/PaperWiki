@@ -8,9 +8,9 @@ authors: [Han Zhu, Lingxuan Ye, Wei Kang, Zengwei Yao, Liyong Guo, Fangjun Kuang
 year: 2026
 venue: "Preprint (under review)"
 tags: [TTS, zero-shot, non-autoregressive, discrete-diffusion, masked-generation, multilingual, multi-codebook, LLM-initialization]
-concepts: ["[[Non-autoregressive TTS]]", "[[Masked Generative Modeling]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Classifier-Free Guidance]]", "[[Single-codebook vs Multi-codebook]]", "[[Diffusion-based TTS]]"]
-models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice 3|CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Non-autoregressiveTTS]]", "[[MaskedGenerativeModeling]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[Classifier-FreeGuidance]]", "[[Single-codebookvsMulti-codebook]]", "[[Diffusion-basedTTS]]"]
+models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: OmniVoice 定位于 [[Non-autoregressive TTS]] 的离散 token 路线 [待确认],具体继承 [[Masked Generative Modeling]] [待确认] 中 SoundStorm/MaskGCT 开创的 mask-and-predict 范式,但有两个根本性突破:
+**谱系定位**: OmniVoice 定位于 [[Non-autoregressiveTTS]] 的离散 token 路线 [待确认],具体继承 [[MaskedGenerativeModeling]] [待确认] 中 SoundStorm/MaskGCT 开创的 mask-and-predict 范式,但有两个根本性突破:
 
-1. **架构简化**: MaskGCT 需要 text-to-semantic + semantic-to-acoustic 两阶段级联,OmniVoice 直接 text-to-multi-codebook-acoustic 单阶段,绕过了 semantic token 瓶颈。这与 KB 中 [[Speech Tokenizer]] 记录的主流"先 semantic 后 acoustic"分层路线相悖 -- OmniVoice 论证了单阶段离散 NAR 也可以达到 SOTA。
+1. **架构简化**: MaskGCT 需要 text-to-semantic + semantic-to-acoustic 两阶段级联,OmniVoice 直接 text-to-multi-codebook-acoustic 单阶段,绕过了 semantic token 瓶颈。这与 KB 中 [[SpeechTokenizer]] 记录的主流"先 semantic 后 acoustic"分层路线相悖 -- OmniVoice 论证了单阶段离散 NAR 也可以达到 SOTA。
 
-2. **LLM 初始化进入 NAR**: KB 中 [[LLM-based TTS]] 记录的 LLM 初始化仅在 AR TTS (CosyVoice 系列等) 中成功,OmniVoice 首次在 NAR 架构中成功复用 AR LLM 权重 (Qwen3-0.6B),且 bidirectional attention 与 causal 预训练不冲突。
+2. **LLM 初始化进入 NAR**: KB 中 [[LLM-basedTTS]] 记录的 LLM 初始化仅在 AR TTS (CosyVoice 系列等) 中成功,OmniVoice 首次在 NAR 架构中成功复用 AR LLM 权重 (Qwen3-0.6B),且 bidirectional attention 与 causal 预训练不冲突。
 
-**已有认知**: [[Residual Vector Quantization]] 的多层码本结构 (coarse → fine) 天然支持层级生成,SoundStorm/MaskGCT 都采用 per-layer masking schedule 来对齐 RVQ 层级结构。OmniVoice 的 full-codebook random masking 打破了这一惯例。[[Classifier-Free Guidance]] 在连续空间扩散模型中广泛使用,OmniVoice 将其扩展到离散 token 的 log-softmax 空间。
+**已有认知**: [[ResidualVectorQuantization]] 的多层码本结构 (coarse → fine) 天然支持层级生成,SoundStorm/MaskGCT 都采用 per-layer masking schedule 来对齐 RVQ 层级结构。OmniVoice 的 full-codebook random masking 打破了这一惯例。[[Classifier-FreeGuidance]] 在连续空间扩散模型中广泛使用,OmniVoice 将其扩展到离散 token 的 log-softmax 空间。
 
-**创新判断**: 对比 KB 中 [[Zero-shot Speech Synthesis]] 记录的当前 SOTA (CosyVoice 3 WER test-zh 0.71%, IndexTTS2 SS 0.865),OmniVoice 在 Seed-TTS test-zh 上达到 WER 0.84% / SIM-o 0.777,与 SOTA 竞争但未全面超越;其独特价值在于 600+ 语言覆盖 + 全开源训练数据。
+**创新判断**: 对比 KB 中 [[Zero-shotSpeechSynthesis]] 记录的当前 SOTA (CosyVoice 3 WER test-zh 0.71%, IndexTTS2 SS 0.865),OmniVoice 在 Seed-TTS test-zh 上达到 WER 0.84% / SIM-o 0.777,与 SOTA 竞争但未全面超越;其独特价值在于 600+ 语言覆盖 + 全开源训练数据。
 
-> 检索命中: [[LLM-based TTS]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

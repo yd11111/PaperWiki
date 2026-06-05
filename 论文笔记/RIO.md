@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Robust Zero-Shot Text-to-Speech Synthesis with Reverse Inference Optimization"
 arxiv_id: "2407.02243"
-source: "https://arxiv.org/abs/2407.02243"
+source: "Sources/RIO.pdf"
 authors: [Yuchen Hu, Chen Chen, Siyin Wang, Eng Siong Chng, Chao Zhang]
 year: 2024
 venue: "arXiv"
 tags: [RLHF, zero-shot-TTS, robustness, reverse-inference, exposure-bias, codec-LM, VoiceCraft, production-perception-consistency]
-concepts: ["[[LLM-based TTS]]", "[[Residual Vector Quantization]]", "[[TTS Evaluation]]", "[[Semantic vs Acoustic Tokens]]"]
+concepts: ["[[LLM-basedTTS]]", "[[ResidualVectorQuantization]]", "[[TTSEvaluation]]", "[[SemanticvsAcousticTokens]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[Residual Vector Quantization]], [[TTS Evaluation]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[ResidualVectorQuantization]], [[TTSEvaluation]], [[SemanticvsAcousticTokens]])
 > LLM-based TTS 面临的核心挑战之一是 exposure bias: 训练时 teacher-forcing (用 golden history),推理时 autoregressive (用 self-generated history),导致 error accumulation 和 bad cases (截断/重复/不自然韵律)。Zero-shot TTS 中 bad case 比例可达 27%-51%。TTS Evaluation 中 WER + SIM + MOS 是标准评估三件套;bad case ratio 是鲁棒性的关键指标。
-> 检索命中: [[LLM-based TTS]], [[Residual Vector Quantization]], [[TTS Evaluation]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Codec Language Model]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[ResidualVectorQuantization]], [[TTSEvaluation]], [[SemanticvsAcousticTokens]] | 过滤: [[CodecLanguageModel]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

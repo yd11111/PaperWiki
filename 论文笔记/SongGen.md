@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "SongGen: A Single Stage Auto-regressive Transformer for Text-to-Song Generation"
 arxiv_id: "2502.13128"
-source: "https://arxiv.org/abs/2502.13128"
+source: "Sources/SongGen.pdf"
 authors: [Zihan Liu, Shuangrui Ding, Zhixiong Zhang, Xiaoyi Dong, Pan Zhang, Yuhang Zang, Yuhang Cao, Dahua Lin, Jiaqi Wang]
 year: 2025
 venue: "arXiv"
 tags: [text-to-song, song-generation, autoregressive, codec-LM, voice-cloning, music-generation, open-source]
-concepts: ["[[Residual Vector Quantization]]", "[[Codec Language Model]]", "[[Singing Voice Synthesis]]", "[[Speech Tokenizer]]", "[[Classifier-Free Guidance]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[CodecLanguageModel]]", "[[SingingVoiceSynthesis]]", "[[SpeechTokenizer]]", "[[Classifier-FreeGuidance]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: []
 datasets: []
@@ -20,18 +20,18 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **[[Residual Vector Quantization]]** (confirmed): RVQ 是现代 neural audio codec 的核心量化方法,通过递归量化残差逐步逼近输入。SongGen 使用的 X-Codec 基于 RVQ,8 层 codebook,每层 1024 entries。RVQ 的层级信息结构(前层 coarse / 后层 fine）天然适合 codebook-delay pattern 建模。
+> **[[ResidualVectorQuantization]]** (confirmed): RVQ 是现代 neural audio codec 的核心量化方法,通过递归量化残差逐步逼近输入。SongGen 使用的 X-Codec 基于 RVQ,8 层 codebook,每层 1024 entries。RVQ 的层级信息结构(前层 coarse / 后层 fine）天然适合 codebook-delay pattern 建模。
 >
-> **[[Speech Tokenizer]]** (confirmed): Speech Tokenizer 将连续音频波形转为离散 token。SongGen 使用声学 tokenizer (X-Codec) 而非 semantic tokenizer,直接操作 RVQ acoustic tokens。Survey 发现没有万能 tokenizer,domain-specific 训练对生成质量至关重要。
+> **[[SpeechTokenizer]]** (confirmed): Speech Tokenizer 将连续音频波形转为离散 token。SongGen 使用声学 tokenizer (X-Codec) 而非 semantic tokenizer,直接操作 RVQ acoustic tokens。Survey 发现没有万能 tokenizer,domain-specific 训练对生成质量至关重要。
 >
-> **[[Singing Voice Synthesis]]** [待确认]: SVS 从歌词+乐谱生成歌声。SongGen 属于 "Text-to-Song Generation" 子任务 — 从文本直接生成完整歌曲(歌声+伴奏),是 SVS + 音乐生成的融合。SVS 概念页已收录 SongGen 为代表工作。
+> **[[SingingVoiceSynthesis]]** [待确认]: SVS 从歌词+乐谱生成歌声。SongGen 属于 "Text-to-Song Generation" 子任务 — 从文本直接生成完整歌曲(歌声+伴奏),是 SVS + 音乐生成的融合。SVS 概念页已收录 SongGen 为代表工作。
 >
-> **[[Codec Language Model]]** [待确认]: CodecLM 直接在 neural audio codec tokens 上训练语言模型。SongGen 是 CodecLM 在 song generation 领域的应用,使用 codebook-delay pattern 处理多层 RVQ tokens。
+> **[[CodecLanguageModel]]** [待确认]: CodecLM 直接在 neural audio codec tokens 上训练语言模型。SongGen 是 CodecLM 在 song generation 领域的应用,使用 codebook-delay pattern 处理多层 RVQ tokens。
 >
-> 检索命中: [[Residual Vector Quantization]], [[Speech Tokenizer]] | 过滤: [[Singing Voice Synthesis]](pending-review), [[Codec Language Model]](pending-review), [[Musical Score Encoder]](pending-review), [[Classifier-Free Guidance]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]], [[SpeechTokenizer]] | 过滤: [[SingingVoiceSynthesis]](pending-review), [[CodecLanguageModel]](pending-review), [[MusicalScoreEncoder]](pending-review), [[Classifier-FreeGuidance]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -169,7 +169,7 @@ SongGen 是 text-to-song generation 领域的重要里程碑:
 
 4. **全开源承诺**: 模型权重+训练代码+标注数据+预处理 pipeline 全部开源,填补了该领域开源空白 [§Abstract]。
 
-5. **与 SVS 的关系**: SongGen 不使用乐谱输入 (无 [[Musical Score Encoder]])，而是从自由文本描述生成,属于 text-to-song 而非传统 SVS。这意味着它的音乐控制力弱于乐谱驱动的 SVS,但使用门槛大幅降低 [agent 解读]。
+5. **与 SVS 的关系**: SongGen 不使用乐谱输入 (无 [[MusicalScoreEncoder]])，而是从自由文本描述生成,属于 text-to-song 而非传统 SVS。这意味着它的音乐控制力弱于乐谱驱动的 SVS,但使用门槛大幅降低 [agent 解读]。
 
 ## 可复用的 idea
 

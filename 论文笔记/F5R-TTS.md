@@ -8,9 +8,9 @@ authors: [Xiaohui Sun, Ruitong Xiao, Jianye Mo, Bowen Wu, Qun Yu, Baoxun Wang]
 year: 2025
 venue: "arXiv"
 tags: [TTS, reinforcement-learning, GRPO, flow-matching, NAR-TTS, zero-shot, voice-cloning, post-training]
-concepts: ["[[Conditional Flow Matching]]", "[[Differentiable Reward Optimization]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[TTS Evaluation]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]", "[[Non-autoregressiveTTS]]", "[[SpeakerEmbedding]]", "[[TTSEvaluation]]"]
 models: ["[[模型库/SenseVoice|SenseVoice]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -26,16 +26,16 @@ updated: 2026-06-03
 > **谱系定位**: 本文位于 "RL post-training for TTS" 与 "NAR flow-matching TTS" 的交叉点。RL-for-TTS 路线为: Seed-TTS (2024, REINFORCE, audio-level, AR TTS) -> SpeechAlign (2024, DPO, codec LM) -> DiffRO/CosyVoice 3 (2025, token-level differentiable RL) -> Multi-Reward GRPO (2025, audio-level, AR single-codebook TTS) -> RL-for-Audio-LLM (Tongyi, 2025, GRPO vs DiffRO 对比)。但上述所有工作均针对 **AR** TTS 架构。F5R-TTS 是 **首次在 NAR flow-matching TTS 上成功集成 RL** 的工作,通过将 flow matching 输出概率化解决了 NAR 与 RL 的结构性不兼容。
 >
 > **已有认知**:
-> - [[Conditional Flow Matching]] (confirmed): F5-TTS 是基于 CFM 的 NAR TTS 模型,学习向量场将高斯先验转为数据分布。F5R-TTS 在此基础上修改最后一层输出为均值+方差的概率分布。CFM 已在 CosyVoice 系列、Seed-TTS、MaskGCT 等系统中广泛应用,但此前无 RL 后训练成功案例。
-> - [[Speaker Embedding]] (confirmed): 本文使用 WeSpeaker 提取 speaker embedding 计算余弦相似度作为 SIM reward,使用 WavLM-large-based speaker verification 模型在评估阶段计算 SIM 指标。Speaker embedding 的余弦相似度是 zero-shot TTS 的标准评估方式。
-> - [[Zero-shot Speech Synthesis]] (confirmed): 本文的应用场景。当前 SOTA 在 SEED-TTS-Eval test-zh 上 CER 约 0.71% (CosyVoice 3), SIM 约 0.865 (IndexTTS2)。F5R-TTS 报告 WER 1.48% / SIM 0.730 (test-cn general),虽非 SOTA 但显著优于 F5-TTS baseline。
+> - [[ConditionalFlowMatching]] (confirmed): F5-TTS 是基于 CFM 的 NAR TTS 模型,学习向量场将高斯先验转为数据分布。F5R-TTS 在此基础上修改最后一层输出为均值+方差的概率分布。CFM 已在 CosyVoice 系列、Seed-TTS、MaskGCT 等系统中广泛应用,但此前无 RL 后训练成功案例。
+> - [[SpeakerEmbedding]] (confirmed): 本文使用 WeSpeaker 提取 speaker embedding 计算余弦相似度作为 SIM reward,使用 WavLM-large-based speaker verification 模型在评估阶段计算 SIM 指标。Speaker embedding 的余弦相似度是 zero-shot TTS 的标准评估方式。
+> - [[Zero-shotSpeechSynthesis]] (confirmed): 本文的应用场景。当前 SOTA 在 SEED-TTS-Eval test-zh 上 CER 约 0.71% (CosyVoice 3), SIM 约 0.865 (IndexTTS2)。F5R-TTS 报告 WER 1.48% / SIM 0.730 (test-cn general),虽非 SOTA 但显著优于 F5-TTS baseline。
 > - [[SEED-TTS-Eval]] (confirmed): 本文使用 SEED-TTS-Eval test-cn 子集评估,包含 2020 general + 400 hard + 140 noisy 样本,使用 Paraformer-zh 计算 WER、WavLM-based SV 计算 SIM。
-> - [[Differentiable Reward Optimization]] [待确认]: DiffRO 在 token 空间操作 (需 Gumbel-Softmax),而 F5R-TTS 的 GRPO 在 audio-level 操作。关键区别: DiffRO 仅适用于 AR token-level 架构,F5R-TTS 通过 output probabilization 使 GRPO 适用于 NAR flow-matching 架构。Tongyi 对比发现 GRPO 超 1500 步后退化,但 F5R-TTS 未讨论此问题。
-> - [[Non-autoregressive TTS]] [待确认]: NAR TTS 通过并行计算实现快速推理,但其确定性输出方式使 RL 集成困难。F5R-TTS 通过输出概率化解决了这一根本性障碍。
+> - [[DifferentiableRewardOptimization]] [待确认]: DiffRO 在 token 空间操作 (需 Gumbel-Softmax),而 F5R-TTS 的 GRPO 在 audio-level 操作。关键区别: DiffRO 仅适用于 AR token-level 架构,F5R-TTS 通过 output probabilization 使 GRPO 适用于 NAR flow-matching 架构。Tongyi 对比发现 GRPO 超 1500 步后退化,但 F5R-TTS 未讨论此问题。
+> - [[Non-autoregressiveTTS]] [待确认]: NAR TTS 通过并行计算实现快速推理,但其确定性输出方式使 RL 集成困难。F5R-TTS 通过输出概率化解决了这一根本性障碍。
 >
 > **创新判断**: 本文的核心创新不在奖励设计 (仅 WER+SIM 两个标准奖励),而在于 **如何让 GRPO 兼容 NAR flow-matching 架构**。通过将最后一层从确定性预测改为高斯分布预测,使得每个 flow step 的输出具有明确的概率语义,从而可以计算 log-likelihood、KL 散度等 RL 所需的概率量。这一改造思路具有方法论意义,可推广到其他 NAR 生成模型。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

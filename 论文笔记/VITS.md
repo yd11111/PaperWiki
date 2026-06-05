@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "VITS: Conditional Variational Autoencoder with Adversarial Learning for End-to-End Text-to-Speech"
 arxiv_id: "2106.06103"
-source: "https://arxiv.org/abs/2106.06103"
+source: "Sources/VITS.pdf"
 authors: [Jaehyeon Kim, Jungil Kong, Juhee Son]
 year: 2021
 venue: "ICML 2021 (PMLR 139)"
 tags: [TTS, end-to-end, VAE, normalizing-flow, GAN, parallel-synthesis, duration-prediction]
-concepts: ["[[Variational Autoencoder for TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Neural Vocoder]]", "[[Mel Spectrogram]]", "[[Phoneme Representation]]", "[[Speech-Text Alignment]]"]
+concepts: ["[[VariationalAutoencoderforTTS]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[NeuralVocoder]]", "[[MelSpectrogram]]", "[[PhonemeRepresentation]]", "[[Speech-TextAlignment]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,15 +20,15 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个实体页: [[Neural Vocoder]], [[Variational Autoencoder for TTS]], [[Non-autoregressive TTS]], [[Duration Predictor]])
+> [!info] KB 背景 (基于 4 个实体页: [[NeuralVocoder]], [[VariationalAutoencoderforTTS]], [[Non-autoregressiveTTS]], [[DurationPredictor]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Neural Vocoder]]✓(confirmed), [[Variational Autoencoder for TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review) | 过滤: [[Mel Spectrogram]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: Normalizing Flow (无独立页)
+> 检索命中: [[NeuralVocoder]]✓(confirmed), [[VariationalAutoencoderforTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review) | 过滤: [[MelSpectrogram]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: Normalizing Flow (无独立页)
 
 **已有知识要点**:
-- [[Neural Vocoder]]: HiFi-GAN (Kong et al., NeurIPS 2020) 是当前事实标准的 GAN vocoder,采用 Multi-Period Discriminator + Multi-Scale Discriminator,速度快 (13.4x 实时) 且质量高 [待确认]
-- [[Variational Autoencoder for TTS]]: VAE 在 TTS 中用于建模 one-to-many mapping,VITS 是 VAE 在 TTS 中的集大成者,结合了 normalizing flow 和 GAN [待确认]
-- [[Non-autoregressive TTS]]: VITS 被归类为 VAE+Flow fully E2E NAR 系统,在 NAR TTS 演进中位于 Glow-TTS 之后 [待确认]
-- [[Duration Predictor]]: Glow-TTS 提出的 Monotonic Alignment Search (MAS) 是 VITS 对齐估计的基础 [待确认]
+- [[NeuralVocoder]]: HiFi-GAN (Kong et al., NeurIPS 2020) 是当前事实标准的 GAN vocoder,采用 Multi-Period Discriminator + Multi-Scale Discriminator,速度快 (13.4x 实时) 且质量高 [待确认]
+- [[VariationalAutoencoderforTTS]]: VAE 在 TTS 中用于建模 one-to-many mapping,VITS 是 VAE 在 TTS 中的集大成者,结合了 normalizing flow 和 GAN [待确认]
+- [[Non-autoregressiveTTS]]: VITS 被归类为 VAE+Flow fully E2E NAR 系统,在 NAR TTS 演进中位于 Glow-TTS 之后 [待确认]
+- [[DurationPredictor]]: Glow-TTS 提出的 Monotonic Alignment Search (MAS) 是 VITS 对齐估计的基础 [待确认]
 
 ## 速查
 
@@ -200,4 +200,4 @@ $$L_{vae} = L_{recon} + L_{kl} + L_{dur} + L_{adv}(G) + L_{fm}(G)$$
 
 ---
 
-检索命中: [[Neural Vocoder]]✓, [[Variational Autoencoder for TTS]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Duration Predictor]](pending-review) | 过滤: [[Mel Spectrogram]](pending-review), [[Phoneme Representation]](pending-review) | 未命中但可能相关: Normalizing Flow (无独立页)
+检索命中: [[NeuralVocoder]]✓, [[VariationalAutoencoderforTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review) | 过滤: [[MelSpectrogram]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: Normalizing Flow (无独立页)

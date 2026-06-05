@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "RepCodec: A Speech Representation Codec for Speech Tokenization"
 arxiv_id: "2309.00169"
-source: "Sources/RenCodec.pdf"
+source: "Sources/RepCodec.pdf"
 authors: [Zhichao Huang, Chutong Meng, Tom Ko]
 year: 2024
 venue: "arXiv (ByteDance)"
 tags: [speech-tokenizer, semantic-token, vector-quantization, representation-codec, speech-LM]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[Self-Supervised Speech Representation]]", "[[Codebook Collapse]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[Self-SupervisedSpeechRepresentation]]", "[[CodebookCollapse]]"]
 models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/EnCodec|EnCodec]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[Codebook Collapse]])
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review) [待确认], [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[CodebookCollapse]])
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review) [待确认], [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
 
-**[[Speech Tokenizer]]**: RepCodec 属于 semantic tokenizer 的改进方案。传统 semantic token (HuBERT k-means) 使用离线聚类将 SSL 表征离散化, 存在信息损失大的问题。RepCodec 提出用 parametric codec (encoder + VQ + decoder) 替代 k-means, 在同一 50Hz 帧率下保留更多表征信息。KB 中记录了 k-means 路线的局限: "not all sets of speech representations are suitable for clustering" [§1]。
+**[[SpeechTokenizer]]**: RepCodec 属于 semantic tokenizer 的改进方案。传统 semantic token (HuBERT k-means) 使用离线聚类将 SSL 表征离散化, 存在信息损失大的问题。RepCodec 提出用 parametric codec (encoder + VQ + decoder) 替代 k-means, 在同一 50Hz 帧率下保留更多表征信息。KB 中记录了 k-means 路线的局限: "not all sets of speech representations are suitable for clustering" [§1]。
 
-**[[Semantic vs Acoustic Tokens]]**: RepCodec 明确定位为 semantic token 的改进, 不涉及 acoustic token。其动机是: k-means 离散化导致严重信息损失, 使下游 ASR 的 WER 从连续表征的 2.5% 恶化到 6.0% (AudioLM 数据) [§3]。RepCodec 通过更好的量化缓解此问题。
+**[[SemanticvsAcousticTokens]]**: RepCodec 明确定位为 semantic token 的改进, 不涉及 acoustic token。其动机是: k-means 离散化导致严重信息损失, 使下游 ASR 的 WER 从连续表征的 2.5% 恶化到 6.0% (AudioLM 数据) [§3]。RepCodec 通过更好的量化缓解此问题。
 
-**[[Residual Vector Quantization]]**: RepCodec 支持单层 VQ 和 2 层 RVQ 两种模式。RVQ 模式下可保留更多信息 (Table 2b: 2-RVQ WER 2.48 vs 1-VQ WER 3.85 on data2vec large) [§4.2], 但 bitrate 也更高。RepCodec 的 VQ 优化采用 EMA 算法, 与 SoundStream/EnCodec 一致。
+**[[ResidualVectorQuantization]]**: RepCodec 支持单层 VQ 和 2 层 RVQ 两种模式。RVQ 模式下可保留更多信息 (Table 2b: 2-RVQ WER 2.48 vs 1-VQ WER 3.85 on data2vec large) [§4.2], 但 bitrate 也更高。RepCodec 的 VQ 优化采用 EMA 算法, 与 SoundStream/EnCodec 一致。
 
-**[[Codebook Collapse]]**: RepCodec 使用 1024 个 codebook entries, 与 k-means 的 cluster 数对齐以保证公平对比 [§4.1]。其 EMA 优化策略有助于防止 collapse, 因为 codebook 持续跟踪编码器输出的分布变化。
+**[[CodebookCollapse]]**: RepCodec 使用 1024 个 codebook entries, 与 k-means 的 cluster 数对齐以保证公平对比 [§4.1]。其 EMA 优化策略有助于防止 collapse, 因为 codebook 持续跟踪编码器输出的分布变化。
 
 ## 速查
 
@@ -195,4 +195,4 @@ $$l = \lambda_r \cdot l_r + \lambda_q \cdot l_q$$
 3. **PNMI_n 评估指标**: 将 PNMI 扩展到 n-gram 级别, 更全面评估 token 与 phoneme 的关系 [§4.4, Eq. 6]
 4. **Reconstruction loss 作为 token 质量指标**: 重建损失比 PNMI 更好地预测下游性能 — 可作为 tokenizer 选择的 proxy metric [§4.4]
 
-检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[Codebook Collapse]] | 过滤: [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[CodebookCollapse]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无

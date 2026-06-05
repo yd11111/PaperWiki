@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "ZipVoice: Fast and High-Quality Zero-Shot Text-to-Speech with Flow Matching"
 arxiv_id: "2506.13053"
-source: "https://arxiv.org/abs/2506.13053"
+source: "Sources/ZipVoice.pdf"
 authors: [Han Zhu, Wei Kang, Zengwei Yao, Liyong Guo, Fangjun Kuang, Zhaoqing Li, Weiji Zhuang, Long Lin, Daniel Povey]
 year: 2025
 venue: "arXiv"
 tags: [zero-shot-TTS, flow-matching, NAR-TTS, model-compression, inference-acceleration, distillation]
-concepts: ["[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Speech-Text Alignment]]", "[[Neural Vocoder]]"]
-models: ["[[论文笔记/E2 TTS|E2 TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[Speech-TextAlignment]]", "[[NeuralVocoder]]"]
+models: ["[[论文笔记/E2TTS|E2 TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "LibriTTS"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页: [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]], [[Classifier-Free Guidance]], [[Non-autoregressive TTS]], [[Duration Predictor]], [[Speech-Text Alignment]])
+> [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页: [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]], [[Classifier-FreeGuidance]], [[Non-autoregressiveTTS]], [[DurationPredictor]], [[Speech-TextAlignment]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: ZipVoice 属于 flow-matching-based NAR zero-shot TTS 一脉,与 E2-TTS / F5-TTS 同源(均基于 speech infilling + conditional flow matching),但聚焦于效率问题。在知识库中,当前 flow matching TTS 的效率探索主要通过 consistency distillation (Seed-TTS)、ReFlow (VoiceFlow) 等方式实现,ZipVoice 的 flow distillation 方法与这些加速策略构成并行路线。
 >
-> **已有认知**: (1) [[Conditional Flow Matching]] 已成为 TTS 的主流生成框架,通过 ODE 路径实现比 diffusion 更少步数的生成; (2) [[Classifier-Free Guidance]] 在推理时需要额外的无条件推理 pass,是推理开销的重要来源; (3) 当前 zero-shot TTS 的对齐方式分为显式 (MFA/MAS + duration predictor) 和隐式 (filler token padding 如 E2-TTS)两派,ZipVoice 的 average upsampling 是第三种折中方案; (4) [[Duration Predictor]] 页面记录了 DMOSpeech 2 和 FlexSpeech 对 duration 优化的最新进展,ZipVoice 则完全绕过 phone-level duration prediction。
+> **已有认知**: (1) [[ConditionalFlowMatching]] 已成为 TTS 的主流生成框架,通过 ODE 路径实现比 diffusion 更少步数的生成; (2) [[Classifier-FreeGuidance]] 在推理时需要额外的无条件推理 pass,是推理开销的重要来源; (3) 当前 zero-shot TTS 的对齐方式分为显式 (MFA/MAS + duration predictor) 和隐式 (filler token padding 如 E2-TTS)两派,ZipVoice 的 average upsampling 是第三种折中方案; (4) [[DurationPredictor]] 页面记录了 DMOSpeech 2 和 FlexSpeech 对 duration 优化的最新进展,ZipVoice 则完全绕过 phone-level duration prediction。
 >
 > **创新判断**: ZipVoice 的核心创新在于三方面——(a) Zipformer 从 ASR 迁移到 TTS flow matching backbone (此前未见类似尝试), (b) average upsampling 替代 filler token padding 和显式 duration prediction 的对齐策略, (c) flow distillation 将 CFG 的多次推理压缩为单次前向。这三者组合使得 123M 模型在 100K 小时数据上达到与 336M F5-TTS 相当的质量。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](待确认), [[Non-autoregressive TTS]](待确认), [[Duration Predictor]](待确认), [[Speech-Text Alignment]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Classifier-FreeGuidance]](待确认), [[Non-autoregressiveTTS]](待确认), [[DurationPredictor]](待确认), [[Speech-TextAlignment]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

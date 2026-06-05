@@ -8,8 +8,8 @@ authors: [Haoxun Li, Leyuan Qu, Jiaxi Hu, Taihao Li]
 year: 2025
 venue: "Interspeech 2025 (submitted)"
 tags: [TTS, emotion, emphasis, prosody, variance-adapter, weakly-supervised, non-autoregressive]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Duration Predictor]]", "[[F0 Modeling]]", "[[Non-autoregressive TTS]]", "[[Mel Spectrogram]]", "[[Self-Supervised Speech Representation]]", "[[Neural Vocoder]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[DurationPredictor]]", "[[F0Modeling]]", "[[Non-autoregressiveTTS]]", "[[MelSpectrogram]]", "[[Self-SupervisedSpeechRepresentation]]", "[[NeuralVocoder]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,13 +20,13 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Emotion Control in TTS]]✓, [[Prosody Modeling]]✓, [[Duration Predictor]] [待确认], [[F0 Modeling]] [待确认], [[Non-autoregressive TTS]] [待确认], [[Mel Spectrogram]] [待确认])
+> [!info] KB 背景 (基于 6 个实体页: [[EmotionControlinTTS]]✓, [[ProsodyModeling]]✓, [[DurationPredictor]] [待确认], [[F0Modeling]] [待确认], [[Non-autoregressiveTTS]] [待确认], [[MelSpectrogram]] [待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Emotion Control in TTS]], [[Prosody Modeling]], [[Duration Predictor]], [[F0 Modeling]], [[Non-autoregressive TTS]], [[Mel Spectrogram]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[EmotionControlinTTS]], [[ProsodyModeling]], [[DurationPredictor]], [[F0Modeling]], [[Non-autoregressiveTTS]], [[MelSpectrogram]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: EME-TTS 处于 **情感可控 TTS** 与 **重音可控 TTS** 的交叉地带。KB 中 [[Emotion Control in TTS]] 页面记录了情感建模从 emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → DPO 对齐 (Emo-DPO, 2024) → ADV 维度解耦 (UDDETTS, 2025) 的演进线。EME-TTS 走的是另一条路线 — 不是从情感表示本身出发,而是从 **重音 (emphasis)** 这个韵律子维度切入,通过增强重音位置来间接提升情感表达力。这条路线在 KB 中尚无先例记录。
+**谱系定位**: EME-TTS 处于 **情感可控 TTS** 与 **重音可控 TTS** 的交叉地带。KB 中 [[EmotionControlinTTS]] 页面记录了情感建模从 emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → DPO 对齐 (Emo-DPO, 2024) → ADV 维度解耦 (UDDETTS, 2025) 的演进线。EME-TTS 走的是另一条路线 — 不是从情感表示本身出发,而是从 **重音 (emphasis)** 这个韵律子维度切入,通过增强重音位置来间接提升情感表达力。这条路线在 KB 中尚无先例记录。
 
-**已有认知**: [[Prosody Modeling]] 中记录了 FastSpeech 2 的 variance adaptor (duration + pitch + energy predictor) 作为显式韵律建模的标杆。EME-TTS 的基座架构 EmoSpeech 正是 FastSpeech 2 的情感扩展版,沿用 variance adaptor 范式。EME-TTS 在此基础上新增 **variance-based emphasis features** (pitch variance + duration variance),属于 variance adaptor 的功能扩展。
+**已有认知**: [[ProsodyModeling]] 中记录了 FastSpeech 2 的 variance adaptor (duration + pitch + energy predictor) 作为显式韵律建模的标杆。EME-TTS 的基座架构 EmoSpeech 正是 FastSpeech 2 的情感扩展版,沿用 variance adaptor 范式。EME-TTS 在此基础上新增 **variance-based emphasis features** (pitch variance + duration variance),属于 variance adaptor 的功能扩展。
 
 **创新判断**: KB 中已有工作均将 emotion 和 emphasis 视为独立的可控维度分别建模。EME-TTS 首次系统探索两者的交互关系 — emphasis 如何增强情感表现力,以及如何在不同情感条件下维持重音的感知清晰度。EPE block 中 Emphasis Adapter 的 attention weight 调制机制是全新设计。
 
@@ -201,4 +201,4 @@ EPE 将 MOS 从 3.98 提升到 4.22 (+0.24),甚至超过基座 EmoSpeech 的 4.1
 
 ---
 
-检索命中: [[Emotion Control in TTS]], [[Prosody Modeling]], [[Duration Predictor]], [[F0 Modeling]], [[Non-autoregressive TTS]], [[Mel Spectrogram]] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[EmotionControlinTTS]], [[ProsodyModeling]], [[DurationPredictor]], [[F0Modeling]], [[Non-autoregressiveTTS]], [[MelSpectrogram]] | 过滤: 无 | 未命中但可能相关: 无

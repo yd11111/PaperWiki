@@ -116,7 +116,7 @@ Append(不改 status) vs Substantive(→ pending-review)。实体页生命周期
 
 - 所有跨页引用使用 `[[wikilink]]` 格式
 - Frontmatter 中的链接使用 `"[[Page Name]]"` 格式（带引号）
-- **同名文件消歧**: `[[论文笔记/CosyVoice 3|CosyVoice 3]]`。实体页 `key_papers` 始终使用 `[[论文笔记/xxx|显示名]]`
+- **同名文件消歧**: `[[论文笔记/CosyVoice3|CosyVoice 3]]`。实体页 `key_papers` 始终使用 `[[论文笔记/xxx|显示名]]`
 - **核心链接(must-link)**: 实体页必须包含的关系链接
 - **相关引用(optional)**: 可选的延伸链接
 

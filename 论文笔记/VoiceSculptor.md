@@ -8,9 +8,9 @@ authors: [Jingbin Hu, Huakang Chen, Linhan Ma, Dake Guo, Qirui Zhan, Wenhao Li, 
 year: 2026
 venue: "arXiv"
 tags: [TTS, instruction-following, voice-design, voice-cloning, controllable, CoT, RAG, open-source, fine-grained-control]
-concepts: ["[[Instruction-Guided Speech Synthesis]]", "[[Natural Language Description for TTS]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+concepts: ["[[Instruction-GuidedSpeechSynthesis]]", "[[NaturalLanguageDescriptionforTTS]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -33,7 +33,7 @@ updated: 2026-06-04
 
 **创新判断**: VoiceSculptor 的独特定位是 **voice design + voice clone 的解耦架构** — 先用 LLM 从 NL 指令"设计"一个声音 (生成 prompt waveform),再将这个 prompt 喂给零样本 TTS 模型克隆。这避免了在单一模型中同时承担指令理解 + 高保真合成的复杂度,但引入了中间 prompt 的信息瓶颈。
 
-> 检索命中: [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Instructed Speech Generation]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[模型库/CosyVoice2|CosyVoice 2]]✓, [[InstructedSpeechGeneration]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -8,7 +8,7 @@ authors: [Sambal Shikhar, Mohammed Irfan Kurpath, Sahal Shaji Mullappilly, Jean 
 year: 2025
 venue: "arXiv"
 tags: [TTS, streaming, LLM-agnostic, autoregressive, speech-tokenizer, low-latency, plug-and-play, speech-LM]
-concepts: ["[[Streaming Spoken Dialogue]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Codec Language Model]]", "[[Residual Vector Quantization]]", "[[Speech-LLM Integration Taxonomy]]"]
+concepts: ["[[StreamingSpokenDialogue]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[CodecLanguageModel]]", "[[ResidualVectorQuantization]]", "[[Speech-LLMIntegrationTaxonomy]]"]
 models: ["[[Whisper]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]], [[Whisper]]; 2 个待确认页: [[Streaming Spoken Dialogue]] [待确认], [[Speech-LLM Integration Taxonomy]] [待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[Whisper]]; 2 个待确认页: [[StreamingSpokenDialogue]] [待确认], [[Speech-LLMIntegrationTaxonomy]] [待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Streaming Spoken Dialogue]], [[Speech-LLM Integration Taxonomy]], [[Codec Language Model]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[StreamingSpokenDialogue]], [[Speech-LLMIntegrationTaxonomy]], [[CodecLanguageModel]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: LLMVoX 处于 [[Speech-LLM Integration Taxonomy]] 中 **Text-based Integration (Cascaded)** 路线 [待确认],即 ASR + LLM + TTS 管线串联。与端到端 Speech-LLM 路线 (如 Moshi、LLaMA-Omni、Freeze-Omni) 对立。根据已有知识,cascaded 方式的主要优势是保留 LLM 能力、模块可替换,主要劣势是延迟高。LLMVoX 的核心创新在于解决 cascaded 路线的延迟问题。
+**谱系定位**: LLMVoX 处于 [[Speech-LLMIntegrationTaxonomy]] 中 **Text-based Integration (Cascaded)** 路线 [待确认],即 ASR + LLM + TTS 管线串联。与端到端 Speech-LLM 路线 (如 Moshi、LLaMA-Omni、Freeze-Omni) 对立。根据已有知识,cascaded 方式的主要优势是保留 LLM 能力、模块可替换,主要劣势是延迟高。LLMVoX 的核心创新在于解决 cascaded 路线的延迟问题。
 
 **已有认知**:
-- [[Streaming Spoken Dialogue]] [待确认] 记录了多种 streaming 实现:Mini-Omni (delayed parallel decoding)、LLaMA-Omni (NAR CTC decoder)、Moshi (fully causal RQ-Transformer)、Freeze-Omni (chunk-wise streaming encoder)。LLMVoX 的 multi-queue streaming 是一种新的 streaming 机制,侧重在 **TTS 模块与 LLM 解耦** 的前提下实现流式。
-- [[LLM-based TTS]] 记录了 codec LM TTS 范式(VALL-E 系列)和 hybrid 架构(CosyVoice)。LLMVoX 回到更轻量的 decoder-only transformer 直接预测 codec tokens,与 VALL-E 类似但规模远小 (30M vs 370M+)。
-- [[Speech Tokenizer]] 和 [[Residual Vector Quantization]] 记录了各类语音离散化方案。LLMVoX 使用 WavTokenizer (单层 RVQ, 4096 entries) 作为 audio codec,属于 [[Single-codebook vs Multi-codebook]] 中的单码本路线。
+- [[StreamingSpokenDialogue]] [待确认] 记录了多种 streaming 实现:Mini-Omni (delayed parallel decoding)、LLaMA-Omni (NAR CTC decoder)、Moshi (fully causal RQ-Transformer)、Freeze-Omni (chunk-wise streaming encoder)。LLMVoX 的 multi-queue streaming 是一种新的 streaming 机制,侧重在 **TTS 模块与 LLM 解耦** 的前提下实现流式。
+- [[LLM-basedTTS]] 记录了 codec LM TTS 范式(VALL-E 系列)和 hybrid 架构(CosyVoice)。LLMVoX 回到更轻量的 decoder-only transformer 直接预测 codec tokens,与 VALL-E 类似但规模远小 (30M vs 370M+)。
+- [[SpeechTokenizer]] 和 [[ResidualVectorQuantization]] 记录了各类语音离散化方案。LLMVoX 使用 WavTokenizer (单层 RVQ, 4096 entries) 作为 audio codec,属于 [[Single-codebookvsMulti-codebook]] 中的单码本路线。
 
 **创新判断**: LLMVoX 的核心新意在于 (1) 极轻量 (30M) 的 LLM-agnostic streaming TTS,(2) multi-queue 双实例并行机制实现无限长度对话,(3) ByT5 G2P embedding 作为文本前端。这种"完全解耦 + 极轻量"的设计在已有知识库中没有对应物——Freeze-Omni 虽也 freeze LLM 但仍依赖 LLM hidden states,不是真正 LLM-agnostic。
 
@@ -172,4 +172,4 @@ multi-queue streaming 机制是巧妙的工程设计,通过空间换时间 (两�
 > - [medium/template-compliance] frontmatter models 列了 EnCodec,但 LLMVoX 实际使用 WavTokenizer (无模型页);EnCodec 仅在 related work 中被引用。已修正为仅保留 Whisper。
 > **通过原则**: 可复述✓ 可信赖✓ 可区分✓ 可定位✓(修正后) 不污染✓
 
-检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Streaming Spoken Dialogue]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Codec Language Model]](pending-review) | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[CodecLanguageModel]](pending-review) | 过滤: 无 | 未命中但可能相关: 无

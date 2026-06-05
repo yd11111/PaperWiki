@@ -8,9 +8,9 @@ authors: [Junyang Chen, Yuhang Jia, Hui Wang, Jiaming Zhou, Yaxin Han, Mengying 
 year: 2026
 venue: "arXiv"
 tags: [speech-editing, end-to-end, post-training, transfer-learning, flow-matching, AR-NAR, cost-effective, zero-shot-TTS-adaptation]
-concepts: ["[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Speech-Text Alignment]]"]
+concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[SpeakerEmbedding]]", "[[Speech-TextAlignment]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]", "[[论文笔记/Step-Audio-EditX|Step-Audio-EditX]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[GigaSpeech]]"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[模型库/CosyVoice|CosyVoice]], [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Speaker Embedding]], [[Zero-shot Speech Synthesis]], [[Speech-Text Alignment]])
+> [!info] KB 背景 (基于 5 个已确认实体页 + 1 个待确认实体页: [[模型库/CosyVoice|CosyVoice]], [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SpeakerEmbedding]], [[Zero-shotSpeechSynthesis]], [[Speech-TextAlignment]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **CosyVoice 谱系**: CosyEdit 直接基于 CosyVoice 进行 post-training。CosyVoice 是阿里巴巴提出的 LLM + OT-CFM coarse-to-fine 零样本 TTS 系统,核心创新是 S3 (Supervised Semantic Speech) tokenizer 和 x-vector 显式说话人分离。CosyVoice 已演进到 CosyVoice 2 (streaming) 和 CosyVoice 3 (DiffRO, 1M h),但 CosyEdit 基于原版 CosyVoice 进行任务迁移。
@@ -33,7 +33,7 @@ updated: 2026-06-04
 >
 > **Zero-shot TTS → Speech Editing 迁移**: 论文的核心假设是零样本 TTS 已具备 (1) 自然语音生成、(2) in-context learning、(3) 潜在时间对齐能力,通过 task-specific post-training 即可解锁编辑能力,无需从头训练。[agent 解读] 这是对 TTS→editing 迁移路径可行性的系统验证。
 >
-> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

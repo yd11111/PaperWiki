@@ -8,7 +8,7 @@ authors: [Sen Liu, Yiwei Guo, Xie Chen, Kai Yu]
 year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, dataset, expressiveness, prosody, annotation, LLM, Mandarin, storytelling]
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Natural Language Description for TTS]]", "[[TTS Evaluation]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]", "[[GlobalStyleTokens]]", "[[NaturalLanguageDescriptionforTTS]]", "[[TTSEvaluation]]"]
 models: ["VQTTS (Du et al., 2022)"]
 tasks: []
 datasets: []
@@ -22,15 +22,15 @@ updated: 2026-06-03
 
 > [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Prosody Modeling]]✓, [[Emotion Control in TTS]][待确认], [[TTS Evaluation]][待确认], [[Style Transfer in TTS]][待确认], [[Global Style Tokens]][待确认], [[Natural Language Description for TTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[EmotionControlinTTS]][待确认], [[TTSEvaluation]][待确认], [[StyleTransferinTTS]][待确认], [[GlobalStyleTokens]][待确认], [[NaturalLanguageDescriptionforTTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 **谱系定位**: StoryTTS 位于 Expressive TTS 数据集建设的交叉点,同时触及韵律建模和情感控制两大方向。在韵律建模领域,已有方法主要从语音信号端入手: 通过 Reference Encoder / GST (Wang et al., 2018) 隐式学习风格,或通过 FastSpeech 2 的 variance adaptor 显式建模 pitch/duration/energy。StoryTTS 的不同之处在于 **从文本端出发**,系统性定义和标注文本中蕴含的、影响韵律的语言学特征。
 
 **已有认知**:
-- [[Prosody Modeling]] 指出韵律建模有两条路线: 显式 (pitch/duration/energy predictor) 和隐式 (reference encoder/VAE/flow),但对 **文本端的韵律线索** (如修辞手法、句式、角色扮演) 关注不足。StoryTTS 恰好补充了这一缺口。
-- [[Emotion Control in TTS]] 记录了情感标签通常是离散类别 (happy/sad/angry),而 StoryTTS 的 emotional color 维度采用 **自由文本描述** (如 "worry and anxiety"),与 [[Natural Language Description for TTS]] 中 PromptTTS 等工作的思路相呼应。
-- [[Style Transfer in TTS]] 梳理了风格控制从 Style Tagging → Reference Speech → NL Description → Instruction-Guided 的演进,StoryTTS 的标注框架可视为为 Style Tagging 提供更精细的标签体系。
-- [[TTS Evaluation]] 中 MOS、MCD、log-F0 RMSE 是 StoryTTS 实验采用的核心指标。
+- [[ProsodyModeling]] 指出韵律建模有两条路线: 显式 (pitch/duration/energy predictor) 和隐式 (reference encoder/VAE/flow),但对 **文本端的韵律线索** (如修辞手法、句式、角色扮演) 关注不足。StoryTTS 恰好补充了这一缺口。
+- [[EmotionControlinTTS]] 记录了情感标签通常是离散类别 (happy/sad/angry),而 StoryTTS 的 emotional color 维度采用 **自由文本描述** (如 "worry and anxiety"),与 [[NaturalLanguageDescriptionforTTS]] 中 PromptTTS 等工作的思路相呼应。
+- [[StyleTransferinTTS]] 梳理了风格控制从 Style Tagging → Reference Speech → NL Description → Instruction-Guided 的演进,StoryTTS 的标注框架可视为为 Style Tagging 提供更精细的标签体系。
+- [[TTSEvaluation]] 中 MOS、MCD、log-F0 RMSE 是 StoryTTS 实验采用的核心指标。
 
 **创新判断**: 与已有知识库对比,StoryTTS 的核心新意在于: (1) 首次系统性定义文本中影响语音表现力的五个维度并提供标注; (2) 用 LLM (GPT-4/Claude-2) 进行批量标注的方法论; (3) 从"评书" (Pingshu) 这一特殊语料源获取的高韵律变化数据。这三点在现有概念页中均未被覆盖。
 
@@ -181,7 +181,7 @@ StoryTTS 的主要价值在于 **提出了一个被忽视但重要的研究方�
 
 **实验层面**: 实验设计合理 (逐标签消融 + 全融合),验证了文本表现力标注确实有效。但 MOS 改善幅度有限 (3.88→4.09),且 MOS 的 confidence interval 重叠,统计显著性不够明确。
 
-**与已有知识的关系**: 本文的文本表现力框架可视为对 [[Prosody Modeling]] 中 "Text Pre-training" 分支的具体化 — 不是用 BERT 隐式学习文本韵律信息,而是显式标注文本中的韵律相关特征。这与 [[Natural Language Description for TTS]] 的方向互补: 后者关注用自然语言描述目标语音属性,本文关注从文本本身提取影响语音的特征。
+**与已有知识的关系**: 本文的文本表现力框架可视为对 [[ProsodyModeling]] 中 "Text Pre-training" 分支的具体化 — 不是用 BERT 隐式学习文本韵律信息,而是显式标注文本中的韵律相关特征。这与 [[NaturalLanguageDescriptionforTTS]] 的方向互补: 后者关注用自然语言描述目标语音属性,本文关注从文本本身提取影响语音的特征。
 
 ## 可复用的 idea
 
@@ -203,4 +203,4 @@ StoryTTS 的主要价值在于 **提出了一个被忽视但重要的研究方�
 
 ---
 
-检索命中: [[Prosody Modeling]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[TTSEvaluation]](pending-review), [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无

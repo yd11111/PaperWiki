@@ -8,9 +8,9 @@ authors: [Chunyu Qiang, Kang Yin, Xiaopeng Wang, Yuzhe Liang, Jiahui Zhao, Ruibo
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, TTM, unified-audio, instruction-control, MM-DiT, flow-matching, natural-language-description, music-generation, dialogue-TTS, multi-attribute-control]
-concepts: ["[[Instruction-Guided Speech Synthesis]]", "[[Natural Language Description for TTS]]", "[[Conditional Flow Matching]]", "[[Diffusion-based TTS]]", "[[Singing Voice Synthesis]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]", "MaskGCT", "F5-TTS", "E2-TTS", "ZipVoice", "ACE-Step", "DiffRhythm+"]
-tasks: ["[[任务库/Instructed Speech Generation]]"]
+concepts: ["[[Instruction-GuidedSpeechSynthesis]]", "[[NaturalLanguageDescriptionforTTS]]", "[[ConditionalFlowMatching]]", "[[Diffusion-basedTTS]]", "[[SingingVoiceSynthesis]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]", "MaskGCT", "F5-TTS", "E2-TTS", "ZipVoice", "ACE-Step", "DiffRhythm+"]
+tasks: ["[[任务库/InstructedSpeechGeneration]]"]
 datasets: ["[[数据集/SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -22,7 +22,7 @@ updated: 2026-06-04
 
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Instruction-Guided Speech Synthesis]][待确认], [[Natural Language Description for TTS]][待确认], [[Conditional Flow Matching]]✓, [[Singing Voice Synthesis]][待确认], [[Diffusion-based TTS]][待确认], [[模型库/CosyVoice 2|CosyVoice 2]]✓ | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[Instruction-GuidedSpeechSynthesis]][待确认], [[NaturalLanguageDescriptionforTTS]][待确认], [[ConditionalFlowMatching]]✓, [[SingingVoiceSynthesis]][待确认], [[Diffusion-basedTTS]][待确认], [[模型库/CosyVoice2|CosyVoice 2]]✓ | 过滤: 无 | 未命中但可能相关: 无
 
 **谱系定位**: InstructAudio 处于 Instruction-Guided Speech Synthesis 和 Text-to-Music (TTM) 的交叉地带。在 TTS 侧,它延续了 PromptTTS→InstructTTS→VoxInstruct→CosyVoice 的 NL description 控制路线,但进一步实现了纯文本控制(无需参考音频)的 timbre 属性(gender, age)——这是 CosyVoice 2 仍依赖参考音频的短板。在 TTM 侧,它将 NL description 控制范式从 TTS 拓展到音乐生成,与 ACE-Step/DiffRhythm+ 竞争。核心创新在于用统一的 instruction-phoneme 输入格式和 MM-DiT 架构同时覆盖两个任务。
 

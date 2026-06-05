@@ -1,0 +1,41 @@
+paper: DiffuSpeech
+reviewer: auto
+date: 2026-06-04
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    status: pass
+    notes: "方法节包含 4 个 WHY 解释 (为什么 masked diffusion, 为什么 selective masking, 为什么 HuBERT, 为什么 confidence-based unmasking),每个都有因果链。速查可借鉴列出 3 个具体可迁移 trick。"
+  可信赖:
+    status: pass
+    notes: "数字型 claim 均有 [Table N]/[§X.X]/[Fig N] 标注,覆盖率 >90%。指标名正确 (WER↓, Accuracy↑)。速查指标字段含具体数字+数据集名+出处。所有关键数字经核验与原文一致。"
+  可区分:
+    status: pass-with-fixes
+    notes: "因果解释来源标注覆盖率约 85%,有一处小混淆 (见 issue #1)。整体区分度良好。"
+  可定位:
+    status: pass
+    notes: "KB 背景有清晰谱系定位: 对比 DiFFA (理解only), TARS (文本输出only), SpiritLM/Moshi (AR)。创新判断有具体对比基准。frontmatter 字段完整,models 列出有 vault 笔记的对比模型。"
+  不污染:
+    status: pass
+    notes: "无新概念页创建。反向更新计划待 KB 审阅。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: fact-inference-mixing
+    location: "核心问题 §2, line 46"
+    detail: "'一个词的发音可能取决于后续内容' 被标注为 [论文原文],但论文原文只说 'prosody and content are inherently entangled' [§1],具体例子是 agent 的展开解释。"
+    suggestion: "改为 '[论文原文] 韵律和内容天然纠缠 [§1]。[agent 解读] 例如一个词的发音可能取决于后续内容。'"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "关键设计选择 - Modality-specific masking schedules, line 74"
+    detail: "称 '沿用 MMaDA 的做法' 但论文 §3.2 只提到 follow MMaDA 的整体框架,具体 masking schedule (cosine) 是 MDLM 的标准选择而非 MMaDA 特有。描述不够精确。"
+    suggestion: "改为 '参考 MMaDA 框架 [§3.2],使用 cosine masking schedule (MDLM 标准选择)'"
+
+summary: |
+  笔记质量整体良好。方法节机制解释清晰,因果链完整,数字核验准确。
+  KB 背景定位精确,与 4 个 confirmed 页和 2 个 pending-review 页有恰当关联。
+  2 个 issues (0 high, 1 medium, 1 low),均不阻塞反向更新。
+  建议修正后放行。

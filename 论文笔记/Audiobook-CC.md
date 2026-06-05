@@ -8,9 +8,9 @@ authors: [Min Liu, JingJing Yin, Xiang Zhang, Siyu Hao, Yanni Hu, Bin Lin, Yuan 
 year: 2025
 venue: "arXiv"
 tags: [TTS, audiobook, long-context, emotion-control, style-disentanglement, self-distillation, multicast, context-aware, LLM-based]
-concepts: ["[[Emotion Control in TTS]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Speech Tokenizer]]", "[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Instruction-Guided Speech Synthesis]]"]
-models: ["[[CosyVoice 2]]", "[[BigVGAN]]"]
-tasks: ["[[Instructed Speech Generation]]", "[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[SpeechTokenizer]]", "[[ProsodyModeling]]", "[[StyleTransferinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]"]
+models: ["[[CosyVoice2]]", "[[BigVGAN]]"]
+tasks: ["[[InstructedSpeechGeneration]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[CV3-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[CosyVoice 2]], [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speaker Embedding]] + [[Emotion Control in TTS]][待确认], [[Instruction-Guided Speech Synthesis]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[CosyVoice2]], [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeakerEmbedding]] + [[EmotionControlinTTS]][待确认], [[Instruction-GuidedSpeechSynthesis]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: Audiobook-CC 属于 LLM-based TTS 家族中专攻长篇有声书合成的分支。它以 CosyVoice 2 为基础模型(AR LLM + CFM 的 coarse-to-fine 架构),在其上增加了上下文建模、风格解耦和情感自蒸馏三项机制,目标从单句合成扩展到章节级多角色有声书生成。
@@ -33,7 +33,7 @@ updated: 2026-06-04
 >
 > **创新判断**: 本文的核心新意在于将上下文建模(pre/post context)与风格解耦和情感增强结合,形成有声书专用的端到端框架;已有方法(AudioStory, MultiActor-Audiobook 等)依赖外部 TTS 系统或缺乏显式上下文建模。
 >
-> 检索命中: [[CosyVoice 2]]✓, [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[CosyVoice2]]✓, [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

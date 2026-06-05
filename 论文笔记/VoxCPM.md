@@ -8,9 +8,9 @@ authors: [Yixuan Zhou, Guoyang Zeng, Xin Liu, Xiang Li, Renjie Yu, Ziyang Wang, 
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, tokenizer-free, hierarchical-modeling, flow-matching, end-to-end, semi-discrete, LLM-based]
-concepts: ["[[Finite Scalar Quantization]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Classifier-Free Guidance]]", "[[Variational Autoencoder for TTS]]", "[[Next-Token Diffusion]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice 3|CosyVoice 3]]", "[[模型库/MELLE|MELLE]]", "[[模型库/HierSpeech++|HierSpeech++]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[FiniteScalarQuantization]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[Classifier-FreeGuidance]]", "[[VariationalAutoencoderforTTS]]", "[[Next-TokenDiffusion]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[模型库/MELLE|MELLE]]", "[[模型库/HierSpeech++|HierSpeech++]]", "[[模型库/NaturalSpeech2|NaturalSpeech 2]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["[[数据集/Emilia|Emilia]]", "[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]", "[[数据集/CV3-Eval|CV3-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 6 个已确认实体页 + 1 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: VoxCPM 处于 [[LLM-based TTS]] 谱系中 "Hybrid 架构 (LLM + Diffusion)" 路线的最新发展,但与 CosyVoice 系列的 "discrete semantic tokens + 独立 CFM renderer" 两阶段管线不同,VoxCPM 追求的是**端到端统一框架**,无需外部 [[Speech Tokenizer]]。这使它更接近 DiTAR / CLEAR / VibeVoice 等 continuous-valued AR 路线,但独创地引入了 [[Finite Scalar Quantization]] [待确认] 作为内部正则化瓶颈(不是预测目标),解决了纯连续模型的 error accumulation 问题。
+**谱系定位**: VoxCPM 处于 [[LLM-basedTTS]] 谱系中 "Hybrid 架构 (LLM + Diffusion)" 路线的最新发展,但与 CosyVoice 系列的 "discrete semantic tokens + 独立 CFM renderer" 两阶段管线不同,VoxCPM 追求的是**端到端统一框架**,无需外部 [[SpeechTokenizer]]。这使它更接近 DiTAR / CLEAR / VibeVoice 等 continuous-valued AR 路线,但独创地引入了 [[FiniteScalarQuantization]] [待确认] 作为内部正则化瓶颈(不是预测目标),解决了纯连续模型的 error accumulation 问题。
 
 **已有认知**:
-- [[Semantic vs Acoustic Tokens]] 指出: 离散 token 保稳定但牺牲表达力,连续信号保保真度但 entangle semantic/acoustic。VoxCPM 的 semi-discrete residual 方案是对这一 trade-off 的新解法。
-- [[Conditional Flow Matching]] 在 CosyVoice 系列中作为独立的 second-stage renderer; VoxCPM 将 flow matching 作为唯一训练目标统一全模型,更接近 CLEAR 的单阶段路线。
-- [[Residual Vector Quantization]] 的层级信息结构(coarse→fine)启发了 VoxCPM 的 TSLM+FSQ(semantic skeleton) + RALM(acoustic residual) 层级设计,但 VoxCPM 用 FSQ 替代 RVQ 第一层,用连续残差替代 RVQ 后续层。
-- [[Zero-shot Speech Synthesis]] 当前 SOTA: CosyVoice 3-1.5B (CER 0.71%, WER 1.45%)。VoxCPM 仅 0.5B 参数,目标是在开源系统中达到最优。
+- [[SemanticvsAcousticTokens]] 指出: 离散 token 保稳定但牺牲表达力,连续信号保保真度但 entangle semantic/acoustic。VoxCPM 的 semi-discrete residual 方案是对这一 trade-off 的新解法。
+- [[ConditionalFlowMatching]] 在 CosyVoice 系列中作为独立的 second-stage renderer; VoxCPM 将 flow matching 作为唯一训练目标统一全模型,更接近 CLEAR 的单阶段路线。
+- [[ResidualVectorQuantization]] 的层级信息结构(coarse→fine)启发了 VoxCPM 的 TSLM+FSQ(semantic skeleton) + RALM(acoustic residual) 层级设计,但 VoxCPM 用 FSQ 替代 RVQ 第一层,用连续残差替代 RVQ 后续层。
+- [[Zero-shotSpeechSynthesis]] 当前 SOTA: CosyVoice 3-1.5B (CER 0.71%, WER 1.45%)。VoxCPM 仅 0.5B 参数,目标是在开源系统中达到最优。
 
 **创新判断**: 相比 CosyVoice / IndexTTS2 等依赖外部 speech tokenizer 的系统,VoxCPM 的核心创新在于: (1) FSQ 不作为 tokenizer 的量化层,而是作为模型内部的可微正则化瓶颈; (2) TSLM + RALM 残差分工实现隐式 disentanglement; (3) 全模型端到端训练,消除 tokenizer→LM→diffusion 多阶段割裂。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

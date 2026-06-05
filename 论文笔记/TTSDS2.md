@@ -12,10 +12,10 @@ level: deep
 status: draft
 created: 2026-06-03
 updated: 2026-06-03
-concepts: ["[[TTS Evaluation]]", "[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]"]
+concepts: ["[[TTSEvaluation]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]"]
 models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/Whisper|Whisper]]"]
 datasets: []
-kb_sources: ["[[TTS Evaluation]]", "[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]"]
+kb_sources: ["[[TTSEvaluation]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]"]
 ---
 tier: deep
 
@@ -23,10 +23,10 @@ tier: deep
 
 ## KB 背景
 
-- **[[TTS Evaluation]]** [pending-review]: TTSDS2 是当前最全面的 TTS 客观评估指标对比研究，直接回应了 TTS 评估领域的核心痛点——MOS 不可比、客观指标跨域泛化差、缺乏多语言 benchmark [待确认]
-- **[[Self-Supervised Speech Representation]]** [pending-review]: TTSDS2 的 GENERIC 和 INTELLIGIBILITY 因子直接使用 HuBERT/WavLM/wav2vec 2.0 的 SSL 表征作为特征 [待确认]
-- **[[Prosody Modeling]]** [confirmed]: TTSDS2 的 PROSODY 因子衡量 pitch (WORLD F0) + speaking rate (HuBERT/Allosaurus token rate) + prosody embeddings [论文原文]
-- **[[Speaker Embedding]]** [confirmed]: TTSDS2 的 SPEAKER 因子使用 d-Vector + WeSpeaker 衡量说话人身份保真度 [论文原文]
+- **[[TTSEvaluation]]** [pending-review]: TTSDS2 是当前最全面的 TTS 客观评估指标对比研究，直接回应了 TTS 评估领域的核心痛点——MOS 不可比、客观指标跨域泛化差、缺乏多语言 benchmark [待确认]
+- **[[Self-SupervisedSpeechRepresentation]]** [pending-review]: TTSDS2 的 GENERIC 和 INTELLIGIBILITY 因子直接使用 HuBERT/WavLM/wav2vec 2.0 的 SSL 表征作为特征 [待确认]
+- **[[ProsodyModeling]]** [confirmed]: TTSDS2 的 PROSODY 因子衡量 pitch (WORLD F0) + speaking rate (HuBERT/Allosaurus token rate) + prosody embeddings [论文原文]
+- **[[SpeakerEmbedding]]** [confirmed]: TTSDS2 的 SPEAKER 因子使用 d-Vector + WeSpeaker 衡量说话人身份保真度 [论文原文]
 
 > [!summary] 速查
 > - **一句话**: 首个在 20 个 TTS 系统 x 4 域 x 14 语言上全面验证的分布式客观评估指标，平均 Spearman ρ≈0.67，是唯一在所有条件下 ρ>0.5 的指标
@@ -182,4 +182,4 @@ Bottom 3:
 
 ---
 
-检索命中: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[Prosody Modeling]], [[Speaker Embedding]] | 过滤: [[TTS Evaluation]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: 无
+检索命中: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[ProsodyModeling]], [[SpeakerEmbedding]] | 过滤: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无

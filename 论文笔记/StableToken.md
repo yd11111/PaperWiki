@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "StableToken: A Noise-Robust Semantic Speech Tokenizer for Resilient SpeechLLMs"
 arxiv_id: ""
-source: "Sources/STABLETOKEN.pdf"
+source: "Sources/StableToken.pdf"
 authors: [Anonymous]
 year: 2026
 venue: "Under review at ICLR 2026"
 tags: [speech-tokenizer, noise-robustness, voting-LFQ, consensus-training, SpeechLLM, token-stability, multi-branch-quantization]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Residual Vector Quantization]]", "[[Self-Supervised Speech Representation]]", "[[Finite Scalar Quantization]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]", "[[ResidualVectorQuantization]]", "[[Self-SupervisedSpeechRepresentation]]", "[[FiniteScalarQuantization]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speech Language Model]], [[Residual Vector Quantization]])
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]], [[ResidualVectorQuantization]])
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
 
-**[[Speech Tokenizer]]**: StableToken 属于第二类"监督式 semantic tokenizer" — 通过 ASR 监督在 encoder 中插入量化层, 直接优化语义编码。与 CosyVoice 系列的 S3/FSQ tokenizer 同族, 但 StableToken 的核心创新在量化架构 (Voting-LFQ 替代 FSQ/VQ) 和训练策略 (Noise-Aware Consensus Training)。KB 显示现有 semantic tokenizer 在 SpeechLM 中被广泛采用 (CosyVoice, GLM-4-Voice, S^3 Tokenizer), 但无一专门解决噪声鲁棒性问题。
+**[[SpeechTokenizer]]**: StableToken 属于第二类"监督式 semantic tokenizer" — 通过 ASR 监督在 encoder 中插入量化层, 直接优化语义编码。与 CosyVoice 系列的 S3/FSQ tokenizer 同族, 但 StableToken 的核心创新在量化架构 (Voting-LFQ 替代 FSQ/VQ) 和训练策略 (Noise-Aware Consensus Training)。KB 显示现有 semantic tokenizer 在 SpeechLM 中被广泛采用 (CosyVoice, GLM-4-Voice, S^3 Tokenizer), 但无一专门解决噪声鲁棒性问题。
 
-**[[Semantic vs Acoustic Tokens]]**: StableToken 是纯 semantic tokenizer (单码本, 25Hz, 8192 entries), 不编码声学细节。其核心贡献是发现现有 semantic tokenizer 的 token stability 问题: 微小声学扰动 → 剧烈 token 变化 → 下游 SpeechLLM 性能退化。这揭示了 semantic tokens 的一个被忽视的脆弱性。
+**[[SemanticvsAcousticTokens]]**: StableToken 是纯 semantic tokenizer (单码本, 25Hz, 8192 entries), 不编码声学细节。其核心贡献是发现现有 semantic tokenizer 的 token stability 问题: 微小声学扰动 → 剧烈 token 变化 → 下游 SpeechLLM 性能退化。这揭示了 semantic tokens 的一个被忽视的脆弱性。
 
-**[[Speech Language Model]]**: StableToken 直接面向 SpeechLLM 下游任务优化。KB 显示 SpeechLM 高度依赖 tokenizer 的 token 质量 — token 不稳定会破坏 speech-text alignment, 迫使 LLM 从不一致的输入中学习。StableToken 在 ASR (CHiME-4), SER, TTS (SEED-TTS) 三大下游任务上验证了 token stability 对 SpeechLLM resilience 的直接贡献。
+**[[SpeechLanguageModel]]**: StableToken 直接面向 SpeechLLM 下游任务优化。KB 显示 SpeechLM 高度依赖 tokenizer 的 token 质量 — token 不稳定会破坏 speech-text alignment, 迫使 LLM 从不一致的输入中学习。StableToken 在 ASR (CHiME-4), SER, TTS (SEED-TTS) 三大下游任务上验证了 token stability 对 SpeechLLM resilience 的直接贡献。
 
-**[[Residual Vector Quantization]]**: StableToken 不使用 RVQ, 而是使用 LFQ (Look-up Free Quantization) 的多分支变体 Voting-LFQ。与 RVQ 的层级量化残差不同, Voting-LFQ 通过 n 个并行分支独立二值化投影, 再 bit-wise majority vote 合并。这是一条与 RVQ 平行的量化路线, 通过冗余和投票实现鲁棒性而非精度。
+**[[ResidualVectorQuantization]]**: StableToken 不使用 RVQ, 而是使用 LFQ (Look-up Free Quantization) 的多分支变体 Voting-LFQ。与 RVQ 的层级量化残差不同, Voting-LFQ 通过 n 个并行分支独立二值化投影, 再 bit-wise majority vote 合并。这是一条与 RVQ 平行的量化路线, 通过冗余和投票实现鲁棒性而非精度。
 
 ## 速查
 
@@ -199,4 +199,4 @@ UED (Unit Edit Distance) 降低 >60% 相对 vs best supervised baseline (S^3) [T
 
 ---
 
-检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speech Language Model]], [[Residual Vector Quantization]] | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Finite Scalar Quantization]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]], [[ResidualVectorQuantization]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无

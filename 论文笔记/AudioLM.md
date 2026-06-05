@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "AudioLM: a Language Modeling Approach to Audio Generation"
 arxiv_id: "2209.03143"
-source: "https://arxiv.org/abs/2209.03143"
+source: "Sources/AudioLM.pdf"
 authors: [Zalán Borsos, Raphaël Marinier, Damien Vincent, Eugene Kharitonov, Olivier Pietquin, Matt Sharifi, Dominik Roblek, Olivier Teboul, David Grangier, Marco Tagliasacchi, Neil Zeghidour]
 year: 2023
 venue: "arXiv (Google Research)"
 tags: [speech-LM, audio-generation, semantic-token, acoustic-token, hierarchical-generation, speech-continuation, piano-generation, zero-shot]
-concepts: ["[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]", "[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[LLM-based TTS]]"]
+concepts: ["[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]", "[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]", "[[LLM-basedTTS]]"]
 models: ["[[SoundStream]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Semantic vs Acoustic Tokens]], [[Speech Language Model]], [[Residual Vector Quantization]], [[Speech Tokenizer]], [[LLM-based TTS]])
-> AudioLM 是 semantic-acoustic token 层级建模范式的奠基工作,被 [[Semantic vs Acoustic Tokens]] 列为串联策略的代表。[[Speech Language Model]] 将 AudioLM 定位为 GSLM → AudioLM → TWIST 演进中的关键节点。[[Residual Vector Quantization]] 页记录了 RVQ 的 coarse/fine 层级信息结构,这正是 AudioLM 三阶段生成的基础。
-> 检索命中: [[Semantic vs Acoustic Tokens]], [[Speech Language Model]], [[Residual Vector Quantization]], [[Speech Tokenizer]], [[LLM-based TTS]] | 过滤: [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]], [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[LLM-basedTTS]])
+> AudioLM 是 semantic-acoustic token 层级建模范式的奠基工作,被 [[SemanticvsAcousticTokens]] 列为串联策略的代表。[[SpeechLanguageModel]] 将 AudioLM 定位为 GSLM → AudioLM → TWIST 演进中的关键节点。[[ResidualVectorQuantization]] 页记录了 RVQ 的 coarse/fine 层级信息结构,这正是 AudioLM 三阶段生成的基础。
+> 检索命中: [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]], [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[LLM-basedTTS]] | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

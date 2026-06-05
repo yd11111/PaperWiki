@@ -8,9 +8,9 @@ authors: [Joonyong Park, Kenichi Nakamura]
 year: 2025
 venue: "13th ISCA Speech Synthesis Workshop"
 tags: [TTS, emotion, multilingual, self-supervised-learning, spherical-coordinates, discrete-tokens, prosody, HuBERT]
-concepts: ["[[Emotion Control in TTS]]", "[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Mel Spectrogram]]", "[[Speaker Embedding]]", "[[Non-autoregressive TTS]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[MelSpectrogram]]", "[[SpeakerEmbedding]]", "[[Non-autoregressiveTTS]]"]
 models: ["[[模型库/HuBERT]]"]
-tasks: ["[[任务库/Cross-lingual Voice Cloning]]"]
+tasks: ["[[任务库/Cross-lingualVoiceCloning]]"]
 datasets: ["ESD", "JVNV"]
 kb_context_sources: 6
 status: draft
@@ -20,13 +20,13 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[Prosody Modeling]]$\checkmark$, [[Speaker Embedding]]$\checkmark$, [[Cross-lingual Voice Cloning]]$\checkmark$, [[Emotion Control in TTS]][待确认], [[Self-Supervised Speech Representation]][待确认], [[模型库/HuBERT|HuBERT]][待确认])
+> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[ProsodyModeling]]$\checkmark$, [[SpeakerEmbedding]]$\checkmark$, [[Cross-lingualVoiceCloning]]$\checkmark$, [[EmotionControlinTTS]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认], [[模型库/HuBERT|HuBERT]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Prosody Modeling]], [[Speaker Embedding]], [[Cross-lingual Voice Cloning]], [[Emotion Control in TTS]], [[Self-Supervised Speech Representation]], [[HuBERT]] | 过滤: 3 页 pending-review | 未命中但可能相关: [[Style Transfer in TTS]], [[Global Style Tokens]]
+> 检索命中: [[ProsodyModeling]], [[SpeakerEmbedding]], [[Cross-lingualVoiceCloning]], [[EmotionControlinTTS]], [[Self-SupervisedSpeechRepresentation]], [[HuBERT]] | 过滤: 3 页 pending-review | 未命中但可能相关: [[StyleTransferinTTS]], [[GlobalStyleTokens]]
 
-**谱系定位**: EmoSSLSphere 处于情感可控 TTS 演进线的 EmoSphere-TTS (Interspeech 2024) 之后,是其向多语言+SSL 特征方向的扩展。与 [[Emotion Control in TTS]][待确认] 中记录的演进线对照: EmoSphere-TTS 引入了 AVD 球面坐标变换实现风格/强度解耦; EmoSphere++ 进一步升级为 emotion-adaptive centroid + CFM decoder + 零样本能力。EmoSSLSphere 则沿另一条轴线扩展 -- 保留 EmoSphere-TTS 的球面情感编码器和 FastSpeech 2 decoder,但新增 SSL 离散 token (HuBERT) 和语义文本编码器 (DeBERTaV3),聚焦多语言场景。在 KB 中已有 [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] 和 [[论文笔记/EmoSphere++|EmoSphere++]] 两篇精读笔记。
+**谱系定位**: EmoSSLSphere 处于情感可控 TTS 演进线的 EmoSphere-TTS (Interspeech 2024) 之后,是其向多语言+SSL 特征方向的扩展。与 [[EmotionControlinTTS]][待确认] 中记录的演进线对照: EmoSphere-TTS 引入了 AVD 球面坐标变换实现风格/强度解耦; EmoSphere++ 进一步升级为 emotion-adaptive centroid + CFM decoder + 零样本能力。EmoSSLSphere 则沿另一条轴线扩展 -- 保留 EmoSphere-TTS 的球面情感编码器和 FastSpeech 2 decoder,但新增 SSL 离散 token (HuBERT) 和语义文本编码器 (DeBERTaV3),聚焦多语言场景。在 KB 中已有 [[论文笔记/EmoSphere-TTS|EmoSphere-TTS]] 和 [[论文笔记/EmoSphere++|EmoSphere++]] 两篇精读笔记。
 
-**已有认知**: [[Self-Supervised Speech Representation]][待确认] 记录了 HuBERT 中间层 (8-9) 对超音段韵律特征 (stress/tone/accent) 的编码最强的发现 [de la Fuente & Jurafsky, 2024],这为 EmoSSLSphere 选择第 9 层特征提供了理论支撑。[[Prosody Modeling]]$\checkmark$ 涵盖了从显式韵律预测到 SSL 隐式韵律表征的完整方法谱。[[Speaker Embedding]]$\checkmark$ 说明了 speaker lookup table 和 speaker encoder 两种范式在多说话人 TTS 中的角色。
+**已有认知**: [[Self-SupervisedSpeechRepresentation]][待确认] 记录了 HuBERT 中间层 (8-9) 对超音段韵律特征 (stress/tone/accent) 的编码最强的发现 [de la Fuente & Jurafsky, 2024],这为 EmoSSLSphere 选择第 9 层特征提供了理论支撑。[[ProsodyModeling]]$\checkmark$ 涵盖了从显式韵律预测到 SSL 隐式韵律表征的完整方法谱。[[SpeakerEmbedding]]$\checkmark$ 说明了 speaker lookup table 和 speaker encoder 两种范式在多说话人 TTS 中的角色。
 
 **创新判断**: 与 KB 已有工作相比,EmoSSLSphere 的贡献在于将球面情感向量与 SSL 离散 token 融合用于多语言情感 TTS。核心新颖性是:(1) 用语言分别聚类的 HuBERT k-means token 提供跨语言一致的韵律控制信号; (2) DeBERTaV3 语义编码器通过 cross-attention 条件化情感/韵律模块。但架构整体仍在 FastSpeech 2 + mel-spectrogram 范式内,未触及 LLM-TTS 或 CFM decoder 的新范式。
 
@@ -82,7 +82,7 @@ Speaker Embedding ────────────────────�
 
 [论文原文] 作者引用了分析研究表明 "lower-middle transformer layers encode rhythm and pitch trajectories reliably across languages",第 9 层在 12 层 base model 中提供了细粒度语音细节 (低层) 与高层语义 (高层) 之间的最佳平衡 [S3.2]。
 
-[agent 解读] 这与 KB 中 [[Self-Supervised Speech Representation]][待确认] 记录的 de la Fuente & Jurafsky (2024) 发现完全一致 -- HuBERT 中间层 (8-9) 对超音段韵律特征的编码最强。但论文并未引用该分析工作,说明作者可能是独立得到类似结论的。
+[agent 解读] 这与 KB 中 [[Self-SupervisedSpeechRepresentation]][待确认] 记录的 de la Fuente & Jurafsky (2024) 发现完全一致 -- HuBERT 中间层 (8-9) 对超音段韵律特征的编码最强。但论文并未引用该分析工作,说明作者可能是独立得到类似结论的。
 
 #### 2. 为什么对 SSL 特征做语言分别聚类?
 
@@ -183,7 +183,7 @@ Speaker Embedding ────────────────────�
 1. **极小评估规模**: EN 仅 80 句 (4 情感 x 20 句)、JA 仅 60 句 (6 情感 x 10 句),均为单说话人 [S4.2]。这使统计显著性存疑,且完全无法评估多说话人泛化能力。作者也在结论中承认这一局限 [S6]
 2. **无零样本能力**: 推理时要求参考语音与目标说话人匹配,不支持 unseen speaker [S3.5]。而同系列的 EmoSphere++ 已实现零样本情感 TTS [agent 解读]
 3. **未与 EmoSphere++ 对比**: EmoSphere++ (arXiv 2024.11) 比本文 (arXiv 2025.08) 更早发表,但未在 baseline 中出现。考虑到 EmoSphere++ 在 ESD 上的 ECA 93.53%、nMOS 3.92,缺少这一对比使本文贡献的增量价值难以准确评估 [agent 解读]
-4. **架构保守**: 仍基于 FastSpeech 2 mel-spectrogram 范式,未采用 CFM/Diffusion decoder 或 LLM-based 生成。在 KB 中 [[Emotion Control in TTS]] 的演进线上,这一架构已被后续工作 (TTS-CtrlNet, UDDETTS) 超越 [agent 解读]
+4. **架构保守**: 仍基于 FastSpeech 2 mel-spectrogram 范式,未采用 CFM/Diffusion decoder 或 LLM-based 生成。在 KB 中 [[EmotionControlinTTS]] 的演进线上,这一架构已被后续工作 (TTS-CtrlNet, UDDETTS) 超越 [agent 解读]
 5. **nMOS 未提供 baseline 数据**: Table 2 的 nMOS 仅报告了 proposed method 和 GT,EmoSphere-TTS 和 NATSpeech 的 nMOS 数据以脚注形式出现 (EN: 4.05, JA: 3.63),未提供置信区间。Baseline 只进行了单次 MOS 评估 [agent 解读]
 6. **语义编码器贡献存疑**: 消融显示去掉语义编码器的影响很小 (MCD EN 7.293 vs 7.282),其跨语言价值未被充分验证 [Table 2]
 7. **无跨语言情感迁移实验**: 虽然标题含 "Multilingual",但未做 cross-lingual emotion transfer (如用英语参考的情感合成日语),所有实验均在同语言内进行 [S4.2]
@@ -216,4 +216,4 @@ Speaker Embedding ────────────────────�
 
 ---
 
-检索命中: [[Prosody Modeling]]$\checkmark$, [[Speaker Embedding]]$\checkmark$, [[Cross-lingual Voice Cloning]]$\checkmark$, [[Emotion Control in TTS]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[HuBERT]](pending-review) | 过滤: 无 | 未命中但可能相关: [[Style Transfer in TTS]], [[Global Style Tokens]]
+检索命中: [[ProsodyModeling]]$\checkmark$, [[SpeakerEmbedding]]$\checkmark$, [[Cross-lingualVoiceCloning]]$\checkmark$, [[EmotionControlinTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review) | 过滤: 无 | 未命中但可能相关: [[StyleTransferinTTS]], [[GlobalStyleTokens]]

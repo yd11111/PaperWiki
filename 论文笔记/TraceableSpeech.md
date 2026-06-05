@@ -8,9 +8,9 @@ authors: [Junzuo Zhou, Jiangyan Yi, Tao Wang, Jianhua Tao, Ye Bai, Chu Yuan Zhan
 year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, watermarking, proactive-traceability, neural-codec, codec-LM, security, speech-synthesis]
-concepts: ["[[Codec Language Model]]", "[[Residual Vector Quantization]]", "[[Anti-spoofing and Deepfake Detection]]", "[[TTS Evaluation]]", "[[Speaker Embedding]]"]
+concepts: ["[[CodecLanguageModel]]", "[[ResidualVectorQuantization]]", "[[Anti-spoofingandDeepfakeDetection]]", "[[TTSEvaluation]]", "[[SpeakerEmbedding]]"]
 models: ["[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 5
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页 + 3 个待确认实体页: [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓, [[Codec Language Model]][待确认], [[Anti-spoofing and Deepfake Detection]][待确认], [[TTS Evaluation]][待确认])
+> [!info] KB 背景 (基于 2 个已确认实体页 + 3 个待确认实体页: [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓, [[CodecLanguageModel]][待确认], [[Anti-spoofingandDeepfakeDetection]][待确认], [[TTSEvaluation]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓ | 参考: [[Codec Language Model]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓ | 参考: [[CodecLanguageModel]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)
 
 **谱系定位**: TraceableSpeech 处于 Codec Language Model (VALL-E 范式) 与 Anti-spoofing/Deepfake Detection 的交叉地带。在 Codec LM 页中,VALL-E 是首个大规模 codec LM TTS,使用 EnCodec tokens + AR/NAR 两阶段生成;TraceableSpeech 在此基础上将水印机制嵌入 codec 训练,属于 codec LM 的安全性扩展。Anti-spoofing 页提到了 watermarking 作为 proactive traceability 手段,但缺乏技术细节,TraceableSpeech 是该方向的具体实现。TTS Evaluation 页的 Security & Traceability 一节直接引用了本文 (TraceSpeech [Zhou et al., 2024]) 作为 imperceptible audio watermarking 的代表工作。
 
@@ -191,4 +191,4 @@ frame-wise broadcast 是一个优雅的工程设计: 通过在 latent space 的�
 > 五个原则均满足, 3 个 low issue (template-compliance ×1, traceability-gap ×2) 均不阻塞.
 > 详见 `_review/TraceableSpeech-review.yml`
 
-检索命中: [[Residual Vector Quantization]]✓, [[Speaker Embedding]]✓ | 参考: [[Codec Language Model]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[TTS Evaluation]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)
+检索命中: [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓ | 参考: [[CodecLanguageModel]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[TTSEvaluation]](pending-review) | 未命中但可能相关: Audio Watermarking(概念库中无独立页)

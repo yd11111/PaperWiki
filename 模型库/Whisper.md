@@ -5,9 +5,9 @@ aliases: [OpenAI Whisper, Whisper ASR]
 org: "OpenAI"
 year: 2022
 tags: [ASR, weak-supervision, multilingual, multitask, zero-shot, robustness, speech-recognition]
-key_concepts: ["[[Mel Spectrogram]]", "[[Speech Tokenizer]]", "[[LLM-enhanced ASR]]"]
+key_concepts: ["[[MelSpectrogram]]", "[[SpeechTokenizer]]", "[[LLM-enhancedASR]]"]
 tasks: []
-key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/Lightweight Prompt Biasing|Lightweight Prompt Biasing]]"]
+key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/LightweightPromptBiasing|Lightweight Prompt Biasing]]"]
 supersedes: []
 superseded_by: []
 status: pending-review

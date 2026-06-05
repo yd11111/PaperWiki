@@ -6,16 +6,16 @@ authors: [Yexing Du, Ziyang Ma, Yifan Yang, Keqi Deng, Xie Chen, Bo Yang, Yang X
 year: 2024
 venue: arXiv
 arxiv_id: "2409.19510"
-source: "https://arxiv.org/abs/2409.19510"
+source: "Sources/CoT-ST.pdf"
 tags: [speech-translation, chain-of-thought, SLM, curriculum-learning, Q-Former, Whisper, Qwen2]
 level: deep
 status: draft
 created: 2026-06-03
 updated: 2026-06-03
-concepts: ["[[Speech Language Model]]", "[[Speech-Text Alignment]]", "[[Audio Understanding]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 datasets: []
-kb_sources: ["[[Speech Language Model]]", "[[Speech-Text Alignment]]", "[[Audio Understanding]]"]
+kb_sources: ["[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]"]
 ---
 tier: deep
 
@@ -23,9 +23,9 @@ tier: deep
 
 ## KB 背景
 
-- **[[Speech Language Model]]** [confirmed]: CoT-ST 属于 SLM 范式——冻结 Whisper encoder + 冻结 LLM (Qwen2-7B) + 可训练 Q-Former 投影层，是 speech-LLM integration 中 latent-representation-based 路线的应用 [论文原文]
-- **[[Speech-Text Alignment]]** [confirmed]: CoT-ST 的核心贡献在于通过 CoT 分解实现隐式的 speech-text 对齐——先 ASR (speech→text)，再翻译 (text→target)，中间转写为两步间的桥梁 [论文原文]
-- **[[Audio Understanding]]** [confirmed]: CoT-ST 支持 ASR + MMT + SRT 三任务，体现了 SLM 的多任务理解能力 [论文原文]
+- **[[SpeechLanguageModel]]** [confirmed]: CoT-ST 属于 SLM 范式——冻结 Whisper encoder + 冻结 LLM (Qwen2-7B) + 可训练 Q-Former 投影层，是 speech-LLM integration 中 latent-representation-based 路线的应用 [论文原文]
+- **[[Speech-TextAlignment]]** [confirmed]: CoT-ST 的核心贡献在于通过 CoT 分解实现隐式的 speech-text 对齐——先 ASR (speech→text)，再翻译 (text→target)，中间转写为两步间的桥梁 [论文原文]
+- **[[AudioUnderstanding]]** [confirmed]: CoT-ST 支持 ASR + MMT + SRT 三任务，体现了 SLM 的多任务理解能力 [论文原文]
 
 > [!summary] 速查
 > - **一句话**: 通过三阶段课程学习 (ASR→MMT→SRT) 激活 SLM 的 Chain-of-Thought 推理能力，将语音翻译分解为"先转写再翻译"，SOTA 于 CoVoST-2 和 MuST-C
@@ -160,4 +160,4 @@ CoT 输出格式: `<transcription> <|lang|> <translation>` [Table 1]
 
 ---
 
-检索命中: [[Speech Language Model]], [[Speech-Text Alignment]], [[Audio Understanding]] | 过滤: 无 | 未命中但可能相关: [[Modality Adaptation for Speech LLM]]
+检索命中: [[SpeechLanguageModel]], [[Speech-TextAlignment]], [[AudioUnderstanding]] | 过滤: 无 | 未命中但可能相关: [[ModalityAdaptationforSpeechLLM]]

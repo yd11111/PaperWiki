@@ -5,9 +5,9 @@ aliases: [WavLM Base, WavLM Base+, WavLM Large]
 org: "Microsoft"
 year: 2022
 tags: [self-supervised-learning, speech-representation, masked-prediction, speech-denoising, full-stack, speaker-verification, speech-separation, diarization, ASR]
-key_concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Self-Supervised Speech Representation]]"]
+key_concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeakerEmbedding]]", "[[SpeechFactorization]]", "[[Self-SupervisedSpeechRepresentation]]"]
 tasks: []
-key_papers: ["[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Vec-Tok Speech|Vec-Tok Speech]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
+key_papers: ["[[论文笔记/WavLM|WavLM]]", "[[论文笔记/Vec-TokSpeech|Vec-Tok Speech]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
 supersedes: ["[[模型库/HuBERT|HuBERT]]"]
 superseded_by: []
 status: pending-review

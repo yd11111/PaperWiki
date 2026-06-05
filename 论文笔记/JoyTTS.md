@@ -8,8 +8,8 @@ authors: [Fangru Zhou, Jun Zhao, Guoxin Wang]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, spoken-chatbot, voice-cloning, LLM-based, end-to-end, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Speech Tokenizer]]", "[[Speech Language Model]]", "[[Mel Spectrogram]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[SpeechTokenizer]]", "[[SpeechLanguageModel]]", "[[MelSpectrogram]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
 tasks: []
 datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -20,19 +20,19 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-based TTS]], [[Speaker Embedding]], [[Speech Tokenizer]], [[Speech Language Model]], [[模型库/CosyVoice 2|CosyVoice 2]], [[模型库/CosyVoice|CosyVoice]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-basedTTS]], [[SpeakerEmbedding]], [[SpeechTokenizer]], [[SpeechLanguageModel]], [[模型库/CosyVoice2|CosyVoice 2]], [[模型库/CosyVoice|CosyVoice]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: JoyTTS 属于 **modular SpeechLM** 路线 — 在已有文本 LLM (MiniCPM-o/Qwen-7B) 外围挂载 TTS 模块 (CosyVoice2),通过 hidden state 桥接实现端到端语音对话。这条路线与 [[论文笔记/LLaMA-Omni 2|LLaMA-Omni 2]] 思路相似(也复用 CosyVoice 2 作为 TTS 后端),但 JoyTTS 的集成方式更简单直接: 仅通过 MLP 映射 LLM hidden states 到 TTS embedding 空间,不涉及额外的 modality adapter 或 speech encoder。
+**谱系定位**: JoyTTS 属于 **modular SpeechLM** 路线 — 在已有文本 LLM (MiniCPM-o/Qwen-7B) 外围挂载 TTS 模块 (CosyVoice2),通过 hidden state 桥接实现端到端语音对话。这条路线与 [[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]] 思路相似(也复用 CosyVoice 2 作为 TTS 后端),但 JoyTTS 的集成方式更简单直接: 仅通过 MLP 映射 LLM hidden states 到 TTS embedding 空间,不涉及额外的 modality adapter 或 speech encoder。
 
 **已有认知**:
-- [[模型库/CosyVoice 2|CosyVoice 2]] 作为独立 TTS 系统在 SEED-TTS-Eval test-zh 上 CER 1.45%、SS 0.748,是当前零样本 TTS 的强 baseline。JoyTTS 以此为 TTS 后端,但集成后性能 (SS 0.73, WER 5.09) 相比独立 CosyVoice2 有明显回退。
-- [[LLM-based TTS]] 谱系中,JoyTTS 属于 "Hybrid 架构 (LLM + 独立 TTS)" 子类,但与 CosyVoice 自身的 LLM+CFM 两阶段设计不同,JoyTTS 是在 LLM-Chat 和 LLM-TTS 之间做模块级拼接。
-- [[Speech Language Model]] 分类体系中,MiniCPM-o 属于 "instruction-tuning" 阶段 + "IPR (Interactive Period Recognition)" 生成范式的 omni-model,JoyTTS 本质上是改善其 TTS 后端的工程优化。
+- [[模型库/CosyVoice2|CosyVoice 2]] 作为独立 TTS 系统在 SEED-TTS-Eval test-zh 上 CER 1.45%、SS 0.748,是当前零样本 TTS 的强 baseline。JoyTTS 以此为 TTS 后端,但集成后性能 (SS 0.73, WER 5.09) 相比独立 CosyVoice2 有明显回退。
+- [[LLM-basedTTS]] 谱系中,JoyTTS 属于 "Hybrid 架构 (LLM + 独立 TTS)" 子类,但与 CosyVoice 自身的 LLM+CFM 两阶段设计不同,JoyTTS 是在 LLM-Chat 和 LLM-TTS 之间做模块级拼接。
+- [[SpeechLanguageModel]] 分类体系中,MiniCPM-o 属于 "instruction-tuning" 阶段 + "IPR (Interactive Period Recognition)" 生成范式的 omni-model,JoyTTS 本质上是改善其 TTS 后端的工程优化。
 
 **创新判断**: JoyTTS 的核心贡献是工程集成 + 开源,而非方法创新。hidden state MLP 桥接是已有技术(LLaMA-Omni 2 等已有类似实践)。论文价值主要在于提供了可复现的训练代码和完整流程。
 
-检索命中: [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Speech Tokenizer]]✓, [[Speech Language Model]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review), [[Streaming Spoken Dialogue]](pending-review), [[Mel Spectrogram]](pending-review) | 未命中但可能相关: MiniCPM-o(无独立模型页)
+检索命中: [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[SpeechTokenizer]]✓, [[SpeechLanguageModel]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[模型库/CosyVoice|CosyVoice]]✓ | 过滤: [[VoiceCloningTaxonomy]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: MiniCPM-o(无独立模型页)
 
 > [!summary] 速查
 > - **一句话**: 将 MiniCPM-o 的 LLM-Chat 与 CosyVoice2 的 TTS 模块通过 hidden state MLP 桥接,构建带 voice cloning 的端到端语音聊天机器人

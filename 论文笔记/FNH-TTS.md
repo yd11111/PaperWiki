@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "FNH-TTS: Mixture-of-Experts Duration Modeling for Robust Neural Speech Synthesis"
 arxiv_id: "2508.12001"
-source: "arXiv:2508.12001v3"
+source: "Sources/FNH-TTS.pdf"
 authors: [Qingliang Meng, Luogeng Xiong, Wei Liang, Limei Yu, Huizhi Liang, Tian Li]
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, duration-modeling, MoE, vocoder, non-autoregressive, VITS, discriminator, prosody]
-concepts: ["[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Prosody Modeling]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Multi-scale STFT Discriminator]]", "[[Variational Autoencoder for TTS]]"]
+concepts: ["[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[ProsodyModeling]]", "[[NeuralVocoder]]", "[[SpeakerEmbedding]]", "[[Multi-scaleSTFTDiscriminator]]", "[[VariationalAutoencoderforTTS]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Neural Vocoder]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ + 3 个待确认页: [[Duration Predictor]][待确认], [[Non-autoregressive TTS]][待确认], [[VITS]][待确认])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[NeuralVocoder]]✓, [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓ + 3 个待确认页: [[DurationPredictor]][待确认], [[Non-autoregressiveTTS]][待确认], [[VITS]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Duration Predictor]], [[Non-autoregressive TTS]], [[VITS]], [[Neural Vocoder]], [[Prosody Modeling]], [[Speaker Embedding]] | 过滤: [[Multi-scale STFT Discriminator]](confirmed, 辅助参考), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[DurationPredictor]], [[Non-autoregressiveTTS]], [[VITS]], [[NeuralVocoder]], [[ProsodyModeling]], [[SpeakerEmbedding]] | 过滤: [[Multi-scaleSTFTDiscriminator]](confirmed, 辅助参考), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: FNH-TTS 位于 VITS 系列的直接改进路线上。VITS (Kim et al., ICML 2021) 开创了 VAE+Flow+GAN 端到端 NAR TTS 范式,其后续 VITS2 通过对抗学习改善多说话人 duration prediction。FNH-TTS 沿这条路线继续,但方向不同于 VITS2 的对抗目标 -- 它从 Duration Predictor 的内部结构入手,引入 Mixture-of-Experts 机制。
 
@@ -177,4 +177,4 @@ FNH-TTS 的核心价值不在于 MoE 或 VOCOS 这些单独组件 (它们都是�
 
 ---
 
-检索命中: [[Duration Predictor]], [[Non-autoregressive TTS]], [[VITS]], [[Neural Vocoder]], [[Prosody Modeling]], [[Speaker Embedding]] | 过滤: [[Multi-scale STFT Discriminator]](confirmed), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[DurationPredictor]], [[Non-autoregressiveTTS]], [[VITS]], [[NeuralVocoder]], [[ProsodyModeling]], [[SpeakerEmbedding]] | 过滤: [[Multi-scaleSTFTDiscriminator]](confirmed), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无

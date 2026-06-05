@@ -8,7 +8,7 @@ authors: [Yifan Liu, Yu Fang, Zhouhan Lin]
 year: 2025
 venue: "arXiv preprint"
 tags: [video-to-speech, V2S, audio-visual, speaker-preservation, mel-spectrogram, vocoder, HiFi-GAN, AV-HuBERT, conformer, end-to-end]
-concepts: ["[[Mel Spectrogram]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Self-Supervised Speech Representation]]", "[[Speaker Verification]]"]
+concepts: ["[[MelSpectrogram]]", "[[NeuralVocoder]]", "[[SpeakerEmbedding]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeakerVerification]]"]
 models: ["[[模型库/HuBERT|HuBERT]]"]
 tasks: []
 datasets: []
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DiVISe 是 Video-to-Speech (V2S) 合成领域的工作,与本 vault 的 TTS 主线有交叉但方向不同。V2S 从无声视频生成语音,而 TTS 从文本生成语音。两者共享的核心模块包括: (1) [[Neural Vocoder]] (confirmed) — DiVISe 使用 HiFi-GAN 将预测的 mel spectrogram 转为波形,这是 TTS 领域 2020-2023 最广泛使用的 vocoder; (2) [[Mel Spectrogram]] [待确认] — DiVISe 以 128 维 mel spectrogram 为中间表示,与 TTS 系统的 80 维 mel 有差异但原理相同; (3) [[Speaker Embedding]] (confirmed) — DiVISe 的核心贡献之一是无需 speaker embedding 即可保留说话人特性,这与 TTS 领域中 speaker embedding 从 lookup table 到 in-context prompt 的演进趋势相关。
+> **谱系定位**: DiVISe 是 Video-to-Speech (V2S) 合成领域的工作,与本 vault 的 TTS 主线有交叉但方向不同。V2S 从无声视频生成语音,而 TTS 从文本生成语音。两者共享的核心模块包括: (1) [[NeuralVocoder]] (confirmed) — DiVISe 使用 HiFi-GAN 将预测的 mel spectrogram 转为波形,这是 TTS 领域 2020-2023 最广泛使用的 vocoder; (2) [[MelSpectrogram]] [待确认] — DiVISe 以 128 维 mel spectrogram 为中间表示,与 TTS 系统的 80 维 mel 有差异但原理相同; (3) [[SpeakerEmbedding]] (confirmed) — DiVISe 的核心贡献之一是无需 speaker embedding 即可保留说话人特性,这与 TTS 领域中 speaker embedding 从 lookup table 到 in-context prompt 的演进趋势相关。
 >
-> **已有认知**: KB 中 [[Self-Supervised Speech Representation]] [待确认] 记录了 HuBERT 的 masked prediction + offline k-means 范式,DiVISe 使用的 AV-HuBERT 是其音视频扩展版本。[[模型库/HuBERT|HuBERT]] [待确认] 页面记录了 BASE 95M / LARGE 317M / X-LARGE 964M 三个规模,DiVISe 使用 LARGE (325M) 作为视觉骨干。[[Speaker Verification]] [待确认] 页面详细记录了 SECS 和 EER 两个指标的定义和局限性,DiVISe 在评估中同时使用了这两个指标。
+> **已有认知**: KB 中 [[Self-SupervisedSpeechRepresentation]] [待确认] 记录了 HuBERT 的 masked prediction + offline k-means 范式,DiVISe 使用的 AV-HuBERT 是其音视频扩展版本。[[模型库/HuBERT|HuBERT]] [待确认] 页面记录了 BASE 95M / LARGE 317M / X-LARGE 964M 三个规模,DiVISe 使用 LARGE (325M) 作为视觉骨干。[[SpeakerVerification]] [待确认] 页面详细记录了 SECS 和 EER 两个指标的定义和局限性,DiVISe 在评估中同时使用了这两个指标。
 >
 > **创新判断**: 相较于 KB 中记录的 TTS 系统 (均以文本为输入),DiVISe 的创新在于: (1) 证明 V2S 任务中 mel-based vocoder 显著优于 unit-based vocoder 在说话人特性保留上; (2) 端到端、无 speaker embedding 的 V2S 架构。这些发现虽不直接适用于 text-to-speech,但为 vocoder 选择 (mel vs unit) 提供了跨任务的实证证据。
 >
-> 检索命中: [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[模型库/HuBERT|HuBERT]](pending-review), [[Speaker Verification]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[模型库/HuBERT|HuBERT]](pending-review), [[SpeakerVerification]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -190,4 +190,4 @@ HiFi-GAN vocoder 的训练分两步 [§4.2.2]:
 
 ---
 
-检索命中: [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Self-Supervised Speech Representation]](pending-review), [[模型库/HuBERT|HuBERT]](pending-review), [[Speaker Verification]](pending-review) | 未命中但可能相关: 无
+检索命中: [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[模型库/HuBERT|HuBERT]](pending-review), [[SpeakerVerification]](pending-review) | 未命中但可能相关: 无

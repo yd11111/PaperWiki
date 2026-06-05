@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Llasa+: Free Lunch for Accelerated and Streaming Llama-Based Speech Synthesis"
 arxiv_id: "2508.06262"
-source: "https://arxiv.org/abs/2508.06262"
+source: "Sources/Llasa+.pdf"
 authors: [Wenjie Tian, Xinfa Zhu, Hanke Xie, Zhen Ye, Wei Xue, Lei Xie]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, LLM-based-TTS, inference-acceleration, multi-token-prediction, speculative-decoding, streaming, speech-codec, single-codebook, autoregressive, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Codec Language Model]]", "[[Single-codebook vs Multi-codebook]]", "[[Streaming Spoken Dialogue]]", "[[Speech Tokenizer]]"]
-models: ["[[论文笔记/Llasa|Llasa]]", "[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[Single-codebookvsMulti-codebook]]", "[[StreamingSpokenDialogue]]", "[[SpeechTokenizer]]"]
+models: ["[[论文笔记/Llasa|Llasa]]", "[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 3
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓)
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: Llasa+ 是 Llasa 的推理加速与流式化扩展。Llasa 在 LLM-based TTS 中代表"彻底对齐标准 LLM"路线 -- 单层 VQ codec (X-codec2) + 单 LLaMA Transformer, 已验证 train-time 和 inference-time scaling law。现有 LLM-based TTS 的推理加速探索有限: VALL-E 2 的 Grouped Code Modeling 需要重训 backbone, CosyVoice 2 用 chunk-aware causal flow matching 优化解码端但未解决 AR token 预测本身的瓶颈。Llasa+ 直接切入 AR token 预测环节, 是 TTS 领域系统探索 multi-token prediction + verification 加速的首个工作。
@@ -29,7 +29,7 @@ updated: 2026-06-04
 >
 > **创新判断**: Llasa+ 的核心贡献不在提出 MTP 本身 (来自 DeepSeek-V3), 而在三方面: (a) 证明 frozen backbone + plug-and-play MTP modules 在 TTS 中可行, 无需重训大模型; (b) 提出适配 TTS 的 verification 算法 (特别是 EOS 验证), 使 MTP 不牺牲质量甚至略有提升; (c) 将 X-Codec2 改造为因果流式版本 (XCodec2-S), 仅解冻 decoder 即保留 ~95% 原始质量。
 >
-> 检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[CosyVoice 2]] | 过滤: [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[CosyVoice2]] | 过滤: [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 在冻结的 Llasa backbone 上加挂可插拔 MTP 模块 + verification 算法, 实现 1.48x 推理加速且不降质量; 附带 XCodec2-S 支持流式波形重建
@@ -203,4 +203,4 @@ MTP 预测的 token 不总是准确的。不加 verification 时, WER 从 3.070 
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[CosyVoice 2]] | 过滤: [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Streaming Spoken Dialogue]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[CosyVoice2]] | 过滤: [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: 无

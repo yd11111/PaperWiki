@@ -6,16 +6,16 @@ authors: [Seamless Communication, Loic Barrault, Yu-An Chung, et al.]
 year: 2023
 venue: arXiv
 arxiv_id: "2312.05187"
-source: "https://arxiv.org/abs/2312.05187"
+source: "Sources/Seamless.pdf"
 tags: [speech-translation, S2ST, expressive, streaming, multilingual, prosody-preservation, w2v-BERT, UnitY2, EMMA]
 level: deep
 status: draft
 created: 2026-06-03
 updated: 2026-06-03
-concepts: ["[[Prosody Modeling]]", "[[Self-Supervised Speech Representation]]", "[[Speech-Text Alignment]]", "[[Non-autoregressive TTS]]", "[[Speech Language Model]]"]
+concepts: ["[[ProsodyModeling]]", "[[Self-SupervisedSpeechRepresentation]]", "[[Speech-TextAlignment]]", "[[Non-autoregressiveTTS]]", "[[SpeechLanguageModel]]"]
 models: ["[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/Whisper|Whisper]]"]
 datasets: []
-kb_sources: ["[[Self-Supervised Speech Representation]]", "[[Prosody Modeling]]", "[[Speech Language Model]]"]
+kb_sources: ["[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeechLanguageModel]]"]
 ---
 tier: deep
 
@@ -23,9 +23,9 @@ tier: deep
 
 ## KB 背景
 
-- **[[Self-Supervised Speech Representation]]**: Seamless 的语音编码器基于 w2v-BERT 2.0 (Conformer, 4.5M h 无标注音频预训练)，是 SSL 表征在语音翻译领域的大规模应用 [论文原文]
-- **[[Prosody Modeling]]**: SeamlessExpressive 的核心贡献在于跨语言韵律保持——保留源语音的 speech rate、rhythm、pause 和 vocal style [论文原文]
-- **[[Speech Language Model]]** [confirmed]: Seamless 属于端到端多任务 Speech-Text 模型，与 SpeechLM 范式相关但侧重翻译而非对话 [论文原文]
+- **[[Self-SupervisedSpeechRepresentation]]**: Seamless 的语音编码器基于 w2v-BERT 2.0 (Conformer, 4.5M h 无标注音频预训练)，是 SSL 表征在语音翻译领域的大规模应用 [论文原文]
+- **[[ProsodyModeling]]**: SeamlessExpressive 的核心贡献在于跨语言韵律保持——保留源语音的 speech rate、rhythm、pause 和 vocal style [论文原文]
+- **[[SpeechLanguageModel]]** [confirmed]: Seamless 属于端到端多任务 Speech-Text 模型，与 SpeechLM 范式相关但侧重翻译而非对话 [论文原文]
 
 > [!summary] 速查
 > - **一句话**: 首个公开的端到端表达性+流式跨语言语音翻译系统，统一 SeamlessM4T v2 + SeamlessExpressive + SeamlessStreaming
@@ -165,4 +165,4 @@ tier: deep
 
 ---
 
-检索命中: [[Self-Supervised Speech Representation]], [[Prosody Modeling]], [[Speech Language Model]] | 过滤: 无 | 未命中但可能相关: [[Non-autoregressive TTS]], [[Speech-Text Alignment]]
+检索命中: [[Self-SupervisedSpeechRepresentation]], [[ProsodyModeling]], [[SpeechLanguageModel]] | 过滤: 无 | 未命中但可能相关: [[Non-autoregressiveTTS]], [[Speech-TextAlignment]]

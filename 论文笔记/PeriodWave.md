@@ -9,7 +9,7 @@ authors: [Sang-Hoon Lee, Ha-Yeong Choi, Seong-Whan Lee]
 year: 2024
 venue: "arXiv preprint (under review)"
 tags: [vocoder, flow-matching, waveform-generation, multi-period, DWT, high-fidelity, universal-vocoder, ODE]
-concepts: ["[[Conditional Flow Matching]]", "[[Neural Vocoder]]", "[[Diffusion-based Vocoder]]", "[[Snake Activation]]", "[[Multi-scale STFT Discriminator]]", "[[F0 Modeling]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[NeuralVocoder]]", "[[Diffusion-basedVocoder]]", "[[SnakeActivation]]", "[[Multi-scaleSTFTDiscriminator]]", "[[F0Modeling]]"]
 models: ["[[模型库/BigVGAN|BigVGAN]]"]
 tasks: [waveform-generation, neural-vocoder, text-to-speech]
 datasets: [LJSpeech, LibriTTS, MUSDB18-HQ]
@@ -21,20 +21,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个实体页: [[Conditional Flow Matching]], [[Neural Vocoder]], [[Diffusion-based Vocoder]], [[Snake Activation]], [[Multi-scale STFT Discriminator]])
+> [!info] KB 背景 (基于 5 个实体页: [[ConditionalFlowMatching]], [[NeuralVocoder]], [[Diffusion-basedVocoder]], [[SnakeActivation]], [[Multi-scaleSTFTDiscriminator]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: PeriodWave 位于 neural vocoder 演进链的 flow matching 分支。KB 中 [[Neural Vocoder]] 页记录了从 WaveNet (2016, AR) → HiFi-GAN (2020, GAN 主流) → DiffWave (2020, diffusion) → BigVGAN (2023, large-scale GAN) → Vocos (2023, iSTFT) 的演进。[[Conditional Flow Matching]] 页主要记录了 CFM 在 TTS 声学模型层 (CosyVoice 系列、F5-TTS 等) 的应用,但尚未记录 CFM 在 **波形生成** (vocoder) 层面的应用 — PeriodWave 填补了这个空白。
+> **谱系定位**: PeriodWave 位于 neural vocoder 演进链的 flow matching 分支。KB 中 [[NeuralVocoder]] 页记录了从 WaveNet (2016, AR) → HiFi-GAN (2020, GAN 主流) → DiffWave (2020, diffusion) → BigVGAN (2023, large-scale GAN) → Vocos (2023, iSTFT) 的演进。[[ConditionalFlowMatching]] 页主要记录了 CFM 在 TTS 声学模型层 (CosyVoice 系列、F5-TTS 等) 的应用,但尚未记录 CFM 在 **波形生成** (vocoder) 层面的应用 — PeriodWave 填补了这个空白。
 >
 > **已有认知**:
-> - [[Diffusion-based Vocoder]] 记录了 diffusion vocoder 的核心挑战: 高频信息建模不足 + 推理步数多。PriorGrad 通过数据自适应先验缓解,MBD 通过多频带分解解决高频问题。PeriodWave 同时继承了这两条思路 (energy-based prior + DWT 多频带)。
-> - [[Snake Activation]] 记录了 BigVGAN 引入周期性激活函数以编码音频信号的周期 inductive bias。PeriodWave 走了另一条路: 不在激活函数层面引入周期性,而在 **网络结构** 层面 (reshaping + multi-period paths) 显式编码周期特征。论文也尝试了 Snake 但训练不稳定 [§4.6]。
-> - [[Multi-scale STFT Discriminator]] 记录了 GAN vocoder 依赖多判别器的训练范式。PeriodWave 作为 flow matching 模型,完全不需要判别器,仅用单一 OT-CFM loss 训练。
+> - [[Diffusion-basedVocoder]] 记录了 diffusion vocoder 的核心挑战: 高频信息建模不足 + 推理步数多。PriorGrad 通过数据自适应先验缓解,MBD 通过多频带分解解决高频问题。PeriodWave 同时继承了这两条思路 (energy-based prior + DWT 多频带)。
+> - [[SnakeActivation]] 记录了 BigVGAN 引入周期性激活函数以编码音频信号的周期 inductive bias。PeriodWave 走了另一条路: 不在激活函数层面引入周期性,而在 **网络结构** 层面 (reshaping + multi-period paths) 显式编码周期特征。论文也尝试了 Snake 但训练不稳定 [§4.6]。
+> - [[Multi-scaleSTFTDiscriminator]] 记录了 GAN vocoder 依赖多判别器的训练范式。PeriodWave 作为 flow matching 模型,完全不需要判别器,仅用单一 OT-CFM loss 训练。
 > - [[论文笔记/FlowDec|FlowDec]] 是 KB 中另一个 flow matching + 音频的工作,但它是 codec postfilter (增强已有输出),而 PeriodWave 是条件生成器 (从 mel 生成波形)。两者在 flow matching 的应用层面不同。
 >
 > **创新判断**: PeriodWave 的核心创新 — period-aware flow matching estimator 和 multi-period 向量场估计 — 在 KB 中没有先例。这是 flow matching 首次被成功应用于波形级高分辨率信号建模。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Neural Vocoder]]✓, [[Diffusion-based Vocoder]]✓, [[Snake Activation]]✓, [[Multi-scale STFT Discriminator]]✓ | 过滤: [[F0 Modeling]](pending-review,用作参考) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓, [[Diffusion-basedVocoder]]✓, [[SnakeActivation]]✓, [[Multi-scaleSTFTDiscriminator]]✓ | 过滤: [[F0Modeling]](pending-review,用作参考) | 未命中但可能相关: 无
 
 ## 速查
 

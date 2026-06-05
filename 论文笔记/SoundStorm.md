@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "SoundStorm: Efficient Parallel Audio Generation"
 arxiv_id: "2305.09636"
-source: "Sources/SoundStorm-paper.pdf"
+source: "Sources/SoundStorm.pdf"
 authors: [Zalan Borsos, Matt Sharifi, Damien Vincent, Eugene Kharitonov, Neil Zeghidour, Marco Tagliasacchi]
 year: 2023
 venue: "arXiv"
 tags: [audio-generation, non-autoregressive, masked-generative, parallel-decoding, RVQ, acoustic-model, dialogue-synthesis, TTS]
-concepts: ["[[Masked Generative Modeling]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]", "[[Non-autoregressive TTS]]"]
+concepts: ["[[MaskedGenerativeModeling]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[SpeechTokenizer]]", "[[Non-autoregressiveTTS]]"]
 models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/SoundStream|SoundStream]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 3
 status: draft
@@ -20,11 +20,11 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Masked Generative Modeling]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[MaskedGenerativeModeling]][待确认] | 未命中但可能相关: 无
 
-**谱系定位**: SoundStorm 是 AudioLM (Borsos et al., 2022) pipeline 中 acoustic generation stage 的高效替代方案。AudioLM 建立了 "semantic tokens → acoustic tokens" 的两阶段框架 (详见 [[Semantic vs Acoustic Tokens]] 和 [[Codec Language Model]]),但其 acoustic stage 使用自回归生成展开后的 SoundStream RVQ tokens,速度极慢 (O(T×Q) 步)。SoundStorm 将此阶段替换为 masked generative modeling,实现 O(Q) 步并行解码,比 AudioLM 快两个数量级。
+**谱系定位**: SoundStorm 是 AudioLM (Borsos et al., 2022) pipeline 中 acoustic generation stage 的高效替代方案。AudioLM 建立了 "semantic tokens → acoustic tokens" 的两阶段框架 (详见 [[SemanticvsAcousticTokens]] 和 [[CodecLanguageModel]]),但其 acoustic stage 使用自回归生成展开后的 SoundStream RVQ tokens,速度极慢 (O(T×Q) 步)。SoundStorm 将此阶段替换为 masked generative modeling,实现 O(Q) 步并行解码,比 AudioLM 快两个数量级。
 
 **已有认知**:
 - RVQ 页记录了 SoundStream 的层级结构: 前面层编码 coarse 信息,后面层编码 fine details -- SoundStorm 正是利用这一特性设计 coarse-to-fine 的逐层解码策略
@@ -190,4 +190,4 @@ SoundStorm 的影响体现在后续工作中: MaskGCT 将 masked generative mode
 
 ---
 
-检索命中: [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[Speech Tokenizer]] | 过滤: [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[SpeechTokenizer]] | 过滤: [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无

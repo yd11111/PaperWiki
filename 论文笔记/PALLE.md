@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Pseudo-Autoregressive Neural Codec Language Models for Efficient Zero-Shot Text-to-Speech Synthesis"
 arxiv_id: "2504.10352"
-source: "Sources/PANLM.pdf"
+source: "Sources/PALLE.pdf"
 authors: [Yifan Yang, Shujie Liu, Jinyu Li, Yuxuan Hu, Haibin Wu, Hui Wang, Jianwei Yu, Lingwei Meng, Haiyang Sun, Yanqing Liu, Yan Lu, Kai Yu, Xie Chen]
 year: 2025
 venue: "ACM MM 2025"
 tags: [TTS, zero-shot, codec-LM, pseudo-autoregressive, masked-generative, parallel-decoding, non-autoregressive]
-concepts: ["[[Codec Language Model]]", "[[Masked Generative Modeling]]", "[[Non-autoregressive TTS]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Conditional Flow Matching]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/CosyVoice 2]]", "[[模型库/EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[CodecLanguageModel]]", "[[MaskedGenerativeModeling]]", "[[Non-autoregressiveTTS]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ConditionalFlowMatching]]", "[[Speech-TextAlignment]]"]
+models: ["[[模型库/CosyVoice2]]", "[[模型库/EnCodec]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriTTS", "LibriSpeech"]
 kb_context_sources: 6
 status: draft
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[模型库/CosyVoice 2]]✓, [[Masked Generative Modeling]][待确认])
+> [!info] KB 背景 (基于 6 个实体页: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[模型库/CosyVoice2]]✓, [[MaskedGenerativeModeling]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]], [[模型库/CosyVoice 2]], [[Codec Language Model]] | 过滤: [[Masked Generative Modeling]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Speech-Text Alignment]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]], [[模型库/CosyVoice2]], [[CodecLanguageModel]] | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Speech-TextAlignment]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: PALLE 处于 zero-shot TTS 中 codec language model 范式的前沿,具体位于 AR 与 NAR 建模范式的交汇处。当前 codec LM TTS 形成三条路线: (1) AR 路线 (VALL-E, CosyVoice 系列) 序列生成有时序保障但推理慢; (2) NAR 路线 (MaskGCT, F5-TTS, E2 TTS) 并行生成快但缺乏时序建模导致鲁棒性问题; (3) 混合路线 (SoundStorm 的 semantic-to-acoustic 阶段用 masked generation)。PALLE 提出第四条路线 -- pseudo-autoregressive (PAR),在 masked generative transformer 中注入 span-level 时序约束,试图统一 AR 的时序建模和 NAR 的并行效率。
 
-**已有认知**: 知识库中 [[Masked Generative Modeling]] 记录了 MaskGIT → SoundStorm → MaskGCT 的演进线,其核心是 confidence-based iterative parallel decoding; [[Codec Language Model]] 记录了从 VALL-E 到多任务 CodecLM 的发展; [[Speech Tokenizer]] 记录了从自监督到监督式 semantic token 的演进,PALLE 使用的 S3Tokenizer v2 来自 [[模型库/CosyVoice 2]]; [[Conditional Flow Matching]] 记录了 CFM 在 TTS 中作为 token-to-mel 渲染器的角色,PALLE 的 speech detokenizer 即来自 CosyVoice 2 的 CFM 模型。
+**已有认知**: 知识库中 [[MaskedGenerativeModeling]] 记录了 MaskGIT → SoundStorm → MaskGCT 的演进线,其核心是 confidence-based iterative parallel decoding; [[CodecLanguageModel]] 记录了从 VALL-E 到多任务 CodecLM 的发展; [[SpeechTokenizer]] 记录了从自监督到监督式 semantic token 的演进,PALLE 使用的 S3Tokenizer v2 来自 [[模型库/CosyVoice2]]; [[ConditionalFlowMatching]] 记录了 CFM 在 TTS 中作为 token-to-mel 渲染器的角色,PALLE 的 speech detokenizer 即来自 CosyVoice 2 的 CFM 模型。
 
 **创新判断**: PALLE 的 PAR 范式是对 MaskGCT 式 NAR 建模的结构性改进 -- 不是简单加 causal mask (如 SyncSpeech),而是通过 span-level progressive commitment 在双向 transformer 中建立软时序约束,使推理步数与目标长度解耦 (O(1) vs O(T))。这是 masked generative modeling 在 TTS 中的新变体,知识库中尚无此类记录。
 

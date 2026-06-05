@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "FlexiVoice: Enabling Flexible Style Control in Zero-Shot TTS with Natural Language Instructions"
 arxiv_id: ""
-source: "Sources/FLEXIVOICE.pdf"
+source: "Sources/FlexiVoice.pdf"
 authors: [Anonymous]
 year: 2026
 venue: "Under review at ICLR 2026"
 tags: [TTS, instruction-following, style-control, zero-shot, DPO, GRPO, disentanglement, progressive-post-training, emotion-control, LLM-TTS]
-concepts: ["[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Instruction-Guided Speech Synthesis]]", "[[Natural Language Description for TTS]]", "[[Style Transfer in TTS]]", "[[Emotion Control in TTS]]", "[[Differentiable Reward Optimization]]"]
+concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[NaturalLanguageDescriptionforTTS]]", "[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[DifferentiableRewardOptimization]]"]
 models: []
 tasks: []
 datasets: ["[[Emilia]]"]
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]])
-> 检索命中: [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]])
+> 检索命中: [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[EmotionControlinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
 
-**[[LLM-based TTS]]**: FlexiVoice 属于 LLM-based TTS 家族, 以 LLM 为核心生成 discrete speech tokens, 然后通过 flow matching 转为 mel + vocoder 合成波形。与 CosyVoice 2 架构相似, 但重点在于 instruction-following 能力的 post-training。LLM-based TTS 的典型问题——难以精确控制细粒度属性——正是 FlexiVoice PPT 框架要解决的。
+**[[LLM-basedTTS]]**: FlexiVoice 属于 LLM-based TTS 家族, 以 LLM 为核心生成 discrete speech tokens, 然后通过 flow matching 转为 mel + vocoder 合成波形。与 CosyVoice 2 架构相似, 但重点在于 instruction-following 能力的 post-training。LLM-based TTS 的典型问题——难以精确控制细粒度属性——正是 FlexiVoice PPT 框架要解决的。
 
-**[[Conditional Flow Matching]]**: FlexiVoice 使用 flow matching 将 speech tokens 转换为 mel-spectrogram, 再通过 vocoder 合成波形 [§3]。这与 CosyVoice 系列的 token→CFM→vocoder pipeline 一致。
+**[[ConditionalFlowMatching]]**: FlexiVoice 使用 flow matching 将 speech tokens 转换为 mel-spectrogram, 再通过 vocoder 合成波形 [§3]。这与 CosyVoice 系列的 token→CFM→vocoder pipeline 一致。
 
-**[[Speech Tokenizer]]**: FlexiVoice 使用 frozen speech tokenizer 将语音转为 discrete tokens 作为 LLM 的训练目标 [§3.1]。Tokenizer 的选择直接决定了下游 style 信息的编码能力。
+**[[SpeechTokenizer]]**: FlexiVoice 使用 frozen speech tokenizer 将语音转为 discrete tokens 作为 LLM 的训练目标 [§3.1]。Tokenizer 的选择直接决定了下游 style 信息的编码能力。
 
 ## 速查
 
@@ -186,4 +186,4 @@ $$A^i_{\text{emo}} = \frac{r^i_{\text{ser}} - \text{mean}(r^i_{\text{ser}})}{\te
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]] | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]] | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[EmotionControlinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无

@@ -8,7 +8,7 @@ authors: [Xincan Feng, Akifumi Yoshimoto]
 year: 2024
 venue: "LREC-COLING 2024"
 tags: [TTS, end-to-end, semantic-embedding, LLM, VITS, emotion, expressiveness]
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Text-to-Speech Pipeline]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[SemanticvsAcousticTokens]]", "[[Text-to-SpeechPipeline]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: ["LJSpeech", "EmoV_DB"]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Prosody Modeling]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]] + 3 个待确认页)
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ProsodyModeling]], [[LLM-basedTTS]], [[SemanticvsAcousticTokens]] + 3 个待确认页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: Llama-VITS 处于 "传统 E2E TTS + 预训练语言模型增强" 的交叉点。在 [[Text-to-Speech Pipeline]] 的演进线中,VITS 代表 Stage 4 (Fully E2E) 的里程碑,而 [[LLM-based TTS]] 范式 (VALL-E 等) 则将 TTS 重构为 codec language modeling 任务。Llama-VITS 不属于后者 -- 它不用 LLM 做生成,而是把 LLM 当作语义特征提取器来增强 VITS 的文本嵌入。这更接近 [[Prosody Modeling]] 中 "Text Pre-training" 策略的延伸: 用更大的预训练模型 (Llama2 13B vs BERT 110M) 为 TTS 注入更丰富的语义/韵律信息。
+> **谱系定位**: Llama-VITS 处于 "传统 E2E TTS + 预训练语言模型增强" 的交叉点。在 [[Text-to-SpeechPipeline]] 的演进线中,VITS 代表 Stage 4 (Fully E2E) 的里程碑,而 [[LLM-basedTTS]] 范式 (VALL-E 等) 则将 TTS 重构为 codec language modeling 任务。Llama-VITS 不属于后者 -- 它不用 LLM 做生成,而是把 LLM 当作语义特征提取器来增强 VITS 的文本嵌入。这更接近 [[ProsodyModeling]] 中 "Text Pre-training" 策略的延伸: 用更大的预训练模型 (Llama2 13B vs BERT 110M) 为 TTS 注入更丰富的语义/韵律信息。
 >
-> **已有认知**: [[Semantic vs Acoustic Tokens]] 页面确认了语义信息对语音合成的关键性 -- 纯声学系统在语义任务上接近随机。[[Emotion Control in TTS]] 页面梳理了情感建模从 emotion embedding 到 DPO 优化的演进,本文的 EIS (Emotion-Intention-Style) prompting 策略可视为 "通过 LLM 理解文本情感并注入 TTS" 的早期尝试。[[VITS]] 页面记录了 VITS 的核心架构 (VAE + Flow + GAN E2E),本文在此基础上仅修改文本嵌入环节。
+> **已有认知**: [[SemanticvsAcousticTokens]] 页面确认了语义信息对语音合成的关键性 -- 纯声学系统在语义任务上接近随机。[[EmotionControlinTTS]] 页面梳理了情感建模从 emotion embedding 到 DPO 优化的演进,本文的 EIS (Emotion-Intention-Style) prompting 策略可视为 "通过 LLM 理解文本情感并注入 TTS" 的早期尝试。[[VITS]] 页面记录了 VITS 的核心架构 (VAE + Flow + GAN E2E),本文在此基础上仅修改文本嵌入环节。
 >
 > **创新判断**: 相比已有 BERT-VITS 工作,本文用 GPT-like LLM (Llama2) 替换 BERT-like LM,探索了 7 种语义 token 策略 (5 全局 + 2 序列),并发现了与 BERT-VITS 不同的增益模式 (全局 token > 序列 token 于 naturalness,反之于 BERT)。这是对 "LLM 语义表征如何辅助 TTS" 的系统性实验探索。
 >
-> 检索命中: [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓ | 参考(待确认): [[VITS]], [[Emotion Control in TTS]], [[Text-to-Speech Pipeline]] | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓ | 参考(待确认): [[VITS]], [[EmotionControlinTTS]], [[Text-to-SpeechPipeline]] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -132,7 +132,7 @@ Llama2 (13B) 输出维度 5120,VITS 文本嵌入维度远小于此。用一个�
 
 **不足**: (1) 改进幅度在中性语音上微小且不一致,难以确定是否超越噪声 (UTMOS 差异 ~0.02); (2) 实验设计存在统计效力不足的问题; (3) 相比同期 LLM-based TTS 工作 (如 CosyVoice 用 LLM 做 semantic token 生成 + CFM 做高保真合成),本文的架构相对保守,仅在嵌入层做修改。
 
-**时代意义**: 本文发表于 LREC-COLING 2024,属于 "LLM 辅助传统 TTS" 的尝试。从知识库视角看,后续的 LLM-based TTS 路线 (如 [[LLM-based TTS]] 页面记录的演进) 走得更远 -- 直接让 LLM 做语音 token 的 next-token prediction,而非仅提取特征。本文的实验结论 (GPT-like 嵌入在情感表达上更强) 作为 evidence 仍有参考价值,但其架构方案在当前已非主流方向。
+**时代意义**: 本文发表于 LREC-COLING 2024,属于 "LLM 辅助传统 TTS" 的尝试。从知识库视角看,后续的 LLM-based TTS 路线 (如 [[LLM-basedTTS]] 页面记录的演进) 走得更远 -- 直接让 LLM 做语音 token 的 next-token prediction,而非仅提取特征。本文的实验结论 (GPT-like 嵌入在情感表达上更强) 作为 evidence 仍有参考价值,但其架构方案在当前已非主流方向。
 
 ## 可复用的 idea
 
@@ -149,4 +149,4 @@ Llama2 (13B) 输出维度 5120,VITS 文本嵌入维度远小于此。用一个�
 > 详见 `_review/Llama-VITS-review.yml`
 
 ---
-检索命中: [[Prosody Modeling]], [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]] | 参考(待确认): [[VITS]], [[Emotion Control in TTS]], [[Text-to-Speech Pipeline]] | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]], [[LLM-basedTTS]], [[SemanticvsAcousticTokens]] | 参考(待确认): [[VITS]], [[EmotionControlinTTS]], [[Text-to-SpeechPipeline]] | 未命中但可能相关: 无

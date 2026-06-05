@@ -8,7 +8,7 @@ authors: [Ayush Pratap Singh, Harshit Singh, Nityanand Mathur, Akshat Mandloi, S
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, pronunciation-correction, knowledge-editing, causal-tracing, null-space, model-editing, LLM-TTS, one-shot-editing]
-concepts: ["[[LLM-based TTS]]", "[[Phoneme Representation]]", "[[Speaker Embedding]]", "[[Codec Language Model]]", "[[Speech Tokenizer]]"]
+concepts: ["[[LLM-basedTTS]]", "[[PhonemeRepresentation]]", "[[SpeakerEmbedding]]", "[[CodecLanguageModel]]", "[[SpeechTokenizer]]"]
 models: ["[[论文笔记/SNAC|SNAC]]", "Orpheus-TTS"]
 tasks: []
 datasets: []
@@ -20,13 +20,13 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Speaker Embedding]]; 3 个待确认实体页: [[Codec Language Model]], [[Phoneme Representation]], [[Text-to-Speech Pipeline]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SpeakerEmbedding]]; 3 个待确认实体页: [[CodecLanguageModel]], [[PhonemeRepresentation]], [[Text-to-SpeechPipeline]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Phoneme Representation]](pending-review), [[Text-to-Speech Pipeline]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review), [[Text-to-SpeechPipeline]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: SonoEdit 定位在 [[LLM-based TTS]] 范式的 **后部署修正** 环节。当前 LLM-based TTS (VALL-E, Orpheus-TTS, CosyVoice 等) 通过 codec language model 在离散 speech token 上做 next-token prediction,利用 in-context learning 实现零样本声音克隆。然而这些系统隐式地将 text-to-pronunciation 映射编码在 Transformer 权重中,对训练集外的低频专有名词(人名、品牌、地名)系统性误读。传统的 G2P 前端([[Phoneme Representation]])仅解决词典内词汇,对 LLM 内部已编码的错误映射无能为力。
+**谱系定位**: SonoEdit 定位在 [[LLM-basedTTS]] 范式的 **后部署修正** 环节。当前 LLM-based TTS (VALL-E, Orpheus-TTS, CosyVoice 等) 通过 codec language model 在离散 speech token 上做 next-token prediction,利用 in-context learning 实现零样本声音克隆。然而这些系统隐式地将 text-to-pronunciation 映射编码在 Transformer 权重中,对训练集外的低频专有名词(人名、品牌、地名)系统性误读。传统的 G2P 前端([[PhonemeRepresentation]])仅解决词典内词汇,对 LLM 内部已编码的错误映射无能为力。
 
-**已有认知**: KB 中 [[Speaker Embedding]] 页记录了 SIM (Speaker Embedding Cosine Similarity) 是 voice cloning 质量评估的核心指标,ECAPA-TDNN 和 WavLM 是常用 encoder。SonoEdit 使用 WavLM speaker embeddings 的 cosine similarity 来验证编辑后 speaker identity 保持。[[Speech Tokenizer]] 页中 SNAC 属于多尺度 RVQ codec (Multi-Scale Neural Audio Codec),SonoEdit 的实验对象 Orpheus-TTS 使用 SNAC 7 层 hierarchical tokens。
+**已有认知**: KB 中 [[SpeakerEmbedding]] 页记录了 SIM (Speaker Embedding Cosine Similarity) 是 voice cloning 质量评估的核心指标,ECAPA-TDNN 和 WavLM 是常用 encoder。SonoEdit 使用 WavLM speaker embeddings 的 cosine similarity 来验证编辑后 speaker identity 保持。[[SpeechTokenizer]] 页中 SNAC 属于多尺度 RVQ codec (Multi-Scale Neural Audio Codec),SonoEdit 的实验对象 Orpheus-TTS 使用 SNAC 7 层 hierarchical tokens。
 
 **创新判断**: 知识编辑 (ROME, MEMIT, AlphaEdit) 原本用于 NLP 中修正 LLM 的事实性错误。SonoEdit 是已知首个将 null-space constrained knowledge editing 迁移到 TTS pronunciation correction 的工作,核心创新在于:将"发音错误"类比为"事实错误",将"general speech manifold"的 null-space 作为编辑约束,实现 zero-side-effect 的精准发音修正。
 
@@ -156,7 +156,7 @@ SonoEdit 本身 **不需要训练** — 这是其最核心的设计优势 [§3.4
 
 3. **One-shot deployment patch**: 将模型修正从"重训练"简化为"权重补丁",特别适合已部署系统的快速修复。在产品 TTS 中,可建立 pronunciation fix registry,每个修正对应一个 rank-1 update,按需应用。
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[Speaker Embedding]] | 过滤: [[Codec Language Model]](pending-review), [[Phoneme Representation]](pending-review), [[Text-to-Speech Pipeline]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[SpeakerEmbedding]] | 过滤: [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review), [[Text-to-SpeechPipeline]](pending-review) | 未命中但可能相关: 无
 
 ## 审阅
 

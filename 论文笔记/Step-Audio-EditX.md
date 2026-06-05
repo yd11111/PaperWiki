@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Step-Audio-EditX: First Open-Source LLM-based Audio Model for Expressive and Iterative Audio Editing"
 arxiv_id: "2511.03601"
-source: "https://arxiv.org/abs/2511.03601"
+source: "Sources/Step-Audio-EditX.pdf"
 authors: [Chao Yan, Boyong Wu, Peng Yang, Pengfei Tan, Guoqiang Hu, Yuxin Zhang, Xiangyu Zhang, Fei Tian, Xuerui Yang, Xiangyu Zhang, Daxin Jiang, Gang Yu]
 year: 2025
 venue: "arXiv"
 tags: [audio-editing, emotion-control, style-control, paralinguistic, zero-shot-TTS, LLM-based, reinforcement-learning, large-margin-data, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Emotion Control in TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Style Transfer in TTS]]"]
+concepts: ["[[LLM-basedTTS]]", "[[EmotionControlinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[StyleTransferinTTS]]"]
 models: ["[[模型库/BigVGAN|BigVGAN]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Speaker Embedding]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[SpeakerEmbedding]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Style Transfer in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[StyleTransferinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
 >
 > **LLM-based TTS**: Step-Audio-EditX 是 LLM-based TTS 范式在音频编辑方向的延伸。KB 记录了 LLM-based TTS 的典型两阶段管线 (AR token generation + acoustic rendering); EditX 保持了这个架构但缩小至 3B 参数,并新增了 audio editing 能力。与 Step-Audio (130B) 相比,EditX 通过 large-margin data + RL 在更小模型上实现了更优的情感/风格控制。
 >
@@ -156,4 +156,4 @@ Step-Audio-EditX 的核心贡献是方法论上的: **用数据而非架构来�
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Style Transfer in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[StyleTransferinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无

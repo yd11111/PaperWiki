@@ -8,9 +8,9 @@ authors: [Anonymous]
 year: 2026
 venue: "ICLR 2026 (under review)"
 tags: [TTS, SSM, Mamba, diffusion, voice-cloning, streaming, efficiency, encoder-design, state-space-model]
-concepts: ["[[Diffusion-based TTS]]", "[[Prosody Modeling]]", "[[F0 Modeling]]", "[[Speaker Embedding]]", "[[Voice Cloning Taxonomy]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Attention-based TTS]]"]
+concepts: ["[[Diffusion-basedTTS]]", "[[ProsodyModeling]]", "[[F0Modeling]]", "[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[Attention-basedTTS]]"]
 models: ["[[VITS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[LJSpeech]]", "[[LibriTTS]]", "[[VCTK]]", "[[CSS10]]"]
 kb_context_sources: 3
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speaker Embedding]], [[Prosody Modeling]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeakerEmbedding]], [[ProsodyModeling]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[F0Modeling]](pending-review), [[DurationPredictor]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 >
 > **Speaker Embedding**: MVC 使用全局 style embedding e (mel-derived, shallow conv/GRU) 通过 AdaLN 注入编码器,属于 KB 中 "FiLM conditioning" 和 "Conditional LayerNorm" 注入方式的 SSM 版本。与传统 speaker encoder (d-vector, x-vector) 不同,MVC 的 embedding 同时编码 timbre 和 coarse expressiveness [§3.1, Eq. 1]。[agent解读]
 >
@@ -320,4 +320,4 @@ MVC 是唯一在 text, rhythm, prosody 三个维度全部 SSM-only 的系统 [Ta
 
 ---
 
-检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[F0 Modeling]](pending-review), [[Duration Predictor]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[F0Modeling]](pending-review), [[DurationPredictor]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无

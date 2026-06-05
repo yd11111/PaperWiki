@@ -8,9 +8,9 @@ authors: [Xinsheng Wang, Mingqi Jiang, Ziyang Ma, Ziyu Zhang, Songxiang Liu, Lin
 year: 2025
 venue: "arXiv"
 tags: [TTS, LLM-based-TTS, speech-codec, single-codebook, zero-shot, controllable-TTS, chain-of-thought, speech-factorization, open-source]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Finite Scalar Quantization]]", "[[Single-codebook vs Multi-codebook]]", "[[Speech Factorization]]", "[[Codec Language Model]]", "[[Speaker Embedding]]"]
-models: ["[[CosyVoice]]", "[[CosyVoice 2]]", "[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[FiniteScalarQuantization]]", "[[Single-codebookvsMulti-codebook]]", "[[SpeechFactorization]]", "[[CodecLanguageModel]]", "[[SpeakerEmbedding]]"]
+models: ["[[CosyVoice]]", "[[CosyVoice2]]", "[[EnCodec]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[Zero-shot Speech Synthesis]]✓, [[Single-codebook vs Multi-codebook]][待确认])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[LLM-basedTTS]]✓, [[SpeechFactorization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Single-codebookvsMulti-codebook]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: LLM-based TTS 领域有两大主流路线: (1) 多阶段方案 -- AR LM 生成 semantic tokens + flow matching/diffusion 渲染声学细节 (CosyVoice 系列, Seed-TTS, FireRedTTS); (2) 多码本 RVQ 方案 -- AR+NAR 两阶段预测多层 codec tokens (VALL-E 系列)。两者均面临架构复杂度高的问题。近期出现了第三条路线: 单码本 codec + 单 Transformer (Llasa),但 Llasa 仅支持 zero-shot cloning,不支持属性控制。Spark-TTS 属于这第三条路线的扩展 -- 单流 codec (BiCodec) + 单 LM (Qwen2.5),但增加了 chain-of-thought 属性控制能力。
@@ -29,7 +29,7 @@ updated: 2026-06-03
 >
 > **创新判断**: Spark-TTS 的创新不在单一技术上,而在整合方式 -- BiCodec 将 semantic tokens (VQ, 50 TPS) 和 global tokens (FSQ, 固定 32 个) 解耦为两种互补 token 类型,使得单个 LM 即可同时处理内容和属性控制,无需 flow matching 等第二阶段。对比 Llasa (FSQ 单码本 65K) 和 CosyVoice (semantic + CFM 两阶段),Spark-TTS 找到了一个中间路线。
 >
-> 检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Factorization]], [[Zero-shot Speech Synthesis]], [[Single-codebook vs Multi-codebook]] | 过滤: [[Finite Scalar Quantization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeechFactorization]], [[Zero-shotSpeechSynthesis]], [[Single-codebookvsMulti-codebook]] | 过滤: [[FiniteScalarQuantization]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

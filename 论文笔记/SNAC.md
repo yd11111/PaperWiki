@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "SNAC: Multi-Scale Neural Audio Codec"
 arxiv_id: "2410.14411"
-source: "Sources/Snac.pdf"
+source: "Sources/SNAC.pdf"
 authors: [Hubert Siuzdak, Florian Grotschla, Luca A. Lanzendorfer]
 year: 2024
 venue: "NeurIPS 2024 Workshop on AI-Driven Speech, Music, and Sound Generation"
 tags: [audio-codec, neural-compression, multi-scale-RVQ, RVQGAN, speech-tokenizer]
-concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Codebook Collapse]]", "[[Multi-scale STFT Discriminator]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[CodebookCollapse]]", "[[Multi-scaleSTFTDiscriminator]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]"]
 tasks: []
 datasets: ["[[DAPS]]", "[[MUSDB]]"]
@@ -20,18 +20,18 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Codebook Collapse]], [[Multi-scale STFT Discriminator]])
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codebook Collapse]]✓, [[Multi-scale STFT Discriminator]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Quantizer Dropout]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 5 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[Multi-scaleSTFTDiscriminator]])
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[Multi-scaleSTFTDiscriminator]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[QuantizerDropout]](pending-review) | 未命中但可能相关: 无
 
-**[[Residual Vector Quantization]]**: SNAC 是 RVQ 的直接变体 MSRVQ (Multi-Scale RVQ)。标准 RVQ 在固定时间分辨率上逐层量化残差; MSRVQ 在不同层使用不同时间分辨率, 高层降采样后量化再上采样。RVQ 已有丰富变体 taxonomy (GVQ, CSRVQ, RNDVQ 等), MSRVQ 是其中"多尺度"分支的代表。
+**[[ResidualVectorQuantization]]**: SNAC 是 RVQ 的直接变体 MSRVQ (Multi-Scale RVQ)。标准 RVQ 在固定时间分辨率上逐层量化残差; MSRVQ 在不同层使用不同时间分辨率, 高层降采样后量化再上采样。RVQ 已有丰富变体 taxonomy (GVQ, CSRVQ, RNDVQ 等), MSRVQ 是其中"多尺度"分支的代表。
 
-**[[Speech Tokenizer]]**: SNAC 属于第三类"声学 tokenizer" (与 SoundStream, EnCodec, DAC 同族), 通过 RVQ-GAN 重建波形产生 acoustic tokens。与监督式 semantic tokenizer (CosyVoice 系列) 的定位不同, SNAC 的 token 编码全部声学信息而非仅语义。
+**[[SpeechTokenizer]]**: SNAC 属于第三类"声学 tokenizer" (与 SoundStream, EnCodec, DAC 同族), 通过 RVQ-GAN 重建波形产生 acoustic tokens。与监督式 semantic tokenizer (CosyVoice 系列) 的定位不同, SNAC 的 token 编码全部声学信息而非仅语义。
 
-**[[Semantic vs Acoustic Tokens]]**: SNAC 的多尺度设计产生了一个天然的粗-细层级: 最低帧率层 (coarse) 的 token 近似于低频/长程结构 (类 semantic), 最高帧率层 (fine) 编码高频细节 (类 acoustic)。这与 AudioLM 的 semantic→acoustic 层级理念呼应, 但 SNAC 在单一 codec 内实现。
+**[[SemanticvsAcousticTokens]]**: SNAC 的多尺度设计产生了一个天然的粗-细层级: 最低帧率层 (coarse) 的 token 近似于低频/长程结构 (类 semantic), 最高帧率层 (fine) 编码高频细节 (类 acoustic)。这与 AudioLM 的 semantic→acoustic 层级理念呼应, 但 SNAC 在单一 codec 内实现。
 
-**[[Codebook Collapse]]**: SNAC 使用 depthwise convolutions 替代标准卷积以稳定 GAN 训练, 避免 model collapse。消融实验 [Table 1] 显示去除 depthwise conv 后训练完全不稳定 (N/A)。
+**[[CodebookCollapse]]**: SNAC 使用 depthwise convolutions 替代标准卷积以稳定 GAN 训练, 避免 model collapse。消融实验 [Table 1] 显示去除 depthwise conv 后训练完全不稳定 (N/A)。
 
-**[[Multi-scale STFT Discriminator]]**: SNAC 使用 complex multi-scale STFT discriminator [§4.2] 配合 multi-period discriminator, 与 DAC 方案一致, 用于提供高频和相位的细致梯度信号。
+**[[Multi-scaleSTFTDiscriminator]]**: SNAC 使用 complex multi-scale STFT discriminator [§4.2] 配合 multi-period discriminator, 与 DAC 方案一致, 用于提供高频和相位的细致梯度信号。
 
 ## 速查
 
@@ -209,4 +209,4 @@ $$\mathbf{x} \leftarrow \mathbf{x} + \text{Linear}(\mathbf{x}) \odot \boldsymbol
 3. **Depthwise convolutions for GAN stability**: 替换标准卷积为 depthwise separable — 减参数 + 稳定训练, 允许更高学习率 [§3]
 4. **Speech-specific codec simplification**: 去除 attention + 减少通道 → 仅 19.8M 参数的轻量 speech codec, 保持竞争质量 [§4.1]
 
-检索命中: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Codebook Collapse]], [[Multi-scale STFT Discriminator]] | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Audio Tokenizer Taxonomy]](pending-review), [[Quantizer Dropout]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[Multi-scaleSTFTDiscriminator]] | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[QuantizerDropout]](pending-review) | 未命中但可能相关: 无

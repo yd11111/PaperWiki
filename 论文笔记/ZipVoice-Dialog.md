@@ -8,9 +8,9 @@ authors: [Han Zhu, Wei Kang, Liyong Guo, Zengwei Yao, Fangjun Kuang, Weiji Zhuan
 year: 2025
 venue: "arXiv"
 tags: [zero-shot-TTS, flow-matching, NAR-TTS, dialogue-synthesis, turn-taking, curriculum-learning, stereo-audio, dataset, evaluation]
-concepts: ["[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Turn-taking in Spoken Dialogue]]", "[[Speech-Text Alignment]]", "[[Classifier-Free Guidance]]", "[[Spoken Dialogue Evaluation]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Non-autoregressiveTTS]]", "[[Turn-takinginSpokenDialogue]]", "[[Speech-TextAlignment]]", "[[Classifier-FreeGuidance]]", "[[SpokenDialogueEvaluation]]"]
 models: ["[[论文笔记/ZipVoice|ZipVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Non-autoregressive TTS]][待确认], [[Turn-taking in Spoken Dialogue]][待确认], [[Speech-Text Alignment]][待确认], [[Spoken Dialogue Evaluation]][待确认])
+> [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Non-autoregressiveTTS]][待确认], [[Turn-takinginSpokenDialogue]][待确认], [[Speech-TextAlignment]][待确认], [[SpokenDialogueEvaluation]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: ZipVoice-Dialog 是 flow-matching-based NAR TTS 从单话者独白向多话者对话场景的首次成功扩展。它建立在 ZipVoice (Zhu et al., 2025) 的 Zipformer + CFM + speech infilling 架构之上,核心创新在于解决 flow matching 在多说话人对话场景下的两个新问题: (1) 多说话人导致 speech-text alignment collapse, (2) 缺乏说话人轮次控制。在知识库中,当前 turn-taking 的研究主要集中在交互式全双工系统 (Moshi、dGSLM、Freeze-Omni 等实时推理场景),ZipVoice-Dialog 解决的是一个不同子问题: 给定完整文本脚本,生成带正确说话人轮次分配的对话语音 (dialogue TTS/podcast generation)。这一分支的 AR 代表包括 MoonCast、Dia、Parakeet;ZipVoice-Dialog 是该分支的第一个 NAR 模型。
 >
-> **已有认知**: (1) [[Conditional Flow Matching]] 是当前 TTS 主流生成框架,ZipVoice 已证明 CFM + Zipformer + average upsampling 能在 123M 参数下达到与 F5-TTS (336M) 相当的独白质量; (2) [[Non-autoregressive TTS]] 的核心优势是并行生成 (推理速度快、无 exposure bias),但此前仅应用于单说话人场景; (3) [[Turn-taking in Spoken Dialogue]] 页面记录了端到端系统中隐式建模 turn-taking 的多种方法 (dGSLM dual-tower、Moshi multi-stream、Parrot dual-channel),但这些方案面向实时交互; (4) [[Speech-Text Alignment]] 在多说话人场景下比单说话人困难得多,因为模型需同时学习不同音色与对应文本的对齐; (5) [[Spoken Dialogue Evaluation]] 缺乏标准化的 dialogue TTS benchmark,ZipVoice-Dialog 提出的 cpWER/cpSIM 指标填补了这一空缺。
+> **已有认知**: (1) [[ConditionalFlowMatching]] 是当前 TTS 主流生成框架,ZipVoice 已证明 CFM + Zipformer + average upsampling 能在 123M 参数下达到与 F5-TTS (336M) 相当的独白质量; (2) [[Non-autoregressiveTTS]] 的核心优势是并行生成 (推理速度快、无 exposure bias),但此前仅应用于单说话人场景; (3) [[Turn-takinginSpokenDialogue]] 页面记录了端到端系统中隐式建模 turn-taking 的多种方法 (dGSLM dual-tower、Moshi multi-stream、Parrot dual-channel),但这些方案面向实时交互; (4) [[Speech-TextAlignment]] 在多说话人场景下比单说话人困难得多,因为模型需同时学习不同音色与对应文本的对齐; (5) [[SpokenDialogueEvaluation]] 缺乏标准化的 dialogue TTS benchmark,ZipVoice-Dialog 提出的 cpWER/cpSIM 指标填补了这一空缺。
 >
 > **创新判断**: ZipVoice-Dialog 的核心创新在于两个简单但有效的方法: (a) monologue-to-dialogue curriculum learning 避免多说话人场景下的 alignment collapse; (b) learnable speaker-turn embeddings 替代复杂的说话人建模方案。此外,OpenDialog (6.8k 小时) 是该领域首个大规模开源对话数据集。与 concurrent work CoVoMix2 (Zhang et al., 2025) 的区别: ZipVoice-Dialog 不依赖预定义 timestamps,实现端到端 NAR 对话生成。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Non-autoregressive TTS]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review), [[Speech-Text Alignment]](pending-review), [[Spoken Dialogue Evaluation]](pending-review) | 未命中但可能相关: [[Full-duplex Spoken Dialogue]], [[Classifier-Free Guidance]]
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[Speech-TextAlignment]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: [[Full-duplexSpokenDialogue]], [[Classifier-FreeGuidance]]
 
 > [!summary] 速查
 > - **一句话**: 首个 NAR flow-matching 对话 TTS,通过 curriculum learning + speaker-turn embeddings 两个轻量设计使 123M 模型在对话生成上全面超越 1.6B Dia 和 2.7B MoonCast

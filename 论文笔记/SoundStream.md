@@ -8,9 +8,9 @@ authors: [Neil Zeghidour, Alejandro Luebs, Ahmed Omran, Jan Skoglund, Marco Tagl
 year: 2021
 venue: "IEEE/ACM Transactions on Audio, Speech, and Language Processing"
 tags: [audio-codec, neural-compression, RVQ, streaming, variable-bitrate, denoising, GAN-training]
-concepts: ["[[Residual Vector Quantization]]", "[[Quantizer Dropout]]", "[[Codebook Collapse]]", "[[Multi-scale STFT Discriminator]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[QuantizerDropout]]", "[[CodebookCollapse]]", "[[Multi-scaleSTFTDiscriminator]]"]
 models: ["[[SoundStream]]"]
-tasks: ["[[Neural Audio Compression]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: []
 kb_context_sources: 2
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Quantizer Dropout]](pending-review), [[Neural Audio Compression]](pending-review), [[Codebook Collapse]](pending-review), [[Multi-scale STFT Discriminator]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓ | 过滤: [[QuantizerDropout]](pending-review), [[NeuralAudioCompression]](pending-review), [[CodebookCollapse]](pending-review), [[Multi-scaleSTFTDiscriminator]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: SoundStream 是 RVQ 概念页中记录的"首次将 RVQ 用于端到端 audio codec"的原始论文。在 Speech Tokenizer 概念页中,SoundStream 被归类为"声学 tokenizer"(第 3 类),其 discrete codes 后来被 AudioLM、VALL-E 等用作生成目标。
 

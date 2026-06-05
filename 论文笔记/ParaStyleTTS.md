@@ -8,7 +8,7 @@ authors: [Haowei Lou, Hye-Young Paik, Wen Hu, Lina Yao]
 year: 2025
 venue: "ACM Conference (submitted)"
 tags: [TTS, style-control, paralinguistic, prosody, VITS, end-to-end, lightweight, FiLM, emotion, prompt-based]
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]", "[[Variational Autoencoder for TTS]]", "[[Natural Language Description for TTS]]", "[[LLM-based TTS]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]", "[[VariationalAutoencoderforTTS]]", "[[NaturalLanguageDescriptionforTTS]]", "[[LLM-basedTTS]]"]
 models: ["[[VITS]]", "[[CosyVoice]]"]
 tasks: []
 datasets: []
@@ -20,21 +20,21 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[CosyVoice]], [[Prosody Modeling]], [[LLM-based TTS]]; 3 个待确认实体页: [[VITS]], [[Emotion Control in TTS]], [[Style Transfer in TTS]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[CosyVoice]], [[ProsodyModeling]], [[LLM-basedTTS]]; 3 个待确认实体页: [[VITS]], [[EmotionControlinTTS]], [[StyleTransferinTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: ParaStyleTTS 位于 VITS 系端到端 TTS 与文本提示风格控制的交汇处。它继承了同一第一作者先前工作 LanStyleTTS 的音素级韵律 GTU 机制和 VITS 的 VAE+Flow+GAN 框架,将自己定位为 LLM-based TTS (CosyVoice, Spark-TTS) 在风格控制任务上的轻量级替代方案。
 >
 > **已有认知**:
-> - [[Prosody Modeling]] (confirmed) 记录了韵律建模从显式 variance adaptor (FastSpeech 2) 到隐式 LLM-based in-context learning 的演进; ParaStyleTTS 回归显式两级结构。
+> - [[ProsodyModeling]] (confirmed) 记录了韵律建模从显式 variance adaptor (FastSpeech 2) 到隐式 LLM-based in-context learning 的演进; ParaStyleTTS 回归显式两级结构。
 > - [[CosyVoice]] (confirmed) 采用 LLM+OT-CFM coarse-to-fine 架构,支持 instruct 模式的副语言控制,但论文指出其对 prompt 措辞敏感。
-> - [[LLM-based TTS]] (confirmed) 指出 LLM 范式的核心优势是零样本+自然语言控制,核心局限是计算成本高和细粒度控制困难。
-> - [[Emotion Control in TTS]] [待确认] 记录了从 emotion embedding 到 DPO/activation steering 的多条路线; ParaStyleTTS 的模板化 prompt + FiLM 注入是一条较简单但可解释的路线。
-> - [[Style Transfer in TTS]] [待确认] 区分了 style tagging / reference prompt / NL description / instruction-guided 四类方法; ParaStyleTTS 混合了 style tagging (硬 token) 和 NL description (文本 prompt)。
+> - [[LLM-basedTTS]] (confirmed) 指出 LLM 范式的核心优势是零样本+自然语言控制,核心局限是计算成本高和细粒度控制困难。
+> - [[EmotionControlinTTS]] [待确认] 记录了从 emotion embedding 到 DPO/activation steering 的多条路线; ParaStyleTTS 的模板化 prompt + FiLM 注入是一条较简单但可解释的路线。
+> - [[StyleTransferinTTS]] [待确认] 区分了 style tagging / reference prompt / NL description / instruction-guided 四类方法; ParaStyleTTS 混合了 style tagging (硬 token) 和 NL description (文本 prompt)。
 >
 > **创新判断**: 两级显式风格分离 (prosodic vs paralinguistic) 和 FiLM 在 TTS 中的引入是知识库中尚无先例的设计; 以 30x 加速换取略低的可懂度是一个有意义的工程权衡。
 >
-> 检索命中: [[CosyVoice]]✓, [[Prosody Modeling]]✓, [[LLM-based TTS]]✓ | 过滤: [[VITS]](pending-review), [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: [[Global Style Tokens]], [[Speaker Embedding]]
+> 检索命中: [[CosyVoice]]✓, [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[VITS]](pending-review), [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: [[GlobalStyleTokens]], [[SpeakerEmbedding]]
 
 ## 速查
 
@@ -147,7 +147,7 @@ ParaStyleTTS 在 VITS 的 VAE+normalizing flow+HiFi-GAN 框架上叠加两级风
 
 **不足**: 论文的比较框架存在不对等: ParaStyleTTS 与 CosyVoice 的训练数据规模相差几个数量级,合成质量差距可能主要源于数据而非架构。风格准确率的评估使用自动分类器而非人类判断,对于"age"这样主观性强的维度,分类器本身的准确性存疑。论文也未做充分的消融实验 (如单独移除 FiLM / GTU 的效果),使得两级设计的贡献难以量化。
 
-**定位**: 在 KB 的风格控制谱系中,ParaStyleTTS 代表了一条"反 LLM"的路线 — 用显式模块化设计替代 LLM 的隐式推理。这与 [[Emotion Control in TTS]] 中 EmoSteer-TTS (training-free) 和 TTS-CtrlNet (plug-in) 的思路类似,都在探索 LLM-based TTS 之外的高效替代方案。不同之处在于 ParaStyleTTS 从头设计系统,而后两者是在已有大模型上做附加控制。
+**定位**: 在 KB 的风格控制谱系中,ParaStyleTTS 代表了一条"反 LLM"的路线 — 用显式模块化设计替代 LLM 的隐式推理。这与 [[EmotionControlinTTS]] 中 EmoSteer-TTS (training-free) 和 TTS-CtrlNet (plug-in) 的思路类似,都在探索 LLM-based TTS 之外的高效替代方案。不同之处在于 ParaStyleTTS 从头设计系统,而后两者是在已有大模型上做附加控制。
 
 ## 可复用的 idea
 

@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "TextrolSpeech: A Text Style Control Speech Corpus with Codec Language Text-to-Speech Models"
 arxiv_id: "2308.14430"
-source: "https://arxiv.org/abs/2308.14430"
+source: "Sources/TextrolSpeech.pdf"
 authors: [Shengpeng Ji, Jialong Zuo, Minghui Fang, Ziyue Jiang, Feiyang Chen, Xinyu Duan, Baoxing Huai, Zhou Zhao]
 year: 2023
 venue: "arXiv"
 tags: [dataset, controllable-TTS, text-style-prompt, codec-LM, emotion, style-control, RVQ, autoregressive]
-concepts: ["[[Natural Language Description for TTS]]", "[[Codec Language Model]]", "[[Emotion Control in TTS]]", "[[Style Transfer in TTS]]", "[[Residual Vector Quantization]]", "[[LLM-based TTS]]"]
+concepts: ["[[NaturalLanguageDescriptionforTTS]]", "[[CodecLanguageModel]]", "[[EmotionControlinTTS]]", "[[StyleTransferinTTS]]", "[[ResidualVectorQuantization]]", "[[LLM-basedTTS]]"]
 models: ["[[模型库/EnCodec|EnCodec]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[Residual Vector Quantization]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[ResidualVectorQuantization]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Codec Language Model]](pending-review), [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[NaturalLanguageDescriptionforTTS]](pending-review), [[CodecLanguageModel]](pending-review), [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 >
 > **LLM-based TTS**: TextrolSpeech/Salle 是 LLM-based TTS 早期探索文本风格控制的工作。KB 记录了 PromptTTS (Guo et al., 2023) 作为开创性工作使用 5 属性文本描述控制 TTS。TextrolSpeech 在数据集规模和描述多样性上超越了 PromptTTS 的 PromptSpeech 数据集 (27,893 descriptions vs 236,220)。Salle 模型采用 codec LM 路线,与 VALL-E 的 AR+NAR 两阶段类似但增加了 style prompt 输入。
 >
@@ -155,4 +155,4 @@ Salle 模型本身相对简单: 6 层 Transformer + EnCodec tokens 的 AR+NAR �
 
 ---
 
-检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Codec Language Model]](pending-review), [[Emotion Control in TTS]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[NaturalLanguageDescriptionforTTS]](pending-review), [[CodecLanguageModel]](pending-review), [[EmotionControlinTTS]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无

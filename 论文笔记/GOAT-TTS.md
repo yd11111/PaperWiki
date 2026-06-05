@@ -8,9 +8,9 @@ authors: [Yaodong Song, Hongjie Chen, Jie Lian, Yuxin Zhang, Guangmin Xia, Zehan
 year: 2025
 venue: "arXiv (Technical Report)"
 tags: [TTS, LLM-based, zero-shot, dual-branch, modality-alignment, streaming, multi-token-prediction, dialect, data-augmentation]
-concepts: ["[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Modality Adaptation for Speech LLM]]", "[[Speech Language Model]]"]
-models: ["[[Whisper]]", "[[CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[ModalityAdaptationforSpeechLLM]]", "[[SpeechLanguageModel]]"]
+models: ["[[Whisper]]", "[[CosyVoice2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Speech Language Model]], [[CosyVoice 2]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SpeechLanguageModel]], [[CosyVoice2]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: GOAT-TTS 属于 [[LLM-based TTS]] 范式中"coarse-to-fine"路线的变体: AR LLM 生成离散 speech tokens → [[Conditional Flow Matching]] 渲染 mel spectrogram → vocoder 合成波形。这一流水线与 [[CosyVoice 2]]、Llasa、FireRedTTS 等同代系统一致。但 GOAT-TTS 的独特之处在于双分支架构设计: 一条分支用于 modality alignment (连续语音表征 → LLM 理解),另一条用于 speech token generation (LLM → 离散 token)。这种设计直接回应了 [[LLM-based TTS]] 中三个已知痛点: (1) 离散化 prompt 损失声学特征, (2) 依赖精确转录文本, (3) 微调导致 LLM 语言知识灾难性遗忘。
+> **谱系定位**: GOAT-TTS 属于 [[LLM-basedTTS]] 范式中"coarse-to-fine"路线的变体: AR LLM 生成离散 speech tokens → [[ConditionalFlowMatching]] 渲染 mel spectrogram → vocoder 合成波形。这一流水线与 [[CosyVoice2]]、Llasa、FireRedTTS 等同代系统一致。但 GOAT-TTS 的独特之处在于双分支架构设计: 一条分支用于 modality alignment (连续语音表征 → LLM 理解),另一条用于 speech token generation (LLM → 离散 token)。这种设计直接回应了 [[LLM-basedTTS]] 中三个已知痛点: (1) 离散化 prompt 损失声学特征, (2) 依赖精确转录文本, (3) 微调导致 LLM 语言知识灾难性遗忘。
 >
-> **已有认知**: KB 中 [[Modality Adaptation for Speech LLM]] [待确认] 概述了语音→LLM 适配的三种方案 (Conv downsampling / CTC-based / Q-Former),GOAT-TTS 的 speech encoder + CNN projector 属于第一类 convolutional downsampling。[[Speech Tokenizer]] 页明确区分了 semantic/acoustic/self-supervised 三类 tokenizer,GOAT-TTS 虽未指明使用哪种 codec,但其 speech token 经 flow-matching 解码为 mel,符合 coarse-to-fine 的 semantic token → CFM 路线。[[CosyVoice 2]] 的 FSQ-SenseVoice tokenizer + Qwen2.5 初始化 + chunk-aware CFM 是当前最强 streaming baseline 之一,GOAT-TTS 在 SEED 测试集上与之直接对比。
+> **已有认知**: KB 中 [[ModalityAdaptationforSpeechLLM]] [待确认] 概述了语音→LLM 适配的三种方案 (Conv downsampling / CTC-based / Q-Former),GOAT-TTS 的 speech encoder + CNN projector 属于第一类 convolutional downsampling。[[SpeechTokenizer]] 页明确区分了 semantic/acoustic/self-supervised 三类 tokenizer,GOAT-TTS 虽未指明使用哪种 codec,但其 speech token 经 flow-matching 解码为 mel,符合 coarse-to-fine 的 semantic token → CFM 路线。[[CosyVoice2]] 的 FSQ-SenseVoice tokenizer + Qwen2.5 初始化 + chunk-aware CFM 是当前最强 streaming baseline 之一,GOAT-TTS 在 SEED 测试集上与之直接对比。
 >
 > **创新判断**: 对比 KB 已有系统,GOAT-TTS 的核心新意在于: (a) 用连续 acoustic embedding 而非离散 token 编码 speech prompt,绕过信息瓶颈; (b) layer-wise freezing (冻结 bottom-N, 微调 top-K) 替代传统 LoRA/全参微调,保护 LLM 语言知识; (c) 将方言数据合成作为主要应用场景验证,而非仅做标准 TTS benchmark。
 >
-> 检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Speech Language Model]], [[CosyVoice 2]], [[Zero-shot Speech Synthesis]] | 过滤: [[Modality Adaptation for Speech LLM]](pending-review), [[Whisper]](pending-review), [[Speaker Adaptation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SpeechLanguageModel]], [[CosyVoice2]], [[Zero-shotSpeechSynthesis]] | 过滤: [[ModalityAdaptationforSpeechLLM]](pending-review), [[Whisper]](pending-review), [[SpeakerAdaptation]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -182,7 +182,7 @@ GOAT-TTS 的核心思想有价值: 用连续 acoustic embedding 保留 prompt �
 - 架构细节关键参数 (LLM 型号、bottom-N/top-K 的 N/K 值、codec 类型) 缺失,可复现性低
 - 没有消融实验,无法区分各创新点的独立贡献
 
-**定位**: 在 [[LLM-based TTS]] 谱系中,GOAT-TTS 是来自中国电信 TeleAI 的工业探索,聚焦于方言场景的实用价值而非刷新 SOTA。其双分支 + layer freezing 的设计理念有参考意义,但实验证据尚不足以充分验证这些设计的有效性。
+**定位**: 在 [[LLM-basedTTS]] 谱系中,GOAT-TTS 是来自中国电信 TeleAI 的工业探索,聚焦于方言场景的实用价值而非刷新 SOTA。其双分支 + layer freezing 的设计理念有参考意义,但实验证据尚不足以充分验证这些设计的有效性。
 
 ## 可复用的 idea
 

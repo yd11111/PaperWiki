@@ -3,12 +3,13 @@ type: paper
 tier: deep
 title: "Spotlight-TTS: Spotlighting the Style via Voiced-Aware Style Extraction and Style Direction Adjustment for Expressive Text-to-Speech"
 arxiv_id: "2505.20868"
+thesis_arxiv_id: "2511.14824"
 source: "Sources/Spotlight-TTS.pdf"
 authors: [Nam-Gyu Kim, Deok-Hyeon Cho, Seung-Bin Kim, Seong-Whan Lee]
 year: 2025
-venue: "Interspeech 2025 (inferred from format)"
+venue: "Interspeech 2025; extended Master's thesis (Korea University, Feb 2026)"
 tags: [TTS, style-transfer, expressive, VQ, RVQ, disentanglement, voiced-unvoiced, FastSpeech2]
-concepts: ["[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Residual Vector Quantization]]", "[[Prosody Modeling]]", "[[Speech Factorization]]", "[[Mel Spectrogram]]", "[[F0 Modeling]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[StyleTransferinTTS]]", "[[GlobalStyleTokens]]", "[[ResidualVectorQuantization]]", "[[ProsodyModeling]]", "[[SpeechFactorization]]", "[[MelSpectrogram]]", "[[F0Modeling]]", "[[EmotionControlinTTS]]"]
 models: ["[[模型库/BigVGAN|BigVGAN]]"]
 tasks: []
 datasets: ["ESD (Emotional Speech Dataset)"]
@@ -26,14 +27,14 @@ updated: 2026-06-03
 **谱系定位**: Spotlight-TTS 属于 reference speech-based style transfer TTS 路线,位于 Global Style Tokens (GST, 2018) → frame-level style (GenerSpeech, 2022) → region-aware style 的演进轴上。它聚焦于 style extraction 质量改进,而非更换建模范式(如 LLM-based / diffusion-based)。
 
 **已有认知**:
-- [[Style Transfer in TTS]] [待确认] 整理了风格迁移的四大策略(tagging / reference / NL / instruction),本文属于 "Reference Speech Prompt" 路线,直接改进 reference encoder 的 style extraction。从 sentence-level style (GST) → frame-level style (GenerSpeech) → **region-aware frame-level style** (Spotlight-TTS) 是这条路线上粒度递进的自然延伸。
-- [[Residual Vector Quantization]] (confirmed) 记录了 RVQ 在 audio codec 中的标准用法和训练难点(codebook collapse、STE 梯度问题)。Spotlight-TTS 用 RVQ 做 style bottleneck 而非 codec,且用 rotation trick 替代 STE — 这是 RVQ 在 style extraction 场景的新应用。
-- [[Prosody Modeling]] (confirmed) 区分了显式(variance adaptor)和隐式(reference encoder)韵律建模。Spotlight-TTS 的 SP loss 显式引导 style embedding 保留低频韵律信息,是对"隐式 style → 显式 prosody"方向约束的一次尝试。
-- [[Speech Factorization]] (confirmed) 总结了对抗训练/information bottleneck/self-distillation 三大解耦方法。Spotlight-TTS 的 SD loss (正交约束) + 选择性量化输入(仅 voiced frames)构成了一种**双重 bottleneck**: 既在输入端物理过滤(VE),又在嵌入空间方向约束(SD loss)。
+- [[StyleTransferinTTS]] [待确认] 整理了风格迁移的四大策略(tagging / reference / NL / instruction),本文属于 "Reference Speech Prompt" 路线,直接改进 reference encoder 的 style extraction。从 sentence-level style (GST) → frame-level style (GenerSpeech) → **region-aware frame-level style** (Spotlight-TTS) 是这条路线上粒度递进的自然延伸。
+- [[ResidualVectorQuantization]] (confirmed) 记录了 RVQ 在 audio codec 中的标准用法和训练难点(codebook collapse、STE 梯度问题)。Spotlight-TTS 用 RVQ 做 style bottleneck 而非 codec,且用 rotation trick 替代 STE — 这是 RVQ 在 style extraction 场景的新应用。
+- [[ProsodyModeling]] (confirmed) 区分了显式(variance adaptor)和隐式(reference encoder)韵律建模。Spotlight-TTS 的 SP loss 显式引导 style embedding 保留低频韵律信息,是对"隐式 style → 显式 prosody"方向约束的一次尝试。
+- [[SpeechFactorization]] (confirmed) 总结了对抗训练/information bottleneck/self-distillation 三大解耦方法。Spotlight-TTS 的 SD loss (正交约束) + 选择性量化输入(仅 voiced frames)构成了一种**双重 bottleneck**: 既在输入端物理过滤(VE),又在嵌入空间方向约束(SD loss)。
 
 **创新判断**: 相比 GenerSpeech 的 multi-level style 方案(sentence + frame),Spotlight-TTS 不改多级结构但改进 frame-level 的获取方式: (1) 从"均匀处理所有帧"到"区分 voiced/unvoiced"; (2) 从 STE 到 rotation trick; (3) 从单纯 quantization bottleneck 到 quantization + 方向约束(orthogonality + prosody alignment)。这些改进是渐进式的工程创新,非范式变革 [agent 解读]。
 
-> 检索命中: [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Speech Factorization]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[ProsodyModeling]]✓, [[SpeechFactorization]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[F0Modeling]](pending-review), [[MelSpectrogram]](pending-review), [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

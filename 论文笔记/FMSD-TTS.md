@@ -8,7 +8,7 @@ authors: [Yutong Liu, Ziyue Zhang, Ban Ma-bao, Yuqing Cai, Yongbin Yu, Renzeng D
 year: 2025
 venue: "arXiv"
 tags: [TTS, multi-speaker, multi-dialect, few-shot, low-resource, Tibetan, speaker-identity, non-autoregressive, flow-matching, dynamic-routing]
-concepts: ["[[Speaker Embedding]]", "[[Conditional Flow Matching]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Speaker Adaptation]]"]
+concepts: ["[[SpeakerEmbedding]]", "[[ConditionalFlowMatching]]", "[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[SpeakerAdaptation]]"]
 models: ["[[VITS]]", "[[BigVGAN]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页: [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓, [[Speaker Adaptation]], [[Voice Cloning Taxonomy]], [[Duration Predictor]], [[Non-autoregressive TTS]])
+> [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页: [[SpeakerEmbedding]]✓, [[ConditionalFlowMatching]]✓, [[SpeakerAdaptation]], [[VoiceCloningTaxonomy]], [[DurationPredictor]], [[Non-autoregressiveTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: FMSD-TTS 属于 semi-end-to-end NAR TTS 系统,基于 Matcha-TTS (CFM-based) 架构,使用显式 duration predictor + flow matching 生成 mel spectrogram + BigVGAN vocoder。在 KB 的 Voice Cloning Taxonomy 四分类中,FMSD-TTS 属于 **Few-shot Voice Cloning** 类别 — 使用 ECAPA-TDNN 提取 speaker embedding + 少量参考音频进行说话人克隆,但其核心创新不在 voice cloning 本身,而在 **方言控制** 维度。
 
@@ -201,11 +201,11 @@ $$loss_{ref} = \frac{h_{spk} \cdot h_{did}}{||h_{spk}|| \cdot ||h_{did}||}$$
 
 ---
 
-检索命中: [[Speaker Embedding]]✓, [[Conditional Flow Matching]]✓ | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeakerEmbedding]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 
 > [!review] 审阅 (2026-06-03, auto)
 > **结论**: pass-with-fixes (0 high / 1 medium / 2 low)
-> - (medium) frontmatter.tasks 已修正: 移除 [[Zero-shot Speech Synthesis]],FMSD-TTS 是 few-shot 非 zero-shot
+> - (medium) frontmatter.tasks 已修正: 移除 [[Zero-shotSpeechSynthesis]],FMSD-TTS 是 few-shot 非 zero-shot
 > - (low) 训练策略中 speaker encoder 冻结推断已补充标注
 > - (low) 随机裁剪参考音频是常见做法,保留但已知悉
 > 详见 `_review/FMSD-TTS-review.yml`

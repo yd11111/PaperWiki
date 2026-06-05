@@ -5,11 +5,11 @@ aliases: [CosyVoice1, CosyVoice-base, CosyVoice-instruct]
 org: "Alibaba (Speech Lab)"
 year: 2024
 tags: [TTS, zero-shot, multilingual, LLM-based, coarse-to-fine, flow-matching]
-key_concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
-key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice 2|CosyVoice 2]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/BreezyVoice|BreezyVoice]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/Prompt-Unseen-Emotion|PUE (Gao et al., 2025)]]", "[[论文笔记/SpeechAccentLLM|SpeechAccentLLM]]", "[[论文笔记/Shallow Flow Matching|Shallow Flow Matching]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/DeepDubbing|DeepDubbing]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]", "[[论文笔记/UltraVoice|UltraVoice]]"]
+key_concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
+key_papers: ["[[论文笔记/CosyVoice|CosyVoice]]", "[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/AutoStyle-TTS|AutoStyle-TTS]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/BreezyVoice|BreezyVoice]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/Prompt-Unseen-Emotion|PUE (Gao et al., 2025)]]", "[[论文笔记/SpeechAccentLLM|SpeechAccentLLM]]", "[[论文笔记/ShallowFlowMatching|Shallow Flow Matching]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/DeepDubbing|DeepDubbing]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]", "[[论文笔记/UltraVoice|UltraVoice]]"]
 supersedes: []
-superseded_by: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
+superseded_by: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
 status: confirmed
 lifecycle: active
 merged_into: ""
@@ -42,7 +42,7 @@ CosyVoice 是阿里巴巴语音实验室提出的可扩展多语言零样本 TTS
 
 ## 演进线
 
-CosyVoice (2024, S3 tokenizer, LLM+OT-CFM) → [[模型库/CosyVoice 2|CosyVoice 2]] (2024, streaming, LLM init) → [[模型库/CosyVoice 3|CosyVoice 3]] (2025, MinMo tokenizer, DiffRO, 1M h)
+CosyVoice (2024, S3 tokenizer, LLM+OT-CFM) → [[模型库/CosyVoice2|CosyVoice 2]] (2024, streaming, LLM init) → [[模型库/CosyVoice3|CosyVoice 3]] (2025, MinMo tokenizer, DiffRO, 1M h)
 
 Task derivative: [[论文笔记/CosyEdit|CosyEdit]] (Chen et al., 2026) — 基于 CosyVoice 的 post-training 迁移到端到端 speech editing,仅用 250h 数据微调 LLM+CFM; 提出 GOT-CFM (guided OT-CFM) 和 zero-shot training / one-shot inference 非对称策略; 400M 参数在 RealEdit 上 WER 4.50% / EMOS 4.15,超越 3B-16B 参数的 SLM-based editing 系统 [CosyEdit Table II]
 

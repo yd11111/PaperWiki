@@ -5,7 +5,7 @@ aliases: [SEED-TTS Eval, SEED TTS Eval]
 domain: "TTS evaluation"
 scale: "3 subsets (test-zh, test-en, test-hard)"
 tags: [benchmark, TTS, zero-shot, evaluation]
-used_by: ["[[论文笔记/CosyVoice 3|CosyVoice 3]]", "[[CosyVoice 2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-Reward GRPO|Multi-Reward GRPO]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/DMOSpeech 2|DMOSpeech 2]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/Llasa+|Llasa+]]", "[[论文笔记/Cross-Lingual F5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]"]
+used_by: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[CosyVoice2]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/Multi-RewardGRPO|Multi-Reward GRPO]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/DMOSpeech2|DMOSpeech 2]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/F5R-TTS|F5R-TTS]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/Llasa+|Llasa+]]", "[[论文笔记/Cross-LingualF5-TTS|Cross-Lingual F5-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/TTS-1|TTS-1 (Inworld, 2025)]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Vox-Evaluator|Vox-Evaluator]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]"]
 metrics_reported_on: [CER, WER, Speaker Similarity]
 url: ""
 status: confirmed
@@ -30,8 +30,8 @@ SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发�
 
 ## 使用此数据集的模型
 
-- [[论文笔记/CosyVoice 3|CosyVoice 3]]: CER 0.71% (zh), WER 1.45% (en), CER 5.09% (hard)
-- [[CosyVoice 2]]: CER 1.45% (zh), WER 2.57% (en), CER 6.83% (hard)
+- [[论文笔记/CosyVoice3|CosyVoice 3]]: CER 0.71% (zh), WER 1.45% (en), CER 5.09% (hard)
+- [[CosyVoice2]]: CER 1.45% (zh), WER 2.57% (en), CER 6.83% (hard)
 - Seed-TTS: CER 1.12% (zh), WER 2.25% (en), CER 7.59% (hard)
 - F5-TTS: CER 1.56% (zh), WER 1.83% (en), CER 8.67% (hard)
 
@@ -47,5 +47,5 @@ SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发�
 - [[论文笔记/MamTra|MamTra]] (2026): WER 2.28% (test-en, 1:1 配置), SSIM 0.72 (test-en), UTMOS 4.16 (test-en); Mamba-Transformer 混合架构,VRAM 降低 34% vs CosyVoice 2
 - [[论文笔记/LLaDA-TTS|LLaDA-TTS]] (2026): CER 0.98% (test-zh), WER 1.96% (test-en), CER 7.04% (test-hard), SS 74.6% (test-zh); masked discrete diffusion 替代 AR decoder,基于 CosyVoice 3-0.5B backbone,64 步推理实现 2x LLM-stage speedup
 - [[论文笔记/PilotTTS|PilotTTS]] (2026): CER 0.87% (test-zh), WER 1.50% (test-en), SIM 0.862 (test-zh), SIM 0.815 (test-en); Q-Former + CAMPPlus 双路径 conditioning,仅用 200K h 数据,SIM 刷新 SEED-TTS-Eval 最高记录
-- [[论文笔记/DMOSpeech 2|DMOSpeech 2]] (2025/AAAI 2026): WER 1.752% (test-en), CER 1.527% (test-zh), SIM 0.698 (test-en), SIM 0.760 (test-zh), RTF 0.032; 0.3B params, GRPO 优化 duration predictor, 4-step DMD-distilled flow matching
+- [[论文笔记/DMOSpeech2|DMOSpeech 2]] (2025/AAAI 2026): WER 1.752% (test-en), CER 1.527% (test-zh), SIM 0.698 (test-en), SIM 0.760 (test-zh), RTF 0.032; 0.3B params, GRPO 优化 duration predictor, 4-step DMD-distilled flow matching
 - [[论文笔记/F5R-TTS|F5R-TTS]] (Tencent, 2025): WER 1.48% (test-cn general), WER 10.63% (test-cn hard), SIM 0.730 (test-cn general), SIM 0.711 (test-cn hard); 首次在 NAR flow-matching TTS 上集成 GRPO,通过 output probabilization 使 RL 兼容 CFM 架构

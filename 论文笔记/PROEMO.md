@@ -8,7 +8,7 @@ authors: [Shaozuo Zhang, Ambuj Mehrish, Yingting Li, Soujanya Poria]
 year: 2025
 venue: "arXiv (cs.SD)"
 tags: [TTS, emotion, intensity-control, prompt-control, LLM, prosody, multi-speaker, FastSpeech2, HuBERT, expressive-speech]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Non-autoregressive TTS]]", "[[Speaker Embedding]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[Non-autoregressiveTTS]]", "[[SpeakerEmbedding]]", "[[MelSpectrogram]]", "[[DurationPredictor]]"]
 models: ["[[HuBERT]]"]
 tasks: []
 datasets: []
@@ -23,19 +23,19 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: PROEMO 处于 Emotion Control in TTS 演进线中 "Emotion embedding + LLM prompt" 阶段,介于显式 emotion embedding (Li et al., 2021) 与 LLM 自由文本情感控制 (EmoVoice, 2025) 之间。它的 backbone 是 FastSpeech 2 ([[Non-autoregressive TTS]] 的代表),属于显式 variance adaptor 路线,与 LLM-based TTS (VALL-E, CosyVoice) 的隐式韵律建模形成对比。
+**谱系定位**: PROEMO 处于 Emotion Control in TTS 演进线中 "Emotion embedding + LLM prompt" 阶段,介于显式 emotion embedding (Li et al., 2021) 与 LLM 自由文本情感控制 (EmoVoice, 2025) 之间。它的 backbone 是 FastSpeech 2 ([[Non-autoregressiveTTS]] 的代表),属于显式 variance adaptor 路线,与 LLM-based TTS (VALL-E, CosyVoice) 的隐式韵律建模形成对比。
 
 **已有认知**:
-- [[Prosody Modeling]] ✓ 明确定义了 prosody 的四个物理维度 (duration, pitch, energy, pause),以及显式 vs 隐式建模的分类。PROEMO 使用 FastSpeech 2 的显式 variance adaptor (pitch + energy + duration predictor),并叠加 GPT-4 prompt 推理,属于"显式 + LLM 增强"混合路线。
-- [[Speaker Embedding]] ✓ 梳理了 multi-speaker TTS 的 speaker encoder 方案。PROEMO 使用 GE2E loss 训练的 speaker encoder,是标准零样本路线。
-- [[Emotion Control in TTS]] [待确认] 已收录 emotion embedding、层级建模、DPO/RLHF、EmoSphere++ 球面向量等方案。PROEMO 的 HuBERT-based emotion encoder + 独立 intensity encoder 的双编码器设计是新的组合。
+- [[ProsodyModeling]] ✓ 明确定义了 prosody 的四个物理维度 (duration, pitch, energy, pause),以及显式 vs 隐式建模的分类。PROEMO 使用 FastSpeech 2 的显式 variance adaptor (pitch + energy + duration predictor),并叠加 GPT-4 prompt 推理,属于"显式 + LLM 增强"混合路线。
+- [[SpeakerEmbedding]] ✓ 梳理了 multi-speaker TTS 的 speaker encoder 方案。PROEMO 使用 GE2E loss 训练的 speaker encoder,是标准零样本路线。
+- [[EmotionControlinTTS]] [待确认] 已收录 emotion embedding、层级建模、DPO/RLHF、EmoSphere++ 球面向量等方案。PROEMO 的 HuBERT-based emotion encoder + 独立 intensity encoder 的双编码器设计是新的组合。
 - [[HuBERT]] [待确认] 作为自监督语音模型,在 PROEMO 中被用于 emotion/intensity 特征提取 (冻结 CNN + 微调 Transformer),与其在 TTS tokenizer 中的常见用法不同。
-- [[Non-autoregressive TTS]] [待确认] 覆盖 FastSpeech 2 的 variance adaptor 设计,PROEMO 直接在此基础上扩展。
-- [[Instruction-Guided Speech Synthesis]] [待确认] 描述的是统一指令范式 (VoxInstruct, CosyVoice),PROEMO 的 prompt control 更受限 — 仅通过 GPT-4 预测 scaling factors,不是自由指令。
+- [[Non-autoregressiveTTS]] [待确认] 覆盖 FastSpeech 2 的 variance adaptor 设计,PROEMO 直接在此基础上扩展。
+- [[Instruction-GuidedSpeechSynthesis]] [待确认] 描述的是统一指令范式 (VoxInstruct, CosyVoice),PROEMO 的 prompt control 更受限 — 仅通过 GPT-4 预测 scaling factors,不是自由指令。
 
 **创新判断**: PROEMO 的主要组合创新在于: (1) 独立 intensity encoder 通过 relative ranking function 实现无标注的强度建模; (2) 双层 (global + local) LLM prompt control 实现推理时韵律微调。但这些组件均非首创,更多是已有方法的工程集成。
 
-> 检索命中: [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[HuBERT]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[HuBERT]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -151,7 +151,7 @@ PROEMO 尝试用模块化方式 (emotion encoder + intensity encoder + LLM promp
 - Prompt control 直接继承 Sigurgeirsson & King (2023) 的范式
 - 仅在推理时叠加 GPT-4,训练和模型本身未受 LLM 影响
 
-**与已有方法的定位**: 在 [[Emotion Control in TTS]] 的演进线中,PROEMO 处于 "embedding + LLM" 的过渡位置。相比 Daisy-TTS 的 PCA 分解方法和 EmoSphere-TTS 的球面表征,PROEMO 对情感的建模更简单直接。相比 EmoCtrl-TTS 的帧级 arousal-valence 连续控制,PROEMO 的句级/词级 scaling factor 控制粒度更粗。
+**与已有方法的定位**: 在 [[EmotionControlinTTS]] 的演进线中,PROEMO 处于 "embedding + LLM" 的过渡位置。相比 Daisy-TTS 的 PCA 分解方法和 EmoSphere-TTS 的球面表征,PROEMO 对情感的建模更简单直接。相比 EmoCtrl-TTS 的帧级 arousal-valence 连续控制,PROEMO 的句级/词级 scaling factor 控制粒度更粗。
 
 **实验说服力不足**: MOS 3.728、仅 20 名评估者、与过时 baseline 对比、ESD 小数据集 — 这些都限制了结论的可信度。Local > G&L 的结果实际上削弱了双层设计的价值主张。
 

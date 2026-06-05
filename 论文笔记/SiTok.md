@@ -5,18 +5,18 @@ aliases: [Speech Diffusion Tokenizer, SiTok Tokenizer]
 authors: ["Anonymous"]
 year: 2026
 arxiv_id: ""
-source: "ICLR 2026 submission"
+source: "Sources/SiTok.pdf"
 venue: "ICLR 2026 (under review)"
 tags: [speech-tokenizer, diffusion-autoencoder, semantic-regularization, CTC, low-bitrate, flow-matching, speech-codec, speech-understanding]
 level: deep
 status: draft
-concepts: ["[[Speech Tokenizer]]", "[[Diffusion Model]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Classifier-Free Guidance]]", "[[Mel Spectrogram]]", "[[Codebook Collapse]]"]
+concepts: ["[[SpeechTokenizer]]", "[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]", "[[CodebookCollapse]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/SoundStream|SoundStream]]"]
 tasks: [speech-tokenization, speech-reconstruction, ASR, emotion-recognition, speaker-verification, keyword-spotting]
 datasets: ["[[SEED-TTS-Eval]]"]
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Classifier-Free Guidance]]"]
+kb_sources: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[Classifier-FreeGuidance]]"]
 ---
 tier: deep
 
@@ -24,11 +24,11 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[Speech Tokenizer]]** (confirmed): SiTok 提出用 diffusion autoencoder 替代传统 RVQ-GAN 作为 speech tokenizer。与已知的三类 tokenizer (自监督/监督/声学) 不同,SiTok 是第四条路线 -- diffusion-based tokenizer,通过端到端联合训练 VQ + diffusion decoder 实现极低 token rate (12.5 Hz) 和 bitrate (0.2 kbps) [§1, §2.1]。[agent 解读]
-- **[[Conditional Flow Matching]]** (confirmed): SiTok 的 decoder 使用 flow matching 目标训练。其 diffusion decoder 学习预测速度场 v_phi(x_t, t, z_q) -> x - epsilon,将噪声 mel spectrogram 映射回 clean mel [§2.1, Eq]。这与 TTS 中 CFM 用于 mel 生成一致,但 SiTok 中 CFM 用于 codec reconstruction 而非 text-conditioned generation [agent 解读]。
-- **[[Residual Vector Quantization]]** (confirmed): SiTok 默认使用单 codebook VQ,但消融实验 [§3.4, Table 5] 证实 RVQ (CN=2,4) 可系统性提升质量: CN=4 时 WER 从 4.06 降至 2.80,SIM 从 0.641 升至 0.660,代价是 bitrate 从 0.20 升至 0.70 kbps。
-- **[[Semantic vs Acoustic Tokens]]** (confirmed): SiTok 通过 CTC semantic regularization 明确解决 semantic-acoustic trade-off。传统 acoustic tokenizer 语义弱,自监督 semantic tokenizer 声学差。SiTok 在量化后的 latent space 上施加 CTC loss,使离散 codes 同时编码语义和声学信息 [§2.2]。
-- **[[Classifier-Free Guidance]]** [待确认]: SiTok 采用 Token CFG -- 训练时 10% 概率随机 drop 所有 input tokens,推理时融合 conditional + unconditional prediction 增强重建质量 [§2.4]。这是 CFG 在 speech tokenizer 中的新应用,不同于 TTS 中 drop text/speaker condition [agent 解读]。
+- **[[SpeechTokenizer]]** (confirmed): SiTok 提出用 diffusion autoencoder 替代传统 RVQ-GAN 作为 speech tokenizer。与已知的三类 tokenizer (自监督/监督/声学) 不同,SiTok 是第四条路线 -- diffusion-based tokenizer,通过端到端联合训练 VQ + diffusion decoder 实现极低 token rate (12.5 Hz) 和 bitrate (0.2 kbps) [§1, §2.1]。[agent 解读]
+- **[[ConditionalFlowMatching]]** (confirmed): SiTok 的 decoder 使用 flow matching 目标训练。其 diffusion decoder 学习预测速度场 v_phi(x_t, t, z_q) -> x - epsilon,将噪声 mel spectrogram 映射回 clean mel [§2.1, Eq]。这与 TTS 中 CFM 用于 mel 生成一致,但 SiTok 中 CFM 用于 codec reconstruction 而非 text-conditioned generation [agent 解读]。
+- **[[ResidualVectorQuantization]]** (confirmed): SiTok 默认使用单 codebook VQ,但消融实验 [§3.4, Table 5] 证实 RVQ (CN=2,4) 可系统性提升质量: CN=4 时 WER 从 4.06 降至 2.80,SIM 从 0.641 升至 0.660,代价是 bitrate 从 0.20 升至 0.70 kbps。
+- **[[SemanticvsAcousticTokens]]** (confirmed): SiTok 通过 CTC semantic regularization 明确解决 semantic-acoustic trade-off。传统 acoustic tokenizer 语义弱,自监督 semantic tokenizer 声学差。SiTok 在量化后的 latent space 上施加 CTC loss,使离散 codes 同时编码语义和声学信息 [§2.2]。
+- **[[Classifier-FreeGuidance]]** [待确认]: SiTok 采用 Token CFG -- 训练时 10% 概率随机 drop 所有 input tokens,推理时融合 conditional + unconditional prediction 增强重建质量 [§2.4]。这是 CFG 在 speech tokenizer 中的新应用,不同于 TTS 中 drop text/speaker condition [agent 解读]。
 
 > [!summary] 速查
 > - **一句话**: 用 diffusion autoencoder 替代 RVQ-GAN 构建 speech tokenizer,通过 CTC semantic regularization 使 12.5 Hz / 0.2 kbps 单 codebook 离散表征同时支持高保真重建和强语义理解
@@ -155,4 +155,4 @@ SiTok 代表了 speech tokenizer 设计的范式转移: 从 RVQ-GAN 到 diffusio
 
 ---
 
-检索命中: [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review), [[Mel Spectrogram]](pending-review), [[Codebook Collapse]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[MelSpectrogram]](pending-review), [[CodebookCollapse]](pending-review) | 未命中但可能相关: 无

@@ -8,7 +8,7 @@ authors: [Neta Glazer, Aviv Navon, Yael Segal, Aviv Shamsian, Hilit Segev, Asaf 
 year: 2025
 venue: "ICML 2025 Workshop on Machine Learning for Audio"
 tags: [TTS, flow-matching, environmental-audio, joint-generation, self-supervised, controllability]
-concepts: ["[[Conditional Flow Matching]]", "[[Mel Spectrogram]]", "[[Diffusion-based TTS]]", "[[Non-autoregressive TTS]]", "[[Natural Language Description for TTS]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[MelSpectrogram]]", "[[Diffusion-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[NaturalLanguageDescriptionforTTS]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: ["[[数据集/AudioSet|AudioSet]]"]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Conditional Flow Matching]], [[Mel Spectrogram]][待确认], [[Diffusion-based TTS]][待确认], [[Non-autoregressive TTS]][待确认], [[Natural Language Description for TTS]][待确认], [[数据集/AudioSet|AudioSet]][待确认])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ConditionalFlowMatching]], [[MelSpectrogram]][待确认], [[Diffusion-basedTTS]][待确认], [[Non-autoregressiveTTS]][待确认], [[NaturalLanguageDescriptionforTTS]][待确认], [[数据集/AudioSet|AudioSet]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: UmbraTTS 属于 flow matching TTS 家族,直接继承 F5-TTS 框架 (Chen et al., 2024),使用 CFM + DiT 架构在 mel spectrogram 空间生成。与 CosyVoice 系列的 LLM+CFM 两阶段不同,UmbraTTS 不引入 LLM,而是沿 F5-TTS 的 non-autoregressive 路线扩展环境音联合生成能力。
 >
-> **已有认知**: [[Conditional Flow Matching]] 概念页(confirmed)记录了 CFM 在 TTS 中的主流应用 -- 将离散 token/文本转为 mel spectrogram。F5-TTS 作为 CFM 的代表模型已被收录。[[Natural Language Description for TTS]] 概念页记录了环境感知 TTS 的先行工作 VoiceLDM 和 AST-LDM,但均基于 diffusion 而非 flow matching。
+> **已有认知**: [[ConditionalFlowMatching]] 概念页(confirmed)记录了 CFM 在 TTS 中的主流应用 -- 将离散 token/文本转为 mel spectrogram。F5-TTS 作为 CFM 的代表模型已被收录。[[NaturalLanguageDescriptionforTTS]] 概念页记录了环境感知 TTS 的先行工作 VoiceLDM 和 AST-LDM,但均基于 diffusion 而非 flow matching。
 >
 > **创新判断**: UmbraTTS 的核心新意不在生成范式(CFM/DiT 已成熟),而在 (1) 将 CFM 框架扩展到语音+环境音联合生成这一未被探索的交叉领域;(2) 提出 SER 连续控制机制;(3) 设计 self-supervised 数据构建流程解决配对数据缺失问题。对比 VoiceLDM/VoiceDiT 等 diffusion-based 方案,UmbraTTS 是首个 flow matching 基础的环境感知 TTS。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Mel Spectrogram]], [[Diffusion-based TTS]], [[Non-autoregressive TTS]], [[Natural Language Description for TTS]], [[数据集/AudioSet|AudioSet]] | 过滤: 5 页 pending-review | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[MelSpectrogram]], [[Diffusion-basedTTS]], [[Non-autoregressiveTTS]], [[NaturalLanguageDescriptionforTTS]], [[数据集/AudioSet|AudioSet]] | 过滤: 5 页 pending-review | 未命中但可能相关: 无
 
 ## 速查
 
@@ -76,7 +76,7 @@ L_CFM(theta) = E_{t,x0,x1} ||v_t^theta(x_t) - (x_1 - x_0)||^2
 
 **1. 为什么选 flow matching 而非 diffusion?**
 
-论文指出 flow matching 在语音合成任务中已展现出优于 diffusion 的合成质量 [§2, 论文原文]。[agent 解读] 这与 KB 中 [[Conditional Flow Matching]] 页记录的趋势一致 -- CFM 步数更少、效率更高,F5-TTS/Matcha-TTS 已验证其在 TTS 中的有效性。UmbraTTS 继承 F5-TTS 的成功经验,将其扩展到联合生成场景。
+论文指出 flow matching 在语音合成任务中已展现出优于 diffusion 的合成质量 [§2, 论文原文]。[agent 解读] 这与 KB 中 [[ConditionalFlowMatching]] 页记录的趋势一致 -- CFM 步数更少、效率更高,F5-TTS/Matcha-TTS 已验证其在 TTS 中的有效性。UmbraTTS 继承 F5-TTS 的成功经验,将其扩展到联合生成场景。
 
 **2. 为什么用联合生成而非后混合?**
 

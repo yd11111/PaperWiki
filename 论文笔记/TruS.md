@@ -8,9 +8,9 @@ authors: [Myungjin Lee, Eunji Shin, Jiyoung Lee]
 year: 2026
 venue: "arXiv"
 tags: [machine-unlearning, voice-privacy, zero-shot-TTS, speaker-identity, activation-steering, training-free, flow-matching, DiT, safety]
-concepts: ["[[Conditional Flow Matching]]", "[[Speaker Embedding]]", "[[Speaker Verification]]", "[[Anti-spoofing and Deepfake Detection]]", "[[Emotion Control in TTS]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[SpeakerVerification]]", "[[Anti-spoofingandDeepfakeDetection]]", "[[EmotionControlinTTS]]"]
 models: []
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,21 +20,21 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[Conditional Flow Matching]], [[Speaker Embedding]], [[Zero-shot Speech Synthesis]], [[Speaker Verification]], [[Anti-spoofing and Deepfake Detection]], [[Emilia]])
+> [!info] KB 背景 (基于 3 个已确认 + 3 个待确认实体页: [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[Zero-shotSpeechSynthesis]], [[SpeakerVerification]], [[Anti-spoofingandDeepfakeDetection]], [[Emilia]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文属于 [[Anti-spoofing and Deepfake Detection]] 中"模型级 speaker 保护"方向,提出第五条防线 -- 推理时激活干预:
+> **谱系定位**: 本文属于 [[Anti-spoofingandDeepfakeDetection]] 中"模型级 speaker 保护"方向,提出第五条防线 -- 推理时激活干预:
 > | 路线 | 代表 | 操作端 | 时机 |
 > |------|------|--------|------|
 > | 被动检测 | ASVspoof 系列 | 输出端 | 事后 |
 > | 主动扰动 | SafeSpeech | 数据端 | 事前 |
 > | 水印溯源 | TraceableSpeech | 输出端 | 事后 |
-> | Machine Unlearning (重训练) | [[论文笔记/Speaker Identity Unlearning|TGU/SGU (Kim et al., ICML 2025)]] | 模型端 | 事前 |
+> | Machine Unlearning (重训练) | [[论文笔记/SpeakerIdentityUnlearning|TGU/SGU (Kim et al., ICML 2025)]] | 模型端 | 事前 |
 > | **推理时 Steering (免训练)** | **TruS (本文)** | **模型端** | **事前** |
 >
-> 本文是对 [[论文笔记/Speaker Identity Unlearning|Speaker Identity Unlearning (Kim et al., ICML 2025)]] 的直接改进。Kim et al. 提出了 TGU/SGU 两种基于重训练的 unlearning 方案,但存在三个核心限制: (1) 高训练开销(TGU 430 GPU-hours, SGU 48 hours); (2) 每次新 opt-out 请求需重训; (3) 仅支持训练集中出现过的 seen speakers。TruS 同时解决了这三个问题。
+> 本文是对 [[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning (Kim et al., ICML 2025)]] 的直接改进。Kim et al. 提出了 TGU/SGU 两种基于重训练的 unlearning 方案,但存在三个核心限制: (1) 高训练开销(TGU 430 GPU-hours, SGU 48 hours); (2) 每次新 opt-out 请求需重训; (3) 仅支持训练集中出现过的 seen speakers。TruS 同时解决了这三个问题。
 >
-> **已有认知**: [[Conditional Flow Matching]] 页(confirmed)记录了 CFM 的 ODE 路径与向量场回归机制。TruS 基于 F5-TTS(一个 DiT-based CFM 模型),在 ODE 求解的每个 flow step 中对中间激活值施加 steering vector。[[Speaker Embedding]] 页(confirmed)记录了 speaker identity 在 TTS 模型中的编码方式。TruS 的核心发现是 DiT FFN 层的激活值包含强 speaker identity 信号,可以通过构造 ID-prototype 并减去投影来消除。[[Zero-shot Speech Synthesis]] 页(confirmed)记录了零样本 TTS 通过 in-context learning 从 audio prompt 泛化到未见说话人的能力,这正是 unlearning 的核心挑战 -- 即使删除训练数据,模型仍可零样本克隆。
+> **已有认知**: [[ConditionalFlowMatching]] 页(confirmed)记录了 CFM 的 ODE 路径与向量场回归机制。TruS 基于 F5-TTS(一个 DiT-based CFM 模型),在 ODE 求解的每个 flow step 中对中间激活值施加 steering vector。[[SpeakerEmbedding]] 页(confirmed)记录了 speaker identity 在 TTS 模型中的编码方式。TruS 的核心发现是 DiT FFN 层的激活值包含强 speaker identity 信号,可以通过构造 ID-prototype 并减去投影来消除。[[Zero-shotSpeechSynthesis]] 页(confirmed)记录了零样本 TTS 通过 in-context learning 从 audio prompt 泛化到未见说话人的能力,这正是 unlearning 的核心挑战 -- 即使删除训练数据,模型仍可零样本克隆。
 >
 > **与 EmoSteer-TTS 的关系**: TruS 与 [[论文笔记/EmoSteer-TTS|EmoSteer-TTS (Xie et al., 2025)]] 同属"推理时激活操控"范式,但目标不同 -- EmoSteer-TTS 操控情感属性,TruS 操控说话人身份。TruS 论文直接引用 EmoSteer-TTS [19] 并指出其使用固定 top-k channel 选择缺乏动态适应性,而 TruS 的动态层选择机制是改进点。
 >
@@ -204,4 +204,4 @@ TruS 的核心贡献是范式转换: 将 speaker unlearning 从"修改模型权�
 
 ---
 
-检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Speaker Verification]][待确认], [[Anti-spoofing and Deepfake Detection]][待确认], [[Emilia]][待确认] | 未命中但可能相关: [[Diffusion Model]](DiT 基础), [[Emotion Control in TTS]](EmoSteer-TTS 关联)
+检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[SpeakerVerification]][待确认], [[Anti-spoofingandDeepfakeDetection]][待确认], [[Emilia]][待确认] | 未命中但可能相关: [[DiffusionModel]](DiT 基础), [[EmotionControlinTTS]](EmoSteer-TTS 关联)

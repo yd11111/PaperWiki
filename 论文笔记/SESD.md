@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "Sample-Efficient Diffusion for Text-To-Speech Synthesis"
 arxiv_id: "2409.03717"
-source: "Sources/SED-TTS.pdf"
+source: "Sources/SESD.pdf"
 authors: [Justin Lovelace, Soham Ray, Kwangyoun Kim, Kilian Q. Weinberger, Felix Wu]
 year: 2024
 venue: "arXiv (Interspeech submission)"
 tags: [TTS, diffusion, latent-diffusion, sample-efficiency, data-efficiency, text-encoder, alignment]
-concepts: ["[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Classifier-Free Guidance]]", "[[Duration Predictor]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]"]
-models: ["[[论文笔记/SESD|SESD]]", "[[模型库/EnCodec|EnCodec]]", "[[模型库/VITS|VITS]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/HuBERT|HuBERT]]"]
+concepts: ["[[Diffusion-basedTTS]]", "[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[DurationPredictor]]", "[[ResidualVectorQuantization]]", "[[Non-autoregressiveTTS]]"]
+models: ["[[论文笔记/SESD|SESD]]", "[[模型库/EnCodec|EnCodec]]", "[[模型库/VITS|VITS]]", "[[模型库/NaturalSpeech2|NaturalSpeech 2]]", "[[模型库/HuBERT|HuBERT]]"]
 tasks: ["Text-to-Speech"]
 datasets: ["LibriSpeech"]
 kb_context_sources: 6
@@ -20,20 +20,20 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Residual Vector Quantization]], [[模型库/EnCodec|EnCodec]]; 4 个待确认: [[Diffusion-based TTS]], [[Classifier-Free Guidance]], [[Duration Predictor]], [[Speech-Text Alignment]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ResidualVectorQuantization]], [[模型库/EnCodec|EnCodec]]; 4 个待确认: [[Diffusion-basedTTS]], [[Classifier-FreeGuidance]], [[DurationPredictor]], [[Speech-TextAlignment]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: SESD 属于 [[Diffusion-based TTS]] 中的 **latent diffusion** 分支。在 Diffusion TTS 演进线上 (Diff-TTS 2021 → Grad-TTS 2021 → ProDiff 2022 → NaturalSpeech 2 2023 → Flow Matching 取代 diffusion 2023-2024),SESD 与 NaturalSpeech 2 同属 latent diffusion 路线,但关注点不同: NS2 追求音质天花板 (44k 小时数据 + pitch 标注 + phoneme alignment),SESD 追求数据效率 (<1k 小时 + 无 phoneme alignment)。
+> **谱系定位**: SESD 属于 [[Diffusion-basedTTS]] 中的 **latent diffusion** 分支。在 Diffusion TTS 演进线上 (Diff-TTS 2021 → Grad-TTS 2021 → ProDiff 2022 → NaturalSpeech 2 2023 → Flow Matching 取代 diffusion 2023-2024),SESD 与 NaturalSpeech 2 同属 latent diffusion 路线,但关注点不同: NS2 追求音质天花板 (44k 小时数据 + pitch 标注 + phoneme alignment),SESD 追求数据效率 (<1k 小时 + 无 phoneme alignment)。
 >
 > **已有认知**:
 > - [[模型库/EnCodec|EnCodec]] (confirmed): SESD 使用 EnCodec 的 **连续 latent** (quantization 前的 128d embedding, 75Hz),而非 RVQ 离散 tokens。这是与 VALL-E 等 codec LM 的关键区别 — VALL-E 建模离散 tokens,SESD 建模连续 latents。
-> - [[Residual Vector Quantization]] (confirmed): EnCodec 内部使用 RVQ 压缩,但 SESD 刻意绕过 RVQ 直接使用连续 embedding,避免量化信息损失。推理时生成的连续 latent 再经 RVQ 量化 + EnCodec decoder 还原波形。
-> - [[Classifier-Free Guidance]] [待确认]: SESD 使用标准 CFG (p=0.1 随机 drop text),text-only 合成用 w=5.0,speaker-prompted 用 w=8.0。
-> - [[Duration Predictor]] [待确认]: SESD 的 duration 策略与主流 TTS 完全不同 — 不预测 phoneme duration,而是用 ByT5 fine-tuned 的 seq2seq 模型预测**整体时长** (utterance-level),diffusion 过程内部隐式解决 phoneme 对齐。这与 Duration Predictor 演进线上的趋势一致 (显式 phoneme duration → 隐式端到端)。
+> - [[ResidualVectorQuantization]] (confirmed): EnCodec 内部使用 RVQ 压缩,但 SESD 刻意绕过 RVQ 直接使用连续 embedding,避免量化信息损失。推理时生成的连续 latent 再经 RVQ 量化 + EnCodec decoder 还原波形。
+> - [[Classifier-FreeGuidance]] [待确认]: SESD 使用标准 CFG (p=0.1 随机 drop text),text-only 合成用 w=5.0,speaker-prompted 用 w=8.0。
+> - [[DurationPredictor]] [待确认]: SESD 的 duration 策略与主流 TTS 完全不同 — 不预测 phoneme duration,而是用 ByT5 fine-tuned 的 seq2seq 模型预测**整体时长** (utterance-level),diffusion 过程内部隐式解决 phoneme 对齐。这与 Duration Predictor 演进线上的趋势一致 (显式 phoneme duration → 隐式端到端)。
 >
 > **创新判断**: SESD 的核心贡献不在于单个组件的突破,而在于多个设计选择的协同使数据效率大幅提升: (1) 连续 latent diffusion 降低建模难度,(2) character-aware LM (ByT5) 替代 phonemizer,(3) 非对称 loss weighting 强化高噪声级的 transcript alignment,(4) position-aware cross-attention 显式注入位置信息。消融实验 [Fig 4] 表明每个组件都不可或缺。
 >
-> 检索命中: [[Residual Vector Quantization]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Duration Predictor]](pending-review), [[Speech-Text Alignment]](pending-review) | 未命中但可能相关: Latent Diffusion (无独立页)
+> 检索命中: [[ResidualVectorQuantization]]✓, [[模型库/EnCodec|EnCodec]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[DurationPredictor]](pending-review), [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: Latent Diffusion (无独立页)
 
 > [!summary] 速查
 > - **一句话**: 通过 latent diffusion + ByT5 文本编码 + 非对称 loss weighting,用不到 1k 小时标注数据达到接近人类水平的 TTS 可懂度 (WER 2.3% vs human 2.2%)

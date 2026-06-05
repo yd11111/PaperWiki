@@ -5,7 +5,7 @@ aliases: [Variational Inference with adversarial learning for end-to-end Text-to
 org: "Kakao Enterprise / KAIST"
 year: 2021
 tags: [TTS, end-to-end, VAE, normalizing-flow, GAN, parallel-synthesis]
-key_concepts: ["[[Variational Autoencoder for TTS]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]", "[[Neural Vocoder]]", "[[Speech-Text Alignment]]"]
+key_concepts: ["[[VariationalAutoencoderforTTS]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[NeuralVocoder]]", "[[Speech-TextAlignment]]"]
 tasks: []
 key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Muyan-TTS|Muyan-TTS]]", "[[论文笔记/MathReader|MathReader]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/TMD-TTS|TMD-TTS]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]"]
 supersedes: []

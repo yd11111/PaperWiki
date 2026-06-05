@@ -8,9 +8,9 @@ authors: [Yuancheng Wang, Haoyue Zhan, Liwei Liu, Ruihong Zeng, Haotian Guo, Jia
 year: 2024
 venue: "Preprint"
 tags: [TTS, zero-shot, non-autoregressive, masked-generative, speech-codec, semantic-token]
-concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Conditional Flow Matching]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[ConditionalFlowMatching]]"]
 models: ["[[SoundStream]]", "[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 0
 status: draft
@@ -191,7 +191,7 @@ MaskGCT 的核心贡献在于证明了 **masked generative modeling 可以完全
 > **评分:** 理解 8 | 溯源 7 | 严谨 8 | 导航 6 | 安全 7
 > **Claim 标注率:** 85% (53/62)
 > **问题:** 0 high, 3 medium, 3 low
-> - [medium/bad-linking] frontmatter: models 缺少 [[MaskGCT]] 自身; concepts 缺少 [[Masked Generative Modeling]]、[[w2v-BERT 2.0]]、[[VQ-VAE]]
+> - [medium/bad-linking] frontmatter: models 缺少 [[MaskGCT]] 自身; concepts 缺少 [[MaskedGenerativeModeling]]、[[w2v-BERT2.0]]、[[VQ-VAE]]
 > - [medium/fact-inference-mixing] 方法 > Semantic Codec & T2S: '为什么 VQ-VAE 优于 k-means' 和 '为什么 masked generative 比 AR 更适合 TTS' 未区分论文原文与 agent 解读
 > - [medium/missing-lineage] KB 背景: 空占位符,未定位 MaskGCT 在 NAR TTS 谱系中的位置 (SoundStorm → MaskGCT; vs NaturalSpeech 3)
 > **反向更新:** ✅

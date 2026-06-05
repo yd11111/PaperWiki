@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "NVSpeech: An Integrated and Scalable Pipeline for Human-Like Speech Modeling with Paralinguistic Vocalizations"
 arxiv_id: "2508.04195"
-source: "https://arxiv.org/abs/2508.04195"
+source: "Sources/NVSpeech.pdf"
 authors: [Huan Liao, Qinke Ni, Yuancheng Wang, Yiheng Lu, Haoyue Zhan, Pengyuan Xie, Qiang Zhang, Zhizheng Wu]
 year: 2025
 venue: "arXiv"
 tags: [paralinguistic, non-verbal-vocalization, ASR, TTS, dataset, human-like-speech, expressive-TTS, Mandarin]
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Speech Tokenizer]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[SpeechTokenizer]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]"]
 tasks: []
 datasets: ["[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 2
@@ -20,18 +20,18 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Prosody Modeling]], [[CosyVoice 2]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ProsodyModeling]], [[CosyVoice2]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **[[Prosody Modeling]]** (confirmed): 韵律建模覆盖 duration, pitch, energy, pause 四个物理维度。NVSpeech 扩展了韵律建模的范畴 — 副语言发声 (笑声、叹气、咳嗽等) 是韵律的自然延伸,传统系统完全忽视。NVSpeech 的 word-level annotation 填补了韵律建模中 paralinguistic cues 的数据空白。
+> **[[ProsodyModeling]]** (confirmed): 韵律建模覆盖 duration, pitch, energy, pause 四个物理维度。NVSpeech 扩展了韵律建模的范畴 — 副语言发声 (笑声、叹气、咳嗽等) 是韵律的自然延伸,传统系统完全忽视。NVSpeech 的 word-level annotation 填补了韵律建模中 paralinguistic cues 的数据空白。
 >
-> **[[CosyVoice 2]]** (confirmed): 阿里巴巴通义实验室的流式零样本 TTS 模型。NVSpeech 直接以 CosyVoice 和 CosyVoice2 为 TTS backbone,通过扩展其词表来支持副语言标签的显式插入。
+> **[[CosyVoice2]]** (confirmed): 阿里巴巴通义实验室的流式零样本 TTS 模型。NVSpeech 直接以 CosyVoice 和 CosyVoice2 为 TTS backbone,通过扩展其词表来支持副语言标签的显式插入。
 >
-> **[[Emotion Control in TTS]]** [待确认]: 情感控制 TTS 的核心挑战是情感与其他语音属性深度纠缠。NVSpeech 的方法从不同角度切入 — 不直接建模抽象情感,而是建模具体的副语言行为 (笑、叹气、犹豫),这些行为是情感的外在表现。
+> **[[EmotionControlinTTS]]** [待确认]: 情感控制 TTS 的核心挑战是情感与其他语音属性深度纠缠。NVSpeech 的方法从不同角度切入 — 不直接建模抽象情感,而是建模具体的副语言行为 (笑、叹气、犹豫),这些行为是情感的外在表现。
 >
-> **[[Instruction-Guided Speech Synthesis]]** [待确认]: 指令引导合成将 TTS 重构为指令跟随任务。NVSpeech 的方法与指令引导互补 — 通过在文本中显式插入 `[Laughter]`、`[Breathing]` 等标签实现 token-level 控制,是比自然语言指令更精确的副语言控制方式。
+> **[[Instruction-GuidedSpeechSynthesis]]** [待确认]: 指令引导合成将 TTS 重构为指令跟随任务。NVSpeech 的方法与指令引导互补 — 通过在文本中显式插入 `[Laughter]`、`[Breathing]` 等标签实现 token-level 控制,是比自然语言指令更精确的副语言控制方式。
 >
-> 检索命中: [[Prosody Modeling]], [[CosyVoice 2]] | 过滤: [[Emotion Control in TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]], [[CosyVoice2]] | 过滤: [[EmotionControlinTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -197,7 +197,7 @@ NVSpeech 的方法论选择是建模**可观察的物理行为**(笑声、叹气
 
 3. **Word-level 标注的关键意义**: 这是本文最核心的贡献。Sentence-level 标注只能告诉你"这句话有笑声"，word-level 标注精确到"这个词之后有笑声"，后者才能实现 TTS 中的 context-aware PV 插入 [agent 解读]。
 
-4. **与 [[Emotion Control in TTS]] 的互补**: NVSpeech 不直接建模"快乐/悲伤"等抽象情感,而是建模笑声、叹气等具体行为。这两种方法互补: 情感控制提供高层意图,PV 控制提供底层实现 [agent 解读]。
+4. **与 [[EmotionControlinTTS]] 的互补**: NVSpeech 不直接建模"快乐/悲伤"等抽象情感,而是建模笑声、叹气等具体行为。这两种方法互补: 情感控制提供高层意图,PV 控制提供底层实现 [agent 解读]。
 
 5. **实用但需注意域偏移**: 游戏语音数据的表演性可能使模型在某些场景过度戏剧化。Open-domain 测试集部分缓解了这一担忧,但更多真实场景验证仍需要 [agent 解读]。
 

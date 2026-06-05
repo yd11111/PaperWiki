@@ -1,0 +1,35 @@
+paper: "M3-TTS"
+reviewer: agent
+date: "2026-06-04"
+conclusion: pass
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节包含 4 个关键设计选择,每个都有 WHY 解释 (为什么 MMDiT / 为什么 Mel-VAE / 为什么两阶段 / 训练推理细节);速查卡片可借鉴字段列出 4 个具体可迁移 idea"
+  trustworthy:
+    verdict: pass
+    notes: "数字 claim 标注覆盖率高 ([Table 1], [Table 2], [§X.X], [Eq.X]);指标名正确 (WER/SIM-o/UTMOS/NMOS/QMOS);速查卡片指标含具体数字 + 数据集 + 出处"
+  distinguishable:
+    verdict: pass
+    notes: "[论文原文]/[agent 解读] 标注贯穿全文,覆盖率 > 90%;无推断写成断言的情况;强断言均有数字支撑"
+  locatable:
+    verdict: pass
+    notes: "KB 背景谱系定位清晰 (F5-TTS/E2-TTS/ZipVoice 同源,MMDiT 对齐方案定位);创新判断有 3 条对比基准;frontmatter 完整,models 全部为论文对比的 baseline"
+  no_pollution:
+    verdict: pass
+    notes: "不计划新建实体页;反向更新将仅 append key_papers,不改 status"
+
+issues:
+  - severity: low
+    type: template-compliance
+    principle: distinguishable
+    location: "## 方法: 关键设计选择 > 对齐策略对比表"
+    detail: "对比表中 M3-TTS 的对齐质量描述为'单调自学习',是 agent 解读但表格中未标注来源"
+    suggestion: "可在表格下方补充注释或在表头标注为 agent 总结"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""

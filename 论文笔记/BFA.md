@@ -8,7 +8,7 @@ authors: [Abdul Rehman, Jingyao Cai, Jian-Jun Zhang, Xiaosong Yang]
 year: 2025
 venue: "Under review (IEEE)"
 tags: [forced-alignment, CTC, phoneme-boundary, multilingual, real-time, speech-processing]
-concepts: ["[[Duration Predictor]]", "[[Phoneme Representation]]", "[[Non-autoregressive TTS]]"]
+concepts: ["[[DurationPredictor]]", "[[PhonemeRepresentation]]", "[[Non-autoregressiveTTS]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个待确认实体页: [[Duration Predictor]], [[Phoneme Representation]], [[Non-autoregressive TTS]])
+> [!info] KB 背景 (基于 3 个待确认实体页: [[DurationPredictor]], [[PhonemeRepresentation]], [[Non-autoregressiveTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。全部命中页均为 pending-review 状态,仅供参考 [待确认]。
-> 检索命中: [[Duration Predictor]], [[Phoneme Representation]], [[Non-autoregressive TTS]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[DurationPredictor]], [[PhonemeRepresentation]], [[Non-autoregressiveTTS]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: 强制对齐 (Forced Alignment) 是 TTS pipeline 中获取 phoneme-level duration 标签的关键上游工具。根据 [[Duration Predictor]] 页记录,MFA (Montreal Forced Aligner) 是目前最主流的 duration 标签提取方式,被 FastSpeech 2 等经典 NAR TTS 系统广泛使用。BFA 作为 MFA 的直接竞争者,定位在"更快+多语言+静音感知"方向。
+**谱系定位**: 强制对齐 (Forced Alignment) 是 TTS pipeline 中获取 phoneme-level duration 标签的关键上游工具。根据 [[DurationPredictor]] 页记录,MFA (Montreal Forced Aligner) 是目前最主流的 duration 标签提取方式,被 FastSpeech 2 等经典 NAR TTS 系统广泛使用。BFA 作为 MFA 的直接竞争者,定位在"更快+多语言+静音感知"方向。
 
 **已有认知**:
-- [[Duration Predictor]] 详细记录了 6 种 duration 标签获取方式:AR teacher attention / CTC alignment / HMM forced alignment (MFA) / DP / MAS / Soft DTW。BFA 属于 CTC-based 路线但用于独立 forced alignment 而非 TTS 内部对齐。
-- [[Phoneme Representation]] 提到 IPA 可统一表示所有语言发音,espeak-ng 是常用 G2P 工具。BFA 的 CUPE phoneme encoder 同样基于 IPA 体系。
-- [[Non-autoregressive TTS]] 指出 FastSpeech 2 使用 MFA 获取 duration 标签,若 BFA 的速度优势成立 (240x),可作为高效替代。
+- [[DurationPredictor]] 详细记录了 6 种 duration 标签获取方式:AR teacher attention / CTC alignment / HMM forced alignment (MFA) / DP / MAS / Soft DTW。BFA 属于 CTC-based 路线但用于独立 forced alignment 而非 TTS 内部对齐。
+- [[PhonemeRepresentation]] 提到 IPA 可统一表示所有语言发音,espeak-ng 是常用 G2P 工具。BFA 的 CUPE phoneme encoder 同样基于 IPA 体系。
+- [[Non-autoregressiveTTS]] 指出 FastSpeech 2 使用 MFA 获取 duration 标签,若 BFA 的速度优势成立 (240x),可作为高效替代。
 
 **创新判断**: 相比 MFA (HMM-GMM),BFA 的核心差异在于:(1) CTC-based 神经方法而非 HMM-GMM;(2) 显式建模 inter-phoneme gaps/silences;(3) 无需语言特定发音词典;(4) 预测 onset+offset 双边界而非仅 onset。速度提升极为显著 (240x),但精度在严格容忍度下略低于 MFA。
 
@@ -217,4 +217,4 @@ inter-phoneme gap 的建模是一个有趣的方向。传统对齐器假设音�
 
 ---
 
-检索命中: [[Duration Predictor]][待确认], [[Phoneme Representation]][待确认], [[Non-autoregressive TTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[DurationPredictor]][待确认], [[PhonemeRepresentation]][待确认], [[Non-autoregressiveTTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无

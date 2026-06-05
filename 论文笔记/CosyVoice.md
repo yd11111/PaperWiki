@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "CosyVoice: A Scalable Multilingual Zero-shot Text-to-speech Synthesizer based on Supervised Semantic Tokens"
 arxiv_id: "2407.05407"
-source: "Sources/CosyVoice1.pdf"
+source: "Sources/CosyVoice.pdf"
 authors: [Zhihao Du, Qian Chen, Shiliang Zhang, Kai Hu, Heng Lu, Yexin Yang, Hangrui Hu, Siqi Zheng, Yue Gu, Ziyang Ma, Zhijie Yan]
 year: 2024
 venue: "arXiv"
 tags: [TTS, zero-shot, LLM-based, flow-matching, supervised-token, multilingual, coarse-to-fine, voice-cloning]
-concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]", "[[Semantic vs Acoustic Tokens]]"]
-models: ["[[CosyVoice 2]]", "[[CosyVoice 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]", "[[SemanticvsAcousticTokens]]"]
+models: ["[[CosyVoice2]]", "[[CosyVoice3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["LibriTTS", "AISHELL-3", "Common Voice", "LibriSpeech", "MLS"]
 kb_context_sources: 3
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-02
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[LLM-based TTS]][待确认], [[Classifier-Free Guidance]][待确认], [[Semantic vs Acoustic Tokens]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[LLM-basedTTS]][待确认], [[Classifier-FreeGuidance]][待确认], [[SemanticvsAcousticTokens]][待确认] | 未命中但可能相关: 无
 
 **谱系定位**: CosyVoice 是 LLM-based TTS 范式的早期关键工作之一,与 VALL-E (2023) 同属第一波将 LLM 引入 TTS 的系统。但与 VALL-E 使用无监督 EnCodec acoustic tokens 不同,CosyVoice 开创性地使用**监督式 semantic tokens**(从 ASR 模型提取),这是 Speech Tokenizer 演进线中"监督式 semantic tokenizer"分支的开山之作。后续 CosyVoice 2 (streaming) → CosyVoice 3 (多语言 scaling + DiffRO) 直接继承了这一设计。
 

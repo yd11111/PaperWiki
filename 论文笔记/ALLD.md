@@ -5,18 +5,18 @@ aliases: [ALLD, Audio LLM Distillation, Descriptive Speech Quality Evaluation, A
 authors: ["Chen Chen", "Yuchen Hu", "Siyin Wang", "Helin Wang", "Zhehuai Chen", "Chao Zhang", "Chao-Han Huck Yang", "Eng Siong Chng"]
 year: 2025
 arxiv_id: "2501.17202"
-source: "https://arxiv.org/abs/2501.17202"
+source: "Sources/ALLD.pdf"
 venue: "ICLR 2025"
 tags: [speech-quality-evaluation, MOS-prediction, audio-LLM, distillation, DPO, A-B-test, descriptive-analysis, NISQA, speech-quality, multimodal]
 level: deep
 status: draft
-concepts: ["[[TTS Evaluation]]", "[[Audio Understanding]]", "[[Audio-Language Pretraining]]", "[[Speech-LLM Integration Taxonomy]]"]
+concepts: ["[[TTSEvaluation]]", "[[AudioUnderstanding]]", "[[Audio-LanguagePretraining]]", "[[Speech-LLMIntegrationTaxonomy]]"]
 models: []
 tasks: [MOS-prediction, speech-quality-assessment, A-B-testing, synthetic-word-detection]
 datasets: []
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[TTS Evaluation]]", "[[Audio Understanding]]", "[[Prosody Modeling]]"]
+kb_sources: ["[[TTSEvaluation]]", "[[AudioUnderstanding]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
 
@@ -24,9 +24,9 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[TTS Evaluation]]** [待确认]: ALLD 直接解决 TTS Evaluation 概念页中指出的 predicted MOS 局限性 -- 纯数值 MOS 预测 "overly simplistic, provides no insight into underlying causes of quality degradation"。ALLD 训练 audio LLM 同时输出 (1) 多维度描述性分析 (Noisiness, Coloration, Discontinuity, Loudness) + (2) MOS 数值预测 + (3) A/B pairwise comparison [§3, §4] [论文原文]。
-- **[[Audio Understanding]]** [待确认]: ALLD 揭示了当前 audio LLM 的一个盲区: 它们能理解语义内容 (what is said) 但 **无法感知语音质量** (how it sounds)。Audio understanding 的 paralinguistic 任务维度需扩展到包含 quality assessment [§1] [论文原文]。
-- **[[Prosody Modeling]]** (confirmed): ALLD 的 speech quality 分析涉及 Noisiness/Coloration/Discontinuity/Loudness 四个维度,其中 Coloration (Pearson 0.82) 和 Loudness (Pearson 0.81) 与整体 MOS 相关性最高 [Fig 1]。这些维度与传统 prosody 建模关注的 pitch/duration/energy 互补 -- 共同构成语音感知质量的完整图景 [agent 解读]。
+- **[[TTSEvaluation]]** [待确认]: ALLD 直接解决 TTS Evaluation 概念页中指出的 predicted MOS 局限性 -- 纯数值 MOS 预测 "overly simplistic, provides no insight into underlying causes of quality degradation"。ALLD 训练 audio LLM 同时输出 (1) 多维度描述性分析 (Noisiness, Coloration, Discontinuity, Loudness) + (2) MOS 数值预测 + (3) A/B pairwise comparison [§3, §4] [论文原文]。
+- **[[AudioUnderstanding]]** [待确认]: ALLD 揭示了当前 audio LLM 的一个盲区: 它们能理解语义内容 (what is said) 但 **无法感知语音质量** (how it sounds)。Audio understanding 的 paralinguistic 任务维度需扩展到包含 quality assessment [§1] [论文原文]。
+- **[[ProsodyModeling]]** (confirmed): ALLD 的 speech quality 分析涉及 Noisiness/Coloration/Discontinuity/Loudness 四个维度,其中 Coloration (Pearson 0.82) 和 Loudness (Pearson 0.81) 与整体 MOS 相关性最高 [Fig 1]。这些维度与传统 prosody 建模关注的 pitch/duration/energy 互补 -- 共同构成语音感知质量的完整图景 [agent 解读]。
 
 > [!summary] 速查
 > - **一句话**: 首个 descriptive speech quality evaluation 数据集 + ALLD (Alignment with LLM Distillation) 训练方法,使 audio LLM 既能预测 MOS 又能生成多维度质量分析和 A/B 比较判断
@@ -153,4 +153,4 @@ ALLD 训练策略的巧妙之处在于 **将 LLM 作为 teacher 而非 reward mo
 
 ---
 
-检索命中: [[Prosody Modeling]](confirmed) | 过滤: [[TTS Evaluation]](pending-review), [[Audio Understanding]](pending-review), [[Audio-Language Pretraining]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]](confirmed) | 过滤: [[TTSEvaluation]](pending-review), [[AudioUnderstanding]](pending-review), [[Audio-LanguagePretraining]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: 无

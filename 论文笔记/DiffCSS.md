@@ -8,8 +8,8 @@ authors: [Weihao Wu, Zhiwei Lin, Yixuan Zhou, Jingbei Li, Rui Niu, Qinghua Wu, S
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, conversational-speech-synthesis, diffusion, prosody, diversity, LM-based-TTS, context-modeling]
-concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Prosody Modeling]]", "[[Codec Language Model]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Natural Language Description for TTS]]"]
-models: ["[[NaturalSpeech 3]]"]
+concepts: ["[[DiffusionModel]]", "[[Diffusion-basedTTS]]", "[[ProsodyModeling]]", "[[CodecLanguageModel]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[NaturalLanguageDescriptionforTTS]]"]
+models: ["[[NaturalSpeech3]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -20,18 +20,18 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Prosody Modeling]], [[LLM-based TTS]], [[Speaker Embedding]]; 3 个待确认实体页: [[Diffusion-based TTS]], [[Codec Language Model]], [[Natural Language Description for TTS]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ProsodyModeling]], [[LLM-basedTTS]], [[SpeakerEmbedding]]; 3 个待确认实体页: [[Diffusion-basedTTS]], [[CodecLanguageModel]], [[NaturalLanguageDescriptionforTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Prosody Modeling]]✓, [[LLM-based TTS]]✓, [[Speaker Embedding]]✓ | 过滤: [[Diffusion-based TTS]](pending-review), [[Codec Language Model]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[CodecLanguageModel]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: DiffCSS 处于 Conversational Speech Synthesis (CSS) 与 LM-based TTS 的交叉地带。在 Prosody Modeling 的演进线上,传统 CSS 系统 (Guo et al. 2021 GRU-based; Li et al. 2022 DialogueGCN) 使用确定性韵律预测,面临 one-to-many mapping 问题 — 即同一对话上下文可对应多种合理韵律。DiffCSS 引入 diffusion model 解决这一问题,属于知识库中 [[Prosody Modeling]] "生成模型隐式建模韵律分布" 分支的新实例,但将其拓展到 **对话上下文条件化** 场景。
+**谱系定位**: DiffCSS 处于 Conversational Speech Synthesis (CSS) 与 LM-based TTS 的交叉地带。在 Prosody Modeling 的演进线上,传统 CSS 系统 (Guo et al. 2021 GRU-based; Li et al. 2022 DialogueGCN) 使用确定性韵律预测,面临 one-to-many mapping 问题 — 即同一对话上下文可对应多种合理韵律。DiffCSS 引入 diffusion model 解决这一问题,属于知识库中 [[ProsodyModeling]] "生成模型隐式建模韵律分布" 分支的新实例,但将其拓展到 **对话上下文条件化** 场景。
 
 **已有认知**:
-- [[Prosody Modeling]] (confirmed) 指出韵律建模的 one-to-many 问题是核心挑战,传统方法通过 VAE/Flow/Diffusion 等生成模型隐式建模韵律分布来缓解 over-smoothing。DiffCSS 是该思路在 CSS 中的具体应用。
-- [[LLM-based TTS]] (confirmed) 记录了 LM-based TTS 的典型架构 (decoder-only transformer + codec tokens),以及 Hybrid 架构 (LLM + Flow/Diffusion) 的趋势。DiffCSS 的 TTS backbone 基于 ParlerTTS,属于 LM-based TTS 范式。
-- [[Speaker Embedding]] (confirmed) 描述了 speaker embedding 在 TTS 中的注入方式,包括 cross-attention、concatenation 等。DiffCSS 将 speaker embedding 与 prosody embedding 组合后通过 cross-attention 注入 TTS backbone。
-- [[Diffusion-based TTS]] [待确认] 梳理了 diffusion 在 TTS 声学模型中的应用,但主要关注 text→mel 的直接生成。DiffCSS 的创新在于将 diffusion 用于 **韵律嵌入** 的生成而非直接的声学特征生成。
-- [[Natural Language Description for TTS]] [待确认] 介绍了 Parler-TTS 作为 text-description-based TTS,DiffCSS 将其改造为 prosody-controllable backbone。
+- [[ProsodyModeling]] (confirmed) 指出韵律建模的 one-to-many 问题是核心挑战,传统方法通过 VAE/Flow/Diffusion 等生成模型隐式建模韵律分布来缓解 over-smoothing。DiffCSS 是该思路在 CSS 中的具体应用。
+- [[LLM-basedTTS]] (confirmed) 记录了 LM-based TTS 的典型架构 (decoder-only transformer + codec tokens),以及 Hybrid 架构 (LLM + Flow/Diffusion) 的趋势。DiffCSS 的 TTS backbone 基于 ParlerTTS,属于 LM-based TTS 范式。
+- [[SpeakerEmbedding]] (confirmed) 描述了 speaker embedding 在 TTS 中的注入方式,包括 cross-attention、concatenation 等。DiffCSS 将 speaker embedding 与 prosody embedding 组合后通过 cross-attention 注入 TTS backbone。
+- [[Diffusion-basedTTS]] [待确认] 梳理了 diffusion 在 TTS 声学模型中的应用,但主要关注 text→mel 的直接生成。DiffCSS 的创新在于将 diffusion 用于 **韵律嵌入** 的生成而非直接的声学特征生成。
+- [[NaturalLanguageDescriptionforTTS]] [待确认] 介绍了 Parler-TTS 作为 text-description-based TTS,DiffCSS 将其改造为 prosody-controllable backbone。
 
 **创新判断**: DiffCSS 的核心新颖性在于将 diffusion model 从传统的"直接生成声学特征"转向"生成韵律嵌入条件",配合 LM-based TTS backbone,实现对话韵律的多样性。相比 KB 中已有的 Diffusion-based TTS (Grad-TTS, ProDiff 等直接在 mel space 做 diffusion) 和 Prosody Modeling (FastSpeech 2 显式预测、VITS flow-based 隐式),DiffCSS 是首个将 diffusion 专用于 CSS 韵律多样性的工作。
 
@@ -164,7 +164,7 @@ DiffCSS 是一项概念清晰、设计合理的工作,其核心洞察 — 用 di
 
 然而,工作的验证范围较窄: 仅 2 个说话人、20 小时对话数据、DailyTalk 一个数据集。CSS 的真正挑战在于多说话人、多风格、自发对话场景。此外,MOS 绝对值偏低 (3.6 左右) 可能反映了 ParlerTTS backbone 本身的局限,使用更强的 backbone (如 CosyVoice 或 Seed-TTS) 可能会进一步释放 diffusion 韵律预测器的潜力。
 
-从知识库视角看,DiffCSS 为 [[Prosody Modeling]] 中 "生成模型隐式建模韵律分布" 分支提供了一个新的 CSS 应用实例,也为 [[Diffusion-based TTS]] 提供了一个 diffusion 用于韵律嵌入而非声学特征的新方向。
+从知识库视角看,DiffCSS 为 [[ProsodyModeling]] 中 "生成模型隐式建模韵律分布" 分支提供了一个新的 CSS 应用实例,也为 [[Diffusion-basedTTS]] 提供了一个 diffusion 用于韵律嵌入而非声学特征的新方向。
 
 ## 可复用的 idea
 
@@ -182,4 +182,4 @@ DiffCSS 是一项概念清晰、设计合理的工作,其核心洞察 — 用 di
 
 ---
 
-检索命中: [[Prosody Modeling]], [[LLM-based TTS]], [[Speaker Embedding]] | 过滤: [[Diffusion-based TTS]](pending-review), [[Codec Language Model]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]], [[LLM-basedTTS]], [[SpeakerEmbedding]] | 过滤: [[Diffusion-basedTTS]](pending-review), [[CodecLanguageModel]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无

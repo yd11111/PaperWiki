@@ -8,9 +8,9 @@ authors: [Ye-Xin Lu, Yu Gu, Kun Wei, Hui-Peng Du, Yang Ai, Zhen-Hua Ling]
 year: 2025
 venue: "ICASSP 2026"
 tags: [TTS, zero-shot, environment-aware, flow-matching, disentanglement, cross-attention, classifier-free-guidance]
-concepts: ["[[Conditional Flow Matching]]", "[[Classifier-Free Guidance]]", "[[Mel Spectrogram]]", "[[Speech Factorization]]", "[[Masked Generative Modeling]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]", "[[SpeechFactorization]]", "[[MaskedGenerativeModeling]]"]
 models: ["[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["[[数据集/AudioSet|AudioSet]]"]
 kb_context_sources: 6
 status: draft
@@ -25,16 +25,16 @@ updated: 2026-06-04
 
 **谱系定位**: DAIEN-TTS 属于 flow-matching-based 零样本 TTS 的新分支,专注于 **环境感知合成**。它直接构建在 F5-TTS (flow matching infilling) 之上,与已有知识库中的工作存在以下关系:
 
-- **[[Conditional Flow Matching]]** (confirmed): DAIEN-TTS 的生成核心与 F5-TTS 相同,使用 CFM 训练 velocity field 将 Gaussian noise 映射到 target mel。区别在于训练目标增加了 environment 条件,且 loss 仅在 speech mask 区域计算。在 CFM 演进链 (Voicebox → F5-TTS → CosyVoice 3) 中,DAIEN-TTS 是 F5-TTS 的 environment-aware 扩展。
-- **[[Speech Factorization]]** (confirmed): 该概念页已记录 content/speaker/prosody/environment 等维度的解耦。DAIEN-TTS 的核心贡献是 **speech-environment 解耦 + 独立重建**,与 NaturalSpeech 3 的 factorized codec、IDEA-TTS (同组前作) 的 incremental disentanglement 在方法论上一脉相承,但 DAIEN-TTS 用 Transformer masking net 替代 speech enhancement pipeline,并将 environment 通过 cross-attention 注入而非 concatenation。
-- **[[Classifier-Free Guidance]]** [待确认]: DAIEN-TTS 提出 **Dual CFG (DCFG)**,将 speech 和 environment 作为两个独立引导项,分别控制引导强度。这是标准 CFG 的多条件扩展,在 VoiceLDM 中也有类似设计。
-- **[[Speaker Embedding]]** (confirmed): DAIEN-TTS 不使用显式 speaker embedding,而是通过 in-context speech prompt (masked mel spectrogram) 传递音色信息,延续 F5-TTS/Voicebox 的 infilling 范式。评估时使用 WavLM-large-based speaker verification model 计算 SIM-o。
-- **[[Masked Generative Modeling]]** [待确认]: DAIEN-TTS 的 infilling 范式 (random span mask + 条件重建) 与 masked generative modeling 在连续域的对应关系,但 DAIEN-TTS 是连续 flow matching 而非离散 mask-predict。
-- **任务库/[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]** (confirmed): DAIEN-TTS 是 zero-shot TTS 的子方向 (environment-aware),目标不仅是音色克隆,还要独立控制背景环境。
+- **[[ConditionalFlowMatching]]** (confirmed): DAIEN-TTS 的生成核心与 F5-TTS 相同,使用 CFM 训练 velocity field 将 Gaussian noise 映射到 target mel。区别在于训练目标增加了 environment 条件,且 loss 仅在 speech mask 区域计算。在 CFM 演进链 (Voicebox → F5-TTS → CosyVoice 3) 中,DAIEN-TTS 是 F5-TTS 的 environment-aware 扩展。
+- **[[SpeechFactorization]]** (confirmed): 该概念页已记录 content/speaker/prosody/environment 等维度的解耦。DAIEN-TTS 的核心贡献是 **speech-environment 解耦 + 独立重建**,与 NaturalSpeech 3 的 factorized codec、IDEA-TTS (同组前作) 的 incremental disentanglement 在方法论上一脉相承,但 DAIEN-TTS 用 Transformer masking net 替代 speech enhancement pipeline,并将 environment 通过 cross-attention 注入而非 concatenation。
+- **[[Classifier-FreeGuidance]]** [待确认]: DAIEN-TTS 提出 **Dual CFG (DCFG)**,将 speech 和 environment 作为两个独立引导项,分别控制引导强度。这是标准 CFG 的多条件扩展,在 VoiceLDM 中也有类似设计。
+- **[[SpeakerEmbedding]]** (confirmed): DAIEN-TTS 不使用显式 speaker embedding,而是通过 in-context speech prompt (masked mel spectrogram) 传递音色信息,延续 F5-TTS/Voicebox 的 infilling 范式。评估时使用 WavLM-large-based speaker verification model 计算 SIM-o。
+- **[[MaskedGenerativeModeling]]** [待确认]: DAIEN-TTS 的 infilling 范式 (random span mask + 条件重建) 与 masked generative modeling 在连续域的对应关系,但 DAIEN-TTS 是连续 flow matching 而非离散 mask-predict。
+- **任务库/[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]** (confirmed): DAIEN-TTS 是 zero-shot TTS 的子方向 (environment-aware),目标不仅是音色克隆,还要独立控制背景环境。
 
 **创新判断**: 相对于 KB 已有知识,DAIEN-TTS 的核心新颖性在于 (1) 将 speech-environment separation 模块嵌入 flow matching TTS pipeline, (2) 通过 cross-attention 而非 concatenation 注入 environment 条件, (3) DCFG + SNR adaptation 的推理策略组合。这些在已有概念页中均无记录。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Speaker Embedding]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Masked Generative Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓, [[SpeakerEmbedding]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "UMETTS: A Unified Framework for Emotional Text-to-Speech Synthesis with Multimodal Prompts"
 arxiv_id: "2404.18398"
-source: "Sources/MM-TTS.pdf"
+source: "Sources/UMETTS.pdf"
 authors: [Zhi-Qi Cheng, Xiang Li, Jun-Yan He, Junyao Chen, Xiaomao Fan, Xiaojiang Peng, Alexander G. Hauptmann]
 year: 2024
 venue: "IEEE (preprint, arXiv:2404.18398v2)"
 tags: [TTS, emotion, multimodal, contrastive-learning, style-transfer, expressiveness]
-concepts: ["[[Emotion Control in TTS]]", "[[Global Style Tokens]]", "[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Speaker Embedding]]", "[[Natural Language Description for TTS]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[GlobalStyleTokens]]", "[[StyleTransferinTTS]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]", "[[NaturalLanguageDescriptionforTTS]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -25,16 +25,16 @@ updated: 2026-06-03
 
 **谱系定位**: UMETTS 处于 Emotional TTS 从"离散标签/单模态参考"向"多模态 prompt"演进的节点。在已有知识中:
 
-- **[[Emotion Control in TTS]]** [待确认] 梳理了 E-TTS 的演进线: emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → DPO 优化 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024)。UMETTS 的创新在于**跨模态对齐**(视觉+音频+文本 → 统一 emotion embedding),这是已有演进线未覆盖的方向。
-- **[[Global Style Tokens]]** [待确认] 描述了 GST 的 reference encoder + style token bank 架构及其局限(全局粒度、speaker/style 纠缠)。UMETTS 论文明确指出 GST 方法"may not fully disentangle speaker characteristics from emotional and prosodic elements" [§I],这与 KB 中对 GST 局限的描述一致。UMETTS 用对比学习替代了 GST 的 attention-over-token-bank。
-- **[[Style Transfer in TTS]]** [待确认] 将风格控制策略分为 style tagging / reference prompt / NL description / instruction-guided 四类。UMETTS 的 multimodal prompt 方案横跨 reference prompt 和 NL description 两类: 它同时接受音频参考、视觉参考和文本 prompt。
-- **[[Prosody Modeling]]** (confirmed) 区分了显式韵律建模(FastSpeech 2 的 variance adaptor)和隐式建模(VAE/flow/reference encoder)。UMETTS 的 EMI-TTS 模块在 FastSpeech2 variant 中通过 Conditional Cross-Attention 将 emotion embedding 注入 Duration Predictor 和 Mel Decoder,属于条件化隐式控制韵律的路线。
-- **[[Speaker Embedding]]** (confirmed) 总结了 speaker embedding 的注入方式(concatenation, addition, conditional LN, cross-attention, prefix)。UMETTS 的所有 TTS variant 都采用 concatenation 方式: $h_{lg}^{emo} = \text{Concat}(h_{lg}, u_{emo}, u_{spk})$ [§II-B],将 speaker embedding 与 emotion embedding 拼接后送入 decoder。
-- **[[Natural Language Description for TTS]]** [待确认] 梳理了从 PromptTTS 到 InstructTTS 的 NL 控制演进。UMETTS 的文本 prompt 更接近简短的 emotion label prompt(如"A person speaking with a feeling of happy"),而非自由格式的风格描述。
+- **[[EmotionControlinTTS]]** [待确认] 梳理了 E-TTS 的演进线: emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → DPO 优化 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024)。UMETTS 的创新在于**跨模态对齐**(视觉+音频+文本 → 统一 emotion embedding),这是已有演进线未覆盖的方向。
+- **[[GlobalStyleTokens]]** [待确认] 描述了 GST 的 reference encoder + style token bank 架构及其局限(全局粒度、speaker/style 纠缠)。UMETTS 论文明确指出 GST 方法"may not fully disentangle speaker characteristics from emotional and prosodic elements" [§I],这与 KB 中对 GST 局限的描述一致。UMETTS 用对比学习替代了 GST 的 attention-over-token-bank。
+- **[[StyleTransferinTTS]]** [待确认] 将风格控制策略分为 style tagging / reference prompt / NL description / instruction-guided 四类。UMETTS 的 multimodal prompt 方案横跨 reference prompt 和 NL description 两类: 它同时接受音频参考、视觉参考和文本 prompt。
+- **[[ProsodyModeling]]** (confirmed) 区分了显式韵律建模(FastSpeech 2 的 variance adaptor)和隐式建模(VAE/flow/reference encoder)。UMETTS 的 EMI-TTS 模块在 FastSpeech2 variant 中通过 Conditional Cross-Attention 将 emotion embedding 注入 Duration Predictor 和 Mel Decoder,属于条件化隐式控制韵律的路线。
+- **[[SpeakerEmbedding]]** (confirmed) 总结了 speaker embedding 的注入方式(concatenation, addition, conditional LN, cross-attention, prefix)。UMETTS 的所有 TTS variant 都采用 concatenation 方式: $h_{lg}^{emo} = \text{Concat}(h_{lg}, u_{emo}, u_{spk})$ [§II-B],将 speaker embedding 与 emotion embedding 拼接后送入 decoder。
+- **[[NaturalLanguageDescriptionforTTS]]** [待确认] 梳理了从 PromptTTS 到 InstructTTS 的 NL 控制演进。UMETTS 的文本 prompt 更接近简短的 emotion label prompt(如"A person speaking with a feeling of happy"),而非自由格式的风格描述。
 
 **已有认知与创新判断**: 现有 KB 中的 E-TTS 方法要么依赖单一模态参考(GST 的音频参考、PromptTTS 的文本描述),要么需要显式 emotion label。UMETTS 的核心创新是 EP-Align 模块将**视觉**模态引入 E-TTS(从图像/视频中提取情感线索),这在 KB 中尚无先例。但其 TTS 后端(VITS/FastSpeech2/Tacotron2 的 emotion conditioning 变体)并非新架构,而是在已有模型上的条件化扩展。
 
-> 检索命中: [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Style Transfer in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -159,7 +159,7 @@ UMETTS 的核心 idea — 用对比学习统一多模态情感表示 — 方向�
 
 但论文的主要弱点在于 TTS 后端的选择。在 2024 年仍然使用 VITS/FastSpeech2/Tacotron2 作为后端,未与 LLM-based TTS 系统(如 VALL-E、CosyVoice)集成,限制了方法的实际影响力。此外,实验仅在小规模平行情感数据集上进行,泛化到 in-the-wild 场景的能力未知。
 
-从 KB 角度看,UMETTS 填补了 [[Emotion Control in TTS]] 中"多模态 prompt → 情感合成"这一空白路线。其 EP-Align 模块的设计理念(跨模态对比对齐 + prompt anchoring)比具体的 TTS 集成更有长期价值,可以迁移到任何条件生成任务中。
+从 KB 角度看,UMETTS 填补了 [[EmotionControlinTTS]] 中"多模态 prompt → 情感合成"这一空白路线。其 EP-Align 模块的设计理念(跨模态对比对齐 + prompt anchoring)比具体的 TTS 集成更有长期价值,可以迁移到任何条件生成任务中。
 
 ## 可复用的 idea
 

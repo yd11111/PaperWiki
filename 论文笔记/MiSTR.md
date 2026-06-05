@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "MiSTR: Multi-Modal iEEG-to-Speech Synthesis with Transformer-Based Prosody Prediction and Neural Phase Reconstruction"
 arxiv_id: "2508.03166"
-source: "Sources/2508.03166.pdf"
+source: "Sources/MiSTR.pdf"
 authors: [Mohammed Salah Al-Radhi, Géza Németh, Branislav Gerazov]
 year: 2025
 venue: "Interspeech 2025 (推断)"
 tags: [BCI, iEEG, speech-synthesis, neural-decoding, prosody, mel-spectrogram, vocoder, phase-reconstruction, transformer]
-concepts: ["[[Mel Spectrogram]]", "[[Neural Vocoder]]", "[[Prosody Modeling]]", "[[F0 Modeling]]"]
+concepts: ["[[MelSpectrogram]]", "[[NeuralVocoder]]", "[[ProsodyModeling]]", "[[F0Modeling]]"]
 models: []
 tasks: []
 datasets: []
@@ -22,15 +22,15 @@ updated: 2026-06-04
 
 > [!info] KB 背景 (基于 2 个已确认 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Neural Vocoder]]✓, [[Prosody Modeling]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[F0 Modeling]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[F0Modeling]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: MiSTR 处于 BCI (脑机接口) 与 TTS 的交叉领域 — 从颅内脑电图 (iEEG) 信号解码语音,属于 speech neuroprosthesis 方向。与传统 TTS pipeline 的区别在于输入源: 不是文本,而是神经信号。但核心 pipeline 结构与 TTS 一致: 特征提取 → Mel spectrogram 预测 → 波形合成。
 
 **已有认知**:
-- [[Neural Vocoder]] (confirmed): KB 中记录了从 WaveNet → HiFi-GAN → BigVGAN → Vocos 的 vocoder 演进。MiSTR 提出的 IHPR vocoder 属于 phase reconstruction 方向,与 Griffin-Lim (传统) 和 WaveGlow/BigVGAN (神经网络) 形成对比。KB 指出 "mel spectrogram 丢失了相位信息" 正是 MiSTR IHPR 模块要解决的核心问题。
-- [[Prosody Modeling]] (confirmed): KB 记录了韵律的四个物理维度 (duration, pitch/F0, energy, pause)。MiSTR 从 iEEG 信号中提取这些维度的代理特征 (proxy F0, RMS energy, shimmer, duration, phase variability),方法上与传统 TTS 从文本/参考音频提取韵律的路线完全不同。
-- [[Mel Spectrogram]] [待确认]: KB 描述 mel spectrogram 作为 "声学模型与声码器之间的桥梁"。MiSTR 的中间表示同样是 mel spectrogram,但输入端是 iEEG 特征而非文本/linguistic features。
-- [[F0 Modeling]] [待确认]: MiSTR 使用 Harvest 算法提取 F0 作为韵律特征之一,与 KB 中描述的 FastSpeech 2 pitch predictor 等方法不同 — MiSTR 的 F0 不是预测目标,而是编码输入。
+- [[NeuralVocoder]] (confirmed): KB 中记录了从 WaveNet → HiFi-GAN → BigVGAN → Vocos 的 vocoder 演进。MiSTR 提出的 IHPR vocoder 属于 phase reconstruction 方向,与 Griffin-Lim (传统) 和 WaveGlow/BigVGAN (神经网络) 形成对比。KB 指出 "mel spectrogram 丢失了相位信息" 正是 MiSTR IHPR 模块要解决的核心问题。
+- [[ProsodyModeling]] (confirmed): KB 记录了韵律的四个物理维度 (duration, pitch/F0, energy, pause)。MiSTR 从 iEEG 信号中提取这些维度的代理特征 (proxy F0, RMS energy, shimmer, duration, phase variability),方法上与传统 TTS 从文本/参考音频提取韵律的路线完全不同。
+- [[MelSpectrogram]] [待确认]: KB 描述 mel spectrogram 作为 "声学模型与声码器之间的桥梁"。MiSTR 的中间表示同样是 mel spectrogram,但输入端是 iEEG 特征而非文本/linguistic features。
+- [[F0Modeling]] [待确认]: MiSTR 使用 Harvest 算法提取 F0 作为韵律特征之一,与 KB 中描述的 FastSpeech 2 pitch predictor 等方法不同 — MiSTR 的 F0 不是预测目标,而是编码输入。
 
 **创新判断**: MiSTR 的创新不在单一模块 (Transformer/mel/vocoder 在 TTS 中均非新颖),而在于将 TTS 成熟技术迁移到 iEEG-to-speech 这个新输入域,并针对 iEEG 特有的挑战 (神经信号变异性、缺乏相位信息、韵律难以从神经活动直接解码) 做了组合创新。
 
@@ -173,7 +173,7 @@ MiSTR 是一个工程导向的组合创新工作,将 TTS 领域的成熟技术 (
 
 ---
 
-检索命中: [[Neural Vocoder]], [[Prosody Modeling]] | 过滤: [[Mel Spectrogram]](pending-review), [[F0 Modeling]](pending-review) | 未命中但可能相关: 无
+检索命中: [[NeuralVocoder]], [[ProsodyModeling]] | 过滤: [[MelSpectrogram]](pending-review), [[F0Modeling]](pending-review) | 未命中但可能相关: 无
 
 > [!review] 审阅 (2026-06-04, agent)
 > **结论: pass-with-fixes** | issues: 0 high, 1 medium, 2 low

@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Speak, Read and Prompt: High-Fidelity Text-to-Speech with Minimal Supervision"
 arxiv_id: "2302.03540"
-source: "https://arxiv.org/abs/2302.03540"
+source: "Sources/SPEAR-TTS.pdf"
 authors: [Eugene Kharitonov, Damien Vincent, Zalán Borsos, Raphaël Marinier, Sertan Girgin, Olivier Pietquin, Matt Sharifi, Marco Tagliasacchi, Neil Zeghidour]
 year: 2023
 venue: "arXiv (Google Research)"
 tags: [TTS, zero-shot, low-resource, semantic-token, acoustic-token, backtranslation, pretraining, in-context-learning, speaker-prompting]
-concepts: ["[[Semantic vs Acoustic Tokens]]", "[[LLM-based TTS]]", "[[Speech Language Model]]", "[[Speech Tokenizer]]", "[[Residual Vector Quantization]]"]
+concepts: ["[[SemanticvsAcousticTokens]]", "[[LLM-basedTTS]]", "[[SpeechLanguageModel]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]"]
 models: ["[[SoundStream]]"]
 tasks: []
 datasets: []
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Language Model]], [[Speech Tokenizer]], [[Residual Vector Quantization]])
-> SPEAR-TTS 是 AudioLM 的直接 TTS 扩展,在 [[LLM-based TTS]] 中被列为 semantic token 路线的代表。[[Semantic vs Acoustic Tokens]] 页将 SPEAR-TTS 归入串联策略 (text → semantic → acoustic)。[[Voice Cloning Taxonomy]] [待确认] 将 SPEAR-TTS 列为 codec-based zero-shot cloning 的代表。
-> 检索命中: [[Semantic vs Acoustic Tokens]], [[LLM-based TTS]], [[Speech Language Model]], [[Speech Tokenizer]], [[Residual Vector Quantization]] | 过滤: [[Voice Cloning Taxonomy]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 5 个已确认实体页: [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeechLanguageModel]], [[SpeechTokenizer]], [[ResidualVectorQuantization]])
+> SPEAR-TTS 是 AudioLM 的直接 TTS 扩展,在 [[LLM-basedTTS]] 中被列为 semantic token 路线的代表。[[SemanticvsAcousticTokens]] 页将 SPEAR-TTS 归入串联策略 (text → semantic → acoustic)。[[VoiceCloningTaxonomy]] [待确认] 将 SPEAR-TTS 列为 codec-based zero-shot cloning 的代表。
+> 检索命中: [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeechLanguageModel]], [[SpeechTokenizer]], [[ResidualVectorQuantization]] | 过滤: [[VoiceCloningTaxonomy]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

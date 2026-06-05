@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Continuous Speech Tokenizer in Text To Speech"
 arxiv_id: "2410.17081"
-source: "Sources/ContinuousSpeechTokenizer.pdf"
+source: "Sources/Cont-SPT.pdf"
 authors: [Yixing Li, Ruobing Xie, Xingwu Sun, Yu Cheng, Zhanhui Kang]
 year: 2024
 venue: "NAACL 2025 Findings"
 tags: [TTS, continuous-token, speech-tokenizer, autoregressive, flow-matching, information-retention]
-concepts: ["[[Speech Tokenizer]]", "[[Residual Vector Quantization]]", "[[Conditional Flow Matching]]", "[[Variational Autoencoder for TTS]]", "[[Codec Language Model]]", "[[Semantic vs Acoustic Tokens]]", "[[Mel Spectrogram]]", "[[TTS Evaluation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[ConditionalFlowMatching]]", "[[VariationalAutoencoderforTTS]]", "[[CodecLanguageModel]]", "[[SemanticvsAcousticTokens]]", "[[MelSpectrogram]]", "[[TTSEvaluation]]"]
 models: ["[[EnCodec]]", "[[MELLE]]", "[[论文笔记/VALL-E|VALL-E]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriSpeech"]
 kb_context_sources: 6
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认参考: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Codec Language Model]][待确认], [[Variational Autoencoder for TTS]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认参考: [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[CodecLanguageModel]][待确认], [[VariationalAutoencoderforTTS]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: Cont-SPT 属于 Speech Tokenizer 页记录的 "Continuous VAE Tokenizer" 新路线的早期探索之一。Speech Tokenizer 页的演进线已标注: "Continuous VAE tokenizer (sigma-VAE, LatentLM 2024; shortcut-VAE, CLEAR 2025): 绕过离散量化,直接用 VAE 编码为连续 latent vectors"。Cont-SPT 提出时间 (2024-10) 略早于 LatentLM (2024-12) 和 CLEAR (2025),是同期独立探索连续语音表征路线的工作之一。
 
@@ -157,4 +157,4 @@ Cont-SPT 在所有指标上优于 VALL-E baseline。**Continuity Quality 提升�
 > - Issues: 2 medium (frontmatter datasets 为空 → 已补; models 缺 VALL-E → 已补), 2 low
 > - 详见 `_review/Cont-SPT-review.yml`
 
-检索命中: [[Speech Tokenizer]]✓, [[Residual Vector Quantization]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Variational Autoencoder for TTS]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[ResidualVectorQuantization]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无

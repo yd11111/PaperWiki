@@ -8,9 +8,9 @@ authors: [Xiaoyu Fan, Huizhi Xie, Wei Zou, Yunzhang Chen]
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, masked-diffusion, non-autoregressive, zero-shot, speech-editing, discrete-diffusion, LLM-based]
-concepts: ["[[Masked Generative Modeling]]", "[[LLM-based TTS]]", "[[Non-autoregressive TTS]]", "[[Diffusion Model]]", "[[Conditional Flow Matching]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Tokenizer]]"]
-models: ["[[CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "F5-TTS (Chen et al., 2024)", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[MaskedGenerativeModeling]]", "[[LLM-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[SemanticvsAcousticTokens]]", "[[SpeechTokenizer]]"]
+models: ["[[CosyVoice3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "F5-TTS (Chen et al., 2024)", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: LLaDA-TTS 位于 [[LLM-based TTS]] 范式的 NAR 分支。主流 LLM-based TTS (VALL-E, Seed-TTS, CosyVoice 系列) 均采用自回归 decoder-only transformer 生成离散 speech tokens,然后用 vocoder 合成波形。LLaDA-TTS 保留了这一 pipeline 的 tokenizer + vocoder 部分,仅将 AR LLM 替换为 masked discrete diffusion model,属于对 LLM-based TTS 的 "解码策略替换" 而非 "架构重设计"。
+> **谱系定位**: LLaDA-TTS 位于 [[LLM-basedTTS]] 范式的 NAR 分支。主流 LLM-based TTS (VALL-E, Seed-TTS, CosyVoice 系列) 均采用自回归 decoder-only transformer 生成离散 speech tokens,然后用 vocoder 合成波形。LLaDA-TTS 保留了这一 pipeline 的 tokenizer + vocoder 部分,仅将 AR LLM 替换为 masked discrete diffusion model,属于对 LLM-based TTS 的 "解码策略替换" 而非 "架构重设计"。
 >
 > **已有认知**:
-> - [[Masked Generative Modeling]] [待确认] 页记录了 MaskGIT-style mask-and-predict 范式在 TTS 中的应用 (SoundStorm 用于 S2A, MaskGCT 扩展到 T2S+S2A),但 LLaDA-TTS 使用的是基于 ELBO 的 1/t-weighted masked diffusion objective (来自 LLaDA/Dream),与 MaskGIT-style confidence-based decoding 有理论区别。
-> - [[CosyVoice 3]] [待确认] 是 LLaDA-TTS 的直接 baseline (Qwen2-0.5B backbone + FSQ tokenizer + CFM vocoder)。CosyVoice 3 在 SEED-TTS-Eval 上报告 CER 0.71% (zh) / WER 1.45% (en),LLaDA-TTS 论文中引用的 baseline 数据为 CER 1.21% (zh) / WER 2.24% (en),对应的是 CosyVoice 3-0.5B 的未经 DiffRO post-training 的版本。
-> - [[Non-autoregressive TTS]] [待确认] 页覆盖了传统 NAR (FastSpeech/VITS) 和 masked generation (MaskGCT),但尚未涵盖 masked discrete diffusion 这一新子类。
-> - [[Diffusion Model]] [待确认] 页主要覆盖连续空间 diffusion (DDPM, SDE),对离散空间 diffusion (D3PM, MDLM, LLaDA) 的覆盖有限。
+> - [[MaskedGenerativeModeling]] [待确认] 页记录了 MaskGIT-style mask-and-predict 范式在 TTS 中的应用 (SoundStorm 用于 S2A, MaskGCT 扩展到 T2S+S2A),但 LLaDA-TTS 使用的是基于 ELBO 的 1/t-weighted masked diffusion objective (来自 LLaDA/Dream),与 MaskGIT-style confidence-based decoding 有理论区别。
+> - [[CosyVoice3]] [待确认] 是 LLaDA-TTS 的直接 baseline (Qwen2-0.5B backbone + FSQ tokenizer + CFM vocoder)。CosyVoice 3 在 SEED-TTS-Eval 上报告 CER 0.71% (zh) / WER 1.45% (en),LLaDA-TTS 论文中引用的 baseline 数据为 CER 1.21% (zh) / WER 2.24% (en),对应的是 CosyVoice 3-0.5B 的未经 DiffRO post-training 的版本。
+> - [[Non-autoregressiveTTS]] [待确认] 页覆盖了传统 NAR (FastSpeech/VITS) 和 masked generation (MaskGCT),但尚未涵盖 masked discrete diffusion 这一新子类。
+> - [[DiffusionModel]] [待确认] 页主要覆盖连续空间 diffusion (DDPM, SDE),对离散空间 diffusion (D3PM, MDLM, LLaDA) 的覆盖有限。
 >
 > **创新判断**: LLaDA-TTS 的核心贡献在于证明 AR-pretrained weights 可以高效迁移到 masked diffusion 范式 (仅需 50 小时微调数据 + bidirectional attention + label shift),并给出了理论解释 (epsilon-forward dependence)。这与 MaskGCT 的区别在于: MaskGCT 从头训练,使用 MaskGIT-style confidence decoding;LLaDA-TTS 从 AR checkpoint 初始化,使用 ELBO-derived 1/t objective。同时 LLaDA-TTS 作为 "method paper" 展示了该方法可推广到任意 LLM-based AR TTS 系统。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[CosyVoice 3]](pending-review), [[Masked Generative Modeling]](pending-review), [[Non-autoregressive TTS]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[CosyVoice3]](pending-review), [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

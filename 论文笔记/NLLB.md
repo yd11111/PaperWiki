@@ -6,7 +6,7 @@ authors: [NLLB Team, Marta R. Costa-jussa, James Cross, et al.]
 year: 2022
 venue: arXiv
 arxiv_id: "2207.04672"
-source: "https://arxiv.org/abs/2207.04672"
+source: "Sources/NLLB.pdf"
 tags: [machine-translation, multilingual, low-resource, MoE, FLORES-200, text-only]
 level: enhanced-card
 status: draft

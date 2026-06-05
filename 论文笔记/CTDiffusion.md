@@ -8,9 +8,9 @@ authors: [Xinlu He, Swayambhu Nath Ray, Harish Mallidi, Jia-Hong Huang, Ashwin B
 year: 2025
 venue: "NeurIPS 2025 Workshop SPIGM"
 tags: [TTS, diffusion, autoregressive, continuous-representation, MLLM, zero-shot, speaker-cloning, exposure-bias]
-concepts: ["[[Next-Token Diffusion]]", "[[LLM-based TTS]]", "[[Diffusion-based TTS]]", "[[Variational Autoencoder for TTS]]", "[[Masked Generative Modeling]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/MELLE|MELLE]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[Next-TokenDiffusion]]", "[[LLM-basedTTS]]", "[[Diffusion-basedTTS]]", "[[VariationalAutoencoderforTTS]]", "[[MaskedGenerativeModeling]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]"]
+models: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/MELLE|MELLE]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: []
 kb_context_sources: 7
 status: draft
@@ -36,7 +36,7 @@ updated: 2026-06-04
 
 **创新判断**: 相比 LatentLM/CLEAR 等前作,本文的主要增量在于 (1) dual-head EOS 控制机制和 (2) two-stage training 策略,后者带来 46% 相对 WER 降低。模型仅 160M 参数,远小于 LatentLM (1B+) 和 CLEAR (规模未公开) 等同路线工作。
 
-> 检索命中: [[LLM-based TTS]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speaker Embedding]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考(待确认): [[Next-Token Diffusion]], [[Diffusion-based TTS]], [[Variational Autoencoder for TTS]] | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 参考(待确认): [[Next-TokenDiffusion]], [[Diffusion-basedTTS]], [[VariationalAutoencoderforTTS]] | 未命中但可能相关: 无
 
 ## 速查
 

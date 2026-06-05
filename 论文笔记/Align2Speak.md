@@ -8,9 +8,9 @@ authors: [Shehzeen Hussain, Paarth Neekhara, Xuesong Yang, Edresson Casanova, Su
 year: 2025
 venue: "Submitted to ICASSP 2026"
 tags: [TTS, GRPO, preference-alignment, low-resource, multilingual, autoregressive, IPA, reinforcement-learning, online-RL, ASR-reward, speaker-similarity, PESQ]
-concepts: ["[[LLM-based TTS]]", "[[Differentiable Reward Optimization]]", "[[Classifier-Free Guidance]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[TTS Evaluation]]", "[[Prosody Modeling]]"]
+concepts: ["[[LLM-basedTTS]]", "[[DifferentiableRewardOptimization]]", "[[Classifier-FreeGuidance]]", "[[SpeakerVerification]]", "[[SpeakerEmbedding]]", "[[TTSEvaluation]]", "[[ProsodyModeling]]"]
 models: ["[[论文笔记/Koel-TTS|Koel-TTS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[LLM-based TTS]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓, [[Differentiable Reward Optimization]][待确认], [[Speaker Verification]][待确认], [[Classifier-Free Guidance]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[DifferentiableRewardOptimization]][待确认], [[SpeakerVerification]][待确认], [[Classifier-FreeGuidance]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: 本文属于 LLM-based TTS 范式下的 **RL post-training** 分支。该分支的演进路线为: RLHF for NLP → RL for TTS on audio (Seed-TTS, 2024) → Preference optimization for codec LM (SpeechAlign, 2024) → Token-level DiffRO (CosyVoice 3, 2025) → Multi-Reward GRPO (Tencent, 2025)。本文是 GRPO-for-TTS 的又一实践,但聚焦于 **低资源语言适配** 这一独特应用场景,这是此前 GRPO/DiffRO 工作较少覆盖的方向。
 >
-> **已有认知**: 概念库中 [[Differentiable Reward Optimization]] 详细记录了 GRPO 与 DiffRO 在 TTS 中的对比: DiffRO 在 token 空间操作,GRPO 在 audio-level 操作。Tongyi 的对比实验 (RL-for-Audio-LLM) 发现 GRPO 超过 1500 步后可能退化。Multi-Reward GRPO 使用 5 维 reward,TTS-1 使用 3 维 reward (WER+SIM+DNSMOS)。本文同样使用 3 维 reward (CER+SSIM+PESQ),与 TTS-1 架构接近但规模更小。
+> **已有认知**: 概念库中 [[DifferentiableRewardOptimization]] 详细记录了 GRPO 与 DiffRO 在 TTS 中的对比: DiffRO 在 token 空间操作,GRPO 在 audio-level 操作。Tongyi 的对比实验 (RL-for-Audio-LLM) 发现 GRPO 超过 1500 步后可能退化。Multi-Reward GRPO 使用 5 维 reward,TTS-1 使用 3 维 reward (WER+SIM+DNSMOS)。本文同样使用 3 维 reward (CER+SSIM+PESQ),与 TTS-1 架构接近但规模更小。
 >
 > **创新判断**: 本文的独特贡献不在 GRPO 方法本身(已有多篇工作),而在于 (1) 将 GRPO 与 IPA-based multilingual TTS + few-shot fine-tuning 组合成完整的低资源语言适配 pipeline,(2) 证明 GRPO 在无配对数据时也能改善 TTS 质量(仅用 unpaired text + speaker prompts),(3) 在同一框架下对比 online GRPO vs offline DPO。基线模型 Koel-TTS 是同一团队 NVIDIA 的前作。
 >
-> 检索命中: [[LLM-based TTS]], [[Speaker Embedding]], [[Prosody Modeling]], [[Differentiable Reward Optimization]], [[Speaker Verification]], [[Classifier-Free Guidance]] | 过滤: [[TTS Evaluation]](pending-review, 与本文关联度较低) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SpeakerEmbedding]], [[ProsodyModeling]], [[DifferentiableRewardOptimization]], [[SpeakerVerification]], [[Classifier-FreeGuidance]] | 过滤: [[TTSEvaluation]](pending-review, 与本文关联度较低) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -160,7 +160,7 @@ GRPO 在 CER 和 SSIM 上全面优于 DPO,MOS 基本持平 [Table 1]。无 CFG �
 1. **仅在 Koel-TTS 380M 上验证**: 未在更大模型 (如 8.8B TTS-1) 或其他架构 (如 NAR flow-matching) 上测试,泛化性未知 [agent 解读]
 2. **无人工 MOS 评测**: 所有质量评估均为自动指标 (CER/SSIM/PESQ/Squim-MOS),缺少主观听感验证 [agent 解读]
 3. **低资源语言覆盖有限**: 仅 3 种语言 (印地语/葡萄牙语/波兰语),且均有一定程度的 ASR 支持 (Whisper)。对于 Whisper 也不支持的极低资源语言,本方法可能失效 [agent 解读]
-4. **GRPO 稳定性未讨论**: Tongyi 的 RL-for-Audio-LLM 发现 GRPO 超过 1500 步后会退化,本文最多 2k 步但未报告训练曲线或稳定性分析 [agent 解读, 基于 [[Differentiable Reward Optimization]] 中的对比数据]
+4. **GRPO 稳定性未讨论**: Tongyi 的 RL-for-Audio-LLM 发现 GRPO 超过 1500 步后会退化,本文最多 2k 步但未报告训练曲线或稳定性分析 [agent 解读, 基于 [[DifferentiableRewardOptimization]] 中的对比数据]
 5. **Reward hacking 风险**: CER reward 使用 Whisper,但 Whisper 本身在低资源语言上可能不准确,导致 CER reward 噪声较大。论文未讨论这一风险 [agent 解读]
 6. **省略 KL penalty 的影响**: 论文称省略 KL "stabilizes learning",但缺少消融实验支持。KL penalty 的缺失可能导致策略漂移过远,特别是长训练时 [agent 解读]
 

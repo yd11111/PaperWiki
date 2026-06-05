@@ -8,9 +8,9 @@ authors: [Hieu-Nghia Huynh-Nguyen, Huynh Nguyen Dang, Ngoc-Son Nguyen, Van Nguye
 year: 2025
 venue: "AAAI 2026"
 tags: [TTS, zero-shot, flow-matching, attention-free, FACodec, non-autoregressive, efficiency, duration-modeling, temporal-diversity]
-concepts: ["[[Conditional Flow Matching]]", "[[Duration Predictor]]", "[[Speech Factorization]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]"]
-models: ["[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[DurationPredictor]]", "[[SpeechFactorization]]", "[[ResidualVectorQuantization]]", "[[Non-autoregressiveTTS]]"]
+models: ["[[模型库/NaturalSpeech2|NaturalSpeech 2]]", "[[模型库/NaturalSpeech3|NaturalSpeech 3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]], [[Speech Factorization]], [[Residual Vector Quantization]]; 2 个待确认实体页: [[Duration Predictor]] [待确认], [[模型库/NaturalSpeech 3|NaturalSpeech 3]] [待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]], [[SpeechFactorization]], [[ResidualVectorQuantization]]; 2 个待确认实体页: [[DurationPredictor]] [待确认], [[模型库/NaturalSpeech3|NaturalSpeech 3]] [待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: Flamed-TTS 是 OZSpeech 同组 (FPT Software AI Center) 的后续工作,属于 Zero-shot TTS 的 NAR/flow-based 阵营。与 OZSpeech 共享 FACodec 编解码器和 "learned prior 替代 Gaussian noise" 的核心思路,但 Flamed-TTS 进一步 (1) 将 attention 从 Denoiser 中完全移除 (换用 ConvNeXt), (2) 引入概率化 Duration & Silence Generator 实现动态节奏。在 CFM 演进谱系中,OZSpeech 探索单步采样的极限效率,Flamed-TTS 则在多步采样 (16-128 NFE) 下追求 attention-free 效率 + 时间多样性。
@@ -31,7 +31,7 @@ updated: 2026-06-04
 >
 > **已有认知 -- Speech Factorization**: FACodec (NaturalSpeech 3) 将语音分解为 prosody (1层)、content (2层)、acoustic detail (3层) + speaker identity,共 6 层 RVQ 码。OZSpeech 直接复用 FACodec 并在其 6 层码本空间建模。Flamed-TTS 同样基于 FACodec,但引入了 Code Decoder 阶段在码本空间生成离散 token,再用这些 token 构造 semantically enriched prior 供 flow matching 使用,形成两阶段 (Code Generator + Denoiser) 架构。
 
-检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Duration Predictor]](pending-review), [[模型库/NaturalSpeech 3|NaturalSpeech 3]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeechFactorization]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[DurationPredictor]](pending-review), [[模型库/NaturalSpeech3|NaturalSpeech 3]](pending-review) | 未命中但可能相关: 无
 
 > [!summary] 速查
 > - **一句话**: 在 flow matching 的 Denoiser 中用 ConvNeXt 替代 self-attention,利用离散码构造的 semantically enriched prior 保持语义,同时引入概率化 Duration & Silence Generator 增强时间多样性。

@@ -8,9 +8,9 @@ authors: [Canxiang Yan, Chunxiang Jin, Dawei Huang, Haibing Yu, Han Peng, Hui Zh
 year: 2025
 venue: "arXiv"
 tags: [speech-LM, unified-model, continuous-tokenizer, VAE, speech-editing, free-form-editing, per-token-diffusion, flow-matching, TTS, ASR, multimodal, MoE]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Variational Autoencoder for TTS]]", "[[Conditional Flow Matching]]", "[[Speech Language Model]]", "[[Next-Token Diffusion]]", "[[LLM-based TTS]]", "[[Classifier-Free Guidance]]"]
-models: ["[[EnCodec]]", "[[Whisper]]", "[[CosyVoice 2]]", "[[CosyVoice 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Instructed Speech Generation]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[VariationalAutoencoderforTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechLanguageModel]]", "[[Next-TokenDiffusion]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]"]
+models: ["[[EnCodec]]", "[[Whisper]]", "[[CosyVoice2]]", "[[CosyVoice3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -20,17 +20,17 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Variational Autoencoder for TTS]][待确认], [[Conditional Flow Matching]]✓, [[Speech Language Model]]✓, [[Next-Token Diffusion]][待确认])
+> [!info] KB 背景 (基于 6 个实体页: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[VariationalAutoencoderforTTS]][待确认], [[ConditionalFlowMatching]]✓, [[SpeechLanguageModel]]✓, [[Next-TokenDiffusion]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Conditional Flow Matching]]✓, [[Speech Language Model]]✓ | 参考: [[Variational Autoencoder for TTS]](pending-review), [[Next-Token Diffusion]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓, [[SpeechLanguageModel]]✓ | 参考: [[VariationalAutoencoderforTTS]](pending-review), [[Next-TokenDiffusion]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: Ming-UniAudio 位于 **连续 VAE tokenizer + per-token diffusion/flow** 路线的最新节点。这条路线由 LatentLM (2024) 开创,CLEAR/VibeVoice (2025) 推进,已证明 continuous latent 在 TTS 生成质量上优于同条件下的 discrete tokens [LatentLM Table 4]。但此前的工作(包括 LatentLM/CLEAR/VibeVoice)主要面向 **生成** 任务,understanding 能力未被系统验证。Ming-UniAudio 的核心贡献是将这套连续表示架构扩展到 **理解 + 生成 + 编辑** 三任务统一。
 
 **已有认知**:
-- [[Speech Tokenizer]] 概念页记录了 continuous VAE tokenizer 作为新路线(sigma-VAE/CLEAR/VibeVoice),与传统 discrete token (HuBERT/EnCodec/SpeechTokenizer) 的区别 [confirmed]
-- [[Semantic vs Acoustic Tokens]] 概念页指出 "没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果 → 联合建模仍是开放挑战" [confirmed]
-- [[Next-Token Diffusion]] 记录了 per-token diffusion head 的技术范式:LM backbone 仅一次 forward,head 负责迭代去噪,支持流式 [pending-review]
-- [[Conditional Flow Matching]] 记录了 flow matching 在 TTS 中的应用,包括 CLEAR 的 per-token rectified flow 变体 [confirmed]
+- [[SpeechTokenizer]] 概念页记录了 continuous VAE tokenizer 作为新路线(sigma-VAE/CLEAR/VibeVoice),与传统 discrete token (HuBERT/EnCodec/SpeechTokenizer) 的区别 [confirmed]
+- [[SemanticvsAcousticTokens]] 概念页指出 "没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果 → 联合建模仍是开放挑战" [confirmed]
+- [[Next-TokenDiffusion]] 记录了 per-token diffusion head 的技术范式:LM backbone 仅一次 forward,head 负责迭代去噪,支持流式 [pending-review]
+- [[ConditionalFlowMatching]] 记录了 flow matching 在 TTS 中的应用,包括 CLEAR 的 per-token rectified flow 变体 [confirmed]
 
 **创新判断**:
 - 对比 LatentLM/CLEAR/VibeVoice: Ming-UniAudio 的 MingTok-Audio 增加了**显式 LLM 语义蒸馏**(用冻结 LLM 的 ASR 损失反向传播优化 tokenizer),不仅保留声学还对齐语义,使同一表示兼容 understanding
@@ -78,7 +78,7 @@ Ming-UniAudio 由三个核心组件组成 [§3, Fig 3]:
 
 ### 关键设计选择
 
-**为什么用连续 VAE 而非离散 token?** [论文原文] 离散 token 存在 semantic fragmentation,对理解任务(如 ASR)不利;连续 VAE latent 在 DitAR (Jia et al., 2025) 中已被证明生成质量优于离散 token [§3.1.1]。[agent 解读] 这与 KB 中 [[Speech Tokenizer]] 概念页记录的 continuous VAE 路线一致 — LatentLM/CLEAR 已验证连续表示的生成优势,Ming-UniAudio 进一步验证其理解兼容性。
+**为什么用连续 VAE 而非离散 token?** [论文原文] 离散 token 存在 semantic fragmentation,对理解任务(如 ASR)不利;连续 VAE latent 在 DitAR (Jia et al., 2025) 中已被证明生成质量优于离散 token [§3.1.1]。[agent 解读] 这与 KB 中 [[SpeechTokenizer]] 概念页记录的 continuous VAE 路线一致 — LatentLM/CLEAR 已验证连续表示的生成优势,Ming-UniAudio 进一步验证其理解兼容性。
 
 **为什么需要 Zlatent 和 Zuni 两级表示?** [论文原文] 理解任务需要高维语义丰富的输入 (Zuni),而 flow matching 生成在高维空间面临 scalability 问题,需要低维 latent (Zlatent, 32 或 64 维) [§3.1.1]。Semantic module 作为桥梁将 Zlatent 映射到 Zuni,形成闭环。
 
@@ -173,7 +173,7 @@ ContextASR: 12 项 subtask 中 **8 项 SOTA**,尤其在 NE-WER 和 NE-FNR 指标
 
 ## 点评
 
-**核心贡献判断**: Ming-UniAudio 的最大价值在于**验证了连续统一表示可以同时服务理解和生成** — 这回答了 [[Semantic vs Acoustic Tokens]] 概念页中 "联合建模仍是开放挑战" 的问题。三阶段 tokenizer 训练 + 冻结语义模块的工程策略是使其可行的关键。
+**核心贡献判断**: Ming-UniAudio 的最大价值在于**验证了连续统一表示可以同时服务理解和生成** — 这回答了 [[SemanticvsAcousticTokens]] 概念页中 "联合建模仍是开放挑战" 的问题。三阶段 tokenizer 训练 + 冻结语义模块的工程策略是使其可行的关键。
 
 **不足之处**: 论文在 TTS 生成上强调 WER SOTA 但回避 SIM 表现,整体叙述偏向 "理解-生成 trade-off balance" 而非在任一任务上达到最优。编辑能力虽为首创,但缺乏外部 baseline 对比,说服力有限。
 
@@ -200,4 +200,4 @@ ContextASR: 12 项 subtask 中 **8 项 SOTA**,尤其在 NE-WER 和 NE-FNR 指标
 
 ---
 
-检索命中: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Conditional Flow Matching]], [[Speech Language Model]] | 参考: [[Variational Autoencoder for TTS]](pending-review), [[Next-Token Diffusion]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ConditionalFlowMatching]], [[SpeechLanguageModel]] | 参考: [[VariationalAutoencoderforTTS]](pending-review), [[Next-TokenDiffusion]](pending-review) | 未命中但可能相关: 无

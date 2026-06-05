@@ -8,9 +8,9 @@ authors: [Guanrou Yang, Chen Yang, Qian Chen, Ziyang Ma, Wenxi Chen, Wen Wang, T
 year: 2025
 venue: "ACM MM 2025"
 tags: [TTS, emotion, LLM-based, instruction, natural-language-description, controllability, dataset, evaluation]
-concepts: ["[[Emotion Control in TTS]]", "[[LLM-based TTS]]", "[[Natural Language Description for TTS]]", "[[Instruction-Guided Speech Synthesis]]", "[[Semantic vs Acoustic Tokens]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[LLM-basedTTS]]", "[[NaturalLanguageDescriptionforTTS]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[SemanticvsAcousticTokens]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/CosyVoice|CosyVoice]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,18 +20,18 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-based TTS]], [[模型库/CosyVoice 2|CosyVoice 2]], [[Semantic vs Acoustic Tokens]]; 3 个待确认实体页: [[Emotion Control in TTS]], [[Natural Language Description for TTS]], [[Instruction-Guided Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[LLM-basedTTS]], [[模型库/CosyVoice2|CosyVoice 2]], [[SemanticvsAcousticTokens]]; 3 个待确认实体页: [[EmotionControlinTTS]], [[NaturalLanguageDescriptionforTTS]], [[Instruction-GuidedSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: EmoVoice 位于两条演进线的交汇处:
 > 1. **情感控制演进线**: Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → DPO 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → **LLM 自由文本情感 (EmoVoice, 2025)**。EmoVoice 是该线的最新节点,首次将 freestyle NL emotion description 作为一等公民注入 LLM-based TTS。
 > 2. **NL Description 演进线**: PromptTTS (5 属性模板, 2023) → InstructTTS (三阶段, 2024) → CosyVoice (统一指令, 2024) → CosyVoice 2 (streaming + instruction, 2024)。EmoVoice 与 CosyVoice 2 共享 Qwen2.5 backbone 和 CosyVoice semantic tokens,但专注于情感维度的 fine-grained NL control,是 NL Description 路线在情感子问题上的垂直深化。
 >
-> **已有认知**: KB 中 [[LLM-based TTS]] (confirmed) 已系统梳理了 LLM-based TTS 的核心设计(离散 token 表示、两阶段生成、in-context learning);[[模型库/CosyVoice 2|CosyVoice 2]] (confirmed) 记录了 FSQ-SenseVoice tokenizer 和双向流式方案;[[Semantic vs Acoustic Tokens]] (confirmed) 解释了 CosyVoice 监督式 semantic tokens 的工作原理。[[Emotion Control in TTS]] [待确认] 整理了从 emotion embedding 到 DPO 的方法谱系。
+> **已有认知**: KB 中 [[LLM-basedTTS]] (confirmed) 已系统梳理了 LLM-based TTS 的核心设计(离散 token 表示、两阶段生成、in-context learning);[[模型库/CosyVoice2|CosyVoice 2]] (confirmed) 记录了 FSQ-SenseVoice tokenizer 和双向流式方案;[[SemanticvsAcousticTokens]] (confirmed) 解释了 CosyVoice 监督式 semantic tokens 的工作原理。[[EmotionControlinTTS]] [待确认] 整理了从 emotion embedding 到 DPO 的方法谱系。
 >
 > **创新判断**: 相比 KB 中已有知识,EmoVoice 的关键新贡献是: (1) 将 LLM 的文本理解能力直接用于理解 freestyle emotion description,不需 PromptTTS 式的专用 style encoder;(2) phoneme boost parallel output (EmoVoice-PP) 是一种新的输出侧设计,灵感来自 CoT/CoM 但在 TTS 中首次以 parallel phoneme prediction 形式出现;(3) EmoVoice-DB 是首个带 NL emotion description 标注的 40 小时情感语音数据集。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Natural Language Description for TTS]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -8,9 +8,9 @@ authors: [Karan Dua, Puneet Mittal, Ranjeet Gupta, Hitesh Laxmichand Patel]
 year: 2025
 venue: "ACL 2025 (Industry Track)"
 tags: [TTS, data-generation, text-normalization, synthetic-data, multilingual, pipeline, diversity, speaker-standardization]
-concepts: ["[[Text-to-Speech Pipeline]]", "[[TTS Evaluation]]", "[[Phoneme Representation]]"]
+concepts: ["[[Text-to-SpeechPipeline]]", "[[TTSEvaluation]]", "[[PhonemeRepresentation]]"]
 models: []
-tasks: ["[[Cross-lingual Voice Cloning]]"]
+tasks: ["[[Cross-lingualVoiceCloning]]"]
 datasets: []
 kb_context_sources: 5
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 2 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: SpeechWeave 不属于 TTS 模型架构论文,而是一篇 TTS 训练数据生成管线论文。它解决的是 [[Text-to-Speech Pipeline]] [待确认] 中最前端的问题——高质量训练数据的获取。传统 TTS pipeline 假设训练数据已就绪,而 SpeechWeave 聚焦于 pipeline 之前的数据制备环节。
+> **谱系定位**: SpeechWeave 不属于 TTS 模型架构论文,而是一篇 TTS 训练数据生成管线论文。它解决的是 [[Text-to-SpeechPipeline]] [待确认] 中最前端的问题——高质量训练数据的获取。传统 TTS pipeline 假设训练数据已就绪,而 SpeechWeave 聚焦于 pipeline 之前的数据制备环节。
 >
 > **已有认知**:
-> - [[Speaker Embedding]]✓: SpeechWeave 使用 OpenVoice V2 的 tone color converter 做说话人标准化,这本质上是将参考说话人的音色迁移到合成语音。KB 中记录的 Speaker Embedding 注入方式 (concatenation/addition/cross-attention 等) 关注的是模型内部,而 SpeechWeave 是在数据层面解决说话人一致性。
-> - [[Cross-lingual Voice Cloning]]✓: SpeechWeave 的 audio generation 模块利用了跨语言声音克隆——用英文参考音频标准化其他语言的合成语音。这与 KB 中记录的 "language-agnostic speaker embedding" 方法相呼应,但 SpeechWeave 使用的是 tone color conversion 而非 embedding 注入。
-> - [[Phoneme Representation]] [待确认]: SpeechWeave 用 diphone coverage 评估数据多样性,这是 phoneme-level 的分析。KB 中记录了 TTS 前端的 Text Normalization 子任务,而 SpeechWeave 的核心创新之一就是 at-source normalization——在生成时即完成规范化,取代传统的后处理 normalizer。
-> - [[TTS Evaluation]] [待确认]: SpeechWeave 使用 WER + MOS + SNR 评估数据质量。KB 中已记录 WER 的局限性 (ASR 自身误差、非线性对应感知),但本文仅用 WER 评估下游模型且未讨论这些局限。
+> - [[SpeakerEmbedding]]✓: SpeechWeave 使用 OpenVoice V2 的 tone color converter 做说话人标准化,这本质上是将参考说话人的音色迁移到合成语音。KB 中记录的 Speaker Embedding 注入方式 (concatenation/addition/cross-attention 等) 关注的是模型内部,而 SpeechWeave 是在数据层面解决说话人一致性。
+> - [[Cross-lingualVoiceCloning]]✓: SpeechWeave 的 audio generation 模块利用了跨语言声音克隆——用英文参考音频标准化其他语言的合成语音。这与 KB 中记录的 "language-agnostic speaker embedding" 方法相呼应,但 SpeechWeave 使用的是 tone color conversion 而非 embedding 注入。
+> - [[PhonemeRepresentation]] [待确认]: SpeechWeave 用 diphone coverage 评估数据多样性,这是 phoneme-level 的分析。KB 中记录了 TTS 前端的 Text Normalization 子任务,而 SpeechWeave 的核心创新之一就是 at-source normalization——在生成时即完成规范化,取代传统的后处理 normalizer。
+> - [[TTSEvaluation]] [待确认]: SpeechWeave 使用 WER + MOS + SNR 评估数据质量。KB 中已记录 WER 的局限性 (ASR 自身误差、非线性对应感知),但本文仅用 WER 评估下游模型且未讨论这些局限。
 >
 > **创新判断**: SpeechWeave 的主要创新在数据工程层面 (at-source normalization + keyphrase diversity),而非模型架构层面。在 KB 已有的 TTS 概念体系中,它填补了"训练数据制备"这一空白区域。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Cross-lingual Voice Cloning]]✓ | 过滤: [[Text-to-Speech Pipeline]](待确认), [[TTS Evaluation]](待确认), [[Phoneme Representation]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[Text-to-SpeechPipeline]](待确认), [[TTSEvaluation]](待确认), [[PhonemeRepresentation]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

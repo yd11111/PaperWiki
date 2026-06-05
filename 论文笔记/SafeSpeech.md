@@ -8,7 +8,7 @@ authors: [Zhisheng Zhang, Derui Wang, Qianyi Yang, Pengyang Huang, Junhan Pu, Yu
 year: 2025
 venue: "USENIX Security 2025"
 tags: [voice-protection, adversarial-perturbation, unlearnable-examples, voice-cloning, anti-spoofing, deepfake-defense, data-poisoning, speaker-verification]
-concepts: ["[[Anti-spoofing and Deepfake Detection]]", "[[Speaker Verification]]", "[[Speaker Embedding]]", "[[Mel Spectrogram]]", "[[Voice Cloning Taxonomy]]", "[[Speaker Adaptation]]"]
+concepts: ["[[Anti-spoofingandDeepfakeDetection]]", "[[SpeakerVerification]]", "[[SpeakerEmbedding]]", "[[MelSpectrogram]]", "[[VoiceCloningTaxonomy]]", "[[SpeakerAdaptation]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 4 个待确认实体页: [[Speaker Embedding]], [[Anti-spoofing and Deepfake Detection]], [[Speaker Verification]], [[Voice Cloning Taxonomy]], [[Mel Spectrogram]])
+> [!info] KB 背景 (基于 1 个已确认 + 4 个待确认实体页: [[SpeakerEmbedding]], [[Anti-spoofingandDeepfakeDetection]], [[SpeakerVerification]], [[VoiceCloningTaxonomy]], [[MelSpectrogram]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文属于 voice protection / proactive defense 方向,是 [[Anti-spoofing and Deepfake Detection]] 中"主动防御"分支的新进展。与 KB 中已有的 deepfake detection(被动检测)和 watermarking(可追踪)路线不同,SafeSpeech 走的是"让数据不可学"的主动扰动路线。KB 中已记录的 [[Voice Cloning Taxonomy]] 将 cloning 分为 Speaker Adaptation / Few-shot / Zero-shot / Multilingual 四类,SafeSpeech 的核心贡献在于从 zero-shot 防护扩展到 fine-tuning 防护,覆盖了 taxonomy 中更广的攻击面。
+> **谱系定位**: 本文属于 voice protection / proactive defense 方向,是 [[Anti-spoofingandDeepfakeDetection]] 中"主动防御"分支的新进展。与 KB 中已有的 deepfake detection(被动检测)和 watermarking(可追踪)路线不同,SafeSpeech 走的是"让数据不可学"的主动扰动路线。KB 中已记录的 [[VoiceCloningTaxonomy]] 将 cloning 分为 Speaker Adaptation / Few-shot / Zero-shot / Multilingual 四类,SafeSpeech 的核心贡献在于从 zero-shot 防护扩展到 fine-tuning 防护,覆盖了 taxonomy 中更广的攻击面。
 >
-> **已有认知**: [[Speaker Verification]] 页记录了 ECAPA-TDNN 等 speaker encoder 用于计算 SECS/SIM 的标准做法,SafeSpeech 正是以此作为防护效果评估的核心指标。[[Speaker Embedding]] 页(confirmed)记录了 speaker embedding 在 TTS 中的注入方式,理解这些机制有助于理解 SafeSpeech 为何选择在 mel spectrogram 层面施加扰动。[[Mel Spectrogram]] 页记录了 mel 频谱作为 TTS 中间表示的标准流程,SafeSpeech 的 pivotal objective 正是利用了 mel 距离的通用性。
+> **已有认知**: [[SpeakerVerification]] 页记录了 ECAPA-TDNN 等 speaker encoder 用于计算 SECS/SIM 的标准做法,SafeSpeech 正是以此作为防护效果评估的核心指标。[[SpeakerEmbedding]] 页(confirmed)记录了 speaker embedding 在 TTS 中的注入方式,理解这些机制有助于理解 SafeSpeech 为何选择在 mel spectrogram 层面施加扰动。[[MelSpectrogram]] 页记录了 mel 频谱作为 TTS 中间表示的标准流程,SafeSpeech 的 pivotal objective 正是利用了 mel 距离的通用性。
 >
-> **创新判断**: KB 中 [[Anti-spoofing and Deepfake Detection]] 页记录了 AntiFake 等前序工作仅覆盖 zero-shot 场景的局限,SafeSpeech 将防护场景扩展到 fine-tuning 是实质性推进。SPEC 技术(KL 引导输出趋近噪声)是该方向的新思路,KB 中尚无类似记录。
+> **创新判断**: KB 中 [[Anti-spoofingandDeepfakeDetection]] 页记录了 AntiFake 等前序工作仅覆盖 zero-shot 场景的局限,SafeSpeech 将防护场景扩展到 fine-tuning 是实质性推进。SPEC 技术(KL 引导输出趋近噪声)是该方向的新思路,KB 中尚无类似记录。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Anti-spoofing and Deepfake Detection]][待确认], [[Speaker Verification]][待确认], [[Voice Cloning Taxonomy]][待确认], [[Mel Spectrogram]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[Anti-spoofingandDeepfakeDetection]][待确认], [[SpeakerVerification]][待确认], [[VoiceCloningTaxonomy]][待确认], [[MelSpectrogram]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 
@@ -173,7 +173,7 @@ L = L_SPEC + alpha * L_perception
 - 物理世界实验只在安静室内(22 dBA 背景噪声)测试,未验证嘈杂环境
 
 **在 KB 语境下的定位**:
-从 [[Anti-spoofing and Deepfake Detection]] 的视角看,SafeSpeech 代表了从"被动检测"到"主动防护"的范式转变。与 [[Voice Cloning Taxonomy]] 中四类 cloning 方法对应,SafeSpeech 是目前唯一同时覆盖 Speaker Adaptation(fine-tuning)和 Zero-shot VC 两种攻击场景的防护方案。
+从 [[Anti-spoofingandDeepfakeDetection]] 的视角看,SafeSpeech 代表了从"被动检测"到"主动防护"的范式转变。与 [[VoiceCloningTaxonomy]] 中四类 cloning 方法对应,SafeSpeech 是目前唯一同时覆盖 Speaker Adaptation(fine-tuning)和 Zero-shot VC 两种攻击场景的防护方案。
 
 ## 可复用的 idea
 

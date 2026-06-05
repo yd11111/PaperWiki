@@ -8,9 +8,9 @@ authors: [Ruonan Zhang, Xiaoyang Hao, Junjie Cao, Yichen Han, Yue Liu, Kai Zhang
 year: 2025
 venue: "arXiv"
 tags: [audio-codec, RVQ, disentanglement, subband-decomposition, quantizer-dropout, PQMF, semantic-acoustic-disentanglement]
-concepts: ["[[Residual Vector Quantization]]", "[[Semantic vs Acoustic Tokens]]", "[[Quantizer Dropout]]", "[[Speech Factorization]]", "[[Codebook Collapse]]", "[[Single-codebook vs Multi-codebook]]", "[[Codec Training Objectives]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[SemanticvsAcousticTokens]]", "[[QuantizerDropout]]", "[[SpeechFactorization]]", "[[CodebookCollapse]]", "[[Single-codebookvsMulti-codebook]]", "[[CodecTrainingObjectives]]"]
 models: ["[[SoundStream]]", "[[EnCodec]]", "[[HuBERT]]", "[[DAC]]"]
-tasks: ["[[Neural Audio Compression]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: ["[[Emilia]]", "[[AudioSet]]"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Residual Vector Quantization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Quantizer Dropout]]✓, [[Speech Factorization]]✓, [[Codebook Collapse]]✓, [[Neural Audio Compression]]✓)
+> [!info] KB 背景 (基于 6 个实体页: [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[QuantizerDropout]]✓, [[SpeechFactorization]]✓, [[CodebookCollapse]]✓, [[NeuralAudioCompression]]✓)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: MBCodec 是 RVQ-based 多码本 audio codec 家族的新成员,继承 SoundStream→EnCodec→DAC 的 encoder-RVQ-decoder 范式。与前代的核心区别在于从"残差编码"转向"功能编码" — 给每层码本赋予明确的物理/语义意义,而非纯粹量化残差。
@@ -33,7 +33,7 @@ updated: 2026-06-04
 >
 > **创新判断**: 主要创新在"功能化码本" — 用 PQMF 子带监督将 RVQ 每层绑定到特定频段,而非让所有层都量化"残差"。这是对 SpeechTokenizer 式"第一层语义+后层残差"方案的推进: 不仅第一层有明确功能(语义),后续层也有(各频段声学)。非均匀 quantizer dropout 是对 SoundStream/DAC 方案的合理改进。
 
-> 检索命中: [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]], [[Quantizer Dropout]], [[Speech Factorization]], [[Codebook Collapse]], [[Neural Audio Compression]] | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Codec Training Objectives]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[QuantizerDropout]], [[SpeechFactorization]], [[CodebookCollapse]], [[NeuralAudioCompression]] | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[CodecTrainingObjectives]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

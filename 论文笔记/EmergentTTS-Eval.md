@@ -5,18 +5,18 @@ aliases: [EmergentTTS-Eval Benchmark, EmergentTTS Eval]
 authors: ["Ruskin Raj Manku", "Yuzhi Tang", "Xingjian Shi", "Mu Li", "Alex Smola"]
 year: 2025
 arxiv_id: "2505.23009"
-source: "https://arxiv.org/abs/2505.23009"
+source: "Sources/EmergentTTS-Eval.pdf"
 venue: "Preprint"
 tags: [TTS-evaluation, benchmark, model-as-judge, LALM, prosody, expressiveness, pronunciation, emergent-abilities, LLM-judge]
 level: deep
 status: draft
-concepts: ["[[TTS Evaluation]]", "[[Audio Understanding]]", "[[Audio-Language Pretraining]]", "[[Prosody Modeling]]"]
+concepts: ["[[TTSEvaluation]]", "[[AudioUnderstanding]]", "[[Audio-LanguagePretraining]]", "[[ProsodyModeling]]"]
 models: []
 tasks: [TTS-evaluation, speech-quality-assessment, model-judging]
 datasets: []
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[TTS Evaluation]]", "[[Prosody Modeling]]"]
+kb_sources: ["[[TTSEvaluation]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
 
@@ -24,9 +24,9 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[TTS Evaluation]]** [待确认]: EmergentTTS-Eval 直接回应了 TTS Evaluation 概念页中描述的核心问题 -- WER/SIM/predicted-MOS 无法评估 nuanced 维度 (情感韵律、复杂发音、副语言学)。本文提出 LALM-as-judge 替代人类评估,覆盖 6 个 challenging 场景,1645 test cases。与 Yang et al. (Responsible TTS Eval) 的 "Level 1: Fidelity & Accuracy" 讨论互补 -- EmergentTTS-Eval 关注的是 traditional metrics 根本无法测量的维度 [agent 解读]。
-- **[[Prosody Modeling]]** (confirmed): EmergentTTS-Eval 的 6 个场景中,Emotions 和 Paralinguistics 直接测试 TTS 系统的韵律建模能力: 情感渐变、叹词 (Uhh, Hmmm)、拟声词、口吃 (I-I-I d-didn't)、强调标记等。这些是 Prosody Modeling 中最具挑战性的长尾场景 [§3.1] [agent 解读]。
-- **[[Audio Understanding]]** [待确认]: LALM judge (Gemini 2.5 Pro) 用于评估 TTS 输出时,实质上是 Audio Understanding 能力的应用 -- 需要理解合成语音的情感、韵律、发音准确性等多维度信息并做出 judgement [§3.2] [agent 解读]。
+- **[[TTSEvaluation]]** [待确认]: EmergentTTS-Eval 直接回应了 TTS Evaluation 概念页中描述的核心问题 -- WER/SIM/predicted-MOS 无法评估 nuanced 维度 (情感韵律、复杂发音、副语言学)。本文提出 LALM-as-judge 替代人类评估,覆盖 6 个 challenging 场景,1645 test cases。与 Yang et al. (Responsible TTS Eval) 的 "Level 1: Fidelity & Accuracy" 讨论互补 -- EmergentTTS-Eval 关注的是 traditional metrics 根本无法测量的维度 [agent 解读]。
+- **[[ProsodyModeling]]** (confirmed): EmergentTTS-Eval 的 6 个场景中,Emotions 和 Paralinguistics 直接测试 TTS 系统的韵律建模能力: 情感渐变、叹词 (Uhh, Hmmm)、拟声词、口吃 (I-I-I d-didn't)、强调标记等。这些是 Prosody Modeling 中最具挑战性的长尾场景 [§3.1] [agent 解读]。
+- **[[AudioUnderstanding]]** [待确认]: LALM judge (Gemini 2.5 Pro) 用于评估 TTS 输出时,实质上是 Audio Understanding 能力的应用 -- 需要理解合成语音的情感、韵律、发音准确性等多维度信息并做出 judgement [§3.2] [agent 解读]。
 
 > [!summary] 速查
 > - **一句话**: 面向 TTS 系统 "emergent abilities" 的综合 benchmark (1645 cases, 6 challenging 场景) + LALM-as-judge 评估框架,Gemini 2.5 Pro 作为 judge 与人类评估 Spearman 相关 90.5%
@@ -146,4 +146,4 @@ EmergentTTS-Eval 填补了 TTS 评估的重要空白 -- 传统指标 (WER, SIM, 
 
 ---
 
-检索命中: [[Prosody Modeling]](confirmed) | 过滤: [[TTS Evaluation]](pending-review), [[Audio Understanding]](pending-review), [[Audio-Language Pretraining]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ProsodyModeling]](confirmed) | 过滤: [[TTSEvaluation]](pending-review), [[AudioUnderstanding]](pending-review), [[Audio-LanguagePretraining]](pending-review) | 未命中但可能相关: 无

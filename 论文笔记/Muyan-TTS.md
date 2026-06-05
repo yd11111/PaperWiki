@@ -8,9 +8,9 @@ authors: [Xin Li, Kaikai Jia, Hao Sun, Jun Dai, Ziyang Jiang]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, LLM-based, zero-shot, podcast, open-source, VITS, SoVITS, inference-acceleration]
-concepts: ["[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Speaker Embedding]]", "[[Speaker Adaptation]]", "[[Variational Autoencoder for TTS]]", "[[Self-Supervised Speech Representation]]"]
-models: ["[[VITS]]", "[[CosyVoice 2]]", "[[HuBERT]]", "[[Whisper]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[SpeakerEmbedding]]", "[[SpeakerAdaptation]]", "[[VariationalAutoencoderforTTS]]", "[[Self-SupervisedSpeechRepresentation]]"]
+models: ["[[VITS]]", "[[CosyVoice2]]", "[[HuBERT]]", "[[Whisper]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,18 +23,18 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: Muyan-TTS 属于 [[LLM-based TTS]] 中的 hybrid 路线 (LLM + VITS-based decoder),但与 CosyVoice 系列 (LLM + Flow Matching) 不同,它用 VITS/SoVITS 作为解码器而非 flow matching。在已有 KB 中,这种 LLM + VITS 组合的架构是新的变体 -- GPT-SoVITS 也有此路线,但 Muyan-TTS 用了更大的预训练 LLM (Llama-3.2-3B) 替代 GPT-SoVITS 的原始 AR 模型。
+**谱系定位**: Muyan-TTS 属于 [[LLM-basedTTS]] 中的 hybrid 路线 (LLM + VITS-based decoder),但与 CosyVoice 系列 (LLM + Flow Matching) 不同,它用 VITS/SoVITS 作为解码器而非 flow matching。在已有 KB 中,这种 LLM + VITS 组合的架构是新的变体 -- GPT-SoVITS 也有此路线,但 Muyan-TTS 用了更大的预训练 LLM (Llama-3.2-3B) 替代 GPT-SoVITS 的原始 AR 模型。
 
 **已有认知**:
-- [[LLM-based TTS]] 页记载了 LLM + Flow/Diffusion hybrid 架构 (CosyVoice 系列),但 LLM + VITS 的具体组合尚未覆盖
-- [[Speech Tokenizer]] 页记录了 HuBERT semantic token (25Hz) 的提取方式,Muyan-TTS 的 token 化方案正是用 HuBERT embedding + GPT-SoVITS quantizer,属于 semantic token 路线
-- [[Zero-shot Speech Synthesis]] 页当前 SOTA 为 CosyVoice 3 (WER 1.45% / CER 0.71%),Muyan-TTS 的 WER 3.44% (LibriSpeech) 有较大差距
-- [[CosyVoice 2]] 是论文的主要对比对象之一,其 LibriSpeech WER 2.91% 优于 Muyan-TTS 的 3.44%
+- [[LLM-basedTTS]] 页记载了 LLM + Flow/Diffusion hybrid 架构 (CosyVoice 系列),但 LLM + VITS 的具体组合尚未覆盖
+- [[SpeechTokenizer]] 页记录了 HuBERT semantic token (25Hz) 的提取方式,Muyan-TTS 的 token 化方案正是用 HuBERT embedding + GPT-SoVITS quantizer,属于 semantic token 路线
+- [[Zero-shotSpeechSynthesis]] 页当前 SOTA 为 CosyVoice 3 (WER 1.45% / CER 0.71%),Muyan-TTS 的 WER 3.44% (LibriSpeech) 有较大差距
+- [[CosyVoice2]] 是论文的主要对比对象之一,其 LibriSpeech WER 2.91% 优于 Muyan-TTS 的 3.44%
 - [[VITS]] [待确认] 是 Muyan-TTS decoder 的架构基础,VITS 的 G2P 特性被用于抑制 LLM 幻觉
 
 **创新判断**: 本文的核心价值不在于架构创新(LLM + SoVITS 组合已有先例),而在于: (1) 完整开源训练流程 + 数据处理管线, (2) 面向 podcast 场景的优化, (3) $50K 预算约束下的实践报告。在架构层面属于 GPT-SoVITS 的 LLM 升级版。
 
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[VITS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[VITS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

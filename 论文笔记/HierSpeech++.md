@@ -8,7 +8,7 @@ authors: [Sang-Hoon Lee, Ha-Yeong Choi, Seung-Bin Kim, Seong-Whan Lee]
 year: 2023
 venue: "IEEE/ACM TASLP (under review)"
 tags: [TTS, voice-conversion, zero-shot, hierarchical-VAE, speech-super-resolution, non-autoregressive, BigVGAN]
-concepts: ["[[Variational Autoencoder for TTS]]", "[[Speech Factorization]]", "[[Semantic vs Acoustic Tokens]]", "[[F0 Modeling]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]"]
+concepts: ["[[VariationalAutoencoderforTTS]]", "[[SpeechFactorization]]", "[[SemanticvsAcousticTokens]]", "[[F0Modeling]]", "[[NeuralVocoder]]", "[[SpeakerEmbedding]]"]
 models: ["[[模型库/VITS|VITS]]", "[[模型库/BigVGAN|BigVGAN]]", "[[模型库/HierSpeech++|HierSpeech++]]"]
 tasks: [TTS, voice-conversion, speech-super-resolution]
 datasets: [LibriTTS, VCTK, Libri-light, EXPRESSO, NIKL, MSSS]
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Variational Autoencoder for TTS]], [[Speech Factorization]], [[Semantic vs Acoustic Tokens]], [[F0 Modeling]], [[Neural Vocoder]], [[Speaker Embedding]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[VariationalAutoencoderforTTS]], [[SpeechFactorization]], [[SemanticvsAcousticTokens]], [[F0Modeling]], [[NeuralVocoder]], [[SpeakerEmbedding]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Variational Autoencoder for TTS]]✓, [[Speech Factorization]]✓, [[Semantic vs Acoustic Tokens]]✓, [[F0 Modeling]]✓, [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[VariationalAutoencoderforTTS]]✓, [[SpeechFactorization]]✓, [[SemanticvsAcousticTokens]]✓, [[F0Modeling]]✓, [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 - **VAE for TTS**: HierSpeech++ 基于 VITS 的 conditional VAE 范式,但引入 hierarchical VAE 桥接 semantic/acoustic gap。KB 已有 VITS 消融: 去掉 normalizing flow MOS 下降 1.52。本文扩展为层级 VAE + bidirectional Transformer flow。
 - **Speech Factorization**: 本文通过 source-filter 理论将语义表示解耦为 speaker-agnostic 和 speaker-related 成分,使用 speech perturbation 去除说话人信息。与 Seed-TTS 的 self-distillation 路线类似但更早。
@@ -206,4 +206,4 @@ HierSpeech++ 由三个独立子系统组成 [Fig 1]:
 4. **Source-filter speech perturbation**: 使用 speech perturbation 创建 speaker-agnostic 表示,简单有效的解耦方法
 5. **NN upsampler 替代 transposed convolution**: 减少 tonal artifacts 且更高效
 
-检索命中: [[Variational Autoencoder for TTS]], [[Speech Factorization]], [[Semantic vs Acoustic Tokens]], [[F0 Modeling]], [[Neural Vocoder]], [[Speaker Embedding]] | 过滤: [[Mel Spectrogram]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[VariationalAutoencoderforTTS]], [[SpeechFactorization]], [[SemanticvsAcousticTokens]], [[F0Modeling]], [[NeuralVocoder]], [[SpeakerEmbedding]] | 过滤: [[MelSpectrogram]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无

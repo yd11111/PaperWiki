@@ -8,8 +8,8 @@ authors: [Cong Wang, Changfeng Gao, Yang Xiang, Zhihao Du, Keyu An, Han Zhao, Qi
 year: 2025
 venue: "arXiv preprint"
 tags: [emotional-TTS, reinforcement-learning, reward-hacking, reward-model, robustness, LLM-TTS, post-training]
-concepts: ["[[Differentiable Reward Optimization]]", "[[Emotion Control in TTS]]", "[[Gumbel-Softmax]]", "[[LLM-based TTS]]"]
-models: ["[[CosyVoice 2]]"]
+concepts: ["[[DifferentiableRewardOptimization]]", "[[EmotionControlinTTS]]", "[[Gumbel-Softmax]]", "[[LLM-basedTTS]]"]
+models: ["[[CosyVoice2]]"]
 tasks: []
 datasets: ["IEMOCAP", "ESD", "MER2023"]
 kb_context_sources: 6
@@ -22,11 +22,11 @@ updated: 2026-06-04
 
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Emotion Control in TTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[Codec Language Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[CosyVoice2]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[EmotionControlinTTS]](pending-review), [[Gumbel-Softmax]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: 本文是 DiffRO (Gao et al., Interspeech 2025) 的直接后续工作,出自同一团队 (Tongyi Lab)。DiffRO 提出了在 token 空间通过 Gumbel-Softmax 可微采样实现 end-to-end reward 优化的框架,并通过 Multi-Task Reward (MTR) 实现了零样本情感控制。然而,DiffRO 的 Emotion Control 依赖 vanilla SER reward model,而 KB 中已有记录指出 RL-for-TTS 领域存在 reward hacking 问题 (Seed-TTS 最早发现, No Verifiable Reward for Prosody 提供了 GRPO 韵律坍缩的实验证据)。
 
-**已有认知**: [[Differentiable Reward Optimization]][待确认] 页面已系统记录了 DiffRO 的核心机制 (Token2Text RM, Gumbel-Softmax, token-level KL) 及其与 GRPO/DPO/FPO/TKTO 等路线的对比。[[Emotion Control in TTS]][待确认] 页面覆盖了情感控制的多条路线 (embedding/层级/对抗/DPO/RL),其中 DiffRO-MTR 路线已被记录为"用 SER reward model 梯度间接引导 TTS LM 学习情感表达"。
+**已有认知**: [[DifferentiableRewardOptimization]][待确认] 页面已系统记录了 DiffRO 的核心机制 (Token2Text RM, Gumbel-Softmax, token-level KL) 及其与 GRPO/DPO/FPO/TKTO 等路线的对比。[[EmotionControlinTTS]][待确认] 页面覆盖了情感控制的多条路线 (embedding/层级/对抗/DPO/RL),其中 DiffRO-MTR 路线已被记录为"用 SER reward model 梯度间接引导 TTS LM 学习情感表达"。
 
 **创新判断**: RRPO 的核心创新不在 policy optimization 算法本身 (仍沿用 DiffRO 框架),而在于**识别并解决 DiffRO 的 reward hacking 脆弱性** — 通过三层混合正则化 (Label Smoothing + Energy-Adaptive Mixup + Adversarial Training) 构建 robust RM,使 policy 无法通过生成 acoustic artifacts 获取虚假奖励。这填补了 DiffRO 演进线中"RM 质量保障"的空白。
 

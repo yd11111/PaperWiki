@@ -8,7 +8,7 @@ authors: [Edresson Casanova, Julian Weber, Christopher Shulby, Arnaldo Candido J
 year: 2022
 venue: "ICML 2022 (arXiv v4: Apr 2023)"
 tags: [TTS, zero-shot, multi-speaker, multilingual, VITS, voice-conversion, speaker-adaptation, flow-based, cross-lingual]
-concepts: ["[[Speaker Embedding]]", "[[Speaker Adaptation]]", "[[Neural Vocoder]]", "[[Speaker Verification]]"]
+concepts: ["[[SpeakerEmbedding]]", "[[SpeakerAdaptation]]", "[[NeuralVocoder]]", "[[SpeakerVerification]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -20,11 +20,11 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Speaker Embedding]], [[Neural Vocoder]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[SpeakerEmbedding]], [[NeuralVocoder]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speaker Embedding]]✓, [[Neural Vocoder]]✓, [[Residual Vector Quantization]]✓ (tag overlap), [[Semantic vs Acoustic Tokens]]✓ (tag overlap) | 过滤: [[Speaker Adaptation]](待确认), [[Voice Cloning Taxonomy]](待确认), [[VITS]](model, 待确认) | 未命中但可能相关: Variational Autoencoder for TTS, Speech-Text Alignment
+> 检索命中: [[SpeakerEmbedding]]✓, [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓ (tag overlap), [[SemanticvsAcousticTokens]]✓ (tag overlap) | 过滤: [[SpeakerAdaptation]](待确认), [[VoiceCloningTaxonomy]](待确认), [[VITS]](model, 待确认) | 未命中但可能相关: Variational Autoencoder for TTS, Speech-Text Alignment
 
-**谱系定位:** YourTTS (2021.12, Coqui/USP) 是基于 VITS 架构的零样本多说话人多语言 TTS 系统。在谱系上属于 "Flow-based end-to-end TTS + external speaker encoder" 路线,是 SC-GlowTTS (2021) 的后续工作。它早于 VALL-E (2023) 和 codec LM 时代,代表了 pre-LLM TTS 中零样本方案的重要节点。KB 中 [[Voice Cloning Taxonomy]] (pending-review) 已将 YourTTS 归入 "3-5 languages" 多语言 voice cloning 类别。
+**谱系定位:** YourTTS (2021.12, Coqui/USP) 是基于 VITS 架构的零样本多说话人多语言 TTS 系统。在谱系上属于 "Flow-based end-to-end TTS + external speaker encoder" 路线,是 SC-GlowTTS (2021) 的后续工作。它早于 VALL-E (2023) 和 codec LM 时代,代表了 pre-LLM TTS 中零样本方案的重要节点。KB 中 [[VoiceCloningTaxonomy]] (pending-review) 已将 YourTTS 归入 "3-5 languages" 多语言 voice cloning 类别。
 
 **已有认知:** KB 已知: (1) VITS (ICML 2021) 是首个 VAE+Flow+GAN 端到端 TTS,已有模型页; (2) Speaker Embedding 页记录了 H/ASP (multi-layer attention statistical pooling) encoder 为 YourTTS 所用; (3) Speaker Adaptation 页列举了 speaker encoder 在 zero-shot 场景中的核心角色; (4) Voice Cloning Taxonomy 将 zero-shot VC 定义为 "无需微调,使用 speaker encoder 从短音频推断说话人特征"。
 
@@ -151,4 +151,4 @@ YourTTS 基于 VITS [19] 架构,增加若干 modifications for zero-shot multi-s
 
 ---
 
-检索命中: [[Speaker Embedding]], [[Neural Vocoder]], [[Residual Vector Quantization]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Speaker Adaptation]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: Variational Autoencoder for TTS, Speech-Text Alignment
+检索命中: [[SpeakerEmbedding]], [[NeuralVocoder]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: Variational Autoencoder for TTS, Speech-Text Alignment

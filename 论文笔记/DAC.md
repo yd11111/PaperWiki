@@ -8,9 +8,9 @@ authors: [Rithesh Kumar, Prem Seetharaman, Alejandro Luebs, Ishaan Kumar, Kundan
 year: 2023
 venue: "NeurIPS 2023"
 tags: [audio-codec, neural-compression, VQ-GAN, RVQ, universal-codec]
-concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Snake Activation]]", "[[Quantizer Dropout]]", "[[Multi-scale STFT Discriminator]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]", "[[SnakeActivation]]", "[[QuantizerDropout]]", "[[Multi-scaleSTFTDiscriminator]]"]
 models: ["[[论文笔记/DAC|DAC]]", "[[EnCodec]]", "[[SoundStream]]"]
-tasks: ["[[Neural Audio Compression]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: ["[[DAPS]]", "[[MUSDB]]", "[[AudioSet]]"]
 kb_context_sources: 2
 status: draft
@@ -20,17 +20,17 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]])
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓(间接), [[Zero-shot Speech Synthesis]]✓(间接)
-> 过滤: [[Codebook Collapse]][待确认], [[Quantizer Dropout]][待确认], [[Snake Activation]][待确认]
+> [!info] KB 背景 (基于 2 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]])
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓(间接), [[Zero-shotSpeechSynthesis]]✓(间接)
+> 过滤: [[CodebookCollapse]][待确认], [[QuantizerDropout]][待确认], [[SnakeActivation]][待确认]
 
-**[[Residual Vector Quantization]]**: DAC 的核心量化模块。RVQ 通过递归量化残差逐步逼近输入: r_1=z, q_i=Quantize(r_i), r_{i+1}=r_i-q_i, 重建 z_hat=sum(q_1...q_N)。DAC 在此基础上引入 factorized codes (8d lookup) + L2-normalization,将 codebook utilization 从 ~90% 提升到 ~99%。RVQ 的层级信息结构 (coarse→fine) 天然适合 hierarchical generation。
+**[[ResidualVectorQuantization]]**: DAC 的核心量化模块。RVQ 通过递归量化残差逐步逼近输入: r_1=z, q_i=Quantize(r_i), r_{i+1}=r_i-q_i, 重建 z_hat=sum(q_1...q_N)。DAC 在此基础上引入 factorized codes (8d lookup) + L2-normalization,将 codebook utilization 从 ~90% 提升到 ~99%。RVQ 的层级信息结构 (coarse→fine) 天然适合 hierarchical generation。
 
-**[[Speech Tokenizer]]**: DAC 作为声学 tokenizer (第 3 类) 可直接服务 LLM-based TTS。与 CosyVoice 系列的监督式 semantic tokenizer 不同,DAC 的 RVQ codes 编码全部声学信息而非仅语义,因此更适合作为 drop-in replacement 用于 AudioLM/VALL-E/MusicLM 等需要高保真重建的生成模型。
+**[[SpeechTokenizer]]**: DAC 作为声学 tokenizer (第 3 类) 可直接服务 LLM-based TTS。与 CosyVoice 系列的监督式 semantic tokenizer 不同,DAC 的 RVQ codes 编码全部声学信息而非仅语义,因此更适合作为 drop-in replacement 用于 AudioLM/VALL-E/MusicLM 等需要高保真重建的生成模型。
 
-**[[Codebook Collapse]]** [待确认]: DAC 解决的核心问题之一。码本坍缩导致有效比特率远低于理论值,DAC 的 factorized codes 方案比 EMA+k-means+restart 更简洁有效。
+**[[CodebookCollapse]]** [待确认]: DAC 解决的核心问题之一。码本坍缩导致有效比特率远低于理论值,DAC 的 factorized codes 方案比 EMA+k-means+restart 更简洁有效。
 
-**[[Quantizer Dropout]]** [待确认]: DAC 改进了 SoundStream 的原始方案,以概率 p=0.5 决定是否执行 dropout,在低比特率灵活性与全带宽质量间取得平衡。
+**[[QuantizerDropout]]** [待确认]: DAC 改进了 SoundStream 的原始方案,以概率 p=0.5 决定是否执行 dropout,在低比特率灵活性与全带宽质量间取得平衡。
 
 ## 速查
 

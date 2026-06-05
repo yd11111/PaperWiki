@@ -3,13 +3,13 @@ type: paper
 tier: deep
 title: "Retrieval-Augmented Dialogue Knowledge Aggregation for Expressive Conversational Speech Synthesis"
 arxiv_id: "2501.06467"
-source: "Sources/RAD-KECSS.pdf"
+source: "Sources/RADKA-CSS.pdf"
 authors: [Rui Liu, Zhenqi Jia, Feilong Bao, Haizhou Li]
 year: 2025
 venue: "arXiv preprint (submitted to Elsevier)"
 tags: [TTS, conversational-speech-synthesis, RAG, heterogeneous-graph, contrastive-learning, style-modeling, prosody, multi-granularity]
-concepts: ["[[Prosody Modeling]]", "[[Style Transfer in TTS]]", "[[Emotion Control in TTS]]", "[[Global Style Tokens]]", "[[Non-autoregressive TTS]]", "[[Self-Supervised Speech Representation]]"]
-models: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]"]
+concepts: ["[[ProsodyModeling]]", "[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[GlobalStyleTokens]]", "[[Non-autoregressiveTTS]]", "[[Self-SupervisedSpeechRepresentation]]"]
+models: ["[[模型库/wav2vec2.0|wav2vec 2.0]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: RADKA-CSS 属于 Conversational Speech Synthesis (CSS) 领域,以 FastSpeech 2 为 TTS backbone。它处理的核心问题 -- 对话上下文建模以驱动风格韵律 -- 与 [[Prosody Modeling]] 中的隐式韵律建模方向一致,但将建模范围从单句扩展到多轮对话。论文中使用 Wav2Vec 2.0 (IEMOCAP fine-tuned) 提取情感风格特征,x-vector 提取说话人信息,这两个组件在 [[Speaker Embedding]] 和 [[Self-Supervised Speech Representation]] 中有详细记录。
+> **谱系定位**: RADKA-CSS 属于 Conversational Speech Synthesis (CSS) 领域,以 FastSpeech 2 为 TTS backbone。它处理的核心问题 -- 对话上下文建模以驱动风格韵律 -- 与 [[ProsodyModeling]] 中的隐式韵律建模方向一致,但将建模范围从单句扩展到多轮对话。论文中使用 Wav2Vec 2.0 (IEMOCAP fine-tuned) 提取情感风格特征,x-vector 提取说话人信息,这两个组件在 [[SpeakerEmbedding]] 和 [[Self-SupervisedSpeechRepresentation]] 中有详细记录。
 >
-> **已有认知**: 知识库已覆盖风格建模的完整谱系 -- 从 GST 无监督风格发现 ([[Global Style Tokens]]) 到 reference encoder 方法 ([[Style Transfer in TTS]]),再到情感控制 ([[Emotion Control in TTS]])。CSS 作为专门子领域尚无独立概念页。RADKA-CSS 的 FastSpeech 2 backbone 属于 [[Non-autoregressive TTS]] 范式。
+> **已有认知**: 知识库已覆盖风格建模的完整谱系 -- 从 GST 无监督风格发现 ([[GlobalStyleTokens]]) 到 reference encoder 方法 ([[StyleTransferinTTS]]),再到情感控制 ([[EmotionControlinTTS]])。CSS 作为专门子领域尚无独立概念页。RADKA-CSS 的 FastSpeech 2 backbone 属于 [[Non-autoregressiveTTS]] 范式。
 >
 > **创新判断**: 知识库中尚无 RAG-for-CSS 或 dialogue-level heterogeneous graph 的记录。本文的核心创新 -- 将 stored dialogue 作为外部知识库并通过 RAG 检索增强当前对话的风格合成 -- 是全新方向。现有概念页覆盖了 TTS 的风格/韵律建模,但均面向单句或参考音频驱动,未涉及对话级别的多轮上下文建模。
 >
-> 检索命中: [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Style Transfer in TTS]][待确认], [[Emotion Control in TTS]][待确认], [[Non-autoregressive TTS]][待确认], [[Global Style Tokens]][待确认], [[Self-Supervised Speech Representation]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[StyleTransferinTTS]][待确认], [[EmotionControlinTTS]][待确认], [[Non-autoregressiveTTS]][待确认], [[GlobalStyleTokens]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 

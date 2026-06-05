@@ -8,9 +8,9 @@ authors: [Wei Deng, Siyi Zhou, Jingchen Shu, Jinchao Wang, Lu Wang]
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, autoregressive, industrial, polyphone-control, VQ, FSQ, BigVGAN]
-concepts: ["[[Speech Tokenizer]]", "[[Codebook Collapse]]", "[[Finite Scalar Quantization]]", "[[LLM-based TTS]]", "[[Speaker Embedding]]", "[[Neural Vocoder]]", "[[Single-codebook vs Multi-codebook]]"]
-models: ["[[BigVGAN]]", "[[XTTS]]", "[[CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[SpeechTokenizer]]", "[[CodebookCollapse]]", "[[FiniteScalarQuantization]]", "[[LLM-basedTTS]]", "[[SpeakerEmbedding]]", "[[NeuralVocoder]]", "[[Single-codebookvsMulti-codebook]]"]
+models: ["[[BigVGAN]]", "[[XTTS]]", "[[CosyVoice2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Speech Tokenizer]], [[Codebook Collapse]], [[LLM-based TTS]], [[Neural Vocoder]], [[Zero-shot Speech Synthesis]], [[Speaker Embedding]])
-> 检索命中: [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓, [[LLM-based TTS]]✓, [[Neural Vocoder]]✓, [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[BigVGAN]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Phoneme Representation]](pending-review)
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SpeechTokenizer]], [[CodebookCollapse]], [[LLM-basedTTS]], [[NeuralVocoder]], [[Zero-shotSpeechSynthesis]], [[SpeakerEmbedding]])
+> 检索命中: [[SpeechTokenizer]]✓, [[CodebookCollapse]]✓, [[LLM-basedTTS]]✓, [[NeuralVocoder]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[BigVGAN]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[PhonemeRepresentation]](pending-review)
 
-**谱系定位**: IndexTTS 属于 [[LLM-based TTS]] 中的 hybrid 架构路线(SEQ3 条件化方式),使用 single codebook + BigVGAN2 decoder,与 XTTS/Tortoise 同源但做了多项工程改进。在 [[Zero-shot Speech Synthesis]] 任务页记录的三条主流路线中属于"LLM + 离散 token"方向,使用 VQ/FSQ 单码本 25Hz 采样率,属于 [[Single-codebook vs Multi-codebook]] 中的单码本阵营。
+**谱系定位**: IndexTTS 属于 [[LLM-basedTTS]] 中的 hybrid 架构路线(SEQ3 条件化方式),使用 single codebook + BigVGAN2 decoder,与 XTTS/Tortoise 同源但做了多项工程改进。在 [[Zero-shotSpeechSynthesis]] 任务页记录的三条主流路线中属于"LLM + 离散 token"方向,使用 VQ/FSQ 单码本 25Hz 采样率,属于 [[Single-codebookvsMulti-codebook]] 中的单码本阵营。
 
-**已有认知**: 知识库中 [[Codebook Collapse]] 页已详述 VQ 利用率问题及 FSQ 等解决方案;[[Speaker Embedding]] 页记录了从 d-vector 到 Conformer Perceiver 的演进;[[Neural Vocoder]] 页记录了 BigVGAN 作为当前主流 vocoder 的地位。IndexTTS 是 IndexTTS2 的前身,后者在本 vault 中已有 repro 级笔记。
+**已有认知**: 知识库中 [[CodebookCollapse]] 页已详述 VQ 利用率问题及 FSQ 等解决方案;[[SpeakerEmbedding]] 页记录了从 d-vector 到 Conformer Perceiver 的演进;[[NeuralVocoder]] 页记录了 BigVGAN 作为当前主流 vocoder 的地位。IndexTTS 是 IndexTTS2 的前身,后者在本 vault 中已有 repro 级笔记。
 
-**创新判断**: 字符-拼音混合建模方案在已有知识库中无先例,VQ vs FSQ 的系统对比实验对 [[Codebook Collapse]] 页具有参考价值。Conformer-based Perceiver conditioner 在 [[Speaker Embedding]] 页的架构谱系中是新增的类型。
+**创新判断**: 字符-拼音混合建模方案在已有知识库中无先例,VQ vs FSQ 的系统对比实验对 [[CodebookCollapse]] 页具有参考价值。Conformer-based Perceiver conditioner 在 [[SpeakerEmbedding]] 页的架构谱系中是新增的类型。
 
 ## 速查
 
@@ -43,7 +43,7 @@ updated: 2026-06-03
 LLM-based zero-shot TTS 在工业部署中面临三个实际问题 [§1]:
 
 1. **中文多音字发音不可控**: 使用 raw text + BPE 的系统在中文场景中难以处理多音字(如"晕"可读 yūn 或 yùn),传统 G2P 前端又会限制端到端学习和多语言扩展
-2. **VQ codebook 利用率低**: 离散 token 方案中 VQ 可能因 [[Codebook Collapse]] 导致有效码本远小于设定大小,影响重建质量
+2. **VQ codebook 利用率低**: 离散 token 方案中 VQ 可能因 [[CodebookCollapse]] 导致有效码本远小于设定大小,影响重建质量
 3. **音色相似度和音质不足**: XTTS 等早期 GPT-style TTS 系统在 speaker similarity 和 audio quality 上仍有改进空间
 
 IndexTTS 的目标是在保持 GPT-style TTS 架构简洁性的前提下,通过工程化改进解决上述问题,构建可用于视频创作场景的工业级 TTS 系统 [§1]。
@@ -82,7 +82,7 @@ FSQ 配置: levels = [8, 8, 8, 6, 5],等效 8192 个离散状态 [§3.2.2]。
 
 **实验结果** [§3.3.2]: 在 6k 小时训练数据下,VQ 利用率仅 55%; 但当训练数据增至 34k 小时后,VQ 和 FSQ 的利用率差距消失,VQ 也接近 100%。50% 的 token 覆盖了超过 80% 的训练数据中出现的 token 总量 [§3.3.2]。
 
-[agent 解读]: 这一发现补充了 [[Codebook Collapse]] 页的解决方案谱系 — 除了 EMA/factorized codes/FSQ 等方法论层面的改进,充足的训练数据本身也是缓解 codebook collapse 的有效手段。这对资源充足的工业场景有直接参考价值。
+[agent 解读]: 这一发现补充了 [[CodebookCollapse]] 页的解决方案谱系 — 除了 EMA/factorized codes/FSQ 等方法论层面的改进,充足的训练数据本身也是缓解 codebook collapse 的有效手段。这对资源充足的工业场景有直接参考价值。
 
 **3. Conformer-based Perceiver Conditioner** [§2.3]
 
@@ -150,7 +150,7 @@ IndexTTS 是一篇偏工程实践的系统论文,其价值在于提供了三个�
 
 1. **字符-拼音混合建模**是本文最独特的贡献。在中文 TTS 场景中,多音字问题长期依赖 G2P 前端解决,而 IndexTTS 将拼音直接纳入 BPE 词表,通过训练时随机替换让模型同时掌握两种表示,用户推理时可按需注入拼音纠正发音。94% 的纠正率证明了方案的实用性。
 
-2. **VQ vs FSQ 的对比实验**给出了一个重要发现:在充足数据量(34k h)下 VQ 的 codebook 利用率接近 100%,FSQ 的优势不再显著。这补充了领域内对 [[Codebook Collapse]] 问题的理解 — 数据量本身是一种"解药"。
+2. **VQ vs FSQ 的对比实验**给出了一个重要发现:在充足数据量(34k h)下 VQ 的 codebook 利用率接近 100%,FSQ 的优势不再显著。这补充了领域内对 [[CodebookCollapse]] 问题的理解 — 数据量本身是一种"解药"。
 
 3. **Conformer Perceiver + BigVGAN2 直接解码**的组合在 MOS timbre(4.20)和 quality(4.05)上超越了所有 baseline [Table 4],但 SS 指标(0.776)落后于 CosyVoice2(0.788) [Table 3],说明 MOS 主观感知和 embedding-based 客观指标可能衡量了音色相似度的不同维度。
 

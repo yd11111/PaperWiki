@@ -8,7 +8,7 @@ authors: [Sieun Hyeon, Kyudan Jung, Nam-Joon Kim, Hyun Gon Ryu, Jaeyoung Do]
 year: 2025
 venue: "ICASSP 2025"
 tags: [TTS, pipeline, OCR, accessibility, LaTeX, mathematical-TTS, document-reader]
-concepts: ["[[Text-to-Speech Pipeline]]", "[[TTS Evaluation]]"]
+concepts: ["[[Text-to-SpeechPipeline]]", "[[TTSEvaluation]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个待确认实体页: [[VITS]], [[Text-to-Speech Pipeline]], [[TTS Evaluation]])
+> [!info] KB 背景 (基于 3 个待确认实体页: [[VITS]], [[Text-to-SpeechPipeline]], [[TTSEvaluation]])
 > 自动生成,不保证完整覆盖所有相关知识。全部来源均为 pending-review,仅供参考 [待确认]。
 >
-> **谱系定位**: MathReader 是一个应用层 TTS pipeline,不涉及 TTS 模型本身的创新。它使用 VITS 作为后端语音合成模型。在 [[Text-to-Speech Pipeline]] 的五阶段演进中,MathReader 并不属于任何一个阶段的推进,而是在"前端文本分析"这一环节做了数学公式场景的适配——通过 OCR + T5 翻译将 LaTeX 公式转为可朗读的英文,再送入标准 TTS。在 [[TTS Evaluation]] 中,WER 被用作可懂度指标,且该页面明确将"数学符号/公式"列为 TTS 评估中不足的维度之一,MathReader 正好针对这个缺口。
+> **谱系定位**: MathReader 是一个应用层 TTS pipeline,不涉及 TTS 模型本身的创新。它使用 VITS 作为后端语音合成模型。在 [[Text-to-SpeechPipeline]] 的五阶段演进中,MathReader 并不属于任何一个阶段的推进,而是在"前端文本分析"这一环节做了数学公式场景的适配——通过 OCR + T5 翻译将 LaTeX 公式转为可朗读的英文,再送入标准 TTS。在 [[TTSEvaluation]] 中,WER 被用作可懂度指标,且该页面明确将"数学符号/公式"列为 TTS 评估中不足的维度之一,MathReader 正好针对这个缺口。
 >
 > **已有认知**: VITS (Kim et al., ICML 2021) 是端到端并行 TTS 模型,MOS 4.43,67x 实时速率,可直接从音素序列生成波形。MathReader 直接使用 VITS 而未做修改。
 >
 > **创新判断**: MathReader 的创新不在 TTS 模型层面,而在前端预处理——用 fine-tuned T5-small 将 LaTeX 翻译为 spoken English,这是一个工程集成创新而非模型创新。
 >
-> 检索命中: [[VITS]](pending-review), [[Text-to-Speech Pipeline]](pending-review), [[TTS Evaluation]](pending-review) | 过滤: 无 confirmed 页面 | 未命中但可能相关: 无
+> 检索命中: [[VITS]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[TTSEvaluation]](pending-review) | 过滤: 无 confirmed 页面 | 未命中但可能相关: 无
 
 ## 速查
 

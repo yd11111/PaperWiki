@@ -8,9 +8,9 @@ authors: [Yakun Song, Xiaobin Zhuang, Jiawei Chen, Zhikang Niu, Guanrou Yang, Ch
 year: 2025
 venue: "arXiv preprint (work in progress)"
 tags: [zero-shot-TTS, RVQ, masked-diffusion, autoregressive, discrete-token, patch-generation, codec-LM]
-concepts: ["[[Residual Vector Quantization]]", "[[Masked Generative Modeling]]", "[[Classifier-Free Guidance]]", "[[Codec Language Model]]", "[[Quantizer Dropout]]", "[[Single-codebook vs Multi-codebook]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[MaskedGenerativeModeling]]", "[[Classifier-FreeGuidance]]", "[[CodecLanguageModel]]", "[[QuantizerDropout]]", "[[Single-codebookvsMulti-codebook]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["[[数据集/Emilia|Emilia]]", "[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Residual Vector Quantization]], [[Masked Generative Modeling]], [[Classifier-Free Guidance]], [[Codec Language Model]], [[Single-codebook vs Multi-codebook]], [[Diffusion-based TTS]])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ResidualVectorQuantization]], [[MaskedGenerativeModeling]], [[Classifier-FreeGuidance]], [[CodecLanguageModel]], [[Single-codebookvsMulti-codebook]], [[Diffusion-basedTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DiSTAR 处于 RVQ 多码本离散 token 路线与 masked generative/diffusion 路线的交汇点。在 KB 中,[[Residual Vector Quantization]] 页记录了 RVQ 从 SoundStream → EnCodec → DAC 的演进线,DiSTAR 使用的是自研 MagiCodec 变体 (9 层 RVQ, 64 Hz, 65536 codebook, 16-d)。[[Masked Generative Modeling]] 页记录了 MaskGIT → SoundStorm → MaskGCT 的迭代并行解码谱系,DiSTAR 将此范式改造为 LLaDA-style masked diffusion,不再是置信度排序 unmask,而是以连续时间 masking schedule 驱动的迭代去 mask 过程。[[Codec Language Model]] 页记录了 AR 在 codec token 上建模的家族谱系 (VALL-E, AudioLM),DiSTAR 属于此路线但用 patch-level AR + intra-patch masked diffusion 替代了传统 token-level AR。
+> **谱系定位**: DiSTAR 处于 RVQ 多码本离散 token 路线与 masked generative/diffusion 路线的交汇点。在 KB 中,[[ResidualVectorQuantization]] 页记录了 RVQ 从 SoundStream → EnCodec → DAC 的演进线,DiSTAR 使用的是自研 MagiCodec 变体 (9 层 RVQ, 64 Hz, 65536 codebook, 16-d)。[[MaskedGenerativeModeling]] 页记录了 MaskGIT → SoundStorm → MaskGCT 的迭代并行解码谱系,DiSTAR 将此范式改造为 LLaDA-style masked diffusion,不再是置信度排序 unmask,而是以连续时间 masking schedule 驱动的迭代去 mask 过程。[[CodecLanguageModel]] 页记录了 AR 在 codec token 上建模的家族谱系 (VALL-E, AudioLM),DiSTAR 属于此路线但用 patch-level AR + intra-patch masked diffusion 替代了传统 token-level AR。
 >
-> **已有认知 vs 创新**: KB 中已有 [[Quantizer Dropout]] (confirmed) 记录了 SoundStream/DAC 的可变比特率训练技巧,DiSTAR 的 stochastic layer truncation 是同一思路在 TTS LM 端的应用 (训练时随机丢弃上层 RVQ)。[[Classifier-Free Guidance]] [待确认] 记录了 CFG 在 TTS 中的标准用法,DiSTAR 的创新在于将 CFG 应用于 masked diffusion 模块而非 continuous diffusion。[[Single-codebook vs Multi-codebook]] [待确认] 记录了业界向少码本/单码本的趋势,DiSTAR 反向选择了多码本 (9 层 RVQ) 路线但通过 patch-level 并行化解决了序列过长问题。
+> **已有认知 vs 创新**: KB 中已有 [[QuantizerDropout]] (confirmed) 记录了 SoundStream/DAC 的可变比特率训练技巧,DiSTAR 的 stochastic layer truncation 是同一思路在 TTS LM 端的应用 (训练时随机丢弃上层 RVQ)。[[Classifier-FreeGuidance]] [待确认] 记录了 CFG 在 TTS 中的标准用法,DiSTAR 的创新在于将 CFG 应用于 masked diffusion 模块而非 continuous diffusion。[[Single-codebookvsMulti-codebook]] [待确认] 记录了业界向少码本/单码本的趋势,DiSTAR 反向选择了多码本 (9 层 RVQ) 路线但通过 patch-level 并行化解决了序列过长问题。
 >
-> 检索命中: [[Residual Vector Quantization]]✓ | 过滤: [[Masked Generative Modeling]](pending-review), [[Classifier-Free Guidance]](pending-review), [[Codec Language Model]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review), [[Diffusion-based TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[CodecLanguageModel]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[Diffusion-basedTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -117,7 +117,7 @@ DiSTAR 由三个 Transformer 组件组成 [§3.1.2, Fig 1]:
 
 **为什么**: [论文原文, §3.4] 上层 RVQ 主要编码 acoustic detail 而非 linguistic content,pruning 后 WER 变化小但 SIM 下降 [Fig 2, §4.4]。
 
-[agent 解读] 这与 [[Quantizer Dropout]] (SoundStream 提出, DAC 改进) 的思路完全一致,只是作用位置从 codec 端移到了 LM 端。
+[agent 解读] 这与 [[QuantizerDropout]] (SoundStream 提出, DAC 改进) 的思路完全一致,只是作用位置从 codec 端移到了 LM 端。
 
 #### 6. Embedding initialization from codec codebook
 

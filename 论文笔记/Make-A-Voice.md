@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Make-A-Voice: Unified Voice Synthesis With Discrete Representation"
 arxiv_id: "2305.19269"
-source: "https://arxiv.org/abs/2305.19269"
+source: "Sources/Make-A-Voice.pdf"
 authors: [Rongjie Huang, Chunlei Zhang, Yongqi Wang, Dongchao Yang, Luping Liu, Zhenhui Ye, Ziyue Jiang, Chao Weng, Zhou Zhao, Dong Yu]
 year: 2023
 venue: "arXiv preprint"
 tags: [TTS, voice-conversion, SVS, zero-shot, discrete-token, unified-framework, autoregressive, coarse-to-fine]
-concepts: ["[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[Neural Vocoder]]", "[[LLM-based TTS]]", "[[F0 Modeling]]", "[[Singing Voice Synthesis]]"]
+concepts: ["[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[NeuralVocoder]]", "[[LLM-basedTTS]]", "[[F0Modeling]]", "[[SingingVoiceSynthesis]]"]
 models: ["[[模型库/Make-A-Voice|Make-A-Voice]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/SoundStream|SoundStream]]", "[[模型库/BigVGAN|BigVGAN]]"]
 tasks: [TTS, voice-conversion, singing-voice-synthesis]
 datasets: [LibriTTS, LibriLight, OpenCPOP, OpenSinger, CSMSC, M4Singer]
@@ -20,9 +20,9 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[Neural Vocoder]], [[LLM-based TTS]], [[F0 Modeling]], [[Singing Voice Synthesis]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[LLM-basedTTS]], [[F0Modeling]], [[SingingVoiceSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Neural Vocoder]]✓, [[LLM-based TTS]]✓, [[Speech Factorization]]✓, [[Speaker Embedding]]✓ | 过滤: [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review) | 未命中但可能相关: [[Singing Voice Synthesis]]
+> 检索命中: [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[NeuralVocoder]]✓, [[LLM-basedTTS]]✓, [[SpeechFactorization]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[F0Modeling]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: [[SingingVoiceSynthesis]]
 
 - **Semantic vs Acoustic Tokens**: Make-A-Voice 是 AudioLM 范式的直接继承者,采用 HuBERT semantic tokens → SoundStream acoustic tokens 的两阶段离散表示。KB 记录了此串联策略的优缺点: 概念简单但序列长。本文用 12 层 RVQ 但推理仅取前 3 层作为 vocoder 输入,以避免 codebook mismatch。
 - **RVQ**: 本文使用 SoundStream 的 12 层 RVQ (codebook size 1024),但关键设计选择是推理时仅用 3 层 acoustic tokens + unit-based vocoder,而非全部 12 层 + SoundStream decoder。
@@ -226,4 +226,4 @@ Demo 页展示三项扩展能力:
 4. **同帧率对齐**: semantic/acoustic tokens 使用相同 downsampling rate (320, 20ms frame),简化跨阶段对齐
 5. **Separating tokens**: 多条件 concatenation 时用 separating tokens 分隔不同来源的 token 序列
 
-检索命中: [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[Neural Vocoder]], [[LLM-based TTS]], [[Speech Factorization]], [[Speaker Embedding]] | 过滤: [[F0 Modeling]](pending-review), [[Mel Spectrogram]](pending-review) | 未命中但可能相关: [[Singing Voice Synthesis]]
+检索命中: [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[LLM-basedTTS]], [[SpeechFactorization]], [[SpeakerEmbedding]] | 过滤: [[F0Modeling]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: [[SingingVoiceSynthesis]]

@@ -8,9 +8,9 @@ authors: [Gaspard Michel, Elena V. Epure, Christophe Cerisara]
 year: 2025
 venue: "Findings of ACL 2026"
 tags: [TTS, dataset, expressive-speech, audiobook, zero-shot, flow-matching, evaluation, narrative, prosody]
-concepts: ["[[Prosody Modeling]]", "[[Emotion Control in TTS]]", "[[Natural Language Description for TTS]]", "[[Conditional Flow Matching]]", "[[TTS Evaluation]]"]
+concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[NaturalLanguageDescriptionforTTS]]", "[[ConditionalFlowMatching]]", "[[TTSEvaluation]]"]
 models: ["[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "F5-TTS"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文属于"表现力语音合成数据"方向,核心贡献是一个从有声书中提取的角色台词数据集 LibriQuote。与 [[Emilia]] (in-the-wild 多样性路线) 形成互补 -- Emilia 提供规模和多样性,LibriQuote 提供叙事语境标注的表现力语料。在方法实验上,本文验证了 [[Conditional Flow Matching]] (F5-TTS) 与自回归 LLM-TTS (SparkTTS) 在表现力微调上的差异化表现,这与 KB 中已有的"flow matching 更适合细粒度声学还原"认知一致。
+> **谱系定位**: 本文属于"表现力语音合成数据"方向,核心贡献是一个从有声书中提取的角色台词数据集 LibriQuote。与 [[Emilia]] (in-the-wild 多样性路线) 形成互补 -- Emilia 提供规模和多样性,LibriQuote 提供叙事语境标注的表现力语料。在方法实验上,本文验证了 [[ConditionalFlowMatching]] (F5-TTS) 与自回归 LLM-TTS (SparkTTS) 在表现力微调上的差异化表现,这与 KB 中已有的"flow matching 更适合细粒度声学还原"认知一致。
 >
-> **已有认知**: [[Prosody Modeling]] 概念页已梳理从 GST 到 NVSpeech 的韵律建模演进,本文的"叙事语境伪标签"(speech verbs/adverbs) 可视为 [[Natural Language Description for TTS]] 的一种新形式 -- 不同于 PromptTTS 的显式属性描述,而是从文学叙事中自动提取的隐式说话风格指示。[[Emotion Control in TTS]] 概念页中 IndexTTS2 的 soft-instruction 情感解耦已有记录,本文进一步验证了 IndexTTS2 在表现力基准上的优势。[[TTS Evaluation]] 概念页中 LALM-as-a-Judge (Manku et al., 2025) 已被记录,本文是该方法在表现力评估场景的实际应用。
+> **已有认知**: [[ProsodyModeling]] 概念页已梳理从 GST 到 NVSpeech 的韵律建模演进,本文的"叙事语境伪标签"(speech verbs/adverbs) 可视为 [[NaturalLanguageDescriptionforTTS]] 的一种新形式 -- 不同于 PromptTTS 的显式属性描述,而是从文学叙事中自动提取的隐式说话风格指示。[[EmotionControlinTTS]] 概念页中 IndexTTS2 的 soft-instruction 情感解耦已有记录,本文进一步验证了 IndexTTS2 在表现力基准上的优势。[[TTSEvaluation]] 概念页中 LALM-as-a-Judge (Manku et al., 2025) 已被记录,本文是该方法在表现力评估场景的实际应用。
 >
 > **创新判断**: 相较于 KB 中已有的表现力 TTS 工作,本文的独特贡献在于 (1) 叙事感知分割 -- 按角色台词而非随机句子边界切分有声书; (2) 首次大规模自动提取 speech verbs/adverbs 伪标签; (3) 提出 ContextMOS 和 Win-Rate 两个基于 LALM 的表现力评估指标。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[Emotion Control in TTS]][待确认], [[TTS Evaluation]][待确认], [[Natural Language Description for TTS]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 参考: [[EmotionControlinTTS]][待确认], [[TTSEvaluation]][待确认], [[NaturalLanguageDescriptionforTTS]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -182,4 +182,4 @@ Pipeline 分两大部分:
 
 ---
 
-检索命中: [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 参考: [[Emotion Control in TTS]][待确认], [[TTS Evaluation]][待确认], [[Natural Language Description for TTS]][待确认] | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 参考: [[EmotionControlinTTS]][待确认], [[TTSEvaluation]][待确认], [[NaturalLanguageDescriptionforTTS]][待确认] | 未命中但可能相关: 无

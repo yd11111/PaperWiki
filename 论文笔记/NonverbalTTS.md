@@ -8,9 +8,9 @@ authors: [Maksim Borisov, Egor Spirin, Daria Diatlova]
 year: 2025
 venue: "arXiv"
 tags: [dataset, non-verbal-vocalization, emotion-annotation, TTS, expressive-TTS, data-pipeline, English]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[TTS Evaluation]]", "[[Speech-Text Alignment]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[TTSEvaluation]]", "[[Speech-TextAlignment]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["[[数据集/Emilia|Emilia]]"]
 kb_context_sources: 3
 status: draft
@@ -20,20 +20,20 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[模型库/CosyVoice 2|CosyVoice 2]], [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[模型库/CosyVoice|CosyVoice]], [[模型库/CosyVoice2|CosyVoice 2]], [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **[[模型库/CosyVoice|CosyVoice]]** (confirmed): 阿里巴巴语音实验室提出的 LLM + OT-CFM 零样本 TTS 系统。本文以 CosyVoice-300M 为基座模型,仅微调 LM 组件来验证 NVTTS 数据集对副语言发声合成的有效性。CosyVoice 原生不支持 cough/sigh 等 NV,在 laughter/breath 上也弱于 CosyVoice2,因此是展示 NVTTS 增益的理想起点。
 >
-> **[[模型库/CosyVoice 2|CosyVoice 2]]** (confirmed): CosyVoice 的流式升级版,原生支持 breath、laughter、cough、sigh 四类 NV,但其 NV 训练数据为闭源私有数据集。本文将 NVTTS 微调后的 CosyVoice 与 CosyVoice2 做 head-to-head 对比,证明开源数据可达到与私有数据同等水平。CosyVoice2 区分单 token `[laugh]` 和多 token span `<laughter></laughter>`,而本文实现缺乏此粒度,这解释了 laughter Jaccard 的差距。
+> **[[模型库/CosyVoice2|CosyVoice 2]]** (confirmed): CosyVoice 的流式升级版,原生支持 breath、laughter、cough、sigh 四类 NV,但其 NV 训练数据为闭源私有数据集。本文将 NVTTS 微调后的 CosyVoice 与 CosyVoice2 做 head-to-head 对比,证明开源数据可达到与私有数据同等水平。CosyVoice2 区分单 token `[laugh]` 和多 token span `<laughter></laughter>`,而本文实现缺乏此粒度,这解释了 laughter Jaccard 的差距。
 >
-> **[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]** (confirmed): 给定短参考语音和目标文本,合成保持音色的语音。本文在零样本设定下验证 NV 合成能力 — 测试集使用 VoxCeleb 中训练时未见的说话人,评估同时覆盖 speaker similarity 和 NV fidelity。
+> **[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]** (confirmed): 给定短参考语音和目标文本,合成保持音色的语音。本文在零样本设定下验证 NV 合成能力 — 测试集使用 VoxCeleb 中训练时未见的说话人,评估同时覆盖 speaker similarity 和 NV fidelity。
 >
-> **[[概念库/Emotion Control in TTS|Emotion Control in TTS]]** [待确认]: 情感控制 TTS 的演进线已出现从"抽象情感状态"到"具体副语言行为"的分支 (NVSpeech, 2025)。本文 NVTTS 提供了 8 类情感标注,但实验发现去掉情感标签后 NV 生成质量略有提升,暗示情感-NV 联合建模并非总是互利的。
+> **[[概念库/EmotionControlinTTS|Emotion Control in TTS]]** [待确认]: 情感控制 TTS 的演进线已出现从"抽象情感状态"到"具体副语言行为"的分支 (NVSpeech, 2025)。本文 NVTTS 提供了 8 类情感标注,但实验发现去掉情感标签后 NV 生成质量略有提升,暗示情感-NV 联合建模并非总是互利的。
 >
-> **[[概念库/TTS Evaluation|TTS Evaluation]]** [待确认]: 本文使用 WER、SIM-o、DNSMOS、NV Jaccard distance 等标准客观指标,加上人类偏好测试。NV Jaccard distance 是较独特的评估方式 — 用 BEATs 检测生成和参考音频中的 NV,计算集合 Jaccard 距离。
+> **[[概念库/TTSEvaluation|TTS Evaluation]]** [待确认]: 本文使用 WER、SIM-o、DNSMOS、NV Jaccard distance 等标准客观指标,加上人类偏好测试。NV Jaccard distance 是较独特的评估方式 — 用 BEATs 检测生成和参考音频中的 NV,计算集合 Jaccard 距离。
 >
-> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[概念库/Emotion Control in TTS|Emotion Control in TTS]](pending-review), [[概念库/TTS Evaluation|TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[概念库/EmotionControlinTTS|Emotion Control in TTS]](pending-review), [[概念库/TTSEvaluation|TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -189,4 +189,4 @@ NV 在 transcription 中的精确定位通过 MFA (Montreal Forced Aligner) 实�
 > - [low] template-compliance: review callout 占位符 → 已修正
 > 详见 `_review/NonverbalTTS-review.yml`
 
-检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[概念库/Emotion Control in TTS|Emotion Control in TTS]](pending-review), [[概念库/TTS Evaluation|TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review) | 未命中但可能相关: 无
+检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[概念库/EmotionControlinTTS|Emotion Control in TTS]](pending-review), [[概念库/TTSEvaluation|TTS Evaluation]](pending-review), [[数据集/Emilia|Emilia]](pending-review) | 未命中但可能相关: 无

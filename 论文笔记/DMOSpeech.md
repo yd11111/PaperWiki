@@ -8,9 +8,9 @@ authors: [Yinghao Aaron Li, Rithesh Kumar, Zeyu Jin]
 year: 2024
 venue: "Preprint (2024.10, revised 2025.02)"
 tags: [TTS, diffusion, distillation, zero-shot, metric-optimization, speaker-similarity, distribution-matching]
-concepts: ["[[Diffusion-based TTS]]", "[[Diffusion Model]]", "[[Score Matching]]", "[[Speaker Embedding]]", "[[Speaker Verification]]", "[[Classifier-Free Guidance]]", "[[Non-autoregressive TTS]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Diffusion-basedTTS]]", "[[DiffusionModel]]", "[[ScoreMatching]]", "[[SpeakerEmbedding]]", "[[SpeakerVerification]]", "[[Classifier-FreeGuidance]]", "[[Non-autoregressiveTTS]]"]
+models: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[Speaker Embedding]]✓, [[Diffusion-based TTS]], [[Diffusion Model]], [[Score Matching]], [[Speaker Verification]], [[Differentiable Reward Optimization]])
+> [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页: [[SpeakerEmbedding]]✓, [[Diffusion-basedTTS]], [[DiffusionModel]], [[ScoreMatching]], [[SpeakerVerification]], [[DifferentiableRewardOptimization]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: DMOSpeech 处于 [[Diffusion-based TTS]] 演进线的加速与优化交叉点。在 diffusion TTS 的演进中,从 Diff-TTS/Grad-TTS (2021) 到 ProDiff/DiffGAN-TTS (2022) 再到 Flow Matching 主流化 (Voicebox/F5-TTS, 2023-24),加速一直是核心问题。DMOSpeech 选择了 Distribution Matching Distillation (DMD2) 路线,将 128 步 teacher 蒸馏为 4 步 student,但其创新不仅在加速 — 更在于利用蒸馏后的确定性路径打通了从噪声到语音的完整梯度通路,使得首次在 TTS 中实现了对 SV loss 和 CTC loss 的端到端优化。
+> **谱系定位**: DMOSpeech 处于 [[Diffusion-basedTTS]] 演进线的加速与优化交叉点。在 diffusion TTS 的演进中,从 Diff-TTS/Grad-TTS (2021) 到 ProDiff/DiffGAN-TTS (2022) 再到 Flow Matching 主流化 (Voicebox/F5-TTS, 2023-24),加速一直是核心问题。DMOSpeech 选择了 Distribution Matching Distillation (DMD2) 路线,将 128 步 teacher 蒸馏为 4 步 student,但其创新不仅在加速 — 更在于利用蒸馏后的确定性路径打通了从噪声到语音的完整梯度通路,使得首次在 TTS 中实现了对 SV loss 和 CTC loss 的端到端优化。
 >
-> **已有认知**: [[Speaker Embedding]] 页面 (confirmed) 记录了从 d-vector 到 ECAPA-TDNN 再到 WavLM 的 speaker encoder 演进,以及 SECS 作为评估指标的核心地位。[[Speaker Verification]] 页面 [待确认] 记录了 SV 作为训练组件的三种用途 (feedback constraint, adversarial training, loss function),但尚无 "在 latent 空间直接优化 SV loss" 的记录 — DMOSpeech 的 latent SV model 是新模式。[[Diffusion Model]] 页面 [待确认] 覆盖了 DDPM/SDE/ODE 统一框架,[[Score Matching]] 页面 [待确认] 解释了 score function 的原理 — DMOSpeech 中 teacher score model 和 student score model 的对比机制直接基于这些原理。[[Differentiable Reward Optimization]] 页面 [待确认] 追踪了 RL-for-TTS 的多条路线 (token-level DiffRO, audio-level GRPO, component-level GRPO),DMOSpeech 可视为 "direct metric optimization" 路线的先驱 — 它不走 RL,而是直接端到端优化可微 metric,在 DMOSpeech 2 (其续作) 中才引入 GRPO。
+> **已有认知**: [[SpeakerEmbedding]] 页面 (confirmed) 记录了从 d-vector 到 ECAPA-TDNN 再到 WavLM 的 speaker encoder 演进,以及 SECS 作为评估指标的核心地位。[[SpeakerVerification]] 页面 [待确认] 记录了 SV 作为训练组件的三种用途 (feedback constraint, adversarial training, loss function),但尚无 "在 latent 空间直接优化 SV loss" 的记录 — DMOSpeech 的 latent SV model 是新模式。[[DiffusionModel]] 页面 [待确认] 覆盖了 DDPM/SDE/ODE 统一框架,[[ScoreMatching]] 页面 [待确认] 解释了 score function 的原理 — DMOSpeech 中 teacher score model 和 student score model 的对比机制直接基于这些原理。[[DifferentiableRewardOptimization]] 页面 [待确认] 追踪了 RL-for-TTS 的多条路线 (token-level DiffRO, audio-level GRPO, component-level GRPO),DMOSpeech 可视为 "direct metric optimization" 路线的先驱 — 它不走 RL,而是直接端到端优化可微 metric,在 DMOSpeech 2 (其续作) 中才引入 GRPO。
 >
 > **创新判断**: DMOSpeech 的三个新颖点在 KB 中无先例: (1) 首个蒸馏后 student 全面超越 teacher 的 TTS 系统; (2) 首次在 TTS 中实现对 WER (通过 CTC loss) 和 speaker similarity (通过 SV loss) 的真正端到端优化; (3) 发现并利用 "mode shrinkage" — 蒸馏导致的条件分布收缩在强条件生成 (如 TTS) 中反而有益,与 diversity trade-off 的传统认知相反。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Diffusion-based TTS]]✓, [[Diffusion Model]]✓, [[Score Matching]]✓, [[Speaker Verification]]✓, [[Differentiable Reward Optimization]]✓ | 过滤: 5 页为 pending-review | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[Diffusion-basedTTS]]✓, [[DiffusionModel]]✓, [[ScoreMatching]]✓, [[SpeakerVerification]]✓, [[DifferentiableRewardOptimization]]✓ | 过滤: 5 页为 pending-review | 未命中但可能相关: 无
 
 ## 速查
 

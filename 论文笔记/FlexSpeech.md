@@ -8,9 +8,9 @@ authors: [Linhan Ma, Dake Guo, He Wang, Jin Xu, Lei Xie]
 year: 2025
 venue: "arXiv (eess.AS)"
 tags: [TTS, zero-shot, flow-matching, duration-prediction, DPO, style-transfer, NAR, preference-alignment]
-concepts: ["[[Conditional Flow Matching]]", "[[Duration Predictor]]", "[[Non-autoregressive TTS]]", "[[Style Transfer in TTS]]", "[[Prosody Modeling]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]", "[[Differentiable Reward Optimization]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/BigVGAN|BigVGAN]]"]
-tasks: ["[[任务库/Zero-shot Speech Synthesis|Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[DurationPredictor]]", "[[Non-autoregressiveTTS]]", "[[StyleTransferinTTS]]", "[[ProsodyModeling]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]", "[[DifferentiableRewardOptimization]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/BigVGAN|BigVGAN]]"]
+tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["[[数据集/Emilia|Emilia]]", "[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Conditional Flow Matching]]、[[Prosody Modeling]]、[[Speaker Embedding]] + 3 个待确认实体页)
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ConditionalFlowMatching]]、[[ProsodyModeling]]、[[SpeakerEmbedding]] + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: FlexSpeech 位于 NAR TTS 与 AR prosody modeling 的交叉点。在已有知识库中,TTS 的 duration prediction 经历了 "FastSpeech 显式 duration → Glow-TTS MAS → MaskGCT T2D model → DMOSpeech 2 GRPO-optimized duration" 的演进。FlexSpeech 提出了一条新路线: **AR duration predictor + DPO 偏好对齐**,与 DMOSpeech 2 的 GRPO-optimized duration 理念相近(都是对 duration 组件做 RL/偏好优化),但优化方法不同(DPO vs GRPO)。
 >
-> **已有认知**: KB 中 [[Conditional Flow Matching]] (confirmed) 详细记录了 OT-CFM 在 TTS 中的应用谱系(CosyVoice 系列、F5-TTS、VoiceFlow 等)。[[Duration Predictor]] [待确认] 梳理了从 FastSpeech 到 DMOSpeech 2 的 duration 建模演进,特别指出 DMOSpeech 2 的发现: "最优 duration 不等于真实 duration"(RL-optimized WER 1.752 < GT duration WER 1.821)。[[Prosody Modeling]] (confirmed) 将韵律信息分为 duration/pitch/energy/pause 四维度,FlexSpeech 专注于 duration 维度的 AR 建模。
+> **已有认知**: KB 中 [[ConditionalFlowMatching]] (confirmed) 详细记录了 OT-CFM 在 TTS 中的应用谱系(CosyVoice 系列、F5-TTS、VoiceFlow 等)。[[DurationPredictor]] [待确认] 梳理了从 FastSpeech 到 DMOSpeech 2 的 duration 建模演进,特别指出 DMOSpeech 2 的发现: "最优 duration 不等于真实 duration"(RL-optimized WER 1.752 < GT duration WER 1.821)。[[ProsodyModeling]] (confirmed) 将韵律信息分为 duration/pitch/energy/pause 四维度,FlexSpeech 专注于 duration 维度的 AR 建模。
 >
-> **创新判断**: FlexSpeech 的核心创新在于将 AR + DPO 引入 duration predictor(而非整个 TTS pipeline),实现了 duration 的 Markov 依赖建模 + 人类偏好对齐。与 [[Differentiable Reward Optimization]] [待确认] 中记录的 DiffRO/GRPO 方案对比,FlexSpeech 的 DPO 是最轻量的偏好优化(不需要 reward model,仅需人工标注的 win-lose 对)。与 MegaTTS 系列的 prosody/timbre 解耦思路类似,但 FlexSpeech 的解耦更彻底: 完全独立的 duration model + acoustic model,且 DPO 仅作用于 duration 不影响 acoustic model。
+> **创新判断**: FlexSpeech 的核心创新在于将 AR + DPO 引入 duration predictor(而非整个 TTS pipeline),实现了 duration 的 Markov 依赖建模 + 人类偏好对齐。与 [[DifferentiableRewardOptimization]] [待确认] 中记录的 DiffRO/GRPO 方案对比,FlexSpeech 的 DPO 是最轻量的偏好优化(不需要 reward model,仅需人工标注的 win-lose 对)。与 MegaTTS 系列的 prosody/timbre 解耦思路类似,但 FlexSpeech 的解耦更彻底: 完全独立的 duration model + acoustic model,且 DPO 仅作用于 duration 不影响 acoustic model。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Prosody Modeling]]✓, [[Speaker Embedding]]✓ | 过滤: [[Duration Predictor]](待确认), [[Non-autoregressive TTS]](待确认), [[Style Transfer in TTS]](待确认), [[Differentiable Reward Optimization]](待确认) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[DurationPredictor]](待确认), [[Non-autoregressiveTTS]](待确认), [[StyleTransferinTTS]](待确认), [[DifferentiableRewardOptimization]](待确认) | 未命中但可能相关: 无
 
 ## 速查
 

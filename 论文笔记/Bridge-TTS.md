@@ -8,7 +8,7 @@ authors: [Zehua Chen, Guande He, Kaiwen Zheng, Xu Tan, Jun Zhu]
 year: 2023
 venue: "arXiv preprint"
 tags: [TTS, diffusion, Schrödinger-bridge, data-to-data, mel-generation, sampling-efficiency, noise-schedule]
-concepts: ["[[Diffusion Model]]", "[[Diffusion-based TTS]]", "[[Score Matching]]", "[[Conditional Flow Matching]]", "[[Mel Spectrogram]]", "[[Duration Predictor]]"]
+concepts: ["[[DiffusionModel]]", "[[Diffusion-basedTTS]]", "[[ScoreMatching]]", "[[ConditionalFlowMatching]]", "[[MelSpectrogram]]", "[[DurationPredictor]]"]
 models: ["[[模型库/VITS|VITS]]"]
 tasks: []
 datasets: []
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[Conditional Flow Matching]]✓, [[Diffusion Model]][待确认], [[Diffusion-based TTS]][待确认], [[Score Matching]][待确认], [[Mel Spectrogram]][待确认], [[Duration Predictor]][待确认])
+> [!info] KB 背景 (基于 1 个已确认 + 5 个待确认实体页: [[ConditionalFlowMatching]]✓, [[DiffusionModel]][待确认], [[Diffusion-basedTTS]][待确认], [[ScoreMatching]][待确认], [[MelSpectrogram]][待确认], [[DurationPredictor]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: Bridge-TTS 位于 Diffusion-based TTS 演进线上,是 Grad-TTS (Popov et al., 2021) 的直接改进。Grad-TTS 是 SDE-based diffusion TTS 的开创性工作 [§3.2.1],它用 U-Net decoder 从 mean-shifted Gaussian prior 生成 mel spectrogram。Bridge-TTS 的核心创新在于将 Grad-TTS 的 data-to-noise 过程替换为 Schrödinger bridge 的 data-to-data 过程,从而使先验从含噪高斯变为干净的 text latent。
@@ -29,7 +29,7 @@ updated: 2026-06-03
 >
 > **创新判断**: 相对于 Diffusion-based TTS 页记录的加速方案(ProDiff 知识蒸馏, DiffGAN-TTS GAN 加速, CoMoSpeech consistency distillation),Bridge-TTS 的路线独特 — 不是在 data-to-noise 框架内加速,而是从根本上改变了生成过程的起点(clean prior 替代 noisy prior),这是一个理论层面的范式转换。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Diffusion Model]][待确认], [[Diffusion-based TTS]][待确认], [[Score Matching]][待确认], [[Mel Spectrogram]][待确认], [[Duration Predictor]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[DiffusionModel]][待确认], [[Diffusion-basedTTS]][待确认], [[ScoreMatching]][待确认], [[MelSpectrogram]][待确认], [[DurationPredictor]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 

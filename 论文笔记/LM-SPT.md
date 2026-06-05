@@ -8,9 +8,9 @@ authors: [Daejin Jo, Jeeyoung Yun, Byungseok Roh, Sungwoong Kim]
 year: 2025
 venue: "arXiv preprint"
 tags: [speech-tokenizer, semantic-distillation, RVQ, speech-LM, low-frame-rate, codec-design]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Self-Supervised Speech Representation]]", "[[Speech Language Model]]", "[[Codec Training Objectives]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[TokenRateandBitrateTrade-offs]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeechLanguageModel]]", "[[CodecTrainingObjectives]]"]
 models: ["[[模型库/EnCodec|EnCodec]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/Whisper|Whisper]]"]
-tasks: ["[[Neural Audio Compression]]"]
+tasks: ["[[NeuralAudioCompression]]"]
 datasets: ["LibriSpeech", "LJSpeech", "GigaSpeech", "VCTK"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Speech Language Model]]✓, [[Token Rate and Bitrate Trade-offs]][待确认], [[Self-Supervised Speech Representation]][待确认])
+> [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[SpeechLanguageModel]]✓, [[TokenRateandBitrateTrade-offs]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: LM-SPT 属于 mixed objective tokenizer 路线 (SpeechTokenizer → Mimi → LM-SPT),即在单一 codec 内同时编码语义和声学信息。KB 中记录了该路线的两个先驱:
@@ -28,13 +28,13 @@ updated: 2026-06-03
 - Mimi: 单 VQ 模块提取 WavLM 语义 + 额外 RVQ 声学,Split RVQ 结构
 
 **已有认知对比**: 
-1. KB [[Speech Tokenizer]] 记录了"SSL teacher 实际编码的是 phonetic 而非 semantic 信息"这一认知 (Choi et al. 2024),LM-SPT 正是从这一局限出发,改用 ASR teacher (Whisper)
-2. KB [[Semantic vs Acoustic Tokens]] 的 Survey 发现"没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果",LM-SPT 的 reconstruction-driven distillation 可视为对此的一种回应
-3. KB [[Token Rate and Bitrate Trade-offs]] 记录了"低 token rate 对 LM 建模有巨大优势",LM-SPT 支持 25/12.5/6.25 Hz 三档超低帧率,正对应此趋势
+1. KB [[SpeechTokenizer]] 记录了"SSL teacher 实际编码的是 phonetic 而非 semantic 信息"这一认知 (Choi et al. 2024),LM-SPT 正是从这一局限出发,改用 ASR teacher (Whisper)
+2. KB [[SemanticvsAcousticTokens]] 的 Survey 发现"没有任何 tokenizer 在 semantic-acoustic alignment 上取得实质性成果",LM-SPT 的 reconstruction-driven distillation 可视为对此的一种回应
+3. KB [[TokenRateandBitrateTrade-offs]] 记录了"低 token rate 对 LM 建模有巨大优势",LM-SPT 支持 25/12.5/6.25 Hz 三档超低帧率,正对应此趋势
 
 **创新判断**: 相对于 KB 中已有的 mixed tokenizer (SpeechTokenizer, Mimi),LM-SPT 的核心新意在于:(a) 将 semantic distillation 从 feature-level 改为 reconstruction-driven,绕过帧率对齐问题;(b) 从 SSL teacher 换为 ASR teacher (Whisper),更贴近 LM 语义;(c) dual encoder 架构显式分离 semantic 和 acoustic 编码。这些设计与 KB 中 FireRedTTS 2 的思路有相似性(也用 Whisper encoder + 声学 encoder + Vocos decoder),但 LM-SPT 的 distillation 机制不同。
 
-> 检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓, [[Speech Language Model]]✓ | 过滤: [[Token Rate and Bitrate Trade-offs]](pending-review), [[Self-Supervised Speech Representation]](pending-review) | 未命中但可能相关: [[Codec Training Objectives]]
+> 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: [[CodecTrainingObjectives]]
 
 ## 速查
 

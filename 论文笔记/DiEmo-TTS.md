@@ -8,7 +8,7 @@ authors: [Deok-Hyeon Cho, Hyung-Seok Oh, Seung-Bin Kim, Seong-Whan Lee]
 year: 2025
 venue: "Interspeech 2025"
 tags: [TTS, emotion, cross-speaker, disentanglement, self-supervised, DINO, style-transfer, FastSpeech2]
-concepts: ["[[Emotion Control in TTS]]", "[[Speech Factorization]]", "[[Style Transfer in TTS]]", "[[Speaker Embedding]]", "[[Gradient Reversal Layer]]", "[[Self-Supervised Speech Representation]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[SpeechFactorization]]", "[[StyleTransferinTTS]]", "[[SpeakerEmbedding]]", "[[GradientReversalLayer]]", "[[Self-SupervisedSpeechRepresentation]]"]
 models: ["[[论文笔记/EmoSphere-TTS|EmoSphere-TTS]]", "[[论文笔记/EmoSphere++|EmoSphere++]]"]
 tasks: []
 datasets: ["ESD", "MSP-Podcast"]
@@ -23,17 +23,17 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: DiEmo-TTS 属于跨说话人情感迁移 (cross-speaker emotion transfer) 方向,是 [[Emotion Control in TTS]] 的子问题。其核心挑战是 [[Speech Factorization]] 中的 emotion-speaker disentanglement: 从参考语音中提取不含说话人身份信息的情感嵌入。
+**谱系定位**: DiEmo-TTS 属于跨说话人情感迁移 (cross-speaker emotion transfer) 方向,是 [[EmotionControlinTTS]] 的子问题。其核心挑战是 [[SpeechFactorization]] 中的 emotion-speaker disentanglement: 从参考语音中提取不含说话人身份信息的情感嵌入。
 
 **已有认知**:
-- **解耦方法谱系**: 对抗训练 ([[Gradient Reversal Layer]], 2016) → 信息瓶颈 (VQ) → self-distillation (Seed-TTS, 2024)。DiEmo-TTS 提出第四条路线: 基于 DINO 的自监督蒸馏,不依赖显式标签实现解耦。
+- **解耦方法谱系**: 对抗训练 ([[GradientReversalLayer]], 2016) → 信息瓶颈 (VQ) → self-distillation (Seed-TTS, 2024)。DiEmo-TTS 提出第四条路线: 基于 DINO 的自监督蒸馏,不依赖显式标签实现解耦。
 - **Speaker Embedding** (confirmed): ECAPA-TDNN 等 speaker encoder 用于提取说话人特征,DiEmo-TTS 用 ECAPA-TDNN 做情感聚类中的说话人嵌入。
 - **Speech Factorization** (confirmed): 已有方法包括 GRL 对抗训练、VQ 信息瓶颈、正交损失等。DiEmo-TTS 的 cluster-driven sampling + information perturbation 是新的解耦组合方案。
 - **相关工作**: EmoSphere-TTS/EmoSphere++ (Cho et al., 2024/2025) 为本文同组前作,用球面坐标建模情感; Daisy-TTS 用 PCA 分解韵律嵌入; EmoCtrl-TTS 用帧级 arousal-valence 控制。
 
 **创新判断**: DiEmo-TTS 的核心创新在于将 DINO 自监督蒸馏从 speaker verification 领域迁移到 emotion disentanglement,并引入 cluster-driven sampling (基于情感聚类而非随机裁剪) 和 formant-based information perturbation (通过共振峰扰动破坏说话人信息同时保留情感),这两点在已有 KB 中无先例。
 
-> 检索命中: [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 参考: [[Emotion Control in TTS]][待确认], [[Style Transfer in TTS]][待确认], [[Gradient Reversal Layer]][待确认], [[Self-Supervised Speech Representation]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓ | 参考: [[EmotionControlinTTS]][待确认], [[StyleTransferinTTS]][待确认], [[GradientReversalLayer]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认] | 未命中但可能相关: 无
 
 ## 速查
 
@@ -187,4 +187,4 @@ DiEmo-TTS 提出了一条有价值的 emotion disentanglement 新路线: 将 DIN
 > - [low/traceability-gap] 消融分析中一处 agent 推断未标注来源 (已修正)
 > 详见 `_review/DiEmo-TTS-review.yml`
 
-> 检索命中: [[Speaker Embedding]]✓, [[Speech Factorization]]✓ | 参考: [[Emotion Control in TTS]][待确认], [[Style Transfer in TTS]][待确认], [[Gradient Reversal Layer]][待确认], [[Self-Supervised Speech Representation]][待确认] | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓ | 参考: [[EmotionControlinTTS]][待确认], [[StyleTransferinTTS]][待确认], [[GradientReversalLayer]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认] | 未命中但可能相关: 无

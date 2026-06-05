@@ -8,9 +8,9 @@ authors: [Ziqi Chen, Chaofan Ding, Gongyu Chen, Zihao Chen, Yihua Wang, Wei-Qian
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, dialect, multilingual, MoE, IPA, PEFT, LoRA, flow-matching, low-resource]
-concepts: ["[[Conditional Flow Matching]]", "[[Non-autoregressive TTS]]", "[[Phoneme Representation]]", "[[Speaker Adaptation]]", "[[Mel Spectrogram]]"]
-models: ["[[CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Non-autoregressiveTTS]]", "[[PhonemeRepresentation]]", "[[SpeakerAdaptation]]", "[[MelSpectrogram]]"]
+models: ["[[CosyVoice2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]"]
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
 status: draft
@@ -23,19 +23,19 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: DiaMoE-TTS 基于 F5-TTS 架构构建,F5-TTS 是一个使用 [[Conditional Flow Matching]] (OT-CFM) + DiT backbone 的全 NAR TTS 系统。在知识库中,F5-TTS 已被大量系统作为基座引用(Cross-Lingual F5-TTS、F5R-TTS 等),但尚无独立模型页。本文的核心创新集中在**多方言前端统一**(IPA) + **方言感知路由**(MoE) + **参数高效适应**(LoRA/Conditioning Adapter),而非对 flow matching 生成范式的改进。
+**谱系定位**: DiaMoE-TTS 基于 F5-TTS 架构构建,F5-TTS 是一个使用 [[ConditionalFlowMatching]] (OT-CFM) + DiT backbone 的全 NAR TTS 系统。在知识库中,F5-TTS 已被大量系统作为基座引用(Cross-Lingual F5-TTS、F5R-TTS 等),但尚无独立模型页。本文的核心创新集中在**多方言前端统一**(IPA) + **方言感知路由**(MoE) + **参数高效适应**(LoRA/Conditioning Adapter),而非对 flow matching 生成范式的改进。
 
 **已有认知**:
-- [[Conditional Flow Matching]] (confirmed): OT-CFM 在 TTS 中已成为主流生成范式,F5-TTS 使用 ConvNeXt V2 text encoder + DiT + flow matching。DiaMoE-TTS 保留了这一核心架构,创新集中在前端和适应层。
-- [[Zero-shot Speech Synthesis]] (confirmed): 当前 SOTA 由 CosyVoice 3、Qwen3-TTS 等系统把持,WER < 1.5%。DiaMoE-TTS 的 zero-shot 定义不同于主流——它关注**方言级别**的 zero-shot(用少量数据适应新方言),而非说话人级别。
-- [[Cross-lingual Voice Cloning]] (confirmed): 跨语言克隆的核心挑战是音色-语言解耦。DiaMoE-TTS 的 IPA 统一前端与该任务高度相关,但本文聚焦在同一语系(汉语方言)内的变体。
-- [[Phoneme Representation]] [待确认]: IPA 作为跨语言统一表示已被记录,DiaMoE-TTS 是首个系统性地将 IPA 应用于汉语方言 TTS 并配合 MoE 路由的工作。
-- [[Speaker Adaptation]] [待确认]: LoRA + Conditioning Adapter 属于 parameter-efficient adaptation,与 AdaSpeech 系列中的 CLN tuning 和 residual adapter 方法一脉相承,但 DiaMoE-TTS 特别之处在于适应的对象是**方言**而非说话人。
-- [[Non-autoregressive TTS]] [待确认]: F5-TTS 基座属于全 NAR 架构(flow matching + DiT),不涉及自回归建模。
+- [[ConditionalFlowMatching]] (confirmed): OT-CFM 在 TTS 中已成为主流生成范式,F5-TTS 使用 ConvNeXt V2 text encoder + DiT + flow matching。DiaMoE-TTS 保留了这一核心架构,创新集中在前端和适应层。
+- [[Zero-shotSpeechSynthesis]] (confirmed): 当前 SOTA 由 CosyVoice 3、Qwen3-TTS 等系统把持,WER < 1.5%。DiaMoE-TTS 的 zero-shot 定义不同于主流——它关注**方言级别**的 zero-shot(用少量数据适应新方言),而非说话人级别。
+- [[Cross-lingualVoiceCloning]] (confirmed): 跨语言克隆的核心挑战是音色-语言解耦。DiaMoE-TTS 的 IPA 统一前端与该任务高度相关,但本文聚焦在同一语系(汉语方言)内的变体。
+- [[PhonemeRepresentation]] [待确认]: IPA 作为跨语言统一表示已被记录,DiaMoE-TTS 是首个系统性地将 IPA 应用于汉语方言 TTS 并配合 MoE 路由的工作。
+- [[SpeakerAdaptation]] [待确认]: LoRA + Conditioning Adapter 属于 parameter-efficient adaptation,与 AdaSpeech 系列中的 CLN tuning 和 residual adapter 方法一脉相承,但 DiaMoE-TTS 特别之处在于适应的对象是**方言**而非说话人。
+- [[Non-autoregressiveTTS]] [待确认]: F5-TTS 基座属于全 NAR 架构(flow matching + DiT),不涉及自回归建模。
 
 **创新判断**: 本文的主要贡献不在生成模型层面,而在 TTS 系统的**前端统一**和**高效方言扩展**策略。与 Cross-Lingual F5-TTS 相比,后者通过 MMS forced alignment + speaking rate predictor 解决跨语言问题,而 DiaMoE-TTS 通过 IPA 统一音素空间 + MoE 方言路由解决方言问题,两者路线不同但均基于 F5-TTS。
 
-> 检索命中: [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓, [[Cross-lingual Voice Cloning]]✓ | 参考: [[Phoneme Representation]](pending-review), [[Speaker Adaptation]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓ | 参考: [[PhonemeRepresentation]](pending-review), [[SpeakerAdaptation]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

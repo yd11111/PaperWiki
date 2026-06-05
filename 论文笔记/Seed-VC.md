@@ -8,9 +8,9 @@ authors: [Liu Songting]
 year: 2024
 venue: "arXiv"
 tags: [voice-conversion, zero-shot, diffusion-transformer, flow-matching, timbre-leakage, singing-voice-conversion, in-context-learning]
-concepts: ["[[Conditional Flow Matching]]", "[[Self-Supervised Speech Representation]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Diffusion Model]]", "[[F0 Modeling]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeakerEmbedding]]", "[[SpeechFactorization]]", "[[DiffusionModel]]", "[[F0Modeling]]"]
 models: ["[[模型库/BigVGAN|BigVGAN]]", "[[模型库/Whisper|Whisper]]", "[[模型库/HuBERT|HuBERT]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 5
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个已确认实体页: [[Conditional Flow Matching]], [[Speaker Embedding]], [[Speech Factorization]], [[Prosody Modeling]], [[Residual Vector Quantization]])
+> [!info] KB 背景 (基于 5 个已确认实体页: [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SpeechFactorization]], [[ProsodyModeling]], [[ResidualVectorQuantization]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speaker Embedding]]✓, [[Speech Factorization]]✓, [[Prosody Modeling]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Diffusion Model]](pending-review), [[F0 Modeling]](pending-review), [[Diffusion-based TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[SpeechFactorization]]✓, [[ProsodyModeling]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[DiffusionModel]](pending-review), [[F0Modeling]](pending-review), [[Diffusion-basedTTS]](pending-review) | 未命中但可能相关: 无
 
-**谱系定位**: Seed-VC (2024.11) 是一个零样本语音转换 (Voice Conversion) 框架,不同于 Seed-TTS 的 text-to-speech 路线。它属于 KB 中 [[Voice Cloning Taxonomy]] [待确认] 记录的 "Zero-shot VC" 分支,与 OpenVoice、FreeVC、YourTTS 等系统同期竞争。在技术路线上,Seed-VC 使用 diffusion transformer + flow matching,与 CosyVoice 系列中 CFM 渲染器共享相似的理论基础 (CFM 页已记录 flow matching 的 ODE 路径学习范式)。
+**谱系定位**: Seed-VC (2024.11) 是一个零样本语音转换 (Voice Conversion) 框架,不同于 Seed-TTS 的 text-to-speech 路线。它属于 KB 中 [[VoiceCloningTaxonomy]] [待确认] 记录的 "Zero-shot VC" 分支,与 OpenVoice、FreeVC、YourTTS 等系统同期竞争。在技术路线上,Seed-VC 使用 diffusion transformer + flow matching,与 CosyVoice 系列中 CFM 渲染器共享相似的理论基础 (CFM 页已记录 flow matching 的 ODE 路径学习范式)。
 
 **已有认知**:
-- [[Speech Factorization]] 页详细记录了 content-timbre 解耦的主流方法,包括对抗训练、信息瓶颈和 self-distillation (Seed-TTS 方案)。Seed-VC 提出了一种新的解耦思路: 使用外部 timbre shifter 在训练时扰动源语音音色,从根源上消除内容表征中的残留音色信息。
-- [[Speaker Embedding]] 页记录了 CAM++ 作为 speaker encoder 的应用 (DINO-VITS 等),Seed-VC 正是使用 CAM++ 提取 speaker embedding。
-- [[Conditional Flow Matching]] 页记录了 flow matching 在 TTS 中的应用 (CosyVoice, F5-TTS 等),Seed-VC 将此范式首次系统性地应用于零样本 VC。
+- [[SpeechFactorization]] 页详细记录了 content-timbre 解耦的主流方法,包括对抗训练、信息瓶颈和 self-distillation (Seed-TTS 方案)。Seed-VC 提出了一种新的解耦思路: 使用外部 timbre shifter 在训练时扰动源语音音色,从根源上消除内容表征中的残留音色信息。
+- [[SpeakerEmbedding]] 页记录了 CAM++ 作为 speaker encoder 的应用 (DINO-VITS 等),Seed-VC 正是使用 CAM++ 提取 speaker embedding。
+- [[ConditionalFlowMatching]] 页记录了 flow matching 在 TTS 中的应用 (CosyVoice, F5-TTS 等),Seed-VC 将此范式首次系统性地应用于零样本 VC。
 
 > [!summary] 速查
 > - **一句话**: 通过外部 timbre shifter 消除训练-推理不一致 + diffusion transformer 利用完整参考语音做 in-context learning,实现高 speaker similarity 的零样本语音转换
@@ -183,4 +183,4 @@ Seed-VC 包含以下组件 [§3, Fig 1, Fig 2, Fig 3]:
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[Speaker Embedding]], [[Speech Factorization]], [[Prosody Modeling]], [[Residual Vector Quantization]] | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Diffusion Model]](pending-review), [[F0 Modeling]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SpeechFactorization]], [[ProsodyModeling]], [[ResidualVectorQuantization]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[DiffusionModel]](pending-review), [[F0Modeling]](pending-review) | 未命中但可能相关: 无

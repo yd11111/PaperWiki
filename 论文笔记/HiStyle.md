@@ -8,7 +8,7 @@ authors: [Ziyu Zhang, Hanzhao Li, Jingbin Hu, Wenhao Li, Lei Xie]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, style-control, text-prompt, diffusion, contrastive-learning, hierarchical, controllability]
-concepts: ["[[Style Transfer in TTS]]", "[[Natural Language Description for TTS]]", "[[Speaker Embedding]]", "[[Global Style Tokens]]", "[[Prosody Modeling]]", "[[Diffusion Model]]"]
+concepts: ["[[StyleTransferinTTS]]", "[[NaturalLanguageDescriptionforTTS]]", "[[SpeakerEmbedding]]", "[[GlobalStyleTokens]]", "[[ProsodyModeling]]", "[[DiffusionModel]]"]
 models: []
 tasks: []
 datasets: []
@@ -23,17 +23,17 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: HiStyle 属于 [[Natural Language Description for TTS]] [待确认] 技术路线,在 PromptTTS → PromptTTS 2 → FleSpeech 的演进线上提出了一种新的 style embedding 预测策略。核心创新在于"分层预测"而非"一步映射",这与 [[Style Transfer in TTS]] [待确认] 中从 Reference Speech Prompt (GST, 2018) 到 NL Description (PromptTTS, 2023) 的范式转变处于同一赛道。
+> **谱系定位**: HiStyle 属于 [[NaturalLanguageDescriptionforTTS]] [待确认] 技术路线,在 PromptTTS → PromptTTS 2 → FleSpeech 的演进线上提出了一种新的 style embedding 预测策略。核心创新在于"分层预测"而非"一步映射",这与 [[StyleTransferinTTS]] [待确认] 中从 Reference Speech Prompt (GST, 2018) 到 NL Description (PromptTTS, 2023) 的范式转变处于同一赛道。
 >
 > **已有认知**:
-> - [[Speaker Embedding]] 区分两种范式 (lookup table vs speaker encoder),HiStyle 的 Stage 1 显式预测 speaker-related embedding,属于"从文本描述预测 speaker representation"的新路径,不同于从参考音频提取的传统方式。
-> - [[Prosody Modeling]] 将语音属性分为 content / timbre / prosody / channel 四类,HiStyle 的层级发现 (先按 timbre 聚类,再按 style 属性细分) 与这一分类框架高度一致。
-> - [[Global Style Tokens]] [待确认] 的 reference encoder + token bank 架构是 HiStyle 的精神前身 — 二者都用全局 embedding 编码风格,但 GST 是无监督+从音频提取,HiStyle 是有监督+从文本预测。
-> - [[Diffusion Model]] [待确认] 的 DDPM 框架是 HiStyle 两个 predictor 的技术基座,采用 transformer encoder-based 去噪估计器,训练目标为 MSE + contrastive loss。
+> - [[SpeakerEmbedding]] 区分两种范式 (lookup table vs speaker encoder),HiStyle 的 Stage 1 显式预测 speaker-related embedding,属于"从文本描述预测 speaker representation"的新路径,不同于从参考音频提取的传统方式。
+> - [[ProsodyModeling]] 将语音属性分为 content / timbre / prosody / channel 四类,HiStyle 的层级发现 (先按 timbre 聚类,再按 style 属性细分) 与这一分类框架高度一致。
+> - [[GlobalStyleTokens]] [待确认] 的 reference encoder + token bank 架构是 HiStyle 的精神前身 — 二者都用全局 embedding 编码风格,但 GST 是无监督+从音频提取,HiStyle 是有监督+从文本预测。
+> - [[DiffusionModel]] [待确认] 的 DDPM 框架是 HiStyle 两个 predictor 的技术基座,采用 transformer encoder-based 去噪估计器,训练目标为 MSE + contrastive loss。
 >
 > **创新判断**: 对比 PromptTTS (直接投影)、PromptTTS 2 (variation network 单步生成) 和 FleSpeech (query encoder + diffusion),HiStyle 首次利用 style embedding 空间的层级聚类结构 (timbre → style) 设计两阶段预测,并引入 contrastive learning 增强跨模态对齐。此外,数据标注方面提出统计+人类感知迭代调整的 pipeline。
 >
-> 检索命中: [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Natural Language Description for TTS]](pending-review), [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[NaturalLanguageDescriptionforTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

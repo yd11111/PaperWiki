@@ -8,9 +8,9 @@ authors: [Edresson Casanova, Kelly Davis, Eren Golge, Gorkem Goknar, Iulian Gule
 year: 2024
 venue: "Interspeech 2024"
 tags: [TTS, zero-shot, multilingual, cross-lingual, voice-cloning, language-model, VQ-VAE, GPT-2, open-source]
-concepts: ["[[Codec Language Model]]", "[[Speaker Embedding]]", "[[Speaker Adaptation]]", "[[Single-codebook vs Multi-codebook]]", "[[Voice Cloning Taxonomy]]"]
+concepts: ["[[CodecLanguageModel]]", "[[SpeakerEmbedding]]", "[[SpeakerAdaptation]]", "[[Single-codebookvsMulti-codebook]]", "[[VoiceCloningTaxonomy]]"]
 models: ["[[模型库/VITS|YourTTS]]", "[[模型库/HierSpeech++|HierSpeech++]]", "[[模型库/EnCodec|EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 3 个已确认实体页 + 3 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: XTTS 属于 Codec Language Model 路线中的 VQ-VAE + AR LM 范式,是 Tortoise 的多语言扩展版。在 [[Voice Cloning Taxonomy]] 的四分类中,XTTS 同时覆盖 Zero-shot VC (推理时无需微调) 和 Multilingual VC (16 语言) 两个类别,且支持 Speaker Adaptation (10 min fine-tuning)。Survey (Azzuni & El Saddik, 2025) 在 Multilingual VC 的 "5+ languages" 子类中明确提及 XTTS (VQ-VAE + GPT-2)。
+**谱系定位**: XTTS 属于 Codec Language Model 路线中的 VQ-VAE + AR LM 范式,是 Tortoise 的多语言扩展版。在 [[VoiceCloningTaxonomy]] 的四分类中,XTTS 同时覆盖 Zero-shot VC (推理时无需微调) 和 Multilingual VC (16 语言) 两个类别,且支持 Speaker Adaptation (10 min fine-tuning)。Survey (Azzuni & El Saddik, 2025) 在 Multilingual VC 的 "5+ languages" 子类中明确提及 XTTS (VQ-VAE + GPT-2)。
 
 **已有认知**:
-- [[Zero-shot Speech Synthesis]] (confirmed): 当前 SOTA 已演进到 CosyVoice 3、IndexTTS2、Qwen3-TTS 等系统。XTTS 使用的 language model + discrete token 路线是三大主流方法之一,但其 VQ-VAE 单码本方案在 [[Single-codebook vs Multi-codebook]] [待确认] 的演进中处于较早期位置。
-- [[Cross-lingual Voice Cloning]] (confirmed): 当前 SOTA (CosyVoice 3, Qwen3-TTS) 支持 4-9 语种,XTTS 覆盖 16 语种的广度在当时(2024)是最大规模。
-- [[Speaker Embedding]] (confirmed): XTTS 使用 H/ASP speaker encoder (多层注意力统计池化),结合 Speaker Consistency Loss (SCL),在跨语言场景中通过 fine-tuning 提升 SECS 从 0.5852 到 0.7166。
-- [[Codec Language Model]] [待确认]: XTTS 的 VQ-VAE + GPT-2 属于 codec LM 范式的早期形态,使用单码本 (8192→1024 codes) 而非 RVQ,帧率 21.53 Hz 远低于 EnCodec 的 75 Hz,天然适合 AR 建模。
+- [[Zero-shotSpeechSynthesis]] (confirmed): 当前 SOTA 已演进到 CosyVoice 3、IndexTTS2、Qwen3-TTS 等系统。XTTS 使用的 language model + discrete token 路线是三大主流方法之一,但其 VQ-VAE 单码本方案在 [[Single-codebookvsMulti-codebook]] [待确认] 的演进中处于较早期位置。
+- [[Cross-lingualVoiceCloning]] (confirmed): 当前 SOTA (CosyVoice 3, Qwen3-TTS) 支持 4-9 语种,XTTS 覆盖 16 语种的广度在当时(2024)是最大规模。
+- [[SpeakerEmbedding]] (confirmed): XTTS 使用 H/ASP speaker encoder (多层注意力统计池化),结合 Speaker Consistency Loss (SCL),在跨语言场景中通过 fine-tuning 提升 SECS 从 0.5852 到 0.7166。
+- [[CodecLanguageModel]] [待确认]: XTTS 的 VQ-VAE + GPT-2 属于 codec LM 范式的早期形态,使用单码本 (8192→1024 codes) 而非 RVQ,帧率 21.53 Hz 远低于 EnCodec 的 75 Hz,天然适合 AR 建模。
 
 **创新判断**: 相对已有认知,XTTS 的核心差异化在于:
 1. 语言覆盖规模 (16 语种 vs 前人最多 6 语种),尤其包含低资源语言
@@ -37,7 +37,7 @@ updated: 2026-06-03
 3. 码本过滤策略 (8192→1024 最高频 codes)
 4. CJK 文字罗马化预处理
 
-> 检索命中: [[Zero-shot Speech Synthesis]]✓, [[Cross-lingual Voice Cloning]]✓, [[Speaker Embedding]]✓ | 过滤: [[Codec Language Model]](pending-review), [[Voice Cloning Taxonomy]](pending-review), [[Speaker Adaptation]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[SpeakerAdaptation]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

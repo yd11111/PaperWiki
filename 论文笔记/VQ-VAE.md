@@ -8,7 +8,7 @@ authors: [Aaron van den Oord, Oriol Vinyals, Koray Kavukcuoglu]
 year: 2017
 venue: "NeurIPS 2017"
 tags: [VQ-VAE, discrete-representation, vector-quantization, generative-model, autoencoder]
-concepts: ["[[Residual Vector Quantization]]", "[[Codebook Collapse]]", "[[Variational Autoencoder for TTS]]", "[[Speech Tokenizer]]", "[[Gumbel-Softmax]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]", "[[VariationalAutoencoderforTTS]]", "[[SpeechTokenizer]]", "[[Gumbel-Softmax]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Residual Vector Quantization]], [[Codebook Collapse]], [[Speech Tokenizer]])
-> 检索命中: [[Residual Vector Quantization]]✓, [[Codebook Collapse]]✓, [[Speech Tokenizer]]✓ | 过滤: [[Variational Autoencoder for TTS]](pending-review) [待确认], [[Gumbel-Softmax]](pending-review) [待确认] | 未命中但可能相关: 无
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ResidualVectorQuantization]], [[CodebookCollapse]], [[SpeechTokenizer]])
+> 检索命中: [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[SpeechTokenizer]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review) [待确认], [[Gumbel-Softmax]](pending-review) [待确认] | 未命中但可能相关: 无
 
-**[[Residual Vector Quantization]]**: VQ-VAE 是 RVQ 技术线的起源论文。VQ-VAE 提出了单层 VQ (Vector Quantization) 用于生成模型的离散隐变量; 后续 SoundStream (2021) 将 VQ 扩展为多层级的 Residual VQ, 形成 RVQ。KB 中 RVQ 演进时间线的第一个节点即是 "VQ-VAE (2017)"。
+**[[ResidualVectorQuantization]]**: VQ-VAE 是 RVQ 技术线的起源论文。VQ-VAE 提出了单层 VQ (Vector Quantization) 用于生成模型的离散隐变量; 后续 SoundStream (2021) 将 VQ 扩展为多层级的 Residual VQ, 形成 RVQ。KB 中 RVQ 演进时间线的第一个节点即是 "VQ-VAE (2017)"。
 
-**[[Codebook Collapse]]**: VQ-VAE 是 codebook collapse 问题的首个重要场景。论文中使用 commitment loss 约束 encoder 输出靠近 codebook entries [Eq. 3], 这成为后续 anti-collapse 方案的基础。论文也提到可用 EMA 替代 VQ loss 更新码本 [§3.2, Appendix A.1], 这一做法被 SoundStream/EnCodec 继承。
+**[[CodebookCollapse]]**: VQ-VAE 是 codebook collapse 问题的首个重要场景。论文中使用 commitment loss 约束 encoder 输出靠近 codebook entries [Eq. 3], 这成为后续 anti-collapse 方案的基础。论文也提到可用 EMA 替代 VQ loss 更新码本 [§3.2, Appendix A.1], 这一做法被 SoundStream/EnCodec 继承。
 
-**[[Speech Tokenizer]]**: VQ-VAE 是所有基于 VQ 的 speech tokenizer 的理论基础。从 VQ-VAE 的离散隐空间 → SoundStream/EnCodec 的 RVQ acoustic tokens → HuBERT k-means semantic tokens, 都源于 VQ-VAE 建立的 "encoder → discrete bottleneck → decoder" 范式。KB 中 Speech Tokenizer 演进的第一个节点 "VQ-VAE acoustic tokens (2019)" 直接继承自本文。
+**[[SpeechTokenizer]]**: VQ-VAE 是所有基于 VQ 的 speech tokenizer 的理论基础。从 VQ-VAE 的离散隐空间 → SoundStream/EnCodec 的 RVQ acoustic tokens → HuBERT k-means semantic tokens, 都源于 VQ-VAE 建立的 "encoder → discrete bottleneck → decoder" 范式。KB 中 Speech Tokenizer 演进的第一个节点 "VQ-VAE acoustic tokens (2019)" 直接继承自本文。
 
 ## 速查
 
@@ -194,4 +194,4 @@ VQ-VAE 可在离散隐空间中生成 action-conditioned 视频序列, 不需要
 4. **两阶段范式**: 先训练 codec (encode/decode), 再训练 prior/language model — 被 AudioLM, DALL-E, Stable Diffusion 等继承 [§3.3]
 5. **Content-speaker factorization via VQ**: 离散 latent 编码 content, decoder conditioning 编码 speaker — voice conversion 的自然框架 [§4.3]
 
-检索命中: [[Residual Vector Quantization]], [[Codebook Collapse]], [[Speech Tokenizer]] | 过滤: [[Variational Autoencoder for TTS]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ResidualVectorQuantization]], [[CodebookCollapse]], [[SpeechTokenizer]] | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无

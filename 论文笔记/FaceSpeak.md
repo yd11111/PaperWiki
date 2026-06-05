@@ -8,7 +8,7 @@ authors: [Tian-Hao Zhang, Jiawei Zhang, Jun Wang, Xinyuan Qian, Xu-Cheng Yin]
 year: 2025
 venue: "AAAI 2025"
 tags: [TTS, multi-modal, face-to-speech, emotion, style-transfer, disentanglement, VITS, adversarial-training]
-concepts: ["[[Style Transfer in TTS]]", "[[Emotion Control in TTS]]", "[[Speaker Embedding]]", "[[Speech Factorization]]", "[[Gradient Reversal Layer]]", "[[Variational Autoencoder for TTS]]"]
+concepts: ["[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[SpeakerEmbedding]]", "[[SpeechFactorization]]", "[[GradientReversalLayer]]", "[[VariationalAutoencoderforTTS]]"]
 models: ["[[VITS]]"]
 tasks: []
 datasets: []
@@ -23,19 +23,19 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: FaceSpeak 属于 vision-conditioned TTS 这一小众分支,与主流的 reference-speech-prompt 或 text-description 控制方法平行。在 [[Style Transfer in TTS]] 的四类控制策略 (Style Tagging / Reference Speech / NL Description / Instruction-Guided) 之外,FaceSpeak 代表第五类 "Image Prompt" 路线,与 VisualTTS (Lu et al., 2022) 和 MM-TTS (Guan et al., 2024) 同属此线。
+**谱系定位**: FaceSpeak 属于 vision-conditioned TTS 这一小众分支,与主流的 reference-speech-prompt 或 text-description 控制方法平行。在 [[StyleTransferinTTS]] 的四类控制策略 (Style Tagging / Reference Speech / NL Description / Instruction-Guided) 之外,FaceSpeak 代表第五类 "Image Prompt" 路线,与 VisualTTS (Lu et al., 2022) 和 MM-TTS (Guan et al., 2024) 同属此线。
 
 **已有认知**:
-- [[Speaker Embedding]] (confirmed): FaceSpeak 的 identity embedding 本质上是从视觉域提取的 speaker embedding 替代品。知识库已覆盖从 d-vector 到 in-context prompt 的完整演进,FaceSpeak 提供了一个 "跨模态 speaker embedding" 的新视角。
-- [[Speech Factorization]] (confirmed): FaceSpeak 的核心创新在于 identity-emotion 解耦,这与 Speech Factorization 的对抗训练方案直接对应。知识库记录了 GRL、information bottleneck、self-distillation 三大解耦范式,FaceSpeak 同时使用了 GRL + mutual information minimization (vCLUB),属于对抗训练 + 信息论方法的组合。
-- [[Gradient Reversal Layer]] [待确认]: GRL 已被 IndexTTS2、NaturalSpeech 3 用于 emotion-speaker 解耦。FaceSpeak 的用法与 IndexTTS2 高度相似 -- 在 identity adapter 后接 GRL + emotion classifier,迫使 identity embedding 不含情感信息。
-- [[Emotion Control in TTS]] [待确认]: 知识库记录了从 emotion embedding 到 DPO 优化的完整演进,但尚无 vision-to-emotion 路线的条目。FaceSpeak 从肖像表情提取 emotion representation 是一条独特路径。
-- [[Style Transfer in TTS]] [待确认]: 现有知识框架中 "风格解耦" 小节提到对抗训练 (GRL) 和 information bottleneck,FaceSpeak 的方案正好落入这一框架。
+- [[SpeakerEmbedding]] (confirmed): FaceSpeak 的 identity embedding 本质上是从视觉域提取的 speaker embedding 替代品。知识库已覆盖从 d-vector 到 in-context prompt 的完整演进,FaceSpeak 提供了一个 "跨模态 speaker embedding" 的新视角。
+- [[SpeechFactorization]] (confirmed): FaceSpeak 的核心创新在于 identity-emotion 解耦,这与 Speech Factorization 的对抗训练方案直接对应。知识库记录了 GRL、information bottleneck、self-distillation 三大解耦范式,FaceSpeak 同时使用了 GRL + mutual information minimization (vCLUB),属于对抗训练 + 信息论方法的组合。
+- [[GradientReversalLayer]] [待确认]: GRL 已被 IndexTTS2、NaturalSpeech 3 用于 emotion-speaker 解耦。FaceSpeak 的用法与 IndexTTS2 高度相似 -- 在 identity adapter 后接 GRL + emotion classifier,迫使 identity embedding 不含情感信息。
+- [[EmotionControlinTTS]] [待确认]: 知识库记录了从 emotion embedding 到 DPO 优化的完整演进,但尚无 vision-to-emotion 路线的条目。FaceSpeak 从肖像表情提取 emotion representation 是一条独特路径。
+- [[StyleTransferinTTS]] [待确认]: 现有知识框架中 "风格解耦" 小节提到对抗训练 (GRL) 和 information bottleneck,FaceSpeak 的方案正好落入这一框架。
 - [[VITS]] [待确认]: FaceSpeak 以 VITS2 为 backbone,将视觉 control embedding 注入 posterior encoder / decoder / flow / duration predictor 四个模块。
 
 **创新判断**: FaceSpeak 的主要创新点不在 TTS backbone (VITS2 较成熟),而在 (1) 将控制信号从语音/文本域扩展到任意风格的肖像图像域,(2) 使用 FaRL + IAM/EAM + GRL + vCLUB 的组合实现跨模态 identity-emotion 解耦,(3) 构建了多风格多模态 TTS 数据集 EM2 TTS。
 
-> 检索命中: [[Speaker Embedding]] (confirmed), [[Speech Factorization]] (confirmed), [[Gradient Reversal Layer]] (pending-review), [[Emotion Control in TTS]] (pending-review), [[Style Transfer in TTS]] (pending-review), [[VITS]] (pending-review) | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SpeakerEmbedding]] (confirmed), [[SpeechFactorization]] (confirmed), [[GradientReversalLayer]] (pending-review), [[EmotionControlinTTS]] (pending-review), [[StyleTransferinTTS]] (pending-review), [[VITS]] (pending-review) | 过滤: 无 | 未命中但可能相关: 无
 
 ## 速查
 

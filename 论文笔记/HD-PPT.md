@@ -8,9 +8,9 @@ authors: [Sihang Nie, Xiaofen Xing, Jingyuan Xing, Baiji Liu, Xiangmin Xu]
 year: 2026
 venue: "arXiv"
 tags: [TTS, LLM-based, instruction-following, controllability, speech-tokenizer, hierarchical-decoding, FSQ, CLAP, emotion, style]
-concepts: ["[[Instruction-Guided Speech Synthesis]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]", "[[Finite Scalar Quantization]]", "[[Audio-Language Pretraining]]", "[[Speech Factorization]]", "[[Semantic vs Acoustic Tokens]]", "[[Prosody Modeling]]", "[[Emotion Control in TTS]]"]
-models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]"]
-tasks: ["[[Instructed Speech Generation]]"]
+concepts: ["[[Instruction-GuidedSpeechSynthesis]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[Audio-LanguagePretraining]]", "[[SpeechFactorization]]", "[[SemanticvsAcousticTokens]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]"]
+models: ["[[模型库/CosyVoice|CosyVoice]]", "[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]"]
+tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: ["[[CV3-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-based TTS]], [[Speech Tokenizer]], [[模型库/CosyVoice 2|CosyVoice 2]], [[Instructed Speech Generation]], [[Speech Factorization]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 6 个已确认实体页: [[LLM-basedTTS]], [[SpeechTokenizer]], [[模型库/CosyVoice2|CosyVoice 2]], [[InstructedSpeechGeneration]], [[SpeechFactorization]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: HD-PPT 处于 LLM-based Instruct-TTS 的技术前沿。其主 baseline CosyVoice 2 (confirmed) 采用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching 架构,实现了低延迟双向流式合成。HD-PPT 的核心创新——将 speech tokens 分解为 content-preference 和 prompt-preference 两种中间表征——可视为 [[Speech Factorization]] (confirmed) 在 token 级别的新实例化方式。传统 Speech Factorization 在特征层面解耦(如 NaturalSpeech 3 的 factorized diffusion codec、Seed-TTS 的 self-distillation),HD-PPT 则在 discrete token 空间做分解,通过 ASR + CLAP 双任务监督实现 content/style 解耦。
+> **谱系定位**: HD-PPT 处于 LLM-based Instruct-TTS 的技术前沿。其主 baseline CosyVoice 2 (confirmed) 采用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching 架构,实现了低延迟双向流式合成。HD-PPT 的核心创新——将 speech tokens 分解为 content-preference 和 prompt-preference 两种中间表征——可视为 [[SpeechFactorization]] (confirmed) 在 token 级别的新实例化方式。传统 Speech Factorization 在特征层面解耦(如 NaturalSpeech 3 的 factorized diffusion codec、Seed-TTS 的 self-distillation),HD-PPT 则在 discrete token 空间做分解,通过 ASR + CLAP 双任务监督实现 content/style 解耦。
 >
-> **已有认知对比**: [[Semantic vs Acoustic Tokens]] (confirmed) 描述了传统的 semantic → acoustic 二层级 token 体系; HD-PPT 引入了正交的 content-preference vs prompt-preference 分解维度。CosyVoice 系列使用 supervised semantic token + CFM 的 coarse-to-fine 路线; HD-PPT 在 CosyVoice 2 tokenizer 输出的 speech tokens 上方再叠加一层 preference token 抽取,建立三层级生成: content → style → acoustic。[[Instruction-Guided Speech Synthesis]] [待确认] 从 NL Description → Instruction-Guided 的演进线上,HD-PPT 提出了结构化中间表征来弥合指令文本与语音 token 之间的模态鸿沟。[[Audio-Language Pretraining]] [待确认] 中的 CLAP 对比学习被 HD-PPT 用于 prompt-preference token 的监督信号。
+> **已有认知对比**: [[SemanticvsAcousticTokens]] (confirmed) 描述了传统的 semantic → acoustic 二层级 token 体系; HD-PPT 引入了正交的 content-preference vs prompt-preference 分解维度。CosyVoice 系列使用 supervised semantic token + CFM 的 coarse-to-fine 路线; HD-PPT 在 CosyVoice 2 tokenizer 输出的 speech tokens 上方再叠加一层 preference token 抽取,建立三层级生成: content → style → acoustic。[[Instruction-GuidedSpeechSynthesis]] [待确认] 从 NL Description → Instruction-Guided 的演进线上,HD-PPT 提出了结构化中间表征来弥合指令文本与语音 token 之间的模态鸿沟。[[Audio-LanguagePretraining]] [待确认] 中的 CLAP 对比学习被 HD-PPT 用于 prompt-preference token 的监督信号。
 >
 > **创新判断**: 相比 CosyVoice 2 (直接从 LLM hidden state 预测 speech token) 和 EmoVoice-PP (LLM + flow matching + HiFi-GAN),HD-PPT 的 hierarchical intermediate representation 是一种新颖的结构化解耦思路。关键区别在于: (1) 不是简单地增加 encoder 分支做解耦,而是在 decoder 端引入层级化的 intermediate prediction targets; (2) CLAP 监督让 prompt-preference token 直接与文本指令语义空间对齐,这比隐式学习风格映射更加 grounded。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[CosyVoice 2]]✓, [[Instructed Speech Generation]]✓, [[Speech Factorization]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Finite Scalar Quantization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Audio-Language Pretraining]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓, [[InstructedSpeechGeneration]]✓, [[SpeechFactorization]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[Audio-LanguagePretraining]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -198,4 +198,4 @@ HD-PPT 提出了一个有吸引力的结构化假设: 将 speech token 空间显
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Speech Tokenizer]], [[CosyVoice 2]], [[Instructed Speech Generation]], [[Speech Factorization]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Finite Scalar Quantization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Audio-Language Pretraining]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SpeechTokenizer]], [[CosyVoice2]], [[InstructedSpeechGeneration]], [[SpeechFactorization]], [[SemanticvsAcousticTokens]] | 过滤: [[FiniteScalarQuantization]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[Audio-LanguagePretraining]](pending-review) | 未命中但可能相关: 无

@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "FPO: Fine-grained Preference Optimization Improves Zero-shot Text-to-Speech"
 arxiv_id: "2502.02950"
-source: "Sources/2502.02950.pdf"
+source: "Sources/FPO.pdf"
 authors: [Jixun Yao, Yang Yuguang, Yuan Feng, Yu Pan, Ziqian Ning, Jianhao Ye, Hongbin Zhou, Lei Xie]
 year: 2025
 venue: "arXiv (journal submission)"
 tags: [RLHF, DPO, preference-optimization, zero-shot-TTS, robustness, fine-grained-alignment, token-level-optimization, data-efficiency, codec-LM]
-concepts: ["[[LLM-based TTS]]", "[[Semantic vs Acoustic Tokens]]", "[[Differentiable Reward Optimization]]", "[[TTS Evaluation]]"]
-models: ["[[CosyVoice]]", "[[CosyVoice 2]]", "[[论文笔记/Llasa|Llasa]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[DifferentiableRewardOptimization]]", "[[TTSEvaluation]]"]
+models: ["[[CosyVoice]]", "[[CosyVoice2]]", "[[论文笔记/Llasa|Llasa]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 5
 status: draft
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 5 个实体页: [[LLM-based TTS]]confirmed, [[Semantic vs Acoustic Tokens]]confirmed, [[CosyVoice]]confirmed, [[CosyVoice 2]]confirmed, [[TTS Evaluation]]pending-review)
+> [!info] KB 背景 (基于 5 个实体页: [[LLM-basedTTS]]confirmed, [[SemanticvsAcousticTokens]]confirmed, [[CosyVoice]]confirmed, [[CosyVoice2]]confirmed, [[TTSEvaluation]]pending-review)
 > **谱系定位**: TTS 领域的 RL/偏好优化已形成三条路线: (1) 音频级 RL (Seed-TTS 的 REINFORCE, 2024); (2) utterance-level DPO/KTO (SpeechAlign, UNO, RIO, 2024); (3) token-level 可微优化 (DiffRO/CosyVoice 3, 2025)。FPO 处于路线 (2) 和 (3) 之间 -- 仍使用 DPO 框架,但将 loss 计算从 utterance-level 下沉到 token-level 的 problematic segments。
 >
 > **已有认知**: SpeechAlign 首次将 DPO 引入 codec LM,通过 golden vs synthetic AR tokens 构建偏好数据集; RIO 提出 reverse inference 自动选择偏好样本,无需人工标注; 两者均为 utterance-level 优化。概念库中 Differentiable Reward Optimization 页记录了 CosyVoice 3 的 DiffRO 路线 (token-level Gumbel-Softmax + reward model),以及 Multi-Reward GRPO 路线 (audio-level 多奖励)。NLP 中 Mask-DPO 和 Rho-1 已探索 token-level 选择性训练。
 >
 > **创新判断**: FPO 的核心贡献不是 token-level DPO 本身 (Mask-DPO 已存在),而是 (a) 针对 TTS 特有错误类型 (temporal modeling errors vs semantic-phonetic alignment errors) 设计了差异化的 fine-grained annotation 策略; (b) 在 CosyVoice/CosyVoice2/Llasa 三个 backbone 上验证了 3-4x 数据效率优势。
 >
-> 检索命中: [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[CosyVoice]], [[CosyVoice 2]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[SemanticvsAcousticTokens]], [[CosyVoice]], [[CosyVoice2]], [[TTSEvaluation]] | 过滤: [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -182,4 +182,4 @@ FPO 的核心贡献在于将 "fine-grained alignment" 这一在 NLP 中已有探
 > - [low] 可复用 idea #4 非 FPO 独创 (已知,保留作参考)
 > 详见 `_review/FPO-review.yml`
 
-检索命中: [[LLM-based TTS]], [[Semantic vs Acoustic Tokens]], [[CosyVoice]], [[CosyVoice 2]], [[TTS Evaluation]] | 过滤: [[Differentiable Reward Optimization]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[SemanticvsAcousticTokens]], [[CosyVoice]], [[CosyVoice2]], [[TTSEvaluation]] | 过滤: [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无

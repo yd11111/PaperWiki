@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "DiFlow-TTS: Compact and Low-Latency Zero-Shot Text-to-Speech with Factorized Discrete Flow Matching"
 arxiv_id: "2509.09631"
-source: "Sources/2509.09631.pdf"
+source: "Sources/DiFlow-TTS.pdf"
 authors: [Ngoc-Son Nguyen, Thanh V. T. Tran, Hieu-Nghia Huynh-Nguyen, Truong-Son Hy, Van Nguyen]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, discrete-flow-matching, FACodec, non-autoregressive, efficiency, compact, factorization, DiT]
-concepts: ["[[Conditional Flow Matching]]", "[[Speech Factorization]]", "[[Duration Predictor]]", "[[Residual Vector Quantization]]", "[[Non-autoregressive TTS]]", "[[Prosody Modeling]]", "[[Speech Tokenizer]]"]
-models: ["[[模型库/NaturalSpeech 3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech 2|NaturalSpeech 2]]", "[[模型库/EnCodec|EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[SpeechFactorization]]", "[[DurationPredictor]]", "[[ResidualVectorQuantization]]", "[[Non-autoregressiveTTS]]", "[[ProsodyModeling]]", "[[SpeechTokenizer]]"]
+models: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]", "[[模型库/NaturalSpeech2|NaturalSpeech 2]]", "[[模型库/EnCodec|EnCodec]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认实体页: [[Conditional Flow Matching]], [[Speech Factorization]], [[Residual Vector Quantization]], [[Prosody Modeling]]; 2 个待确认实体页: [[Duration Predictor]] [待确认], [[Non-autoregressive TTS]] [待确认]; 1 个已确认任务页: [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 4 个已确认实体页: [[ConditionalFlowMatching]], [[SpeechFactorization]], [[ResidualVectorQuantization]], [[ProsodyModeling]]; 2 个待确认实体页: [[DurationPredictor]] [待确认], [[Non-autoregressiveTTS]] [待确认]; 1 个已确认任务页: [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: DiFlow-TTS 在 TTS 生成范式谱系中占据一个独特位置——它是首个将 **离散 flow matching (DFM)** 直接应用于语音生成的系统。现有 flow matching TTS 系统(如 CosyVoice 系列、F5-TTS、Matcha-TTS)均在连续空间操作(mel spectrogram 或 continuous latent),而 DiFlow-TTS 直接在离散 codec token 的概率分布上定义 flow。这与 NaturalSpeech 3 的 factorized discrete diffusion 思路有渊源——两者都使用 FACodec 将语音分解为 content/prosody/acoustic 子空间,但 NS3 用的是 discrete diffusion,DiFlow-TTS 用的是 discrete flow matching。同时,DiFlow-TTS 与同组的 OZSpeech 共享 FACodec backbone 和 factorized 设计,但 OZSpeech 用 continuous OT-CFM + learned prior 实现单步采样,而 DiFlow-TTS 探索纯离散的 DFM 路线。
 >
-> **已有认知**: 概念库中 [[Conditional Flow Matching]] 已覆盖连续 flow matching 的丰富应用(CFM → rectified flow → shallow flow matching 演进线),但尚无 discrete flow matching 的条目。[[Speech Factorization]] 覆盖了 content/prosody/timbre 分解的多种方法(对抗训练、信息瓶颈、self-distillation),DiFlow-TTS 的 factorized 设计直接继承 NaturalSpeech 3 的 FACodec 路线。[[Duration Predictor]] [待确认] 已记录 FastSpeech 系 MFA-based 方案,DiFlow-TTS 的 PCM 模块本质是 duration predictor + content predictor 的组合。
+> **已有认知**: 概念库中 [[ConditionalFlowMatching]] 已覆盖连续 flow matching 的丰富应用(CFM → rectified flow → shallow flow matching 演进线),但尚无 discrete flow matching 的条目。[[SpeechFactorization]] 覆盖了 content/prosody/timbre 分解的多种方法(对抗训练、信息瓶颈、self-distillation),DiFlow-TTS 的 factorized 设计直接继承 NaturalSpeech 3 的 FACodec 路线。[[DurationPredictor]] [待确认] 已记录 FastSpeech 系 MFA-based 方案,DiFlow-TTS 的 PCM 模块本质是 duration predictor + content predictor 的组合。
 >
 > **创新判断**: 相较已有知识,DiFlow-TTS 的核心新意在于 (1) 将 DFM 从 NLP/图/蛋白质领域引入语音,(2) 在 DFM 框架中引入 factorized probability velocity field(分头预测 prosody 和 acoustic 的概率速度),这在离散 flow matching 文献中属首次。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[Speech Factorization]]✓, [[Residual Vector Quantization]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Duration Predictor]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: Discrete Flow Matching (无独立页)
+> 检索命中: [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓, [[ResidualVectorQuantization]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: Discrete Flow Matching (无独立页)
 
 > [!summary] 速查
 > - **一句话**: 首个将离散 flow matching 应用于零样本 TTS 的系统,通过 factorized probability velocity field 分头建模 prosody 和 acoustic token,以 122-164M 参数实现 UTMOS 3.98 + RTF 0.03-0.07,模型最小 11.7x、推理最快 34x 于 baseline
@@ -174,7 +174,7 @@ DiFlow-TTS 的核心价值不在于 SOTA 性能(speaker similarity 明显弱),�
 4. **Cubic scheduler κ_t = t²**: 相比线性调度,cubic 在初期更慢(给模型更多时间学习全局结构)、后期更快(细节填充),是 DFM 调度的一个简单有效选择。
 
 > [!review] 审阅状态: pass-with-fixes (3 issues: 0 high / 1 medium / 2 low)
-> - [medium] frontmatter concepts 移除 [[Masked Generative Modeling]] (DFM != mask-and-predict) -- 已修正
+> - [medium] frontmatter concepts 移除 [[MaskedGenerativeModeling]] (DFM != mask-and-predict) -- 已修正
 > - [low] 消融第2条来源标注补充 -- 已修正
 > - [low] datasets 字段为空 (vault 无 LibriTTS/LibriSpeech 页,跳过)
 > 详见 `_review/DiFlow-TTS-review.yml`。

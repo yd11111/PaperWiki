@@ -8,9 +8,9 @@ authors: [Deokjin Seo, Gangin Park, Kihyun Nam]
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, block-diffusion, streaming, discrete-token, parallel-decoding, diffusion-language-model]
-concepts: ["[[Masked Generative Modeling]]", "[[Classifier-Free Guidance]]", "[[Codec Language Model]]", "[[Non-autoregressive TTS]]", "[[Diffusion-based TTS]]"]
-models: ["[[模型库/CosyVoice 3|CosyVoice 3]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[MaskedGenerativeModeling]]", "[[Classifier-FreeGuidance]]", "[[CodecLanguageModel]]", "[[Non-autoregressiveTTS]]", "[[Diffusion-basedTTS]]"]
+models: ["[[模型库/CosyVoice3|CosyVoice 3]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -22,11 +22,11 @@ updated: 2026-06-03
 
 > [!info] KB 背景 (基于 1 个已确认实体页 + 5 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Zero-shot Speech Synthesis]]✓, [[Codec Language Model]][待确认], [[Masked Generative Modeling]][待确认], [[Classifier-Free Guidance]][待确认], [[Non-autoregressive TTS]][待确认], [[Diffusion-based TTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[Zero-shotSpeechSynthesis]]✓, [[CodecLanguageModel]][待确认], [[MaskedGenerativeModeling]][待确认], [[Classifier-FreeGuidance]][待确认], [[Non-autoregressiveTTS]][待确认], [[Diffusion-basedTTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: Chatterbox-Flash 处于 AR ↔ NAR 的中间地带。KB 中 [[Codec Language Model]] 记录了 AR 在 discrete speech token 上的建模范式(VALL-E 起),而 [[Non-autoregressive TTS]] 和 [[Masked Generative Modeling]] 记录了并行生成的两条路线(FastSpeech 系列的显式 duration 预测、MaskGIT-style 的 mask-and-predict)。本文开辟的 block-diffusion 路线不同于两者: 它在 block 内做 masked denoising(类 masked generative),跨 block 做因果(类 AR),从而同时获得并行加速和流式能力。
+**谱系定位**: Chatterbox-Flash 处于 AR ↔ NAR 的中间地带。KB 中 [[CodecLanguageModel]] 记录了 AR 在 discrete speech token 上的建模范式(VALL-E 起),而 [[Non-autoregressiveTTS]] 和 [[MaskedGenerativeModeling]] 记录了并行生成的两条路线(FastSpeech 系列的显式 duration 预测、MaskGIT-style 的 mask-and-predict)。本文开辟的 block-diffusion 路线不同于两者: 它在 block 内做 masked denoising(类 masked generative),跨 block 做因果(类 AR),从而同时获得并行加速和流式能力。
 
-**已有认知**: KB 中 [[Classifier-Free Guidance]] 记录了 CFG 在 diffusion/flow TTS 中的标准用法(训练时 dropout 条件、推理时外推)。本文的 CFG 用法有独特之处: CFG 引导 token 采样,而 PMI 分数仅在 conditional 分支上计算用于 position ranking,两者解耦。[[Diffusion-based TTS]] 记录了连续空间 diffusion TTS 的演进(Diff-TTS → Grad-TTS → Flow Matching),但本文是在**离散 token 空间**做 block diffusion,面临的问题(dominant-token bias、BICT)是连续 diffusion 不存在的。
+**已有认知**: KB 中 [[Classifier-FreeGuidance]] 记录了 CFG 在 diffusion/flow TTS 中的标准用法(训练时 dropout 条件、推理时外推)。本文的 CFG 用法有独特之处: CFG 引导 token 采样,而 PMI 分数仅在 conditional 分支上计算用于 position ranking,两者解耦。[[Diffusion-basedTTS]] 记录了连续空间 diffusion TTS 的演进(Diff-TTS → Grad-TTS → Flow Matching),但本文是在**离散 token 空间**做 block diffusion,面临的问题(dominant-token bias、BICT)是连续 diffusion 不存在的。
 
 **创新判断**: KB 中无 block diffusion 相关记录。离散空间的 dominant-token bias 问题(silence token 占主导导致 confidence-based unmasking 失效)是本文首次系统性提出并解决的,prior-calibrated scoring (PMI) 是针对离散语音 codec 特性的新颖推理技术。
 
@@ -213,4 +213,4 @@ CFG 引导 token sampling (ℓ_i = (1+w)ℓ^c_i - wℓ^u_i),但 PMI score 仅在
 
 ---
 
-检索命中: [[Zero-shot Speech Synthesis]]✓, [[Codec Language Model]][待确认], [[Masked Generative Modeling]][待确认], [[Classifier-Free Guidance]][待确认], [[Non-autoregressive TTS]][待确认], [[Diffusion-based TTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[Zero-shotSpeechSynthesis]]✓, [[CodecLanguageModel]][待确认], [[MaskedGenerativeModeling]][待确认], [[Classifier-FreeGuidance]][待确认], [[Non-autoregressiveTTS]][待确认], [[Diffusion-basedTTS]][待确认] | 过滤: 无 | 未命中但可能相关: 无

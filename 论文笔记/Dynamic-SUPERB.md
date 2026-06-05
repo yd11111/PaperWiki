@@ -8,7 +8,7 @@ authors: [Chien-yu Huang, Wei-Chih Chen, Shu-wen Yang, Andy T. Liu, Chen-An Li, 
 year: 2024
 venue: "arXiv Preprint (National Taiwan Univ / UT Austin / CMU / NTU / INRS-EMT)"
 tags: [benchmark, speech-evaluation, spoken-language-model, instruction-following, task-taxonomy, audio-understanding, music-understanding, LLM-as-judge, universal-model]
-concepts: ["[[Audio Understanding]]", "[[Speech Language Model]]"]
+concepts: ["[[AudioUnderstanding]]", "[[SpeechLanguageModel]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Speech Language Model]], [[Prosody Modeling]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[SpeechLanguageModel]], [[ProsodyModeling]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Language Model]]✓(confirmed), [[Prosody Modeling]]✓(confirmed) | 过滤: [[Audio Understanding]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review) | 未命中但可能相关: [[TTS Evaluation]]
+> 检索命中: [[SpeechLanguageModel]]✓(confirmed), [[ProsodyModeling]]✓(confirmed) | 过滤: [[AudioUnderstanding]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: [[TTSEvaluation]]
 
 **已有知识要点**:
-- [[Speech Language Model]]: SpeechLM 系统可接受语音输入并通过指令完成多种下游任务 (ASR, SER, SID, QbE 等);Dynamic-SUPERB 是评估此类通用模型的关键 benchmark ✓
-- [[Audio Understanding]] [待确认]: Dynamic-SUPERB Phase-2 被列为 180 任务的大规模 benchmark,覆盖 speech/music/audio 三个域;已有概念页 Audio Understanding 中已引用 Dynamic-SUPERB 作为核心评估平台
+- [[SpeechLanguageModel]]: SpeechLM 系统可接受语音输入并通过指令完成多种下游任务 (ASR, SER, SID, QbE 等);Dynamic-SUPERB 是评估此类通用模型的关键 benchmark ✓
+- [[AudioUnderstanding]] [待确认]: Dynamic-SUPERB Phase-2 被列为 180 任务的大规模 benchmark,覆盖 speech/music/audio 三个域;已有概念页 Audio Understanding 中已引用 Dynamic-SUPERB 作为核心评估平台
 
 ## 速查
 
@@ -184,4 +184,4 @@ updated: 2026-06-03
 
 ---
 
-检索命中: [[Speech Language Model]]✓, [[Prosody Modeling]]✓ | 过滤: [[Audio Understanding]](pending-review), [[Speech-LLM Integration Taxonomy]](pending-review) | 未命中但可能相关: [[TTS Evaluation]]
+检索命中: [[SpeechLanguageModel]]✓, [[ProsodyModeling]]✓ | 过滤: [[AudioUnderstanding]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: [[TTSEvaluation]]

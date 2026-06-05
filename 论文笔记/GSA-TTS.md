@@ -8,9 +8,9 @@ authors: [Seokgi Lee, Jungjun Kim]
 year: 2025
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, style-transfer, non-autoregressive, speaker-adaptation, reference-encoder, FastPitch]
-concepts: ["[[Style Transfer in TTS]]", "[[Global Style Tokens]]", "[[Speaker Embedding]]", "[[Prosody Modeling]]", "[[Non-autoregressive TTS]]", "[[Duration Predictor]]"]
+concepts: ["[[StyleTransferinTTS]]", "[[GlobalStyleTokens]]", "[[SpeakerEmbedding]]", "[[ProsodyModeling]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]"]
 models: ["[[论文笔记/YourTTS|YourTTS]]", "MetaStyleSpeech (Min et al., 2021)", "FastPitch (Lancucki, 2021)"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["LibriTTS-R", "VCTK"]
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Zero-shot Speech Synthesis]], [[Speaker Embedding]], [[Prosody Modeling]] + 3 个待确认: [[Style Transfer in TTS]], [[Global Style Tokens]], [[Non-autoregressive TTS]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[Zero-shotSpeechSynthesis]], [[SpeakerEmbedding]], [[ProsodyModeling]] + 3 个待确认: [[StyleTransferinTTS]], [[GlobalStyleTokens]], [[Non-autoregressiveTTS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 
 **谱系定位**: GSA-TTS 属于 **Reference Speech Prompt** 路线的零样本风格迁移系统,处于 GST (2018) → MetaStyleSpeech (2021) → GenerSpeech (2022) 这一演进线的延伸。与当前 LLM-based zero-shot TTS (VALL-E/CosyVoice/Seed-TTS) 的主流趋势不同,GSA-TTS 仍基于 NAR FastPitch 架构,属于 **非自回归 + reference encoder** 范式。
@@ -35,7 +35,7 @@ updated: 2026-06-03
 
 **创新判断**: GSA-TTS 的核心新意在于 (1) 首次用 ASR (Whisper) 对参考音频做 word-level 语义切分作为风格提取的预处理,而非随机切分或全局编码; (2) local → global 两级编码结构减少 content leakage。这两点在当前 SOTA 系统中未被广泛采用,有一定参考价值,尤其是 ASR-guided segmentation 思路可迁移到其他 reference-based 系统。
 
-> 检索命中: [[Zero-shot Speech Synthesis]]✓, [[Speaker Embedding]]✓, [[Prosody Modeling]]✓ | 过滤: [[Style Transfer in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Non-autoregressive TTS]](pending-review) | 未命中但可能相关: [[Mel Spectrogram]], [[Duration Predictor]]
+> 检索命中: [[Zero-shotSpeechSynthesis]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[StyleTransferinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[Non-autoregressiveTTS]](pending-review) | 未命中但可能相关: [[MelSpectrogram]], [[DurationPredictor]]
 
 ## 速查
 

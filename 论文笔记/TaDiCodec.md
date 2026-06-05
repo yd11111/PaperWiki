@@ -8,9 +8,9 @@ authors: [Yuancheng Wang, Dekun Chen, Xueyao Zhang, Junan Zhang, Jiaqi Li, Zhizh
 year: 2025
 venue: "arXiv preprint (under review)"
 tags: [speech-tokenizer, diffusion-model, flow-matching, single-codebook, low-bitrate, zero-shot-TTS, codec-design, BSQ]
-concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Single-codebook vs Multi-codebook]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Semantic vs Acoustic Tokens]]", "[[Residual Vector Quantization]]", "[[Masked Generative Modeling]]", "[[Diffusion Model]]", "[[Codec Language Model]]", "[[LLM-based TTS]]"]
-models: ["[[EnCodec]]", "[[CosyVoice]]", "[[CosyVoice 2]]", "[[SoundStream]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Neural Audio Compression]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[Single-codebookvsMulti-codebook]]", "[[TokenRateandBitrateTrade-offs]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[MaskedGenerativeModeling]]", "[[DiffusionModel]]", "[[CodecLanguageModel]]", "[[LLM-basedTTS]]"]
+models: ["[[EnCodec]]", "[[CosyVoice]]", "[[CosyVoice2]]", "[[SoundStream]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[NeuralAudioCompression]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,16 +20,16 @@ updated: 2026-06-04
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 4 个已确认 + 2 个待确认实体页: [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Semantic vs Acoustic Tokens]], [[Residual Vector Quantization]], [[Single-codebook vs Multi-codebook]][待确认], [[Token Rate and Bitrate Trade-offs]][待确认])
+> [!info] KB 背景 (基于 4 个已确认 + 2 个待确认实体页: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[Single-codebookvsMulti-codebook]][待确认], [[TokenRateandBitrateTrade-offs]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: TaDiCodec 属于 speech tokenizer 演进中的新节点。已有 KB 记录了从 VQ-VAE → RVQ (SoundStream/EnCodec) → 单码本回归 (BigCodec/WavTokenizer) → continuous VAE tokenizer (LatentLM/CLEAR) 的演进路线。TaDiCodec 开辟了另一条路线: **端到端 diffusion autoencoder + 单码本 BSQ**,不依赖外部 SSL 模型做语义蒸馏,不用多级 RVQ,也不用 GAN 对抗训练。在 KB 已有的 "semantic vs acoustic" 二分法中,TaDiCodec 不属于传统任何一类 — 它不做显式的 semantic distillation,但通过 text-aware decoding 隐式注入语义信息。
 >
-> **已有认知**: KB 中 [[Token Rate and Bitrate Trade-offs]] 记录了业界从高帧率 (75Hz, 多码本) 向低帧率 (12.5-25Hz, 单码本) 的趋势。TaDiCodec 的 6.25 Hz 是目前最激进的压缩率。[[Single-codebook vs Multi-codebook]] 记录了单码本路线的优劣: 低 token rate 利于 LM 建模,但重建质量通常低于 RVQ。TaDiCodec 通过 diffusion decoder + text conditioning 弥补了单码本的重建质量短板。[[Conditional Flow Matching]] 在 TTS 中已被广泛应用(CosyVoice, F5-TTS, MaskGCT 等),TaDiCodec 将 flow matching 从 TTS 的 second-stage renderer 移到了 tokenizer 的解码器内部,实现端到端训练。
+> **已有认知**: KB 中 [[TokenRateandBitrateTrade-offs]] 记录了业界从高帧率 (75Hz, 多码本) 向低帧率 (12.5-25Hz, 单码本) 的趋势。TaDiCodec 的 6.25 Hz 是目前最激进的压缩率。[[Single-codebookvsMulti-codebook]] 记录了单码本路线的优劣: 低 token rate 利于 LM 建模,但重建质量通常低于 RVQ。TaDiCodec 通过 diffusion decoder + text conditioning 弥补了单码本的重建质量短板。[[ConditionalFlowMatching]] 在 TTS 中已被广泛应用(CosyVoice, F5-TTS, MaskGCT 等),TaDiCodec 将 flow matching 从 TTS 的 second-stage renderer 移到了 tokenizer 的解码器内部,实现端到端训练。
 >
 > **创新判断**: 相对于 KB 中已有的 CosyVoice tokenizer (两阶段, 25 Hz, 0.3 kbps) 和 BigCodec (单阶段 GAN, 80 Hz, 1.04 kbps),TaDiCodec 的创新在于: (1) 压缩率提升一个数量级 (0.0875 kbps); (2) 用 diffusion loss 取代 adversarial loss; (3) text-aware decoding 使 codec 不再纯粹基于声学。
 >
-> 检索命中: [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Residual Vector Quantization]]✓ | 过滤: [[Single-codebook vs Multi-codebook]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

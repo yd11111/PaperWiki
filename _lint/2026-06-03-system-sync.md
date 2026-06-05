@@ -51,7 +51,7 @@
 
 | 死链 | 来源文件 | 原因/建议 |
 |------|---------|----------|
-| `[[W2v-BERT 2.0]]` | MaskGCT.md | 大小写不一致，应为 `[[w2v-BERT 2.0]]` |
+| `[[W2v-BERT 2.0]]` | MaskGCT.md | 大小写不一致，应为 `[[w2v-BERT2.0]]` |
 | `[[数据集/AISHELL-3]]` | CosyVoice.md | 数据集页不存在，需创建或改为纯文本 |
 | `[[数据集/Common Voice]]` | CosyVoice.md | 同上 |
 | `[[数据集/LibriSpeech]]` | CosyVoice.md, CosyVoice 2.md, NaturalSpeech 3.md | 同上 |

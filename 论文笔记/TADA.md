@@ -8,9 +8,9 @@ authors: [Trung Dang, Sharath Rao, Ananya Gupta, Christopher Gagne, Panagiotis T
 year: 2026
 venue: "arXiv preprint"
 tags: [TTS, LLM, flow-matching, synchronous-tokenization, VAE, alignment, spoken-language-model, zero-shot, single-stream]
-concepts: ["[[LLM-based TTS]]", "[[Conditional Flow Matching]]", "[[Speech Tokenizer]]", "[[Speech-Text Alignment]]", "[[Speech Language Model]]", "[[Token Rate and Bitrate Trade-offs]]", "[[Variational Autoencoder for TTS]]", "[[Next-Token Diffusion]]", "[[Classifier-Free Guidance]]", "[[Speaker Embedding]]"]
-models: ["[[模型库/wav2vec 2.0|wav2vec 2.0]]", "[[模型库/EnCodec|EnCodec]]", "[[模型库/VITS|VITS]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[Speech-TextAlignment]]", "[[SpeechLanguageModel]]", "[[TokenRateandBitrateTrade-offs]]", "[[VariationalAutoencoderforTTS]]", "[[Next-TokenDiffusion]]", "[[Classifier-FreeGuidance]]", "[[SpeakerEmbedding]]"]
+models: ["[[模型库/wav2vec2.0|wav2vec 2.0]]", "[[模型库/EnCodec|EnCodec]]", "[[模型库/VITS|VITS]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -20,15 +20,15 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[LLM-based TTS]]✓, [[Conditional Flow Matching]]✓, [[Speech Tokenizer]]✓, [[Speech-Text Alignment]][待确认], [[Speech Language Model]]✓, [[Token Rate and Bitrate Trade-offs]][待确认])
+> [!info] KB 背景 (基于 6 个实体页: [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓, [[Speech-TextAlignment]][待确认], [[SpeechLanguageModel]]✓, [[TokenRateandBitrateTrade-offs]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Speech Language Model]], [[Speech-Text Alignment]], [[Token Rate and Bitrate Trade-offs]] | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SpeechLanguageModel]], [[Speech-TextAlignment]], [[TokenRateandBitrateTrade-offs]] | 过滤: 无 | 未命中但可能相关: 无
 
-**谱系定位**: TADA 属于 [[LLM-based TTS]] 中 "Continuous-valued AR (Next-Token Diffusion)" 路线的新成员,与 [[论文笔记/LatentLM|LatentLM]]、[[论文笔记/CLEAR|CLEAR]]、[[论文笔记/VibeVoice|VibeVoice]] 同属连续 latent AR 生成范式。但 TADA 的核心差异在于其同步 tokenization 方案: 通过 CTC 强制对齐将帧率从固定速率 (25-75 Hz) 压缩到与文本 token 1:1 对应 (约 2-3 fps),比同类方案的 7.5 Hz (VibeVoice) 或 15 Hz (CLEAR) 更激进。这使其在 [[Token Rate and Bitrate Trade-offs]] 的权衡中走到了极端低帧率端。
+**谱系定位**: TADA 属于 [[LLM-basedTTS]] 中 "Continuous-valued AR (Next-Token Diffusion)" 路线的新成员,与 [[论文笔记/LatentLM|LatentLM]]、[[论文笔记/CLEAR|CLEAR]]、[[论文笔记/VibeVoice|VibeVoice]] 同属连续 latent AR 生成范式。但 TADA 的核心差异在于其同步 tokenization 方案: 通过 CTC 强制对齐将帧率从固定速率 (25-75 Hz) 压缩到与文本 token 1:1 对应 (约 2-3 fps),比同类方案的 7.5 Hz (VibeVoice) 或 15 Hz (CLEAR) 更激进。这使其在 [[TokenRateandBitrateTrade-offs]] 的权衡中走到了极端低帧率端。
 
-**已有认知**: KB 中已有丰富的 [[Speech-Text Alignment]] 知识,涵盖 concatenated、alternating、multi-sequence 三种 speech-text 组织方式 [待确认]。TADA 提出了第四种: **synchronous single-stream** — text 和 speech 不是拼接或交替,而是在同一 token 位置做 additive fusion。这在 [[Speech Language Model]] 的分类体系中对应 "continuous features" 类型,但组织方式不同于 Mini-Omni/Moshi 的多序列。
+**已有认知**: KB 中已有丰富的 [[Speech-TextAlignment]] 知识,涵盖 concatenated、alternating、multi-sequence 三种 speech-text 组织方式 [待确认]。TADA 提出了第四种: **synchronous single-stream** — text 和 speech 不是拼接或交替,而是在同一 token 位置做 additive fusion。这在 [[SpeechLanguageModel]] 的分类体系中对应 "continuous features" 类型,但组织方式不同于 Mini-Omni/Moshi 的多序列。
 
-**创新判断**: TADA 的核心创新是将 alignment 从模型内部的隐式学习提升为外部显式 1:1 对齐 (通过 CTC aligner),然后用 VAE encoder 将 variable-length 音频段压缩为 per-token latent。这与 [[Speech Tokenizer]] 演进线中 "从高帧率离散 → 低帧率连续" 的趋势一致,但 TADA 更进一步: 帧率由文本决定而非固定。
+**创新判断**: TADA 的核心创新是将 alignment 从模型内部的隐式学习提升为外部显式 1:1 对齐 (通过 CTC aligner),然后用 VAE encoder 将 variable-length 音频段压缩为 per-token latent。这与 [[SpeechTokenizer]] 演进线中 "从高帧率离散 → 低帧率连续" 的趋势一致,但 TADA 更进一步: 帧率由文本决定而非固定。
 
 ## 速查
 
@@ -220,7 +220,7 @@ z_i = (1 - λ_SFG) · z_i^{text-only} + λ_SFG · z_i^{text-speech}
 4. **Bit Diffusion for duration**: 在 flow matching 中用 gray coding 联合预测连续特征和离散时长,避免了单独的 duration predictor [§4.2]
 
 **局限/疑问**:
-1. oMOS 偏低暗示 VAE decoder 在从极低帧率 latent 重建时牺牲了音质,与 [[Token Rate and Bitrate Trade-offs]] 中 "极低帧率 vs 重建质量" 的 trade-off 一致 [待确认]
+1. oMOS 偏低暗示 VAE decoder 在从极低帧率 latent 重建时牺牲了音质,与 [[TokenRateandBitrateTrade-offs]] 中 "极低帧率 vs 重建质量" 的 trade-off 一致 [待确认]
 2. SLM 评估中 sSC 明显落后 SpiritLM (66.8 vs 79.4),但 SpiritLM 使用 7B 模型 + 50Hz semantic tokens — 公平性存疑
 3. CTC aligner 训练需要 128K vocabulary 的 CTC,工程难度不小 (需 curriculum learning + intermediate CTC loss)
 4. 与 VibeVoice/CLEAR 相比,TADA 的 1:1 对齐在节奏自然度上是否存在上限? 人类语音中同一 phoneme 的时长差异很大,将其压缩到单个 latent 可能丢失 duration 微观结构
@@ -242,4 +242,4 @@ z_i = (1 - λ_SFG) · z_i^{text-only} + λ_SFG · z_i^{text-speech}
 
 ---
 
-检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Speech Tokenizer]], [[Speech Language Model]] | 过滤: [[Speech-Text Alignment]](pending-review), [[Token Rate and Bitrate Trade-offs]](pending-review) | 未命中但可能相关: 无
+检索命中: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SpeechLanguageModel]] | 过滤: [[Speech-TextAlignment]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: 无

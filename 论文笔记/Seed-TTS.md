@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Seed-TTS: A Family of High-Quality Versatile Speech Generation Models"
 arxiv_id: "2406.02430"
-source: "Sources/SeedTTS.pdf"
+source: "Sources/Seed-TTS.pdf"
 authors: [Seed Team, ByteDance]
 year: 2024
 venue: "arXiv"
 tags: [TTS, zero-shot, autoregressive, diffusion, reinforcement-learning, voice-cloning, speech-tokenizer, LLM-based]
-concepts: ["[[Speech Tokenizer]]", "[[Conditional Flow Matching]]", "[[Differentiable Reward Optimization]]"]
+concepts: ["[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]"]
 models: ["[[BigVGAN]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]", "[[Cross-lingual Voice Cloning]]", "[[Instructed Speech Generation]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 3
 status: draft
@@ -20,11 +20,11 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Tokenizer]], [[Conditional Flow Matching]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓, [[Conditional Flow Matching]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Cross-lingual Voice Cloning]](待确认), [[SEED-TTS-Eval]](待确认), [[BigVGAN]](待确认), [[Differentiable Reward Optimization]](待确认), [[CosyVoice 2]](待确认), [[Instructed Speech Generation]](待确认) | 未命中但可能相关: NaturalSpeech 系列, VALL-E
+> 检索命中: [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Cross-lingualVoiceCloning]](待确认), [[SEED-TTS-Eval]](待确认), [[BigVGAN]](待确认), [[DifferentiableRewardOptimization]](待确认), [[CosyVoice2]](待确认), [[InstructedSpeechGeneration]](待确认) | 未命中但可能相关: NaturalSpeech 系列, VALL-E
 
-**谱系定位:** Seed-TTS (2024.06) 是 ByteDance 提出的大规模自回归 TTS 系统,在谱系上属于 "LLM + 离散 token" 路线的早期标杆之一。它与 VALL-E (2023), NaturalSpeech 2/3 (2023-2024) 同期,早于 CosyVoice 2 (2024) 和 CosyVoice 3 (2025)。KB 中已记录的 [[Zero-shot Speech Synthesis]] 任务页将 Seed-TTS 列为该领域代表模型之一,其提出的 SEED-TTS-Eval benchmark 已成为后续所有零样本 TTS 模型的标准评估集。
+**谱系定位:** Seed-TTS (2024.06) 是 ByteDance 提出的大规模自回归 TTS 系统,在谱系上属于 "LLM + 离散 token" 路线的早期标杆之一。它与 VALL-E (2023), NaturalSpeech 2/3 (2023-2024) 同期,早于 CosyVoice 2 (2024) 和 CosyVoice 3 (2025)。KB 中已记录的 [[Zero-shotSpeechSynthesis]] 任务页将 Seed-TTS 列为该领域代表模型之一,其提出的 SEED-TTS-Eval benchmark 已成为后续所有零样本 TTS 模型的标准评估集。
 
 **已有认知:** KB 已知: (1) Speech Tokenizer 分为自监督、监督式 semantic、声学三类,Seed-TTS 使用类似 Betker (2023) 的 tokenizer 设计; (2) CFM 在 TTS 中用于 coarse-to-fine rendering,Seed-TTS 的 token diffusion model 是此概念的早期实例; (3) 后续 CosyVoice 3 提出的 DiffRO 演进线中明确标注 "RL for TTS on audio (Seed-TTS, 2024)" 为前驱——即 Seed-TTS 是首个在 TTS 中系统性应用 RL post-training 的工作。
 

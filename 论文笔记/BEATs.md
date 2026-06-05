@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "BEATs: Audio Pre-Training with Acoustic Tokenizers"
 arxiv_id: "2212.09058"
-source: "https://arxiv.org/abs/2212.09058"
+source: "Sources/BEATs.pdf"
 authors: [Sanyuan Chen, Yu Wu, Chengyi Wang, Shujie Liu, Daniel Tompkins, Zhuo Chen, Furu Wei]
 year: 2022
 venue: "ICML 2023 (Microsoft)"
 tags: [self-supervised-learning, audio-representation, acoustic-tokenizer, iterative-pretraining, ViT, audio-classification, discrete-label-prediction, knowledge-distillation]
-concepts: ["[[Self-Supervised Speech Representation]]", "[[Speech Tokenizer]]", "[[Codebook Collapse]]"]
+concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[SpeechTokenizer]]", "[[CodebookCollapse]]"]
 models: []
 tasks: []
 datasets: ["[[AudioSet]]"]
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Tokenizer]], [[Codebook Collapse]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechTokenizer]], [[CodebookCollapse]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed), [[Codebook Collapse]]✓(confirmed), [[Semantic vs Acoustic Tokens]]✓(confirmed) | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed), [[CodebookCollapse]]✓(confirmed), [[SemanticvsAcousticTokens]]✓(confirmed) | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: HuBERT 的离线 k-means 聚类产生 semantic tokens;BEATs 提出了完全不同的 acoustic tokenizer 路线,通过知识蒸馏迭代优化离散标签质量 ✓
-- [[Codebook Collapse]]: 端到端量化训练中 codebook entries 利用率低的问题;BEATs 通过 $\ell_2$ normalization 和 EMA 优化 codebook ✓
-- [[Semantic vs Acoustic Tokens]]: SSL 产生的 semantic tokens 与 BEATs 的 acoustic tokenizer 产生的离散标签在性质上有本质区别 — 前者编码语言信息,后者编码高层音频语义 ✓
+- [[SpeechTokenizer]]: HuBERT 的离线 k-means 聚类产生 semantic tokens;BEATs 提出了完全不同的 acoustic tokenizer 路线,通过知识蒸馏迭代优化离散标签质量 ✓
+- [[CodebookCollapse]]: 端到端量化训练中 codebook entries 利用率低的问题;BEATs 通过 $\ell_2$ normalization 和 EMA 优化 codebook ✓
+- [[SemanticvsAcousticTokens]]: SSL 产生的 semantic tokens 与 BEATs 的 acoustic tokenizer 产生的离散标签在性质上有本质区别 — 前者编码语言信息,后者编码高层音频语义 ✓
 
 ## 速查
 
@@ -174,7 +174,7 @@ Iter 3+: Self-Distilled Tokenizer (teacher=BEATs_iter2 fine-tuned on AS) → BEA
 **与已有知识的关系**: [agent 解读]
 - BEATs 的 random-projection tokenizer 与 Chiu et al. (2022) 的工作一致,后者证明随机量化也足以支撑大规模 SSL 预训练
 - 迭代优化框架与 HuBERT 的 iterative refinement 理念相似,但 BEATs 的 tokenizer 更复杂 (self-distilled 12层 Transformer vs k-means)
-- BEATs 验证了 [[Semantic vs Acoustic Tokens]] 中 "discrete label prediction > reconstruction" 的论断在通用音频域也成立
+- BEATs 验证了 [[SemanticvsAcousticTokens]] 中 "discrete label prediction > reconstruction" 的论断在通用音频域也成立
 
 ## 可复用的 idea
 
@@ -182,8 +182,8 @@ Iter 3+: Self-Distilled Tokenizer (teacher=BEATs_iter2 fine-tuned on AS) → BEA
 2. **Random-projection 冷启动**: 极简的 tokenizer 初始化方案,避免了 k-means 等离线聚类的计算开销
 3. **Self-distilled tokenizer**: 12层 Transformer encoder + VQ + 3层 estimator 的架构设计,可迁移到其他 tokenizer 训练场景
 4. **仅编码 unmasked patches**: 在预训练阶段仅将 25% 的 unmasked patches 送入 encoder,节省 ~4x 计算
-5. **$\ell_2$ normalization for codebook**: 改善 codebook utilization,防止 [[Codebook Collapse]]
+5. **$\ell_2$ normalization for codebook**: 改善 codebook utilization,防止 [[CodebookCollapse]]
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Codebook Collapse]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Self-Supervised Speech Representation]](pending-review), [[Audio Understanding]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[CodebookCollapse]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无

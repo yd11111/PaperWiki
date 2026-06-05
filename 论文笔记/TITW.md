@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Text-To-Speech Synthesis In The Wild"
 arxiv_id: "2409.08711"
-source: "Sources/TTS_in_the_Wild.pdf"
+source: "Sources/TITW.pdf"
 authors: [Jee-weon Jung, Wangyou Zhang, Soumi Maiti, Yihan Wu, Xin Wang, Ji-Hoon Kim, Yuta Matsunaga, Seyun Um, Jinchuan Tian, Hye-jin Shim, Nicholas Evans, Joon Son Chung, Shinnosuke Takamichi, Shinji Watanabe]
 year: 2024
 venue: "arXiv preprint"
 tags: [TTS, dataset, noisy-training, data-pipeline, in-the-wild, deepfake-detection, benchmark, VoxCeleb, speech-enhancement]
-concepts: ["[[TTS Evaluation]]", "[[Neural Vocoder]]", "[[Speaker Embedding]]", "[[Anti-spoofing and Deepfake Detection]]", "[[Speaker Verification]]", "[[Text-to-Speech Pipeline]]"]
+concepts: ["[[TTSEvaluation]]", "[[NeuralVocoder]]", "[[SpeakerEmbedding]]", "[[Anti-spoofingandDeepfakeDetection]]", "[[SpeakerVerification]]", "[[Text-to-SpeechPipeline]]"]
 models: ["[[VITS]]", "[[Whisper]]"]
 tasks: []
 datasets: ["[[Emilia]]"]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个已确认实体页: [[Neural Vocoder]], [[Speaker Embedding]]; 4 个待确认参考: [[TTS Evaluation]], [[Anti-spoofing and Deepfake Detection]], [[Emilia]], [[VITS]])
+> [!info] KB 背景 (基于 2 个已确认实体页: [[NeuralVocoder]], [[SpeakerEmbedding]]; 4 个待确认参考: [[TTSEvaluation]], [[Anti-spoofingandDeepfakeDetection]], [[Emilia]], [[VITS]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: 本文是一篇 **数据集论文**,引入了首个公开的标准化 noisy-TTS 训练数据集 TITW。它不提出新模型,而是用已有模型 (VITS、GradTTS-DiffWave、MQTTS、TransformerTTS-ParallelWaveGAN) 作为 baseline 验证数据集的实用性。KB 中 [[Neural Vocoder]] 页详述了 DiffWave 和 Parallel WaveGAN 等 vocoder 的分类和特性;[[Speaker Embedding]] 页记录了 VoxCeleb1 作为 speaker recognition 数据集在 TTS 中的关联;[[TTS Evaluation]] [待确认] 页覆盖了 DNSMOS、UTMOS、MCD、WER 等本文使用的评估指标;[[Anti-spoofing and Deepfake Detection]] [待确认] 页讨论了 deepfake detection 的威胁分类和防御,与本文的伦理贡献直接相关。
+> **谱系定位**: 本文是一篇 **数据集论文**,引入了首个公开的标准化 noisy-TTS 训练数据集 TITW。它不提出新模型,而是用已有模型 (VITS、GradTTS-DiffWave、MQTTS、TransformerTTS-ParallelWaveGAN) 作为 baseline 验证数据集的实用性。KB 中 [[NeuralVocoder]] 页详述了 DiffWave 和 Parallel WaveGAN 等 vocoder 的分类和特性;[[SpeakerEmbedding]] 页记录了 VoxCeleb1 作为 speaker recognition 数据集在 TTS 中的关联;[[TTSEvaluation]] [待确认] 页覆盖了 DNSMOS、UTMOS、MCD、WER 等本文使用的评估指标;[[Anti-spoofingandDeepfakeDetection]] [待确认] 页讨论了 deepfake detection 的威胁分类和防御,与本文的伦理贡献直接相关。
 >
 > **已有认知**: KB 中已有 [[Emilia]] [待确认] 数据集,属同类并行工作 (大规模 in-the-wild 语音数据集),但 Emilia 侧重于 pipeline 产出高质量数据 (DNSMOS 3.26, 101K+ hours),而 TITW 明确保留低质量子集 (TITW-Hard, DNSMOS 2.38) 以推动更鲁棒的未来 TTS 系统研究。
 >
 > **创新判断**: 相比 Emilia 追求数据质量最大化,TITW 的独特价值在于: (1) 提供分级难度 (Easy vs Hard),让社区能量化模型对数据噪声的鲁棒性; (2) 基于 VoxCeleb1 源数据的单说话人保证,天然支持 deepfake detection 对偶研究; (3) 标准化评估协议 (KSKT/KSUT)。
 >
-> 检索命中: [[Neural Vocoder]]✓, [[Speaker Embedding]]✓ | 过滤: [[TTS Evaluation]](pending-review), [[Anti-spoofing and Deepfake Detection]](pending-review), [[Emilia]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[NeuralVocoder]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[Anti-spoofingandDeepfakeDetection]](pending-review), [[Emilia]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

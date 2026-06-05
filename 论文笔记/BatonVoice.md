@@ -8,9 +8,9 @@ authors: [Yue Wang, Ruotian Ma, Xingyu Chen, Zhengliang Shi, Wanshun Chen, Huang
 year: 2025
 venue: "arXiv"
 tags: [TTS, controllable, LLM, emotion, instruction-following, preference-optimization, cross-lingual, operationalism]
-concepts: ["[[Instruction-Guided Speech Synthesis]]", "[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[LLM-based TTS]]", "[[Conditional Flow Matching]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Instructed Speech Generation]]", "[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[Instruction-GuidedSpeechSynthesis]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[InstructedSpeechGeneration]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 7
 status: draft
@@ -23,17 +23,17 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 5 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: BatonVoice 属于 [[LLM-based TTS]] 中的 instruction-guided 可控合成分支。与 CosyVoice/VoxInstruct 等端到端指令跟随 TTS 不同,BatonVoice 采用"解耦"策略 -- 将指令理解与语音生成分离为两个独立模块。这在 [[Instruction-Guided Speech Synthesis]] [待确认] 的演进路线中属于一个新范式: 不是让 TTS 模型本身理解指令,而是让外部 LLM 先将指令转换为显式声学特征,再由专用 TTS 模型执行合成。
+**谱系定位**: BatonVoice 属于 [[LLM-basedTTS]] 中的 instruction-guided 可控合成分支。与 CosyVoice/VoxInstruct 等端到端指令跟随 TTS 不同,BatonVoice 采用"解耦"策略 -- 将指令理解与语音生成分离为两个独立模块。这在 [[Instruction-GuidedSpeechSynthesis]] [待确认] 的演进路线中属于一个新范式: 不是让 TTS 模型本身理解指令,而是让外部 LLM 先将指令转换为显式声学特征,再由专用 TTS 模型执行合成。
 
 **已有认知**:
-- [[Prosody Modeling]]: 韵律的物理维度 (pitch, energy, duration) 是 TTS 控制的基础。传统方法要么显式预测这些维度 (FastSpeech 2),要么隐式建模 (VALL-E in-context learning)。BatonVoice 回归显式路线,但用 LLM 替代 variance predictor。
-- [[Emotion Control in TTS]] [待确认]: 现有情感控制方法包括 emotion embedding、DPO 优化、activation steering 等。BatonVoice 的解耦策略与这些方法正交 -- 不直接建模情感表示,而是将情感映射到可量化的声学特征。
-- [[Conditional Flow Matching]]: CosyVoice 2 的 CFM decoder 将离散 speech token 转换为 mel spectrogram,BatonVoice 直接复用这一组件。
-- [[Speech Tokenizer]]: CosyVoice 2 的 FSQ-SenseVoice tokenizer 将语音编码为离散 token,BatonVoice 使用相同的 tokenizer。
+- [[ProsodyModeling]]: 韵律的物理维度 (pitch, energy, duration) 是 TTS 控制的基础。传统方法要么显式预测这些维度 (FastSpeech 2),要么隐式建模 (VALL-E in-context learning)。BatonVoice 回归显式路线,但用 LLM 替代 variance predictor。
+- [[EmotionControlinTTS]] [待确认]: 现有情感控制方法包括 emotion embedding、DPO 优化、activation steering 等。BatonVoice 的解耦策略与这些方法正交 -- 不直接建模情感表示,而是将情感映射到可量化的声学特征。
+- [[ConditionalFlowMatching]]: CosyVoice 2 的 CFM decoder 将离散 speech token 转换为 mel spectrogram,BatonVoice 直接复用这一组件。
+- [[SpeechTokenizer]]: CosyVoice 2 的 FSQ-SenseVoice tokenizer 将语音编码为离散 token,BatonVoice 使用相同的 tokenizer。
 
-**创新判断**: 相对于 [[Instruction-Guided Speech Synthesis]] [待确认] 中的已有方法 (CosyVoice 需 556h, CosyVoice2 需 1500h 指令数据 [Table 1]),BatonVoice 的核心创新是"零指令数据"实现可控性 -- 通过 operationalism 思想将抽象指令转为可量化的 vocal features,绕过了昂贵的指令-语音标注。这与 [[Emotion Control in TTS]] [待确认] 中 DiffRO 的"从 reward model 蒸馏情感知识"思路有相似性 -- 都是避免人工标注的路线。
+**创新判断**: 相对于 [[Instruction-GuidedSpeechSynthesis]] [待确认] 中的已有方法 (CosyVoice 需 556h, CosyVoice2 需 1500h 指令数据 [Table 1]),BatonVoice 的核心创新是"零指令数据"实现可控性 -- 通过 operationalism 思想将抽象指令转为可量化的 vocal features,绕过了昂贵的指令-语音标注。这与 [[EmotionControlinTTS]] [待确认] 中 DiffRO 的"从 reward model 蒸馏情感知识"思路有相似性 -- 都是避免人工标注的路线。
 
-> 检索命中: [[LLM-based TTS]], [[Conditional Flow Matching]], [[Prosody Modeling]], [[Speech Tokenizer]], [[CosyVoice 2]] | 过滤: [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[ProsodyModeling]], [[SpeechTokenizer]], [[CosyVoice2]] | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

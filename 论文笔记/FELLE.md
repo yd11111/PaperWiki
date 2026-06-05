@@ -5,17 +5,17 @@ aliases: [FELLE TTS, Token-Wise Coarse-to-Fine Flow Matching TTS]
 authors: ["Hui Wang", "Shujie Liu", "Lingwei Meng", "Jinyu Li", "Yifan Yang", "Shiwan Zhao", "Haiyang Sun", "Yanqing Liu", "Haoqin Sun", "Jiaming Zhou", "Yan Lu", "Yong Qin"]
 year: 2025
 arxiv_id: "2502.11128"
-source: "https://doi.org/10.1145/3746027.3755494"
+source: "Sources/FELLE.pdf"
 venue: "ACM Multimedia 2025"
 tags: [TTS, zero-shot, autoregressive, flow-matching, continuous-token, mel-spectrogram, coarse-to-fine, LLM-TTS]
 level: deep
 status: draft
-concepts: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Classifier-Free Guidance]]", "[[Mel Spectrogram]]"]
+concepts: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]"]
 models: ["[[模型库/MELLE|MELLE]]"]
 tasks: [TTS, zero-shot-TTS]
 created: 2026-06-03
 updated: 2026-06-03
-kb_sources: ["[[Conditional Flow Matching]]", "[[LLM-based TTS]]", "[[Speech Tokenizer]]"]
+kb_sources: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]"]
 ---
 tier: deep
 
@@ -23,11 +23,11 @@ tier: deep
 
 本文涉及以下已有知识:
 
-- **[[Conditional Flow Matching]]** (confirmed): FELLE 的核心创新在于将 token-wise flow matching 引入 AR mel-spectrogram 生成。与现有 CFM 应用(如 CosyVoice 用 CFM 做全局 mel 生成)不同,FELLE 在每个 AR step 内部使用 coarse-to-fine flow matching,是 CFM 在 token-level 粒度的新应用范式。
-- **[[LLM-based TTS]]** (confirmed): FELLE 属于 LLM-based TTS 中的连续表示路线,直接继承 MELLE 的 continuous mel AR 框架,但用 flow matching 取代了 MELLE 的 regression loss + latent sampling 方案。
-- **[[Speech Tokenizer]]** (confirmed): FELLE 不使用离散 speech tokenizer,而是直接在连续 mel-spectrogram frames 上做 AR,绕过了量化损失。
-- **[[Classifier-Free Guidance]]** [待确认]: FELLE 在 coarse 和 fine flow matching 阶段均使用 CFG,训练时以 p_drop=0.1 随机 mask speech prompt,推理时 w=1.6 [§4.4, §5.2]。
-- **[[Mel Spectrogram]]** [待确认]: FELLE 工作在 80-dim log-mel spectrogram 空间,16kHz 采样率,80 维 mel filter + STFT [§5.1]。
+- **[[ConditionalFlowMatching]]** (confirmed): FELLE 的核心创新在于将 token-wise flow matching 引入 AR mel-spectrogram 生成。与现有 CFM 应用(如 CosyVoice 用 CFM 做全局 mel 生成)不同,FELLE 在每个 AR step 内部使用 coarse-to-fine flow matching,是 CFM 在 token-level 粒度的新应用范式。
+- **[[LLM-basedTTS]]** (confirmed): FELLE 属于 LLM-based TTS 中的连续表示路线,直接继承 MELLE 的 continuous mel AR 框架,但用 flow matching 取代了 MELLE 的 regression loss + latent sampling 方案。
+- **[[SpeechTokenizer]]** (confirmed): FELLE 不使用离散 speech tokenizer,而是直接在连续 mel-spectrogram frames 上做 AR,绕过了量化损失。
+- **[[Classifier-FreeGuidance]]** [待确认]: FELLE 在 coarse 和 fine flow matching 阶段均使用 CFG,训练时以 p_drop=0.1 随机 mask speech prompt,推理时 w=1.6 [§4.4, §5.2]。
+- **[[MelSpectrogram]]** [待确认]: FELLE 工作在 80-dim log-mel spectrogram 空间,16kHz 采样率,80 维 mel filter + STFT [§5.1]。
 - **MELLE** [待确认]: FELLE 直接建立在 MELLE 框架之上。MELLE 首创了连续 mel AR,使用 regression loss + spectrogram flux loss + latent sampling module。FELLE 用 flow matching 替代了这三个组件,目标是更好地捕捉 mel 分布的多模态性和时间依赖。
 
 > [!summary] 速查
@@ -231,4 +231,4 @@ hat{v}_t(x^*; .) = w * v_t^*(x^*, c; theta) + (1-w) * v_t^*(x^*, epsilon; theta)
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Tokenizer]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Mel Spectrogram]](pending-review) | 未命中但可能相关: MELLE(模型页, pending-review)
+检索命中: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: MELLE(模型页, pending-review)

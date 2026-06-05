@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Whisper: Robust Speech Recognition via Large-Scale Weak Supervision"
 arxiv_id: "2212.04356"
-source: "https://arxiv.org/abs/2212.04356"
+source: "Sources/Whisper.pdf"
 authors: [Alec Radford, Jong Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, Ilya Sutskever]
 year: 2023
 venue: "ICML 2023"
 tags: [ASR, weak-supervision, robustness, multilingual, multitask, speech-recognition, seq2seq, zero-shot]
-concepts: ["[[Mel Spectrogram]]", "[[Speech Tokenizer]]", "[[LLM-enhanced ASR]]"]
+concepts: ["[[MelSpectrogram]]", "[[SpeechTokenizer]]", "[[LLM-enhancedASR]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,13 +20,13 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 2 个实体页: [[Speech Tokenizer]], [[Mel Spectrogram]])
+> [!info] KB 背景 (基于 2 个实体页: [[SpeechTokenizer]], [[MelSpectrogram]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed) | 过滤: [[Mel Spectrogram]](pending-review), [[LLM-enhanced ASR]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed) | 过滤: [[MelSpectrogram]](pending-review), [[LLM-enhancedASR]](pending-review) | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: Whisper encoder 是近期 SpeechLM 中最流行的 speech encoder 选择,被 Kimi-Audio, Qwen2.5-Omni, Mimmo, Lyra, Flow-Omni, SLAM-Omni, Mini-Omni 2, IntrinsicVoice 等系统采用,逐渐取代 HuBERT ✓
-- [[Mel Spectrogram]]: 80 通道 log-mel spectrogram 是主流声学特征配置 [待确认]
+- [[SpeechTokenizer]]: Whisper encoder 是近期 SpeechLM 中最流行的 speech encoder 选择,被 Kimi-Audio, Qwen2.5-Omni, Mimmo, Lyra, Flow-Omni, SLAM-Omni, Mini-Omni 2, IntrinsicVoice 等系统采用,逐渐取代 HuBERT ✓
+- [[MelSpectrogram]]: 80 通道 log-mel spectrogram 是主流声学特征配置 [待确认]
 
 ## 速查
 
@@ -209,4 +209,4 @@ Whisper 采用标准 encoder-decoder Transformer [§2.2, Fig 1]:
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓ | 过滤: [[Mel Spectrogram]](pending-review), [[LLM-enhanced ASR]](pending-review) | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[LLM-enhancedASR]](pending-review) | 未命中但可能相关: 无

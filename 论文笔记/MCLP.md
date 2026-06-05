@@ -8,8 +8,8 @@ authors: [Yong Ren, Jingbei Li, Haiyang Sun, Yujie Chen, Cheng Yi, Yechang Huang
 year: 2026
 venue: "ICML 2026"
 tags: [TTS, evaluation, reward, RL, GRPO, role-play, stylistic-consistency, LALM, multi-turn, metric]
-concepts: ["[[LLM-based TTS]]", "[[TTS Evaluation]]", "[[Style Transfer in TTS]]", "[[Differentiable Reward Optimization]]", "[[Instruction-Guided Speech Synthesis]]", "[[Emotion Control in TTS]]"]
-models: ["[[论文笔记/Step-Audio 2.5|Step-Audio-2]]"]
+concepts: ["[[LLM-basedTTS]]", "[[TTSEvaluation]]", "[[StyleTransferinTTS]]", "[[DifferentiableRewardOptimization]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[EmotionControlinTTS]]"]
+models: ["[[论文笔记/Step-Audio2.5|Step-Audio-2]]"]
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -35,7 +35,7 @@ updated: 2026-06-04
 
 **创新判断**: MCLP 的核心创新在于将 LALM 的 continuation likelihood 重新定义为 style metric — 通过固定 transcript 消除 content 变量,使 likelihood 变化仅反映 style 差异。这一思路与 GSRM 的 "acoustic-feature-grounded CoT" 和 SpeechJudge 的 "pairwise preference" 路线完全不同,是第三条 style evaluation 路线。
 
-> 检索命中: [[LLM-based TTS]]✓, [[TTS Evaluation]](pending-review), [[Style Transfer in TTS]](pending-review), [[Differentiable Reward Optimization]](pending-review), [[Instruction-Guided Speech Synthesis]](pending-review), [[Emotion Control in TTS]](pending-review) | 未命中但可能相关: Spoken Dialogue Evaluation
+> 检索命中: [[LLM-basedTTS]]✓, [[TTSEvaluation]](pending-review), [[StyleTransferinTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review), [[EmotionControlinTTS]](pending-review) | 未命中但可能相关: Spoken Dialogue Evaluation
 
 ## 速查
 

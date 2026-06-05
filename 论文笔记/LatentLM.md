@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "Multimodal Latent Language Modeling with Next-Token Diffusion"
 arxiv_id: "2412.08635"
-source: "https://arxiv.org/abs/2412.08635"
+source: "Sources/LatentLM.pdf"
 authors: [Yutao Sun, Hangbo Bao, Wenhui Wang, Zhiliang Peng, Li Dong, Shaohan Huang, Jianyong Wang, Furu Wei]
 year: 2024
 venue: "arXiv"
 tags: [multimodal, latent-language-model, next-token-diffusion, sigma-VAE, continuous-representation, TTS, image-generation, unified-model]
-concepts: ["[[Diffusion Model]]", "[[Classifier-Free Guidance]]", "[[Speech Tokenizer]]", "[[LLM-based TTS]]"]
+concepts: ["[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[SpeechTokenizer]]", "[[LLM-basedTTS]]"]
 models: ["[[MELLE]]"]
 tasks: [image-generation, multimodal-LLM, zero-shot-TTS]
 datasets: [ImageNet, LibriSpeech, MS-COCO, LibriHeavy]
@@ -20,16 +20,16 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Tokenizer]], [[Classifier-Free Guidance]], [[Diffusion Model]], [[Semantic vs Acoustic Tokens]])
+> [!info] KB 背景 (基于 6 个实体页: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]], [[Classifier-FreeGuidance]], [[DiffusionModel]], [[SemanticvsAcousticTokens]])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **Continuous vs Discrete Token 路线**: 当前 LLM-based TTS 主流使用离散 codec tokens (如 VALL-E, CosyVoice 系列),通过 RVQ 量化将连续语音压缩为离散序列 [[Speech Tokenizer]]。但离散化存在有损压缩的根本矛盾: 低 bitrate 导致重建质量损失,高 bitrate 导致序列过长 [[Semantic vs Acoustic Tokens]]。MELLE 率先在连续 mel-spectrogram 空间做 AR TTS,但使用简化高斯分布假设,无法建模复杂语音分布 [[MELLE]]。
+> **Continuous vs Discrete Token 路线**: 当前 LLM-based TTS 主流使用离散 codec tokens (如 VALL-E, CosyVoice 系列),通过 RVQ 量化将连续语音压缩为离散序列 [[SpeechTokenizer]]。但离散化存在有损压缩的根本矛盾: 低 bitrate 导致重建质量损失,高 bitrate 导致序列过长 [[SemanticvsAcousticTokens]]。MELLE 率先在连续 mel-spectrogram 空间做 AR TTS,但使用简化高斯分布假设,无法建模复杂语音分布 [[MELLE]]。
 >
-> **Diffusion 在 TTS 中的角色**: [[Diffusion Model]] 可建模任意分布,已在 TTS 声学模型 (Grad-TTS)、vocoder (DiffWave)、条件生成 ([[Conditional Flow Matching]]) 中广泛应用。Flow matching 作为 diffusion 的 ODE 近亲,以更少推理步数实现高质量生成,在 CosyVoice/F5-TTS 等系统中作为 "fine stage" 渲染器。[[Classifier-Free Guidance]] [待确认] 是 diffusion 条件生成的标准引导方法。
+> **Diffusion 在 TTS 中的角色**: [[DiffusionModel]] 可建模任意分布,已在 TTS 声学模型 (Grad-TTS)、vocoder (DiffWave)、条件生成 ([[ConditionalFlowMatching]]) 中广泛应用。Flow matching 作为 diffusion 的 ODE 近亲,以更少推理步数实现高质量生成,在 CosyVoice/F5-TTS 等系统中作为 "fine stage" 渲染器。[[Classifier-FreeGuidance]] [待确认] 是 diffusion 条件生成的标准引导方法。
 >
 > **本文定位**: LatentLM 提出用 VAE 编码连续数据为 latent vectors,用 per-token diffusion head 逐 token 自回归生成这些 latent vectors,实现离散 (文本) 和连续 (图像/音频/视频) 数据的统一建模。这是 "next-token diffusion" 范式的奠基工作。
 >
-> 检索命中: [[Conditional Flow Matching]]✓, [[LLM-based TTS]]✓, [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓ | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
@@ -170,4 +170,4 @@ LatentLM 的核心贡献在于提出了一个优雅的统一框架: **per-token 
 
 ---
 
-检索命中: [[Conditional Flow Matching]], [[LLM-based TTS]], [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]] | 过滤: [[Classifier-Free Guidance]](pending-review), [[Diffusion Model]](pending-review) | 未命中但可能相关: 无
+检索命中: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无

@@ -8,7 +8,7 @@ authors: [Rendi Chevi, Alham Fikri Aji]
 year: 2024
 venue: "arXiv"
 tags: [TTS, emotion, prosody, diffusion, embedding-decomposition, structural-model-of-emotion, style-control, PCA]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Global Style Tokens]]", "[[Speech Factorization]]", "[[Diffusion-based TTS]]", "[[Style Transfer in TTS]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[GlobalStyleTokens]]", "[[SpeechFactorization]]", "[[Diffusion-basedTTS]]", "[[StyleTransferinTTS]]"]
 models: []
 tasks: []
 datasets: []
@@ -23,18 +23,18 @@ updated: 2026-06-03
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: Daisy-TTS 处于**情感 TTS** 与 **韵律建模**的交叉点。在 [[Emotion Control in TTS]] [待确认] 的演进线上,它位于 "Emotion Embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022)" 之间的分支,核心创新是**将情感表示框架从离散标签/维度模型转向基于 Plutchik 结构模型的韵律嵌入分解**。
+**谱系定位**: Daisy-TTS 处于**情感 TTS** 与 **韵律建模**的交叉点。在 [[EmotionControlinTTS]] [待确认] 的演进线上,它位于 "Emotion Embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022)" 之间的分支,核心创新是**将情感表示框架从离散标签/维度模型转向基于 Plutchik 结构模型的韵律嵌入分解**。
 
 **已有认知**:
-- **[[Prosody Modeling]]** (confirmed): 韵律建模分为显式 (duration/pitch/energy predictor) 和隐式 (reference encoder/VAE/diffusion)。Daisy-TTS 继承了 Reference Encoder 路线 (Skerry-Ryan et al., 2018; Wang et al., 2018),但增加了情感判别器实现情感可分离性。
-- **[[Speech Factorization]]** (confirmed): 解耦是可控 TTS 的前提。Daisy-TTS 的情感判别器思路类似对抗训练解耦,但方向相反 — 不是移除情感信息,而是强化情感分离。
-- **[[Global Style Tokens]]** [待确认]: GST 用 reference encoder + token bank 无监督发现风格维度。Daisy-TTS 用 reference encoder + emotion discriminator **有监督**强制情感分离,是 GST 思路在情感维度的有监督特化。
-- **[[Diffusion-based TTS]]** [待确认]: Grad-TTS (Popov et al., 2021) 是 SDE 形式化的 diffusion TTS,MOS 4.44 (LJSpeech)。Daisy-TTS 选用 Grad-TTS 作为骨干,将韵律条件通过 FiLM 注入 encoder。
-- **[[Style Transfer in TTS]]** [待确认]: 风格迁移的核心是从参考音频提取可控表示。Daisy-TTS 的 prosody embedding 支持线性组合/缩放/取反操作,提供了比 GST attention weights 更结构化的操控方式。
+- **[[ProsodyModeling]]** (confirmed): 韵律建模分为显式 (duration/pitch/energy predictor) 和隐式 (reference encoder/VAE/diffusion)。Daisy-TTS 继承了 Reference Encoder 路线 (Skerry-Ryan et al., 2018; Wang et al., 2018),但增加了情感判别器实现情感可分离性。
+- **[[SpeechFactorization]]** (confirmed): 解耦是可控 TTS 的前提。Daisy-TTS 的情感判别器思路类似对抗训练解耦,但方向相反 — 不是移除情感信息,而是强化情感分离。
+- **[[GlobalStyleTokens]]** [待确认]: GST 用 reference encoder + token bank 无监督发现风格维度。Daisy-TTS 用 reference encoder + emotion discriminator **有监督**强制情感分离,是 GST 思路在情感维度的有监督特化。
+- **[[Diffusion-basedTTS]]** [待确认]: Grad-TTS (Popov et al., 2021) 是 SDE 形式化的 diffusion TTS,MOS 4.44 (LJSpeech)。Daisy-TTS 选用 Grad-TTS 作为骨干,将韵律条件通过 FiLM 注入 encoder。
+- **[[StyleTransferinTTS]]** [待确认]: 风格迁移的核心是从参考音频提取可控表示。Daisy-TTS 的 prosody embedding 支持线性组合/缩放/取反操作,提供了比 GST attention weights 更结构化的操控方式。
 
 **创新判断**: 相比 KB 中已有的情感 TTS 方法,Daisy-TTS 的独特贡献在于将 PCA 分解引入情感嵌入空间,通过数学操作 (混合/缩放/取反) 实现 Plutchik 结构模型中定义的二级情感、强度和极性模拟。这是一种新的情感表示范式 — 不依赖离散标签或连续 VAD 维度,而是通过可分解的韵律原型实现组合式情感控制。
 
-> 检索命中: [[Prosody Modeling]]✓, [[Speech Factorization]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[Global Style Tokens]](pending-review), [[Diffusion-based TTS]](pending-review), [[Style Transfer in TTS]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ProsodyModeling]]✓, [[SpeechFactorization]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[Diffusion-basedTTS]](pending-review), [[StyleTransferinTTS]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 

@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers"
 arxiv_id: "2301.02111"
-source: "https://arxiv.org/abs/2301.02111"
+source: "Sources/VALL-E.pdf"
 authors: [Chengyi Wang, Sanyuan Chen, Yu Wu, Ziqiang Zhang, Long Zhou, Shujie Liu, Zhuo Chen, Yanqing Liu, Huaming Wang, Jinyu Li, Lei He, Sheng Zhao, Furu Wei]
 year: 2023
 venue: "arXiv preprint"
 tags: [TTS, zero-shot, codec-LM, in-context-learning, large-scale-training, AR-NAR]
-concepts: ["[[Residual Vector Quantization]]", "[[Speech Tokenizer]]"]
+concepts: ["[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]"]
 models: ["[[EnCodec]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 3
 status: draft
@@ -20,9 +20,9 @@ updated: 2026-06-01
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Residual Vector Quantization]], [[Speech Tokenizer]], [[Zero-shot Speech Synthesis]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[Zero-shotSpeechSynthesis]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Residual Vector Quantization]]✓, [[Speech Tokenizer]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Neural Audio Compression]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[NeuralAudioCompression]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: VALL-E 是 Zero-shot TTS 任务页中记录的 "LLM + 离散 token" 路线的开山之作。在 Speech Tokenizer 页中,VALL-E 属于使用"声学 tokenizer"(EnCodec/SoundStream 的 RVQ codes)作为 LM 生成目标的首个 TTS 系统。
 
@@ -160,5 +160,5 @@ VALL-E 的核心洞察: 如果用 neural codec 的离散 codes 替代 mel spectr
 > **Claim 标注率:** 100% (20/20)
 > **问题:** 0 high, 2 medium, 1 low
 > - [medium/template-compliance] frontmatter > datasets: 字段为空但论文使用 LibriLight/LibriSpeech/VCTK 三个核心数据集
-> - [medium/bad-linking] frontmatter > concepts: 仅 2 个概念,缺少 [[LLM-based TTS]] 等核心概念挂接
+> - [medium/bad-linking] frontmatter > concepts: 仅 2 个概念,缺少 [[LLM-basedTTS]] 等核心概念挂接
 > **反向更新:** ✅

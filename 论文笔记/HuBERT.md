@@ -3,12 +3,12 @@ type: paper
 tier: deep
 title: "HuBERT: Self-Supervised Speech Representation Learning by Masked Prediction of Hidden Units"
 arxiv_id: "2106.07447"
-source: "https://arxiv.org/abs/2106.07447"
+source: "Sources/HuBERT.pdf"
 authors: [Wei-Ning Hsu, Benjamin Bolte, Yao-Hung Hubert Tsai, Kushal Lakhotia, Ruslan Salakhutdinov, Abdelrahman Mohamed]
 year: 2021
 venue: "IEEE/ACM Transactions on Audio, Speech, and Language Processing"
 tags: [self-supervised-learning, speech-representation, masked-prediction, BERT, clustering, ASR]
-concepts: ["[[Speech Tokenizer]]", "[[Semantic vs Acoustic Tokens]]", "[[Speech Language Model]]"]
+concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]"]
 models: []
 tasks: []
 datasets: []
@@ -20,14 +20,14 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页: [[Speech Tokenizer]], [[Semantic vs Acoustic Tokens]], [[Speech Language Model]])
+> [!info] KB 背景 (基于 3 个已确认实体页: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[Speech Tokenizer]]✓(confirmed), [[Semantic vs Acoustic Tokens]]✓(confirmed), [[Speech Language Model]]✓(confirmed) | 过滤: 无 | 未命中但可能相关: 无
+> 检索命中: [[SpeechTokenizer]]✓(confirmed), [[SemanticvsAcousticTokens]]✓(confirmed), [[SpeechLanguageModel]]✓(confirmed) | 过滤: 无 | 未命中但可能相关: 无
 
 **已有知识要点**:
-- [[Speech Tokenizer]]: HuBERT 是三类 speech tokenizer 中"自监督 tokenizer"的代表,通过 masked prediction 学习表征后做 k-means 聚类离散化;在 SpeechLM 中被 SynCLLM, SpeechGPT, dGSLM, SUTLM, pGSLM, GSLM, TWIST, PSLM 等系统采用 ✓
-- [[Semantic vs Acoustic Tokens]]: HuBERT 产生的 semantic tokens 与文本对齐良好、语义连贯性强,但缺乏高频声学细节 (pitch, timbre 等); HuBERT 25Hz 在 SALMon benchmark 的语义任务上保持最强 (sBLIMP 60.89, sWUGGY 70.51) ✓
-- [[Speech Language Model]]: HuBERT semantic tokens 是多数 SpeechLM 系统的首选输入表征 ✓
+- [[SpeechTokenizer]]: HuBERT 是三类 speech tokenizer 中"自监督 tokenizer"的代表,通过 masked prediction 学习表征后做 k-means 聚类离散化;在 SpeechLM 中被 SynCLLM, SpeechGPT, dGSLM, SUTLM, pGSLM, GSLM, TWIST, PSLM 等系统采用 ✓
+- [[SemanticvsAcousticTokens]]: HuBERT 产生的 semantic tokens 与文本对齐良好、语义连贯性强,但缺乏高频声学细节 (pitch, timbre 等); HuBERT 25Hz 在 SALMon benchmark 的语义任务上保持最强 (sBLIMP 60.89, sWUGGY 70.51) ✓
+- [[SpeechLanguageModel]]: HuBERT semantic tokens 是多数 SpeechLM 系统的首选输入表征 ✓
 
 ## 速查
 
@@ -199,4 +199,4 @@ $$L_m = \sum_{t \in M} \sum_k \log p_f^{(k)}(z_t^{(k)} | \tilde{X}, t)$$
 
 ---
 
-检索命中: [[Speech Tokenizer]]✓, [[Semantic vs Acoustic Tokens]]✓, [[Speech Language Model]]✓ | 过滤: 无 | 未命中但可能相关: 无
+检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: 无 | 未命中但可能相关: 无

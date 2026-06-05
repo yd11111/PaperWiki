@@ -8,9 +8,9 @@ authors: [Hui Wang, Yifan Yang, Shujie Liu, Jinyu Li, Lingwei Meng, Yanqing Liu,
 year: 2025
 venue: "arXiv"
 tags: [TTS, zero-shot, streaming, autoregressive, continuous-token, mel-spectrogram, interleaving, low-latency, single-stage]
-concepts: ["[[Mel Spectrogram]]", "[[LLM-based TTS]]", "[[Variational Autoencoder for TTS]]", "[[Codec Language Model]]"]
-models: ["[[模型库/MELLE|MELLE]]", "[[模型库/CosyVoice 2|CosyVoice 2]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[MelSpectrogram]]", "[[LLM-basedTTS]]", "[[VariationalAutoencoderforTTS]]", "[[CodecLanguageModel]]"]
+models: ["[[模型库/MELLE|MELLE]]", "[[模型库/CosyVoice2|CosyVoice 2]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -26,16 +26,16 @@ updated: 2026-06-03
 **谱系定位**: StreamMel 处于 **连续值自回归 TTS** 路线的延伸位置。该路线的里程碑是 [[论文笔记/MELLE|MELLE]] [待确认],首次证明零样本 TTS 可以绕过向量量化,直接在连续 mel-spectrogram 上做自回归建模,通过 spectrogram flux loss + latent sampling module 解决连续 AR 的训练目标和采样两大挑战。StreamMel 在 MELLE 的基础上增加了**流式能力**,是该路线的流式化延伸。
 
 **已有认知**:
-- **[[Mel Spectrogram]]** [待确认]: 80 维 log-mel 是 neural TTS 最广泛使用的中间声学特征,与离散 speech tokens 相比保留了连续信息但丢失相位,需要 vocoder 恢复波形。StreamMel 直接在此空间建模。
-- **[[模型库/CosyVoice 2|CosyVoice 2]]** ✓: 流式零样本 TTS 代表,采用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching 的**两阶段**流式方案。StreamMel 通过单阶段设计消除了两阶段间的延迟瓶颈。
-- **[[LLM-based TTS]]** ✓: 以 VALL-E 为代表的自回归 codec LM 范式。StreamMel 属于该范式中"连续值 AR"子路线 (与 MELLE/FELLE/LatentLM/CLEAR 同属),但进一步解决了流式推理问题。
-- **[[Codec Language Model]]** [待确认]: 在离散 neural codec tokens 上做语言建模的范式。StreamMel 明确挑战了该范式"必须离散化"的假设,证明连续 mel + 交错序列可同时实现流式和高质量。
-- **[[Variational Autoencoder for TTS]]** [待确认]: StreamMel 的 latent decoder 直接继承 MELLE 的 latent sampling module (VAE reparameterization trick),为连续空间自回归提供概率采样机制。
-- **[[Zero-shot Speech Synthesis]]** ✓: 当前 SOTA 在 SEED-TTS-Eval 上 (CosyVoice 3, Qwen3-TTS),StreamMel 在 LibriSpeech 上的流式成绩已接近离线 SOTA。
+- **[[MelSpectrogram]]** [待确认]: 80 维 log-mel 是 neural TTS 最广泛使用的中间声学特征,与离散 speech tokens 相比保留了连续信息但丢失相位,需要 vocoder 恢复波形。StreamMel 直接在此空间建模。
+- **[[模型库/CosyVoice2|CosyVoice 2]]** ✓: 流式零样本 TTS 代表,采用 FSQ-SenseVoice tokenizer + LLM + chunk-aware flow matching 的**两阶段**流式方案。StreamMel 通过单阶段设计消除了两阶段间的延迟瓶颈。
+- **[[LLM-basedTTS]]** ✓: 以 VALL-E 为代表的自回归 codec LM 范式。StreamMel 属于该范式中"连续值 AR"子路线 (与 MELLE/FELLE/LatentLM/CLEAR 同属),但进一步解决了流式推理问题。
+- **[[CodecLanguageModel]]** [待确认]: 在离散 neural codec tokens 上做语言建模的范式。StreamMel 明确挑战了该范式"必须离散化"的假设,证明连续 mel + 交错序列可同时实现流式和高质量。
+- **[[VariationalAutoencoderforTTS]]** [待确认]: StreamMel 的 latent decoder 直接继承 MELLE 的 latent sampling module (VAE reparameterization trick),为连续空间自回归提供概率采样机制。
+- **[[Zero-shotSpeechSynthesis]]** ✓: 当前 SOTA 在 SEED-TTS-Eval 上 (CosyVoice 3, Qwen3-TTS),StreamMel 在 LibriSpeech 上的流式成绩已接近离线 SOTA。
 
 **创新判断**: StreamMel 的核心创新在于**交错 (interleaving) 策略**,将文本 token 和连续 mel frame 按固定 n:m 比率交替排列,使自回归模型无需等待完整输入即可逐帧生成。这是连续值 AR 路线首次实现真正的流式合成。对比 IST-LM (同样采用交错但基于离散 token),StreamMel 证明连续表示在交错框架下仍然可行且更优。
 
-> 检索命中: [[模型库/MELLE|MELLE]] [待确认], [[模型库/CosyVoice 2|CosyVoice 2]]✓, [[Mel Spectrogram]] [待确认], [[Codec Language Model]] [待确认], [[Zero-shot Speech Synthesis]]✓, [[LLM-based TTS]]✓ | 过滤: [[Variational Autoencoder for TTS]] [待确认] | 未命中但可能相关: 无
+> 检索命中: [[模型库/MELLE|MELLE]] [待确认], [[模型库/CosyVoice2|CosyVoice 2]]✓, [[MelSpectrogram]] [待确认], [[CodecLanguageModel]] [待确认], [[Zero-shotSpeechSynthesis]]✓, [[LLM-basedTTS]]✓ | 过滤: [[VariationalAutoencoderforTTS]] [待确认] | 未命中但可能相关: 无
 
 ## 速查
 

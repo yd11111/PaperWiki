@@ -8,9 +8,9 @@ authors: [Xiang Li, Duyi Pan, Hongru Xiao, Jiale Han, Jing Tang, Jiabao Ma, Wei 
 year: 2025
 venue: "arXiv"
 tags: [TTS, dialogue-synthesis, multi-agent, multi-party, emotional-TTS, data-generation, zero-shot, evaluation]
-concepts: ["[[Emotion Control in TTS]]", "[[Prosody Modeling]]", "[[Turn-taking in Spoken Dialogue]]", "[[TTS Evaluation]]"]
+concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[Turn-takinginSpokenDialogue]]", "[[TTSEvaluation]]"]
 models: ["[[模型库/CosyVoice|CosyVoice]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
 status: draft
@@ -20,7 +20,7 @@ updated: 2026-06-03
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 6 个实体页: [[模型库/CosyVoice|CosyVoice]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓, [[Emotion Control in TTS]][待确认], [[TTS Evaluation]][待确认], [[Turn-taking in Spoken Dialogue]][待确认])
+> [!info] KB 背景 (基于 6 个实体页: [[模型库/CosyVoice|CosyVoice]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓, [[EmotionControlinTTS]][待确认], [[TTSEvaluation]][待确认], [[Turn-takinginSpokenDialogue]][待确认])
 > 自动生成,不保证完整覆盖所有相关知识。
 >
 > **谱系定位**: DialogueAgents 处于 dialogue speech synthesis 与 multi-agent collaboration 的交叉点。它不提出新的 TTS 模型,而是将已有的零样本 TTS 系统 (CosyVoice) 嵌入多 agent 协作框架,通过迭代脚本优化来提升对话语音的情感和韵律质量。这与当前 TTS 领域"单模型端到端"的主流范式形成差异化路线。
@@ -33,7 +33,7 @@ updated: 2026-06-03
 >
 > **创新判断**: 本文的创新在于框架设计而非模型/算法。将 LLM (GPT-4o) 作为脚本生成器、CosyVoice 作为合成器、Qwen2-Audio 作为多模态语音评审组成闭环迭代,这种"生成-合成-评审-修改"的循环是本文独特贡献。但框架依赖闭源模型 (GPT-4o),复现受限。
 >
-> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[Prosody Modeling]]✓, [[Zero-shot Speech Synthesis]]✓ | 过滤: [[Emotion Control in TTS]](pending-review), [[TTS Evaluation]](pending-review), [[Turn-taking in Spoken Dialogue]](pending-review) | 未命中但可能相关: [[Spoken Dialogue Evaluation]]
+> 检索命中: [[模型库/CosyVoice|CosyVoice]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[TTSEvaluation]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review) | 未命中但可能相关: [[SpokenDialogueEvaluation]]
 
 ## 速查
 

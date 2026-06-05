@@ -3,14 +3,14 @@ type: paper
 tier: deep
 title: "TTS-1 Technical Report"
 arxiv_id: "2507.21138"
-source: "Sources/2507.21138.pdf"
+source: "Sources/TTS-1.pdf"
 authors: [Oleg Atamanenko, Anna Chalova, Joseph Coombes, Nikki Cope, Phillip Dang, Zhifeng Deng, Jimmy Du, Michael Ermolenko, Feifan Fan, Yufei Feng, Cheryl Fichter, Pavel Filimonov, Louis Fischer, Kylan Gibbs, Valeria Gusarova, Pavel Karpik, Andreas Assad Kottner, Ian Lee, Oliver Louie, Jasmine Mai, Mikhail Mamontov, Suri Mao, Nurullah Morshed, Igor Poletaev, Florin Radu, Dmytro Semernia, Evgenii Shingarev, Vikram Sivaraja, Peter Skirko, Rinat Takhautdinov, Robert Villahermosa, Jean Wang]
 year: 2025
 venue: "arXiv"
 tags: [TTS, LLM-based, autoregressive, zero-shot, GRPO, RL-alignment, audio-codec, single-codebook, streaming, multilingual, emotion-control, audio-markup, 48kHz]
-concepts: ["[[LLM-based TTS]]", "[[Speech Language Model]]", "[[Single-codebook vs Multi-codebook]]", "[[Differentiable Reward Optimization]]", "[[Emotion Control in TTS]]", "[[Codec Training Objectives]]", "[[Voice Cloning Taxonomy]]"]
-models: ["[[模型库/CosyVoice 2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
-tasks: ["[[Zero-shot Speech Synthesis]]"]
+concepts: ["[[LLM-basedTTS]]", "[[SpeechLanguageModel]]", "[[Single-codebookvsMulti-codebook]]", "[[DifferentiableRewardOptimization]]", "[[EmotionControlinTTS]]", "[[CodecTrainingObjectives]]", "[[VoiceCloningTaxonomy]]"]
+models: ["[[模型库/CosyVoice2|CosyVoice 2]]", "[[模型库/Whisper|Whisper]]", "[[模型库/WavLM|WavLM]]"]
+tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
 status: draft
@@ -23,13 +23,13 @@ updated: 2026-06-04
 > [!info] KB 背景 (基于 4 个已确认实体页 + 2 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 >
-> **谱系定位**: TTS-1 属于 [[LLM-based TTS]] 范式中的纯自回归 + 单码本路线。它使用 LLaMA 作为 [[Speech Language Model]] backbone,将语音离散化为单一码本 (65536 tokens) 的 token 序列后自回归生成。这与 CosyVoice 系列 (semantic tokens + CFM acoustic decoder) 和 VALL-E 系列 (多码本 AR+NAR) 都不同 -- TTS-1 选择了 X-codec2 架构的 **单码本 + 超分辨率 decoder** 路线,是 [[Single-codebook vs Multi-codebook]] 趋势中单码本大词表方案的代表。
+> **谱系定位**: TTS-1 属于 [[LLM-basedTTS]] 范式中的纯自回归 + 单码本路线。它使用 LLaMA 作为 [[SpeechLanguageModel]] backbone,将语音离散化为单一码本 (65536 tokens) 的 token 序列后自回归生成。这与 CosyVoice 系列 (semantic tokens + CFM acoustic decoder) 和 VALL-E 系列 (多码本 AR+NAR) 都不同 -- TTS-1 选择了 X-codec2 架构的 **单码本 + 超分辨率 decoder** 路线,是 [[Single-codebookvsMulti-codebook]] 趋势中单码本大词表方案的代表。
 >
-> **已有认知**: (1) LLM-based TTS 已从 VALL-E 开创的 codec LM 范式演化出多条子路线 [confirmed]; (2) GRPO 用于 TTS RL alignment 已有 Multi-Reward GRPO、CosyVoice 3 DiffRO 等先例,TTS-1 的 GRPO 方案属于 audio-level RL 路线 [待确认]; (3) 情感/非语言控制方面,NVSpeech 和 EmoVoice 等已探索了文本标签和自由文本 prompt 两种方案,TTS-1 的 audio markup 属于文本标签路线 [待确认]; (4) [[Zero-shot Speech Synthesis]] 当前 SOTA 在 SEED-TTS-Eval 上 WER 已降至 1% 以下 (CosyVoice 3),TTS-1 的竞争力需看其在该 benchmark 上的表现 [confirmed]。
+> **已有认知**: (1) LLM-based TTS 已从 VALL-E 开创的 codec LM 范式演化出多条子路线 [confirmed]; (2) GRPO 用于 TTS RL alignment 已有 Multi-Reward GRPO、CosyVoice 3 DiffRO 等先例,TTS-1 的 GRPO 方案属于 audio-level RL 路线 [待确认]; (3) 情感/非语言控制方面,NVSpeech 和 EmoVoice 等已探索了文本标签和自由文本 prompt 两种方案,TTS-1 的 audio markup 属于文本标签路线 [待确认]; (4) [[Zero-shotSpeechSynthesis]] 当前 SOTA 在 SEED-TTS-Eval 上 WER 已降至 1% 以下 (CosyVoice 3),TTS-1 的竞争力需看其在该 benchmark 上的表现 [confirmed]。
 >
 > **创新判断**: TTS-1 的主要创新不在单个组件,而在 **系统级工程整合** -- 将已有范式 (LLaMA backbone + X-codec2 + GRPO + LoRA 风格微调 + 流式推理) 组合为可部署的高质量 48kHz 多语言 TTS 系统,并开源训练代码。单独来看,每个组件都有先例;但作为完整系统 (尤其是 8.8B 参数规模 + 11 语言 + 48kHz + 开源),在工业级 TTS 中仍有参考价值。
 >
-> 检索命中: [[LLM-based TTS]]✓, [[Speech Language Model]]✓, [[Zero-shot Speech Synthesis]]✓, [[CosyVoice 2]]✓ | 过滤: [[Differentiable Reward Optimization]](pending-review), [[Single-codebook vs Multi-codebook]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[LLM-basedTTS]]✓, [[SpeechLanguageModel]]✓, [[Zero-shotSpeechSynthesis]]✓, [[CosyVoice2]]✓ | 过滤: [[DifferentiableRewardOptimization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review) | 未命中但可能相关: 无
 
 ## 速查
 
