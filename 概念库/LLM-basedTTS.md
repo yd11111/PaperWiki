@@ -162,4 +162,4 @@ Future: Instruction-Aware Frameworks → 精细指令控制
 
 ## 演进
 
-Tacotron/FastSpeech (显式 variance predictor, 2017-2020) → VALL-E (codec LM, AR+NAR, 2023) → VALL-E 2 / RALL-E (鲁棒性增强, 2024) → Hybrid CosyVoice (LLM + Flow, 2024) → Instruction-aware 架构 (VoxInstruct, Step-Audio, 2024-2025)
+Tacotron/FastSpeech (显式 variance predictor, 2017-2020) → VALL-E (codec LM, AR+NAR, 2023) → VALL-E 2 / RALL-E (鲁棒性增强, 2024) → Hybrid CosyVoice (LLM + Flow, 2024) → Instruction-aware 架构 (VoxInstruct, Step-Audio, 2024-2025) → Gen 4 "Native Agentic" 框架 (Any2Speech/BorderlessLongSpeech, 2026; 分层标注+CoT+Agent 接口,尚无定量验证)

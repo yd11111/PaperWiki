@@ -76,6 +76,9 @@ Natural Language Description for TTS 是一种通过自然语言文本描述来�
 - PromptSpeaker (Zhang et al., 2023c): 说话人特征的文本描述
 - ProEmo (Zhang et al., 2025a): 情感的自然语言描述
 
+### 多层级场景描述 (Multi-level Scene Description)
+- [[论文笔记/BorderlessLongSpeech|Any2Speech]] (Song et al., Xiaomi, 2026): 将 NL description 从单维度属性扩展为三层结构化 caption — Global (场景/说话人画像/情感弧/声学环境) + Sentence (逐句语气/语速/意图) + Token (音素级重音/连读)。所有维度均用自由格式 NL 表达,不用枚举或数值编码。通过 "label don't filter" 数据策略将含噪数据的背景声/环境音纳入 NL 描述范畴,使其成为可控维度。框架论文,尚无定量验证。
+
 ## 数据集需求
 
 Survey 指出 description-based datasets 的特点:
