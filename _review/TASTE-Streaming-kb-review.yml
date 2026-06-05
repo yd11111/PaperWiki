@@ -1,0 +1,46 @@
+paper: "TASTE-Streaming"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "单一 key_papers append,内容与论文一致,不改已有定义"
+  no_bloat:
+    verdict: pass
+    notes: "无新建页。TASTE 本身不独立建页(已由 Speech-TextAlignment 覆盖)。SpeechTokenizer/CFM/SemanticvsAcousticTokens/FSQ 均因 key_papers 超限跳过。"
+  traceable:
+    verdict: pass
+    notes: "追加条目含 wikilink [[论文笔记/TASTE-Streaming|TASTE-S]]"
+
+change_plan_summary:
+  total_targets: 1
+  appends: 1
+  substantive: 0
+  new_pages: 0
+
+change_plan:
+  - target: "概念库/Speech-TextAlignment.md"
+    action: append
+    detail: "追加 key_papers: TASTE-S (text-aligned tokenization 的流式化方案)"
+    status_change: none
+
+skipped:
+  - target: "概念库/SpeechTokenizer.md"
+    reason: "key_papers 已有 77 条(上限 12),entity-review 已标记需重构"
+  - target: "概念库/ConditionalFlowMatching.md"
+    reason: "key_papers 超限;CFM 仅用于 vocoder,非本文核心贡献"
+  - target: "概念库/SemanticvsAcousticTokens.md"
+    reason: "key_papers 超限;本文不直接讨论 semantic vs acoustic 分类"
+  - target: "概念库/FiniteScalarQuantization.md"
+    reason: "key_papers 16 条超限;本文仅使用 FSQ,无新 insight"
+  - target: "概念库/SpeechLanguageModel.md"
+    reason: "本文是 tokenizer 工作,与 SLM 概念页相关但非直接贡献"
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
