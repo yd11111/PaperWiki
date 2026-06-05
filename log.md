@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MAGIC-TTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Emilia]](pending-review)
+- [ingest/deep] [[MAGIC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (DurationPredictor 演进+正文, ConditionalFlowMatching 演进)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(79),改追加到正文演进段
+- [skip/update] [[DurationPredictor]] — key_papers 已达上限(22),改追加到正文演进段
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(55),跳过追加 (MAGIC-TTS 不创新 prosody modeling 本身)
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(28),跳过追加
+- [lint/local] MAGIC-TTS — 通过
 - [kb/search] [[ChainOfDetails]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review)
 - [ingest/deep] [[ChainOfDetails]] — 精读, kb_sources=6, 新建 0, 追加 1 (MaskedGenerativeModeling key_papers+演进)
 - [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),跳过追加
