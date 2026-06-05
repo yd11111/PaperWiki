@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[BorderlessLongSpeech]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[ProsodyModeling]]✓ | 参考(pending-review): [[Instruction-GuidedSpeechSynthesis]], [[EmotionControlinTTS]], [[NaturalLanguageDescriptionforTTS]], [[GlobalStyleTokens]]
+- [ingest/deep] [[BorderlessLongSpeech]] — 精读, kb_sources=6, 新建 0, 追加 2 (LLM-basedTTS 演进线, NaturalLanguageDescriptionforTTS 扩展方向)
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限,改追加到演进线
+- [skip/update] [[NaturalLanguageDescriptionforTTS]] — key_papers 已达上限,改追加到扩展方向
+- [skip/update] [[EmotionControlinTTS]] — 论文识别情感弧gap但无具体情感控制贡献
+- [skip/update] [[ProsodyModeling]] — CoT 韵律规划方向有趣但无定量验证
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]] — Instruct-Think 分流无独立实验验证
+- [review/auto] [[BorderlessLongSpeech]] — pass-with-fixes: 0 high, 1 medium (速查指标补充 demo), 2 low
+- [lint/local] BorderlessLongSpeech — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 294 — 建议抽空审核
 - [kb/search] [[MOSS-TTSD]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[ResidualVectorQuantization]]✓ | 参考(pending-review): [[CodecLanguageModel]], [[VoiceCloningTaxonomy]], [[Turn-takinginSpokenDialogue]], [[SpokenDialogueEvaluation]]
 - [ingest/deep] [[MOSS-TTSD]] — 精读, kb_sources=6, 新建 0, 追加 4 (LLM-basedTTS body, CodecLanguageModel body, SpokenDialogueEvaluation key_papers+body, VoiceCloningTaxonomy key_papers)
 - [skip/update] [[ResidualVectorQuantization]] — 论文仅使用 RVQ,无创新贡献
