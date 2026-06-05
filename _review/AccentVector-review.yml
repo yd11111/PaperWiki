@@ -1,0 +1,43 @@
+review:
+  paper: "AccentVector"
+  reviewer: "auto (inline, same-session)"
+  date: "2026-06-05"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节提供了清晰的因果解释,4个关键设计选择都回答了WHY,speed查卡片的'可借鉴'具体可迁移(LoRA权重差作为属性向量)。读完笔记可以向同事解释为什么Accent Vector能work。"
+  trustworthy:
+    score: 9
+    reason: "数字标注覆盖率高(>90%),所有关键数字都有[Table N]/[§X.X]标注。指标名称使用正确(WER/CER/UTMOS/SSIM)。速查卡片指标有具体数字+对比基准+出处。"
+  distinguishable:
+    score: 9
+    reason: "因果解释来源标注覆盖率高,所有WHY解释都标注了[论文原文]或[agent 解读]。局限性和点评中的推断性分析均有明确限定词。"
+  positionable:
+    score: 8
+    reason: "KB背景节谱系定位清晰(从传统accent TTS方法到task vector迁移),创新判断有对比基准(vs KB中的Speaker Adaptation方法)。frontmatter字段基本完整,但datasets为空。"
+  non_polluting:
+    score: 8
+    reason: "反向更新计划合理:SpeakerAdaptation和Cross-lingualVoiceCloning追加key_papers+贡献描述,不涉及实质修改。无factual error或overclaim。"
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: "frontmatter → datasets"
+    detail: "datasets字段为空,但论文使用了VCTK、CommonVoice、IndicVoices-R、KeSpeech、LibriTTS-R等数据集。知识库中无对应数据集页,留空符合约定。"
+    suggestion: "可保持为空,或待数据集页创建后补充。"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "实验表 → 数据集列"
+    detail: "表格中数据集列标注为训练数据源(VCTK test, CommonVoice-sp test等),但实际评估使用LibriTTS-R test-clean的4.8k transcripts配合目标语言参考语音[§4.2]。数据集列的语义不够精确。"
+    suggestion: "可在表格下方添加一行注释说明评估设置,或将数据集列改为'训练数据'并新增'评估数据'说明。"
+
+issues_summary:
+  high: 0
+  medium: 0
+  low: 2
+
+learning_signals: []
