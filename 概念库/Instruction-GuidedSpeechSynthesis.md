@@ -124,9 +124,13 @@ Survey (Sec 5.2) 指出的关键挑战:
 
 [[论文笔记/InstructAudio|InstructAudio]] (Qiang et al., Kuaishou/Tianjin Univ., 2025) 首次将 instruction-guided 范式从纯 TTS 扩展到统一 TTS+TTM (Text-to-Music) 框架。核心设计: 标准化 instruction-phoneme 输入格式,NL instruction 描述所有属性 (timbre/paralinguistic/musical),text/lyrics 统一转为 phoneme,用 MM-DiT (Joint DiT 14L + Single DiT 6L) 基于 CFM 训练同时生成语音和音乐。1.34B 参数,50K h 语音 + 20K h 音乐训练。Seed-TTS WER EN 1.52% / ZH 1.35% (best); 唯一同时支持 Gender/Age/Emotion/Style/Accent/Dialogue 纯文本控制; SongEval 全维度超越 ACE-Step/DiffRhythm+。局限: NMOS 3.46 低于 CosyVoice2 (3.65),纯文本控制的 one-to-many 模糊性导致音质下降。与 VoxInstruct 的区别: VoxInstruct 统一了 TTS 内的 content+style,InstructAudio 进一步统一了 TTS 与 TTM 两个任务。
 
+## 统一 TTS+TTM+TTA 三模态指令控制 (UniSonate)
+
+[[论文笔记/UniSonate|UniSonate]] (Qiang et al., Kuaishou/Tianjin Univ., 2026) 将 InstructAudio 的统一指令范式进一步扩展到 TTS+TTM+TTA (Sound Effects) 三模态。核心挑战: SFX 没有语言学内容,无法用 phoneme 序列作为 content input。解决方案: **Dynamic Token Injection** — 引入可学习 [SFX] token 作为伪音素,token 数量按 phoneme-to-duration 比率确定,使 phoneme 驱动架构无需修改即可处理非语言音频。配合三阶段课程学习 (speech→music→SFX) 缓解负迁移。1.34B 参数 (同 InstructAudio),新增 1.5M SFX clips。TTS WER EN 1.47% (best), SongEval Coh 3.18 (SOTA), TTA FAD 4.21 (competitive)。消融显示正向迁移: 联合训练 WER 2.24→1.47 [Table 6]。
+
 ## 演进
 
-Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026)
+Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **统一 TTS+TTM+TTA 三模态** (UniSonate, 2026) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026)
 
 ## 评估 Benchmark
 

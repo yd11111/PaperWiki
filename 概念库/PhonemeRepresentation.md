@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]"]
+key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]", "[[论文笔记/UniSonate|UniSonate]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-SpeechPipeline]]", "[[Attention-basedTTS]]", "[[Non-autoregressiveTTS]]"]
 status: pending-review
@@ -105,6 +105,10 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - [[Attention-basedTTS]]: phoneme/character 作为 encoder 输入
 - BPE Tokenizer: LLM-TTS 中 text 的替代表示方式
 
+## Pseudo-Phoneme: 将非语言音频融入 Phoneme 驱动架构
+
+[[论文笔记/UniSonate|UniSonate]] (Qiang et al., 2026) 提出 **Dynamic Token Injection**: 为缺乏语言学内容的 sound effects (SFX) 引入可学习 [SFX] special token 作为伪音素。token 数量按语音语料的平均 phoneme-to-duration 比率 lambda 确定: L_sfx = floor(lambda * T_target),使 SFX 的时间展开在 token 密度上与 phoneme 一致。这允许 phoneme 驱动的 MM-DiT 架构无需修改即可处理非语言音频,将 TTS+TTM 统一框架扩展至 TTA。TTS WER EN 1.47% (best), TTA FAD 4.21 (competitive) [Table 3, 5]。
+
 ## 演进
 
-完整语言学特征 (SPSS; phoneme + POS + duration + prosody 标注) → 简化为 phoneme only (FastSpeech, 2019) → Character 直接输入 (Tacotron, 让模型学 G2P) → BPE text tokens (LLM-TTS, 2023+; 共享 LLM tokenizer)
+完整语言学特征 (SPSS; phoneme + POS + duration + prosody 标注) → 简化为 phoneme only (FastSpeech, 2019) → Character 直接输入 (Tacotron, 让模型学 G2P) → BPE text tokens (LLM-TTS, 2023+; 共享 LLM tokenizer) → **Pseudo-phoneme for non-linguistic audio** (UniSonate [SFX] tokens, 2026)
