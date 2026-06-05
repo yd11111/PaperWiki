@@ -90,6 +90,10 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 - [[ConditionalFlowMatching]]: CFG 同样适用于 flow matching 框架
 - [[SpeakerEmbedding]]: CFG 可用于说话人条件引导
 
+## 参数空间 CFG 类比
+
+[[论文笔记/TaskVectorTTS|TaskVectorTTS]] (Feng et al., 2025) 将 task vector 增强 (θ_enhanced = θ_pre + α·τ,其中 τ = θ_ft - θ_pre) 类比为参数空间的 CFG [§3.1.2]。传统 CFG 在输出/激活空间操作 (条件-无条件差值外推),task vector 则在参数空间操作 (微调-预训练参数差值外推)。两者共享相同的数学结构: 沿条件方向做线性外推以增强条件信号。这一类比表明 CFG 原理可推广到参数空间,为基于模型编辑的条件控制提供理论支撑。
+
 ## 演进
 
 Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用
