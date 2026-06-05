@@ -1,0 +1,110 @@
+paper: CosyEdit2
+reviewer: auto
+date: 2026-06-06
+checklist_version: v1.1
+
+# Layer 1: Principle Assessment
+
+principles:
+  reproducible:
+    score: 9
+    verdict: pass
+    reason: >
+      方法节覆盖了三个关键设计选择(两阶段 post-training / target-speech-free 数据构造 / 三维 reward 设计),
+      每个都有 WHY 解释。速查卡片可借鉴字段列出 5 个具体可迁移 trick。
+      训练策略(Stage 1 + Stage 2)参数完整。
+
+  trustworthy:
+    score: 9
+    verdict: pass
+    reason: >
+      数字型 claim 标注覆盖率约 95%。所有实验表格数据与原文 PDF 交叉验证一致。
+      指标使用正确(WER/CER/SS/MCD/DNSMOS/MAE_DNSMOS 区分清晰)。
+      速查卡片指标字段含具体数字+数据集名+来源标注。
+
+  distinguishable:
+    score: 8
+    verdict: pass
+    reason: >
+      方法节有 8 处 [论文原文] 和 3 处 [agent 解读] 标注。
+      点评部分有 1 处未标注来源的推断("与 ECPA 的 self-consistency GRPO 相比")但该比较有原文支撑 [§2.2]。
+      覆盖率约 85%。
+
+  positionable:
+    score: 9
+    verdict: pass
+    reason: >
+      KB 背景节从 5 个维度定位: CosyVoice2 backbone, CosyEdit 谱系, RL 演进线 (DiffRO vs GRPO),
+      CFM 角色, TTS-editing 统一观。
+      创新判断有对比基准(vs ECPA, vs SFT)。
+
+  non_polluting:
+    score: 9
+    verdict: pass
+    reason: >
+      frontmatter concepts/models/tasks 字段语义正确。
+      models 列了 backbone (CosyVoice2), 前作 (CosyEdit), 和对比 baseline (Ming-UniAudio),
+      未包含后续系统。
+      反向更新计划为追加操作(key_papers 追加),安全性高。
+
+# Layer 2: Checklist Items
+
+checklist:
+  method_has_why: pass
+  design_choices_explained: pass
+  reusable_is_specific: pass
+  numbers_have_sources: pass
+  metrics_correct: pass
+  summary_has_numbers: pass
+  no_directional_error: pass
+  causal_sources_labeled: pass
+  source_coverage_above_80: pass
+  no_assertion_without_qualifier: pass
+  strong_claims_supported: pass
+  kb_has_lineage: pass
+  kb_has_innovation_judgment: pass
+  frontmatter_present: pass
+  frontmatter_semantically_correct: pass
+  summary_five_fields_filled: pass
+  dedup_check: pass
+  no_factual_error_in_update: pass
+  update_correctly_classified: pass
+
+# Issues
+
+issues:
+  - id: 1
+    severity: low
+    type: traceability-gap
+    location: "点评 > 核心贡献 > 第1点"
+    detail: '"与 ECPA 的 self-consistency GRPO 相比" 没有出处标注,虽然 §2.2 有对应内容'
+    suggestion: "追加 [§2.2] 标注"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "实验 > Speech Editing 表格"
+    detail: "Table 1 仅展示了 SSR-Speech 和 CosyEdit2 两个系统的对比,原文有更多 baseline (VoiceCraft-X, Ming-UniAudio)"
+    suggestion: "至少补充 Ming-UniAudio 的数据作为 E2E 对比基准,或注明省略了其他 baseline"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用 > 第4点"
+    detail: '"Zero-shot TTS 作为 speech editing 特例" 的 reusable idea 更偏观察而非具体 trick'
+    suggestion: "增加具体实施建议(如 CosyEdit2 TTS 推理模式的 VAD trimming 处理)"
+
+  - id: 4
+    severity: low
+    type: traceability-gap
+    location: "方法 > 训练策略 > BigVGAN 训练"
+    detail: '"复用 88.20% generator 参数" 的出处标注缺失'
+    suggestion: "追加 [§C.3] 标注"
+
+# Summary
+
+conclusion: pass
+issue_count: 4
+issue_breakdown: "high: 0, medium: 0, low: 4"
+
+learning_signals: []

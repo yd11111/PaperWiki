@@ -217,3 +217,19 @@ Coarse-to-fine 组合 [Eqs. 4-5]:
 3. **模块化 RL**: GRPO 仅更新 LLM 而冻结下游 Flow + Vocoder,将 RL 搜索空间限制在语义 token 层面。这比在完整管线上做 RL 更稳定高效,可应用于任何 coarse-to-fine 生成系统
 4. **Zero-shot TTS 作为 speech editing 特例**: 这个统一视角暗示 editing-oriented 训练可以是通用 TTS improvement 的有效路径。未来可探索: 先训 editing → 再做 TTS 部署,利用 editing 的更强约束作为"难题训练"提升模型能力
 5. **MCD 容忍度设计**: r_mcd 的 δ=2 dB 阈值忽略感知不可辨的小差异,避免过度优化。这个"tolerance margin"思想可用于任何 perceptual metric 驱动的 RL(如图像编辑中的 SSIM reward)
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三个关键设计选择均有 WHY 解释,速查卡片可借鉴具体 |
+> | 可信赖 | pass | 数字覆盖率 ~95%,全部与原文交叉验证一致 |
+> | 可区分 | pass | 8 处 [论文原文] + 3 处 [agent 解读] 标注,覆盖率 ~85% |
+> | 可定位 | pass | KB 背景从 5 个维度定位,创新判断有对比基准 |
+> | 不污染 | pass | frontmatter 语义正确,反向更新为追加操作 |
+> 
+> Issues: 4 (high: 0, medium: 0, low: 4)
+> 详见 `_review/CosyEdit2-review.yml`
