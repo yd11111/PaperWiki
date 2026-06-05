@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Dict-TTS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Gumbel-Softmax]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
+- [ingest/deep] [[Dict-TTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation key_papers+中文G2P段, Gumbel-Softmax key_papers+多音字消歧段)
+- [lint/local] Dict-TTS — 通过
+- [review/auto] [[Dict-TTS]] — pass-with-fixes, 1 high fixed (JSUT 数据归因) / 1 medium / 1 low
 - [kb/search] [[UniVocal]] — 命中 6 页(取 Top 6): [[CosyVoice2]]✓, [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[SingingVoiceSynthesis]](pending-review), [[F0Modeling]](pending-review)
 - [ingest/deep] [[UniVocal]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice2 baseline段, F0Modeling key_papers+正文段, SingingVoiceSynthesis key_papers+正文段)
 - [lint/local] UniVocal — 通过
