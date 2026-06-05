@@ -1,0 +1,52 @@
+review:
+  paper: "PFluxTTS"
+  reviewer: auto
+  date: 2026-06-05
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节包含充分的因果解释(WHY),每个设计选择都回答了为什么;向量场融合、prompt conditioning 不对称设计、alpha 调度都有清晰的 WHY 解释"
+  可信赖:
+    score: 9
+    reason: "关键数字全部有 [§X.X]/[Table N]/[Fig N] 标注,覆盖率 >90%;指标名称正确;发现速查卡片中 MOS 与 VoxLingua-dev 归组有误(实为 mTEDx),已修正"
+  可区分:
+    score: 9
+    reason: "[论文原文] 和 [agent 解读] 标注清晰,覆盖率高;agent 推断(如 filler-token 机制导致 AF 跳字、ECAPA-TDNN 锚点作用)与论文原文严格区分"
+  可定位:
+    score: 9
+    reason: "KB 背景从三个维度(CFM 路线分化、跨语言方案对比、vocoder 演进)定位,与 MegaTTS-3/Cross-Lingual F5-TTS/PeriodWave 对比明确;创新判断有具体基准"
+  不污染:
+    score: 9
+    reason: "未新建实体页;现有概念引用合理;反向更新仅追加 key_papers,无实质修改风险"
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "速查卡片 > 指标"
+    detail: "MOS 4.11 来自 mTEDx [Table 1] 而非 VoxLingua-dev,但原文将其与 VoxLingua-dev 指标归组显示"
+    suggestion: "将 MOS 4.11 移至 mTEDx 分组,或明确标注各指标的数据集来源"
+    status: fixed
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter > venue"
+    detail: "venue 标注为 IEEE ICASSP 2026,但论文本身仅有 '© 2026 IEEE' 版权声明,未明确标注会议名称"
+    suggestion: "改为 'IEEE 2026' 或保留并标注 [推断]"
+    status: accepted
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: "models 字段仅列 PeriodWave,未列入有笔记的对比 baseline (Fish-Speech, VITS 等)"
+    suggestion: "追加 Fish-Speech 作为对比 baseline"
+    status: fixed
+
+conclusion: pass-with-fixes
+summary: "笔记整体质量高,机制解释充分,来源标注覆盖率 >90%,谱系定位精准。1 个 medium issue (速查卡片数据集归组错误) 已修正。2 个 low issues 中 1 个已修正。无 high issue。"
+
+learning_signals: []

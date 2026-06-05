@@ -9,7 +9,7 @@ year: 2026
 venue: "IEEE ICASSP 2026"
 tags: [flow-matching, TTS, cross-lingual, voice-cloning, dual-decoder, vocoder, super-resolution, zero-shot]
 concepts: ["[[ConditionalFlowMatching]]", "[[Classifier-FreeGuidance]]", "[[DurationPredictor]]", "[[NeuralVocoder]]", "[[VoiceCloningTaxonomy]]", "[[SpeakerEmbedding]]"]
-models: ["[[论文笔记/PeriodWave|PeriodWave]]"]
+models: ["[[论文笔记/PeriodWave|PeriodWave]]", "[[论文笔记/Fish-Speech|Fish-Speech]]"]
 tasks: ["[[Cross-lingualVoiceCloning]]", "[[Zero-shotSpeechSynthesis]]"]
 datasets: []
 kb_context_sources: 6
@@ -37,7 +37,7 @@ updated: 2026-06-05
 > [!summary] 速查
 > - **一句话**: 推理时融合 duration-guided 和 alignment-free 两个独立 flow-matching 解码器的向量场,兼得对齐稳定性和自然度,配合 FLUX 架构的 sequence prompt embedding 实现鲁棒跨语言克隆
 > - **路线**: phonemes → DG TextEncoder + AF TextEncoder → DG FLUX decoder + AF DiT decoder → vector-field fusion (ODE solver) → mel → PeriodWave+SR vocoder → 48kHz waveform
-> - **指标**: MOS 4.11 / WER 6.9% / SPK-SIM 0.68 (VoxLingua-dev, 33 languages cross-lingual); SMOS 3.51 vs ChatterBox 3.63 / ElevenLabs 3.19 (mTEDx) [Table 1, Table 2]
+> - **指标**: Nat. MOS 4.11 / SMOS 3.51 (mTEDx cross-lingual) [Table 1]; WER 6.9% / SPK-SIM 0.68 (VoxLingua-dev, 33 languages) [Table 2]
 > - **可借鉴**: 推理时向量场融合策略 -- 两个独立训练的模型通过分时段的 alpha 调度在 ODE 求解中混合,无需联合训练或蒸馏,实用性极强
 > - **局限**: 仅在 English 作为目标语言的方向上评估; RTF 0.56 不算快(两个完整解码器 + 30 ODE steps); 50k 小时训练数据远少于 ChatterBox 等 baseline
 
@@ -133,3 +133,19 @@ FLUX 架构用于 speech prompt conditioning 的效果显著 (CMOS +1.19),但论
 2. **DG 用 sequence prompt + AF 用 fixed embedding**: 根据解码器架构特性选择不同的 prompt conditioning 粒度,而非统一使用同一策略。DG 有显式对齐因此能承受更复杂的 conditioning
 3. **Prompt-aware vocoder conditioning**: 在 vocoder 中加入 speaker prompt embedding 补偿低帧率 mel 丢失的高频信息,简单但有效
 4. **Logits softcapping (from Gemma)**: 在 flow-matching 训练中使用 logits softcapping (threshold 70) 稳定训练,这个从 LLM 借来的技巧可能适用于其他 FM-TTS 训练
+
+## 审阅
+
+> [!review] 审阅 (2026-06-05, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,设计选择有 WHY 解释 |
+> | 可信赖 | pass | 数字来源标注覆盖率 >90%,指标名正确 |
+> | 可区分 | pass | 论文原文/agent 解读标注清晰 |
+> | 可定位 | pass | 从 CFM 路线/跨语言方案/vocoder 三维度定位 |
+> | 不污染 | pass | 未新建实体页,引用合理 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/PFluxTTS-review.yml`
