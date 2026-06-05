@@ -46,6 +46,7 @@ Emilia 是首个大规模、多语言、多样化的开源 in-the-wild 语音生
 - [[论文笔记/MaskGCT|MaskGCT]]: 使用 Emilia 100K 小时 (50K 英文 + 50K 中文) 训练全部模型组件
 - [[论文笔记/Seed-VC|Seed-VC]]: 使用 Emilia 训练 voice conversion 模型
 - [[论文笔记/NVSpeech|NVSpeech]]: 使用 Emilia 子集作为副语言感知 ASR 自动标注的数据来源之一
+- [[论文笔记/X-Voice|X-Voice]]: 使用 Emilia 中英数据作为 420K 小时 30 语言训练语料的重要组成部分; F5-TTS-v1-Base checkpoint (在 Emilia 上预训练) 作为 DiT 初始化
 
 ## 来源
 

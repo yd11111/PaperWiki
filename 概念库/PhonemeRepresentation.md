@@ -4,7 +4,7 @@ title: "Phoneme Representation"
 aliases: [音素表示, G2P, Grapheme-to-Phoneme, 音素, 语音学表示, IPA]
 category: "representation"
 tags: [TTS, text-analysis, phoneme, frontend, G2P, linguistics]
-key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]", "[[论文笔记/UniSonate|UniSonate]]", "[[论文笔记/Tibetan-TTS|Tibetan-TTS]]"]
+key_papers: ["[[论文笔记/MetaLearningTTS7000Languages|Meta Learning TTS 7000 Languages]]", "[[论文笔记/SpeechWeave|SpeechWeave]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/ParsVoice|ParsVoice]]", "[[论文笔记/SonoEdit|SonoEdit]]", "[[论文笔记/CTC-TTS|CTC-TTS]]", "[[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]", "[[论文笔记/UniSonate|UniSonate]]", "[[论文笔记/Tibetan-TTS|Tibetan-TTS]]", "[[论文笔记/X-Voice|X-Voice]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[Text-to-SpeechPipeline]]", "[[Attention-basedTTS]]", "[[Non-autoregressiveTTS]]"]
 status: pending-review
@@ -89,6 +89,7 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - **IPA (International Phonetic Alphabet)**: 国际音标,可统一表示所有语言的发音
 - **Byte representation**: 直接使用 UTF-8 bytes,无需任何语言学知识
 - **Phoneme embedding mapping**: 将不同语言的音素嵌入映射到共享空间
+- [[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026): 30 语言 IPA 统一表示的大规模实践。中文使用 Pinyin (高度标准化音节结构),其他语言使用 eSpeak-NG,泰/日/韩使用专用 G2P 工具 (PyThaiNLP/PyOpenJTalk/g2pK)。两个设计要点: (1) 显式保留 stress markers 区分语义 (如希腊语同形词仅靠重音位置区分含义); (2) 将 articulatory units 与 suprasegmental modifiers (长度/送气/声调) 分解但统一 embedding (引用 Zhang et al. 2021 的 NAR TTS 实验证明分离 embedding 无显著差异)。420K 小时 30 语言训练验证了此表示的可扩展性
 
 ## 关键论文
 

@@ -50,3 +50,4 @@ SEED-TTS-Eval 是由 ByteDance 随 [[论文笔记/Seed-TTS|Seed-TTS]] 论文发�
 - [[论文笔记/DMOSpeech2|DMOSpeech 2]] (2025/AAAI 2026): WER 1.752% (test-en), CER 1.527% (test-zh), SIM 0.698 (test-en), SIM 0.760 (test-zh), RTF 0.032; 0.3B params, GRPO 优化 duration predictor, 4-step DMD-distilled flow matching
 - [[论文笔记/F5R-TTS|F5R-TTS]] (Tencent, 2025): WER 1.48% (test-cn general), WER 10.63% (test-cn hard), SIM 0.730 (test-cn general), SIM 0.711 (test-cn hard); 首次在 NAR flow-matching TTS 上集成 GRPO,通过 output probabilization 使 RL 兼容 CFM 架构
 - [[论文笔记/MOSS-TTS|MOSS-TTS]] (OpenMOSS, 2026): CER 1.44% (test-zh), WER 1.93% (test-en), SIM 79.62% (test-zh), SIM 73.28% (test-en); MOSS-TTS-Local-Transformer 1.7B Continuation 模式,纯 AR 离散 token 路线,ZH SIM 为开源模型最高
+- [[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026): X-Voice_s2 WER 1.28% (test-zh), WER 1.30% (test-en), SIM 0.76 (test-zh), SIM 0.65 (test-en), RTF 0.073; 0.4B NAR flow-matching,30 语言 transcript-free 零样本克隆

@@ -111,3 +111,7 @@ Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariw
 ## Adaptive Projection Guidance (APG) 替代方案
 
 [[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 在 flow matching TTS 中发现标准 CFG 在高 guidance scale (α=4.0) 下产生 audible artifacts (oversaturation)。引入 APG (Sadat et al., 2024,源自图像生成),将 guidance residual 几何分解为平行于 conditional prediction 的分量和正交分量,选择性衰减平行分量 (η=0.5) 并保留正交分量。效果: CER/SIM 不变,UTMOS 3.06→3.16, DNSMOS 3.38→3.40 [Table 4]。同时发现计算 unconditional velocity 时必须 drop 显式构造的 noisy prompt latent 以避免信息泄漏。
+
+## Decoupled CFG + Asymmetric Warmup (多语言 NAR TTS)
+
+[[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026) 在 30 语言 flow-matching TTS 中同时实现了 DCFG 解耦 + 时间调度 + 非对称预热三重优化。将 guided vector field 分解为 acoustic guidance (wA) 和 linguistic guidance (wL): vt,DCFG = vt(ψt; A,T,L) + wA(t)·[条件-无条件acoustic] + wL(t)·[条件-无条件linguistic]。关键发现: 文本引导在 ODE 积分初期 (高熵噪声) 缺乏方向性,强引导导致 "integration shock" 和轨迹振荡; 声学引导则需要从一开始就锚定音色轮廓。因此提出 **Asymmetric Warmup**: linguistic guidance 前 twarm 步从 0 线性升到 wL_start,acoustic guidance 全程保持 wA_start; 两者在 tdecay 后按 (1-t)^2 衰减。Ablation: Decoupled+A-Warmup 在 30 语言上 WER 8.20 / UTMOS 3.284 vs Base w=2.5 WER 8.85 / UTMOS 3.207,同时保持 SIM 0.685 (vs 0.693) [X-Voice Table 9]。

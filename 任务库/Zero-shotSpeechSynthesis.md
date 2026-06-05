@@ -68,6 +68,10 @@ updated: 2026-06-01
 | PilotTTS | SS test-en | 0.815 | SEED-TTS-Eval | PilotTTS Table 1 |
 | PilotTTS | WER test-en | 1.50% | SEED-TTS-Eval | PilotTTS Table 1 |
 
+### 多语言零样本 (30 语言)
+
+- [[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026): 0.4B NAR CFM 系统,30 语言 transcript-free 零样本克隆。Seed-TTS test-zh WER 1.28% / SIM 0.76, test-en WER 1.30% / SIM 0.65, RTF 0.073 [Table 3]
+
 ## 开放问题
 
 - 音色可控性: 能否通过文本指令编辑音色而非仅克隆
