@@ -1,0 +1,30 @@
+kb_review:
+  target_note: "论文笔记/EditContentPreserveAcoustics.md"
+  reviewer: auto
+  date: 2026-06-05
+
+change_plan:
+  - target: "概念库/DifferentiableRewardOptimization.md"
+    action: append
+    detail: "在演进线末尾追加 self-consistency reward GRPO for speech editing。key_papers 已达上限,仅追加正文。"
+    risk: low
+    reason: "纯追加到演进线末尾,不修改已有内容。追加内容为已验证事实 (论文实验结果)。"
+
+  - target: "概念库/SemanticvsAcousticTokens.md"
+    action: append
+    detail: "在 '在 Speech LM 中的角色' 段末尾或相关位置追加 semantic tokens 在 editing 场景的优势证据。key_papers 已达上限,仅追加正文。"
+    risk: low
+    reason: "纯追加事实性观察,不修改已有定义或关系。"
+
+  skipped:
+    - target: "概念库/ConditionalFlowMatching.md"
+      reason: "本文未对 CFM 做贡献,仅作为基础设施复用。"
+    - target: "概念库/CodecLanguageModel.md"
+      reason: "本文论证反对在 acoustic codec token 上做 editing,与 CodecLM 页面主题关联弱。"
+    - target: "概念库/Non-autoregressiveTTS.md"
+      reason: "FluentSpeech 仅作为 baseline,本文不属于 NAR TTS 研究。"
+    - target: "概念库/LLM-basedTTS.md"
+      reason: "本文核心是 speech editing 而非 TTS,与 LLM-based TTS 主题关联弱。"
+
+conclusion: pass
+issues: []
