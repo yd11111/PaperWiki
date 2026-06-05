@@ -162,7 +162,7 @@ Talker 直接在 RVQ tokens 上操作 [§2.4]:
 | Custom-voice TTS WER best | 10/29 语言最优 | Gemini-2.5 Pro / GPT-Audio / MiniMax / ElevenLabs | TTS multilingual | [Table 12] |
 
 **关键发现**:
-1. **文本能力无退化**: Qwen3.5-Omni-Plus 在 text→text 任务上与 Qwen3.5-Plus-Instruct 持平 (MMLU-Pro 85.9 vs 79.9, IFEval 89.7 vs 89.7) [Table 4] [论文原文]。OPD + interaction-aligned RL 对 instruction-following 有正向贡献 [论文原文]
+1. **文本能力无退化甚至更优**: 论文声称 Qwen3.5-Omni-Plus 在 text→text 任务上与 Qwen3.5-Plus-Instruct "on par" [论文原文],但部分指标实际更强 (MMLU-Pro 85.9 vs 79.9, SuperGPQA 66.4 vs 54.9),instruction-following 持平 (IFEval 89.7 vs 89.7) [Table 4]。OPD + interaction-aligned RL 对 instruction-following 有正向贡献 [论文原文]
 2. **视觉能力轻微提升**: 在视频理解任务 (VideoMME, MLVU, MVBench) 上超过 text-only Qwen3.5-Plus-Instruct [Table 6],论文归因于联合 video-audio 训练使动态视觉感知更强 [论文原文]
 3. **语音生成 RLHF 效果**: RLHF 优化后 SEED-TTS test-en WER 从未报告的 base 值降至 1.26 [Table 8] [论文原文]
 4. **跨语言 TTS 突破**: zh-to-ko 错误率从 CosyVoice 3 的 14.4 降至 4.03 (~72% relative reduction) [Table 11] [论文原文]
@@ -197,3 +197,19 @@ Qwen3.5-Omni 是 Qwen omni 系列的工程集大成之作。从技术角度看,�
 ---
 
 检索命中: [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓ | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Full-duplexSpokenDialogue]](pending-review), [[Speech-TextAlignment]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,设计选择回答了 WHY |
+> | 可信赖 | pass | 数字标注覆盖率高;已修正'持平'表述 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 覆盖率 >90% |
+> | 可定位 | pass | KB 背景谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 概念引用准确,无不必要新建页 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Qwen3.5-Omni-review.yml`

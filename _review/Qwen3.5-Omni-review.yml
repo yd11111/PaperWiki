@@ -1,0 +1,57 @@
+review:
+  target: "论文笔记/Qwen3.5-Omni.md"
+  date: "2026-06-06"
+  mode: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    status: pass
+    reason: "方法节包含充分的因果解释(ARIA 的 WHY、时间戳替代 TMRoPE 的 WHY、OPD 的 WHY);每个设计选择都回答了'为什么选这个';速查卡片可借鉴字段具体可迁移"
+  可信赖:
+    score: 8
+    status: pass
+    reason: "数字型 claim 几乎全部有 [Table N] 标注;指标名使用正确;但关键发现1中'持平'与括号内数字矛盾(85.9 vs 79.9 不是持平)"
+  可区分:
+    score: 9
+    status: pass
+    reason: "[论文原文] 和 [agent 解读] 标注覆盖率高(>90%);推断性分析均有明确标记;无断言性句子缺少限定词"
+  可定位:
+    score: 9
+    status: pass
+    reason: "KB 背景谱系定位具体(Moshi→VITA/MiniCPM-o 演进线);创新判断有明确对比基准(MFA、dual-channel、delay pattern);frontmatter 完整"
+  不污染:
+    score: 9
+    status: pass
+    reason: "概念引用准确;未创建不必要的新实体页;反向更新内容均为事实追加"
+
+issues:
+  - id: 1
+    severity: medium
+    type: overclaim
+    location: "关键发现 第1点"
+    detail: "笔记写'Qwen3.5-Omni-Plus 在 text→text 任务上与 Qwen3.5-Plus-Instruct 持平 (MMLU-Pro 85.9 vs 79.9)',但 85.9 vs 79.9 是 Omni-Plus 显著优于 Plus-Instruct,不是'持平'。论文原文虽用'on par',但括号数字与此矛盾。"
+    suggestion: "改为'持平或更优',或标注'论文声称 on par,但部分指标如 MMLU-Pro (85.9 vs 79.9) 显示 Omni-Plus 实际更强'"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "models 仅列 CosyVoice2/3,未包含论文中最主要的对比系统 Gemini-3.1 Pro"
+    suggestion: "考虑是否在 models 中加入 Gemini-3.1 Pro,或在 tasks/datasets 中体现该对比关系"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "整体架构 - 模型规模"
+    detail: "论文标题含'scales to hundreds of billions of parameters',但笔记未明确记录 Plus 和 Flash 的具体参数量(论文本身也未公布具体数字,仅称'hundreds of billions')"
+    suggestion: "在整体架构节补充'Plus 参数规模达数百亿(具体数字未公布)[论文原文]',提升完整性"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []
