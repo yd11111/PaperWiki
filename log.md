@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[KineticOptimalTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review)
+- [ingest/deep] [[KineticOptimalTTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (CFM 演进, MaskedGen key_papers+演进, SEED-TTS-Eval 结果, CV3-Eval 使用+结果, Emilia 使用记录)
+- [lint/local] KineticOptimalTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 314 — 建议抽空审核
 - [kb/search] [[X-Voice]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[PhonemeRepresentation]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
 - [ingest/deep] [[X-Voice]] — 精读, kb_sources=6, 新建 0, 追加 8 (CFM 演进, CFG DCFG+A-Warmup, PhonemeRepresentation key_papers+IPA, NAR 演进, Cross-lingualVC key_models+代表模型, ZeroShotTTS 正文, Emilia 使用记录, SEED-TTS-Eval 结果)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到演进节正文
