@@ -131,6 +131,7 @@ LLM-based TTS (如 VALL-E 系列) 是 SpeechLM 在 TTS 任务上的特例:
 - Moshi (Defossez et al., 2024): 全双工实时对话, Mimi tokenizer
 - SpeechGPT (Zhang et al., 2023): 端到端 speech-text instruction-following
 - AudioPaLM (Rubenstein et al., 2023): PaLM-2 为基础的大规模 SpeechLM
+- [[论文笔记/WavSLM|WavSLM]] (Della Libera et al., 2026): 首个 speech-only 单码本 SLM,将 WavLM 层级拆分为 tokenizer + LM backbone,305M 参数竞争 1.3-8B text-pretrained 系统,证明好的表征可补偿 text pretraining 的缺失
 
 ## 相关概念
 

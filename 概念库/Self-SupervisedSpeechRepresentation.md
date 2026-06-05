@@ -98,3 +98,7 @@ SSL 语音模型在 TTS 系统中主要作为 semantic tokenizer:
 ## 演进
 
 CPC (contrastive, 2018) → wav2vec (contrastive on waveform, 2019) → vq-wav2vec (VQ + BERT, 两阶段, 2020) → **wav2vec 2.0** (contrastive + Gumbel-Softmax PQ, 端到端, 2020) → **HuBERT** (masked prediction + k-means, 迭代, 2021) → **w2v-BERT** (contrastive + MLM, 端到端, 2021) → **WavLM** (masked denoising, full-stack, 2022) → **BEATs** (iterative acoustic tokenizer + discrete label prediction, 通用音频 SSL, 2022) → Whisper encoder (弱监督替代自监督, 2022) → **w2v-BERT 2.0** (contrastive + MLM, 580M params, 4.5M hours, 143 languages, Seamless, 2023) → **XEUS** (masked prediction + denoising + dereverberation, E-Branchformer, 1M hours, 4057 languages, ML-SUPERB SOTA, 2024) → 监督式 tokenizer (CosyVoice S3, 2024)
+
+### SSL 模型分层复用: WavSLM [2026]
+
+[[论文笔记/WavSLM|WavSLM]] (Della Libera et al., 2026) 提出了一种新颖的 SSL 模型复用方式: 将 WavLM-large 按层级拆分 — 下层 (1-6) 作为 tokenizer encoder (经 FocalCodec-Stream 量化为单码本 token),上层 (7-24) 施加 causal attention 后直接作为 SLM backbone。这种"一鱼两吃"策略避免了 tokenizer 和 LM 之间的 representation gap,305M 参数在 SALMon + ZeroSpeech 上竞争 1.3-8B text-pretrained 系统 [WavSLM Table 1]。

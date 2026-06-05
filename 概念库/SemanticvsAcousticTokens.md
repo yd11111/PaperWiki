@@ -140,3 +140,7 @@ CosyVoice (Du et al., 2024) 开创了第四类路线: **监督式 semantic token
 ## 演进
 
 Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → **监督式 semantic tokens (CosyVoice, 2024)** → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025)
+
+### WavLM 中层单码本路线 [WavSLM, 2026]
+
+[[论文笔记/WavSLM|WavSLM]] (Della Libera et al., 2026) 提供了一种新的 mixed token 路线: 用 WavLM 第 6 层 (中层) 特征经 FocalCodec-Stream 量化为单码本 discrete tokens。论文实验证明这种 mid-level SSL feature 的单码本 token 在 SALMon 声学一致性 (Speaker 88.5, Gender 90.5) 和 ZeroSpeech 语义任务上均表现竞争性,支持"中层 SSL 表征天然兼顾语义和声学"的假设 [WavSLM Table 1]。

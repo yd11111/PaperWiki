@@ -148,6 +148,10 @@ SNAC (Siuzdak et al., 2024) 使用此策略,减少总 token 数同时保留多�
 
 VQ-VAE 单码本 (2017) → RVQ 多码本 (SoundStream, 2021, M=12) → EnCodec 可变码本数 (2022, M=2-32) → DAC 深层码本 (2023, M=9) → 单码本回归 (BigCodec/WavTokenizer, 2024) → MSRVQ 折中 (SNAC, 2024) → 极低帧率单码本 (Mimi 12.5Hz, LFSC 21.5Hz, 2024-2025)
 
+### 单码本在 SLM 中的验证 [WavSLM, 2026]
+
+[[论文笔记/WavSLM|WavSLM]] (Della Libera et al., 2026) 将单码本路线从 codec 重建扩展到 SLM 下游任务。使用 FocalCodec-Stream (基于 WavLM-6,单码本 2k/4k/65k,50 Hz) + WavLM 7-24 层作为因果 LM,在 SALMon + ZeroSpeech 上 Avg 69.5 与 LLaMA-Mimi 8B (4 码本) 持平,同时推理速度快 5x (RTF 5.8 vs 1.1) [WavSLM Table 1, Table 2]。这是单码本方案在 SLM 评估中的最强结果。
+
 ---
 
 > [!info] 来源
