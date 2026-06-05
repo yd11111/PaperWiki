@@ -1,0 +1,64 @@
+paper: "MINT-Bench"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    notes: "方法节清楚解释了三阶段 pipeline 和三层评估协议的 WHY,关键设计选择均有因果解释。Taxonomy 的四轴结构和节点概念解释清晰。但作为 benchmark 论文,本文无模型训练,主要价值在评估框架设计,可复述性主要体现在框架理解上。"
+
+  trustworthy:
+    score: 8
+    verdict: pass
+    notes: "关键数字均标注出处 (Table 3/4/5, Eq. 1-5)。PE Score/IF Score/TDS 指标的定义和计算准确。实验表格数据与原文一致。有一处小问题: 速查卡片中大分割说 ~1000 对,实际 Large split 是 890 对 [Table 7/8]。"
+
+  distinguishable:
+    score: 8
+    verdict: pass
+    notes: "方法节中的因果解释标注了 [论文原文] 和 [agent 解读],覆盖率良好。局限性明确区分了论文自述和 agent 解读。点评节的观点有证据支撑。"
+
+  positionable:
+    score: 9
+    verdict: pass
+    notes: "KB 背景节定位清晰,与 InstructTTSEval/NV-Bench 的区别明确。谱系定位从 VoxInstruct → CosyVoice 2 → OV-InstructTTS 的演进线到 benchmark 需求的推导合理。创新判断有对比基准。"
+
+  non_polluting:
+    score: 7
+    verdict: pass-with-fixes
+    notes: "frontmatter models 字段列了 CosyVoice/CosyVoice2,但这些是被评估的系统而非本文提出或主要对比的 baseline。本文作为 benchmark 论文,models 字段应列被评估的代表系统或留空。此外 datasets 字段为空,但 MINT-Bench 本身就是一个数据集/benchmark,可考虑是否需要新建实体页。"
+
+issues:
+  - severity: medium
+    type: template-compliance
+    principle: trustworthy
+    location: "速查卡片 指标字段"
+    detail: "速查说'大分割 ~1000 对/语言',实际 Large split 总数为 890 对/语言 [Table 7/8 合计]"
+    suggestion: "改为'大分割 890 对/语言'"
+
+  - severity: medium
+    type: bad-linking
+    principle: non_polluting
+    location: "frontmatter models 字段"
+    detail: "models 列了 CosyVoice/CosyVoice2,但它们不是本文提出或主要对比的模型。本文是 benchmark 论文,CosyVoice 仅在 Related Work 中作为 instruction-following TTS 代表被提及,并非实验中的核心 baseline"
+    suggestion: "models 改为空列表,或仅保留在实验中重点分析的系统 (如无模型库中的对应页则留空)"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "方法节 数据构建 LLM"
+    detail: "提到使用 Gemini 2.5 Pro 构建数据,但未标注原文节号"
+    suggestion: "补充 [§4.1] 标注"
+
+  - severity: low
+    type: template-compliance
+    principle: reproducible
+    location: "Emotion 属性描述"
+    detail: "速查卡片中 Emotion 说'7+1 类',原文 Table 1 列出 7 standard classes 加上 thoughtful (出现在 Table 2 示例中),但实际 Table 6 列出 8 类 (含 thoughtful)。表述略有歧义"
+    suggestion: "改为'8 类'或'7 标准类 + thoughtful',与 Table 6 保持一致"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "benchmark 论文的 models 字段语义不够明确——benchmark 评估了多个系统,但这些系统不是本文'提出'或'对比'的,而是被'评估'的对象。现有规则 (models 列本文模型+对比 baseline) 对 benchmark 论文适用性有限"
+  checklist_upgrade_suggestion: "考虑为 benchmark 论文增加 frontmatter 语义指导: models 仅列本文提出的模型,被评估系统可放在正文中"

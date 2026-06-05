@@ -9,7 +9,7 @@ year: 2026
 venue: "Preprint"
 tags: [TTS, benchmark, evaluation, instruction-following, multilingual, controllability, LALM-as-judge]
 concepts: ["[[Instruction-GuidedSpeechSynthesis]]", "[[TTSEvaluation]]", "[[NaturalLanguageDescriptionforTTS]]"]
-models: ["[[CosyVoice]]", "[[CosyVoice2]]"]
+models: []
 tasks: ["[[InstructedSpeechGeneration]]"]
 datasets: []
 kb_context_sources: 6
@@ -35,7 +35,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 首个结构化多语言 instruction-following TTS benchmark,通过分层 taxonomy + 三阶段数据构建 + 层级混合评估协议,在 10 语言上系统评估 TTS 指令遵循能力
 > - **路线**: 4 轴 Taxonomy (难度/控制域/控制规格/细粒度模式) → 3 阶段数据构建 (节点规范 → 结构化标签计划 → 指令-文本对) → 3 层评估 (WER 内容一致性 → LALM 指令遵循 → 条件感知质量+音色多样性)
-> - **指标**: Gemini 2.5-Flash EN Overall PE 3.66 最高 [Table 3]; Qwen3-TTS ZH PE 3.12 超越所有商用系统 [Table 3]; LALM-human agreement Spearman 67-77 (接近人类间 69-79) [Table 5]; 覆盖 10 语言,大分割 ~1000 对/语言,迷你分割 ~300 对/语言
+> - **指标**: Gemini 2.5-Flash EN Overall PE 3.66 最高 [Table 3]; Qwen3-TTS ZH PE 3.12 超越所有商用系统 [Table 3]; LALM-human agreement Spearman 67-77 (接近人类间 69-79) [Table 5]; 覆盖 10 语言,大分割 890 对/语言,迷你分割 274 对/语言
 > - **可借鉴**: (1) 三阶段数据构建 pipeline 防止属性泄露和语义漂移; (2) 内容一致性系数 c 作为后续评分的缩放因子而非过滤门; (3) 条件感知质量评估仅对强指令遵循样本 (s=3) 启用,避免低质量样本干扰排名
 > - **局限**: 覆盖范围有限 (不含长文本/对话/code-switching); 多语言不平衡 (中英大分割 vs 其他语言迷你分割); 依赖 Gemini 作为评估 LALM (可能存在偏差和版本依赖)
 
@@ -65,7 +65,7 @@ MINT-Bench 由三个紧耦合组件构成 [§3.1, Fig 1]:
 
 Taxonomy 的核心是 10 个原子声学属性 (Table 1):
 - **Timbre (4)**: Age (3 类), Gender (2 类), Pitch (5 级), Texture (人工标注)
-- **Style (6)**: Speed (5 级), Volume (5 级), Emotion (7+1 类), Accent (语言相关), Personality (10 类), Tone (17 类)
+- **Style (6)**: Speed (5 级), Volume (5 级), Emotion (8 类), Accent (语言相关), Personality (10 类), Tone (17 类)
 
 这 10 个属性沿四个轴组织 [论文原文]:
 - **Axis 1 - 难度**: Easy (原子/简单组合) → Hard (复杂组合/动态/分层/冲突/人物/场景) → Special (extra-vocal)
@@ -89,7 +89,7 @@ Taxonomy 的核心是 10 个原子声学属性 (Table 1):
 
 **Stage 3 - 指令-文本对构建**: 将结构化计划实现为自然语言指令 + 合成文本对。合成文本在约束下生成,最小化控制目标的直接词汇泄露 [§3.3]。
 
-**数据构建 LLM**: 使用 Gemini 2.5 Pro [§4.1]。[agent 解读] 这意味着 benchmark 的质量上界受限于 LLM 的指令理解能力,但三阶段 pipeline 通过中间约束层缓解了这个问题。
+**数据构建 LLM**: 使用 Gemini 2.5 Pro [§4.1]。**评估 LALM**: 使用 Gemini 3.1 Pro Preview [§4.1]。[agent 解读] 这意味着 benchmark 的质量上界受限于 LLM 的指令理解能力,但三阶段 pipeline 通过中间约束层缓解了这个问题。
 
 #### 3. 层级混合评估协议 [§3.4]
 
@@ -188,3 +188,19 @@ MINT-Bench 的核心贡献在于**方法论层面**而非工具层面: 它将 in
 3. **条件感知质量评估**: 仅对强指令遵循样本 (s=3) 评估感知奖励 (自然度+表达力),避免低质量样本干扰排名上端的分辨力。这种"先通过门槛再评质量"的设计可用于任何分层评估场景。
 
 4. **TDS (音色多样性) 指标**: 通过 APS × 通过率的组合衡量一对多生成能力,作为独立于 IF/PE 的条件诊断指标。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 三阶段 pipeline 和三层评估协议的 WHY 解释清晰 |
+> | 可信赖 | pass | 关键数字均有出处标注;速查卡片数字已修正 |
+> | 可区分 | pass | 因果解释来源标注覆盖率良好,[论文原文]/[agent 解读] 区分清楚 |
+> | 可定位 | pass | KB 背景定位清晰,与 InstructTTSEval/NV-Bench 区别明确 |
+> | 不污染 | pass-with-fixes | models 字段已清空 (benchmark 论文不提出模型) |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/MINT-Bench-review.yml`
