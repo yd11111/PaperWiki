@@ -64,3 +64,4 @@ updated: 2026-06-01
 - 口音迁移 vs 口音消除的权衡
 - 语调模式在跨语言时如何自然过渡
 - [[论文笔记/AccentVector|Accent Vector (2026)]] 提出无口音数据的口音控制: 通过 LoRA 微调 XTTS-v2 + task vector 算术实现细粒度口音强度控制和混合口音合成,但声调语言(普通话)效果受限
+- [[论文笔记/Tibetan-TTS|Tibetan-TTS (He et al., 2026)]]: 验证了 AR LM + Flow Matching 骨干模型从中英预训练跨语言迁移到极低资源藏语(卫藏方言)的可行性,MOS 4.28-4.35,但仅覆盖单一方言且缺少客观指标
