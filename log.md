@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ImmersiveTTS]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[模型库/WavLM|WavLM]](pending-review)
+- [ingest/deep] [[ImmersiveTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (WavLM key_papers, NaturalLanguageDescriptionforTTS 环境感知段)
+- [skip/update] [[ConditionalFlowMatching]], [[Classifier-FreeGuidance]], [[Diffusion-basedTTS]], [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(>12),跳过追加
+- [review/auto] [[ImmersiveTTS]] — pass-with-fixes, 0 high / 1 medium / 2 low
+- [lint/local] ImmersiveTTS — 通过
 - [kb/search] [[HoliTok]] — 命中 6 页(取 Top 6): [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 参考: [[VariationalAutoencoderforTTS]](pending-review), [[Next-TokenDiffusion]](pending-review), [[CodecTrainingObjectives]](pending-review)
 - [ingest/deep] [[HoliTok]] — 精读, kb_sources=6, 新建 0, 追加 2 (Next-TokenDiffusion key_papers+演进, CodecTrainingObjectives key_papers+progressive training), prose追加 1 (VariationalAutoencoderforTTS)
 - [skip/update] [[SpeechTokenizer]] — entity review 为 revise,需先重构,跳过反向更新
