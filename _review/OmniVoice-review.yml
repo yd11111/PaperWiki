@@ -1,72 +1,120 @@
-paper: OmniVoice
-reviewer: auto
-date: 2026-06-03
-conclusion: pass-with-fixes
-total_issues: 3
-high: 0
-medium: 1
-low: 2
+paper: "OmniVoice"
+file: "论文笔记/OmniVoice.md"
+reviewer: agent (independent)
+date: "2026-06-05"
+conclusion: pass
 
+# 第一层: 原则判断
 principles:
-  可复述:
-    verdict: pass
-    notes: >
-      方法节对两个核心创新 (full-codebook masking, LLM init) 都包含 WHY 解释 +
-      消融验证 + 与已有方案 (per-layer masking, random init) 的对比。
-      速查卡片"可借鉴"列出 4 个具体可迁移 trick。
-  可信赖:
-    verdict: pass
-    notes: >
-      数字 claim 标注覆盖率 > 90%。指标名使用正确 (WER/CER/SIM-o/UTMOS/CMOS/SMOS/RTF)。
-      速查卡片指标字段含具体数字 + 数据集名 + 表格出处。
-      对 FLEURS CER < ground truth 的结果有审慎解读 [agent 解读]。
-  可区分:
-    verdict: pass
-    notes: >
-      方法节全程使用 [论文原文] / [agent 解读] 标注,覆盖率 > 80%。
-      agent 解读的推断 (如 causal→bidirectional 迁移的可能原因、FLEURS CER 的解释)
-      都有明确的推断标记,不与论文原文 claim 混淆。
-  可定位:
-    verdict: pass-with-fixes
-    notes: >
-      KB 背景有具体谱系定位 (MaskGCT 对比 + LLM-based TTS 对比 + SOTA 数字对比)。
-      frontmatter models 字段仅列 SoundStorm 和 CosyVoice 3,缺少 MaskGCT/F5-TTS/ZipVoice
-      等直接对比的论文笔记链接 (存在于 论文笔记/ 但不在 模型库/)。属于 medium issue。
-  不污染:
-    verdict: pass
-    notes: >
-      无新概念页创建需求。反向更新内容为追加 (key_papers 列表 + 末尾一行说明),
-      不涉及实质性修改,不会改变已有实体页 status。
+  reproducible:
+    score: 9
+    judgment: >
+      方法节不仅覆盖 WHAT (full-codebook masking, LLM init, multilingual scaling)
+      还深入 WHY: 每个设计选择都有因果解释 + 消融验证 + 与 baseline 的对比。
+      作为 repro 层级笔记,模块细节 (embedding offset, fused head, codebook-weighted loss)
+      和训练/推理代码逻辑均有伪代码级别记录。速查卡片"可借鉴"列出 3 个具体可迁移 trick,
+      每个都有足够细节支撑复用。
+  trustworthy:
+    score: 9
+    judgment: >
+      与 PDF 原文交叉验证: Table 1-8 所有关键数字完全匹配。68 处 [§X.X]/[Table N]/[Fig N]
+      标注,覆盖率 >90%。指标名使用正确 (WER/CER/SIM-o/UTMOS/CMOS/SMOS/RTF 无混淆)。
+      对 FLEURS CER < ground truth 这一反直觉结果有审慎解读 [agent 解读]。
+      唯一瑕疵: 消融总结中 "random init 最优 WER 2.52" 引用的是 LR=2e-4 行,
+      但笔记内表格仅展示 LR=5e-4 行 (WER 2.56),造成笔记内微小不一致。
+  distinguishable:
+    score: 9
+    judgment: >
+      方法节全程使用 [论文原文](8 处) / [agent 解读](10 处) 标注,
+      覆盖率 >85%。Agent 推断均有明确标记且语气审慎 (如 "这可能因为"/"这个结果的
+      合理解释是")。无推断被写成断言的情况。"首个"等强 claim 均以引号
+      + [§2.1.2] 归属原文。
+  positioned:
+    score: 9
+    judgment: >
+      KB 背景节提供精确谱系定位: 从 SoundStorm/MaskGCT 到 OmniVoice 的演进线,
+      两个根本性突破点 (单阶段 + LLM→NAR),与 SOTA 的量化对比 (CosyVoice 3 WER 0.71%),
+      及独特价值定位 (600+ 语言 + 全开源)。点评节进一步讨论 ZipVoice 关系
+      (同团队前序 flow-matching NAR → 本文 discrete diffusion)。
+      Frontmatter models 已包含 SoundStorm/CosyVoice3/MaskGCT/Qwen3-TTS 核心对比系统。
+  non_polluting:
+    score: 9
+    judgment: >
+      无新概念页创建。8 个已有概念页链接均合理 (Non-autoregressive TTS / Masked Generative
+      Modeling / LLM-based TTS / Speech Tokenizer / RVQ / CFG / Single-vs-Multi-codebook /
+      Diffusion-based TTS)。"可复用的 idea" 6 条均有实验或代码依据,不存在 overclaim。
+      对 "600+ 语言" 的宣传值持审慎态度,指出低资源语言实际质量差异大。
 
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 25
+    annotated: 22
+    rate: "88%"
+  metric_names_correct: true
+  source_labels_present: true
+  source_labels_coverage: "85%+ (8 [论文原文] + 10 [agent 解读], 方法节覆盖完整)"
+  speed_card_complete: true
+  speed_card_fields:
+    一句话: "具体且信息量大"
+    路线: "完整 pipeline 含维度标注"
+    指标: "多指标 + 数据集名 + 表格出处"
+    可借鉴: "3 个具体可迁移 trick,有足够细节"
+    局限: "5 条具体局限"
+  frontmatter_complete: true
+  frontmatter_semantically_correct: true
+  concept_admission_ok: true
+
+# 发现的问题
 issues:
-  - id: 1
-    type: template-compliance
-    severity: medium
-    principle: 可定位
-    location: frontmatter.models
-    detail: >
-      models 字段仅列 SoundStorm 和 CosyVoice 3 (模型库实体页),但本文直接对比的
-      baseline 还包括 MaskGCT、F5-TTS、ZipVoice、Qwen3-TTS、VoxCPM、IndexTTS2,
-      这些在 论文笔记/ 有对应笔记但无 模型库/ 实体页。建议: 至少在 models 字段用
-      论文笔记链接补充核心对比 baseline (MaskGCT, F5-TTS, ZipVoice)。
-    suggestion: >
-      models 字段追加: "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"
-  - id: 2
+  - severity: low
     type: traceability-gap
-    severity: low
     principle: 可信赖
-    location: 训练策略 > 模型参数
+    location: "消融实验 > LLM 初始化 (line 329 vs line 119)"
     detail: >
-      Note 提到 "Qwen3-0.6B backbone" 但未明确提及 Table 1 中报告的总参数量 0.8B
-      (含 tokenizer 和 prediction heads)。读者可能困惑 0.6B 是否是完整参数量。
-    suggestion: 在训练策略节补充 "总参数量 0.8B (含 audio tokenizer + prediction heads)"
-  - id: 3
-    type: weak-reusability
-    severity: low
-    principle: 可复述
-    location: 可复用的 idea > #2
+      消融总结 (line 329) 写 "random init 最优 WER 2.52",引用的是 PDF Table 6 中
+      LR=2e-4 的行。但笔记内简化表格 (line 119) 仅展示 LR=5e-4 行 (WER 2.56),
+      且标记为 "Random init (最优 LR)"。两处 "最优" 指代不同 LR,造成笔记内微小不一致。
+      不影响结论 (LLM init 远优于 random init),但可能让仔细对照的读者困惑。
+    suggestion: >
+      line 329 改为 "random init 最优 Libri WER 2.52 (LR=2e-4)" 或
+      将 line 119 表格中的 "最优 LR" 换成更具体的 "LR=5e-4 (Seed-en 最优)"
+  - severity: low
+    type: template-compliance
+    principle: 可定位
+    location: "frontmatter.models"
     detail: >
-      "AR LLM → NAR 初始化" 描述为"零成本",但实际上需要 backbone 架构与 LLM 结构
-      完全相同 (OmniVoice 的 backbone 就是 Qwen3-0.6B 架构),对不同架构的 NAR 模型
-      不一定适用。
-    suggestion: 补充 "前提是 NAR backbone 与 LLM 架构相同"
+      ZipVoice 是同团队前序工作且为 Table 1 直接 baseline,论文笔记/ZipVoice.md 存在,
+      但未列入 frontmatter models 字段。lineage 信息因此不完整。
+    suggestion: >
+      models 字段追加: "[[论文笔记/ZipVoice|ZipVoice]]"
+  - severity: low
+    type: traceability-gap
+    principle: 可信赖
+    location: "实验 > 中英文评估 Table 2 行 (lines 304-305)"
+    detail: >
+      CMOS 和 SMOS 数字未包含置信区间 (PDF Table 2: 0.44+-0.16, 3.80+-0.17)。
+      对 repro 层级笔记,置信区间有助于判断统计显著性。
+    suggestion: >
+      CMOS/SMOS 列数字补充 +-std,如 "+0.44+-0.16" 和 "3.80+-0.17"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: >
+    所有原则均强满足 (>=9),无 high/medium issue。数字经 PDF 交叉验证全部匹配。
+    Agent 推断与论文原文严格区分。反向更新内容 (追加 key_papers + 一行说明)
+    不涉及实质性修改,不会改变已有实体页 status。
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: >
+    Repro 层级笔记的审阅 checklist 可增加: 代码引用的准确性验证
+    (如笔记描述的代码逻辑是否与实际仓库代码一致)。当前 checklist 偏向
+    论文层面的验证,对代码层面的交叉验证缺少专门检查项。
+  checklist_upgrade_suggestion: >
+    对包含消融实验汇总的笔记,可增加检查项: "消融总结中的数字与笔记内
+    详细表格一致" — 本次发现 line 329 vs line 119 不一致即属此类。

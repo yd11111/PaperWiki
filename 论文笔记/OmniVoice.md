@@ -9,7 +9,7 @@ year: 2026
 venue: "Preprint (under review)"
 tags: [TTS, zero-shot, non-autoregressive, discrete-diffusion, masked-generation, multilingual, multi-codebook, LLM-initialization]
 concepts: ["[[Non-autoregressiveTTS]]", "[[MaskedGenerativeModeling]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]", "[[ResidualVectorQuantization]]", "[[Classifier-FreeGuidance]]", "[[Single-codebookvsMulti-codebook]]", "[[Diffusion-basedTTS]]"]
-models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]"]
+models: ["[[模型库/SoundStorm|SoundStorm]]", "[[模型库/CosyVoice3|CosyVoice 3]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]", "[[论文笔记/ZipVoice|ZipVoice]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[Emilia]]", "[[SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -301,8 +301,8 @@ audio_labels[:, prompt_length:][~token_mask] = -100  # 不计 loss
 | WER ↓ | 1.60 | 1.72 | 2.88 | 1.85 | 2.17 | **1.54** | Seed-TTS en | [Table 1] |
 | SIM-o ↑ | 0.777 | 0.765 | 0.773 | 0.750 | **0.778** | 0.766 | Seed-TTS zh | [Table 1] |
 | WER ↓ | **0.84** | 0.89 | 2.40 | 1.53 | 1.14 | 1.15 | Seed-TTS zh | [Table 1] |
-| CMOS ↑ | **+0.44** | +0.42 | -0.38 | - | - | +0.40 | 主观 | [Table 2] |
-| SMOS ↑ | **3.80** | 3.58 | 3.20 | - | - | 3.65 | 主观 | [Table 2] |
+| CMOS ↑ | **+0.44±0.16** | +0.42±0.17 | -0.38±0.19 | - | - | +0.40±0.16 | 主观 | [Table 2] |
+| SMOS ↑ | **3.80±0.17** | 3.58±0.19 | 3.20±0.21 | - | - | 3.65±0.18 | 主观 | [Table 2] |
 
 OmniVoice-Emilia 在相同 Emilia 训练数据下全面超越 NAR baselines (F5-TTS, ZipVoice, MaskGCT);完整多语言版在说话人相似度和智能度上与 CosyVoice 3 / Qwen3-TTS 等 AR 系统竞争 [§4.1]。
 
@@ -326,7 +326,7 @@ OmniVoice-Emilia 在相同 Emilia 训练数据下全面超越 NAR baselines (F5-
 ### 消融实验
 
 1. **Masking 策略** [Table 5]: Full-codebook random > MaskGCT-style > SoundStorm-style (WER: 1.57 vs 2.04 vs 3.00)
-2. **LLM 初始化** [Table 6]: LLM init WER 1.57 vs random init 最优 WER 2.52 (差距显著)
+2. **LLM 初始化** [Table 6]: LLM init WER 1.57 vs random init 最优 Libri WER 2.52 (LR=2e-4) (差距显著)
 3. **Prompt denoising** [Table 7]: 开启后 UTMOS 4.23→4.32, SIM-o 0.697→0.668 (更干净但更标准化)
 
 ### 推理速度
@@ -490,3 +490,13 @@ bash examples/run_eval.sh
 5. **Sequence packing + flex_attention 用于 NAR TTS**: 将 LLM 训练中的 sequence packing 技术引入 bidirectional NAR TTS,通过 document_ids + block mask 实现跨样本隔离,提升 GPU 利用率。
 
 6. **Fused prediction head**: 用单个 `nn.Linear(H, C*V)` 替代 C 个独立 head,GPU 上更高效。通过 reshape + permute 实现逻辑上的 per-codebook 输出。
+
+> [!review] 自动审阅 (2026-06-05)
+> **结论:** pass
+> **原则:** 复述 9 | 信赖 9 | 区分 9 | 定位 9 | 污染 9
+> **Claim 标注率:** 88% (22/25)
+> **问题:** 0 high, 0 medium, 3 low
+> - 💡 [traceability-gap] 消融实验 line 329 vs line 119: "random init 最优 WER" 引用不同 LR 行 (2.52 at 2e-4 vs 表格展示 2.56 at 5e-4),笔记内微小不一致
+> - 💡 [template-compliance] frontmatter.models: 缺少 ZipVoice (同团队前序工作 + Table 1 直接 baseline)
+> - 💡 [traceability-gap] Table 2 CMOS/SMOS: 缺少置信区间 (+-0.16/+-0.17),repro 层级建议补充
+> **反向更新:** ✅ 安全

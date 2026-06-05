@@ -66,6 +66,16 @@ CFG 已成为 diffusion/flow-based 音频生成的标准技术:
 - 语音合成 (SoundStorm, VoiceBox)
 - 在 [[ConditionalFlowMatching]] 中同样适用 (如 Matcha-TTS)
 
+### 离散空间 CFG
+
+OmniVoice (Zhu et al., 2026) 将 CFG 从连续空间扩展到离散 token 的 log-softmax 空间。推理时 batch 翻倍 (2*B),前 B 个为 conditional,后 B 个为 unconditional (仅含 masked target,无 text/style/prompt)。引导公式在 log-softmax 空间操作:
+
+```
+log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
+```
+
+注意外层还有一个 log_softmax -- 即双重 softmax normalize。guidance_scale 默认 2.0。这表明 CFG 原理不限于连续扩散/flow,同样适用于离散 masked generative modeling。
+
 ## 关键论文
 
 - Ho & Salimans (2022): Classifier-Free Diffusion Guidance — 原始论文
