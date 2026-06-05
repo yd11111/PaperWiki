@@ -1,0 +1,28 @@
+paper: "CoCoEmo"
+reviewer: agent
+date: "2026-06-05"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "两项更新均为事实性追加,内容与论文原文一致。EmotionControlinTTS 追加的 CoCoEmo 段落准确描述了论文的 SLM steering 方法和核心发现。CosyVoice2 追加的被引用条目准确引用了论文中的实验数据。"
+  no_bloat:
+    verdict: pass
+    notes: "不新建实体页。CoCoEmo 不引入新的独立概念(activation steering 已在 EmotionControlinTTS 中有专门段落)。所有更新追加到已有页面。"
+  traceable:
+    verdict: pass
+    notes: "两项追加均包含论文 wikilink 和具体 Table/Section 引用。"
+
+change_plan_summary:
+  total_targets: 2
+  appends: 2
+  substantive: 0
+  new_pages: 0
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
