@@ -35,7 +35,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 在 neural HMM TTS 之上叠加 normalizing flow (invertible post-net),构建同时具备自回归、单调对齐、全概率建模和流增强的 TTS 声学模型
 > - **路线**: phoneme → encoder (2 vectors/phone) → left-to-right HMM decoder (pre-net + LSTM + emission params) → invertible neural net (Glow-TTS decoder architecture) → mel spectrogram → HiFi-GAN → waveform
-> - **指标**: WER 2.91% (Harvard sentences, Whisper ASR) vs T2 6.36% / GTTS 3.97% / NHMM 5.96%; MOS 3.43 vs T2 3.25 / GTTS 2.64 / NHMM 2.97; 2.5h 达到 5% validation WER (与 GTTS 并列最快) [Table 2]
+> - **指标**: WER 2.91% (Harvard sentences, Whisper ASR) vs T2 6.36% / GTTS 3.97% / NHMM 5.96%; MOS 3.43 vs T2 3.25 / GTTS 2.64 / NHMM 2.97; 3h 达到 5% validation WER (仅次于 GTTS 2.5h, 均远快于其他方法) [Table 2]
 > - **可借鉴**: 将 invertible neural net 作为 post-net 的思路 -- 既能像传统 post-net 一样利用非因果 CNN 增强输出,又不破坏精确似然训练; neural HMM 的 quantile-based duration generation 实现概率化时长控制
 > - **局限**: 仅在 LJ Speech 单说话人上验证; 自回归推理速度未量化(但框架本身是自回归的,不适合 GPU 并行); MOS 3.43 与 VOC 4.18 仍有较大差距; 未与 diffusion-based 方法对比
 
@@ -95,13 +95,13 @@ Neural HMM 的 left-to-right no-skip 结构从数学上保证了单调对齐(mon
 | 指标 | OverFlow (OF) | OverFlow (OFND) | OverFlow (OFZT) | Tacotron 2 | Glow-TTS | NHMM | VITS | FastPitch | VOC | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Harvard WER | 2.91% | 2.92% | 2.30% | 6.36% | 3.97% | 5.96% | 7.03% | 100% | - | Harvard 720 sent | [Table 2] |
-| Time to 5% WER | 2.5h | - | - | 54h | 2.5h | 125h | 23h | 21h (未达5%) | - | LJ Speech val | [Table 2] |
+| Time to 5% WER | 3h | - | - | 54h | 2.5h | 125h | 23h | 21h (未达5%) | - | LJ Speech val | [Table 2] |
 | MOS | 3.43 | 3.25 | 3.01 | 3.25 | 2.64 | 2.97 | - | - | 4.18 | LJ Speech test | [Table 2] |
 | Model size | 28.5M | 28.5M | 28.5M | 28.2M | 28.6M | 15.3M | 83.1M | 37.5M | - | - | [Table 2] |
 
 **关键发现**:
 
-1. **训练效率**: OverFlow 和 Glow-TTS 达到 5% WER 仅需 2.5h,比 Tacotron 2 (54h) 和 NHMM (125h) 快 7x 以上 [§4, Fig 2]。
+1. **训练效率**: Glow-TTS 达到 5% WER 需 2.5h, OverFlow 需 3h,两者比 Tacotron 2 (54h) 和 NHMM (125h) 快 7x 以上 [§4, Fig 2]。
 
 2. **发音准确度**: OF/OFND 的 WER 2.91-2.92% 大幅优于所有 baseline (次优 GTTS 3.97%) [Table 2]。Zero-temperature (OFZT) WER 更低(2.30%),说明模型学到的分布均值已经非常准确 [agent 解读]。
 
@@ -151,4 +151,16 @@ OverFlow 是一个概念清晰、实验扎实的工作。它的核心洞察很�
 
 ## 审阅
 
-<!-- 审阅将由独立 subagent 填充 -->
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 机制解释充分,WHY 覆盖好 |
+> | 可信赖 | pass | Time to 5% WER 数值已修正(3h, 非 2.5h) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率高 |
+> | 可定位 | pass | KB 背景谱系定位准确,Glow NF vs CFM 区分清晰 |
+> | 不污染 | pass | CFM 链接虽不完全精确但已解释差异 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/OverFlow-review.yml`

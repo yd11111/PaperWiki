@@ -1,0 +1,45 @@
+review:
+  paper: "OverFlow"
+  note_path: "论文笔记/OverFlow.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节包含充分的 WHY 解释(为什么用 neural HMM / 为什么用 flow / 为什么自回归),关键设计选择清晰。速查卡片可借鉴字段具体(invertible post-net、quantile-based duration)。"
+  可信赖:
+    score: 7
+    reason: "数字型 claim 的出处标注覆盖率高(>90%)。但 Time to 5% WER 存在一个数值错误: OF=3h 被误写为 2.5h,出现在 3 处。MOS/WER 核心指标均正确。"
+  可区分:
+    score: 9
+    reason: "[论文原文] vs [agent 解读] 标注覆盖率高,方法节中绝大多数 WHY 解释都有来源标注。推断性结论(如局限性分析)均标注了 [agent 解读]。"
+  可定位:
+    score: 9
+    reason: "KB 背景节谱系定位准确,清晰区分了 Glow normalizing flow vs CFM/flow matching 的体系差异,与 VITS 的设计哲学对比到位。创新判断有对比基准(Glow-TTS/Flowtron/NHMM)。"
+  不污染:
+    score: 8
+    reason: "反向更新计划合理(追加到已有概念页,不需新建)。ConditionalFlowMatching 链接虽不完全精确(Glow NF ≠ CFM),但 KB 背景中已解释差异,不会污染。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "速查/指标 + 实验表 + 关键发现1"
+    detail: "OverFlow Time to 5% WER 被误写为 2.5h(与 Glow-TTS 混淆)。PDF Table 2 中 GTTS=2.5h, OF=3h。错误出现在 3 处: 速查'2.5h 达到 5% validation WER (与 GTTS 并列最快)', 实验表'2.5h', 关键发现'仅需 2.5h'。"
+    suggestion: "将 3 处 OF 的 Time to 5% 修正为 3h; 速查中改为'3h 达到 5% validation WER (仅次于 GTTS 2.5h)'; 关键发现改为'Glow-TTS 达到 5% WER 需 2.5h, OverFlow 需 3h'。"
+  - type: traceability-gap
+    severity: low
+    location: "实验/关键发现3"
+    detail: "讨论 MOS 显著性差异时未提及 95% CI (±0.07)。Table 2 脚注明确给出此信息。"
+    suggestion: "在 MOS 讨论中补充 CI 信息,如'MOS 3.43±0.07'。"
+  - type: bad-linking
+    severity: low
+    location: "frontmatter concepts"
+    detail: "[[ConditionalFlowMatching]] 在 concepts 中,但论文使用的是 Glow 架构的离散 normalizing flow (invertible 1x1 convolution + affine coupling),与 CFM (ODE-based continuous flow) 是不同体系。KB 中无独立 NormalizingFlow 页,且 KB 背景已明确解释差异,实际污染风险低。"
+    suggestion: "保持现状,因 KB 中无更精确的概念页。如未来新建 NormalizingFlow 页,再更新链接。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量整体良好。机制解释充分,来源标注到位,KB 定位准确。主要问题是 Time to 5% WER 的数值错误(3h 误写为 2.5h,medium),需修正 3 处。其余 2 个 low issue 不阻塞。"
+
+learning_signals: []
