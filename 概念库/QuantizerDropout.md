@@ -4,7 +4,7 @@ title: "Quantizer Dropout"
 aliases: [RVQ Dropout, Variable Bitrate Training]
 category: "training-technique"
 tags: [quantization, training-trick, variable-bitrate, audio-codec]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/MBCodec|MBCodec]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]"]
 origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
 related_concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]", "[[TokenRateandBitrateTrade-offs]]"]
 status: confirmed
@@ -34,6 +34,10 @@ SoundStream [Zeghidour et al., 2021] 提出: 对每个训练样本, 随机采样
 DAC 发现 p=0.5 是最优平衡点:
 - 在低比特率时保留可变比特率能力 (接近 always-dropout 的低比特率质量)
 - 在全带宽时接近 no-dropout 的质量
+
+### MOSS-Audio-Tokenizer 的 p=1.0 方案 [MOSS-TTS, §3.3]
+
+MOSS-Audio-Tokenizer 使用 quantizer dropout p=1.0 (即每个样本都执行 dropout),结合 32 层 RVQ 实现 0.125-4 kbps 可变比特率。这比 DAC 的 p=0.5 更激进,意味着模型从未在训练中以固定全带宽运行,而是始终面对随机比特率。论文报告该策略在不同比特率下均取得强重建质量 [MOSS-TTS Table 2]。
 
 ## 交互效应
 
