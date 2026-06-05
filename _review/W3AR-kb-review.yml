@@ -1,0 +1,30 @@
+kb_review:
+  note: "论文笔记/W3AR.md"
+  reviewer: auto
+  date: 2026-06-05
+  conclusion: pass
+
+  change_plan:
+    - target: "概念库/DifferentiableRewardOptimization.md"
+      action: append
+      detail: "追加 W3AR section 到演进线后,描述 ASR cross-attention reward 路线。key_papers 已达 25 条,跳过追加。"
+      risk: low
+
+    - target: "模型库/Whisper.md"
+      action: append
+      detail: "追加 W3AR 到 key_papers (当前 6 条,未超 12 条上限)。"
+      risk: low
+
+    - target: "模型库/CosyVoice.md"
+      action: skip
+      detail: "key_papers 已达 15 条,超出上限。W3AR 对 CosyVoice 模型页的贡献仅为'使用 CosyVoice 做 baseline',无需在 CosyVoice 页追加。"
+      risk: none
+
+    - skipped:
+      - "概念库/TTSEvaluation.md — W3AR 使用标准评估指标,不贡献新评估方法"
+      - "概念库/Speech-TextAlignment.md — W3AR 的 alignment 概念不同于 Speech-TextAlignment 中的 modality alignment"
+      - "概念库/CodecLanguageModel.md — W3AR 优化 codec LM 但不贡献新 codec LM 知识"
+      - "概念库/LLM-basedTTS.md — W3AR 优化 LLM-based TTS 但 key_papers 已远超上限"
+
+  issues: []
+  summary: "2 个 append 操作 (DifferentiableRewardOptimization prose + Whisper key_papers),1 个 skip,4 个不更新。无安全风险。"

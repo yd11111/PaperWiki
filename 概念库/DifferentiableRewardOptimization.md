@@ -101,3 +101,7 @@ Liu et al. (2025) [[论文笔记/ARDM-DPO|ARDM-DPO]] 首次将 DPO 扩展到**�
 ## Robust Reward Model for DiffRO / RRPO (Tongyi Lab, 2026)
 
 Wang et al. (2026) [[论文笔记/RRPO|RRPO]] 识别并解决了 DiffRO 的 reward hacking 脆弱性: DiffRO 的全可微优化使 RM 缺陷被解析梯度精确放大,vanilla SER RM 的过度自信、脆弱决策边界和扰动敏感性使 policy 可通过生成声学伪影 (如不自然的嘴部咔嗒声) 骗取虚假奖励。核心方法: 三层混合正则化 fine-tune RM — (1) Label Smoothing 修正离散情感标签导致的过度自信; (2) Energy-Adaptive Mixup 基于语音能量自适应混合平滑决策边界; (3) Adversarial Training 在高层 embedding 上增强扰动鲁棒性。在 CosyVoice2 上验证: E-MOS 3.78 / N-MOS 3.81 (DiffRO: 3.65 / 3.61); SER WA 在 ESD 上 64.4→81.7%,跨语言 IEMOCAP 66.0→68.0% [RRPO Table 1, Table 2]。与 DiffRO 的核心区别: 不改 policy optimization 算法,仅强化 RM 质量;填补了 DiffRO 演进线中"RM 鲁棒性保障"的空白。
+
+## ASR Cross-Attention Reward / W3AR (Melbourne/NJUPT, AAAI 2026)
+
+Wang & Sun (2025) [[论文笔记/W3AR|W3AR]] 提出第六条路线: 利用 frozen ASR (Whisper) 的 cross-attention map 直接提取 word-level reward,无需额外训练 reward model 或偏好数据标注。两个互补指标: (1) Attention Purity — attention 在峰值周围的集中度,衡量发音清晰度; (2) Alignment Monotonicity — attention 峰值的单调前进程度,衡量韵律流畅性。使用 word-level group-relative policy optimization 更新 TTS。在 CosyVoice 上 OOD WER 8.92→4.54 (-49.1%),泛化到 VoiceCraft/MaskGCT 上同样有效。与 DiffRO 的核心区别: reward 在 audio-level 操作且来自 frozen ASR 内部表征 (cross-attention),不需要 Gumbel-Softmax 或 Token2Text reward model; 与 FPO 的区别: 不需要 error segment 标注,word-level importance 通过 group-relative advantage 自动发现。
