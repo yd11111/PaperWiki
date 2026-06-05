@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[CTC-TTS]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[CosyVoice2]]✓ | 过滤: [[Speech-TextAlignment]](pending-review), [[CodecLanguageModel]](pending-review), [[PhonemeRepresentation]](pending-review)
+- [ingest/deep] [[CTC-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[PhonemeRepresentation]] key_papers)
+- [review/auto] [[CTC-TTS]] — pass-with-fixes, 0 high, 1 medium, 3 low
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(90+),跳过
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限(37),跳过
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过
+- [skip/update] [[Single-codebookvsMulti-codebook]] — key_papers 已达上限(17),跳过
+- [lint/local] CTC-TTS — 通过
 - [kb/search] [[Covo-Audio]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[Full-duplexSpokenDialogue]]✓, [[SpeechTokenizer]]✓, [[ModalityAdaptationforSpeechLLM]]✓, [[ConditionalFlowMatching]]✓, [[Speech-LLMIntegrationTaxonomy]]✓ | 过滤: 无
 - [ingest/deep] [[Covo-Audio]] — 精读, kb_sources=6, 新建 0, 追加 1 ([[Full-duplexSpokenDialogue]] 代表系统)
 - [review/auto] [[Covo-Audio]] — pass, 0 high, 0 medium, 2 low
