@@ -4,7 +4,7 @@ title: "Speaker Verification"
 aliases: [说话人验证, Speaker Recognition, SV, 说话人识别, Speaker Identification]
 category: "evaluation-and-security"
 tags: [speaker-identity, evaluation, voice-cloning, anti-spoofing, security, SECS, SV-EER]
-key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Align2Speak|Align2Speak]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TTSDS|TTSDS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DMOSpeech|DMOSpeech]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Align2Speak|Align2Speak]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]", "[[论文笔记/SpeakerPoisoning|Speaker Poisoning (Trachu et al., 2026)]]"]
 origin_paper: ""
 related_concepts: ["[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[Anti-spoofingandDeepfakeDetection]]", "[[SpeakerAdaptation]]"]
 status: pending-review

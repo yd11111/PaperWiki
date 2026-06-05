@@ -4,7 +4,7 @@ title: "Voice Cloning Taxonomy"
 aliases: [语音克隆分类, Voice Cloning Classification, 声音克隆体系]
 category: "taxonomy"
 tags: [TTS, voice-cloning, speaker-adaptation, few-shot, zero-shot, multilingual, survey]
-key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/RevivalwithVoice|Revival with Voice]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/TruS|TruS]]"]
+key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/RevivalwithVoice|Revival with Voice]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/LatinX|LatinX]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/TruS|TruS]]", "[[论文笔记/SpeakerPoisoning|Speaker Poisoning (Trachu et al., 2026)]]"]
 origin_paper: "[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]"
 related_concepts: ["[[SpeakerAdaptation]]", "[[SpeakerEmbedding]]", "[[SpeechFactorization]]", "[[Zero-shotSpeechSynthesis]]", "[[LLM-basedTTS]]", "[[SpeakerVerification]]"]
 status: pending-review

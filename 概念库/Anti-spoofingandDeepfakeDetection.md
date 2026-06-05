@@ -4,7 +4,7 @@ title: "Anti-spoofing and Deepfake Detection"
 aliases: [反欺骗检测, Audio Deepfake Detection, Voice Anti-spoofing, 深伪语音检测, Speech Deepfake, 语音伪造检测]
 category: "security"
 tags: [voice-cloning, deepfake, anti-spoofing, ethics, safety, speaker-verification, TTS]
-key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/TraceableTTS|Traceable TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/TraceableSpeech|TraceableSpeech]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/TraceableTTS|Traceable TTS]]", "[[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]]", "[[论文笔记/E2E-VGuard|E2E-VGuard]]", "[[论文笔记/Training-freeSpeakerUnlearning|TruS (Lee et al., 2026)]]", "[[论文笔记/SpeakerPoisoning|Speaker Poisoning (Trachu et al., 2026)]]"]
 origin_paper: ""
 related_concepts: ["[[SpeakerVerification]]", "[[VoiceCloningTaxonomy]]", "[[SpeakerEmbedding]]"]
 status: pending-review
@@ -67,6 +67,7 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 - **Machine Unlearning (模型级遗忘)**: [[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]] (Kim et al., ICML 2025) 首次在 ZS-TTS 中提出 speaker identity unlearning,通过 Teacher-Guided Unlearning (TGU) 直接修改模型权重使其丧失复制特定说话人的能力。与 SafeSpeech(数据端防护)和 Traceable TTS(事后溯源)互补,构成 ZS-TTS 安全的三层防线: 预防(unlearning) + 防护(perturbation) + 溯源(watermark/fingerprint)
 - **LLM-TTS + E2E 防护**: [[论文笔记/E2E-VGuard|E2E-VGuard]] (Zhang et al., NeurIPS 2025) 将 SafeSpeech 的防护扩展到 LLM-based TTS 和 ASR-driven E2E 场景。通过 encoder ensemble(6 种 speaker encoder + MFCC)保护 timbre,同时用 ASR 对抗攻击破坏发音,加上心理声学模型保证扰动不可感知。在 19 个 TTS 模型(含 3 个商业 API)上验证有效
 - **Training-free Inference-time Unlearning**: [[论文笔记/Training-freeSpeakerUnlearning|TruS]] (Lee et al., 2026) 将 speaker unlearning 从训练范式推向推理范式。通过在 F5-TTS DiT blocks 的 FFN 输出上做动态 activation steering,用 ID-prototype (retain speaker 均值) 定位 identity 方向后投影减法抑制 opt-out speaker 身份。0 GPU 小时训练成本,首次实现 unseen opt-out speaker 的 unlearning (SIM-UO 0.668→0.488),与 TGU (模型级) 互补
+- **Speaker Poisoning (StyleTTS2)**: [[论文笔记/SpeakerPoisoning|Trachu et al. (2026)]] 将 Kim et al. 的 TGP 框架从 VoiceBox 迁移到 StyleTTS2,并提出 Encoder-Guided Poisoning (EGP) -- 用 style encoder 输出替代 teacher 生成的 mel 作为蒸馏目标,规避同容量 teacher-student 蒸馏效率低的问题。同时引入分布级评估框架 (AUC + FSSIM),揭示了 100 speaker 时 latent space crowding 导致的 scalability 限制 [Table 2]
 
 ## 在 TTS 中的应用
 
