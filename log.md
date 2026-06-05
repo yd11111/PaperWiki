@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-05
+- [kb/search] [[OV-InstructTTS]] — 命中 6 页(取 6): [[InstructedSpeechGeneration]]✓, [[LLM-basedTTS]]✓, [[CosyVoice2]]✓ | 过滤: [[Instruction-GuidedSpeechSynthesis]](pending-review), [[NaturalLanguageDescriptionforTTS]](pending-review), [[EmotionControlinTTS]](pending-review)
+- [ingest/deep] [[OV-InstructTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (Instruction-GuidedSpeechSynthesis 演进+prose, InstructedSpeechGeneration prose, CosyVoice2 baseline)
+- [skip/update] [[Instruction-GuidedSpeechSynthesis]] — key_papers 已达上限(19),改追加到正文
+- [skip/update] [[InstructedSpeechGeneration]] — key_models 已达上限(12),改追加到正文
+- [skip/update] [[CosyVoice2]] — key_papers 已达上限(23),改追加到正文
+- [review/auto] [[OV-InstructTTS]] — pass, 2 issues (0 high, 0 medium, 2 low)
+- [lint/local] OV-InstructTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 270 — 建议抽空审核
 - [kb/search] [[ManchuTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review), [[MelSpectrogram]](pending-review), [[PhonemeRepresentation]](pending-review)
 - [ingest/deep] [[ManchuTTS]] — 精读, kb_sources=6, 新建 0, 追加 0 (所有6页 key_papers 均超上限,且本文为应用型论文无方法论贡献,跳过反向更新)
 - [review/auto] [[ManchuTTS]] — pass-with-fixes, 3 issues (0 high, 2 medium fixed: CBVC baseline 补充+models 字段, 1 low fixed: first-chunk 术语)
