@@ -5,6 +5,7 @@
 - [ingest/deep] [[AST-Edit]] — 精读, kb_sources=6, 新建 0, 追加 1 (ConditionalFlowMatching 演进段)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),改追加到正文演进段
 - [lint/local] AST-Edit — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 306 — 建议抽空审核
 - [kb/search] [[Qwen3.5-Omni]] — 命中 6 页(取 6): [[SpeechLanguageModel]]✓, [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓ | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Full-duplexSpokenDialogue]](pending-review), [[Speech-TextAlignment]](pending-review)
 - [ingest/deep] [[Qwen3.5-Omni]] — 精读, kb_sources=6, 新建 0, 追加 2 (StreamingSpokenDialogue 延迟表+演进, Speech-TextAlignment 演进)
 - [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34),跳过追加
