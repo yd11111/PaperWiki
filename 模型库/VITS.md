@@ -48,3 +48,7 @@ Glow-TTS (Kim et al., 2020; flow-based NAR) → **VITS** (2021; VAE+Flow+GAN E2E
 2. Normalizing flow 增强 VAE prior 的有效性 (贡献最大的单一因素) [Table 2]
 3. Flow-based stochastic duration predictor 建模韵律多样性 [§2.2.2]
 4. Linear spectrogram 作为 posterior 高分辨率输入的设计 [§2.1.3]
+
+## 相关工作
+
+- [[论文笔记/ZeSTA|ZeSTA]] (Choi et al., 2026): 以 VITS 为 target model,验证 ZS-TTS 合成数据增强 + domain-conditioned training 的低资源个性化策略; 复用 VITS speaker embedding matrix (缩减至 64-dim) 实现 domain conditioning,DC+OS 使 SECS 从 0.765 (naive mixing) 恢复到 0.815 (接近 Real 100% 的 0.832) [ZeSTA Table 3]
