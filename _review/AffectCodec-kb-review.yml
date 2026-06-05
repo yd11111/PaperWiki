@@ -1,0 +1,38 @@
+kb_review:
+  paper: "AffectCodec"
+  note_path: "论文笔记/AffectCodec.md"
+  reviewer: auto
+  date: 2026-06-06
+
+  change_plan:
+    - target: "概念库/CodecTrainingObjectives.md"
+      action: append
+      content: "追加 key_papers + 正文补充 L_rela (关系蒸馏) 和 L_align (情感加权语义对齐) 两个新目标类型"
+      safety: "key_papers 当前 9 条,未达 12 上限; 追加内容为客观描述新训练目标,factually accurate"
+
+    - target: "概念库/AudioTokenizerTaxonomy.md"
+      action: append
+      content: "追加 key_papers"
+      safety: "key_papers 当前 2 条,远未达 12 上限"
+
+    - target: "概念库/ResidualVectorQuantization.md"
+      action: skip
+      content: "key_papers 已达 45 条(上限 12),且页面已过载"
+
+    - target: "概念库/SpeechTokenizer.md"
+      action: skip
+      content: "key_papers 已达 80 条(上限 12),且页面已被审阅标记为 revise"
+
+    - target: "概念库/EmotionControlinTTS.md"
+      action: skip
+      content: "key_papers 已达 65 条(上限 12),且页面内容已过载"
+
+    - target: "概念库/SemanticvsAcousticTokens.md"
+      action: skip
+      content: "key_papers 已达 68 条(上限 12),且页面已过载"
+
+  new_entities: []
+
+  conclusion: pass
+  issues: []
+  summary: "仅 2 个保守 append 操作(CodecTrainingObjectives, AudioTokenizerTaxonomy),4 个 skip(key_papers 超限)。无新建实体页。安全执行。"
