@@ -8,6 +8,7 @@
 - [skip/update] [[ProsodyModeling]] — key_papers 51/12 已达上限,论文不贡献新韵律建模方法
 - [review/auto] [[Affectron]] — pass-with-fixes: 0 high, 1 medium (消融描述修正), 1 low (frontmatter models 补充)
 - [lint/local] Affectron — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 289 — 建议抽空审核
 - [kb/search] [[VoXtream2]] — 命中 6 页(取 6): [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓, [[模型库/CosyVoice2|CosyVoice 2]]✓ | 参考(pending-review): [[Classifier-FreeGuidance]], [[DurationPredictor]]
 - [ingest/deep] [[VoXtream2]] — 精读, kb_sources=6, 新建 0, 追加 3 (CosyVoice2/DurationPredictor/CFG body text)
 - [skip/update] [[LLM-basedTTS]] — key_papers 已达上限,跳过追加
