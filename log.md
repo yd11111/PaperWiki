@@ -1369,3 +1369,5 @@
 [alert/backlog] pending-review: 70, draft deep/repro: 126 — 建议抽空审核
 - [alert/backlog] pending-review: 71, draft deep/repro: 205 — 建议抽空审核
 - [alert/backlog] pending-review: 71, draft deep/repro: 215 — 建议抽空审核
+- [review/auto] [[FlexiVoice]] — pass-with-fixes, 0 high, 2 medium (models 字段补充 + 架构细节补充), 3 low (overclaim fix + 超参数补充); 修正 InstructTTSEval ZH 数据错误 + arxiv_id/authors
+- [lint/local] FlexiVoice — 通过/0 问题
