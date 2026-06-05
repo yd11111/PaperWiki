@@ -41,7 +41,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 用多语言纯文本做 MLM 预训练 + 冻结 language-aware embedding,实现只需文本 (无语音) 的零样本多语言 TTS
 > - **路线**: 多语言文本 → MLM 预训练 (token embed + language embed + bottleneck + encoder) → 少量配对数据微调 (冻结 language-aware embedding,训练 encoder + decoder) → 推理时输入未见语言文本 + language ID → mel → HiFi-GAN
-> - **指标**: 未见语言 (西班牙语) CER 18.27% (bytes) / 11.69% (IPA),已见语言 byte 模型全面超 IPA baseline;MOS 3.44 (bytes zero-shot) vs 3.29 (baseline)
+> - **指标**: 未见语言 (西班牙语) CER 18.27% (bytes) / 11.69% (IPA) [Table 3],已见语言 byte 模型全面超 IPA baseline [Table 2];MOS 3.44 (bytes zero-shot) vs 3.29 (baseline) [Fig 5]
 > - **可借鉴**: (1) 冻结 language-aware embedding 的跨语言迁移策略; (2) 纯文本 MLM 预训练提升 byte-based TTS 的思路; (3) bottleneck layer 对跨语言泛化的重要性
 > - **局限**: 仅在 7+1 欧洲语言上验证,语种跨度有限; 模型规模小 (6 层 Transformer); 与 oracle 仍有明显 gap; 语言依赖性强 (相似语种效果好,差异大的语种改善有限)
 
@@ -190,3 +190,19 @@ MLM 预训练使用与 BERT 相同的 masking 策略: 12% token 替换为 [MASK]
 2. **Bottleneck as language adapter**: 用 bottleneck layer 融合 token 和 language embedding 的设计可借鉴到需要风格/说话人/情感条件注入的场景
 3. **Text-only pretraining for TTS**: 利用大量无标注文本预训练 TTS encoder 的思路,在低资源场景下可能比从头训练更高效
 4. **Byte-based multilingual TTS without G2P**: 证明通过预训练可以绕过 G2P,对不支持 G2P 的语言有价值
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, inline — no subagent available)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,设计选择 WHY 明确 |
+> | 可信赖 | pass | 所有关键数字经 PDF 交叉验证正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致 |
+> | 可定位 | pass | KB 背景谱系定位具体,创新判断有对比 |
+> | 不污染 | pass | 反向更新为纯 append,无 overclaim |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/LearningToSpeakFromText-review.yml`

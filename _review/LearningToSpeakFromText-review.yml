@@ -1,0 +1,57 @@
+review:
+  paper: "LearningToSpeakFromText"
+  reviewer: "inline (no subagent available)"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      rationale: "方法节包含充分的因果解释(WHY bottleneck, WHY freeze, WHY byte vs IPA),每个设计选择有 [论文原文]/[agent 解读] 标注。速查可借鉴给出 4 个具体可迁移 trick。"
+    trustworthy:
+      score: 8
+      rationale: "所有关键数字经 PDF 交叉验证正确。出处标注覆盖率 >90%。速查指标字段有数字但缺 [Table N] 标注(low issue)。"
+    distinguishable:
+      score: 9
+      rationale: "因果解释来源标注一致,方法节 4 个关键设计选择均标注了 [论文原文] 或 [agent 解读]。无断言-推断混淆。"
+    locatable:
+      score: 9
+      rationale: "KB 背景给出具体谱系定位(VALL-E 同期/mBERT 迁移/说话人 vs 语言维度零样本的正交关系),创新判断有对比基准。frontmatter 完整,models 为空但合理(论文未提出命名模型)。"
+    no_pollution:
+      score: 9
+      rationale: "不创建新概念页。反向更新计划为纯 append(追加 key_papers)。无 overclaim 风险。"
+
+  conclusion: "pass"
+
+  issues:
+    - id: 1
+      severity: low
+      type: traceability-gap
+      location: "速查 > 指标"
+      detail: "指标字段列出了 CER 18.27%/11.69% 和 MOS 3.44 等数字,但未标注 [Table 3]/[Fig 5] 来源"
+      suggestion: "在指标数字后追加 [Table 2,3] [Fig 5] 标注"
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "frontmatter > venue"
+      detail: "venue 标注为 IJCAI 2023,基于格式判断但未经明确验证"
+      suggestion: "可保留,格式匹配 IJCAI proceedings;如有疑问可查 IJCAI 2023 accepted papers list"
+
+  summary:
+    total_issues: 2
+    high: 0
+    medium: 0
+    low: 2
+
+  learning_signals: []
+
+  cross_validation:
+    numbers_checked:
+      - "Table 2: de MCD 5.65, CER 3.79 -- verified"
+      - "Table 2: fr MCD 6.48, CER 7.15 -- verified"
+      - "Table 3: es bytes CER 18.27, IPA CER 11.69 -- verified"
+      - "Table 3: baseline bytes CER 64.07, IPA CER 44.75 -- verified"
+      - "Table 3: oracle IPA multi CER 5.32 -- verified"
+      - "Table 4: ablation averages -- verified against paper text"
+      - "Fig 5: MOS 3.44 (bytes), 3.29 (baseline), 3.96 (oracle) -- verified"
+    all_correct: true
