@@ -123,6 +123,10 @@ Singing Style Transfer 是 Style Transfer in TTS 在歌声领域的延伸,但具
 - [[GlobalStyleTokens]]: 风格迁移的奠基机制
 - [[LLM-basedTTS]]: 新范式下的风格控制方式
 
+## Training-free 推理时风格控制
+
+[[论文笔记/FineGrainedStyleControl|Kang et al. (2026)]] 提出两种 training-free 方法在 prompt-based TTS (Parler-TTS) 上实现细粒度风格控制: (1) Inter-utterance — 在 text encoder embedding space 中计算对比 style prompt 的方向向量,通过标量 alpha 插值实现 pitch/speed/gender 的连续控制 (gender 转换 99-100%, pitch +/-36 Hz, speed +/-1.6 SPS); (2) Intra-utterance — 发现 style self-referencing 现象 (AR decoder 早期 audio token 通过 self-attention 锁定风格,使中途 prompt 替换无效),提出 KV-cache swap + sliding-window attention masking 实现单条语音内的风格过渡 (SIM 0.81-0.91, 过渡感知率达 96.2%)。与 EmoSteer-TTS 的激活空间操作互补: EmoSteer-TTS 在 flow-matching DiT 层做 emotion steering,本文在 AR decoder 的 text encoder embedding + KV-cache 层面做 style control。
+
 ## 演进
 
-固定风格合成 (SPSS) → GST 无监督风格发现 (2018) → VAE 风格隐空间 (2019) → Meta-learning 零样本 (2021) → 扩散+对抗达人类水平 (StyleTTS 2, 2023) → LLM in-context style (2023-) → 指令驱动自由风格 (VoxInstruct, 2024)
+固定风格合成 (SPSS) → GST 无监督风格发现 (2018) → VAE 风格隐空间 (2019) → Meta-learning 零样本 (2021) → 扩散+对抗达人类水平 (StyleTTS 2, 2023) → LLM in-context style (2023-) → 指令驱动自由风格 (VoxInstruct, 2024) → Training-free 推理时风格操控 (EmoSteer-TTS/FineGrainedStyleControl, 2025-2026)
