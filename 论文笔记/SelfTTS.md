@@ -11,7 +11,7 @@ tags: [TTS, cross-speaker-style-transfer, disentanglement, contrastive-learning,
 concepts: ["[[GradientReversalLayer]]", "[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[SpeechFactorization]]", "[[SpeakerEmbedding]]"]
 models: ["[[VITS]]"]
 tasks: []
-datasets: []
+datasets: ["ESD"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -162,3 +162,19 @@ LK-CKA per-flow-step 分析(Table 4)揭示了一个有趣的模式:
 3. **Self-Augmentation 的 ENC 配置**: 只替换 encoder 输入而不替换重建目标,避免合成伪影污染训练。这种"在输入端做 augmentation,在输出端保持干净"的策略可泛化。
 4. **LK-CKA 逐层分析**: 用 Label Kernel CKA 追踪信息在模型各层的流动,是分析 disentanglement 效果的有用工具,不局限于 TTS。
 5. **Emotion-naturalness trade-off 的量化**: proportion 参数提供了一个连续可调的旋钮来控制情感保持度和自然度的平衡,这种显式 trade-off 建模在工程实践中有价值。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四个设计选择均含 WHY + 消融支撑,速查可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖 ~90%,指标无混淆 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖 ~85% |
+> | 可定位 | pass | KB 背景谱系具体,创新判断有对比基准 |
+> | 不污染 | pass | 无新建概念页,概念链接正确 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/SelfTTS-review.yml`

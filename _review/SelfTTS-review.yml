@@ -1,0 +1,56 @@
+reviewer: auto
+date: 2026-06-06
+note: 论文笔记/SelfTTS.md
+conclusion: pass-with-fixes
+principles:
+  可复述:
+    score: 9
+    comment: >
+      方法节四个设计选择均回答了 WHY(为什么用 MPCL 而非 CE、为什么用 cosine 而非 CE-GRL、
+      为什么 ENC 配置、flow 中信息流动分析),每个选择有消融数据支撑。
+      速查卡片可借鉴字段给出了三个具体可迁移 trick。
+  可信赖:
+    score: 8
+    comment: >
+      数字型 claim 覆盖率约 90%,所有关键数字均标注出处。
+      指标名使用正确。速查指标含具体数字+数据集+出处。
+      ESD 数据集描述中"~14.5h"为推算值(原文仅给出全集 29h),属估算标注。
+  可区分:
+    score: 8
+    comment: >
+      [论文原文] 和 [agent 解读] 标注覆盖率约 85%。
+      方法节每个因果解释均标注了来源。未发现将推断写成断言的句子。
+  可定位:
+    score: 8
+    comment: >
+      KB 背景谱系定位具体,引用了 6 个实体页进行对比。
+      创新判断有明确对比基准(CE-based GRL, DiEmo-TTS, EmoSteer-TTS 等)。
+      frontmatter datasets 字段为空,应填入 ESD。
+  不污染:
+    score: 9
+    comment: >
+      未新建概念页。概念链接正确(GRL, StyleTransfer, EmotionControl, SpeechFactorization, SpeakerEmbedding, VITS)。
+      无 overclaim。反向更新为纯 append(key_papers 追加),不会污染已有知识。
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter
+    detail: datasets 字段为空,应填入 ESD (论文主要训练/评估数据集)
+    suggestion: 'datasets: ["[[ESD]]"]'
+
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: >
+      ESD 在数据集/目录下尚不存在为独立页面,但 EmotionControlinTTS 概念页中已有 ESD 引用。
+      可暂用无链接字符串 "ESD" 或创建数据集页面。
+    suggestion: 先填入数据集名称,后续根据准入规则决定是否建页
+
+  - type: traceability-gap
+    severity: low
+    location: 局限性第1点
+    detail: '"~14.5h" 是基于全集 29h / 2(中英各半)的推算,原文未直接给出英语子集时长'
+    suggestion: 改为 "约 14.5h(推算: 全集 29h 中英各半)"或去掉具体小时数
+
+learning_signals: []
