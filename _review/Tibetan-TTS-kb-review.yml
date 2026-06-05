@@ -1,0 +1,43 @@
+kb_review:
+  paper: "Tibetan-TTS"
+  note_path: "论文笔记/Tibetan-TTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+change_plan:
+  - target: "概念库/PhonemeRepresentation.md"
+    action: append
+    detail: "追加 key_papers: Tibetan-TTS 的 tokenizer 适配(音节级 vs BPE)直接相关于文本表征选择"
+    risk: low
+    status_change: none
+
+  - target: "任务库/Cross-lingualVoiceCloning.md"
+    action: append
+    detail: "在开放问题节追加一行:藏语低资源跨语言迁移的验证案例"
+    risk: low
+    status_change: none
+
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: skip
+    detail: "key_papers 已达 67 条(上限 12),论文仅使用 FM 无方法贡献"
+
+  - target: "概念库/LLM-basedTTS.md"
+    action: skip
+    detail: "key_papers 已达 103 条(上限 12),论文使用已有范式无方法贡献"
+
+  - target: "概念库/SpeakerAdaptation.md"
+    action: skip
+    detail: "key_papers 已达 15 条(上限 12),论文适配策略描述笼统无具体方法贡献"
+
+  - target: "概念库/CodecLanguageModel.md"
+    action: skip
+    detail: "key_papers 已达 42 条(上限 12),非直接贡献"
+
+issues: []
+
+issues_summary:
+  high: 0
+  medium: 0
+  low: 0
+  total: 0
