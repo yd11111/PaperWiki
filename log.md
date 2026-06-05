@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[AffectCodec]] — 命中 6 页(取 6): [[ResidualVectorQuantization]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[CodecTrainingObjectives]](pending-review), [[AudioTokenizerTaxonomy]](pending-review)
+- [ingest/deep] [[AffectCodec]] — 精读, kb_sources=6, 新建 0, 追加 2 (CodecTrainingObjectives key_papers+L_rela/L_align, AudioTokenizerTaxonomy key_papers)
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),跳过
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(80),跳过
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(65),跳过
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(68),跳过
+- [lint/local] AffectCodec — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[KineticOptimalTTS]] — 命中 6 页(取 6): [[ConditionalFlowMatching]]✓, [[ResidualVectorQuantization]]✓, [[Zero-shotSpeechSynthesis]]✓, [[SEED-TTS-Eval]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Non-autoregressiveTTS]](pending-review)
 - [ingest/deep] [[KineticOptimalTTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (CFM 演进, MaskedGen key_papers+演进, SEED-TTS-Eval 结果, CV3-Eval 使用+结果, Emilia 使用记录)
 - [lint/local] KineticOptimalTTS — 通过
