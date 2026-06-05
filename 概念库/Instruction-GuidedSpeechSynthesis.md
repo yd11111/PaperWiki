@@ -130,7 +130,7 @@ Survey (Sec 5.2) 指出的关键挑战:
 
 ## 演进
 
-Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **统一 TTS+TTM+TTA 三模态** (UniSonate, 2026) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026)
+Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **统一 TTS+TTM+TTA 三模态** (UniSonate, 2026) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026) → **统一生成+编辑** (UNISON, 2026, 纯文本 LLM 指令 + channel-mask 多任务, 无 phoneme encoder)
 
 ## 评估 Benchmark
 
