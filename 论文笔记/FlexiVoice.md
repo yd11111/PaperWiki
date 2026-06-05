@@ -2,11 +2,11 @@
 type: paper
 tier: deep
 title: "FlexiVoice: Enabling Flexible Style Control in Zero-Shot TTS with Natural Language Instructions"
-arxiv_id: ""
+arxiv_id: "2601.04656"
 source: "Sources/FlexiVoice.pdf"
-authors: [Anonymous]
+authors: [Dekun Chen, Xueyao Zhang, Yuancheng Wang, Kenan Dai, Li Ma, Zhizheng Wu]
 year: 2026
-venue: "Under review at ICLR 2026"
+venue: "Preprint"
 tags: [TTS, instruction-following, style-control, zero-shot, DPO, GRPO, disentanglement, progressive-post-training, emotion-control, LLM-TTS]
 concepts: ["[[LLM-basedTTS]]", "[[ConditionalFlowMatching]]", "[[SpeechTokenizer]]", "[[Instruction-GuidedSpeechSynthesis]]", "[[NaturalLanguageDescriptionforTTS]]", "[[StyleTransferinTTS]]", "[[EmotionControlinTTS]]", "[[DifferentiableRewardOptimization]]"]
 models: []
@@ -15,7 +15,7 @@ datasets: ["[[Emilia]]"]
 kb_context_sources: 3
 status: draft
 created: 2026-06-03
-updated: 2026-06-03
+updated: 2026-06-05
 ---
 
 ## KB 背景
@@ -142,9 +142,10 @@ $$A^i_{\text{emo}} = \frac{r^i_{\text{ser}} - \text{mean}(r^i_{\text{ser}})}{\te
 
 | 模型 | APS (EN) | DSD (EN) | RP (EN) | Avg (EN) | APS (ZH) | DSD (ZH) | RP (ZH) | Avg (ZH) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **FlexiVoice** | **81.2** | **85.2** | **71.4** | **79.3** | **81.2** | **85.2** | **71.4** | **79.3** |
+| **FlexiVoice** | **81.2** | **85.2** | **71.4** | **79.3** | 71.0 | 71.8 | 69.7 | **70.8** |
 | Gemini-pro | 87.6 | 86.0 | 67.2 | 80.3 | 89.0 | 90.1 | 75.5 | 84.8 |
-| MiMo-Audio-7B | 80.6 | 77.6 | 59.5 | 72.6 | **75.7** | **74.3** | 61.5 | 70.5 |
+| MiMo-Audio-7B | 80.6 | 77.6 | 59.5 | 72.6 | - | - | - | - |
+| VoxInstruct | 54.9 | 57.0 | 39.3 | 50.4 | 75.7 | 74.3 | 61.5 | 70.5 |
 | FlexiVoice-Base | 63.6 | 75.0 | 60.6 | 66.4 | 56.7 | 59.1 | 59.5 | 58.4 |
 
 ### PPT 消融 [Table 5]
