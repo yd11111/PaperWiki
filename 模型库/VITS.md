@@ -52,3 +52,4 @@ Glow-TTS (Kim et al., 2020; flow-based NAR) → **VITS** (2021; VAE+Flow+GAN E2E
 ## 相关工作
 
 - [[论文笔记/ZeSTA|ZeSTA]] (Choi et al., 2026): 以 VITS 为 target model,验证 ZS-TTS 合成数据增强 + domain-conditioned training 的低资源个性化策略; 复用 VITS speaker embedding matrix (缩减至 64-dim) 实现 domain conditioning,DC+OS 使 SECS 从 0.765 (naive mixing) 恢复到 0.815 (接近 Real 100% 的 0.832) [ZeSTA Table 3]
+- [[论文笔记/SelfTTS|SelfTTS]] (Ueda et al., 2026): 在 VITS 上扩展双 Reference Encoder (speaker + emotion) + cosine-based GRL 解耦 + MPCL 对比聚类 + Self-Augmentation (利用 normalizing flow 可逆性做 VC 生成合成情感数据); 在 ESD 上 eMOS 2.853 超越 E3-VITS/VECL baseline [SelfTTS Table 1]

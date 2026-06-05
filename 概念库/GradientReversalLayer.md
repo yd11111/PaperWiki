@@ -4,7 +4,7 @@ title: "Gradient Reversal Layer"
 aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]"]
 origin_paper: ""
 related_concepts: ["[[SpeechTokenizer]]"]
 status: pending-review
@@ -42,6 +42,13 @@ Gradient Reversal Layer (GRL) 是一种对抗训练技术,前向传播时为恒�
 - NaturalSpeech 3 (Ju et al., 2024): 在 factorized codec 中使用类似的解耦策略
 - IndexTTS2 (Zhou et al., 2025): 在 TTS 中用 GRL 实现情感-音色正交化
 - [[论文笔记/DisCo-Speech|DisCo-Speech]] (Li et al., 2025): 在 disentangled speech codec 的 prosody branch 使用 GRL 去除 timbre 信息,配合 soft orthogonality constraint 实现 content/prosody/timbre 三因子解耦
+
+在 [[论文笔记/SelfTTS|SelfTTS]] (Ueda et al., 2026) 中,GRL 用于 emotion-speaker disentanglement,但采用 cosine similarity 替代 CE 作为 GRL 的损失函数:
+- Emotion embedding e 和 speaker embedding g 各自通过 3 层 Linear Processor 映射后,与对方 embedding 的 detached 版本计算 cosine similarity
+- GRL 反转梯度使两个 encoder 被训练为输出正交的 embedding 空间
+- 不依赖外部标签,避免了当 emotion-speaker 存在统计相关性时 CE-based GRL 失效的问题
+- 同样的 cosine-based GRL 还施加在 normalizing flow 输出 zp 上(通过 Conv Processor),确保 prior latent 不含 speaker/emotion 信息
+- CKA 0.0139 (vs CE-GRL 0.0336),验证了更强的解耦效果 [Table 2]
 
 ## 相关概念
 
