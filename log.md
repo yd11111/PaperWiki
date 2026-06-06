@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[XPhoneBERT]] — 命中 5 页(取 Top 5): [[ProsodyModeling]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[VITS]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[TTSEvaluation]](pending-review)
+- [ingest/deep] [[XPhoneBERT]] — 精读, kb_sources=5, 新建 0, 追加 2 (PhonemeRepresentation 多语言预训练节, VITS 相关工作追加)
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[VITS]] — key_papers 已超上限(14),改追加到正文
+- [review/auto] [[XPhoneBERT]] — pass-with-fixes, 0 high / 1 medium / 1 low (速查指标补数据集名)
+- [lint/local] XPhoneBERT — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 339 — 建议抽空审核
 - [kb/search] [[ADAPTERMIX]] — 命中 6 页(取 Top 6): [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[TTSEvaluation]](pending-review)
 - [ingest/deep] [[ADAPTERMIX]] — 精读, kb_sources=6, 新建 0, 追加 1 (SpeakerAdaptation key_papers)
 - [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限(12),跳过追加
