@@ -130,6 +130,7 @@ Singing Voice Synthesis (SVS) 从文本歌词和符号化乐谱 (musical score) 
 - TCSinger (Zhang et al., 2024c): RVQ 风格迁移 + 多层级风格控制
 - PromptSinger (Wang et al., 2024a): 自然语言 prompt 控制歌声
 - TechSinger (Guo et al., 2025b): CFG 歌唱技巧控制 + flow matching
+- [[论文笔记/BiSinger|BiSinger]] (Zhou et al., 2023): 早期中英双语 SVS,CMU 音素统一表示 + SVC 跨语言数据增强 + 语音 pitch shift 伪歌声
 
 ## 相关概念
 
