@@ -9,6 +9,7 @@
 - [review/auto] [[ShanghainTTS]] — pass-with-fixes, 0 high, 1 medium, 2 low
 - [review/kb] [[ShanghainTTS]] — pass, 3 appends, 0 issues
 - [lint/local] ShanghainTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 342 — 建议抽空审核
 - [kb/search] [[METTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
 - [ingest/deep] [[METTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (EmotionControlinTTS 层级情感建模节追加, Cross-lingualVoiceCloning 跨语言+情感迁移节追加)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已超上限,改追加到正文
