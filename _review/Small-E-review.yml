@@ -1,0 +1,53 @@
+review:
+  paper: "Small-E"
+  note_path: "论文笔记/Small-E.md"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass"
+
+  principles:
+    可复述:
+      score: 9
+      status: pass
+      reason: "方法节详细解释了 LCLM 替代 transformer 的 WHY (attention 退化为对角)、GLA 选择的 WHY (throughput 略优)、PACA 三步机制的 HOW+WHY。速查可借鉴字段列出 3 个具体可迁移 idea。"
+    可信赖:
+      score: 9
+      status: pass
+      reason: "所有关键数字经 PDF 原文交叉验证无误。MOS/SMOS/throughput/ppl/skip/repeat 全部标注 [Table N] 出处。指标名使用正确。"
+    可区分:
+      score: 9
+      status: pass
+      reason: "方法节因果解释标注覆盖率高。多处明确标注 [论文原文] 和 [agent 解读],如 PACA 与 Location Sensitive Attention 的类比标注为 agent 解读。局限性中合理区分了论文未报告项 (标注 agent 解读) 和论文承认的局限。"
+    可定位:
+      score: 8
+      status: pass
+      reason: "KB 背景谱系定位清晰,明确了 Small-E 在 CodecLM → encoder-decoder + LCLM 的位置。创新判断有对比基准 (vs decoder-only 主流)。frontmatter concepts 中 Speech-TextAlignment 的语义匹配度略低 (KB 页面侧重 SpeechLM 模态对齐,而 PACA 是 TTS 内部的 monotonic alignment),但不构成误导。"
+    不污染:
+      score: 9
+      status: pass
+      reason: "KB 引用关系准确,无 factual error 或 overclaim。多个目标页 key_papers 已超上限,反向更新应跳过追加或改追加正文。"
+
+  issues:
+    - severity: low
+      type: "bad-linking"
+      location: "frontmatter concepts"
+      detail: "Speech-TextAlignment 在 KB 中定义为 SpeechLM 模态对齐 (SPIRIT-LM, Moshi 等跨模态表征对齐),而 Small-E 的 PACA 是 TTS 内部的 monotonic text-audio 位置对齐,语义重叠有限。"
+      suggestion: "可保留但标注为弱关联,或考虑替换为 Attention-basedTTS (如果更匹配)。当前不影响笔记质量。"
+    - severity: low
+      type: "template-compliance"
+      location: "frontmatter venue"
+      detail: "venue 标注为 'Interspeech 2024',从论文格式 (两栏、Index Terms) 推断合理,但未在 PDF 中找到明确的会议名称标识。"
+      suggestion: "可保留当前标注。如需精确,可搜索 Interspeech 2024 proceedings 确认。"
+
+  issue_summary:
+    high: 0
+    medium: 0
+    low: 2
+
+  cross_verification:
+    numbers_checked: 12
+    numbers_correct: 12
+    numbers_wrong: 0
+    details: "MOS 3.16±0.28 ✓, SMOS 3.08±0.30 ✓, YourTTS MOS 2.56±0.24 ✓, MetaVoice MOS 3.80±0.28 ✓, Original MOS 4.55±0.20 ✓, Vocos MOS 4.27±0.21 ✓, throughput 316/195 kT/s ✓, ppl 18.33/19.68 ✓, skip 1 vs 5 ✓, repeat 1 vs 9 ✓, 64M params ✓, 5000h data ✓"
+
+  learning_signals: []
