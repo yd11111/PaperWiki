@@ -1,0 +1,45 @@
+paper: AutomatedTTSDataset
+reviewer: auto
+date: 2026-06-06
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 7
+    rationale: "方法节清晰解释了四个模块的 HOW 和 WHY,phoneme-balanced 选句、VAD+Levenshtein 匹配、两轮 QA 的机制都有因果解释。但选句算法的 divergence 度量未从论文中提取具体定义(论文本身也未明确),agent 解读合理标注。作为工具/系统论文,机制解释已足够支撑复述。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字均有出处标注([Table 3], [Table 4], [§4.1] 等)。与 PDF 原文交叉验证: 匹配率 94.9%-99.8% 正确 [Table 3]; 编辑率 1.25%-11.38% 正确 [Table 4]; 丢弃率 0-0.15% 正确 [Table 4]; 600k 词目标和 2.75 词/秒 正确 [§4.1]; 88kHz 采样率正确 [Table 2]; Levenshtein 阈值 0.2 和 20% 正确 [§4.2]。速查卡片指标含具体数字+数据集+出处。无方向性错误。"
+  distinguishable:
+    score: 8
+    rationale: "论文原文与 agent 解读标注清晰,使用 [论文原文] 和 [agent 解读] 前缀区分。agent 解读合理: phoneme 选句的随机化 vs 确定性对比分析、规模受限的判断、单 speaker 推断等都标注了来源。无断言式推断。"
+  positionable:
+    score: 8
+    rationale: "KB 背景节定位精准: 明确区分受控录音 vs in-the-wild 两条路线,与 Emilia 形成对比。Whisper 失败案例的定位与 TTSEvaluation 的关联有价值。创新判断'工程集成而非算法创新'准确。frontmatter concepts/models 字段正确。"
+  non_polluting:
+    score: 9
+    rationale: "不涉及新概念页创建(论文不引入新概念/模型)。concepts/models 挂接合理: PhonemeRepresentation(phoneme 分布选句), TTSEvaluation(WER-based QA), Text-to-SpeechPipeline(一般 TTS 上下文), Whisper(ASR 工具)。反向更新仅为追加 key_papers,风险极低。"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "方法节 - Phoneme-balanced 迭代选句"
+    detail: "论文提到用 'divergence' 度量子集与语料库的 phoneme 分布差异,但未指明具体用什么度量(KL divergence? Jensen-Shannon? L2?)。笔记中标注了'论文未说明',但可以更明确地标注为 [论文未指定]。"
+    suggestion: "将'divergence 用什么度量? KL? 未说明'改为在方法节中直接标注 [论文未指定具体 divergence 度量]。"
+  - type: template-compliance
+    severity: medium
+    location: "实验表格"
+    detail: "实验表格 Baseline 列全部为空或为'说明'文字,不符合模板预期的对比格式。但这是因为本文是工具论文而非模型论文,没有传统的 baseline 对比。"
+    suggestion: "可在实验节开头说明'本文为工具/系统论文,实验评估的是工具效率而非模型性能,因此无传统 baseline 对比'。当前已在点评中提及,但实验节本身缺少此说明。"
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片 - 指标"
+    detail: "速查卡片指标字段未标注 Table 编号(仅在实验表格中标注了)。"
+    suggestion: "在速查卡片指标中追加 [Table 3][Table 4] 标注。"
+  - type: traceability-gap
+    severity: low
+    location: "局限性第6点"
+    detail: "'单 speaker per language' 标注为 [agent 解读,基于实验设置],但论文 §5.5 确实提到每种语言需要 native speaker(复数形式提到 'speakers' 但实验中每语言似乎只有一两位 voice actor)。这个推断合理但可以更精确。"
+    suggestion: "改为 '论文未明确报告每语言的 voice actor 数量,但实验数据(每语言 1-2 个文件)暗示人数有限 [agent 解读]'"
+
+learning_signals: []

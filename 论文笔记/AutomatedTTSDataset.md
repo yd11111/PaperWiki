@@ -165,3 +165,19 @@ voice actor 可选两种录音模式:
 2. **Whisper verbatim 问题的意识**: 在需要忠实转录(非语义理解)的管线中,Whisper 的 auto-correction 可能是 bug 而非 feature → 选择 ASR 时需区分"理解型"与"忠实型"使用场景
 3. **Phoneme divergence 驱动的选句**: 用全语料库的 phoneme 分布作为 target,迭代采样使子集分布逼近 → 可迁移到任何需要平衡覆盖的数据子集选择问题(不限于语音)
 4. **批量录音的 VAD+Levenshtein 匹配**: 解决"一个音频文件包含多个句子"的自动切分与对齐问题,阈值设计(edit ratio < 0.2, length diff < 20%)有实操参考价值
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四模块机制清晰,因果解释充分,divergence 度量论文本身未指定已标注 |
+> | 可信赖 | pass | 关键数字全部与 PDF 交叉验证通过,出处标注覆盖率高 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注清晰,无断言式推断 |
+> | 可定位 | pass | KB 背景受控录音 vs in-the-wild 定位精准,Emilia 对比有价值 |
+> | 不污染 | pass | 不涉及新概念页创建,反向更新仅追加 key_papers |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/AutomatedTTSDataset-review.yml`
