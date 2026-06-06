@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Amphion]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[VITS]](pending-review), [[NaturalSpeech2]](pending-review), [[BigVGAN]](pending-review), [[TTSEvaluation]](pending-review)
+- [ingest/deep] [[Amphion]] — 精读, kb_sources=6, 新建 0, 追加 2 (BigVGAN 追加 key_papers + 使用系统, NaturalSpeech2 追加 key_papers)
+- [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),跳过追加
+- [skip/update] [[VITS]] — key_papers 已达上限(14),跳过追加
+- [skip/update] [[TTSEvaluation]] — key_papers 已达上限(27),跳过追加
+- [lint/local] Amphion — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 380
 - [kb/search] [[SALMONN]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓ | 过滤: [[ModalityAdaptationforSpeechLLM]](pending-review), [[AudioUnderstanding]](pending-review), [[Audio-LanguagePretraining]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Whisper]](pending-review)
 - [ingest/deep] [[SALMONN]] — 精读, kb_sources=6, 新建 0, 追加 4 (ModalityAdaptation, Audio-LanguagePretraining, Speech-LLMIntegrationTaxonomy, Whisper 追加 key_papers); SpeechLanguageModel 和 AudioUnderstanding key_papers 已达上限,跳过
 - [lint/local] SALMONN — 通过
