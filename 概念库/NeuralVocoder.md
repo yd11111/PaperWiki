@@ -163,4 +163,4 @@ Neural vocoder 在 SVS 级联系统中承担与 TTS 相同的波形合成角色,
 
 ## 演进
 
-STRAIGHT/WORLD (SPSS vocoder) → WaveNet (2016, AR) → Parallel WaveNet (2017, distilled) → WaveGlow (2018, flow) → MelGAN/HiFi-GAN (2019-20, GAN主流) → DiffWave (2020, diffusion) → BigVGAN (2023, large-scale GAN) → Vocos (2023, iSTFT-based) → PeriodWave (2024, flow matching vocoder)
+STRAIGHT/WORLD (SPSS vocoder) → WaveNet (2016, AR) → Parallel WaveNet (2017, distilled) → WaveGlow (2018, flow) → MelGAN/HiFi-GAN (2019-20, GAN主流) → DiffWave (2020, diffusion) → BigVGAN (2023, large-scale GAN) → Vocos (2023, iSTFT-based) → PeriodWave (2024, flow matching vocoder) → **Vocoder-free**: [[论文笔记/WavTTS|WavTTS]] (2026, 直接在原始波形空间做 flow matching 端到端 TTS,完全消除 vocoder 环节)

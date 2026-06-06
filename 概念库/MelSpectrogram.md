@@ -70,3 +70,5 @@ MGC/MCC+BAP+F0 (SPSS时代) → Linear Spectrogram (Tacotron, 2017) → **Mel Sp
 ## Mel Spectrogram 的 compounding error 问题
 
 [[论文笔记/LongCat-AudioDiT|LongCat-AudioDiT]] (Meituan, 2026) 实验量化了 mel spectrogram 作为中间表示的 compounding error: 在相同 1B DiT 下,Wav-VAE (直接编码波形) 相比 Mel-VAE,speaker similarity 从 0.706→0.812 (Seed-ZH), 0.696→0.787 (Seed-Hard) [Table 3]。论文指出 mel 丢弃的相位和高频细节对 voice cloning 至关重要,latent→mel→waveform 的两次转换放大了预测误差。
+
+[[论文笔记/WavTTS|WavTTS]] (Chen et al., 2026) 进一步在同一 flow matching 框架下对比了波形 vs mel spectrogram 直接建模: 波形模型收敛更快 (200K 步 WER 4.10% vs mel 9.76%) 且最终 UTMOS 更高 (3.93 vs 3.68),同时保持相当的 SIM-o [Fig 6]。不过 WavTTS 仍将 multi-scale mel loss 作为辅助监督,表明 mel spectrogram 的感知对齐价值在训练信号层面仍不可替代。

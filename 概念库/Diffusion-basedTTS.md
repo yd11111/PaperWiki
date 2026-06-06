@@ -141,4 +141,4 @@ Diffusion model 在 SVS 领域同样发挥重要作用 [Pan et al., 2026]:
 
 ## 演进
 
-Tacotron (AR attention, 2017) --> FastSpeech (NAR, 2019) --> Diff-TTS + Grad-TTS (diffusion 声学模型, 2021) --> ProDiff + DiffGAN-TTS (高效化, 2022) --> Guided-TTS 2 (零样本多说话人, 2022) --> **Flow Matching 取代 diffusion 成为主流** (Voicebox 2023, Matcha-TTS 2024, F5-TTS 2024) --> DMOSpeech (DMD2 蒸馏 + 端到端 metric 优化, 2024) --> Hybrid LLM + Flow (CosyVoice, 2024) --> Waveform Latent Diffusion (LongCat-AudioDiT, 2026, 纯 NAR diffusion 在 waveform latent 空间建模,消除 mel 中间表示)
+Tacotron (AR attention, 2017) --> FastSpeech (NAR, 2019) --> Diff-TTS + Grad-TTS (diffusion 声学模型, 2021) --> ProDiff + DiffGAN-TTS (高效化, 2022) --> Guided-TTS 2 (零样本多说话人, 2022) --> **Flow Matching 取代 diffusion 成为主流** (Voicebox 2023, Matcha-TTS 2024, F5-TTS 2024) --> DMOSpeech (DMD2 蒸馏 + 端到端 metric 优化, 2024) --> Hybrid LLM + Flow (CosyVoice, 2024) --> Waveform Latent Diffusion (LongCat-AudioDiT, 2026, 纯 NAR diffusion 在 waveform latent 空间建模,消除 mel 中间表示) --> Raw Waveform Flow Matching ([[论文笔记/WavTTS|WavTTS]], 2026, 直接在原始波形空间做 flow matching,无需任何 vocoder/VAE/codec,WER 1.50%/UTMOS 3.92 接近 SOTA 但 SIM-o 0.65 落后 latent 模型)
