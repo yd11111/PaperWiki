@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[METTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
+- [ingest/deep] [[METTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (EmotionControlinTTS 层级情感建模节追加, Cross-lingualVoiceCloning 跨语言+情感迁移节追加)
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已超上限,改追加到正文
+- [review/auto] [[METTS]] — pass-with-fixes, 0 high, 1 medium (CER/WER 单位已修正), 3 low
+- [lint/local] METTS — 通过
 - [kb/search] [[UnitSpeech]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[DiffusionModel]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
 - [ingest/deep] [[UnitSpeech]] — 精读, kb_sources=6, 新建 0, 追加 2 (SpeakerAdaptation Untranscribed Speech 节追加, HuBERT key_papers 追加)
 - [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12),改追加到正文
