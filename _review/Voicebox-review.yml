@@ -1,0 +1,67 @@
+review:
+  paper: "Voicebox"
+  note_path: "论文笔记/Voicebox.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节包含详细的因果解释(WHY),每个关键设计选择(OT path vs diffusion, masked loss, duration 解耦, CFG)都有'为什么选这个'的回答,并引用消融数据支撑。速查卡片的'可借鉴'列出了 6 个具体可迁移 trick。"
+    trustworthy:
+      score: 9
+      reason: "数字型 claim 标注覆盖率高(Table/Fig/Section 引用),指标名使用正确(WER/SIM-o/SIM-r/FSD/QMOS/SMOS 无混淆),速查卡片指标字段含具体数字+数据集+出处。无方向性错误。"
+    distinguishable:
+      score: 8
+      reason: "因果解释基本都标注了[论文原文]或[agent 解读],来源标注覆盖率约 85%。方法节中 ghost silence 和 word-position phone 的解读标注为[agent 解读]。有个别推断性表述可更明确标注来源。"
+    positionable:
+      score: 9
+      reason: "KB 背景节有具体谱系定位(CFM 演进线中的位置),创新判断有明确对比基准(与后续 CosyVoice/F5-TTS/E2 TTS 对比),与 NS2 的同期对比详细且准确。frontmatter 字段完整。"
+    non_polluting:
+      score: 9
+      reason: "frontmatter concepts/models/tasks 挂接合理: models 列 NaturalSpeech2 作为对比 baseline 而非后续系统。不需要新建概念页(所有相关概念已存在)。反向更新仅为 append key_papers,不改 status,安全。"
+
+  checklist:
+    reproducible:
+      mechanism_not_summary: pass
+      design_choice_why: pass
+      reusable_specificity: pass
+    trustworthy:
+      claim_traceability: pass
+      metric_names_correct: pass
+      quick_card_metrics: pass
+      no_directional_error: pass
+    distinguishable:
+      source_annotation: pass
+      source_coverage: pass-with-note  # ~85%, 达标但个别可改善
+      no_assertion_without_qualifier: pass
+      strong_claims_supported: pass
+    positionable:
+      kb_lineage_specific: pass
+      innovation_judgment_baseline: pass
+      fields_present: pass
+      fields_semantically_correct: pass
+      quick_card_complete: pass
+    non_polluting:
+      new_concept_admission: not-applicable  # 不需要新建概念页
+      dedup_check: not-applicable
+      reverse_update_accuracy: pass
+      reverse_update_classification: pass
+
+  issues:
+    - type: traceability-gap
+      severity: low
+      location: "方法 > 关键设计选择 > 6. Ghost Silence"
+      detail: "Ghost silence 和 word-position-dependent phone 的描述标注为[agent 解读],但实际上这些是论文 Appendix A.2 的明确描述,应标注为[论文原文]"
+      suggestion: "将[agent 解读]改为[论文原文]并添加[Appendix A.2]出处"
+    - type: traceability-gap
+      severity: low
+      location: "速查 > 路线"
+      detail: "路线描述缺少出处标注"
+      suggestion: "路线是对整体架构的概括,可接受不标注,但可加[§3.2-3.4]"
+
+  conclusion: pass
+  summary: "笔记质量优秀。5 项原则均满足,仅 2 个 low severity 问题(出处标注细节)。方法机制解释深入,消融实验引用充分,KB 定位准确。可直接进行反向更新。"
+
+  learning_signals: []

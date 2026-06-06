@@ -122,7 +122,7 @@ Audio model: 24 层, 16 heads, 1024/4096 embed/FFN, 330M 参数 [§5.1]。关键
 
 **6. Ghost Silence 和 Word-Position-Dependent Phone**
 
-[agent 解读] 这两个工程技巧被后续工作较少提及,但实际上很关键:
+[论文原文] 这两个工程技巧被后续工作较少提及,但实际上很关键 [Appendix A.2]:
 - Ghost silence: 在词间插入 duration=0 的 silence token, 让 duration model 学习"是否需要停顿" [Appendix A.2]
 - Word-position phone: 添加 _B/_E/_I/_S 后缀标记词内位置, 帮助 audio model 识别词边界 [Appendix A.2]
 
@@ -217,3 +217,19 @@ Audio model: 24 层, 16 heads, 1024/4096 embed/FFN, 330M 参数 [§5.1]。关键
 5. **FSD (Frechet Speech Distance)**: 用 wav2vec 2.0 特征计算 Frechet distance 评估语音多样性和质量, 论文详细验证了 FSD 相比 FAD 对 speech diversity 更敏感 [Appendix C.1]。
 
 6. **合成数据验证方式**: 用 TTS 合成数据训练 ASR 模型并在真实数据上评测, 作为衡量合成语音真实性的间接指标 [§5.5]。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法机制解释深入,每个设计选择有 WHY + 消融支撑 |
+> | 可信赖 | pass | claim 标注覆盖率高,指标名正确,无方向性错误 |
+> | 可区分 | pass | 因果解释来源标注覆盖率 ~85%,达标 |
+> | 可定位 | pass | KB 背景谱系定位准确,创新判断有对比基准 |
+> | 不污染 | pass | frontmatter 挂接合理,反向更新为安全 append |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/Voicebox-review.yml`
