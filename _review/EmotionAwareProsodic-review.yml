@@ -1,0 +1,87 @@
+review:
+  paper: "EmotionAwareProsodic"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "note-review"
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节包含清晰的因果解释(WHY选RoBERTa/WHY文本预测情感),架构三模块拆解到位,训练策略完整。速查卡片可借鉴字段具体(SMC分析方法+前端情感感知思路)。"
+  trustworthy:
+    score: 9
+    reason: "所有数字型claim均有[Table N]/[§X.X]标注,覆盖率接近100%。指标名正确(F1/Precision/Recall/EMOS)。速查指标字段含具体数字+数据集名+来源。"
+  distinguishable:
+    score: 8
+    reason: "方法节每个设计选择均标注[论文原文]或[agent解读],覆盖率>80%。局限性节清晰区分论文事实和agent推测。无断言式overclaim。"
+  positionable:
+    score: 8
+    reason: "KB背景节有具体谱系定位(Prosody tags路线+Pause维度),创新判断有对比基准(声学层vs文本前端)。frontmatter字段完整。"
+  non-polluting:
+    score: 9
+    reason: "无新建概念页需求。反向更新仅为追加key_papers到已有页面,无实质修改风险。"
+
+checklist:
+  reproducible:
+    - item: "方法节包含因果解释(WHY)"
+      status: pass
+    - item: "关键设计选择回答why-not-that"
+      status: pass
+    - item: "速查可借鉴字段具体可迁移"
+      status: pass
+
+  trustworthy:
+    - item: "数字型claim出处标注覆盖率>=80%"
+      status: pass
+      detail: "所有Table引用、§引用齐全"
+    - item: "指标名正确"
+      status: pass
+    - item: "速查指标字段含数字+数据集+来源"
+      status: pass
+    - item: "无方向性错误"
+      status: pass
+
+  distinguishable:
+    - item: "因果解释标注来源"
+      status: pass
+    - item: "来源标注覆盖率>=80%"
+      status: pass
+    - item: "无断言式推断"
+      status: pass
+
+  positionable:
+    - item: "KB背景有具体谱系定位"
+      status: pass
+    - item: "创新判断有对比基准"
+      status: pass
+    - item: "frontmatter字段存在且非空"
+      status: pass
+    - item: "frontmatter字段语义正确"
+      status: pass-with-note
+      detail: "venue写'ICASSP 2024',但arXiv提交日期为2023-09-21,论文本身未标注发表venue。从引用格式和页面布局看是ICASSP投稿格式,但无法确认是否被录用。"
+      suggestion: "venue改为arXiv preprint或标注(submitted to ICASSP 2024)"
+      severity: low
+    - item: "速查5字段有实质内容"
+      status: pass
+
+  non-polluting:
+    - item: "反向更新无factual-error"
+      status: pass
+    - item: "反向更新正确分类"
+      status: pass
+
+issues:
+  - id: 1
+    type: "template-compliance"
+    severity: low
+    location: "frontmatter venue"
+    detail: "venue写'ICASSP 2024',论文arXiv版本未标注正式发表venue,无法从PDF确认是否被ICASSP录用"
+    suggestion: "改为'arXiv preprint'或'ICASSP 2024 (unconfirmed)'"
+
+conclusion: "pass"
+issue_summary:
+  high: 0
+  medium: 0
+  low: 1
+
+learning_signals: []

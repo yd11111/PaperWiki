@@ -150,3 +150,19 @@ EmoPP 提出了一个合理的 motivation: prosodic phrasing 应该考虑情感�
 1. **情感-韵律相关性分析方法**: 用 SMC 在平行语料 (同文本不同情感) 上量化情感对 phrase break 的影响,可推广到分析情感对 duration/pitch/energy 等其他韵律维度的影响
 2. **前端情感感知**: 在 TTS pipeline 的文本前端而非声学后端引入情感信息,可与当前的声学层情感控制方法形成互补
 3. **自动 phrase break 标注 pipeline**: MFA + 静音阈值的自动标注方法虽然简单,但可快速为任意语音数据集生成 phrase break 标注
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释清晰,设计选择回答了 WHY |
+> | 可信赖 | pass | 数字 claim 出处标注覆盖率接近 100% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >80% |
+> | 可定位 | pass | KB 背景谱系定位具体 (Prosody tags + Pause 维度) |
+> | 不污染 | pass | 仅追加 key_papers,无实质修改风险 |
+> 
+> Issues: 1 (high: 0, medium: 0, low: 1)
+> 详见 `_review/EmotionAwareProsodic-review.yml`
