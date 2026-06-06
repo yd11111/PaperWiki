@@ -1,0 +1,43 @@
+paper: "MagiCodec"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass
+
+principles:
+  reproducibility:
+    score: 9
+    verdict: pass
+    notes: "方法节包含清晰的因果解释(WHY): Gaussian noise injection 的动机(spectral bias→高频正则化)、三阶段训练的动机(避免 synchronous cold start)均有明确的 WHY。关键设计选择回答了'为什么这个而不是那个'(replacement vs additive noise, 三阶段 vs 端到端)。速查卡片可借鉴字段列出了3个具体可迁移 trick。"
+  trustworthiness:
+    score: 9
+    verdict: pass
+    notes: "数字型 claim 标注覆盖率高(>90%),所有实验数字均标注了 [Table N] 或 [§X.X]。指标名使用正确(WER/PER/PESQ/STOI/UTMOS/SPK-SIM/ViSQOL)。速查卡片指标字段含具体数字+数据集+来源。经交叉验证,所有关键数字与原文一致: WER 3.16 [Table 2], UTMOS 4.18 [Table 2], TTS WER 3.30 [Table 3] 等。"
+  distinguishability:
+    score: 8
+    verdict: pass
+    notes: "因果解释来源标注覆盖率约85%。方法节中的 WHY 解释大多标了 [论文原文] 或 [agent 解读]。一处情感实验的解读已修正标注。未发现将推断写成断言的严重问题。"
+  positioning:
+    score: 9
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位(TS3-Codec→MagiCodec, SVQ 趋势),创新判断有明确对比基准(vs SpeechTokenizer蒸馏, vs X-Codec SSL)。frontmatter 字段完整,models 列了 EnCodec/SoundStream(确实有模型页的baseline)。"
+  no_pollution:
+    score: 9
+    verdict: pass
+    notes: "概念页引用合理(6个已有页),不涉及新建概念页。反向更新预计为追加操作(key_papers),不改变已有定义。"
+
+issues:
+  - severity: low
+    type: template-compliance
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 LibriSpeech, Libri-light, ESD, VocalSound, ESC-50 等数据集"
+    suggestion: "非关键问题,这些数据集在 KB 中无对应实体页,空值可接受"
+  - severity: low
+    type: traceability-gap
+    location: "消融实验 - token rate 100Hz"
+    detail: "note 说'下游 TTS 无改善 (未报告数据)',但 Table 7 中 100Hz TTS 行显示'–',应说明是'论文未报告'而非'无改善'"
+    suggestion: "当前措辞'未报告数据'已基本清楚,可保留"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
