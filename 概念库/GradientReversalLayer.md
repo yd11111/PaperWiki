@@ -4,7 +4,7 @@ title: "Gradient Reversal Layer"
 aliases: [GRL, 梯度反转层, Domain-Adversarial Training]
 category: "training-technique"
 tags: [adversarial-training, disentanglement, domain-adaptation, TTS]
-key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]", "[[论文笔记/AgentSteerTTS|AgentSteerTTS]]", "[[论文笔记/ZET-Speech|ZET-Speech]]", "[[论文笔记/USAT|USAT]]"]
+key_papers: ["[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/DiEmo-TTS|DiEmo-TTS]]", "[[论文笔记/DisCo-Speech|DisCo-Speech]]", "[[论文笔记/SelfTTS|SelfTTS]]", "[[论文笔记/AgentSteerTTS|AgentSteerTTS]]", "[[论文笔记/ZET-Speech|ZET-Speech]]", "[[论文笔记/USAT|USAT]]", "[[论文笔记/HierarchicalEmotionControl|Hierarchical Emotion Control]]"]
 origin_paper: ""
 related_concepts: ["[[SpeechTokenizer]]"]
 status: pending-review
@@ -51,6 +51,8 @@ Gradient Reversal Layer (GRL) 是一种对抗训练技术,前向传播时为恒�
 - 不依赖外部标签,避免了当 emotion-speaker 存在统计相关性时 CE-based GRL 失效的问题
 - 同样的 cosine-based GRL 还施加在 normalizing flow 输出 zp 上(通过 Conv Processor),确保 prior latent 不含 speaker/emotion 信息
 - CKA 0.0139 (vs CE-GRL 0.0336),验证了更强的解耦效果 [Table 2]
+
+在 [[论文笔记/HierarchicalEmotionControl|Hierarchical Emotion Control]] (Inoue et al., 2024) 中,GRL 用于层级情感分布 (Hierarchical ED) 提取器中的 speaker/gender 解耦。在共享 feature extractor 之后接 speaker classifier 和 gender classifier,GRL gradient scale 设为 0.5。训练时固定 feature extractor 先训 classifier 100 epochs 保证稳定,然后联合训练。选择标准: emotion classification 验证准确率最高且 speaker/gender 预测接近随机。消融显示 GRL 对 EPR 模型提升显著: Emotion Score 0.369 (w/ GRL) vs 0.278 (w/o GRL), MIG 0.089 vs 0.530 [Table V, IX]。与 IndexTTS2 的单向 emotion-speaker GRL 类似,但增加了 gender 维度的解耦。
 
 ## 相关概念
 

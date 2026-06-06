@@ -142,6 +142,10 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 
 规则情感合成 (HMM, 2003) → Emotion embedding (2021) → 多尺度层级建模 (MsEmoTTS, 2022) → 跨说话人情感迁移 (2022) → 韵律嵌入分解 (Daisy-TTS, 2024) → DPO/RLHF 对齐 (Emo-DPO, 2024) → 零样本情感 (EmoSphere++, 2024) → LLM 自由文本情感 (EmoVoice, 2025) → 副语言行为控制 (NVSpeech, 2025) → LLM prompt 混合情感 (PUE, 2025) → ADV 维度解耦控制 (UDDETTS, 2025) → Training-free 激活 steering (EmoSteer-TTS, 2025) → 结构化 AI 反馈 (RLAIF-SPA, 2025) → Self-training 词级情感控制 (WeSCon, NeurIPS 2025) → Training-free attention mask intra-utterance 多情感 (TED-TTS, 2026) → 双空间跨架构 plug-and-play (DUET, 2026) → SAE 稀疏特征 steering (SAE-Emotion, ICML 2026)
 
+## DNN-based 层级 ED + Flow Matching (HierarchicalEmotionControl)
+
+[[论文笔记/HierarchicalEmotionControl|Hierarchical Emotion Control]] (Inoue et al., 2024) 是同组 Multi-Step Hierarchical ED (2025) 的前序 journal 版本,将层级 ED 提取从 SVM 升级为 DNN 分类器,并在 MatchaTTS (OT-CFM) 上构建情感 TTS 框架。核心贡献: (1) Emotion Presence Recognizer (EPR) — 将多分类 SER 拆分为 4 个独立二分类器,各判断"是否存在某情感",输出非竞争的连续强度值; (2) OpenSMILE (word/phoneme) + WavLM (utterance) 混合声学特征,利用两者在不同粒度的互补优势; (3) GRL (gradient scale 0.5) 对抗训练解耦 speaker/gender 信息。EPR + Combination 配置在 ESD 英文子集上全面优于 SVM-based HED baseline: Emotion Score 0.369 vs 0.120, MIG 0.089 vs 1.843 [Table III, IX]。与后续 Multi-Step 版本的区别: 本文为单步并行提取三级 ED,Multi-Step 升级为 utterance→word→phoneme 顺序预测。
+
 ## 多步层级情感分布预测 (Multi-Step Hierarchical ED)
 
 [[论文笔记/Multi-StepHierarchicalED|Multi-Step Hierarchical ED]] (Inoue et al., 2025) 提出多步预测框架,将情感量化为 utterance/word/phoneme 三级连续分布向量 (Hierarchical ED),并按 utterance→word→phoneme 顺序逐级预测,使高层情感上下文引导底层韵律。ED 通过 OpenSMILE + SVM 排序函数从音频中提取,支持训练时自动标注和推理时用户手动调整。在 FastSpeech 2 上验证了两种集成方式 (External 模型无关 / VA 内嵌),Multi-Step 在 WER (2.45% vs 4.61%) 和 MUSHRA 自然度上均优于 Single-Step baseline。BWS 测试中情感可控性全面优于 MsEmoTTS。关键发现: ED 数值差异相近但合成质量差异显著,说明多步预测学到的是层级依赖关系而非更准确的数值。
