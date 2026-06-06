@@ -6,6 +6,7 @@
 - [review/auto] [[LSLM]] — pass, 0 high 0 medium 3 low
 - [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(15),改追加到正文端到端系统段
 - [lint/local] LSLM — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 373
 - [kb/search] [[Voicebox]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[NaturalSpeech2]](pending-review), [[DurationPredictor]](pending-review)
 - [ingest/deep] [[Voicebox]] — 精读, kb_sources=6, 新建 0, 追加 2 (Non-autoregressiveTTS 演进线, DurationPredictor 现代 duration section)
 - [review/auto] [[Voicebox]] — pass, 0 high 0 medium 2 low
