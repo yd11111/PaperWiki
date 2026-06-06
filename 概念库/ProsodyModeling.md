@@ -169,6 +169,8 @@ NVSpeech (Liao et al., 2025) 将韵律建模扩展至副语言发声维度 — �
 
 **评估标准化**: [[论文笔记/NV-Bench|NV-Bench]] (Ni et al., 2026) 为 NV 生成能力建立了首个标准化 benchmark,含 1,651 条 paired GT 数据和 PCER (Paralinguistic CER) 指标。NV-CV3 (CosyVoice 3 微调) PCER 27.69% (ZH single-label),NV-FlexiVoice FAD 0.29 (最接近真实分布) [Table 4, 5]。PCER 与人类 IMOS 评分显著相关 (rho=-0.65),验证了自动评估的可靠性。
 
+**呼吸音检测**: [[论文笔记/FrameWiseBreath|Yang et al. (Interspeech 2024)]] 提出基于 Conformer + 自训练的帧级呼吸音检测模型,解决 PV 合成上游的自动检测问题。无需人工标注: 先用规则方法 (Duration/ZCR/VMS/NA-VMS 四特征阈值) 获得高精度初始标注 (precision 0.982),再通过伪标签迭代扩展训练集。Conformer + 下采样/上采样架构实现 10ms 帧级检测 (IoU 0.836, vs 基线 0.710) [Table 3a]。将检测到的 breath marks 插入 VITS 训练文本后,合成呼吸自然度 MOS 3.55 (vs 无标注 VITS 3.34) [Table 4],且能为训练数据中缺乏呼吸音的说话人转移呼吸能力。与 NVSpeech 的合成端互补: 本文提供检测工具,NVSpeech 式方法消费检测结果。
+
 ## SSL 模型中的超音段韵律表征
 
 de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模型 (wav2vec 2.0, HuBERT, WavLM) 对超音段特征 (stress, tone, accent) 的内在表征: 超音段表征在中间层 (8-9) 最强,且是抽象的语言学类别 (与 F0 追踪能力不直接相关)。语言特异性仅在 context network (Transformer 层) 出现,CNN 层对所有语言一致。ASR fine-tuning 增强词级韵律 (stress, tone) 但对短语级 accent 效果弱。详见 [[论文笔记/SSLSuprasegmentalAnalysis|SSL Suprasegmental Analysis]]。
