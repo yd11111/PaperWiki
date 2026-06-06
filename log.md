@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[TextAwareContextAwareTTS]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[VITS]](pending-review), [[HuBERT]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
+- [ingest/deep] [[TextAwareContextAwareTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (GlobalStyleTokens 正文)
+- [skip/update] [[StyleTransferinTTS]] — key_papers 已超上限(24)
+- [skip/update] [[ProsodyModeling]] — key_papers 已超上限(51)
+- [skip/update] [[VITS]] — key_papers 已超上限(14)
+- [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12), 改追加到正文
+- [lint/local] TextAwareContextAwareTTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[Small-E]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[EnCodec]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[Speech-TextAlignment]](pending-review)
 - [ingest/deep] [[Small-E]] — 精读, kb_sources=6, 新建 0, 追加 1 (CodecLanguageModel 正文代表系统)
 - [skip/update] [[CodecLanguageModel]] — key_papers 已超上限(37), 改追加到正文代表系统
