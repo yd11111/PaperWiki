@@ -1,0 +1,42 @@
+review:
+  paper: "UniSRM"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+  principles:
+    reproducible:
+      score: 8
+      reason: "方法节详细解释了 RCR-GRPO 的 WHY (防止 shallow reasoning) 和 HOW (dimension-wise sign consistency),速查卡片具体可操作。四任务统一框架的设计逻辑清晰。"
+    trustworthy:
+      score: 8
+      reason: "关键数字均标注出处 (Table 1/2/7/9/10/11),与 PDF 原文交叉验证一致。指标使用正确 (acc/PCC 不混淆)。局限性分析坦诚且有具体论据。"
+    distinguishable:
+      score: 8
+      reason: "因果解释明确标注 [论文原文] 和 [agent 解读],覆盖率高。关键推断 (如 T1 绝对性能有限、LLM-as-annotator 依赖) 均有 [agent 解读] 标记。"
+    positionable:
+      score: 9
+      reason: "KB 背景节定位清晰: 对比 SpeechJudge (单任务 naturalness)、GSRM (feature-grounded)、TTS-PRISM (multi-dimensional schema),准确指出 UniSRM 填补 task coverage + reasoning supervision 的空白。"
+    non-polluting:
+      score: 8
+      reason: "概念引用合理 (TTSEvaluation, DifferentiableRewardOptimization, Audio-LanguagePretraining),无过度 claim。反向更新计划为追加 key_papers,安全。"
+
+  issues:
+    - type: "traceability-gap"
+      severity: "low"
+      location: "方法: 数据构建部分"
+      detail: "T2 数据来源 QualiSpeech 的引用未标注具体章节"
+      suggestion: "补充 [§3, Task 2]"
+    - type: "traceability-gap"
+      severity: "low"
+      location: "训练策略"
+      detail: "SFT 4 GPU-hours 和 GRPO 480 GPU-hours 数字未标注出处"
+      suggestion: "补充 [Appendix D]"
+
+  summary:
+    total_issues: 2
+    high: 0
+    medium: 0
+    low: 2
+
+  learning_signals: []

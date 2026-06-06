@@ -186,3 +186,19 @@ R = λ_fmt * R_fmt + λ_acc * R_acc + λ_rc * R_rc  (λ_fmt = λ_acc = λ_rc = 1
 2. **Cyclic conflict filtering**: 数据清洗时移除 A>B, B>C, C>A 循环矛盾,适用于任何 pairwise preference 数据集构建
 3. **Hard negative 构造策略**: T3 的 emotion mismatch + TTS negative, T4 的 text/audio/mixed 三类 negative,均是系统性的 hard negative 设计,可应用于对话/风格评估的数据构建
 4. **四任务统一为条件生成**: 不同评估任务共享 <think>+<answer> 格式,仅通过 system prompt 区分任务,实现参数共享和跨任务知识迁移
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | RCR-GRPO 的 WHY/HOW 解释清晰,速查卡片具体 |
+> | 可信赖 | pass | 关键数字均标注出处,与 PDF 交叉验证一致 |
+> | 可区分 | pass | 因果解释来源标注覆盖率高,[论文原文]/[agent 解读] 区分清晰 |
+> | 可定位 | pass | KB 背景定位准确,与 SpeechJudge/GSRM/TTS-PRISM 对比清楚 |
+> | 不污染 | pass | 概念引用合理,反向更新均为追加操作 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/UniSRM-review.yml`
