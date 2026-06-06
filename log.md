@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[JointDialogueSpeech]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Text-to-SpeechPipeline]](pending-review), [[PhonemeRepresentation]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Full-duplexSpokenDialogue]](pending-review)
+- [ingest/deep] [[JointDialogueSpeech]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling LLM-based PSP 段追加)
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,改追加到正文
+- [review/auto] [[JointDialogueSpeech]] — pass-with-fixes, 0 high, 1 medium, 2 low
+- [review/kb] [[JointDialogueSpeech]] — pass, 0 issues
+- [lint/local] JointDialogueSpeech — 通过
 - [kb/search] [[DiffProsody]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[DiffusionModel]](pending-review), [[Diffusion-basedTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
 - [ingest/deep] [[DiffProsody]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling 生成模型代表工作追加)
 - [skip/update] [[ProsodyModeling]] — key_papers 已达上限,改追加到正文
