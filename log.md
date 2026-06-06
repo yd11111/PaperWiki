@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[JoyVoice]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CosyVoice3]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Diffusion-basedTTS]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
+- [ingest/deep] [[JoyVoice]] — 精读, kb_sources=6, 新建 0, 追加 3 (LLM-basedTTS 追加 Dialogue section, CosyVoice3 追加 key_papers, Zero-shotSpeechSynthesis 追加 SOTA)
+- [skip/update] [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[Diffusion-basedTTS]], [[DifferentiableRewardOptimization]], [[SpeakerEmbedding]], [[CosyVoice2]] — key_papers 已达上限(12+),跳过追加
+- [lint/local] JoyVoice — 通过/0 问题
+- [review/auto] [[JoyVoice]] — pass, 0 high, 1 medium, 2 low
+- [alert/backlog] pending-review: 72, draft deep/repro: 381
 - [kb/search] [[Amphion]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[VITS]](pending-review), [[NaturalSpeech2]](pending-review), [[BigVGAN]](pending-review), [[TTSEvaluation]](pending-review)
 - [ingest/deep] [[Amphion]] — 精读, kb_sources=6, 新建 0, 追加 2 (BigVGAN 追加 key_papers + 使用系统, NaturalSpeech2 追加 key_papers)
 - [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),跳过追加
