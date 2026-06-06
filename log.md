@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Voicebox]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[NaturalSpeech2]](pending-review), [[DurationPredictor]](pending-review)
+- [ingest/deep] [[Voicebox]] — 精读, kb_sources=6, 新建 0, 追加 2 (Non-autoregressiveTTS 演进线, DurationPredictor 现代 duration section)
+- [review/auto] [[Voicebox]] — pass, 0 high 0 medium 2 low
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(12),Voicebox 已在正文中引用
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(12),Voicebox 已在正文中引用
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(12),改追加到正文演进线
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_papers 已达上限(12),Voicebox 已在正文中引用
+- [skip/update] [[DurationPredictor]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] Voicebox — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 372
 - [kb/search] [[WavTokenizer]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
 - [ingest/deep] [[WavTokenizer]] — 精读, kb_sources=6, 新建 0, 追加 2 (CodebookCollapse section, NeuralAudioCompression key_papers+SOTA表)
 - [review/auto] [[WavTokenizer]] — pass-with-fixes, 0 high 1 medium (UTMOS 比较方向性错误已修正)
