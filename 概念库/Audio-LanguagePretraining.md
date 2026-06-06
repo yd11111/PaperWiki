@@ -4,7 +4,7 @@ title: "Audio-Language Pretraining"
 aliases: [音频语言预训练, CLAP, Contrastive Language-Audio Pretraining, Audio-Language Model, ALM, 音频语言模型, Audio-Text Alignment, 音频文本对齐]
 category: "technique"
 tags: [audio-language, contrastive-learning, CLAP, pretraining, audio-text, retrieval, captioning, multimodal]
-key_papers: ["[[论文笔记/Survey-AudioLanguageModels|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/AudioMOSChallenge2025|AudioMOS Challenge 2025]]", "[[论文笔记/HD-PPT|HD-PPT]]"]
+key_papers: ["[[论文笔记/Survey-AudioLanguageModels|Su et al. 2025 (ALM Survey)]]", "[[论文笔记/AudioMOSChallenge2025|AudioMOS Challenge 2025]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/SALMONN|SALMONN]]"]
 origin_paper: "Elizalde et al., CLAP: Learning Audio Concepts from Natural Language Supervision, ICASSP 2023"
 related_concepts: ["[[AudioUnderstanding]]", "[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[SpeechTokenizer]]", "[[TTSEvaluation]]"]
 status: pending-review
