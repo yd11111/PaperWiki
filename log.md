@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[UnitSpeech]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[DiffusionModel]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
+- [ingest/deep] [[UnitSpeech]] — 精读, kb_sources=6, 新建 0, 追加 2 (SpeakerAdaptation Untranscribed Speech 节追加, HuBERT key_papers 追加)
+- [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[DiffusionModel]] — key_papers 已超上限(16),跳过追加
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已超上限(36),跳过追加
+- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已超上限(24),跳过追加
+- [skip/update] [[VoiceCloningTaxonomy]] — key_papers 已达上限(12),跳过追加
+- [review/auto] [[UnitSpeech]] — pass-with-fixes, 1 high fixed (VC表SMOS/SECS错位已修正) / 0 medium / 2 low
+- [lint/local] UnitSpeech — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[XPhoneBERT]] — 命中 5 页(取 Top 5): [[ProsodyModeling]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[VITS]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[TTSEvaluation]](pending-review)
 - [ingest/deep] [[XPhoneBERT]] — 精读, kb_sources=5, 新建 0, 追加 2 (PhonemeRepresentation 多语言预训练节, VITS 相关工作追加)
 - [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
