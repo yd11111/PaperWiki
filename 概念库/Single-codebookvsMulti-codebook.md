@@ -99,6 +99,7 @@ $$q_t = \arg\min_{k \in \{1,...,K\}} \|z_t - c_k\|^2$$
 | TTS-1 (2025) | 1 | 65536 | 50 | - | X-codec2 架构, semantic+acoustic 融合, super-resolution to 48kHz |
 | SecoustiCodec (2025) | 1 | 6561 (VAE+FSQ) | 20/80 | 0.27/1 kbps | VAE+FSQ, causal streaming, 帧级 contrastive 语义解耦 |
 | [[论文笔记/MagiCodec\|MagiCodec]] (2025) | 1 | 131072 | 50 | 0.85 kbps | Transformer, SVQ, Gaussian noise injection + 三阶段训练, streaming |
+| [[论文笔记/GLM-4-Voice\|GLM-4-Voice]] (2024) | 1 | 16384 | 12.5 | 0.175 kbps | VQ-Whisper, ASR-supervised, 已知最低比特率单码本方案 |
 
 ### 折中方案
 

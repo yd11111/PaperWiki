@@ -95,6 +95,8 @@ Moshi (2024, 全双工, Mimi tokenizer, RQ-Transformer, 8 codebook 并行)
 Mini-Omni (2024, text+7 acoustic streams 并行, 流式推理)
   ↓
 VITA (2024, IPR, 多模态 vision+speech+text)
+  ↓
+GLM-4-Voice (2024, 合成 interleaved data 1T token 预训练, VQ-Whisper 12.5Hz, Streaming Thoughts)
 ```
 
 ## 能力全景
