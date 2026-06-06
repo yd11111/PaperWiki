@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ADAPTERMIX]] — 命中 6 页(取 Top 6): [[SpeakerEmbedding]]✓, [[ProsodyModeling]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[TTSEvaluation]](pending-review)
+- [ingest/deep] [[ADAPTERMIX]] — 精读, kb_sources=6, 新建 0, 追加 1 (SpeakerAdaptation key_papers)
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限(12),跳过追加
+- [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(12),跳过追加
+- [skip/update] [[TTSEvaluation]] — key_papers 已达上限(12),跳过追加
+- [review/auto] [[ADAPTERMIX]] — pass-with-fixes, 0 high / 0 medium / 3 low (inline review, 出处标注补全)
+- [lint/local] ADAPTERMIX — 通过
 - [kb/search] [[StochasticPitchPrediction]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[DurationPredictor]](pending-review), [[SpeakerAdaptation]](pending-review), [[GlobalStyleTokens]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
 - [ingest/deep] [[StochasticPitchPrediction]] — 精读, kb_sources=6, 新建 0, 追加 2 (DurationPredictor SDP 迁移节, ProsodyModeling 显式概率化节)
 - [skip/update] [[DurationPredictor]] — key_papers 已达上限(12),改追加到正文
