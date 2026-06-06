@@ -1,0 +1,43 @@
+kb_review:
+  paper: "GATrainingRawPhonetic"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass"
+
+  change_plan:
+    - target: "概念库/Text-to-SpeechPipeline.md"
+      action: "append"
+      detail: "追加 key_papers entry — 本文提供 phoneme→audio 端到端 pipeline 的实践案例,含 mel-bypass 的经验证据"
+      safe: true
+
+    - target: "概念库/NeuralVocoder.md"
+      action: "skip"
+      detail: "key_papers 已达 18 条(>12 上限),本文对 vocoder 领域贡献边际(使用标准 HiFi-GAN)"
+      safe: true
+
+    - target: "概念库/ProsodyModeling.md"
+      action: "skip"
+      detail: "key_papers 已达 51 条(>12 上限),本文的显式韵律建模方案未超越已有覆盖"
+      safe: true
+
+    - target: "概念库/DurationPredictor.md"
+      action: "skip"
+      detail: "key_papers 已达 22 条(>12 上限),softmax duration 分类有一定新意但论文无消融验证"
+      safe: true
+
+    - target: "概念库/GlobalStyleTokens.md"
+      action: "skip"
+      detail: "key_papers 已达 12 条(=上限);且论文对 style tokens 仅在 abstract 提及,正文无详细实现"
+      safe: true
+
+    - target: "概念库/MelSpectrogram.md"
+      action: "skip"
+      detail: "key_papers 已达 21 条(>12 上限);mel-bypass 经验证据已被 LongCat-AudioDiT 更定量地覆盖"
+      safe: true
+
+  issues: []
+
+  summary:
+    total_changes: 1
+    skipped: 5
+    reason: "5/6 目标页 key_papers 超限;本文为工程系统报告,概念贡献边际"
