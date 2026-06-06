@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[USAT]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[VITS]](pending-review), [[GradientReversalLayer]](pending-review)
+- [ingest/deep] [[USAT]] — 精读, kb_sources=6, 新建 0, 追加 2 (GRL key_papers + VITS 相关工作)
+- [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12), 演进线已引用 USAT
+- [skip/update] [[VoiceCloningTaxonomy]] — key_papers 已达上限(12)
+- [skip/update] [[VariationalAutoencoderforTTS]] — key_papers 已超上限(17)
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已超上限(64)
+- [skip/update] [[VITS]] — key_papers 已超上限(14), 改追加到正文相关工作
+- [lint/local] USAT — 通过
+- [review/auto] USAT — pass, 0 high, 0 medium, 3 low
 - [kb/search] [[HyperTTS]] — 命中 5 页 (取 Top 5): [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
 - [ingest/deep] [[HyperTTS]] — 精读, kb_sources=5, 新建 0, 追加 0
 - [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12), 且正文已引用 HyperTTS
