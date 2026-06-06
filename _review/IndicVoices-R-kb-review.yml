@@ -1,0 +1,33 @@
+kb_review:
+  paper: "IndicVoices-R"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+change_plan:
+  - target: "数据集/IndicVoices-R.md"
+    action: new
+    rationale: "Dataset paper warrants its own entity page (analogous to Emilia.md); 22-language coverage makes it a likely future reference for Indian TTS papers"
+    risk: low
+
+  - target: "任务库/Zero-shotSpeechSynthesis.md"
+    action: skip
+    rationale: "key_models has 60+ entries (far above 12 limit); IV-R is a dataset, not a model; no natural append slot"
+
+  - target: "任务库/Cross-lingualVoiceCloning.md"
+    action: skip
+    rationale: "Paper doesn't propose cross-lingual cloning method; link in frontmatter is for KB context only"
+
+  - target: "概念库/SpeakerEmbedding.md"
+    action: skip
+    rationale: "key_papers at 56 entries (far above limit); paper uses wav2vec2 for evaluation but no novel contribution to speaker embedding"
+
+  - target: "概念库/TTSEvaluation.md"
+    action: skip
+    rationale: "key_papers at 26 entries (above limit); paper uses standard metrics, no new evaluation methods"
+
+  - target: "概念库/SpeakerAdaptation.md"
+    action: skip
+    rationale: "key_papers at 12 (at limit); VoiceCraft fine-tuning is standard, no novel adaptation technique"
+
+issues: []
