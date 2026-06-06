@@ -1,0 +1,107 @@
+review:
+  paper: "NEUTART"
+  note_path: "论文笔记/NEUTART.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节有清晰的因果解释(WHY),包括为什么选择联合表征而非级联、为什么用 FLAME 而非 2D landmark、为什么需要 lip-reading loss。每个关键设计选择都回答了设计动机。速查卡片可借鉴字段给出了 4 个具体可迁移 idea。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字均经 PDF 交叉验证无误。所有指标值附有 [Table N] 标注。指标名称正确(MCD/FID/V-CER/LMD 等)。速查卡片指标字段含具体数字+数据集+来源。"
+  distinguishable:
+    score: 8
+    rationale: "方法节中因果解释明确标注了 [论文原文] 和 [agent 解读],且区分清晰。agent 解读集中在 multi-task learning 的梯度分析上,有 Table 2 数据支撑。无断言性推断。"
+  positionable:
+    score: 9
+    rationale: "KB 背景节详细定位了 NEUTART 在 FastSpeech 2 + HiFi-GAN 谱系中的位置,明确创新点在 CV 侧而非 TTS 侧。创新判断有具体对比基准(KB 中所有系统止步于音频,NEUTART 扩展到视频)。frontmatter 字段完整。"
+  no_pollution:
+    score: 9
+    rationale: "笔记未提出新建概念页。concepts 字段列出的 6 个已有页面均为合理关联。反向更新计划为追加 key_papers,不涉及实质修改。"
+
+checklist:
+  reproducible:
+    - item: "方法节包含因果解释(WHY)"
+      result: pass
+    - item: "每个关键设计选择回答了 WHY"
+      result: pass
+    - item: "速查卡片可借鉴是具体可迁移 trick"
+      result: pass
+
+  trustworthy:
+    - item: "数字型 claim 有出处标注(≥80%)"
+      result: pass
+      detail: "所有实验数字均标注 [Table N] 或 [§X.X]。覆盖率约 95%。"
+    - item: "指标名使用正确"
+      result: pass
+    - item: "速查卡片指标字段含具体数字+数据集+来源"
+      result: pass
+    - item: "无方向性错误"
+      result: pass
+
+  distinguishable:
+    - item: "因果解释标注了 [论文原文] 或 [agent 解读]"
+      result: pass
+    - item: "因果解释来源标注覆盖率 ≥ 80%"
+      result: pass
+      detail: "方法节中 6 处因果解释中 5 处有来源标注,覆盖率 ~83%。"
+    - item: "不存在推断写成断言的句子"
+      result: pass
+    - item: "强断言有数字+出处支撑"
+      result: pass
+
+  positionable:
+    - item: "KB 背景有具体谱系定位"
+      result: pass
+    - item: "KB 背景的创新判断有对比基准"
+      result: pass
+    - item: "frontmatter 字段存在且非空"
+      result: pass
+    - item: "frontmatter 字段语义正确"
+      result: pass-with-note
+      detail: "models 字段为空。本文不引入新模型架构(NEUTART 是方法名),且 baselines (Wav2Lip, SadTalker, VideoReTalking) 均为 CV 领域模型不在 KB 中,留空合理。"
+    - item: "速查卡片 5 字段有实质内容"
+      result: pass
+
+  no_pollution:
+    - item: "新建概念页满足准入规则"
+      result: not-applicable
+      detail: "笔记未提出新建概念页。"
+    - item: "已有概念库中无语义相近页"
+      result: not-applicable
+    - item: "反向更新内容无 factual-error"
+      result: pass
+    - item: "反向更新正确分类为追加/实质修改"
+      result: pass
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 字段为空列表。虽然 baselines 不在 KB 中留空合理,但可考虑注明 NEUTART 本身为 system 而非独立 model。"
+    suggestion: "可接受现状,无需修改。"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "方法节 - Neural Face Renderer"
+    detail: "渲染器描述中 'adversarial loss [14]' 引用的是 GAN 原始论文编号,但在笔记中读者无法对应。"
+    suggestion: "可改为 'adversarial loss (Goodfellow et al., 2014)' 或省略引用编号。"
+
+  - id: low
+    severity: low
+    type: weak-reusability
+    location: "可复用 idea #4 - SPECTRE"
+    detail: "SPECTRE 本身是外部工具,非本文贡献。作为可复用 idea 有一定价值但不是本文核心。"
+    suggestion: "保留即可,读者可自行判断。"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals: []
