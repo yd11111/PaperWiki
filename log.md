@@ -8,6 +8,7 @@
 - [skip/update] [[Non-autoregressiveTTS]] — key_papers 已达上限(28),跳过追加
 - [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(36),跳过追加
 - [lint/local] Metis — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 377
 - [kb/search] [[WavTTS]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[NeuralVocoder]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[MelSpectrogram]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[WavTTS]] — 精读, kb_sources=6, 新建 0, 追加 5 (ConditionalFlowMatching/Diffusion-basedTTS/NeuralVocoder/MelSpectrogram 追加演进/section, key_papers 全部已达上限; Emilia/SEED-TTS-Eval 追加 used_by)
 - [lint/local] WavTTS — 通过
