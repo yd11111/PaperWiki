@@ -90,6 +90,7 @@ Survey 特别指出情感控制的难点:
 | RECOLA (Ringeval et al., 2013) | FR | 连续维度 | 协作互动 |
 | Toloka (2024) | Multi | 多类 | 众包标注 |
 | ESD | ZH/EN | 5类 | 平行语料 |
+| [[论文笔记/KazEmoTTS|KazEmoTTS]] (2024) | KZ | 6类 | 首个哈萨克语情感TTS, 74.85h, 3叙述者, CC-BY-4.0 |
 
 ## 评估方法
 
