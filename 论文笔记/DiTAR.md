@@ -132,7 +132,7 @@ Patch size 过小 (P=1) 退化为 per-token diffusion,失去 bidirectional 优�
 | 指标 | 本文 (1B, 280Kh) | Seed-TTS_DiT | CosyVoice 2 | F5TTS | 数据集 | 出处 |
 | --- | --- | --- | --- | --- | --- | --- |
 | WER(%)↓ | **1.685** | 1.733 | 2.57 | 1.83 | Seed-EN | [Table 3] |
-| SIM↑ | **0.735** | 0.790 | 0.652 | 0.71 | Seed-EN | [Table 3] |
+| SIM↑ | 0.735 | **0.790** | 0.652 | 0.71 | Seed-EN | [Table 3] |
 | WER(%)↓ | **1.023** | 1.178 | 1.45 | 1.56 | Seed-ZH | [Table 3] |
 | SIM↑ | 0.753 | **0.809** | 0.748 | 0.76 | Seed-ZH | [Table 3] |
 
@@ -179,3 +179,19 @@ LM Guidance 是一个优雅的工程设计: 利用 LM 输出已编码全部历�
 2. **Historical context 将 generation 转为 outpainting**: 给 decoder 前缀输入历史观测,比纯条件生成更容易,因为 decoder 能看到真实的局部上下文而非仅有隐式条件
 3. **LM Guidance**: 对任何 "LM backbone + diffusion head" 架构都适用 — 只需在训练时 drop LM output,推理时用全零向量做 unconditional branch
 4. **连续 LM 温度 = ODE 噪声引入点**: 提供了一种与 ODE solver 兼容的采样多样性控制方案,可迁移到其他 diffusion 生成系统
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节清晰解释 WHY,设计选择有因果论证 |
+> | 可信赖 | pass | 数字经 PDF 交叉验证,1 处 bold 标记已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >80% |
+> | 可定位 | pass | KB 背景三路线谱系定位清晰 |
+> | 不污染 | pass | 反向更新仅 append,无 factual error |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/DiTAR-review.yml`
