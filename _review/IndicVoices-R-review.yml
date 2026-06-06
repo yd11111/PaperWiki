@@ -1,0 +1,39 @@
+review:
+  paper: "IndicVoices-R"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: v1.1
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节逐步解释 WHY (为什么选 ASR 增强而非网络挖掘, 为什么三阶段级联, 为什么 grapheme), 速查卡片可借鉴字段具体(跨语言增强泛化能力)"
+  可信赖:
+    score: 8
+    reason: "关键数字均与原文 Table 1/Table 5 交叉验证一致; 指标名称正确; 方向性无误"
+  可区分:
+    score: 7
+    reason: "因果解释来源标注覆盖率 >90%; 点评节有一处 overclaim (两个数量级 vs 实际 ~40x)"
+  可定位:
+    score: 8
+    reason: "KB 背景谱系定位清晰 (LibriTTS-R 路线 vs Emilia 路线), 创新判断有对比基准"
+  不污染:
+    score: 8
+    reason: "frontmatter 引用合理, 无 factual error 风险; 反向更新为 append 操作"
+
+issues:
+  - id: 1
+    severity: medium
+    type: overclaim
+    location: "点评 > 优势 > 第一点"
+    detail: "说话人数量比此前最大数据集多两个数量级 — 实际 IV-R 10,496 vs Google-CS 261 = ~40x, 约 1.6 个数量级, 不到两个"
+    suggestion: "改为 '约 40 倍' 或 '超过一个数量级'"
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "核心问题 / 方法 / 实验"
+    detail: "未明确提到 IV-R 首次为 9 种语言 (Dogri, Kashmiri, Konkani, Maithili, Nepali, Sanskrit, Santali, Sindhi, Urdu) 提供开源 TTS 数据, 这是一个重要贡献 [§3.4]"
+    suggestion: "在核心问题或实验节补充这一信息"
+
+learning_signals: []

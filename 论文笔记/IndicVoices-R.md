@@ -111,6 +111,8 @@ TTS 实验使用 VoiceCraft (830M 参数,GigaSpeech 预训练) 进行 fine-tunin
 - IV-R 在规模上远超所有对比数据集: 1704h / 10496 speakers / 22 languages (vs LibriTTS 585h / 2456 spk / 1 lang; IndicTTS 284h / 27 spk / 14 lang)
 - N-MOS 3.38 低于录音室数据集 (LJSpeech 4.36, IndicTTS 4.29),但 N-MOS 分布图 [Fig 3] 显示 IV-R 有比 IndicTTS 和 LibriTTS 更多的 N-MOS>4 样本
 
+**语言覆盖**: IV-R 首次为 9 种语言提供开源 TTS 数据: Dogri, Kashmiri, Konkani, Maithili, Nepali, Sanskrit, Santali, Sindhi, Urdu (Table 3 中标 * 的语言) [§3.4]
+
 **多样性优势**:
 - 说话人: 10,496 speakers,比此前最多的 Google-CS (261 speakers) 多 40 倍 [§3.3.2]
 - 年龄/性别均衡: 男女比例接近 (5030:5466), 覆盖 18-60+ 四个年龄段 [Table 2]
@@ -137,7 +139,7 @@ TTS 实验使用 VoiceCraft (830M 参数,GigaSpeech 预训练) 进行 fine-tunin
 ## 点评
 
 **优势**:
-- 填补了印度语 TTS 的关键数据空白 -- 首次覆盖全部 22 种官方语言,且说话人数量比此前最大数据集多两个数量级
+- 填补了印度语 TTS 的关键数据空白 -- 首次覆盖全部 22 种官方语言,且说话人数量比此前最大印度 TTS 数据集 (Google-CS, 261 speakers) 多约 40 倍
 - ASR→TTS 数据转化管道思路清晰,且验证了英语增强模型的跨语言能力,为其他低资源语言提供了可复制的方法论
 - Benchmark 设计考虑周到(zero/few/many-shot x gender x age),为印度 TTS 社区提供了标准化评估框架
 - 全部数据和代码开源,符合可复现性要求
@@ -156,3 +158,19 @@ TTS 实验使用 VoiceCraft (830M 参数,GigaSpeech 预训练) 进行 fine-tunin
 2. **多维度过滤标准**: C50/SNR/pitch/speaking rate/CER 的组合阈值过滤策略,比单纯依赖 DNSMOS 更细粒度。
 3. **Benchmark 设计方法**: zero/few/many-shot x gender x age 的交叉设计,可作为其他低资源语言 TTS benchmark 的模板。
 4. **Vocabulary 扩展策略**: 新 token embedding 用旧 embedding 统计量初始化 ($\mu_{old}$, $\sigma_{old}^2$),简单但有效的迁移方法。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 管道每步有 WHY 解释,设计选择有对比 |
+> | 可信赖 | pass | 关键数字与 Table 1/5 交叉验证一致 |
+> | 可区分 | pass | 来源标注覆盖率 >90%, 已修正 overclaim |
+> | 可定位 | pass | KB 背景谱系定位清晰 (LibriTTS-R vs Emilia 路线) |
+> | 不污染 | pass | 反向更新为 append 操作,无 factual error 风险 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1) — 已当场修正
+> 详见 `_review/IndicVoices-R-review.yml`
