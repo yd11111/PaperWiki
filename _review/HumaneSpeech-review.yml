@@ -1,0 +1,53 @@
+paper: "HumaneSpeech"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 7
+    verdict: pass
+    notes: "方法节清晰解释了三阶段 pipeline 的 WHY 和 HOW; 关键设计选择(零样本 vs 训练、三级 prompt、口吃策略)均有因果解释且标注了来源; 速查卡片可借鉴字段具体可迁移。"
+  trustworthy:
+    score: 5
+    verdict: pass-with-fixes
+    notes: "论文本身无定量指标,笔记准确反映了这一事实; 定性结论的出处标注完整([§X.X]); 但笔记中局限性第4点'SpeechT5已远落后于CosyVoice/VALL-E/F5-TTS'是 agent 判断而非论文 claim,未标注 [agent 解读]。"
+  distinguishable:
+    score: 8
+    verdict: pass
+    notes: "因果解释来源标注清晰,覆盖率高; [论文原文] vs [agent 解读] 区分明确; 点评节的判断合理且有据。"
+  positionable:
+    score: 8
+    verdict: pass
+    notes: "KB 背景节谱系定位具体(HMM 规则合成 → 本文 → NVSpeech 显式标签); 与 EmotionControlinTTS 演进链的对应关系清晰; 创新判断有对比基准。"
+  no_pollution:
+    score: 7
+    verdict: pass
+    notes: "frontmatter 概念挂接合理; 本文技术贡献有限,反向更新主要是 append key_papers,污染风险低; SpeechT5 和 MMS-TTS 不在模型库中,不会触发新建页。"
+
+issues:
+  - severity: medium
+    type: fact-inference-mixing
+    principle: trustworthy
+    location: "局限性 第4点"
+    detail: "'SpeechT5 (2021) 和 MMS-TTS (2023) 在 2024 年已远落后于 CosyVoice/VALL-E/F5-TTS 等系统的自然度水平' 是 agent 判断,未标注 [agent 解读]"
+    suggestion: "在该句末尾添加 [agent 解读] 标注"
+
+  - severity: low
+    type: template-compliance
+    principle: trustworthy
+    location: "实验表格"
+    detail: "实验表格中 Disfluency 合成质量/流畅性/综合 三列的值是笔记作者对论文定性描述的概括,而非论文原文指标"
+    suggestion: "在表格标题或脚注中说明'以下为论文定性描述的概括,非标准指标'"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "核心问题 第二段"
+    detail: "'Guo et al., 2023 EmoSpeech/EmoDiff' 括号备注中 EmoSpeech 实际对应的是 Diatlova and Shutov (2023) 而非 Guo et al. (2023); Guo et al. (2023) 对应的是 EmoDiff"
+    suggestion: "修正为 '(Diatlova and Shutov, 2023 EmoSpeech; Guo et al., 2023 EmoDiff)' 或去掉模型名备注"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "论文本身无定量指标的情况下,笔记如何处理实验节 — 当前方案(定性概括表格)是合理的折中,但缺少明确的标注规范"
+  checklist_upgrade_suggestion: "考虑增加检查项: 当论文缺乏定量评估时,笔记须在实验节开头显式声明'本文无标准定量指标'"

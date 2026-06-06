@@ -44,7 +44,7 @@ updated: 2026-06-06
 
 本文试图解决的问题: 现有对话式 AI 系统的语音输出缺乏情感深度和自然的口语特征(如犹豫、口吃、叹息),使其听起来机械化,尤其在需要共情交互的场景(如虚拟患者训练)中体验不佳。
 
-**与已有方法的区别**: 此前的方法要么在 TTS 之后检测并插入情感 (Lee et al., 2017; Im et al., 2022),要么训练专门的情感 TTS 模型 (Liu et al., 2023; Guo et al., 2023 EmoSpeech/EmoDiff)。本文的不同之处在于让 LLM 在文本生成阶段就同步产生情感和 disfluency 标记,声称这种"上下文感知"的同步生成比事后插入更自然 [§3.1]。
+**与已有方法的区别**: 此前的方法要么在 TTS 之后检测并插入情感 (Lee et al., 2017; Im et al., 2022),要么训练专门的情感 TTS 模型 (Diatlova and Shutov, 2023 EmoSpeech; Guo et al., 2023 EmoDiff)。本文的不同之处在于让 LLM 在文本生成阶段就同步产生情感和 disfluency 标记,声称这种"上下文感知"的同步生成比事后插入更自然 [§3.1]。
 
 ## 方法: 它怎么 work
 
@@ -107,7 +107,7 @@ updated: 2026-06-06
 
 3. **拼接产生的不自然性**: 将 clean speech、emotion audio、disfluency speech 简单拼接,缺乏跨段的韵律连贯性 (过渡不平滑、语速/音高突变) [§5.2.1]
 
-4. **TTS 模型过时**: SpeechT5 (2021) 和 MMS-TTS (2023) 在 2024 年已远落后于 CosyVoice/VALL-E/F5-TTS 等系统的自然度水平
+4. **TTS 模型过时**: SpeechT5 (2021) 和 MMS-TTS (2023) 在 2024 年已远落后于 CosyVoice/VALL-E/F5-TTS 等系统的自然度水平 [agent 解读]
 
 5. **单一应用场景验证**: 仅在 "Pastor Zimmerman" 虚拟患者案例上测试,未验证在其他情感场景或说话人上的泛化能力 [§4.1]
 
@@ -132,3 +132,19 @@ updated: 2026-06-06
 2. **三层记忆架构** (Background + Initial + Latest): 用于长对话的上下文管理,保持角色一致性。这是通用对话系统设计模式,非本文原创但实现清晰。
 
 3. **Disfluency 分类与处理**: 将 disfluency 分为 interjections / stutters / pauses / emotion cues 四类并分别处理的框架 [§3.5.2],可作为 disfluency-aware TTS 数据标注的参考分类体系。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY/HOW 清晰,速查卡片具体可迁移 |
+> | 可信赖 | pass-with-fixes | 论文无定量指标已如实反映; 1 处 agent 判断未标注来源(已修正) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 区分覆盖率高 |
+> | 可定位 | pass | KB 背景谱系定位具体,与 NVSpeech 的对比有意义 |
+> | 不污染 | pass | 技术贡献有限,反向更新仅 append,污染风险低 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/HumaneSpeech-review.yml`
