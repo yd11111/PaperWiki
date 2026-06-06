@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MultilingualTurkicTTS]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[NeuralVocoder]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Attention-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[MultilingualTurkicTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation 跨语言节, Cross-lingualVoiceCloning 早期探索节)
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限(63),跳过
+- [review/auto] [[MultilingualTurkicTTS]] — pass-with-fixes, 0 high / 1 medium / 1 low (inline review)
+- [lint/local] MultilingualTurkicTTS — 通过
 - [kb/search] [[ZET-Speech]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[GradientReversalLayer]](pending-review), [[Diffusion-basedTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
 - [ingest/deep] [[ZET-Speech]] — 精读, kb_sources=6, 新建 0, 追加 2 (GRL key_papers, EmotionControl 对抗训练解耦段)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(58),改追加到正文
