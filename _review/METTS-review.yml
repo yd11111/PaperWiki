@@ -1,0 +1,58 @@
+review:
+  paper: "METTS"
+  note_path: "论文笔记/METTS.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducibility:
+    score: 8
+    reason: "方法节包含清晰的因果解释,三个关键设计选择(multi-scale emotion, formant perturbation, VQ matcher)均回答了 WHY。Coarse-fine 分层的设计动机、L2 normalization 的作用、VQ 将回归转分类的 insight 均有机制解释。速查卡片的可借鉴字段具体可迁移。"
+  trustworthiness:
+    score: 8
+    reason: "实验数字标注覆盖率高,Table II-IX 均有标注。指标名(MOS/SMOS/CER/WER/Cosine Similarity)使用正确。速查卡片含具体数字+数据集。无方向性错误。发现 1 个 medium issue: CER 0.48 和 0.35 的数值异常低,可能是百分比表示(即 0.48% 和 0.35%),但笔记未明确标注单位。"
+  distinguishability:
+    score: 9
+    reason: "因果解释来源标注覆盖率约 90%,方法节中 [论文原文] 和 [agent 解读] 标注清晰,边界明确。未发现把推断写成断言的句子。"
+  positionability:
+    score: 9
+    reason: "KB 背景节详细,含谱系定位(MsEmoTTS→METTS 演进链)、已有认知(vs 现代方案的对比)、创新判断(有对比基准)。frontmatter 字段完整。concepts/models/tasks/datasets 语义正确。速查 5 字段均有实质内容。"
+  no_pollution:
+    score: 9
+    reason: "未新建概念页。反向更新目标清晰(EmotionControlinTTS 追加、Cross-lingualVoiceCloning 追加)。无 factual-error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "速查卡片 → 指标"
+    detail: "CER 0.48 和 WER 5.60 的单位未标注。从论文 Table IV 看,CER 0.48 应为 0.48%(百分比),WER 5.60 也应为 5.60%。笔记中实验表格同样未标注单位。"
+    suggestion: "在速查卡片和实验表格中统一标注百分号或说明单位。"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter → venue"
+    detail: "venue 填写为 'arXiv (TASLP format)',但论文实际是 arXiv 预印本,格式类似 TASLP 但未确认是否已发表。"
+    suggestion: "如确认未正式发表,改为 'arXiv preprint'。"
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "方法节 → 训练策略 → Pre-training 损失"
+    detail: "L_iter 的定义('每个 Conformer block 的 mel L1 loss')来自论文但未标注具体出处。"
+    suggestion: "添加 [§III.E] 或 [Eq. 2] 标注。"
+  - id: 4
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea → 第4条"
+    detail: "'VQ 将回归转分类'描述略泛,可补充适用条件(如何判断何时用这个 trick)。"
+    suggestion: "补充: 适用于目标空间维度高但实际模式数有限的场景。"
+
+learning_signals: []
+
+summary:
+  total_issues: 4
+  high: 0
+  medium: 1
+  low: 3
+  conclusion_rationale: "所有 5 个原则得分均 ≥ 8,无 high issue。1 个 medium issue (CER/WER 单位未标注) 不阻塞反向更新,可在后续修正。整体质量良好。"

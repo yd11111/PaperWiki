@@ -36,7 +36,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 提出多尺度情感建模(coarse-grained GST + fine-grained CVAE)+ formant-shift 信息扰动 + VQ emotion matcher,实现单语说话人的跨语言跨说话人情感语音合成
 > - **路线**: Text → DelightfulTTS Conformer Encoder → Variance Adaptor (+Speaker Embedding) → Mel Decoder; 情感条件来自 (a) Reference mel → Formant Perturb → GST (coarse) + CVAE (fine) 或 (b) Text+EmotionID → VQ Emotion Matcher → coarse embedding + Fine-grained Predictor
-> - **指标**: MOS 4.11 (intra-lingual, CN speakers) / 4.00 (cross-lingual); Speaker SIM 3.94/3.94; Emotion SIM 4.12/3.44; Cosine SIM 0.813 (intra) / 0.753 (cross); 全面优于 CET 和 M3 [Table II-V]
+> - **指标**: MOS 4.11 (intra-lingual, CN speakers) / 4.00 (cross-lingual); Speaker SIM 3.94/3.94; Emotion SIM 4.12/3.44; Cosine SIM 0.813 (intra) / 0.753 (cross); CER 0.48% / WER 5.60% (cross-lingual); 全面优于 CET 和 M3 [Table II-V]
 > - **可借鉴**: (1) L2 normalization 消除跨语言 magnitude 差异,使 GST 编码 language-agnostic 情感; (2) Formant shift 作为 pre-processing 步骤去除 speaker timbre,比 GRL 更稳定; (3) VQ 将回归问题转化为分类问题,简化 text→emotion embedding 的映射
 > - **局限**: 仅双语(中英),仅女性说话人,数据规模极小(~41h),backbone 过时(DelightfulTTS/MelGAN),英语训练数据无情感标注导致跨语言英语情感表达偏弱,未开源
 
@@ -137,8 +137,8 @@ Matcher 结构 [Fig 2]:
 | MOS (EN text, EN spk) | 3.95+-0.14 | 4.05+-0.18 | 2.89+-0.12 | 2.41+-0.19 | 同上 | [Table III] |
 | Cosine SIM (CN text, CN spk) | 0.813 | 0.805 | 0.726 | 0.754 | 同上 | [Table IV] |
 | Cosine SIM (EN text, CN spk) | 0.753 | 0.711 | 0.638 | 0.673 | 同上 | [Table IV] |
-| CER (CN text, CN spk) | 0.48 | 0.48 | 0.35 | 11.02 | 同上 | [Table IV] |
-| WER (EN text, CN spk) | 5.60 | 5.46 | 12.65 | 55.32 | 同上 | [Table IV] |
+| CER % (CN text, CN spk) | 0.48 | 0.48 | 0.35 | 11.02 | 同上 | [Table IV] |
+| WER % (EN text, CN spk) | 5.60 | 5.46 | 12.65 | 55.32 | 同上 | [Table IV] |
 
 **Ablation 关键发现** [Table VI, VII]:
 - w/o GST: emotion SIM 暴跌 (4.12→3.19, CN text/CN spk),证明 coarse-grained language-agnostic 表示是跨语言情感迁移的关键
@@ -180,4 +180,16 @@ METTS 是一篇在 pre-LLM 时代系统性解决"跨语言+跨说话人+情感"�
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (8/10) | 三个关键设计选择均有因果解释,速查卡片可借鉴具体可迁移 |
+> | 可信赖 | pass (8/10) | 数字标注覆盖率高,1 个 medium: CER/WER 单位未标注 |
+> | 可区分 | pass (9/10) | [论文原文]/[agent 解读] 标注清晰,覆盖率~90% |
+> | 可定位 | pass (9/10) | KB 背景详细,谱系定位明确,frontmatter 完整 |
+> | 不污染 | pass (9/10) | 未新建概念页,反向更新目标清晰 |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/METTS-review.yml`
