@@ -11,7 +11,7 @@ tags: [self-supervised-learning, low-resource, TTS, data-augmentation, HuBERT, d
 concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[SemanticvsAcousticTokens]]", "[[SpeakerEmbedding]]", "[[DurationPredictor]]", "[[Text-to-SpeechPipeline]]"]
 models: ["[[HuBERT]]", "[[VITS]]"]
 tasks: []
-datasets: []
+datasets: ["LibriSpeech", "Libri-light", "MUSAN"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -35,7 +35,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 用 100h 真实语音预训练的 HuBERT 构建 unit-based TTS,合成大量数据反哺 SSL 预训练,将语音数据需求降低 90%
 > - **路线**: 100h real speech → HuBERT pre-train → k-means units → T2U + U2S TTS → synthetic corpus → HuBERT re-train
-> - **指标**: WER 15.8% on LibriSpeech dev-other (100h real + 11k synth) vs 14.2% topline (960h real) [Table 5]
+> - **指标**: WER-best 15.8% on LibriSpeech dev-other (100h real + 11k synth, 2nd iter) vs 14.4% topline (960h real) [Table 5]
 > - **可借鉴**: 用 SSL discrete units 降低 TTS 训练难度(10h paired data 就能训练 T2U);合成数据中 oversampling 真实数据(100x)显著提升效果
 > - **局限**: 仅在 LibriSpeech (英语阅读语音) 上验证;合成语音语速偏快需后处理拉伸;未评估合成语音质量(MOS)
 
@@ -95,11 +95,11 @@ updated: 2026-06-06
 
 | 指标 | 本文 | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| WER (dev-other) | 25.0% (S0, 100h real) | 14.2% (S1, 960h real) | LibriSpeech | [Table 2] |
-| WER (dev-other) | 23.5% (S4, 1.1k synth) | 23.2% (S3-VITS, 809h synth) | LibriSpeech | [Table 5] |
-| WER (dev-other) | 20.4% (S4, 11k synth, os=100) | 14.2% (S1, 960h real) | LibriSpeech | [Table 5] |
-| WER (dev-other) | 17.5% (S4 + 10k synth FT) | 14.2% (S1, 960h real) | LibriSpeech | [Table 5] |
-| WER (dev-other) | 15.8% (S4, iter2) | 14.2% (S1, 960h real) | LibriSpeech | [Table 5] |
+| WER-last (dev-other) | 25.0% (S0, 100h real) | 14.2% (S1, 960h real) | LibriSpeech | [Table 2] |
+| WER-last (dev-other) | 23.5% (S4, 1.1k synth) | 23.2% (S3-VITS, 809h synth) | LibriSpeech | [Table 5] |
+| WER-last (dev-other) | 20.4% (S4, 11k synth, os=100) | 14.2% (S1, 960h real) | LibriSpeech | [Table 5] |
+| WER-last (dev-other) | 17.5% (S4 + 10k synth FT) | 14.2% (S1, 960h real) | LibriSpeech | [Table 5] |
+| WER-best (dev-other) | 15.8% (S4, iter2) | 14.4% (S1, 960h real) | LibriSpeech | [Table 5] |
 | Phone Purity (l9, k500) | 67.32% (S0-3rd) | 68.12% (pre-trained HuBERT) | LibriSpeech | [Table 3] |
 
 ### 关键实验发现
@@ -139,3 +139,19 @@ updated: 2026-06-06
 2. **离散单元降低 paired data 需求**: 将 TTS 的预测目标从连续 mel-spectrogram 切换为离散单元,大幅降低 text-speech paired data 的需求 (从正常的 10h+ 降至可行),因为离散目标空间更小、序列更短
 3. **Oversampling 真实数据**: 在混合真实+合成数据训练时,大幅 oversample 真实数据 (100x) 可显著弥补合成数据的分布偏差
 4. **Utterance-level x-vector 保持多样性**: 在说话人数量有限的低资源场景,使用句级而非说话人级 speaker embedding 可最大化合成数据的多样性
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,关键设计选择有 WHY |
+> | 可信赖 | pass | 数字标注覆盖率 >90%,WER-last/best 区分可改进 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率极高 |
+> | 可定位 | pass | KB 背景谱系清晰,datasets frontmatter 可补充 |
+> | 不污染 | pass | 无新建实体页,现有引用准确 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/LowResourceSSL-TTS-review.yml`

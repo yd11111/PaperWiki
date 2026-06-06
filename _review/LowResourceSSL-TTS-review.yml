@@ -1,0 +1,52 @@
+review:
+  paper: "LowResourceSSL-TTS"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节包含清晰的因果解释(WHY): 为什么用离散单元而非 mel、为什么用 utterance-level x-vector、DPDP 的作用。三阶段流水线描述完整,关键设计选择均回答了'为什么选这个'。速查卡片可借鉴字段给出具体 trick。"
+    trustworthy:
+      score: 8
+      reason: "数字型 claim 标注覆盖率 >90%,指标名正确 (WER, Phone Purity)。速查指标字段有具体数字+数据集+来源。WER-last vs WER-best 在实验表中未明确标注,导致轻微混淆。"
+    distinguishable:
+      score: 9
+      reason: "因果解释标注覆盖率极高,几乎每段 WHY 解释都标了 [论文原文] 或 [agent 解读],边界清晰。无断言式推断。"
+    positionable:
+      score: 8
+      reason: "KB 背景节有具体谱系定位(HuBERT→GSLM→unit-based TTS),创新判断有对比基准(vs 用大数据训练 TTS)。frontmatter datasets 字段为空,可补充 LibriSpeech。"
+    non-polluting:
+      score: 9
+      reason: "不涉及新建实体页。现有概念引用准确,无 factual error 或 overclaim 风险。"
+
+  conclusion: "pass-with-fixes"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "medium"
+      location: "实验表"
+      detail: "实验表中 6 行 WER 数据未标注是 WER-last 还是 WER-best。论文 §4.3 说明 'We report WER-last except for the 2nd iteration of S0',但表中未体现这一区分。S0 第 2 轮迭代的 15.8% 实际是 WER-best。"
+      suggestion: "在实验表脚注或行内标注 WER-last/WER-best,特别是 15.8% (iter2) 和 25.0% (S0) 行。"
+    - id: 2
+      type: "template-compliance"
+      severity: "medium"
+      location: "frontmatter datasets"
+      detail: "datasets 字段为空。论文使用 LibriSpeech (pre-train/fine-tune/eval)、Libri-light (10h split)、MUSAN (augmentation) 三个数据集。"
+      suggestion: "补充 datasets 字段,至少列入 LibriSpeech。"
+    - id: 3
+      type: "traceability-gap"
+      severity: "low"
+      location: "速查卡片-指标"
+      detail: "15.8% 是第二轮迭代的最终结果,速查中未标注这是 2nd iteration WER-best(非 WER-last）。"
+      suggestion: "速查指标改为 'WER 15.8% (WER-best, 2nd iter) on LibriSpeech dev-other'。"
+
+  summary:
+    total: 3
+    high: 0
+    medium: 2
+    low: 1
+
+  learning_signals: []
