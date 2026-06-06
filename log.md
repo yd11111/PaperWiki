@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[CM-TTS]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[DiffusionModel]](pending-review), [[ScoreMatching]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[CM-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (Diffusion-basedTTS 高效加速表)
+- [skip/update] [[DiffusionModel]] [[ScoreMatching]] [[Non-autoregressiveTTS]] [[NeuralVocoder]] [[MelSpectrogram]] — key_papers 超限(ScoreMatching 除外但论文对 score matching 无新贡献),跳过
+- [lint/local] CM-TTS — 通过
+- [review/auto] CM-TTS — pass, 0 high, 0 medium, 2 low
 - [kb/search] [[LipToSpeech]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓, [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review)
 - [ingest/deep] [[LipToSpeech]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] [[SpeakerEmbedding]] [[MelSpectrogram]] [[DurationPredictor]] [[ProsodyModeling]] [[NeuralVocoder]] [[Non-autoregressiveTTS]] [[BigVGAN]] — 全部 key_papers 超限且论文为跨模态 lip-to-speech 工作,对 TTS 概念页无新贡献,跳过
