@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[LowResourceSSL-TTS]] — 命中 6 页(取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
+- [ingest/deep] [[LowResourceSSL-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (HuBERT key_papers)
+- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(24),跳过
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(60),跳过
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已达上限(64),跳过
+- [skip/update] [[DurationPredictor]] — key_papers 已达上限(22),跳过
+- [review/auto] [[LowResourceSSL-TTS]] — pass-with-fixes, 0 high, 2 medium, 1 low
+- [lint/local] LowResourceSSL-TTS — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[BiSinger]] — 命中 6 页(取 Top 6): [[Cross-lingualVoiceCloning]]✓ | 过滤: [[SingingVoiceSynthesis]](pending-review), [[PhonemeRepresentation]](pending-review), [[MusicalScoreEncoder]](pending-review), [[SVSEvaluationMetrics]](pending-review), [[DiffusionModel]](pending-review)
 - [ingest/deep] [[BiSinger]] — 精读, kb_sources=6, 新建 0, 追加 1 (SingingVoiceSynthesis 正文追加)
 - [review/auto] [[BiSinger]] — pass-with-fixes, 0 high, 1 medium (venue 待确认), 2 low
