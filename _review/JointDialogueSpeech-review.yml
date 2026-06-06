@@ -1,0 +1,53 @@
+paper: "JointDialogueSpeech"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    notes: "方法节清晰解释了 PSP prompting/fine-tuning 和联合预测的 WHY/HOW;Levelt 模型动机框架有说服力;速查卡片可借鉴字段给出了具体可迁移技巧(JSON编码/逆向对话生成/语言学知识注入)"
+  trustworthy:
+    score: 8
+    verdict: pass
+    notes: "所有关键数字(Table 1/2/3, Fig 4 消融)均有出处标注;指标名称(F-Score/parsable/matched)使用正确;速查卡片指标字段含具体数字+数据集+来源"
+  distinguishable:
+    score: 7
+    verdict: pass
+    notes: "方法节大部分因果解释标注了[论文原文]/[agent 解读];局限性和点评中agent推断有明确标注;有一处 SpanPSP baseline 描述中 BERT 参数量笔记写 0.1B 而论文 §1 写 0.3B,但 §3.5/Table 1 确认 bert-base-chinese 0.1B,§1 的 0.3B 是指 Chen et al. 2022 的 front-end 总参数量(含任务头),笔记对齐 Table 1 是正确的"
+  positionable:
+    score: 8
+    verdict: pass
+    notes: "KB背景节提供了清晰的谱系定位(传统前端→LLM前端→端到端LLM-TTS);与ProsodyModeling/LLM-basedTTS/Text-to-SpeechPipeline的关系明确;创新判断有对比基准"
+  no_pollution:
+    score: 8
+    verdict: pass
+    notes: "frontmatter concepts/models 字段语义正确;不会引入错误信息到概念页;反向更新计划为追加操作,风险低"
+
+issues:
+  - severity: medium
+    type: traceability-gap
+    principle: trustworthy
+    location: "实验表格 PSP PW #1"
+    detail: "SpanPSP DataBaker Pretrained PW #1 = 96.35 vs PeopleDaily Pretrained = 89.20;笔记中 baseline 写的是 96.35 (DataBaker),但论文 §3.5 主要对比的是 PeopleDaily Pretrained 79.80% (Average),两个 SpanPSP 变体的选择应说明"
+    suggestion: "在实验表格中增加一行 SpanPSP PeopleDaily 的分项数据,或在备注中说明对比的是哪个变体"
+
+  - severity: low
+    type: template-compliance
+    principle: positionable
+    location: "frontmatter models 字段"
+    detail: "ChatGPT 和 ChatGLM2-6B 作为 models 列出合理,但 SpanPSP 是 baseline 方法名而非模型名;实际模型是 bert-base-chinese"
+    suggestion: "可保留,SpanPSP 作为完整方法名在论文中反复使用,读者可识别"
+
+  - severity: low
+    type: weak-reusability
+    principle: reproducible
+    location: "可复用的 idea 第1条"
+    detail: "JSON编码技巧的适用边界未说明:本文 JSON 解码导致 15-40s 延迟,实用性存疑"
+    suggestion: "在可复用idea中补充适用场景限制(offline/非实时场景)"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "对于 feasibility study 类论文(无完整系统/无端到端验证),审阅标准中缺少'完整性'维度的判断指引"
+  checklist_upgrade_suggestion: "考虑增加检查项:对于声称系统/框架论文,是否有端到端验证结果"
