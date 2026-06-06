@@ -1,0 +1,51 @@
+paper: "WavTokenizer"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "两项变更内容均可追溯到论文原文,不会向知识库引入错误信息。CodebookCollapse 追加行的数据 (K=4096, k-means init, random awakening, 100% 利用率) 与论文 §3.2 完全一致; NeuralAudioCompression 的 0.9 kbps / 24kHz 与 Table 1 一致。"
+  no_bloat:
+    verdict: pass
+    notes: "无新建实体页。两项均为对已有页面的 append 操作,不增加实体数量。CodebookCollapse 正确跳过 key_papers 追加 (已达 12 上限),改在正文表格追加数据行,符合规则。"
+  traceable:
+    verdict: pass
+    notes: "追加内容可直接追溯到论文笔记 WavTokenizer.md 的 §3.2 (VQ 空间扩展 + codebook utilization 保障) 和 Table 1 (0.9 kbps 指标)。需确保实际执行时包含 wikilink。"
+
+change_plan_summary:
+  total_targets: 2
+  appends: 2
+  substantive: 0
+  new_pages: 0
+
+issues:
+  - severity: medium
+    type: factual-error
+    principle: no_pollution
+    target: "任务库/NeuralAudioCompression.md"
+    action: append
+    detail: "SOTA 表格第四列为「压缩因子」(existing entries: 91x, 16-32x, 64x), 但变更计划填入「单 quantizer」。「单 quantizer」是量化器数量,不是压缩因子。WavTokenizer 的压缩因子应为 ~427x (24kHz * 16-bit = 384 kbps / 0.9 kbps)。"
+    suggestion: "将「单 quantizer」改为「~427x」。如需标注量化器数量,可在模型名后加括号: WavTokenizer (1Q)。"
+
+  - severity: low
+    type: missing-provenance
+    principle: traceable
+    target: "概念库/CodebookCollapse.md"
+    action: append
+    detail: "追加行的「代表工作」列应包含 wikilink [[论文笔记/WavTokenizer|WavTokenizer]] 以确保可溯源,变更计划描述中未明确提及 wikilink 格式。"
+    suggestion: "确保代表工作列使用 [[论文笔记/WavTokenizer|WavTokenizer (2025)]] 格式。"
+
+  - severity: low
+    type: missing-provenance
+    principle: traceable
+    target: "任务库/NeuralAudioCompression.md"
+    action: append
+    detail: "SOTA 表格中表头标注「截至 2023」,追加 2025 年工作后时间范围过时。但更新表头属于 substantive 修改,不在 append 范畴内。"
+    suggestion: "当前 append 可先执行。后续有其他 SOTA 更新时一并将表头改为「截至 2025」(需作为 substantive update 处理)。"
+
+learning_signals:
+  new_issue_type: "column-mismatch — 追加表格行时字段语义与列定义不匹配,是 factual-error 的子类型"
+  rule_gap: ""
+  checklist_upgrade_suggestion: "可增加检查项: 追加表格行时验证每个字段与列标题的语义一致性"
