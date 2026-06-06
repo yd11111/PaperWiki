@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[UniSRM]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
+- [ingest/deep] [[UniSRM]] — 精读, kb_sources=4, 新建 0, 追加 1 (TTSEvaluation 追加 section + 演进线)
+- [lint/local] UniSRM — 通过/0 问题
+- [review/auto] [[UniSRM]] — pass, 0 high, 0 medium, 2 low
+- [alert/backlog] pending-review: 72, draft deep/repro: 0 (draft total: 388)
 - [kb/search] [[OmniCodec]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓ | 过滤: [[AudioTokenizerTaxonomy]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
 - [ingest/deep] [[OmniCodec]] — 精读, kb_sources=6, 新建 0, 追加 5 (SemanticvsAcousticTokens 追加 section, CodecTrainingObjectives 追加 section, CodebookCollapse 追加 section, AudioTokenizerTaxonomy 追加 key_papers+table, NeuralAudioCompression 追加 key_papers)
 - [lint/local] OmniCodec — 通过/0 问题
