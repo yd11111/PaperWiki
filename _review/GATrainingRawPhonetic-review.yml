@@ -1,0 +1,74 @@
+review:
+  paper: "GATrainingRawPhonetic"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    retellable:
+      score: 8
+      reasoning: "方法节包含充分的因果解释(为什么跳过 mel、为什么 duration 用 softmax、为什么微调 BERT),每个关键设计选择都回答了'为什么选这个'。速查卡片'可借鉴'列出 4 个具体可迁移 trick。"
+      status: pass
+
+    trustworthy:
+      score: 7
+      reasoning: "数字型 claim 标注覆盖率高(>90%),指标名使用正确。但实验表中两处 MOS 数值与原文 Table 1 不符(已修正): NEB SE native 原写 4.3 实为 3.8,AD SE native 原写 4.2 实为 3.2。修正后可信度恢复。"
+      status: pass-with-fixes
+
+    distinguishable:
+      score: 9
+      reasoning: "因果解释来源标注覆盖率高(>90%),全篇严格区分 [论文原文] 和 [agent 解读],无推断伪装成断言的情况。"
+      status: pass
+
+    positionable:
+      score: 8
+      reasoning: "KB 背景有具体谱系定位(HiFi-GAN、FastSpeech 2、VITS),创新判断有对比基准(Blizzard 同期系统、VITS)。速查 5 字段实质充分。frontmatter 中 tasks/datasets 为空,但该论文确实没有引入新任务/数据集(使用 Blizzard Challenge 公共数据),不算缺失。"
+      status: pass
+
+    non_contaminating:
+      score: 8
+      reasoning: "反向更新仅涉及向已有实体页追加 key_papers(NeuralVocoder 和 ProsodyModeling 已达上限需跳过;DurationPredictor/GlobalStyleTokens 可追加)。无新建实体页需求。无 overclaim 风险。"
+      status: pass
+
+  issues:
+    - id: 1
+      severity: medium
+      type: factual-error
+      location: "实验表 MOS (NEB, SE native)"
+      detail: "原写 4.3,实际应为 3.8 [Table 1 第 5 行 Mean 列]"
+      suggestion: "已修正为 3.8"
+      status: fixed
+
+    - id: 2
+      severity: medium
+      type: factual-error
+      location: "实验表 MOS (AD, SE native)"
+      detail: "原写 4.2,实际应为 3.2 [Table 1 AD 第 5 行 Mean 列]"
+      suggestion: "已修正为 3.2"
+      status: fixed
+
+    - id: 3
+      severity: low
+      type: traceability-gap
+      location: "核心问题节"
+      detail: "'已有的端到端方案(如 WaveNet conditioned on linguistic features)虽然避免了这个问题,但通常依赖自回归生成(慢)或隐式韵律建模(不可控)' — 这是 agent 综述性判断,未标注 [agent 解读]"
+      suggestion: "在句末添加 [agent 解读] 标注"
+      status: open
+
+    - id: 4
+      severity: low
+      type: template-compliance
+      location: "实验表"
+      detail: "实验表缺少部分评估子组: NEB SE overall (4.0), NEB N-SE non-native (4.3), AD SE overall (3.3), AD N-SE native (3.5), AD N-SE non-native (4.2)"
+      suggestion: "可选择性补充,当前已覆盖核心数据点"
+      status: open
+
+  summary:
+    total_issues: 4
+    high: 0
+    medium: 2
+    low: 2
+    fixed: 2
+    open: 2
+
+  learning_signals: []

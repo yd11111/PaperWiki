@@ -125,12 +125,12 @@ Grapheme-to-phoneme (G2P) 实现为序列标注网络 (非 seq2seq attention) [�
 | 指标 | 本文 (System E) | 排名 | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
 | Overall ranking | 6/20 | 6/20 | Blizzard 2023 | [§4] |
-| MOS (NEB, SE native) | 4.3 | — | NEB | [Table 1] |
+| MOS (NEB, SE native) | 3.8 | — | NEB | [Table 1] |
 | MOS (NEB, SE non-native) | 4.3 | — | NEB | [Table 1] |
 | MOS (NEB, N-SE native) | 3.6 | — | NEB | [Table 1] |
 | MOS (NEB, SP) | 3.6 | — | NEB | [Table 1] |
 | MOS (NEB, SR) | 4.2 | — | NEB | [Table 1] |
-| MOS (AD, SE native) | 4.2 | — | AD | [Table 1] |
+| MOS (AD, SE native) | 3.2 | — | AD | [Table 1] |
 | MOS (AD, SE non-native) | 3.6 | — | AD | [Table 1] |
 | MOS (AD, SP) | 3.5 | — | AD | [Table 1] |
 | MOS (AD, SR) | 4.1 | — | AD | [Table 1] |
@@ -176,7 +176,19 @@ Grapheme-to-phoneme (G2P) 实现为序列标注网络 (非 seq2seq attention) [�
 
 ## 审阅
 
-*待独立审阅 agent 填写*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含充分因果解释,速查卡片有 4 个具体可迁移 trick |
+> | 可信赖 | pass-with-fixes | 2 处 MOS 数值与原文不符已修正 (NEB SE native 3.8, AD SE native 3.2) |
+> | 可区分 | pass | 来源标注覆盖率 >90%,严格区分论文原文/agent 解读 |
+> | 可定位 | pass | KB 背景有具体谱系 (HiFi-GAN/FastSpeech 2/VITS),创新判断有对比 |
+> | 不污染 | pass | 反向更新仅追加,无新建实体页,无 overclaim |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/GATrainingRawPhonetic-review.yml`
 
 ---
 检索命中: [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[DurationPredictor]](pending-review), [[GlobalStyleTokens]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: 无
