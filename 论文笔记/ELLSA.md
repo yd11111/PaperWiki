@@ -39,7 +39,7 @@ updated: 2026-06-06
 
 > [!summary] 速查
 > - **一句话**: ELLSA 是首个端到端全双工模型,通过 SA-MoE 架构将 speech expert 和 action expert 用 shared attention 连接,实现同时听+看+说+做的四模态 MIMO 交互
-> - **路线**: Speech → Mamba encoder → MLP adapter → Speech Expert (LLaMA-3.1-8B) ←SA-MoE attention→ Action Expert (Emu3-Base) ← VisionVQ + FAST tokenizer; Speech Expert → Synthesizer Adapter → CosyVoice2-0.5B → 语音输出
+> - **路线**: Speech → Mamba encoder → MLP adapter → Speech Expert (LLaMA-3.1-8B) ←SA-MoE attention→ Action Expert (Emu3-Base) ← VisionVQ + FAST tokenizer; Speech Expert → Synthesizer Adapter → CosyVoice2-0.5B → 语音输出 [§3, Fig 1]
 > - **指标**: LIBERO 平均成功率 89.4% (超 pi0-FAST 85.5%); Llama Q. S2S 70.0 (超 Freeze-Omni 56.2); 对话 turn-taking 100%; Speaking-while-acting 时性能下降可控 (SPEAR encoder 版本下降 <3%)
 > - **可借鉴**: SA-MoE 的"shared KV cache + 独立 FFN"设计可迁移到任何需要融合异构预训练模型的场景; 将 VLA 和 speech LLM 通过 attention 桥接的思路
 > - **局限**: 仅在 LIBERO 仿真环境验证,未部署真实机器人; 全双工场景有限 (无 backchannel); speaking-while-acting 时性能有可见下降 (尤其难题); 2-expert 设计绑定了模态分组
@@ -201,4 +201,16 @@ ELLSA 的架构由三层组成 [§3, Fig 1]:
 
 ## 审阅
 
-(待独立审阅 agent 填充)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | SA-MoE 的 WHY/HOW 因果解释完整,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 数字标注覆盖率 ~90%,指标使用正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注系统,覆盖率 ~90% |
+> | 可定位 | pass | Full-duplex + VLA 双线交叉定位清晰,与 pi0 有明确对比 |
+> | 不污染 | pass | 反向更新仅追加 key_papers,无 factual error 风险 |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/ELLSA-review.yml`

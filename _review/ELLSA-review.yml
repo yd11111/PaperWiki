@@ -1,0 +1,116 @@
+review:
+  paper: "ELLSA"
+  note_path: "论文笔记/ELLSA.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节详细解释了 SA-MoE 的 WHY (为什么不用 dense model, 为什么这样分组 expert), HOW (shared KV cache + independent FFN), 以及三阶段训练的逻辑。速查卡片的可借鉴字段给出了具体可迁移的设计 (shared KV cache, interleaved sequence, speech from text hidden state)。核心问题节回答了三个层层递进的为什么。"
+
+  可信赖:
+    score: 8
+    rationale: "实验表格覆盖了论文主要结果,数字均标注了出处 (Table N)。指标使用正确 (Acc, Success Rate, GPTScore)。速查卡片指标字段包含具体数字、数据集名和出处。方法节引用了 Section 和 Figure 编号。有少量 claim 缺少出处标注。"
+
+  可区分:
+    score: 9
+    rationale: "方法节系统使用了 [论文原文] 和 [agent 解读] 标注,覆盖率高。agent 解读部分 (如 SA-MoE vs 标准 MoE 的区别、Stage 2 数据效率的分析) 明确标记为推断。点评节的观点明确是 agent 评论性质。"
+
+  可定位:
+    score: 9
+    rationale: "KB 背景节提供了具体谱系定位 (full-duplex 演进线 + VLA 演进线的交叉), 引用了具体系统名 (Moshi, LSLM, pi0, OpenVLA 等)。创新判断有对比基准 (从 pi0 的 attention 连接扩展而来)。点评节进一步讨论了与 Moshi 的延迟对比和与 KB 现有系统的定位。"
+
+  不污染:
+    score: 8
+    rationale: "frontmatter 的 concepts 和 models 字段合理。concepts 列出的 6 个 KB 页均与论文内容直接相关。models 列了 CosyVoice2 (论文使用的组件)。没有列后续系统。反向更新计划中可能涉及的追加操作 (key_papers) 预计不会有 factual error。"
+
+checks:
+  可复述:
+    - item: "方法节包含因果解释"
+      status: pass
+      detail: "方法节详细解释了 SA-MoE 的设计动机和机制"
+    - item: "关键设计选择有 why"
+      status: pass
+      detail: "解释了为什么 speech+text 和 vision+action 分组, 为什么不用 dense model"
+    - item: "速查可借鉴具体"
+      status: pass
+      detail: "列出了 5 个具体可迁移 idea"
+
+  可信赖:
+    - item: "数字 claim 有出处标注"
+      status: pass
+      detail: "实验表格所有数字标注了 [Table N], 方法节引用了 [§X.X]/[Fig N]。估计覆盖率 ~90%"
+    - item: "指标名正确"
+      status: pass
+      detail: "Acc, Success Rate, GPTScore 使用正确"
+    - item: "速查指标有数字+数据集+来源"
+      status: pass
+      detail: "包含具体数字、数据集名和出处标注"
+    - item: "无方向性错误"
+      status: pass
+      detail: "未发现方向性错误"
+
+  可区分:
+    - item: "因果解释有来源标注"
+      status: pass
+      detail: "系统使用 [论文原文] 和 [agent 解读] 标注"
+    - item: "来源标注覆盖率 >= 80%"
+      status: pass
+      detail: "方法节中 WHY 解释覆盖率估计 ~90%"
+    - item: "无断言无限定词"
+      status: pass
+      detail: "未发现将推断写成断言的句子"
+    - item: "强断言有数字支撑"
+      status: pass
+      detail: "如 'SA-MoE >> Dense model' 有 Table 7 数据支撑"
+
+  可定位:
+    - item: "KB 背景有谱系定位"
+      status: pass
+      detail: "清晰的 full-duplex + VLA 双线交叉定位"
+    - item: "创新判断有对比基准"
+      status: pass
+      detail: "与 pi0 的明确对比"
+    - item: "frontmatter 字段非空"
+      status: pass
+      detail: "所有字段已填写"
+    - item: "frontmatter 语义正确"
+      status: pass
+      detail: "concepts 列相关概念, models 列 CosyVoice2 (使用的组件), 未列后续系统"
+    - item: "速查 5 字段有实质内容"
+      status: pass
+      detail: "5 个字段均有具体内容"
+
+  不污染:
+    - item: "新建概念页满足准入"
+      status: pass
+      detail: "本次不新建概念页"
+    - item: "去重检查"
+      status: pass
+      detail: "不涉及新建"
+    - item: "反向更新无 factual error"
+      status: pass
+      detail: "计划仅做 key_papers 追加"
+    - item: "反向更新分类正确"
+      status: pass
+      detail: "追加 key_papers 不改 status"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查 > 路线"
+    detail: "路线描述中未标注来源 section"
+    suggestion: "可在路线后加 [§3, Fig 1]"
+
+  - type: template-compliance
+    severity: low
+    location: "审阅节"
+    detail: "审阅节为空白占位"
+    suggestion: "将由本 review 填充"
+
+conclusion: pass
+conclusion_rationale: "所有原则满足,无 high/medium issue,仅 2 个 low 级问题。笔记对 SA-MoE 的机制理解、四模态 MIMO 设计、三阶段训练策略都有清晰的因果解释和出处标注。KB 定位准确,指标可信。"
+
+learning_signals: []
