@@ -1,0 +1,55 @@
+review:
+  paper: "ChildTTS-Fastpitch"
+  reviewer: "auto (inline, no subagent available)"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducible:
+    score: 7
+    reason: "方法节解释了 WHY(为何选 FastPitch、为何 transfer learning),关键设计选择有因果论述。但对 FastPitch pitch predictor 在高 F0 域的适应性缺乏机制级分析。"
+  trustworthy:
+    score: 8
+    reason: "数字型 claim 标注率高(覆盖率 ~90%),所有实验数字已与原文交叉验证无误。指标名使用正确(MOS/WER/cosine similarity)。"
+  distinguishable:
+    score: 7
+    reason: "5 处标注了[论文原文]/[agent 解读]区分。有一处推断未标注来源:关于 MOSNet 偏好'更接近成人语音'的解读(在点评节)应标注为[agent 解读]。"
+  positionable:
+    score: 8
+    reason: "KB 背景节有具体谱系定位(FastPitch 在 NAR TTS 家族中的位置、transfer learning 在 Speaker Adaptation 演进中的位置)。创新判断有对比基准(AdaSpeech 系列)。"
+  non_polluting:
+    score: 9
+    reason: "概念引用均指向已有实体页,无新建概念页需求。反向更新预计为纯追加操作,安全性高。"
+
+issues:
+  - id: 1
+    type: "fact-inference-mixing"
+    severity: "medium"
+    principle: "distinguishable"
+    location: "点评 §主要不足 第1条"
+    detail: "MOSNet 评分高于真实儿童语音(3.10 vs 2.91)这一结果需要审慎解读 — 更可能反映 MOSNet 对'更接近成人语音'的偏好 — 此为 agent 推断但未标注来源"
+    suggestion: "在该句前加 [agent 解读] 标注"
+
+  - id: 2
+    type: "template-compliance"
+    severity: "low"
+    principle: "positionable"
+    location: "frontmatter models 字段"
+    detail: "models 字段引用了本文自身 [[论文笔记/ChildTTS-Fastpitch|ChildTTS-Fastpitch]],但本文未提出新模型,FastPitch 和 WaveGlow 都是已有模型的直接使用"
+    suggestion: "将 models 清空或改为对比 baseline: Tacotron 2"
+
+  - id: 3
+    type: "traceability-gap"
+    severity: "low"
+    principle: "trustworthy"
+    location: "方法 §关键设计选择 第3段"
+    detail: "关于'多说话人框架对于捕捉儿童个体差异至关重要'的结论缺少出处标注"
+    suggestion: "标注为 [agent 解读] 因为这是对初始实验失败原因的推断"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []

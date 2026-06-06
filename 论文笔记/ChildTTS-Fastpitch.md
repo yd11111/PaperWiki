@@ -9,7 +9,7 @@ year: 2023
 venue: "IEEE (conference paper)"
 tags: [TTS, child-speech, transfer-learning, FastPitch, multi-speaker, low-resource]
 concepts: ["[[Non-autoregressiveTTS]]", "[[SpeakerAdaptation]]", "[[ProsodyModeling]]", "[[DurationPredictor]]", "[[F0Modeling]]", "[[NeuralVocoder]]"]
-models: ["[[论文笔记/ChildTTS-Fastpitch|ChildTTS-Fastpitch]]"]
+models: []
 tasks: []
 datasets: []
 kb_context_sources: 6
@@ -85,7 +85,7 @@ FastPitch 架构 [§II.B.1, Fig 1]:
 **单说话人 vs 多说话人微调**: 作者尝试了两种初始实验 [§III.B.1]:
 1. LJ Speech 单说话人训练 + 单个 MyST 儿童说话人微调 → 输出噪声大
 2. LJ Speech 单说话人训练 + 全 MyST 数据集(视为单说话人)微调 → 不像儿童语音
-[agent 解读] 这说明多说话人框架对于捕捉儿童个体差异至关重要。
+[agent 解读] 这可能说明多说话人框架对于捕捉儿童个体差异较为重要。
 
 ### 训练策略
 
@@ -169,7 +169,7 @@ Transfer learning 两阶段 [§III.A, Fig 2]:
 - 释放合成数据集和代码有利于社区复现
 
 **主要不足**:
-- MOSNet 评分高于真实儿童语音(3.10 vs 2.91)这一结果需要审慎解读 — 更可能反映 MOSNet 对"更接近成人语音"的偏好,而非真正的质量提升
+- MOSNet 评分高于真实儿童语音(3.10 vs 2.91)这一结果需要审慎解读 — [agent 解读] 更可能反映 MOSNet 对"更接近成人语音"的偏好,而非真正的质量提升
 - 缺乏对 FastPitch 的 pitch predictor 在高 F0 域上表现的针对性分析,这本应是方法选择的核心验证
 - WER 17.61 虽优于 Tacotron 2 的 25.63,但仍显著高于真实儿童语音的 15.27,表明可懂度仍有差距
 
@@ -180,3 +180,19 @@ Transfer learning 两阶段 [§III.A, Fig 2]:
 2. **三维客观评估框架**: 用 MOSNet(自然度) + ASR WER(可懂度) + Speaker Encoder(说话人相似度)构建无需人工参与的评估体系,适合快速迭代实验
 
 3. **过拟合检测方法**: 每 50k 步手动听合成音频检测过拟合,比仅看 loss 曲线更可靠 [§III.B.2]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节有因果解释,关键设计选择有 WHY |
+> | 可信赖 | pass | 数字标注覆盖率 ~90%,已与原文交叉验证 |
+> | 可区分 | pass | 5 处来源标注,1 处推断未标注(medium) |
+> | 可定位 | pass | KB 背景有具体谱系定位和创新判断 |
+> | 不污染 | pass | 无新建页需求,仅追加引用 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ChildTTS-Fastpitch-review.yml`
