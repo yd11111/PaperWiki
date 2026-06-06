@@ -4,6 +4,7 @@
 - [kb/search] [[SALMONN]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓ | 过滤: [[ModalityAdaptationforSpeechLLM]](pending-review), [[AudioUnderstanding]](pending-review), [[Audio-LanguagePretraining]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Whisper]](pending-review)
 - [ingest/deep] [[SALMONN]] — 精读, kb_sources=6, 新建 0, 追加 4 (ModalityAdaptation, Audio-LanguagePretraining, Speech-LLMIntegrationTaxonomy, Whisper 追加 key_papers); SpeechLanguageModel 和 AudioUnderstanding key_papers 已达上限,跳过
 - [lint/local] SALMONN — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 379
 - [kb/search] [[ELLSA]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
 - [ingest/deep] [[ELLSA]] — 精读, kb_sources=6, 新建 0, 追加 2 (Full-duplexSpokenDialogue 追加 section + 演进, Turn-takinginSpokenDialogue 追加 section + 演进)
 - [skip/update] [[Full-duplexSpokenDialogue]] — key_papers 已达上限(17),改追加到正文
