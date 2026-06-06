@@ -7,7 +7,7 @@ year: 2022
 tags: [ASR, weak-supervision, multilingual, multitask, zero-shot, robustness, speech-recognition]
 key_concepts: ["[[MelSpectrogram]]", "[[SpeechTokenizer]]", "[[LLM-enhancedASR]]"]
 tasks: []
-key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/LightweightPromptBiasing|Lightweight Prompt Biasing]]", "[[论文笔记/W3AR|W3AR]]", "[[论文笔记/Raon-Speech|Raon-Speech]]"]
+key_papers: ["[[论文笔记/Whisper|Whisper]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/MAVE|MAVE]]", "[[论文笔记/LightweightPromptBiasing|Lightweight Prompt Biasing]]", "[[论文笔记/W3AR|W3AR]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/AutomatedTTSDataset|Automated TTS Dataset (Gunduz et al., 2024)]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
