@@ -6,6 +6,7 @@
 - [skip/update] [[SpeechTokenizer]] — 实体页审阅结论 revise,跳过反向更新
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(60+),跳过追加
 - [lint/local] GLM-4-Voice — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 374
 - [kb/search] [[LSLM]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
 - [ingest/deep] [[LSLM]] — 精读, kb_sources=6, 新建 0, 追加 2 (Full-duplexSpokenDialogue wikilink更新+补充, Turn-takinginSpokenDialogue 追加 LSLM section)
 - [review/auto] [[LSLM]] — pass, 0 high 0 medium 3 low
