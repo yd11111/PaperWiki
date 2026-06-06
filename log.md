@@ -5,6 +5,7 @@
 - [ingest/deep] [[HierarchicalEmotionControl]] — 精读, kb_sources=6, 新建 0, 追加 2 (EmotionControlinTTS 正文, GradientReversalLayer 正文+key_papers)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已超上限, 改追加到正文
 - [lint/local] HierarchicalEmotionControl — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 368 — 建议抽空审核
 - [kb/search] [[MitigatingUnauthorized]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓ | 过滤: [[Anti-spoofingandDeepfakeDetection]](pending-review), [[SpeakerVerification]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
 - [ingest/deep] [[MitigatingUnauthorized]] — 精读, kb_sources=6, 新建 0, 追加 1 (Anti-spoofingandDeepfakeDetection 正文 POP 描述)
 - [skip/update] [[SpeakerVerification]] — key_papers 已达上限(12)
