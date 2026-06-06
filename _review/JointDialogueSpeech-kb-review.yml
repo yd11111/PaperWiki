@@ -1,0 +1,28 @@
+paper: "JointDialogueSpeech"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "仅追加一条 LLM-based PSP 早期实验结果到 ProsodyModeling 显式韵律节,内容与论文一致,不改写已有定义"
+  no_bloat:
+    verdict: pass
+    notes: "不新建实体页;本文为 feasibility study,不构成独立概念;所有更新为已有页追加"
+  traceable:
+    verdict: pass
+    notes: "追加内容含论文 wikilink 和具体数字出处"
+
+change_plan_summary:
+  total_targets: 1
+  appends: 1
+  substantive: 0
+  new_pages: 0
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
