@@ -1,0 +1,49 @@
+review:
+  paper: "UnitSpeech"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含详细因果解释(4个关键设计选择),速查可借鉴字段有3个具体可迁移trick,整体机制理解到位"
+  可信赖:
+    score: 7
+    rationale: "数字标注覆盖率>85%,指标名正确;初稿VC表SMOS/SECS行存在factual error(值错位),已修正"
+  可区分:
+    score: 8
+    rationale: "[论文原文]/[agent 解读]标注覆盖率高(约85%);方法节4个设计选择均有明确来源标注"
+  可定位:
+    score: 9
+    rationale: "KB背景定位清晰——精准对标AdaSpeech 2(mel encoder)和Guided-TTS 2(diffusion+CFG),在SpeakerAdaptation/Untranscribed Speech子课题中准确定位"
+  不污染:
+    score: 9
+    rationale: "未新建概念页;反向更新仅为现有页追加key_papers和贡献描述;frontmatter概念挂接合理(6个概念均相关)"
+
+issues:
+  - id: 1
+    severity: high
+    type: factual-error
+    location: "实验 > VC表 > SMOS/SECS行"
+    detail: "VC SMOS值错位:原将YourTTS的3.56写为UnitSpeech,BNE-PPG-VC的3.50写为DiffVC;SECS值DiffVC/YourTTS/BNE-PPG-VC错位。实际: UnitSpeech SMOS=3.83, SECS=0.923; DiffVC SMOS=3.69, SECS=0.909; YourTTS SMOS=3.56, SECS=0.763; BNE-PPG-VC SMOS=3.50, SECS=0.851"
+    suggestion: "已修正为PDF Table 2原始数据"
+    status: fixed
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "局限性 > 第5点"
+    detail: "'与LLM-era方法的差距'缺少具体VALL-E数字对比,仅有定性判断"
+    suggestion: "可接受——VALL-E使用不同数据集和评估设置,直接数字对比可能误导"
+    status: accepted
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter > venue"
+    detail: "venue写为'Interspeech 2023',但PDF显示为arXiv preprint(2306.16083v1),未明确标注会议接收"
+    suggestion: "如无法确认正式发表venue,改为'arXiv preprint'或保留但标注'(推断)'"
+    status: open
+
+learning_signals: []

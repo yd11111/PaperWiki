@@ -6,7 +6,7 @@ arxiv_id: "2306.16083"
 source: "Sources/UnitSpeech.pdf"
 authors: [Heeseung Kim, Sungwon Kim, Jiheum Yeom, Sungroh Yoon]
 year: 2023
-venue: "Interspeech 2023"
+venue: "Interspeech 2023 (arXiv: 2306.16083)"
 tags: [speaker-adaptation, diffusion-model, self-supervised-unit, voice-conversion, HuBERT, fine-tuning, untranscribed-data, classifier-free-guidance]
 concepts: ["[[SpeakerAdaptation]]", "[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeechFactorization]]", "[[VoiceCloningTaxonomy]]"]
 models: ["[[模型库/HuBERT]]"]
@@ -122,8 +122,8 @@ UnitSpeech 使用一种简化的 CFG [§2.3]:unconditional embedding e_Φ 直接
 | --- | --- | --- | --- | --- | --- | --- |
 | MOS (VC) | 4.26±0.09 | 3.97±0.09 | 3.88±0.10 | 3.86±0.10 | LibriTTS | [Table 2] |
 | CER (VC) | 3.55% | 3.67% | 2.20% | 1.37% | LibriTTS | [Table 2] |
-| SMOS (VC) | 3.56±0.12 | 3.50±0.14 | — | — | LibriTTS | [Table 2] |
-| SECS (VC) | 0.923 | 0.763 | 0.851 | 0.909 | LibriTTS | [Table 2] |
+| SMOS (VC) | 3.83±0.13 | 3.69±0.13 | 3.56±0.12 | 3.50±0.14 | LibriTTS | [Table 2] |
+| SECS (VC) | 0.923 | 0.909 | 0.763 | 0.851 | LibriTTS | [Table 2] |
 
 **Ablation 要点** [Table 3]:
 - **Unit 聚类数 K**: K=200 为最佳平衡; K 增大改善 VC 发音精度(K=500 CER 3.80% vs K=50 CER 12.64%)但对 TTS 影响不大 [Table 3]
@@ -157,3 +157,19 @@ UnitSpeech 的核心贡献是将 HuBERT discrete units 引入 diffusion-based sp
 4. **Unit duration 作为显式对齐机制**: 从 HuBERT 输出中同时提取 unit sequence 和 duration,避免了在适应阶段依赖 MAS 进行文本-语音对齐
 
 检索命中: [[SpeechFactorization]], [[SpeakerAdaptation]], [[DiffusionModel]], [[Classifier-FreeGuidance]], [[Self-SupervisedSpeechRepresentation]], [[VoiceCloningTaxonomy]] | 过滤: 5 页 pending-review | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节4个设计选择均有因果解释,速查可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率>85%;初稿VC表SMOS/SECS错位已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注覆盖率~85% |
+> | 可定位 | pass | KB背景精准对标AdaSpeech 2和Guided-TTS 2 |
+> | 不污染 | pass | 未新建概念页,frontmatter挂接合理 |
+> 
+> Issues: 3 (high: 1 fixed, medium: 0, low: 2)
+> 详见 `_review/UnitSpeech-review.yml`
