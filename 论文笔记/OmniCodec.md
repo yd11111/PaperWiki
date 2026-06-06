@@ -63,7 +63,7 @@ updated: 2026-06-06
 OmniCodec 采用双流 (semantic + acoustic) 编解码器架构 [§2.1, Fig 1]:
 
 **Semantic 分支**:
-- 输入: 16 kHz audio → Qwen3-Omni-AuT-Encoder (冻结的预训练理解模型 encoder)
+- 输入: 16 kHz audio → Qwen3-Omni-AuT-Encoder (预训练理解模型 encoder,论文未明确说明是否冻结)
 - 输出: 12.5 Hz 高维语义特征
 - 量化: Semantic Transformer → VQ (codebook 2048, embedding dim 1024)
 - 训练目标: semantic reconstruction loss (重建 Qwen3-Omni-AuT-Encoder 的特征)
@@ -168,7 +168,7 @@ OmniCodec 在 music 和 sound 域 PPL 优于 Mimi,但 speech 域 PPL 劣于 Mimi
 **关键发现**:
 1. 移除 semantic branch → 重建略好 (PESQ 2.81 vs 2.76),但 PPL 暴增 ~84% (10.02→18.44) [Table 2],证实语义分支是给下游任务提供结构化信息的关键
 2. 移除 self-guidance → codebook 利用率从 0.982 降至 0.974,重建略降 [Table 2]
-3. 移除 Adapter-1 → PPL 略升 + 重建降,说明解耦策略有效 [Table 2]
+3. 移除 Adapter-1 → PPL 略升 (11.13 vs 10.02); PESQ-WB 下降 (2.61 vs 2.76) 但 Mel dis. 改善 (0.76 vs 0.81),说明解耦对不同重建指标影响不一致 [Table 2]
 4. 仅用 speech 数据 → speech 指标最优 (PPL0 8.03, PESQ 2.90),但失去通用性 [Table 2]
 
 ## 局限性
@@ -194,3 +194,19 @@ OmniCodec 的核心贡献是将预训练理解模型 encoder (Qwen3-Omni-AuT-Enc
 2. **Self-guidance loss**: $|sg(h_e) - h_q|_2^2$ 是一个通用的量化鲁棒性正则化——可应用于任何有 quantization bottleneck 的 encoder-decoder 架构,几乎无额外计算开销
 3. **解耦策略 (减-加)**: 声学分支先减去量化后的语义特征再编码,保证声学 RVQ 只编码语义无法覆盖的残差信息。这种显式的信息分流比让两个分支自由竞争更清晰
 4. **域间 data ratio 的重要性**: 消融显示仅用 speech 数据可获得 speech 上最优 PPL (8.03) 但失去通用性,fine-tune 缓解一个域却伤害其他域。对多域 codec 的训练配比是关键超参
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 3 个设计选择的 WHY,self-guidance 机制清晰 |
+> | 可信赖 | pass | 所有数字经 PDF 交叉验证正确,指标使用无误 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >90% |
+> | 可定位 | pass | KB 背景准确定位 Mimi/CosyVoice/mixed tokenizer 演进线 |
+> | 不污染 | pass | 分析客观,局限性充分 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/OmniCodec-review.yml`

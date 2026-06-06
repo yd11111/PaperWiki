@@ -1,0 +1,44 @@
+review:
+  paper: "OmniCodec"
+  note_path: "论文笔记/OmniCodec.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节充分解释了三个关键设计选择的 WHY (为何用 Qwen3-Omni encoder, 为何多码本, 为何用量化后特征做 Adapter 输入),含因果链。Self-guidance loss 的机制和数学形式清晰。速查卡片的可借鉴字段具体可操作。"
+  trustworthy:
+    score: 9
+    reason: "所有数字均有 [Table N] 标注,经 PDF 交叉验证全部正确。指标使用无误 (PESQ-WB/NB, MCD, Mel dis., STOI, PPL0/mean)。速查指标含具体数字+数据集+出处。"
+  distinguishable:
+    score: 8
+    reason: "方法节一致标注 [论文原文] 和 [agent 解读],覆盖率 >90%。点评节明确区分了论文贡献和不足。消融分析中的因果推断有标注来源。"
+  positionable:
+    score: 8
+    reason: "KB 背景准确定位: 与 Mimi (同帧率双流) 的差异化、与 CosyVoice S3 (监督式语义) 的异同、在 mixed tokenizer 演进线中的位置。创新判断有具体对比基准。"
+  non_contaminating:
+    score: 8
+    reason: "分析客观,未过度 claim。局限性分析充分 (6 点)。反向更新范围合理 (追加 key_papers 为主)。"
+
+issues:
+  - type: "traceability-gap"
+    severity: "low"
+    location: "消融实验关键发现第3点"
+    detail: "w/o Adapter-1 消融描述为'重建降',但 Mel dis. 从 0.81 改善到 0.76 (lower is better)。实际是 PESQ-WB 降 (2.76→2.61) 但 Mel dis. 升,应更精确描述"
+    suggestion: "改为'PESQ-WB 下降 (2.76→2.61) 但 Mel dis. 改善 (0.81→0.76),说明解耦对不同重建指标影响不一致'"
+
+  - type: "template-compliance"
+    severity: "low"
+    location: "frontmatter models 字段"
+    detail: "models 仅列 EnCodec/SoundStream/WavLM,缺少主要对比 baseline Mimi。Mimi 有笔记 [[论文笔记/Moshi|Moshi]] 可链接"
+    suggestion: "在 models 中追加 Mimi/Moshi 的链接"
+
+  - type: "traceability-gap"
+    severity: "low"
+    location: "整体架构 - Semantic 分支"
+    detail: "笔记说 Qwen3-Omni-AuT-Encoder 是'冻结的'预训练模型,但论文未明确说明是否冻结。论文说'leveraging the audio encoder of the pre-trained understanding model'但未提frozen"
+    suggestion: "确认或去掉'冻结'二字,或标注为 [agent 推断]"
+
+learning_signals: []
