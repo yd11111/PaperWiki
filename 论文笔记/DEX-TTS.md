@@ -6,7 +6,7 @@ arxiv_id: "2406.19135"
 source: "Sources/DEX-TTS.pdf"
 authors: [Hyun Joon Park, Jin Sob Kim, Wooseok Shin, Sung Won Han]
 year: 2024
-venue: "arXiv preprint (NeurIPS 2024 submission)"
+venue: "arXiv preprint"
 tags: [TTS, diffusion, expressive, style-transfer, reference-based, DiT, zero-shot, multi-speaker]
 concepts: ["[[Diffusion-basedTTS]]", "[[StyleTransferinTTS]]", "[[DiffusionModel]]", "[[GlobalStyleTokens]]", "[[DurationPredictor]]", "[[F0Modeling]]", "[[MelSpectrogram]]", "[[ScoreMatching]]"]
 models: []
@@ -183,7 +183,7 @@ T-IV 和 T-V adapter 都以 diffusion timestep t 为额外条件。消融 g) 移
 **不足**:
 - 推理效率是实际部署的主要障碍,论文未实际实现 consistency distillation 或其他加速方案
 - 实验规模(特别是 zero-shot speakers 数量)偏小,难以确信在大规模场景下的泛化能力
-- 与 2023-2024 年更强的 baseline(StyleTTS 2 MOS-N 4.80 on LJSpeech)相比,GeDEX-TTS 的 MOS-N 4.26 仍有较大差距
+- 与 2023-2024 年更强的 baseline(如 StyleTTS 2)相比,GeDEX-TTS 的 MOS-N 4.26 可能仍有差距,但论文未直接对比
 - T-SNE 可视化 [Fig 4] 定性有说服力(T-IV/T-V 分别按情感/说话人聚类),但缺少定量解耦度量
 
 ## 可复用的 idea
@@ -200,4 +200,16 @@ T-IV 和 T-V adapter 都以 diffusion timestep t 为额外条件。消融 g) 移
 
 ## 审阅
 
-*(待独立审阅 agent 填写)*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含完整因果解释,每个设计选择配消融实验 |
+> | 可信赖 | pass | 核心数字全部交叉验证通过,出处标注覆盖率~90% |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注一致且覆盖率高 |
+> | 可定位 | pass | 双维度谱系定位(Diffusion-basedTTS + StyleTransferinTTS) |
+> | 不污染 | pass | 内容准确,无 overclaim |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/DEX-TTS-review.yml`

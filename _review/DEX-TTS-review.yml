@@ -1,0 +1,43 @@
+review:
+  note: "论文笔记/DEX-TTS.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节包含完整因果解释: T-IV/T-V 二分法的 WHY、AdaIN vs cross-attention 选择理由、VQ 信息瓶颈设计动机、overlapping patchify 动机均有解释。每个设计选择配有消融实验支撑。速查卡片可借鉴字段列出 5 个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    reason: "核心数字全部交叉验证通过(Table 1-4, Table 8-9)。出处标注覆盖率约 90%。指标名使用正确(WER/COS/MOS-N/MOS-S)。无方向性错误。"
+  可区分:
+    score: 9
+    reason: "[论文原文] 和 [agent 解读] 标注一致且覆盖率高(~90%)。所有强判断有限定词。未发现把推断写成断言的情况。"
+  可定位:
+    score: 9
+    reason: "KB 背景提供双维度谱系定位(Diffusion-basedTTS 演进线 + StyleTransferinTTS 演进线),创新判断有对比基准(vs GST/MetaStyleSpeech/GenerSpeech/U-DiT-TTS)。"
+  不污染:
+    score: 9
+    reason: "笔记内容准确,无 overclaim。暂未执行反向更新,无 KB 污染风险。"
+
+issues:
+  - type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter venue"
+    detail: "venue 标注为 'arXiv preprint (NeurIPS 2024 submission)',但论文仅标注 'Preprint',NeurIPS 提交是推测。"
+    suggestion: "改为 'arXiv preprint'"
+
+  - type: "template-compliance"
+    severity: "low"
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 VCTK、ESD、LJSpeech 三个数据集。"
+    suggestion: "无对应实体页则可保持空,或标注数据集名称字符串。"
+
+  - type: "traceability-gap"
+    severity: "low"
+    location: "点评 > 不足"
+    detail: "'StyleTTS 2 MOS-N 4.80 on LJSpeech' 引用了外部数据但无出处标注。"
+    suggestion: "标注来源或移除具体数字比较。"
+
+learning_signals: []
