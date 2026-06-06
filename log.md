@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[LSLM]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
+- [ingest/deep] [[LSLM]] — 精读, kb_sources=6, 新建 0, 追加 2 (Full-duplexSpokenDialogue wikilink更新+补充, Turn-takinginSpokenDialogue 追加 LSLM section)
+- [review/auto] [[LSLM]] — pass, 0 high 0 medium 3 low
+- [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(15),改追加到正文端到端系统段
+- [lint/local] LSLM — 通过
 - [kb/search] [[Voicebox]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[Classifier-FreeGuidance]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[NaturalSpeech2]](pending-review), [[DurationPredictor]](pending-review)
 - [ingest/deep] [[Voicebox]] — 精读, kb_sources=6, 新建 0, 追加 2 (Non-autoregressiveTTS 演进线, DurationPredictor 现代 duration section)
 - [review/auto] [[Voicebox]] — pass, 0 high 0 medium 2 low
