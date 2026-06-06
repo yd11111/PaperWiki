@@ -10,6 +10,7 @@
 - [skip/update] [[VITS]] — key_papers 已超上限(14), 改追加到正文相关工作
 - [lint/local] USAT — 通过
 - [review/auto] USAT — pass, 0 high, 0 medium, 3 low
+- [alert/backlog] pending-review: 71, draft deep/repro: 361 — 建议抽空审核
 - [kb/search] [[HyperTTS]] — 命中 5 页 (取 Top 5): [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
 - [ingest/deep] [[HyperTTS]] — 精读, kb_sources=5, 新建 0, 追加 0
 - [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12), 且正文已引用 HyperTTS
