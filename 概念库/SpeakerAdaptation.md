@@ -4,7 +4,7 @@ title: "Speaker Adaptation"
 aliases: [说话人适应, Speaker Fine-tuning, TTS Adaptation, 说话人自适应, Voice Adaptation, 语音适应]
 category: "technique"
 tags: [TTS, voice-cloning, fine-tuning, speaker-identity, few-shot, multi-speaker, adaptation]
-key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/Low-ResourceForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/ZeSTA|ZeSTA (Choi et al., 2026)]]", "[[论文笔记/AccentVector|Accent Vector (Lertpetchpun et al., 2026)]]"]
+key_papers: ["[[论文笔记/Survey-VoiceCloning|Azzuni & El Saddik 2025]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/GLM-TTS|GLM-TTS]]", "[[论文笔记/XTTS|XTTS]]", "[[论文笔记/Low-ResourceForwardTacotron|Low-Resource ForwardTacotron (Kayyar et al., 2025)]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/CSP-FT|CSP-FT (Wang et al., 2026)]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/ZeSTA|ZeSTA (Choi et al., 2026)]]", "[[论文笔记/AccentVector|Accent Vector (Lertpetchpun et al., 2026)]]", "[[论文笔记/ADAPTERMIX|ADAPTERMIX (Mehrish et al., 2023)]]"]
 origin_paper: ""
 related_concepts: ["[[SpeakerEmbedding]]", "[[VoiceCloningTaxonomy]]", "[[SpeechFactorization]]", "[[SpeakerVerification]]", "[[StyleTransferinTTS]]"]
 status: pending-review
