@@ -9,7 +9,7 @@ year: 2024
 venue: "arXiv (Zhipu AI / Tsinghua University)"
 tags: [speech-LM, end-to-end, spoken-chatbot, speech-tokenizer, flow-matching, single-codebook, streaming, interleaved-data, pre-training, bilingual]
 concepts: ["[[SpeechLanguageModel]]", "[[SpeechTokenizer]]", "[[ConditionalFlowMatching]]", "[[Single-codebookvsMulti-codebook]]", "[[StreamingSpokenDialogue]]", "[[Speech-LLMIntegrationTaxonomy]]", "[[SemanticvsAcousticTokens]]"]
-models: ["[[CosyVoice]]", "[[Whisper]]"]
+models: ["[[CosyVoice]]", "[[Whisper]]", "[[Moshi]]"]
 tasks: []
 datasets: ["[[SEED-TTS-Eval]]"]
 kb_context_sources: 3
@@ -73,7 +73,7 @@ GLM-4-Voice 由三个组件构成 [§3, Fig 2]:
 具体实现:
 - 在 Whisper-large-v3 encoder 中间插入 pooling layer + VQ layer
 - Pooling 降低帧率: 原始 50Hz → 12.5Hz (4x downsample) [Table 1]
-- VQ 用 EMA 更新码本向量,通过 reset 低使用率码本防止 codebook collapse [§3.1, 引用 Dhariwal et al.]
+- VQ 用 EMA 更新码本向量 (codebook size = 16384, 即 14 bits/token),通过 reset 低使用率码本防止 codebook collapse [§3.1, 引用 Dhariwal et al.]
 - 为支持 streaming 编码: 将 Whisper 的双向注意力替换为 block causal attention,将卷积层替换为 causal convolution [§3.1]
 - 训练数据: 多个 ASR 数据集 (LibriSpeech, GigaSpeech, MLS-Eng, Wenet, CommonVoice, AISHELL-1) + 10K 小时中文私有数据 + 700K 小时无监督伪标签数据 [§3.1]
 
@@ -203,3 +203,19 @@ GLM-4-Voice 在所有 4 个指标上均大幅领先所有 baseline。UTMOS 4.45 
 ---
 
 检索命中: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[ConditionalFlowMatching]] | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY/HOW 解释充分,设计选择动机清晰 |
+> | 可信赖 | pass | 所有关键数字与 PDF 交叉验证一致,出处标注覆盖率 ~95% |
+> | 可区分 | pass | 来源标注覆盖率 ~90%,无推断写成断言 |
+> | 可定位 | pass-with-fixes | KB 谱系定位清晰; models 字段已补充 Moshi |
+> | 不污染 | pass | 挂接合理,无 overclaim |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/GLM-4-Voice-review.yml`

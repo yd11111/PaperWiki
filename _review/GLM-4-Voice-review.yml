@@ -1,0 +1,98 @@
+review:
+  paper: "GLM-4-Voice"
+  note_path: "论文笔记/GLM-4-Voice.md"
+  reviewer: "auto (inline fallback, no subagent dispatch available)"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节详细解释了 VQ-Whisper tokenizer、Streaming Thoughts、分离 loss 等设计的 WHY;每个关键设计选择 (为什么 12.5Hz、为什么单码本、为什么 1:2 交替比例) 都有明确的动机解释;速查卡片可借鉴字段列出了 3 个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    rationale: "所有关键数字均标注了出处 [Table 1-6]/[§X.X];与 PDF 原文交叉验证: Table 1 tokenizer 指标、Table 3-4 base model 指标、Table 5 ASR/TTS 指标、Table 6 chat model 指标,全部准确无误;指标名 WER/CER/UTMOS/MOS 使用正确。"
+  可区分:
+    score: 9
+    rationale: "方法节系统地标注了 [论文原文] 和 [agent 解读];覆盖率约 90%;不存在把推断写成断言的情况;局限性节中 agent 推断均明确标注。"
+  可定位:
+    score: 8
+    rationale: "KB 背景节定位了 GLM-4-Voice 在 SpeechLM 演进中的位置,与 TWIST/SPIRIT-LM/Moshi/CosyVoice 的关系清晰;创新判断有具体对比基准。扣分点: frontmatter models 未包含 Moshi 等主要 baseline 模型。"
+  不污染:
+    score: 9
+    rationale: "concepts 挂接合理 (7 个概念页,覆盖了论文核心技术);反向更新风险低 (主要为追加操作);无 overclaim。"
+
+checklist:
+  可复述:
+    - item: "方法节含因果解释"
+      result: pass
+    - item: "设计选择有 WHY"
+      result: pass
+    - item: "速查可借鉴具体"
+      result: pass
+
+  可信赖:
+    - item: "数字有出处标注"
+      result: pass
+      note: "覆盖率 ~95%, 所有实验表格数字和关键技术参数均有标注"
+    - item: "指标名正确"
+      result: pass
+    - item: "速查指标有数字+数据集+来源"
+      result: pass
+    - item: "无方向性错误"
+      result: pass
+
+  可区分:
+    - item: "因果解释有来源标注"
+      result: pass
+    - item: "来源标注覆盖率 ≥ 80%"
+      result: pass
+      note: "估计 ~90%"
+    - item: "无推断写成断言"
+      result: pass
+    - item: "强断言有支撑"
+      result: pass
+
+  可定位:
+    - item: "KB 背景有具体谱系定位"
+      result: pass
+    - item: "创新判断有对比基准"
+      result: pass
+    - item: "frontmatter 字段存在且非空"
+      result: pass
+    - item: "frontmatter 字段语义正确"
+      result: pass-with-fixes
+      note: "models 字段仅列了 CosyVoice 和 Whisper (本文使用的组件), 未列 Moshi 等主要对比 baseline"
+
+  不污染:
+    - item: "新建概念页满足准入"
+      result: not-applicable
+      note: "本轮未新建概念页"
+    - item: "去重检查"
+      result: not-applicable
+    - item: "反向更新无 factual-error"
+      result: not-applicable
+      note: "反向更新尚未执行"
+    - item: "反向更新分类正确"
+      result: not-applicable
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter models 字段"
+    detail: "models 应包含本文主要对比 baseline (Moshi, SpeechGPT 等有笔记的模型), 目前仅列了 CosyVoice 和 Whisper"
+    suggestion: "补充 Moshi 到 models 列表 (有论文笔记)"
+
+  - type: traceability-gap
+    severity: low
+    location: "§3.1 Speech Tokenizer"
+    detail: "VQ codebook size (16384) 未在笔记正文中明确提及, 仅可从 175bps / 12.5Hz = 14 bits → 2^14 = 16384 推算"
+    suggestion: "在 tokenizer 描述中补充 codebook size 信息"
+
+conclusion: "pass-with-fixes"
+issue_count:
+  high: 0
+  medium: 1
+  low: 1
+
+learning_signals: []
