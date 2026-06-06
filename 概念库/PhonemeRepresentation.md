@@ -42,6 +42,8 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 | Polyphone Disambiguation | 多音字消歧 (中文) | 上下文模型 |
 | Prosody Prediction | 韵律边界预测 | CRF / Self-Attention |
 
+**前端子任务联合学习**: [[论文笔记/MultiTaskFrontEnd|Kang et al. (arXiv 2024)]] 提出用 shared trunk + task-specific heads 的 MTL 架构联合训练 TN/POS/HD 三个前端任务,证实了任务间正向迁移(HD macro acc +6.18%),并发现 ALBERT 浅层(句法信息)有利于 TN/POS、深层(上下文)有利于 HD [Table 1]。附带发布了 Llama 2 生成的平衡 homograph disambiguation 数据集
+
 ### Grapheme-to-Phoneme (G2P)
 
 **英文 G2P**:
