@@ -94,7 +94,7 @@ GST 作为可控 TTS 的奠基工作,影响了大量后续方法:
 
 ## 在 TTS 中的应用
 
-- 有声书朗读: 从示例音频迁移朗读风格
+- 有声书朗读: 从示例音频迁移朗读风格; [[论文笔记/TextAwareContextAwareTTS|TACA-TTS]] (Guo et al., 2024) 用 CLIP 式跨模态对比学习建立连续文本风格空间,替代 TP-GST 的有限 token bank,配合 context encoder 实现跨句韵律连贯,EMOS 3.93 vs VITS 3.61 [Table 1]
 - 情感对话: 从情感参考中提取情感风格
 - 角色配音: 定义角色特定说话方式
 - 风格探索: 通过 token 权重交互探索风格空间
