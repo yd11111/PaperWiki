@@ -1,0 +1,30 @@
+kb_review:
+  paper: "ShanghainTTS"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass
+
+  change_plan:
+    - target: "模型库/VITS.md"
+      action: append
+      content: "追加到相关工作段: ShanghainTTS用VITS做上海话TTS,利用stochastic duration predictor建模声调变调"
+      key_papers_count: 14
+      key_papers_action: "skip (已达上限,追加到正文)"
+      safety: "低风险,仅追加一行引用描述"
+
+    - target: "概念库/ProsodyModeling.md"
+      action: append
+      content: "追加到体text: 分词作为声调变调域代理标注的案例"
+      key_papers_count: ">12"
+      key_papers_action: "skip (已达上限)"
+      safety: "低风险,追加一段描述,不修改已有内容"
+
+    - target: "概念库/PhonemeRepresentation.md"
+      action: append
+      content: "追加到中文G2P或跨语言段: 上海话音标化流水线(吴语拼音→IPA)"
+      key_papers_count: 12
+      key_papers_action: "skip (已达上限)"
+      safety: "低风险,追加一段描述"
+
+  issues: []
+  summary: "pass: 3个append操作,均为正文追加引用/描述,不修改已有内容,不改status。key_papers均已达上限,改为正文追加。无factual-error或overclaim风险。"
