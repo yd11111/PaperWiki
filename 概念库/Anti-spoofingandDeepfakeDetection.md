@@ -61,7 +61,7 @@ Survey 中提到的一些系统在设计时考虑了安全性:
 
 - **Speaker verification as quality gate**: 多个系统用 SV 验证克隆质量,这同时可作为检测基线
 - **Watermarking**: 部分商业系统 (如 Seed-TTS) 考虑在合成语音中嵌入水印; [[论文笔记/TraceableSpeech|TraceableSpeech]] (Zhou et al., Interspeech 2024) 将水印嵌入与 codec LM TTS 端到端联合训练,实现 proactive traceability; [[论文笔记/MelShield|MelShield]] (Jin et al., 2026) 在 mel spectrogram 域通过 keyed spread-spectrum 扰动嵌入水印,无需训练或修改 vocoder,实现跨架构(DiffWave/HiFi-GAN)的 plug-and-play in-generation watermarking
-- **Proactive Voice Protection**: [[论文笔记/SafeSpeech|SafeSpeech]] (Zhang et al., USENIX Security 2025) 在上传前嵌入不可感知扰动,使 TTS 模型在 fine-tuning 和 zero-shot 场景下均无法合成高质量语音,代表从"被动检测"到"主动防护"的范式转变
+- **Proactive Voice Protection**: [[论文笔记/MitigatingUnauthorized|POP]] (Zhang et al., 2024) 首次提出 Pivotal Objective Perturbation,通过选择 mel reconstruction loss 作为通用优化目标生成 error-minimizing 扰动,在 fine-tuning 场景下使 TTS 模型无法学到有效分布 (MB-iSTFT-VITS WER 21.9%→127.3%); 其后续 [[论文笔记/SafeSpeech|SafeSpeech]] (Zhang et al., USENIX Security 2025) 在 POP 基础上增加 SPEC(KL 引导输出趋近噪声) + 感知优化(STOI+STFT),并将防护从 fine-tuning 扩展到 zero-shot 场景(覆盖 10 个 TTS 模型),代表从"被动检测"到"主动防护"的范式转变
 - **ASVspoof Challenge 系列**: 推动 anti-spoofing 技术发展的标准化竞赛 (Survey 未展开但属于该领域核心)
 - **Watermark-free Traceability**: [[论文笔记/TraceableTTS|Traceable TTS]] (Zhao et al., 2025) 提出不依赖显式水印的 TTS 模型溯源方案,通过反转 GAN generator loss 实现 TTS 模型与 discriminator (wav2vec 2.0 + LCNN) 的协同训练,使模型自然产生可追溯的隐式指纹。域外泛化 EER 11.5% vs baseline 18.99%
 - **Machine Unlearning (模型级遗忘)**: [[论文笔记/SpeakerIdentityUnlearning|Speaker Identity Unlearning]] (Kim et al., ICML 2025) 首次在 ZS-TTS 中提出 speaker identity unlearning,通过 Teacher-Guided Unlearning (TGU) 直接修改模型权重使其丧失复制特定说话人的能力。与 SafeSpeech(数据端防护)和 Traceable TTS(事后溯源)互补,构成 ZS-TTS 安全的三层防线: 预防(unlearning) + 防护(perturbation) + 溯源(watermark/fingerprint)
