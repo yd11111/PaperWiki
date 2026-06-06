@@ -1,0 +1,66 @@
+review:
+  paper: "SaSLaW"
+  note_path: "论文笔记/SaSLaW.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含语料库构建方法和 EA-TTS 模型的因果解释(WHY hearing audio, WHY GST, WHY pseudo-data pretraining)。速查卡片可借鉴字段列出三个具体可迁移 trick。关键设计选择有 WHY 回答。"
+  可信赖:
+    score: 7
+    rationale: "数字型 claim 标注覆盖率 ~85%(RMS/F0 相关系数、模型参数量、训练步数、数据划分等均标注了出处)。指标名使用正确。但速查卡片指标字段缺少具体 preference score 数值,仅描述趋势。"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率高,两个关键设计选择明确标注 [agent 解读],语料库分析结论标注 [论文原文]。有一处 [论文原文] 标注中混入了推断成分(环境噪声模拟段)。"
+  可定位:
+    score: 7
+    rationale: "KB 背景节有具体谱系定位,创新判断有对比基准(现有风格控制方法)。但 frontmatter models 和 datasets 字段为空,应列出 FastSpeech 2/HiFi-GAN 和 DEMAND/JSUT。"
+  不污染:
+    score: 9
+    rationale: "未提议创建新概念页(合理,本文的概念已被 KB 覆盖)。无 factual-error 或 overclaim。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 字段为空,但论文使用 FastSpeech 2 和 HiFi-GAN 作为基础模型/baseline"
+    suggestion: "添加 models: [] 中未列的 baseline 模型,但由于 KB 中无 FastSpeech2 模型页,可暂不填或仅作文本注释"
+
+  - id: 2
+    severity: medium
+    type: template-compliance
+    location: "frontmatter datasets 字段"
+    detail: "datasets 字段为空,但论文使用了 DEMAND (噪声数据集) 和 JSUT (预训练 TTS 语料)"
+    suggestion: "如 KB 中无对应页面则暂不填 wikilink,但可在 tags 中反映"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "速查卡片 > 指标"
+    detail: "指标字段仅描述趋势(显著优于/不如),未提取 Fig 6 中的具体 preference score 百分比"
+    suggestion: "Fig 6 为 bar chart 无精确数值,可标注为 '显著(p<0.05)' 即可"
+
+  - id: 4
+    severity: low
+    type: fact-inference-mixing
+    location: "方法 > 环境噪声模拟段"
+    detail: "'让参与者真正听到并自然反应环境噪声,从而产生真实的 Lombard 效应' 标注为 [论文原文],但论文未明确陈述此动机,更多是 agent 从方法描述中推断"
+    suggestion: "将此句标注改为 [agent 解读] 或改述为 '论文选择物理播放噪声(而非后期混音)的方式录制'"
+
+  - id: 5
+    severity: low
+    type: weak-reusability
+    location: "速查卡片 > 一句话"
+    detail: "一句话偏长(~50字),可精简"
+    suggestion: "精简为: '首个包含第一人称听觉+视觉同步记录的自发对话 TTS 语料库,验证了听觉感知驱动的环境自适应语音合成'"
+
+summary:
+  high: 0
+  medium: 2
+  low: 3
+
+learning_signals: []
