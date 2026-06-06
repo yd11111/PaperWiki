@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[TextToSpeechSynthesis]] — 命中 6 页: [[ProsodyModeling]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[Text-to-SpeechPipeline]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Attention-basedTTS]](pending-review), [[DurationPredictor]](pending-review)
+- [ingest/deep] [[TextToSpeechSynthesis]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [skip/update] TextToSpeechSynthesis — 学生级基础综述,无原创贡献,不追加到任何 KB 页
+- [lint/local] TextToSpeechSynthesis — 通过
 - [kb/search] [[MultiTaskFrontEnd]] — 命中 2 页: [[Text-to-SpeechPipeline]][待确认], [[PhonemeRepresentation]][待确认] | 过滤: 无
 - [ingest/deep] [[MultiTaskFrontEnd]] — 精读, kb_sources=2, 新建 0, 追加 2
 - [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
