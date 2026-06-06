@@ -123,6 +123,10 @@ Survey 特别指出情感控制的难点:
 - [[DifferentiableRewardOptimization]]: Emo-DPO 的技术基础
 - [[LLM-basedTTS]]: 新范式下的情感控制方式
 
+## 前端韵律分句的情感感知 (EmoPP)
+
+[[论文笔记/EmotionAwareProsodic|EmoPP]] (Liu et al., 2023) 从 TTS 文本前端 (prosodic phrasing) 而非声学后端切入情感控制。通过 BERT (语言特征) + RoBERTa (文本情感预测) 联合训练 phrase break predictor,使停顿模式感知情感上下文。在 ESD 平行语料上实证验证了不同情感产生不同 phrase break 模式 (SMC 0.90-0.92),IEMOCAP 上 F1 78.43 (vs BERT+BiLSTM 77.48) [Table 2],接入 emotional TTS 后 EMOS 4.09 vs 3.84 [Table 3]。与后续声学层方法的区别: EmoPP 在文本处理阶段引入情感,产出的 phrase break sequence 作为 TTS 的输入之一,是上游切入点。
+
 ## 帧级 Arousal-Valence 条件控制 (EmoCtrl-TTS)
 
 EmoCtrl-TTS (Wu et al., 2024) 在 flow-matching zero-shot TTS 上同时使用两组帧级条件: (1) arousal-valence 值 (来自 wav2vec 2.0-based extractor, chunk-wise 0.5s/0.25s) 控制时变情感; (2) laughter detector embedding (32 维) 控制 NV (笑声、哭泣等)。用 27k 小时伪标签真实情感数据训练,在 JVNV S2ST 上 Aro-Val SIM 0.643 (超越 ELaTE 0.548)。关键发现: laughter detector embedding 能泛化到哭泣等非笑声 NV; 两种 embedding 在某些数据上存在负面交互,需按数据源选择性启用。与 NVSpeech 的离散 PV 标签方法互补: EmoCtrl-TTS 用连续 embedding 实现帧级控制,NVSpeech 用离散标签实现 token-level 控制。详见 [[论文笔记/EmoCtrl-TTS|EmoCtrl-TTS]]。

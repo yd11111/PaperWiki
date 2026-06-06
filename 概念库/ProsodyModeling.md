@@ -181,6 +181,10 @@ de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模
 
 [[论文笔记/JointDialogueSpeech|Zhou et al. (2023)]] 是较早验证 LLM 用于中文韵律结构预测 (PSP) 的工作。在 DataBaker 语料上,ChatGPT (175B) prompting (语言学知识 + 16 selected examples) Average F-Score 80.12%,ChatGLM2-6B fine-tuning 82.38%,均超过传统 BERT-based SpanPSP (0.1B) 的 79.80% [Table 1]。LLM 在高层级韵律边界 (PPH #2, IPH #3) 上优势更大 (IPH: 80.00% vs 65.64%),论文推测因为 #2/#3 需要更深的语义理解而非词边界规则 [§3.4]。进一步尝试联合预测对话回复 + JSON 格式语言学特征 (pinyin/prosody/duration/pitch),但 8k 样本严重过拟合,未接声学模型验证。这是传统 BERT-based 韵律标注 → LLM 驱动韵律预测的早期过渡节点。
 
+## 情感感知的韵律分句 (Emotion-Aware Prosodic Phrasing)
+
+[[论文笔记/EmotionAwareProsodic|EmoPP]] (Liu et al., 2023) 是较早将情感信息引入 prosodic phrasing (phrase break prediction) 的工作。在 ESD 平行语料上用 SMC 验证了不同情感下 phrase break 模式存在差异 (SMC 0.90-0.92),提出 BERT (语言特征) + RoBERTa (情感预测) + BiLSTM decoder 的联合架构,在 IEMOCAP 上 F1 78.43 (vs BERT+BiLSTM 77.48) [Table 2]。与声学层的情感控制方法 (如 EmoCtrl-TTS/EmoSteer-TTS) 互补,是从 TTS 文本前端切入情感表达的路线。
+
 ## 韵律多样性度量
 
 Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distance),首个与人类韵律多样性判断高相关 (r=0.77) 的客观指标,基于 HuBERT/WavLM 中间层 semantic tokens 的加权编辑距离。配套发布 ProsodyEval 数据集 (1000 样本 + 2000 人类评分)。关键发现: (1) AR 系统韵律多样性优于 flow matching NAR 但不优于 masked generative NAR (MaskGCT); (2) flow matching 系统的隐式对齐导致 mean-mode collapse,韵律单调; (3) DPO 后训练提升可懂度但削弱韵律多样性 (CosyVoice 2: -18.8%); (4) 时长是韵律多样性的关键维度,duration perturbation 可显著提升 NAR 系统韵律多样性 (+26-29%)。这一工作将 SSL 中间层韵律编码能力 (见上节 de la Fuente & Jurafsky 发现) 从分析工具推进到可操作的评估指标。详见 [[论文笔记/ProsodyEval|ProsodyEval]]。
