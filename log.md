@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MunTTS]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓, [[VITS]][待确认], [[TTSEvaluation]][待确认], [[VariationalAutoencoderforTTS]][待确认], [[Text-to-SpeechPipeline]][待确认], [[MelSpectrogram]][待确认] | 过滤: 无
+- [ingest/deep] [[MunTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (VITS 相关工作)
+- [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到相关工作段
+- [lint/local] MunTTS — 通过
+- [review/auto] MunTTS — pass-with-fixes, 0 high, 1 medium (hedging fix), 2 low
 - [kb/search] [[TextToSpeechSynthesis]] — 命中 6 页: [[ProsodyModeling]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[Text-to-SpeechPipeline]](pending-review), [[Diffusion-basedTTS]](pending-review), [[Attention-basedTTS]](pending-review), [[DurationPredictor]](pending-review)
 - [ingest/deep] [[TextToSpeechSynthesis]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] TextToSpeechSynthesis — 学生级基础综述,无原创贡献,不追加到任何 KB 页
