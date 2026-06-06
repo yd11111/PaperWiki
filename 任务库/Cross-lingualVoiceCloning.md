@@ -64,6 +64,10 @@ updated: 2026-06-01
 - [[论文笔记/LearningToSpeakFromText|Saeki et al. (IJCAI 2023)]]: 在多语言文本上做 MLM 预训练 + 冻结 language-aware embedding,仅用文本数据 (无语音) 实现未见语言的零样本 TTS。未见语言 (西班牙语) CER 11.69%,与 oracle 的 5.32% 仍有 gap [Table 3]。证明了跨语言迁移在极低资源场景的可行性,但效果依赖于已见语言中是否存在相似语言
 - [[论文笔记/MultilingualTurkicTTS|Yeshpanov et al. (Interspeech 2023)]]: 通过 IPA 转写实现同语系(突厥语系)内的跨语言 TTS。仅用哈萨克语数据训练 Tacotron 2,手动构建 10 种语言的 IPA 映射表,零样本合成 9 种目标语言。全语言平均 MOS 3.25, 可理解度 92% [Table 3]。核心 insight: 同语系语言的语音学相似性可作为免费的跨语言先验
 
+## 跨语言 + 情感迁移
+
+- [[论文笔记/METTS|METTS]] (Zhu et al., 2023): 在跨语言 TTS 中同时解决跨说话人情感迁移问题。通过 multi-scale emotion modeling (coarse-grained language-agnostic GST + fine-grained language-specific CVAE) + formant-shift information perturbation 解耦 speaker/emotion/language 三因素。中英双语,单语说话人,部分说话人仅有中性数据。Cross-lingual MOS 4.00, Cosine SIM 0.753 [Table II, IV]。
+
 ## 开放问题
 
 - 低资源语言方向的跨语言克隆质量仍有提升空间

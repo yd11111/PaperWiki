@@ -42,6 +42,8 @@ MsEmoTTS (Lei et al., 2022) 的多尺度方法:
 - **Local level**: 词/音素级情感细节
 - 分层结构捕捉情感在不同粒度的表现
 
+[[论文笔记/METTS|METTS]] (Zhu et al., 2023, 同组) 将多尺度情感建模扩展到跨语言场景: coarse-grained GST (L2 normalization 消除 magnitude 差异) 编码 language-agnostic 情感,fine-grained CVAE (以 text+coarse 为条件) 编码 language-specific 韵律细节。配合 formant-shift information perturbation 实现跨说话人跨语言情感迁移。中英双语 MOS 4.11 (intra) / 4.00 (cross-lingual) [Table II]。
+
 ### 3. 对抗训练解耦 (Adversarial Disentanglement)
 
 将情感与说话人身份分离:
