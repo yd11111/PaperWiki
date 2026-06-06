@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MagiCodec]] — 命中 6 页 (取 Top 6): [[CodebookCollapse]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[AudioTokenizerTaxonomy]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
+- [ingest/deep] [[MagiCodec]] — 精读, kb_sources=6, 新建 0, 追加 3 (CodebookCollapse section, CodecTrainingObjectives key_papers+section, Single-codebookvsMulti-codebook section)
+- [skip/update] [[CodebookCollapse]] — key_papers 已达上限(12), 改追加到正文
+- [skip/update] [[Single-codebookvsMulti-codebook]] — key_papers 已超上限, 改追加到正文
+- [skip/update] [[TokenRateandBitrateTrade-offs]] — key_papers 已达上限(12), 跳过
+- [lint/local] MagiCodec — 通过
 - [kb/search] [[DiTAR]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Next-TokenDiffusion]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[Diffusion-basedTTS]](pending-review)
 - [ingest/deep] [[DiTAR]] — 精读, kb_sources=6, 新建 0, 追加 2 (Next-TokenDiffusion key_papers+section, Classifier-FreeGuidance section)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已超上限, 跳过
