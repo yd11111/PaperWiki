@@ -1,0 +1,40 @@
+paper: "DiffProsody"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass
+review_checklist_version: "v1.1"
+
+principles:
+  reproducible:
+    score: 9
+    verdict: pass
+    notes: "方法节包含 4 个关键设计选择,每个都有 WHY 因果解释 + 论文原文/agent 解读标注。速查可借鉴列出了 3 个具体可迁移 trick (low-band mel / DDGAN 4-step / PCD),不是泛泛而谈。两阶段训练的逻辑链清晰。"
+  trustworthy:
+    score: 9
+    verdict: pass
+    notes: "数字 claim 出处标注覆盖率 ~95%。实验表格每行有 [Table I/II/III] 标注。关键数字交叉验证: MOS 4.03, CER 0.90%, RTF 0.054 均与 PDF Table I 一致。KL divergence 值与 Table II 一致。指标名称无混淆。"
+  distinguishable:
+    score: 9
+    verdict: pass
+    notes: "方法节中 WHY 解释一致标注 [论文原文] 或 [agent 解读],覆盖率 ~90%。4 处 agent 解读明确标出 (low-band mel 假设、VQ 作为 bottleneck、PCD 本质)。无推断被写成断言的情况。"
+  locatable:
+    score: 8
+    verdict: pass
+    notes: "KB 背景谱系定位清晰 (GST→FS2→ProsoSpeech→DiffProsody)。创新判断有对比基准。frontmatter 除 models:[] 外均有实质内容; models 为空因为 FastSpeech 2 / ProsoSpeech 无模型库页,可接受。速查 5 字段均有实质内容。"
+  no_pollution:
+    score: 9
+    verdict: pass
+    notes: "反向更新计划为 append (追加 key_papers 到 ProsodyModeling 等),不涉及实质修改。无 overclaim。无需新建概念页。"
+
+issues:
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "速查卡片 → 指标"
+    detail: "速查写 'RTF 0.054 (vs AR 0.149, DDPM 0.871)' — 0.149 来自 Table I 的 ProsoSpeech,0.871 来自 Table III 的 DiffProsody(DDPM)。论文声称的 '2.48x faster than AR' 实际是指 DiffProsody(AR) 的 RTF 0.134 (Table III),不是 ProsoSpeech 的 0.149。混合了两张表的数据,虽不算错但可能误导。"
+    suggestion: "改为 'RTF 0.054 (vs DiffProsody-AR 0.134, DiffProsody-DDPM 0.871) [Table III]' 或保留当前写法但注明两个对比来自不同表。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""

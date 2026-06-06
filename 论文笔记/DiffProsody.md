@@ -176,3 +176,19 @@ DiffProsody 采用两阶段训练 [§III, Fig 1]:
 3. **条件判别器 (Conditional Discriminator)**: 将目标属性 (此处为韵律) 作为判别器的额外条件,可以让 GAN 训练更精确地对焦于该属性的质量。可迁移到: 情感条件判别、speaker 条件判别、F0 条件判别等。
 
 4. **DDGAN 在低维序列上的应用**: 对于 word-level prosody vector 这类短序列 (~10-30 tokens)、低维 (192-d) 的生成任务,DDGAN 4 步采样已足够,是 DDPM 速度-质量 trade-off 的实用方案。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4 个设计选择均有 WHY 因果解释,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 数字出处覆盖率 ~95%,关键数字与 PDF 交叉验证一致 |
+> | 可区分 | pass | 论文原文/agent 解读标注覆盖率 ~90%,无推断写成断言 |
+> | 可定位 | pass | 谱系定位清晰 (GST→FS2→ProsoSpeech→DiffProsody),KB 背景实质 |
+> | 不污染 | pass | 反向更新均为 append,无 overclaim,无需新建概念页 |
+> 
+> Issues: 1 (high: 0, medium: 0, low: 1)
+> 详见 `_review/DiffProsody-review.yml`
