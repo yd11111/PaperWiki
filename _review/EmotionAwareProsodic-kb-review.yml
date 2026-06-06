@@ -1,0 +1,24 @@
+review:
+  paper: "EmotionAwareProsodic"
+  date: "2026-06-06"
+  reviewer: "auto"
+  mode: "kb-update-review"
+
+change_plan:
+  - target: "概念库/ProsodyModeling.md"
+    action: "append"
+    content: "跳过key_papers(已达上限51条),在正文追加一行引用描述EmoPP的贡献(emotion-aware phrase break prediction)"
+    assessment: "safe - 纯追加,不改已有内容,不改status"
+
+  - target: "概念库/EmotionControlinTTS.md"
+    action: "append"
+    content: "跳过key_papers(已达上限53条),在正文追加一行引用描述EmoPP的贡献(prosodic phrasing前端情感感知)"
+    assessment: "safe - 纯追加,不改已有内容,不改status"
+
+issues: []
+
+conclusion: "pass"
+issue_summary:
+  high: 0
+  medium: 0
+  low: 0
