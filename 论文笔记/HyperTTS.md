@@ -41,13 +41,13 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 用 hypernetwork 将静态 adapter 参数变为 speaker-conditioned 动态参数,以 <1% backbone 参数量实现接近 full fine-tune 的多说话人 TTS 适应
 > - **路线**: Text → Phoneme Encoder (4 FFT) → Variance Adapter (duration/pitch/energy) → Mel-Decoder (6 FFT) → Mel Spectrogram; 各模块卷积层后插入 adapter, adapter 权重由 Hypernetwork(SE+LE→SP→Parameter Sampler) 动态生成 [Fig 2]
-> - **指标**: VCTK 适应 HyperTTS_e/v/d COS 79.46 / FFE 34.47 / MOS 3.64, vs Full Fine-tune COS 80.44 / FFE 34.63 / MOS 3.70 (p~0.56 无显著差异); 仅用 1.27% 参数 [Table 1, Table 4]
+> - **指标**: HyperTTS_e/v/d COS 79.46 / FFE 34.47 (客观, 1.27% 参数); HyperTTS_d MOS 3.64 vs TTS-FT 3.70 (主观, p~0.56 无显著差异, 0.42% 参数) [Table 1, Table 4]
 > - **可借鉴**: hypernetwork 以 (speaker_embedding, layer_id) 为条件生成 adapter 权重,将离散的 per-speaker adapter 问题转化为连续参数空间采样问题,理论上可扩展到任意数量说话人而不增加 hypernetwork 参数
 > - **局限**: backbone 仅 35.7M 参数 (FastSpeech-like); 仅英语 LibriTTS/VCTK 验证; hypernetwork 存在 overfitting 适应域的问题 [§6]; WER 偏高 (>0.20); 未与 LoRA/CLN 等同期方法比较
 
 ## 核心问题
 
-1. **为什么静态 adapter 在 TTS speaker adaptation 中效果有限?** 作者假设: 静态 adapter 被迫学习一组跨所有说话人通用的参数,但不同说话人的声音特征差异大,一组固定参数难以同时适配多个说话人 (under-parameterization) [§1]。这与 NLP 中 adapter 的成功形成对比 -- NLP 任务间差异远小于说话人间差异 [论文原文]。
+1. **为什么静态 adapter 在 TTS speaker adaptation 中效果有限?** 作者假设: 静态 adapter 被迫学习一组跨所有说话人通用的参数,但不同说话人的声音特征差异大,一组固定参数难以同时适配多个说话人 (under-parameterization) [§1]。这与 NLP 中 adapter 的成功形成对比 [论文原文] -- NLP 任务间差异远小于说话人间差异 [论文原文]。
 
 2. **如何在保持参数效率的同时让 adapter 动态适应每个说话人?** 核心 idea: 用 hypernetwork 以 speaker embedding 为条件生成 adapter 的 down/up projection 权重,使每个说话人获得"专属"的 adapter 参数,同时 hypernetwork 本身参数很少 (<1% backbone) [§1, §3.4]。
 
@@ -75,7 +75,7 @@ h = h + ReLU(h · W_d) · W_u
 - `W_d ∈ R^{dh × dr}`: down-projection (256 → 32)
 - `W_u ∈ R^{dr × dh}`: up-projection (32 → 256)
 - 插入位置: encoder/decoder/VA 每层的 Conv1D 之后 [Fig 2-d]
-- 残差连接保证适配器未充分训练时不破坏 backbone 输出
+- 残差连接保证适配器未充分训练时不破坏 backbone 输出 [agent 解读]
 
 [论文原文] 作者指出静态 adapter 在 NLP 中有效但在 TTS speaker adaptation 中效果有限 [§3.4],原因是被迫学习跨说话人通用的单组参数。
 
@@ -188,3 +188,19 @@ HyperTTS 提出了一个优雅的解决方案: 用 hypernetwork 将静态 adapte
 2. **Layer embedding 实现跨层参数共享**: 用可学习的 layer-id embedding 让共享 hypernetwork 区分不同层,比 per-layer 独立网络参数效率高得多。在任何需要跨层/跨模块参数共享的架构中都可借鉴。
 
 3. **Speaker embedding 作为 adapter 条件**: 不是简单地将 speaker embedding 加到 hidden states 上 (additive conditioning),而是用它来生成 adapter 权重 (generative conditioning),提供了更丰富的说话人信息利用方式。对比: AdaSpeech 用 speaker embedding 调制 LayerNorm (CLN),HyperTTS 用它生成整个 adapter 权重,后者参数搜索空间更大。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (8) | 方法节含因果解释,速查可借鉴具体可迁移 |
+> | 可信赖 | pass (7) | 数字覆盖率~85%,速查指标混淆配置已修正 |
+> | 可区分 | pass (8) | 来源标注覆盖率~80%,2处 low 已修正 |
+> | 可定位 | pass (8) | 谱系定位清晰,创新判断有对比基准 |
+> | 不污染 | pass (9) | 反向更新仅追加,无新建页 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2) -- medium 已修正
+> 详见 `_review/HyperTTS-review.yml`

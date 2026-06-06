@@ -1,0 +1,49 @@
+review:
+  paper: "HyperTTS"
+  note_path: "论文笔记/HyperTTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节含充分因果解释(WHY static adapter fails, WHY hypernetwork works);速查卡片可借鉴字段具体可迁移(连续参数空间采样替代离散实例化);每个关键设计选择都有 WHY 解释"
+  trustworthy:
+    score: 7
+    rationale: "数字覆盖率~85%, 所有关键数字与 PDF 交叉验证通过; 但速查卡片指标字段混淆了 HyperTTS_e/v/d 和 HyperTTS_d 两个配置的指标, MOS 3.64 来自 HyperTTS_d [Table 4] 而非 HyperTTS_e/v/d"
+  distinguishable:
+    score: 8
+    rationale: "来源标注覆盖率~80%, 方法节多处明确标注 [论文原文] 和 [agent 解读]; 存在 2 处未标注来源的推断性陈述"
+  locatable:
+    score: 8
+    rationale: "KB 背景谱系定位清晰(SpeakerAdaptation 参数效率子课题), 创新判断有与 ADAPTERMIX/CLN 的对比基准; frontmatter 字段完整"
+  no_pollution:
+    score: 9
+    rationale: "反向更新仅追加 key_papers, 无新建页风险; 无 factual error 或 overclaim 会污染 KB"
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "速查卡片 → 指标 字段"
+    detail: "指标字段写 'HyperTTS_e/v/d COS 79.46 / FFE 34.47 / MOS 3.64', 但 MOS 3.64 来自 HyperTTS_d [Table 4], 不是 HyperTTS_e/v/d。HyperTTS_e/v/d 未进行 MOS 评估。混淆不同配置的指标会误导读者认为 1.27% 参数即可达到该 MOS。"
+    suggestion: "改为 'HyperTTS_e/v/d COS 79.46 / FFE 34.47 (客观, 1.27% 参数); HyperTTS_d MOS 3.64 vs TTS-FT 3.70 (主观, p~0.56 无显著差异, 0.42% 参数) [Table 1, Table 4]'"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "核心问题 第1点"
+    detail: "'这与 NLP 中 adapter 的成功形成对比 -- NLP 任务间差异远小于说话人间差异' 缺少来源标注"
+    suggestion: "添加 [论文原文] 标注, 对应 §1 原文 'Although famous in NLP, speech synthesis has not seen much improvement from Adapters'"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "方法 → 关键设计选择 → 1. Bottleneck Adapter"
+    detail: "'残差连接保证适配器未充分训练时不破坏 backbone 输出' 缺少来源标注"
+    suggestion: "添加 [agent 解读] 标注"
+
+learning_signals: []
