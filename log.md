@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[FrameWiseBreath]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[VITS]](pending-review), [[TTSEvaluation]](pending-review), [[DurationPredictor]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
+- [ingest/deep] [[FrameWiseBreath]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling 副语言发声节)
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(51),改追加到副语言发声段正文
+- [skip/update] [[MelSpectrogram]] [[VITS]] [[TTSEvaluation]] [[DurationPredictor]] — 使用标准,无新贡献,跳过
+- [lint/local] FrameWiseBreath — 通过
+- [review/auto] FrameWiseBreath — pass, 0 high, 0 medium, 3 low
 - [kb/search] [[MunTTS]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓, [[VITS]][待确认], [[TTSEvaluation]][待确认], [[VariationalAutoencoderforTTS]][待确认], [[Text-to-SpeechPipeline]][待确认], [[MelSpectrogram]][待确认] | 过滤: 无
 - [ingest/deep] [[MunTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (VITS 相关工作)
 - [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到相关工作段
