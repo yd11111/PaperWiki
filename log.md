@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MultiTaskFrontEnd]] — 命中 2 页: [[Text-to-SpeechPipeline]][待确认], [[PhonemeRepresentation]][待确认] | 过滤: 无
+- [ingest/deep] [[MultiTaskFrontEnd]] — 精读, kb_sources=2, 新建 0, 追加 2
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] MultiTaskFrontEnd — 通过
 - [kb/search] [[NEUTART]] — 命中 6 页(取 Top 6): [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[Non-autoregressiveTTS]](pending-review), [[MelSpectrogram]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
 - [ingest/deep] [[NEUTART]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] 所有 6 个 KB 页 key_papers 已超上限,NEUTART 为 CV 论文仅消费 TTS 组件,无 TTS 方法贡献,跳过反向更新
