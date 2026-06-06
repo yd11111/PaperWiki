@@ -7,6 +7,7 @@
 - [skip/update] [[Single-codebookvsMulti-codebook]] — key_papers 已超上限, 改追加到正文
 - [skip/update] [[TokenRateandBitrateTrade-offs]] — key_papers 已达上限(12), 跳过
 - [lint/local] MagiCodec — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 370
 - [kb/search] [[DiTAR]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[Next-TokenDiffusion]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[Diffusion-basedTTS]](pending-review)
 - [ingest/deep] [[DiTAR]] — 精读, kb_sources=6, 新建 0, 追加 2 (Next-TokenDiffusion key_papers+section, Classifier-FreeGuidance section)
 - [skip/update] [[ConditionalFlowMatching]] — key_papers 已超上限, 跳过
