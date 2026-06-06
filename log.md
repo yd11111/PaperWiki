@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[SaSLaW]] — 命中 5 页 (取 Top 5): [[ProsodyModeling]]✓, [[NeuralVocoder]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[F0Modeling]](pending-review), [[StyleTransferinTTS]](pending-review)
+- [ingest/deep] [[SaSLaW]] — 精读, kb_sources=5, 新建 0, 追加 1 (GlobalStyleTokens 正文 EA-TTS 应用)
+- [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12), 改追加到正文
+- [skip/update] [[ProsodyModeling]] — key_papers 已超上限(51)
+- [skip/update] [[StyleTransferinTTS]] — key_papers 已超上限(25)
+- [skip/update] [[NeuralVocoder]] — key_papers 已超上限(18)
+- [skip/update] [[F0Modeling]] — key_papers 已超上限(12)
+- [lint/local] SaSLaW — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 365 — 建议抽空审核
 - [kb/search] [[DEX-TTS]] — 命中 6 页 (取 Top 6): 过滤: [[Diffusion-basedTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[DiffusionModel]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review), [[F0Modeling]](pending-review)
 - [ingest/deep] [[DEX-TTS]] — 精读, kb_sources=6, 新建 0, 追加 0 (format fix: StyleTransferinTTS key_papers wikilink)
 - [skip/update] [[Diffusion-basedTTS]] — key_papers 已超上限(20)
