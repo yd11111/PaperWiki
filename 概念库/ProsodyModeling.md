@@ -72,7 +72,7 @@ Survey 将语音合成所需的信息分为四大类:
 - 用高级生成模型隐式建模韵律分布
 - 缓解 one-to-many → over-smoothing 问题
 
-**代表工作**: Glow-TTS, Flow-TTS, Multi-SpectroGAN, Grad-TTS
+**代表工作**: Glow-TTS, Flow-TTS, Multi-SpectroGAN, Grad-TTS, [[论文笔记/DiffProsody|DiffProsody]] (DDGAN + VQ latent prosody + prosody conditional discriminator)
 
 #### Text Pre-training
 - 通过预训练学习隐含韵律的文本表示
