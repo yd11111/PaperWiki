@@ -74,6 +74,7 @@ Encoder Output → Duration Predictor → Length Regulator → Pitch Predictor �
 ```
 
 ### 现代 LLM-TTS 中的 duration
+- [[论文笔记/Voicebox|Voicebox]] (Le et al., 2023): 首次提出 duration model 与 audio model 解耦设计,duration model 同时支持回归 (L1 loss, 类似 FastSpeech 2 但增加 duration context lctx 输入) 和 flow matching (CFM) 两种变体; 回归版本更稳定用于 TTS,flow matching 版本更多样用于 diverse sampling [§3.3]
 - MaskGCT: 专门的 duration prediction 阶段 (T2D model)
 - IndexTTS2: 通过共享位置编码实现隐式 duration control
 - CosyVoice: flow matching 内部隐式处理 duration
