@@ -151,6 +151,14 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - FDB v1.0: interruption TOR 0.980, backchannel TOR 0.091 (均为 best); user backchannel resume 率 0.398 (弱于 MiniCPM-o 0.520)
 - 详见 [[论文笔记/Raon-Speech|Raon-Speech]]
 
+### ELLSA (Wang et al., 2026)
+- 首个将 turn-taking 概念从纯语音扩展到四模态 (speech+vision+text+action) 的系统
+- **Action turn-taking**: 模型自行判断何时开始执行动作 (收到语音指令后),LIBERO 上成功率 96.4-100%
+- **Action barge-in**: 在执行动作过程中收到中断命令时,模型输出 "Action Cancelled" 并停止动作,成功率 94.3%
+- 同时保持 dialogue turn-taking 100% 成功率 (优于 Moshi 37-85%, Freeze-Omni 72-99.8%)
+- 1 秒 time block 设计简化了 turn-taking 学习,但引入了较高的最小延迟
+- 详见 [[论文笔记/ELLSA|ELLSA]]
+
 ## VAD 的局限
 
 最早期的全双工系统使用 Voice Activity Detection (VAD) 判断用户是否有打断意图。然而 VAD 存在根本性局限:
@@ -181,4 +189,4 @@ WavChat 定义了交互系统需具备的五项关键能力:
 
 ## 演进
 
-VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026)
+VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026)

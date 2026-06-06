@@ -101,6 +101,15 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - FDB v1.0: interruption TOR 0.980 (best), backchannel TOR 0.091 (best); FDB v2.0 多轮长对话弱于 MiniCPM-o 4.5
 - 详见 [[论文笔记/Raon-Speech|Raon-Speech]]
 
+### ELLSA (Wang et al., 2026)
+- 首个端到端全双工四模态 MIMO 模型: 同时 listen+look+speak+act
+- **SA-MoE 架构**: Speech Expert (LLaMA-3.1-8B) 和 Action Expert (Emu3-Base) 通过 shared attention KV cache 连接,FFN 保持独立
+- 每 1 秒 time block 内按固定顺序交错四种模态 (speech input → image → text output → action output)
+- 支持 speaking-while-acting、context-grounded VQA、action barge-in 等新型交互
+- 对话 turn-taking 100% 成功率; LIBERO 平均成功率 89.4% (超 pi0-FAST)
+- 仅在 LIBERO 仿真环境验证,不支持 backchannel
+- 详见 [[论文笔记/ELLSA|ELLSA]]
+
 ## Interactive Period Recognition (IPR)
 
 Survey 特别提出 IPR 作为全双工的配套能力:
@@ -182,4 +191,4 @@ WavChat survey 进一步梳理了全双工系统的更多实现:
 
 ## 演进
 
-Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026)
+Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026) → ELLSA (四模态 MIMO 全双工: listen+look+speak+act, SA-MoE, 2026)
