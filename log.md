@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[MitigatingUnauthorized]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓ | 过滤: [[Anti-spoofingandDeepfakeDetection]](pending-review), [[SpeakerVerification]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
+- [ingest/deep] [[MitigatingUnauthorized]] — 精读, kb_sources=6, 新建 0, 追加 1 (Anti-spoofingandDeepfakeDetection 正文 POP 描述)
+- [skip/update] [[SpeakerVerification]] — key_papers 已达上限(12)
+- [skip/update] [[VoiceCloningTaxonomy]] — key_papers 已达上限(12)
+- [skip/update] [[VITS]] — key_papers 已超上限(14)
+- [skip/update] [[MelSpectrogram]] — key_papers 已超上限(21)
+- [skip/update] [[VariationalAutoencoderforTTS]] — key_papers 已超上限(17)
+- [lint/local] MitigatingUnauthorized — 通过
 - [kb/search] [[IndicVoices-R]] — 命中 6 页 (取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[SpeakerAdaptation]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[IndicVoices-R]] — 精读, kb_sources=6, 新建 1 (数据集/IndicVoices-R), 追加 0
 - [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已超上限(60+)
