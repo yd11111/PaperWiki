@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[WavTokenizer]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
+- [ingest/deep] [[WavTokenizer]] — 精读, kb_sources=6, 新建 0, 追加 2 (CodebookCollapse section, NeuralAudioCompression key_papers+SOTA表)
+- [review/auto] [[WavTokenizer]] — pass-with-fixes, 0 high 1 medium (UTMOS 比较方向性错误已修正)
+- [review/kb] [[WavTokenizer]] — pass-with-fixes, 0 high 1 medium (SOTA 表列名修正)
+- [skip/update] [[CodebookCollapse]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] WavTokenizer — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 371
 - [kb/search] [[MagiCodec]] — 命中 6 页 (取 Top 6): [[CodebookCollapse]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[AudioTokenizerTaxonomy]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review)
 - [ingest/deep] [[MagiCodec]] — 精读, kb_sources=6, 新建 0, 追加 3 (CodebookCollapse section, CodecTrainingObjectives key_papers+section, Single-codebookvsMulti-codebook section)
 - [skip/update] [[CodebookCollapse]] — key_papers 已达上限(12), 改追加到正文
