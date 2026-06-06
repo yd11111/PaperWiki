@@ -164,5 +164,21 @@ LSLM 的核心价值在于**问题形式化**和**系统性消融**,而非系统
 
 4. **FDM 形式化 (Eq. 3)**: 将全双工建模表达为 P(r_t | R_{1:t-1}, S_{1:t-1}, C),清晰地指出"额外条件化于实时外部信号"是核心,为后续工作提供了可扩展的形式化基础。
 
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (9) | 三种融合策略因果解释充分,速查可借鉴含 3 个具体 trick |
+> | 可信赖 | pass (9) | 数字标注覆盖率 >90%,指标使用正确 |
+> | 可区分 | pass (9) | [论文原文]/[agent 解读] 标注一致,覆盖率 ~90% |
+> | 可定位 | pass (9) | 谱系定位明确 (dGSLM/Moshi/LSLM 三路线对比) |
+> | 不污染 | pass (9) | 所有概念页已存在,追加更新不引入新风险 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/LSLM-review.yml`
+
 ---
 检索命中: [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | [[Full-duplexSpokenDialogue]][待确认], [[Turn-takinginSpokenDialogue]][待确认], [[StreamingSpokenDialogue]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认] | 未命中但可能相关: [[SpokenDialogueEvaluation]]

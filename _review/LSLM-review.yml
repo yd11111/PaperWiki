@@ -1,0 +1,54 @@
+reviewer: auto
+date: 2026-06-06
+note: 论文笔记/LSLM.md
+pdf: Sources/LSLM.pdf
+kb_pages_checked:
+  - 概念库/Full-duplexSpokenDialogue.md
+  - 概念库/Turn-takinginSpokenDialogue.md
+  - 概念库/SpeechLanguageModel.md
+  - 概念库/StreamingSpokenDialogue.md
+  - 概念库/Self-SupervisedSpeechRepresentation.md
+  - 概念库/LLM-basedTTS.md
+
+conclusion: pass
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节因果解释充分: 三种融合策略各有 WHY 解释 (early 破坏生成通道编码, late 信息利用不足, middle 渐进注入); 单层 token vs 多层 RVQ 选择有实时性论据; 共享 encoder 不量化的设计有信息保留论据。速查卡片可借鉴字段给出 3 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    reason: "数字型 claim 标注覆盖率 > 90%: Table 2/3/4 关键数字全部标注。指标名 WER/Precision/Recall/F1 使用正确。速查指标字段含具体数字 + 数据集名 + 表格出处。无方向性错误。"
+  distinguishable:
+    score: 9
+    reason: "[论文原文] 和 [agent 解读] 标注一致且覆盖率高 (方法节 WHY 解释 ~90% 有来源标注)。Early fusion 退化原因、共享 encoder 设计理由等推断性分析清楚标记为 agent 解读。无强断言缺乏支撑的情况。"
+  locatable:
+    score: 9
+    reason: "KB 背景谱系定位具体: 明确与 dGSLM (dual transformer) 和 Moshi (unified multi-stream) 对比定位为三条不同路线之一。创新判断有对比基准。frontmatter concepts 字段完整挂接 6 个相关 KB 页。"
+  no_contamination:
+    score: 9
+    reason: "所有概念页已存在, 不需新建。反向更新内容 (追加 key_papers) 均基于论文事实, 无 overclaim。LSLM 已在 Full-duplexSpokenDialogue 和 Turn-takinginSpokenDialogue 页中被引用, 追加更新不引入新信息风险。"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查 > 一句话"
+    detail: "'首个系统探索' 用语可能引起歧义 — dGSLM (2023) 更早做了全双工, 虽然 LSLM 的贡献在于系统消融融合策略而非首个全双工模型"
+    suggestion: "可改为 '首个系统消融端到端全双工融合策略的 speech language model' 以更精确"
+
+  - type: template-compliance
+    severity: low
+    location: "实验表"
+    detail: "实验表仅包含 Middle Fusion 结果, Early Fusion (WER 33.56%) 和 Late Fusion (WER 4.37%/6.87%) 仅在分析段落中提及"
+    suggestion: "如需更完整的快速参考, 可在正文之外补充三种融合策略对比的完整表格"
+
+  - type: bad-linking
+    severity: low
+    location: "frontmatter > models"
+    detail: "models 字段为空。虽然论文 baseline 'Vanilla TTS' 无 KB 页, 但论文使用的 vq-wav2vec 在 模型库/ 中可能无独立页面 (Self-SupervisedSpeechRepresentation 概念页覆盖)"
+    suggestion: "可接受现状; vq-wav2vec 不够独立成模型页, 已通过 concepts 字段间接关联"
+
+learning_signals: []
