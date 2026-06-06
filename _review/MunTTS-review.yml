@@ -1,0 +1,55 @@
+review:
+  paper: "MunTTS"
+  note_path: "论文笔记/MunTTS.md"
+  reviewer: auto
+  date: 2026-06-06
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    reason: "方法节清晰解释了数据收集流程(WHY+HOW)和模型选择理由;关键设计选择(E2E vs 两阶段, 44K vs 22K)都回答了'为什么';速查卡片可借鉴字段具体可操作。但由于本文无新架构,方法节更偏系统描述而非机制分析,这是论文本身的特点而非笔记的不足。"
+  可信赖:
+    score: 8
+    reason: "所有实验数字均有[Table N]/[§X.X]标注,覆盖率>90%。MOS/MCD指标使用正确。一处hedging丢失:原文'This might due to the catastrophic forgetting'在笔记中变为'归因于catastrophic forgetting',去掉了不确定性。MOS评分量表异常(1-5 scale但XTTS-finetuned得0.05, MMS得0.79)未在笔记中指出。"
+  可区分:
+    score: 8
+    reason: "因果解释来源标注覆盖率>80%;方法节多处正确使用了[论文原文]/[agent 解读]标签。一处fact-inference mixing: catastrophic forgetting归因的hedging被去掉。"
+  可定位:
+    score: 9
+    reason: "KB背景节具体列出了VITS在LJ Speech/VCTK上的MOS数字作对比;创新判断明确指出'不提出新架构,核心贡献在数据收集';与ShanghainTTS/XPhoneBERT的对比提供了同类工作的锚点。frontmatter完整,concepts/models语义正确。"
+  不污染:
+    score: 9
+    reason: "无需新建概念页。反向更新仅涉及VITS模型页的key_papers追加(已达14条,超上限12,需跳过)。无overclaim风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: fact-inference-mixing
+    location: "关键发现 #2"
+    detail: "笔记写'[论文原文] 归因于 catastrophic forgetting [§5.3]',但原文用的是'This might due to the catastrophic forgetting induced by the finetuning',带有hedging('might')。笔记去掉了不确定性,变成了断言。"
+    suggestion: "改为'论文推测可能是 catastrophic forgetting 导致 [§5.3]'或保留'might'限定词"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "实验表格"
+    detail: "实验表格只列了GT-22k的MOS(4.62±0.68),未列GT-44k的MOS(4.58±0.70)。GT-44k数据有意义:它显示44kHz真实语音MOS反而略低于22kHz,与合成模型的结论(44K>22K)形成有趣对比。"
+    suggestion: "在实验表格中补充GT-44k行"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "实验表格/局限性"
+    detail: "MOS评分量表为1-5(论文§5.2 + Figure 1明确说明),但XTTS-finetuned MOS=0.05, MMS MOS=0.79,均低于量表下限1。这一异常未在笔记中指出,可能暗示实际使用了0-5量表或存在评估方法论问题。"
+    suggestion: "在局限性或实验节增加一句指出此异常"
+
+issues_summary:
+  high: 0
+  medium: 1
+  low: 2
+  total: 3
+
+learning_signals:
+  - "低资源语言TTS论文往往方法深度有限(无新架构),审阅时应侧重数据方法论和实验设计的严谨性评估"
+  - "MOS量表范围异常(低于声明的下界)是一个值得在笔记中标注的元信息,有助于后续引用时理解数据的局限性"

@@ -104,7 +104,7 @@ updated: 2026-06-06
 **关键发现**:
 
 1. **VITS-44K 全面最优**: MOS 和 MCD 均显著优于所有其他模型 [Table 2, 3]
-2. **XTTS v2 微调灾难性失败**: 微调后 MOS 从 2.20 暴跌至 0.05,生成 "nonsensical outputs" [§5.3]。[论文原文] 归因于 catastrophic forgetting [§5.3]
+2. **XTTS v2 微调灾难性失败**: 微调后 MOS 从 2.20 暴跌至 0.05,生成 "nonsensical outputs" [§5.3]。[论文原文] 论文推测可能是 catastrophic forgetting 导致 ("This might due to the catastrophic forgetting") [§5.3]
 3. **XTTS v2 零样本存在 phantom speech**: 基于 GPT-2 的 XTTS v2 会在句末生成随机 Hindi 词和乱码,类似 LLM 幻觉 [§5.3]
 4. **MMS 表现极差**: MOS 0.79 [Table 2]。[agent 解读] MMS 覆盖 1000+ 语言,每语言数据极少,质量自然不如专用模型
 5. **男性合成质量显著低于女性**: VITS-44K Male MOS 3.39 vs Female MOS 3.79 [Table 2],反映训练数据的说话人不平衡 (男性仅 26%)
@@ -145,3 +145,19 @@ updated: 2026-06-06
 2. **Speaker-weighted sampler**: 简单有效地处理多说话人数据不平衡,适用于任何多说话人 TTS 训练。
 3. **保留原始采样率训练**: 如果录音质量高,避免下采样可获得一致性改进。
 4. **反面教训 -- 多语言模型微调风险**: XTTS v2 在仅 27.5h 低资源语言数据上微调会灾难性遗忘,提示在迁移学习时需要更谨慎的策略 (如冻结更多层、使用 adapter)。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 数据收集流程+模型选择理由清晰;速查卡片具体可操作 |
+> | 可信赖 | pass | 数字标注覆盖>90%;一处 hedging 丢失已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖>80% |
+> | 可定位 | pass | KB 背景含具体数字锚点 (VITS LJ Speech MOS 4.43 对比) |
+> | 不污染 | pass | 无新建概念页;VITS key_papers 已超上限,需跳过追加 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/MunTTS-review.yml`
