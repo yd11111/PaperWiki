@@ -177,6 +177,10 @@ de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模
 
 [[论文笔记/StochasticPitchPrediction|Ogun et al. (Interspeech 2023)]] 在 Glow-TTS 上同时概率化 duration 和 pitch 两个韵律维度: 复用 VITS 的 stochastic duration predictor + 新增 stochastic pitch predictor (同一 spline flow 架构)。在 zero-shot multi-speaker 场景下,stochastic duration 主要提升自然度 (N-MOS +0.18),stochastic pitch 主要提升多样性 (D-MOS 显著提升 + log-F0 分布更接近真实语音),两者互补。这一工作是 FastSpeech 2 显式确定性韵律预测 → VITS 概率化 duration → 概率化 pitch 演进链上的中间节点。
 
+## LLM 驱动的韵律结构预测
+
+[[论文笔记/JointDialogueSpeech|Zhou et al. (2023)]] 是较早验证 LLM 用于中文韵律结构预测 (PSP) 的工作。在 DataBaker 语料上,ChatGPT (175B) prompting (语言学知识 + 16 selected examples) Average F-Score 80.12%,ChatGLM2-6B fine-tuning 82.38%,均超过传统 BERT-based SpanPSP (0.1B) 的 79.80% [Table 1]。LLM 在高层级韵律边界 (PPH #2, IPH #3) 上优势更大 (IPH: 80.00% vs 65.64%),论文推测因为 #2/#3 需要更深的语义理解而非词边界规则 [§3.4]。进一步尝试联合预测对话回复 + JSON 格式语言学特征 (pinyin/prosody/duration/pitch),但 8k 样本严重过拟合,未接声学模型验证。这是传统 BERT-based 韵律标注 → LLM 驱动韵律预测的早期过渡节点。
+
 ## 韵律多样性度量
 
 Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distance),首个与人类韵律多样性判断高相关 (r=0.77) 的客观指标,基于 HuBERT/WavLM 中间层 semantic tokens 的加权编辑距离。配套发布 ProsodyEval 数据集 (1000 样本 + 2000 人类评分)。关键发现: (1) AR 系统韵律多样性优于 flow matching NAR 但不优于 masked generative NAR (MaskGCT); (2) flow matching 系统的隐式对齐导致 mean-mode collapse,韵律单调; (3) DPO 后训练提升可懂度但削弱韵律多样性 (CosyVoice 2: -18.8%); (4) 时长是韵律多样性的关键维度,duration perturbation 可显著提升 NAR 系统韵律多样性 (+26-29%)。这一工作将 SSL 中间层韵律编码能力 (见上节 de la Fuente & Jurafsky 发现) 从分析工具推进到可操作的评估指标。详见 [[论文笔记/ProsodyEval|ProsodyEval]]。

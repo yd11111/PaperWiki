@@ -23,7 +23,7 @@ updated: 2026-06-06
 > [!info] KB 背景 (基于 2 个已确认实体页 + 4 个待确认实体页)
 > 自动生成,不保证完整覆盖所有相关知识。
 
-**谱系定位**: 本文处于 TTS 前端(text analysis)与 LLM 能力交叉的早期探索节点。在传统 TTS Pipeline 中,前端负责将文本转换为语言学特征(G2P、韵律边界、词性标注等),主流方法依赖 BERT-scale (0.1B) 小模型 [[[Text-to-SpeechPipeline]]]。本文提出用 LLM (6B-175B) 替代传统前端,是 LLM 进入 TTS 领域的早期信号之一。
+**谱系定位**: 本文处于 TTS 前端(text analysis)与 LLM 能力交叉的早期探索节点。在传统 TTS Pipeline 中,前端负责将文本转换为语言学特征(G2P、韵律边界、词性标注等),主流方法依赖 BERT-scale (0.1B) 小模型 [[Text-to-SpeechPipeline]]。本文提出用 LLM (6B-175B) 替代传统前端,是 LLM 进入 TTS 领域的早期信号之一。
 
 **已有认知对比**:
 - [[ProsodyModeling]] (confirmed): 韵律建模的演进线从规则标注 → GST/VAE → FastSpeech 2 显式预测 → VITS 隐式 → LLM in-context learning。本文的 PSP 实验属于"显式韵律标注预测"任务,但用 LLM 替代传统 CRF/BERT 方法,是这条演进线上传统显式 → LLM 驱动的过渡节点。
