@@ -1,0 +1,70 @@
+paper: "WavTokenizer"
+file: "论文笔记/WavTokenizer.md"
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+# 第一层: 原则判断
+principles:
+  reproducible:
+    score: 9
+    judgment: "方法节按 4 个关键设计选择展开,每个都有清晰的 WHY 解释(为什么扩展 VQ 空间、为什么用 iSTFT 替代镜像解码器、为什么 attention 只放 decoder、为什么用多尺度判别器),配合消融数据量化每个模块的必要性。读完能向同事完整解释 WavTokenizer 为什么 work。"
+  trustworthy:
+    score: 9
+    judgment: "几乎所有数字型 claim 都标注了 [§X.X]/[Table N]/[Fig N],覆盖率极高。与 PDF 原文交叉验证,Table 1/2/3/4/5/6/7 的核心数字均正确。唯一问题是局限性第 6 条中 K=8192 vs K=4096 的 UTMOS 比较方向写反(实际 4096 > 8192,笔记写成 8192 > 4096)。"
+  distinguishable:
+    score: 9
+    judgment: "方法节系统使用 [论文原文] 和 [agent 解读] 标签区分来源,覆盖率接近 100%。局限性节中 agent 分析也有 [agent 解读] 标注。点评节虽未逐条标注,但性质上是整体评价,可接受。"
+  positioned:
+    score: 9
+    judgment: "KB 背景节质量很高:明确的演进线(VQ-VAE→RVQ/SoundStream→DAC→单码本回归),与 4 个 confirmed + 2 个 pending 实体页的交叉定位,创新判断有具体对比基准(vs DAC/EnCodec/Single-Codec)。谱系关系清晰。"
+  non_polluting:
+    score: 9
+    judgment: "链接的 8 个概念均为已有页,无新建需求。笔记中关于 codebook collapse、iSTFT decoder、semantic vs acoustic tokens 的描述与 KB 页一致。唯一风险点是局限性第 6 条的 UTMOS 方向错误,但该内容不太可能流入概念页(属于论文级分析而非概念级事实)。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 25
+    annotated: 25
+    rate: "100%"
+  metric_names_correct: true
+  source_labels_present: true
+  speed_card_complete: true
+  frontmatter_complete: true
+  concept_admission_ok: true
+
+# 发现的问题
+issues:
+  - severity: medium
+    type: factual-error
+    principle: trustworthy
+    location: "局限性 > 第 6 条"
+    detail: "笔记写'扩展到 2^13 利用率 68% 时 UTMOS 略高于 2^12 (差值在误差范围内)',但 Table 5 实际数据为 K=8192 UTMOS=4.0220 < K=4096 UTMOS=4.0486。方向写反。K=8192 的 PESQ (2.3916) 确实略高于 K=4096 (2.3730),可能是指标混淆。"
+    suggestion: "改为'扩展到 2^13 时 PESQ (2.39) 略高于 2^12 (2.37) 但 UTMOS (4.02) 反而略低于 2^12 (4.05),差值均在误差范围内',或直接引用两个指标的具体数字避免含糊。"
+
+  - severity: low
+    type: template-compliance
+    principle: trustworthy
+    location: "实验表格 > 语义表征 (ARCH Benchmark)"
+    detail: "ARCH 表只展示了 12 个数据集中的 6 个,点评中'仅在 6 个超过 DAC-9Q'的判断需要全 12 列数据支撑。读者无法从表格直接验证此判断。"
+    suggestion: "在 ARCH 表下方加一行注释说明完整 12 数据集结果,或在点评该句旁标注 [Table 3, full 12 datasets]。"
+
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "方法 > 判别器 > MPD"
+    detail: "'periods [2,3,5,7,11]' 虽在 §3.4 大段下,但这个具体参数来自 HiFi-GAN 而非 WavTokenizer 论文。当前依靠 section-level 标注 [§3.4] 覆盖,尚可接受但不够精确。"
+    suggestion: "补充 '(HiFi-GAN, Kong et al. 2020)' 标注明确来源。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: false
+  reason: "局限性第 6 条有一个 UTMOS 方向性错误(medium),但该内容属于论文级分析,不会被反向更新到概念页。核心方法描述和实验数据均正确,反向更新内容(codebook collapse 策略、iSTFT decoder、单码本定位等)无风险。修正 medium issue 后可进入可信层。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: "消融实验的数字在方法节中引用时,建议 working agent 直接写出完整比较(A=X vs B=Y)而非使用模糊的'略高于/略低于',可减少方向性混淆。"
+  checklist_upgrade_suggestion: "可考虑增加'消融数据交叉一致性'检查项:方法节/局限性节引用的消融数字与实验表的一致性验证。当前检查项仅覆盖 claim 有无出处标注,不覆盖引用是否与原始数据一致。"

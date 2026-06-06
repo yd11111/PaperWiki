@@ -182,7 +182,7 @@ $$L_{gen} = \lambda_q L_q + \lambda_{mel} L_{mel} + \lambda_{adv} L_{adv} + \lam
 
 5. **长音频重建的可靠性**: 论文声称 attention 模块在长序列推理时"能良好重建",但未给出长音频 (>30s) 的系统评估 [§3.3]。
 
-6. **码本空间分析的局限**: "speech as a unique language" 假设有启发性但缺乏理论支撑。码本分布集中在 2^12 左侧不必然说明 2^12 是最优;扩展到 2^13 利用率 68% 时 UTMOS 略高于 2^12 (差值在误差范围内) [Table 5, Fig 2b]。
+6. **码本空间分析的局限**: "speech as a unique language" 假设有启发性但缺乏理论支撑。码本分布集中在 2^12 左侧不必然说明 2^12 是最优;K=8192 利用率 68% 时 UTMOS 4.02 略低于 K=4096 的 4.05,但 PESQ 略高 (2.39 vs 2.37),差值均在误差范围内 [Table 5, Fig 2b]。
 
 ## 点评
 
@@ -212,4 +212,12 @@ $$L_{gen} = \lambda_q L_q + \lambda_{mel} L_{mel} + \lambda_{adv} L_{adv} + \lam
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 自动审阅 (2026-06-06)
+> **结论:** pass-with-fixes
+> **原则:** 复述 9 | 信赖 9 | 区分 9 | 定位 9 | 污染 9
+> **Claim 标注率:** 100% (25/25)
+> **问题:** 0 high, 1 medium, 2 low
+> - ⚠️ [factual-error] 局限性 > 第 6 条: K=8192 vs K=4096 的 UTMOS 比较方向写反 (实际 4096>8192,笔记写成 8192>4096,可能与 PESQ 混淆)
+> - 💡 [template-compliance] ARCH 表只展示 6/12 数据集,点评中"仅在 6 个超过"的判断缺少完整数据支撑
+> - 💡 [traceability-gap] MPD periods [2,3,5,7,11] 来自 HiFi-GAN,缺少明确来源标注
+> **反向更新:** ✅ 安全 (medium issue 属于论文级分析,不影响 KB 更新内容)
