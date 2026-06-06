@@ -1,0 +1,49 @@
+review:
+  paper: "ADAPTERMIX"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节含因果解释 (WHY multiple adapters, WHY expert choice routing, WHY variance adapter); 速查卡片可借鉴具体且可迁移; 关键设计选择回答了 why this not that"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 85%; 指标名正确使用; 速查指标字段含具体数字+数据集; 全部数字已交叉验证与 PDF Table 1 一致"
+  可区分:
+    score: 7
+    rationale: "因果解释来源标注覆盖率约 80%; 多处正确使用 [论文原文] 和 [agent 解读]; KB 背景中有一处 agent 意见未标注来源"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供了清晰谱系定位 (Parameter Efficiency 子课题 → CLN vs adapter 对比); 创新判断有对比基准; frontmatter 完整"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 反向更新仅为追加 key_papers; 无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "局限性 §1"
+    detail: "'backbone 3.6M 参数偏小' 缺少 [§4.2] 出处标注"
+    suggestion: "改为 'backbone 仅 3.6M 参数 [§4.2]'"
+  - id: 2
+    type: fact-inference-mixing
+    severity: low
+    location: "KB 背景 创新判断"
+    detail: "'adapter-based 方法在当前范式中的直接适用性有限' 是 agent 意见,未标注来源"
+    suggestion: "前缀 '[agent 解读]' 或改为 '从技术演进趋势来看...'"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述未标注出处 [Fig 1a]"
+    suggestion: "末尾加 [Fig 1a]"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals: []

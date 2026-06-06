@@ -32,7 +32,7 @@ updated: 2026-06-06
 - [[VoiceCloningTaxonomy]] [待确认] 将本文归入 "Few-shot Voice Cloning → Parameter Efficiency" 分支。
 - [[TTSEvaluation]] [待确认] 中 MOS + WER + Cosine Similarity 是本文使用的评估三件套,2023 年尚处于标准期,SpeakerEmbedding 页 (confirmed) 指出 cosine similarity 高度依赖 speaker encoder 选择。
 
-**创新判断**: 相对于已有 KB 知识,ADAPTERMIX 的核心新增在于: (1) 将 MoE 的 expert choice routing 引入 TTS adapter; (2) 多个 adapter 跨说话人共享而非每人一套 (vs Hsieh/Morioka per-speaker adapter)。但从 2023 年至今,LLM-based TTS (in-context learning) 已大幅改变 speaker adaptation 格局,adapter-based 方法在当前范式中的直接适用性有限。
+**创新判断**: 相对于已有 KB 知识,ADAPTERMIX 的核心新增在于: (1) 将 MoE 的 expert choice routing 引入 TTS adapter; (2) 多个 adapter 跨说话人共享而非每人一套 (vs Hsieh/Morioka per-speaker adapter)。但从 2023 年至今,[agent 解读] LLM-based TTS (in-context learning) 已大幅改变 speaker adaptation 格局,adapter-based 方法在当前范式中的直接适用性有限。
 
 > 检索命中: [[SpeakerAdaptation]][待确认], [[SpeakerEmbedding]]✓, [[VoiceCloningTaxonomy]][待确认], [[Non-autoregressiveTTS]][待确认], [[TTSEvaluation]][待确认], [[ProsodyModeling]]✓ | 过滤: 无 | 未命中但可能相关: 无
 
@@ -40,7 +40,7 @@ updated: 2026-06-06
 
 > [!summary] 速查
 > - **一句话**: 将 Mixture of Experts 中的 expert choice routing 引入 TTS decoder adapter,实现跨说话人共享的参数高效 speaker adaptation (仅 11.62% 参数)
-> - **路线**: Text → Transformer TTS Encoder → Duration/Pitch Predictor → Decoder (每层含 N 个并行 residual adapter + routing) → Mel Spectrogram → Vocoder
+> - **路线**: Text → Transformer TTS Encoder → Duration/Pitch Predictor → Decoder (每层含 N 个并行 residual adapter + routing) → Mel Spectrogram → Vocoder [Fig 1a]
 > - **指标**: 1min 数据 MOS 3.33 vs Fine-tune 3.45 vs Adapter 2.82; XAB speaker similarity 偏好 43.63% (10min); Cosine Sim 0.7324 (10min) 接近 Fine-tune 0.7362 [Table 1, Fig 3]
 > - **可借鉴**: expert choice routing 让每个 adapter 自主选择 top-k token 处理,实现 token 级别的细粒度分工;adapter 跨说话人共享的设计比 per-speaker adapter 更可扩展
 > - **局限**: 仅在 LibriTTS → VCTK 英语场景验证; backbone 3.6M 参数偏小; 与 CLN-based 方法 (AdaSpeech) 未直接对比; 无 ablation 解释各 adapter 学到了什么; 已开源但 2023 年后无后续
@@ -131,7 +131,7 @@ G 中包含的 softmax 门控值起到加权作用,[论文原文] "outputs of th
 
 ## 局限性
 
-1. **实验规模有限**: 仅 10 个说话人 (VCTK), 单一语言 (英语), backbone 仅 3.6M 参数,无法确认方法在大规模场景下的表现 [agent 解读]
+1. **实验规模有限**: 仅 10 个说话人 (VCTK), 单一语言 (英语), backbone 仅 3.6M 参数 [§4.2],无法确认方法在大规模场景下的表现 [agent 解读]
 2. **缺少与 CLN-based 方法的对比**: 未与 AdaSpeech 系列 (同为参数高效方法) 直接比较,无法判断 MoA 是否优于 CLN [agent 解读]
 3. **无 adapter 专业化分析**: 论文声称多个 adapter 捕获互补特征 (prosody, speaking rate, accent),但未提供任何可视化或 ablation 证据 [§1 vs 实验部分]
 4. **Fine-tune 在 10min 时 MOS 异常下降**: 3.45 (1min) → 3.18 (10min) → 3.54 (15min),论文未讨论此现象 [Table 1]
@@ -154,3 +154,19 @@ ADAPTERMIX 是将 MoE routing 机制引入 TTS speaker adaptation adapter 的早
 2. **Adapter 跨说话人/跨任务共享**: 不为每个新条件训练独立模块,而是共享一组 adapter + routing,以 O(1) 参数支持 O(N) 个条件。对现代 LoRA-based adaptation 也有参考价值。
 
 3. **Variance adapter 独立适应**: 在 variance predictor (duration/pitch/energy) 后也加 adapter,不仅适应音色还适应韵律。这提醒在做 speaker adaptation 时不能只关注 decoder/acoustic model。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (8) | 方法节含因果解释,速查可借鉴具体可迁移 |
+> | 可信赖 | pass (8) | 数字覆盖率~85%,全部与 PDF 交叉验证通过 |
+> | 可区分 | pass (7) | 来源标注覆盖率~80%,KB 背景有一处 agent 意见未标注 |
+> | 可定位 | pass (8) | 谱系定位清晰,创新判断有对比基准 |
+> | 不污染 | pass (9) | 无新建页,反向更新仅追加 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/ADAPTERMIX-review.yml`
