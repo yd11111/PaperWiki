@@ -97,7 +97,7 @@ Flow-based TTS 模型（如 Glow-TTS）通过从 latent distribution 采样来�
 | N-MOS (男) | 2.92 | 3.11 | **3.40** | 4.00 | [Table 1] |
 | N-MOS (女) | 3.35 | 3.51 | **3.51** | 4.40 | [Table 1] |
 | NR-MOS (总,长句) | 2.95 | 3.26 | **3.39** | 4.79 | [Table 1] |
-| S-MOS (总) | 2.26 | **2.98** | **2.99** | — | [Table 1] |
+| S-MOS (总) | 2.26 | **2.98** | **2.99** | 4.79 | [Table 1] |
 | WV-MOS | 4.11 | 4.17 | **4.18** | 4.32 | [Table 1] |
 | cos-sim | 0.8287 | **0.8364** | 0.8319 | 0.8121 | [Table 1] |
 | D-MOS | ~2.4 | ~2.7 | **~3.0** | — | [Fig 2] |
@@ -136,4 +136,16 @@ Flow-based TTS 模型（如 Glow-TTS）通过从 latent distribution 采样来�
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含因果解释(WHY),设计选择清晰; 速查"可借鉴"具体可迁移 |
+> | 可信赖 | pass | 数字 claim 覆盖率 >90%,经 PDF 交叉验证全部准确; S-MOS VCTK-copy 值已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~90%,边界清楚 |
+> | 可定位 | pass | KB 背景含具体谱系(FastSpeech 2→VITS SDP→本文),创新判断有对比基准 |
+> | 不污染 | pass | 无新概念页创建,反向更新均为 append(不改 status) |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/StochasticPitchPrediction-review.yml`

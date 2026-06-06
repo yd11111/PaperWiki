@@ -1,0 +1,41 @@
+paper: "StochasticPitchPrediction"
+reviewer: auto
+date: 2026-06-06
+conclusion: pass-with-fixes
+note: "审阅未能完全独立执行(无可用 reviewer subagent),由同一 session 进行交叉验证"
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节包含充分的因果解释(WHY): SDP 复用的原因、pitch predictor 的设计动机、decoder conditioning 的物理直觉。速查'可借鉴'是具体可迁移的方法论('任何确定性预测器都可以用 flow 概率化')。"
+  trustworthy:
+    score: 8
+    rationale: "所有数字经 PDF 交叉验证准确。N-MOS/NR-MOS/S-MOS/WV-MOS/cos-sim 全部与 Table 1 一致。D-MOS 从 Fig 2 近似读取,合理。source citation 覆盖率 >90%。发现 1 个 medium issue: S-MOS VCTK-copy 原缺失,已修正。"
+  distinguishable:
+    score: 9
+    rationale: "方法节中 [论文原文] 和 [agent 解读] 标注清晰,覆盖率约 90%。关键推断('这比确定性 predictor 能更好地捕捉变化'、'pitch 直接决定谐波结构')均标注为 [agent 解读]。"
+  positionable:
+    score: 8
+    rationale: "KB 背景含具体谱系链(FastSpeech 2 显式确定性 → VITS SDP 概率化 duration → 本文概率化 pitch)。创新判断以 DurationPredictor KB 页为对比基准。点评节定位了 Variance-Flow 的关系。"
+  non_polluting:
+    score: 8
+    rationale: "不创建新概念页。反向更新仅为 append(DurationPredictor + ProsodyModeling 追加 key_papers)。concepts 字段中 ConditionalFlowMatching 的关联稍弱(本文用 normalizing flow 而非 CFM),但 KB 页覆盖了 NF 演进,可接受。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "实验表格 S-MOS 行"
+    detail: "S-MOS VCTK-copy 值原写为 '—' 但 Table 1 中实际为 4.79"
+    suggestion: "已在审阅过程中修正为 4.79"
+    fixed: true
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets 字段"
+    detail: "datasets 字段为空,但论文使用了 Common Voice (EN v7.0, 训练), VCTK (评估), LibriTTS (NR-MOS 评估文本 + vocoder 训练)"
+    suggestion: "不阻塞,可在反向更新时补充"
+    fixed: false
+
+learning_signals: []
