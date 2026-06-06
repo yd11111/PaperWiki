@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[HyperTTS]] — 命中 5 页 (取 Top 5): [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
+- [ingest/deep] [[HyperTTS]] — 精读, kb_sources=5, 新建 0, 追加 0
+- [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12), 且正文已引用 HyperTTS
+- [lint/local] HyperTTS — 通过
+- [review/auto] HyperTTS — pass-with-fixes, 0 high, 1 medium (已修正), 2 low (已修正)
 - [kb/search] [[HumaneSpeech]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[TTSEvaluation]](pending-review)
 - [ingest/deep] [[HumaneSpeech]] — 精读, kb_sources=6, 新建 0, 追加 0
 - [skip/update] [[EmotionControlinTTS]] [[ProsodyModeling]] [[Text-to-SpeechPipeline]] — key_papers 超限或论文贡献不足以增值,跳过
