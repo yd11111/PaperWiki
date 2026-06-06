@@ -1,0 +1,47 @@
+review:
+  paper: "XPhoneBERT"
+  note_path: "论文笔记/XPhoneBERT.md"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+
+  principles:
+    可复述:
+      score: 8
+      rationale: "方法节包含因果解释(WHY): 为什么用 RoBERTa 而非 BERT 预训练、为什么用 white-space tokenizer、为什么冻结后解冻。速查卡片可借鉴字段具体可迁移。minor gap: BERT-base 架构选择本身缺乏对比替代方案的讨论,但论文原文也未展开。"
+    可信赖:
+      score: 9
+      rationale: "所有实验数字经 PDF 交叉验证全部正确。出处标注覆盖率 >90%。指标名使用正确(MOS/MCD/RMSE_F0)。速查指标字段有数字+出处但缺数据集名(minor)。"
+    可区分:
+      score: 8
+      rationale: "因果解释来源标注覆盖率约 85%。方法节中推断性解释均标注 [agent 解读],论文直接引用标注 [论文原文] 或 [§X.X]。点评和局限性中的推断有适当限定词('暗示'、'可能')。"
+    可定位:
+      score: 9
+      rationale: "KB 背景具体列出 PnG BERT/Mixed-Phoneme BERT/Phoneme-level BERT 三个单语前驱,VITS 作为评估框架,PhonemeRepresentation 演进线。创新判断有明确对比基准(单语→多语言)。frontmatter concepts/models 语义正确。"
+    不污染:
+      score: 9
+      rationale: "计划的反向更新均为 append 操作(向 PhonemeRepresentation 和 VITS 追加 key_papers),不涉及实质修改。无新建实体页需求。不会污染已有知识。"
+
+  conclusion: "pass-with-fixes"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "medium"
+      location: "速查卡片 > 指标"
+      detail: "指标字段列出了数字和 Table 引用,但未明确标注数据集名称(LJSpeech / Vietnamese 自建数据集)"
+      suggestion: "改为: EN MOS 4.00→4.14 (+0.14, LJSpeech), VN MOS 3.74→3.89 (+0.15, Vietnamese 自建) [Table 2, 3]; 低资源 VN MOS 1.59→3.35 (+1.76, Vietnamese 5%) [Table 3]"
+
+    - id: 2
+      type: "template-compliance"
+      severity: "low"
+      location: "frontmatter > datasets"
+      detail: "论文使用 LJSpeech 和自建越南语数据集,datasets 字段为空。vault 无对应实体页,故不阻塞。"
+      suggestion: "可选: 未来创建 LJSpeech 数据集页后回填"
+
+  issue_summary:
+    high: 0
+    medium: 1
+    low: 1
+
+  learning_signals: []

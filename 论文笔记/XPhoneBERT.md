@@ -36,7 +36,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 首个多语言 phoneme BERT (330M 句, 94 语言),用 RoBERTa 方法预训练,替换 VITS encoder 后显著提升自然度,尤其在低资源场景
 > - **路线**: Raw Text → CharsiuG2P (G2P) → segments (phoneme segmentation) → White-space tokenized phoneme sequence → XPhoneBERT (BERT-base, MLM) → Contextual phoneme embeddings → VITS decoder → Waveform
-> - **指标**: EN MOS 4.00→4.14 (+0.14), VN MOS 3.74→3.89 (+0.15) [Table 2, 3]; 低资源 VN MOS 1.59→3.35 (+1.76) [Table 3]
+> - **指标**: EN MOS 4.00→4.14 (+0.14, LJSpeech), VN MOS 3.74→3.89 (+0.15, Vietnamese 自建 18h) [Table 2, 3]; 低资源 VN MOS 1.59→3.35 (+1.76, Vietnamese 5%) [Table 3]
 > - **可借鉴**: (1) 预训练 phoneme encoder 可直接 drop-in 替换 TTS 的 text encoder; (2) 冻结预训练模型 25% 训练步后 unfreeze 的 fine-tuning 策略; (3) 低资源语言 TTS 中,phoneme 预训练的杠杆效应远大于高资源语言
 > - **局限**: 仅在 VITS 上评估,未验证其他 TTS 架构; 实验仅覆盖英语和越南语两种语言; 未与 PnG BERT 等同类模型对比 (对方未开源); G2P 依赖 CharsiuG2P 的转换质量
 
@@ -122,3 +122,19 @@ XPhoneBERT 是一个工程贡献大于方法创新的工作。其核心方法—
 1. **预训练 encoder 的冻结-解冻策略**: 先冻结 25% 训练步让下游模型适应预训练表征,再 unfreeze 做联合优化。这是一种通用的预训练模型集成策略,可应用于其他预训练-微调场景
 2. **低资源语言 TTS 的预训练杠杆**: 当目标语言数据稀缺时,多语言预训练的 phoneme encoder 可提供强先验,显著提升合成质量。对任何低资源语言 TTS 项目有参考价值
 3. **三阶段多语言 phoneme 语料构建 pipeline**: Text collection → G2P → Phoneme segmentation 的工程流程可复用于构建其他多语言语音相关的预训练数据
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,速查可借鉴具体 |
+> | 可信赖 | pass | 数字全部交叉验证通过,出处覆盖 >90% |
+> | 可区分 | pass | 来源标注覆盖 ~85%,推断有限定词 |
+> | 可定位 | pass | 谱系定位具体,列出三个单语前驱 |
+> | 不污染 | pass | 反向更新均为 append,无新建页 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/XPhoneBERT-review.yml`
