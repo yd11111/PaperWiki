@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[HumaneSpeech]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[TTSEvaluation]](pending-review)
+- [ingest/deep] [[HumaneSpeech]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [skip/update] [[EmotionControlinTTS]] [[ProsodyModeling]] [[Text-to-SpeechPipeline]] — key_papers 超限或论文贡献不足以增值,跳过
+- [lint/local] HumaneSpeech — 通过
+- [review/auto] HumaneSpeech — pass-with-fixes, 0 high, 1 medium, 2 low
 - [kb/search] [[KazEmoTTS]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[TTSEvaluation]](pending-review), [[GlobalStyleTokens]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[KazEmoTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 数据集表)
 - [skip/update] [[Diffusion-basedTTS]] [[NeuralVocoder]] [[TTSEvaluation]] [[MelSpectrogram]] [[GlobalStyleTokens]] — key_papers 超限且论文无方法贡献,跳过
