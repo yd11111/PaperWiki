@@ -7,7 +7,7 @@ year: 2023
 tags: [TTS, zero-shot, diffusion, latent-diffusion, speech-prompting, non-autoregressive, singing-synthesis]
 key_concepts: ["[[Diffusion-basedTTS]]", "[[ResidualVectorQuantization]]", "[[DiffusionModel]]", "[[DurationPredictor]]", "[[ProsodyModeling]]", "[[Non-autoregressiveTTS]]"]
 tasks: []
-key_papers: ["[[论文笔记/NaturalSpeech2|NaturalSpeech 2]]"]
+key_papers: ["[[论文笔记/NaturalSpeech2|NaturalSpeech 2]]", "[[论文笔记/Amphion|Amphion]]"]
 supersedes: []
 superseded_by: ["[[模型库/NaturalSpeech3|NaturalSpeech 3]]"]
 status: pending-review
