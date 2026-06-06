@@ -1,0 +1,55 @@
+reviewer: auto (same-session, no independent subagent available)
+date: 2026-06-06
+note: 论文笔记/TextAwareContextAwareTTS.md
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    reasoning: "方法节包含四个明确的设计选择及 WHY 解释,整体架构用 ASCII 流程图清晰描述。训练策略分阶段说明。扣分: 未与 CLAM (论文引用的 [11]) 做显式对比,后者也是 cross-modal style 方法。"
+  可信赖:
+    score: 8
+    reasoning: "所有数字标注 [Table 1]/[§X.X] 出处。指标名 (CER/MCD/NMOS/EMOS) 使用正确。扣分: venue 标为 Interspeech 2024,但论文原文未明确标注会议名 (仅 arxiv preprint),应注明不确定性。"
+  可区分:
+    score: 9
+    reasoning: "[论文原文] 和 [agent 解读] 标注一致且清晰。点评节作为观点明确标识。无将推断写成断言的情况。"
+  可定位:
+    score: 8
+    reasoning: "KB 背景从 GST → TP-GST → TACA 画出清晰谱系。与 KB 中 StyleTransferinTTS 的演进路线呼应。创新判断有对比基准 (GST token 数量限制)。扣分: 可额外提及与同组前序工作 HIGNN-TTS [4] (同一作者) 的关系。"
+  不污染:
+    score: 9
+    reasoning: "反向更新仅追加 key_papers,无实质修改。未计划新建概念页。无 factual error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter venue
+    detail: "venue 标为 'Interspeech 2024',但论文 PDF 仅显示 arxiv:2406.05672v3,未标注会议名。论文格式 (Index Terms 格式) 暗示 Interspeech 但无法确认。"
+    suggestion: "改为 'arXiv preprint (Interspeech format)' 或查证后确认。"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 方法节 - 关键设计选择 1
+    detail: "与 CLAM [11] 的对比只在核心问题节提了一句 ('CLAPSpeech: 只关注局部韵律'),但 CLAM 本身 (constrastive cross-modal speaking style modeling) 才是更直接的前序方法,未被充分讨论。"
+    suggestion: "在关键设计选择 1 中补充: CLAM 也做了 cross-modal style modeling,但它从多个参考音频选择,仍依赖参考音频; TACA 直接从文本预测,不需要参考音频。"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: 方法节 - 整体架构
+    detail: "HIGNN-TTS [4] 是同一团队 (Guo 第一作者) 的前序工作,在层级韵律建模上与本文 context encoder 有方法延续,但笔记中未提及这一关联。"
+    suggestion: "在 KB 背景或点评中补充 HIGNN-TTS 与本文的关系 (同团队前序工作,从 hierarchical graph → cross-sentence context encoder 的演进)。"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: 实验节
+    detail: "MOS 评估条件 (1-2 分钟长音频, 0.5 分间隔, 20 听众) 在局限性节已提及,但实验表格中可补充 N=20 和 confidence interval 来源说明。"
+    suggestion: "在实验表格备注或实验节正文中标注听众数量。"
+
+learning_signals:
+  - "CLIP-style cross-modal contrastive learning 在 TTS 风格建模中的应用是一个值得追踪的模式 (本文, CLAPSpeech, CLAM 构成一族方法)"
+  - "同一团队的前序工作关系 (HIGNN-TTS → TACA-TTS) 应在 KB 背景中主动追踪"

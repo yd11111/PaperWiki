@@ -194,3 +194,19 @@ Text style embedding → VQ (codebook 64*32) → Random Select ←→ Speech sty
 ---
 
 检索命中: [[ProsodyModeling]]✓, [[GlobalStyleTokens]][待确认], [[StyleTransferinTTS]][待确认], [[VITS]][待确认], [[HuBERT]][待确认], [[Self-SupervisedSpeechRepresentation]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto, same-session)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY 解释清晰,4 个设计选择有因果推理 |
+> | 可信赖 | pass | 数字标注覆盖好; venue 存疑 (arxiv vs Interspeech) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致 |
+> | 可定位 | pass | GST→TP-GST→TACA 谱系清晰 |
+> | 不污染 | pass | 反向更新仅 append key_papers |
+> 
+> Issues: 4 (high: 0, medium: 1, low: 3)
+> 详见 `_review/TextAwareContextAwareTTS-review.yml`
