@@ -1,0 +1,119 @@
+review:
+  paper: "USAT"
+  note_path: "论文笔记/USAT.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+
+  principles:
+    explainable:
+      score: 9
+      rationale: "方法节详细解释了每个组件的 WHY: MAVAE 为什么需要 memory (简化后验分布), phoneme leakage discriminator 为什么用对比 embedding 对 (利用时间不变性检测泄漏), timbre residual discriminator 为什么用 GRL (逆变换去音色=正变换加音色), adapter 为什么不微调全模型 (灾难性遗忘+存储)。每个设计选择都有消融实验佐证。"
+    trustworthy:
+      score: 9
+      rationale: "所有关键数字经 PDF 交叉验证正确: LibriTTS unseen NMOS 3.95 [Table I] ✓, SMOS 4.06 [Table I] ✓, SMCS 0.780 ✓, SVR 88.7% ✓; ESLTTS fine-grained SMCS 0.833 [Table V] ✓, SVR 98.8% ✓, params 0.64M ✓; 消融 CNMOS/CSMOS 数值均正确 [Table III] ✓。指标名称使用正确,方向性描述无误。"
+    distinguishable:
+      score: 8
+      rationale: "[论文原文] 和 [agent 解读] 标注覆盖率 >80%。MAVAE 的 discrete bottleneck 连续化类比正确标注为 [agent 解读]。局限性中的对比基准陈旧和 ESLTTS 规模评价正确标注为 [agent 解读]。有一处 KB 背景中将 MAVAE decoder 等同于 HiFi-GAN 未标注为推断。"
+    positionable:
+      score: 9
+      rationale: "KB 背景提供了清晰的谱系定位: VITS 继承关系、SpeakerAdaptation 演进线上的 2024 节点、VoiceCloningTaxonomy 中横跨 SA+FS-VC 的定位、与 NaturalSpeech memory mechanism 的呼应。创新判断有具体对比基准 (当时方法通常只做 zero-shot 或 few-shot 之一)。"
+    non_polluting:
+      score: 9
+      rationale: "无需新建概念页。frontmatter 中 concepts/models/tasks/datasets 字段语义正确: models 列 VITS (backbone),未列后续系统; concepts 涵盖 SpeakerAdaptation/VAE/SpeakerEmbedding/GRL 等相关概念。反向更新为 append 操作 (追加 key_papers),不涉及实质修改。"
+
+  checklist:
+    explainable:
+      - item: "method_has_causal_explanations"
+        status: pass
+        detail: "四个关键设计选择都有完整的 WHY 解释"
+      - item: "design_choices_answer_why_not_what"
+        status: pass
+        detail: "每个子节标题以 '为什么...' 开头,明确回答设计动机"
+      - item: "quick_card_reusable_is_specific"
+        status: pass
+        detail: "可借鉴列出 3 个具体可迁移 trick (memory codebook, 对比 embedding 对, adapter-only 微调)"
+
+    trustworthy:
+      - item: "claim_source_coverage"
+        status: pass
+        detail: "数字型 claim 源标注覆盖率 ~95%, 所有实验数字均有 [Table N]/[Fig N]/[§X.X] 标注"
+      - item: "metric_names_correct"
+        status: pass
+        detail: "NMOS/SMOS/SMCS/SVR/UTMOS/WER 使用正确,方向性描述无误"
+      - item: "quick_card_metrics_specific"
+        status: pass
+        detail: "指标字段含具体数字 + 数据集 + 来源标注"
+      - item: "no_directional_errors"
+        status: pass
+        detail: "无方向性错误"
+
+    distinguishable:
+      - item: "causal_explanation_source_labels"
+        status: pass
+        detail: "方法节中 [论文原文] 和 [agent 解读] 标注清晰"
+      - item: "source_label_coverage"
+        status: pass-with-note
+        detail: "覆盖率 ~85%, KB 背景中 MAVAE decoder 等同 HiFi-GAN 的推断未标注来源"
+      - item: "no_assertion_without_qualifier"
+        status: pass
+        detail: "强断言均有数据支撑或限定词"
+      - item: "strong_claims_supported"
+        status: pass
+        detail: "'全面超越' 有完整表格数据支撑"
+
+    positionable:
+      - item: "kb_background_has_specific_lineage"
+        status: pass
+        detail: "谱系定位含具体论文名/模型名/KB 页面引用"
+      - item: "kb_innovation_has_comparison_basis"
+        status: pass
+        detail: "创新判断以 '当时的方法通常只做其中之一' 为对比基准"
+      - item: "frontmatter_fields_present"
+        status: pass
+        detail: "所有字段存在且非空"
+      - item: "frontmatter_semantically_correct"
+        status: pass
+        detail: "models 列 VITS (backbone) 而非后续系统; concepts 列本文涉及概念"
+      - item: "quick_card_five_fields_substantive"
+        status: pass
+        detail: "5 字段均有实质内容"
+
+    non_polluting:
+      - item: "new_concept_meets_admission"
+        status: not-applicable
+        detail: "无需新建概念页"
+      - item: "dedup_check"
+        status: not-applicable
+        detail: "无新建页"
+      - item: "reverse_update_no_factual_error"
+        status: pass
+        detail: "append 操作内容准确"
+      - item: "reverse_update_correct_classification"
+        status: pass
+        detail: "仅追加 key_papers,正确分类为 append"
+
+  issues:
+    - id: 1
+      severity: low
+      type: "fact-inference-mixing"
+      location: "KB 背景 → 架构根基"
+      detail: "描述中将 MAVAE decoder 等同于 HiFi-GAN decoder,但论文未明确命名 MAVAE 的 decoder 架构,仅因继承自 VITS 而推断"
+      suggestion: "改为 'MAVAE decoder (继承自 VITS 架构)' 或标注为推断"
+    - id: 2
+      severity: low
+      type: "traceability-gap"
+      location: "实验表格"
+      detail: "实验表格缺少 WER 指标,而 WER 是论文报告的重要指标之一 (USAT 5.9%/5.8% seen/unseen on LibriTTS)"
+      suggestion: "可选择性补充 WER 行,但不影响整体可信度"
+    - id: 3
+      severity: low
+      type: "template-compliance"
+      location: "venue 字段"
+      detail: "venue 标注为 'arXiv (IEEE Trans. format)',这是一个准确的描述但可能在后续出版时需要更新"
+      suggestion: "如论文已被接收可更新 venue 字段"
+
+  conclusion: "pass"
+  summary: "笔记质量高,0 high / 0 medium / 3 low issues。所有五个原则基本满足。方法解释清晰有因果深度,实验数字全部通过交叉验证,KB 定位准确,来源标注覆盖率高。3 个 low issue 均为可选优化项,不影响可信度或可用性。"
+
+  learning_signals: []
