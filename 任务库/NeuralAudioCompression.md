@@ -4,7 +4,7 @@ title: "Neural Audio Compression"
 aliases: [Neural Audio Codec, Learned Audio Compression, End-to-End Audio Codec]
 category: "audio-processing"
 tags: [audio-codec, compression, discrete-representation, speech-tokenization]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/SAC|SAC]]", "[[论文笔记/PURECodec|PURE Codec]]", "[[论文笔记/T-Mimi|T-Mimi]]", "[[论文笔记/EntropyGRVQ|EntropyGRVQ]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/SAC|SAC]]", "[[论文笔记/PURECodec|PURE Codec]]", "[[论文笔记/T-Mimi|T-Mimi]]", "[[论文笔记/EntropyGRVQ|EntropyGRVQ]]", "[[论文笔记/WavTokenizer|WavTokenizer]]"]
 related_tasks: ["[[Zero-shotSpeechSynthesis]]"]
 metrics: [ViSQOL, Mel-distance, STFT-distance, SI-SDR, MUSHRA, Bitrate-efficiency]
 status: confirmed
@@ -67,4 +67,5 @@ Neural audio codec 的 discrete codes 可直接作为 speech tokenizer 用于 LL
 | DAC | 8 kbps | 22.05 kHz | 91x |
 | EnCodec | 24 kbps | 12 kHz | 16-32x |
 | SoundStream | 6 kbps | 12 kHz | 64x |
+| WavTokenizer (1Q) | 0.9 kbps | 24 kHz | ~427x |
 | Opus (传统) | 8-24 kbps | 4-16 kHz | - |

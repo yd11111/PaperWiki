@@ -69,6 +69,7 @@ w2v-BERT (Chung et al., ASRU 2021) 提供了 codebook collapse 的直接实验�
 | Random Codebooks | Giniès et al. (2024) | 引入随机性确保所有 codes 被周期性评估 | 简单有效的正则化 |
 | Robust Residual FSQ | arXiv 2508.15860 (2026) | 结合 FSQ 的结构性解决方案与 RVQ 残差结构 | 兼顾压缩效率和稳定性 |
 | Staged Training (AE→VQ→Vocoder) | [[论文笔记/MagiCodec|MagiCodec]] (Song et al., 2025) | 分三阶段训练: (1) AE 预训练 encoder+decoder; (2) 冻结 encoder,仅训 VQ+decoder; (3) 冻结 encoder+VQ,GAN 训 vocoder。切断 encoder drift 对 codebook 的影响 [§3.3] | 在 K=131072 超大码本下实现高利用率,重建+下游全面 SOTA |
+| Large VQ + k-means init + random awakening | [[论文笔记/WavTokenizer|WavTokenizer]] (Ji et al., ICLR 2025) | 单码本 K=4096,k-means 初始化 (200 centers) + EMA (0.99) + 未使用 codes 替换为当前 batch 的随机输入向量 [§3.2] | K=4096 利用率 100%,K=8192 利用率 68%,K=16384 利用率 27% [Table 5] |
 
 ### ERVQ 详解 (当前最佳实践)
 
