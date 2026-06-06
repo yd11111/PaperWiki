@@ -1,0 +1,42 @@
+kb_review:
+  paper: "USAT"
+  note_path: "论文笔记/USAT.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+
+  change_plan:
+    - target: "概念库/GradientReversalLayer.md"
+      action: "append"
+      content: "追加 key_papers + 在 TTS 应用节追加 USAT 的 GRL 用法描述"
+      risk: "low"
+      rationale: "USAT 明确使用 GRL (论文 §III-B2d, ref [46]),key_papers 当前 9/12 未达上限"
+
+    - target: "模型库/VITS.md"
+      action: "append"
+      content: "在相关工作节末尾追加 USAT 条目"
+      risk: "low"
+      rationale: "USAT 以 VITS 为 backbone,key_papers 14/12 超上限,改追加到正文"
+
+    - target: "概念库/SpeakerAdaptation.md"
+      action: "skip"
+      content: "已在演进线提及 USAT,key_papers 12/12 已达上限"
+      risk: "none"
+
+    - target: "概念库/VoiceCloningTaxonomy.md"
+      action: "skip"
+      content: "key_papers 12/12 已达上限,USAT 在概念层面已覆盖"
+      risk: "none"
+
+    - target: "概念库/VariationalAutoencoderforTTS.md"
+      action: "skip"
+      content: "key_papers 17/12 超上限,MAVAE 不是 VAE-TTS 领域的核心贡献"
+      risk: "none"
+
+    - target: "概念库/SpeakerEmbedding.md"
+      action: "skip"
+      content: "key_papers 64/12 严重超上限,USAT 的 speaker encoder 设计不是该领域核心贡献"
+      risk: "none"
+
+  conclusion: "pass"
+  summary: "2 个 append 操作均为低风险,不改变任何页面的 status。4 个 skip 操作因 key_papers 上限或内容已覆盖。无实质修改,无 factual error 风险。"
+  issues: []
