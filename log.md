@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[IndicVoices-R]] — 命中 6 页 (取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[SpeakerAdaptation]](pending-review), [[Emilia]](pending-review)
+- [ingest/deep] [[IndicVoices-R]] — 精读, kb_sources=6, 新建 1 (数据集/IndicVoices-R), 追加 0
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已超上限(60+)
+- [skip/update] [[SpeakerEmbedding]] — key_papers 已超上限(56)
+- [skip/update] [[TTSEvaluation]] — key_papers 已超上限(26)
+- [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12)
+- [lint/local] IndicVoices-R — 通过
 - [kb/search] [[SaSLaW]] — 命中 5 页 (取 Top 5): [[ProsodyModeling]]✓, [[NeuralVocoder]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[F0Modeling]](pending-review), [[StyleTransferinTTS]](pending-review)
 - [ingest/deep] [[SaSLaW]] — 精读, kb_sources=5, 新建 0, 追加 1 (GlobalStyleTokens 正文 EA-TTS 应用)
 - [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12), 改追加到正文
