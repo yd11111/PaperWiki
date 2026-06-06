@@ -48,6 +48,7 @@ Zhang et al. (2023) 综述将 diffusion TTS 分为两大框架 [§3, Table 1]:
 |------|----------|------|------|
 | ProDiff (Huang et al., 2022) | Generator-based 参数化 + 知识蒸馏 | 首个可交互的实时 diffusion TTS | [§3.2.2] |
 | DiffGAN-TTS (Liu et al., 2022) | 用预训练 GAN 作 generator + 浅 diffusion | **1 步生成**高质量音频 | [§3.2.2] |
+| [[论文笔记/CM-TTS|CM-TTS]] (Li et al., 2024) | Consistency training (非 distillation) + importance sampler | 无需对抗训练或 teacher model 的单步生成 | arXiv:2404.00569 |
 
 **ProDiff 核心** [§3.2.2]: 传统 gradient-based 参数化需数百步迭代,ProDiff 改用直接预测 clean data 的 generator-based 参数化,并通过知识蒸馏将 N 步 teacher 压缩为 N/2 步 student。
 
