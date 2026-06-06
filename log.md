@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[AutomatedTTSDataset]] — 命中 5 页 (取 Top 5): 无 confirmed | 过滤: [[PhonemeRepresentation]](pending-review), [[Whisper]](pending-review), [[TTSEvaluation]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[Emilia]](pending-review)
+- [ingest/deep] [[AutomatedTTSDataset]] — 精读, kb_sources=5, 新建 0, 追加 1 (Whisper key_papers)
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),且贡献边缘,跳过
+- [skip/update] [[TTSEvaluation]] [[Text-to-SpeechPipeline]] — 连接边缘,跳过
+- [lint/local] AutomatedTTSDataset — 通过
+- [review/auto] AutomatedTTSDataset — pass-with-fixes, 0 high, 1 medium, 3 low
 - [kb/search] [[FrameWiseBreath]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[VITS]](pending-review), [[TTSEvaluation]](pending-review), [[DurationPredictor]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
 - [ingest/deep] [[FrameWiseBreath]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling 副语言发声节)
 - [skip/update] [[ProsodyModeling]] — key_papers 已达上限(51),改追加到副语言发声段正文
