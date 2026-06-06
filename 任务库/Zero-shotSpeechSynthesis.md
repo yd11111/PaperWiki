@@ -67,6 +67,9 @@ updated: 2026-06-01
 | PilotTTS | SS test-zh | 0.862 | SEED-TTS-Eval | PilotTTS Table 1 |
 | PilotTTS | SS test-en | 0.815 | SEED-TTS-Eval | PilotTTS Table 1 |
 | PilotTTS | WER test-en | 1.50% | SEED-TTS-Eval | PilotTTS Table 1 |
+| JoyVoice (E2E) | CER test-zh | 0.97% | SEED-TTS-Eval | JoyVoice Table 3 |
+| JoyVoice (E2E) | WER test-en | 1.69% | SEED-TTS-Eval | JoyVoice Table 3 |
+| JoyVoice (E2E) | SS (WavLM) test-zh | 0.786 | SEED-TTS-Eval | JoyVoice Table 3 |
 
 ### 多语言零样本 (30 语言)
 
