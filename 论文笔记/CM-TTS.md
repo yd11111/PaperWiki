@@ -234,3 +234,19 @@ IS sampler 可迁移: 应用到 DiffGAN-TTS 后 WER 降低 13%,S.Cos 提升 [Tab
 2. **Padding-aware Loss**: 变长序列训练中,将 padding 部分纳入 loss 计算(引导模型学习静音生成)可能优于忽略 padding。
 3. **Consistency Training for Single-step Generation**: 虽然 flow matching 成为主流,但 consistency training 无需 teacher model 的特性在资源受限场景仍有价值。
 4. **IS 可迁移性验证方法**: 将新 training trick 迁移到已有 baseline (DiffGAN-TTS) 验证通用性的实验设计值得借鉴。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY 解释清晰,速查可借鉴具体 |
+> | 可信赖 | pass | 全部关键数字与 PDF 原表交叉验证通过 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率约 85% |
+> | 可定位 | pass | KB 谱系三路线定位准确,创新判断有对比基准 |
+> | 不污染 | pass | 无新建概念页,反向更新仅 append |
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/CM-TTS-review.yml`

@@ -1,0 +1,50 @@
+review:
+  paper: "CM-TTS"
+  note_path: "论文笔记/CM-TTS.md"
+  reviewer: "auto (inline, no subagent available)"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+  principles:
+    可复述:
+      score: 8
+      reason: "方法节清晰解释了 consistency training 的 WHY(避免对抗训练和 teacher 依赖),EMA 双网络的 WHY(稳定训练),weighted sampler 的 WHY(减少采样偏差)。速查卡片可借鉴字段具体(IS sampler 可迁移到 flow matching)。"
+    可信赖:
+      score: 9
+      reason: "所有关键数字逐一与 PDF 原表交叉验证通过(Table 1-6, 8)。指标名使用正确,方向标注无误。速查卡片指标字段含具体数字+数据集+出处。"
+    可区分:
+      score: 8
+      reason: "[论文原文] 和 [agent 解读] 标注在方法节和局限性节中使用,覆盖率约 85%。点评节的 agent 观点通过上下文可区分但未全部显式标注。"
+    可定位:
+      score: 9
+      reason: "KB 背景谱系定位具体(DiffGAN-TTS GAN 加速 / ProDiff 蒸馏加速 / CM-TTS consistency training 三条路线),创新判断有对比基准(vs DiffGAN-TTS 和 CoMoSpeech)。frontmatter 字段完整且语义正确。"
+    不污染:
+      score: 9
+      reason: "未新建概念页,反向更新仅涉及已有实体页的 append 操作(追加 key_papers),不会引入 factual error。"
+
+  issues:
+    - id: 1
+      type: "traceability-gap"
+      severity: "low"
+      location: "点评 > 不足"
+      detail: "点评节第 4 条关于 flow matching 成为主流的判断虽有 [agent 解读] 标注,但前 3 条不足分析也含有 agent 判断('不够充分'等)却未标注来源。"
+      suggestion: "点评节整体可视为 agent 分析,但为保持一致性,可在点评节开头统一标注或逐条标注。"
+    - id: 2
+      type: "template-compliance"
+      severity: "low"
+      location: "速查卡片 > 指标"
+      detail: "LJSpeech MOS 写为 3.84,实际 Table 8 值为 3.8353。虽然四舍五入正确,与 VCTK 的 3.96 (实际 3.9618) 精度不一致。"
+      suggestion: "统一使用两位小数或保留更多有效数字,保持一致精度。"
+
+  cross_verification:
+    - "Table 1 (VCTK): CM-TTS MOS 3.9618 → note 3.96 ✓; DiffGAN-TTS MOS 3.4476 → note 3.45 ✓; S.Cos 0.8396 ✓; melFID 7.58 ✓; WER 0.0688 ✓; RTF 0.02 ✓"
+    - "Table 2 (Ablation): w/o CM melFID 10.74, WER 0.0832 ✓; w/o IS melFID 10.08, WER 0.0872 ✓"
+    - "Table 3 (Sampler): IS MOS 3.9107 → 3.91 ✓; Uniform MOS 3.8133 → 3.81 ✓; Linear asc 3.3278 → 3.33 ✓; Linear desc 3.5676 → 3.57 ✓"
+    - "Table 4 (Padding): l1 MOS 3.9052 → 3.91 ✓; l1 w/o padding 3.8117 → 3.81 ✓"
+    - "Table 5 (Zero-shot VCTK): CM-TTS MOS 3.8715 → 3.87 ✓; DiffGAN MOS 3.4607 → 3.46 ✓; S.Cos 0.7108 ✓; mfccFID 157.91 ✓"
+    - "Table 6 (IS on DiffGAN): DiffGAN T=2 S.Cos 0.8333 ✓; with IS 0.8397 ✓; WER 0.0827→0.0720 ✓"
+    - "Table 8 (LJSpeech): CM-TTS MOS 3.8353 → 3.84 ✓; DiffGAN 3.7142 → 3.71 ✓; CoMoSpeech 3.5583 → 3.56 ✓; S.Cos 0.9009 ✓; melFID 2.97 ✓"
+
+  learning_signals: []
+
+  summary: "pass, 0 high / 0 medium / 2 low issues. 所有关键数字与 PDF 原文交叉验证通过。笔记结构完整,机制解释清晰,KB 定位准确。两个 low issue 不影响可信性或后续使用。"
