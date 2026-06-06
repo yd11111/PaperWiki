@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[SplitMeanFlow]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓ | 过滤: [[DiffusionModel]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[Diffusion-basedTTS]](pending-review), [[ScoreMatching]](pending-review), [[Non-autoregressiveTTS]](pending-review)
+- [ingest/deep] [[SplitMeanFlow]] — 精读, kb_sources=6, 新建 0, 追加 1 (ConditionalFlowMatching 追加演进 section, key_papers 已达上限)
+- [lint/local] SplitMeanFlow — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 375
 - [kb/search] [[GLM-4-Voice]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
 - [ingest/deep] [[GLM-4-Voice]] — 精读, kb_sources=3, 新建 0, 追加 4 (SpeechLanguageModel 追加演进, StreamingSpokenDialogue 追加表格行, Single-codebookvsMulti-codebook 追加代表工作, Speech-LLMIntegrationTaxonomy 追加 key_papers)
 - [skip/update] [[SpeechTokenizer]] — 实体页审阅结论 revise,跳过反向更新
