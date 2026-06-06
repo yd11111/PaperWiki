@@ -10,6 +10,7 @@
 - [skip/update] [[MelSpectrogram]] — key_papers 已达上限(21),跳过
 - [review/auto] [[GATrainingRawPhonetic]] — pass-with-fixes, 0 high, 2 medium (MOS 数值修正), 2 low
 - [lint/local] GATrainingRawPhonetic — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 348 — 建议抽空审核
 - [kb/search] [[LowResourceSSL-TTS]] — 命中 6 页(取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review), [[DurationPredictor]](pending-review), [[Text-to-SpeechPipeline]](pending-review)
 - [ingest/deep] [[LowResourceSSL-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (HuBERT key_papers)
 - [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(24),跳过
