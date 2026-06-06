@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[GLM-4-Voice]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓ | 过滤: [[Single-codebookvsMulti-codebook]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
+- [ingest/deep] [[GLM-4-Voice]] — 精读, kb_sources=3, 新建 0, 追加 4 (SpeechLanguageModel 追加演进, StreamingSpokenDialogue 追加表格行, Single-codebookvsMulti-codebook 追加代表工作, Speech-LLMIntegrationTaxonomy 追加 key_papers)
+- [skip/update] [[SpeechTokenizer]] — 实体页审阅结论 revise,跳过反向更新
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(60+),跳过追加
+- [lint/local] GLM-4-Voice — 通过
 - [kb/search] [[LSLM]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
 - [ingest/deep] [[LSLM]] — 精读, kb_sources=6, 新建 0, 追加 2 (Full-duplexSpokenDialogue wikilink更新+补充, Turn-takinginSpokenDialogue 追加 LSLM section)
 - [review/auto] [[LSLM]] — pass, 0 high 0 medium 3 low
