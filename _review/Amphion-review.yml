@@ -1,0 +1,40 @@
+paper: Amphion
+reviewer: auto
+date: 2026-06-06
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 7
+    reason: "作为 toolkit 论文,方法节清晰描述了四层架构和任务分类体系,包含 WHY 解释。但因论文本身是框架介绍而非方法论文,机制深度受限于原论文内容 -- 这是论文性质决定的,非笔记质量问题。"
+  trustworthy:
+    score: 9
+    reason: "所有数字型 claim 均有 [Table N] / [§X.X] 标注,覆盖率 ~95%。五组实验数据与 PDF 原文交叉验证全部正确。指标方向标注正确 (↓/↑)。VALL-E 实验条件差异已明确标注。"
+  distinguishable:
+    score: 8
+    reason: "所有因果解释标注了 [论文原文] 或 [agent 解读],覆盖率约 90%。agent 解读集中在任务分类体系和框架设计的 WHY 上,与论文原文陈述清晰区分。"
+  locatable:
+    score: 8
+    reason: "KB 背景节提供了具体谱系定位,对比 ESPnet/SpeechBrain/AudioCraft 定位清晰。创新判断有对比基准。frontmatter 字段完整。速查卡片 5 字段均有实质内容。"
+  non-polluting:
+    score: 9
+    reason: "反向更新计划全部为 append (追加 key_papers),无实质修改。不创建新实体页。概念挂接合理。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter models 字段"
+    detail: "models 字段列了 VITS, NaturalSpeech2, BigVGAN,但这些不是 Amphion 本文提出的模型或对比 baseline,而是框架集成的已有模型。对于 toolkit 论文,models 字段的语义需要适配。"
+    suggestion: "保留当前列法,因为 toolkit 论文的 models 字段语义为'本文涉及/集成的模型'而非'本文提出的模型'。这是一个合理的语义扩展,无需修改。"
+  - type: traceability-gap
+    severity: low
+    location: "点评 - 生态角色段"
+    detail: "'Amphion 团队后续发布了 Emilia 大规模数据集、MaskGCT 等重要工作' 缺少出处标注"
+    suggestion: "添加 [Emilia: He et al., SLT 2024] [MaskGCT: Wang et al., 2024] 或 wikilink"
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea - 第2条"
+    detail: "'三类任务统一视角'较为抽象,难以直接迁移到具体工作"
+    suggestion: "补充具体场景:例如'当构建支持多种音频任务的研究平台时,可按输入约束强度组织数据处理和条件注入逻辑'"
+
+learning_signals: []

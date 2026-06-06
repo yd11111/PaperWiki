@@ -171,3 +171,19 @@ Amphion 是 CUHK-SZ 吴志正团队发布的音频生成统一 toolkit。作为�
 2. **三类任务统一视角**: 按输入约束强度 (Text/Descriptive Text/Waveform) 统一不同音频生成任务的分类框架 [§2]
 3. **TF-Rep Discriminators**: 集成 Time-Frequency Representation Discriminators (MS-SB-CQTD, MSSTFTD) 提升 HiFi-GAN 频谱重建质量的实践 [§3.4, Table 8]
 4. **统一评估套件**: 将 F0 指标、频谱失真、可懂度、说话人相似度等异构指标整合在同一框架中的组织方式 [Table 1]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四层架构和任务分类体系描述清晰,含 WHY 解释; 技术深度受限于 toolkit 论文性质 |
+> | 可信赖 | pass | 所有数字均有出处标注且经 PDF 交叉验证正确; 指标方向无误 |
+> | 可区分 | pass | 论文原文/agent 解读标注覆盖率约 90%,区分清晰 |
+> | 可定位 | pass | KB 背景谱系定位具体,对比 ESPnet/SpeechBrain/AudioCraft; 速查卡片 5 字段完整 |
+> | 不污染 | pass | 仅 append 更新,不创建新页,概念挂接合理 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Amphion-review.yml`
