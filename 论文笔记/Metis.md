@@ -179,3 +179,19 @@ $$p_\theta(\mathbf{x}_0^a | \mathbf{x}_t^a, \mathbf{x}_{prompt}^a, \mathbf{x}^{s
 2. **条件类型区分注入**: Non-frame-level (concatenation) vs frame-level (interpolation + MLP adapter + addition),简洁有效的通用条件注入框架
 3. **VC 数据增强**: 用轻量 VC 模型 (OpenVoice) 对目标语音做 timbre perturbation 生成训练对,避免传统 information bottleneck/timbre perturbation 的复杂性 [§4.2.2]
 4. **多任务 fine-tuning 的任务组合**: 预训练模型同时 fine-tune 多任务后,可在推理时组合任务 (如 TTS + TSE = text-guided TSE),无需专门训练组合任务
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含清晰因果解释,关键设计选择有 WHY |
+> | 可信赖 | pass | 数字 claim 覆盖率高,指标名使用正确 |
+> | 可区分 | pass-with-fixes | 来源标注覆盖约 70%,部分因果解释未标来源 |
+> | 可定位 | pass | KB 背景谱系定位具体(MaskGCT 直接后继),创新判断有基准 |
+> | 不污染 | pass | concepts/models 语义正确,无 overclaim |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/Metis-review.yml`

@@ -1,0 +1,53 @@
+paper: "Metis"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    notes: "方法节包含清晰的因果解释(为什么选无条件预训练、为什么区分两种条件注入),关键设计选择均有 WHY 解释。速查卡片'可借鉴'具体可迁移。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    notes: "数字型 claim 覆盖率高,实验表格数据均标注 [Table N]。指标名称使用正确(WER/SIM/DNSMOS/NISQA)。速查卡片指标含具体数字+数据集+来源。"
+  distinguishable:
+    score: 7
+    verdict: pass-with-fixes
+    notes: "方法节有 [论文原文]/[agent 解读] 标注,但覆盖率约 70%,部分因果解释未标来源。核心问题节的'underexplored'等判断缺少限定词。"
+  locatable:
+    score: 9
+    verdict: pass
+    notes: "KB 背景节有具体谱系定位(MaskGCT直接后继、与SpeechFlow/VoiceBox对比),创新判断有明确对比基准。frontmatter 完整。速查卡片5字段均有实质内容。"
+  no_pollution:
+    score: 8
+    verdict: pass
+    notes: "concepts/models/tasks/datasets 语义正确。concepts 列本文核心概念,models 列参考/对比模型。无 overclaim。"
+
+issues:
+  - severity: medium
+    type: traceability-gap
+    location: "## 关键设计选择 > 1. 两种离散表征"
+    detail: "'w2v-BERT 2.0 结合了 contrastive learning 和 masked prediction' 的解释标注为 [agent 解读],但紧接的'580M 参数、4.5M 小时多语言预训练'是事实性 claim 未标出处"
+    suggestion: "标注 [w2v-BERT 2.0 model card] 或 [Seamless, 2023]"
+  - severity: medium
+    type: traceability-gap
+    location: "## 核心问题"
+    detail: "'现有语音生成领域缺乏真正意义上的 foundation model' 是论文核心 claim 但措辞偏绝对"
+    suggestion: "改为'论文指出现有语音生成领域尚缺乏有效的 foundation model [§1]'"
+  - severity: low
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "models 列了 SoundStorm/HuBERT/w2v-BERT/WavLM 均为参考/组件模型而非对比 baseline;本文直接对比的 baseline (MaskGCT/CosyVoice/UniAudio/VoiceBox) 未列入"
+    suggestion: "考虑将 MaskGCT 加入 models(最直接对比),但现有列法也合理因为这些是组件依赖"
+  - severity: low
+    type: weak-reusability
+    location: "## 可复用的 idea > 4"
+    detail: "'多任务 fine-tuning 的任务组合' 描述偏泛,具体如何组合任务的操作细节不足"
+    suggestion: "补充: 推理时同时提供 text 条件 (TTS) 和 mixed speech 条件 (TSE) 实现 text-guided TSE"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
