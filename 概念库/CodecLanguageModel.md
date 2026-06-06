@@ -68,6 +68,13 @@ Survey (Cui et al., 2024) 明确指出: "Some studies directly model the codec t
 - 170K 小时多语言训练,日语 SIM 最高(0.677, CI 不重叠 vs XTTS v2 0.622)
 - 详见 [[论文笔记/T5Gemma-TTS|T5Gemma-TTS]]
 
+### Small-E (Lemerle et al., 2024)
+- 另一个 **encoder-decoder** codec LM,较早探索 LCLM (线性复杂度循环架构: GLA/Mamba/RWKV) 替代 decoder-only transformer
+- 64M 参数,EnCodec 3kbps + codebook delay,Librilight 5K 小时训练
+- 提出 Position-Aware Cross-Attention (PACA) 解决 AR skip/repeat
+- 训练吞吐 +62% vs decoder-only (316 vs 195 kT/s),perplexity 也略优
+- 详见 [[论文笔记/Small-E|Small-E]]
+
 ## 关键技术挑战
 
 1. **多层 RVQ 建模**: codec tokens 有多个量化层 (通常 4-8 层), 如何高效建模?
