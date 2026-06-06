@@ -173,3 +173,19 @@ updated: 2026-06-06
 3. **NA-VMS 特征**: 归一化 VMS 均值作为区分不同类型声音事件的特征,可能对其他非语言声音(如 clicks、lip smacks)的检测也有效
 
 4. **TTS 中 breath mark 的训练策略**: 在训练文本中插入检测到的 breath marks 让 TTS 模型学习呼吸模式,比隐式学习更可控,且能为无呼吸说话人"转移"呼吸能力
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass (8) | 方法含因果解释,设计选择有 WHY,速查可借鉴具体 |
+> | 可信赖 | pass (9) | 49 处来源标注,关键数字经 PDF 交叉验证全部正确 |
+> | 可区分 | pass (8) | 方法节 5 处 [论文原文]/[agent 解读] 标注,无推断写成断言 |
+> | 可定位 | pass (8) | KB 谱系定位具体(ProsodyModeling/NVSpeech 对比),创新判断有基准 |
+> | 不污染 | pass (9) | 未新建概念页,反向更新范围合理,无 factual error |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/FrameWiseBreath-review.yml`

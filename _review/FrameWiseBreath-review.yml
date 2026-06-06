@@ -1,0 +1,52 @@
+review:
+  paper: "FrameWiseBreath"
+  date: "2026-06-06"
+  reviewer: "auto"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含充分的因果解释(WHY Conformer, WHY upsampling, WHY self-training),4 个关键设计选择均回答了'为什么选这个'。速查卡片'可借鉴'列出了具体可迁移策略(规则+自训练、下采样-上采样架构),不是泛泛'提出了新方法'。"
+  可信赖:
+    score: 9
+    rationale: "49 处来源标注,覆盖率高。关键数字经 PDF 交叉验证: IoU 0.836/0.710 [Table 3a] 正确, MOS1 3.37/3.35 [Table 4] 正确, MOS2 3.55/3.34 [Table 4] 正确, 规则标注 precision 0.982 [§2.1] 正确, 消融 IoU 数值 [Table 3b] 全部正确。指标名称使用正确(IoU/Precision/Recall/MOS)。"
+  可区分:
+    score: 8
+    rationale: "方法节中 5 处[论文原文]/[agent 解读]标注,关键设计选择的因果解释均有来源区分。未发现将推断写成断言的句子。"
+  可定位:
+    score: 8
+    rationale: "KB 背景谱系定位具体(ProsodyModeling 副语言发声 → NVSpeech 对比 → 本文互补关系),创新判断有对比基准(KB 无呼吸检测概念页)。frontmatter 字段齐全,concepts/models 语义正确。"
+  不污染:
+    score: 9
+    rationale: "未新建概念页,反向更新范围合理(追加 key_papers 到已有页)。内容无 factual error 或 overclaim。"
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: frontmatter datasets field
+    detail: "datasets 字段为空,但论文大量使用 LibriTTS-R 语料。虽然 数据集/ 下无 LibriTTS-R 页,frontmatter 仍可记录数据集名称供后续检索。"
+    suggestion: "可在 datasets 中添加 LibriTTS-R 字符串(不带 wikilink),待未来建页时自动匹配。非阻塞。"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: frontmatter venue field
+    detail: "venue 标注为 'Interspeech 2024',PDF 仅显示 arXiv:2402.00288v2。论文使用 Interspeech 模板格式(Index Terms)且时间线吻合,但严格来说应确认是否被正式接收。"
+    suggestion: "可标注为 'arXiv 2024 (Interspeech format)' 或确认后保留。非阻塞。"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: 审阅 section
+    detail: "笔记末尾缺少 [!review] callout(待本报告完成后追加)。"
+    suggestion: "追加 review callout。"
+
+learning_signals: []
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 0
+  low: 3
