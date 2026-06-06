@@ -1,0 +1,90 @@
+paper: "TextToSpeechSynthesis"
+reviewer: auto
+date: 2026-06-06
+checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 5
+    rationale: >
+      笔记对原文的技术内容做了合理的归纳(方法表格、TTS 流程分步),
+      但原文本身几乎没有机制解释可供提取。笔记诚实地标注了原文描述深度不足的问题,
+      并补充了 agent 解读(如 MAS 动机、FastSpeech duration extraction)。
+      由于原文内容极浅,笔记能提供的"可复述"价值也相应有限。
+  trustworthy:
+    score: 7
+    rationale: >
+      仅有的数字 claim(86.77% accuracy)标注了出处。
+      笔记明确声明"无自有实验",Results 部分表格标注了空值。
+      无方向性错误。整体可信度受限于原文而非笔记质量。
+  distinguishable:
+    score: 8
+    rationale: >
+      agent 解读和论文原文区分清晰,使用了 [论文原文] 和 [agent 解读] 标签。
+      方法节中的 WHY 解释来源标注覆盖率 100%。
+      无推断被写成断言的情况。
+  positionable:
+    score: 8
+    rationale: >
+      KB 背景节提供了具体的谱系定位,引用了 KB 中的概念页名和相关综述。
+      创新判断有对比基准("与知识库已有内容重叠度极高")。
+      frontmatter 字段完整且语义正确。
+  non_polluting:
+    score: 9
+    rationale: >
+      笔记不建议创建新概念页,不建议反向更新,明确指出对 KB 增量价值接近零。
+      concepts 引用的都是已有页面,models 为空(正确,本文不提出新模型)。
+
+conclusion: pass-with-fixes
+high_issues: 0
+medium_issues: 2
+low_issues: 2
+
+issues:
+  - id: 1
+    severity: medium
+    type: summary-without-mechanism
+    principle: reproducible
+    location: "## 方法: 它怎么 work > 整体架构"
+    detail: >
+      原文 §IV 的 TTS pipeline 描述被较忠实地转述,但对于一篇精读笔记,
+      可以更明确地指出原文描述停留在 SPSS 范式而非 neural TTS 范式。
+      当前笔记在 agent 解读中提到了这一点,但结构上应在架构描述的开头就做范式定位。
+    suggestion: >
+      在"整体架构"子节开头追加一句范式定位,如:
+      "[agent 解读] 以下描述对应经典 SPSS 流程(Stage 0-1),
+      与 Stage 3+ 的 neural TTS 有本质区别,详见 [[Text-to-SpeechPipeline]]。"
+
+  - id: 2
+    severity: medium
+    type: weak-reusability
+    principle: reproducible
+    location: "## 可复用的 idea"
+    detail: >
+      "可复用的 idea"节完全为空。虽然论文确实缺乏原创贡献,
+      但可以提取一些元层面的经验(如"综述的文献选择需平衡核心技术与应用场景")。
+    suggestion: >
+      保持"无可复用的技术 idea"判断,但可补充一句关于综述写作方法论的反面教训。
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    principle: positionable
+    location: frontmatter > venue
+    detail: >
+      venue 字段为空字符串。如果是 arXiv preprint 应标注 "arXiv"。
+    suggestion: >
+      venue 改为 "arXiv" 或查证是否有会议发表记录。
+
+  - id: 4
+    severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "## 速查 > 指标"
+    detail: >
+      速查卡片中 86.77% accuracy 标注了 [§III, Ref 1] 但未标注具体模型名(GRU)。
+      主文中有标注。不一致但不影响可信度。
+    suggestion: >
+      速查卡片中补充 "(GRU 情感分类)" 使自包含。
+
+learning_signals: []
