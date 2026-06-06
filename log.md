@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[BiSinger]] — 命中 6 页(取 Top 6): [[Cross-lingualVoiceCloning]]✓ | 过滤: [[SingingVoiceSynthesis]](pending-review), [[PhonemeRepresentation]](pending-review), [[MusicalScoreEncoder]](pending-review), [[SVSEvaluationMetrics]](pending-review), [[DiffusionModel]](pending-review)
+- [ingest/deep] [[BiSinger]] — 精读, kb_sources=6, 新建 0, 追加 1 (SingingVoiceSynthesis 正文追加)
+- [review/auto] [[BiSinger]] — pass-with-fixes, 0 high, 1 medium (venue 待确认), 2 low
+- [lint/local] BiSinger — 通过
 - [kb/search] [[EmotionAwareProsodic]] — 命中 2 页(取 Top 2): [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review)
 - [ingest/deep] [[EmotionAwareProsodic]] — 精读, kb_sources=2, 新建 0, 追加 2 (ProsodyModeling+EmotionControlinTTS 正文追加)
 - [skip/update] [[ProsodyModeling]] — key_papers 已达上限(51),改追加到正文
