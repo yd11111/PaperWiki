@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[DiffProsody]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[SpeakerEmbedding]]✓, [[ResidualVectorQuantization]]✓ | 过滤: [[DiffusionModel]](pending-review), [[Diffusion-basedTTS]](pending-review), [[GlobalStyleTokens]](pending-review)
+- [ingest/deep] [[DiffProsody]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling 生成模型代表工作追加)
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,改追加到正文
+- [review/auto] [[DiffProsody]] — pass, 0 high, 0 medium, 1 low
+- [lint/local] DiffProsody — 通过
 - [kb/search] [[ShanghainTTS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[VITS]](pending-review), [[PhonemeRepresentation]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[DurationPredictor]](pending-review)
 - [ingest/deep] [[ShanghainTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (VITS 相关工作追加, ProsodyModeling 显式韵律段追加, PhonemeRepresentation 吴语G2P段追加)
 - [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到正文
