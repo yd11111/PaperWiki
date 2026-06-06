@@ -8,6 +8,7 @@
 - [skip/update] [[StreamingSpokenDialogue]] — key_papers 已达上限(16),跳过追加
 - [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34),跳过追加
 - [lint/local] ELLSA — 通过
+- [alert/backlog] pending-review: 72, draft deep/repro: 0
 - [kb/search] [[Metis]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓ | 过滤: [[MaskedGenerativeModeling]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[CodecLanguageModel]](pending-review), [[Classifier-FreeGuidance]](pending-review)
 - [ingest/deep] [[Metis]] — 精读, kb_sources=6, 新建 0, 追加 1 (MaskedGenerativeModeling 追加 key_papers + 演进 section)
 - [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(24),跳过追加
