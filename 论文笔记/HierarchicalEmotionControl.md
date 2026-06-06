@@ -6,12 +6,12 @@ arxiv_id: "2412.12498"
 source: "Sources/HierarchicalEmotionControl.pdf"
 authors: [Sho Inoue, Kun Zhou, Shuai Wang, Haizhou Li]
 year: 2024
-venue: "IEEE TASLP (submitted)"
+venue: "arXiv"
 tags: [TTS, emotion, hierarchical, flow-matching, emotion-distribution, disentanglement, prosody, controllability, OpenSMILE, WavLM, GRL, fine-grained-control]
 concepts: ["[[EmotionControlinTTS]]", "[[ProsodyModeling]]", "[[ConditionalFlowMatching]]", "[[SpeakerEmbedding]]", "[[GlobalStyleTokens]]", "[[GradientReversalLayer]]"]
 models: []
 tasks: []
-datasets: []
+datasets: ["[[ESD]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -42,7 +42,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 基于 flow matching (MatchaTTS) 的情感 TTS 框架,通过 DNN-based 层级情感分布 (ED) 提取实现 phoneme/word/utterance 三级可量化情感强度控制
 > - **路线**: Reference Audio → Hierarchical ED Extractor (OpenSMILE+WavLM → Feature Extractor → SER/EPR Classifier → 三级 ED) + Speaker Encoder → Text Encoder + Duration Adaptor → Flow-Prediction Network → Mel → Vocos → Waveform
-> - **指标**: WER 8.75 (Whisper), MCD 5.31, SECS 0.871 (WavLM) / 0.511 (WeSpeaker), Emotion Score 0.369 (EPR); MUSHRA Naturalness 48.91, Emotion Similarity 59.41 (均在 ESD 英文子集)
+> - **指标**: WER 8.75 (Whisper) [Table I], MCD 5.31 [Table I], SECS 0.871 (WavLM) / 0.511 (WeSpeaker) [Table I], Emotion Score 0.369 (EPR) [Table III]; MUSHRA Naturalness 48.91, Emotion Similarity 59.41 [Table IV] (均在 ESD 英文子集)
 > - **可借鉴**: (1) EPR (Emotion Presence Recognizer) 的二分类设计比多分类 SER 更适合量化情感强度; (2) OpenSMILE (word/phoneme) + WavLM (utterance) 组合利用了两者在不同粒度的互补优势; (3) GRL 对抗训练有效解耦 speaker/gender 信息,提升情感可控性
 > - **局限**: 仅在 ESD (29h, 5 情感, 10 说话人, content-parallel) 上验证,未测试非平行/大规模/多语言数据; 未利用文本中的词汇情感信息 (lexical prosody); 未与 LLM-based TTS 比较; Naturalness MOS 仍低于 Ground Truth ~13 分
 
@@ -162,4 +162,16 @@ Backbone 采用 MatchaTTS [56],做了两处关键修改 [§IV-A]:
 
 ## 审阅
 
-*待审阅 subagent dispatch*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 因果解释充分,3 个具体可迁移 trick |
+> | 可信赖 | pass | 数字全部交叉验证准确,标注覆盖率高 |
+> | 可区分 | pass | [agent 解读]/[论文原文] 标注清晰,覆盖率 >=80% |
+> | 可定位 | pass | 精确定位 MsEmoTTS→本文→Multi-Step HED 演进线 |
+> | 不污染 | pass | concepts 挂接合理,反向更新均为追加操作 |
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/HierarchicalEmotionControl-review.yml`

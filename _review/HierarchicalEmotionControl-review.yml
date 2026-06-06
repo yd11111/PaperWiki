@@ -1,0 +1,46 @@
+reviewer: auto
+date: 2026-06-06
+note: "论文笔记/HierarchicalEmotionControl.md"
+conclusion: pass
+confidence: high
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节包含因果解释 (WHY EPR > SER, WHY 混合特征互补, WHY GRL 解耦),每个设计选择都有 ablation 对应。速查卡片可借鉴字段给出 3 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    reason: "所有数字经交叉验证均与原文一致。标注覆盖率高,实验表格中每个数字都有 [Table N] 出处。指标名称使用正确 (WER/MCD/SECS/MUSHRA)。无方向性错误。"
+  distinguishable:
+    score: 8
+    reason: "明确标注了 [agent 解读] (EPR 优于 SER 的原因) 和 [论文原文] (特征互补引用),来源标注覆盖率 >=80%。未发现推断写成断言的情况。"
+  positionable:
+    score: 9
+    reason: "KB 背景节精确定位到 MsEmoTTS (2022) → 本文 (2024) → Multi-Step HED (2025) 的演进线,与 EmoCtrl-TTS/EmoSteer-TTS 等路线做了对比。6 个 KB 实体页引用,含 3 个 confirmed 页。"
+  non-polluting:
+    score: 8
+    reason: "frontmatter concepts 合理挂接 6 个概念页。models 空合理 (本文无命名模型)。待反向更新的内容为追加操作,风险低。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    detail: "datasets 字段为空,但论文使用 ESD 数据集"
+    suggestion: "添加 ESD 引用到 datasets 字段"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 速查.指标
+    detail: "指标字段列出了具体数字和数据集名,但缺少 [Table N] 来源标注"
+    suggestion: "补充 [Table I, III, IV] 标注"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: frontmatter.venue
+    detail: "venue 写为 'IEEE TASLP (submitted)' 但从论文模板无法确认投稿期刊"
+    suggestion: "改为 'arXiv' 或标注不确定性"
+
+summary: "3 low issues, 0 medium, 0 high。笔记质量良好: 数字全部准确,因果解释充分,KB 定位精确,来源标注覆盖率高。"
+
+learning_signals: []
