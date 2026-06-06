@@ -171,6 +171,10 @@ NVSpeech (Liao et al., 2025) 将韵律建模扩展至副语言发声维度 — �
 
 de la Fuente & Jurafsky (2024) 通过 layer-wise probing 揭示了 SSL 语音模型 (wav2vec 2.0, HuBERT, WavLM) 对超音段特征 (stress, tone, accent) 的内在表征: 超音段表征在中间层 (8-9) 最强,且是抽象的语言学类别 (与 F0 追踪能力不直接相关)。语言特异性仅在 context network (Transformer 层) 出现,CNN 层对所有语言一致。ASR fine-tuning 增强词级韵律 (stress, tone) 但对短语级 accent 效果弱。详见 [[论文笔记/SSLSuprasegmentalAnalysis|SSL Suprasegmental Analysis]]。
 
+## 显式韵律概率化 (Stochastic Prosody Prediction)
+
+[[论文笔记/StochasticPitchPrediction|Ogun et al. (Interspeech 2023)]] 在 Glow-TTS 上同时概率化 duration 和 pitch 两个韵律维度: 复用 VITS 的 stochastic duration predictor + 新增 stochastic pitch predictor (同一 spline flow 架构)。在 zero-shot multi-speaker 场景下,stochastic duration 主要提升自然度 (N-MOS +0.18),stochastic pitch 主要提升多样性 (D-MOS 显著提升 + log-F0 分布更接近真实语音),两者互补。这一工作是 FastSpeech 2 显式确定性韵律预测 → VITS 概率化 duration → 概率化 pitch 演进链上的中间节点。
+
 ## 韵律多样性度量
 
 Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distance),首个与人类韵律多样性判断高相关 (r=0.77) 的客观指标,基于 HuBERT/WavLM 中间层 semantic tokens 的加权编辑距离。配套发布 ProsodyEval 数据集 (1000 样本 + 2000 人类评分)。关键发现: (1) AR 系统韵律多样性优于 flow matching NAR 但不优于 masked generative NAR (MaskGCT); (2) flow matching 系统的隐式对齐导致 mean-mode collapse,韵律单调; (3) DPO 后训练提升可懂度但削弱韵律多样性 (CosyVoice 2: -18.8%); (4) 时长是韵律多样性的关键维度,duration perturbation 可显著提升 NAR 系统韵律多样性 (+26-29%)。这一工作将 SSL 中间层韵律编码能力 (见上节 de la Fuente & Jurafsky 发现) 从分析工具推进到可操作的评估指标。详见 [[论文笔记/ProsodyEval|ProsodyEval]]。

@@ -86,6 +86,7 @@ Encoder Output → Duration Predictor → Length Regulator → Pitch Predictor �
 - **与 Glow-TTS 对比**: Glow-TTS 用 MAS 估计对齐后训练确定性 duration predictor (MSE loss),VITS 则学习 duration 分布的变分下界
 - **实验验证**: stochastic vs deterministic (DDP) 版本 MOS 4.43 vs 4.39 [Table 1],stochastic 产生更多样化的 F0 和时长分布 [Fig 2, Fig 3]
 - 详见 [[论文笔记/VITS|VITS]]
+- [[论文笔记/StochasticPitchPrediction|Ogun et al. (Interspeech 2023)]]: 将 SDP 的架构(variational data augmentation + spline flows)从 duration 维度平行迁移到 pitch 维度,构建 stochastic pitch predictor; 在 Glow-TTS + zero-shot multi-speaker 场景下验证了该迁移的有效性(D-MOS 显著提升),证明 SDP 的概率建模范式可泛化到其他韵律维度
 
 ## 在 SVS 中的时长预测
 
