@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[KazEmoTTS]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[Diffusion-basedTTS]](pending-review), [[TTSEvaluation]](pending-review), [[GlobalStyleTokens]](pending-review), [[MelSpectrogram]](pending-review)
+- [ingest/deep] [[KazEmoTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (EmotionControlinTTS 数据集表)
+- [skip/update] [[Diffusion-basedTTS]] [[NeuralVocoder]] [[TTSEvaluation]] [[MelSpectrogram]] [[GlobalStyleTokens]] — key_papers 超限且论文无方法贡献,跳过
+- [lint/local] KazEmoTTS — 通过
+- [review/auto] KazEmoTTS — pass-with-fixes, 0 high, 0 medium, 3 low
 - [kb/search] [[CM-TTS]] — 命中 6 页 (取 Top 6): [[NeuralVocoder]]✓ | 过滤: [[Diffusion-basedTTS]](pending-review), [[DiffusionModel]](pending-review), [[ScoreMatching]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[CM-TTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (Diffusion-basedTTS 高效加速表)
 - [skip/update] [[DiffusionModel]] [[ScoreMatching]] [[Non-autoregressiveTTS]] [[NeuralVocoder]] [[MelSpectrogram]] — key_papers 超限(ScoreMatching 除外但论文对 score matching 无新贡献),跳过
