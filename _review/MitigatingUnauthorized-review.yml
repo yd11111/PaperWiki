@@ -1,0 +1,49 @@
+paper: "MitigatingUnauthorized"
+reviewer: auto
+date: 2026-06-06
+checklist_version: v1.1
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节包含充分的 WHY 解释: pivotal objective 选择的三个理由、bi-level 简化的前提条件、position-fixed perturbation 利用 WGT 的逻辑、speaker selection 的最强攻击者假设。每个关键设计选择都回答了'为什么选这个'。速查卡片可借鉴字段具体(pivotal objective selection + position-fixed perturbation)。"
+  trustworthy:
+    score: 7
+    rationale: "数字型 claim 标注覆盖率 ~90%, 指标名使用正确(WER/MCD/MOS/SNR/PESQ 无混淆)。速查指标字段含具体数字+数据集名+来源。发现 1 个 medium 问题: 训练策略中 surrogate model 描述有误(已修正)。"
+  distinguishable:
+    score: 8
+    rationale: "因果解释一致标注了 [论文原文] / [agent 解读], 覆盖率 ~95%。4 处 agent 解读均有'agent 解读'标签且不与论文断言混淆。未发现把推断写成断言的句子。"
+  locatable:
+    score: 8
+    rationale: "KB 背景含与 SafeSpeech 的详细对比定位(同作者前续关系、技术差异),与 PosCUDA 的时间线关系(已修正'首次'overclaim)。frontmatter 字段存在且语义正确(models 列 VITS 作为本文使用的模型)。datasets 字段已补充。"
+  non_polluting:
+    score: 9
+    rationale: "无新建实体页需求。反向更新仅追加 key_papers 到已有概念页,属于纯 append 操作。概念挂接合理(Anti-spoofing, SpeakerVerification, MelSpectrogram, VoiceCloningTaxonomy, VAE-TTS, VITS)。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "训练策略 section"
+    detail: "原文: '使用 VITS 作为代理模型生成扰动,测试迁移到 MB-iSTFT-VITS 和 GlowTTS'。实际: Table 1 主实验中每个模型使用自身生成扰动 (self-protection, §5.2); Table 3 迁移实验使用 MB-iSTFT-VITS 作为代理 (§5.3)。"
+    suggestion: "已修正为准确描述两组实验的代理模型设置。"
+    fixed: true
+
+  - id: 2
+    severity: low
+    type: overclaim
+    location: "点评 - KB 语境下的定位"
+    detail: "原文称'首次将 unlearnable examples 从图像分类迁移到 TTS 生成任务'。但 PosCUDA (Gokul & Dubnov, 2024, arxiv:2401.02135) 也做了类似迁移且发表时间更早 (Jan 2024 vs Oct 2024)。论文自身也引用并参考了 PosCUDA。"
+    suggestion: "已修正为'与 PosCUDA 近似同期'。"
+    fixed: true
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets field"
+    detail: "datasets 字段为空,但论文核心使用 LibriTTS 和 CMU ARCTIC 两个数据集。"
+    suggestion: "已补充 datasets: ['LibriTTS', 'CMU ARCTIC']"
+    fixed: true
+
+learning_signals: []

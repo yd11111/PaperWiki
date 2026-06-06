@@ -11,7 +11,7 @@ tags: [voice-protection, adversarial-perturbation, unlearnable-examples, data-po
 concepts: ["[[Anti-spoofingandDeepfakeDetection]]", "[[SpeakerVerification]]", "[[MelSpectrogram]]", "[[VoiceCloningTaxonomy]]", "[[VariationalAutoencoderforTTS]]"]
 models: ["[[VITS]]"]
 tasks: []
-datasets: []
+datasets: ["LibriTTS", "CMU ARCTIC"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
@@ -104,7 +104,7 @@ s.t. H(x + delta) ≈ H(x) and ||delta||_p <= epsilon
 
 ### 训练策略
 
-**代理模型**: 使用 VITS 作为代理模型生成扰动,测试迁移到 MB-iSTFT-VITS 和 GlowTTS(+WaveGlow/HiFiGAN 两种 vocoder) [§5.1]。
+**代理模型**: Table 1 的主实验中,每个模型使用自身作为代理模型生成扰动(self-protection) [§5.2]。Table 3 的迁移实验中,使用 MB-iSTFT-VITS 作为代理模型,测试扰动迁移到 VITS 和 GlowTTS(+WaveGlow/HiFiGAN 两种 vocoder)的效果 [§5.3]。
 
 **数据集**: LibriTTS (train-clean-100, 50 speakers) 和 CMU ARCTIC (18 speakers, 每人 300 样本),80/20 train/eval split [§5.1]。
 
@@ -158,10 +158,26 @@ s.t. H(x + delta) ≈ H(x) and ||delta||_p <= epsilon
 - 虽然实验在 MB-iSTFT-VITS→VITS 迁移时效果好,但这两个模型架构非常接近(都是 VAE+GAN 端到端),不能充分证明对架构差异大的模型(如 diffusion TTS, codec LM)的迁移性
 
 **在 KB 语境下的定位**:
-从 [[Anti-spoofingandDeepfakeDetection]] 的视角看,POP 是 proactive voice protection 方向的早期工作,提出了 pivotal objective selection 的核心思想,但覆盖面和鲁棒性不如后续的 [[论文笔记/SafeSpeech|SafeSpeech]]。POP 的主要历史价值在于: (a) 首次将 unlearnable examples 从图像分类迁移到 TTS 生成任务,并解决了多模态输入和多目标 loss 的技术挑战; (b) 为 SafeSpeech 的 SPEC 和感知优化提供了技术基础。对比 KB 中已有的安全方向工作,POP/SafeSpeech 走"数据端防护"路线,与 SpeakerIdentityUnlearning (模型端遗忘)和 TraceableTTS (事后溯源)互补。
+从 [[Anti-spoofingandDeepfakeDetection]] 的视角看,POP 是 proactive voice protection 方向的早期工作,提出了 pivotal objective selection 的核心思想,但覆盖面和鲁棒性不如后续的 [[论文笔记/SafeSpeech|SafeSpeech]]。POP 的主要历史价值在于: (a) 将 unlearnable examples 从图像分类迁移到 TTS 生成任务(与 PosCUDA [15] 近似同期),并通过 pivotal objective 策略解决了多模态输入和多目标 loss 的技术挑战; (b) 为 SafeSpeech 的 SPEC 和感知优化提供了技术基础。对比 KB 中已有的安全方向工作,POP/SafeSpeech 走"数据端防护"路线,与 SpeakerIdentityUnlearning (模型端遗忘)和 TraceableTTS (事后溯源)互补。
 
 ## 可复用的 idea
 
 1. **Pivotal objective selection**: 面对多目标 TTS loss,逐一分析每个 loss 的三个属性(是否可被扰动影响、是否跨模型通用、收敛速度),选出最优单一目标。这个分析框架可迁移到任何需要跨模型 transferable perturbation 的场景 [§4.4, Fig 3]
 2. **Position-fixed perturbation**: 利用 TTS 模型 WGT 训练策略的特性,只在固定位置生成扰动,大幅降低计算成本(1.855s vs 7.128s)和提高不可感知性(SNR 17.9dB vs 11.0dB) [§4.4, Table 4]
 3. **Error-minimizing for generative models**: 将 unlearnable examples 从分类任务迁移到生成任务时,不需要 bi-level 优化,固定模型参数只优化扰动即可,因为生成模型学的是输入分布而不是决策边界 [§4.3]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含充分 WHY 解释(pivotal objective 三理由、bi-level 简化理由、position-fixed 理由),设计选择清晰 |
+> | 可信赖 | pass-with-fixes | 1 个 medium: 训练策略 surrogate model 描述有误(已修正); 数字 claim 标注覆盖率 ~90% |
+> | 可区分 | pass | 因果解释均标注了 [论文原文] / [agent 解读]; 来源标注覆盖率 ≥ 90% |
+> | 可定位 | pass | KB 背景含与 SafeSpeech 的对比定位; 与 PosCUDA 的时间线关系已修正 |
+> | 不污染 | pass | 无新建实体页需求; 反向更新为纯 append(key_papers 追加) |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/MitigatingUnauthorized-review.yml`
