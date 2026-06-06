@@ -173,4 +173,16 @@ SALMONN 由四个组件构成 [Fig 1]:
 
 ## 审阅
 
-*(待独立 reviewer dispatch)*
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节因果解释充分,三个设计选择均回答 WHY,可借鉴项具体可迁移 |
+> | 可信赖 | pass | 数字标注覆盖率>90%,指标名称正确,方向性无误 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率接近 100%,推断明确标记 |
+> | 可定位 | pass | KB 背景谱系清晰,历史定位准确 (2023.10 Audio-LLM 早期) |
+> | 不污染 | pass | 反向更新为 append-only,内容 factually accurate |
+> 
+> Issues: 0 (high: 0, medium: 0, low: 0)
+> 详见 `_review/SALMONN-review.yml`

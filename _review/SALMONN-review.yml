@@ -1,0 +1,34 @@
+review:
+  paper: "SALMONN"
+  note_path: "论文笔记/SALMONN.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含充分的因果解释,三个关键设计选择都回答了 WHY。Window-level Q-Former 的折中分析、dual encoder 的务实考量、activation tuning 的自监督原理都有深入解释。速查卡片可借鉴项具体可迁移。"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 标注覆盖率高(>90%),指标名称使用正确,方向性无误。实验表格包含完整的 baseline 和数据集信息。速查指标含具体数字+数据集+出处。"
+  可区分:
+    score: 9
+    rationale: "因果解释全面标注了 [论文原文] vs [agent 解读],覆盖率接近 100%。推断性分析如'N=1 可能是为了控制 token 数'和'12 样本足以打破偏倚'明确标记为 agent 解读。无强断言缺乏支撑的情况。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节对 SALMONN 在 latent-representation-based 路线中的定位清晰,与 audio-token-based 路线的对比明确。创新判断有三个具体对比基准。历史定位部分准确地将 SALMONN 放在 2023.10 的 Audio-LLM 早期爆发节点。"
+  不污染:
+    score: 9
+    rationale: "不涉及新概念页创建。反向更新为 append-only(key_papers 追加),内容 factually accurate,无 overclaim。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0
