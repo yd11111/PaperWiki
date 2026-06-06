@@ -1,0 +1,72 @@
+paper: "JoyVoice"
+file: "论文笔记/JoyVoice.md"
+date: "2026-06-06"
+conclusion: pass
+
+# 第一层: 原则判断
+principles:
+  reproducible:     # 可复述
+    score: 9
+    judgment: "方法节对每个关键设计(E2E vs cascaded、离散+连续双信号、全局因果DiT、无分割序列建模、随机chunk FM、APO)都给出了因果解释,读完笔记可以向同事清楚解释这篇论文为什么work。"
+  trustworthy:      # 可信赖
+    score: 8
+    judgment: "所有关键数字经PDF交叉验证均正确;指标方向无误;速查卡片指标字段含具体数字+数据集+来源。有一处表格行的来源标注混用了两张Table,但数字本身准确。"
+  distinguishable:  # 可区分
+    score: 9
+    judgment: "方法节开头有来源标注声明banner,8处[论文原文]和5处[agent 解读]标注清晰,WHY解释来源标注覆盖率接近100%。点评/疑问节天然为agent视角,边界清楚。"
+  positioned:       # 可定位
+    score: 9
+    judgment: "KB背景节精准定位JoyVoice在LLM-based TTS one-stage E2E分支的位置,追溯DiTAR前驱、对比VibeVoice/CosyVoice 3竞品,创新判断有具体对比基准。"
+  non_polluting:    # 不污染
+    score: 9
+    judgment: "9个概念链接均准确相关;E2E双信号设计、MM-Tokenizer与CosyVoice 3对比、随机chunk FM等信息流入KB会提升相关概念页质量;未发现factual error或overclaim。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 35
+    annotated: 32
+    rate: "91%"
+  metric_names_correct: true
+  source_labels_present: true  # [论文原文]/[agent 解读]
+  source_labels_coverage: "100%"  # 方法节10个WHY解释全部标注
+  speed_card_complete: true
+  frontmatter_complete: true
+  frontmatter_semantically_correct: true  # models列baseline+base model,无successor-as-model
+  concept_admission_ok: true  # 9个概念均为已有实体页
+
+# 发现的问题
+issues:
+  - severity: medium
+    type: traceability-gap
+    principle: 可信赖
+    location: "实验 > 主结果表第6行 'CER 12.5Hz E2E test-zh'"
+    detail: "该行 baseline 数字 1.57% 来自 Table 2(MM-Tokenizer Cascade 12.5Hz),但来源标注为 [Table 3]。Table 3 中 JoyVoice-12.5Hz 的 0.95% 是正确的,但 Cascade baseline 在 Table 3 中并无 12.5Hz 行。"
+    suggestion: "将来源标注改为 [Table 3, Table 2],或拆分为两个独立数据点各自标注来源。"
+
+  - severity: low
+    type: traceability-gap
+    principle: 可区分
+    location: "实验 > 主结果表第7行 'CER+RL test-zh'"
+    detail: "行标题 'CER+RL' 未标明是 CascadeRL 而非 E2E+RL。文本段落已正确澄清为 'JoyVoice-CascadeRL',但仅看表格会产生歧义(论文未报告 E2E+RL 结果)。"
+    suggestion: "将行标题改为 'CER (CascadeRL) test-zh' 以消除歧义。"
+
+  - severity: low
+    type: template-compliance
+    principle: 可复述
+    location: "速查卡片 > 一句话 / 全文"
+    detail: "论文 Abstract 和 §4.1 提及支持四语(中文、英文、日文、韩文),笔记仅讨论中英评估结果,多语种支持范围未在任何位置提及。"
+    suggestion: "在速查卡片一句话中补充'支持中英日韩多语种',或在局限性中补充语种覆盖信息。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "所有关键数字经PDF交叉验证均正确,概念链接准确,因果解释来源清晰。唯一的medium issue是表格来源标注混用,不影响实质内容。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: ""
+  checklist_upgrade_suggestion: "可考虑增加检查项: 实验结果表每行的来源标注是否精确到单一Table(而非混用多Table数据但只标一个)"

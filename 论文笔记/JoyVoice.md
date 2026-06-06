@@ -188,3 +188,13 @@ JoyVoice 采用 E2E-Transformer-DiT 架构 [Fig 2],由三大模块组成:
 4. **CER-based APO preference pair 构建**: 简单直接 — CER=0 为 chosen,CER>0 为 rejected。无需复杂的 reward model,适用于任何可用 ASR 评估的 TTS 系统。
 
 5. **E2E 对 tokenizer 压缩的鲁棒性**: 论文证明 E2E 联合训练可在不牺牲性能的前提下将 token rate 从 25Hz 降到 12.5Hz,对长文本/长对话场景的序列长度减半意义重大。
+
+> [!review] 自动审阅 (2026-06-06)
+> **结论:** pass
+> **原则:** 复述 9 | 信赖 8 | 区分 9 | 定位 9 | 污染 9
+> **Claim 标注率:** 91% (32/35)
+> **问题:** 0 high, 1 medium, 2 low
+> - ⚠️ [traceability-gap] 实验表第6行: baseline 1.57% 来自 Table 2 但标注为 [Table 3]
+> - 💡 [traceability-gap] 实验表第7行: "CER+RL" 行标题未标明是 CascadeRL
+> - 💡 [template-compliance] 未提及论文的四语种支持(日文、韩文)
+> **反向更新:** ✅ 安全
