@@ -55,6 +55,8 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 - 代表: 条件神经网络 + 多级 embedding
 - 字典知识注入: [[论文笔记/Dict-TTS|Dict-TTS]] (Jiang et al., NeurIPS 2022) 提出 Semantics-to-Pronunciation Attention (S2PA),用在线字典作为结构化先验知识,通过注意力匹配输入语义与字典条目实现无监督多音字消歧。Biaobei PER-S 1.08% (接近 pypinyin 1.14%),预训练后 0.79% [Table 1, 2]。核心 insight: 将字符表示保持在语义空间(而非被 mel loss 拉向声学空间),由 Gumbel-Softmax 实现可微的离散发音选择。跨中/日/粤三语验证,但日语效果受限于 kanji 音读/训读的经验性规则
 
+**吴语 (上海话) G2P**: [[论文笔记/ShanghainTTS|ShanghainTTS]] (Chen, 2023) 构建了上海话的 G2P 流水线: 词典查找 (125K 词条吴语词典, Chen 2022) → Yahwe 吴语拼音 → Qieyun 声调标注 → 宽式 IPA。由于词典仅含繁体字,需先经 OpenCC 转繁体。用记号简化减少歧义双字母组合 (⟨c⟩ for /tɕ/, ⟨ɟ⟩ for /dʑ/)。这是低资源方言 G2P 的典型案例 --- 依赖手工词典而非统计模型,覆盖率受词典规模限制 (仅 51K/125K 词条有拼音标注)
+
 ## 在不同 TTS 范式中的角色
 
 ### SPSS 时代

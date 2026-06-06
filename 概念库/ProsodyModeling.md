@@ -49,6 +49,8 @@ Survey 将语音合成所需的信息分为四大类:
 
 **代表工作**: FastSpeech 2, FastPitch
 
+**声调变调的韵律标注 (Tone Sandhi Annotation)**: [[论文笔记/ShanghainTTS|ShanghainTTS]] (Chen, 2023) 将显式韵律标注从传统的静态停顿 (pause/break) 扩展到动态声调现象 --- 用词分割结果作为上海话左主导变调域 (LD domain) 边界的代理标注。核心 insight: 词的左边界高度相关于变调域边界 (Roberts 2020, Kuang & Tian 2019),因此分词可替代专用韵律标注模型。在 VITS 上训练,MOS 4.14 与 Apple VoiceOver 无显著差异,但多音节变调域处理显著更好 [ShanghainTTS Table 1, 3]。这是 prosody tags 从标记停顿到标记声调域的扩展。
+
 ### 2. 隐式韵律信息 (Implicit)
 
 从数据中自动学习不可直接标注的韵律变化:
