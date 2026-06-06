@@ -181,3 +181,19 @@ t = τ^p / (τ^p + s(1-τ^p)), 其中 p=2, s=3
 2. **PolyShift 推理时间表**: t = τ^p / (τ^p + s(1-τ^p)) 比 Sway Sampling 更灵活,且可通过 (p, s) 二维调参适配不同任务。可直接插入任何 flow matching 系统。
 3. **x-prediction + frequency-domain auxiliary loss 组合**: x-prediction 使 clean 预测可用于任意域的辅助 loss (mel, STFT, 感知 loss 等),而 v-prediction 无此便利。这个组合范式可推广到其他 raw signal generation 任务。
 4. **波形 patchification 策略**: 简单的 non-overlapping 1D patchification (F=160 @ 16kHz = 10ms) 将序列压缩 160 倍,使 DiT 可以处理原始波形。可作为所有波形级 Transformer 模型的 baseline 方案。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 4 个设计选择均有因果解释 + 消融支持,速查可借鉴字段具体可操作 |
+> | 可信赖 | pass | 数字标注覆盖率 >90%, Table 1/3/4/6 交叉验证全部正确 |
+> | 可区分 | pass | 方法节 [论文原文]/[agent 解读] 标注覆盖充分,无未标注推断 |
+> | 可定位 | pass | KB 背景谱系定位具体 (mel/latent/waveform 三路线对比),创新判断有基准 |
+> | 不污染 | pass | 仅追加 key_papers,无实质修改,污染风险低 |
+> 
+> Issues: 0 (high: 0, medium: 0, low: 0)
+> 详见 `_review/WavTTS-review.yml`

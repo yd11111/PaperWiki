@@ -1,0 +1,60 @@
+review:
+  paper: "WavTTS"
+  note_path: "论文笔记/WavTTS.md"
+  reviewer: "auto"
+  date: "2026-06-06"
+  conclusion: "pass"
+
+  principles:
+    reproducible:
+      score: 9
+      reasoning: "方法节包含充分的因果解释(WHY): x-prediction 的动机(噪声分量不稳定优化)、variance alignment 的信号论分析(SNR 下移 20dB)、noise-shifted scheduling 的 loss reweighting 视角。每个设计选择都回答了'为什么选这个',有清晰的消融支持。速查卡片的可借鉴字段具体可操作。"
+    trustworthy:
+      score: 9
+      reasoning: "数字型 claim 标注覆盖率高(>90%): 所有实验数字均标注 [Table N] 或 [Fig N] 或 [§X.X]。指标名无混淆。速查卡片指标字段含具体数字+数据集+来源。交叉验证 Table 1/3/4/6 数字全部正确。"
+    distinguishable:
+      score: 9
+      reasoning: "因果解释来源标注覆盖率高: 方法节中 4 个设计选择均明确标注了 [论文原文] 和 [agent 解读],无未标注的推断。不存在把推测写成断言的情况。"
+    locatable:
+      score: 9
+      reasoning: "KB 背景节有具体谱系定位,明确对比了 mel 路线(F5-TTS)、VAE latent 路线(LongCat-AudioDiT)和波形路线(WavTTS)。创新判断有对比基准(E3-TTS 此前未达 SOTA)。frontmatter 字段齐全。"
+    no_pollution:
+      score: 8
+      reasoning: "反向更新计划为追加 key_papers 到已有概念页,不涉及实质修改,污染风险低。无新建概念页需求(WavTTS 的技术贡献是已有概念的组合应用)。"
+
+  issues: []
+
+  summary:
+    total: 0
+    high: 0
+    medium: 0
+    low: 0
+
+  checklist:
+    reproducible:
+      mechanism_not_summary: pass
+      design_choices_why: pass
+      reusable_concrete: pass
+    trustworthy:
+      claim_sourced: pass
+      metric_names_correct: pass
+      quickcard_metrics: pass
+      no_direction_error: pass
+    distinguishable:
+      source_annotation: pass
+      source_coverage: pass
+      no_assertion_without_evidence: pass
+      strong_claims_supported: pass
+    locatable:
+      kb_lineage_specific: pass
+      innovation_has_baseline: pass
+      fields_present: pass
+      fields_semantically_correct: pass
+      quickcard_complete: pass
+    no_pollution:
+      new_concept_admission: n/a
+      dedup_check: n/a
+      no_factual_error_in_update: pass
+      update_classification_correct: pass
+
+  learning_signals: []
