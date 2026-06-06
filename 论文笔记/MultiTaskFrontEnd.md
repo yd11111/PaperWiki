@@ -6,7 +6,7 @@ arxiv_id: "2401.06321"
 source: "Sources/MultiTaskFrontEnd.pdf"
 authors: [Wonjune Kang, Yun Wang, Shun Zhang, Arthur Hinsvark, Qing He]
 year: 2024
-venue: "ICASSP 2024"
+venue: "arXiv preprint"
 tags: [TTS, front-end, text-normalization, POS-tagging, homograph-disambiguation, multi-task-learning, ALBERT]
 concepts: ["[[Text-to-SpeechPipeline]]", "[[PhonemeRepresentation]]"]
 models: []
@@ -140,3 +140,19 @@ Llama 2 HD 数据集是一个有意义的副产品: 用 LLM 生成 balanced trai
 3. **Semiotic classification 防止不可恢复错误**: TN 用分类(预定义规则集)替代 seq2seq(自由生成),牺牲灵活性换取安全性。适用于对错误零容忍的产品级部署。
 
 4. **Cross-attention 对齐不等长序列**: 用 cross-attention 将 ALBERT token 序列(长度 m)映射到 TN token 序列(长度 n)的空间,实现不同 tokenizer 产出的融合。这是一种通用的异构 tokenization 融合策略。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含因果解释,设计选择有 WHY,速查可借鉴具体 |
+> | 可信赖 | pass | 所有数字经 PDF 交叉验证正确,指标名无误 |
+> | 可区分 | pass | 论文原文/agent解读标注覆盖率>80% |
+> | 可定位 | pass-with-fixes | KB 背景谱系清晰; venue 原为 ICASSP 2024(推测,已修正为 arXiv preprint) |
+> | 不污染 | pass | concepts 挂接合理,无过度创建 |
+> 
+> Issues: 1 (high: 0, medium: 1, low: 0)
+> 详见 `_review/MultiTaskFrontEnd-review.yml`

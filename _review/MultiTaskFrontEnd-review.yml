@@ -1,0 +1,39 @@
+paper: "MultiTaskFrontEnd"
+reviewer: agent
+date: "2026-06-06"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    notes: "方法节包含清晰的因果解释: semiotic classification vs seq2seq 的安全性权衡, ALBERT 分层利用的实验依据, cross-attention 保持 TN token 长度的设计动机。速查卡片'可借鉴'具体可迁移。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    notes: "所有关键数字(Table 1, Table 2)经 PDF 原文交叉验证全部正确。指标名使用准确(line accuracy, WER, micro/macro accuracy)。计算推导正确(HD +6.18%, Llama 2 +9.02%)。"
+  distinguishable:
+    score: 8
+    verdict: pass
+    notes: "[论文原文] 和 [agent 解读] 标注覆盖率 >80%。局限性节中 agent 解读的局限(仅 American English, 缺乏端到端对比, 数据集偏差)与论文自述的局限(ALBERT 深层贡献不确定)区分明确。"
+  positionable:
+    score: 7
+    verdict: pass-with-fixes
+    notes: "KB 背景提供了 TTS 前端的谱系定位,包含已有认知和创新判断。但 venue 标注为 ICASSP 2024 未在原文中确认,仅为推测。"
+  no_pollution:
+    score: 8
+    verdict: pass
+    notes: "concepts 挂接合理(Text-to-SpeechPipeline, PhonemeRepresentation)。models/tasks/datasets 为空合理(本文无命名模型,无 baseline TTS 模型对比)。反向更新计划为追加,不涉及实质修改。"
+
+issues:
+  - severity: medium
+    type: template-compliance
+    principle: positionable
+    location: "frontmatter venue 字段"
+    detail: "venue 标注为 'ICASSP 2024',但论文原文仅显示 arXiv:2401.06321v1 标识符,未明确声明发表会议。虽然论文格式(IEEE 双栏, 5 页)与 ICASSP 一致,但属于推断。"
+    suggestion: "改为 'arXiv preprint' 或添加注释标明 venue 为推测。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
