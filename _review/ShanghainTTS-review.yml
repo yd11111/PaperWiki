@@ -1,0 +1,103 @@
+review:
+  paper: "ShanghainTTS"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: "v1.1"
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 8
+      rationale: "方法节包含清晰的因果解释(WHY: 词边界≈LD域边界 → 分词=韵律代理标注),设计选择有理由(为什么用jieba+补丁,为什么选VITS)。速查卡片可借鉴字段给出了具体可迁移策略。"
+    trustworthy:
+      score: 7
+      rationale: "关键数字均有出处标注([Table 1/2/3], [§X.X])。指标名使用正确(MOS)。但有一处数据集时长计算值(~93分钟)为agent推算,原文给的是5607秒(=93.45分钟),合理但应标注为计算值。"
+    distinguishable:
+      score: 8
+      rationale: "因果解释来源标注覆盖率高,方法节中的WHY解释大部分标了[论文原文]或[agent解读]。无明显将推断写成断言的情况。"
+    positionable:
+      score: 8
+      rationale: "KB背景节给出了具体的谱系定位: 在ProsodyModeling的显式韵律分支中的位置,与PhonemeRepresentation前端流程的关系。创新判断有对比基准(vs传统ToBI标注)。"
+    non-polluting:
+      score: 9
+      rationale: "本文不产生新概念页。反向更新仅涉及追加到已有页面(VITS, ProsodyModeling, PhonemeRepresentation)。内容factually accurate,无overclaim风险。"
+
+  checklist:
+    reproducible:
+      - item: "方法节包含因果解释"
+        status: pass
+      - item: "关键设计选择回答WHY"
+        status: pass
+      - item: "速查卡片可借鉴字段具体"
+        status: pass
+
+    trustworthy:
+      - item: "数字型claim有出处标注"
+        status: pass
+        note: "覆盖率>90%"
+      - item: "指标名使用正确"
+        status: pass
+      - item: "速查卡片指标字段含具体数字"
+        status: pass
+      - item: "无方向性错误"
+        status: pass
+
+    distinguishable:
+      - item: "因果解释标注来源"
+        status: pass
+      - item: "来源标注覆盖率>=80%"
+        status: pass
+      - item: "无推断写成断言"
+        status: pass
+      - item: "强断言有数字+出处支撑"
+        status: pass
+
+    positionable:
+      - item: "KB背景有谱系定位"
+        status: pass
+      - item: "创新判断有对比基准"
+        status: pass
+      - item: "frontmatter字段存在且非空"
+        status: pass
+      - item: "frontmatter字段语义正确"
+        status: pass-with-note
+        note: "models仅列VITS(本文使用的backbone),未列VoiceOver作为baseline对比。VoiceOver是商业系统非开源模型,不列入models合理。"
+      - item: "速查卡片5字段有实质内容"
+        status: pass
+
+    non-polluting:
+      - item: "新建概念页满足准入规则"
+        status: n/a
+        note: "本次不新建概念页"
+      - item: "已有概念库无语义相近页"
+        status: n/a
+      - item: "反向更新内容无factual-error"
+        status: pass
+      - item: "反向更新正确分类"
+        status: pass
+
+  issues:
+    - id: 1
+      type: traceability-gap
+      severity: medium
+      location: "速查/指标"
+      detail: "速查卡片中'无显著差异 (p=0.64)'的p值在原文§4.2中确实有,但速查卡片未标注具体出处节号"
+      suggestion: "在速查卡片指标后补充 [§4.2, Table 1, 3]"
+
+    - id: 2
+      type: template-compliance
+      severity: low
+      location: "局限性"
+      detail: "局限性第6点'无消融实验'是agent评价而非论文自述局限,混在一起可能混淆来源"
+      suggestion: "将agent补充的局限(第6点)与论文自述局限分开标注,或在第6点前加[agent解读]"
+
+    - id: 3
+      type: traceability-gap
+      severity: low
+      location: "方法/音标化流水线"
+      detail: "'125,000+ 词条'来自§2.2原文'more than 125,000 lexical entries',正确;但'51,000 of which have corresponding romanisations'未在笔记中提及"
+      suggestion: "可选择性补充romanisation覆盖率信息(51K/125K),增加可信赖度"
+
+  learning_signals: []
+
+  summary: "pass-with-fixes: 笔记质量良好,因果解释清晰,来源标注覆盖率高。2个medium/low issue均不阻塞反向更新。建议补充速查卡片出处标注。"
