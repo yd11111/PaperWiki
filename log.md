@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ShanghainTTS]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[VITS]](pending-review), [[PhonemeRepresentation]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[DurationPredictor]](pending-review)
+- [ingest/deep] [[ShanghainTTS]] — 精读, kb_sources=6, 新建 0, 追加 3 (VITS 相关工作追加, ProsodyModeling 显式韵律段追加, PhonemeRepresentation 吴语G2P段追加)
+- [skip/update] [[VITS]] — key_papers 已达上限(14),改追加到正文
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限,改追加到正文
+- [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
+- [review/auto] [[ShanghainTTS]] — pass-with-fixes, 0 high, 1 medium, 2 low
+- [review/kb] [[ShanghainTTS]] — pass, 3 appends, 0 issues
+- [lint/local] ShanghainTTS — 通过
 - [kb/search] [[METTS]] — 命中 6 页(取 Top 6): [[SpeechFactorization]]✓, [[Cross-lingualVoiceCloning]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[VariationalAutoencoderforTTS]](pending-review)
 - [ingest/deep] [[METTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (EmotionControlinTTS 层级情感建模节追加, Cross-lingualVoiceCloning 跨语言+情感迁移节追加)
 - [skip/update] [[EmotionControlinTTS]] — key_papers 已超上限,改追加到正文
