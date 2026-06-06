@@ -4,7 +4,7 @@ title: "Full-duplex Spoken Dialogue"
 aliases: [全双工口语对话, Full-duplex Speech Interaction, Real-time Speech Interaction, 实时语音交互, Duplex Conversation, 全双工语音]
 category: "technique"
 tags: [speech-LM, dialogue, real-time, full-duplex, turn-taking, streaming, interaction]
-key_papers: ["dGSLM (Nguyen et al., 2023)", "[[论文笔记/Moshi|Moshi]]", "VITA (Fu et al., 2024)", "NTPP (Wang et al., 2025)", "LSLM (Ma et al., 2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "MiniCPM-o 2.6 (OpenBMB, 2024)", "FlexDuo (Liao et al., 2025)", "OmniFlatten (Zhang et al., 2024)", "SALMONN-omni (Wu et al., 2024)", "SyncLLM (2024)", "Parrot (2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]"]
+key_papers: ["dGSLM (Nguyen et al., 2023)", "[[论文笔记/Moshi|Moshi]]", "VITA (Fu et al., 2024)", "NTPP (Wang et al., 2025)", "[[论文笔记/LSLM|LSLM]]", "Mini-Omni 2 (Xie & Wu, 2024)", "MiniCPM-o 2.6 (OpenBMB, 2024)", "FlexDuo (Liao et al., 2025)", "OmniFlatten (Zhang et al., 2024)", "SALMONN-omni (Wu et al., 2024)", "SyncLLM (2024)", "Parrot (2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]"]
 origin_paper: "[[论文笔记/Survey-SpeechLanguageModels|Cui et al., Speech Language Models, 2024]]"
 related_concepts: ["[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]", "[[Turn-takinginSpokenDialogue]]", "[[StreamingSpokenDialogue]]", "[[SpokenDialogueEvaluation]]"]
 status: pending-review
@@ -62,11 +62,12 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - 使用 Mimi (mixed tokenizer) 作为 speech tokenizer
 - 实现真正的实时全双工对话
 
-### LSLM (Ma et al., 2024)
+### [[论文笔记/LSLM|LSLM]] (Ma et al., 2024)
 - "Language model can listen while speaking"
-- 使用 decoder-only transformer 建模一个说话者的语音
-- 整合 streaming self-supervised learning (SSL) encoder 实现边说边听
-- 在讲话的同时编码并理解用户输入
+- 使用 decoder-only transformer (106M) 建模一个说话者的语音,单层 vq-wav2vec token
+- 整合 streaming vq-wav2vec SSL encoder 实现边说边听,监听通道不做量化 (保留连续表征)
+- 系统探索 early/middle/late 三种融合策略,middle fusion 最优 (WER 4.05%, F1 98.00%)
+- 引入 IRQ (interruption) token 实现端到端 turn-taking 检测
 
 ### Mini-Omni 2 (Xie & Wu, 2024)
 - 基于 Qwen2 + Whisper encoder
@@ -160,7 +161,7 @@ WavChat survey 进一步梳理了全双工系统的更多实现:
 
 - dGSLM (Nguyen et al., 2023): 首个全双工对话模型, dual transformer + cross-attention
 - Moshi (Defossez et al., 2024): RQ-Transformer 全双工, Mimi tokenizer, Inner Monologue
-- LSLM (Ma et al., 2024): 边说边听, streaming SSL encoder
+- [[论文笔记/LSLM|LSLM]] (Ma et al., 2024): 边说边听, middle fusion + IRQ token, streaming SSL encoder
 - VITA (Fu et al., 2024): IPR + 多模态全双工, dual-model 架构
 - NTPP (Wang et al., 2025): next-token-pair prediction 双通道对话
 - Mini-Omni 2 (Xie & Wu, 2024): vision+speech+text 全双工, irq/n-irq 打断标记

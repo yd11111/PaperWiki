@@ -116,6 +116,13 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - 训练数据包含各种噪声环境下的打断命令,增强鲁棒性
 - 基于指令设计的打断机制,limited instruction approach
 
+### [[论文笔记/LSLM|LSLM]]
+- **IRQ token**: 在词表中添加 IRQ (interruption) 特殊 token,训练时在打断发生 0.5s 后标注 IRQ
+- 使用 streaming vq-wav2vec SSL encoder 实时编码监听通道输入
+- **Middle fusion**: 监听信号在每个 Transformer block 注入,优于 early/late fusion
+- Command-based FDM: F1 98.00% (clean); Voice-based FDM: F1 95.50% (clean) [Table 2, 3]
+- 与 Mini-Omni2 irq/n-irq 的区别: LSLM 仅用 IRQ 一个 token (打断/不打断),Mini-Omni2 用 irq+n-irq 两个标记
+
 ### SyncLLM
 - **Time synchronization**: 将音频流分割为固定大小 chunks,每个 chunk 对应特定时间间隔
 - 在每个时间步交替生成 user 和 system speech segments
