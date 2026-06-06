@@ -137,9 +137,13 @@ Survey 在 SALMon benchmark 上对比各类 tokenizer:
 
 CosyVoice (Du et al., 2024) 开创了第四类路线: **监督式 semantic tokens**。不同于 HuBERT 的自监督学习,CosyVoice 的 S3 tokenizer 直接在 ASR encoder 中插入 VQ 层,通过 ASR loss 监督训练,使 token 显式编码语义信息且与文本对齐。实验证明 S3 tokens 在 TTS 任务上的内容一致性 (WER) 远优于 HuBERT semantic tokens 和 EnCodec acoustic tokens [CosyVoice Table 7]。后续 CosyVoice 2/3 继承并扩展了这一路线。
 
+### 理解模型 Encoder 做语义分支 [OmniCodec, 2026]
+
+[[论文笔记/OmniCodec|OmniCodec]] (Hu et al., 2026) 扩展了监督式 semantic tokens 路线: 不使用 ASR encoder (CosyVoice S3) 或 SSL 模型 (WavLM/HuBERT),而是直接用预训练多模态理解模型的 audio encoder (Qwen3-Omni-AuT-Encoder, 2000 万小时监督数据训练) 作为 codec 语义分支的输入。论文声称这是首次展示监督式理解模型 encoder 可替代 SSL 模型做 codec 语义监督 [OmniCodec §1]。优势: 天然覆盖 speech/music/general sound 全域 (Qwen3-Omni 训练数据跨域),而 WavLM/HuBERT 主要针对 speech。劣势: speech 域 PPL 仍不如 WavLM-based Mimi (10.02 vs 8.73),论文作者归因于 WavLM BERT 架构在 phonetic details 上更优 [OmniCodec §3.3, Table 4]。
+
 ## 演进
 
-Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → **监督式 semantic tokens (CosyVoice, 2024)** → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025)
+Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBERT semantic tokens (2021) → semantic + acoustic 层级 (AudioLM, 2022) → paralinguistic tokens 补充 (pGSLM, 2022) → **监督式 semantic tokens (CosyVoice, 2024)** → mixed tokenizer (SpeechTokenizer, 2024) → 统一框架 (Mimi/Moshi, 2024) → 五轴精细化 taxonomy 取代二分法 (Mousavi et al., 2025) → 理解模型 encoder 做语义分支 (OmniCodec, 2026)
 
 ### WavLM 中层单码本路线 [WavSLM, 2026]
 

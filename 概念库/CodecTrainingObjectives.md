@@ -146,6 +146,10 @@ encoder/quantizer/decoder 同时训练,常见于 acoustic tokenizer:
 
 [[论文笔记/MagiCodec|MagiCodec]] (Song et al., 2025) 提出三阶段训练 + Gaussian noise injection 的组合策略。Stage 1 训练 AE (encoder+decoder,无 VQ),输入帧以 Bernoulli(p) 概率被 Gaussian noise 替换,隐式正则化高频成分 + latent regularization (L_norm = ||Z_e||_2^2); Stage 2 冻结 encoder,仅训练 VQ+decoder; Stage 3 冻结 encoder+VQ,GAN 训练 vocoder (MPD + MS-STFT Discriminator)。与 HoliTok 的渐进式三阶段不同,MagiCodec 完全不使用外部监督 (无 SSL 蒸馏/无 ASR/无多任务),仅靠内在正则化提升 token 的下游可建模性。消融显示 mask ratio 30% 时 TTS WER 从 5.51% 降至 3.30% [MagiCodec Table 7]。
 
+### 11. Self-guidance Loss (OmniCodec)
+
+[[论文笔记/OmniCodec|OmniCodec]] (Hu et al., 2026) 引入 self-guidance loss,用 pre-quantized continuous latent 的 decoder 输出作为 teacher,引导 quantized token 的 decoder 输出逼近: L_self_guidance = |sg(h_e) - h_q|^2,其中 h_e/h_q 分别是 acoustic transformer 处理 z_e (连续) 和 z_q (量化) 后的隐层特征,sg 为 stop-gradient (Li et al., 2024 提出)。核心 idea: 迫使 decoder 学会容忍量化误差,从而改善重建质量和 codebook 利用率 (0.974→0.982)。权重设为 0.1,属于轻度正则化。与 MagiCodec 的 staged training 不同,self-guidance 是单阶段端到端训练中的辅助 loss,无需改变训练流程 [OmniCodec §2.3, Table 2]。
+
 ---
 
 > [!info] 来源

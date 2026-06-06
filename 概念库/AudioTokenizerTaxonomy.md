@@ -4,7 +4,7 @@ title: "Audio Tokenizer Taxonomy"
 aliases: [音频分词器分类体系, Tokenizer Taxonomy, Discrete Audio Token Taxonomy]
 category: "taxonomy"
 tags: [taxonomy, audio-codec, discrete-token, tokenization, survey]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]", "[[论文笔记/AffectCodec|AffectCodec]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]", "[[论文笔记/AffectCodec|AffectCodec]]", "[[论文笔记/OmniCodec|OmniCodec]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[ResidualVectorQuantization]]", "[[FiniteScalarQuantization]]", "[[CodecTrainingObjectives]]", "[[Single-codebookvsMulti-codebook]]"]
 status: pending-review
@@ -114,6 +114,7 @@ SSL-based tokenizer (HuBERT, WavLM) 多使用 non-causal encoder,限制流式部
 | SQ-Codec | 50 | FSQ | CNN | GAN,Rec | - | 否 |
 | Discrete WavLM | 50 | K-means | CNN+T | GAN,Feat,Rec,MP | - | 否 |
 | MOSS-Audio-Tokenizer | 12.5 | RVQ (32层) | T (纯 Transformer) | GAN,Feat,Rec,VQ,Sem | Supervised Semantic (LLM head) | 是 |
+| OmniCodec | 12.5/6.25 | VQ+RVQ (1+31层) | CNN+T (SEANet+Transformer) | GAN,Feat,Rec,VQ,Sem,Self-guidance | Supervised Semantic (Qwen3-Omni encoder) | 是 |
 
 ## 在 TTS 中的应用
 
