@@ -1,6 +1,12 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[DEX-TTS]] — 命中 6 页 (取 Top 6): 过滤: [[Diffusion-basedTTS]](pending-review), [[StyleTransferinTTS]](pending-review), [[DiffusionModel]](pending-review), [[GlobalStyleTokens]](pending-review), [[DurationPredictor]](pending-review), [[F0Modeling]](pending-review)
+- [ingest/deep] [[DEX-TTS]] — 精读, kb_sources=6, 新建 0, 追加 0 (format fix: StyleTransferinTTS key_papers wikilink)
+- [skip/update] [[Diffusion-basedTTS]] — key_papers 已超上限(20)
+- [skip/update] [[DiffusionModel]] — key_papers 已超上限(16)
+- [skip/update] [[GlobalStyleTokens]] — key_papers 已达上限(12)
+- [lint/local] DEX-TTS — 通过
 - [kb/search] [[TextAwareContextAwareTTS]] — 命中 6 页 (取 Top 6): [[ProsodyModeling]]✓ | 过滤: [[GlobalStyleTokens]](pending-review), [[StyleTransferinTTS]](pending-review), [[VITS]](pending-review), [[HuBERT]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
 - [ingest/deep] [[TextAwareContextAwareTTS]] — 精读, kb_sources=6, 新建 0, 追加 1 (GlobalStyleTokens 正文)
 - [skip/update] [[StyleTransferinTTS]] — key_papers 已超上限(24)
