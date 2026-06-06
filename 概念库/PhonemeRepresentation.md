@@ -113,6 +113,10 @@ Raw Text → [Text Normalization] → [Word Segmentation] → [POS Tagging] → 
 
 [[论文笔记/UniSonate|UniSonate]] (Qiang et al., 2026) 提出 **Dynamic Token Injection**: 为缺乏语言学内容的 sound effects (SFX) 引入可学习 [SFX] special token 作为伪音素。token 数量按语音语料的平均 phoneme-to-duration 比率 lambda 确定: L_sfx = floor(lambda * T_target),使 SFX 的时间展开在 token 密度上与 phoneme 一致。这允许 phoneme 驱动的 MM-DiT 架构无需修改即可处理非语言音频,将 TTS+TTM 统一框架扩展至 TTA。TTS WER EN 1.47% (best), TTA FAD 4.21 (competitive) [Table 3, 5]。
 
+## 多语言 Phoneme 预训练
+
+[[论文笔记/XPhoneBERT|XPhoneBERT]] (Nguyen et al., INTERSPEECH 2023): 首个多语言 phoneme BERT。BERT-base 架构 (87.6M params),RoBERTa 预训练 (dynamic masking, 无 NSP),在 330M phoneme-level sentences (94 languages/locales, 来自 Wikipedia + CharsiuG2P 转换) 上训练。White-space tokenizer, 1960 phoneme types。替换 VITS Transformer encoder 后,EN MOS 4.00→4.14 (+0.14, LJSpeech), VN MOS 3.74→3.89 (+0.15) [Table 2, 3]; 低资源 VN (5% data, ~0.9h) MOS 1.59→3.35 (+1.76) [Table 3],证明多语言 phoneme 预训练在低资源场景中杠杆效应极大。与 PnG BERT (phoneme+grapheme) / Mixed-Phoneme BERT (phoneme+sup-phoneme) / Phoneme-level BERT (phoneme-only, ALBERT) 三个英语单语前驱相比,XPhoneBERT 的核心贡献是将 phoneme 预训练从单语推向多语言,并首个开源
+
 ## 演进
 
 完整语言学特征 (SPSS; phoneme + POS + duration + prosody 标注) → 简化为 phoneme only (FastSpeech, 2019) → Character 直接输入 (Tacotron, 让模型学 G2P) → BPE text tokens (LLM-TTS, 2023+; 共享 LLM tokenizer) → **Pseudo-phoneme for non-linguistic audio** (UniSonate [SFX] tokens, 2026)
