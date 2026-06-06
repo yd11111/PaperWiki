@@ -1,0 +1,50 @@
+review:
+  paper: "LipToSpeech"
+  reviewer: auto
+  date: 2026-06-06
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节有清晰的因果解释(WHY);关键设计选择逐一回答了'为什么';速查卡片的可借鉴字段具体可迁移。整体机制理解到位。"
+  trustworthy:
+    score: 7
+    reason: "数字型 claim 标注覆盖率高(>90%),指标名正确。但发现 LRS2 的 VCA-GAN LSE 值与原文不符(factual-error),局限性部分有一个未标注来源的外部知识比较。"
+  distinguishable:
+    score: 9
+    reason: "因果解释来源标注覆盖率高,方法节全部标注了[论文原文]或[agent 解读],无推断被写成断言的情况。"
+  positionable:
+    score: 8
+    reason: "KB 背景有具体谱系定位,列出了与 SpeakerEmbedding/DurationPredictor/NeuralVocoder 等概念的关系。创新判断有对比基准(与 lip-to-text pipeline 级联对比)。frontmatter 字段完整。"
+  non_polluting:
+    score: 9
+    reason: "不创建新概念页,反向更新仅为追加 key_papers,风险低。"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: high
+    location: "实验表 LRS2 LSE-C/LSE-D 行,VCA-GAN 列"
+    detail: "笔记中 VCA-GAN 在 LRS2 上的 LSE-C=2.507, LSE-D=8.155,但原文 Table 1 显示 VCA-GAN [20] 在 LRS2 上 LSE-C=1.874, LSE-D=11.48。笔记中的 2.507/8.155 实际属于 SVTS [23]。VCA-GAN 和 SVTS 的 LSE 值被混淆。"
+    suggestion: "更正 VCA-GAN LRS2 LSE-C=1.874, LSE-D=11.48;SVTS LRS2 LSE-C/LSE-D 需要确认是否有值(原文称仅对 VCA-GAN 和 Multi-task L2S 计算了 LSE),如有值则为 2.507/8.155,否则应标注为 —。"
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "局限性 第4点"
+    detail: "「远低于 TTS 系统(通常 3.5+)」是 agent 的外部知识,非本文内容,未标注来源。"
+    suggestion: "改为 [agent 解读] 标注,或删除与 TTS 系统的比较,仅保留本文指标的客观描述。"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "方法节 Stage 2 Speaker Embedding"
+    detail: "speaker encoder 来自 Real-Time-Voice-Cloning GitHub(论文脚注 1),笔记中未标注此出处。"
+    suggestion: "补充 speaker encoder 的来源:预训练 identity network (Real-Time-Voice-Cloning, 脚注 1)。"
+
+conclusion: pass-with-fixes
+summary: "1 high (LRS2 VCA-GAN LSE 数值错误), 1 medium (外部知识未标注), 1 low (出处遗漏)"
+
+learning_signals:
+  - "pdftotext 提取多列数字表格时容易因空值(dash)导致列偏移,需与 PDF 图像交叉验证"
