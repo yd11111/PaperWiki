@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[LipToSpeech]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓, [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[DurationPredictor]](pending-review), [[Non-autoregressiveTTS]](pending-review)
+- [ingest/deep] [[LipToSpeech]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [skip/update] [[SpeakerEmbedding]] [[MelSpectrogram]] [[DurationPredictor]] [[ProsodyModeling]] [[NeuralVocoder]] [[Non-autoregressiveTTS]] [[BigVGAN]] — 全部 key_papers 超限且论文为跨模态 lip-to-speech 工作,对 TTS 概念页无新贡献,跳过
+- [lint/local] LipToSpeech — 通过
+- [review/auto] LipToSpeech — pass-with-fixes, 1 high (LRS2 VCA-GAN LSE 数值已修正), 1 medium, 1 low
 - [kb/search] [[AutomatedTTSDataset]] — 命中 5 页 (取 Top 5): 无 confirmed | 过滤: [[PhonemeRepresentation]](pending-review), [[Whisper]](pending-review), [[TTSEvaluation]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[Emilia]](pending-review)
 - [ingest/deep] [[AutomatedTTSDataset]] — 精读, kb_sources=5, 新建 0, 追加 1 (Whisper key_papers)
 - [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),且贡献边缘,跳过
