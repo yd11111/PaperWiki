@@ -1,0 +1,62 @@
+review:
+  paper: "SplitMeanFlow"
+  date: "2026-06-06"
+  reviewer: auto
+  mode: note-review
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节清晰解释了 WHY (积分可加性 vs 微分,消除 JVP),关键设计选择均有因果解释。速查卡片可借鉴字段具体可迁移 (积分可加性→self-consistency, general-to-special 证明策略, CFG 内化)。ISC→MeanFlow 的极限推导过程完整可跟踪。"
+
+  可信赖:
+    score: 9
+    verdict: pass
+    reason: "Table 1/2 数字全部与 PDF 交叉验证一致 (SIM 0.789/0.787, WER 0.0561/0.0551, CMOS -0.01; ICL 1-step WER 0.0286=baseline)。指标名无混淆。出处标注覆盖率 ~95%。20x 加速 claim 正确引用 [Abstract]。"
+
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "[论文原文]/[agent 解读] 标注覆盖率 ~90%。agent 推断性解释 (如 1-step 优于 2-step 的可能原因,bootstrapping 类比 Consistency Models) 均明确标注为 [agent 解读]。未发现把推断写成断言的情况。"
+
+  可定位:
+    score: 8
+    verdict: pass
+    reason: "KB 背景准确定位到 flow matching 采样加速分支,列举同类方法 (MeanFlow, DSFlow, RapFlow-TTS, Shallow FM, OZSpeech) 对比。与 DSFlow 的关系分析精准 (自监督 vs 蒸馏,代数约束 vs 差商近似)。与 Consistency Models 的概念对比有价值。"
+
+  不污染:
+    score: 8
+    verdict: pass
+    reason: "未新建实体页。ConditionalFlowMatching 页 key_papers 已超 12 条上限,追加需走正文路线而非 key_papers。反向更新内容无 factual-error。"
+
+conclusion: pass-with-fixes
+total_issues: 3
+issue_summary:
+  high: 0
+  medium: 2
+  low: 1
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 列了 [[论文笔记/DSFlow|DSFlow]],但 DSFlow 不是本文的对比 baseline (实验中未出现),也不在模型库中。models 字段应列本文模型+实验 baseline。"
+    suggestion: "移除 DSFlow。models 应为 [[论文笔记/Seed-TTS|Seed-TTS]] (实验框架)。DMD 是实验 baseline 但无模型库页,可不列。"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "速查卡片 指标字段"
+    detail: "20x 加速的计算逻辑未在笔记中解释: 10-step FM with CFG = 20 NFE vs 1-step SplitMeanFlow without CFG = 1 NFE。读者可能不理解 '10 步变 1 步' 为何是 20x 而非 10x。"
+    suggestion: "在速查或实验节补充说明: FM baseline 需 10 步 ODE + CFG (额外 unconditional pass) = 20 NFE,SplitMeanFlow 1 步无 CFG = 1 NFE,因此 20x。"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "核心问题节 引用标注"
+    detail: "'训练不稳定: 高精度反向传播可能引起数值不稳定 [引用 19, 24]' 使用了 [引用 N] 而非 [§X.X] 格式。"
+    suggestion: "改为 '高精度反向传播可能引起数值不稳定 (Lu & Song, 2024; Peng et al., 2025) [§4.3.2]'。§4.3.2 是论文讨论 JVP 数值精度问题的段落。"
+
+learning_signals: []

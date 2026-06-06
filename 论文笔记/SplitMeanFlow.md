@@ -9,7 +9,7 @@ year: 2025
 venue: "arXiv"
 tags: [flow-matching, few-step-generation, one-step-generation, average-velocity, algebraic-consistency, distillation, TTS, efficiency]
 concepts: ["[[ConditionalFlowMatching]]", "[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[Diffusion-basedTTS]]", "[[ScoreMatching]]"]
-models: ["[[论文笔记/Seed-TTS|Seed-TTS]]", "[[论文笔记/DSFlow|DSFlow]]"]
+models: ["[[论文笔记/Seed-TTS|Seed-TTS]]"]
 tasks: []
 datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"]
 kb_context_sources: 6
@@ -38,7 +38,7 @@ updated: 2026-06-06
 > [!summary] 速查
 > - **一句话**: 从积分可加性出发推导纯代数的 Interval Splitting Consistency 恒等式,用于训练平均速度场,证明 MeanFlow 的微分恒等式是其极限特例,消除 JVP 计算
 > - **路线**: 噪声 z1 → uθ(zt, r, t) 预测平均速度 → z0 = z1 - u(z1, 0, 1) (一步生成); 训练时对区间 [r,t] 取中间点 s,强制 (t-r)u(zt,r,t) = (s-r)u(zs,r,s) + (t-s)u(zt,s,t) 的代数一致性
-> - **指标**: 2-step SFT SIM 0.789 vs FM 10-step 0.787, CMOS -0.01; 1-step ICL WER 0.0286 = FM 10-step, CMOS 0; 20x 加速 [Table 1, 2]
+> - **指标**: 2-step SFT SIM 0.789 vs FM 10-step 0.787, CMOS -0.01; 1-step ICL WER 0.0286 = FM 10-step, CMOS 0; 20x 加速 (FM 10步+CFG=20 NFE vs SMF 1步无CFG=1 NFE) [Table 1, 2]
 > - **可借鉴**: (1) 从积分可加性推导 self-consistency 约束,绕过 JVP; (2) 代数恒等式 → 微分恒等式的极限关系,证明 general-to-special 的理论层次; (3) CFG 内化策略 (Stage 2 dropout=0.0,student 直接输出 guided velocity)
 > - **局限**: 仅在 Seed-TTS 内部系统验证,无公开 checkpoint/代码; 未与 DSFlow/RapFlow-TTS 等同期加速方法直接对比; 实验仅覆盖 audio 域,未验证 image/video
 
@@ -47,7 +47,7 @@ updated: 2026-06-06
 Flow matching 生成模型推理需多步 ODE 求解 (典型 10-100 步),延迟高。MeanFlow 通过学习平均速度场实现 few-step 生成,但其训练依赖微分恒等式 u = v - (t-r)du/dt,需要计算 Jacobian-Vector Product (JVP),带来三个问题 [§1]:
 
 1. **计算代价**: JVP 需额外一次反向传播量级的计算
-2. **训练不稳定**: 高精度反向传播可能引起数值不稳定 [引用 19, 24]
+2. **训练不稳定**: 高精度反向传播可能引起数值不稳定 (Lu & Song, 2024; Peng et al., 2025) [§4.3.2]
 3. **硬件兼容性**: 某些加速器和软件后端对 JVP 支持有限或效率低
 
 **核心问题**: 能否找到一种不依赖微分算子的方式来约束平均速度场,使训练更简单、更稳定、更通用?
@@ -187,4 +187,16 @@ SplitMeanFlow 的核心是一个纯代数的训练目标: Interval Splitting Con
 
 ## 审阅
 
-(待独立审阅 agent 填写)
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | WHY 解释清晰,速查可借鉴具体可迁移,ISC→MeanFlow 推导完整 |
+> | 可信赖 | pass | Table 1/2 数字与 PDF 交叉验证一致,出处覆盖率 ~95% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~90%,无推断写成断言 |
+> | 可定位 | pass | KB 背景准确定位加速分支,与 DSFlow/MeanFlow/CM 对比清晰 |
+> | 不污染 | pass | 未新建实体页,CFM key_papers 已超限需走正文路线 |
+> 
+> Issues: 3 (high: 0, medium: 2, low: 1)
+> 详见 `_review/SplitMeanFlow-review.yml`
