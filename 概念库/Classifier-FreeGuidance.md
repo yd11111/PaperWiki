@@ -104,6 +104,10 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 关键发现: 虽然 CFG 不直接应用于 duration token 采样,γ_temp 仍间接影响语速控制 -- γ_temp 越大快速语音 WER 越低而慢速 WER 越高,反之亦然 [VoXtream2 Fig 9]。这表明 CFG 的条件增强效果会跨模态传播,即使在不直接被引导的维度上也产生影响。
 
+## LM Guidance: AR+Diffusion 架构的高效 CFG 变体
+
+[[论文笔记/DiTAR|DiTAR]] (Jia et al., ByteDance, 2025) 提出 LM Guidance: 在 causal LM + diffusion head (LocDiT) 架构中,利用 LM 输出 h_i 已编码全部历史信息的特性,仅需 **1 次 LM forward + 2 次 LocDiT forward** 即可实现 CFG。训练时以 10% 概率将 h_i 替换为全零 h_∅; 推理时 ε̃ = (1+w)·ε(z,h_i) - w·ε(z,h_∅)。相比离散 LM CFG 需要 2 次完整 LM 计算,LM Guidance 将大部分 unconditional 计算卸载到轻量 diffusion head。消融显示 w=0 时 WER/SIM 显著退化; 即使 NFE=2 配合 guidance 仍保持良好性能 [Fig 4]。
+
 ## 演进
 
 Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导) --> APG 替代 CFG (LongCat-AudioDiT, 2026, Adaptive Projection Guidance 衰减平行分量消除 oversaturation)

@@ -4,7 +4,7 @@ title: "Next-Token Diffusion"
 aliases: [Per-Token Diffusion, Token-Level Diffusion Head, 逐token扩散, Next-Token Diffusion Head]
 category: "technique"
 tags: [diffusion, autoregressive, continuous-representation, language-model, TTS, multimodal]
-key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/HoliTok|HoliTok]]"]
+key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/HoliTok|HoliTok]]", "[[论文笔记/DiTAR|DiTAR]]"]
 origin_paper: "Sun et al., Multimodal Latent Language Modeling with Next-Token Diffusion, 2024 (arXiv:2412.08635)"
 related_concepts: ["[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[VariationalAutoencoderforTTS]]"]
 status: pending-review
@@ -73,6 +73,10 @@ Next-Token Diffusion 不是要取代 sequence-level diffusion,而是用于**与 
 ## 演进
 
 MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM (2024, per-token DDPM head, sigma-VAE, multimodal) → CLEAR (2025, per-token rectified flow head, enhanced VAE, streaming TTS) → VibeVoice (2025, industrial-scale, long-form multi-speaker, Qwen2.5 backbone) → SemaVoice (2026, SFM-guided VAE alignment, patch-wise LocDiT) → HoliTok (2026, holistic VAE tokenizer + AR+DiT, 渐进式三阶段训练, 统一生成-理解)
+
+## DiTAR: Patch 级分治替代 Per-Token Diffusion
+
+[[论文笔记/DiTAR|DiTAR]] (Jia et al., ByteDance, 2025) 提出了 AR+Diffusion 融合的第三条路线: **patch 级分治**。与 LatentLM 的 per-token diffusion head 不同,DiTAR 将连续 token 切分为 patch (默认 P=4),用 causal LM 处理 patch 间预测,用 bidirectional DiT (LocDiT) 处理 patch 内生成。核心发现: patch size=1 (即 per-token) 时性能显著退化,验证了 causal attention 的单向约束是 per-token diffusion 性能瓶颈的原因 [Fig 3]。LocDiT 引入 historical patch 作为前缀 context 将生成转为 outpainting,并提出 LM Guidance (仅需 1 次 LM + 2 次 LocDiT forward 的高效 CFG 变体)。0.6B 参数在 LibriSpeech 上 WER 1.78%,TFLOPs 仅 ~2.75 (NAR 竞品的 1/14-1/43) [Table 1]。
 
 ## HoliTok: AR+DiT 统一建模的 holistic tokenizer
 
