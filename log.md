@@ -1,6 +1,11 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[OmniCodec]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[CodebookCollapse]]✓ | 过滤: [[AudioTokenizerTaxonomy]](pending-review), [[CodecTrainingObjectives]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
+- [ingest/deep] [[OmniCodec]] — 精读, kb_sources=6, 新建 0, 追加 5 (SemanticvsAcousticTokens 追加 section, CodecTrainingObjectives 追加 section, CodebookCollapse 追加 section, AudioTokenizerTaxonomy 追加 key_papers+table, NeuralAudioCompression 追加 key_papers)
+- [lint/local] OmniCodec — 通过/0 问题
+- [review/auto] [[OmniCodec]] — pass-with-fixes, 0 high, 0 medium, 3 low
+- [alert/backlog] pending-review: 72, draft deep/repro: 382
 - [kb/search] [[JoyVoice]] — 命中 6 页 (取 Top 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CosyVoice3]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Diffusion-basedTTS]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
 - [ingest/deep] [[JoyVoice]] — 精读, kb_sources=6, 新建 0, 追加 3 (LLM-basedTTS 追加 Dialogue section, CosyVoice3 追加 key_papers, Zero-shotSpeechSynthesis 追加 SOTA)
 - [skip/update] [[ConditionalFlowMatching]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[Diffusion-basedTTS]], [[DifferentiableRewardOptimization]], [[SpeakerEmbedding]], [[CosyVoice2]] — key_papers 已达上限(12+),跳过追加
