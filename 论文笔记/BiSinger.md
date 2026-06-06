@@ -6,7 +6,7 @@ arxiv_id: "2309.14089"
 source: "Sources/BiSinger.pdf"
 authors: [Huali Zhou, Yueqian Lin, Yao Shi, Peng Sun, Ming Li]
 year: 2023
-venue: "ICASSP 2024"
+venue: "IEEE Conference 2023"
 tags: [SVS, bilingual, code-switch, singing-voice-synthesis, multilingual, DiffSinger, language-independent-representation, dataset-adaptation, singing-voice-conversion]
 concepts: ["[[SingingVoiceSynthesis]]", "[[PhonemeRepresentation]]", "[[MusicalScoreEncoder]]", "[[SVSEvaluationMetrics]]", "[[DiffusionModel]]"]
 models: ["[[论文笔记/BiSinger|BiSinger]]"]
@@ -182,3 +182,19 @@ BiSinger 是 SVS 领域较早探索双语/code-switch 的工作,核心贡献是�
 2. **MFA 比例分配时长标注**: 当标注格式需要从一种音素集转换为另一种时,用 MFA 预对齐获取辅音/元音比例再按比例分配,比均分更符合发音规律。可迁移到任何涉及音素集转换的 SVS/TTS 工作。
 3. **Style ID token 区分语音/歌声/伪歌声**: 简单的 embedding tag 即可让模型区分不同域的数据,防止域混淆。可迁移到任何混合不同类型音频数据训练的场景。
 4. **Pitch shift 伪歌声**: 用 WORLD vocoder 替换语音 F0 为预定义旋律频率,快速生成音高丰富的伪歌声数据,利用大量语音数据辅助 SVS。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-06, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 3 个核心设计选择有 WHY/HOW 解释,速查可借鉴具体 |
+> | 可信赖 | pass | 实验数字与 PDF 交叉验证一致,出处覆盖率 ~85% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标签覆盖率 ~85% |
+> | 可定位 | pass | KB 谱系定位具体,创新判断有对比基准 |
+> | 不污染 | pass | 概念引用恰当,未提议不必要的新页 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/BiSinger-review.yml`
