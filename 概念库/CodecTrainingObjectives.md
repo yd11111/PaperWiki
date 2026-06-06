@@ -4,7 +4,7 @@ title: "Codec Training Objectives"
 aliases: [Codec 训练目标, Codec Loss Landscape, Audio Codec Training Losses, Neural Codec 损失函数]
 category: "training-technique"
 tags: [training-objective, audio-codec, GAN, reconstruction, perceptual-loss]
-key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/AffectCodec|AffectCodec]]", "[[论文笔记/HoliTok|HoliTok]]"]
+key_papers: ["[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/SiTok|SiTok]]", "[[论文笔记/AffectCodec|AffectCodec]]", "[[论文笔记/HoliTok|HoliTok]]", "[[论文笔记/MagiCodec|MagiCodec]]"]
 origin_paper: "Mousavi et al., Discrete Audio Tokens: More Than a Survey!, TMLR 2025"
 related_concepts: ["[[AudioTokenizerTaxonomy]]", "[[ResidualVectorQuantization]]", "[[Multi-scaleSTFTDiscriminator]]", "[[CodebookCollapse]]"]
 status: pending-review
@@ -141,6 +141,10 @@ encoder/quantizer/decoder 同时训练,常见于 acoustic tokenizer:
 ### 8. Emotion-Weighted Semantic Alignment Loss (L_align)
 
 同为 AffectCodec 引入,在 Q(1) 与文本语义 teacher 之间做 soft alignment,但用帧级情感差分 d_t = ||e_t - e_{t-1}||_1 经 softmax 生成权重 gamma_t,使情感变化大的帧获得更强语义对齐监督: L_align = -(1/T') * sum(gamma_t * log(sigma(cos(Q^(1)_t, c*_t))))。核心 idea: 情感变化大的帧更易受量化失真影响,需要更强的锚定 [AffectCodec §3.2.3]。
+
+### 10. Gaussian Noise Injection + Staged Training (MagiCodec)
+
+[[论文笔记/MagiCodec|MagiCodec]] (Song et al., 2025) 提出三阶段训练 + Gaussian noise injection 的组合策略。Stage 1 训练 AE (encoder+decoder,无 VQ),输入帧以 Bernoulli(p) 概率被 Gaussian noise 替换,隐式正则化高频成分 + latent regularization (L_norm = ||Z_e||_2^2); Stage 2 冻结 encoder,仅训练 VQ+decoder; Stage 3 冻结 encoder+VQ,GAN 训练 vocoder (MPD + MS-STFT Discriminator)。与 HoliTok 的渐进式三阶段不同,MagiCodec 完全不使用外部监督 (无 SSL 蒸馏/无 ASR/无多任务),仅靠内在正则化提升 token 的下游可建模性。消融显示 mask ratio 30% 时 TTS WER 从 5.51% 降至 3.30% [MagiCodec Table 7]。
 
 ---
 
