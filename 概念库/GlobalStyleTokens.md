@@ -99,6 +99,7 @@ GST 作为可控 TTS 的奠基工作,影响了大量后续方法:
 - 角色配音: 定义角色特定说话方式
 - 风格探索: 通过 token 权重交互探索风格空间
 - 小数据集 GST 训练优化: [[论文笔记/EmotionCoherentAugmentation|Chung (SLT 2024)]] 提出 emotion-coherent 数据增强 (按文本情感标签拼接而非随机拼接) + SimCLR contrastive loss 正则化 reference encoder,在 6.5h 童话数据集上改善 TP-GST style embedding 质量
+- 环境自适应 TTS: [[论文笔记/SaSLaW|SaSLaW (Take et al., Interspeech 2024)]] 将 GST 的 reference 从目标风格音频替换为 hearing audio (环境噪声+对话者语音的混合信号),通过 Env-to-style predictor 从听觉感知预测 style vector,实现噪声环境下的语音风格自适应。这是 GST 从"风格迁移"到"环境适应"的功能扩展
 
 ## 关键论文
 
