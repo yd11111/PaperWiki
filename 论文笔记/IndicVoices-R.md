@@ -11,7 +11,7 @@ tags: [TTS, dataset, multilingual, Indian-languages, speech-enhancement, data-pi
 concepts: ["[[SpeakerAdaptation]]", "[[TTSEvaluation]]", "[[SpeakerEmbedding]]"]
 models: []
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]"]
-datasets: ["[[Emilia]]"]
+datasets: ["[[IndicVoices-R]]", "[[Emilia]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-06
