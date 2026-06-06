@@ -1,6 +1,10 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[ChildTTS-Fastpitch]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[NeuralVocoder]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review), [[F0Modeling]](pending-review)
+- [ingest/deep] [[ChildTTS-Fastpitch]] — 精读, kb_sources=6, 新建 0, 追加 0
+- [skip/update] 所有 6 个 KB 页 key_papers 已达上限,本文为应用研究无新贡献,跳过反向更新
+- [lint/local] ChildTTS-Fastpitch — 通过
 - [kb/search] [[GATrainingRawPhonetic]] — 命中 6 页(取 Top 6): [[NeuralVocoder]]✓, [[ProsodyModeling]]✓ | 过滤: [[DurationPredictor]](pending-review), [[GlobalStyleTokens]](pending-review), [[Text-to-SpeechPipeline]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[GATrainingRawPhonetic]] — 精读, kb_sources=6, 新建 0, 追加 1 (Text-to-SpeechPipeline key_papers)
 - [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),跳过
