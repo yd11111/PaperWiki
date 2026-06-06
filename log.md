@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[StochasticPitchPrediction]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[ProsodyModeling]]✓ | 过滤: [[DurationPredictor]](pending-review), [[SpeakerAdaptation]](pending-review), [[GlobalStyleTokens]](pending-review), [[VoiceCloningTaxonomy]](pending-review)
+- [ingest/deep] [[StochasticPitchPrediction]] — 精读, kb_sources=6, 新建 0, 追加 2 (DurationPredictor SDP 迁移节, ProsodyModeling 显式概率化节)
+- [skip/update] [[DurationPredictor]] — key_papers 已达上限(12),改追加到正文
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(12),改追加到正文
+- [review/auto] [[StochasticPitchPrediction]] — pass-with-fixes, 0 high / 1 medium / 1 low (inline review, S-MOS 值修正)
+- [lint/local] StochasticPitchPrediction — 通过
+- [alert/backlog] pending-review: 71, draft deep/repro: 0 — 建议抽空审核实体页
 - [kb/search] [[MultilingualTurkicTTS]] — 命中 6 页(取 Top 6): [[Zero-shotSpeechSynthesis]]✓, [[Cross-lingualVoiceCloning]]✓, [[NeuralVocoder]]✓ | 过滤: [[PhonemeRepresentation]](pending-review), [[Attention-basedTTS]](pending-review), [[MelSpectrogram]](pending-review)
 - [ingest/deep] [[MultilingualTurkicTTS]] — 精读, kb_sources=6, 新建 0, 追加 2 (PhonemeRepresentation 跨语言节, Cross-lingualVoiceCloning 早期探索节)
 - [skip/update] [[PhonemeRepresentation]] — key_papers 已达上限(12),改追加到正文
