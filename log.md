@@ -1,6 +1,15 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[Small-E]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[EnCodec]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[Speech-TextAlignment]](pending-review)
+- [ingest/deep] [[Small-E]] — 精读, kb_sources=6, 新建 0, 追加 1 (CodecLanguageModel 正文代表系统)
+- [skip/update] [[CodecLanguageModel]] — key_papers 已超上限(37), 改追加到正文代表系统
+- [skip/update] [[LLM-basedTTS]] — key_papers 已超上限(84)
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已超上限(46)
+- [skip/update] [[EnCodec]] — key_papers 已超上限(15)
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已超上限(68)
+- [skip/update] [[Speech-TextAlignment]] — 语义匹配度低,跳过
+- [lint/local] Small-E — 通过
 - [kb/search] [[USAT]] — 命中 6 页 (取 Top 6): [[SpeakerEmbedding]]✓ | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[VariationalAutoencoderforTTS]](pending-review), [[VITS]](pending-review), [[GradientReversalLayer]](pending-review)
 - [ingest/deep] [[USAT]] — 精读, kb_sources=6, 新建 0, 追加 2 (GRL key_papers + VITS 相关工作)
 - [skip/update] [[SpeakerAdaptation]] — key_papers 已达上限(12), 演进线已引用 USAT
