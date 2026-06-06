@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-06
+- [kb/search] [[EmotionAwareProsodic]] — 命中 2 页(取 Top 2): [[ProsodyModeling]]✓ | 过滤: [[EmotionControlinTTS]](pending-review)
+- [ingest/deep] [[EmotionAwareProsodic]] — 精读, kb_sources=2, 新建 0, 追加 2 (ProsodyModeling+EmotionControlinTTS 正文追加)
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(51),改追加到正文
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(53),改追加到正文
+- [review/auto] [[EmotionAwareProsodic]] — pass, 0 high, 0 medium, 1 low
+- [review/kb] [[EmotionAwareProsodic]] — pass, 0 issues
+- [lint/local] EmotionAwareProsodic — 通过
 - [kb/search] [[JointDialogueSpeech]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[Text-to-SpeechPipeline]](pending-review), [[PhonemeRepresentation]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Full-duplexSpokenDialogue]](pending-review)
 - [ingest/deep] [[JointDialogueSpeech]] — 精读, kb_sources=6, 新建 0, 追加 1 (ProsodyModeling LLM-based PSP 段追加)
 - [skip/update] [[ProsodyModeling]] — key_papers 已达上限,改追加到正文
