@@ -166,7 +166,7 @@ Podcast CER 和 UTMOS SOTA,但 cpSIM 偏低 (0.457 vs SoulX 0.599) [Table 7]。
 | --- | --- | --- | --- | --- | --- | --- |
 | Avg | **3.30** | 4.23 | 4.34 | 6.3 | ContextASR-Bench | [Table 8] |
 | Speech-English WER | 2.91 | 2.95 | **1.13** | 6.65 | ContextASR-Bench | [Table 8] |
-| Dialogue-Mandarin WER | **1.77** | 1.36 | 1.59 | 4.03 | ContextASR-Bench | [Table 8] |
+| Dialogue-Mandarin WER | 1.77 | **1.36** | 1.59 | 4.03 | ContextASR-Bench | [Table 8] |
 
 ContextASR 整体 SOTA (avg 3.30),在 NE-WER 和 NE-FNR 等命名实体相关指标上优势突出 [Table 8]。
 
@@ -263,6 +263,22 @@ GenEval 0.94 为所有方法 (包括纯生成和统一模型) 中最高,Position
 4. **Sequence packing + LP-optimized pipeline parallelism**: 将 pipeline 依赖建模为线性规划问题,自动求解最优 stage layout,在多种模型规模上实现 58-70% 端到端加速。可用于任何异构多模态模型的训练 [§2.5]
 
 5. **RL post-training with offline data regularization**: 用离线数据正则化替代 KL 散度约束防止 reward hacking,配合 generative segmentation 初始化和多维奖励 (realism + instruction + aesthetic + task-specific)。适用于任何需要 RL 对齐的生成模型 [§2.3]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass (0 high, 1 medium, 1 low)
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 7 个 WHY 设计选择含因果解释,速查可借鉴含 4 个具体可迁移技巧 |
+> | 可信赖 | pass | 数字 claim 覆盖率 >90%,发现并修正 1 处 Dialogue-Mandarin WER bold marker 错误 |
+> | 可区分 | pass | [论文原文] vs [agent 解读] 覆盖率 ~90% |
+> | 可定位 | pass | Ming-Omni/Ming-UniAudio/Qwen3-Omni 三向对比,技术路线转换定位清晰 |
+> | 不污染 | pass | 无新概念页需求,反向更新为 append-only |
+> 
+> Issues: 2 (medium: 1, low: 1)
+> 详见 `_review/Ming-Flash-Omni-review.yml`
 
 ---
 

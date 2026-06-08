@@ -1,0 +1,51 @@
+review:
+  paper: Ming-Flash-Omni
+  note_path: 论文笔记/Ming-Flash-Omni.md
+  date: 2026-06-08
+  reviewer: auto (independent subagent)
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    reason: "方法节包含 7 个 WHY 设计选择,每个有因果解释;速查可借鉴含 4 个具体可迁移技巧;训练策略详尽"
+  可信赖:
+    score: 9
+    verdict: pass
+    reason: "数字 claim 覆盖率 >90%,均有 [Table/§] 标注;指标名使用正确;发现并修正了 1 处 factual error (Dialogue-Mandarin WER bold marker)"
+  可区分:
+    score: 9
+    verdict: pass
+    reason: "[论文原文] vs [agent 解读] 标注贯穿全文,覆盖率 ~90%;局限性中明确区分了 agent 推断"
+  可定位:
+    score: 9
+    verdict: pass
+    reason: "KB 背景含 Ming-Omni/Ming-UniAudio/Qwen3-Omni 三向对比;创新判断有具体数字基准;谱系定位清晰标注了技术路线转换"
+  不污染:
+    score: 9
+    verdict: pass
+    reason: "无需新建概念页;concepts/models/tasks/datasets 字段语义正确;反向更新为 append-only"
+
+conclusion: pass
+total_issues: 2
+high: 0
+medium: 1
+low: 1
+
+issues:
+  - severity: medium
+    type: factual-error
+    location: "实验 > 上下文 ASR > Dialogue-Mandarin WER"
+    detail: "原稿将 Ming-Flash-Omni (1.77) 标为 bold best,但 Qwen3-ASR (1.36) 更低"
+    suggestion: "已修正: bold marker 移至 Qwen3-ASR 1.36"
+    fixed: true
+
+  - severity: low
+    type: traceability-gap
+    location: "点评 > 不足之处"
+    detail: "提及 Instruct-TTS-Eval-zh 上匹配 Qwen3-TTS 的声称,但未标注论文具体 section/table"
+    suggestion: "已在正文中标注 [§2.2]"
+    fixed: false
+
+learning_signals: []
