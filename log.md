@@ -1,6 +1,16 @@
 # Log
 
 ## 2026-06-08
+- [kb/search] [[Step-Audio2]] — 命中 5 页 (取 Top 5): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[ModalityAdaptationforSpeechLLM]](pending-review)
+- [ingest/deep] [[Step-Audio2]] — 精读, kb_sources=5, 新建 0, 追加 0 (全部 skip: key_papers 超限 + Step-Audio 系列已充分代表)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45), Step-Audio 系列已有 v1+v2.5
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77), SA2 使用 CosyVoice2 tokenizer 无新贡献
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(103), Step-Audio 系列已有 v1+v2.5+EditX
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67), SA2 沿用 FM+HiFi-GAN
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(68), latent encoder 非 token 类贡献
+- [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(18), SA2.5 已代表
+- [lint/local] Step-Audio2 — 1 误报 (Step-Audio2.5 wikilink 因文件名含 .5 触发 has_extension 假阳性)
+- [review/auto] [[Step-Audio2]] — pass-with-fixes, 0 high, 1 medium, 2 low
 - [kb/search] [[Ming-Flash-Omni]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review)
 - [ingest/deep] [[Ming-Flash-Omni]] — 精读, kb_sources=6, 新建 0, 追加 1 (SpeechLanguageModel 演进线追加节点)
 - [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45),追加到演进线
