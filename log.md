@@ -5,6 +5,7 @@
 - [ingest/deep] [[Qwen3-ASR]] — 精读, kb_sources=6, 新建 0, 追加 2 (Whisper key_papers, SenseVoice key_papers+演进线)
 - [review/auto] [[Qwen3-ASR]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
 - [lint/local] Qwen3-ASR — 通过
+- [alert/backlog] pending-review: 73, draft deep/repro: 478 — 建议抽空审核
 - [kb/search] [[U-Codec]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[SpeechTokenizer]](pending-review), [[CodecLanguageModel]](pending-review)
 - [ingest/deep] [[U-Codec]] — 精读, kb_sources=6, 新建 0, 追加 2 (NeuralAudioCompression key_papers, TokenRateandBitrateTrade-offs 正文)
 - [skip/update] [[ResidualVectorQuantization]] — key_papers 已超限(45), 跳过
