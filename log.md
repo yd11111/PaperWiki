@@ -2,6 +2,15 @@
 
 ## 2026-06-08
 
+- [kb/search] [[Pupu-Vocoder]] — 命中 7 页 (取 Top 6): [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[EnCodec]]✓ | 过滤: [[SnakeActivation]](pending-review), [[BigVGAN]](pending-review), [[SingingVoiceSynthesis]](pending-review)
+- [ingest/deep] [[Pupu-Vocoder]] — 精读, kb_sources=6, 新建 0, 追加 4 (SnakeActivation/BigVGAN/NeuralVocoder/Multi-scaleSTFTDiscriminator)
+- [review/auto] [[Pupu-Vocoder]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [review/kb] [[Pupu-Vocoder]] — pass, 0 issues
+- [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),改追加到演进线
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),本文无 RVQ 方法创新,跳过
+- [skip/update] [[EnCodec]] — key_papers 已达上限(15),本文仅用作 baseline,跳过
+- [lint/local] Pupu-Vocoder — 通过
+- [alert/backlog] pending-review: 75, draft deep/repro: 1 — 建议抽空审核
 - [kb/search] [[J-CHAT]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review)
 - [ingest/deep] [[J-CHAT]] — 精读, kb_sources=4, 新建 1 (数据集/J-CHAT), 追加 0
 - [review/auto] [[J-CHAT]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
