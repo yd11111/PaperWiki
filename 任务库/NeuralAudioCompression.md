@@ -4,7 +4,7 @@ title: "Neural Audio Compression"
 aliases: [Neural Audio Codec, Learned Audio Compression, End-to-End Audio Codec]
 category: "audio-processing"
 tags: [audio-codec, compression, discrete-representation, speech-tokenization]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/SAC|SAC]]", "[[论文笔记/PURECodec|PURE Codec]]", "[[论文笔记/T-Mimi|T-Mimi]]", "[[论文笔记/EntropyGRVQ|EntropyGRVQ]]", "[[论文笔记/WavTokenizer|WavTokenizer]]", "[[论文笔记/OmniCodec|OmniCodec]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/VARSTok|VARSTok]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/SAC|SAC]]", "[[论文笔记/PURECodec|PURE Codec]]", "[[论文笔记/T-Mimi|T-Mimi]]", "[[论文笔记/EntropyGRVQ|EntropyGRVQ]]", "[[论文笔记/WavTokenizer|WavTokenizer]]", "[[论文笔记/OmniCodec|OmniCodec]]", "[[论文笔记/U-Codec|U-Codec]]"]
 related_tasks: ["[[Zero-shotSpeechSynthesis]]"]
 metrics: [ViSQOL, Mel-distance, STFT-distance, SI-SDR, MUSHRA, Bitrate-efficiency]
 status: confirmed
