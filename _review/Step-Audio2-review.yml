@@ -1,0 +1,54 @@
+review:
+  note: "论文笔记/Step-Audio2.md"
+  paper: "Step-Audio 2 Technical Report"
+  date: 2026-06-08
+  reviewer: auto
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    rationale: "方法节清晰解释了四组件架构、latent encoder 替代 discrete tokenizer 的 WHY、两阶段 PPO 的设计逻辑、audio search tool 的创新动机。速查卡片的可借鉴字段包含 5 个具体可迁移 trick。"
+  可信赖:
+    score: 9
+    verdict: pass
+    rationale: "所有数字型 claim 均有 [Table N] 标注,覆盖率 >95%。指标名使用正确 (CER/WER/BLEU)。速查卡片指标字段包含具体数字+数据集+来源。"
+  可区分:
+    score: 9
+    verdict: pass
+    rationale: "因果解释标注 [论文原文]/[agent 解读] 覆盖率 >90%。agent 解读与论文原文边界清晰。点评节全部标注为 [agent 解读]。"
+  可定位:
+    score: 8
+    verdict: pass
+    rationale: "KB 背景对比了 v1/v2/v2.5 三代系统差异,谱系定位准确。系列演进有具体时间和特征对比。但系列演进顺序有一个时间线错误 (medium issue)。"
+  不污染:
+    score: 9
+    verdict: pass
+    rationale: "概念挂接合理,frontmatter 字段语义正确。反向更新计划合理 (append key_papers + 追加描述)。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: factual-error
+    location: "点评 > 系列演进观察"
+    detail: "列出顺序 'Step-Audio 2 (2025.07) → Step-Audio-AQAA (2025.06)' 暗示 SA2 先于 AQAA,但 AQAA (arXiv:2506.08967) 2025年6月发布,SA2 (arXiv:2507.16632) 2025年7月发布。AQAA 在时间上先于 SA2,且 SA2 论文引用了 AQAA。"
+    suggestion: "修正为: Step-Audio (2025.02) → Step-Audio-AQAA (2025.06) → Step-Audio 2 (2025.07) → Step-Audio 2.5 (2026.05)"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter concepts"
+    detail: "SemanticvsAcousticTokens 在 KB 背景中被引用 (confirmed 实体页) 但未列入 frontmatter concepts 字段。反之 ModalityAdaptationforSpeechLLM (pending-review) 列入了 concepts。"
+    suggestion: "建议将 SemanticvsAcousticTokens 加入 concepts 或在 KB 背景说明其仅作背景参考。非阻塞。"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "方法 > 关键设计选择 > Interleaved text+audio token output"
+    detail: "论文提到 text 和 audio tokens 以 '固定比例' 交织 (§3.1 'interleaved at a fixed ratio'),但笔记标注 '具体比例未详述'。论文确实未给出具体数值,但 v1 曾使用 2:3 ratio,可补充作为参考。"
+    suggestion: "可在 agent 解读中补充: v1 使用 2:3 (text:audio) 交织比,v2 可能沿用但论文未明确。非阻塞。"
+
+conclusion: pass-with-fixes
+summary: "笔记质量高,五项原则基本满足。1 个 medium issue (系列演进时间线错误) 需修正,2 个 low issue 可选修正。不阻塞反向更新。"
+
+learning_signals: []

@@ -152,7 +152,7 @@ Step-Audio 2 是 Step-Audio 系列从"模块化工业系统"到"端到端基座�
 
 **Audio search tool 是系列最具独创性的工具创新**: 将音色/风格控制从训练时的 in-context learning 扩展为推理时的 retrieval,这种"检索增强的语音表达"思路在 LALM 领域尚无先例。但工具的工业价值与学术可复现性之间存在张力——开源版不包含此工具 [agent 解读]。
 
-**系列演进观察**: Step-Audio (2025.02, 130B AQTA+TTS) → Step-Audio 2 (2025.07, 端到端) → Step-Audio-AQAA (2025.06, 全端到端表达) → Step-Audio 2.5 (2026.05, 统一基座+三分支特化)。从分离到统一,从理解到推理,每代解决前代的核心限制。Step-Audio 2 是这条演进线上"从级联到端到端"的转折点 [agent 解读]。
+**系列演进观察**: Step-Audio (2025.02, 130B AQTA+TTS) → Step-Audio-AQAA (2025.06, 全端到端表达) → Step-Audio 2 (2025.07, 端到端+RL+RAG) → Step-Audio 2.5 (2026.05, 统一基座+三分支特化)。从分离到统一,从理解到推理,每代解决前代的核心限制。Step-Audio 2 是这条演进线上"从级联到端到端"的转折点 [agent 解读]。
 
 ## 可复用的 idea
 
@@ -162,6 +162,22 @@ Step-Audio 2 是 Step-Audio 系列从"模块化工业系统"到"端到端基座�
 4. **Paralinguistic speech captioning**: 构建 11 维副语言标注数据集 (gender/age/timbre/emotion/pitch/rhythm/speed/style/scenario/event/vocal) 用于 SFT,系统性覆盖副语言理解
 5. **Conversational speech synthesis pipeline**: 文本对话 → LLM 改写为口语化 → 随机插入情感/语速指令 → TTS 合成 (50K 说话人库),自动化生产多样化语音对话数据
 6. **Detokenizer 增强**: FM Transformer block 中每个 self-attention 后增加 CNN encoder layer,提升发音准确性和音色相似度
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法 WHY 清晰,速查可借鉴具体 |
+> | 可信赖 | pass | 数字 claim 标注覆盖率 >95% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注 >90% |
+> | 可定位 | pass | KB 背景谱系定位准确,v1/v2/v2.5 对比清晰 |
+> | 不污染 | pass | 概念挂接合理,反向更新无风险 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Step-Audio2-review.yml`
 
 ---
 
