@@ -1,6 +1,14 @@
 # Log
 
 ## 2026-06-08
+- [kb/search] [[DrVoice]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Speech-LLMIntegrationTaxonomy]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[MinMo]](pending-review)
+- [ingest/deep] [[DrVoice]] — 精读, kb_sources=6, 新建 0, 追加 2 (MinMo key_papers, TokenRateandBitrateTrade-offs 正文)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34), 跳过
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已超限, 跳过
+- [skip/update] [[SpeechTokenizer]] — key_papers 已超限, 跳过
+- [skip/update] [[CosyVoice]] — key_papers 已达上限(15), 跳过
+- [lint/local] DrVoice — 通过
+- [review/auto] [[DrVoice]] — pass-with-fixes, 0 high, 1 medium, 1 low
 - [kb/search] [[Step-Audio2]] — 命中 5 页 (取 Top 5): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[ModalityAdaptationforSpeechLLM]](pending-review)
 - [ingest/deep] [[Step-Audio2]] — 精读, kb_sources=5, 新建 0, 追加 0 (全部 skip: key_papers 超限 + Step-Audio 系列已充分代表)
 - [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45), Step-Audio 系列已有 v1+v2.5
