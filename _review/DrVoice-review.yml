@@ -1,0 +1,36 @@
+review:
+  paper: "DrVoice"
+  date: 2026-06-08
+  reviewer: auto
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节因果解释充分,DRSR 的 why/how 清楚,grouping+SRH 机制可复述。Core-Cocktail α=0 的解读有独立分析。"
+  trustworthy:
+    score: 9
+    rationale: "数字 claim 全部有出处标注,与原文交叉验证无误(Table 2/3/4/7 数据正确)。指标名使用准确。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文] 和 [agent 解读] 区分清晰,覆盖率 >90%。无推断当断言。SOTA claim 均有数据支撑。"
+  locatable:
+    score: 8
+    rationale: "KB 背景谱系定位准确(parallel vs interleaved vs text-driven),创新判断有对比基准(vs TokenRateandBitrateTrade-offs)。但 models 字段缺少 baselines。"
+  non-polluting:
+    score: 9
+    rationale: "无新概念页创建需求。反向更新内容预计为追加,风险低。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter models"
+    detail: "models 字段仅列组件(MinMo, CosyVoice, Whisper),缺少主要 baselines(Kimi-Audio, Qwen2.5-Omni, Baichuan-Omni-1.5, GLM-4-Voice, Step-Audio2-Mini, MiniCPM-o)"
+    suggestion: "补充 baseline 模型到 models 字段"
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,论文使用了 LibriSpeech, CommonVoice, MELD, SPGISpeech, Voxpopuli 等训练数据"
+    suggestion: "按需补充主要训练数据集"
+
+learning_signals: []

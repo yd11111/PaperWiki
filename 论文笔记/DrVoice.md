@@ -9,9 +9,9 @@ year: 2025
 venue: "arXiv preprint"
 tags: [speech-LM, parallel-speech-text, dual-resolution, speech-tokenizer, joint-modeling, grouping, SRH]
 concepts: ["[[SemanticvsAcousticTokens]]", "[[SpeechTokenizer]]", "[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[TokenRateandBitrateTrade-offs]]", "[[ModalityAdaptationforSpeechLLM]]", "[[ConditionalFlowMatching]]"]
-models: ["[[MinMo]]", "[[CosyVoice]]", "[[Whisper]]"]
+models: ["[[MinMo]]", "[[CosyVoice]]", "[[Whisper]]", "[[Kimi-Audio]]", "[[Qwen2.5-Omni]]", "[[GLM-4-Voice]]", "[[Baichuan-Omni-1.5]]", "[[Step-Audio2-Mini]]", "[[MiniCPM-o]]"]
 tasks: []
-datasets: []
+datasets: ["[[LibriSpeech]]", "[[CommonVoice]]"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-08
@@ -200,3 +200,19 @@ L_SRH = -sum log P(s_i | s_{<i}, H_{<i})
 3. **CoM-Mixing 7 模式**: 通过 system prompt 控制模型的输出模态,一个模型覆盖 S2M/S2T/T2M/T2T + 3 种 chain-of-modality 模式
 4. **SRH 预训练**: 先用 T2M 数据独立训练小模型初始化 SRH,比端到端训练效率高很多(预训练 vs 不预训练: S2M 38.33 vs 21.67)
 5. **非对称 encoder 设计**: 用户端连续表征(Whisper)+ 助手端离散 tokens(S3Tokenizer),各取所长
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | DRSR 因果解释充分,Core-Cocktail 有独立分析 |
+> | 可信赖 | pass | 数字交叉验证无误,出处标注 >90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 区分清晰 |
+> | 可定位 | pass-with-fixes | KB 背景谱系准确; models 字段已补充 baselines |
+> | 不污染 | pass | 无新概念页创建需求 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1)
+> 详见 `_review/DrVoice-review.yml`
