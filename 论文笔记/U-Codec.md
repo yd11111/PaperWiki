@@ -11,7 +11,7 @@ tags: [audio-codec, ultra-low-frame-rate, RVQ, speech-tokenizer, LLM-TTS, hierar
 concepts: ["[[ResidualVectorQuantization]]", "[[TokenRateandBitrateTrade-offs]]", "[[CodecTrainingObjectives]]", "[[SpeechTokenizer]]", "[[CodecLanguageModel]]"]
 models: ["[[EnCodec]]", "[[SoundStream]]"]
 tasks: ["[[NeuralAudioCompression]]", "[[Zero-shotSpeechSynthesis]]"]
-datasets: ["[[LibriTTS]]"]
+datasets: []
 kb_context_sources: 6
 status: draft
 created: 2026-06-08
@@ -82,7 +82,7 @@ Input: T frames × N RVQ tokens/frame
 
 [论文原文] 在 5Hz 下,每个 token 覆盖 200ms 语音,帧间信息依赖极强。纯卷积的 shift-invariant 操作无法自适应地在信息密集帧和静音帧之间重新分配建模容量。Transformer 的全局 attention 机制可以动态聚焦于关键帧 [§4.1.2]。
 
-消融证据 [Table 3]: 移除 Transformer 改用 convolution 后,WER 从 3.44 → 5.40 (+57%),PESQ 从 2.59 → 2.55,SPK-SIM 从 0.87 → 0.84。退化在 ASR/AVSR/Video-QA 等需要细粒度时序建模的任务上最为明显。
+消融证据 [Table 3]: 移除 Transformer 改用 convolution 后,WER 从 3.44 → 5.40 (+57%),PESQ-WB 从 2.59 → 2.55,SPK-SIM 从 0.87 → 0.84。[论文原文] 论文指出 shift-invariant 卷积操作无法自适应地在信息密集帧和静音帧之间重分配建模容量,这是纯卷积设计在极低帧率下的结构性缺陷 [§4.1.2]。
 
 [agent 解读] 这一发现与 5Hz 帧率直接相关。在高帧率 (50Hz) 下,每帧仅覆盖 20ms,卷积的局部感受野足以建模帧间依赖。但在 200ms 粒度下,一帧可能跨越多个音素,需要长距离依赖建模。
 
@@ -194,3 +194,19 @@ CodecFormer 将每帧的 N 个 RVQ token 视为一个 "patch",分两级建模 [E
 2. **固定 bitrate 下深层小 codebook 优于浅层大 codebook**: 在 ~1kbps 下,32层×256 优于 8层×8192。这一发现可指导其他低比特率 codec 的 codebook 配置
 3. **CodecFormer 的 global-local 分离**: 将 T×N 序列分解为帧间 (global, 长度 T) + 帧内 (local, 长度 N) 的层级建模,使深 RVQ (N=32-100) 在 LLM 中可行。这一思路可迁移到任何多码本 codec 的 LM 建模
 4. **帧率-RVQ深度-推理速度三角 trade-off**: 低帧率减少 global 步数但增加 local 步数 (深 RVQ);MAC 和 RTF 可能呈反向趋势 (MAC ↓ but RTF ↑)。系统设计需要同时优化两个维度
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY 解释充分,速查可借鉴具体可迁移 |
+> | 可信赖 | pass | 数字标注覆盖率 >90%,1 处 pdftotext 污染已修正 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注一致 |
+> | 可定位 | pass | KB 背景谱系定位精准,创新判断有对比基准 |
+> | 不污染 | pass | 反向更新均为追加操作,无新建页 |
+> 
+> Issues: 3 (high: 1 fixed, medium: 1 fixed, low: 1 noted)
+> 详见 `_review/U-Codec-review.yml`

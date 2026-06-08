@@ -1,0 +1,58 @@
+review:
+  paper: "U-Codec"
+  note_path: "论文笔记/U-Codec.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 9
+    verdict: pass
+    rationale: "方法节包含完整因果解释: Transformer bottleneck 的 WHY (帧间依赖在 200ms 粒度下不可避免), CodecFormer 的 WHY (T*N 序列不可行), 深层小 codebook 的 WHY (残差分解让每层只需少量信息)。速查卡片可借鉴字段列出 3 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    verdict: pass
+    rationale: "数字型 claim 标注覆盖率 >90%。实验表格均标注 [Table N]。消融数据准确 (WER 3.44→5.40, PESQ-WB 2.59→2.55, SPK-SIM 0.87→0.84 与 PDF Table 3 吻合)。指标名使用正确。初稿有一处 ASR/AVSR/Video-QA 污染已修正。"
+  distinguishable:
+    score: 9
+    verdict: pass
+    rationale: "因果解释一致标注 [论文原文] 或 [agent 解读]。覆盖率 >90%。推断性分析 (如 12.5Hz 可能是更实用折中、深层小 codebook 与直觉一致) 均明确标注 [agent 解读]。"
+  positionable:
+    score: 9
+    verdict: pass
+    rationale: "KB 背景节详细定位: 5Hz 在 codec 帧率演进中的位置 (SoundStream 50Hz → Mimi 12.5Hz → U-Codec 5Hz)。创新判断明确指出核心新意是系统工程组合而非单项技术突破。frontmatter 字段完整。"
+  non-polluting:
+    score: 8
+    verdict: pass
+    rationale: "反向更新计划合理: RVQ 页追加 key_papers, TokenRateandBitrateTrade-offs 页追加 key_papers, NeuralAudioCompression 页追加 key_papers。均为追加操作,不改 status。无需新建概念页。"
+
+issues:
+  - id: 1
+    severity: high
+    type: factual-error
+    location: "方法节 > 关键设计选择 > 1. Transformer bottleneck"
+    detail: "初稿包含 '退化在 ASR/AVSR/Video-QA 等需要细粒度时序建模的任务上最为明显' — 这些任务来自 video-SALMONN 论文 (pdftotext 错误提取),U-Codec 论文 Table 3 仅含 codec 重建指标。"
+    suggestion: "已修正为论文原文对 shift-invariant 卷积缺陷的解释。"
+    status: fixed
+
+  - id: 2
+    severity: medium
+    type: factual-error
+    location: "frontmatter datasets"
+    detail: "datasets 字段列 [[LibriTTS]] 但论文实际使用 LibriSpeech test-clean 评估 (不是 LibriTTS)。训练使用 LibriLight/GigaSpeech/MLS/LibriHeavy。"
+    suggestion: "已修正: datasets 改为空 (LibriSpeech/LibriLight/LibriHeavy/GigaSpeech/MLS 均无独立实体页)。"
+    status: fixed
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "速查卡片 > 指标"
+    detail: "PESQ 3.20 未标注为 PESQ-NB (narrow-band),可能误导读者以为是 PESQ-WB (2.59)。"
+    suggestion: "建议改为 PESQ-NB 3.20 / PESQ-WB 2.59 或标注 NB。"
+    status: noted
+
+conclusion: pass-with-fixes
+summary: "笔记整体质量高。方法节因果解释充分,来源标注覆盖率 >90%,KB 背景谱系定位精准。1 个 high issue (pdftotext 污染导致的事实错误) 已当场修正。1 个 medium issue (frontmatter datasets 错误) 已修正。1 个 low issue (PESQ NB/WB 未区分) 已记录。建议通过反向更新。"
+
+learning_signals: []
