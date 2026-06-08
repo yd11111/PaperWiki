@@ -36,7 +36,7 @@ updated: 2026-06-08
 > [!summary] 速查
 > - **一句话**: 基于 Qwen3-Omni 基座的 all-in-one ASR 家族 (0.6B/1.7B) + 首个 LALM-based NAR forced aligner,覆盖 52 语言/方言、歌声识别、流式推理
 > - **路线**: 音频 → Fbank 100Hz → AuT encoder (8x下采样, 12.5Hz) → Projector → Qwen3 LM → ASR 文本; ForcedAligner: 音频 + 带 [time] 槽的转录 → AuT + Qwen3 LM → timestamp prediction layer (NAR)
-> - **指标**: 1.7B LibriSpeech clean/other 1.63/3.38 WER, WenetSpeech 4.97/5.88 CER [Table 3]; 0.6B TTFT 92ms, throughput 2000s/s@128并发 [Table 2]; ForcedAligner AAS 32.4ms (vs MFA 141.3ms, NFA 101.2ms) on human-labeled [Table 9]
+> - **指标**: 1.7B LibriSpeech clean/other 1.63/3.38 WER, WenetSpeech 4.97/5.88 CER [Table 3]; 0.6B TTFT 92ms, throughput 2000s/s@128并发 [Table 2]; ForcedAligner AAS 32.4ms (vs Monotonic-Aligner 141.3ms, NFA 101.2ms) on human-labeled [Table 9]
 > - **可借鉴**: (1) 四阶段训练范式 (AuT预训练→Omni预训练→ASR SFT→GSPO RL); (2) ForcedAligner 的 slot-filling 重构 + NAR 解码 + 动态槽插入训练策略; (3) ASR SFT 阶段不使用自然语言指令以防止 instruction injection
 > - **局限**: 仅限 ASR 任务 (不支持 TTS/对话等生成); 30 语言 Fleurs 全集上略逊 Whisper-large-v3; ForcedAligner 训练依赖 MFA 伪标签; 内部 benchmark 不可复现
 
@@ -177,8 +177,8 @@ SFT 阶段训练模型"成为仅 ASR 的模型,不遵循 prompt 中的自然语�
 
 ### Forced Alignment 精度 [Table 9]
 
-| 评估集 | MFA | NFA | WhisperX | Qwen3-FA | 出处 |
-|--------|-----|-----|----------|----------|------|
+| 评估集 | Monotonic-Aligner | NFA | WhisperX | Qwen3-FA | 出处 |
+|--------|-------------------|-----|----------|----------|------|
 | MFA-Labeled Raw (avg, ms) | 161.1 | 129.8 | 133.2 | **42.9** | [Table 9] |
 | MFA-Labeled Concat-300s (avg, ms) | 1742.4 | 246.7 | 2708.4 | **52.9** | [Table 9] |
 | Human-Labeled (avg, ms) | 141.3 | 101.2 | — | **32.4** | [Table 9] |
@@ -225,3 +225,19 @@ SFT 阶段训练模型"成为仅 ASR 的模型,不遵循 prompt 中的自然语�
 4. **小规模 RL (GSPO) 做最后一公里优化**: 仅 50k utterances 的 RL 微调就能显著提升噪声鲁棒性和转录稳定性。对于已经有较好 SFT 基础的 ASR 模型,少量 RL 数据的边际收益很高。
 
 5. **MFA 伪标签蒸馏**: ForcedAligner 在 MFA 伪标签上训练但精度超越 MFA,说明 LLM 的全局建模能力可以从有噪声的监督信号中提取更干净的模式——"student surpasses teacher"策略。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四阶段训练WHY解释清晰,ForcedAligner slot-filling机制到位 |
+> | 可信赖 | pass | 数字标注覆盖率>90%,已修正1处baseline命名错误 |
+> | 可区分 | pass | [论文原文]/[agent 解读]标注覆盖率>90% |
+> | 可定位 | pass | KB背景谱系定位具体(LALM vs GER vs Whisper弱监督) |
+> | 不污染 | pass | 反向更新为追加操作,风险低 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Qwen3-ASR-review.yml`
