@@ -11,6 +11,7 @@
 - [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(18),跳过
 - [lint/local] Ming-Flash-Omni — 通过/0 问题
 - [review/auto] [[Ming-Flash-Omni]] — pass, 0 high, 1 medium, 1 low
+- [alert/backlog] pending-review: 73, draft deep/repro: 0 — 建议抽空审核
 
 ## 2026-06-06
 - [kb/search] [[UniSRM]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
