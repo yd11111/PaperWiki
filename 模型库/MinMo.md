@@ -7,7 +7,7 @@ year: 2025
 tags: [multimodal-LLM, speech-understanding, voice-interaction]
 key_concepts: ["[[SpeechTokenizer]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
-key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]"]
+key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DrVoice|DrVoice]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
@@ -46,3 +46,4 @@ FunAudioLLM / SenseVoice → MinMo (2025, 多模态语音 LLM)
 
 - 为 CosyVoice 3 提供了强大的语音理解 backbone,使 speech tokenizer 的多任务监督训练成为可能
 - 其丰富的预训练知识使得 FSQ 量化后的 token 天然携带副语言信息
+- DrVoice (Tan et al., 2025) 同样出自 Tongyi Fun Team,使用 S3Tokenizer + CosyVoice detokenizer(均源自 MinMo/CosyVoice 技术栈),在 parallel speech-text joint modeling 中达到 7B 级 SOTA

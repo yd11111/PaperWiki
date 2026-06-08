@@ -111,6 +111,7 @@ TTS 系统对 token rate 和 bitrate 有特殊需求:
 
 Survey TTS 实验 [Table 11]: Discrete WavLM (6 codebooks, 3 kbps, semantic) 达到 UTMOS 3.42, dWER 7.45, SpkSim 0.90 — 语义 tokenizer 在有限数据条件下更稳定。
 - **极低帧率 + 深 RVQ**: [[论文笔记/UltraLowLatencyTTS|UltraLowLatencyTTS]] (Su et al., 2026) 使用 Mimi 12.5 Hz x 32 层 codebook (2048 entries),通过 depth-wise sequential decoding 在帧内逐层预测。消融显示 16→32 层 WER 仅降 0.18pp (9.07→8.89%),佐证 Survey "8Q→32Q 改善微弱但 token rate 增 4 倍" 的发现。极端低帧率的优势在 attention 计算量(序列仅 125 帧/10s)和 RTF(0.0033)上体现。
+- **Grouping 降频 for Speech-LLM**: [[论文笔记/DrVoice|DrVoice]] (Tan et al., 2025) 在 parallel speech-text joint model 中使用 grouping factor k=5 将 25Hz semantic tokens 压缩到 5Hz 输入 LLM,再通过 Speech Refined Head (SRH) 自回归恢复 25Hz 输出。消融显示 k=5 vs k=1 在 S2M(T) 上从 4.00 跳到 37.67,同时 GPU hours 减半 [DrVoice Table 7, Fig 2]。这是 token rate trade-off 在 Speech-LLM 场景的另一种解法: 不降低 tokenizer 帧率,而是在 LLM 输入层做 grouping 降频。
 
 ## 关键论文
 
