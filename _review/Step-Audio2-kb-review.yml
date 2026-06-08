@@ -1,0 +1,39 @@
+kb_review:
+  note: "论文笔记/Step-Audio2.md"
+  paper: "Step-Audio 2 Technical Report"
+  date: 2026-06-08
+  reviewer: auto
+
+change_plan:
+  - target: "概念库/SpeechLanguageModel.md"
+    action: skip
+    reason: "key_papers 已达上限 (45 条); 页面已包含 Step-Audio v1 和 StepAudio 2.5,Step-Audio 系列充分代表"
+
+  - target: "概念库/SpeechTokenizer.md"
+    action: skip
+    reason: "key_papers 已达上限 (77 条); SA2 使用 CosyVoice 2 tokenizer,未引入新 tokenizer 设计"
+
+  - target: "概念库/LLM-basedTTS.md"
+    action: skip
+    reason: "key_papers 已达上限 (103 条); 页面已包含 Step-Audio v1 和 StepAudio 2.5"
+
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: skip
+    reason: "key_papers 已达上限 (67 条); SA2 沿用 FM+HiFi-GAN,仅增加 CNN layer 增强,不构成独立贡献"
+
+  - target: "概念库/SemanticvsAcousticTokens.md"
+    action: skip
+    reason: "key_papers 已达上限 (68 条); SA2 的 latent encoder 输入属于连续表征路线,与 semantic/acoustic token 二分法不直接相关"
+
+  - target: "概念库/ModalityAdaptationforSpeechLLM.md"
+    action: skip
+    reason: "key_papers 已达上限 (18 条); 页面已包含 StepAudio 2.5, SA2 的 2x downsampling adaptor 是标准方案无新贡献"
+
+  - target: "新页面"
+    action: none
+    reason: "SA2 未引入需要独立成页的新概念。latent audio encoder 和 audio search tool 是工程设计而非概念级创新,不满足概念页准入规则 (多篇引用 + 前置知识 + 连接论文 >= 2)"
+
+conclusion: pass
+summary: "所有目标页 key_papers 均超限,Step-Audio 系列已充分代表 (v1/v2.5/EditX)。无新建页需求。跳过全部反向更新。"
+
+issues: []
