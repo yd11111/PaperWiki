@@ -7,7 +7,7 @@ arxiv_id: "2309.09690"
 source: "Sources/ZipfSpeechSymbols.pdf"
 authors: [Shinnosuke Takamichi, Hiroki Maeda, Joonyong Park, Daisuke Saito, Hiroshi Saruwatari]
 year: 2023
-venue: "Interspeech 2024 (UTokyo)"
+venue: "Interspeech 2024"
 tags: [speech-tokenizer, Zipf-law, discrete-token, speech-representation, GSLM, HuBERT, k-means, statistical-analysis, speech-analysis, self-supervised-learning]
 concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[Self-SupervisedSpeechRepresentation]]", "[[SpeechLanguageModel]]"]
 models: ["[[模型库/HuBERT|HuBERT]]"]
@@ -201,3 +201,19 @@ Input waveform → Speech2unit (HuBERT encoder + k-means clustering) → Discret
 ---
 
 检索命中: [[SpeechTokenizer]](confirmed), [[SemanticvsAcousticTokens]](confirmed), [[SpeechLanguageModel]](confirmed) | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review) | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 分析框架的 WHY/HOW 解释充分,速查卡片可操作 |
+> | 可信赖 | pass | 数字标注覆盖率 ≥ 90%,指标名正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率高 |
+> | 可定位 | pass | KB 背景含 NACTokenLanguageAnalysis 谱系定位 |
+> | 不污染 | pass | 无新建概念页,反向更新仅追加 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ZipfSpeechSymbols-review.yml`
