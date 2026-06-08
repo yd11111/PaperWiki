@@ -167,3 +167,22 @@ updated: 2026-06-08
 3. **JTFS LM 的连续反馈机制**: output embedding 不经离散化直接反馈到 input 端,保持连续空间的完整信息。这一设计可用于任何需要避免 autoregressive quantization bottleneck 的场景。
 
 4. **SSL 中间层 > 最后层**: HuBERT layer 16 consistently 优于 layer 24,与 SSL 领域的 probing 研究一致,可作为 tokenizer 层选择的通用指导。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 2x2 矩阵 + 四类 encoder 的 WHY/HOW 清晰; 速查可借鉴有 3 个具体 trick |
+> | 可信赖 | pass | WER 数据标注覆盖率 >90%, 指标使用一致 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~85%, matched tokens 解读边界清楚 |
+> | 可定位 | pass | KB 背景准确定位在 Speech-LLM Integration Taxonomy 交叉点 |
+> | 不污染 | pass | 对比研究无新概念, 反向更新仅 append |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> - models 字段为空 (medium, 可接受因为是对比研究)
+> - venue 未确认是否为 Interspeech 2024 (low)
+> - datasets 引用 [[LibriSpeech]] 但页面不存在 (low)
+> 详见 `_review/DiscreteVsContinuousLLM-ASR-review.yml`
