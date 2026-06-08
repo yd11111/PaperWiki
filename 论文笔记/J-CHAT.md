@@ -6,13 +6,13 @@ arxiv_id: "2407.15828"
 source: "Sources/J-CHAT.pdf"
 authors: [Wataru Nakata, Kentaro Seki, Hitomi Yanaka, Yuki Saito, Shinnosuke Takamichi, Hiroshi Saruwatari]
 year: 2024
-venue: "LREC-COLING 2025"
+venue: "arXiv preprint"
 tags: [speech-dataset, spoken-dialogue, corpus-construction, dGSLM, Japanese, spontaneous-speech, speech-LM]
-concepts: ["[[SpeechLanguageModel]]", "[[Full-duplexSpokenDialogue]]", "[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpokenDialogueEvaluation]]"]
+concepts: ["[[SpeechLanguageModel]]", "[[Full-duplexSpokenDialogue]]", "[[SpeechTokenizer]]", "[[SpokenDialogueEvaluation]]"]
 models: ["[[HuBERT]]"]
 tasks: []
 datasets: ["[[LibriTTS]]"]
-kb_context_sources: 4
+kb_context_sources: 3
 status: draft
 created: 2026-06-08
 updated: 2026-06-08
@@ -20,9 +20,9 @@ updated: 2026-06-08
 
 ## KB 背景
 
-> [!info] KB 背景 (基于 3 个已确认实体页 + 1 个待确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[Full-duplexSpokenDialogue]])
+> [!info] KB 背景 (基于 2 个已确认实体页 + 2 个待确认实体页: [[SpeechLanguageModel]], [[SpeechTokenizer]], [[Full-duplexSpokenDialogue]], [[SpokenDialogueEvaluation]])
 > 自动生成,不保证完整覆盖所有相关知识。
-> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: 无
+> 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review) | 未命中但可能相关: 无
 
 **谱系定位**: J-CHAT 是一个面向 end-to-end Spoken Dialogue System (SDS) 的大规模语音对话语料库。在 SpeechLM 发展谱系中,端到端 SDS 的代表是 dGSLM (Nguyen et al., 2023),它是首个全双工 SpeechLM,使用 HuBERT semantic tokens + dual transformer 架构。dGSLM 的训练需要数万小时的对话语音数据,但此前开源对话语料极为稀缺 -- 最大的 Seamless Interaction 仅 4k 小时且人工录制、不可扩展。J-CHAT 试图填补这一数据缺口。
 
@@ -157,3 +157,19 @@ YouTube 和播客常含背景音乐,对语音生成模型构成噪声 [论文原
 2. **多数据源混合优于单源放大**: 合并不同来源的数据比单纯扩大同一来源规模更能提升模型性能。启示: 数据工程中应优先追求来源多样性 [§5.4]
 3. **80% 单人占比过滤规则**: 简单但有效的对话/独白分离规则,可直接复用到其他语言的对话语料构建 [§3.2.2]
 4. **Podcast 作为高效对话数据源**: Podcast 的对话比例 (45%) 高于 YouTube (42%),且 PodcastIndex 提供多语言元数据,是跨语言对话语料采集的高效来源 [§3.1]
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | pipeline 各环节 WHY/HOW 清晰,速查卡片可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率高,MOS 含 CI,指标名正确 |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 ~85% |
+> | 可定位 | pass | 谱系定位精确,KB 背景含具体对比基准 |
+> | 不污染 | pass-with-fixes | concepts 挂接 SemanticvsAcousticTokens 过宽,已修正 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/J-CHAT-review.yml`

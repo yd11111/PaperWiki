@@ -1,0 +1,61 @@
+review:
+  paper: "J-CHAT"
+  note_path: "论文笔记/J-CHAT.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    verdict: pass
+    rationale: "方法节清晰解释了 pipeline 各环节的 WHY 和 HOW,包括双源选择原因、80% 过滤规则依据。数据工程论文的核心在 pipeline 设计,笔记准确捕获了这一点。速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: 8
+    verdict: pass
+    rationale: "关键数字均有出处标注 (Table 2/3, §4.2, §3.1 等)。MOS 含 95% CI。NISQA 数字与原文一致。指标名称使用正确。"
+  可区分:
+    score: 8
+    verdict: pass
+    rationale: "[论文原文] 和 [agent 解读] 标注清晰,覆盖率约 85%。5s gap 阈值的解读明确标注为 agent 推断。Podcast 保留率高的解释也标注为 agent 解读。"
+  可定位:
+    score: 9
+    verdict: pass
+    rationale: "KB 背景节谱系定位精确: 明确了 J-CHAT 在 SpeechLM/dGSLM 谱系中的位置,与 Seamless Interaction 的对比基准清晰,已有认知涵盖了 SpeechLanguageModel/Full-duplex/SpeechTokenizer 三个维度。"
+  不污染:
+    score: 7
+    verdict: pass-with-fixes
+    rationale: "frontmatter concepts 列了 SemanticvsAcousticTokens,但本文对 semantic vs acoustic tokens 的讨论很浅 (仅用 HuBERT semantic tokens,未涉及这一 trade-off 的讨论),挂接略宽。models 仅列 HuBERT 合理。反向更新计划中不涉及新页面创建,风险低。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: bad-linking
+    location: "frontmatter concepts"
+    detail: "concepts 列了 [[SemanticvsAcousticTokens]],但本文并未讨论 semantic vs acoustic tokens 的 trade-off,仅使用了 HuBERT semantic tokens 作为工具。挂接过宽。"
+    suggestion: "移除 [[SemanticvsAcousticTokens]],保留 [[SpeechLanguageModel]], [[Full-duplexSpokenDialogue]], [[SpeechTokenizer]], [[SpokenDialogueEvaluation]]"
+
+  - id: 2
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "models 仅列 [[HuBERT]],但本文实验中还使用了 dGSLM 作为核心验证模型。dGSLM 是本文的下游用户 (非对比 baseline),但作为数据集论文,dGSLM 是唯一的验证模型。"
+    suggestion: "如果模型库中有 dGSLM 页面则追加;如无则保持现状,因为 models 字段语义要求列本文模型或对比 baseline。"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "方法 §3.4 ASR 转录"
+    detail: "提到 Moshi 的 Inner Monologue 作为需要文本标注的 SDS 的例子,但原文 §3.4 引用的是 Défossez et al., 2024 而非 Moshi。虽然指的是同一系统,但引用不够精确。"
+    suggestion: "改为 '如 Défossez et al. (2024) 所述的需要文本标注的 SDS 训练'"
+
+  - id: 4
+    severity: low
+    type: template-compliance
+    location: "frontmatter venue"
+    detail: "venue 标注为 LREC-COLING 2025,但 arXiv v2 日期为 2026-04-02。需确认是否已被正式接收。"
+    suggestion: "如无法确认,改为 arXiv preprint。"
+
+learning_signals: []
