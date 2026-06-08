@@ -1,6 +1,25 @@
 # Log
 
 ## 2026-06-08
+
+- [kb/search] [[ZipfSpeechSymbols]] — 命中 5 页 (取 Top 5): [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review)
+- [ingest/deep] [[ZipfSpeechSymbols]] — 精读, kb_sources=5, 新建 0, 追加 1 (HuBERT key_papers)
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过追加
+- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(68),跳过追加
+- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(26),跳过追加
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45),跳过追加
+- [lint/local] ZipfSpeechSymbols — 通过
+- [kb/search] [[DiscreteVsContinuousLLM-ASR]] — 命中 6 页 (取 Top 6): [[SpeechTokenizer]]✓ | 过滤: [[LLM-enhancedASR]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
+- [ingest/deep] [[DiscreteVsContinuousLLM-ASR]] — 精读, kb_sources=6, 新建 1 (LibriSpeech), 追加 2 (LLM-enhancedASR key_papers, Speech-LLMIntegrationTaxonomy key_papers)
+- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(24),跳过追加
+- [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(12),跳过追加
+- [skip/update] [[SpeechTokenizer]] — 实体页审阅标记 revise,跳过追加
+- [review/auto] [[DiscreteVsContinuousLLM-ASR]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] DiscreteVsContinuousLLM-ASR — 通过
+- [kb/search] [[BalancingUnderstanding-Generation]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
+- [ingest/deep] [[BalancingUnderstanding-Generation]] — 精读 (no-git, no-kb-update), kb_sources=6, 新建 0, 追加 0
+- [review/auto] [[BalancingUnderstanding-Generation]] — pass, 0 high (2 low)
+- [lint/local] BalancingUnderstanding-Generation — 通过
 - [kb/search] [[Qwen3-ASR]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓ | 过滤: [[AudioUnderstanding]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[LLM-enhancedASR]](pending-review), [[Whisper]](pending-review), [[SenseVoice]](pending-review)
 - [ingest/deep] [[Qwen3-ASR]] — 精读, kb_sources=6, 新建 0, 追加 2 (Whisper key_papers, SenseVoice key_papers+演进线)
 - [review/auto] [[Qwen3-ASR]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
