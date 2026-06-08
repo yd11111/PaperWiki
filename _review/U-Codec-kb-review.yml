@@ -1,0 +1,29 @@
+kb_review:
+  paper: "U-Codec"
+  note_path: "论文笔记/U-Codec.md"
+  reviewer: auto
+  date: 2026-06-08
+
+change_plan:
+  - target: "任务库/NeuralAudioCompression.md"
+    action: append
+    detail: "追加 key_papers: [[论文笔记/U-Codec|U-Codec]]。当前 11 条,追加后 12 条 (达上限)。"
+    safety: pass
+
+  - target: "概念库/ResidualVectorQuantization.md"
+    action: skip
+    detail: "key_papers 已 45 条 (上限 12),远超限额。跳过追加。"
+    safety: pass
+
+  - target: "概念库/TokenRateandBitrateTrade-offs.md"
+    action: append-body
+    detail: "key_papers 已 12 条 (达上限)。在'在 TTS 中的应用'节末追加一行引用 U-Codec 作为 5Hz 极低帧率的数据点。"
+    safety: pass
+
+  - target: "概念库/CodecTrainingObjectives.md"
+    action: skip
+    detail: "key_papers 已 12 条 (达上限)。U-Codec 训练目标为标准 GAN+Feat+Rec+VQ,无新贡献。跳过。"
+    safety: pass
+
+conclusion: pass
+summary: "4 个目标页,1 个 append key_papers, 1 个 append body text, 2 个 skip (key_papers 上限)。全部为追加操作,不改 status。无新建页。安全通过。"
