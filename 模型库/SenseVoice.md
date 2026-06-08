@@ -7,7 +7,7 @@ year: 2024
 tags: [ASR, SER, AED, LID, multilingual, non-autoregressive, speech-understanding, open-source]
 key_concepts: ["[[Self-SupervisedSpeechRepresentation]]", "[[AudioUnderstanding]]", "[[SpeechTokenizer]]"]
 tasks: []
-key_papers: ["[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]"]
+key_papers: ["[[论文笔记/FunAudioLLM|FunAudioLLM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/Qwen3-ASR|Qwen3-ASR]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
@@ -46,7 +46,7 @@ SenseVoice 同时是 CosyVoice 系列 S^3 supervised semantic speech tokenizer �
 
 ## 演进线
 
-SenseVoice (2024, ASR+SER+AED+LID) → 作为 S^3 tokenizer 基础集成入 CosyVoice (2024) → MinMo (2025) 替代 SenseVoice-Large 作为 CosyVoice 3 的 tokenizer backbone
+SenseVoice (2024, ASR+SER+AED+LID) → 作为 S^3 tokenizer 基础集成入 CosyVoice (2024) → MinMo (2025) 替代 SenseVoice-Large 作为 CosyVoice 3 的 tokenizer backbone → Qwen3-ASR (2026, 同团队, 基于 Qwen3-Omni 基座的 LALM 范式 ASR, 覆盖 52 语言/方言, 开源 SOTA)
 
 ## 关键贡献
 
