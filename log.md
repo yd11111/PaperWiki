@@ -1,5 +1,17 @@
 # Log
 
+## 2026-06-08
+- [kb/search] [[Ming-Flash-Omni]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓, [[ConditionalFlowMatching]]✓, [[SpeechTokenizer]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review)
+- [ingest/deep] [[Ming-Flash-Omni]] — 精读, kb_sources=6, 新建 0, 追加 1 (SpeechLanguageModel 演进线追加节点)
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45),追加到演进线
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(103),系统报告非核心贡献,跳过
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(67),跳过
+- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(84),跳过
+- [skip/update] [[VariationalAutoencoderforTTS]] — key_papers 已达上限(17),跳过
+- [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(18),跳过
+- [lint/local] Ming-Flash-Omni — 通过/0 问题
+- [review/auto] [[Ming-Flash-Omni]] — pass, 0 high, 1 medium, 1 low
+
 ## 2026-06-06
 - [kb/search] [[UniSRM]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓ | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review)
 - [ingest/deep] [[UniSRM]] — 精读, kb_sources=4, 新建 0, 追加 1 (TTSEvaluation 追加 section + 演进线)
