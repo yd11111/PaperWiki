@@ -1,6 +1,13 @@
 # Log
 
 ## 2026-06-08
+- [kb/search] [[U-Codec]] — 命中 6 页 (取 Top 6): [[ResidualVectorQuantization]]✓, [[NeuralAudioCompression]]✓ | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[CodecTrainingObjectives]](pending-review), [[SpeechTokenizer]](pending-review), [[CodecLanguageModel]](pending-review)
+- [ingest/deep] [[U-Codec]] — 精读, kb_sources=6, 新建 0, 追加 2 (NeuralAudioCompression key_papers, TokenRateandBitrateTrade-offs 正文)
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已超限(45), 跳过
+- [skip/update] [[CodecTrainingObjectives]] — key_papers 已达上限(12), 跳过
+- [review/auto] [[U-Codec]] — pass-with-fixes, 3 issues (1 high fixed, 1 medium fixed, 1 low noted)
+- [review/kb] [[U-Codec]] — pass, 1 append + 1 body-append + 2 skip
+- [lint/local] U-Codec — 通过
 - [kb/search] [[DrVoice]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Speech-LLMIntegrationTaxonomy]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review), [[MinMo]](pending-review)
 - [ingest/deep] [[DrVoice]] — 精读, kb_sources=6, 新建 0, 追加 2 (MinMo key_papers, TokenRateandBitrateTrade-offs 正文)
 - [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(34), 跳过
