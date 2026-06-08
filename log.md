@@ -2,6 +2,12 @@
 
 ## 2026-06-08
 
+- [kb/search] [[J-CHAT]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review)
+- [ingest/deep] [[J-CHAT]] — 精读, kb_sources=4, 新建 1 (数据集/J-CHAT), 追加 0
+- [review/auto] [[J-CHAT]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [lint/local] J-CHAT — 通过
+- [create/dataset] J-CHAT — 新建数据集页 (76k hr 日语对话语料, pending-review)
+- [alert/backlog] pending-review: 75, draft deep/repro: 0 — 建议抽空审核
 - [kb/search] [[ZipfSpeechSymbols]] — 命中 5 页 (取 Top 5): [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review)
 - [ingest/deep] [[ZipfSpeechSymbols]] — 精读, kb_sources=5, 新建 0, 追加 1 (HuBERT key_papers)
 - [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过追加
