@@ -34,7 +34,7 @@ updated: 2026-06-08
 ## 速查
 
 > [!summary] 速查
-> - **一句话**: 从信号处理角度系统解决 neural vocoder/codec 中激活函数和上采样层的 aliasing 问题,提出 ADAA SnakeBeta + resampling upsampling,在歌声/音乐/音频合成上显著超越 BigVGAN 和 DAC
+> - **一句话**: 从信号处理角度系统解决 neural vocoder/codec 中激活函数和上采样层的 aliasing 问题,提出 ADAA SnakeBeta + resampling upsampling;vocoder 在歌声/音乐上显著超越 BigVGAN,codec 以更少参数(119M vs 154M)与 DAC 持平或略优
 > - **路线**: Mel/Waveform → Encoder → RVQ(codec)/直接输入(vocoder) → Decoder(AF Conv Blocks: ADAA SnakeBeta activation + resampling upsampling + deterministic noise prior) → Waveform
 > - **指标**: 歌声 MUSHRA: Pupu-Vocoder_large 70.84 vs BigVGAN_large 53.08 [Table II]; 音乐 MUSHRA: 56.42 vs 50.42 [Table III]; AHR activation -45.95 dB vs LeakyReLU -25.25 dB [Table I]
 > - **可借鉴**: ADAA 技术可迁移到任何使用非线性激活的上采样网络; deterministic noise prior 解决重采样训练不稳定; SnakeBeta 的 closed-form ADAA 消除 threshold fallback
@@ -87,7 +87,7 @@ $$y_t = \frac{1}{2\beta} + \frac{\Sigma_x}{2} - \frac{\cos(\alpha\Sigma_x)\text{
 
 #### 2. Anti-Aliased Upsampling: Resampling + Deterministic Noise Prior [§III-B]
 
-**问题**: ConvTranspose 的 zero-interlacing 本质上是频域展宽 + 频谱复制 [Eq.48 参考],引入 "mirrored" aliasing 和 "tonal artifact" [§II-B]。Linear/nearest interpolation 替代方案虽消除 tonal artifact,但其等效滤波器频率响应差(通带衰减 + 阻带泄漏),引入 "filter artifact" [Fig 3]。
+**问题**: ConvTranspose 的 zero-interlacing 本质上是频域展宽 + 频谱复制 [48],引入 "mirrored" aliasing 和 "tonal artifact" [§II-B]。Linear/nearest interpolation 替代方案虽消除 tonal artifact,但其等效滤波器频率响应差(通带衰减 + 阻带泄漏),引入 "filter artifact" [Fig 3]。
 
 **方案** [论文原文]:
 - **Resampling layer**: zero-interlacing + Kaiser window truncated sinc LPF (n=16),频率响应远优于 linear/nearest interpolation [Fig 5a]
@@ -208,3 +208,19 @@ ADAA SnakeBeta 不用 oversampling 就能达到 SnakeBeta O=2 的效果;加上 O
 2. **Deterministic noise prior**: 在任何上采样场景中,用原始信号的高频分量作为 prior 填充新增频段,比纯零填充或随机噪声更稳定。可推广到 super-resolution 等任务
 3. **Test signal benchmark**: 用合成正弦/锯齿/三角波量化 aliasing 程度(AHR 指标),比真实信号更可控、可解释。可作为 vocoder 设计的标准 ablation 工具
 4. **SnakeBeta > Snake 的选择逻辑**: SnakeBeta 的分母 $\beta$ 使 ADAA closed-form 更优美,这种"为下游数学性质选择函数形式"的思路值得学习
+
+## 审阅
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY 充分,速查可借鉴具体 |
+> | 可信赖 | pass | 所有数字与原文交叉验证无误,标注覆盖率高 |
+> | 可区分 | pass | 来源标注覆盖率 >90%,事实/推断分离清晰 |
+> | 可定位 | pass | 谱系定位 BigVGAN→DAC→本文 清楚 |
+> | 不污染 | pass | 待 KB 更新审阅 |
+> 
+> Issues: 2 (high: 0, medium: 1, low: 1) — 均已修正
+> 详见 `_review/Pupu-Vocoder-review.yml`
