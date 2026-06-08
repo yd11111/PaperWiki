@@ -11,7 +11,7 @@ tags: [speech-dataset, spoken-dialogue, corpus-construction, dGSLM, Japanese, sp
 concepts: ["[[SpeechLanguageModel]]", "[[Full-duplexSpokenDialogue]]", "[[SpeechTokenizer]]", "[[SpokenDialogueEvaluation]]"]
 models: ["[[HuBERT]]"]
 tasks: []
-datasets: ["[[LibriTTS]]"]
+datasets: ["[[LibriTTS]]", "[[J-CHAT]]"]
 kb_context_sources: 3
 status: draft
 created: 2026-06-08
