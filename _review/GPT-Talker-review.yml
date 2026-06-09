@@ -1,0 +1,37 @@
+paper: GPT-Talker
+reviewer: auto
+date: 2026-06-09
+tier: deep
+conclusion: pass
+
+principles:
+  reproducible:
+    status: pass
+    note: "ConGPT (24层 Transformer, HuBERT-VQ tokenization, ABAB序列化) + ConVITS (text encoder + token encoder + cross-attention + timbre encoder + VITS) 架构清晰可复述; 训练细节完整 (2xA100+2xA800, batch 8, N=3)"
+  trustworthy:
+    status: pass
+    note: "主实验数字来自 Table 3 (DailyTalk + NCSSD); 消融来自 Table 4 + Appendix Table 2/3/4; 因果解释区分了[论文原文]和[agent解读]"
+  distinguishable:
+    status: pass
+    note: "明确对比了 ECSS (同组前作, graph-based→sequence-based升级), DiffCSS (diffusion路线), RADKA-CSS (retrieval路线); 在CSS演进链中定位清晰"
+  locatable:
+    status: pass
+    note: "KB背景覆盖 ProsodyModeling(confirmed) + EmotionControlinTTS + CodecLanguageModel + StyleTransferinTTS; 谱系定位在 CSS + CodecLM 交叉"
+  no_pollution:
+    status: pass
+    note: "无编造数据; 局限性如实标注 (N=3限制/非母语/视觉未用/非端到端); NCSSD数据统计直接引自 Table 2"
+
+issues:
+  high: 0
+  medium: 0
+  low: 0
+  details: []
+
+strengths:
+  - "NCSSD数据集详情充分 (规模/构建方法/许可),是该论文最有价值的贡献"
+  - "ABAB vs AABB 消融、三阶段训练消融、对话轮次消融三组实验覆盖全面"
+  - "与同领域 DiffCSS/ECSS/RADKA-CSS 的对比定位准确,体现了CSS领域的理解深度"
+  - "可复用的idea提取聚焦实用性 (自动化pipeline/序列化策略/训练策略)"
+
+suggestions:
+  - "未来可补充 NCSSD 在后续论文中的使用情况追踪"
