@@ -73,7 +73,7 @@ Frame-wise features → Q-Former (Learned Queries + Cross-Attention) → Fixed-l
 - 一组可学习的 query tokens 通过 cross-attention 从语音表征中提取信息
 - 输出长度由 query 数量决定,与输入长度无关
 
-**代表系统**: Yu et al. (2024), SALMONN (Tang et al., 2024), COSMIC (Pan et al., 2023), XLLM, DesSTA, Secap
+**代表系统**: Yu et al. (2024), SALMONN (Tang et al., 2024), COSMIC (Pan et al., 2023), XLLM, DesSTA, Secap, [[论文笔记/JELLY|JELLY]] (Cha et al., ICASSP 2025, EQ-former: Whisper+TLTR+Q-former 特化用于情感对齐)
 
 **优势**: 输出长度固定,效率最高; 性能最优 (Yu et al., 2024 实验证实)
 **劣势**: 额外 query tokens 需要学习; 可能丢失细粒度时序信息

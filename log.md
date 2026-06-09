@@ -2,6 +2,12 @@
 
 ## 2026-06-09
 
+- [kb/search] [[JELLY]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Full-duplexSpokenDialogue]](pending-review)
+- [ingest/deep] [[JELLY]] — 精读, kb_sources=6 (2 confirmed + 4 pending-review), 新建 0, 追加 2 (EmotionControlinTTS body, ModalityAdaptationforSpeechLLM body)
+- [review/auto] [[JELLY]] — pass-with-fixes, 1 low issue
+- [lint/local] JELLY — 通过
+- [skip/update] [[EmotionControlinTTS]] — key_papers 已达上限(>12),改追加到正文
+- [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(12),改追加到正文
 - [ingest/deep] [[SASLM]] — Self-Aware Speech LLM; KB 命中: [[ProsodyModeling]](confirmed), [[EmotionControlinTTS]](pending-review), [[LLM-basedTTS]](confirmed); 追加 key_papers x3
 - [review/auto] [[SASLM]] — pass, 2 minor issues
 - [ingest/deep] [[GPT-Talker]] — 精读, kb_sources=4 (1 confirmed: ProsodyModeling; 3 pending-review: EmotionControlinTTS, CodecLanguageModel, StyleTransferinTTS), 新建 0, 追加 2 (ProsodyModeling, CodecLanguageModel)
