@@ -1,0 +1,14 @@
+paper: Chain-Talker
+reviewer: auto
+date: 2026-06-09
+conclusion: pass
+checklist:
+  reproducible: pass  # 三阶段架构、CSS-EmCap pipeline、训练策略均可复现
+  trustworthy: pass  # 关键数字标注出处,因果推断区分来源
+  distinguishable: pass  # 与5个相关系统对比清晰
+  traceable: pass  # KB背景定位明确,概念页链接完整
+  non-polluting: pass  # 未编造信息,不确定处标注[agent解读]
+issues: []
+notes:
+  - ProsodyModeling key_papers 已 51 条超上限,暂不追加
+  - 论文 DDTW 低于 GT 的现象在笔记中标注为开放问题
