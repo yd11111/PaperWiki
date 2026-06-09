@@ -1,0 +1,42 @@
+review:
+  paper: "CoLM-DSR"
+  note_path: "论文笔记/CoLM-DSR.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "三模块架构 (multi-modal encoder, speaker codec encoder, codec LM decoder) 解释充分,含 WHY (为什么用多模态/为什么 codec normalizer 优于 speaker encoder)。codec normalizer 的 SV-based nearest neighbor 机制有数学公式支撑 (Eq. 2-6)。速查卡片可借鉴字段给出了具体可迁移思路。"
+  trustworthy:
+    score: 8
+    rationale: "所有关键指标均标注出处 (Table 1/2/3, Fig 3)。MOS 含 95% CI。WER 和 SV distance 结果与原文一致。指标名称使用正确 (MOS/WER/SV distance)。"
+  distinguishable:
+    score: 7
+    rationale: "codec normalizer 的 insight 解读明确标为 [agent 解读]。论文原文的解释标为 [论文原文]。但方法节中部分因果推断 (如'选择 VALL-E 架构可能是因为成熟的开源实现') 虽标为 [agent 解读],措辞可更谨慎。"
+  positionable:
+    score: 8
+    rationale: "KB 背景含谱系定位 (codec LM 从正常语音到病理语音的迁移),与已有系统 (VALL-E/AudioLM) 的对比清晰,创新判断有对比基准 (speaker codec normalizer 在 KB 中无先例)。"
+  non_polluting:
+    score: 9
+    rationale: "未触发反向更新。笔记中的概念引用与 KB 已有页面一致,无 overclaim。"
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "方法节 > 关键设计选择 > 第3点"
+    detail: "'选择 VALL-E 架构而非更新的 codec LM 变体 (如 SoundStorm),可能是因为 VALL-E 有成熟的开源实现' — 这是 agent 推测,论文未讨论架构选择的原因。虽标为 [agent 解读],但 '可能是因为' 的推测性较强,读者可能误认为论文有讨论。"
+    suggestion: "改为更明确的推测措辞,如 '[agent 解读] 论文未解释架构选择原因。一个可能的因素是 VALL-E 有成熟开源实现。'"
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter > tasks"
+    detail: "tasks 字段为空列表。DSR (Dysarthric Speech Reconstruction) 可视为一个任务,但 KB 任务库中无对应页面。"
+    suggestion: "可保持空列表,因 DSR 不满足概念页准入规则 (仅本文使用,非通用任务)。或在 frontmatter 中以非 wikilink 形式标注 'Dysarthric Speech Reconstruction'。"
+
+learning_signals: []

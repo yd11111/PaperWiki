@@ -1,0 +1,109 @@
+review:
+  paper: "HowGSLMEncodesNoisySpeech"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 8
+      rationale: "方法节清晰解释了 GSLM 架构、实验设计 (噪声分类、SNR 范围、评估指标)。核心问题节动机明确。速查卡片可借鉴字段具体。但论文本身是分析性工作而非新方法,因果解释(WHY)更多是实验设计的合理性解释,方法节不涉及新的设计选择,这符合论文性质。"
+
+    trustworthy:
+      score: 9
+      rationale: "数字标注覆盖率高 (>90%),所有表格数据标注了出处 [Table N]。指标名称正确无混淆 (UER/PER/WER/WCER/WARP-Q/UTMOS)。速查卡片指标字段含具体范围和条件。无方向性错误。"
+
+    distinguishable:
+      score: 8
+      rationale: "方法节有 [论文原文] 和 [agent 解读] 标注。点评节和局限性节的推断性内容清晰可辨。但局限性第6条'Tacotron2 作为 decoder 已过时'是 agent 判断,未显式标注,考虑到局限性节本身就是评述性质,这属于可接受范围。"
+
+    locatable:
+      score: 9
+      rationale: "KB 背景节有具体谱系定位,引用了 SpeechLanguageModel 和 SemanticvsAcousticTokens 两个 confirmed 页面的具体内容。创新判断明确——填补 KB 中噪声鲁棒性维度的空缺。frontmatter 字段完整,concepts 和 models 语义合理。"
+
+    non-polluting:
+      score: 9
+      rationale: "本次审阅无反向更新,不存在污染风险。frontmatter 中的 concepts/models 链接指向合理目标。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "frontmatter: venue"
+      detail: "venue 列为 'Interspeech 2023',但论文正文未明确标注会议名。从 arXiv 提交日期 (2023-06-01)、论文格式和页数 (4+1 pages) 推断为 Interspeech,但未经确认。"
+      suggestion: "在 venue 字段添加注释或通过 Playwright 搜索确认实际发表会议。如无法确认,改为空字符串或 'arXiv preprint'。"
+
+    - id: 2
+      severity: low
+      type: bad-linking
+      location: "frontmatter: concepts"
+      detail: "concepts 包含 PhonemeRepresentation,但该概念页主要关于 TTS 前端的 G2P 转换,与本文的 phoneme-level error analysis 视角不完全匹配。不构成错误但关联性偏弱。"
+      suggestion: "可保留,因为本文的 unit-to-phoneme mapping 确实涉及音素表示的分析。"
+
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: "frontmatter: models"
+      detail: "models 仅列 HuBERT,但论文使用 Whisper-base 做 WER 评估 (Whisper 在模型库中存在)。Whisper 是评估工具而非研究对象,是否列入取决于 models 字段的语义约定。"
+      suggestion: "当前不列入是合理的,因为 Whisper 仅作为外部 ASR 工具使用,非本文研究的模型。保持现状。"
+
+  summary:
+    total_issues: 3
+    high: 0
+    medium: 1
+    low: 2
+
+  checklist_results:
+    reproducible:
+      - item: "方法节含因果解释(WHY)"
+        status: pass
+        note: "分析性论文,WHY 体现在实验设计的合理性解释"
+      - item: "关键设计选择有理由"
+        status: pass
+        note: "噪声分类 (L-BAB/M-BAB/H-BAB) 动机清晰"
+      - item: "速查可借鉴具体可迁移"
+        status: pass
+        note: "5 个可复用 idea 均具体"
+    trustworthy:
+      - item: "数字标注 ≥ 80%"
+        status: pass
+        note: "估计 >90%,所有表格数据有 [Table N] 标注"
+      - item: "指标名正确"
+        status: pass
+        note: "UER/PER/WER/WCER/WARP-Q/UTMOS 均正确"
+      - item: "速查指标具体"
+        status: pass
+        note: "含范围值和条件"
+      - item: "无方向性错误"
+        status: pass
+    distinguishable:
+      - item: "因果解释来源标注"
+        status: pass
+        note: "[论文原文] 和 [agent 解读] 标注存在"
+      - item: "来源标注覆盖率 ≥ 80%"
+        status: pass
+        note: "方法节约 90% 覆盖"
+      - item: "无推断当断言"
+        status: pass
+      - item: "强断言有支撑"
+        status: pass
+        note: "无不当强断言"
+    locatable:
+      - item: "KB 背景有具体谱系定位"
+        status: pass
+        note: "引用 SpeechLanguageModel + SemanticvsAcousticTokens confirmed 页"
+      - item: "创新判断有对比基准"
+        status: pass
+        note: "明确指出填补噪声鲁棒性维度"
+      - item: "frontmatter 字段存在非空"
+        status: pass
+      - item: "frontmatter 语义正确"
+        status: pass-with-note
+        note: "venue 未经确认,见 issue #1"
+      - item: "速查 5 字段实质内容"
+        status: pass
+    non_polluting:
+      - item: "无反向更新 (skipped)"
+        status: not-applicable
+
+  learning_signals: []

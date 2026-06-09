@@ -1,0 +1,52 @@
+review:
+  paper: "NativeAudio-VisualAlignment"
+  date: "2026-06-08"
+  reviewer: "auto"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含充分的 WHY 解释(为何解耦同步与条件/为何渐进融合/为何 span-level timbre),每个设计选择有对比替代方案的分析。速查卡片5个可复用idea具体且可迁移。"
+  可信赖:
+    score: 9
+    rationale: "主要实验数字均有 [Table N] 标注,指标名称使用正确(Sync-C/Sync-D/IB/WER/PQ/FD/ASV),方程引用 [Eq.N] 完整。训练细节有少量出处缺失(minor)。"
+  可区分:
+    score: 9
+    rationale: "方法节中因果解释标注了 [论文原文] 和 [agent 解读],覆盖率 >90%。点评节定位为主观评论,未混入未标注的推断。"
+  可定位:
+    score: 8
+    rationale: "KB 背景节有具体谱系定位(CFG 演进线 VoXtream2/X-Voice, speaker embedding 注入范式对比),创新判断有对比基准。但本文属于 CV/multimodal 领域,与 TTS KB 的核心关联较弱,主要通过 Seed-TTS 评估和 CosyVoice 基线连接。"
+  不污染:
+    score: 10
+    rationale: "本次审阅未涉及反向更新(skip by instruction),无 KB 污染风险。frontmatter concepts/models/datasets 挂接合理。"
+
+issues:
+  - id: 1
+    severity: low
+    type: traceability-gap
+    location: "训练策略 section"
+    detail: "训练细节 (3:1 ratio, lr 5e-5, batch 512, 70K steps) 缺少 [§2.4.1] 和 [Appendix] 的精确标注,仅在段尾提到 [Appendix]"
+    suggestion: "在各项训练参数后补充 [§2.4.1] 或 [Appendix §6.4] 标注"
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter concepts"
+    detail: "本文核心创新 Timbre-in-Context Conditioning 和 Align-then-Fuse MMDiT 无对应概念页可挂接,concepts 仅列了间接相关的 CFG/DiffusionModel/SpeakerEmbedding"
+    suggestion: "此为客观限制(KB 无音频视频联合生成相关概念页),当前挂接合理,无需修改"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "速查 - 路线"
+    detail: "路线描述中的 block 数量 (10 HAL + 20 UFL) 未标注来源"
+    suggestion: "补充 [§3.1]"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+summary: "笔记质量优良。方法节因果解释充分,来源标注覆盖率高,速查卡片具体可迁移。3个low问题均为局部出处标注缺失,不影响可信性。本文属于 CV/multimodal 领域论文,与 TTS KB 的连接主要通过 Seed-TTS 评估和音色控制机制,KB 背景节正确定位了这一关系。"
+
+learning_signals: []

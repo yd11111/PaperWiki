@@ -1,0 +1,50 @@
+review:
+  paper: "WhenDoSpeechLLMsBehaveLikeASR-LLMPipelines"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节以三层框架 (形式化→行为测试→机制证据) 组织,每层都有因果解释 (WHY matched-backbone, WHY LEACE 同时擦除所有层, WHY 禁用 bias centering, WHY TTS 合成音频)。速查卡片可借鉴列出 5 条具体可迁移方法,均含实现指引。关键设计选择回答了 why this not that。"
+    trustworthy:
+      score: 9
+      reason: "所有数字型 claim 均标注出处,覆盖率 >95%。与 PDF 原文全面交叉验证: kappa 值 (Fig 1)、LEACE 结果 (Table 7)、噪声下性能变化 (§4.4/Fig 3)、probing 数据 (Table 4/5)、implicit cascade kappa (Table 6) 全部一致,无方向性错误。指标名使用正确 (Cohen's kappa, R^2, CTC decodability, conditional error overlap)。"
+    distinguishable:
+      score: 9
+      reason: "因果解释来源标注覆盖率约 95%。方法节 4 个关键设计选择均明确标注 [论文原文] 或 [agent 解读]。LEACE 模式分析中对 Qwen2-Audio '内置 ASR' 和 Ultravox '逐层构建文本表征' 的深层规律正确标注为 [agent 解读],虽然论文 §5.5 有类似表述,agent 的用语更强但推断合理。点评节身份清晰,无事实与推断混淆。"
+    positionable:
+      score: 8
+      reason: "KB 背景节基于 6 个实体页 (1 confirmed + 5 pending-review) 提供了实质性谱系定位,特别是将论文与 AudioUnderstanding 页的 Dynamic-SUPERB 发现对齐、与 Speech-LLMIntegrationTaxonomy 的三类分类框架关联。创新判断有明确对比基准 ('核心创新不在架构改进,而在评估方法论')。扣分点: frontmatter tasks/datasets 为空,虽然这些任务/数据集无实体页,但列出会增强可发现性。"
+    non-polluting:
+      score: 9
+      reason: "按用户指令跳过反向更新和概念页修改,无污染风险。概念引用 (SpeechLanguageModel, Speech-LLMIntegrationTaxonomy 等) 合理且已有实体页。无 overclaim,点评中的推测性判断措辞谨慎。"
+
+  issues:
+    - type: "template-compliance"
+      severity: "low"
+      location: "frontmatter tasks/datasets"
+      detail: "论文使用了 6 个评估数据集 (TriviaQA, AG News, SST-2, CommonsenseQA, MELD, MUStARD) 和 MUSAN 噪声集,但 frontmatter tasks 和 datasets 字段均为空。这些数据集无实体页,按现有惯例可不填,但空字段降低了该笔记在按数据集检索时的可发现性。"
+      suggestion: "考虑在 tags 中补充数据集名称,或在 datasets 字段以纯文本 (非 wikilink) 列出"
+    - type: "traceability-gap"
+      severity: "low"
+      location: "点评 倒数第 2 段"
+      detail: "'pitch R^2 > 0.29' 缺少具体出处标注"
+      suggestion: "补充 [Table 4]"
+    - type: "traceability-gap"
+      severity: "low"
+      location: "局限性 §4"
+      detail: "'Whisper 的 680k 小时训练' 来自 [agent 解读] 但实际是 Whisper 论文事实,应标注 KB 来源或参考文献"
+      suggestion: "改为 'Whisper 的 680k 小时弱监督训练 [Whisper 原文/KB: Whisper]'"
+
+  summary:
+    total_issues: 3
+    high: 0
+    medium: 0
+    low: 3
+
+conclusion: "pass"
+
+learning_signals:
+  - "本文是方法论/评估类论文 (不提出新模型),frontmatter models 字段的处理惯例值得明确: 对于评估多个已有模型的研究,应列出所有被评估模型还是仅列有实体页的?"

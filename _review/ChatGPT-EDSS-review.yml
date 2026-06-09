@@ -1,0 +1,44 @@
+review:
+  paper: "ChatGPT-EDSS"
+  arxiv_id: "2305.13724"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    status: pass
+    reason: "方法流程 (ChatGPT prompt → BERT embedding → FS2 条件化) 描述清晰,两步架构易于复述。训练细节 (lr, iterations, optimizer) 完整记录。"
+  trustworthy:
+    score: 8
+    status: pass
+    reason: "所有 MOS 数字和 reliability score 均标注出处 [Table 1-3, Fig 4]。结论 '持平' 与数据一致,未夸大效果。"
+  distinguishable:
+    score: 8
+    status: pass
+    reason: "与 TP-GSTs 的差异 (考虑对话历史) 和与 CCE 的差异 (可解释性) 明确阐述。KB 背景将其定位在 Emotion Control 和 NL Description 两条线的交叉点。"
+  locatable:
+    score: 8
+    status: pass
+    reason: "在演进线中定位清晰: 早于 Emo-DPO/EmoVoice 等系统,与 PromptTTS 同期但关注对话场景。"
+  non_polluting:
+    score: 9
+    status: pass
+    reason: "未引入未经验证的推测。弱监督视角和 hallucination 风险的讨论均标注为论文原文或 agent 解读。"
+
+issues:
+  - id: 1
+    severity: medium
+    location: "局限性"
+    detail: "MOS 差异在统计上不显著 (95% CI 重叠: 3.52±0.14 vs 3.43±0.14),当前措辞 '效果仅持平' 可更尖锐地指出这意味着实验无法证明 ChatGPT 上下文提供了额外增益"
+    suggestion: "在局限性或点评中明确指出 '所有方法 MOS 差异在 95% CI 内重叠,无法证明统计显著差异'"
+  - id: 2
+    severity: low
+    location: "KB 背景 / 可复用的 idea"
+    detail: "与同期 PromptTTS (Guo et al., ICASSP 2023) 的比较仅在 KB 背景中提及,未在正文展开讨论两者的方法论差异"
+    suggestion: "可在点评或方法节补充: PromptTTS 用专家标注 5 属性描述 → 直接控制 TTS; ChatGPT-EDSS 用 LLM 自动提取 3 属性 → 弱监督条件化,两者代表 NL description 的不同设计哲学"
+
+learning_signals: []
+
+summary: "笔记质量良好,结构完整,KB 定位准确。两个 issues 均为增强性建议,不影响笔记的核心质量。建议保留 pass-with-fixes 结论。"

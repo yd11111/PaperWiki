@@ -1,0 +1,35 @@
+review:
+  paper: "QualiSpeech"
+  note_path: "论文笔记/QualiSpeech.md"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass
+
+  principles:
+    reproducible:
+      score: 9
+      rationale: "数据集设计三步标注流程的 WHY 清晰(为何用 GPT 生成+人工修正而非纯人写); 模型训练的两阶段策略有明确动机; 关键设计选择(11 维度选择理由、统一合成+真实语音的动机、多选题 benchmark 的理由)均有因果解释"
+    trustworthy:
+      score: 9
+      rationale: "所有数字标注来源([Table N]/[§X.X]/[Appendix X]); PCC/IoU/precision/recall 指标使用正确; 速查卡片含具体数字和数据集; 无方向性错误"
+    distinguishable:
+      score: 9
+      rationale: "[论文原文]/[agent 解读] 标注覆盖方法节所有因果解释; 无推断写成断言的问题"
+    positionable:
+      score: 9
+      rationale: "KB 背景清晰定位在 TTS Evaluation 演进线的 NL 描述数据层; 与 GSRM/SpeechJudge/TTS-PRISM/UniSRM 等后续工作的关系明确; frontmatter 字段完整"
+    non_polluting:
+      score: 10
+      rationale: "无新建概念页; 不执行反向更新(按用户要求); 无污染风险"
+
+  issues: []
+
+  summary:
+    total_issues: 0
+    high: 0
+    medium: 0
+    low: 0
+
+  learning_signals: []
+
+  notes: "本篇为数据集/benchmark 贡献论文,非模型创新论文,笔记结构已适配(侧重数据设计和标注方法论而非模型架构)。按用户要求不执行反向更新和 git commit。"

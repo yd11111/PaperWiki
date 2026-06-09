@@ -1,0 +1,43 @@
+review:
+  paper: "Fine-GrainedContrastiveAudio-Text"
+  title: "Towards Fine-Grained and Multi-Granular Contrastive Language-Speech Pre-training"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节详细解释了关键设计的 WHY: 为什么用端到端 pipeline 而非级联(信息瓶颈)、为什么需要两阶段课程训练(ablation Table 8)、为什么动态调度器从 global 向 fine-grained 渐进(避免 hard negative 干扰); 速查可借鉴字段给出 5 个具体可迁移 idea"
+    trustworthy:
+      score: 9
+      reason: "所有数字 claim 均标注 [Table N]/[§X.X]/[Eq N]; 指标名使用正确 (R@1/mAP@10/WA/UA/Pearson r/Spearman rho/Kendall tau); 速查指标字段含具体数字+数据集+来源; 无方向性错误"
+    distinguishable:
+      score: 9
+      reason: "因果解释来源标注覆盖率 >90%; [论文原文] 和 [agent 解读] 区分一致; agent 解读使用了'可能是''直觉是'等限定词; 无推断写成断言的情况; '范式转变'等强表述有数字支撑 (从 <5% 到 45-68%)"
+    positionable:
+      score: 8
+      reason: "KB 背景谱系定位清晰 (CLAP 家族 → LAION-CLAP/GLAP/ParaCLAP → CLSP 的两个差异点); 创新判断有对比基准; frontmatter 字段存在且语义基本正确; 但 models: [] 为空,本文提出 CLSP 模型且对比了多个 baseline"
+    no_contamination:
+      score: null
+      reason: "本次不执行 KB 更新,无需评估"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: template-compliance
+      location: "frontmatter → models"
+      detail: "models: [] 为空,但本文提出 CLSP (724M dual-encoder) 并对比了 LAION-CLAP、GLAP、ParaCLAP、Auden-Voice 等 baseline。按 checklist 'models 列本文模型+对比 baseline' 应至少列出 CLSP"
+      suggestion: "至少添加 CLSP;如果模型库中有对应 baseline 页,也应列出"
+      fixed: false
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "frontmatter → datasets"
+      detail: "datasets 仅列 Emilia,但 FCaps (本文核心贡献数据集) 和 ParaSpeechCaps (主要评测基准) 也是关键数据集;IEMOCAP/RAVDESS/CREMA-D 用于零样本分类评测"
+      suggestion: "考虑补充 FCaps 和 ParaSpeechCaps 至 datasets (如有/将创建对应页)"
+      fixed: false
+
+  learning_signals: []
+
+  summary: "高质量精读笔记。方法机制解释到位,因果解释来源标注完整,数字 claim 溯源覆盖率高。KB 背景准确定位了 CLSP 在 CLAP 家族中的位置和创新点。1 个 medium 问题 (models 字段为空) 和 1 个 low 问题 (datasets 不完整) 不影响笔记可用性。无 high issue,反向更新可继续。"

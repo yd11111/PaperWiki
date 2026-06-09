@@ -1,0 +1,43 @@
+review:
+  paper: "OmniScript"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节覆盖 WHY/HOW,关键设计选择 (AV-DeepStack 多层融合、时间对齐、CoT 推理、CPM 延迟命名) 均有因果解释; 速查卡片可借鉴字段具体且可迁移 (时序分段奖励、记忆增强标注、两阶段推理)"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 85%; 指标名正确使用; 速查指标字段含具体数字+数据集名+来源标注 [Table 1/2]; 消融实验数据完整引用 [Table 3/4/5]"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 80%; 方法节多处正确使用 [论文原文] 和 [agent 解读] 标注; 点评节的质疑有数字支撑 (如 37.7 vs 38.9 的 overclaim 指出)"
+  可定位:
+    score: 7
+    rationale: "KB 背景有谱系定位 (Dense Video Captioning → Omni-Modal Script Generation); 与 TimeChat-Captioner 的对比清晰; 但 vault 以 TTS 为核心,本文属视频理解方向,KB 命中少是结构性原因,非笔记质量问题"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 不做反向更新; 无概念页修改; 无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "frontmatter models/concepts"
+    detail: "frontmatter 的 models 字段未列全论文提及的 baseline 模型 (Qwen3-VL-235B, Gemini-3-pro, Qwen3-Omni 作为对比 baseline); 但这些模型不在 vault KB 中且非 TTS 方向,省略有合理性"
+    suggestion: "可维持现状; 若日后 vault 扩展至多模态方向再补充"
+  - id: 2
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea §5"
+    detail: "'四阶段层级评估设计' 的可迁移描述偏泛,但给出了具体的四级管线拆分思路 (对齐→身份解析→字段语义→时间定位)"
+    suggestion: "可补充一句'对 TTS 场景的具体映射示例'增强可操作性"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 1
+
+learning_signals: []

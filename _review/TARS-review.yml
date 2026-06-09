@@ -1,0 +1,47 @@
+paper: TARS
+file: 论文笔记/TARS.md
+reviewer: auto
+date: 2026-06-08
+checklist_version: v1.1
+
+verdict: pass
+
+principles:
+  可复述:
+    status: pass
+    notes: >
+      方法节包含充分的因果解释: WHY on-policy 而非 off-policy (exposure bias + unreachable objective),
+      WHY moving reference (co-evolution), WHY modality-specific normalization (弱模态被压制),
+      WHY mean-pool (序列长度不匹配), WHY embedding similarity 而非 token-level matching (分布差异)。
+      速查卡片的可借鉴字段列出 4 条具体可迁移 trick。
+  可信赖:
+    status: pass
+    notes: >
+      数字 claim 均有 [Table N]/[§X.X] 标注。指标名使用正确 (MRR, accuracy, WER, cosine similarity)。
+      速查卡片指标字段含具体数字 + 数据集名 + 来源标注。无方向性错误。
+      出处标注覆盖率估计 >90%。
+  可区分:
+    status: pass
+    notes: >
+      因果解释来源标注覆盖率 >80%。[论文原文] 和 [agent 解读] 区分清晰。
+      点评节明确标注 [agent 解读]。无把推断写成断言的情况。
+  可定位:
+    status: pass
+    notes: >
+      KB 背景定位到 SpeechLM 演进中 Post-alignment 阶段,与 Align-SLM/SpeechAlign 对比,
+      指出从 off-policy DPO 到 on-policy RL 的推进。frontmatter 字段完整,
+      models 列 Qwen2.5-Omni 和 Phi-4-MM (本文实验对象,非后续系统)。
+  不污染:
+    status: pass
+    notes: >
+      无新建概念页需求。现有概念库中 SpeechLanguageModel (confirmed),
+      Speech-TextAlignment, ModalityAdaptationforSpeechLLM, AudioUnderstanding (pending-review)
+      已充分覆盖 TARS 涉及的概念空间。反向更新建议: 可追加 TARS 到
+      SpeechLanguageModel.key_papers 和 Speech-TextAlignment.key_papers。
+
+issues: []
+
+summary: >
+  高质量深读笔记。TARS 的核心贡献 (dense alignment reward + modality-specific normalization)
+  解释清晰,实验消融层次分明,stage-dependent regularization 发现有独特价值。
+  无 high/medium/low issue。建议后续反向更新追加 TARS 到相关概念页 key_papers。

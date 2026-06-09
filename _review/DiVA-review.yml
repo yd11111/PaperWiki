@@ -1,0 +1,34 @@
+review:
+  paper: "DiVA"
+  note_path: "论文笔记/DiVA.md"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "三个关键设计选择均有 WHY not just WHAT 解释: Whisper decoder 初始化 Q-Former (复用 cross-attention vs 从头训练), L2 proxy for KL (Lemma 1 + toy experiment), 最后 N 对齐 (causal attention 梯度回传)。Context distillation 的动机 (SFT forgetting 问题) 和核心假设 (audio/text 应产生相似输出) 明确。速查可借鉴项包含具体公式和适用范围。"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 标注覆盖率约 85%,主要引用 [Fig N]/[§X.X]/[Table N]。实验表格包含完整 baseline 对比、数据集和来源。注意: 原文 benchmark 结果以 bar chart 呈现无精确数字 table,笔记中用 ~ 标注为图表估读值。72% win rate 和 100x 计算效率差距等关键 claim 有精确出处。"
+  可区分:
+    score: 9
+    rationale: "[论文原文] vs [agent 解读] 标注覆盖率接近 100%。推断性分析明确标记: 'distillation 的天花板'、'Whisper decoder 初始化是废物利用'、'一旦 LLM 被微调 L2 近似不再严格成立'、'teacher 没有 audio 理解能力无法 distill'。局限性中区分了论文承认的 (继承 LLM 偏见) 和 agent 补充的 (仅理解不生成)。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节将 DiVA 准确定位于 latent-representation-based + Q-Former 路线。与 SALMONN 的范式对比 (SFT+activation tuning vs distillation) 有教学价值。与 context distillation 文献 (Snell et al. 2022, Mu et al. 2024) 的关系明确。创新判断有三个具体点,各点与 KB 已有知识形成对比。"
+  不污染:
+    score: 9
+    rationale: "未创建新概念页。KB 引用均为已有页面 (6 个 concept pages)。数字型 claim 带来源标注,bar chart 估读值用 ~ 标记。无 overclaim — 局限性节充分讨论了 distillation 方法的内在限制。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

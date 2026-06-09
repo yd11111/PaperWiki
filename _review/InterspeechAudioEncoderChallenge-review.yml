@@ -1,0 +1,56 @@
+paper: InterspeechAudioEncoderChallenge
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    reason: "方法节清晰解释了 XARES-LLM 三模块架构的 WHY (SmolLM2-135M 设计意图、Track A/B 独立训练原因),速查卡片可借鉴字段给出了 3 个具体可迁移 trick"
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: "数字型 claim 的出处标注覆盖率约 90%,指标名使用正确 (Acc/mAP/iWER/iCER/FENSE/DATE),速查卡片指标字段包含具体数字 + 数据集 + 来源"
+  distinguishable:
+    score: 8
+    verdict: pass
+    reason: "因果解释处有 [论文原文]/[agent 解读] 标注,覆盖率约 85%; 点评节的判断有 Table 6 数据支撑"
+  locatable:
+    score: 9
+    verdict: pass
+    reason: "KB 背景节准确定位了本文在 X-ARES 系列和 audio encoder benchmark 谱系中的位置,创新判断有明确对比基准 (SUPERB/HEAR/X-ARES linear probing)"
+  non-polluting:
+    score: 9
+    verdict: pass
+    reason: "no-kb-update 模式,不涉及反向更新; frontmatter 概念挂接合理"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: frontmatter.datasets
+    detail: "datasets 字段为空,但论文使用了 30+ 个评估数据集 (ESC-50, LibriSpeech, Clotho, AISHELL-1 等)"
+    suggestion: "添加最关键的几个代表数据集 (非全部): LibriSpeech, AISHELL-1, Clotho, ESC-50 等在 vault 中已有实体页的"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "点评节"
+    detail: "\"LALM-aligned encoder 全面碾压传统 SSL encoder\" 中 '碾压' 是定性判断,虽有 Table 6 支撑但缺少具体分数差距量化"
+    suggestion: "补充顶级 LALM-encoder 团队 vs 纯 SSL 团队的典型分数差 (如 THUVoice 91.2% vs JustForFun/WavLM-based 69.3%)"
+
+  - id: 3
+    severity: low
+    type: bad-linking
+    location: frontmatter.models
+    detail: "models 仅列 Whisper,但论文核心提到的 Qwen2-Audio、Audio-Flamingo 3、StepAudio 2 等 LALM encoder 未列入 (vault 中无对应页面)"
+    suggestion: "保持现状即可; 这些模型在 vault 中无实体页,不应创建空链接"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []

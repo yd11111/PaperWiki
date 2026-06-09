@@ -1,0 +1,37 @@
+review:
+  paper: "论文笔记/video-SALMONN2.md"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass"
+
+principles:
+  repeatable:
+    score: 8
+    verdict: pass
+    reason: "方法节完整覆盖 MrDPO 三步循环、gDPO loss 公式、atomic event 评估流程,因果解释充分 (WHY: 为什么不能直接多轮 DPO → reference staleness; 为什么用 LoRA proxy → 避免停滞; 为什么 gDPO → 稳定训练)。训练策略三阶段清晰。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: "数字 claim 标注覆盖率高,主要实验结果均标注 [Table X] 出处。指标名使用正确 (Missing Rate, Hallucination Rate, Total Error%, Elo, Video-MME accuracy)。无方向性错误。"
+  distinguishable:
+    score: 7
+    verdict: pass
+    reason: "因果解释标注了 [论文原文] 和 [agent 解读]。'直接在每轮用上一轮的完整模型做 reference 又会导致...' 标注为 [agent 解读]。整体 fact-inference 区分明确。MrDPO ablation 表中 gDPO 单独变差的解释 (从第 2 轮起才稳定) 来自 Fig 3a 实验,标注可更明确。"
+  locatable:
+    score: 8
+    verdict: pass
+    reason: "KB 背景谱系定位清晰 (SALMONN → video-SALMONN → video-SALMONN 2),明确标注了与前代的差异 (架构→训练策略转向)。与 DifferentiableRewardOptimization 页的关联分析到位,区分了 MrDPO 面向 captioning vs TTS DPO 的场景差异。速查卡片 5 字段均有实质内容。"
+  no_pollution:
+    score: 9
+    verdict: pass
+    reason: "本次不做反向更新 (用户指示)。frontmatter concepts/models 挂接合理。无 overclaim。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

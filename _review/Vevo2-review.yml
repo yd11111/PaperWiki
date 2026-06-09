@@ -1,0 +1,51 @@
+paper: Vevo2
+arxiv_id: "2508.16332"
+reviewer: auto
+date: 2026-06-08
+verdict: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    notes: "架构、tokenizer 设计、EPL/IPL 策略、GRPO 后训练均有清晰描述,关键方程引用准确"
+  trustworthy:
+    status: pass
+    notes: "[论文原文] vs [agent 解读] 标注明确; 指标引用带 Table 号; KB 定位准确"
+  distinguishable:
+    status: pass
+    notes: "与 MaskGCT/CosyVoice/Vevo 的区别清晰; 低帧率 trade-off 有定量分析"
+  navigable:
+    status: pass-with-fixes
+    notes: "KB 背景充分; chromagram tokenizer 与 ProsodyModeling 概念页关系可进一步展开"
+  unpolluted:
+    status: pass
+    notes: "无臆造数据; 局限性坦诚"
+
+issues:
+  - id: 1
+    severity: medium
+    category: completeness
+    description: "速查中指标选取偏 expressive speech 和 singing voice 域,regular speech 上的 SeedTTS test-en WER 3.639 (vs CosyVoice 2 的 2.890) 未在速查中提及,可能给读者造成 Vevo2 全面优于竞品的错误印象"
+    location: "速查 > 指标"
+    suggestion: "在指标行补充 regular speech domain 的 WER 对比"
+
+  - id: 2
+    severity: medium
+    category: sourcing
+    description: "§V-E pitch region control 中论文作者自己的 hypothesis ('we hypothesize that this minor degradation occurs because...') 在笔记中未标注为 [论文原文]"
+    location: "实验 > 关键发现 > Pitch region control"
+    suggestion: "添加 [论文原文] 标注"
+
+  - id: 3
+    severity: low
+    category: cosmetic
+    description: "FM stage 的 REPA 策略 (Representation Alignment for Generation) 仅一句带过,作为 training acceleration trick 值得一两句展开"
+    location: "训练策略 > FM 模型"
+    suggestion: "补充 REPA 的核心机制 (align intermediate hidden to SSL features during flow matching training)"
+
+statistics:
+  sections: 9
+  sourcing_ratio: "~85%"
+  word_count: ~3200
+  tables: 1
+  kb_concepts_linked: 6

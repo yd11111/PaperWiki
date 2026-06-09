@@ -1,0 +1,71 @@
+review:
+  paper: "AnalysingNeuralAudioCodecs"
+  reviewer: "auto"
+  date: "2026-06-08"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    reproducible:
+      score: 8
+      status: pass
+      reason: "方法节清晰解释了 WHY (为什么 3-gram, 为什么需要维度偏移, 为什么 MLE 而非线性回归), 每个设计选择有理由。速查卡片可借鉴字段具体 (3-gram proxy metric, 维度偏移方法, 统计分析框架迁移)。"
+
+    trustworthy:
+      score: 8
+      status: pass
+      reason: "数字 claim 标注覆盖率 >90% ([Fig N], [Table I], [§X])。指标名使用正确 (WER/CER/UTMOS/Pearson r)。速查卡片指标字段含具体数字 + 数据集 + 出处。"
+
+    distinguishable:
+      score: 7
+      status: pass-with-fixes
+      reason: "因果解释来源标注覆盖率约 85%。大部分 [论文原文]/[agent 解读] 标注到位,但部分解读性段落可进一步明确来源。"
+
+    locatable:
+      score: 9
+      status: pass
+      reason: "KB 背景节丰富 (6 个实体页), 谱系定位清晰 (与 Takamichi 2024 SSL 分析的对等关系, 在 AudioTokenizerTaxonomy 中的位置)。创新判断有对比基准。frontmatter 字段完整且语义正确。"
+
+    non-polluting:
+      score: 8
+      status: pass
+      reason: "未触发反向更新 (用户指令不修改概念页)。concepts 字段列举合理, 未引入错误关联。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: fact-inference-mixing
+      location: "点评节第 1 段"
+      detail: "'3 x 20ms = 60ms 接近典型音素时长' 是 agent 推测, 论文未做此对应关系的验证"
+      suggestion: "已标注 [agent 解读], 可保留但补充说明 '这一对应需要进一步实验验证'"
+
+    - id: 2
+      severity: medium
+      type: traceability-gap
+      location: "实验 B 节 '维度 n_d 的角色' 段"
+      detail: "'这是预期中的' 缺少明确 [agent 解读] 标注"
+      suggestion: "末尾 [agent 解读] 标签已存在, 可接受"
+
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: "frontmatter models"
+      detail: "论文实际分析了 6 种 NAC 模型 (SpeechTokenizer, HiFi-Codec, AudioDec, DAC, EnCodec, FunCodec), 但 models 字段仅列了 EnCodec 和 SoundStream (SoundStream 未在 Table I 中作为独立模型, 它是 DAC 的训练数据参考)"
+      suggestion: "models 字段移除 SoundStream, 考虑添加 DAC (如有模型页)"
+
+    - id: 4
+      severity: low
+      type: weak-reusability
+      location: "可复用的 idea 第 1 条"
+      detail: "proxy metric 的具体使用方法可更详细 (如计算成本、所需数据量、对比传统评估的效率提升)"
+      suggestion: "可在后续使用中补充"
+
+  learning_signals:
+    - "分析类论文的审阅: 方法节重点在 '为什么选这个分析方法' 而非 '怎么训练', 需要调整审阅重心"
+    - "相关性分析类论文: 需特别关注混淆变量 (n_d 同时影响统计特性和重建质量)"
+
+  summary:
+    total_issues: 4
+    high: 0
+    medium: 2
+    low: 2
+    action: "pass-with-fixes: 无 high issue, 2 个 medium issue 不阻塞。建议修正 models frontmatter。"

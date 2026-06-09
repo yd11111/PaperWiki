@@ -1,0 +1,34 @@
+review:
+  paper: "video-SALMONN"
+  note_path: "论文笔记/video-SALMONN.md"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节围绕三个核心设计选择展开因果解释: (1) 为什么需要多分辨率而非单分辨率 Q-Former (语音 vs 视觉的时间粒度矛盾, 配合 Fig 4 trade-off 曲线); (2) 为什么用 diversity loss (视频帧冗余导致 query 退化); (3) 为什么用 unpaired 混合训练 (防止模态主导)。速查可借鉴项具体可迁移: 多分辨率 Q-Former 的总 query 约束 C=W*N、diversity loss 的 lambda 调优注意事项、unpaired 混合训练的适用条件。分辨率功能分工分析 (Table 5 zero-mask 实验) 提供了直观的理解。"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 标注覆盖率 >90%,所有实验数据均标注 [Table N] 或 [§X.X] 来源。指标名称使用正确 (WER/SPIDEr/CIDEr/Accuracy 无混淆)。速查指标字段含具体数字+数据集名+出处标注。方向性无误 (WER 低=好, Accuracy 高=好)。"
+  可区分:
+    score: 9
+    rationale: "方法节中所有因果解释均标注了 [论文原文] 或 [agent 解读],覆盖率接近 100%。agent 解读内容合理且不越界: 如将 diversity loss 与 layer normalization 后 cosine similarity 的合理性关联、将 unpaired 训练与 CutMix/MixUp 类比、对 query 感受野的分析。无未标注来源的强断言。速查一句话中'首个'claim 来源于论文 §1 原文。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节提供了精确的谱系定位: 在 Speech-LLM Integration Taxonomy 中的 latent-representation-based 路线、在 ALM 分类中从 two-head 扩展为 three-head、与 SALMONN/SALMONN-omni 三篇论文的关系和架构演化。创新判断以 SALMONN 原版 window-level Q-Former 和 KB 中 adapter 分类为对比基准。frontmatter 字段完整: models 仅列 Whisper (有实体页), tasks/datasets 为空 (vault 中无匹配实体页, 合理)。速查 5 字段均有实质内容。"
+  不污染:
+    score: 10
+    rationale: "本次未执行反向更新或概念页创建 (用户指令禁止)。笔记内容 factually accurate, 无 overclaim。KB 背景中对 SALMONN 系列关系的描述与已有笔记 SALMONN.md / SALMONN-omni.md 一致。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

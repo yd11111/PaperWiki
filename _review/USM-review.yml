@@ -1,0 +1,49 @@
+review:
+  paper: "USM"
+  reviewer: "auto (same-session)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "三阶段 pipeline (BEST-RQ → MOST → task fine-tuning) 的 WHY 解释完整; BEST-RQ 随机投影量化 vs w2v-BERT 可学习量化的可扩展性论证有因果链+实验数据 (Table 6); chunk-wise attention 的 receptive field mismatch 问题分析清晰; MOST 的两大收益 (text alignment + low-resource generalization) 有机制解释; 速查可借鉴有 5 个具体可迁移 trick"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名 WER/CER/BLEU 使用正确; 关键数字 (12M h/90k h/1/7/66% WER/2% adapter/30.7 BLEU) 全部有 Table/Section 引用; Whisper 对比条件 (18 语言筛选) 如实说明"
+  可区分:
+    score: 8
+    rationale: "[论文原文]/[agent 解读] 标注覆盖率约 85%; 方法节核心设计选择均标注了来源; 几处推断 (如 'w2v-BERT codebook collapse 可能是原因') 正确使用了 [agent 解读] 限定"
+  可定位:
+    score: 9
+    rationale: "KB 背景含 USM vs Whisper 路线对比; 与 XEUS (后续开源推进)、w2v-BERT (量化方式对比)、BEST-RQ (SSL 范式定位) 的关系明确; 在 Self-SupervisedSpeechRepresentation 和 SpeechLanguageModel 演进中的位置清晰"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 反向更新建议仅为追加 key_papers 到 Self-SupervisedSpeechRepresentation 和 SpeechLanguageModel; 无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "训练策略 - 模型规格"
+    detail: "Conformer-2B 规格引用 [Table 2] 但未在文本中标注"
+    suggestion: "在 '32 层, dimension 1536' 后加 [Table 2]"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "局限性 §5"
+    detail: "'YT-513-U 中 188 种语言不足 100 小时数据' 缺少 [§3.1] 出处标注"
+    suggestion: "改为 '188 种语言不足 100 小时数据 [§3.1]'"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "可复用的 idea §5"
+    detail: "MOST curriculum 的 [§2.5] 标注在段尾,但具体数字 '20k steps' 应标注来源"
+    suggestion: "改为 '先用标注数据 20k steps [§2.5] 稳定 decoder 对齐'"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals: []

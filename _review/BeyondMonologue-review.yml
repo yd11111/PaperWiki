@@ -1,0 +1,122 @@
+review:
+  paper: "BeyondMonologue"
+  note_path: "论文笔记/BeyondMonologue.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节详细解释了 MHGK 的 WHY (dual-resolution property: talking 需要帧级 hard alignment, listening 需要 long-range soft context), HOW (高斯距离惩罚 bias 矩阵, 不同 head 不同 sigma), 以及与 ALiBi/2D Spatial CA 的对比。Q-Former 替代 all-zero CFG 的 WHY 解释清楚。两阶段训练的逻辑 (避免信号干扰) 有因果链。速查卡片可借鉴字段给出 4 个具体可迁移 idea (MHGK, Q-Former CFG, arbitrary-position training, 数据清洗管线)。"
+
+  可信赖:
+    score: 8
+    rationale: "实验表格覆盖了论文 Table 1-5 的主要结果, 数字均标注了 [Table N] 出处。方法节引用了 [§X.X]/[Fig N]。指标使用正确 (FID/FVD/LPIPS/CSIM/LMD/LSE-C 方向均对)。速查指标有具体数字、数据集名和出处。有少量非关键 claim (如 VoxHear 1206 小时) 缺少 section 标注但信息来源明确。速查中 User Study 分数被标为 MOS 但原文未用该术语, 属于轻微不精确。"
+
+  可区分:
+    score: 9
+    rationale: "方法节系统使用 [论文原文] 和 [agent 解读] 标注, 覆盖率约 85%。agent 解读部分明确标记 (如 MHGK 与 ALiBi 哲学类比、与 LongCat-AudioDiT CFG 问题的关联、两阶段训练与 ELLSA 的类比)。局限性节中部分推断 (如 '无法理解语义') 虽为 agent 分析但放在评论性 section 中, 边界清晰。"
+
+  可定位:
+    score: 8
+    rationale: "KB 背景节有清晰的双线定位: audio-driven video gen 演进线 + full-duplex 系统演进线。创新判断有对比基准 (vs ALiBi, vs DIM, vs StreamAvatar)。frontmatter 字段完整且语义正确: concepts 列了 4 个直接相关 KB 概念, models 列了 wav2vec2.0 (使用的 encoder)。本文不是 TTS 论文而是 video generation, 与 KB 核心领域的关联度适中 — KB 背景正确标注了这种跨领域关系, 但定位深度受限于 KB 中缺乏 audio-driven video generation 的专门概念页。"
+
+  不污染:
+    score: 9
+    rationale: "按指令不做反向更新和 KB 修改, 不涉及新建概念页。frontmatter 引用合理, 不存在 overclaim 或 factual error 风险。如未来做反向更新, 仅需对 Full-duplexSpokenDialogue 等页做 key_papers 追加, 属于 append 操作, 不改 status。"
+
+checks:
+  可复述:
+    - item: "方法节包含因果解释"
+      status: pass
+      detail: "MHGK 的 WHY/HOW, Q-Former 的双重作用, 两阶段训练的逻辑, arbitrary-position training 的动机均有因果解释"
+    - item: "关键设计选择有 why"
+      status: pass
+      detail: "为什么不用 2D Spatial CA / 3D Global CA / ALiBi, 为什么需要独立 Q-Former, 为什么两阶段训练"
+    - item: "速查可借鉴具体"
+      status: pass
+      detail: "4 个可迁移 idea 均为具体设计 (MHGK, Q-Former CFG, arbitrary-position training, 数据清洗管线)"
+
+  可信赖:
+    - item: "数字 claim 有出处标注"
+      status: pass
+      detail: "实验表格所有数字标注了 [Table N], 方法节引用了 [§X.X]/[Fig N]。覆盖率约 85%"
+    - item: "指标名正确"
+      status: pass
+      detail: "FID, FVD, LPIPS, CSIM, LMD, LSE-C, LSE-D, CPBD, ASE, IQA 使用正确"
+    - item: "速查指标有数字+数据集+来源"
+      status: pass
+      detail: "包含 HDTF/MEAD/ResponseNet 数据集上的具体数字和 Table 标注"
+    - item: "无方向性错误"
+      status: pass
+      detail: "未发现方向性错误"
+
+  可区分:
+    - item: "因果解释有来源标注"
+      status: pass
+      detail: "系统使用 [论文原文] 和 [agent 解读]"
+    - item: "来源标注覆盖率 >= 80%"
+      status: pass
+      detail: "方法节 WHY 解释覆盖率约 85%"
+    - item: "无断言无限定词"
+      status: pass
+      detail: "未发现将推断写成断言的句子"
+    - item: "强断言有数字支撑"
+      status: pass
+      detail: "'MHGK >> 其他注意力机制' 有 Table 2, 3 数据支撑; 'CSIM 大幅领先' 有具体数字"
+
+  可定位:
+    - item: "KB 背景有谱系定位"
+      status: pass
+      detail: "audio-driven video gen + full-duplex 双线交叉定位, 包含具体系统名"
+    - item: "创新判断有对比基准"
+      status: pass
+      detail: "与 ALiBi, DIM, StreamAvatar, 2D Spatial CA 有明确对比"
+    - item: "frontmatter 字段非空"
+      status: pass
+      detail: "所有字段已填写"
+    - item: "frontmatter 语义正确"
+      status: pass
+      detail: "concepts 列 4 个直接相关概念, models 列 wav2vec2.0 (使用的 encoder), 未列后续系统"
+    - item: "速查 5 字段有实质内容"
+      status: pass
+      detail: "5 个字段均有具体内容"
+
+  不污染:
+    - item: "新建概念页满足准入"
+      status: pass
+      detail: "不新建概念页"
+    - item: "去重检查"
+      status: pass
+      detail: "不涉及新建"
+    - item: "反向更新无 factual error"
+      status: pass
+      detail: "按指令不做反向更新"
+    - item: "反向更新分类正确"
+      status: pass
+      detail: "按指令不做反向更新"
+
+issues:
+  - type: traceability-gap
+    severity: low
+    location: "速查 > 指标"
+    detail: "User Study 评分被描述为 'MOS' 但原文仅使用 1-5 scale 评分, 未使用 MOS 术语"
+    suggestion: "改为 'User Study listening: Natural 4.14 / AV Align 4.18 (1-5 scale)' 或标注 [Table 5]"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法 > 训练策略"
+    detail: "VoxHear 1206 小时数字和 MossFormer2 + SyncNet 工具名在数据集构建段落中缺少 section 标注"
+    suggestion: "添加 [§3.4, Fig 4] 标注"
+
+  - type: template-compliance
+    severity: low
+    location: "方法 > 整体架构"
+    detail: "Asynchronous Noise Streaming Inference (推理策略, Fig 2 左上) 在方法节中未详细展开, 仅在 arbitrary-position training 段落中简要提及 diffusion forcing"
+    suggestion: "可在训练策略后简述推理时的 streaming 拼接方式"
+
+conclusion: pass
+conclusion_rationale: "所有原则满足, 无 high/medium issue, 仅 3 个 low 级问题 (2 个 traceability gap, 1 个 completeness)。笔记对 MHGK 的设计动机和机制、Q-Former 的双重作用、双流架构的 trade-off 有清晰的因果解释和出处标注。KB 定位准确 (正确识别了 video gen vs speech LM 的全双工差异), 实验数据可信。"
+
+learning_signals: []

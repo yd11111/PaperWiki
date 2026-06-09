@@ -1,0 +1,61 @@
+review:
+  paper: "MoEAdapter"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节含清晰因果解释 (WHY dense adapter fails, WHY MoE solves it, WHY top-4 not top-1); 关键设计选择 (expert count, EBL trade-off, aggregation block) 均回答了 why this not that; 速查卡片可借鉴字段具体可迁移 (MoE-as-adapter 范式 + gradient 分析工具箱)"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名使用正确 (Audio Accuracy, Modality Gap); 速查指标含具体数字+数据集+出处; 实验表格每行标注 [Table N]; gradient 分析数字标注 [Fig 4/5]"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; [论文原文] 和 [agent 解读] 区分清晰; 方法节有专门的区分来源 callout; agent 解读集中在合理推断处 (双流 fusion 的非平凡性, Whisper encoder 训练状态不明, 大模型 adapter 占比递减)"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供了明确谱系定位 (latent-representation-based 路线 + Conv/CTC/Q-Former 之后的第四范式); 创新判断有对比基准 (MoE 不新, 但用于 adapter 层新); frontmatter 字段完整; concepts/models 语义正确"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 指令明确不做反向更新; 无 factual error 或 overclaim 风险; concepts 链接均指向已有页面"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "方法 §整体架构"
+    detail: "Audio Frontend 双流架构描述 'd_enc = 5120' 和 'Linear(5120→2560)' 缺少具体出处标注"
+    suggestion: "加 [§3.1] 或 [Fig 2] 出处"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法 §训练策略"
+    detail: "'AdamW (β1=0.9, β2=0.95)' 和 'Warmup-Stable-Decay scheduler (peak LR 1e-5, 20 warmup steps)' 标注了 [§4.1] 但 β1/β2 具体值未确认是否在 §4.1 中"
+    suggestion: "交叉验证 β1/β2 数值出处"
+  - id: 3
+    type: fact-inference-mixing
+    severity: low
+    location: "局限性 §1"
+    detail: "'94M/1.7B ≈ 5.5%' 占比计算是 agent 推算, 但紧跟在 [agent 解读] 标注后, 标注正确; 仅需确认计算准确性 (94M/1700M = 5.53%, 正确)"
+    suggestion: "无需修改, 标注已正确"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "方法 §关键设计选择 Aggregation Block"
+    detail: "Aggregation Block 的 MLP 维度 'd→10240→d' 标注了 [Table 4] 但未标注具体来源段落"
+    suggestion: "确认 [Table 4] 是否包含 10240 维度信息, 若来自正文则改标 [§3.2]"
+  - id: 5
+    type: traceability-gap
+    severity: medium
+    location: "方法 §整体架构"
+    detail: "'沿用 Kimi-Audio 的双流架构 [§3.1, Fig 2]' -- 论文是否明确声明沿用 Kimi-Audio? 若是 agent 推断则需标注 [agent 解读]"
+    suggestion: "交叉验证原文 §3.1 是否引用 Kimi-Audio; 若无明确引用则改为 '[agent 解读] 架构与 Kimi-Audio 类似'"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 4
+
+learning_signals: []

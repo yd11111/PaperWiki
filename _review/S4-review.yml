@@ -1,0 +1,51 @@
+review:
+  paper: "S4"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节有四个子节,每个包含因果解释 (WHY HiPPO not random init, WHY NPLR not naive diag, WHY three-step reduction, WHY bilinear discretization); 关键设计选择均回答了 why-this-not-that; 速查卡片可借鉴五条均为具体可迁移思路(三视图统一、结构驱动算法、初始化=归纳偏置、采样率无关、核可视化),不是泛泛的'提出了新方法'"
+  可信赖:
+    score: 9
+    rationale: "实验表 17 行,每行标注 [Table N] 或 [§X.X]; 所有关键数字经 PDF 交叉验证(LRA avg 86.09% [Table 4], Path-X 96.35% [Table 4], SC10 98.32% [Table 5], sCIFAR 91.13% [Table 6], WikiText-103 20.95 [Table 8], WaveGAN-D 96.25% [Table 5]); 指标名使用正确(准确率/ppl/bpd); 速查指标字段含具体数字+数据集+来源"
+  可区分:
+    score: 8
+    rationale: "方法节因果解释来源标注覆盖率 ~90%,正确使用 [论文原文] 和 [agent 解读]; 消融解读 [agent 解读] 标注清晰; 局限性 5 条均标注了来源类型; 可复用 idea 节和点评节作为 agent 评论性质的整体节,未逐条标注来源,但节标题隐含了这是 agent 视角"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供完整谱系定位 (HiPPO → LSSL → S4 → S4D → H3 → Mamba); 明确与 Mamba 的精确关系(两个改动); 引用了 [[论文笔记/Mamba]], [[论文笔记/MambaVoiceCloning]], [[论文笔记/MamTra]] 等已有笔记; 创新判断有对比基准(vs LSSL 的 O(N^2 L)); frontmatter 基本字段完整但 concepts/models/tasks/datasets 为空(见 issue 1)"
+  不污染:
+    score: 9
+    rationale: "未新建概念页; 未执行反向更新; 无 factual error 或 overclaim; KB 背景中的谱系信息来自已有 Mamba 笔记,交叉验证可靠"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "frontmatter concepts/models/tasks/datasets"
+    detail: "四个链接字段均为空 []. 本文讨论了 HiPPO/NPLR/SSM/Cauchy-kernel 等概念, LSSL/S4 等模型, LRA/SC10/sCIFAR-10/WikiText-103 等数据集. 空字段影响 KB 链接和 MOC 索引功能"
+    suggestion: "填充 concepts (如已有则链接,无则保持空但注释原因); models 至少列 S4; datasets 列主要评测集. 注意仅列当前 vault 中存在或将创建的实体"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "可复用的 idea §2"
+    detail: "'BigVGAN 的 Snake 激活函数利用周期性' 是跨论文知识,无来源标注"
+    suggestion: "添加 [agent 解读] 标注或改为 '如 BigVGAN [agent 解读] 中 Snake 激活函数...'"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "KB 背景 已有认知 (2)"
+    detail: "'[[概念库/CodecLanguageModel|CodecLanguageModel]][待确认]' 使用了非标准注释格式 [待确认]"
+    suggestion: "改为标准降级标注 '[基于未确认概念页]' 或移除 [待确认] 后缀"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 2
+
+learning_signals:
+  - "非 TTS 核心论文(序列建模基础)的 KB 背景检索命中为 0,但通过引用已有笔记 (Mamba) 仍能构建有意义的谱系定位 — 验证了失败降级策略的有效性"
+  - "论文 v3 修订导致正文数字 (80.48%) 与表格数字 (86.09%) 不一致; 笔记正确选择了表格值,但未标注此差异"

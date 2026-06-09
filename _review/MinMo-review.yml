@@ -1,0 +1,38 @@
+paper: MinMo
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节对六个模块的功能、参数量、初始化来源均有完整说明 (Table 1)。5:15 interleaving 设计、四阶段训练策略、每阶段更新哪些参数均清晰可追踪。Pre-align 的动机有因果解释。S2S 数据构造的三种策略有具体示例。速查可借鉴列出 4 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    rationale: "关键数字均来自论文表格,标注覆盖率高 (Table 5-23 全部引用)。ASR/S2TT/LID/SER 等 SOTA 声明均有对应数字支撑。TTS 质量低于 baseline 的事实如实记录。全双工延迟分解 (250+150+70+130=600ms) 可追溯到 Table 21。S2S vs S2T 的 performance gap 如实反映。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖所有因果解释。5:15 ratio 来源于 CosyVoice 2 的推断标为 agent 解读; Pre-align 防梯度冲击标为论文原文; native vs aligned 的辩论定位标为 agent 解读; S2S 合成数据上限分析标为 agent 解读。"
+  positionable:
+    score: 9
+    rationale: "KB 背景覆盖 6 个实体页,从 SpeechLM aligned vs native 路线、Integration Taxonomy 的混合集成、Modality Adaptation 的 Conv 增强变体、Streaming 中 5:15 方案的新颖性等多角度定位。与 Moshi/GLM-4-Voice/Freeze-Omni/LLaMA-Omni 的对比贯穿全文。"
+  non-polluting:
+    score: 10
+    rationale: "无新建概念页。反向更新预期为 SpeechLanguageModel/Full-duplexSpokenDialogue 等页 key_papers 追加,均为 append 操作,不涉及实质修改。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter authors"
+    detail: "authors 字段写为 [FunAudioLLM Team (Alibaba Tongyi Lab)] 而非逐人列出,因原文列 36 人按字母排序且无明确第一/通讯作者"
+    suggestion: "可保持团队名,符合此论文的署名方式"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "实验表 TriviaQA 行"
+    detail: "论文自述 TriviaQA 测试集不公开,MinMo 未报告该数据集结果,笔记中未列出 TriviaQA 数据避免歧义"
+    suggestion: "如需补充可添加备注说明 TriviaQA 结果因测试集不一致仅供参考"
+    status: noted
+
+learning_signals: []

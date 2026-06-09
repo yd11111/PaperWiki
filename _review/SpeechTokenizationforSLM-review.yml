@@ -1,0 +1,57 @@
+review:
+  paper: "SpeechTokenizationforSLM"
+  reviewer: auto
+  date: "2026-06-08"
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 8
+      verdict: pass
+      rationale: "方法节清晰解释了 tokenization pipeline 的每个步骤 (分段 → 池化 → K-means → 去重),关键设计选择 (N-K 交互、mean pooling、dedup) 均有 WHY 解释。'音素-语素类比' 提供了直觉性因果框架。速查卡片可借鉴字段具体可迁移。"
+    trustworthy:
+      score: 8
+      verdict: pass
+      rationale: "关键数字均有出处标注 ([Table 3], [Fig 2], [Fig 5])。指标名正确 (accuracy 而非 WER/MOS)。速查卡片指标字段含具体数字 + 数据集名。无方向性错误。"
+    distinguishable:
+      score: 7
+      verdict: pass-with-fixes
+      rationale: "因果解释大部分标注了 [论文原文] 或 [agent 解读],但方法节中部分 WHY 解释 (如 'mean pooling 消除混淆变量') 标为 [agent 解读] 但置信度不低,边界可以更清晰。无把推断写成断言的情况。"
+    locatable:
+      score: 8
+      verdict: pass
+      rationale: "KB 背景节有具体谱系定位 (GSLM 框架 + HuBERT k-means 路线 + SLU benchmark 评估)。创新判断有对比基准 (vs GSLM baseline, vs 可变分段)。frontmatter 字段完整且语义正确。速查卡片 5 字段均有实质内容。"
+    no_pollution:
+      score: 9
+      verdict: pass
+      rationale: "不涉及新概念页创建。反向更新仅为追加 (不修改已有定义)。无 factual-error 或 overclaim 风险。"
+
+  issues:
+    - id: 1
+      type: traceability-gap
+      severity: medium
+      location: "实验 A 表格"
+      detail: "Table 3 中 Best K 列 (N=20 最优 K=2^7; N=40 最优 K=2^13) 的判定逻辑来自论文原文,但笔记中 baseline 行的 5 个 benchmark 具体数字从 Fig 2 的热力图中提取,可能存在读数偏差。"
+      suggestion: "标注 '数值从 Fig 2 热力图目视提取,可能有 +-0.01 偏差'。"
+    - id: 2
+      type: traceability-gap
+      severity: medium
+      detail: "速查卡片指标字段中 'baseline (20, 2^7) 平均 0.65' 未标注 [Table 3]。"
+      location: "速查卡片 > 指标"
+      suggestion: "补充出处标注。"
+    - id: 3
+      type: weak-reusability
+      severity: low
+      location: "可复用的 idea #2"
+      detail: "'80ms (~12.5 Hz) 是一个值得尝试的起点' -- 这是 HuBERT + k-means + SLU 特定条件下的结论,迁移到 NAC tokenizer 或 TTS 场景时需要注意条件差异。"
+      suggestion: "补充适用范围注释: '此结论基于 SSL k-means tokenization + SLU 评估,迁移到 NAC/TTS 场景可能不适用'。"
+    - id: 4
+      type: template-compliance
+      severity: low
+      location: "frontmatter > models"
+      detail: "models 字段仅列了 HuBERT,但 OPT 是 SLM 的 backbone 模型,也是实验的关键组件。"
+      suggestion: "考虑在 models 中补充 OPT (非必要,因 OPT 非本文焦点)。"
+
+  learning_signals: []
+
+  summary: "笔记质量良好。方法机制的 WHY 解释充分 (音素-语素类比、固定 vs 可变分段的 trade-off),KB 背景与论文发现形成有效交叉验证 (SLM 韵律好于语义 ↔ semantic tokens 偏 phonetic)。2 个 medium issue 均为出处标注小瑕疵,不影响可信度。建议通过后进行反向更新。"

@@ -187,7 +187,10 @@ CLSP 采用 CLAP 经典的 dual-encoder 架构 [§4.1, Fig 3]:
 
 ## 审阅
 
-> [!review] 审阅 (pending)
-> **结论**: pending
+> [!review] 审阅 (pass-with-fixes)
+> **结论**: pass-with-fixes | 0 high, 1 medium, 1 low
 > 
-> 待独立审阅 agent 执行。
+> **medium**: frontmatter models: [] 为空,应至少列出 CLSP
+> **low**: datasets 仅列 Emilia,可补充 FCaps/ParaSpeechCaps
+> 
+> 详见 `_review/Fine-GrainedContrastiveAudio-Text-review.yml`

@@ -1,0 +1,43 @@
+review:
+  paper: "Aliasing-FreeSynthesis"
+  title: "Aliasing-Free Neural Audio Synthesis"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 9
+      reason: "方法节详细解释了 ADAA 的 WHY(为什么选 SnakeBeta 而非 Snake)、noise prior 的 WHY(为什么不用纯零填充)、oversampling 的 WHY(为什么 2x 而非 4x); 速查卡片可借鉴字段给出 3 个具体可迁移 trick"
+    trustworthy:
+      score: 9
+      reason: "所有数字 claim 均有 [Table N]/[§X.X] 标注; 实验数据与原文 Table II-V 交叉验证无误; 指标名使用正确 (MUSHRA/AHR/C-MOS/F0RMSE)"
+    distinguishable:
+      score: 8
+      reason: "因果解释来源标注覆盖率高(>90%),明确区分 [论文原文] 和 [agent 解读]; 但速查中'显著超越 DAC'存在轻微 overclaim — codec 对比 DAC 在部分指标/场景持平"
+    positionable:
+      score: 9
+      reason: "KB 背景谱系定位清晰(BigVGAN → DAC → 本文),创新判断有对比基准; frontmatter 语义正确; concepts/models/tasks/datasets 均合理"
+    no_contamination:
+      score: null
+      reason: "待 KB 更新审阅阶段评估"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: overclaim
+      location: "速查 → 一句话"
+      detail: "'显著超越 BigVGAN 和 DAC' — vocoder vs BigVGAN 在歌声/音乐上确实显著(MUSHRA +17.76); 但 codec vs DAC 在 speech 上 DAC 反而更优(88.14 vs 86.51),在 singing 上持平(85.43 vs 85.65),仅在 music/audio 上略优"
+      suggestion: "改为'在歌声/音乐/音频上显著超越 BigVGAN;codec 与 DAC 持平或略优,但参数量更小(119M vs 154M)'"
+      fixed: true
+    - id: 2
+      severity: low
+      type: traceability-gap
+      location: "方法 → Anti-Aliased Upsampling → 问题段"
+      detail: "'[Eq.48 参考]' 应为 '[48] (Oppenheim, Discrete-Time Signal Processing)' — Eq.48 不是论文中的公式编号,而是参考文献编号"
+      suggestion: "改为 [48]"
+      fixed: true
+
+  learning_signals: []
+
+  summary: "高质量精读笔记,方法节机制理解到位,数学推导准确呈现,因果解释来源标注完整。1 个 medium overclaim 已修正,1 个 low 引用格式问题已修正。反向更新可继续。"

@@ -1,0 +1,38 @@
+paper: Seed-ASR
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节覆盖 5 个关键设计选择,每个都有 WHY 解释 (为什么选 frame splicing 而非 Q-Former, 为什么冻结 LLM, 为什么需要声学剪枝等)。速查卡片可借鉴字段列出 5 个具体可迁移 trick,均有 section 出处。四阶段训练 recipe 的消融分析 (Table 9) 清晰展示每阶段的贡献。"
+  trustworthy:
+    score: 9
+    rationale: "所有数字型 claim 均有 [Table N]/[Fig N]/[§X.X] 标注。指标名 (WER/CER/F1/recall) 使用正确,中文用 CER 英文用 WER 与论文一致。方向性正确 (WER 越低越好)。实验表格数据经与原文交叉验证无误。Fleurs avg 标注为 computed。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖所有因果解释。关键推断 (如'为什么选 frame splicing 而非 Q-Former'、'一个隐含的 tension') 均明确标注为 agent 解读。无将推断写成断言的情况。"
+  positionable:
+    score: 8
+    rationale: "KB 背景有明确的 taxonomy 定位 (latent-representation-based integration), 与 text-based LLM-enhanced ASR 的区别说明清晰。点评节对标 Whisper/USM/FunAudioLLM。frontmatter 字段完整, concepts/models 语义正确。KB 背景基于 pending-review 页面而非 confirmed,已做标注。"
+  non-polluting:
+    score: 9
+    rationale: "无新建概念页。建议的反向更新仅为 key_papers 追加,不涉及实质修改。无 factual-error 或 overclaim。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "KB 背景节"
+    detail: "kb_context_sources 设为 0 因无 confirmed 实体页命中,但实际参考了 1 个 confirmed 页 (SpeechLanguageModel) 和 5 个 pending-review 页"
+    suggestion: "可将 kb_context_sources 改为 1 并在 KB 背景中更明确标注 SpeechLanguageModel 为 confirmed"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "实验表 Fleurs avg"
+    detail: "Fleurs 8 语言平均 WER 5.07 是根据 Table 11 各语言数字手动计算,非论文原文报告"
+    suggestion: "已标注 (avg computed),可接受"
+    status: noted
+
+learning_signals: []

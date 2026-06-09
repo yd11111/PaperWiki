@@ -1,0 +1,40 @@
+paper: UniAudio2.0
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    note: "核心方法三大组件 (ReasoningCodec dual-branch + layer specialization + auditory sentences) 清晰完整,关键公式 (Eq.1-18) 和设计选择均有 §/Eq/Table 引用"
+  trustworthy:
+    status: pass
+    note: "[论文原文] vs [agent 解读] 标注一致; 所有数值标注出处 (Table 1-25); 信息论分析引自 §A.3.5; 未将 arXiv 结论当作 peer-reviewed 事实"
+  distinguishable:
+    status: pass
+    note: "与 CosyVoice 3 (Table 15 对比), SpeechTokenizer/Mimi (mixed token 路线对比), Moshi/Kimi-Audio (vanilla unified AR 对比), UniAudio 1.0/1.5 (系列演进) 的差异明确阐述; KB 背景覆盖 6 个 confirmed 实体页"
+  locatable:
+    status: pass-with-fixes
+    note: "§/Table 引用覆盖 >80%; 点评中部分 agent 分析缺乏精确出处"
+  unpolluted:
+    status: pass
+    note: "推测性内容均标记 [agent 解读]; KB 背景严格基于 confirmed 实体页; 未混入无来源主张"
+
+issues:
+  - severity: medium
+    type: sourcing
+    location: "点评 > 局限性分析"
+    description: "'3.5pp text 能力损耗 → 7.4% 相对下降并非可忽略' 是 agent 对 Table 7 数据的评价,已标注 [agent 解读],但可补充作者原文的解释 ('does not significantly degrade') 以呈现双方观点"
+    suggestion: "在该句后添加作者原文观点作为对比"
+  - severity: low
+    type: analysis-depth
+    location: "局限性 > 第 4 点 S2S 弱"
+    description: "推测 auditory sentences 不足以替代 explicit conversation data 缺乏论文证据支持"
+    suggestion: "标注为纯推测或移除因果推断"
+
+statistics:
+  sections: 9
+  sourcing_ratio: "~85% (39/46 technical claims with §/Table refs)"
+  kb_entities_linked: 9
+  kb_confirmed_used: 6
+  word_count_estimate: 3200

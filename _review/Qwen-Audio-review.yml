@@ -1,0 +1,34 @@
+review:
+  paper: "Qwen-Audio"
+  note_path: "论文笔记/Qwen-Audio.md"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含充分的因果解释。层级标签框架的设计原则 (最大化共享 vs 消歧) 有清晰阐述; SRWT 引入动机双重目的; 两阶段训练逻辑 (先对齐空间再释放 LLM); 为什么选单编码器而非双编码器都有 WHY。速查卡片可借鉴项具体可迁移。"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 标注覆盖率高 (>90%),全部来自 Table 3/4/5。指标名称使用正确 (WER/BLEU/ACC/AAS/SPIDEr),方向性无误 (WER↓, ACC↑)。实验表格包含完整 baseline 名称、数据集和出处。SRWT 消融实验结果完整呈现。"
+  可区分:
+    score: 9
+    rationale: "因果解释全面标注了 [论文原文] vs [agent 解读],覆盖率 >90%。推断性分析如单编码器选择、SRWT 跨域增益原因、中文 ASR 提升更显著的解释均标记为 agent 解读。无强断言缺乏支撑的情况。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节定位清晰: latent-representation-based 路线, Two Heads 架构, 与 SALMONN 的对比 (单编码器 vs 双编码器+Q-Former)。创新判断有三个具体对比点。点评中与 SALMONN 的互补对比和历史定位 (2023.11 Audio-LLM 范式确立期) 准确。"
+  不污染:
+    score: 9
+    rationale: "不涉及新概念页创建。反向更新为 append-only (key_papers 追加 Qwen-Audio 到 AudioUnderstanding/Audio-LanguagePretraining 等页)。内容 factually accurate,无 overclaim。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

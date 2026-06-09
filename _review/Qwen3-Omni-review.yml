@@ -1,0 +1,66 @@
+paper: Qwen3-Omni
+arxiv_id: "2509.17765"
+reviewer: auto
+date: 2026-06-08
+tier: deep
+verdict: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    note: "Architecture (Thinker-Talker MoE + AuT + multi-codebook RVQ + MTP + Code2Wav), training pipeline (3-stage pretrain + 3-stage Thinker post-train + 4-stage Talker train), and key design choices (text decoupling, multi-codebook vs DiT, non-degradation training) clearly described with section references"
+  trustworthy:
+    status: pass
+    note: "All experimental numbers traced to specific Tables (4-18); [论文原文] vs [agent 解读] consistently marked throughout method section; non-degradation claims backed by controlled experiment (Table 16)"
+  distinguishable:
+    status: pass
+    note: "KB background positions against Qwen2.5-Omni (predecessor), Qwen3.5-Omni (successor), Moshi (full-duplex), and industry single-codebook trend; Thinker-Talker decoupling evolution and CFM→ConvNet shift explicitly analyzed"
+  locatable:
+    status: pass-with-fixes
+    note: "8 concept links present covering SpeechLM, SpeechTokenizer, LLM-basedTTS, CFM, ModalityAdaptation, AudioUnderstanding, Integration Taxonomy, Single-vs-Multi-codebook; AuT decoder architecture details insufficient for precise KB mapping"
+  unpolluted:
+    status: pass
+    note: "All inferences marked [agent 解读]; no speculation presented as fact; concept references accurate"
+
+issues:
+  - id: 1
+    severity: medium
+    category: information-gap
+    description: "AuT encoder's decoder architecture, training loss, and data augmentation details are not disclosed in the paper. Note correctly flags this gap but cannot deeply analyze the encoder training methodology"
+    location: "关键设计选择 §1 (AuT)"
+    suggestion: "Acceptable as-is; monitor for code release or follow-up papers"
+
+  - id: 2
+    severity: medium
+    category: missing-metric
+    description: "SEED TTS evaluation (Table 13) only reports WER (content consistency), not speaker similarity (SIM). Cannot assess whether multi-codebook RVQ improves voice cloning over Qwen2.5-Omni's approach"
+    location: "实验 - 语音生成"
+    suggestion: "Already noted in 局限性 §5; no action needed"
+
+  - id: 3
+    severity: low
+    category: incomplete-evaluation
+    description: "Captioner variant (§4.3, Appendix 9.2) only provides qualitative examples, no quantitative benchmark comparison with existing audio captioning models"
+    location: "局限性 §6"
+    suggestion: "Minor; captioner is a secondary contribution"
+
+section_coverage:
+  kb_background: present
+  quick_ref: present
+  core_problem: present
+  method: present
+  experiments: present
+  limitations: present
+  commentary: present
+  reusable_ideas: present
+  review_callout: present
+
+source_citations:
+  total_claims: 48
+  cited: 43
+  citation_rate: 0.90
+
+kb_links:
+  concepts: 8
+  models: 10
+  confirmed_entities_used: 4

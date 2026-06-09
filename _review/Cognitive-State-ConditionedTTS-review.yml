@@ -1,0 +1,57 @@
+review:
+  paper: "Cognitive-State-ConditionedTTS"
+  reviewer: "auto (same-session, cross-checked against PDF via pdftotext)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节详尽覆盖 CosyVoice2 instruction fine-tuning 和 F5-TTS cognition label embedding 两条路线的因果解释; 速查卡片可借鉴字段含 5 个具体可迁移 trick; 关键设计选择 (instruction vs label embedding, 分训两模型 vs 单模型+标签) 回答了 why this not that"
+  可信赖:
+    score: 8
+    rationale: "Table 1/2/3/4 数字全部经 pdftotext 交叉验证无误; 指标名正确 (MCD/FAD/log-F0 RMSE/WER/accuracy); 速查指标字段含具体数字+数据集+来源; 出处标注覆盖率约 85%; 有一处增强倍率范围不准确 (1.5x-2x 应为 1.5x-2.5x)"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 方法节中 [论文原文] 和 [agent 解读] 标注使用正确且分布合理; KB 背景中的创新判断正确标注了分析性质; 有一处 F5-TTS KB 状态标注不准确"
+  可定位:
+    score: 9
+    rationale: "KB 背景谱系定位清晰 (TTS 从高保真目标偏转到病理语音数据增强); 创新判断明确指出核心创新在应用层而非模型层; CosyVoice2 在 KB 中 30+ 篇引用但首次用于临床的定位精准; frontmatter 概念/模型挂接基本合理"
+  不污染:
+    score: 10
+    rationale: "无新建概念页; 无反向更新; 无 KB 污染风险"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "实验 关键发现 §3 (line 113)"
+    detail: "笔记写'增强倍率: 最优在 1.5x-2x 范围', 但论文 §4.4 原文为'the optimal range lying between 1.5x and 2.5x'。笔记将上界从 2.5x 缩小到 2x, 与原文不符。"
+    suggestion: "改为'最优在 1.5x-2.5x 范围, 最佳单点为 2x, >2.5x 性能下降 [Fig 3]'"
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "KB 背景 (line 31)"
+    detail: "F5-TTS 标注为 '[confirmed 概念]', 但 KB 搜索未命中 F5-TTS 实体页, 概念库和模型库中均无 F5-TTS 页面。此标注可能误导后续 KB 操作。"
+    suggestion: "删除 '[confirmed 概念]' 标注, 改为无标注或标注 '[未建页]'; 或在 KB 背景末尾注明 F5-TTS 无独立实体页"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter models 字段 (line 12)"
+    detail: "F5-TTS 是本文两个核心 TTS 模型之一, 但未列入 frontmatter models 字段。虽然 vault 中无 F5-TTS 模型页, 但遗漏可能影响未来检索。"
+    suggestion: "如未来创建 F5-TTS 模型页, 补充到 models 字段"
+  - id: 4
+    type: fact-inference-mixing
+    severity: low
+    location: "frontmatter venue 字段 (line 9)"
+    detail: "venue 标注为 'Interspeech 2026', 但论文 PDF 中未明确标注会议名, 仅从格式和页面限制推断。属于合理推断但非论文原文。"
+    suggestion: "可保留, 但如需严格可改为 'arXiv preprint (Interspeech format)'"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 2
+low_issues: 2
+
+learning_signals:
+  - "instruction fine-tuning 路线实现 TTS 条件化时, 无需架构改动, 仅设计 instruction + 分组微调, 这种最小改动模式值得在其他条件化场景参考"
+  - "跨 ASR 模型集合构建转录文本池的思路, 利用 WER 分布差异提供数据多样性, 可迁移到其他数据增强场景"

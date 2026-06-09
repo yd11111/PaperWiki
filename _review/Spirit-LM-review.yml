@@ -1,0 +1,24 @@
+paper: Spirit-LM
+date: 2026-06-08
+reviewer: auto
+conclusion: pass
+principles:
+  可复述: pass
+  可信赖: pass
+  可区分: pass
+  可定位: pass
+  不污染: pass
+issues:
+  - severity: low
+    type: coverage
+    detail: "Table 10 (unnormalized vs normalized scoring) 未展开讨论,但论文提及 normalization 对不同任务影响不同 [§4.2 footnote 11]"
+  - severity: low
+    type: coverage
+    detail: "Toxicity 分析 (Figure 5 demographic axes) 仅简要提及,未逐轴讨论"
+checks:
+  claim_sourcing: ">80% coverage with [§], [Table], [Fig] annotations"
+  fact_vs_inference: "明确标注 [论文原文] 和 [agent 解读]"
+  kb_positioning: "在 SpeechLM 演进线, SemanticvsAcousticTokens taxonomy, Speech-LLM Integration Taxonomy, EmotionControlinTTS 演进中均有锚点"
+  transferable_ideas: "5 items, all concrete and actionable"
+  limitations: "7 items covering paper-stated + agent-identified"
+  experiment_tables: "覆盖 Table 3 (STSP), Table 4 (comprehension), Table 5 (few-shot), Table 6 (ablation), Table 9 (resynthesis)"

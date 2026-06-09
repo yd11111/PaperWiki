@@ -1,0 +1,45 @@
+paper: SongCreator
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节按 DSLM/BCA/注意力掩码策略/训练策略 四个设计选择展开,每个都有 WHY (动机) + HOW (机制) + 实验验证。速查卡片可借鉴列出 4 个具体可迁移 trick (BCA 双序列交互、mask 策略多任务统一、20% BCA=None dropout、song loss 缓解 separation artifact)。3 个月后读者可完整理解系统为何 work。"
+  trustworthy:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率极高: 方法节 [§X.X]/[Fig N]/[Table N]/[Eq N]/[Appendix X] 标注密集,实验表每行含 [Table N] 出处。指标名使用正确 (FAD/MOS/SECS/RTF/preference %)。方向标注正确 (FAD ↓, MOS ↑, SECS ↑)。经抽查: Lyrics-to-song FAD 2.14 [Table 3]、BCA 消融 85%→14% [Fig 3]、数据 8.5K hours [§4.1] 均与原文一致。"
+  distinguishable:
+    score: 9
+    rationale: "方法节 [论文原文] 标注 5 处 (DSLM 动机、song decoder 非自回归设计、20% None 策略、BCA 互利性、BEST-RQ 局限), [agent 解读] 标注 3 处 (BCA 核心价值、mask 策略精巧、20% None 等价 CFG)。覆盖率 100%。推断句均有限定词 ('实际上等价于'、'核心价值在于')。无把推断写成断言的情况。"
+  positionable:
+    score: 9
+    rationale: "KB 背景节引用 6 个实体页 (1 confirmed + 5 pending-review),有具体谱系定位: vs Jukebox (整体建模)、SingSong (独立建模)、Vevo2 (chromagram 统一表示)。创新判断有对比基准 (dual-sequence 显式交互 vs 前两者)。与 Vevo2 的关系段详细对比了两种路线的优劣。frontmatter 字段存在且语义正确。速查 5 字段均有实质内容。"
+  non-polluting:
+    score: 10
+    rationale: "无新建概念页。无反向更新 (按 caller 指令跳过)。笔记中无 overclaim 或 factual-error 会流入 KB。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "实验表 AB test vs SingSong 行"
+    detail: "使用 ↓ 标记 SongCreator 在此对比中表现较差,但 ↑/↓ 的惯例含义是 '越高/低越好',此处 ↓ 语义模糊 (不是 '越低越好',而是 '表现下降')"
+    suggestion: "可改为不加箭头,或在行内注释 '(SongCreator 输)'。不影响理解,低优先级。"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models/tasks/datasets 字段"
+    detail: "三个字段均为空数组 []。models 可列本文提出的 SongCreator 及对比 baseline (Jukebox/MusicGen/SingSong),但 vault 中暂无对应模型实体页,空值可接受。"
+    suggestion: "若未来创建 SongCreator/Jukebox 等模型页,回填 frontmatter。当前不阻塞。"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "实验表 RTF 行"
+    detail: "RTF (Real-Time Factor) 未标注方向 (↓ 更好) 且未说明测试条件 (V100 但未说明是否含 LDM stage)"
+    suggestion: "可补充 '↓' 并注明 RTF 是否为 DSLM+LDM 总体,或仅 DSLM。低优先级。"
+    status: noted
+
+learning_signals: []

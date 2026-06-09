@@ -1,0 +1,73 @@
+review:
+  paper: "Eureka-Audio"
+  note_path: "论文笔记/Eureka-Audio.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 8
+    verdict: pass
+    reason: >
+      方法节清晰解释了 MoE adapter 的设计动机 (音频异质性导致优化冲突) 和 DataFlux 的三步闭环逻辑。
+      速查卡片的"可借鉴"字段给出了具体可迁移 trick (MoE 解耦异质输入, 多模型交叉验证数据过滤)。
+      关键设计选择 (MoE vs dense projector) 回答了 WHY 问题。
+  可信赖:
+    score: 8
+    verdict: pass
+    reason: >
+      数字型 claim 均有 [Table N]/[Fig N]/[§X.X] 标注, 覆盖率 >90%。
+      指标名正确使用 (WER for English, CER for Mandarin)。
+      速查卡片指标字段含具体数字 + 数据集 + 出处。无方向性错误。
+  可区分:
+    score: 8
+    verdict: pass
+    reason: >
+      方法节中因果解释明确标注了 [论文原文] 和 [agent 解读], 覆盖率 >80%。
+      agent 解读标注的推断性分析 (如 MoE vs Conv/CTC/Q-Former 的比较定位) 与论文原文声明有清晰边界。
+      局限性中对 MoE 路由分析缺失的批评属于合理质疑, 未越界。
+  可定位:
+    score: 7
+    verdict: pass-with-fixes
+    reason: >
+      KB 背景有具体谱系定位 (latent-representation-based integration), 与已有适配方法 (Conv/CTC/Q-Former) 的对比清晰。
+      但 frontmatter concepts 字段未列 SpeechLanguageModel, 而 KB 背景中引用了该页作为定位参考。
+  不污染:
+    score: 9
+    verdict: pass
+    reason: >
+      未新建概念页。反向更新计划未执行 (用户要求不修改概念页)。
+      笔记内容准确, 无 overclaim, 不会对后续 KB 检索产生负面影响。
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: frontmatter concepts 字段
+    detail: >
+      concepts 未列 "[[SpeechLanguageModel]]", 该页是 confirmed 实体页且在 KB 背景中被引用为
+      定位参考。Eureka-Audio 作为 Audio Language Model 与 SpeechLanguageModel 概念直接相关。
+    suggestion: >
+      在 concepts 列表中追加 "[[SpeechLanguageModel]]"。
+
+  - id: 2
+    severity: low
+    type: weak-reusability
+    location: 可复用的 idea 第 4 条
+    detail: >
+      Load-balancing loss 是 MoE 训练的标准 trick, 不是本文的原创贡献,
+      作为"可复用 idea"价值较低。
+    suggestion: >
+      可保留但标注 "标准 MoE trick, 非本文原创", 或替换为其他更本文特异性的 idea
+      (如两阶段预训练的数据配比策略)。
+
+conclusion: pass-with-fixes
+summary: >
+  笔记质量整体良好。方法机制解释清晰, 数据标注规范, 来源区分到位。
+  KB 定位准确地将 Eureka-Audio 放在 latent-representation-based integration 路线中,
+  并与已有 modality adaptation 方法形成有意义的对比。
+  主要问题是 frontmatter concepts 遗漏 SpeechLanguageModel (medium)。
+  建议修正后可安全用于反向更新。
+
+learning_signals: []

@@ -1,0 +1,15 @@
+paper: Kimi-Audio
+date: 2026-06-08
+reviewer: auto
+conclusion: pass
+principles:
+  可复述: pass
+  可信赖: pass
+  可区分: pass
+  可定位: pass
+  不污染: pass
+issues:
+  - severity: low
+    description: "论文本身缺乏 ablation study (hybrid vs discrete-only input, dual-head vs single-head, blank token count, task weights),笔记已在局限性中指出但无法补充实验数据"
+  - severity: low
+    description: "speech conversation evaluation (Table 7) 的 evaluator 信息未在论文中公开,MOS 评分可靠性无法完全验证"

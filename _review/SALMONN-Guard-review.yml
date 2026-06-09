@@ -1,0 +1,75 @@
+review:
+  paper: "SALMONN-Guard"
+  note_path: "论文笔记/SALMONN-Guard.md"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass
+
+  principles:
+    reproducible:
+      score: 8
+      status: pass
+      rationale: >
+        方法节对 SACRED-Bench 三种攻击和 SALMONN-Guard 都给出了因果解释 (WHY),
+        每种攻击的设计直觉清晰说明了为什么这样设计而非那样设计。
+        速查卡片"可借鉴"字段给出了具体可迁移的策略 (黑盒攻击范式、两阶段 curriculum、间接引用)。
+        读完笔记可以向同事解释攻击为什么 work 以及防御为什么有效。
+
+    trustworthy:
+      score: 9
+      status: pass
+      rationale: >
+        数字标注覆盖率高 (>90%), 关键指标均标注 [Table N] 出处。
+        ASR/FAR/OBE 指标使用正确,方向性无误 (lower is better 一致标注)。
+        速查卡片"指标"字段含具体数字 + 数据集名 + 来源标注。
+        与原文交叉验证: Table 1 数据准确 (SALMONN-Guard overall ASR 11.32%, OBE 7.74%)。
+
+    distinguishable:
+      score: 8
+      status: pass
+      rationale: >
+        因果解释来源标注覆盖率 >80%, [论文原文]/[agent 解读] 标注清晰。
+        推断性分析用了限定词 (如 "这利用了", "暗示", "可能")。
+        标题中"首个"等 claim 有数据支撑 (Table 4 泛化实验)。
+        无明显的推断写成断言情况。
+
+    positionable:
+      score: 8
+      status: pass
+      rationale: >
+        KB 背景节有具体谱系定位 — 与 SALMONN 系列关系、与 Anti-spoofing 的区别。
+        明确标注了 KB 中已有什么 (adversarial vulnerability 在 ALM 概念页)、缺什么 (无专门音频攻击页)。
+        速查卡片 5 字段均有实质内容。
+        frontmatter concepts/models 语义正确: concepts 列相关概念, models 列 Whisper (用于评估中的 ASR 转写)。
+
+    non_polluting:
+      score: 9
+      status: pass
+      rationale: >
+        不新建概念页 (用户指定不修改概念页)。
+        无 overclaim — SALMONN-Guard 的泛化能力用了论文原文归因 + "暗示"限定。
+        反向更新内容无 factual error。
+        frontmatter 字段语义正确。
+
+  issues: []
+
+  issue_summary:
+    total: 0
+    high: 0
+    medium: 0
+    low: 0
+
+  learning_signals: []
+
+  cross_validation:
+    pdf_checked: true
+    key_numbers_verified:
+      - "Overall ASR 11.32% [Table 1] — verified"
+      - "OBE 7.74% [Table 1] — verified"
+      - "Gemini 2.5 Pro overall ASR 66.75% [Table 1] — verified"
+      - "SAO ASR 88.56% (Gemini) [Table 1] — verified"
+      - "Speech Insertion 0.00%, Speech Editing 3.00% [Table 4] — verified"
+      - "FAR 0.00% [Table 1] — verified"
+      - "MSD Harmful Compliance 2.15% [Table 9] — verified"
+      - "Training data ~10k (8545 harmful + 1828 benign) [§4.1, Table 5] — verified"
+      - "LoRA rank=32, alpha=32 [Table 6] — verified"

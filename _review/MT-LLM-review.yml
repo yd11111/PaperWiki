@@ -1,0 +1,55 @@
+review:
+  paper: "MT-LLM"
+  reviewer: "auto (same-session)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含清晰因果解释: 为什么 dual encoder (Whisper 语义 + WavLM 声学), 为什么 SOT 而非 PIT; 速查可借鉴 4 条均为具体可迁移 trick (dual encoder 选型/best-matching 分析/multi-task 正则化/SOT 输出格式); 关键设计选择显式回答 why this not that"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; WER 指标使用正确; 速查指标字段含具体数字 + 数据集 (LibriSpeechMix) + 来源 [Table I/II/III]; 实验表完整标注出处; 无方向性错误"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 方法节 4 处正确标注 [论文原文] 和 [agent 解读]; 局限性 #6 '无流式推理' 是 agent 推断但未标注来源"
+  可定位:
+    score: 9
+    rationale: "KB 背景提供精确谱系定位: 与 SALMONN dual encoder 路线对比 (BEATs→WavLM 替换逻辑), WavLM 层级分离特性与 learnable weighted sum 的理论连接, AudioUnderstanding 能力空白填补; 创新判断准确 (问题定义>架构创新); frontmatter concepts/models 基本完整"
+  不污染:
+    score: 9
+    rationale: "未创建新概念页; 未修改任何实体页; 无 factual error 或 overclaim 风险; 无 KB 污染可能"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "文件末尾"
+    detail: "缺少审阅 callout section (paper-deep.md 模板要求在文件末尾包含 > [!review] callout)"
+    suggestion: "在文件末尾 '检索命中' 行之前插入审阅 callout"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets/tasks"
+    detail: "frontmatter datasets: [] 和 tasks: [] 为空, 应包含 LibriSpeechMix、CoVoST2 等数据集和 MultiTalkerASR 等任务"
+    suggestion: "datasets 填入 LibriSpeechMix、CoVoST2; tasks 可选填 MultiTalkerASR"
+  - id: 3
+    type: fact-inference-mixing
+    severity: low
+    location: "局限性 #6"
+    detail: "'无流式推理: 基于 Llama-2-7b 的非流式架构,不适用于实时 multi-talker 转写场景' 是 agent 推断 (论文未讨论流式能力), 但未标注 [agent 解读]"
+    suggestion: "前缀 '[agent 解读]' 或改为 '6. **无流式推理** [agent 解读]: 基于 Llama-2-7b...'"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "速查 一句话"
+    detail: "'首次将 LLM 用于多说话人 cocktail party 场景' 是论文 claim [§I], 但速查中未标注出处"
+    suggestion: "可在速查末尾或核心问题节已有 [§I] 标注, 速查节可忽略 (非强制标注区域), 但建议保持一致"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 3
+
+learning_signals: []

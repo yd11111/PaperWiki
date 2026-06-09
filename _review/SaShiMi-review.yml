@@ -1,0 +1,67 @@
+review:
+  paper: "SaShiMi"
+  note_path: "论文笔记/SaShiMi.md"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: >
+      方法节对 Hurwitz 稳定性修复提供了完整因果链: 问题 (训练用卷积不需 Hurwitz, 推理用循环需要)
+      → 诊断 (S4 训练后 A 通常非 Hurwitz) → 解决 (Λ-pp* 参数化)
+      → 理论保证 (Proposition 4.3) → 实验验证 (Fig 3 spectral radii)。
+      多尺度架构的 WHY (下采样减少底层序列长度,让 S4 以更少步覆盖更大时间跨度) 也有解释。
+      速查卡片可借鉴字段给出了三个具体可迁移 trick。
+
+  trustworthy:
+    score: 8
+    rationale: >
+      数字型 claim 标注覆盖率高: Table 2/3/4/5/6/7 引用充分,关键 NLL/MOS/FID 均有出处。
+      指标名使用正确 (NLL/BPB, FID, IS, mIS, MOS)。速查卡片指标字段含具体数字 + 数据集 + 来源。
+
+  distinguishable:
+    score: 7
+    rationale: >
+      [论文原文] 和 [agent 解读] 标注较充分。核心机制解释 (Hurwitz 修复, 多尺度动机)
+      正确区分了作者的声明和 agent 的推断。但部分 agent 解读 (如等距 S4 性能下降的原因分析)
+      是合理推测,标注了 [agent 解读] 但缺少"可能"等限定词。
+
+  locatable:
+    score: 8
+    rationale: >
+      KB 背景节包含 S4→SaShiMi→Mamba 演进线,与 NeuralVocoder 中 WaveNet/DiffWave 的关系明确。
+      谱系定位包含具体模型名和时间线。frontmatter 字段完整。速查卡片 5 字段均有实质内容。
+
+  non_polluting:
+    score: 9
+    rationale: >
+      未建议创建新概念页。concepts 引用的 3 个页面均已存在。
+      反向更新计划 (如有) 仅为 append key_papers,不涉及实质修改。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter
+    detail: >
+      models 字段为空。按 checklist 要求 "models 列本文模型+对比 baseline(非后续系统)",
+      但 SaShiMi/WaveNet/SampleRNN/DiffWave 均无独立模型页,故空值合理。
+      可考虑列出模型名 (不含 wikilink) 提高可检索性。
+    suggestion: >
+      可选改进: models 字段添加纯文本模型名如 "SaShiMi", "WaveNet", "SampleRNN", "DiffWave"
+      (不含 wikilink,因无对应模型页)。
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "局限性 §2 (8-bit 量化上限)"
+    detail: >
+      "远低于现代 TTS 的 16-bit/24-bit 标准" 这一 claim 属于 agent 对比判断,
+      但未标注 [agent 解读]。论文本身未讨论量化位数的局限性,
+      这是 agent 从现代视角的补充分析。
+    suggestion: >
+      在 "8-bit 量化上限" 条目前添加 [agent 解读] 标签。
+
+learning_signals: []

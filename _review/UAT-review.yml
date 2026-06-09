@@ -1,0 +1,182 @@
+review_target: "论文笔记/UAT.md"
+review_date: "2026-06-08"
+reviewer: auto
+checklist_version: "v1.1"
+
+# 第一层: 原则判断
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    rationale: >
+      方法节清晰解释了 dual-stream DiT 的 WHY (architectural asymmetry + paradigm discrepancy)
+      和 HOW (因果链更新: 音频先更新→文本以更新后音频为条件)。
+      关键设计选择均包含动机解释。速查卡片"可借鉴"给出了具体可迁移 trick (retrofit 策略、continuous+discrete 耦合)。
+  trustworthy:
+    score: 8
+    verdict: pass
+    rationale: >
+      所有数字 claim 均标注了 [Table N] / [§X.X] 出处。指标名使用正确 (KL/IS/FD/FAD/CLAP/CIDEr/SPICE/SPIDEr/SBERT-SIM/FENSE)。
+      速查卡片指标字段含具体数字+数据集+来源。无方向性错误。
+  distinguishable:
+    score: 8
+    verdict: pass
+    rationale: >
+      因果解释标注了 [论文原文] 和 [agent 解读],覆盖率约 90%。
+      无将推断写成断言的明显案例。关于 "首个 diffusion-centric 统一框架" 的 claim 使用了
+      "to our knowledge" 限定 (来自原文)。
+  positionable:
+    score: 8
+    verdict: pass
+    rationale: >
+      KB 背景节包含具体谱系定位 (UNISON/Audio-Omni/UniAudio 2.0/Unified-IO 2),
+      与已有知识的关系明确 (CFM velocity prediction 关联, masked generative modeling 关联)。
+      创新判断有对比基准。frontmatter 字段完整。
+  no_pollution:
+    score: 9
+    verdict: pass
+    rationale: >
+      无新建概念页需求。概念引用合理 (6 个已有概念页)。
+      models 字段为空 (本文无 TTS 模型可引用,AudioX 未入库,合理)。
+      不涉及反向更新 (用户指令不更新概念页)。
+
+# 第二层: 检查项
+checks:
+  # 可复述
+  - id: mechanism_why
+    principle: reproducible
+    description: "方法节包含因果解释 (WHY)"
+    result: pass
+    detail: "4 个关键设计选择均解释了为什么选择该方案"
+
+  - id: design_why_not
+    principle: reproducible
+    description: "每个设计选择回答了为什么不选其他方案"
+    result: pass
+    detail: "dual-stream vs single-stream/cross-attention; continuous+discrete vs pure AR/pure continuous; refiner depth 消融"
+
+  - id: reusable_trick
+    principle: reproducible
+    description: "速查卡片'可借鉴'是具体可迁移 trick"
+    result: pass
+    detail: "4 条具体 trick,均指出可迁移场景"
+
+  # 可信赖
+  - id: claim_traceability
+    principle: trustworthy
+    description: "数字 claim 有出处标注 (≥80%)"
+    result: pass
+    detail: "实验节所有数字均标注 [Table N],方法节引用标注 [§X.X]"
+
+  - id: metric_naming
+    principle: trustworthy
+    description: "指标名正确"
+    result: pass
+    detail: "KL/IS/FD/FAD/CLAP/CIDEr/SPICE/SPIDEr/SBERT-SIM/FENSE/OVL/REL 均正确使用"
+
+  - id: summary_metrics
+    principle: trustworthy
+    description: "速查卡片'指标'含具体数字+数据集+来源"
+    result: pass
+    detail: "包含 IS/FD/FAD/CLAP (AudioCaps) + CIDEr/SPIDEr/SBERT-SIM (AudioCaps) + OVL/REL + [Table 1-4]"
+
+  - id: direction_error
+    principle: trustworthy
+    description: "无方向性错误"
+    result: pass
+
+  # 可区分
+  - id: source_label_coverage
+    principle: distinguishable
+    description: "因果解释来源标注覆盖率 ≥ 80%"
+    result: pass
+    detail: "方法节 4 个设计选择中每个都有 [论文原文] 和 [agent 解读] 标注"
+
+  - id: no_assertion_as_fact
+    principle: distinguishable
+    description: "无把推断写成断言的句子"
+    result: pass-with-note
+    detail: "KB 背景中 '已知首个 diffusion-centric 统一 audio-text 框架' 来自论文原文的 claim ('to our knowledge'),已在笔记中体现"
+
+  - id: strong_claim_support
+    principle: distinguishable
+    description: "强断言有数字+出处支撑"
+    result: pass
+
+  # 可定位
+  - id: kb_lineage
+    principle: positionable
+    description: "KB 背景有具体谱系定位"
+    result: pass
+    detail: "包含 UNISON/Audio-Omni/UniAudio 2.0/Unified-IO 2 的具体对比"
+
+  - id: innovation_baseline
+    principle: positionable
+    description: "KB 背景的创新判断有对比基准"
+    result: pass
+    detail: "与 UNISON (deep fusion)、Audio-Omni (hybrid)、UniAudio 2.0 (AR-centric) 的明确区分"
+
+  - id: fields_present
+    principle: positionable
+    description: "frontmatter 字段存在且非空"
+    result: pass
+
+  - id: fields_semantically_correct
+    principle: positionable
+    description: "frontmatter 字段语义正确"
+    result: pass-with-note
+    detail: "models 字段为空。AudioX 是预训练 backbone 但未在 vault 中建页,合理。baselines (Audio-Omni, UniAudio 2.0 等) 不是本文模型,不列入 models"
+
+  - id: summary_complete
+    principle: positionable
+    description: "速查卡片 5 字段都有实质内容"
+    result: pass
+
+  # 不污染
+  - id: concept_admission
+    principle: no_pollution
+    description: "新建概念页满足准入规则"
+    result: not-applicable
+    detail: "本次未新建概念页"
+
+  - id: dedup_check
+    principle: no_pollution
+    description: "已有概念库中无语义相近页"
+    result: not-applicable
+
+  - id: factual_accuracy
+    principle: no_pollution
+    description: "反向更新无 factual-error"
+    result: not-applicable
+    detail: "用户指令不做反向更新"
+
+  - id: update_classification
+    principle: no_pollution
+    description: "反向更新正确分类为追加/实质"
+    result: not-applicable
+
+# 问题列表
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "frontmatter models 字段"
+    detail: "models 字段为空。虽然 AudioX (预训练 backbone) 和 Audio-Omni / UniAudio 2.0 (baselines) 都有 vault 中的笔记,但 AudioX 本身无独立实体页,baselines 不属于本文 models。按规则 models 应列本文模型+对比 baseline,但 vault 中无 AudioX 实体页,也无 Audio-Omni/UniAudio 2.0 实体页。"
+    suggestion: "如果后续为 AudioX 建立实体页,可补充到 models 字段。当前保持空值是安全选择。"
+
+  - id: 2
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea 第 3 条"
+    detail: "'Audio stream 先更新、text stream 后更新的因果链' 的描述过于抽象,缺少具体的数学直觉或消融证据。"
+    suggestion: "可补充说明: 这种顺序意味着 text stream 看到的是 'one-step-ahead' 的音频表征,等价于在文本预测中注入最新的声学信息。"
+
+# 审阅结论
+conclusion: pass-with-fixes
+summary: >
+  笔记质量整体良好。方法节对 dual-stream architecture 和 continuous+discrete diffusion 耦合的
+  机制解释清晰,因果推理标注充分,KB 背景定位准确 (尤其与 UNISON 的对比)。
+  2 个问题均不阻塞: models 空值是当前 vault 状态的合理选择 (medium);
+  可复用 idea 第 3 条可进一步具体化 (low)。无 high issue。
+
+learning_signals: []

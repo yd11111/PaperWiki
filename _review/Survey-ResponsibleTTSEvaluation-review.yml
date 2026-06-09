@@ -1,0 +1,55 @@
+review:
+  paper: "Survey-ResponsibleTTSEvaluation"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 9
+    verdict: pass
+    note: "三层框架结构清晰,每层的 WHY (为什么需要) 和 HOW (具体问题是什么) 都有因果解释。关键设计选择 (三层递进 vs 并列, Alternative Views 的纳入) 有明确论述。速查卡片可借鉴字段提供了具体可操作清单。"
+  可信赖:
+    score: 8
+    verdict: pass
+    note: "所有关键数字 (WER 2.63/4.22, SIM-o 0.754/0.905, 差异 0.151/60%) 均有出处标注。指标名称使用准确。本文为 position paper 而非方法论文,数字型 claim 较少但均已覆盖。"
+  可区分:
+    score: 9
+    verdict: pass
+    note: "因果解释来源标注覆盖率 >90%,方法节中所有 WHY 解释均标注 [论文原文] 或 [agent 解读],边界清晰。推断性分析使用了恰当的限定词。"
+  可定位:
+    score: 8
+    verdict: pass
+    note: "KB 背景提供了具体谱系定位 (后续工作的共同参考锚点),创新判断以 KB 中已有后续工作为对比基准。frontmatter 字段完整。速查 5 字段均有实质内容。"
+  不污染:
+    score: 8
+    verdict: pass
+    note: "未执行反向更新,无概念页修改风险。笔记中引用的 KB 页面和已有工作均准确。"
+
+issues:
+  - type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter source 字段"
+    detail: "source 为 'Sources/TTSEvaluationPositionPaper.pdf' 但笔记文件名为 'Survey-ResponsibleTTSEvaluation.md',按 AGENTS.md §3 规则 PDF 文件名应与笔记文件名一致。"
+    suggestion: "将 PDF 重命名为 Sources/Survey-ResponsibleTTSEvaluation.pdf,或将笔记重命名为 TTSEvaluationPositionPaper.md。建议前者以保持已有概念页引用不断。"
+  - type: "traceability-gap"
+    severity: "low"
+    location: "方法节 Level 3 公平性部分"
+    detail: "Koenecke et al. 2020 和 Hutiri & Ding 2022 的引用为论文原文引用但未标注具体章节号,仅标注了 [论文原文]。"
+    suggestion: "补充 [§5.2] 章节号标注。"
+  - type: "template-compliance"
+    severity: "low"
+    location: "实验表格"
+    detail: "实验表格第四列标题为'关键发现'而非模板中的'Baseline',但因本文是 position paper 非方法论文,此适配是合理的。"
+    suggestion: "保持现状,此为合理适配。"
+
+learning_signals:
+  - "Position paper 的 deep 笔记需要适配模板: '方法:它怎么 work' 应改为分析框架说明而非技术方法; '实验' 应改为 case study; 不应强求 baseline 对比表格。"
+  - "PDF 文件命名不一致问题在已有笔记升级场景 (card→deep) 中更易出现,因为 card 阶段可能未严格执行命名规则。"
+
+summary: |
+  笔记质量总体良好。三层 Responsible Evaluation 框架的分析结构清晰,因果解释充分且来源标注到位。
+  KB 背景有效利用了 6 个相关实体页进行谱系定位和已有认知对照。速查卡片提供了具体可操作的可借鉴点。
+  主要问题是 PDF 文件名与笔记文件名不一致 (medium),建议修正。
+  其他为低优先级格式问题。
+  结论: pass-with-fixes (1 medium, 2 low)。

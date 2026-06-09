@@ -1,0 +1,34 @@
+review:
+  paper: "SALMONN-omni-v1"
+  note_path: "论文笔记/SALMONN-omni-v1.md"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节围绕四个子挑战展开因果解释 (streaming I/O, dual-stream, time alignment, state transition)。Thinking 机制的 WHY (避免 placeholder 重复导致分布坍缩) 和 HOW (负系数 loss + <think> 仅作输入) 均有充分阐述。速查卡片可借鉴项列出 3 个具体可迁移 trick。考虑到原文仅 9 页且无定量结果,笔记的信息提取已接近极限。"
+  可信赖:
+    score: 9
+    rationale: "所有 claim 标注 [section/Fig]; 明确标注本文无定量评估,避免误导; 数据来源 (LibriHeavy 60k h + GigaSpeech 10k h) 有出处。Case study 表格 7 行均含具体出处标注。无方向性错误。"
+  可区分:
+    score: 9
+    rationale: "[论文原文] vs [agent 解读] 标注覆盖率 >80%。推断性分析均有限定词 ('可能'、'后续 v2 版本揭示了')。与 v2 版本的关系明确标注为 agent 解读。无将推断写成断言的情况。"
+  可定位:
+    score: 9
+    rationale: "KB 背景有谱系定位: codec injection (Moshi/SyncLLM) vs embedding-based (本文) 两条根本路线对比。与 v2 版本 (SALMONN-omni.md) 的定位清晰: v1=idea paper, v2=system paper。速查卡片 5 字段均有实质内容,局限性标注准确。"
+  不污染:
+    score: 9
+    rationale: "未修改任何概念页。无 overclaim。准确标注为 technical report 而非完整系统论文,不会污染知识库中关于系统能力的判断。frontmatter models 仅列 Moshi 和 LSLM (本文引用的主要对比系统)。"
+
+issues: []
+
+learning_signals: []
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

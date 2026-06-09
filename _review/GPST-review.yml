@@ -1,0 +1,62 @@
+paper: GPST
+arxiv_id: "2406.00976"
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  可复述:
+    status: pass
+    notes: >
+      方法节包含因果解释: 为什么 sum 而不是 flatten (利用 RVQ 层级结构降低复杂度),
+      为什么 local transformer 跨时间步独立 (RVQ 残差结构保证同构性),
+      为什么大小不对称 (模拟未来 LLM 集成 + FLOPS 分析)。
+      速查卡片可借鉴字段包含 3 个具体可迁移 trick。
+  可信赖:
+    status: pass
+    notes: >
+      数字 claims 标注覆盖率约 95%。所有实验数字标注了 [Table N] 或 [§X.X]。
+      指标使用正确 (WER/SPK/DNSMOS)。无方向性错误。
+  可区分:
+    status: pass
+    notes: >
+      因果解释来源标注覆盖率约 85%。8 处 [论文原文] 和 5 处 [agent 解读] 标注明确。
+      推断性分析使用限定词 ("可能", "本质上是", "之所以 work 是因为")。
+  可定位:
+    status: pass
+    notes: >
+      KB 背景有具体谱系定位: AudioLM (3-stage) → VALL-E (2-stage) → GPST (1-stage)。
+      概念页挂接 5 个 (SemanticvsAcousticTokens, RVQ, SpeechLM, CodecLM, Single-vs-Multi-codebook)。
+      点评节有领域趋势定位 (单码本化方向)。
+  不污染:
+    status: pass
+    notes: >
+      无新概念页创建需求。反向更新仅涉及 key_papers 追加 (SpeechLanguageModel, CodecLanguageModel),
+      属于 append 操作不改 status。
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    description: >
+      frontmatter 的 models 字段列出 AudioLM/SPEAR-TTS/SoundStorm 作为对比 baseline,
+      但 Table 1 中 GSLM 和 YourTTS 也是 baseline,未在 models 中列出。
+    fix: 可追加 GSLM 和 YourTTS 到 models 字段
+    action: none
+
+  - id: 2
+    severity: low
+    type: weak-reusability
+    description: >
+      可复用 idea 第 4 条 (EnCodec 跨语言通用性) 更接近实验观察而非可迁移 trick。
+    fix: 可精简或合并到实验观察中
+    action: none
+
+stats:
+  sections_present: [KB背景, 速查, 核心问题, 方法, 实验, 局限性, 点评, 可复用的idea, 审阅]
+  source_annotations: 13
+  source_coverage_pct: 85
+  quickcard_fields: 5
+  quickcard_substantive: 5
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true

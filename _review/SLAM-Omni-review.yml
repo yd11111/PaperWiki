@@ -1,0 +1,68 @@
+paper: SLAM-Omni
+arxiv_id: "2412.15649"
+reviewer: auto
+date: 2026-06-08
+verdict: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    note: "方法节包含三个关键设计选择的因果解释(WHY not WHAT),速查卡片可借鉴字段有具体 trick"
+  trustworthy:
+    status: pass
+    note: "数字 claim 均标注 [§X.X]/[Table N],指标名正确,无方向性错误"
+  distinguishable:
+    status: pass
+    note: "[论文原文]/[agent 解读] 标注覆盖率 >80% (方法节 8/9 处标注)"
+  positionable:
+    status: pass
+    note: "KB 背景定位清晰: parallel audio-text modeling 范式 + semantic token 路线 + CosyVoice 复用 + conv downsampling 适配"
+  non-polluting:
+    status: pass
+    note: "未创建新概念页,frontmatter concepts/models 挂接合理,无 successor-as-model 问题"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "局限性 第3-6条"
+    description: "局限性中部分 agent 解读条目初稿未明确标注来源,修正后已补 [agent 解读] 标签"
+    action: fixed
+
+  - id: 2
+    severity: medium
+    type: weak-reusability
+    location: "可复用的 idea 第4条"
+    description: "单阶段训练适用性结论仅在 0.5B 验证,需加限定条件避免过度推广"
+    action: "fixed — 已加 '不宜推广到大模型' 限定"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "实验节 多轮/中文表格"
+    description: "多轮和中文实验仅报 overall 分数,未含 per-dataset breakdown,因原文附录数据分散且篇幅限制可接受"
+    action: accepted
+
+checklist:
+  method_has_causal_explanation: true
+  design_choices_answer_why: true
+  reusable_is_concrete: true
+  numeric_claims_sourced: true
+  metric_names_correct: true
+  quickcard_metrics_with_numbers: true
+  no_directional_errors: true
+  source_annotation_coverage: ">80%"
+  no_assertion_without_qualifier: true
+  strong_claims_supported: true
+  kb_background_has_lineage: true
+  kb_innovation_has_baseline: true
+  frontmatter_fields_present: true
+  frontmatter_fields_semantically_correct: true
+  quickcard_all_fields_substantive: true
+
+stats:
+  sections: 9
+  tables: 5
+  source_annotations: 17
+  agent_interpretations: 7
+  kb_entities_referenced: 7

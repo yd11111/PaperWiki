@@ -1,0 +1,40 @@
+paper: "BridgingLM-TTSgap"
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+principles:
+  reproducible:
+    score: 9
+    verdict: pass
+    reason: "方法节包含充分的 WHY 解释(为什么不用 scheduled sampling、为什么需要 prompt protection、10K warmup 的作用);每个设计选择有对比基准;速查卡片可借鉴字段具体可迁移"
+  trustworthy:
+    score: 9
+    verdict: pass
+    reason: "数字型 claim 标注覆盖率 >90%;指标名(WER/SIM/MOS)使用正确;速查指标含数字+数据集+来源;无方向性错误"
+  distinguishable:
+    score: 9
+    verdict: pass
+    reason: "因果解释一致标注[论文原文]或[agent解读];来源标注覆盖率约 90%;无推断写成断言的情况"
+  locatable:
+    score: 9
+    verdict: pass
+    reason: "KB 背景具体引用了 LLM-basedTTS 范式、CosyVoice/CosyVoice2 模型细节、与 RLHF/DPO 路线的互补关系;创新判断对标 scheduled sampling;frontmatter 语义正确"
+  no_pollution:
+    score: null
+    verdict: "N/A"
+    reason: "no-kb-update 模式,不执行反向更新"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "训练策略/§3.1"
+    detail: "论文引用 [18] (MLS dataset, ~44K hours) 但文中称 'LibriSpeech corpus (~40K hours)'。笔记忠实跟随论文表述,但标准 LibriSpeech 仅 960 hours。未加注释说明可能造成读者混淆"
+    suggestion: "可在训练策略节加注: '注: 论文称 LibriSpeech 但引用 MLS [18],实际训练数据规模为 ~40K hours (MLS),非 960h LibriSpeech'"
+
+summary:
+  total_issues: 1
+  high: 0
+  medium: 1
+  low: 0
+
+learning_signals: []

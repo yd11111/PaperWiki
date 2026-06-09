@@ -1,0 +1,77 @@
+review:
+  paper: "Step-Audio-AQAA"
+  note_path: "论文笔记/Step-Audio-AQAA.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    rationale: >
+      方法节对每个关键设计选择提供了因果解释 (WHY dual-codebook: 互参照降低 perplexity;
+      WHY interleaved output: text tokens 作为语义锚点; WHY masked DPO: 避免语义偏好破坏声学生成;
+      WHY weight merge: 融合互补能力)。速查卡片的"可借鉴"字段列出了 3 个具体可迁移策略。
+      训练策略的 4+1 阶段流程清晰。
+  trustworthy:
+    score: 7
+    verdict: pass-with-fixes
+    rationale: >
+      Ablation 数字标注充分 (Table 1, Table 2, Eq. 1-3)。但主实验 (§5.1) 仅提供雷达图
+      (Fig 3) 的视觉比较,无精确 MOS 数值,笔记已如实标注此限制。指标名正确 (MOS/Chat/Relevance/Factuality)。
+      速查卡片"指标"字段含具体数字 + 数据集名 + 来源标注。
+  distinguishable:
+    score: 8
+    verdict: pass
+    rationale: >
+      因果解释均标注了 [论文原文] 或 [agent 解读]。Agent 推断使用了限定词
+      ("这可能是因为"/"本质上是"/"agent 解读" 等)。无断言式推测。
+  positionable:
+    score: 8
+    verdict: pass
+    rationale: >
+      KB 背景节提供了具体谱系定位: Step-Audio → Step-Audio-AQAA 的升级路径,
+      与 Kimi-Audio/Qwen-Omni/GLM-4-Voice 的同代竞争定位,dual-codebook 在
+      SemanticvsAcousticTokens 中的位置分析。创新判断有明确对比基准
+      (相对于 CosyVoice 系列和前作 Step-Audio 的增量)。Frontmatter 字段完整。
+  non-polluting:
+    score: 9
+    verdict: pass
+    rationale: >
+      本次精读不执行反向更新 (用户要求),无 KB 污染风险。
+      笔记中的概念引用和谱系定位准确,未引入 overclaim。
+
+conclusion: pass-with-fixes
+conclusion_rationale: >
+  所有原则基本满足,无 high issue。1 个 medium issue (主实验缺精确数值)
+  是论文本身的局限而非笔记质量问题,已在笔记中明确标注。
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    principle: trustworthy
+    location: "## 实验"
+    detail: >
+      主实验 (§5.1, Fig 3) 仅提供雷达图视觉比较,无法提取精确 MOS 数值。
+      实验表中只能标注"最高"/"弱于"等定性描述。
+    suggestion: >
+      已在表格中标注"论文仅提供雷达图,未给出具体 MOS 数值"。
+      如后续论文更新提供数字,可回填。当前处理方式已是最佳选择。
+    fixed: true
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    principle: positionable
+    location: "frontmatter datasets"
+    detail: >
+      datasets 字段为空。论文使用 StepEval-Audio-360 作为评测基准,
+      但该数据集尚无独立实体页。
+    suggestion: >
+      StepEval-Audio-360 为 StepFun 自建评测集,当前不满足独立建页的准入规则
+      (仅被本系列论文使用)。暂不列入,待更多论文引用时再考虑。
+    fixed: false
+
+learning_signals: []

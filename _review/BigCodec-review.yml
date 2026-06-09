@@ -1,0 +1,38 @@
+paper: BigCodec
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节每个设计选择 (单码本 vs RVQ、低维 VQ + L2、LSTM vs Transformer、scaling 策略) 均有明确 WHY 解释和替代方案对比。速查卡片可借鉴字段列出 4 个具体可迁移 trick (低维 VQ+L2 归一化、model scaling 策略、LSTM 时序建模、SIM 作为评估指标),全部可操作。"
+  trustworthy:
+    score: 9
+    rationale: "数字 claim 出处标注覆盖率高: 44 处 [§X.X]/[Table N] 标注。MUSHRA 92.33、SIM 0.84、PESQ-WB 2.68、RTF 1.1x 等关键数字经 PDF 交叉验证正确。指标名无混淆 (MUSHRA/PESQ-WB/STOI/SIM/MCD 均正确使用)。比特率公式 80 x 13 = 1040 bps 计算正确。"
+  distinguishable:
+    score: 9
+    rationale: "14 处 [论文原文]/[agent 解读] 标注,覆盖方法节所有因果解释。LSTM 选择原因、MUSHRA 超 GT 解释、数据 scaling 无效原因等均明确标注为 agent 解读。点评节作为独立评论区,不标来源是合理的。"
+  positionable:
+    score: 9
+    rationale: "KB 背景节引用 3 个 confirmed 实体页 (RVQ, MS-STFT Discriminator, CodebookCollapse) + 3 个 pending-review 页,谱系定位清晰 (单码本路线回归转折点)。创新判断有量化对比基准 (159M vs 典型 10-14M)。frontmatter 完整: models 列 EnCodec/BigVGAN/SoundStream (均有模型页), concepts 列 7 个相关概念。"
+  non-polluting:
+    score: 10
+    rationale: "未创建新概念页,未执行反向更新 (用户指令跳过)。笔记中引用的概念页均已存在。点评节的判断 (如'MUSHRA 超 GT 可能因 GAN enhancement') 有明确 [agent 解读] 标注,不会污染 KB。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets 字段"
+    detail: "datasets: [] 为空,但论文使用 LibriSpeech 960h 训练 + MLS test 评测。vault 中无 LibriSpeech 页但有 LibriTTS 页,两者不同,留空合理。"
+    suggestion: "如未来创建 LibriSpeech 数据集页,可回填此字段"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "消融实验表 BigCodec-ll60k"
+    detail: "'ll60k' 含义不直观,读者需额外推理才能知道是 LibriLight 60k hours"
+    suggestion: "可在表内或表后注释 'll60k = LibriLight 60kh data'"
+    status: noted
+
+learning_signals: []

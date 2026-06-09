@@ -1,0 +1,69 @@
+review:
+  paper: "Mamba"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含清晰因果解释: WHY 选择性机制 work (LTI 是瓶颈), WHY hardware-aware scan 必要 (参数时变无法卷积), WHY 合并 block (H3+MLP → Mamba block); 速查卡片可借鉴 5 条均具体可迁移; Theorem 1 (gating 等价) 解释充分"
+  可信赖:
+    score: 6
+    rationale: "实验表数字与 Table 3/4 交叉验证正确; 消融数字与 Table 6/7/10 一致; 但速查卡片存在两处数字问题: (1) FID 0.67 vs SaShiMi 1.99 是跨规模比较 (24.3M vs 5.8M), (2) 'Pythia-7B avg acc 62.5%' 实为 RWKV-7.4B 的数值, Pythia-6.9B 实际为 61.7%"
+  可区分:
+    score: 7
+    rationale: "方法节多处正确标注 [论文原文] 和 [agent 解读]; 核心问题节虽引 [§3.1] 但未用 [论文原文] 标签; 可复用 idea 节混合论文内容与 agent 推断未标注; 整体覆盖率约 75%"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供了详细谱系定位 (HiPPO→S4→Mamba 及 TTS 后续工作 MamTra/MambaVoiceCloning/RWKVTTS); 创新判断有对比基准 (LTI vs selective, SaShiMi vs Mamba); frontmatter 有 concepts 链接但 models/tasks/datasets 为空"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 无反向更新; 概念挂接 (SpeechLanguageModel, LLM-basedTTS, CodecLanguageModel) 合理; 未引入不可靠信息"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "速查 指标"
+    detail: "'Mamba-3B 匹配 Pythia-7B (avg acc 63.3% vs 62.5%)' 中 62.5% 实为 RWKV-7.4B 的 average accuracy [Table 3]; Pythia-6.9B 的实际 avg acc 为 61.7%"
+    suggestion: "改为 'Mamba-2.8B 超越 Pythia-6.9B (avg acc 63.3% vs 61.7%) [Table 3]' 或 'Mamba-2.8B 超越同规模 Pythia/RWKV 约 4pp, 匹配 2x 规模 Transformer [Table 3]'"
+  - id: 2
+    type: overclaim
+    severity: medium
+    location: "速查 指标"
+    detail: "'音频: SC09 FID 0.67 (vs SaShiMi 1.99)' 跨规模比较 — 0.67 来自 24.3M Mamba, 1.99 来自 5.8M SaShiMi。公平对比应为: 6.1M 对 5.8M (0.94 vs 1.99) 或 24.3M 对 23M (0.67 vs 1.42)"
+    suggestion: "改为 '音频: SC09 FID 0.94 vs SaShiMi 1.99 (同规模 ~6M); 扩展至 24.3M 后 FID 0.67 vs DiffWave+SaShiMi 1.42 [Table 4]'"
+  - id: 3
+    type: template-compliance
+    severity: medium
+    location: "frontmatter models/tasks/datasets"
+    detail: "models, tasks, datasets 三个字段均为空 []. checklist 要求 'models 列本文模型+对比 baseline', 至少应含 Mamba 本身及主要 baseline"
+    suggestion: "models 填 Mamba + Pythia + RWKV + SaShiMi + H3; tasks 填 language-modeling + audio-generation + DNA-modeling; datasets 填 ThePile + SC09 + YouTubeMix + HG38"
+  - id: 4
+    type: fact-inference-mixing
+    severity: low
+    location: "核心问题 全节"
+    detail: "核心问题节多处陈述论文原文观点 (如'根本原因诊断 [§3.1]', '本文的核心主张') 但未用 [论文原文] 标签, 仅有章节引用"
+    suggestion: "在核心因果解释前添加 [论文原文] 标签, 特别是 '根本原因诊断' 和 '本文的核心主张' 段落"
+  - id: 5
+    type: overclaim
+    severity: low
+    location: "点评 §3"
+    detail: "'Mamba 是 Transformer 之后最成功的序列建模架构提案之一' 是价值判断, 无引用支撑且缺少限定词"
+    suggestion: "改为 '[agent 解读] Mamba 被广泛认为是 Transformer 之后最具影响力的序列建模架构之一 (截至 2024)'"
+  - id: 6
+    type: traceability-gap
+    severity: low
+    location: "可复用的 idea 全节"
+    detail: "5 条 idea 混合论文内容 (#1 选择性机制, #3 合并 block) 与 agent 推断 (#4 prosody 启发, #5 TTS 低成本路径), 未标注 [论文原文] 或 [agent 解读]"
+    suggestion: "对每条 idea 标注来源: #1/#2/#3 标 [论文原文], #4/#5 标 [agent 解读]"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 3
+low_issues: 3
+
+learning_signals:
+  - "速查卡片中的跨规模比较容易引入 overclaim — 应明确标注各模型参数量或只做同规模对比"
+  - "frontmatter 中 models/tasks/datasets 不应为空, 即使论文是通用架构论文而非 TTS 特定论文"

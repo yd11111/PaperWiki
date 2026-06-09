@@ -1,0 +1,76 @@
+review:
+  paper: "RALL-E"
+  note_path: "论文笔记/RALL-E.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    status: pass
+    rationale: >
+      方法节清晰解释了 CoT prompting 的 WHY (将复杂任务分解为子步骤) 和 HOW (先预测
+      prosody tokens 再预测 speech tokens), duration-guided masking 的动机和窗口设计
+      选择都有充分的因果解释。每个关键设计选择都回答了"为什么选这个而不是那个"。
+
+  可信赖:
+    score: 8
+    status: pass
+    rationale: >
+      实验表格完整, 数字均标注了出处 ([Table 1-4], [§X.X])。UTMOS/WER/SIM 等指标
+      使用正确。速查卡片指标字段含具体数字+数据集+出处。
+      有一个 minor 精度问题: UTMOS 在速查中写为 3.9→4.0, 但 Table 2 原文 VALL-E
+      UTMOS 是 3.9 而 RALL-E 是 4.0(正确)。但 UTMOS 是 4.00 精确值。
+
+  可区分:
+    score: 8
+    status: pass
+    rationale: >
+      方法节中的因果解释来源标注覆盖率高, [论文原文] 和 [agent 解读] 区分清晰。
+      点评节中的演进分析标注为 agent 视角。ablation 解读中 "说明 CoT 框架下的联合
+      建模是必要的" 是基于实验数据的推断, 虽未显式标注 [agent 解读] 但上下文清晰。
+
+  可定位:
+    score: 9
+    status: pass
+    rationale: >
+      KB 背景节有具体谱系定位 (VALL-E 系列演进, 与 ELLA-V/VALL-T 对比), 创新判断
+      有明确的对比基准 (解耦 vs entangle, 不需要 transducer loss)。frontmatter 字段
+      完整, concepts/models/datasets 语义正确。
+
+  不污染:
+    score: 9
+    status: pass
+    rationale: >
+      笔记未触发任何新建实体页。frontmatter 中的概念引用都指向已有页面。KB 背景中的
+      描述准确反映了概念页内容, 无 factual error 或 overclaim。
+
+conclusion: pass
+total_issues: 2
+
+issues:
+  - id: 1
+    severity: low
+    type: traceability-gap
+    location: "## 实验 > Ablation study 要点"
+    detail: >
+      "说明 CoT 框架下的联合建模是必要的" 是 agent 的因果推断, 但未标注 [agent 解读]。
+      虽然放在点评性质的段落中, 但如果该结论被引用进概念页会缺失来源信息。
+    suggestion: 在该句前加 [agent 解读] 标注。
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: >
+      models 字段中 NaturalSpeech2, HuBERT, WavLM 是论文评估中使用的参考模型/工具
+      (NaturalSpeech2 仅在 Table 1 作为参考, HuBERT 用于 ASR 评估, WavLM 用于
+      speaker verification), 而非本文直接对比的 baseline。按规则 models 应列"本文模型+
+      直接对比 baseline"。不过论文主 baseline 是 VALL-E (无独立模型页), 这些工具模型
+      的列出提供了可导航性, 属于边界情况。
+    suggestion: >
+      可考虑仅保留 SoundStream (本文使用的 codec) 和 EnCodec (VALL-E 原始使用的 codec,
+      用于对比讨论), 将 NaturalSpeech2/HuBERT/WavLM 移至笔记正文中用 wikilink 引用。
+
+learning_signals: []

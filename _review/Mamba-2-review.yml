@@ -1,0 +1,49 @@
+review:
+  paper: "Mamba-2"
+  reviewer: "auto (inline, same-session)"
+  date: "2026-06-08"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节提供了完整的因果解释链: (1) WHY SSM=半可分矩阵(Theorem 3.5的精确等价); (2) WHY scalar-identity约束(expressivity-efficiency tradeoff,大N补偿); (3) WHY分块算法有效(对角块用二次matmul,非对角块用线性scan,Q倍压缩chunk间递推); (4) WHY MVA优于MQA/MKA(SSM-centric视角的独特发现); (5) WHY混合架构最优(SSM擅长压缩,attention擅长精确检索)。速查卡片'可借鉴'列出6条具体可迁移技巧(分块矩阵乘法范式、MVA模式、并行投影消除TP同步点、混合比例、A_t=0变长处理、50行PyTorch实现),均为具体trick而非泛泛描述。"
+  trustworthy:
+    score: 9
+    reason: "数字标注覆盖率>90%,几乎所有性能数字都有[Table N]/[Fig N]/[§X.X]标注。指标使用正确(perplexity/accuracy/FLOPs)。速查指标字段含具体数字+baseline+数据集+来源。实验表格完整覆盖主实验和消融,无方向性错误。"
+  distinguishable:
+    score: 9
+    reason: "因果解释来源标注覆盖率极高(>90%)。方法节中每段关键解释都标了[论文原文]或[agent 解读],且分布合理: 核心理论框架、SSD算法描述、多头模式实验结论均标为[论文原文]; scalar-identity的表达力补偿分析明确标为[agent 解读]。局限性和点评中推断性分析使用了限定词('可能有影响'、'留下了开放问题')。"
+  positionable:
+    score: 8
+    reason: "KB背景节谱系定位清晰: 明确标注为Mamba的直接后继(Gu & Dao, CMU/Princeton/Cartesia),并关联了vault内的MamTra(使用Mamba-2层替换CosyVoice2)和SpeechSpeculativeDecoding(Mamba-2作draft model)。创新判断有对比基准(vs Mamba-1的6维对比表)。frontmatter基本完整但models/datasets/tasks均为空——这在非TTS论文中合理(vault无SSM模型页/Pile数据集页/通用LM任务页),但concepts仅列[[CodecLanguageModel]]略显单薄。"
+  non_polluting:
+    score: 10
+    reason: "按用户指示未执行任何概念页修改或反向更新。笔记内容均为事实性描述,无overclaim,不存在污染风险。"
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: "frontmatter → models/datasets/tasks"
+    detail: "models/datasets/tasks三个字段均为空。论文使用Pile数据集、对比Pythia/Transformer++等baseline,但vault中无对应实体页。在非TTS论文中字段为空是合理的,不属于遗漏。"
+    suggestion: "保持为空。待vault扩展SSM/LM相关实体页后可补充。"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter → concepts"
+    detail: "concepts仅列[[CodecLanguageModel]],但论文核心涉及SSM、attention、semiseparable matrix、linear attention等概念。这些概念在TTS-focused vault中无实体页,因此无法链接。"
+    suggestion: "如未来创建SSM/StateSpaceModel概念页,应回填至此frontmatter。"
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: "训练策略节"
+    detail: "训练策略节(155-157行)的出处标注为[Appendix D]和[Appendix D.2],但具体超参数值(5x GPT-3 LR等)未逐一标注来源表格/章节。"
+    suggestion: "可接受,因Appendix D已足够定位。"
+
+issues_summary:
+  high: 0
+  medium: 0
+  low: 3
+
+learning_signals: []

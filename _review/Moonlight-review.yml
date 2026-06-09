@@ -1,0 +1,41 @@
+review:
+  paper: Moonlight
+  file: 论文笔记/Moonlight.md
+  date: 2026-06-08
+  reviewer: auto
+  conclusion: pass
+  confidence: high
+
+principles:
+  reproducible:
+    status: pass
+    note: "核心方法有完整数学推导 (Lemma 1 + proof in Appendix A); Algorithm 1 伪代码描述 Distributed Muon; Eq. 1-7 覆盖所有 update rule 变体; 三阶段训练配置完整"
+  trustworthy:
+    status: pass
+    note: "[论文原文] vs [agent 解读] 标注一致; scaling law 拟合参数 (Table 3) 和实验配置 (Table 2) 完整; 局限性涵盖 optimizer mismatch、non-matrix params、data 未开源"
+  distinguishable:
+    status: pass
+    note: "与 vanilla Muon (Fig 2 消融)、AdamW (scaling law + benchmark)、DSV3-Small/DSV2-Lite/Llama/Qwen (Table 4-5, 10) 的多维度对比清晰完整"
+  locatable:
+    status: pass
+    note: "明确定位为 LLM 优化器研究,非语音/TTS; KB 背景说明间接相关性 (MoE 架构对 speech 系统的参考意义); 不强行关联语音概念"
+  non_polluting:
+    status: pass
+    note: "方法描述严格限于论文内容; 跨域推断 (如 optimizer topology、MoE router 对 speech 的参考) 均标注 [agent 解读]"
+
+issues:
+  - id: ML-L1
+    severity: low
+    type: completeness
+    location: "实验 - 完整训练对比"
+    description: "Table 10 (vs larger dense models) 在笔记中仅列出部分指标,MMLU-pro/BBH/MBPP/MATH 等指标可补充"
+    suggestion: "可在完整训练对比表中增加更多指标行,但当前已覆盖核心比较维度,非阻断性问题"
+
+section_coverage:
+  sourcing_rate: "~85%"
+  sections_with_sourcing: ["核心问题", "方法", "实验", "局限性"]
+  sections_without_sourcing: ["点评 (评论性质,不要求 sourcing)"]
+
+notes: >
+  本文非语音/TTS 方向论文,但 Muon 优化器和 MoE 训练经验对大规模 speech foundation model 训练具有间接参考价值。
+  笔记质量良好,方法推导完整,实验数据忠实于原文,点评有独立观点。

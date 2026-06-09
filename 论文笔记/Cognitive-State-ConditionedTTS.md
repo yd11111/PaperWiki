@@ -28,7 +28,7 @@ updated: 2026-06-08
 
 **已有认知**:
 - **CosyVoice2** [confirmed]: 阿里通义的 LLM + chunk-aware flow matching TTS,支持 instruction fine-tuning。本文直接利用其 instruction fine-tuning 能力来注入认知状态控制。CosyVoice2 在知识库中已有 30+ 篇下游引用,但作为临床数据增强工具是首次出现。
-- **F5-TTS** [confirmed 概念]: 基于 Flow Matching + DiT 的非自回归 TTS,本文通过新增 Cognition Processing 模块实现认知状态条件化,修改方式与 CosyVoice2 的 instruction 路线不同。
+- **F5-TTS** [未建页]: 基于 Flow Matching + DiT 的非自回归 TTS,本文通过新增 Cognition Processing 模块实现认知状态条件化,修改方式与 CosyVoice2 的 instruction 路线不同。
 - **Flow Matching (CFM)** [confirmed]: F5-TTS 的核心生成算法,将 Gaussian noise 变换为目标 mel spectrogram。本文中 F5-TTS 的 FM loss 保持不变,仅在 conditioning 输入中新增认知标签嵌入。
 - **WavLM** [pending-review]: 本文用 WavLM Large 作为 AD 检测模型的特征提取器,利用其层级表示 (learnable softmax weighted fusion) + attentive temporal pooling。
 
@@ -110,7 +110,7 @@ CoSTA 是一个四组件框架 [Fig 1]:
 **关键发现**:
 1. **CS-Cond >> Pretrained**: CS-Cond 模型在 TTS 客观指标上全面优于 pretrained 版本,CosyVoice2-AD FAD 从 8.542 降至 2.192 (74% 下降) [Table 1],证实认知状态条件化使合成语音声学特征显著接近真实病理语音
 2. **ASR > MT**: 在 CS-Cond CosyVoice2 中 20/36 ASR 配置超越 MT 驱动增强 [Table 2],最高配置 (fine-tuned w2v960 large lv) 达到 85.00% (+3.33%) vs MT 82.50% (+0.83%)
-3. **增强倍率**: 最优在 1.5x-2x 范围,>2.5x 性能下降 [Fig 3]。[论文原文] 作者归因于过高比例的合成数据使模型过拟合于 TTS 系统的生成特征而非真实病理特征
+3. **增强倍率**: 最优在 1.5x-2.5x 范围,最佳单点为 2x,>2.5x 性能下降 [Fig 3]。[论文原文] 作者归因于过高比例的合成数据使模型过拟合于 TTS 系统的生成特征而非真实病理特征
 4. **CosyVoice2 > F5-TTS**: 在 TTS 客观指标上 CS-Cond CosyVoice2 全面优于 CS-Cond F5-TTS [Table 1],在 AD 检测增强效果上 CosyVoice2 也更优 (28/37 vs 24/37)
 5. **传统 DA 效果有限**: noise addition +0.83%, time stretching +0.41%, pitch shifting -2.50% [Table 4]
 
@@ -132,6 +132,11 @@ CoSTA 是一个四组件框架 [Fig 1]:
 **临床落地视角**: 85.83% 的 audio-only 准确率在学术上有进步,但距离临床筛查的灵敏度/特异度要求仍有差距。更关键的限制是 ADReSS 数据集本身的规模 (48 个测试样本),统计功效有限。
 
 **与 KB 已有知识的关联**: CosyVoice2 在知识库中已有 30+ 篇引用,但均集中在 TTS 质量/可控性/效率领域。本文首次将 CosyVoice2 用于非 TTS 的下游临床任务,展示了高质量 TTS 作为"通用数据生成器"的潜力。
+
+> [!review] 审阅状态
+> 结论: pass-with-fixes | high: 0 | medium: 2 | low: 2
+> 审阅报告: [[_review/Cognitive-State-ConditionedTTS-review.yml]]
+> 日期: 2026-06-08
 
 ## 可复用的 idea
 

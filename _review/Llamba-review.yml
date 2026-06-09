@@ -1,0 +1,43 @@
+review:
+  paper: "Llamba"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含充分因果解释: MOHAWK 三阶段为什么分层(matrix→hidden→KD), Discrete-Mamba-2 四处简化的动机(蒸馏对齐), 交替 MLP 的效率优势(无时间状态); 速查卡片可借鉴具体且可迁移(5 条均有操作性)"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名使用正确(AVG, MMLU, ARC-C 等); 速查指标字段含具体数字+数据集+出处; Fig 4/Fig 5 的吞吐量为近似读取已在审阅中标注"
+  可区分:
+    score: 9
+    rationale: "因果解释来源标注覆盖率 >85%; 多处正确使用 [论文原文] 和 [agent 解读] 标注; 修改 2-3 动机为 agent 解读已明确标出; 无推断写成断言的情况"
+  可定位:
+    score: 7
+    rationale: "KB 背景节给出了与 Mamba/MamTra/Small-E 的谱系定位和 TTS 桥接分析; 但 KB 以 TTS 为核心, 本文为通用 LLM 蒸馏论文, 天然覆盖有限, 主要靠论文笔记(Mamba)而非概念页提供定位"
+  不污染:
+    score: 10
+    rationale: "无新建概念页; 无反向更新; 不修改任何概念页"
+
+issues:
+  - id: 1
+    type: weak-kb-overlap
+    severity: medium
+    location: "KB 背景"
+    detail: "KB 以 TTS 为核心, 对本文(通用 LLM 蒸馏)覆盖天然有限, KB 背景主要靠 Mamba 笔记而非概念页提供谱系定位。非笔记质量问题, 是 vault 领域边界的体现"
+    suggestion: "未来若 vault 增加 KnowledgeDistillation 或 SSM 概念页, 可回填 KB 背景"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验表 throughput 行"
+    detail: "Fig 4 和 Fig 5 的吞吐量和内存数字从图中近似读取, 非精确文本值"
+    suggestion: "标注 '~' 前缀(已部分做到); 或注明 'approx. from figure'"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 1
+
+learning_signals: []

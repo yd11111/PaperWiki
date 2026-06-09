@@ -1,0 +1,49 @@
+paper: Ming-Omni
+arxiv_id: "2506.09344"
+reviewer: auto
+date: 2026-06-08
+verdict: pass
+
+principles:
+  reproducible:
+    status: pass
+    notes: "方法节含因果解释覆盖所有关键设计选择 (modality-specific router / 冻结LLM / BPE / hidden states conditioning / language ID prediction),每个选择回答了 WHY;速查可借鉴字段含 6 个具体可迁移 trick"
+  trustworthy:
+    status: pass
+    notes: "数字 claim 均标注 [Table N]/[§X.X],覆盖率 >90%;指标名正确 (WER/SIM/FID/GenEval);方向性无误"
+  distinguishable:
+    status: pass
+    notes: "[论文原文] vs [agent 解读] 标注覆盖方法节所有 WHY 解释,覆盖率 >85%;无推断当断言"
+  positionable:
+    status: pass
+    notes: "KB 背景有具体谱系定位 (vs Qwen2.5-Omni/Ming-UniAudio/VITA/Moshi);创新判断有对比基准;frontmatter 完整"
+  non-polluting:
+    status: pass
+    notes: "无新概念页创建;concepts/models/tasks/datasets 链接合理;不需要反向更新 (论文是 omni-model system report,不引入新的 technique concept)"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "方法 §2.1"
+    description: "modality-specific router 是论文声称的核心架构创新,但原文无消融实验对比 modality-specific vs shared router;笔记在局限性中指出了这一点,但方法节的 WHY 解释来自论文的声称而非实验证据"
+    action: "已在局限性 §4 标注;不影响笔记可信度因为已明确说明是声称非证据"
+
+  - id: 2
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea §6 (modality-specific MoE router)"
+    description: "该 idea 因缺乏消融验证,可迁移性不确定;笔记中已加 caveat '虽然缺乏消融验证' 但仍列为可复用"
+    action: "保留,因设计直觉合理且实现成本低"
+
+summary: |
+  Ming-Omni 是一篇 system report 类论文,核心贡献在工程集成而非单点技术突破。
+  笔记准确反映了这一定位: 在方法节解释了每个设计选择的 WHY,在局限性中指出了
+  TTS SIM 偏低、缺乏关键消融等问题。KB 背景与 Ming-UniAudio (同团队) 和
+  Qwen2.5-Omni (竞品) 的对比清晰。
+
+  主要审阅发现: modality-specific router 是核心声称但无消融 (medium),
+  该 idea 的可迁移性因此不确定 (low)。两个 issue 均不影响笔记的可信性
+  因为已在正文中标注了 caveat。
+
+  审阅通过,可继续反向更新。

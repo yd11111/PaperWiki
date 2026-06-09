@@ -1,0 +1,26 @@
+paper: "Full-DuplexSpokenDialogue"
+arxiv_id: "2605.10199"
+reviewer: auto
+date: 2026-06-08
+verdict: pass
+
+principles:
+  reproducible:
+    status: pass
+    note: "核心 tradeoff (channel fusion 的语义接地 vs cross-attention 的上下文鲁棒性) 有因果机制解释; 两种路由策略的结构性差异 (融入自回归上下文 vs 保持为外部记忆) 解释清晰; 速查卡片可借鉴字段列出 5 条具体可迁移 trick"
+  trustworthy:
+    status: pass
+    note: "所有实验数字标注 [Table N]/[§X.X], 覆盖率 >90%; 指标名使用正确 (WER/TOR/Respond/Resume/Stop Latency); 方向性无误"
+  distinguishable:
+    status: pass
+    note: "[论文原文] vs [agent 解读] 标注覆盖 >80%; 因果解释处均标明来源; 无未限定的强断言"
+  positionable:
+    status: pass
+    note: "KB 背景含序列交错/通道融合/cross-attention 三条路线的谱系定位; 与 LSLM (同一路线内部对比 vs 跨路线对比)、Moshi (RQ-Transformer vs lightweight backbone)、Flamingo/AudioFlamingo (XA 来源) 的关系明确"
+  non-polluting:
+    status: pass
+    note: "未新建概念页; 反向更新建议: Full-duplexSpokenDialogue 页可追加本文到 key_papers 和代表系统 section"
+
+issues: []
+
+summary: "高质量对比研究笔记, 核心 tradeoff 清晰, 数字溯源完备, KB 定位准确。无需修改。"

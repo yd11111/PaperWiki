@@ -1,0 +1,81 @@
+paper: PreferenceAlignment
+reviewer: agent-auto
+date: 2026-06-08
+version: v1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含完整因果解释: 为什么 ground truth 作 positive 会失败 (codec token 空间分布差异
+      → DPO 优化变 trivial → win rate 饱和), 为什么小 β 更优, 为什么多 metric 联合排序有效。
+      每个关键设计选择 (8 个子问题) 逐一回答了 "为什么选这个"。速查卡片可借鉴字段列了 5 条具体
+      可迁移 trick, 有操作层面信息量。
+
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率约 90%。所有实验数据标注了 [Table I/II/III] 或 [Fig N]。
+      指标名使用正确 (WER/SPK SIM/Proxy MOS 不混淆)。速查指标字段含具体数字+数据集+来源。
+      方向性正确 (WER ↓, SIM ↑, MOS ↑)。
+
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释来源标注覆盖率约 85%。方法节对 5 处 agent 推断分析明确标注为 [agent 解读],
+      论文原文事实标注为 [论文原文]。局限性第 5 条 (SIM 超过 GT) 也正确标注了 [agent 解读]。
+      未发现推断被写成无限定词断言的情况。
+
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景列举了 6 个实体页, 在 DifferentiableRewardOptimization 演进线上精确定位
+      本文为 "Preference optimization for codec LM" 阶段 (2024年9月, 与 SpeechAlign 同期,
+      早于 DiffRO/GRPO/FPO)。创新判断有明确对比基准 (SpeechAlign 的 ground truth 方案 vs
+      本文的 generated pairs 方案)。frontmatter 字段完整, concepts/models 语义合理。
+
+  不污染:
+    satisfied: true
+    notes: >
+      不新建概念页。未执行反向更新 (按用户指令跳过)。笔记中的事实和推断区分清晰,
+      若后续流入概念页不会造成 overclaim 或 factual error。
+
+conclusion: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter datasets 字段
+    detail: >
+      frontmatter datasets 为空数组, 但论文使用了 LibriSpeech/GigaSpeech/MLS-EN/VCTK 等
+      多个数据集。至少 LibriSpeech 在 vault 中有实体页。
+    suggestion: >
+      补充 datasets: ["[[LibriSpeech]]"]。GigaSpeech/MLS-EN/VCTK 可视 vault 实体页情况决定。
+    action: suggested
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 方法节 "DPO 在 LM-TTS 上的适配"
+    detail: >
+      "DPO 目标函数直接套用 Rafailov et al. (2023) [24] 的公式 [Eq. 6]" 中 [Eq. 6] 是论文
+      原始编号, 但未标注段落来源 (缺少 [§II-B] 标注)。
+    suggestion: >
+      已在下一行标注 [§II-B], 但 Eq. 6 行本身也建议补上。不影响理解, 可批量改善。
+    action: optional
+
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: 可复用的 idea #5
+    detail: >
+      "Length normalization 增加 β 鲁棒性" 的可迁移场景不够明确 — 什么时候需要简化超参数搜索?
+    suggestion: >
+      可补充: "适用于资源受限无法做 β grid search 的场景, 如小团队或快速 prototype"。
+    action: optional
+
+total_issues: 3
+high: 0
+medium: 0
+low: 3

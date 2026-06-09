@@ -1,0 +1,108 @@
+paper: video-SALMONN-o1
+reviewer: agent-auto
+date: 2026-06-08
+version: v1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含清晰的因果解释链: 为什么 ORM/PRM 在视频推理中失效 (loss 仅降 5%,
+      绝对分数难定义) → 为什么成对偏好更可行 → 为什么需要步骤级而非整条路径 →
+      为什么用 contrastive step selection (>70% 错误来自视频误解)。
+      关键设计选择均回答了 "为什么选这个而不是那个" (ORM vs PRM vs PPRM vs pDPO 对比表)。
+      速查卡片 "可借鉴" 列出 5 条具体可迁移 trick,包括 pDPO 迁移思路、
+      KL 散度定位法、混合 SFT 策略等。
+
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率约 95%。所有实验数据均标注 [Table N] 或 [§X.X]。
+      指标名使用正确 (accuracy、F1、precision、recall 均无混淆)。
+      速查卡片 "指标" 字段含 VideoMME 65.6%、NExT-QA 82.3%、RivaBench-StandUp 76.7%
+      + 对应数据集名 + [Table 2] 来源标注。无方向性错误。
+      Gemini-1.5-pro 对比数字 (75.8%) 正确引用。
+
+  可区分:
+    satisfied: true
+    notes: >
+      方法节严格使用 [论文原文] 和 [agent 解读] 双标注。因果解释来源标注覆盖率约 90%。
+      agent 解读均以推断性语言表述 ("核心洞察是"、"巧妙之处在于"、"这是一个有趣的涌现能力")。
+      未发现推断被写成断言的情况。"首个开源推理增强音视频 LLM" 来自论文原文定位。
+      零样本合成视频检测能力描述中,紧跟 "但 F1 仅 17.8% 说明这项能力仍然很初级" 的限定。
+
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景有具体谱系定位: latent-representation-based vs audio-token-based 路线,
+      Q-Former 适配器在 SALMONN 系列中的定位,pDPO 与 KB 中已有 TTS DPO 方法的区分
+      (应用场景不同: 视频推理 vs 语音生成)。创新判断有对比基准 (token 级 reward vs
+      Gumbel-Softmax 采样 vs pDPO 的步骤级偏好)。
+      frontmatter 字段存在且非空 (concepts 5 项, models 1 项)。
+      速查卡片 5 字段均有实质内容。
+
+  不污染:
+    satisfied: true
+    notes: >
+      未新建概念页,未执行反向更新 (按指令要求)。
+      KB 背景中的谱系描述准确,不含 overclaim。
+      概念引用 ([[SpeechLanguageModel]] 等) 指向已有实体页,无虚链。
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter datasets 字段
+    detail: >
+      datasets 字段为空,但论文使用了 VideoMME、NExT-QA、RivaBench 作为评估数据集,
+      LibriSpeech-960h 和 AudioCaps 作为训练数据。虽然 vault 中无对应数据集实体页,
+      但 frontmatter 应记录用到的数据集以便未来追溯和 MOC 覆盖。
+    suggestion: >
+      补充 datasets: ["VideoMME", "NExT-QA", "RivaBench", "LibriSpeech-960h", "AudioCaps"]。
+      无需创建实体页,待日后有需要时再建。
+    action: fix
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: frontmatter tasks 字段
+    detail: >
+      tasks 字段为空。论文涉及 video understanding / audio-visual QA / video reasoning 任务,
+      但 vault 任务库中无对应实体页 (现有任务页均为 TTS 方向)。
+      鉴于本 vault 以 TTS 为核心,视频理解任务页的缺失属于预期范围。
+    suggestion: >
+      可保持为空。若未来扩展 vault 覆盖范围,再补充任务链接。
+    action: optional
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: 方法节 "Contrastive Step Selection" 段
+    detail: >
+      提到 "对输入视频施加微小扰动 (tiny perturbation)" 但未具体说明扰动类型
+      (噪声注入? 帧丢弃? 时序打乱?)。论文原文 §4.3 应有更具体描述。
+    suggestion: >
+      补充扰动方式的具体描述 (如 Gaussian noise on visual features,
+      或 random frame masking 等),附带论文原文引用。
+    action: optional
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: frontmatter models 字段
+    detail: >
+      models 仅列 [[Whisper]] (音频编码器组件)。按 checklist 要求应列
+      "本文模型 + 对比 baseline"。SigLIP 和 Qwen2-7B 是核心组件,
+      video-SALMONN 是前序系统和 baseline,但 vault 中均无模型实体页。
+      Whisper 作为组件列出是合理的 (vault 中有 Whisper.md)。
+    suggestion: >
+      当前可接受。video-SALMONN 系列有论文笔记但无模型页,
+      创建模型页需满足准入条件且非本次 ingest 职责。
+    action: deferred
+
+total_issues: 4
+high: 0
+medium: 1
+low: 3

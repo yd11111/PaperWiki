@@ -1,0 +1,50 @@
+paper: DeepfakeWordDetection
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+high_issues: 0
+medium_issues: 2
+low_issues: 1
+
+principles:
+  reproducible:
+    score: 9
+    status: pass
+    note: "方法节清晰解释了 WHY (为什么不加分类头/为什么复用 token/为什么用 vocoded 数据), 每个设计选择有因果链; 速查卡片'可借鉴'具体可迁移"
+  trustworthy:
+    score: 8
+    status: pass
+    note: "数字 claim 标注覆盖率高 (>90%), 指标名正确使用 (FAR/FRR/WER), 速查指标含具体数字+数据集+出处"
+  distinguishable:
+    score: 8
+    status: pass
+    note: "因果解释标注了 [论文原文] 和 [agent 解读], 覆盖率约 85%; 点评中的推断性分析有 [agent 解读] 标记"
+  positionable:
+    score: 8
+    status: pass
+    note: "KB 背景谱系定位清晰 (被动检测 vs 主动防护); 创新判断有对比基准 (独立模型 vs 模型复用); 点评中明确与 KB 已有工作对比"
+  non_polluting:
+    score: 9
+    status: pass
+    note: "本次跳过反向更新, 无 KB 污染风险; frontmatter concepts/models 挂接合理"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter.models
+    detail: "VITS 和 CosyVoice 在本文中仅作为测试/训练数据生成器, 并非本文提出或重点对比的模型。严格意义上 models 应列 Whisper + ResNet152 (本文的两个对比系统)"
+    suggestion: "models 改为 [Whisper, ResNet152], 将 VITS/CosyVoice 移到 tags 或正文引用"
+
+  - type: traceability-gap
+    severity: medium
+    location: "局限性第5点"
+    detail: "'只评估了词替换场景' 和 '未考虑句子级插入/删除等更复杂的编辑操作' 是 agent 推断, 非论文明确声明的局限"
+    suggestion: "标注 [agent 解读] 以区分来源"
+
+  - type: weak-reusability
+    severity: low
+    location: "可复用的 idea 第2条"
+    detail: "'Vocoder copy-synthesis 数据增强' 在论文自身实验中被证明泛化性不足 (Ft.Voc->E.TTS FAR 76.16%), 作为'可复用 idea'需要附加 caveat"
+    suggestion: "补充: '注意: 本文实验表明 vocoded 数据仅能检测同类 artifacts, 跨合成器泛化有限'"
+
+learning_signals: []

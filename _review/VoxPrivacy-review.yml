@@ -1,0 +1,45 @@
+review:
+  paper: "VoxPrivacy"
+  note_path: "论文笔记/VoxPrivacy.md"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    rationale: >
+      方法节清晰解释了三层 benchmark 的设计动机 (WHY) 和具体结构 (HOW)。
+      每个设计选择 (异步场景、多 LLM 生成、混合训练比例) 都有理由说明。
+      速查卡片"可借鉴"列出了具体可迁移的 trick (三层递进设计、Speaker Continuity Bias 诊断)。
+  trustworthy:
+    score: 9
+    rationale: >
+      关键数字标注出处覆盖率 >90%。指标名使用正确 (Accuracy, Precision, Recall, F1, EER)。
+      速查卡片"指标"字段含具体数字 + 数据集名 + 来源标注 [Table 3, Table 6]。
+      无方向性错误。
+  distinguishable:
+    score: 9
+    rationale: >
+      因果解释来源标注覆盖率高,方法节中的 WHY 解释均标注了 [论文原文] 或 [agent 解读]。
+      未出现将推断写成断言的句子。
+  locatable:
+    score: 9
+    rationale: >
+      KB 背景节具体定位了 VoxPrivacy 在 SpokenDialogueEvaluation 安全维度的位置,
+      以及 SpeakerVerification 的新角色 (从评估工具到运行时安全组件)。
+      frontmatter 字段完整,concepts/models 语义正确。
+  no_pollution:
+    score: 9
+    rationale: >
+      不涉及新建概念页。frontmatter 中的 concepts/models 引用合理。
+      KB 背景中的 integration gap 观察来自论文原文 (Appendix A.6),非 overclaim。
+
+issues: []
+
+learning_signals: []
+
+summary: >
+  高质量 benchmark 论文精读笔记。核心贡献 (三层评估体系 + 诊断分析) 阐述清晰,
+  因果解释有来源标注,关键数字有出处。KB 背景精准定位了论文在已有知识图谱中的位置。
+  无需修正即可进入反向更新。

@@ -1,0 +1,119 @@
+review:
+  paper: "VibeVoice-ASR"
+  note_path: "论文笔记/VibeVoice-ASR.md"
+  reviewer: "self-review (same session)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 8
+      verdict: pass
+      rationale: >
+        方法节包含清晰的因果解释: 为什么复用 TTS tokenizer 对 ASR 有效 (acoustic 保留说话人信息,
+        semantic 保留语言内容)、为什么 Rich Transcription 优于级联 (避免 error propagation)、
+        为什么 curriculum learning (逐步增长序列长度更稳定)。每个关键设计选择都有 WHY 解释。
+        速查卡片"可借鉴"字段列出了 4 个具体可迁移 trick。
+    trustworthy:
+      score: 8
+      verdict: pass
+      rationale: >
+        实验表格中所有数字均标注出处 [Table 1]/[Table 2]。指标名称正确使用 (DER/WER/cpWER/tcpWER)。
+        速查卡片"指标"字段含具体数字、数据集名和来源标注。无方向性错误。
+        traceability coverage 约 90%。
+    distinguishable:
+      score: 7
+      verdict: pass-with-fixes
+      rationale: >
+        因果解释标注了 [论文原文] 和 [agent 解读],覆盖率约 85%。但 KB 背景节中
+        "VibeVoice-ASR 首次证明同一 ultra-low frame rate continuous tokenizer 在语音理解任务上同样有效"
+        是 agent 综合判断,未显式标注来源。此外点评节的部分推断性分析可进一步明确标注。
+    positionable:
+      score: 9
+      verdict: pass
+      rationale: >
+        KB 背景节提供了具体的谱系定位: 与 VibeVoice TTS 的关系、与 LLM-enhanced ASR 路线的区别、
+        在 Speech-LLM Integration Taxonomy 中的位置。点评节提供了 VibeVoice TTS vs ASR 的详细对比表。
+        frontmatter concepts/models/tasks/datasets 均已填写且语义正确。
+    no_pollution:
+      score: 9
+      verdict: pass
+      rationale: >
+        未执行反向更新 (用户明确要求不修改概念页)。frontmatter 引用的实体页均已存在或标注
+        pending-review。models 字段仅列 VibeVoice (父架构),不含后续系统。
+
+  conclusion: "pass-with-fixes"
+
+  issues:
+    - id: 1
+      type: "fact-inference-mixing"
+      severity: "medium"
+      location: "KB 背景节"
+      detail: >
+        "VibeVoice-ASR 首次证明同一 ultra-low frame rate continuous tokenizer 在语音理解任务上同样有效"
+        是 agent 综合判断 (论文未声称"首次"),但未标注 [agent 解读]。
+      suggestion: "在该句末尾添加 [agent 解读] 标注"
+
+    - id: 2
+      type: "traceability-gap"
+      severity: "medium"
+      location: "方法:整体架构 → 关键区别于 VibeVoice TTS"
+      detail: >
+        "TTS 没有 diffusion head 和 VAE decoder 组件" 应为 "ASR 没有..."。
+        原文表述有误导性。
+      suggestion: "改为 'ASR 端没有 diffusion head 和 VAE decoder 组件 — 它是纯理解模型'"
+
+    - id: 3
+      type: "missing-baseline"
+      severity: "medium"
+      location: "实验"
+      detail: >
+        论文仅与 Gemini-2.5/3-Pro 对比,缺少 Whisper、WhisperX、Seed-ASR、
+        TagSpeech 等专用系统的直接比较。已在局限性中指出,但实验节可更显式地
+        标注此对比范围的局限。
+      suggestion: "在实验关键发现中增加一条说明 baseline 选择的局限性"
+
+    - id: 4
+      type: "template-compliance"
+      severity: "low"
+      location: "frontmatter"
+      detail: >
+        venue 字段为 "arXiv",准确但 arxiv_id 中的版本号 (v2) 未记录。
+        论文标题页显示 v2 [cs.SD] 14 Mar 2026。
+      suggestion: "可选: arxiv_id 更新为 '2601.18184v2' 或保持当前格式"
+
+    - id: 5
+      type: "traceability-gap"
+      severity: "low"
+      location: "速查卡片 → 指标"
+      detail: >
+        MLC avg DER 3.42 来自 Table 2 的 MLC-Challenge AVERAGE 行,
+        但原始表格中的 DER 3.42 对应的是所有 12 种语言的平均值,
+        标注应更精确。
+      suggestion: "标注为 [Table 2, MLC AVERAGE]"
+
+    - id: 6
+      type: "weak-reusability"
+      severity: "low"
+      location: "可复用的 idea → #1"
+      detail: >
+        "universal speech tokenizer" 概念较为泛化。
+        可补充具体的实验设计方向 (如在同一 tokenizer 上同时训练 TTS 和 ASR 的 multi-task 实验)。
+      suggestion: "可选优化,不阻塞"
+
+  learning_signals:
+    - type: "missing-baseline"
+      description: >
+        新问题类型: 论文 baseline 选择过于狭窄 (仅通用多模态模型,无专用系统对比)。
+        未来审阅时应检查 baseline 是否包含同任务的 SOTA 专用系统。
+
+  summary:
+    total_issues: 6
+    high: 0
+    medium: 3
+    low: 3
+    verdict: >
+      笔记质量良好。方法节的机制解释清晰,因果标注覆盖率约 85%,
+      实验数据标注完整。主要改进点: KB 背景节的 agent 解读标注、
+      架构描述中的措辞修正、baseline 局限性的显式说明。
+      无 high issue,建议 pass-with-fixes。

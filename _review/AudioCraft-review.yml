@@ -1,0 +1,49 @@
+review:
+  paper: "AudioCraft"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节因果解释突出: WHY delay pattern works (RVQ 层级结构保留 coarse→fine 依赖), WHY 单阶段可行 (音乐语义需求弱于语音), WHY argmax chromagram 防过拟合; 每个设计选择 (5 种 pattern, 3 种 text encoder, stereo 扩展) 均回答了 why this not that; 速查可借鉴 4 条具体可迁移 trick"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 >90%; 所有实验数字附 [Table N] 或 [§X.X]; 指标名正确 (FAD_vgg/KL/CLAP/OVL/REL); 速查指标含具体数字+数据集+来源; 无方向性错误"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率 ~85%; [论文原文] 约 7 处, [agent 解读] 约 4 处, 均恰当; 点评节中 agent 推断 (delay pattern 对 >4 codebooks 未验证) 正确标注为 [agent 解读]"
+  可定位:
+    score: 8
+    rationale: "KB 背景谱系定位具体 (VALL-E/AudioLM/MusicLM 对比); 创新判断有对比基准 (interleaving 形式化 vs 先前 ad-hoc); frontmatter 字段基本完整但 tasks/datasets 空缺"
+  不污染:
+    score: 10
+    rationale: "按指令未创建/修改概念页, 无反向更新, 无 KB 安全风险"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter tasks"
+    detail: "tasks 字段为空, 应列 text-to-music 或 music-generation 相关任务"
+    suggestion: "填入相关任务实体 (如已有的话) 或保持空但加注释"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空, MusicCaps 是核心评估数据集, 应列入"
+    suggestion: "填入 MusicCaps; 训练数据 (ShutterStock/Pond5) 非公开可不列"
+  - id: 3
+    type: bad-linking
+    severity: low
+    location: "frontmatter models"
+    detail: "SoundStream 列入 models 但论文未将其作为直接对比 baseline, 仅在相关工作中提及"
+    suggestion: "移除 SoundStream 或改为注释; 实际 baselines (MusicLM/Noise2Music/Mousai) 无实体页不必列"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals: []

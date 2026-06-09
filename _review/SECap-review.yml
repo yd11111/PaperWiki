@@ -1,0 +1,45 @@
+paper: SECap
+file: 论文笔记/SECap.md
+reviewer: auto
+date: 2026-06-08
+verdict: pass
+
+principles:
+  reproducible:
+    status: pass
+    notes: >
+      方法节包含完整因果解释链: 为何需要解纠缠 (内容干扰情感判断), 为何选 vCLUB (需要上界最小化而非下界最大化),
+      为何两阶段训练 (先表征对齐再 LLM 适配), 为何 Q-Former 而非 Linear (压缩+固定长度泛化)。
+      速查卡片"可借鉴"字段包含 3 个具体可迁移技术。
+  trustworthy:
+    status: pass
+    notes: >
+      所有数字 claim 标注来源 (Table 2/3/4, Fig 4, Eq.1-7)。
+      覆盖率估计 >90%。指标名 (SIM/BLEU/METEOR/CIDEr/SPICE/MOS) 使用正确。
+      无方向性错误。
+  distinguishable:
+    status: pass
+    notes: >
+      [论文原文] vs [agent 解读] 标注覆盖率 >80%。
+      推断性内容使用 "agent 解读" 标签 (3 处): vCLUB 选择原因、三项分离对比学习动机、评估指标局限分析。
+      无未标注的推断性断言。
+  positionable:
+    status: pass
+    notes: >
+      KB 背景包含具体谱系定位: 与 NL-Description TTS (互补闭环)、
+      Emotion Control in TTS (离散→自由文本趋势的理解侧呼应)、
+      Audio Understanding (副语言理解+NL描述分支)、BLIP-2 架构渊源。
+      创新判断有对比基准 (vs SER, vs AAC)。
+  non-polluting:
+    status: pass
+    notes: >
+      未创建新概念页。反向更新建议仅为追加 key_papers (不改 status)。
+      无 factual error 或 overclaim 风险。
+
+issues: []
+
+summary: >
+  SECap 笔记质量良好。方法机制解释充分,特别是 STMIL/SCCL 双目标训练的 WHY 解释清晰。
+  数据来源标注完整。KB 定位准确,将论文放在 Audio Understanding 与 NL-Description TTS
+  交汇处的判断合理。局限性分析诚实 (内部数据集、仅中文、评估体系不足)。
+  可复用 idea 提炼了 3 个具体可迁移技术。无需修正。

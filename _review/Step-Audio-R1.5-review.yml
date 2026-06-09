@@ -1,0 +1,45 @@
+paper: Step-Audio-R1.5
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节对三阶段训练 pipeline 逐一解释 WHY/HOW,关键设计选择 (RLVR vs RLHF、rubric-based reward model、联合 vs 分阶段优化) 都有因果论证。速查卡片'可借鉴'列出 4 个具体可迁移 trick (verifiable reward trap 诊断、rubric-conditioned reward、联合优化经验、cold-start SFT 前置)。CoT 机制的架构意义有清晰解释。架构图示不如图解直观但文字描述充分。"
+  trustworthy:
+    score: 9
+    rationale: "所有 benchmark 数字与 Table 1 交叉验证正确。指标名使用正确,无方向性错误。速查卡片含具体数字+数据集名+来源标注。数字 claim 的 [Table 1]/[§X] 覆盖率高 (>90%)。局限性第 5 点主动指出了 StepFun 自建 benchmark 的 home advantage 问题,体现审慎态度。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖方法节所有因果解释。局限性节全部 6 条标注为 [agent 解读],与论文自述的局限清晰分离。KB 背景中的跨领域对比 (Channel Corp 2026 平行发现) 明确属于 agent 分析。架构选择的路线分析 (latent-representation vs audio-token-based) 标注为 [agent 解读]。"
+  positionable:
+    score: 9
+    rationale: "KB 背景提供了两个维度的精准定位: (1) Step-Audio 系列谱系 (v1 AQTA → v2 端到端 → R1/R1.5 reasoning); (2) RLVR/RLHF 对比的跨领域映射 (Channel Corp 2026 在 TTS 的平行发现)。创新判断有明确对比基准 (SpeechAlign 2024)。frontmatter 字段完整,concepts 挂接合理 (6 个概念,2 confirmed + 4 pending-review)。"
+  non-polluting:
+    score: 10
+    rationale: "无新建概念页。按指示跳过 KB 反向更新。frontmatter models 字段为空 (论文无独立模型名,合理)。不存在 KB 污染风险。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 字段为空列表。Step-Audio-R1.5 本身可视为一个模型,但概念库/模型库中无对应页,留空合理。"
+    suggestion: "如后续创建 Step-Audio 系列模型页,可回填"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "方法节 Stage 1 公式"
+    detail: "Mid-Training loss 公式的来源标注为 [§3.1],但论文原文中此公式是 agent 根据文字描述重构的形式化表达,非论文原式"
+    suggestion: "可追加 [agent 整理] 标注以区分论文原式和 agent 重构式"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空列表,但论文提到了多个 evaluation benchmark (AudioMultiChallenge, Big Bench Audio, MMSU, MMAU 等)。这些是评估集而非训练集,留空有道理但也可以列出。"
+    suggestion: "可选择性补充评估 benchmark 到 datasets 字段"
+    status: noted
+
+learning_signals: []

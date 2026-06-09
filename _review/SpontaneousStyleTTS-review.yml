@@ -1,0 +1,55 @@
+review:
+  paper: "SpontaneousStyleTTS"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节结构清晰,三个关键设计选择各自回答了 WHY (为什么统一建模19种行为 vs 单独处理; 为什么句法位置重要; 为什么提取器+预测器解耦); 速查可借鉴4条均具体可迁移; 三步渐进微调的因果链条完整"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名正确 (PN-MOS/LN-MOS/MCD/CMOS); 速查指标含具体数字+数据集名+出处; 实验表格数据与论文 Table 1/2 对应; LN-MOS 置信区间异常被正确标注为局限"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 方法节中 [论文原文] 和 [agent 解读] 区分清晰; KB 背景中的谱系定位和创新判断含对比基准; 有一处句法信息描述中 S1 和 S3 定义重复,可能是论文原文如此但需确认"
+  可定位:
+    score: 9
+    rationale: "KB 背景提供了清晰谱系定位 (spontaneous speech + LM-based TTS 交叉); 与 DiffCSS 的对比分析精准 (one-to-many vs one-to-one); 创新判断有具体对比基准 (NVSpeech, AdaSpeech 3, SponTTS); frontmatter 完整且语义正确"
+  不污染:
+    score: 9
+    rationale: "未创建新概念页; 反向更新未执行 (按指令); 无 factual error 或 overclaim; 与已有 DiffCSS 笔记关系明确"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "方法 §句法感知行为编码"
+    detail: "S1 和 S3 定义文本相同 ('字在子句中的索引 Index_c,sub'),但符号不同 (S1 vs S3)。可能是论文原文 §2.3 中的不同层级索引,需确认是笔记转录错误还是论文本身描述"
+    suggestion: "回查论文 §2.3 和 Fig 2 确认 S1-S6 的精确含义,如有差异则修正"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "训练策略 §Step 1"
+    detail: "损失函数公式 Eq. 1 的系数 0.1 缺少动机说明 (为什么标签预测损失权重仅 0.1)"
+    suggestion: "如论文有解释则补充 [论文原文],否则标注 [agent 解读] 推测"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter tasks/datasets"
+    detail: "tasks 和 datasets 字段为空列表; 可补充 tasks: SpontaneousSpeechSynthesis; datasets 虽为内部数据集但可标注说明"
+    suggestion: "考虑添加 tasks: ['SpontaneousSpeechSynthesis'] 或保持空并在笔记正文中说明"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述未标注出处 [Fig 1]"
+    suggestion: "末尾加 [Fig 1, §2]"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals: []

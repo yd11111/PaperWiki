@@ -1,0 +1,82 @@
+paper: EnCodec
+file: 论文笔记/EnCodec.md
+reviewer: agent
+date: 2026-06-08
+version: v1
+
+conclusion: pass-with-fixes
+
+principles:
+  可复述: pass
+  可信赖: pass
+  可区分: pass
+  可定位: pass
+  不污染: pass
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    principle: 可信赖
+    location: "实验 > 主要结果: MUSHRA"
+    description: >
+      MUSHRA @1.5kbps=56.3 和 @6kbps=84.2 等 "mean" 值是从 Table 1 的 4 个类别
+      (Clean Speech, Noisy Speech, Music Set-1, Music Set-2) 手动取平均计算,
+      非论文直接报告的数字。Table 1 仅按类别报告,Fig 3 的聚合数据读取精度有限。
+    suggestion: 在表格中标注 "(跨类别平均)" 或改为按类别分别列出
+    fix_applied: false
+
+  - id: 2
+    severity: medium
+    type: template-compliance
+    principle: 可信赖
+    location: "实验 > 主要结果: MUSHRA"
+    description: >
+      部分 baseline (Lyra-v2, Opus) 的数字同样为跨类别平均,与 Table 1
+      按类别报告格式不一致。建议统一为按类别或标注计算方式。
+    suggestion: 统一标注数据来源和计算方式
+    fix_applied: false
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    principle: 可复述
+    location: "可复用的 idea > 4"
+    description: >
+      流式/非流式统一架构的描述偏向架构选择描述 (padding + normalization),
+      可迁移性相对其他 3 个 idea 较弱 — 更接近 design pattern 而非 trick。
+    suggestion: 补充具体的实现细节 (如 transposed conv 的 memory buffer 策略)
+    fix_applied: false
+
+checklist:
+  可复述:
+    causal_why: true
+    design_choices_answered: true
+    reusable_tricks_concrete: true
+  可信赖:
+    claim_sourcing_80pct: true
+    metric_names_correct: true
+    speed_card_metrics_concrete: true
+    no_directional_errors: true
+  可区分:
+    source_labels_present: true
+    source_label_coverage_80pct: true
+    no_assertion_without_qualifier: true
+    strong_claims_supported: true
+  可定位:
+    kb_lineage_specific: true
+    kb_innovation_has_baseline: true
+    frontmatter_fields_present: true
+    frontmatter_semantically_correct: true
+    speed_card_5_fields_filled: true
+  不污染:
+    no_new_concept_pages: true
+    dedup_checked: true
+    no_factual_error_in_kb_update: true
+    kb_update_correctly_classified: true
+
+stats:
+  high: 0
+  medium: 2
+  low: 1
+  total: 3

@@ -1,0 +1,44 @@
+paper: "VALL-E 2"
+file: "论文笔记/VALL-E2.md"
+date: "2026-06-08"
+conclusion: pass
+scores:
+  understandability: 5
+  traceability: 5
+  rigor: 4
+  navigability: 5
+  kb_safety: 5
+claim_stats:
+  total_claims: 40
+  annotated_claims: 38
+  coverage_rate: "95%"
+issues:
+  - severity: medium
+    type: template-compliance
+    location: "frontmatter > models"
+    detail: "models 仅列 [[EnCodec]]，但论文使用 Vocos 作为 codec decoder 替代 EnCodec 自带 decoder（§4.1.1），Vocos 是影响最终音质的关键组件。"
+    suggestion: "补充 models: ['[[EnCodec]]', '[[Vocos]]']。"
+risk_assessment:
+  safe_for_reverse_update: true
+  safe_for_trusted_layer: true
+  reason: "全文 claim 标注率 95%，所有数字均可溯源到具体 Table/Figure/Section。KB 背景准确引用了 4 个 confirmed 实体页的已有认知并给出差异化定位。因果解释源标注覆盖率高，[论文原文] 和 [agent 解读] 边界清晰。唯一 medium issue 是 frontmatter models 字段遗漏 Vocos，不影响内容可信性。"
+review_dimensions:
+  understandability:
+    verdict: pass
+    detail: "方法节对 RAS 和 Grouped Code Modeling 均给出完整的机制解释 + WHY 分析。每个设计选择回答了'为什么选这个而不是那个'。速查卡片可借鉴字段具体且可操作（含超参数推荐）。"
+  traceability:
+    verdict: pass
+    detail: "38/40 claims 标注了 [§X.X]/[Table N]/[Fig N]/[Algorithm 1] 出处。实验表覆盖 LibriSpeech 和 VCTK 两个数据集的多个设置。指标名使用正确（WER/SIM/DNSMOS/SMOS/CMOS 不混淆），方向性正确。"
+  rigor:
+    verdict: pass
+    detail: "因果解释区分了 [论文原文] 和 [agent 解读]，覆盖率约 90%。Human parity 声明的局限性在局限性节和点评节均有讨论，未做过度泛化。唯一可改进：对 G=2 优于 G=1 的机制解释主要来自论文原文的'long context modeling'说法，可以更深入分析。"
+  navigability:
+    verdict: pass
+    detail: "KB 背景节引用了 4 个 confirmed 实体页,谱系定位清晰（与 VALL-E 的差异、在 CodecLM 页中的位置）。frontmatter concepts 挂接 6 个概念页。与前作 VALL-E 笔记有交叉引用。"
+  kb_safety:
+    verdict: pass
+    detail: "无需新建概念页（RAS 和 Grouped Code Modeling 是本文特有技术，不满足多篇引用的概念准入规则）。反向更新如需执行：LLM-basedTTS 页已有 VALL-E 2 条目，CodecLanguageModel 页已有 grouped code 提及，无需修改。"
+learning_signals:
+  new_pattern: false
+  matches_known_pattern: "sequel-vs-original: 续作论文的精读应以前作笔记为锚点，明确'解决了哪些前作痛点'而非重新介绍整个范式"
+  system_upgrade_suggestion: "无"

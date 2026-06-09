@@ -1,0 +1,78 @@
+review:
+  paper: "VALL-E-X"
+  note_path: "论文笔记/VALL-E-X.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    rationale: >
+      方法节包含清晰的因果解释:为什么用 source phonemes 作为 prompt (解耦 speaker/content),
+      为什么 NAR 用全 8 层(fine-grained details), 为什么加 LID (多语言建模难度+声调差异)。
+      关键设计选择都回答了 WHY。速查卡片"可借鉴"给出了 3 个具体可迁移 trick。
+  trustworthy:
+    score: 8
+    verdict: pass
+    rationale: >
+      数字型 claim 标注覆盖率高(估计>90%),实验表格完整标注出处。
+      指标名使用正确(ASV-Score, ASR-WER, ASR-BLEU, SMOS, CMOS, MOS 区分清楚)。
+      速查卡片指标字段含具体数字+数据集名+来源标注。
+  distinguishable:
+    score: 8
+    verdict: pass
+    rationale: >
+      因果解释来源标注清晰:[论文原文] 和 [agent 解读] 在关键位置都有标注。
+      4 处 [agent 解读] 标注合理,均为论文未显式说明但可从内容推断的分析。
+      无将推断写成断言的问题。
+  navigable:
+    score: 7
+    verdict: pass
+    rationale: >
+      KB 背景节有清晰的谱系定位(VALL-E 扩展, codec LM 主线, 与后续系统的关系)。
+      创新判断有对比基准(vs VALL-E, vs 传统跨语言 TTS)。
+      frontmatter 字段存在且非空。datasets 为空但可接受(使用的数据集如 LibriLight/EMIME
+      不在 vault 数据集库中)。
+  non-polluting:
+    score: 9
+    verdict: pass
+    rationale: >
+      用户明确要求不做概念页修改,本次无反向更新。
+      笔记本身内容准确,不会在未来反向更新时引入错误信息。
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: frontmatter > datasets
+    detail: >
+      datasets 字段为空,但论文使用了 LibriLight, WenetSpeech, LibriSpeech, EMIME, GigaST
+      等多个数据集。其中 LibriTTS (相关的 LibriSpeech) 和 Emilia 在 vault 数据集库中存在。
+    suggestion: >
+      考虑在 datasets 中添加已存在的实体页链接,或在未来创建 LibriLight/WenetSpeech/EMIME 数据集页时回填。
+
+  - type: traceability-gap
+    severity: low
+    location: 局限性 > 第 2 点
+    detail: >
+      "继承 VALL-E 的 AR 鲁棒性问题" 标注为 [agent 解读,基于 VALL-E 已知问题],
+      但 VALL-E X 论文本身 §6 也提到了类似局限(虽然不如 VALL-E 论文直接)。
+      可改为引用 VALL-E 原文 §6。
+    suggestion: 可保持现状,agent 解读标注已足够诚实。
+
+  - type: traceability-gap
+    severity: low
+    location: 方法 > NAR 模型 > 为什么 NAR 用全 8 层
+    detail: >
+      标注为 [论文原文],但论文 §3.2 实际上没有显式解释这一设计选择的原因,
+      只是描述了 NAR 的输入格式。更准确的标注应为 [agent 解读]。
+    suggestion: 将此处来源标注从 [论文原文] 改为 [agent 解读]。
+
+conclusion: pass-with-fixes
+summary: >
+  笔记质量好,五个原则均基本满足。方法节包含清晰的因果解释和来源区分,
+  实验数据标注完整,KB 背景定位准确。2 个 low 级别溯源标注问题不影响使用,
+  1 个 medium 级别的 datasets 空字段问题不阻塞。
+
+learning_signals: []

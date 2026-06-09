@@ -1,0 +1,51 @@
+review:
+  paper: "SpeechT5"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含多处因果解释: pre/post-net 隔离设计动机, VQ mix-up 的信息瓶颈理由, L_smlm 对 TTS 的负面影响解读; 速查可借鉴含两个具体可迁移 trick (cross-modal VQ mix-up + pre/post-net 模态适配); 关键设计选择回答了 why this not that"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 85%; 全部实验数字来自原文 Table 1/2/3/4/5/6/7/11/13; 指标名正确使用 (WER/MOS/CMOS/MCD/BLEU/ACC); 速查指标字段含具体数字+数据集+来源"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 多处正确使用 [论文原文] 和 [agent 解读] 区分; 消融实验解读中明确标注了哪些是论文结论、哪些是 agent 推断"
+  可定位:
+    score: 9
+    rationale: "KB 背景提供了清晰的三维谱系定位 (SSL / Speech-Text Alignment / SpeechLM 三个概念的交叉点); 创新判断有明确对比基准 (vs wav2vec 2.0/HuBERT encoder-only, vs VALL-E/AudioLM decoder-only LM); frontmatter 完整"
+  不污染:
+    score: 9
+    rationale: "未新建概念页; 反向更新仅需追加 key_papers 到 Self-SupervisedSpeechRepresentation 和 Speech-TextAlignment; 无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "局限性 §1"
+    detail: "'后来的 WavLM (94k hours) 或 w2v-BERT 2.0 (4.5M hours)' 数字来自 KB 页面而非本文,未标注出处"
+    suggestion: "改为 '[基于 KB 背景]' 或注明具体来源"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "点评 §3 最后一句"
+    detail: "'SpeechTokenizer 的 RVQ 蒸馏对齐 HuBERT, MaskGCT 的 VQ-VAE 量化 w2v-BERT 特征' 属于 agent 跨论文关联,未标注"
+    suggestion: "前缀 '[agent 解读]' 或添加具体论文引用"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用的 idea §2"
+    detail: "pre/post-net 模态适配描述略泛,可补充具体的参数量对比 (pre/post-net vs backbone)"
+    suggestion: "补充: 'speech-encoder pre-net ~3M params vs backbone ~80M params [agent 估算]'"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 0
+low_issues: 3
+
+learning_signals:
+  - "2021-era 统一预训练工作的笔记定位需要同时覆盖 SSL + SpeechLM + Alignment 三个谱系,KB 背景节要交叉引用"
+  - "消融实验 (Table 7) 是这类 unified 模型论文的核心价值,值得详细展开每个配置的 implication"

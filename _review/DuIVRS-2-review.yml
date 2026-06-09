@@ -1,0 +1,122 @@
+review:
+  paper: "DuIVRS-2"
+  note_path: "论文笔记/DuIVRS-2.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 8
+      status: pass
+      rationale: >
+        方法节清晰解释了三大核心设计的 WHY: FSM 数据增强解决长尾分布,
+        选择式生成+CoT 消除幻觉,双评估器防止近亲繁殖。每个设计选择
+        都有问题-方案-验证的完整链条。速查卡片可借鉴字段给出了三个
+        具体可迁移 trick,而非泛泛的"提出了新方法"。
+    trustworthy:
+      score: 9
+      status: pass
+      rationale: >
+        数字型 claim 标注覆盖率高(>90%),所有关键指标均有 [Table N]/[§X.X]
+        出处。指标名(CR/TSR)使用正确,速查卡片指标字段含具体数字+数据集+
+        来源标注。经交叉验证: TSR 83.9% [Table 2], CR avg 77.18% [Table 1],
+        幻觉率 0% [§A.2.2] 均与原文一致。
+    distinguishable:
+      score: 8
+      status: pass
+      rationale: >
+        方法节中因果解释标注了[论文原文]和[agent 解读],区分清晰。
+        两处直接引用论文原文用引号标注。局限性节明确标注了哪些是
+        agent 解读,哪些是论文承认的。无把推断写成断言的情况。
+    positionable:
+      score: 7
+      status: pass
+      rationale: >
+        KB 背景准确标注"未找到直接相关知识库背景"并解释原因(非 TTS 核心论文)。
+        点评节清晰说明了与 TTS/Speech 领域的关系。但因 KB 无交集,
+        谱系定位主要依赖论文自身的 related work,缺乏与 vault 内已有知识的
+        交叉定位。这是论文选题所限,非笔记质量问题。
+    no_pollution:
+      score: 10
+      status: pass
+      rationale: >
+        frontmatter concepts/models/tasks/datasets 均为空,不会触发任何
+        反向更新。KB 背景明确标注无相关实体。笔记不会对概念库产生任何影响。
+
+  conclusion: pass
+  high_issues: 0
+  medium_issues: 2
+  low_issues: 2
+
+  issues:
+    - id: 1
+      severity: medium
+      type: template-compliance
+      principle: positionable
+      location: frontmatter
+      detail: >
+        frontmatter 的 models 字段为空。虽然本文不是 TTS 论文,但论文中
+        提到的 ERNIE-Bot-tiny, ERNIE-Bot-turbo, GPT-4o, DeepSeek-V3,
+        Qwen2.5 等模型均参与了实验对比。按 checklist 要求 models 应列
+        本文模型+对比 baseline。但这些通用 LLM 不在 vault 模型库中,
+        且填入后不会触发有意义的 KB 链接。
+      suggestion: >
+        可保持为空,因为这些通用 LLM 不在 TTS vault 的关注范围内。
+        或可备注说明原因。此项不阻塞。
+
+    - id: 2
+      severity: medium
+      type: traceability-gap
+      principle: trustworthy
+      location: "局限性 §6"
+      detail: >
+        局限性第 6 点提到 A/B 测试"仅分配 ~3,000 通/天、1 小时窗口",
+        缺少 [§5.4] 出处标注(虽然信息来源正确)。
+      suggestion: >
+        补充 [§5.4] 标注: "A/B 测试仅分配 ~3,000 通/天、1 小时窗口 [§5.4]"
+
+    - id: 3
+      severity: low
+      type: weak-reusability
+      principle: reproducible
+      location: "可复用的 idea §4"
+      detail: >
+        "生成+判别双视角评估" 的迁移建议(语音质量评估)比较笼统,
+        未给出具体的迁移路径或适用条件。
+      suggestion: >
+        可补充: "例如在 UTMOS 等 MOS 预测场景,可同时训练
+        生成式(语言模型概率)和判别式(回归/分类)两个评估头"
+
+    - id: 4
+      severity: low
+      type: template-compliance
+      principle: positionable
+      location: "实验表格"
+      detail: >
+        实验主表和消融表分开展示,格式清晰,但消融表缺少"数据集"和
+        "出处"列(虽然可从上下文推断均为 offline/[Table 1])。
+      suggestion: >
+        非阻塞,消融表来源已在标题行标注 [Table 1]。
+
+  learning_signals:
+    - >
+      非 TTS 核心论文的精读处理: 当论文与 vault 主题(TTS)无直接交集时,
+      KB 背景应明确标注"无直接相关",frontmatter 实体字段保持为空是合理的,
+      不应强行关联。重点转向提炼可迁移的工程方法论。
+    - >
+      工业系统论文的评估: 此类论文的价值在工程洞见而非算法创新。
+      审阅标准中"可复述"应侧重工程决策链条(WHY this architecture),
+      而非纯方法论层面的因果机制。
+
+  cross_validation_notes: >
+    交叉验证了以下关键数字:
+    - TSR 83.9% ✓ [Table 2, §Abstract]
+    - CR avg 77.18% ✓ [Table 1]
+    - 幻觉率 0% ✓ [§A.2.2]
+    - 延迟 130ms ✓ [Table 2, §A.2.1]
+    - 0.4M calls/day ✓ [Table 2, §Abstract]
+    - 训练成本 <10,000 RMB ✓ [§A.2.3]
+    - HybridLLMs CR 77.03% ✓ [Table 1]
+    - α=0.1 最优 ✓ [Fig 5, §A.7]
+    所有关键数字与原文一致,无 factual error。

@@ -1,0 +1,51 @@
+review:
+  paper: "UASR-LLM"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+  principles:
+    explainable:
+      score: 9
+      verdict: pass
+      rationale: "方法节对每个关键设计选择(VIM的cross-attention + zero-init tanh gating、不压缩帧、CTC辅助loss用独立1k vocabulary、两阶段训练)均给出了WHY解释,且全部标注了[论文原文]或[agent解读]来源。速查'可借鉴'给出3个具体可迁移trick(zero-init gating注入、clean-target蒸馏pretraining、CTC独立vocabulary)。"
+
+    trustworthy:
+      score: 8
+      verdict: pass
+      rationale: "核心数字(WER/参数量/训练配置)经原文交叉验证一致。所有数字标注了[Table I-V, Fig 1-4, §I-V]来源。指标名(WER)使用正确。速查'指标'有具体数字+数据集+来源+配置标注。修正后noisy AVSR标注了精确配置(433h/433h, UASR-LLM-L)。"
+
+    distinguishable:
+      score: 8
+      verdict: pass
+      rationale: "方法节7处因果解释全部标注[论文原文]或[agent解读],覆盖率100%。点评节区分了优势与弱点。速查一句话已修正避免overclaim('在可比数据量下超越各baseline')。"
+
+    positionable:
+      score: 8
+      verdict: pass
+      rationale: "KB背景节有具体谱系定位(latent-representation-based Speech-LLM Integration路线),创新判断有对比基准(Llama-AVSR的temporal concatenation、MMS-Llama的Q-Former)。frontmatter字段完整,concepts/models引用已有页面,语义正确。"
+
+    no_pollution:
+      score: 9
+      verdict: pass
+      rationale: "未创建/修改任何概念页(按用户指令)。frontmatter concepts字段引用已有概念页(Self-SupervisedSpeechRepresentation、ModalityAdaptationforSpeechLLM等),models引用已有模型页(WavLM、HuBERT、Whisper),语义正确。无factual-error。"
+
+  issues:
+    - type: traceability-gap
+      severity: medium
+      location: "速查 > 指标"
+      detail: "原始速查指标noisy AVSR引用'2.4%'未标明配置,已修正为'3.2% avg WER (433h/433h, UASR-LLM-L) [Table II]'。"
+      suggestion: "已在笔记中修正。"
+
+    - type: overclaim
+      severity: low
+      location: "速查 > 一句话"
+      detail: "原为'全面超越baseline',但LP-Conformer(100k hr)在VSR上仍有更好WER(12.8% vs 20.9%),已修正为'在可比数据量下超越各baseline'。"
+      suggestion: "已在笔记中修正。"
+
+  issue_summary:
+    high: 0
+    medium: 1
+    low: 1
+
+  learning_signals: []

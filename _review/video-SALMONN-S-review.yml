@@ -1,0 +1,41 @@
+paper: "video-SALMONN-S"
+reviewer: auto
+date: "2026-06-08"
+checklist_version: "v1.1"
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节包含完整因果解释 (WHY TTTMEM > Mamba, WHY discarding > merging, WHY two-stage training); 关键设计选择有对比实验佐证; 速查可借鉴字段给出 5 个具体可迁移 trick 含适用条件"
+  trustworthy:
+    score: 8
+    rationale: "数字 claim 标注覆盖率高 (所有表格数据标注了 [Table N], 章节引用标注了 [§X.X]); 指标名正确 (accuracy/WER/TFLOPs); 无方向性错误"
+  distinguishable:
+    score: 8
+    rationale: "因果解释标注了 [论文原文] vs [agent 解读]; 解读均有推理依据; 无将推断写成断言的句子"
+  locatable:
+    score: 7
+    rationale: "KB 背景有清晰的 SALMONN 系列谱系定位 (四代演进); 但 KB 重叠有限 -- 本文核心创新 (TTT, 流式视频记忆) 超出 TTS KB 覆盖范围,谱系定位主要基于系列论文关系而非概念页交叉验证"
+  non_polluting:
+    score: 9
+    rationale: "按指令不执行反向更新; concepts/models frontmatter 挂接合理 (AudioUnderstanding, ModalityAdaptation, Whisper); 不创建新概念页"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter"
+    detail: "KB 中无 TTT/test-time-training 相关概念页,concepts 字段仅挂接了 TTS KB 中的边缘相关概念 (AudioUnderstanding, ModalityAdaptation),不完整反映本文核心技术"
+    suggestion: "如后续在 KB 中创建 test-time-training 或 streaming-video-memory 概念页,应回填 concepts 字段"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "方法: TTTMEM 层的机制"
+    detail: "TTTMEM 的 gating mechanism 引用了 (Dalal et al., 2025) 但未详细解释 gating 如何工作"
+    suggestion: "可在 TTTMEM 机制段补充一句 gating 的作用说明,但鉴于 gating 不是本文创新且篇幅可控,属低优先级"
+
+learning_signals: []
+
+note: "本文是视频理解领域论文,与 TTS KB 的概念重叠有限。审阅重点放在笔记质量 (可复述/可信赖/可区分) 而非 KB 挂接完整性上。"

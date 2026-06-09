@@ -1,0 +1,53 @@
+paper: MIDI-VALLE
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节对每个设计选择都有 WHY 解释: Octuple vs piano-roll 的表征优势、NAR prompt 策略修改原因、Piano-Encodec fine-tuning 动机。速查卡片可借鉴字段列出 4 个具体可迁移 trick。整体架构从输入到输出完整可追溯。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字经交叉验证均与 Table 3/4 原文一致: FAD (3.329/11.014/11.281/34.479/102.022), Piano-Encodec Spec (0.123 vs 0.304), Chroma (0.436/0.421/0.428/0.387)。听力测试 202:58=260 与原文一致。指标名正确 (FAD/Spec./Chroma)。训练细节 (300k steps, 2.5d, 2xA100) 与 §4.2 一致。有 1 处 agent 解读事实错误 (issue #1)。"
+  distinguishable:
+    score: 7
+    rationale: "因果解释来源标注覆盖率高,方法节所有 WHY 均标注了 [论文原文] 或 [agent 解读]。但 issue #1 中 [agent 解读] 将 MIDI-VALLE AR 不用 prompt 错误类比为与 VALL-E 一致,实际是与 VALL-E 的差异点。这属于 fact-inference-mixing: 推断性解释引入了事实错误。"
+  positionable:
+    score: 9
+    rationale: "KB 背景命中 5 个页面,谱系定位清晰 (CodecLM → VALL-E → MIDI-VALLE 的跨域迁移)。创新判断有明确对比基准 (应用驱动 vs 方法驱动)。frontmatter 字段存在且语义基本正确,但 datasets 为空 (issue #3)。"
+  non-polluting:
+    score: 9
+    rationale: "未新建概念页。反向更新未执行 (用户指令)。KB 背景中的信息流安全,不会引入错误认知到概念页。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "方法节 设计4 AR 不使用 Acoustic Prompt — [agent 解读]"
+    detail: "Agent 解读称 '这与 VALL-E 的做法一致',但 VALL-E 的 AR decoder 明确接收 acoustic_prompt_c1 作为输入 (VALL-E §4.2.1, AR 输入序列包含 [phoneme_prompt; phoneme_target; <EOS>; acoustic_prompt_c1; acoustic_target_c1; <EOS>])。MIDI-VALLE AR 不用 acoustic prompt 恰恰是与 VALL-E 的差异点,不是一致点。"
+    suggestion: "修正为: '[agent 解读] 这与 VALL-E 不同: VALL-E 的 AR decoder 同时接收 phoneme 和 acoustic prompt,而 MIDI-VALLE 选择让 AR 仅依赖 MIDI tokens。这一设计使内容生成与风格注入完全解耦 -- 第 1 层 RVQ 编码 coarse acoustic structure 由 MIDI 内容决定,timbre/environment 由 NAR 的 prompt conditioning 注入。'"
+    status: open
+
+  - type: traceability-gap
+    severity: medium
+    location: "方法节 设计4 + 整体架构"
+    detail: "笔记将 AR 不使用 acoustic prompt 描述为绝对规则,但 §3.2 inference 段落明确写道 'The encoded audio prompt, if provided, is appended after the MIDI tokens in the input to the AR decoder for controlling the acoustic environment and timbral characteristics.' 即推理时 AR 可选择性接收 audio prompt。这一训练-推理行为差异未被捕获。"
+    suggestion: "在设计4下方补充: '[论文原文] 推理时,audio prompt 可选择性地拼接在 MIDI tokens 之后输入 AR decoder,用于控制声学环境和音色特征 [§3.2 inference]。这意味着训练时 AR 不使用 prompt,但推理时可以 -- 存在 training-inference mismatch。'"
+    status: open
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets 字段"
+    detail: "datasets: [] 为空,但论文训练使用 ATEPP (8825 recordings, ~700h),评估使用 ATEPP + Maestro + Pijama。这些是音乐数据集,vault 中无对应页面,但 frontmatter 应记录以便检索。"
+    suggestion: "改为 datasets: [ATEPP, Maestro, Pijama] (无 wikilink,因无对应页面)"
+    status: open
+
+  - type: traceability-gap
+    severity: low
+    location: "局限性 §1 / 实验关键发现"
+    detail: "笔记在局限性中讨论了 jazz FAD 仍高 (102),但未提及听力测试中 Pijama 数据集上 M2A 反而被偏好 (§6.2: 'M2A is favoured for segments from Pijama dataset')。这一主观评估结果进一步佐证 jazz 泛化问题,应与 FAD 数据互补。"
+    suggestion: "在关键发现或局限性中补充: '听力测试中 Pijama 子集 M2A 被偏好,进一步佐证古典→爵士泛化有限 [§6.2]'"
+    status: open
+
+learning_signals:
+  - "跨域迁移论文的 agent 解读需特别小心原模型与改进模型的差异点 -- 容易误判为一致性"

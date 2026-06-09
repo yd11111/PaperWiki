@@ -1,0 +1,45 @@
+review:
+  paper: "TASLA"
+  reviewer: "auto (same-session, self-review per instructions)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含完整因果解释: WHY multi-layer adaptive mixing (不同层编码不同类型声学信息), WHY K/V 解耦 (语义对齐与声学内容分离), WHY FSQ 替代 RVQ (codebook collapse 风险); 速查卡片可借鉴字段具体且可迁移 (frozen encoder + learnable mixer); 动态权重分析提供了额外可解释性"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率 >85%; 指标名/方向正确 (WER↓, UTMOS↑, F0-PCC↑ 等); 速查指标字段含具体数字+数据集+出处; Table 1/2 数据交叉核对完整; UTMOS negative result 在点评中明确讨论"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; [论文原文] 和 [agent 解读] 标注清晰; 推断性分析 (如 FSQ vs RVQ 的解释、S3 unit ceiling 解释) 均有 [agent 解读] 标注; 无把推断写成断言的情况"
+  可定位:
+    score: 9
+    rationale: "KB 背景有具体谱系 (TASTE 的直接改进, text-aligned tokenization 路线在 SpeechTokenizer taxonomy 中的位置, 与 CosyVoice FSQ 趋势的关联); 创新判断有明确对比基准 (vs TASTE 的单层 value); frontmatter 完整且语义正确"
+  不污染:
+    score: 10
+    rationale: "按指令未做反向更新; 未新建概念页; 无 KB 污染风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "实验 质量指标"
+    detail: "UTMOS 在三个数据集上均低于 TASTE (3.43 vs 3.51, 3.10 vs 3.31, 3.12 vs 3.33) 是一个系统性 negative result, 实验表本身没有特别标注或强调这一模式"
+    suggestion: "实验表后可加一行注释明确指出 UTMOS 的系统性 trade-off, 或在表格中用标记区分"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "审阅"
+    detail: "self-review 模式下未 dispatch 独立审阅 subagent"
+    suggestion: "按指令要求, self-review 模式下此项可接受; 记录为合规偏差"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 1
+
+learning_signals:
+  - "UTMOS negative result 的讨论可以更 prominent — 考虑在实验节直接加注释而非仅在点评中讨论"
+  - "K/V 解耦设计 (K=deep for alignment, V=mixed for content) 是一个通用思路, 值得在概念页 cross-attention 变体中记录"

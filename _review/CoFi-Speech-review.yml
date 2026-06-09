@@ -1,0 +1,45 @@
+paper: CoFi-Speech
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节对每个关键设计选择都有充分的 WHY 解释: 残差减法机制为何能分离不同粒度信息、SWND 为何能防止高尺度表示坍缩、SoS 级联优于 CoS 单 LM 的原因 (归纳偏置 vs 参数量)。速查卡片可借鉴字段列出 4 个具体可迁移 trick (SoS 级联、SWND、残差减法量化、attention 可视化诊断),每个都包含原理和迁移条件。训练策略细节 (SWND 概率 p0=0.8/p1=0.1/p2=0.1、codebook 16384、EMA decay 0.99 等) 完整记录。"
+  trustworthy:
+    score: 8
+    rationale: "Table I 数字经 PDF 交叉验证全部正确 (SoS NMOS 4.42/SMOS 3.90, CoS 4.12/3.75, CosyVoice 4.28/3.70, VALL-E 3.46/2.92, SoCodec-TTS 4.30/3.51)。Fig 3 数据标注为从柱状图近似读取,已加 disclaimer。指标名 NMOS/SMOS/CER/SIM/MCD 使用正确,方向性无误 (NMOS/SMOS/SIM 越高越好, CER/MCD 越低越好)。出处标注覆盖率约 90%。CosyVoice 数据量差异 (>100k vs 7k hours) 已在实验表注和点评中充分说明。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖所有因果解释,比例约 12:8。关键推断均有明确标注: 残差减法与 RVQ 的类比 [agent 解读]、SWND 与 SoCodec stream-wise dropout 的比较 [agent 解读]、SoS 与 AudioLM 三阶段的对比 [agent 解读]、CosyVoice 对比的 caveats [agent 解读]。方法节无未标注的推断性断言。"
+  positionable:
+    score: 9
+    rationale: "KB 背景高质量: 谱系定位明确 (MSRVQ 路线, 与 SoCodec 的姊妹关系, 与 SNAC/LLM-Codec 的技术路线对比); 创新判断列出 4 个具体贡献并与 KB 已有知识做差分; 点评节进一步定位 CoFi vs SoCodec 的正交维度关系。frontmatter 字段基本完整,但 datasets 为空、models 缺少部分 baseline (见 issues)。速查卡片 5 字段均有实质内容。"
+  non-polluting:
+    score: 10
+    rationale: "本次审阅未涉及概念页创建或反向更新 (按用户指令跳过)。笔记中的事实和推断区分清晰,未来如进行反向更新不会引入 factual-error 或 overclaim。"
+
+issues:
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter datasets 字段"
+    detail: "datasets: [] 为空,但论文使用 WenetSpeech4TTS Basic (7k hours) 作为主数据集,在正文中多次引用"
+    suggestion: "补充为 datasets: [\"[[WenetSpeech4TTS]]\"]。如果 数据集/ 下无此页则仅写文本。当前 数据集/ 下无 WenetSpeech4TTS.md,可写为 datasets: [\"WenetSpeech4TTS\"]"
+    status: fixed
+
+  - type: bad-linking
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 仅列 BigVGAN 和 CosyVoice,但 VALL-E 和 SoCodec-TTS 也是 Table I 的对比 baseline。按 checklist 'models 列本文模型+对比 baseline' 规则应包含。但这两个模型在模型库中无实体页,且非核心对比对象 (SoCodec 是姊妹工作已在 KB 背景充分讨论,VALL-E 是远距离 baseline)"
+    suggestion: "可考虑补充 SoCodec-TTS 和 VALL-E 到 models 字段。鉴于两者无实体页,优先级低"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "训练策略 > CoFi-LM 训练"
+    detail: "SoS 的 3 个 LM 各 12 层的总参数量约为 CoS 的 3 倍 --- 这个结论标注为 [agent 解读],但实际上论文 Fig 3 的 CoS-large (24L) 实验设计就是为了控制参数量做对比,原文 §IV-C 有明确讨论"
+    suggestion: "可将 '参数量为 CoS 的 3 倍' 改为 [论文原文] 标注,或添加 §IV-C 出处"
+    status: noted
+
+learning_signals: []

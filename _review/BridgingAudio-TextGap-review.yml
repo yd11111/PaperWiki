@@ -1,0 +1,97 @@
+review:
+  paper: "BridgingAudio-TextGap"
+  title: "CORD: Bridging the Audio-Text Reasoning Gap via Weighted On-policy Cross-modal Distillation"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: v1.1
+
+  conclusion: pass-with-fixes
+  summary: >
+    笔记结构完整,覆盖了论文的核心方法(token 级加权 KL + 序列级 GRPO)、实验对比和消融分析。
+    KB 背景提供了清晰的谱系定位。速查卡片内容具体。主要问题集中在可信赖层面:
+    部分 claim 出处标注有遗漏,以及对 gap 减少百分比的解读需要更谨慎的 framing。
+    无 high issue,可继续反向更新。
+
+  principles:
+    - name: 可复述
+      score: 8
+      verdict: pass
+      notes: >
+        方法节详细解释了 WHY(为什么用 reverse KL、为什么需要 Top-K 加权、
+        为什么 GRPO 需要 OPD 配合),每个设计选择都回答了替代方案问题。
+        速查卡片"可借鉴"具体列出了 4 个可迁移 trick。
+
+    - name: 可信赖
+      score: 7
+      verdict: pass
+      notes: >
+        主要实验数字均标注了出处(Table 1/2/3, Fig 3/4)。
+        有两处可改进: (1) 训练细节中的超参数未标注具体出处;
+        (2) 点评中对 gap 减少百分比 vs 绝对值的讨论很好,但核心实验表格可以更清晰地区分。
+
+    - name: 可区分
+      score: 8
+      verdict: pass
+      notes: >
+        方法节使用 [论文原文] 和 [agent 解读] 标注区分了论文 claim 和推断。
+        "OPD 的 token 级蒸馏锚定了模型在文本模态上的行为"等解读正确标注为 [agent 解读]。
+        覆盖率 > 80%。
+
+    - name: 可定位
+      score: 8
+      verdict: pass
+      notes: >
+        KB 背景节提供了清晰的谱系定位:从 Speech-LLM Integration Taxonomy
+        到 Modality Adaptation 到 CORD 的训练范式创新。
+        frontmatter 字段完整,concepts/models/datasets 语义正确。
+        速查卡片 5 字段均有实质内容。
+
+    - name: 不污染
+      score: 8
+      verdict: pass
+      notes: >
+        无新建概念页需求。引用的 6 个实体页均已存在且关联合理。
+        CORD 使用 GRPO 这一与 DifferentiableRewardOptimization 概念页的关联是恰当的。
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "训练策略 section"
+      detail: >
+        训练超参数(α=2, β=2, K=20, lr=3e-5, N=4)列出但未全部标注具体出处。
+        K=20 和 N=4 的出处应标注 [§4.1] 或相应段落。
+      suggestion: "为每个超参数补充段落引用,如 K=20 [§3.4], N=4 [§3.5]"
+
+    - id: 2
+      severity: medium
+      type: traceability-gap
+      location: "局限性 section, item 3"
+      detail: >
+        "MMAU Speech 维度下降 3.31%(58.73→55.42)"这个计算是正确的,
+        但原文 Table 2 的数字引用位置应更明确标注。
+      suggestion: "补充 [Table 2] 标注到该句末尾"
+
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: "frontmatter tasks field"
+      detail: "tasks 字段为空列表,可填入 audio-conditioned-reasoning 等相关任务"
+      suggestion: "可保持空,因本文不对应 vault 中已有的任务库实体"
+
+    - id: 4
+      severity: low
+      type: weak-reusability
+      location: "可复用的 idea, item 3"
+      detail: >
+        "内部 teacher 自蒸馏"的描述偏泛,可补充与外部 teacher 蒸馏
+        (如 Wang et al. 2024 BLSP-KD)的具体区别以增强可迁移性。
+      suggestion: "补充一句对比: 与外部 teacher 方案相比,自蒸馏免去了教师-学生架构不匹配问题"
+
+  stats:
+    issues_total: 4
+    issues_high: 0
+    issues_medium: 2
+    issues_low: 2
+
+  learning_signals: []

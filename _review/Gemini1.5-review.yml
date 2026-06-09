@@ -1,0 +1,57 @@
+review:
+  paper: "Gemini1.5"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节以三层架构 (短上下文ASR/长上下文ASR/混合模态in-context ASR) 组织,每层含因果解释; 关键设计选择回答了 why MoE/why native multimodal/why long context; 速查卡片可借鉴列出 4 个具体可迁移 trick (跨模态NIAH评估/ASROB benchmark/长上下文消除分段/混合模态few-shot)"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 ~95%; 所有核心数字标注了 [Table N]/[Fig N]/[§X.X]; 指标名正确 (WER/CER/BLEU/NLL 未混淆); 速查指标字段含 6 组具体数字+数据集名+出处; 无方向性错误"
+  可区分:
+    score: 9
+    rationale: "因果解释来源标注覆盖率 ~90%; 方法节系统使用 [论文原文] 和 [agent 解读] 标注; agent 解读有明确推理链而非断言; 强断言 ('超越 Whisper/USM') 有数字+出处支撑; KB 背景中的创新判断明确标注了 agent 立场"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供了清晰谱系定位 (latent-representation integration vs audio-token-based vs text-based); 创新判断有对比基准 (Whisper/USM/SpeechGPT/Moshi); frontmatter 字段完整; models 字段仅列 Whisper 作为对比 baseline (正确); concepts 列 5 个 KB 实体"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 未进行任何反向更新; 概念页链接使用已有实体 (SpeechLanguageModel, AudioUnderstanding 等); KB 背景内容客观准确,无 overclaim"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 仅列 [[Whisper]], 未列 USM (论文的另一个核心 ASR baseline, 在 Table 20 中与 Whisper 并列对比)"
+    suggestion: "models 字段追加 [[USM]]"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法节 '整体架构' 段"
+    detail: "'Dense Transformer decoder (非 MoE)' 和 '并行 attention + FFN 计算' 两个 Flash 特征描述缺少 [§3.2] 出处标注 (虽然标题已提到 §3.2, 但行内未标)"
+    suggestion: "在 Flash 特征列表各项行尾标注 [§3.2]"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "训练策略节"
+    detail: "'Flash 使用高阶预条件优化方法' 缺少出处标注"
+    suggestion: "补充 [§4] 或具体小节号"
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets 字段"
+    detail: "datasets 为空数组, 但论文使用了 MLS, FLEURS, CoVoST-2, VoxPopuli 等已出现在笔记中的数据集"
+    suggestion: "可选: 填入核心评估数据集 (MLS, FLEURS, CoVoST-2, VoxPopuli)"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "对于 architecture-opaque 论文 (未披露关键细节), [agent 解读] 标注尤为重要 — 本文做得很好, 在音频处理细节缺失处均明确标注了推断性质"
+  - "多模态论文的 KB 谱系定位需要跨多个维度 (integration taxonomy + modality coverage + capability scope), 本文 KB 背景的三段式结构 (谱系定位/已有认知/创新判断) 处理得清晰"

@@ -1,0 +1,50 @@
+review:
+  paper: "Audio-Thinker"
+  arxiv_id: "2508.08039"
+  reviewer: auto
+  date: 2026-06-08
+  verdict: pass
+  issues_count: 0
+  high: 0
+  medium: 0
+  low: 0
+
+principles:
+  reproducible:
+    status: pass
+    notes: >
+      方法节因果解释充分: 四层 reward 各自解决什么问题、为什么需要软惩罚因子、
+      为什么 Case 3 reward 最高、退火策略的动机均有明确回答。
+      可借鉴项 4 个均为具体可迁移的策略而非模糊描述。
+  trustworthy:
+    status: pass
+    notes: >
+      数字标注覆盖率 >90%; 主实验 6 行数据全部标注 Table 出处;
+      消融结果逐行标注来源 [Table 1]; 指标名称和方向性正确 (Accuracy ↑)。
+      reward 公式 Eq. 3-7 忠实于原文。
+  distinguishable:
+    status: pass
+    notes: >
+      [论文原文]/[agent 解读] 标注覆盖核心方法节 8 处;
+      KB 背景中 "创新判断" 明确标记为 agent 综合判断;
+      点评中的跨论文对比 (与 SALMONN, Omni-R1, DeepSeek-R1) 标记为分析性内容。
+  locatable:
+    status: pass
+    notes: >
+      KB 背景定位清晰: LALM 推理增强路线, Two Heads 架构上的 RL 训练框架;
+      点评中与 SALMONN 的时间轴对比 (2023→2025, 感知→推理) 提供了历史定位;
+      在 MMAU/MMAR/AIR 评估体系中与 Omni-R1, Gemini 2.5 Flash 的横向定位准确。
+  no_pollution:
+    status: pass
+    notes: >
+      无反向更新操作; 笔记内容 factually accurate,
+      reward 公式与原文一致, 实验数字与 Tables 1-5 核对无误。
+
+checklist:
+  section_sourcing_rate: ">85%"
+  why_not_what: true
+  kb_background: true
+  quick_card: true
+  limitations_discussed: true
+  reusable_ideas: true
+  review_callout_needed: true

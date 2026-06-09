@@ -1,0 +1,49 @@
+review:
+  paper: "WavCube"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含充分因果解释 (WHY AE not VAE, WHY detached gradient, WHY 128d not 64d, WHY dual anchoring); 两阶段流程清晰; 速查卡片可借鉴具体且可迁移 (信息瓶颈/detached gradient/semantic anchoring)"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 > 90%; 指标名正确使用 (WER/SIM-o/UTMOS/STOI/PESQ/PER); 速查指标字段含具体数字+数据集+出处; 实验表格数据与原文一致"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; [论文原文]/[agent 解读] 标注贯穿方法节和实验节; 关键消融中 agent 解读标注清晰"
+  可定位:
+    score: 9
+    rationale: "KB 背景提供了清晰谱系定位 (Semantic-VAE 进阶 / AudioTokenizerTaxonomy 连续 latent 路线 / RAE/REPA 跨域平行); 创新判断有具体对比基准; frontmatter 完整且语义正确"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 本次不做反向更新; 概念/模型引用合理; 无 factual error 或 overclaim 风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "实验-理解 SUPERB (Table 2) 解读"
+    detail: "'全面碾压 acoustic 表征' 表述较强, 虽有数字支撑但用词过于绝对"
+    suggestion: "改为 '显著优于 acoustic 表征 (VAE/Mel/Semantic-VAE)'"
+  - id: 2
+    type: template-compliance
+    severity: medium
+    location: "frontmatter concepts"
+    detail: "concepts 中列了 ConditionalFlowMatching 但本文并非 CFM 工作, F5-TTS 是 downstream 使用的生成框架"
+    suggestion: "可保留因为 CFM 是 TTS 实验的生成框架, 但如需严格可移至 note body 而非 concepts"
+  - id: 3
+    type: weak-reusability
+    severity: low
+    location: "可复用 idea #4"
+    detail: "'表征替换做受控实验' 较通用方法论, 不是本文独有技巧"
+    suggestion: "可简化为一句附注或移除"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 2
+low_issues: 1
+
+learning_signals: []

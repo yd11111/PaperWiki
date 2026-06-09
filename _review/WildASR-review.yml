@@ -1,0 +1,80 @@
+reviewer: auto
+date: 2026-06-08
+note: 论文笔记/WildASR.md
+checklist_version: v1.1
+conclusion: pass
+high_issues: 0
+medium_issues: 1
+low_issues: 2
+
+principles:
+  可复述:
+    score: 9
+    rationale: >
+      方法节清晰解释了 WildASR 的三维 OOD 因子分解设计动机(why factor-isolated)、
+      真实人声 vs 合成人声的设计选择(why real speech, with 3.7% vs 21.7% empirical evidence)、
+      各类环境扰动的模拟方法和参数选择。速查卡片"可借鉴"列出 5 个具体可迁移的方法论
+      (因子隔离框架、P90 Elbow、WER+HER 联合评估、Prompt sensitivity profiling、
+      真实vs合成对照)。作为 benchmark 论文没有模型训练,方法节适当聚焦于数据构建和评估协议设计。
+  可信赖:
+    score: 9
+    rationale: >
+      数字型 claim 标注覆盖率高(>90%),所有关键数据均标注 [Table N]/[§X.X]/[Fig N]。
+      指标使用正确(WER for EN, CER for CJK, MER for code-switching, HER for hallucination)。
+      速查卡片指标字段含具体数字(5.7% baseline, +67.7% noise gap, 18.2% children等)、
+      数据集名(MagicData/FLEURS)和出处标注。无方向性错误。
+  可区分:
+    score: 9
+    rationale: >
+      因果解释来源标注覆盖率 >90%。[论文原文] 和 [agent 解读] 区分清晰。
+      点评节全标 [agent 解读]。KB 背景中所有推断标注 [agent 解读]。
+      核心实验发现均标注 [论文原文]。无将推断写成断言的情况。
+  可定位:
+    score: 8
+    rationale: >
+      KB 背景有 5 个实体页的具体定位,且与 EmergentTTS-Eval (同团队)的互补关系分析详实。
+      但所有 5 个命中实体页均为 pending-review,无 confirmed 页面提供锚定。
+      这是 KB 现状限制而非笔记本身问题。concepts/models frontmatter 语义正确。
+  不污染:
+    score: 10
+    rationale: >
+      按指令未执行反向更新,无新建实体页。笔记内容本身无 factual error 或 overclaim。
+      如后续执行反向更新,主要涉及向 Whisper/TTSEvaluation/SpokenDialogueEvaluation
+      追加 key_papers,均为 append 操作。
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    principle: 可定位
+    location: frontmatter
+    detail: >
+      tasks 字段为空。WildASR 作为 ASR benchmark,应至少关联 ASR/speech-recognition 相关任务,
+      但 vault 中无对应的 ASR 任务页,故 tasks 留空可接受。
+    suggestion: >
+      如后续创建 ASR 或 ASR-Evaluation 任务页,补充 tasks 字段。当前可保留为空。
+
+  - id: 2
+    severity: low
+    type: template-compliance
+    principle: 可定位
+    location: frontmatter
+    detail: >
+      datasets 字段为空。论文使用了 FLEURS、MagicData、YODAS、SwitchLingua 等数据集,
+      但 vault 中均无对应页面。
+    suggestion: >
+      WildASR 本身作为 benchmark 数据集可能值得在 数据集/ 下建页,但需满足准入规则。暂不建。
+
+  - id: 3
+    severity: low
+    type: bad-linking
+    principle: 可定位
+    location: frontmatter models
+    detail: >
+      models 仅列 [[Whisper]],但论文评测了 7 个模型(Whisper, GPT-4o Transcribe,
+      Gemini 2.5 Pro, Gemini 3 Pro, Qwen2-Audio, Nova 2, Scribe V1)。
+      其余 6 个系统在 vault 中无独立模型页。
+    suggestion: >
+      当前合理(仅挂有页面的模型)。如后续建 Qwen2-Audio 等模型页,补充 models 字段。
+
+learning_signals: []

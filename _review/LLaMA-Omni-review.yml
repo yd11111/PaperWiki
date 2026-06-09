@@ -1,0 +1,96 @@
+paper: LLaMA-Omni
+arxiv_id: "2409.06666"
+reviewer: agent
+date: 2026-06-08
+verdict: pass-with-fixes
+
+principles:
+  可复述:
+    status: pass
+    notes: >
+      方法节包含因果解释(WHY)覆盖每个关键设计选择;
+      CTC 选择、upsample factor、decoder 层数、HuBERT units vs codec、adaptor downsampling
+      均有"为什么选这个而不是那个"的解释;
+      速查卡片"可借鉴"字段列出3个具体可迁移trick
+  可信赖:
+    status: pass
+    notes: >
+      数字型 claim 标注覆盖率约 90%;
+      实验表格含完整的数据集名(InstructS2S-Eval)和出处标注([Table N], [Fig N]);
+      指标名使用正确(ChatGPT Score, ASR-WER, UTMOS, WPS, Latency);
+      无方向性错误
+  可区分:
+    status: pass
+    notes: >
+      方法节中每个设计选择标注了[论文原文]或[agent 解读];
+      因果解释来源标注覆盖率约85%;
+      点评节明确区分论文贡献与agent分析
+  可定位:
+    status: pass
+    notes: >
+      KB背景节有具体谱系定位(modular SpeechLM路线, instruction-tuning阶段, latent-representation input + NAR decoder output);
+      与Moshi/SpeechGPT/Mini-Omni/LLaMA-Omni2有明确对比;
+      创新判断有对比基准
+  不污染:
+    status: pass
+    notes: >
+      未新建概念页;
+      无反向更新内容;
+      信息准确可追溯
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    principle: 可信赖
+    location: "局限性 §1"
+    description: >
+      "NAR decoder 建模能力受限"的论据引用了LLaMA-Omni 2的§1,
+      但LLaMA-Omni原文本身未直接讨论这一局限,来源标注为[agent 解读]已正确,
+      但可补充LLaMA-Omni原文§6中"enhance expressiveness"的self-acknowledged limitation
+    suggestion: >
+      在"NAR decoder 建模能力受限"处补充引用LLaMA-Omni原文§6结论中
+      "explore enhancing the expressiveness of generated speech responses"
+
+  - id: 2
+    severity: medium
+    type: weak-reusability
+    principle: 可复述
+    location: "可复用的 idea §4"
+    description: >
+      "两阶段解耦训练"的描述偏向架构总结,
+      可进一步具体化其适用条件(什么时候该用/不该用)
+    suggestion: >
+      补充说明: 适用条件是decoder模块相对独立且不需要影响LLM内部表征的场景;
+      不适用于需要LLM根据decoder反馈调整生成的场景(如需要prosody-aware text generation)
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    principle: 可定位
+    location: frontmatter
+    description: >
+      datasets字段为空,应列出InstructS2S-200K(本文构造)和InstructS2S-Eval(评估集)
+    suggestion: >
+      补充datasets字段
+
+  - id: 4
+    severity: low
+    type: traceability-gap
+    principle: 可信赖
+    location: "KB背景"
+    description: >
+      KB背景中"adaptor复杂度并非speech interaction的瓶颈"是agent推断,
+      未标注[agent 解读]
+    suggestion: >
+      在该句后补充[agent 解读]标注
+
+summary: >
+  笔记整体质量良好。五个原则均基本满足,无high issue。
+  两个medium issue不阻塞使用:
+  (1) 一处来源标注可以更精确地引用原文结论;
+  (2) 一处可复用idea的适用条件可以更具体。
+  两个low issue为格式层面的小改进。
+  KB背景定位清晰,与LLaMA-Omni 2的前后继关系交代明确。
+  实验数据覆盖全面(offline + streaming + human eval)。
+  可以进行反向更新。

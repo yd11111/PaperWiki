@@ -1,0 +1,80 @@
+review:
+  paper: "SpeechLMScore"
+  note_path: "论文笔记/SpeechLMScore.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    status: pass
+    reason: >
+      方法 pipeline 清晰描述了 HuBERT → k-means → LSTM → perplexity 的完整流程。
+      关键设计选择 (Layer 1 选择、reference-free 动机、speaker-level 评估) 均有 WHY 解释。
+      速查卡片的"可借鉴"字段提供了可迁移的 perplexity-as-quality-proxy 思路。
+
+  可信赖:
+    score: 8
+    status: pass
+    reason: >
+      所有关键数字均标注出处 [Table 1]/[Table 2]/[§X.X]。
+      相关系数和 p 值完整引用。指标名使用正确 (Pearson r, PER, HNR 等不混淆)。
+      速查指标字段含具体数字 + 数据集名 + 来源标注。
+
+  可区分:
+    score: 8
+    status: pass
+    reason: >
+      方法节中的因果解释明确标注了 [论文原文] 和 [agent 解读],覆盖率约 90%。
+      未发现将推断写成断言的情况。"作者认为"等限定词使用充分。
+
+  可定位:
+    score: 7
+    status: pass
+    reason: >
+      KB 背景节提供了具体谱系定位 (在 TTS 评估演进线中的位置),
+      与 SpeechLanguageModel、Self-SupervisedSpeechRepresentation 的关系明确。
+      创新判断明确指出"方法迁移而非方法创新"。
+
+  不污染:
+    score: 9
+    status: pass
+    reason: >
+      无概念页修改计划,无反向更新风险。
+      frontmatter concepts/models 引用准确,未引入不存在的实体。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: frontmatter
+    detail: >
+      datasets 字段为空列表。NKI-SpeechRT 和 NKI-OC-VC 是本文使用和贡献的数据集,
+      虽未在数据集库中创建实体页,但可在 frontmatter 中标注名称。
+    suggestion: >
+      保持当前空列表即可 (数据集库中无对应页面,且非 TTS 核心数据集)。
+      如未来需要追踪病理语音数据集,可考虑创建实体页。
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "方法: 关键设计选择"
+    detail: >
+      HuBERT Layer 1 的选择原因仅引用"作者实验发现最好" [§3.3],
+      缺乏不同层的消融对比数据。但原文也未提供详细消融表格,
+      这是论文本身的不足而非笔记的遗漏。
+    suggestion: >
+      当前标注"作者实验发现"已足够准确。agent 解读中的层级信息假说
+      (底层 = 发音特征) 已标注为 [agent 解读],区分清晰。
+
+summary:
+  total_issues: 2
+  high: 0
+  medium: 1
+  low: 1
+  blocking: false
+
+learning_signals: []

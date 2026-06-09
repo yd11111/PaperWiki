@@ -1,0 +1,50 @@
+review:
+  paper: "Zipfs-law-speech-symbols"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节清晰解释了 WHY (为什么分析 Zipf's law) 和 HOW (rank-frequency 分析框架), 速查卡片的可借鉴字段具体可操作。作为分析性论文而非模型论文, '设计选择' 聚焦于分析维度选择 (word/char/symbol n-gram) 和 n 值确定方法, 解释充分。"
+
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 ≥ 90%。η 值、语料大小、聚类配置均有 [§X.X]/[Fig N] 标注。指标名称正确 (η, Zipf's law, power law 区分清晰)。速查卡片指标字段含具体数字+数据集+来源。"
+
+  可区分:
+    score: 9
+    rationale: "[论文原文] 和 [agent 解读] 标注覆盖率高, 特别是在解读性段落 (如高流利度偏差更大的可能解释) 中明确标注了 [agent 解读]。无推断写成断言的情况。"
+
+  可定位:
+    score: 8
+    rationale: "KB 背景节明确定位了与 NACTokenLanguageAnalysis (后续工作) 的关系, 以及在 SpeechLM/SpeechTokenizer 知识图谱中的位置。点评节的谱系分析 (本文 → NAC Token Language Analysis) 提供了清晰的研究脉络。venue 字段含不确定性 (Interspeech 2024 基于推断)。"
+
+  不污染:
+    score: 9
+    rationale: "不新建概念页, 反向更新仅追加 key_papers, 风险极低。引用的 KB 页面均为已有实体, 无去重问题。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter venue"
+    detail: "venue 字段 'Interspeech 2024 (UTokyo)' 含机构名, 不符合 venue 字段惯例 (应只含会议/期刊名)。且 venue 基于格式推断, 未经确认。"
+    suggestion: "改为 'Interspeech 2024' 或 'arXiv preprint 2023' (保守选项)"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "实验 > B. 非文本偏差识别"
+    detail: "高流利度者偏差最大的具体 figure 观察描述较简略, 未量化偏差大小。"
+    suggestion: "原文也未给出量化数值, 仅为定性观察 [Fig 5], 可接受。"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea > 4"
+    detail: "'无文本语音分析范式' 较泛, 缺少具体应用方式描述。"
+    suggestion: "已有具体示例 (动物叫声/音乐/环境声), 可接受。"
+
+learning_signals: []

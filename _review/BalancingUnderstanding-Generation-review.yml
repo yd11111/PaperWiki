@@ -1,0 +1,47 @@
+review:
+  target: "论文笔记/BalancingUnderstanding-Generation.md"
+  date: "2026-06-08"
+  reviewer: "auto"
+  tier: deep
+
+principles:
+  reproducible:
+    score: 8
+    verdict: pass
+    reason: "方法节详细解释了 CPT 的 WHY (为什么不直接 SFT、为什么选 codec tokens、为什么排除 S2S-Trans)。关键设计选择均有因果解释。速查卡片可借鉴字段给出了具体可迁移的 trick (10% text data ratio, sum embedding, held-out task)。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: "实验表格覆盖全部 4 个任务,每个数字都有 Table 出处标注。指标名 (WER/CER/UTMOS/SPK-SIM/BLEU/Perplexity) 使用正确,方向无误。速查指标字段含具体数字 + 数据集 + 出处。"
+  distinguishable:
+    score: 8
+    verdict: pass
+    reason: "方法节清楚标注了 [论文原文] 和 [agent 解读] 来源。4 处 agent 解读均有明确标注 (sum embedding 分析、规模限制、翻译质量、codec-LM co-design)。没有将推断写成断言。"
+  positionable:
+    score: 9
+    verdict: pass
+    reason: "KB 背景节有完整谱系定位 (CodecLM 路线 → semantic-acoustic gap 问题),已有认知对比 (先前 CPT 用 SSL tokens),创新判断有对比基准 (vs AudioPaLM, Seamless)。frontmatter 字段完整且语义正确: models 列 SoundStream (本文使用的 codec), concepts 列 6 个相关概念。"
+  non_polluting:
+    score: 9
+    verdict: pass
+    reason: "no-kb-update 模式,未进行反向更新。frontmatter 中的 concepts/models 链接均指向已有实体页,无虚假链接。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空,但论文使用了 LibriSpeech, LibriTTS, Aishell2, CoVoST2, GigaST, GigaS2S, LAMBADA 等多个数据集"
+    suggestion: "考虑填充 datasets 字段,至少列出核心评估数据集"
+
+  - type: traceability-gap
+    severity: low
+    location: "方法 > 整体架构 > Speech Tokenizer"
+    detail: "论文未给出具体的 L 值和 L' 值,笔记中也未标注这是论文缺失还是其他原因"
+    suggestion: "添加注释说明论文未披露具体 codebook 数量"
+
+conclusion: pass
+high_issues: 0
+medium_issues: 0
+low_issues: 2
+
+learning_signals: []

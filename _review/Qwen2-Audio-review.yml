@@ -1,0 +1,35 @@
+review:
+  paper: "Qwen2-Audio"
+  note_path: "论文笔记/Qwen2-Audio.md"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+  conclusion: "pass"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节解释了三个关键设计选择的 WHY: 自然语言 prompt 替代 hierarchical tags、单编码器 vs 双编码器、双模式无 system prompt 切换。速查卡片可借鉴项具体可迁移。扣分原因: 原论文技术细节较少 (7 页正文),导致部分设计选择的解释依赖 agent 推断而非论文原文。"
+  可信赖:
+    score: 9
+    rationale: "所有数字型 claim 均标注 [Table 2] 出处,覆盖率>90%。指标名称 (WER/BLEU/ACC) 使用正确,方向性无误。实验表格包含完整 baseline 和数据集。速查指标含数字+数据集+出处。特别注明了 Common Voice 非 zero-shot 和 Gemini SAFETY 样本减少的公平性问题。"
+  可区分:
+    score: 9
+    rationale: "因果解释标注覆盖率>80%。单编码器选择和 Music/Mixed 维度提升原因明确标为 [agent 解读]。预训练策略和双模式设计标为 [论文原文]。无强断言缺乏支撑的情况。"
+  可定位:
+    score: 9
+    rationale: "KB 背景与 SALMONN 对比清晰 (单编码器 vs 双编码器, pooling vs Q-Former)。谱系定位 Qwen-Audio→Qwen2-Audio→Qwen2.5-Omni 准确。在 Speech-LLM Integration Taxonomy 中的位置 (latent-representation-based) 明确。"
+  不污染:
+    score: 9
+    rationale: "不涉及新概念页创建或反向更新。frontmatter concepts 和 models 挂接合理,models 列本文模型和实际对比 baseline (非后续系统)。"
+
+issues: []
+
+learning_signals:
+  - "原论文技术报告较短时 (7 页正文),agent 解读比例不可避免升高,但只要标注清晰,仍可通过审阅"
+
+summary:
+  total_issues: 0
+  high: 0
+  medium: 0
+  low: 0

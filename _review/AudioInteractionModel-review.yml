@@ -1,0 +1,65 @@
+review:
+  paper: "AudioInteractionModel"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含完整因果解释: 3 个关键设计选择 (400ms chunk / 二元决策 / FIFO 异步推理) 均回答 WHY this not that, 与 LSLM/Freeze-Omni/Moshi/SLAM-Omni 做对比; 速查可借鉴 5 条具体可迁移 trick (FIFO调度/层次化事件策划/双目标训练/comprehension-aware silence/单head发现); 四阶段训练 pipeline 有清晰表格"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 实验表完整标注 [Table 1-8]; 速查指标字段含具体数字+数据集+来源; 指标名正确(BLEU/WER/MMAU/Alpaca Score); 方向性正确(WER 越低越好正确处理)"
+  可区分:
+    score: 8
+    rationale: "方法节因果解释来源标注覆盖率约 85%; [论文原文] 和 [agent 解读] 在 3 个关键设计选择中均正确标注; 局限性中 2 条标注了 [agent 解读]; KB 背景创新判断段无来源标注但属于 agent 综合分析, 可接受"
+  可定位:
+    score: 9
+    rationale: "KB 背景提供了清晰谱系定位 (Traditional→Streaming→Full-duplex→Audio-Interaction); 与同作者 LSLM 的演进关系详细对比 (106M→3B, 585h→302kh, middle fusion→chunk-level decision); 创新判断有明确对比基准 (系统级整合而非单一突破); frontmatter 完整"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 无反向更新操作; 用户指示跳过; concepts 链接均为已有实体页; models 列 Qwen2.5-Omni 为本文 baseline, 正确"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "KB 背景 创新判断"
+    detail: "'核心创新不在于单一技术突破,而在于系统级整合' 是 agent 综合判断, 未标注 [agent 解读]"
+    suggestion: "前缀 '[agent 解读]' 使来源边界更清晰"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述中架构细节 (Audio Encoder → Adapter → Qwen2.5-Omni-3B) 未标注出处"
+    suggestion: "末尾加 [§3.1, Fig 2]"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "局限性 §6 '响应时机学习依赖合成标注'"
+    detail: "'chunk-level <silent>/<response> 标签由 pipeline 生成' 标注了 [Appendix B.2] 但可进一步确认 Algorithm 2 引用"
+    suggestion: "改为 [Appendix B.2, Algorithm 2]"
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段列了 StreamAudio-2M 和 ProactiveSound-Bench 但未使用 wikilink 格式; 数据集库中暂无对应页, 保持纯文本可接受"
+    suggestion: "若后续创建数据集页, 需回填 wikilink"
+  - id: 5
+    type: fact-inference-mixing
+    severity: low
+    location: "点评段落 3 '数据贡献可能比模型更持久'"
+    detail: "这是 agent 主观评价, 但点评段本身即为 agent 评论区, 无需标注"
+    suggestion: "无需修改, 点评段定位清晰"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 5
+
+learning_signals:
+  - signal: "StreamAudio-2M 的 TFJP preprocessing pipeline (Algorithm 1) 是可借鉴的数据工程方案, 可考虑为独立概念页"
+    action: "none (待多篇引用后再考虑)"
+  - signal: "FIFO 异步推理调度是 streaming inference 的新范式, 与 KB 中已有的 RQ-Transformer/Chunk-wise 方案形成互补"
+    action: "none (待确认是否有其他论文采用类似方案)"

@@ -1,0 +1,59 @@
+review:
+  paper: "ZMM-TTS"
+  note_path: "论文笔记/ZMM-TTS.md"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+  principles:
+    可复述:
+      score: 8
+      rationale: "方法节包含清晰的因果解释(WHY SSL > Mel, WHY dual loss, WHY ZMM-TTS2 > 1),关键设计选择都有对比分析。速查卡片可借鉴字段给出3个具体可迁移trick。"
+    可信赖:
+      score: 7
+      rationale: "数字标注覆盖率高(所有表格/章节引用完整)。发现并修正了Table IX中SECS/UTMOS列交换的错误(PDF提取造成)。指标名使用正确。35h Polish baseline CER 89.68%异常值提出质疑但无法交叉验证。"
+    可区分:
+      score: 9
+      rationale: "方法节严格标注[论文原文]和[agent 解读],分类清晰。所有推断性分析(如英语MOS低的可能原因)都标注为[agent 解读]。无强断言缺乏支撑的情况。"
+    可定位:
+      score: 8
+      rationale: "KB背景节提供了具体谱系定位(vs VALL-E/NaturalSpeech/HierSpeech++的差异化),引用了6个实体页,创新判断有对比基准。与后续发展(Seamless, CosyVoice S3)的关系也有提及。"
+    不污染:
+      score: 9
+      rationale: "本次不做反向更新。frontmatter concepts/models/tasks/datasets挂接合理,无overclaim。models字段列baseline(VITS, HierSpeech++, wav2vec2.0)而非后续系统。"
+
+  issues:
+    - id: 1
+      type: factual-error
+      severity: medium
+      location: "实验 > 与大规模系统对比表"
+      detail: "Table IX的SECS和UTMOS列在PDF文本提取中顺序被混淆,导致初始写入时两列数值互换(如VALL-E-X SECS写成3.29实际为0.512)。"
+      suggestion: "已在审阅过程中修正。"
+      status: fixed
+
+    - id: 2
+      type: traceability-gap
+      severity: low
+      location: "低资源语言结果表"
+      detail: "35/21h high-resource行中Polish CER 89.68%这个异常值在笔记中提出质疑但无法验证是否为原论文错误或PDF提取错误。"
+      suggestion: "标注为'[待验证]'。该值可能对应的是FSM2x而非ZMM-TTS2x,因Table VIII格式复杂容易错位。"
+
+    - id: 3
+      type: traceability-gap
+      severity: low
+      location: "低资源语言结果表"
+      detail: "Table VIII high-resource baseline部分涉及多个系统(YourTTS/FSM2x/ZMM-TTS2x/FSM2c/ZMM-TTS2c/GT),因PDF提取格式混乱,部分数值对应关系不确定。"
+      suggestion: "high-resource baseline的精确数字需参照原始PDF表格确认,当前提取的行对应关系可能有误。"
+
+    - id: 4
+      type: template-compliance
+      severity: low
+      location: "frontmatter"
+      detail: "models字段列了VITS作为baseline的底层框架(YourTTS基于VITS),但YourTTS本身未作为模型列入。这不是错误但可以更精确。"
+      suggestion: "保持现状即可,VITS是架构基础而非直接比较的baseline系统。"
+
+  learning_signals:
+    - "PDF文本提取的表格列顺序不可靠,尤其是多列紧密排列的大表格。审阅时应用值域校验(SECS应在[-1,1],UTMOS应在[1,5])来发现列错位。"
+    - "low-resource实验的高异常CER值(89%+)可能指示PDF提取行错位,而非原论文错误,需额外小心。"
+
+  summary: "笔记整体质量良好:方法机制解释清晰且有因果逻辑,数字标注覆盖充分,KB背景定位准确。发现并修正了1个medium级别的factual-error(Table IX列交换)。2个low级别的traceability-gap涉及PDF表格提取的可靠性问题,无法当场验证但已标注。结论: pass-with-fixes。"

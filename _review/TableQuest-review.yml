@@ -1,0 +1,40 @@
+paper: "TableQuest"
+arxiv_id: "2412.09884"
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法论清晰完整。三级难度框架(Extract/Calculate/Analyze)的设计逻辑和渐进式 QA 合成 pipeline 的 WHY 都有充分解释。读完笔记可以向同事解释 benchmark 的设计理念和主要发现。"
+  trustworthy:
+    score: 8
+    rationale: "所有关键数字(ELO 分数、Accuracy、数据集统计)均标注了出处([Table 2]/[Table 3]/[Table 4])。指标名称使用正确。无方向性错误。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文] 和 [agent 解读] 区分清晰。特别是对评委偏见问题(GPT-4-turbo 既是评委又是被评模型)的 agent 解读明确标注,不会被误认为是论文自述的局限。"
+  locatable:
+    score: 6
+    rationale: "本文属于 NLP/LLM 评测领域,与 vault 的 TTS 核心方向无交集,KB 背景为空是预期结果。但笔记中缺少与其他 TableQA benchmark (FinQA, FeTaQA, TAT-QA) 的更详细对比,仅在核心问题节简要提及。"
+  no_pollution:
+    score: 10
+    rationale: "无反向更新,concepts/models/tasks/datasets 字段均为空。无 KB 污染风险。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: missing-lineage
+    location: "## 核心问题"
+    detail: "提到 FinQA, FeTaQA, TAT-QA 等已有 benchmark 但未给出具体对比(如各自覆盖哪些技能、数据规模、评测方式),读者难以判断 TableQuest 的增量贡献有多大。"
+    suggestion: "在核心问题或方法节补充一个简表,列出 2-3 个代表性 TableQA benchmark 的特点(数据来源/规模/技能覆盖/评测方式)与 TableQuest 的对比。"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter"
+    detail: "concepts/models/tasks/datasets 均为空列表。本文虽非 TTS 论文,但涉及的模型(GPT-4-turbo, Claude-3.5-sonnet 等)和概念(ELO rating, chain-of-thought)在 vault 中可能有交叉。"
+    suggestion: "可忽略。本文与 vault 核心领域无交集,不填写这些字段不影响知识网络。"
+
+learning_signals: []
+
+summary: "非 TTS 领域论文的精读笔记,质量合格。主要不足在于与已有 TableQA benchmark 的定位对比不够详细(medium),但不影响核心理解。建议 pass-with-fixes。"

@@ -1,0 +1,38 @@
+paper: InstructTTS
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "五模块架构 + 三阶段训练的 WHY/HOW 均有因果解释。Mel-VQ-Diffusion 和 Wave-VQ-Diffusion 两条路线清晰对比,每个设计选择回答了'为什么选这个'。速查卡片可借鉴列出 4 个具体可迁移 trick (cross-modal metric learning, MI 最小化, hierarchy-aware masking, 连续转离散降低建模难度)。"
+  trustworthy:
+    score: 9
+    rationale: "数字型 claim 标注 [Table N]/[§X.X] 覆盖率 >90%。所有实验表格含完整数字、数据集名 (NLSpeech)、出处标注。指标名 (MCD/SSIM/STOI/GPE/VDE/FFE/MOS/RMOS/PESQ) 使用正确,方向性标注 (↑/↓) 无误。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖方法节所有因果解释,比例约 18:3。局限性节中 agent 解读的推断 (如缺少 PromptTTS 对比、跨语言泛化) 均明确标注。"
+  positionable:
+    score: 9
+    rationale: "KB 背景有具体谱系定位 (对标 PromptTTS、VALL-E、VoxInstruct)。演进线清晰: Style tagging → Reference encoder → PromptTTS/InstructTTS → VoxInstruct。创新判断基于技术路线对比 (NL vs 结构化属性, 离散 diffusion vs 连续 diffusion vs codec LM)。frontmatter 字段完整。"
+  non-polluting:
+    score: 10
+    rationale: "未创建新概念页。概念引用均指向已有实体页。无反向更新执行。"
+
+issues:
+  - type: traceability-gap
+    severity: medium
+    location: "点评节第 4 段"
+    detail: "'discrete diffusion TTS 未被大规模跟进' 的判断缺少具体文献支撑,虽从 KB 演进线可推断但应标注 [agent 解读]"
+    suggestion: "在该句末尾追加 [agent 解读] 标注"
+    status: noted
+
+  - type: template-compliance
+    severity: medium
+    location: "frontmatter venue 字段"
+    detail: "论文 venue 标注为 'arXiv (v2: Jun 2023)',该论文后续发表状态未确认;arXiv 标注本身准确但可补充说明"
+    suggestion: "如确认为 TASLP 2024 录用可更新,否则保持 arXiv 标注并在 venue 后加 '(preprint)'"
+    status: noted
+
+learning_signals: []

@@ -1,0 +1,78 @@
+review:
+  paper: "UniAudio1.5"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    可复述:
+      score: 8
+      status: pass
+      rationale: "方法节包含 3 个关键设计选择的 WHY 解释 (frozen codebook, multi-scale RVQ, word-level codebook),每个都有因果论证。速查卡片可借鉴字段列出 3 个具体可迁移 trick。工作流程清晰完整。"
+    可信赖:
+      score: 7
+      status: pass-with-fixes
+      rationale: "数字标注覆盖率 >80%,所有实验表格引用正确。但发现 2 处 Table 2 解读不精确 (已修正): (1) 速查卡片中 59% 的条件标注为 '3-shot+repeat' 应为 '3-shot, 0-repeat'; (2) task induction 重要性举例混淆了不同方法的数字。其他数字经 PDF 交叉验证均正确。"
+    可区分:
+      score: 9
+      status: pass
+      rationale: "方法节中 [论文原文] 和 [agent 解读] 标注清晰,覆盖率 >90%。8 处因果解释全部有来源标注。点评节清楚区分了论文贡献与 agent 评判。"
+    可定位:
+      score: 9
+      status: pass
+      rationale: "KB 背景基于 4 个 confirmed 实体页,谱系定位精确: 与 SNAC (MSRVQ)、SpeechTokenizer (语义分离)、UniAudio (前作) 的对比清晰。创新判断有具体对比基准。frontmatter concepts 字段正确挂接 6 个实体。"
+    不污染:
+      score: 10
+      status: pass
+      rationale: "按指令不修改概念页,不创建新实体页,无反向更新。不存在 KB 污染风险。"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "速查卡片 > 指标"
+      detail: "原文 '2-way 情感分类最高 59% acc (3-shot+repeat)' — Table 2 列结构为 K=3/Repeat=0,不含 repeat。"
+      suggestion: "已修正为 '(semantic layer, 3-shot, 0-repeat)'"
+      fixed: true
+    - id: 2
+      severity: medium
+      type: factual-error
+      location: "关键发现 > Task induction"
+      detail: "原文 '有 induction 45% vs 无 induction 9%' 混淆了两个不同方法的数字: 9% 是 BLSP 无 induction,45% 是 UniAudio semantic+acoustic 无 induction。两者均为无 induction 条件。"
+      suggestion: "已修正为 'UniAudio semantic layer: 无 induction 25% vs 有 induction 53% at 1-shot'"
+      fixed: true
+    - id: 3
+      severity: low
+      type: template-compliance
+      location: "frontmatter > datasets"
+      detail: "datasets 字段为空,但论文使用了 VCTK, ESD, ESC50, FSDD, MLS, AudioCaps, NoiseX-92, Speech Command 等数据集。"
+      suggestion: "补充主要数据集到 frontmatter datasets 字段。"
+      fixed: false
+
+  learning_signals: []
+
+  cross_verification:
+    - claim: "PESQ 2.55, STOI 0.82 (VCTK, 57 tok/s)"
+      source: "[Table 1]"
+      verified: true
+    - claim: "EnCodec PESQ 2.18, DAC PESQ 1.76"
+      source: "[Table 1]"
+      verified: true
+    - claim: "Simple TTS ACC 70%, DNSMOS 2.92"
+      source: "[Table 4]"
+      verified: true
+    - claim: "Speech denoising PESQ 2.17 vs SGMSE+ 3.53"
+      source: "[Table 5]"
+      verified: true
+    - claim: "Codebook usage VQ1 3246/3248, VQ2 31911/32000, VQ3 31941/32000"
+      source: "[§5.3]"
+      verified: true
+    - claim: "Consistency loss 移除: PESQ 2.55 → 1.19"
+      source: "[Table 6]"
+      verified: true
+    - claim: "更新码本: PESQ 2.63, ACC 55%"
+      source: "[Table 6]"
+      verified: true
+    - claim: "Bird Sound Detection 50% vs ImageBind-LLM 28%"
+      source: "[Table 3]"
+      verified: true

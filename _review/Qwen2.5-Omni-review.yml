@@ -1,0 +1,59 @@
+paper: Qwen2.5-Omni
+arxiv_id: "2503.20215"
+reviewer: auto
+date: 2026-06-08
+tier: deep
+verdict: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    note: "Architecture, training pipeline (3-stage pretrain + 3-stage Talker post-train), and key design choices (TMRoPE, Thinker-Talker, sliding-window DiT) clearly described with section references"
+  trustworthy:
+    status: pass
+    note: "All experimental numbers traced to specific tables; [论文原文] vs [agent 解读] consistently marked; no unsourced claims"
+  distinguishable:
+    status: pass
+    note: "KB background positions against Moshi (full-duplex RQ-Transformer), Mini-Omni (parallel streams), VITA (IPR); Thinker-Talker vs Inner Monologue design choice explicitly compared"
+  locatable:
+    status: pass-with-fixes
+    note: "7 concept links present; qwen-tts-tokenizer cannot be mapped to AudioTokenizerTaxonomy due to undisclosed specs"
+  unpolluted:
+    status: pass
+    note: "All inferences marked [agent 解读]; no speculation presented as fact"
+
+issues:
+  - id: 1
+    severity: medium
+    category: information-gap
+    description: "qwen-tts-tokenizer architecture undisclosed in paper; note correctly flags this but cannot provide KB mapping to SpeechTokenizer taxonomy (quantization method, frame rate, codebook size all unknown)"
+    location: "关键设计选择 §3"
+    suggestion: "Acceptable as-is; update when Qwen team publishes details or code"
+
+  - id: 2
+    severity: low
+    category: missing-metric
+    description: "Paper does not report first packet latency despite discussing streaming design; latency comparison with Moshi (230ms), Freeze-Omni etc. impossible"
+    location: "局限性 §6"
+    suggestion: "Already noted in 局限性; no action needed"
+
+section_coverage:
+  kb_background: present
+  quick_ref: present
+  core_problem: present
+  method: present
+  experiments: present
+  limitations: present
+  commentary: present
+  reusable_ideas: present
+  review_callout: present
+
+source_citations:
+  total_claims: 42
+  cited: 38
+  citation_rate: 0.90
+
+kb_links:
+  concepts: 9
+  models: 7
+  confirmed_entities_used: 4

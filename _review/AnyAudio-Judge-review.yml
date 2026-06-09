@@ -1,0 +1,49 @@
+review:
+  paper: "AnyAudio-Judge"
+  reviewer: "auto (inline, same-session)"
+  date: "2026-06-08"
+  conclusion: "pass"
+
+principles:
+  reproducible:
+    score: 9
+    reason: "方法节以 Dynamic Rubric-based Evaluation / Hard Negative Construction / GRPO Reward Design 三个关键设计选择组织,每个都包含因果解释(WHY dynamic rubric 降低子问题难度, WHY balanced rubric accuracy 占 70%, WHY SFT 全参数+GRPO LoRA)。速查卡片'可借鉴'列出 5 条具体可迁移 trick(rubric 分解范式、hard negative pipeline、balanced rubric accuracy reward、hard sample mining、rubric-level probability 作 dense reward),均有足够细节可直接复用。"
+  trustworthy:
+    score: 9
+    reason: "数字标注覆盖率 >90%: 所有关键指标(zh ACC 85.26 [Table 1]、en ACC 84.45 [Table 2]、PAM LCC 0.614 [Table 3]、RL Gemini Score +3.3 [Fig 6a]、ablation 65.33→76.66 [Table 4])均有明确出处。指标名使用正确(ACC/LCC/SRCC/KTAU)。速查卡片指标字段含完整数字+数据集+出处。未发现方向性错误。"
+  distinguishable:
+    score: 9
+    reason: "因果解释来源标注覆盖率 >90%,方法节中所有 WHY 解释均标注了 [论文原文] 或 [agent 解读]。局限性 6 条中明确区分论文自述(前 2 条标 [论文原文]/[Limitations])和 agent 推断(后 4 条标 [agent 解读])。点评节使用'本质上是'等限定语。无推断写成断言的情况。"
+  positionable:
+    score: 8
+    reason: "KB 背景谱系定位详细,列出 SpeechJudge/GSRM/TTS-PRISM/TTSDS/InstructTTSEval/MINT-Bench 完整比较链,并从三个维度(评估目标/覆盖域/评估粒度)区分 AnyAudio-Judge 与已有工作。创新判断有对比基准。但 frontmatter models 和 datasets 均为空,论文提出了 AnyAudio-Judge Model 并使用 AnyAudio-Judge Bench/Corpus,知识库中虽无对应页面,仍可考虑标注。"
+  non_polluting:
+    score: 9
+    reason: "本次跳过反向更新和概念页修改。KB 背景节明确标注所有命中页为 pending-review,不会引起过度信任。无 factual error 或 overclaim 风险。"
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: "frontmatter -> models"
+    detail: "models 字段为空。论文提出 AnyAudio-Judge Model(基于 Qwen3-Omni-30B-A3B-Captioner 微调),并与 Gemini-2.5-Pro、Audio-Flamingo3-Think 等对比。知识库中无对应模型页,但按 checklist 应列本文模型+对比 baseline。"
+    suggestion: "待模型库中创建相关页面后补充,或在 models 字段中添加非链接形式的模型名标注。当前留空不影响笔记可用性。"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter -> datasets"
+    detail: "datasets 字段为空。论文构建了 AnyAudio-Judge Bench(7,920 样本)和 AnyAudio-Judge Corpus(105K 样本),且在外部 benchmark PAM 上验证。知识库中无对应数据集页。"
+    suggestion: "AnyAudio-Judge Bench 是重要的 instruction-following 评估 benchmark,可考虑在数据集库中创建页面。当前留空不阻塞。"
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter -> concepts"
+    detail: "concepts 列出 4 个概念(TTSEvaluation, Audio-LanguagePretraining, Instruction-GuidedSpeechSynthesis, AudioUnderstanding),KB 背景中还检索到 DifferentiableRewardOptimization。GRPO 是本文训练方法的核心组件之一,可考虑加入 concepts。"
+    suggestion: "将 DifferentiableRewardOptimization 加入 concepts 列表,使 frontmatter 与 KB 背景的检索范围一致。"
+
+issues_summary:
+  high: 0
+  medium: 0
+  low: 3
+
+learning_signals: []

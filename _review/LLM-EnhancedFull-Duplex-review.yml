@@ -1,0 +1,47 @@
+review:
+  paper: "LLM-Enhanced Dialogue Management for Full-Duplex Spoken Dialogue Systems"
+  note_path: "论文笔记/LLM-EnhancedFull-Duplex.md"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节清晰解释了 DM/CDE 解耦的 WHY (高频低开销决策 vs 低频高质量生成) 和 4-token 设计的 HOW (2 维度 x 2 任务)。与已有方法 (Freeze-Omni State 0/1/2, CleanS2S 级联) 的差异点明确。速查卡片可借鉴具体可操作。"
+  trustworthy:
+    score: 8
+    rationale: "关键数字 (accuracy 97.85%, F1 0.956-1.000, 实录 accuracy 93.5%+) 均标注 [Table 1/2/3]。指标名称使用正确 (Recall/Precision/F1/Accuracy)。无方向性错误。数据集规模 (11,990 对话, 80,338 轮) 有出处。"
+  distinguishable:
+    score: 7
+    rationale: "因果解释标注了 [论文原文] 和 [agent 解读],覆盖率约 85%。点评中对端到端 vs 模块化路线的判断有数据支撑。但部分 agent 解读 (如操作系统类比) 可进一步标注为推测。"
+  positionable:
+    score: 8
+    rationale: "KB 背景节提供了具体的谱系定位: 与 CleanS2S/Full-duplex LLM FSM 的级联路线对比, 与 Moshi/LSLM/Freeze-Omni 的端到端路线对比, 与 Speech-LLM Integration Taxonomy 的 text-based 路线映射。创新判断有对比基准。"
+  non-polluting:
+    score: 8
+    rationale: "无新建概念页需求。反向更新仅为 Full-duplexSpokenDialogue 和 Turn-takinginSpokenDialogue 追加 key_papers,属于 append 操作。无 overclaim。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "实验节 Table 2 对比"
+    detail: "与 DuplexConv/RTTL-DG 的对比使用不同测试集,笔记中已提及'仅供参考'但可以更显著地标注这一局限,避免读者直接引用对比数字。"
+    suggestion: "在 Table 2 上方或下方加粗标注'不同测试集对比,不可直接引用'"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "方法节 - 整体架构"
+    detail: "'前 4 个模块以短间隔运行'中的'短间隔'具体是多少未从论文中提取。论文也未给出具体数值,但应标注这一缺失。"
+    suggestion: "在相关位置补充'[论文未报告具体间隔时长]'"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea - 第 1 条"
+    detail: "DM/CDE 解耦模式的 TTS 类比 ('小模型做实时韵律决策') 过于抽象,未给出具体场景或实现路径。"
+    suggestion: "补充具体场景,如'在 streaming TTS 中用小 LM 判断是否需要在当前 chunk 插入停顿/犹豫,大 LM 负责内容生成'"
+
+learning_signals: []

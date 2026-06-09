@@ -1,0 +1,46 @@
+paper: AudioPaLM
+arxiv_id: "2306.12925"
+reviewer: auto
+date: 2026-06-08
+tier: deep
+verdict: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    note: "核心 insight (词表扩展 + text LLM 知识迁移) 可完整复述; 速查卡片可借鉴包含 4 个具体 trick; combined tasks 的 WHY 解释透彻"
+  trustworthy:
+    status: pass
+    note: "所有数字 claim 标注了 [Table N]/[§X.X]; 指标名正确 (BLEU/WER/MOS/SMOS); 方向正确 (BLEU↑/WER↓)"
+  distinguishable:
+    status: pass
+    note: "[论文原文]/[agent 解读] 标注覆盖率约 85%; 推断性分析均有限定词"
+  positionable:
+    status: pass
+    note: "KB 背景基于 5 个 confirmed 实体页; 在 SpeechLM 演进线 + semantic-acoustic 路线中定位清晰; 与 AudioLM/SPEAR-TTS/SpeechLM(Hassid) 的对比明确"
+  non-polluting:
+    status: pass-with-fixes
+    note: "AudioPaLM 已被 SpeechLanguageModel/AudioUnderstanding 等概念页引用; 不需新建概念页; 反向更新仅为追加 key_papers 链接"
+
+issues:
+  - id: 1
+    severity: medium
+    type: weak-reusability
+    location: "可复用的 idea #1"
+    description: "embedding matrix 扩展法描述正确但未提及风险: 全参数 fine-tune 可能导致原有 text 能力退化 (catastrophic forgetting), 论文自身也承认此限制 [§6]"
+    fix: "在该 trick 描述中补充注意事项"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "frontmatter datasets"
+    description: "datasets 字段为空,但论文使用了 CoVoST2/CVSS/VoxPopuli/CommonVoice/FLEURS 等多个数据集"
+    fix: "可选: 填充 datasets 字段; 非阻塞因为 datasets 字段为可选"
+
+stats:
+  section_count: 8
+  source_annotation_rate: 0.85
+  quickcard_fields_filled: 5
+  key_claims_sourced: true
+  new_concepts_proposed: 0
+  kb_update_needed: true
+  kb_update_type: append

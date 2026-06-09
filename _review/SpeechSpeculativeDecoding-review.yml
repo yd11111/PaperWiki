@@ -1,0 +1,55 @@
+review:
+  paper: "SpeechSpeculativeDecoding"
+  date: "2026-06-08"
+  reviewer: "auto"
+  conclusion: "pass-with-fixes"
+
+principles:
+  可复述:
+    score: 8
+    status: pass
+    notes: "方法节包含充分的因果解释(为什么 tolerance factor、为什么 layer inheritance),速查卡片可借鉴字段给出了具体可迁移 trick (layer inheritance + tolerance factor)。draft model 上层初始化的反直觉性被正确标注为 agent 解读并提供了合理解释。"
+  可信赖:
+    score: 9
+    status: pass
+    notes: "数字 claim 覆盖率高,主要指标均有 [Table N]/[§X.X] 标注。指标名称正确。速查卡片指标字段包含具体数字+数据集+出处。"
+  可区分:
+    score: 8
+    status: pass
+    notes: "[论文原文]/[agent 解读] 标注贯穿全文,因果解释来源标注覆盖率估计 >85%。点评中的对比分析(vs WAND, MamTra)清晰标注为基于 KB 知识。"
+  可定位:
+    score: 9
+    status: pass
+    notes: "KB 背景提供了清晰的谱系定位,列出了 5 条已有 AR TTS 加速路线并将本文定位为第 5 条。与 WAND/MamTra/VoXtream 的定量对比充分。"
+  不污染:
+    score: 9
+    status: pass
+    notes: "本次无反向更新(指令要求不修改概念页),无污染风险。frontmatter concepts/models/tasks 字段语义正确。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "速查 > 局限 + 点评"
+    detail: "'170K+ 小时工业数据' 引用了 KB 知识而非论文原文。论文表述为 'approximately 1/300 the size of CosyVoice 2's proprietary industrial dataset' [§4.1],未给出具体小时数。"
+    suggestion: "改为 '约为 CosyVoice 2 工业数据的 1/300 [§4.1]',或标注 [agent 解读, 基于 KB]"
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: "方法节"
+    detail: "公式引用使用 [Eq. 5], [Eq. 6], [Eq. 7] 格式,与 claim 标注规范 [§X.X] 一致性可更好。"
+    suggestion: "保持现状即可,公式引用用 Eq. N 是合理的。"
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea #3"
+    detail: "'Beta=0 作为 diagnostic' 虽然有趣但实用性有限,因为这只是验证了一个预期结果(speech token 分布比 text 更分散)。"
+    suggestion: "可保留,但可补充更具体的使用场景。"
+
+summary:
+  total_issues: 3
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals: []

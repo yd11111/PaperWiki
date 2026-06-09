@@ -207,5 +207,6 @@ CEH 的可检验预测: 在 text-sufficient 任务上,speech LLM 和共享同一
 
 ## 审阅
 
-> [!review] 审阅 (待执行)
-> 按用户指令跳过自动审阅流程。待后续手动触发。
+> [!review] 审阅: pass (0 high / 0 medium / 3 low)
+> 审阅报告: [[_review/WhenDoSpeechLLMsBehaveLikeASR-LLMPipelines-review.yml]]
+> 所有数字与 PDF 原文交叉验证一致。3 条 low issue: frontmatter tasks/datasets 为空、点评中 pitch R^2 缺出处标注、局限性中 Whisper 训练数据量缺来源标注。无需修正即可使用。

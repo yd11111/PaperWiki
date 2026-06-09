@@ -1,0 +1,57 @@
+review:
+  paper: "AudioSeal"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节结构清晰, 包含4阶段流水线+3个关键设计选择, 每个设计选择都回答了WHY (为什么加性水印/为什么解耦/为什么TF-Loudness); 速查卡片可借鉴给出5个具体可迁移trick (TF-Loudness, 遮蔽增强, 解耦, 自适应采样, codec架构复用), 均有明确迁移场景; 局限性分析到位且有结构性解释 (感知-鲁棒性trade-off)"
+  可信赖:
+    score: 9
+    rationale: "实验表包含9行关键指标, 全部标注出处 [Table 1/3/4/5, Fig 5]; 文中数字型claim出处覆盖率约90%; 指标名使用正确 (PESQ/STOI/ViSQOL/MUSHRA/SI-SNR/AUC/IoU均正确); 速查指标字段含具体数字+数据集+出处标注; 未发现方向性错误"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约85%; 方法节6处WHY解释中5处标注了[论文原文]或[agent 解读]; 实验发现节也有正确来源区分; 速查卡片未标注agent解读来源但内容为事实性总结, 风险较低"
+  可定位:
+    score: 9
+    rationale: "KB背景节质量高: 4个维度定位 (谱系/架构溯源/损失函数谱系/已有认知), 均含具体论文和模型名; 创新判断有明确对比基准 (vs WavMark的data hiding + brute-force sync); frontmatter完整, concepts列2个相关概念, models列1个架构来源"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 无反向更新操作; KB背景中的谱系定位信息准确, 不会误导未来检索; 唯一风险是 frontmatter concepts 仅列2个, 可能遗漏AudioWatermarking相关概念, 但目前概念库中尚无此页, 不构成污染"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "局限性 §6"
+    detail: "'未考虑水印嵌入对下游TTS系统的影响' 是agent推断的局限, 论文未讨论此点, 但未标注[agent 解读]"
+    suggestion: "在该条前加 '[agent 解读]'"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述缺少 [Fig 2] 出处标注"
+    suggestion: "末尾加 [Fig 2, §3.1]"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter models"
+    detail: "models 字段仅列 EnCodec (架构来源), 未列对比baseline WavMark"
+    suggestion: "改为 models: ['[[EnCodec]]', '[[WavMark]]'] 或在概念库确认 WavMark 页是否存在"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "可复用的idea §5"
+    detail: "'EnCodec 的 encoder-decoder 架构不仅适用于音频压缩...' 标注了[agent 解读]但未明确说明这是超出论文scope的推断"
+    suggestion: "无需修改, 已有[agent 解读]标注, 仅记录"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "AudioSeal笔记的KB背景节是一个正面范例: 4个维度(谱系/架构/损失/已有认知)提供了丰富的定位上下文, 未来review时可引用为参照"
+  - "TF-Loudness loss的跨领域迁移思考(量化噪声塑形)属于高质量的可借鉴分析"

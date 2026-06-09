@@ -1,0 +1,109 @@
+review:
+  paper: "MiMo-Audio"
+  note_path: "论文笔记/MiMo-Audio.md"
+  reviewer: "auto (inline, paperwiki-reader agent)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "核心问题清晰 (scale→emergence hypothesis),方法节覆盖 tokenizer/patch encoder-decoder/LLM backbone/training strategy 四个层次,每个设计选择解释了 WHY (如 lossless vs semantic tokenizer, patch grouping 降 token rate, delay pattern 处理 RVQ 依赖);速查可借鉴 5 个具体 trick 均可直接迁移。"
+  可信赖:
+    score: 9
+    rationale: "实验表全部数字标注 [Table N/§X.X],覆盖率 ~90%;指标名正确 (SIM/PESQ-NB/WB/STOI/WER/MMAU/SpeechMMLU 无混淆);速查指标字段含具体数字+数据集+出处。"
+  可区分:
+    score: 9
+    rationale: "方法节所有因果解释标注了 [论文原文] 或 [agent 解读];共约 20 处因果/解释性 claim,~85% 有来源标注;agent 解读均使用限定语 (如 '可能因为', '这暗示')。"
+  可定位:
+    score: 9
+    rationale: "KB 背景对比了 SpeechTokenizer/Mimi (蒸馏 vs 从零训练), Kimi-Audio/GLM-4-Voice (semantic vs acoustic 路线), StepAudio 2.5 (特化 vs 涌现),谱系定位清晰;点评节进一步与 StepAudio 2.5 做设计哲学对比。"
+  不污染:
+    score: 9
+    rationale: "无新建概念页;反向更新建议为追加 key_papers (不改 status),风险低;concepts frontmatter 挂接合理。"
+
+checklist:
+  可复述:
+    - item: "方法节含因果解释"
+      result: pass
+    - item: "设计选择有 WHY"
+      result: pass
+      note: "5 个关键设计选择均有 WHY: tokenizer 从零训练 vs SSL 蒸馏, 两阶段 tokenizer 训练, delay pattern, loss weights, text-guided interleaving"
+    - item: "速查可借鉴具体"
+      result: pass
+
+  可信赖:
+    - item: "数字有出处标注"
+      result: pass
+      note: "覆盖率 ~90%"
+    - item: "指标名正确"
+      result: pass
+    - item: "速查指标有数字+数据集+来源"
+      result: pass
+    - item: "无方向性错误"
+      result: pass
+
+  可区分:
+    - item: "因果解释有来源标注"
+      result: pass
+    - item: "来源标注覆盖率 ≥ 80%"
+      result: pass
+      note: "估计 ~85%"
+    - item: "无推断写成断言"
+      result: pass
+    - item: "强断言有数字支撑"
+      result: pass
+
+  可定位:
+    - item: "KB 背景有具体谱系定位"
+      result: pass
+    - item: "创新判断有对比基准"
+      result: pass
+    - item: "frontmatter 字段存在且非空"
+      result: pass
+    - item: "frontmatter 语义正确"
+      result: pass-with-fixes
+      note: "models 字段仅列 Whisper,可追加 Kimi-Audio/Step-Audio2/Qwen2.5-Omni/GLM-4-Voice 作为对比 baseline"
+    - item: "速查卡片 5 字段有实质内容"
+      result: pass
+
+  不污染:
+    - item: "新建概念页满足准入"
+      result: n/a
+      note: "无新建计划"
+    - item: "去重检查"
+      result: n/a
+    - item: "反向更新无 factual-error"
+      result: pass
+    - item: "反向更新分类正确"
+      result: pass
+      note: "均为追加 key_papers,不改 status"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 仅列 Whisper (tokenizer 评估中引用的参考),遗漏了主要对比 baseline (Kimi-Audio, Step-Audio2-mini, Qwen2.5-Omni, GLM-4-Voice, Baichuan-Audio)"
+    suggestion: "追加对比 baseline 到 models 列表 (无现有笔记页的用纯文本)"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    location: "点评 #2 '模态鸿沟'"
+    detail: "点评中 'tokenizer 选择决定了模型能力的形状而非大小' 是 agent 归纳,但未标注 [agent 解读]"
+    suggestion: "在该句前添加 [agent 解读] 标注"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用 idea #1"
+    detail: "'适用于资源充足的团队' 的限定较模糊,10M+ 小时的具体成本未量化"
+    suggestion: "可在局限性中补充估算计算成本 (如 GPU hours 量级),提高可操作性"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 2
+low_issues: 1
+
+learning_signals: []

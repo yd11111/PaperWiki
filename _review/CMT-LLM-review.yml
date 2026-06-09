@@ -1,0 +1,65 @@
+review:
+  paper: "CMT-LLM"
+  reviewer: "auto (independent subagent)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含充分因果解释 (WHY 两阶段训练, WHY 子组合编辑距离, WHY 字符编辑距离优于音素/语义, WHY WavLM-Large); 速查卡片可借鉴具体可迁移 (CTC 粗解码+编辑距离过滤策略); 每个关键设计选择都回答了 why this not that"
+  可信赖:
+    score: 7
+    rationale: "数字型 claim 出处标注覆盖率约 85%; 指标名使用正确 (WER/B-WER 不混淆); 速查指标字段含具体数字+数据集+来源标注。但存在两处问题: (1) WavLM-Large 316.6M params 在原文中未出现,属外部知识引入且标注为 [§3.1]; (2) 实验表格中 Table 1 和 Table 3 对同一配置的引用存在交叉,Table 1 标题声称 1000 distractors 下 7.3% 但 Table 3 显示 1000 distractors 下为 7.9%,笔记正确采用了 Table 3 数据但双标 [Table 1, 3] 可能误导"
+  可区分:
+    score: 9
+    rationale: "因果解释来源标注覆盖率约 90%; 方法节中 [论文原文] 和 [agent 解读] 区分清晰; 局限性节正确标注了哪些是 agent 推断; 无把推断写成断言的句子"
+  可定位:
+    score: 9
+    rationale: "KB 背景节提供了详细谱系定位 (latent-representation-based integration, adapter 类型对比, 与 LLM-enhanced ASR 的 text-based vs latent 路线区分, WavLM 选择的特殊适配性); 创新判断有 GER/text-based 方法作为对比基准; frontmatter 字段完整"
+  不污染:
+    score: 8
+    rationale: "无新建概念页; concepts 和 models 挂接合理; 但 frontmatter datasets 字段为空 (LibriMix 和 AMI 是核心评估数据集,虽无现有实体页但应记录); tasks 字段也为空"
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "整体架构 §1, line 62"
+    detail: "'WavLM-Large (316.6M params)' 中的参数量 316.6M 在原文 PDF 中未出现,属于外部知识引入,且标注为 [§3.1] 暗示来自原文"
+    suggestion: "删除 '(316.6M params)' 或改为 'WavLM-Large [§3.1]',如需保留参数量则标注 [WavLM 原文]"
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验表格, WER (test, +100 distractors) 行"
+    detail: "出处标注 [Table 1, 3],但 Table 1 标题明确为 'with 1,000 distractors',其 7.3% 数据与 Table 3 的 +100 distractors 对应行一致。Table 1 的 7.3 实际对应 +1000 配置 (与 Table 3 的 7.9 矛盾,疑为原文内部不一致)。笔记正确采用 Table 3 的数据,但 [Table 1, 3] 双标可能误导"
+    suggestion: "将该行出处改为仅 [Table 3]; 可选: 在局限性或脚注中标注 'Table 1 声称 +1000 distractors 下 7.3%,与 Table 3 的 7.9% 及摘要的 7.9% 不一致,疑为原文数据错误'"
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets 字段"
+    detail: "datasets: [] 为空,但 LibriMix 和 AMI 是本文核心评估数据集。虽然 vault 中无对应实体页,frontmatter 仍应记录"
+    suggestion: "改为 datasets: [\"LibriMix\", \"AMI\"] (不带 wikilink,因无实体页)"
+
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter tasks 字段"
+    detail: "tasks: [] 为空,但本文核心任务为 multi-talker ASR 和 contextual biasing"
+    suggestion: "改为 tasks: [\"Multi-talkerASR\", \"ContextualBiasing\"] (不带 wikilink,因无实体页)"
+
+  - id: 5
+    type: traceability-gap
+    severity: low
+    location: "点评 §2"
+    detail: "'AED 模型处理跨说话人依赖困难,而 LLM 的全局 attention 可以自然地建模多说话人序列中的远距离依赖' 未标注是论文观点还是 agent 解读"
+    suggestion: "标注为 [论文原文, §1] 或 [agent 解读]"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 4
+
+learning_signals: []

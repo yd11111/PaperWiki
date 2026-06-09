@@ -1,0 +1,44 @@
+review:
+  paper: "StreamingASR"
+  title: "Streaming Speech Recognition with Decoder-Only Large Language Models and Latency Optimization"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节详细解释了 MoChA 从 AED 到 decoder-only LLM 的迁移逻辑,包含 WHY(为什么选 MoChA 而非 CTC)和 HOW(interleaved 序列构造、推理流程)。速查卡片可借鉴字段列出了 3 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    rationale: "所有数字型 claim 均标注了 [Table N] / [§X.X] 出处。指标 CER 使用正确,延迟单位(帧/ms)标注清楚。无方向性错误。"
+  distinguishable:
+    score: 8
+    rationale: "方法节中的因果解释均标注了 [论文原文] 或 [agent 解读]。局限性节中 agent 解读的推断用 [agent 解读] 标注,与论文声明的局限有明确区分。"
+  locatable:
+    score: 8
+    rationale: "KB 背景定位准确:与 BESTOW(wait-k)、BTI(discrete token + hybrid boundary)、SpeechLLM-XL(CTC force-alignment)的差异明确。在 Speech-TextAlignment 中的 alternating 方式谱系中标出了本文的位置。"
+  non-polluting:
+    score: 9
+    rationale: "无新建概念页请求。frontmatter concepts/models 字段合理,无后续系统被误列为 baseline。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 字段仅列了 Whisper(未在本文中直接使用或对比)。应列出本文实际使用和对比的模型:Qwen 2.5-1.5B(backbone),BESTOW(baseline),WeNet-U2(baseline)。但 Qwen/BESTOW/WeNet 均非本 vault 的模型库实体,Whisper 也未在本文中使用。建议清空或列出最相关的已有实体。"
+    suggestion: "将 models 字段改为空列表 [],因为本文的核心模型(Qwen 2.5-1.5B, Conformer encoder)和对比 baseline(BESTOW, BTI, WeNet-U2)均不在模型库中,且非 vault 关注方向的代表模型。"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "局限性节第 5 点"
+    detail: "关于 beam search 在 streaming 部署中的延迟影响是 agent 推断,已正确标注 [agent 解读]。但可补充论文中是否讨论了 greedy decoding 作为替代方案。"
+    suggestion: "论文未讨论 greedy vs beam 在 streaming 场景的 trade-off,可在局限性中补充说明这一空白。"
+
+learning_signals: []
+
+summary: "笔记质量良好。方法节的机制解释充分,KB 定位准确,claim 标注规范。主要问题是 frontmatter models 字段包含了一个与本文无直接关系的模型(Whisper)。整体结论 pass-with-fixes,不阻塞使用。"

@@ -1,0 +1,55 @@
+review:
+  paper: "HiPPO"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节以三个设计选择组织,每个都包含因果解释(WHY 测度决定记忆行为、WHY LegS 无超参数、WHY bilinear 离散化); 速查卡片可借鉴列出 5 个具体可迁移思路(测度选择框架、缩放 vs 滑动、结构化矩阵加速、离散化作为设计维度、时间尺度等变性检验); 核心问题 4 道覆盖了论文的 what/why/how 三层"
+  可信赖:
+    score: 9
+    rationale: "实验表 10 行全部标注出处 [Table 1]/[Table 2]/[Table 3]/[Table 6]/[Fig 7]/[Fig 8]; 方法节定理引用精确到 Theorem/Proposition/Eq 编号; 指标名正确(accuracy/MSE/NRMSE/steps-per-sec); 速查指标含数字+数据集+来源; 出处标注覆盖率 >90%"
+  可区分:
+    score: 8
+    rationale: "方法节中 [论文原文] 标注 3 处、[agent 解读] 标注 5 处,覆盖率约 85%; 局限性 5 条中 4 条标注 [agent 解读]; 核心问题 §4 agent 解读有方括号标注; 一处边界情况: 点评节整体为 agent 意见但未逐段标注(点评节惯例如此,可接受)"
+  可定位:
+    score: 7
+    rationale: "KB 背景正确标注 0 命中并解释原因(非 TTS 论文); 点评节提供清晰谱系(HiPPO→LSSL→S4→S4D/DSS→H3→Mamba→Mamba-2); 交叉引用 Mamba/MamTra/MambaVoiceCloning/RWKVTTS 均已验证存在; 但 frontmatter concepts/models/tasks/datasets 全为空列表(见 issue #1)"
+  不污染:
+    score: 9
+    rationale: "未新建任何概念页; 未执行反向更新; 无 overclaim 风险; 交叉引用链接目标均存在"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter concepts/models/tasks/datasets"
+    detail: "四个关联字段均为空列表。论文涉及 state-space model、ODE discretization 等概念,对比了 LSTM/GRU/LMU/Transformer 等 baseline,但 vault 中无对应实体页"
+    suggestion: "可接受: 该论文为通用序列建模理论,vault 聚焦 TTS,无匹配实体页时留空符合规则。若未来创建 SSM 概念页,可回填"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "可复用的 idea §3"
+    detail: "'cumsum' 是实现细节,原文在 Appendix E.2 中描述但 Proposition 4 正文未提 cumsum"
+    suggestion: "改为 '核心操作可用 cumsum 实现 [Appendix E.2]' 以更精确"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "局限性 §3"
+    detail: "'Theta(1/t) 的多项式衰减意味着超长序列上梯度仍然很小' — 论文 Proposition 5 证明了 Theta(1/t) 下界,但'超长序列上梯度仍然很小'的实际影响论文未量化"
+    suggestion: "加 [agent 解读] 标注,或改为 '论文未讨论该衰减在实际超长序列中的影响边界'"
+  - id: 4
+    type: fact-inference-mixing
+    severity: low
+    location: "方法 选择3 ODE离散化方法 [agent 解读]"
+    detail: "'S4 使用 ZOH + 对角化将 A 的特征值推到复数域' — 准确但属于后续工作知识,非本文内容,已标注 [agent 解读],可接受"
+    suggestion: "无需修改,标注正确"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals: []

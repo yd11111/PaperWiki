@@ -1,0 +1,127 @@
+review:
+  paper: "Zoology"
+  note_path: "论文笔记/Zoology.md"
+  reviewer: auto
+  date: 2026-06-08
+  checklist_version: "v1.1"
+
+  conclusion: pass-with-fixes
+
+  principles:
+    reproducible:
+      score: 9
+      status: pass
+      note: "方法节详细解释了每个设计选择的 WHY (为什么 bigram heuristic, 为什么 MQAR, 为什么 BaseConv, 为什么 input-dependence, 为什么 <10% attention 层),包含因果解释和理论-实验对应。速查卡片'可借鉴'字段给出 4 个具体可迁移 idea (n-gram proxy, MQAR benchmark, hybrid 策略, BaseConv 分析工具)。读完笔记能向同事解释这篇论文的核心论证链。"
+
+    trustworthy:
+      score: 8
+      status: pass
+      note: "数字型 claim 标注较充分 (Table 1/2/4/5, Fig 2/3/7, Thm 4.2/4.4/4.5, Prop 4.3, Eq 1/2/3, Def 3.1 等)。指标使用正确 (PPL, NLL, accuracy, FLOPs)。速查卡片'指标'字段含具体数字 + 数据集名 + Table 编号。有 2 处数字需要交叉验证 (见 issues)。"
+
+    distinguishable:
+      score: 8
+      status: pass
+      note: "因果解释来源标注覆盖率约 85%。标注了 [论文原文] 和 [agent 解读] 的区分。点评和 TTS 启示部分的推断性内容明确标注了 [agent 解读]。局限性第 1/4 条也标注了 [agent 解读]。"
+
+    positionable:
+      score: 7
+      status: pass
+      note: "KB 背景诚实标注'未找到相关知识库背景',并合理地链接到 vault 内相关笔记 (RWKVTTS, MambaVoiceCloning)。点评部分提供了时间定位 (2023.12, 与 Mamba 同月) 和谱系定位 (解释了 Mamba 的 input-dependence 方向)。但由于 vault 以 TTS 为核心,缺少通用序列建模概念页支撑,定位深度有限。frontmatter concepts/models/tasks/datasets 均为空。"
+
+    no_pollution:
+      score: 10
+      status: pass
+      note: "按指令不做反向更新和 git commit。concepts/models/tasks/datasets 均为空,无不当链接。无新建概念页。"
+
+  checks:
+    # 可复述
+    - id: method_causal
+      principle: reproducible
+      status: pass
+      detail: "方法节 6 个设计选择均包含 WHY 解释,不是单纯组件罗列"
+
+    - id: design_choice_why
+      principle: reproducible
+      status: pass
+      detail: "每个设计选择有'为什么选这个'的回答 (如为什么 bigram 不用 fuzzy match, 为什么只需 <10% attention 层)"
+
+    - id: reusability_specific
+      principle: reproducible
+      status: pass
+      detail: "可借鉴 4 项均为具体可操作 trick (n-gram proxy, MQAR benchmark, hybrid ratio, BaseConv analysis)"
+
+    # 可信赖
+    - id: claim_traceability
+      principle: trustworthy
+      status: pass
+      detail: "数字型 claim 标注覆盖率约 90% (Table/Fig/Thm/Eq 编号均标注)"
+
+    - id: metric_correctness
+      principle: trustworthy
+      status: pass
+      detail: "PPL/NLL/accuracy/FLOPs 使用正确,无方向性错误"
+
+    - id: quick_card_metrics
+      principle: trustworthy
+      status: pass
+      detail: "速查卡片指标字段含 PPL 数字 + 对比基准 + Table 编号 + 数据集名"
+
+    - id: "97_4_percent_claim"
+      principle: trustworthy
+      status: medium
+      severity: medium
+      location: "速查卡片一句话"
+      detail: "速查卡片称'恢复 97.4% 的差距',引用 [§1],但 §1 摘要原文为 'close 97.4% of the gap to attention',这个 97.4% 数字未在 Table 2 中直接出现。Table 2 中 360M programmatic selection 关闭了 85% AR gap,full attention hybrid 并非 97.4%。97.4% 可能来自 125M scale 的 full attention hybrid ((12.90-9.57)/(12.90-11.01) = 1.76) 但计算方式不一致。"
+      suggestion: "将速查卡片的 97.4% 改为'关闭 85% AR gap (programmatic) / 大部分差距 (full attention)',或明确标注 97.4% 的 scale 和 metric"
+
+    # 可区分
+    - id: source_annotation
+      principle: distinguishable
+      status: pass
+      detail: "方法节因果解释标注 [论文原文] / [agent 解读] 覆盖率约 85%"
+
+    - id: no_assertion_without_evidence
+      principle: distinguishable
+      status: pass
+      detail: "未发现将推断写成断言的情况。TTS 启示部分的推断明确标注了 [agent 解读]"
+
+    # 可定位
+    - id: kb_background_specific
+      principle: positionable
+      status: pass
+      detail: "KB 背景诚实标注无匹配,并给出相关笔记链接;降级处理符合规则"
+
+    - id: frontmatter_present
+      principle: positionable
+      status: pass
+      detail: "所有 frontmatter 字段存在。concepts/models/tasks/datasets 为空是合理的:本文为通用架构分析,vault 以 TTS 为核心"
+
+    - id: empty_concept_fields
+      principle: positionable
+      status: low
+      severity: low
+      location: "frontmatter"
+      detail: "concepts/models/tasks/datasets 均为空列表。虽然 vault 无对应概念页,但可以考虑在 concepts 中标注论文涉及的核心概念名称 (即使无对应页),便于未来 KB 扩展时自动链接"
+      suggestion: "可在 concepts 中添加 placeholder 如 ['associative-recall', 'gated-convolution', 'MQAR'] (不带 wikilink),但这不影响笔记质量,为低优先级建议"
+
+    # 不污染
+    - id: no_new_pages
+      principle: no_pollution
+      status: pass
+      detail: "按指令不创建新实体页,不做反向更新"
+
+    - id: no_factual_error
+      principle: no_pollution
+      status: pass
+      detail: "笔记内容与原文交叉验证无 factual error"
+
+  issues_summary:
+    high: 0
+    medium: 1
+    low: 1
+    total: 2
+
+  learning_signals:
+    - "非 TTS 核心领域的论文,KB 检索命中为零是正常的;关键是在 KB 背景节诚实标注并链接到 vault 内相关笔记"
+    - "分析型论文 (无单一新架构) 的方法节需要特殊组织:不是按模块/pipeline 描述,而是按论证链的逻辑层次 (现象→归因→理论→验证) 组织"
+    - "摘要中的精确百分比 (97.4%) 需要与正文 Table 交叉验证,不同 scale 和 metric 下的 gap closure 数字可能不一致"

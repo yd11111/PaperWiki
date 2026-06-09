@@ -1,0 +1,49 @@
+paper: ERNIE5.0
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    status: pass
+    note: "NCP depth-wise prediction、弹性训练三维度、RL 三件套的机制均有因果解释,含 WHY 而非仅 WHAT"
+  可信赖:
+    status: pass
+    note: "数字型 claim 标注率 >85%; 指标名称和方向正确 (WER↓, accuracy↑); Table 引用完整"
+  可区分:
+    status: pass
+    note: "[论文原文] vs [agent 解读] 标注覆盖率 >85%; agent 解读处均有限定词"
+  可定位:
+    status: pass
+    note: "KB 背景含与 VALL-E/Moshi/SpeechTokenizer/CosyVoice 3 的具体对比定位; concepts 字段挂接 4 个 confirmed 实体"
+  不污染:
+    status: pass
+    note: "无新建概念页需求; 本文是通用多模态模型,音频仅为其一个模态分支,不构成对现有音频概念页的实质修改"
+
+issues:
+  - id: 1
+    severity: medium
+    type: incomplete-eval-coverage
+    principle: 可信赖
+    location: "实验 - TTS 详细对比"
+    description: "TTS 评测仅有 WER (content consistency),缺少 SIM/MOS/PESQ 等声学质量指标。但这是论文本身的局限,非笔记遗漏。已在局限性中指出。"
+    action: "已标注为局限,无需额外修正"
+
+  - id: 2
+    severity: medium
+    type: architecture-detail-missing
+    principle: 可复述
+    description: "论文未公开 backbone 层数/隐藏维度/专家数等关键参数,导致架构描述中缺少具体数字。笔记忠实反映了论文的信息粒度,但影响可复述性。"
+    action: "已在局限性中标注; 若后续有补充信息可更新"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    principle: 可复述
+    location: "可复用的 idea #5"
+    description: "Posterior-based loss weighting 的具体公式未在论文中给出,笔记中的描述偏概念性。"
+    action: "可接受,论文本身未给出公式细节"
+
+backward_update:
+  needed: false
+  reason: "ERNIE 5.0 是通用多模态模型,其音频组件 (NCP/12.5Hz RVQ) 可作为 key_papers 追加到 SpeechLanguageModel/SpeechTokenizer/RVQ/LLM-basedTTS,但属于追加更新且非核心论文 -- 本文音频不是主线贡献,建议暂不更新 KB"

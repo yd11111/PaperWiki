@@ -1,0 +1,72 @@
+paper: DSM
+file: 论文笔记/DSM.md
+reviewer: auto
+date: 2026-06-08
+tier: deep
+
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    status: pass
+    notes: >
+      方法节对每个关键设计选择 (delay 因果性, delay conditioning, action stream,
+      lookahead, CFG distillation, speaker conditioning) 都给出了 WHY 解释。
+      速查卡片的可借鉴字段具体到技术 trick 级别 (delay conditioning cosine embedding,
+      action stream 二分类, CFG 蒸馏保安全等),非泛泛"提出了新方法"。
+  trustworthy:
+    status: pass
+    notes: >
+      数字 claim 标注覆盖率 >90%。实验表中所有数字均有 Table/Figure 出处。
+      指标名正确 (WER, MUSHRA, Speaker Sim, ELO, RTF, Throughput)。
+      方向性正确 (WER 低好, throughput 高好, MUSHRA 高好)。
+  distinguishable:
+    status: pass
+    notes: >
+      因果解释来源标注覆盖率 >90%。方法节中 6 处 [论文原文] 标注, 5 处
+      [agent 解读] 标注,边界清晰。无断言式推测。
+  positionable:
+    status: pass
+    notes: >
+      KB 背景具体定位到 Moshi 的泛化 (全双工→通用 streaming seq2seq),
+      与 LLM-based TTS 的区分 (streaming + batchable + dialogue),
+      与 CodecLM 的 RQ 参数分组共享新解法。创新判断有对比基准。
+      frontmatter 字段完整 (concepts 7, models 1, datasets 1)。
+  no-pollution:
+    status: pass
+    notes: >
+      未新建概念页。KB 背景信息准确。反向更新建议:
+      - StreamingSpokenDialogue: 可追加 DSM 作为 delay conditioning 技术点
+      - CodecLanguageModel: 可追加 DSM 作为 RQ 参数分组共享案例
+      - SpeechLanguageModel: 可追加 DSM 到演进链
+      以上均为追加类更新,不改 status。
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: frontmatter.models
+    description: >
+      frontmatter models 仅列 EnCodec,但 DSM 使用的 codec 是 Mimi (Defossez et al. 2024),
+      且 Whisper 是 ASR 数据生成的关键 teacher 模型。建议补充 Mimi 和 Whisper
+      (如模型库中存在对应页)。当前模型库中是否有 Mimi 页需要确认。
+    fix: 确认模型库是否有 Mimi/Whisper 页,有则补充到 frontmatter.models
+
+  - id: 2
+    severity: medium
+    type: weak-reusability
+    location: 可复用的 idea.4
+    description: >
+      "RQ-Transformer 参数分组共享" 这一 idea 引用了 Labiausse et al. 2025
+      但未说明是 DSM 原创还是沿用。论文原文指出是 follow Labiausse et al. (2025),
+      笔记中应更明确标注此为沿用而非首创。
+    fix: 在 idea 4 中加注 "(沿用 Labiausse et al. 2025)"
+
+  - id: 3
+    severity: low
+    type: traceability-gap
+    location: 局限性.6
+    description: >
+      "法语性能相对弱可能反映训练数据的语言不平衡" 是 agent 推测,
+      但论文未明确讨论此原因。已标注 [agent 解读],风险低。
+    fix: 无需修改,标注已充分

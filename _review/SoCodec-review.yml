@@ -1,0 +1,64 @@
+paper: SoCodec
+arxiv_id: "2409.00933"
+reviewer: auto
+date: 2026-06-08
+version: v1
+
+conclusion: pass
+
+principles:
+  reproducible:
+    status: pass
+    notes: >
+      OPQ 的因果链完整: nested dropout → 强制低流编码主成分 → 对齐 delayed LM 生成方向;
+      Clip&Shuffle 的因果链清晰: 破坏时序 → 防止 content 泄漏到 acoustic embedding;
+      关键消融 (PQ vs RQ vs OPQ, semantic loss, delay steps) 均有 WHY 解释
+  trustworthy:
+    status: pass
+    notes: >
+      数字标注覆盖率约 90%; 所有关键指标 (NMOS/SMOS/CER/SIM/RTF/MCD) 均标注
+      Table/Fig 出处; Fig 5 柱状图读数标注为近似值; 指标方向无错误
+  distinguishable:
+    status: pass
+    notes: >
+      方法节 [论文原文] vs [agent 解读] 标注覆盖率约 90%;
+      推断性分析 (FireRedTTS 关联, Survey 发现对应, lambda_2 权重解读) 均标注为 agent 解读
+  positionable:
+    status: pass
+    notes: >
+      KB 背景含谱系 (TiCodec/SingleCodec 同期, FireRedTTS 直接后续);
+      AudioTokenizerTaxonomy PQ 定位; 与 RVQ 的有序性对比; 创新判断有对比基准
+  no_contamination:
+    status: pass
+    notes: >
+      未创建新概念页; OPQ 作为论文专属技术不需独立概念页;
+      反向更新方向明确 (追加 key_papers 到 SpeechTokenizer/AudioTokenizerTaxonomy 等页)
+
+issues: []
+
+checklist:
+  method_has_why: true
+  design_choices_explained: true
+  reusability_concrete: true
+  claims_sourced_pct: 90
+  metrics_correct: true
+  quick_card_metrics_sourced: true
+  no_directional_errors: true
+  source_labels_pct: 90
+  no_assertion_without_qualifier: true
+  strong_claims_supported: true
+  kb_lineage_specific: true
+  innovation_has_baseline: true
+  frontmatter_present: true
+  frontmatter_semantically_correct: true
+  quick_card_complete: true
+  no_bad_concept_creation: true
+  dedup_checked: true
+  no_factual_error_in_update: true
+  update_correctly_classified: true
+
+summary: >
+  SoCodec 深读笔记质量合格。核心贡献 (OPQ) 的机制和因果解释充分;
+  与 KB 已有知识 (RVQ, PQ, semantic vs acoustic tokens, FireRedTTS) 的定位清晰;
+  实验数据标注完整; [论文原文] vs [agent 解读] 区分到位。
+  论文本身实验规模偏小 (10 评估者, 100 测试句, 仅中文), 但笔记已在局限性中如实记录。

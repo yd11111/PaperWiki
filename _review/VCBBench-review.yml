@@ -1,0 +1,104 @@
+review:
+  paper: "VCBBench"
+  reviewer: "auto"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+  principles:
+    reproducible:
+      score: 8
+      status: pass
+      reason: >
+        笔记清晰解释了 VCB Bench 的三维评估框架设计动机 (WHY),
+        包括为何用真人录音、为何聚焦中文、为何分三个维度。
+        方法节覆盖了数据构建流程、评估协议、ablation 设计。
+        读完笔记不看原文,可以向同事解释 VCB Bench 的设计和核心发现。
+    trustworthy:
+      score: 8
+      status: pass
+      reason: >
+        关键数字均有 [Table N] / [§X.X] / [Fig N] 出处标注。
+        实验表格保留了 Table 1 的核心数据。
+        指标名称使用正确 (TIF/SIF/MTD/GK/ML/DC/SC 等)。
+        无方向性错误。
+    distinguishable:
+      score: 7
+      status: pass
+      reason: >
+        因果解释标注了 [论文原文] 和 [agent 解读],覆盖率约 80%。
+        方法节中多处标注了来源。
+        少数 agent 解读与论文事实混合的地方可以更清晰区分。
+    positionable:
+      score: 9
+      status: pass
+      reason: >
+        KB 背景节提供了具体的谱系定位 (VoiceBench/AIR Bench/URO Bench 对比)。
+        点评节有与 VoiceBench 和 URO Bench 的详细差异分析。
+        frontmatter 字段完整,concepts 和 models 均有实质填充。
+        速查卡片 5 字段均有具体内容。
+    no_pollution:
+      score: 9
+      status: pass
+      reason: >
+        用户指定不做概念页修改,无反向更新,无污染风险。
+        笔记中对 VoiceBench/URO Bench 的对比描述准确,无 overclaim。
+
+  conclusion: "pass"
+
+  issues:
+    - id: 1
+      severity: medium
+      type: traceability-gap
+      location: "方法 > 关键设计选择 > SIF 独特之处"
+      detail: >
+        "这一设计直接对标 InstructTTSEval 和 MINT-Bench" 是 agent 解读,
+        但未标注 [agent 解读] 标签。
+      suggestion: 在该句前添加 [agent 解读] 标注。
+
+    - id: 2
+      severity: low
+      type: template-compliance
+      location: "实验 > 主要结果表"
+      detail: >
+        实验结果表仅包含 5 个模型的摘要,原文 Table 1 有 9 个模型。
+        Baichuan-Audio、Step-Audio 2 mini、Kimi-Audio、Qwen2.5-Omni 的数据未列入。
+      suggestion: >
+        考虑在表中补充全部 9 个模型数据或注明"选取代表性模型"。
+
+    - id: 3
+      severity: low
+      type: weak-reusability
+      location: "可复用的 idea > 第 4 条"
+      detail: >
+        "三维结构化评估框架 (IF/Knowledge/Robustness) 可扩展到其他语言/模态"
+        过于泛泛,缺少具体迁移场景。
+      suggestion: >
+        补充一个具体的迁移场景,如"评估日语/韩语 LALM 时可复用此框架,
+        Robustness 维度替换为方言口音维度"。
+
+    - id: 4
+      severity: medium
+      type: traceability-gap
+      location: "局限性 > 第 4 条"
+      detail: >
+        "GSRM 和 ProsodyEval 研究表明 frontier speech LLM 在细粒度语音质量评估上
+        可能接近随机" 引用了 KB 页面内容但未标注为 [KB 参考]。
+      suggestion: 标注引用来源为 KB 概念页 [[TTSEvaluation]]。
+
+    - id: 5
+      severity: low
+      type: template-compliance
+      location: "frontmatter > datasets"
+      detail: >
+        datasets 字段为空,但 VCB Bench 本身作为数据集应被记录。
+        此外论文使用了 AlpacaEval、StoryCloze 等作为参考。
+      suggestion: >
+        考虑将 VCB Bench 添加为 dataset 引用。
+
+  issue_summary:
+    high: 0
+    medium: 2
+    low: 3
+    total: 5
+
+  learning_signals: []

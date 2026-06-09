@@ -1,0 +1,43 @@
+review:
+  paper: "EntityBindingFailures"
+  reviewer: "auto (same-session, no independent subagent available)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含完整因果解释链 (WHY per-task decomposition, WHY isomorphic controls, WHY token budget control, WHY entity enumeration is critical); 速查卡片可借鉴具体 (4 个可迁移 idea); 关键设计选择回答了 why this not that"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 > 90%; 指标名正确使用; 速查指标字段含具体数字+数据集+来源标注; Table 1/2/3/4/5 数据均有引用"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 多处正确使用 [论文原文] 和 [agent 解读]; 方法节开头有来源区分声明 callout"
+  可定位:
+    score: 8
+    rationale: "KB 背景提供了清晰谱系定位 (SpeechLanguageModel + ModalityAdaptation + AudioUnderstanding); 与 CoT-ST 的关系在点评中明确; frontmatter 完整"
+  不污染:
+    score: 8
+    rationale: "无新建概念页; concepts 挂接合理; 需确认 AudioUnderstanding 页是否应覆盖 reasoning evaluation 维度但此为 pending-review 页不阻塞"
+
+issues:
+  - id: 1
+    type: missing-lineage
+    severity: medium
+    location: "KB 背景 / 点评"
+    detail: "本文引用的 Hsu et al. 2026 (arXiv 2603.01502, 'Anatomy of the Modality Gap') 为同一第一作者的前序工作,笔记中未单独标注该系列关系,可能影响谱系理解"
+    suggestion: "在 KB 背景或点评中加一句说明本文是 Hsu et al. (2603.01502) 'Anatomy of the Modality Gap' 的后续工作,从宏观诊断推进到精细 entity-level 归因"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "实验 关键观察 #3"
+    detail: "Navigate S2T+CoT (+22.4 pp) 的巨大提升在点评中未讨论,该 gain 来源不清 (可能是 spatial task 本身从 structured CoT 获益而非 entity binding 修复)"
+    suggestion: "在点评中加一句讨论 navigate 的 +22.4 pp 提升可能源于 spatial reasoning 对 structured CoT 的通用获益,与 entity binding 修复无关"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 1
+
+learning_signals: []

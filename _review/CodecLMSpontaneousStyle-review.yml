@@ -1,0 +1,83 @@
+paper: CodecLMSpontaneousStyle
+reviewer: agent-auto
+date: 2026-06-08
+version: v1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含完整因果解释链: 为什么选 delay pattern 而非 AR+NAR → 为什么 MT5+LoRA 替代
+      phoneme pipeline → 为什么双阶段 CFG 需要不同引导强度。三个关键设计选择均有 WHY 解释。
+      速查卡片"可借鉴"列出 4 个具体可迁移 trick (双重 CFG、delay pattern 适配、MT5+LoRA、
+      渐进式数据策略),均有操作层面的可迁移性。
+
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率约 90%。实验表格中所有数据均标注 [Table 2] 或 [Table 3]。
+      架构参数标注 [§3.1]/[§3.2]/[§4.1]。训练参数标注 [§4.2]。指标名使用正确
+      (MOS/CER/SECS 无混淆)。速查卡片指标字段含具体数字+数据集名+来源。
+      无方向性错误。
+
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释来源标注覆盖率约 85%。方法节中标注了 5 处 [论文原文] 和 4 处
+      [agent 解读],边界清晰。推断性语句均使用"可能""可能原因"等限定词,
+      未发现推断被写成断言。无未经支撑的强断言。
+
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景节列举了 6 个实体页作为定位参考,谱系定位明确 (VALL-E 系列 → delay pattern
+      路线; AudioLM/SPEAR-TTS → semantic-acoustic 两阶段)。创新判断以 SponLMTTS 为
+      对比基准。frontmatter 字段完整: concepts 4 个、tasks 1 个、tags 9 个。
+      models=[] 合理 (系统论文无命名模型, CoVoC 对比方为匿名队伍)。
+      速查卡片 5 字段均有实质内容。
+
+  不污染:
+    satisfied: true
+    notes: >
+      未新建概念页。未执行反向更新。不存在 KB 污染风险。
+
+conclusion: pass
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter datasets 字段
+    detail: >
+      论文使用 WenetSpeech4TTS、MAGICDATA-RAMC、HQ-Conversations 三个数据集,
+      但 frontmatter datasets=[] 为空。vault 中这三个数据集均无实体页,因此无法链接。
+    suggestion: >
+      当 WenetSpeech4TTS 等数据集页创建后,回填 datasets 字段。
+      当前不阻塞。
+    action: deferred
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 方法节 "骨干网络" 段 (line 59)
+    detail: >
+      "最大序列长度 2560(text 512 + ST+AT 2048)" 缺少 [§4.1] 出处标注。
+    suggestion: >
+      在该句末尾补充 [§4.1]。不影响可信度,可批量改善。
+    action: optional
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: 局限性 第4点 (line 143)
+    detail: >
+      "相比当前主流系统(CosyVoice 1.5B、Qwen3-TTS 1.7B 等)规模偏小"
+      是 agent 解读但未标注来源类型。CosyVoice/Qwen3-TTS 参数量来自 KB 知识而非本文。
+    suggestion: >
+      在该句前补充 [agent 解读] 标注。不影响正确性,可批量改善。
+    action: optional
+
+total_issues: 3
+high: 0
+medium: 0
+low: 3

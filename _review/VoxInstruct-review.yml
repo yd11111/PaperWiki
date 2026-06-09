@@ -1,0 +1,38 @@
+paper: VoxInstruct
+reviewer: auto
+date: 2026-06-08
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "三阶段 pipeline 每个阶段都有 WHY 和 HOW 解释。4 个关键设计选择均有因果分析和消融证据支撑。速查卡片可借鉴字段列出 3 个具体可迁移 trick (semantic token bridge, multi-CFG, progressive fine-tuning),每个都有 Table/Section 引用。"
+  trustworthy:
+    score: 9
+    rationale: "所有数字型 claim 有 [Table N]/[§X.X] 标注,覆盖率约 90%。指标名使用正确 (MOS-Q/MOS-I/MOS-S/WER/MCD/SECS/Acc 均无混淆)。消融实验中的数字经原文 Table 6 交叉验证正确。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖方法节所有因果解释,比例约 15:5。推断性分析 (如 emotion accuracy 低的原因、HuBERT 对中文的局限) 均明确标注为 agent 解读。"
+  positionable:
+    score: 8
+    rationale: "KB 背景基于 2 个 confirmed 实体页,有具体谱系定位 (VALL-E → VoxInstruct → CosyVoice)。点评节有清晰的历史定位。frontmatter 字段完整。速查卡片 5 字段均有实质内容。"
+  non-polluting:
+    score: 9
+    rationale: "无新建概念页。6 个 concepts 链接均指向已有页面。反向更新仅涉及 key_papers 追加 (append,不改 status)。VoxInstruct 在 Instruction-GuidedSpeechSynthesis 概念页中已有提及,此次为补充完整笔记链接。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "实验表: Voice Cloning"
+    detail: "VALL-E/VALL-E X 对比使用 demo 页样本而非同条件生成 [§5.2],论文自身承认此局限;笔记已标注但用户应知此对比不完全公平"
+    suggestion: "已在局限性第 4 点说明"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "局限性第 5 点"
+    detail: "HuBERT 对中文 semantic token 质量可能较低的推断仅标注为 agent 解读,未引用具体文献支撑"
+    suggestion: "可添加 CosyVoice 论文对 supervised semantic token 优于 HuBERT 的论证作为佐证"
+    status: noted
+
+learning_signals: []

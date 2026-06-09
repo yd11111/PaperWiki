@@ -1,0 +1,77 @@
+paper: MiniMax-Speech
+arxiv_id: "2505.07916"
+reviewer: auto
+date: 2026-06-08
+tier: deep
+
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    status: pass
+    notes: "方法节对 learnable speaker encoder 和 Flow-VAE 均包含因果解释; 速查卡片可借鉴字段具体 (4 条 trick + section 标注)"
+  可信赖:
+    status: pass
+    notes: "数字 claim 均标注了 Table/Section/Fig 来源; 指标名 WER/SIM/PESQ/STOI 使用正确; 速查指标含数字+数据集+出处"
+  可区分:
+    status: pass
+    notes: "[论文原文] 和 [agent 解读] 标注覆盖率约 85%; 消融分析中的推断性解释已标注为 agent 解读"
+  可定位:
+    status: pass
+    notes: "KB 背景定位了 5 个概念页关系; 与 CosyVoice/VALL-E/Tortoise/VITS 的差异对比清晰; frontmatter 字段完整"
+  不污染:
+    status: pass
+    notes: "未创建新概念页; 反向更新方向为追加 key_papers (LLM-basedTTS, ConditionalFlowMatching, SpeakerEmbedding, VoiceCloningTaxonomy, VariationalAutoencoderforTTS)"
+
+issues:
+  - id: 1
+    severity: medium
+    type: traceability-gap
+    location: "Extensions 节 (§4.1-4.3)"
+    description: "Emotion control, T2V, PVC 三个扩展均无定量评估数字,论文本身仅有定性描述。笔记如实记录了这一状况但未额外标注论文缺陷。"
+    suggestion: "已在局限性节指出。可接受。"
+
+  - id: 2
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    description: "models 字段列了 Seed-TTS, CosyVoice2, ElevenLabs-Multilingual-v2 作为对比 baseline,正确。但论文中 Tortoise TTS 作为 speaker encoder 思想来源未列入 models (非直接对比 baseline)。"
+    suggestion: "当前分类合理,Tortoise 在 KB 背景中已提及,不需要列入 models。"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea 第 4 条 Flow-VAE"
+    description: "Flow-VAE 的可复用性描述偏泛 ('适用于任何需要提升 VAE latent 信息密度的场景'),缺少具体应用指导。"
+    suggestion: "可接受,因为 Flow-VAE 本身是通用方法,具体场景需结合实际需求。"
+
+backward_update_plan:
+  - target: "[[LLM-basedTTS]]"
+    action: append_key_papers
+    content: "[[论文笔记/MiniMax-Speech|MiniMax-Speech]]"
+    status_change: false
+    reason: "追加 key_papers,不改定义或 related_concepts"
+
+  - target: "[[ConditionalFlowMatching]]"
+    action: append_key_papers
+    content: "[[论文笔记/MiniMax-Speech|MiniMax-Speech]]"
+    status_change: false
+    reason: "追加 key_papers,Flow-VAE latent 作为 flow matching target 是新实例"
+
+  - target: "[[SpeakerEmbedding]]"
+    action: append_key_papers
+    content: "[[论文笔记/MiniMax-Speech|MiniMax-Speech]]"
+    status_change: false
+    reason: "追加 key_papers,learnable speaker encoder 是重要变体"
+
+  - target: "[[VoiceCloningTaxonomy]]"
+    action: append_key_papers
+    content: "[[论文笔记/MiniMax-Speech|MiniMax-Speech]]"
+    status_change: false
+    reason: "追加 key_papers,对 zero-shot 定义的澄清有参考价值"
+
+  - target: "[[VariationalAutoencoderforTTS]]"
+    action: append_key_papers
+    content: "[[论文笔记/MiniMax-Speech|MiniMax-Speech]]"
+    status_change: false
+    reason: "追加 key_papers,Flow-VAE 是 VAE+flow 在 posterior 增强方向的新实例"

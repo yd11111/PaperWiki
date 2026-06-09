@@ -1,0 +1,56 @@
+review:
+  paper: "VoxSafeBench"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节有丰富的因果解释: 为什么用 Two-Tier 分离内容与上下文风险、为什么引入文本参考上限验证构建有效性、为什么用中间感知探测区分感知与对齐失败; 速查卡片可借鉴字段列了 4 条具体可迁移 idea (Two-Tier taxonomy / construct validity 三件套 / NBS+交换顺序 / speech grounding gap 框架); 整体读完不看原文可以向同事解释清楚"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率 > 90%; 几乎每个数据点都标注了 [Table N] 或 [§N]; 指标名定义明确且有方向标注 (↑↓→0); 速查指标含具体数字+条件+出处; inter-judge agreement 数字 (kappa=0.78, rho>=0.88) 有 [§2] 标注"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 方法节中 4 个关键设计选择全部用 [论文原文] 和 [agent 解读] 做了清晰分离; KB 背景中的创新判断有明确对比基准; 点评节中观点明确标注为评论性质; 一处 KB 背景末段 (与 E2E-VGuard 关系) 的描述是 agent 判断但未加 [agent 解读] 标注"
+  可定位:
+    score: 9
+    rationale: "KB 背景命中 2 个实体页并有具体谱系定位 (SLM competence→alignment 范式转移); 创新判断有明确对比基准 (Dynamic-SUPERB/MMSU/VoiceBench vs VoxSafeBench); 与 E2E-VGuard 的互补关系描述清晰 (主动防护 vs 对齐评估); frontmatter 完整且语义正确"
+  不污染:
+    score: 9
+    rationale: "未新建概念页; 笔记中的信息若流入概念页会改善 SpeechLanguageModel 页 (补充对齐评估维度) 和 AudioUnderstanding 页 (补充感知≠对齐的认知); 无 overclaim; 无 factual error"
+
+issues:
+  - id: 1
+    type: fact-inference-mixing
+    severity: low
+    location: "KB 背景 末段 (与 E2E-VGuard 关系)"
+    detail: "'两者共同构成了 CUHK-SZ (Zhizheng Wu 组) 在语音安全领域的双线布局' — 这是 agent 对研究组战略的推断性分析,但未标注 [agent 解读]"
+    suggestion: "在段首加 '[agent 解读]' 标注"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "速查路线描述虽准确但未标注对应的 figure/section 出处"
+    suggestion: "末尾加 [§2, Fig 1]"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 字段为空 []; 本文虽不提出模型,但评估了 6 个 SLM (Gemini-3-Pro / GPT-4o-Audio / Qwen3-Omni 等),作为被评对象可考虑列出"
+    suggestion: "可保持空 (benchmark 论文非模型论文), 或列出被评模型; 当前空值不违反规则但减少了检索性"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "局限性 §6 (合成语音局限)"
+    detail: "'真实环境中的声学变化更复杂,模型失败可能更严重' 后标注了 [§6] 但论文原文中这个推断来自 Limitations & Future Work 节,应确认确切 section 编号"
+    suggestion: "确认原文节号后修正; 影响很小"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "Benchmark/evaluation 论文的笔记在 frontmatter models 字段有特殊性: 被评模型不是本文提出的模型,是否列入取决于检索需求 vs 语义准确性的权衡。可考虑在 checklist 中增加 benchmark 论文的 models 字段指引。"

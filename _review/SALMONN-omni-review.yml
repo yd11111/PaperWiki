@@ -1,0 +1,60 @@
+paper: SALMONN-omni
+arxiv_id: "2505.17060"
+reviewer: auto
+date: 2026-06-08
+verdict: pass
+
+principles:
+  reproducible:
+    status: pass
+    notes: >
+      方法节围绕四个子问题 (streaming I/O, dual-stream, time alignment, state transition)
+      展开因果解释。每个设计选择 (codec-free vs injection, explicit vs implicit thinking,
+      assistant stream, LLM layer 24, 80ms time block) 都回答了 WHY 并有消融支撑。
+      速查卡片"可借鉴"列出 5 个具体可迁移 trick。
+  trustworthy:
+    status: pass
+    notes: >
+      数字型 claim 标注覆盖率 >90%。实验表格 17 行均含对比基准、数据集名和出处。
+      指标名使用正确 (Acc/GPTScore/F1/WER 不混淆)。无方向性错误。
+  distinguishable:
+    status: pass
+    notes: >
+      因果解释来源标注覆盖率 ~85%。方法节中 [论文原文] 14 处, [agent 解读] 8 处,
+      区分清晰。推断性语句均有"可能""很可能""这与...一致"等限定词。
+      无将推断写成断言的情况。
+  positionable:
+    status: pass
+    notes: >
+      KB 背景有具体谱系定位: codec injection (Moshi) vs latent-representation (本文)
+      vs non-standalone (VITA/Freeze-Omni)。与 Raon-SpeechChat/ELLSA/Covo-Audio
+      的特殊 token 方案做了横向对比。frontmatter concepts 5 个、models 1 个均正确。
+  non-polluting:
+    status: pass
+    notes: >
+      未新建概念页。无 overclaim。frontmatter models 仅列 Moshi (本文主要对比 baseline)。
+      concepts 列表精准,无遗漏核心概念也无过度挂接。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    description: >
+      datasets 字段为空,但本文使用 LibriSpeech/GigaSpeech/TriviaQA/AlpacaEval 等多个数据集。
+      因这些数据集在概念库中无对应实体页,留空合理但可考虑后续补充。
+    suggestion: 如数据集库扩充后可回填。
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 局限性.7
+    description: >
+      关于 Mamba encoder 长对话注意力衰减的论述完全是 agent 推断,论文未讨论此问题,
+      虽已标注 [agent 解读],但放在局限性节可能让读者误以为是论文承认的局限。
+    suggestion: 可添加"论文未讨论此方面"的显式说明,或移至点评节。
+
+summary: >
+  笔记质量高。四个子问题的组织方式清晰,codec-free vs codec injection 的路线对比
+  有理有据。显式 thinking 策略和 DPO U 型曲线是两个最有价值的 insight,均有充分展开。
+  两个 low issues 不影响整体可信度和可复用性。

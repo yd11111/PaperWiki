@@ -1,0 +1,31 @@
+paper: SpeechCraft
+reviewer: auto
+date: 2026-06-08
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "三阶段 pipeline + 关键设计选择(Description/Instruction 双版、emphasis bootstrapping、精度-规模权衡)均有 WHY 解释。速查卡片可借鉴列出 4 个具体可迁移 trick(LLM 定制化改写替代模板、双版本设计、合成数据 bootstrapping、多样性增强三件套)。"
+  trustworthy:
+    score: 8
+    rationale: "初稿将 Salle+TextrolSpeech baseline (56.11%) 误用为 ParlerTTS 比较基准,导致提升幅度被夸大(报告 24.43 pp,实际 ParlerTTS 上仅 4.92 pp)。修正后所有数字均有 [Table N]/[§X.X] 标注,覆盖率 ≥ 90%。指标名正确,无方向性错误。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖方法节所有因果解释,覆盖率 ~90%。emphasis bootstrapping 的域差距分析、Salle 提升更大的原因推断均明确标注为 agent 解读。"
+  positionable:
+    score: 9
+    rationale: "KB 背景有具体谱系定位(TextrolSpeech → SpeechCraft 在 NL description 数据线上的位置),含 ProsodyModeling/SpeechFactorization 两个 confirmed 页面的关联分析。创新判断含四维度(规模/语言/粒度/多样性)对比基准。frontmatter 完整且语义正确。"
+  non-polluting:
+    score: 10
+    rationale: "未执行反向更新,无新建概念页,无 KB 污染风险。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "实验表 ParlerTTS 比较"
+    detail: "初稿将 Salle+TextrolSpeech 的 baseline 数字(56.11%)误用于 ParlerTTS 比较,导致报告提升幅度为 24.43 pp,实际 ParlerTTS 上 SpeechCraft vs TextrolSpeech 仅 4.92 pp (80.54 vs 75.62)"
+    suggestion: "已修正为按模型分别列出 Salle 和 ParlerTTS 实验表"
+    status: fixed
+
+learning_signals: []

@@ -1,0 +1,88 @@
+paper: MimicLM
+reviewer: agent-auto
+date: 2026-06-08
+version: v1
+
+principles:
+  可复述:
+    satisfied: true
+    notes: >
+      方法节包含三个关键设计选择 (Role-Swapping / Interleaved Text-Audio / DPO),
+      每个都有因果解释: 为什么反转 source/target (突破合成质量天花板+更好的 reference alignment),
+      为什么用 1:5 ratio (text 领先 audio 提供语义锚点),
+      为什么分两阶段 DPO (先解决 WER 再优化 similarity)。
+      速查卡片"可借鉴"字段给出了具体可迁移的 trick (role-swapping 思路 + temporal offset 设计)。
+
+  可信赖:
+    satisfied: true
+    notes: >
+      数字型 claim 标注覆盖率约 95%。实验表格包含完整的指标+数据集+出处。
+      指标名使用正确 (N-MOS/S-SIM/A-SIM/E-SIM/WER/OVRL/UTMOS/SIG 无混淆)。
+      方向性正确: WER ↓, MOS ↑, SIM ↑。
+      速查卡片指标字段含具体数字 + 数据集名 (SeedTTS test-vc-en) + 来源标注 ([Table 1], [Table 2])。
+
+  可区分:
+    satisfied: true
+    notes: >
+      因果解释来源标注覆盖率约 90%。方法节中 role-swapping 的两个优势标注 [论文原文],
+      agent 对 distributional mismatch 的推断标注 [agent 解读]。
+      局限性 #1 (S-SIM 弱于 Vevo) 的推断原因标注 [agent 解读]。
+      局限性 #2 标注 [论文原文]。未发现推断被写成断言的情况。
+
+  可定位:
+    satisfied: true
+    notes: >
+      KB 背景节提供了清晰的谱系定位: LLM-based VI 系统在 VoiceCloningTaxonomy 四分法中的位置,
+      与 SpeechFactorization 两条路线 (显式解耦 vs 端到端) 的对比,
+      CosyVoice2 组件复用的具体说明,DPO 在 TTS RL 路线中的位置。
+      创新判断有明确对比基准 (vs Seed-TTS self-distillation)。
+      frontmatter 字段完整,concepts/models 语义合理。
+
+  不污染:
+    satisfied: true
+    notes: >
+      不新建概念页。反向更新已跳过 (按用户指令)。
+      无 factual error 或 overclaim。
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter datasets 字段
+    detail: >
+      datasets 字段为空,但论文训练使用 Emilia 数据集 (vault 中已有 数据集/Emilia.md),
+      评估使用 SeedTTS test-vc-en。应至少填入 Emilia。
+    suggestion: >
+      将 datasets 字段改为: ["[[Emilia]]"]。SeedTTS test set 暂无数据集页,
+      可以不列入或待创建后补充。
+    action: fix
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: 方法节 "设计 2: Interleaved Text-Audio Modeling"
+    detail: >
+      Continuous Phase 的设计动机未标注来源。为什么不把所有内容都用 chunked phase?
+      论文可能未给出明确解释,但如果 agent 有推断应标注 [agent 解读]。
+    suggestion: >
+      可选: 补充一句 [agent 解读] 说明 continuous phase 存在的可能原因
+      (text/audio 长度不完全对齐时的余量处理)。不影响理解,可批量改善。
+    action: optional
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: 全文
+    detail: >
+      缺少 review callout (> [!review] 块)。这是因为审阅作为独立步骤执行,
+      且按用户指令跳过了 dispatch。属于预期缺失。
+    suggestion: >
+      审阅完成后在笔记末尾 (--- 之前) 追加 review callout,标注审阅结论和日期。
+    action: fix
+
+total_issues: 3
+high: 0
+medium: 0
+low: 3

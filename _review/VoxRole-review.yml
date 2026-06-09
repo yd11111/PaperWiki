@@ -1,0 +1,57 @@
+review:
+  paper: "VoxRole"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含充分因果解释: 为什么选电影数据源、为什么两层对齐设计、为什么两阶段 LLM 蒸馏、为什么 acoustic 用统计方法; 每个设计选择都回答 why this not that; 速查可借鉴列出 5 个具体可迁移 trick (pipeline/judge/画像/蒸馏/context窗口)"
+  可信赖:
+    score: 8
+    rationale: "实验表格全部标注 [Table 2]/[Table 3]; 质量验证结果标 [§Quality Validation]; 相关性标 [§Subjective experimental results]; 指标名正确 (Rouge-L/Meteor/BertScore/UTMOS); 速查指标含数字+来源 [Table 2, 3]; 无方向性错误; 覆盖率约 85%"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率 ~85%; 方法节广泛使用 [论文原文]/[agent 解读] 标注; 点评节用 agent 视角明确与论文区分; '暗示'等限定词使用恰当; 局限性中部分 agent 推断标了 [agent 解读]"
+  可定位:
+    score: 8
+    rationale: "KB 背景谱系定位清晰 (WavChat 11维框架缺角色扮演维度、VoiceBench/SUPERB/SD-EVAL 不覆盖); 创新判断有 3 个具体对比基准 (InstructTTSEval/NV-Bench); frontmatter 完整; 速查 5 字段均实质; concepts 列出 3 个核心概念"
+  不污染:
+    score: 10
+    rationale: "本次审阅范围内无新建概念页、无反向更新; 按用户指示跳过 KB 修改; 笔记内容事实准确,无 overclaim 或 factual error 会影响未来 KB 背景"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "KB 背景 callout header"
+    detail: "Header 称 '基于 3 个 pending-review 实体页 + 2 个 confirmed 实体页' (=5), 但检索命中行列出 6 个实体 (4 pending + 2 confirmed), kb_context_sources 也为 6"
+    suggestion: "改为 '基于 4 个 pending-review 实体页 + 2 个 confirmed 实体页'"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "速查 一句话"
+    detail: "'13335 段多轮对话 (65.6h) + 1228 个角色' 等统计数字来自 abstract/introduction 但未标注具体 section"
+    suggestion: "可在速查末尾加 [§Abstract] 或 [Table 1] 出处"
+  - id: 3
+    type: fact-inference-mixing
+    severity: low
+    location: "局限性 §2"
+    detail: "'按 1228 角色外推' 是 agent 计算,非论文内容,但未标 [agent 解读]"
+    suggestion: "改为 '[agent 解读] 按 1228 角色外推约 86 个角色可能画像质量较差'"
+  - id: 4
+    type: template-compliance
+    severity: low
+    location: "frontmatter models/datasets"
+    detail: "models=[] 和 datasets=[] 均为空; VoxRole 本身是 benchmark/dataset 且评估了 7 个模型; 但作为 benchmark paper 不提出模型,空值可接受"
+    suggestion: "可选: models 列被评估模型 (GPT-4o 等) 用于交叉引用; datasets 在创建 VoxRole 数据集页后回填"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "benchmark paper 的 frontmatter models 字段该列什么?被评估模型 vs 空值的规范待确认"
+  - "速查卡片中 abstract 级统计数字的出处标注惯例待统一"

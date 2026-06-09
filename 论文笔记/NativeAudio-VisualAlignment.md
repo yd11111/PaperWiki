@@ -33,7 +33,7 @@ updated: 2026-06-08
 
 > [!summary] 速查
 > - **一句话**: NAVA 提出 "先对齐再融合" 的 MMDiT 架构,将音频-视频同步与语义条件解耦,在联合音视频生成中以 6.3B 参数实现最优同步和视频质量
-> - **路线**: Text/Timbre --> Context Tokens; Video/Audio --> separate VAE latents --> Hierarchical Alignment Layers (modality-aware AV self-attn + context cross-attn, 10 blocks) --> Unified Fusion Layers (shared projection + joint denoising, 20 blocks) --> Audio + Video output
+> - **路线**: Text/Timbre --> Context Tokens; Video/Audio --> separate VAE latents --> Hierarchical Alignment Layers (modality-aware AV self-attn + context cross-attn, 10 blocks) --> Unified Fusion Layers (shared projection + joint denoising, 20 blocks) --> Audio + Video output [§3.1, Fig 2]
 > - **指标**: Verse-Bench Sync-C 7.791 (best) / Sync-D 7.566 (best) / Video Quality 0.659 (best) / WER 0.099 (best); Seed-TTS Speaker Similarity 66.7 (best among AV models, competitive with audio-only CosyVoice2 65.2) [Table 1, Table 2]
 > - **可借鉴**: (1) Condition-Factorized CFG -- 将不同条件轴(text/alignment/timbre)分别 dropout+guidance,可迁移到任何多条件扩散系统; (2) Timbre-in-Context -- 将参考音色作为 span-level context token 而非全局 embedding,天然支持多说话人; (3) Rate-aware RoPE rescaling 处理异构 token rate
 > - **局限**: 长尾音频事件(罕见动物叫声、音乐、歌唱)生成仍弱; 代码未开源; 训练成本极高(~107K H100 GPU-hours); 论文为 Baidu 内部工作,数据 pipeline 不可复现

@@ -1,0 +1,55 @@
+review:
+  paper: "UnifiedAudioSchema"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节包含充分的因果解释 (WHY structured JSON > unstructured caption, WHY Stage 2 not Stage 3, WHY UAS-QA is needed beyond UAS annotation); 每个关键设计选择都回答了 why this not that; 速查卡片可借鉴字段列出 5 个具体可迁移 idea,均有实质内容"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名正确使用 (WER/accuracy 未混淆); 速查指标字段含具体数字+数据集名+出处 [Table 1, Table 2]; 消融实验数字与 Fig 4, Table 6, Table 7 交叉引用; 无方向性错误"
+  可区分:
+    score: 8
+    rationale: "方法节一致使用 [论文原文] 和 [agent 解读] 标注; 因果解释来源标注覆盖率约 85%; 关键设计选择 §2 中 agent 解读 ('与 catastrophic forgetting 机制可能相关') 正确标注了推测性质; 点评节整体为 agent 评价,定位明确"
+  可定位:
+    score: 9
+    rationale: "KB 背景节提供了高质量谱系定位: 与 SpeechFactorization 的镜像关系分析、与 SenseVoice 的 rich transcription 对比、与 AudioUnderstanding 三类任务体系的映射; 创新判断有清晰对比基准 ('核心新意不在于解耦本身, 而在于...三点'); frontmatter 完整且语义正确; concepts 和 models 字段合理"
+  不污染:
+    score: 9
+    rationale: "无新建概念页; 未触发任何反向更新; frontmatter concepts 列表均为已有概念页; 点评节的 claim 有数据支撑; 无 overclaim"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述 '音频 → Audio Encoder (AuT) → ...' 未标注出处"
+    suggestion: "末尾加 [Fig 1, §3.1]"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "局限性 §3"
+    detail: "'仅对比 3 个 7B 级别 baseline' 是从 Table 1 推断的, 未标注出处"
+    suggestion: "加 [Table 1] 出处标注"
+  - id: 3
+    type: fact-inference-mixing
+    severity: low
+    location: "方法 关键设计选择 §2"
+    detail: "'与 catastrophic forgetting 的机制可能相关' 已正确标注 [agent 解读], 但推断链不够具体"
+    suggestion: "可补充为 '类似于多任务学习中早期 bias 固化的现象 [agent 解读]' 或简化移除"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "实验 关键发现 (1)"
+    detail: "'说明如何应用知识比知道什么更关键' 是 agent 解读但未标注"
+    suggestion: "前缀 [agent 解读] 或改为 '[论文原文] 作者将此归因于...' 引用 §2.3 原文"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals: []

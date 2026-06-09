@@ -1,0 +1,57 @@
+review:
+  paper: "UniSep"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节含 4 个关键设计选择,每个都回答了 why this not that (离散 vs 连续、causal vs prefix LM、多尺度 Transformer 来源、评估指标选择); 速查可借鉴列出 5 个具体可迁移 trick (pre-training 策略、跨域正迁移、codec reference 评估等); 因果链从核心问题到方法到实验逻辑连贯"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90% (37 处 §/Table/Fig 引用); 指标名 DNSMOS/PESQ/ViSQOL/STFT/MUSHRA 使用正确; 速查指标含具体数字+数据集+来源; 实验表格数据与 PDF 原文 Table II-V 一致; LASS 96.94% 算术正确 (3.49/3.60)"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85% (13 处 [论文原文]/[agent 解读] 标签); 方法节每个设计选择均有双标签区分; 局限性 6 条中 4 条标注 [agent 解读]、2 条引用原文出处; 点评节整体为 agent 评论,身份明确"
+  可定位:
+    score: 9
+    rationale: "KB 背景清晰定位于 CodecLM 范式从生成到分离的迁移,列出 VALL-E/AudioLM/UniAudio 作为对比基准; 创新判断有明确对比 (已有 CodecLM 全面向生成); frontmatter 字段完整且语义正确 (models 列 SoundStream 即论文使用的 codec,非后续系统); 速查 5 字段均有实质内容"
+  不污染:
+    score: 9
+    rationale: "按用户要求未创建新概念页,未执行反向更新; 笔记中无 factual error 或 overclaim; concepts/models 链接指向已有实体页,不存在悬空链接风险"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "速查 路线"
+    detail: "路线描述详细但未标注来源 [Fig 1]"
+    suggestion: "末尾加 [Fig 1, §II]"
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: "frontmatter tasks"
+    detail: "tasks 字段为空列表; 论文涉及 Target Audio Separation / LASS 等任务"
+    suggestion: "若任务库有对应页则链接; 若无,空列表可接受,不必为此创建实体页"
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "方法 §3 多尺度 Transformer"
+    detail: "'12 层 global + 4 层 local, 8 heads, 1536 dim' 架构细节引用了 [§III-B] 但 [16] (UniAudio 原文) 未标注"
+    suggestion: "改为 '采用 UniAudio [16] 的多尺度 Transformer 架构 [§III-B]'"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "点评 §4 对比公平性"
+    detail: "'SpeakerBeam 和 VoiceFilter 是较老的模型 (2018-2019)' 年份未标注出处"
+    suggestion: "加 [ref 9, 10] 或直接注明论文年份出处"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "UniSep 笔记在 KB 背景节做到了精准定位 (CodecLM 从生成迁移到分离),可作为跨范式论文的 KB 背景写作范例"
+  - "局限性节 agent 解读与论文原文比例合理 (4:2),且每条都正确标注了来源,值得保持"

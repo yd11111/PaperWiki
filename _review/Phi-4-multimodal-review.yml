@@ -1,0 +1,57 @@
+review:
+  paper: "Phi-4-multimodal"
+  reviewer: "auto (same-session self-review)"
+  date: "2026-06-08"
+  checklist_version: "v1.1"
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节包含因果解释 (WHY LoRA not full-FT, WHY Conformer not S3M, WHY 80ms token rate, WHY language-agnostic prompt); 速查卡片可借鉴字段具体 (LoRA模态隔离/CoT解码/80ms token rate); 每个关键设计选择回答了 why this not that"
+  可信赖:
+    score: 8
+    rationale: "数字型 claim 出处标注覆盖率约 90%; 指标名 WER/BLEU/ACC 使用正确; 实验表格含数字+数据集+出处; 速查指标字段含 OpenASR WER 6.14 / CV15 WER 6.80 / CoVoST2 BLEU 40.76 等具体数字"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖率约 85%; 方法节中 [论文原文] 和 [agent 解读] 区分清晰; KB 背景中的推断 (如 Conformer 选择原因) 正确标注为 [agent 解读]"
+  可定位:
+    score: 9
+    rationale: "KB 背景谱系定位具体 -- 按 Speech-LLMIntegrationTaxonomy 三分法定位为 latent-representation + LoRA 路线; 创新判断以 ModalityAdaptationforSpeechLLM 中的三种适配方法为对比基准; frontmatter 完整且语义正确"
+  不污染:
+    score: 9
+    rationale: "未新建概念页; 未执行反向更新; concepts 列表引用已有实体页; 无 overclaim; frontmatter models 仅列 Whisper (对比 baseline) 而非后续系统"
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: low
+    location: "方法节 音频编码器 agent 解读"
+    detail: "'80ms token rate 意味着 1 分钟音频仅产生 750 tokens,远小于 Whisper 的 20ms (3000 tokens/min)' 中 Whisper 的 20ms 数字未标注出处"
+    suggestion: "Whisper token rate 是常识性知识,可标注 [agent 解读] 或注明 Whisper 论文出处"
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "局限性 §6"
+    detail: "'论文未提供 LoRA rank/encoder 架构/token rate 等关键超参数的消融分析' 是 agent 观察而非论文自述局限,未标注来源"
+    suggestion: "前缀 '[agent 解读]' 以区分这是 reviewer 对论文的批评而非论文自述"
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter datasets"
+    detail: "datasets 字段为空列表,但论文涉及多个 benchmark 数据集 (CommonVoice15, FLEURS, CoVoST2, OpenASR, AirBench 等)"
+    suggestion: "如果 vault 中有对应数据集实体页则挂接; 否则保持空列表可接受 (数据集页准入门槛)"
+  - id: 4
+    type: traceability-gap
+    severity: low
+    location: "点评 核心贡献"
+    detail: "'语音部分仅 460M 编码器 + 460M LoRA = 920M 参数就超越了 Whisper V3 (1.5B)' 中 Whisper V3 的参数量未标注出处"
+    suggestion: "可标注 [agent 解读] 或注明 Whisper 论文参数量出处"
+
+conclusion: "pass"
+high_issues: 0
+medium_issues: 0
+low_issues: 4
+
+learning_signals:
+  - "非 TTS 论文但与语音 LLM 相关的论文,KB 背景定位仍可做到具体有效 -- Speech-LLMIntegrationTaxonomy 和 ModalityAdaptationforSpeechLLM 两个概念页提供了清晰的坐标系"
+  - "系统工程报告 (technical report) 类论文因缺乏消融实验,方法节的因果解释需要更多 [agent 解读] 标注来补充论文未覆盖的 WHY 问题"

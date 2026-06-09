@@ -1,0 +1,57 @@
+review:
+  paper: "PMF-CEC"
+  reviewer: auto
+  date: 2026-06-08
+  conclusion: pass
+
+  principles:
+    explainable:
+      score: 8
+      verdict: pass
+      rationale: "方法节对每个关键设计选择(cross-attention融合、<no-context> token、RPM、参数共享)均给出了WHY解释,且标注了[论文原文]和[agent解读]来源。速查'可借鉴'给出了3个具体可迁移trick(dummy token插入、RPM阈值过滤、cross-attention残差融合)。"
+
+    trustworthy:
+      score: 8
+      verdict: pass
+      rationale: "核心数字(WERR/B-WER/推理时间)经交叉验证与原文一致。所有数字标注了[Table VI/VII/VIII/X/XI/XII]来源。指标名(WER/B-WER/WERR/U-WER)使用正确。速查'指标'有具体数字+数据集+来源。"
+
+    distinguishable:
+      score: 8
+      verdict: pass
+      rationale: "方法节因果解释均标注[论文原文]或[agent解读],覆盖率>80%。点评节明确区分了优点和不足,未将推测写成断言。"
+
+    positionable:
+      score: 7
+      verdict: pass
+      rationale: "KB背景节有具体谱系定位(LLM GER vs S2S AEC路线对比),创新判断有对比基准(ED-CEC、HyPoradise)。frontmatter字段完整。但本文属ASR后处理方向,与vault核心TTS方向关联较弱,KB检索命中页全部为pending-review状态。"
+
+    no_pollution:
+      score: 9
+      verdict: pass
+      rationale: "未创建/修改任何概念页(按用户指令)。frontmatter concepts/models字段语义正确。无factual-error或overclaim。"
+
+  issues:
+    - type: traceability-gap
+      severity: low
+      location: "速查 > 指标"
+      detail: "8.39%-12.56% B-WER改善未明确标注为'相对改善'(relative reduction),可能被理解为绝对B-WER范围。"
+      suggestion: "改为 'B-WER 相对改善 8.39%-12.56%' 或 'B-WER relative reduction 8.39%-12.56%'。"
+
+    - type: template-compliance
+      severity: low
+      location: "实验 > 主实验表"
+      detail: "LibriSpeech test-other 数据未包含在主实验表中,仅列了test-clean。test-other: PMF-CEC WER 7.88/WERR 17.66, B-WER 18.38 [Table VI]。"
+      suggestion: "在主实验表中补充test-other行数据。"
+
+    - type: weak-reusability
+      severity: low
+      location: "可复用的idea #1"
+      detail: "dummy token插入法源自前作ED-CEC [21]和ConstDecoder [19],并非PMF-CEC的新贡献。标注为可复用idea可能误导读者认为这是本文的创新。"
+      suggestion: "注明'(继承自ED-CEC [21])'。"
+
+  issue_summary:
+    high: 0
+    medium: 0
+    low: 3
+
+  learning_signals: []
