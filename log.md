@@ -2,6 +2,8 @@
 
 ## 2026-06-09
 
+- [ingest/deep] [[MFCIG-CSS]] — 精读, kb_sources=2 (1 confirmed, 1 pending-review), 新建 0, 追加 2 (ProsodyModeling, EmotionControlinTTS)
+- [review/auto] [[MFCIG-CSS]] — pass, 0 issues
 - [ingest/deep] [[Chain-Talker]] — 精读, kb_sources=4 (1 confirmed, 3 pending-review), 新建 0, 追加 0 (全部概念页 key_papers 已超 12 上限)
 - [review/auto] [[Chain-Talker]] — pass, 0 issues
 - [kb/search] [[Universal-2-TF]] — 命中 3 页 (取 Top 3): 无 confirmed | 过滤: [[LLM-enhancedASR]](pending-review), [[Whisper]](pending-review), [[SenseVoice]](pending-review)
