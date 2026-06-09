@@ -1,0 +1,47 @@
+review:
+  paper: "SpeechQualityEval"
+  reviewer: "auto"
+  date: "2026-06-09"
+  conclusion: "pass"
+
+  principles:
+    reproducible:
+      score: 8
+      reason: "方法节详细解释了四个任务的 prompt 设计 WHY (dataset-specific prompt 编码评分偏差, averaging 消除新域 prompt 需求) 和 HOW (LoRA 微调策略, silence-separated concatenation)。速查卡片的可借鉴字段给出 5 个具体可迁移 trick,非泛泛。核心问题节清晰框定了三个研究问题。"
+    trustworthy:
+      score: 8
+      reason: "关键数字均标注出处 (Table I-V, §III-V),指标使用正确 (LCC/SRCC/MSE 不混淆, MOS/SIM/Acc 区分清楚)。速查卡片指标字段含数字+数据集+出处。方向性正确 (LCC 越高越好, MSE 越低越好)。局限性列出 8 条,坦诚且有数据支撑。"
+    distinguishable:
+      score: 9
+      reason: "因果解释来源标注覆盖率高: 方法节 5 个关键设计选择均标注 [论文原文] 或 [agent 解读]。实验发现中 agent 解读 (如 SALMONN 双编码器优势推断) 明确标注。无推断写成断言的情况。"
+    positionable:
+      score: 9
+      reason: "KB 背景节精准定位: 明确指出本文处于 TTSEvaluation 演进线中 'Predicted MOS 自动化' 向 'LLM-as-Judge' 过渡节点,并与 4 个后续工作 (GSRM/SpeechJudge/TTS-PRISM/UniSRM) 做了具体对比。创新判断有对比基准 (直接回归 vs CoT reasoning vs preference modeling)。"
+    non-polluting:
+      score: 9
+      reason: "本次 ingest 按 no-KB 模式运行,未执行反向更新。概念引用合理 (TTSEvaluation, SpeakerEmbedding, SpeakerVerification 等 6 个已有实体),无新建概念页,无污染风险。"
+
+  issues:
+    - type: "traceability-gap"
+      severity: "low"
+      location: "方法: LoRA 微调策略"
+      detail: "LoRA rank=8, scale=32 未标注具体出处章节"
+      suggestion: "补充 [§IV-B] 或 [Appendix]"
+    - type: "traceability-gap"
+      severity: "low"
+      location: "方法: NL 描述的训练数据构建"
+      detail: "训练/验证/测试样本数 (10899/2635/712) 未标注出处"
+      suggestion: "补充 [§IV-A] 或 [Table]"
+    - type: "template-compliance"
+      severity: "low"
+      location: "frontmatter datasets"
+      detail: "datasets 字段为空数组,但论文使用了 BVCC, SOMOS, NISQA, VoxSim 等多个数据集"
+      suggestion: "补充 datasets 引用 (若概念库中已有对应数据集页) 或保留空数组并注释原因"
+
+  summary:
+    total_issues: 3
+    high: 0
+    medium: 0
+    low: 3
+
+  learning_signals: []

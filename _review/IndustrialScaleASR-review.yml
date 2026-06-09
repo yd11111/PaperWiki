@@ -1,91 +1,69 @@
 review:
   paper: "IndustrialScaleASR"
-  title: "The Cascade Equivalence Hypothesis: When Do Speech LLMs Behave Like ASR→LLM Pipelines?"
+  title: "Anatomy of Industrial Scale Multilingual ASR"
   reviewer: "auto"
-  date: "2026-06-08"
-  conclusion: "pass-with-fixes"
+  date: "2026-06-09"
+  conclusion: "pass"
 
 principles:
   reproducible:
-    score: 9
-    verdict: pass
-    reason: >
-      方法节详尽解释了 WHY matched-backbone testing, WHY per-example agreement,
-      WHY 三层证据链(行为+表征+因果)。每个设计选择都有因果解释。
-      速查卡片可借鉴字段给出了具体可迁移的方法论(matched-backbone testing)。
-  trustworthy:
-    score: 9
-    verdict: pass
-    reason: >
-      数字 claim 标注覆盖率高(>90%),所有关键数字引用了 [§X.X]/[Table N]/[Fig N]。
-      指标名(Cohen's kappa, conditional error overlap, accuracy %)使用正确。
-      速查指标字段含具体数字+来源。无方向性错误。
-  distinguishable:
-    score: 9
-    verdict: pass
-    reason: >
-      因果解释源标注覆盖率约 90%+,方法节和点评节一致使用
-      [论文原文]/[agent 解读] 标签。点评不足部分正确标注为 [agent 解读]。
-      无推断被写成断言的情况。
-  locatable:
     score: 8
     verdict: pass
     reason: >
-      KB 背景详细且有具体谱系定位(5 个 KB 实体页),创新判断有对比基准。
-      但 frontmatter models 字段仅列 Whisper,遗漏了本文评估的四个核心 Speech LLM
-      (Ultravox, Qwen2-Audio, Phi-4-Multimodal, Gemini)。tasks/datasets 字段为空,
-      可补充评估任务和噪声数据集。
+      方法节详细解释了每个设计选择的 WHY: RNN-T vs encoder-decoder(label bias/timestamp/latency),
+      BEST-RQ vs HuBERT(避免迭代聚类开销), sequential transducer loss(内存降低 T 倍),
+      伪标签互验(防止错误模式自强化)。速查可借鉴列出 3 个具体可迁移技巧。
+  trustworthy:
+    score: 8
+    verdict: pass
+    reason: >
+      数字 claim 标注覆盖率 >90%,所有关键指标(WER/RTF/FRN/ORN/HRN)均标注
+      Table/Figure 出处。指标名使用正确。速查指标字段含具体数字+数据集名+来源。
+      无方向性错误。
+  distinguishable:
+    score: 8
+    verdict: pass
+    reason: >
+      [论文原文]/[agent 解读] 标签一致使用,覆盖率约 85%。推断性分析
+      (如 encoder-decoder hallucination 机制解释、商业论文选择性报告风险)
+      均明确标注为 agent 解读。
+  locatable:
+    score: 7
+    verdict: pass
+    reason: >
+      KB 背景基于 4 个 pending-review 页面定位,谱系对比 Whisper/USM 路线清晰。
+      创新判断(system-centric 视角)有明确基准。但 KB 中无 confirmed 实体命中,
+      定位深度受限。
   no_pollution:
     score: 9
     verdict: pass
     reason: >
-      本次不执行反向更新。笔记内容准确,无 factual error 或 overclaim。
-      如果执行反向更新,SpeechLanguageModel 页适合追加本文作为
-      cascade equivalence 的关键证据。
+      no-kb-update 模式,不执行反向更新。笔记内容准确,无 overclaim。
+      concepts/models/datasets frontmatter 指向正确实体。
 
 issues:
   - id: 1
-    type: "template-compliance"
-    severity: "medium"
-    location: "frontmatter.models"
+    type: "traceability-gap"
+    severity: "low"
+    location: "局限性 #4"
     detail: >
-      models 字段仅列 [[Whisper]],但本文核心评估的四个 Speech LLM
-      (Ultravox v0.6, Qwen2-Audio-7B, Phi-4-Multimodal, Gemini 2.0 Flash)
-      和三个 matched-backbone cascade 中的 LLM backbone
-      (Llama-3.1-8B, Qwen2-7B, Phi-4-mini) 均未列出。
-    suggestion: >
-      由于这些模型大多无独立模型页,可使用纯文本列出:
-      models: ["[[Whisper]]", "Ultravox v0.6", "Qwen2-Audio-7B",
-      "Phi-4-Multimodal", "Gemini 2.0 Flash"]
+      Hallucination 指标局限性讨论是 agent 推断但未标注 [agent 解读] 标签。
+    suggestion: "加 [agent 解读] 标签"
   - id: 2
     type: "template-compliance"
     severity: "low"
-    location: "frontmatter.tasks, frontmatter.datasets"
+    location: "frontmatter.models"
     detail: >
-      tasks 和 datasets 字段为空。本文评估了 6 个任务(TriviaQA, AG News,
-      SST-2, CommonsenseQA, MELD, MUStARD)和 1 个噪声数据集(MUSAN)。
+      Canary-1B 是核心 baseline 但未列入 frontmatter models 字段
+      (因 vault 内无对应实体页)。Universal-1(本文模型)也未列出。
     suggestion: >
-      可补充为 tasks: [] (因任务库无对应页面)或以纯文本列出。
-      datasets: [] 可保持空,因无对应数据集页。
-  - id: 3
-    type: "template-compliance"
-    severity: "low"
-    location: "frontmatter.arxiv_id, source"
-    detail: >
-      arxiv_id 为 "2602.17598" (论文实际 ID),但 source PDF 文件名为
-      "Sources/2404.09841.pdf" (用户指定的不同 ID)。笔记文件名
-      "IndustrialScaleASR" 与论文标题 "The Cascade Equivalence Hypothesis"
-      不匹配。
-    suggestion: >
-      这些由用户显式指定,不修改。但如果后续整理,建议将 PDF 重命名为
-      与笔记名一致的 Sources/IndustrialScaleASR.pdf,或将笔记名改为
-      更准确的 CascadeEquivalenceHypothesis.md。
+      可以纯文本列出: models: ["[[Whisper]]", "Universal-1", "Canary-1B"]
 
 learning_signals: []
 
 summary:
-  total_issues: 3
+  total_issues: 2
   high: 0
-  medium: 1
+  medium: 0
   low: 2
   pass_rate: "5/5 principles pass"
