@@ -202,6 +202,12 @@ TruS 的核心贡献是范式转换: 将 speaker unlearning 从"修改模型权�
 
 <!-- 审阅由独立 subagent 完成 -->
 
+> [!review] 审阅 (2026-06-04, auto)
+> **结论**: pass
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/TruS-review.yml`
+
 ---
 
 检索命中: [[ConditionalFlowMatching]]✓, [[SpeakerEmbedding]]✓, [[Zero-shotSpeechSynthesis]]✓ | 过滤: [[SpeakerVerification]][待确认], [[Anti-spoofingandDeepfakeDetection]][待确认], [[Emilia]][待确认] | 未命中但可能相关: [[DiffusionModel]](DiT 基础), [[EmotionControlinTTS]](EmoSteer-TTS 关联)

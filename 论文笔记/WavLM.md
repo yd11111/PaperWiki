@@ -191,3 +191,10 @@ $$r_{i-j} = d_{|i-j|} + g_i^{(\text{update})} d_{i-j} + (1 - g_i^{(\text{update}
 ---
 
 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeakerEmbedding]]✓, [[SpeechLanguageModel]]✓, [[SpeechFactorization]]✓ | 过滤: 无 | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

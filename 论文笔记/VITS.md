@@ -201,3 +201,10 @@ $$L_{vae} = L_{recon} + L_{kl} + L_{dur} + L_{adv}(G) + L_{fm}(G)$$
 ---
 
 检索命中: [[NeuralVocoder]]✓, [[VariationalAutoencoderforTTS]](pending-review), [[Non-autoregressiveTTS]](pending-review), [[DurationPredictor]](pending-review) | 过滤: [[MelSpectrogram]](pending-review), [[PhonemeRepresentation]](pending-review) | 未命中但可能相关: Normalizing Flow (无独立页)
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

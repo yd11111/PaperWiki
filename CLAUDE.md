@@ -82,13 +82,13 @@ log.md             ← 操作日志
 Sources/           ← PDF(gitignored)
 ```
 
-## 当前 vault 状态 (2026-06-04)
+## 当前 vault 状态 (2026-06-09)
 
-- 论文笔记: 257 篇 (242 deep + 2 repro + 2 enhanced-card + 11 card)
-- 实体页: 93 个 (62 概念 + 20 模型 + 4 任务 + 7 数据集), 其中 22 confirmed / 71 pending-review
-- 可信层: 22 confirmed 实体 + 1 reviewed 笔记
-- MOC: 9 个
-- MOC 覆盖: 243/244 deep/repro
-- 审阅覆盖: 176/244 deep/repro 有 review callout
-- 审阅报告: 173 个 (_review/*.yml)
+- 论文笔记: 529 篇 (513 deep + 3 repro + 2 enhanced-card + 11 card)
+- 实体页: 96 个 (62 概念 + 20 模型 + 4 任务 + 10 数据集), 其中 22 confirmed / 74 pending-review
+- 可信层: 22 confirmed 实体 + 2 reviewed 笔记
+- MOC: 16 个
+- MOC 覆盖: 516/516 deep/repro
+- 审阅覆盖: 516/516 deep/repro 有 review callout
+- 审阅报告: 560 个 (_review/*.yml)
 

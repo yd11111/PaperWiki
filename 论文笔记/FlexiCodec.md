@@ -184,3 +184,10 @@ FlexiCodec@6.25Hz (0.64 kbps/8q, 216M) 在 semantic 指标上优于 SpeechTokeni
 ---
 
 检索命中: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ConditionalFlowMatching]], [[Multi-scaleSTFTDiscriminator]], [[QuantizerDropout]] | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

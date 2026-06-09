@@ -198,3 +198,10 @@ Step-Audio-R1 的架构继承自 Step-Audio 2,由三个组件构成 [§2, Fig 2]
 4. **Self-cognition correction via DPO**: 模型从大量文本数据继承的"我是文本模型"错误认知,可以用少量 DPO preference pairs (8K) 几乎完全消除 (6.76%→0.02%)。适用于任何跨模态模型的 identity alignment。
 
 5. **空 think tag 的格式初始化**: 对不需要推理的样本,用 `<think>\n\n</think>\n{response}` 格式保持结构一致性。这个小技巧确保模型学习到推理的"开关",而非被迫在所有场景推理。
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

@@ -214,3 +214,10 @@ CosyVoice 2 是一篇工程驱动的系统论文,其价值在于将多个正确�
 ---
 
 检索命中: [[SpeechTokenizer]], [[ConditionalFlowMatching]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[FiniteScalarQuantization]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

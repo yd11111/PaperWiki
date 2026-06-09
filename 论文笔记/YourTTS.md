@@ -152,3 +152,10 @@ YourTTS 基于 VITS [19] 架构,增加若干 modifications for zero-shot multi-s
 ---
 
 检索命中: [[SpeakerEmbedding]], [[NeuralVocoder]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]] | 过滤: [[SpeakerAdaptation]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[VITS]](pending-review) | 未命中但可能相关: Variational Autoencoder for TTS, Speech-Text Alignment
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

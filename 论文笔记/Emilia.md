@@ -163,3 +163,10 @@ DNSMOS P.835 OVRL 3.26 ± 0.14,在 9 个数据集中排第三 (仅次于 MLS 3.3
 3. **WavLM + Sentence-BERT 多样性分析方法**: acoustic + semantic 双维度 PCA 可视化评估数据集多样性
 4. **Duration outlier 过滤**: 平均 phone duration 的 1.5×IQR 过滤规则可复用于任何 ASR 标注的语音数据
 5. **Source separation + Speaker diarization + VAD 三级分割**: 从混合音频到单说话人短片段的标准流程
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

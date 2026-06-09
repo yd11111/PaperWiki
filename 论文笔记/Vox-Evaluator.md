@@ -25,7 +25,7 @@ updated: 2026-06-04
 >
 > **谱系定位**: Vox-Evaluator 处于 TTS 评估与 TTS 后训练优化的交叉地带。在 TTS Evaluation 维度,它属于"自动评估 + 纠错"路线,与 TTSDS2 (分布级评估)、GSRM (声学特征锚定)、SpeechJudge (偏好判别) 等评估工具并列,但独特之处在于**同时输出 error localization + text transcription + quality score 三层信息**,并将评估结果直接用于 downstream correction 和 DPO。在 Differentiable Reward Optimization 维度,Vox-Evaluator 的 DPO 方案属于 utterance-level/segment-level DPO 路线 (类似 FPO),与 DiffRO (token-level 可微)、GRPO (音频级采样) 构成三条并行路径。
 >
-> **已有认知**: 零样本 TTS 的稳定性 (WER) 和保真度 (SIM) 仍是核心挑战 [[[Zero-shot Speech Synthesis]]]; F5-TTS 等 NAR flow-matching 模型虽推理快但易产生 hallucination artifacts [[[Non-autoregressive TTS]]]; DPO/RLHF 用于 TTS 后训练已有成熟路线 (SpeechAlign→FPO→DiffRO→GRPO) [[[Differentiable Reward Optimization]]]; SEED-TTS-Eval 是标准 benchmark, F5-TTS baseline WER 1.83% (test-en) [[[SEED-TTS-Eval]]].
+> **已有认知**: 零样本 TTS 的稳定性 (WER) 和保真度 (SIM) 仍是核心挑战 [[Zero-shotSpeechSynthesis]]; F5-TTS 等 NAR flow-matching 模型虽推理快但易产生 hallucination artifacts [[Non-autoregressiveTTS]]; DPO/RLHF 用于 TTS 后训练已有成熟路线 (SpeechAlign→FPO→DiffRO→GRPO) [[DifferentiableRewardOptimization]]; SEED-TTS-Eval 是标准 benchmark, F5-TTS baseline WER 1.83% (test-en) [[SEED-TTS-Eval]].
 >
 > **创新判断**: Vox-Evaluator 的核心创新在于将"评估→纠错→偏好优化"三步统一到一个 evaluator 模型中,不依赖外部 ASR+MFA 的复杂 pipeline。与 FPO 相比,Vox-Evaluator 自己检测 error segments 而非依赖外部标注; 与 DiffRO 相比,Vox-Evaluator 在 inference-time 纠错而非训练时优化; 这种"评估驱动的迭代纠错"是一个相对少见的范式。
 >

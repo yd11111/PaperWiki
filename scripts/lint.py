@@ -803,9 +803,12 @@ def check_l17():
 
 
 # L18: key_papers count exceeds limit
+# 概念页无硬上限 (quality by entity-review)；模型/数据集/任务页上限 12
 def check_l18():
-    entity_dirs = [DIRS["concepts"], DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
-    for f in collect_md_files(*entity_dirs):
+    concept_dir = DIRS["concepts"]
+    other_dirs = [DIRS["models"], DIRS["datasets"], DIRS["tasks"]]
+    # 模型/数据集/任务页: 硬上限 12
+    for f in collect_md_files(*other_dirs):
         fm = parse_frontmatter(f)
         if not fm:
             continue
@@ -816,6 +819,16 @@ def check_l18():
             err("L18", f.relative_to(VAULT).as_posix(),
                 f"key_papers 有 {len(kp)} 条(上限 12) — "
                 f"请精简为奠基/代表/转折级文献,多余的移到正文'相关工作'段或 MOC")
+    # 概念页: 仅打印 info (不计入 error)
+    for f in collect_md_files(concept_dir):
+        fm = parse_frontmatter(f)
+        if not fm:
+            continue
+        if fm.get("lifecycle") in ("deprecated", "merged"):
+            continue
+        kp = fm.get("key_papers", [])
+        if isinstance(kp, list) and len(kp) > 30:
+            print(f"INFO [L18] 概念页 {f.relative_to(VAULT).as_posix()}: key_papers {len(kp)} 条 — 建议 entity-review 时评估信噪比")
 
 
 # ---------------------------------------------------------------------------

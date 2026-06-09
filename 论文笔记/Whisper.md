@@ -210,3 +210,10 @@ Whisper 采用标准 encoder-decoder Transformer [§2.2, Fig 1]:
 ---
 
 检索命中: [[SpeechTokenizer]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[LLM-enhancedASR]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

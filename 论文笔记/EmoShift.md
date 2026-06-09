@@ -30,7 +30,7 @@ updated: 2026-06-04
 | Emotion embedding / label | EmoSphere++, Daisy-TTS | 大规模情感数据 | 全参数/大量参数 |
 | Natural language description | EmoVoice, CosyVoice2 | Instruct fine-tuning | 全参数 |
 | ControlNet 旁挂 | TTS-CtrlNet | ~400h 数据 | ControlNet 参数 |
-| Training-free steering | [[论文笔记/EmoSteer-TTS\|EmoSteer-TTS]] | 无需训练 | 0 |
+| Training-free steering | [[论文笔记/EmoSteer-TTS]] | 无需训练 | 0 |
 | **Learnable steering** | **EmoShift** | **ESD 数据, 5 epochs** | **10M (< 1/30 全参)** |
 
 **已有认知 (confirmed)**:
@@ -187,3 +187,10 @@ EmoShift 在 LLM-based TTS 管线中插入一个轻量的 EmoSteer 层 [§3, Fig
 3. **仅训练 steering 层,冻结 backbone**: 10M vs 311M 的参数效率比表明情感表达是 hidden space 中的低维子空间,不需要大规模参数更新。这一策略可推广到其他可控属性的 parameter-efficient 适配。
 
 4. **EmoSteer 层仅作用于 speech token 区域 (非 prompt/text 区域)**: 选择性地在生成区域施加 steering,保持条件编码不变。这是一个通用的设计原则 — 可控性应体现在输出端而非输入端。
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

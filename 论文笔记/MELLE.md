@@ -213,3 +213,10 @@ MELLE-R4 仅需 1.40s 生成 10s 语音,超越所有对比系统 [Table 5]。
 5. **Ground truth mel > EnCodec**: Table 1 直接证明从 mel reconstruction 比从 EnCodec reconstruction 有更好的 WER 和 SIM,为"回归连续表示"提供实证支持
 
 检索命中: [[LLM-basedTTS]], [[CodecLanguageModel]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[SemanticvsAcousticTokens]], [[SpeechFactorization]] | 过滤: [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

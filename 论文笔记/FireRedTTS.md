@@ -157,3 +157,10 @@ FireRedTTS 的核心价值在于**系统完整性**而非单点突破。它展�
 ---
 
 检索命中: [[SpeechTokenizer]], [[LLM-basedTTS]], [[ConditionalFlowMatching]], [[SpeakerEmbedding]], [[SemanticvsAcousticTokens]], [[NeuralVocoder]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[EmotionControlinTTS]](pending-review), [[VoiceCloningTaxonomy]](pending-review) | 未命中但可能相关: Instruction-Guided Speech Synthesis
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

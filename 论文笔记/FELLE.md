@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "FELLE"
 aliases: [FELLE TTS, Token-Wise Coarse-to-Fine Flow Matching TTS]
@@ -13,6 +14,7 @@ status: draft
 concepts: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[MelSpectrogram]]"]
 models: ["[[模型库/MELLE|MELLE]]"]
 tasks: [TTS, zero-shot-TTS]
+kb_context_sources: []
 created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]"]
@@ -232,3 +234,10 @@ hat{v}_t(x^*; .) = w * v_t^*(x^*, c; theta) + (1-w) * v_t^*(x^*, epsilon; theta)
 ---
 
 检索命中: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: MELLE(模型页, pending-review)
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

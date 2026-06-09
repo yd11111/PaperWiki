@@ -207,3 +207,10 @@ HierSpeech++ 由三个独立子系统组成 [Fig 1]:
 5. **NN upsampler 替代 transposed convolution**: 减少 tonal artifacts 且更高效
 
 检索命中: [[VariationalAutoencoderforTTS]], [[SpeechFactorization]], [[SemanticvsAcousticTokens]], [[F0Modeling]], [[NeuralVocoder]], [[SpeakerEmbedding]] | 过滤: [[MelSpectrogram]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

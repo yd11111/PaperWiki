@@ -141,3 +141,10 @@ RIO 提出了一个 **优雅的自监督偏好判据**: reverse inference 作为
 2. **Non-pairwise RLHF**: 使用独立的 pos/neg pools + KL reference point,不需要 paired preference data
 3. **极低成本 RL training**: ~150 exemplars + 1 epoch 即可显著改善鲁棒性
 4. **PPC for evaluation**: 可作为 automatic TTS evaluation metric (complementary to WER/SIM)
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

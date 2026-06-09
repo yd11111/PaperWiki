@@ -210,3 +210,10 @@ $$\mathbf{x} \leftarrow \mathbf{x} + \text{Linear}(\mathbf{x}) \odot \boldsymbol
 4. **Speech-specific codec simplification**: 去除 attention + 减少通道 → 仅 19.8M 参数的轻量 speech codec, 保持竞争质量 [§4.1]
 
 检索命中: [[ResidualVectorQuantization]], [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[CodebookCollapse]], [[Multi-scaleSTFTDiscriminator]] | 过滤: [[TokenRateandBitrateTrade-offs]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review), [[AudioTokenizerTaxonomy]](pending-review), [[QuantizerDropout]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

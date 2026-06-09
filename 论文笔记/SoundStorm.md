@@ -191,3 +191,10 @@ SoundStorm 的影响体现在后续工作中: MaskGCT 将 masked generative mode
 ---
 
 检索命中: [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[SpeechTokenizer]] | 过滤: [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

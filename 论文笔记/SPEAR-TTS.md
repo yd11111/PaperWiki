@@ -148,3 +148,10 @@ SPEAR-TTS 与 AudioLM 出自同一团队 (Google Research), 可视为 AudioLM �
 2. **自监督预训练 + 少量微调**: BART/T5 风格的去噪预训练在 speech token 域同样有效, 预训练 1M steps 后仅需 15 分钟微调
 3. **Example prompting 替代 speaker embedding**: 用 acoustic token prefix 做 in-context speaker conditioning, 无需显式 speaker encoder 或 speaker ID
 4. **Quality-based resampling**: 采样 n_s=3 候选 → DNSMOS 选最优 → 同时改善质量和准确率, 成本仅增 3x
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

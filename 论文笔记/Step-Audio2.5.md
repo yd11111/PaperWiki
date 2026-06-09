@@ -140,3 +140,10 @@ StepAudio 2.5 提出了一个重要的系统观点: **task specialization = dire
 4. **Progressive SFT for dialogue**: conversational → persona → paralinguistic 的三阶段渐进,配合 dynamic rehearsal schedule 防遗忘
 5. **Million-scale persona fission**: 少量人工种子 → 算法重组 → 百万级 persona-dialogue pairs
 6. **ROVER voting for long-form ASR data**: 多 ASR 系统投票 + quality filtering + LLM refinement 生产高质量长音频标注
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

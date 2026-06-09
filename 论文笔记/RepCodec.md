@@ -196,3 +196,10 @@ $$l = \lambda_r \cdot l_r + \lambda_q \cdot l_q$$
 4. **Reconstruction loss 作为 token 质量指标**: 重建损失比 PNMI 更好地预测下游性能 — 可作为 tokenizer 选择的 proxy metric [§4.4]
 
 检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[CodebookCollapse]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

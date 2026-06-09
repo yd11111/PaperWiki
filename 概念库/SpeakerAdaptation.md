@@ -61,7 +61,7 @@ Speaker adaptation 在面对不同说话风格、口音和声学条件时的挑�
 - **Semi-supervised**: Inoue et al. 用预训练 ASR 获取文本,再训练 TTS
 - **VQ-VAE linguistic units**: Zhang et al. 从无转写语音提取离散语言单元
 - **AdaSpeech 2**: mel reconstruction + phoneme encoder 的 L2 loss,无需文本转写即可适应
-- **UnitSpeech**: 用 HuBERT discrete units 替代 mel-spectrogram 作为替代 encoder 输入,结合 diffusion decoder (Grad-TTS) 微调,单条无转写音频即可适应,同时支持 TTS 和 VC [[[论文笔记/UnitSpeech|UnitSpeech]]]
+- **UnitSpeech**: 用 HuBERT discrete units 替代 mel-spectrogram 作为替代 encoder 输入,结合 diffusion decoder (Grad-TTS) 微调,单条无转写音频即可适应,同时支持 TTS 和 VC [[论文笔记/UnitSpeech|UnitSpeech]]
 
 ### 5. Parameter Efficiency (参数效率)
 

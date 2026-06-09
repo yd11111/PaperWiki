@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "TTSDS2"
 aliases: [TTSDS2, Text-to-Speech Distribution Score 2, TTS Distribution Score 2]
@@ -15,6 +16,7 @@ updated: 2026-06-03
 concepts: ["[[TTSEvaluation]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]"]
 models: ["[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/Whisper|Whisper]]"]
 datasets: []
+kb_context_sources: []
 kb_sources: ["[[TTSEvaluation]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]"]
 ---
 tier: deep
@@ -183,3 +185,10 @@ Bottom 3:
 ---
 
 检索命中: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[ProsodyModeling]], [[SpeakerEmbedding]] | 过滤: [[TTSEvaluation]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

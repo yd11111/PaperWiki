@@ -195,3 +195,10 @@ VQ-VAE 可在离散隐空间中生成 action-conditioned 视频序列, 不需要
 5. **Content-speaker factorization via VQ**: 离散 latent 编码 content, decoder conditioning 编码 speaker — voice conversion 的自然框架 [§4.3]
 
 检索命中: [[ResidualVectorQuantization]], [[CodebookCollapse]], [[SpeechTokenizer]] | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

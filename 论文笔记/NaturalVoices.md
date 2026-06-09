@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "NaturalVoices"
 aliases: [NaturalVoices Dataset, NaturalVoice Dataset]
@@ -15,6 +16,7 @@ updated: 2026-06-03
 concepts: ["[[SpeakerEmbedding]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
 models: []
 datasets: []
+kb_context_sources: []
 kb_sources: ["[[SpeakerEmbedding]]", "[[EmotionControlinTTS]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
@@ -138,3 +140,10 @@ Voice Conversion (VC) 研究长期依赖**朗读/表演语音数据集** (VCTK 4
 ---
 
 检索命中: [[SpeakerEmbedding]], [[EmotionControlinTTS]], [[ProsodyModeling]] | 过滤: 无 | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

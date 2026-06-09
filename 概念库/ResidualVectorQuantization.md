@@ -50,7 +50,7 @@ DAC 的改进 [§3.2]: 使用 factorized codes (低维 8d lookup) + L2-normaliza
 | **CSRVQ** (Cross-Scale RVQ) | 在 encoder/decoder 不同层级间做残差量化; coarse-to-fine 多分辨率 | ESC (Gu & Diao 2024), Disen-TF-Codec |
 | **RNDVQ** (Residual Normal Distribution VQ) | 将量化公式化为概率选择而非确定性最近邻; 改善 codebook 利用率和鲁棒性 | NDVQ (Niu et al. 2024) |
 | **GRVQ** (Grouped RVQ) | GVQ + RVQ 的结合; 分组后做残差量化 | Prompt Codec, HiFi-Codec |
-| **EG-GRVQ** (Entropy-Guided GRVQ) | 用信道方差作为信息量代理,不等分组使每组信息量均衡; 改善 codebook 利用率 | [[论文笔记/EntropyGRVQ\|EntropyGRVQ]] (Ren et al. 2026) |
+| **EG-GRVQ** (Entropy-Guided GRVQ) | 用信道方差作为信息量代理,不等分组使每组信息量均衡; 改善 codebook 利用率 | [[论文笔记/EntropyGRVQ]] (Ren et al. 2026) |
 
 ### GVQ 数学形式 [§2.2.1]
 

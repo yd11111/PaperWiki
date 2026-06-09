@@ -7,7 +7,7 @@ year: 2021
 tags: [TTS, end-to-end, VAE, normalizing-flow, GAN, parallel-synthesis]
 key_concepts: ["[[VariationalAutoencoderforTTS]]", "[[Non-autoregressiveTTS]]", "[[DurationPredictor]]", "[[NeuralVocoder]]", "[[Speech-TextAlignment]]"]
 tasks: []
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Muyan-TTS|Muyan-TTS]]", "[[论文笔记/MathReader|MathReader]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/TMD-TTS|TMD-TTS]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/YourTTS|YourTTS]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/Llama-VITS|Llama-VITS]]", "[[论文笔记/TITW|TITW]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Muyan-TTS|Muyan-TTS]]", "[[论文笔记/SafeSpeech|SafeSpeech]]", "[[论文笔记/FaceSpeak|FaceSpeak]]", "[[论文笔记/FMSD-TTS|FMSD-TTS]]", "[[论文笔记/FNH-TTS|FNH-TTS]]", "[[论文笔记/TMD-TTS|TMD-TTS]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
@@ -41,6 +41,11 @@ VITS (Kim et al., ICML 2021) 是首个将 conditional VAE + normalizing flow + a
 ## 演进线
 
 Glow-TTS (Kim et al., 2020; flow-based NAR) → **VITS** (2021; VAE+Flow+GAN E2E) → VITS 2 (Kim et al., 2023; 多说话人扩展) → NaturalSpeech (Tan et al., 2022; memory-based VAE 扩展) → VALL-E / LLM-based TTS (2023; 范式转换)
+
+## 作为 Baseline 被引用
+
+- [[论文笔记/MathReader|MathReader]]
+- [[论文笔记/ParaStyleTTS|ParaStyleTTS]]
 
 ## 关键贡献
 

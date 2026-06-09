@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "SpeechWorldModel"
 aliases: [Speech World Model, SWM, Causal Graph Speech Understanding]
@@ -15,6 +16,7 @@ updated: 2026-06-03
 concepts: ["[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[ProsodyModeling]]", "[[EmotionControlinTTS]]"]
 models: []
 datasets: []
+kb_context_sources: []
 kb_sources: ["[[SpeechLanguageModel]]", "[[AudioUnderstanding]]", "[[ProsodyModeling]]"]
 ---
 tier: deep
@@ -181,3 +183,10 @@ S̃_{i,u→v} = τ · onehot(y_{i,u}) + (1-τ) · stopgrad(S_{i,u}),  τ ~ Berno
 ---
 
 检索命中: [[SpeechLanguageModel]], [[AudioUnderstanding]], [[ProsodyModeling]] | 过滤: 无 | 未命中但可能相关: [[EmotionControlinTTS]]
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

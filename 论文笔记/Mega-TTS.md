@@ -155,3 +155,10 @@ Mega-TTS 的核心贡献是**将 inductive bias 思想系统化应用于 TTS 设
 3. **跨语句 timbre 提取**: 从同说话人不同语句中提取 timbre → 迫使解耦, 比同语句 reference encoder 更干净
 4. **离散 prosody codes 的 speech editing**: 连续表征难做边界融合, 离散 codes 可直接计算概率 → max-likelihood 路径选择
 5. **低频 mel 输入 prosody encoder**: 前 20 bins 包含韵律但少量 timbre/content → 简单有效的信息瓶颈
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

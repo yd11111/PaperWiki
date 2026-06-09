@@ -132,3 +132,10 @@ AudioLM 是 speech language model 领域的里程碑式工作。其核心贡献�
 2. **条件独立性分解序列**: 利用 RVQ 的层级结构将长序列拆分为多个短序列, 减少计算量
 3. **3 秒 prompt 的 in-context learning**: 不用显式 speaker embedding, 仅靠 acoustic token prefix 就能保持说话人身份 — 这一范式被 VALL-E 和 SPEAR-TTS 继承
 4. **Fake detection 作为安全措施**: 伴随生成能力提供检测能力, 是负责任 AI 的最佳实践
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

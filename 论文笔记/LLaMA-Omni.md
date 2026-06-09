@@ -175,3 +175,9 @@ LLaMA-Omni 的优势: 语音率 (WPS) 在不同延迟条件下几乎不变 (~2.7
 3. **InstructS2S 数据构造流程**: 用强 LLM 将文本指令数据改写为口语风格 + 生成简洁响应 + TTS 合成。适用于任何需要构建 speech interaction 训练数据的场景
 4. **两阶段解耦训练**: Stage 1 训 understanding (adaptor + LLM), Stage 2 冻结主体训 generation (decoder)。适用条件: decoder 模块相对独立且不需要通过反向传播影响 LLM 内部表征。不适用于需要 LLM 根据 decoder 反馈调整生成的场景 (如 prosody-aware text generation)。LLaMA-Omni 2 正是将 Stage 2 的 decoder 换为 AR 模型来升级语音质量
 5. **Streaming 的 chunk-based vocoder 输出**: 用 minimum chunk size Omega 控制延迟-质量 trade-off,从 236ms (Omega=10) 到 563ms (Omega=100),用户可根据应用场景灵活调节
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass-with-fixes
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/LLaMA-Omni-review.yml`

@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "CoT-ST"
 aliases: [Chain-of-Thought Speech Translation, CoT Speech Translation]
@@ -15,6 +16,7 @@ updated: 2026-06-03
 concepts: ["[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]"]
 models: ["[[模型库/Whisper|Whisper]]"]
 datasets: []
+kb_context_sources: []
 kb_sources: ["[[SpeechLanguageModel]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]"]
 ---
 tier: deep
@@ -161,3 +163,10 @@ CoT 输出格式: `<transcription> <|lang|> <translation>` [Table 1]
 ---
 
 检索命中: [[SpeechLanguageModel]], [[Speech-TextAlignment]], [[AudioUnderstanding]] | 过滤: 无 | 未命中但可能相关: [[ModalityAdaptationforSpeechLLM]]
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

@@ -148,3 +148,10 @@ w2v-BERT 2.0 继承并扩展了 w2v-BERT (Chung et al., 2021) 的双模块架构
 ---
 
 检索命中: [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

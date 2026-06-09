@@ -206,3 +206,10 @@ NaturalSpeech 3 是一篇概念优雅、实验扎实的工作。其核心 insigh
 ---
 
 检索命中: [[SpeechFactorization]], [[ResidualVectorQuantization]], [[SpeechTokenizer]] | 过滤: [[Diffusion-basedTTS]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[GradientReversalLayer]](pending-review), [[MaskedGenerativeModeling]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

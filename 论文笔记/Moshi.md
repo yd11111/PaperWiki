@@ -141,3 +141,10 @@ Moshi 是语音对话领域的里程碑式工作,其贡献在于系统性地解�
 3. **Adversarial-only codec training**: 去除重建 loss 大幅提升感知音质,值得在其他 codec 中验证
 4. **Depthwise parametrization**: Depth Transformer 中不同 codebook level 使用独立参数,适用于任何 RQ-Transformer 架构
 5. **Acoustic delay 模式 [0,2,2,2,2,2,2,2]**: semantic 和 acoustic 之间引入固定 delay,让大模型先建模语义再建模声学,适用于任何层级 codec token 生成
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

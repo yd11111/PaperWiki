@@ -166,3 +166,10 @@ CLEAR 与 LatentLM 几乎同时期提出了相似的核心思想 (连续 VAE lat
 ---
 
 检索命中: [[ConditionalFlowMatching]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[DiffusionModel]](pending-review), [[Diffusion-basedTTS]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

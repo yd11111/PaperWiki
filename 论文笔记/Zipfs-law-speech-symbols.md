@@ -185,7 +185,7 @@ Input waveform → Speech2unit (HuBERT encoder + k-means clustering) → Discret
 3. 非文本偏差分析展示了实际应用价值: 无需文本转录即可检测非标准语音
 
 **不足**:
-1. 分析深度有限: 仅做了 rank-frequency 拟合,未引入 Heaps' law 或 entropy 分析 (这些在后续 Park et al., 2025 的 [[论文笔记/NACTokenLanguageAnalysis|NAC Token Language Analysis]] 中被补充)
+1. 分析深度有限: 仅做了 rank-frequency 拟合,未引入 Heaps' law 或 entropy 分析 (这些在后续 Park et al., 2025 的 NAC Token Language Analysis 中被补充)
 2. 未建立统计特性与下游任务性能的关联 (同样在后续工作中解决)
 3. 实验设置较简单: 单一 SSL 模型 (HuBERT), 单一聚类配置 (k=200), 朗读语音
 

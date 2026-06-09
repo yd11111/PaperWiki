@@ -218,3 +218,9 @@ MinMo 采用渐进式四阶段对齐训练 [§3.4]:
 3. **Style control through hidden embedding only** [§3.4]: 不需要修改 LLM 参数,仅通过 Voice Decoder 训练 + hidden embedding 传递就能实现风格控制。这意味着 aligned 模型的输出模态可以"免费"获得 LLM 的指令理解能力,只要 decoder 能正确利用 hidden states 中的信息。
 
 4. **三源 S2S 数据构造策略** [§3.3]: 文本对话合成 (保证多样性) + 真实语音+LLM回复 (保证鲁棒性) + 风格可控合成 (保证表达力) 的三种混合策略,可复用于任何缺乏真实 S2S 数据的场景。
+
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass
+> 
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/MinMo-review.yml`

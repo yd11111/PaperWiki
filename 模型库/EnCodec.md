@@ -7,7 +7,7 @@ year: 2022
 tags: [audio-codec, neural-compression, RVQ, speech-tokenizer]
 key_concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]"]
 tasks: ["[[NeuralAudioCompression]]"]
-key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/TacoLM|TacoLM]]", "[[论文笔记/SESD|SESD]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/MAEStyle-RichTTS|MAE Style-Rich TTS]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/FuseCodec|FuseCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]"]
+key_papers: ["[[论文笔记/VALL-E|VALL-E]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/NaturalSpeech3|NaturalSpeech 3]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/RepCodec|RepCodec]]", "[[论文笔记/DS-Codec|DS-Codec]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/FuseCodec|FuseCodec]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/TacoLM|TacoLM]]"]
 supersedes: ["[[模型库/SoundStream|SoundStream]]"]
 superseded_by: []
 status: confirmed
@@ -43,6 +43,12 @@ EnCodec 的 discrete codes 被广泛用作 speech tokenizer:
 - VALL-E (Microsoft, 2023): 使用 EnCodec tokens 作为 acoustic target
 - MusicLM (Google, 2023): 音乐生成
 - AudioLM (Google, 2022): 通用音频生成
+
+## 作为 Baseline 被引用
+
+- [[论文笔记/SESD|SESD]]
+- [[论文笔记/TTS-Transducer|TTS-Transducer]]
+- [[论文笔记/MAEStyle-RichTTS|MAE Style-Rich TTS]]
 
 ## 关键论文
 

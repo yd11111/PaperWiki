@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ConditionalFlowMatching]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[InstructedSpeechGeneration]]"]
-key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/MamTra|MamTra]]", "[[论文笔记/RWKVTTS|RWKVTTS]]", "[[论文笔记/EmoVoice|EmoVoice]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/JoyTTS|JoyTTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/NonverbalTTS|NonverbalTTS]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/WeSCon|WeSCon]]", "[[论文笔记/BatonVoice|BatonVoice]]", "[[论文笔记/Audiobook-CC|Audiobook-CC]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]"]
+key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice3|CosyVoice 3]]"]
 status: confirmed
@@ -82,3 +82,6 @@ CosyVoice (2024) → CosyVoice 2 (2024, streaming + instruction) → [[论文笔
 - [[论文笔记/WAND|WAND]] (Lee et al., KAIST/SKKU, 2026): 在 CosyVoice 2-0.5B 上应用 windowed attention + KD 实现常数推理开销; KV cache 5.25 MB vs baseline 10.48 MB (-49.9%), GFLOPs 7.44 vs 11.55 (speedup 1.55x); WER en 1.72% vs 1.94% (改善), CER zh 1.53% vs 1.59% (改善); 仅用 100h LibriTTS 1 epoch 微调,不改架构; 注意力分析显示 CosyVoice 2 的 58.5% 注意力在 conditioning prefix [WAND Table 1, Table 2, Table 3]
 - [[论文笔记/CosyEdit2|CosyEdit2]] (Chen et al., Nankai, 2026): 以 CosyVoice2 为 backbone 构建端到端 speech editing 系统,通过两阶段 post-training (SFT→editing-oriented GRPO) 解锁编辑能力; GRPO 仅更新 LLM 而冻结 Flow+BigVGAN; 编辑性能: WER 1.43% (substitution, Ming-Freeform), SS 0.89-0.93, MAE_DNSMOS 0.107-0.137 (best acoustic consistency); 关键发现: editing-oriented GRPO 反哺 zero-shot TTS,SEED-TTS CER zh 1.36→1.16, WER en 3.10→1.95; CV3-Eval hard-zh CER 15.70→8.06 [CosyEdit2 Table 1, Table 2, Table 9]
 - [[论文笔记/UniVocal|UniVocal]] (Shi et al., Tongyi Fun Team, 2026): 以 CosyVoice2 为 backbone 扩展至 speech-singing code-switching (SCS) 统一生成; 通过 refined cent token (1200-bin pitch 离散化) + CoT interleaved generation 补充 semantic token 的 pitch 信息; 两阶段 curriculum learning (stage-1 speech-singing 对齐, stage-2 SCS 学习); SCSBench-Mixed F1(O) 0.871 / F1(S) 0.810; SeedTTS-EN UTMOS 4.21 vs CosyVoice2 4.18; Empathy E-MOS 2.26 vs CosyVoice2 1.78 (+0.48); singing GTsinger WER 18.07 (best); 6 天 4xA800 训练 [UniVocal Table 1-4]
+- [[论文笔记/MELA-TTS|MELA-TTS]]
+- [[论文笔记/MSR-Codec|MSR-Codec]]
+- [[论文笔记/Audiobook-CC|Audiobook-CC]]

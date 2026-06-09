@@ -178,3 +178,10 @@ SongGen 是 text-to-song generation 领域的重要里程碑:
 3. **VoiceBPE 音素级 tokenizer**: 歌唱场景下,音素级比词级 tokenizer 更适合,因为需要建模音素时长和音高变化
 4. **Curriculum learning for codebook weights**: RVQ 多层 loss 权重从不均匀逐步平衡,先学 coarse 再精化
 5. **数据质量筛选 pipeline**: 双 ASR 模型 + edit distance 过滤 + CLAP 评分 + 能量过滤,可复用于任何音频-文本对数据清洗
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

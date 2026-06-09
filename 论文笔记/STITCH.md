@@ -203,3 +203,10 @@ t₁ ∘ s₁ ∘ z₁ ∘ t₂ ∘ s₂ ∘ z₂ ∘ ... [论文原文]
 ---
 
 检索命中: [[SpeechLanguageModel]], [[SpeechTokenizer]] | 过滤: [[StreamingSpokenDialogue]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

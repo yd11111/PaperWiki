@@ -173,3 +173,10 @@ GRM 相比 BTRM 的优势主要来自两点: (1) CoT reasoning 提供了 inferen
 ---
 
 检索命中: 无 confirmed 命中 | 过滤: [[TTSEvaluation]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[AudioUnderstanding]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

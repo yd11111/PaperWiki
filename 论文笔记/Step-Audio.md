@@ -152,3 +152,10 @@ Step-Audio 代表了 "工业化开源 SpeechLM" 的路线: 用极大参数量 (1
 3. **Speculative response generation**: 用户暂停时预生成响应,命中率约 40%,减少约 500ms 延迟
 4. **Anti-deaf-hacking RLHF**: 构造清晰音频 + deaf-hacking 回复作为 rejected pair,消除 reward model 偏差
 5. **Instruction tags taxonomy**: descriptive (语言/风格) + comparative (情感/速度五级) 的双层标签体系
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

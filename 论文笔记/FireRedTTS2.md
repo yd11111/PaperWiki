@@ -144,3 +144,10 @@ FireRedTTS-2 由两个核心组件构成 [§2, Fig 1]:
 ---
 
 检索命中: [[SpeechTokenizer]], [[ResidualVectorQuantization]], [[SemanticvsAcousticTokens]], [[LLM-basedTTS]], [[SpeakerEmbedding]], [[NeuralVocoder]] | 过滤: [[EmotionControlinTTS]](pending-review), [[StreamingSpokenDialogue]](pending-review) | 未命中但可能相关: Dialogue TTS
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

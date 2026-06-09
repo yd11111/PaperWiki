@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "EmergentTTS-Eval"
 aliases: [EmergentTTS-Eval Benchmark, EmergentTTS Eval]
@@ -14,6 +15,7 @@ concepts: ["[[TTSEvaluation]]", "[[AudioUnderstanding]]", "[[Audio-LanguagePretr
 models: []
 tasks: [TTS-evaluation, speech-quality-assessment, model-judging]
 datasets: []
+kb_context_sources: []
 created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[TTSEvaluation]]", "[[ProsodyModeling]]"]
@@ -147,3 +149,10 @@ EmergentTTS-Eval 填补了 TTS 评估的重要空白 -- 传统指标 (WER, SIM, 
 ---
 
 检索命中: [[ProsodyModeling]](confirmed) | 过滤: [[TTSEvaluation]](pending-review), [[AudioUnderstanding]](pending-review), [[Audio-LanguagePretraining]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

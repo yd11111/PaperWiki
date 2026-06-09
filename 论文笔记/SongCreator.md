@@ -209,6 +209,12 @@ SongCreator 为 SA 和 BCA 分别设计了多种 mask 策略,不同任务使用�
 
 4. **Song Decoder 非自回归融合 + song loss 缓解 source separation artifact**: 当训练数据来自不完美的 source separation 时,通过联合 loss (同时预测分离信号和混合信号) 可以缓解分离噪声。这个思路可泛化到任何依赖 signal decomposition 训练数据的系统。
 
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass
+> 
+> Issues: 3 (high: 0, medium: 0, low: 3)
+> 详见 `_review/SongCreator-review.yml`
+
 ---
 
 检索命中: [[SemanticvsAcousticTokens]], [[SingingVoiceSynthesis]], [[CodecLanguageModel]], [[DiffusionModel]], [[Self-SupervisedSpeechRepresentation]], [[Classifier-FreeGuidance]] | 过滤: 无 | 未命中但可能相关: MaskedGenerativeModeling

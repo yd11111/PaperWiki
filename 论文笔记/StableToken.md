@@ -200,3 +200,10 @@ UED (Unit Edit Distance) 降低 >60% 相对 vs best supervised baseline (S^3) [T
 ---
 
 检索命中: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeechLanguageModel]], [[ResidualVectorQuantization]] | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[FiniteScalarQuantization]](pending-review), [[Gumbel-Softmax]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

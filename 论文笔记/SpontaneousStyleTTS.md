@@ -195,6 +195,12 @@ updated: 2026-06-08
 3. **三步渐进微调策略**: 先训 backbone + 提取器 → 再训预测器(teacher-student)→ 最后联合精调(适应预测误差)。这种分步解耦训练在多模块 TTS 系统中普遍适用
 4. **19 种自发行为分类体系**: 基于语言学的 disfluency/interjections/non-speech 三大类、19 小类分类法,可作为中文自发语音标注的参考标准
 
+> [!review] 审阅 (2026-06-08, auto)
+> **结论**: pass
+> 
+> Issues: 4 (high: 0, medium: 0, low: 4)
+> 详见 `_review/SpontaneousStyleTTS-review.yml`
+
 ---
 
 检索命中: [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[EnCodec]]✓ | 过滤: [[CodecLanguageModel]](pending-review) | 未命中但可能相关: [[StyleTransferinTTS]], [[GlobalStyleTokens]]

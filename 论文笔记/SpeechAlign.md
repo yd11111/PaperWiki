@@ -133,3 +133,10 @@ SpeechAlign 是 **首篇将偏好学习系统性引入 codec language model** �
 1. **Golden vs Synthetic token 对比**: 可推广到任何 two-stage TTS 系统,利用 teacher-forcing 输入与模型生成输入的差异做偏好数据
 2. **Iterative self-improvement for speech**: 不断用更新后模型生成新偏好数据,循环优化
 3. **偏好优化在 discrete token 空间**: 比在波形空间做 RLHF 更高效
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

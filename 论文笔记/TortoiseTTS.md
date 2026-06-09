@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "Tortoise TTS"
 aliases: [TorToise, TorToise-v2, Better Speech Synthesis Through Scaling]
@@ -13,6 +14,7 @@ status: draft
 concepts: ["[[DiffusionModel]]", "[[Classifier-FreeGuidance]]", "[[LLM-basedTTS]]", "[[MelSpectrogram]]", "[[NeuralVocoder]]", "[[SpeechTokenizer]]", "[[VoiceCloningTaxonomy]]"]
 models: []
 tasks: [TTS, zero-shot-TTS, voice-cloning]
+kb_context_sources: []
 created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[NeuralVocoder]]", "[[LLM-basedTTS]]", "[[SpeechTokenizer]]"]
@@ -192,3 +194,10 @@ Tortoise TTS 的历史意义在于:
 ---
 
 检索命中: [[NeuralVocoder]], [[LLM-basedTTS]], [[SpeechTokenizer]] | 过滤: [[Classifier-FreeGuidance]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[MelSpectrogram]](pending-review), [[DiffusionModel]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

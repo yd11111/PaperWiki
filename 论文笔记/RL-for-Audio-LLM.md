@@ -139,3 +139,10 @@ updated: 2026-06-03
 2. **Rule-based reward 组合**: Accuracy + Hallucination + Keyword 的三元 reward 设计可推广到其他 ASR RL 场景
 3. **Sample filter for combined RL**: 对 positive samples 做 DiffRO、对全部做 GRPO,解决两种 loss 的兼容性问题
 4. **Duration reward**: 简单有效地防止 RL 训练中语速变慢的问题
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

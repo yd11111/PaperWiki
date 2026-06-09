@@ -93,3 +93,22 @@
 - [[论文笔记/TMD-TTS|TMD-TTS]] — UESTC/Tibet Univ, 2026, 藏语三方言统一 TTS, Matcha-TTS + DSDR-Net (public/private FFN 条件路由) + dialect fusion, 构建 102h TMDD 数据集, nMOS 3.86 / DECS 88.09%
 - [[论文笔记/MAVE|MAVE]] — MTS AI, 2025, Mamba SSM + cross-attention codec LM 用于 speech editing 和 zero-shot TTS (作者 claim 首个), 830M 参数, ~6x 内存优势超越 VoiceCraft, CM3 causal masking 实现 AR 框架双向上下文
 - [[论文笔记/Semantic-VAE|Semantic-VAE]] — SJTU/Geely, 2025 (ICASSP 2026), VAE latent 语义对齐正则化 (WavLM cosine loss) 解决重建-生成困境, F5-TTS WER 2.23→1.95% / SIM 0.60→0.64
+- [[论文笔记/HiPPO|HiPPO: Recurrent Memory with Optimal Polynomial Projections]] — 2020, 将序列记忆问题形式化为对时变测度的在线最优多项式逼近,推导出一族闭式线性 ODE 记忆更新规则,其中 HiPPO-LegS(缩放 Legendre)实现了无超参数的时间尺度鲁棒记忆
+- [[论文笔记/S4|Efficiently Modeling Long Sequences with Structured State Spaces]] — 2021, 通过将 HiPPO 矩阵分解为 Normal + Low-Rank（NPLR）形式,将 SSM 卷积核的计算归约为 Cauchy kernel,使 SSM 首次在计算效率上可行
+- [[论文笔记/SaShiMi|It's Raw! Audio Generation with State-Space Models]] — 2022, 首个基于 SSM 的音频波形生成架构,通过 Hurwitz 稳定性修复和多尺度池化,在 AR 和 non-AR 设置中均超越 WaveNet/SampleRNN
+- [[论文笔记/Mamba|Mamba: Linear-Time Sequence Modeling with Selective State Spaces]] — 2023, 通过让 SSM 参数随输入变化(选择性机制),突破了结构化状态空间模型的 LTI 限制,实现首个在语言建模上匹配 Transformer 的线性复杂度序列模型
+- [[论文笔记/NEUTART|Neural Text to Articulate Talk: Deep Text to Audiovisual Speech Synthesis achieving both Auditory and Photo-realism]] — 2023, 首个真正双模态(genuine bimodal)的 text-driven 真实感说话人面部视频合成系统
+- [[论文笔记/Zoology|Zoology: Measuring and Improving Recall in Efficient Language Models]] — 2023, 系统性证明 gated convolution 架构 (Hyena/RWKV/H3) 在 associative recall 上显著弱于 attention (70M
+- [[论文笔记/CoFi-Speech|CoFi-Speech: Speaking from Coarse to Fine — Improving Neural Codec Language Model via Multi-Scale Speech Coding and Generation]] — 2024, 提出多尺度 codec (CoFi-Codec) + 多尺度生成 (CoFi-LM) 的 coarse-to-fine CLM-TTS 框架
+- [[论文笔记/Mamba-2|Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality]] — 2024, 通过证明 selective SSM 与 structured masked attention 是半可分矩阵变换的对偶形式
+- [[论文笔记/SoCodec|SoCodec: A Semantic-Ordered Multi-Stream Speech Codec for Efficient Language Model Based Text-to-Speech Synthesis]] — 2024, 提出有序积量化 (OPQ) 将语音压缩为有序多流语义 token 序列,配合 multi-stream delayed LM 实现 240ms frameshift (12x
+- [[论文笔记/ZMM-TTS|ZMM-TTS: Zero-shot Multilingual and Multispeaker Speech Synthesis Conditioned on Self-supervised Discrete Speech Representations]] — 2024, 用 XLSR-53 的 VQ 离散表征替代 Mel spectrogram 作为中间特征,构建多语言多说话人 TTS 系统,实现对未见说话人和未见语言的零样本/少样本合成
+- [[论文笔记/Llamba|Llamba: Scaling Distilled Recurrent Models for Efficient Language Processing]] — 2025, 用 MOHAWK 三阶段跨架构蒸馏将 Llama-3.x Transformer 知识迁移到 Mamba-2 架构,仅用 <0.1% 训练数据即获得接近教师模型的性能
+- [[论文笔记/SpeechQualityEval|Enabling Auditory Large Language Models for Automatic Speech Quality Evaluation]] — 2025, 用 LoRA 微调 auditory LLM (SALMONN/Qwen-Audio) + task-specific prompts
+- [[论文笔记/CosyEdit|CosyEdit: Unlocking End-to-End Speech Editing Capability from Zero-Shot Text-to-Speech Models]] — 2026, 通过对 CosyVoice 进行 task-specific post-training + inference 优化
+- [[论文笔记/DashengAudioGen|Dasheng AudioGen: A Unified Model for Generating Coherent Audio Scenes from Text]] — 2026, 通过结构化多视角 caption + 高维语义-声学统一表征,用单一 flow-matching DiT 实现首个含语音/音乐/音效的混合音频场景端到端生成
+- [[论文笔记/ImmersiveTTS|ImmersiveTTS: Environment-Aware Text-to-Speech with Multimodal Diffusion Transformer and Domain-Specific Training]] — 2026, 用 MM-DiT 双流架构 + flow matching + domain-specific REPA 实现环境感知 TTS
+- [[论文笔记/StreamWise|StreamWise: Serving Multi-Modal Generation in Real-Time at Scale]] — 2026, 面向实时多模态生成(如播客视频)的模块化 serving 系统,通过 deadline-aware DAG 调度 + DiT/VAE 解耦 + 异构硬件 + 自适应质量
+- [[论文笔记/UAT|UAT: Unified Audio-Text Diffusion for Audio Generation, Editing, and Captioning]] — 2026, 在预训练 TTA diffusion backbone 上增加轻量文本流,用 continuous audio diffusion + masked discrete text
+- [[论文笔记/UltraLowLatencyTTS|An Ultra-Low Latency, End-to-End Streaming Speech Synthesis Architecture via Block-Wise Generation and Depth-Wise Codec Decoding]] — 2026, 将 FastSpeech 2 的输出头从连续 mel 回归替换为 32 层 RVQ 离散分类,通过 depth-wise sequential decoding 逐层条件预测
+- [[论文笔记/VividVoice|VividVoice: A Unified Framework for Scene-Aware Visually-Driven Speech Synthesis]] — 2026, 提出 Scene-Aware Visually-Driven Speech Synthesis 任务,用 decoupled memory bank (D-MSVA)

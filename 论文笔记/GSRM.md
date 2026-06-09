@@ -150,3 +150,10 @@ GSRM 是 **speech RLHF reward modeling 的重要突破**,核心洞见在于:
 2. **Vowel-level acoustic features**: 简洁有效的语音韵律表征,适用于各种 speech analysis 任务
 3. **GSRM as universal verifier**: online RL for speech 的通用方案,可替换不同 generator
 4. **Structured annotation rubric**: 7 维子指标设计可作为 speech naturalness 评估的参考标准
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

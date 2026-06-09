@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "Seamless"
 aliases: [Seamless Communication, SeamlessM4T v2, SeamlessExpressive, SeamlessStreaming]
@@ -15,6 +16,7 @@ updated: 2026-06-03
 concepts: ["[[ProsodyModeling]]", "[[Self-SupervisedSpeechRepresentation]]", "[[Speech-TextAlignment]]", "[[Non-autoregressiveTTS]]", "[[SpeechLanguageModel]]"]
 models: ["[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/Whisper|Whisper]]"]
 datasets: []
+kb_context_sources: []
 kb_sources: ["[[Self-SupervisedSpeechRepresentation]]", "[[ProsodyModeling]]", "[[SpeechLanguageModel]]"]
 ---
 tier: deep
@@ -166,3 +168,10 @@ tier: deep
 ---
 
 检索命中: [[Self-SupervisedSpeechRepresentation]], [[ProsodyModeling]], [[SpeechLanguageModel]] | 过滤: 无 | 未命中但可能相关: [[Non-autoregressiveTTS]], [[Speech-TextAlignment]]
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass-with-fixes
+> 
+> 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

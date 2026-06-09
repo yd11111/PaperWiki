@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: enhanced-card
 title: "NLLB"
 aliases: [No Language Left Behind, NLLB-200]

@@ -1,4 +1,5 @@
 ---
+type: paper
 tier: deep
 title: "EmotionThinker"
 aliases: [EmotionThinker, GRPO-PTR, EmotionCoT-35K]
@@ -14,6 +15,7 @@ concepts: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[SpeechLanguageMo
 models: []
 tasks: [speech-emotion-recognition, emotion-reasoning, prosody-perception]
 datasets: []
+kb_context_sources: []
 created: 2026-06-03
 updated: 2026-06-03
 kb_sources: ["[[ProsodyModeling]]", "[[EmotionControlinTTS]]", "[[SpeechLanguageModel]]", "[[AudioUnderstanding]]"]
@@ -165,3 +167,10 @@ Prosody-centric SFT 作为 RL 冷启动的必要性被充分验证: 没有它 (V
 ---
 
 检索命中: [[ProsodyModeling]](confirmed), [[SpeechLanguageModel]](confirmed) | 过滤: [[EmotionControlinTTS]](pending-review), [[AudioUnderstanding]](pending-review), [[DifferentiableRewardOptimization]](pending-review) | 未命中但可能相关: 无
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排

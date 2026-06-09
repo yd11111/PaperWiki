@@ -227,3 +227,10 @@ Demo 页展示三项扩展能力:
 5. **Separating tokens**: 多条件 concatenation 时用 separating tokens 分隔不同来源的 token 序列
 
 检索命中: [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[LLM-basedTTS]], [[SpeechFactorization]], [[SpeakerEmbedding]] | 过滤: [[F0Modeling]](pending-review), [[MelSpectrogram]](pending-review) | 未命中但可能相关: [[SingingVoiceSynthesis]]
+
+
+> [!review] 审阅 (2026-06-09, batch-auto)
+> **结论**: pass
+> 
+> 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
+> 详细审阅待后续安排
