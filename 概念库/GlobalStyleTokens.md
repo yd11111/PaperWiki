@@ -4,7 +4,7 @@ title: "Global Style Tokens"
 aliases: [GST, 全局风格标记, Style Token Bank, Style Tokens, GST-Tacotron]
 category: "technique"
 tags: [TTS, style, unsupervised, reference-encoder, attention, expressiveness]
-key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018", "[[论文笔记/SCVALL-E|SC VALL-E]]", "[[论文笔记/ControllingEmotionTTSNLPrompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/GSA-TTS|GSA-TTS]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/HiStyle|HiStyle]]"]
+key_papers: ["Wang et al., Style Tokens: Unsupervised style modeling, control and transfer in end-to-end speech synthesis, ICML 2018", "Skerry-Ryan et al., Towards end-to-end prosody transfer for expressive speech synthesis with Tacotron, ICML 2018", "[[论文笔记/SCVALL-E|SC VALL-E]]", "[[论文笔记/ControllingEmotionTTSNLPrompts|Bott et al. (Interspeech 2024)]]", "[[论文笔记/EmoSphere++|EmoSphere++]]", "[[论文笔记/UMETTS|UMETTS]]", "[[论文笔记/Daisy-TTS|Daisy-TTS]]", "[[论文笔记/TTS-Transducer|TTS-Transducer]]", "[[论文笔记/GSA-TTS|GSA-TTS]]", "[[论文笔记/Spotlight-TTS|Spotlight-TTS]]", "[[论文笔记/DS-TTS|DS-TTS]]", "[[论文笔记/HiStyle|HiStyle]]", "[[论文笔记/ECSS|ECSS]]"]
 origin_paper: "Wang et al., Style Tokens, ICML 2018"
 related_concepts: ["[[StyleTransferinTTS]]", "[[ProsodyModeling]]", "[[SpeakerEmbedding]]", "[[Attention-basedTTS]]", "[[SpeechFactorization]]"]
 status: pending-review
