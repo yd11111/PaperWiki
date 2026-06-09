@@ -1,0 +1,35 @@
+paper: "ECSS"
+reviewer: auto
+date: 2026-06-09
+checklist_version: v1.1
+conclusion: pass
+
+principles:
+  reproducible: pass
+  trustworthy: pass
+  distinguishable: pass
+  locatable: pass
+  no_pollution: pass
+
+issues:
+  - id: 1
+    type: minor-suggestion
+    severity: low
+    principle: trustworthy
+    location: "局限性 > 第3点"
+    detail: "推理依赖 ground-truth emotion 标签的问题是 agent 推断,论文未讨论部署时如何获取标签"
+    suggestion: "已标注 [agent 解读],无需修改;后续若找到论文 GitHub 代码中的解决方案可补充"
+
+  - id: 2
+    type: minor-suggestion
+    severity: low
+    principle: locatable
+    location: "frontmatter > datasets"
+    detail: "DailyTalk 是核心数据集但无独立实体页"
+    suggestion: "DailyTalk 仅此一篇深度使用,暂不创建独立页;若后续多篇使用再考虑"
+
+notes: |
+  笔记质量良好。KB背景准确定位了 ECSS 在 CSS+Emotion 交叉领域的位置。
+  速查卡片信息完整。方法部分的 WHY 解释有因果链 (为什么异构>同构、为什么CL>CE)。
+  DailyTalk 情感标注分布的详细统计是有价值的补充,为后续工作提供参照。
+  主要关注点是情感分布不平衡对少数类质量的影响,笔记中已指出。
