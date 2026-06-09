@@ -19,7 +19,7 @@ principles:
 
   可定位:
     score: 8
-    rationale: "KB 背景节明确定位了与 NACTokenLanguageAnalysis (后续工作) 的关系, 以及在 SpeechLM/SpeechTokenizer 知识图谱中的位置。点评节的谱系分析 (本文 → NAC Token Language Analysis) 提供了清晰的研究脉络。venue 字段含不确定性 (Interspeech 2024 基于推断)。"
+    rationale: "KB 背景节明确定位了与 AnalysingNeuralAudioCodecs (后续工作) 的关系, 以及在 SpeechLM/SpeechTokenizer 知识图谱中的位置。点评节的谱系分析 (本文 → NAC Token Language Analysis) 提供了清晰的研究脉络。venue 字段含不确定性 (Interspeech 2024 基于推断)。"
 
   不污染:
     score: 9

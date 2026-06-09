@@ -4,7 +4,7 @@ title: "LLM-enhanced ASR"
 aliases: [LLM增强ASR, LLM Rescoring, LLM GER, LLM Generative Error Correction, 大模型增强语音识别, Hypotheses-to-Transcription, H2T]
 category: "technique"
 tags: [ASR, LLM, rescoring, error-correction, text-based-integration, N-best, speech-recognition]
-key_papers: ["Chen et al., 2023a (HyPoradise)", "Radhakrishnan et al., 2023 (Whispering Llama)", "Ma et al., 2023", "Chen et al., 2023c", "Udagawa et al., 2022", "Hu et al., 2024b", "Yang et al., 2023a", "Ko et al., 2024", "Mu et al., 2024 (MMGER)", "Lin et al., 2024 (MoE)", "[[论文笔记/DiscreteVsContinuousLLM-ASR|Xu et al., 2024 (Discrete vs Continuous LLM-ASR)]]"]
+key_papers: ["Chen et al., 2023a (HyPoradise)", "Radhakrishnan et al., 2023 (Whispering Llama)", "Ma et al., 2023", "Chen et al., 2023c", "Udagawa et al., 2022", "Hu et al., 2024b", "Yang et al., 2023a", "Ko et al., 2024", "Mu et al., 2024 (MMGER)", "Lin et al., 2024 (MoE)", "[[论文笔记/ComparingDiscrete-Continuous|Xu et al., 2024 (Discrete vs Continuous LLM-ASR)]]"]
 origin_paper: "Yang et al., When LLM Meet Speech, 2025"
 related_concepts: ["[[Speech-LLMIntegrationTaxonomy]]", "[[SpeechLanguageModel]]", "[[AudioUnderstanding]]"]
 status: pending-review

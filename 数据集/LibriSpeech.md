@@ -8,7 +8,7 @@ tags: [training-data, evaluation, ASR, english, audiobook, benchmark]
 used_by: []
 metrics_reported_on: [WER]
 url: "https://www.openslr.org/12/"
-origin_paper: "[[论文笔记/DiscreteVsContinuousLLM-ASR|Xu et al., 2024]]"
+origin_paper: "[[论文笔记/ComparingDiscrete-Continuous|Xu et al., 2024]]"
 status: pending-review
 lifecycle: active
 merged_into: ""

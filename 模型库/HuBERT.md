@@ -7,7 +7,7 @@ year: 2021
 tags: [self-supervised-learning, speech-representation, masked-prediction, BERT, ASR, speech-tokenizer]
 key_concepts: ["[[SpeechTokenizer]]", "[[SemanticvsAcousticTokens]]", "[[SpeechLanguageModel]]", "[[Self-SupervisedSpeechRepresentation]]"]
 tasks: []
-key_papers: ["[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/PROEMO|PROEMO]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/EmoSSLSphere|EmoSSLSphere]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/UnitSpeech|UnitSpeech]]", "[[论文笔记/LowResourceSSL-TTS|Low-Resource SSL-TTS]]", "[[论文笔记/ZipfSpeechSymbols|Zipf Speech Symbols]]"]
+key_papers: ["[[论文笔记/HuBERT|HuBERT]]", "[[论文笔记/NAST|NAST]]", "[[论文笔记/PROEMO|PROEMO]]", "[[论文笔记/DiVISe|DiVISe (Liu et al., 2025)]]", "[[论文笔记/LM-SPT|LM-SPT]]", "[[论文笔记/C2F-LM|C2F-LM]]", "[[论文笔记/EmoSSLSphere|EmoSSLSphere]]", "[[论文笔记/MSR-Codec|MSR-Codec]]", "[[论文笔记/UnitSpeech|UnitSpeech]]", "[[论文笔记/LowResourceSSL-TTS|Low-Resource SSL-TTS]]"]
 supersedes: ["[[模型库/wav2vec2.0|wav2vec 2.0]]"]
 superseded_by: ["[[模型库/WavLM|WavLM]]"]
 status: pending-review

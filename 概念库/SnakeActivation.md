@@ -4,7 +4,7 @@ title: "Snake Activation"
 aliases: [Snake Function, Periodic Activation]
 category: "architecture-component"
 tags: [activation-function, periodic-inductive-bias, waveform-generation, vocoder]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/PeriodWave|PeriodWave]]", "[[论文笔记/Pupu-Vocoder|Pupu-Vocoder (Gu et al., 2025)]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/PeriodWave|PeriodWave]]", "[[论文笔记/Aliasing-FreeSynthesis|Aliasing-FreeSynthesis (Gu et al., 2025)]]"]
 origin_paper: "Liu et al., Neural Networks Fail to Learn Periodic Functions and How to Fix It, 2020"
 related_concepts: ["[[Multi-scaleSTFTDiscriminator]]", "[[CodecTrainingObjectives]]"]
 status: pending-review
@@ -50,8 +50,8 @@ $$\text{snake}(x) = x + \frac{1}{\alpha}\sin^2(\alpha x)$$
 
 ## ADAA SnakeBeta
 
-Pupu-Vocoder (Gu et al., 2025) 提出 Anti-Derivative Anti-Aliasing (ADAA) 应用于 SnakeBeta,推导出 closed-form 表达式,消除了标准 ADAA 中的 threshold-based fallback mechanism。ADAA SnakeBeta 不用 oversampling 即可达到 SnakeBeta + 2x oversampling 的 anti-aliasing 效果 (AHR -42.29 dB vs -41.32 dB),结合 2x oversampling 后达到最低 aliasing (-45.95 dB) [Table I]。详见 [[论文笔记/Pupu-Vocoder|Pupu-Vocoder]]。
+Aliasing-FreeSynthesis (Gu et al., 2025) 提出 Anti-Derivative Anti-Aliasing (ADAA) 应用于 SnakeBeta,推导出 closed-form 表达式,消除了标准 ADAA 中的 threshold-based fallback mechanism。ADAA SnakeBeta 不用 oversampling 即可达到 SnakeBeta + 2x oversampling 的 anti-aliasing 效果 (AHR -42.29 dB vs -41.32 dB),结合 2x oversampling 后达到最低 aliasing (-45.95 dB) [Table I]。详见 [[论文笔记/Aliasing-FreeSynthesis|Aliasing-FreeSynthesis]]。
 
 ## 演进
 
-ReLU → Leaky ReLU (GAN 标配) → Snake (2020, 周期性) → BigVGAN/DAC 验证在音频领域的有效性 (2023) → ADAA SnakeBeta (Pupu-Vocoder, 2025, anti-aliasing closed-form)
+ReLU → Leaky ReLU (GAN 标配) → Snake (2020, 周期性) → BigVGAN/DAC 验证在音频领域的有效性 (2023) → ADAA SnakeBeta (Aliasing-FreeSynthesis, 2025, anti-aliasing closed-form)

@@ -4,7 +4,7 @@ title: "Multi-scale STFT Discriminator"
 aliases: [Multi-band STFT Discriminator, STFT-D, Complex STFT Discriminator]
 category: "architecture-component"
 tags: [discriminator, GAN, frequency-domain, audio-codec, vocoder]
-key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/Pupu-Vocoder|Pupu-Vocoder (Gu et al., 2025)]]"]
+key_papers: ["[[论文笔记/DAC|DAC]]", "[[论文笔记/MaskGCT|MaskGCT]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/SNAC|SNAC]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/Aliasing-FreeSynthesis|Aliasing-FreeSynthesis (Gu et al., 2025)]]"]
 origin_paper: ""
 related_concepts: ["[[SnakeActivation]]", "[[ResidualVectorQuantization]]", "[[CodecTrainingObjectives]]"]
 status: confirmed
@@ -26,7 +26,7 @@ Multi-scale STFT Discriminator 是一种频域判别器,在多个 STFT 时间尺
 | Multi-Resolution Spectrogram Discriminator (MRSD) | UnivNet [16] | magnitude spectrogram, 多分辨率 |
 | Complex STFT Discriminator | SoundStream [46] | 保留相位信息 (complex-valued) |
 | Multi-band Multi-scale STFT Discriminator | DAC (2023) | 按频带分割 + 多尺度 + complex |
-| Multi-Scale Sub-Band CQT Discriminator (MS-SB-CQTD) | Gu et al. (2024) [50] | Constant-Q 变换 + 多尺度 + 子频带; Pupu-Vocoder 使用 |
+| Multi-Scale Sub-Band CQT Discriminator (MS-SB-CQTD) | Gu et al. (2024) [50] | Constant-Q 变换 + 多尺度 + 子频带; Aliasing-FreeSynthesis 使用 |
 
 ## DAC 的设计 [§3.4]
 
@@ -85,4 +85,4 @@ Survey Table 1 显示 GAN + Feature Matching 是最普遍的训练目标组合,�
 
 ## 演进
 
-MSD (MelGAN, 2019) → MPD (HiFi-GAN, 2020) → MRSD (UnivNet, 2021) → BigVGAN (MRSD 替换 MSD) → DAC (multi-band complex STFT-D, 2023) → MS-SB-CQTD (Gu et al., 2024, Constant-Q) → Pupu-Vocoder/Codec (2025, 4 discriminator 组合: MPD+MSD+MBD+MS-SB-CQTD)
+MSD (MelGAN, 2019) → MPD (HiFi-GAN, 2020) → MRSD (UnivNet, 2021) → BigVGAN (MRSD 替换 MSD) → DAC (multi-band complex STFT-D, 2023) → MS-SB-CQTD (Gu et al., 2024, Constant-Q) → Aliasing-FreeSynthesis/Codec (2025, 4 discriminator 组合: MPD+MSD+MBD+MS-SB-CQTD)

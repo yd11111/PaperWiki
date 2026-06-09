@@ -2,14 +2,14 @@
 
 ## 2026-06-08
 
-- [kb/search] [[Pupu-Vocoder]] — 命中 7 页 (取 Top 6): [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[EnCodec]]✓ | 过滤: [[SnakeActivation]](pending-review), [[BigVGAN]](pending-review), [[SingingVoiceSynthesis]](pending-review)
-- [ingest/deep] [[Pupu-Vocoder]] — 精读, kb_sources=6, 新建 0, 追加 4 (SnakeActivation/BigVGAN/NeuralVocoder/Multi-scaleSTFTDiscriminator)
-- [review/auto] [[Pupu-Vocoder]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
-- [review/kb] [[Pupu-Vocoder]] — pass, 0 issues
+- [kb/search] [[Aliasing-FreeSynthesis]] — 命中 7 页 (取 Top 6): [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[EnCodec]]✓ | 过滤: [[SnakeActivation]](pending-review), [[BigVGAN]](pending-review), [[SingingVoiceSynthesis]](pending-review)
+- [ingest/deep] [[Aliasing-FreeSynthesis]] — 精读, kb_sources=6, 新建 0, 追加 4 (SnakeActivation/BigVGAN/NeuralVocoder/Multi-scaleSTFTDiscriminator)
+- [review/auto] [[Aliasing-FreeSynthesis]] — pass-with-fixes, 2 issues (0 high, 1 medium, 1 low)
+- [review/kb] [[Aliasing-FreeSynthesis]] — pass, 0 issues
 - [skip/update] [[NeuralVocoder]] — key_papers 已达上限(18),改追加到演进线
 - [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45),本文无 RVQ 方法创新,跳过
 - [skip/update] [[EnCodec]] — key_papers 已达上限(15),本文仅用作 baseline,跳过
-- [lint/local] Pupu-Vocoder — 通过
+- [lint/local] Aliasing-FreeSynthesis — 通过
 - [alert/backlog] pending-review: 75, draft deep/repro: 1 — 建议抽空审核
 - [kb/search] [[J-CHAT]] — 命中 4 页 (取 Top 4): [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓ | 过滤: [[Full-duplexSpokenDialogue]](pending-review), [[SpokenDialogueEvaluation]](pending-review)
 - [ingest/deep] [[J-CHAT]] — 精读, kb_sources=4, 新建 1 (数据集/J-CHAT), 追加 0
@@ -17,20 +17,14 @@
 - [lint/local] J-CHAT — 通过
 - [create/dataset] J-CHAT — 新建数据集页 (76k hr 日语对话语料, pending-review)
 - [alert/backlog] pending-review: 75, draft deep/repro: 0 — 建议抽空审核
-- [kb/search] [[ZipfSpeechSymbols]] — 命中 5 页 (取 Top 5): [[SpeechTokenizer]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[Self-SupervisedSpeechRepresentation]](pending-review), [[HuBERT]](pending-review)
-- [ingest/deep] [[ZipfSpeechSymbols]] — 精读, kb_sources=5, 新建 0, 追加 1 (HuBERT key_papers)
-- [skip/update] [[SpeechTokenizer]] — key_papers 已达上限(77),跳过追加
-- [skip/update] [[SemanticvsAcousticTokens]] — key_papers 已达上限(68),跳过追加
-- [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(26),跳过追加
-- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(45),跳过追加
-- [lint/local] ZipfSpeechSymbols — 通过
-- [kb/search] [[DiscreteVsContinuousLLM-ASR]] — 命中 6 页 (取 Top 6): [[SpeechTokenizer]]✓ | 过滤: [[LLM-enhancedASR]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
-- [ingest/deep] [[DiscreteVsContinuousLLM-ASR]] — 精读, kb_sources=6, 新建 1 (LibriSpeech), 追加 2 (LLM-enhancedASR key_papers, Speech-LLMIntegrationTaxonomy key_papers)
+- [lint/local] Zipfs-law-speech-symbols — 通过
+- [kb/search] [[ComparingDiscrete-Continuous]] — 命中 6 页 (取 Top 6): [[SpeechTokenizer]]✓ | 过滤: [[LLM-enhancedASR]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Single-codebookvsMulti-codebook]](pending-review)
+- [ingest/deep] [[ComparingDiscrete-Continuous]] — 精读, kb_sources=6, 新建 1 (LibriSpeech), 追加 2 (LLM-enhancedASR key_papers, Speech-LLMIntegrationTaxonomy key_papers)
 - [skip/update] [[Self-SupervisedSpeechRepresentation]] — key_papers 已达上限(24),跳过追加
 - [skip/update] [[ModalityAdaptationforSpeechLLM]] — key_papers 已达上限(12),跳过追加
 - [skip/update] [[SpeechTokenizer]] — 实体页审阅标记 revise,跳过追加
-- [review/auto] [[DiscreteVsContinuousLLM-ASR]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
-- [lint/local] DiscreteVsContinuousLLM-ASR — 通过
+- [review/auto] [[ComparingDiscrete-Continuous]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] ComparingDiscrete-Continuous — 通过
 - [kb/search] [[BalancingUnderstanding-Generation]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓, [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review)
 - [ingest/deep] [[BalancingUnderstanding-Generation]] — 精读 (no-git, no-kb-update), kb_sources=6, 新建 0, 追加 0
 - [review/auto] [[BalancingUnderstanding-Generation]] — pass, 0 high (2 low)

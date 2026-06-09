@@ -4,7 +4,7 @@ title: "Speech-LLM Integration Taxonomy"
 aliases: [语音-LLM集成分类, Speech-LLM Integration, LLM-Speech Integration Approaches, 语音与大模型集成方法]
 category: "taxonomy"
 tags: [speech-LM, integration, taxonomy, multimodal, architecture, survey]
-key_papers: ["Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/GLM-4-Voice|GLM-4-Voice]]", "[[论文笔记/SALMONN|SALMONN]]", "[[论文笔记/DiscreteVsContinuousLLM-ASR|Xu et al., 2024 (Discrete vs Continuous LLM-ASR)]]"]
+key_papers: ["Yang et al., When LLM Meet Speech, 2025", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/GLM-4-Voice|GLM-4-Voice]]", "[[论文笔记/SALMONN|SALMONN]]", "[[论文笔记/ComparingDiscrete-Continuous|Xu et al., 2024 (Discrete vs Continuous LLM-ASR)]]"]
 origin_paper: "Yang et al., When LLM Meet Speech, 2025"
 related_concepts: ["[[SpeechLanguageModel]]", "[[LLM-basedTTS]]", "[[ModalityAdaptationforSpeechLLM]]", "[[LLM-enhancedASR]]", "[[Speech-TextAlignment]]", "[[AudioUnderstanding]]"]
 status: pending-review
