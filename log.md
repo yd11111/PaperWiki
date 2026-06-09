@@ -1,5 +1,12 @@
 # Log
 
+## 2026-06-09
+
+- [kb/search] [[Universal-2-TF]] — 命中 3 页 (取 Top 3): 无 confirmed | 过滤: [[LLM-enhancedASR]](pending-review), [[Whisper]](pending-review), [[SenseVoice]](pending-review)
+- [ingest/deep] [[Universal-2-TF]] — 精读, kb_sources=3 (全 pending-review), 新建 0, 追加 0
+- [review/auto] [[Universal-2-TF]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
+- [lint/local] Universal-2-TF — 通过
+
 ## 2026-06-08
 
 - [kb/search] [[Aliasing-FreeSynthesis]] — 命中 7 页 (取 Top 6): [[NeuralVocoder]]✓, [[ResidualVectorQuantization]]✓, [[Multi-scaleSTFTDiscriminator]]✓, [[EnCodec]]✓ | 过滤: [[SnakeActivation]](pending-review), [[BigVGAN]](pending-review), [[SingingVoiceSynthesis]](pending-review)
