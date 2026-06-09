@@ -2,6 +2,9 @@
 
 ## 2026-06-09
 
+- [ingest/deep] [[GPT-Talker]] — 精读, kb_sources=4 (1 confirmed: ProsodyModeling; 3 pending-review: EmotionControlinTTS, CodecLanguageModel, StyleTransferinTTS), 新建 0, 追加 2 (ProsodyModeling, CodecLanguageModel)
+- [review/auto] [[GPT-Talker]] — pass, 0 issues
+- [kb/append] [[ProsodyModeling]] + [[CodecLanguageModel]] — 追加 GPT-Talker 到 key_papers
 - [ingest/deep] [[MFCIG-CSS]] — 精读, kb_sources=2 (1 confirmed, 1 pending-review), 新建 0, 追加 2 (ProsodyModeling, EmotionControlinTTS)
 - [review/auto] [[MFCIG-CSS]] — pass, 0 issues
 - [ingest/deep] [[Chain-Talker]] — 精读, kb_sources=4 (1 confirmed, 3 pending-review), 新建 0, 追加 0 (全部概念页 key_papers 已超 12 上限)
