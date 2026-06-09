@@ -41,9 +41,9 @@ updated: 2026-06-09
 
 ## 核心问题
 
-1. **为什么不直接用 end-to-end seq2seq 做全文 text formatting?** 因为对长文本推理成本过高(222.9s vs 10.7s on short text [Table 2]),且全文 seq2seq 容易产生幻觉(PER 35.0%, I-WER 37.6% vs 29.0%, 30.3%) [§2, Table 2]
-2. **为什么不沿用 WFST 规则做 ITN?** WFST 难以扩展到多种语言实体类型,且无法利用上下文信息。NeMo WFST 的 I-WER 平均 57.7% vs Universal-2-TF 的 20.1% [Table 6]
-3. **为什么要把 mixed-case 也交给 seq2seq 而不是 character-level classifier?** 因为字符级分类的"并非所有错误都一样"问题——"JavAScrIpt"比"javascript"感知质量差得多,但字符错误数一样。seq2seq 能做 word-level 的转换,避免此问题 [§2, §3]
+1. **为什么不直接用 end-to-end seq2seq 做全文 text formatting?** [论文原文] 因为对长文本推理成本过高(222.9s vs 10.7s on short text [Table 2]),且全文 seq2seq 容易产生幻觉(PER 35.0%, I-WER 37.6% vs 29.0%, 30.3%) [§2, Table 2]
+2. **为什么不沿用 WFST 规则做 ITN?** [论文原文] WFST 难以扩展到多种语言实体类型,且无法利用上下文信息 [§2]。NeMo WFST 的 I-WER 平均 57.7% vs Universal-2-TF 的 20.1% [Table 6]
+3. **为什么要把 mixed-case 也交给 seq2seq 而不是 character-level classifier?** [论文原文] 因为字符级分类的"并非所有错误都一样"问题——"JavAScrIpt"比"javascript"感知质量差得多,但字符错误数一样 [§2]。seq2seq 能做 word-level 的转换,避免此问题 [§3]
 
 ## 方法: 它怎么 work
 
@@ -133,3 +133,19 @@ updated: 2026-06-09
 ---
 
 检索命中: [[LLM-enhancedASR]][待确认], [[Whisper]][待确认], [[SenseVoice]][待确认] | 过滤: 无 | 未命中但可能相关: 无
+
+## 审阅
+
+> [!review] 审阅 (2026-06-09, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含充分因果解释,速查可借鉴具体 |
+> | 可信赖 | pass | 数字标注覆盖率 >90%,指标名正确 |
+> | 可区分 | pass | 关键设计选择有来源标注,核心问题已补标 |
+> | 可定位 | pass | KB 背景有具体谱系对比,vault TTS 聚焦致关联有限 |
+> | 不污染 | pass | 未新建概念页,无反向更新 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/Universal-2-TF-review.yml`

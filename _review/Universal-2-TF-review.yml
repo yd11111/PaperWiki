@@ -1,0 +1,51 @@
+paper: Universal-2-TF
+reviewer: auto
+date: 2026-06-09
+checklist_version: v1.1
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法节含充分的因果解释(WHY),3 个核心问题直接回答'为什么这样设计而不是那样',速查可借鉴字段列出了 4 个具体可迁移 trick"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 标注覆盖率 >90%,指标名正确(PER/CER/I-WER/M-WER 均为论文定义),无方向性错误"
+  可区分:
+    score: 7
+    rationale: "关键设计选择节有 [论文原文]/[agent 解读] 标注,但核心问题节的 3 个 WHY 解释缺少来源标签,虽然有 section 引用"
+  可定位:
+    score: 7
+    rationale: "KB 背景有具体谱系对比(Whisper 端到端 vs 本文后处理, SenseVoice e_ITN token vs 本文 pipeline);但 vault TTS 聚焦,本文 ASR 后处理与主线关联弱,定位价值有限"
+  不污染:
+    score: 9
+    rationale: "未新建概念页,无反向更新;概念/任务/数据集字段为空不会误导 KB 检索"
+
+issues:
+  - id: 1
+    severity: medium
+    type: fact-inference-mixing
+    principle: 可区分
+    location: "## 核心问题"
+    detail: "3 个核心问题的解释均来自论文原文(有 section 引用),但缺少 [论文原文] 标签"
+    suggestion: "在每个解释前加 [论文原文] 标签"
+  - id: 2
+    severity: low
+    type: template-compliance
+    principle: 可定位
+    location: "frontmatter models"
+    detail: "models 列了 [[Whisper]] 但 Whisper 并非本文的对比 baseline,仅在 introduction 中作为 end-to-end ASR 的例子被提及"
+    suggestion: "models 改为空 [] 或标注 Whisper 在本文中的角色"
+  - id: 3
+    severity: low
+    type: template-compliance
+    principle: 可定位
+    location: "frontmatter concepts/tasks/datasets"
+    detail: "concepts/tasks/datasets 均为空;虽然本文 ASR 后处理概念不在 vault 中,但可考虑链接存在的页面"
+    suggestion: "可保持空,vault 聚焦 TTS,ASR text formatting 概念不需要创建实体页"
+
+conclusion: pass-with-fixes
+high_count: 0
+medium_count: 1
+low_count: 2
+
+learning_signals: []
