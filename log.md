@@ -2,6 +2,8 @@
 
 ## 2026-06-09
 
+- [ingest/deep] [[Chain-Talker]] — 精读, kb_sources=4 (1 confirmed, 3 pending-review), 新建 0, 追加 0 (全部概念页 key_papers 已超 12 上限)
+- [review/auto] [[Chain-Talker]] — pass, 0 issues
 - [kb/search] [[Universal-2-TF]] — 命中 3 页 (取 Top 3): 无 confirmed | 过滤: [[LLM-enhancedASR]](pending-review), [[Whisper]](pending-review), [[SenseVoice]](pending-review)
 - [ingest/deep] [[Universal-2-TF]] — 精读, kb_sources=3 (全 pending-review), 新建 0, 追加 0
 - [review/auto] [[Universal-2-TF]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
