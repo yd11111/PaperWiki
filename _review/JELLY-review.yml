@@ -1,0 +1,45 @@
+review:
+  paper: "JELLY"
+  path: "论文笔记/JELLY.md"
+  date: 2026-06-09
+  reviewer: auto
+  conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 8
+    status: pass
+    rationale: "三阶段 pipeline 描述清晰,EQ-former/PLoRA 机制可复述,训练细节完整"
+  trustworthy:
+    score: 8
+    status: pass
+    rationale: "所有数字标注出处 [Table I/II],因果判断区分了论文原文与 agent 解读"
+  distinguishable:
+    score: 7
+    status: pass
+    rationale: "与 ECSS/DiffCSS/EmotionThinker 的差异点明确,KB 定位清楚"
+  locatable:
+    score: 8
+    status: pass
+    rationale: "KB 背景充分定位在情感控制+模态适配+CSS 三线交叉处"
+  non_polluting:
+    score: 9
+    status: pass
+    rationale: "未引入未验证 claim,局限性标注明确"
+
+issues:
+  - id: 1
+    severity: low
+    category: completeness
+    location: "点评"
+    detail: "未与同期 CSS 工作 RADKA-CSS (ICASSP 2024) 做详细对比"
+    suggestion: "可补充 RADKA-CSS (RAG+diffusion CSS) 的对比定位"
+
+learning_signals: []
+
+summary:
+  total_issues: 1
+  high: 0
+  medium: 0
+  low: 1
+  recommendation: "笔记质量良好,三阶段方法解析清晰,KB 定位准确。低优先级可补充同期 CSS 对比。"
