@@ -6,6 +6,7 @@
 - [ingest/deep] [[Universal-2-TF]] — 精读, kb_sources=3 (全 pending-review), 新建 0, 追加 0
 - [review/auto] [[Universal-2-TF]] — pass-with-fixes, 3 issues (0 high, 1 medium, 2 low)
 - [lint/local] Universal-2-TF — 通过
+- [alert/backlog] pending-review: 74, draft deep/repro: 514 — 建议抽空审核
 
 ## 2026-06-08
 
