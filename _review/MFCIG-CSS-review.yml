@@ -1,0 +1,28 @@
+paper: MFCIG-CSS
+reviewer: auto
+date: 2026-06-09
+conclusion: pass
+
+principles:
+  reproducible:
+    status: pass
+    note: "方法节含 SIG/PIG 图结构的因果解释 (WHY word-level, WHY dual graph, WHY GraphSAGE); 关键设计选择 Q&A 覆盖 4 个核心决策"
+  trustworthy:
+    status: pass
+    note: "所有数字 claim 标注 [Table 1/2] 或 [§X.X]; 指标名称 (N-DMOS/P-DMOS/MAE-P/MAE-E/MCD) 正确; 方向性正确"
+  distinguishable:
+    status: pass
+    note: "因果解释来源标注覆盖率 100%; 每个 WHY 解释均标注 [论文原文] 或 [agent 解读]"
+  positionable:
+    status: pass
+    note: "KB 背景含完整 CSS 演进链 (Base-CTTS→...→I3-CSS→MFCIG-CSS) + 同组前作 RADKA-CSS/ECSS 对比 + ProsodyModeling 粒度定位"
+  non-polluting:
+    status: pass
+    note: "反向更新仅向 ProsodyModeling/EmotionControlinTTS 追加 key_papers,不改定义或 related_concepts"
+
+issues: []
+
+summary: |
+  MFCIG-CSS 笔记结构完整,方法解释清晰,因果来源标注充分。
+  论文本身方法清晰 (双图结构 + GraphSAGE 编码),实验结果在 DailyTalk 上全面领先。
+  无 high/medium/low issues。
