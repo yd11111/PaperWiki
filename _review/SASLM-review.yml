@@ -1,0 +1,15 @@
+paper: SASLM
+reviewer: auto
+date: 2026-06-09
+conclusion: pass
+issues:
+  - severity: minor
+    description: "VIB beta sensitivity 未详细分析,标注为 [未确认]"
+  - severity: minor
+    description: "EchoMind 仅覆盖英文 empathetic dialogue,结论泛化性需注意"
+checklist:
+  可复述: true  # 方法节有因果解释,每个设计选择回答了 WHY
+  可信赖: true  # 数字 claim 有 Table/Section 标注
+  可区分: true  # 事实 vs 推断用 [论文原文] / [agent 解读] 标注
+  可定位: true  # KB 背景有谱系定位,有明确对比基准
+  不污染: true  # 反向更新仅 append key_papers
