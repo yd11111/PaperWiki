@@ -2,6 +2,8 @@
 
 ## 2026-06-09
 
+- [ingest/deep] [[SASLM]] — Self-Aware Speech LLM; KB 命中: [[ProsodyModeling]](confirmed), [[EmotionControlinTTS]](pending-review), [[LLM-basedTTS]](confirmed); 追加 key_papers x3
+- [review/auto] [[SASLM]] — pass, 2 minor issues
 - [ingest/deep] [[GPT-Talker]] — 精读, kb_sources=4 (1 confirmed: ProsodyModeling; 3 pending-review: EmotionControlinTTS, CodecLanguageModel, StyleTransferinTTS), 新建 0, 追加 2 (ProsodyModeling, CodecLanguageModel)
 - [review/auto] [[GPT-Talker]] — pass, 0 issues
 - [kb/append] [[ProsodyModeling]] + [[CodecLanguageModel]] — 追加 GPT-Talker 到 key_papers
