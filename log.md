@@ -2231,3 +2231,4 @@
 - [review/auto] [[FlexiVoice]] — pass-with-fixes, 0 high, 2 medium (models 字段补充 + 架构细节补充), 3 low (overclaim fix + 超参数补充); 修正 InstructTTSEval ZH 数据错误 + arxiv_id/authors
 - [lint/local] FlexiVoice — 通过/0 问题
 - [ingest/deep] [[ECSS]] — 异构图情感 CSS + DailyTalk 情感标注 (AAAI 2024); KB append: ProsodyModeling, EmotionControlinTTS, GlobalStyleTokens
+- [ingest/repro] [[dots.tts]], [[VoxCPM]]→repro, [[VoxCPM2]], [[WavTTS]]→repro — 4篇复现级笔记; 审阅全pass; KB反向更新9概念页 (CFM, LLM-basedTTS, SemanticvsAcousticTokens, FSQ, VAE-TTS, SpeechTokenizer, CFG, NAR-TTS, Next-TokenDiffusion)
