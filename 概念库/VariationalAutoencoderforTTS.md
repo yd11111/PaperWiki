@@ -4,7 +4,7 @@ title: "Variational Autoencoder for TTS"
 aliases: [VAE-TTS, TTS中的变分自编码器, VAE for Speech Synthesis, 变分推断TTS]
 category: "generative-model"
 tags: [TTS, VAE, latent-variable, expressive-TTS, generative-model]
-key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]"]
+key_papers: ["[[论文笔记/VITS|VITS]]", "[[论文笔记/HierSpeech++|HierSpeech++]]", "[[论文笔记/MELLE|MELLE]]", "[[论文笔记/VQ-VAE|VQ-VAE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/IDEA-TTS|IDEA-TTS]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/ParaStyleTTS|ParaStyleTTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[论文笔记/dots.tts|dots.tts]]", "[[论文笔记/VoxCPM2|VoxCPM2]]"]
 origin_paper: "Xu Tan et al., A Survey on Neural Speech Synthesis, 2021"
 related_concepts: ["[[ProsodyModeling]]", "[[Attention-basedTTS]]", "[[Non-autoregressiveTTS]]", "[[NeuralVocoder]]"]
 status: pending-review

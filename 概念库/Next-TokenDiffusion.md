@@ -4,7 +4,7 @@ title: "Next-Token Diffusion"
 aliases: [Per-Token Diffusion, Token-Level Diffusion Head, 逐token扩散, Next-Token Diffusion Head]
 category: "technique"
 tags: [diffusion, autoregressive, continuous-representation, language-model, TTS, multimodal]
-key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/HoliTok|HoliTok]]", "[[论文笔记/DiTAR|DiTAR]]"]
+key_papers: ["[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/VibeVoice|VibeVoice]]", "[[论文笔记/SemaVoice|SemaVoice]]", "[[论文笔记/TADA|TADA]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/CTDiffusion|CTDiffusion]]", "[[论文笔记/Ming-UniAudio|Ming-UniAudio]]", "[[论文笔记/ARDM-DPO|ARDM-DPO]]", "[[论文笔记/HoliTok|HoliTok]]", "[[论文笔记/DiTAR|DiTAR]]", "[[论文笔记/dots.tts|dots.tts]]", "[[论文笔记/VoxCPM2|VoxCPM2]]"]
 origin_paper: "Sun et al., Multimodal Latent Language Modeling with Next-Token Diffusion, 2024 (arXiv:2412.08635)"
 related_concepts: ["[[DiffusionModel]]", "[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[Classifier-FreeGuidance]]", "[[VariationalAutoencoderforTTS]]"]
 status: pending-review
