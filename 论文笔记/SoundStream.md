@@ -175,3 +175,84 @@ FiLM 层插入 encoder 或 decoder 的 residual units 之间。去噪可在推�
 > **Claim 标注率:** 100% (20/20)
 > **问题:** 0 high, 0 medium, 2 low
 > **反向更新:** ✅
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/wesbz/SoundStream (428 stars)
+> - commit: e9dac26
+> - 分析日期: 2026-06-10
+> - 注意: 这是社区实现,非 Google 官方代码。另有 kaiidams/soundstream-pytorch (80 stars) 等替代实现
+
+### 架构验证
+
+代码与论文架构高度一致:
+
+| 组件 | 论文描述 | 代码实现 | 一致性 |
+|------|----------|----------|--------|
+| Encoder strides | (2, 4, 5, 8), 总 320x | `EncoderBlock` strides (2, 4, 5, 8) | 完全一致 |
+| Encoder 结构 | Conv(k=7) → 4 blocks → Conv(k=3) | `Encoder.__init__`: Conv(k=7) → 4 EncoderBlock → Conv(k=3) | 完全一致 |
+| ResidualUnit dilation | (1, 3, 9) per block | `ResidualUnit` 的 dilation 参数按 (1, 3, 9) 传入 | 完全一致 |
+| Decoder 对称性 | strides 反转 (8, 5, 4, 2) | `Decoder.__init__`: DecoderBlock strides (8, 5, 4, 2) | 完全一致 |
+| RVQ | 自实现 | 使用 `vector_quantize_pytorch.ResidualVQ` 第三方库 | 功能等价 |
+| Wave Discriminator | 3 分辨率,每个 7 层 | `WaveDiscriminator(num_D=3)`,每个 `WaveDiscriminatorBlock` 7 层 | 完全一致 |
+| STFT Discriminator | 2D Conv on complex STFT | `STFTDiscriminator` 含 6 个 `ResidualUnit2d` + 首尾 Conv | 完全一致 |
+
+### 论文未写的实现细节
+
+1. **CausalConv1d 实现**: 论文仅说"causal",代码揭示具体方式 — 左侧 zero-padding `dilation * (kernel_size - 1)`,右侧不 padding。这是标准的 causal padding 但论文未给公式。
+
+2. **CausalConvTranspose1d**: 右侧裁剪 `causal_padding = dilation * (kernel_size - 1) + output_padding + 1 - stride`,保证因果性。论文完全未提及 transposed conv 的因果处理。
+
+3. **RVQ 依赖**: 代码使用 `vector_quantize_pytorch` 库的 `ResidualVQ`,配置 `kmeans_init=True, kmeans_iters=100, threshold_ema_dead_code=2`。论文描述的 EMA 更新和 dead code replacement 均由该库实现。
+
+4. **激活函数**: 代码全部使用 `nn.ELU()`,与论文一致(非 ReLU/LeakyReLU)。Discriminator 使用 `LeakyReLU(0.2)`,也与论文一致。
+
+5. **STFT Discriminator 输入**: 代码中 STFT 使用 `return_complex=False` 得到实虚两通道,`permute(0, 3, 1, 2)` 后作为 2 通道 2D 输入。论文 Fig 4 标注输入为 complex STFT 但未说明具体处理方式。
+
+### 训练 pipeline 拆解
+
+`main.py` 实现了完整的 GAN 训练 loop:
+
+1. **Generator 更新**: 计算 `L_adv + 100 * L_feat + L_rec`,其中 `LAMBDA_ADV=1, LAMBDA_FEAT=100, LAMBDA_REC=1` 完全匹配论文
+2. **Discriminator 更新**: 使用 hinge loss `F.relu(1-real) + F.relu(1+fake)`,与论文一致
+3. **Spectral reconstruction loss**: 在 window sizes `2^6` 到 `2^11` 上计算 mel-spectrogram 的 L1 + L2 距离,与论文 Eq.4-5 一致
+4. **训练缺陷**: 默认参数 `C=1, D=1, n_q=1, codebook_size=1` 明显是占位符,说明该仓库偏重架构验证而非完整复现
+
+### 推理 pipeline 拆解
+
+推理极简: `SoundStream.forward(x)` 直接执行 `encoder → quantizer → decoder`。代码未实现 quantizer dropout (可变比特率) 和 FiLM conditioning (去噪),这两个论文重要特性缺失。
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| C (channel multiplier) | 32 (default), 16 (lightweight) | 1 (占位符) | 需用户自行设置 |
+| D (embedding dim) | 未明确指定 | 1 (占位符) | 论文中 D 由 16*C 确定 |
+| n_q (RVQ layers) | 8 (default) | 1 (占位符) | 需用户自行设置 |
+| codebook_size | 1024 | 1 (占位符) | 需用户自行设置 |
+| Encoder strides | (2, 4, 5, 8) | (2, 4, 5, 8) | 硬编码,一致 |
+| LAMBDA_ADV | 1 | 1 | 一致 |
+| LAMBDA_FEAT | 100 | 100 | 一致 |
+| LAMBDA_REC | 1 | 1 | 一致 |
+| STFT window | 1024 | 1024 | 一致 |
+| STFT hop | 256 | 256 | 一致 |
+| Optimizer | Adam(lr=1e-4, betas=(0.5, 0.9)) | Adam(lr=1e-4, betas=(0.5, 0.9)) | 论文未明确报告,但代码设置合理 |
+
+### 复现 checklist (基于代码)
+
+- [x] Encoder/Decoder 对称架构 (strides, residual units)
+- [x] CausalConv1d / CausalConvTranspose1d
+- [x] Wave Discriminator (3 分辨率)
+- [x] STFT Discriminator (2D Conv)
+- [x] 训练 loss (adv + feat + rec)
+- [ ] **Quantizer Dropout** — 未实现
+- [ ] **FiLM conditioning** — 未实现
+- [ ] **合理超参数** — 默认值为占位符
+- [ ] **大规模数据训练** — 仅在 NSynth 小数据集上测试
+
+### 代码质量与可复现性评估
+
+**质量**: 代码结构清晰,忠实还原论文架构,约 600 行覆盖核心模型和训练。但缺少 quantizer dropout 和 FiLM 两个重要特性。
+
+**可复现性**: **中等偏低**。架构正确但默认超参数为占位符,关键特性缺失,训练 pipeline 未经大规模验证 (作者注释 "Super slow, would definitely need profiling")。适合作为架构参考,不适合直接用于复现论文结果。若需完整实现,建议参考 Descript 的 `dac` 或 Meta 的 `encodec` 仓库,它们虽然是后续工作但包含了 SoundStream 的核心设计。

@@ -194,3 +194,120 @@ LLM + CFM 的 coarse-to-fine 架构设计也很精巧: 通过 x-vector 显式分
 > - [medium/template-compliance] 方法节因果解释无 [论文原文]/[agent 解读] 标签 (系统性缺失)
 > **反向更新:** ✅
 > **学习信号:** frontmatter_complete 检查应拆分为"字段存在"+"字段语义正确";models 字段应列本文模型+对比基准
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/FunAudioLLM/CosyVoice
+> - commit: 074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc
+> - 分析日期: 2026-06-10
+> - 备注: 当前仓库已包含 CosyVoice/CosyVoice2/CosyVoice3 三个版本,CosyVoice v1 对应 `TransformerLM` 类 + `MaskedDiffWithXvec` 类
+
+### 架构验证
+
+论文 Fig 1(b) 的四组件架构在代码中精确对应:
+
+| 论文组件 | 代码实现 | 文件位置 |
+|---------|---------|---------|
+| Text Encoder | `TransformerLM.text_encoder` (Conformer) + `text_embedding` (BPE) | `cosyvoice/llm/llm.py:53-58` |
+| S3 Tokenizer | 外部 ONNX 模型 `speech_tokenizer_v1.onnx` | `cosyvoice/cli/cosyvoice.py:44` |
+| LLM (AR) | `TransformerLM.llm` (自定义 Transformer) | `cosyvoice/llm/llm.py:65` |
+| OT-CFM | `MaskedDiffWithXvec` + `ConditionalCFM` | `cosyvoice/flow/flow.py:25`, `flow_matching.py:21` |
+
+**差异**: 论文中 S3 Tokenizer 描述为在 ASR encoder 中间插入 VQ 层,代码中这部分已预训练并导出为 ONNX 模型 (`speech_tokenizer_v1.onnx`),不包含训练代码。
+
+### 论文未写的实现细节
+
+1. **x-vector 归一化** (`cosyvoice/llm/llm.py:128`): speaker embedding 在输入 LLM 前做 L2 归一化 (`F.normalize(embedding, dim=1)`),论文未提及这一关键步骤。
+
+2. **LLM 输入序列的精确构造** (`cosyvoice/llm/llm.py:94`): 序列为 `[sos_emb, spk_embedding, text_encodings, task_id_emb, speech_tokens]`,其中 `sos` 和 `task_id` 都从 2-token 的 `llm_embedding` 中取(index 0 和 1),论文 Eq.6 的 S 和 T 就是这两个 learned embedding。
+
+3. **训练 loss 的 target 构造** (`cosyvoice/llm/llm.py:119-121`): LM target 中前 `2 + text_token_len` 个位置设为 `IGNORE_ID`,仅对 speech tokens + EOS 计算交叉熵损失。EOS token = `speech_token_size`(即 4096)。
+
+4. **推理时的 prompt 拼接** (`cosyvoice/llm/llm.py:178-200`): 零样本推理时,prompt text 和 text 直接在 token 维度拼接后一起过 text encoder,prompt speech tokens 嵌入后拼接到序列末尾作为 prefix。min/max 长度由 `text_len * min_token_text_ratio(2)` 和 `max_token_text_ratio(20)` 控制。
+
+5. **CFM 的 masked mel 实现** (`cosyvoice/flow/flow.py:83-89`): 训练时随机选择 0~30% 的前缀帧作为条件,50% 概率完全不提供条件。这比论文描述的"从随机位置到末尾置零"更精确。
+
+6. **CFM 的 CFG 实现** (`cosyvoice/flow/flow_matching.py:95-118`): 推理时将 batch 复制为 2 份(条件和无条件),一次前向计算两个预测,然后用 `(1+0.7)*cond - 0.7*uncond` 做引导。训练时 `cfg_mask` 以 `p=0.2` 的概率将 `mu/spks/cond` 全部置零。
+
+7. **CFM 缓存机制** (`cosyvoice/flow/flow_matching.py:57-65`): 流式推理时,z 和 mu 的 prompt 部分 + 最后 34 帧被缓存到下一次调用,实现 overlap 生成。34 帧 = 约 0.4 秒。
+
+8. **Vocoder 实际使用 HiFi-GAN** (`cosyvoice/hifigan/`): 论文简单提到 HiFi-GAN,代码实现为 `hifigan/generator.py` 中的标准 HiFi-GAN V1 架构。
+
+### 训练 pipeline 拆解
+
+```
+原始音频
+  → speech_tokenizer_v1.onnx → speech_token (离散, codebook=4096)
+  → mel_spectrogram → speech_feat (80-dim mel)
+  → campplus.onnx → embedding (192-dim x-vector)
+  → BPE tokenizer → text_token
+  
+训练:
+  text_token → text_embedding → text_encoder (Conformer) → text_encoder_affine_layer
+  embedding → L2_norm → spk_embed_affine_layer → (1, 1, llm_input_size)
+  speech_token → speech_embedding → (B, T, llm_input_size)
+  
+  LLM 输入: [sos_emb, spk_emb, text_enc, task_id_emb, speech_emb]
+  LLM 输出 → llm_decoder (Linear → speech_token_size+1) → CE loss (仅 speech+EOS 位置)
+  
+  CFM 输入: speech_token → input_embedding → encoder → encoder_proj → length_regulator → h
+  条件: h + spk_embedding + masked_mel
+  目标: mel_spectrogram
+  Loss: OT-CFM regression (MSE on flow velocity)
+```
+
+### 推理 pipeline 拆解
+
+```
+输入文本 + prompt 音频
+  → prompt 音频 → speech_tokenizer → prompt_speech_token
+  → prompt 音频 → mel_extractor → prompt_feat (mel)
+  → prompt 音频 → campplus → embedding (x-vector)
+  → prompt 文本 + 输入文本 → BPE tokenizer → text_token
+  
+  Stage 1 (LLM):
+    text_token → text_encoder → text_enc
+    构造: [sos, spk_emb, text_enc, task_id, prompt_speech_emb]
+    自回归生成 speech_token 直到 EOS (top-k=25 sampling)
+    
+  Stage 2 (CFM):
+    speech_token → encoder → length_regulator → h
+    prompt_mel 作为条件前缀
+    z ~ N(0,I) → 10 步 Euler ODE → mel (cosine scheduler)
+    CFG: β=0.7
+    
+  Vocoder: mel → HiFi-GAN → waveform (22050 Hz)
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| Speech token codebook size | 4096 | 4096 | `speech_token_size` |
+| Speaker embedding dim | 未明确 | 192 | `spk_embed_dim=192` |
+| LLM output vocab | 未明确 | 4097 (4096+1) | speech_token_size + EOS |
+| CFM steps (inference) | 未明确 | 10 | `n_timesteps=10` |
+| CFG rate (training) | 0.2 | 0.2 | `training_cfg_rate` |
+| CFG rate (inference) | 0.7 | 0.7 | `inference_cfg_rate` |
+| Cosine scheduler | 提及 | `1 - cos(t * 0.5 * pi)` | `t_scheduler='cosine'` |
+| LLM sampling | 未明确 | top-k=25 | `sampling=25` |
+| Min/Max token ratio | 未明确 | 2/20 | 控制生成长度范围 |
+| Flow cache overlap | 未提及 | 34 帧 | 流式推理 overlap |
+| Label smoothing | 未明确 | 0.0 | `lsm_weight` 默认值 |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: PyTorch, transformers, matcha-tts (流匹配基类), hyperpyyaml, modelscope
+- [ ] 数据准备: 需要预提取 speech_token (ONNX)、mel、x-vector (CAM++ ONNX)、BPE text tokens
+- [ ] 预训练模型依赖: speech_tokenizer_v1.onnx, campplus.onnx, HiFi-GAN vocoder
+- [ ] 训练命令: `cosyvoice/bin/train.py` + YAML 配置
+- [ ] 推理命令: `CosyVoice(model_dir).inference_zero_shot(text, prompt_text, prompt_wav)`
+- [ ] 已知坑: (1) S3 Tokenizer 训练代码不在仓库中; (2) text encoder 使用了自定义 Conformer 而非标准实现; (3) 流式推理的 34 帧 overlap 是硬编码
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 - 代码结构清晰,模块化良好,CLI/model/frontend 分层合理
+- **文档完善度**: 3/5 - README 提供了基本使用说明,但缺少训练文档和超参数说明
+- **社区活跃度**: 5/5 - GitHub 5k+ stars,持续更新,三个版本共存于同一仓库
+- **复现难度**: 3/5 - 推理可复现(提供预训练模型),训练较难复现(S3 Tokenizer 训练代码缺失)

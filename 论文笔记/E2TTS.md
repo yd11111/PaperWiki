@@ -199,3 +199,119 @@ E2 TTS 是一个典型的"减法创新"案例。在 TTS 领域,从 Tacotron 到 
 ---
 
 *检索命中: [[ConditionalFlowMatching]], [[Zero-shotSpeechSynthesis]] | 过滤: [[Non-autoregressiveTTS]](待确认), [[Classifier-FreeGuidance]](待确认), [[DurationPredictor]](待确认), [[MelSpectrogram]](待确认) | 未命中但可能相关: Voicebox(无实体页)*
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/SWivid/F5-TTS (F5-TTS 是 E2 TTS 的开源实现和改进)
+> - commit: 2ae2c9bd9b64dab2cb069c4b97e5e7673c521e01
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 (E2 TTS) vs 代码 (F5-TTS) 的关键差异:**
+
+1. **Backbone 架构**: 论文使用 vanilla Transformer + U-Net skip connections (335M params)。F5-TTS 代码使用 **DiT (Diffusion Transformer)** 作为默认 backbone (`src/f5_tts/model/backbones/dit.py`),同时也保留了 U-Net Transformer (`unett.py`) 和 MMDiT (`mmdit.py`) 作为可选 backbone。DiT 版本无 U-Net skip connections,而是使用 AdaLayerNorm + 可选的 long_skip_connection (线性投影而非 skip concat)。
+
+2. **Text Encoder**: 论文直接嵌入字符 (399 vocab)。F5-TTS 增加了 **ConvNeXt V2 text encoder** (`conv_layers=4` in config),在文本嵌入后通过 4 层 ConvNeXtV2Block 做进一步建模 (`dit.py:49-53`)。ConvNeXtV2Block 使用 depthwise conv + GRN (Global Response Normalization) (`modules.py:252-280`)。这是 F5-TTS 论文提出的关键改进。
+
+3. **位置编码**: 论文使用 sinusoidal + 学习位置。F5-TTS 使用 **RoPE** (`RotaryEmbedding`, `dit.py:207`) 用于 DiT blocks,使用 sinusoidal 位置编码 (`precompute_freqs_cis`) 用于 ConvNeXt text encoder。
+
+4. **输入嵌入**: 论文将 text+mel+time 通过线性层拼接。F5-TTS 的 `InputEmbedding` (`dit.py:145-164`) 拼接 `[x, cond, text_embed]` (noised mel + cond mel + text),再通过 `ConvPositionEmbedding` 做卷积位置编码 (kernel_size=31, groups=16)。
+
+5. **CFG 实现**: 论文用 20% cond_drop_prob。F5-TTS 使用两层 dropout: `audio_drop_prob=0.3` (仅丢弃 audio condition) + `cond_drop_prob=0.2` (同时丢弃 audio 和 text) (`cfm.py:46-47`)。推理时两者打包为 2B 的 batch 一次 forward (`cfm.py:180-191`)。
+
+6. **采样优化**: 论文使用 midpoint ODE solver。F5-TTS 默认使用 **Euler method** (`cfm.py:42-43`),并引入 **EPSS (Empirically Pruned Step Sampling)** (`cfm.py:211-213`) 和 **sway sampling** (`cfm.py:215-216`,使用余弦调度非均匀时间步) 来在低 NFE 下获得更好质量。
+
+### 论文未写的实现细节
+
+1. **Text caching 机制** (`dit.py:237-317`): 推理时 text embedding 在第一次 ODE step 计算后被缓存 (`text_cond` / `text_uncond`),后续 step 直接复用,避免重复计算 ConvNeXt text encoder。使用 `threading.local()` 保证线程安全。
+
+2. **AdaLN 零初始化** (`dit.py:264-274`): DiT blocks 的 AdaLayerNorm 线性层和最终投影层全部零初始化 (`nn.init.constant_(..., 0)`),这是 DiT 论文的标准做法,确保训练初期模型输出接近恒等映射。
+
+3. **Flow matching 实现细节** (`cfm.py:270-302`): 最优传输路径 `phi = (1-t)*x0 + t*x1`,flow = `x1 - x0`。Loss 仅在随机 span mask 内计算 (`loss = loss[rand_span_mask]`),mask 比例 uniform(0.7, 1.0)。
+
+4. **Vocoder 支持两种**: Vocos (默认, `mel_spec_type="vocos"`) 和 BigVGAN (可选)。两者使用不同的 mel 提取方式: Vocos 用 `torchaudio.transforms.MelSpectrogram` (center=True),BigVGAN 用 librosa mel 滤波器 (center=False, 额外 reflect padding) (`modules.py:35-109`)。
+
+5. **Per-sample 噪声种子** (`cfm.py:197-201`): 每个 batch 中的样本独立生成初始噪声,支持指定 seed 确保可复现性,避免不同 batch size 影响结果。
+
+6. **Filler token 实现** (`dit.py:87`): 实际用 0 作为 filler token。原始 text token 加 1 (`text = text + 1`),batch padding 用 -1。
+
+### 训练 pipeline 拆解
+
+```
+原始音频 (24kHz wav)
+→ MelSpec 提取 (n_fft=1024, hop=256, n_mels=100, ~10.67ms/frame)
+→ mel spectrogram x1 [B, T, 100]
+→ 生成随机 span mask (uniform 0.7-1.0 of T)
+→ 生成噪声 x0 ~ N(0,1)
+→ 采样时间 t ~ U(0,1)
+→ 构造 flow: phi = (1-t)*x0 + t*x1, target = x1 - x0
+→ 构造 cond: 未 mask 区域保留原始 mel, mask 区域置零
+→ Text → +1 → Embedding → ConvNeXtV2 (4 layers) → text_embed
+→ InputEmbedding: [phi; cond; text_embed] → Linear → ConvPosEmbed
+→ Time → SinusEmbed → MLP → time_embed
+→ DiT blocks (22 layers): AdaLN(x, t) → SelfAttn(RoPE) → FFN
+→ AdaLN_Final → Linear → pred_flow [B, T, 100]
+→ Loss = MSE(pred_flow, target) 仅在 mask 区域
+```
+
+### 推理 pipeline 拆解
+
+```
+Audio prompt (wav) → MelSpec → cond [B, T_aud, 100]
+Text → char tokenization (+1, 0=filler) → text [B, T_total]
+→ pad cond to T_total = T_aud + T_gen, target region = zeros
+→ 初始噪声 y0 ~ N(0,1) [B, T_total, 100]
+→ EPSS/sway 时间步调度 (默认 32 steps)
+→ ODE 积分 (Euler):
+  每步: fn(t, x) = pred + (pred - null_pred) * cfg_strength (默认 2.0)
+  text embedding 缓存, cond 固定
+→ 最终 mel = trajectory[-1]
+→ cond 区域替换回原始 prompt mel
+→ Vocos vocoder → 24kHz waveform
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 (E2 TTS) | 代码实际值 (F5-TTS) | 备注 |
+|------|--------|-----------|------|
+| Backbone | Transformer+U-Net skip | DiT (无 U-Net) | F5-TTS 的核心改进 |
+| Model dim | 1024 | 1024 | 一致 |
+| Depth | 24 layers | 22 layers | F5-TTS 略浅 |
+| Heads | 16 | 16 | 一致 |
+| FFN mult | 4 | 2 | F5-TTS 减半,搭配 text_dim 分离 |
+| Text dim | =mel_dim (100) | 512 (独立) | F5-TTS 用独立 text 维度 |
+| Parameters | 335M | ~330M (估算) | 相近 |
+| Text encoder | 直接嵌入 | ConvNeXtV2 (4 layers) | F5-TTS 新增 |
+| Char vocab | 399 | pinyin tokenizer (可配) | F5-TTS 支持多种 |
+| Mel dim | 100 | 100 | 一致 |
+| Hop length | 10.7ms | 256 samples = 10.67ms | 一致 |
+| Sample rate | 24kHz | 24kHz | 一致 |
+| CFG drop (audio) | 20% | 30% | F5-TTS 更高 |
+| CFG drop (all) | 20% | 20% | 一致 |
+| Mask range | 70-100% | 70-100% | 一致 |
+| LR | 7.5e-5 linear decay | 7.5e-5 linear warmup | 调度不同 |
+| Warmup | 20K steps | 20K steps | 一致 |
+| Batch (frames) | 307,200 | 38,400/GPU x 8 = 307,200 | 一致 |
+| ODE solver | midpoint | Euler | F5-TTS 更快 |
+| NFE steps | 32 (推断) | 32 (默认) | 一致 |
+| CFG strength | 1.0 | 2.0 | F5-TTS 更强 |
+| Vocoder | BigVGAN | Vocos (默认) / BigVGAN | F5-TTS 首选 Vocos |
+| 位置编码 | sinusoidal | RoPE | F5-TTS 改用 |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: Python 3.10+, PyTorch 2.0+, `pip install f5-tts` 或 editable install; 可选 flash-attn
+- [ ] 数据准备: Emilia 数据集 (ZH+EN), 需转为 metadata + wav 格式; 也支持 LibriTTS, LJSpeech, WenetSpeech4TTS
+- [ ] 预训练模型依赖: Vocos vocoder (自动从 HuggingFace 下载); 可选 BigVGAN
+- [ ] 训练命令: `f5-tts_train --config-name F5TTS_Base`
+- [ ] 推理命令: `f5-tts_infer-cli --model F5TTS_Base --ref_audio ref.wav --ref_text "..." --gen_text "..."`
+- [ ] 已知坑: (1) batch 推理时不同 batch size 可能产生微小差异 (卷积层); (2) MPS backend 需要 fallback; (3) 长文本需 chunk (默认 max_chars=135)
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 -- 代码结构清晰,Hydra 配置管理,accelerate 分布式训练,EMA 支持,多种 vocoder/tokenizer/backbone 可配。有 Triton TensorRT-LLM runtime 部署支持。
+- **文档完善度**: 4/5 -- README 详尽,含安装/训练/推理/微调/评估全流程。有 Gradio demo 和 Docker 支持。
+- **社区活跃度**: 5/5 -- 12K+ stars, 1298+ PRs merged, 活跃的 issue 响应。多个社区贡献的 feature (AMD ROCm, MLX 等)。
+- **复现难度**: 2/5 (易) -- pip install 即可推理; 训练需要 Emilia 数据集 (公开) + 8 GPU。预训练权重公开。

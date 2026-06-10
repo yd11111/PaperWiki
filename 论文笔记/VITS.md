@@ -208,3 +208,122 @@ $$L_{vae} = L_{recon} + L_{kl} + L_{dur} + L_{adv}(G) + L_{fm}(G)$$
 > 
 > 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+---
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/jaywalnut310/vits
+> - commit: 2e561ba
+> - 分析日期: 2026-06-10
+> - 说明: 作者官方实现
+
+### 架构验证
+
+代码与论文 Fig 1 完全对应:
+
+- `models.py:SynthesizerTrn` = 整体训练架构,包含 5 个核心组件:
+  - `enc_p` = `TextEncoder`: phoneme embedding → Transformer encoder → 投影到 (mu, logs),即 prior encoder 的文本编码部分
+  - `flow` = `ResidualCouplingBlock`: 4 层 affine coupling (mean_only=True, volume-preserving),即 normalizing flow
+  - `enc_q` = `PosteriorEncoder`: 1x1 conv → 16 层 WN (WaveNet residual blocks) → 投影到 (mu, logs),输入 linear spectrogram
+  - `dec` = `Generator`: HiFi-GAN V1 generator (upsample rates [8,8,2,2],产生 256x 上采样)
+  - `dp` = `StochasticDurationPredictor` (或 `DurationPredictor`): flow-based duration predictor
+
+- `models.py:MultiPeriodDiscriminator` = HiFi-GAN 的 MPD,periods = [2,3,5,7,11],外加一个 `DiscriminatorS`
+
+**与论文的差异**:
+1. **Discriminator 包含 DiscriminatorS**: 论文仅提到 Multi-Period Discriminator,代码额外加了 Multi-Scale Discriminator (DiscriminatorS),组合为 `MultiPeriodDiscriminator`
+2. **ResidualCouplingBlock 的 mean_only=True** (`models.py:199`): flow 层仅学习 mean shift,不学习 scale (volume-preserving),与论文 Appendix B.1 一致
+
+### 论文未写的实现细节
+
+1. **Stop gradient on duration predictor input** (`models.py:51`): `x = torch.detach(x)` — duration predictor 的输入 detach 了梯度,确保 duration loss 不影响 text encoder。同样 global conditioning `g = torch.detach(g)` 也 detach。这对应论文 Section 2.2.2 的 stop gradient operator。
+
+2. **MAS 实现在 C++ extension** (`monotonic_align/`): `monotonic_align/core.pyx` 是 Cython 实现的动态规划,需要预先 `cd monotonic_align && python setup.py build_ext --inplace` 编译。
+
+3. **Segment 随机裁切** (`models.py:495`): `z_slice, ids_slice = commons.rand_slice_segments(z, y_lengths, self.segment_size)` — 训练时从 z 中随机裁取 segment_size=32 帧 (对应 32*256=8192 样本) 送入 decoder,这是论文 Section 3.3 的 "windowed generator training"。
+
+4. **KL loss 的实际计算** (`train.py:184`): `loss_kl = kl_loss(z_p, logs_q, m_p, logs_p, z_mask)` — 在 flow 变换后的空间计算 KL,其中 z_p = flow(z), m_p/logs_p 是 prior 参数 (已经过 attention 扩展)。
+
+5. **Mel loss 系数 c_mel=45** (`configs/ljs_base.json`): mel reconstruction loss 的权重为 45,远大于 c_kl=1.0,说明重建质量的优先级远高于 KL 正则化。
+
+6. **add_blank=true** (`configs/ljs_base.json`): 在每个 phoneme token 之间插入 blank token,扩展序列长度到约 2 倍。这是 Glow-TTS 的设计,帮助 MAS 更灵活地分配 duration。
+
+7. **DistributedBucketSampler** (`data_utils.py`): 自定义采样器按音频长度分桶 [32,300,400,...,1000],减少 padding 浪费。
+
+8. **Inference noise scales** (`models.py:499`): `noise_scale` 控制 z 采样噪声 (默认 1.0); `noise_scale_w` 控制 duration predictor 噪声 (默认 1.0); `length_scale` 控制语速 (默认 1.0)。
+
+9. **Voice conversion** (`models.py:525-533`): 代码提供 `voice_conversion` 方法 — 将源说话人的音频通过 posterior encoder → flow → 换目标说话人 embedding → reverse flow → decoder,论文未详细讨论此功能。
+
+### 训练 pipeline 拆解
+
+数据流: (phoneme_ids, linear_spectrogram, waveform) → SynthesizerTrn.forward:
+1. `enc_p(phonemes)` → h_text, m_p, logs_p (prior 参数)
+2. `enc_q(linear_spec)` → z, m_q, logs_q (posterior 采样)
+3. `flow(z)` → z_p (flow 变换后的 z)
+4. MAS: 计算 neg_cent (z_p 在 prior 下的对数似然) → `monotonic_align.maximum_path` → attention matrix
+5. `w = attn.sum(2)` → phoneme durations; `dp(h_text, w)` → duration loss
+6. 用 attn 扩展 m_p, logs_p 到 frame 级
+7. `rand_slice_segments(z)` → z_slice → `dec(z_slice)` → y_hat (波形)
+8. Discriminator: `net_d(y_real, y_hat)` → disc_loss
+9. Generator loss: `loss_gen + loss_fm + loss_mel*45 + loss_dur + loss_kl*1.0`
+
+- Optimizer: AdamW (lr=2e-4, betas=[0.8,0.99], eps=1e-9)
+- LR scheduler: ExponentialLR (gamma=0.999875)
+- Mixed precision: FP16 via torch.cuda.amp
+- Multi-GPU: DDP with NCCL backend
+
+### 推理 pipeline 拆解
+
+phoneme_ids → `enc_p` → m_p, logs_p → `dp(reverse=True, noise_scale_w)` → logw → exp → ceil → durations → `generate_path` → attn → expand m_p, logs_p → sample z_p from N(m_p, exp(logs_p)) * noise_scale → `flow(reverse=True)` → z → `dec(z)` → waveform
+
+- 无需 posterior encoder, discriminator, linear spectrogram
+- 单次前向,完全并行
+- 三个可调参数: noise_scale (音质 vs 多样性), noise_scale_w (duration 多样性), length_scale (语速)
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 (ljs_base.json) | 备注 |
+|------|--------|-----------|------|
+| inter_channels | 192 | 192 | 隐变量 z 的通道数 |
+| hidden_channels | 192 | 192 | text encoder hidden dim |
+| filter_channels | 768 | 768 | FFN filter size |
+| n_heads | 2 | 2 | attention heads |
+| n_layers (encoder) | 6 | 6 | transformer layers |
+| kernel_size | 3 | 3 | - |
+| p_dropout | 0.1 | 0.1 | - |
+| n_flows | 4 | 4 (ResidualCouplingBlock) | affine coupling layers |
+| posterior n_layers | 16 | 16 (WN in PosteriorEncoder) | WaveNet residual blocks |
+| upsample_rates | [8,8,2,2] | [8,8,2,2] | total 256x (= hop_length) |
+| upsample_kernel_sizes | [16,16,4,4] | [16,16,4,4] | - |
+| resblock_kernel_sizes | [3,7,11] | [3,7,11] | HiFi-GAN MRF |
+| segment_size | 32 (frames) | 8192 (samples) / 256 (hop) = 32 | 一致 |
+| learning_rate | 2e-4 | 2e-4 | - |
+| betas | [0.8, 0.99] | [0.8, 0.99] | 论文: AdamW |
+| lr_decay | 0.999^(1/8)/epoch | 0.999875/epoch | 近似等价 |
+| batch_size | 64 | 64 | - |
+| c_mel | 未明确 | 45 | mel loss 权重 |
+| c_kl | 未明确 | 1.0 | KL loss 权重 |
+| fp16 | yes (V100) | true | - |
+| epochs | 未明确 (800k steps) | 20000 | - |
+| MPD periods | [2,3,5,7,11] | [2,3,5,7,11] | 一致 |
+| add_blank | 未明确 | true | 论文中未显著讨论 |
+| sampling_rate | 22050 | 22050 | - |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: PyTorch >= 1.6, Cython, librosa, scipy, tensorboard, unidecode, phonemizer
+- [ ] 编译 MAS: `cd monotonic_align && python setup.py build_ext --inplace`
+- [ ] 数据准备: LJSpeech 下载 → 生成 filelists (已提供) → text cleaning (phonemizer)
+- [ ] 预训练模型依赖: 无 (从头训练)
+- [ ] 训练命令: `python train.py -c configs/ljs_base.json -m ljs_base`
+- [ ] 推理命令: 通过 `inference.ipynb` (加载 checkpoint + `net_g.infer()`)
+- [ ] 已知坑: Cython MAS 编译可能在 Mac/Windows 上失败; phonemizer 需要 espeak-ng 后端; 多 GPU 训练硬编码 MASTER_PORT=80000 可能冲突; 20000 epoch 在 4xV100 上约需 5-7 天; add_blank 对质量影响大但易被忽略
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 3/5 - 作者官方代码,简洁但缺少注释; 一些变量命名不够直观 (如 c_mel, c_kl 需要看 config 才知含义)
+- **文档完善度**: 2/5 - README 极简 (仅几行),无详细训练指南; inference.ipynb 是唯一的推理参考
+- **社区活跃度**: 2/5 - 2021 年后无更新,但 fork 数量极大 (>4000),社区有大量改进版本 (如 vits2, MB-iSTFT-VITS)
+- **复现难度**: 3/5 - 代码能跑但需要注意 MAS 编译、phonemizer 安装、数据预处理; 训练时间较长

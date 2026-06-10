@@ -193,6 +193,73 @@ $$\lambda_{align} = \alpha \cdot \frac{\|\nabla_\theta L_{mel}\|_2}{\|\nabla_\th
 3. **Previous-patch conditioning 作为 outpainting**: 将自回归生成从独立预测转变为 outpainting,通过提供局部上下文大幅减少 error accumulation。这个设计在 DiTAR 中也被验证有效
 4. **固定信息率变帧率的消融设计**: 在表示学习研究中,通过固定 (frame_rate × dim) 产品改变 granularity 来评估方法的 scaling behavior,是一种干净的实验方法论
 
+## 代码级分析
+
+> [!warning] 代码不可用
+> 截至 2026-06-10,未找到官方或高质量社区实现。GitHub 搜索 "SemaVoice" 仅发现匿名投稿占位仓库 (`ttssemavoice2026/anonymous_tts_semavoice_2026`,0 stars),无实际代码内容。论文来自 Tencent/CUHK 合作,未在论文中提及代码开源计划。
+
+### 论文架构分析
+
+基于论文 Fig 1-2 和 Section 3 的描述,SemaVoice 的架构可拆解为:
+
+**阶段 1: 带 SFM 对齐的 sigma-VAE**
+
+- **Encoder**: 将 24kHz 语音编码为 15Hz, 32-dim 连续 latent (1600x 压缩)
+- **Decoder**: 从 latent 重建波形
+- **SFM 对齐损失**:
+  - 冻结 WavLM-large 提取语义特征 (50Hz)
+  - 2x average pooling 对齐到 25Hz,再进一步到 15Hz
+  - Linear projection 对齐维度: WavLM dim → latent dim
+  - Frame-wise alignment: L_frame = mean(1 - cos(z_t, s_t))
+  - Pair-wise alignment: L_pair = mean(|D^z_{i,j} - D^s_{i,j}|)
+  - L_align = L_frame + L_pair
+  - 自适应权重: λ = α * ||∇L_mel|| / ||∇L_align||, α=0.5
+- **sigma-VAE**: variance σ 从 N(0, C_σ) 采样,不参与梯度,保持非零方差
+
+**阶段 2: AR LLM + LocDiT**
+
+- **LLM backbone**: Qwen2.5-1.5B 初始化,causal attention
+- **Patch grouping**: patch_size=2,输入帧分组后经 Linear proj 到 LLM hidden dim
+- **LocDiT diffusion head**: DDPM-based per-patch 生成
+  - Previous-patch conditioning: [prev_clean_patch, current_noisy_patch] 拼接输入
+  - 双向注意力 (within patch)
+  - adaLN-Zero 时间步注入
+- **CFG**: LLM hidden state 以概率 p 替换为 null embedding; 推理 guidance scale w=2.5
+
+### 关键超参数表 (论文报告)
+
+| 参数 | 论文值 | 备注 |
+|------|--------|------|
+| VAE latent dim | 32 | |
+| VAE frame rate | 15Hz | 1600x 下采样 @ 24kHz |
+| Sample rate | 24kHz | |
+| LLM backbone | Qwen2.5-1.5B | 初始化 |
+| Patch size | 2 | |
+| SFM alignment source | WavLM-large | 冻结 |
+| Adaptive weight α | 0.5 | |
+| CFG scale w | 2.5 | |
+| VAE training data | 20K hours | 双语 |
+| VAE training steps | 280K | 8xA800, batch 320s |
+| TTS training data | 150K hours | 100K Emilia + 50K internal |
+| TTS training steps | 300K | 8xH200, batch 8192s |
+| TTS lr | 1e-4 | Cosine decay |
+| Ablation data | 46.8K hours | Emilia-EN |
+| Ablation steps | 100K | 8xA800 |
+| Ablation lr | 7.5e-5 | |
+
+### 可复现性评估
+
+**复现难度: 4/5 (较难)**
+
+- (+) 架构组件已知: sigma-VAE, Qwen2.5, LocDiT (类似 DiTAR) 均有参考实现
+- (+) SFM alignment 的损失函数公式清晰 (Eq 4-6)
+- (-) sigma-VAE 的具体编码器/解码器架构未详述 (仅提及 1600x 压缩)
+- (-) LocDiT 的层数、hidden dim 等未明确报告
+- (-) 50K 小时内部数据不可复现
+- (-) WavLM 对齐的具体层选择 (哪一层特征) 未明确
+- (-) 自适应权重的梯度计算频率 (每步/每 batch/每 epoch) 未说明
+- (-) 无开源代码或预训练权重
+
 > [!review] 审阅: pass-with-fixes (2026-06-03)
 > 5 原则均满足。3 个 low severity issues (frontmatter models 可加 VoxCPM / VAE loss 权重未收录 / previous-patch conditioning 归属)。不阻塞反向更新。
 > 详见 `_review/SemaVoice-review.yml`

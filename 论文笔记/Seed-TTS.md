@@ -157,3 +157,92 @@ Seed-TTS 由四个模块级联组成 [§2, Figure 1]:
 > - [medium/summary-without-mechanism] 关键设计选择 > Speech Tokenizer 设计: Tokenizer 小节仅描述 WHAT,未解释 WHY 或标注论文信息缺口
 > **反向更新:** ✅
 
+## 代码级分析
+
+> [!warning] 代码不可用
+> 截至 2026-06-10,ByteDance 未开源 Seed-TTS 模型的训练或推理代码。仅开源了评估 benchmark: [BytedanceSpeech/seed-tts-eval](https://github.com/BytedanceSpeech/seed-tts-eval) (1563 stars, commit 752f429)。
+
+### SEED-TTS-Eval Benchmark 分析
+
+开源的 `seed-tts-eval` 仓库仅包含评估工具:
+
+| 文件 | 功能 |
+|------|------|
+| `run_wer.py` | 使用 Whisper 计算 WER (ASR-based 鲁棒性评估) |
+| `average_wer.py` | 汇总多组 WER 结果 |
+| `cal_sim.sh` | 调用 WavLM-based speaker verification 模型计算 speaker similarity |
+| `cal_wer.sh` | 批量计算 WER 的 shell 脚本 |
+| `prepare_ckpt.py` | 下载 Whisper + WavLM 评估模型权重 |
+| `get_wav_res_ref_text.py` | 从评估集中提取 wav/reference/text 三元组 |
+| `thirdparty/UniSpeech/WavLM/` | WavLM speaker verification 模型 (用于 SIM 计算) |
+
+**评估流程**: 提供参考语音 + 文本 → TTS 系统生成 → Whisper 算 WER + WavLM 算 SIM-o
+
+**数据**: SEED-TTS-Eval 的评估数据需要根据论文 Table 1 的描述自行准备 (Common Voice EN + DiDiSpeech ZH),仓库不直接提供音频数据。
+
+### 论文架构分析
+
+由于无代码可分析,以下基于论文信息提取详细架构描述:
+
+**完整系统由 4 个模块级联**:
+
+1. **Speech Tokenizer**:
+   - 设计类似 Betker (2023, Tortoise TTS) 和 Wang et al. (2023b)
+   - 同时探索 continuous 和 discrete 两种变体
+   - 论文明确指出 tokenizer 是全系统的性能瓶颈 [Section 2]
+   - 具体架构和训练方式未公开
+
+2. **Autoregressive Transformer (LM)**:
+   - Decoder-only Transformer,规模 "orders of magnitude" 超越此前最大 TTS
+   - 输入: text tokens + reference speech tokens → 自回归生成 target speech tokens
+   - 训练: next-token prediction,text loss masked (仅计算 speech token loss)
+   - 支持 in-context learning (无需 speaker encoder)
+
+3. **Token Diffusion Model**:
+   - 将 LM 生成的离散/连续 tokens 转为 mel 级别的连续声学表征
+   - 执行 coarse-to-fine rendering
+   - Self-distillation via speaker perturbation: 构造 (S_alt, S_ori) 对训练 timbre disentanglement
+
+4. **Acoustic Vocoder**:
+   - BigVGAN/HiFi-GAN 风格
+   - mel spectrogram → waveform
+
+**Seed-TTS_DiT 变体** (纯 Diffusion):
+   - 去掉 AR LM 和 tokenizer
+   - 输入: audio prompt + target text + Gaussian noise + total duration
+   - 直接预测 vocoder latent
+   - 不使用 phoneme-level duration predictor
+   - 模型自行学习 local alignment
+
+### 关键超参数表 (论文报告)
+
+| 参数 | 论文值 | 备注 |
+|------|--------|------|
+| 训练数据规模 | "orders of magnitude" > 此前最大 | 具体数量未公开 |
+| 模型规模 | "orders of magnitude" > 此前最大 | 具体参数量未公开 |
+| SFT 数据 | 1-10h/speaker, ~20h 总计 | 5 个目标说话人 |
+| RTF (deployed) | 0.132x | 含全部优化 |
+| First-packet latency | 0.028x | 含 streaming 优化 |
+| CMOS vs Human | -0.07 (EN) / -0.08 (ZH) | 无统计显著差异 |
+| SIM (EN ICL) | 0.762 | 超过 Human 的 0.730 |
+| SIM (ZH ICL) | 0.796 | 超过 Human 的 0.750 |
+| WER (EN ICL) | 2.249% | 接近 Human 的 2.143% |
+| RL reward | SIM + WER (SIM-WER variant) / SER (SER variant) | REINFORCE 算法 |
+| RL-SIM-WER CMOS gain | +0.14 vs ICL baseline | 显著 |
+| Seed-TTS_DiT SIM (EN) | 0.790 | 超过 AR variant 的 0.762 |
+| Seed-TTS_DiT WER (EN) | 1.733% | 优于 AR variant 的 2.249% |
+
+### 可复现性评估
+
+**复现难度: 极高**
+
+1. **数据壁垒**: 训练数据规模远超学术界常用数据集,且未公开数据来源和处理方式
+2. **模型壁垒**: 模型架构核心细节 (tokenizer 设计, LM 规模, diffusion 架构) 均以 "orders of magnitude" 等模糊描述
+3. **计算壁垒**: 按论文描述的规模推算,训练成本应在数十万 GPU-hours 级别
+4. **RL 壁垒**: Post-training 的 RL pipeline 需要预训练好的 reward model (SIM/WER/SER 评估器)
+5. **工程壁垒**: Streaming 部署涉及 causal diffusion + consistency distillation + GQA + paged attention + flash attention + quantization 的组合优化
+
+**唯一可复现部分**: SEED-TTS-Eval benchmark 的评估流程可通过开源仓库复现,可用于评估自己的 TTS 系统。
+
+**社区替代**: 截至 2026-06-10,未发现高质量的社区复现。如需类似能力的开源方案,建议关注 CosyVoice 3 (阿里巴巴) 或 F5-TTS 等公开模型。
+

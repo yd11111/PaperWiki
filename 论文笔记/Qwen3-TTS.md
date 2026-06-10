@@ -257,3 +257,135 @@ Qwen3-TTS 是一个**工程驱动的全面系统**,而非单一方法创新。�
 > - **不污染**: pass-with-minor — 反向更新仅 append,无新建概念页
 > - Issues: 3 low (速查过强断言已修正, frontmatter baseline 可选, thinking pattern 描述泛)
 > - 详见 `_review/Qwen3-TTS-review.yml`
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/QwenLM/Qwen3-TTS
+> - commit: 022e286b98fbec7e1e916cb940cdf532cd9f488e
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 vs 代码的关键对应:**
+
+1. **Talker (Qwen3 LM backbone)** (`qwen_tts/core/models/modeling_qwen3_tts.py:1427-1561,1564-1810`): 论文中的 dual-track LM。代码中 `Qwen3TTSTalkerModel` 基于 Qwen3 架构 (RMSNorm, SiLU+GLU MLP, QK-norm attention, Multimodal RoPE)。支持 sliding window attention (部分层) + full causal attention (其余层),通过 `config.layer_types` 逐层配置。
+
+2. **Speaker Encoder (ECAPA-TDNN)** (`modeling_qwen3_tts.py:95-393`): 论文提到"jointly train a learnable speaker encoder"。代码确认是 **ECAPA-TDNN** 架构: TimeDelayNet → SE-Res2Net blocks → Multi-layer Feature Aggregation → Attentive Statistics Pooling → 线性投影。输入 128-dim mel spectrogram (24kHz, hop=256, n_fft=1024, fmax=12000)。
+
+3. **MTP (Multi-Token Prediction) 模块** (`modeling_qwen3_tts.py:1015-1319`): 论文中处理 12Hz 多码本的 MTP。代码中 `Qwen3TTSTalkerCodePredictorModelForConditionalGeneration` 是一个独立的小 Transformer,有自己的 decoder layers、RoPE、codec embeddings。每个 codebook group (除第 0 层) 有独立的 embedding 层和 lm_head。生成方式: Talker 预测第 0 层 token → MTP 自回归地逐层预测后续 codebook tokens。
+
+4. **Dual-track 实现** (`modeling_qwen3_tts.py:1664-1693`): Prefill 阶段直接传入 `inputs_embeds`。Generate 阶段: (a) 取上一步的 codec token id → embedding; (b) MTP 生成剩余 codebook tokens (通过 `self.code_predictor.generate()`); (c) 将所有 codebook embeddings 求和作为下一步 Talker 输入; (d) 加上 trailing text hidden states 或 pad embedding。
+
+5. **25Hz Tokenizer** (`qwen_tts/core/tokenizer_25hz/`): 基于 Qwen2-Audio encoder + VQ layer (codebook 32768) + mel decoder。包含 Whisper encoder 组件 (`whisper_encoder.py`) 和 VQ 核心 (`core_vq.py`, `speech_vq.py`)。
+
+6. **12Hz Tokenizer** (`qwen_tts/core/tokenizer_12hz/`): 基于 Mimi-style 架构,1 VQ + 15 RVQ,codebook 2048,Window Transformer + Downsample ConvNet。全因果设计。
+
+### 论文未写的实现细节
+
+1. **Multimodal RoPE 用于 Talker** (`modeling_qwen3_tts.py:526-559,660-724`): Talker 使用 3D position encoding (temporal, height, width),继承自 Qwen2-VL 的 Multimodal RoPE,通过 `mrope_section` 配置各维度分配。这在 TTS context 中,3 个维度可能分别对应不同的 positional 信息 (如 text position, audio position, 全局 position)。论文未提及这个设计选择。
+
+2. **Sub-talker 采样参数传递** (`modeling_qwen3_tts.py:1656`): MTP 模块的采样参数 (top_k, top_p, temperature) 通过 forward 函数显式传入,与主 Talker 的采样参数独立。推理示例中: Talker `temperature=0.9, top_k=50`, MTP (subtalker) `temperature=0.9, top_k=50, top_p=1.0`。
+
+3. **Trailing text hidden 机制** (`modeling_qwen3_tts.py:1689-1693`): 在 generate 阶段,每步都将 trailing text hidden state 加到 codec embedding 上。当生成步数超过 text 长度时,使用固定的 `tts_pad_embed`。这是 dual-track 设计中 text 信息注入 audio 生成的关键通道。
+
+4. **Speaker embedding 提取** (`modeling_qwen3_tts.py:1940-1952`): 仅支持 24kHz 输入。使用 128-dim mel spectrogram (与 ECAPA-TDNN 输入匹配): n_fft=1024, hop=256, win=1024, fmin=0, fmax=12000。
+
+5. **Voice clone 两种模式** (`qwen_tts/inference/qwen3_tts_model.py`): (a) `x_vector_only_mode=True`: 仅使用 speaker embedding,无 in-context learning; (b) `x_vector_only_mode=False` (ICL mode): 将 ref audio 的 codec tokens + text 一起作为 prompt,更好保留韵律。
+
+6. **QK-Norm** (`modeling_qwen3_tts.py:752-757,910-913`): 两个 attention 类 (`Qwen3TTSTalkerAttention`, `Qwen3TTSAttention`) 都使用 **RMSNorm on Q and K** (per head_dim),这是 Qwen3 的标准做法。
+
+7. **SFT 微调支持** (`finetuning/`): 提供 12Hz 模型的微调脚本 (`sft_12hz.py`),支持 speaker fine-tuning。数据准备脚本 (`prepare_data.py`) 将音频转为 codec tokens。
+
+### 训练 pipeline 拆解
+
+```
+论文描述的训练流程 (代码仅提供推理 + 微调):
+
+预训练:
+  S1 (General): 5M+ hours 多语言 → ChatML format → Qwen3 LM 训练
+  S2 (High-Quality): 质量分层 → 高质量子集 CPT
+  S3 (Long-Context): max_tokens 8192 → 32768, 上采样长语音
+
+后训练:
+  DPO: 人类 preference pairs → Direct Preference Optimization
+  GSPO: rule-based rewards → 全面能力增强
+  Speaker FT: base model + 特定说话人数据 → lightweight adaptation
+
+推理 (代码实现):
+  Text (Qwen tokenizer) → token ids
+  Ref audio → speech tokenizer → codec tokens
+  Ref audio → ECAPA-TDNN → speaker embedding
+  → ChatML format prompt 构造
+  → Qwen3 Talker (AR, causal) → 第 0 层 codec token
+  → MTP CodePredictor (AR per layer) → 层 1~15 codec tokens
+  → 12Hz codec decoder (causal ConvNet) → 24kHz waveform
+```
+
+### 推理 pipeline 拆解
+
+```
+输入: text + ref_audio (+ ref_text)
+
+1. 文本处理:
+   Text → Qwen tokenizer → text_ids
+   构造 ChatML prompt (含 language tag, speaker tag, system prompt)
+
+2. 参考音频处理 (voice clone):
+   ref_audio (24kHz) → speech_tokenizer.encode() → ref_code [T, 16]
+   ref_audio → mel_spectrogram(128d) → ECAPA-TDNN → spk_embedding [D]
+
+3. Prompt 构造:
+   [system] + [ref_code + ref_text] (ICL mode) + [target_text] + [codec_start]
+   text hidden → text_projection → talker dim
+
+4. Prefill:
+   inputs_embeds [B, L, D] → Talker.forward → hidden_states
+   初始化 generation_step=0, past_hidden
+
+5. AR 生成循环:
+   每步:
+     a. last_codec_token → embedding
+     b. past_hidden + last_embedding → MTP.generate() → 15 residual tokens
+     c. 所有 16 tokens embedding 求和 + text_hidden[step] → next input
+     d. Talker.forward → next codec logit → sample → next_codec_token[0]
+     e. generation_step += 1
+   直到 EOS 或 max_new_tokens
+
+6. 解码:
+   all codec tokens [T, 16] → 12Hz codec decoder → 24kHz waveform
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| LM backbone | Qwen3 | Qwen3 (RMSNorm, SiLU-GLU, QK-norm, mRoPE) | 一致 |
+| Model size | 0.6B / 1.7B | config-dependent | 通过 HF 加载不同 checkpoint |
+| Speaker encoder | "learnable, jointly trained" | ECAPA-TDNN (Res2Net+SE+ASP) | 论文未指明具体架构 |
+| Speaker mel | 未明确 | 128-dim, 24kHz, hop=256, fmax=12000 | 代码特有 |
+| 12Hz codec | 16 RVQ, codebook 2048, 12.5Hz | 与论文一致 | VQ(sem)+15RVQ(aco) |
+| MTP 模块 | "Multi-Token Prediction" | 独立小 Transformer + per-group heads | 论文描述粗略 |
+| Attention | 未详述 | sliding_window + full_causal 混合 | 类似 Qwen2.5 |
+| QK-Norm | 未提及 | RMSNorm on Q,K (per head_dim) | Qwen3 标准 |
+| Position encoding | 未详述 | Multimodal RoPE (3D: temporal/h/w) | 继承 Qwen2-VL |
+| Inference temp | 未明确 | 0.9 (Talker), 0.9 (MTP) | 示例代码 |
+| Inference top_k | 未明确 | 50 (Talker), 50 (MTP) | 示例代码 |
+| repetition_penalty | 未明确 | 1.05 | 示例代码 |
+| max_new_tokens | 未明确 | 2048 | 示例代码 |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: Python 3.10+, PyTorch 2.x, transformers>=4.52, `pip install qwen-tts`; 推荐 flash_attention_2
+- [ ] 数据准备: (微调) `finetuning/prepare_data.py` 将 wav 转为 codec tokens; (预训练) 5M hours 数据未公开
+- [ ] 预训练模型依赖: HuggingFace 权重 (`Qwen/Qwen3-TTS-12Hz-1.7B-Base` 等系列), 含 speech_tokenizer 权重
+- [ ] 训练命令: (微调) `python finetuning/sft_12hz.py` (speaker fine-tuning)
+- [ ] 推理命令: `python examples/test_model_12hz_base.py`; 或通过 `Qwen3TTSModel.from_pretrained()` API
+- [ ] 已知坑: (1) 仅 12Hz 模型有微调支持; (2) 预训练代码和 DPO/GSPO 流程未开源; (3) 25Hz tokenizer 推理需 DiT+BigVGAN,计算量较大; (4) `flash_attention_2` 强烈推荐,否则速度慢
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 3.5/5 -- HuggingFace transformers 标准接口,支持 AutoModel/AutoProcessor。代码结构清晰但单文件 (`modeling_qwen3_tts.py`) 过长 (2300+ 行)。有微调脚本但训练代码缺失。
+- **文档完善度**: 3/5 -- README 有基本使用示例和 API 说明。但架构细节、训练流程、超参数选择等文档缺失。
+- **社区活跃度**: 3/5 -- 较新发布 (2026-01), 官方维护。star 数增长中。bug fix 及时 (如 commit 中的 finetuning bug fix)。
+- **复现难度**: 3/5 (中等) -- 推理 1/5 (极易, pip install + HF weights); 微调 2/5 (有脚本); 预训练 5/5 (极难: 5M hours 数据不可用, 6 阶段训练流程不公开, DPO/GSPO 细节缺失)。

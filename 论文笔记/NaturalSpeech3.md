@@ -213,3 +213,103 @@ NaturalSpeech 3 是一篇概念优雅、实验扎实的工作。其核心 insigh
 > 
 > 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/open-mmlab/Amphion (9837 stars)
+> - 路径: `models/codec/ns3_codec/` (FACodec) + `models/codec/facodec/` (替代实现)
+> - commit: 26f6883
+> - 分析日期: 2026-06-10
+> - 注意: Amphion 仅开源了 FACodec (编码器/解码器),完整的 factorized diffusion TTS 系统未开源。FACodec 部分由论文作者参与贡献,可视为半官方实现
+
+### 架构验证
+
+Amphion 的 FACodec 实现与论文高度一致:
+
+| 组件 | 论文描述 | 代码实现 | 一致性 |
+|------|----------|----------|--------|
+| Encoder | 卷积下采样,downsample 200x | `FACodecEncoder(up_ratios=(2,4,5,5))` → hop=200 | 完全一致 |
+| Decoder | 对称上采样 | `FACodecDecoder(up_ratios=(2,4,5,5))` | 完全一致 |
+| Prosody VQ | 1 层 FVQ, codebook 1024 | `FactorizedVectorQuantize(codebook_dim=8)` | 一致 |
+| Content VQ | 2 层 FVQ, codebook 1024 | 2 个 `FactorizedVectorQuantize` 串联 | 一致 |
+| Detail VQ | 3 层 FVQ, codebook 1024 | 3 个 `FactorizedVectorQuantize` 串联 | 一致 |
+| 信息瓶颈 | 8 维低维投影 | `in_proj = Linear(dim, 8)`, `out_proj = Linear(8, dim)` | 完全一致 |
+| GRL | phoneme-GRL + F0-GRL + speaker-GRL | `GradientReversal(alpha)` class | 完全一致 |
+| Timbre Extractor | Transformer encoder → 全局向量 | `TransformerEncoder` + global mean pooling | 一致 |
+| 激活函数 | SnakeBeta | `SnakeBeta(alpha_logscale=True)` | 一致 |
+
+### 论文未写的实现细节
+
+1. **FactorizedVectorQuantize 的 L2 归一化**: `fvq.py` 中 `decode_latents()` 在计算距离前对 encodings 和 codebook 都做了 L2 normalize: `encodings = F.normalize(encodings); codebook = F.normalize(codebook)`。这个关键细节论文未提及,但对 codebook 利用率有重要影响 (类似 DAC 的 L2-norm 策略)。
+
+2. **Straight-through gradient estimator**: `z_q = z_e + (z_q - z_e).detach()` — 标准 STE,前向 pass 使用量化值,反向 pass 梯度直通到 encoder。论文未详述。
+
+3. **GradientReversal 实现**: 极简 — `forward()` 直接返回 x,`backward()` 返回 `-alpha * grad_output`。alpha 是固定超参数 (非可学习)。论文描述了 GRL 的使用但未给出 alpha 值。
+
+4. **SnakeBeta 激活函数**: `x + (1/beta) * sin^2(x * alpha)`,其中 alpha 和 beta 可学习 (log scale 初始化)。这是 BigVGAN 引入的激活函数,论文标注使用了 BigVGAN 风格 decoder 但未详细说明激活函数。
+
+5. **Encoder 架构细节**: 使用 `weight_norm` 的 Conv1d,每个 `EncoderBlock` 含 3 个 `ResidualUnit` (dilation 1, 3, 9) + 下采样 Conv。这与 SoundStream/DAC 的 encoder 架构高度相似,论文未详述。
+
+6. **CNNLSTM 预测器**: `CNNLSTM` class 用于 prosody/content/speaker 的辅助预测器,包含 3 个 ResidualUnit (dilation 1,2,3) + LSTM + linear heads。论文仅提到 "predictor" 但未给出架构。
+
+7. **Dual codebook 路径**: `models/codec/ns3_codec/` 和 `models/codec/facodec/` 存在两套实现。前者更接近论文原始设计 (含独立的 FVQ 和 RVQ 模块),后者包含更多工程优化。
+
+### 训练 pipeline 拆解
+
+FACodec 训练涉及多个 loss (基于 `facodec_trainer.py`):
+1. **Reconstruction loss**: mel spectrogram L1/L2 + waveform L1
+2. **VQ commitment loss**: 每个 FVQ 的 commitment + codebook loss
+3. **Prosody supervision**: F0 prediction loss (通过 JDC F0 估计器)
+4. **Content supervision**: phoneme classification loss
+5. **Speaker supervision**: speaker classification loss
+6. **GRL adversarial**: phoneme-GRL on prosody, F0-GRL on content, phoneme+F0 GRL on detail, speaker-GRL on sum(z_p, z_c, z_d)
+7. **GAN loss**: multi-scale + multi-period discriminator (HiFi-GAN 风格)
+
+### 推理 pipeline 拆解
+
+FACodec 推理:
+1. 输入 waveform → Encoder → latent h
+2. Timbre Extractor: h → global timbre vector h_t
+3. Prosody VQ: project to 8d → quantize → z_p
+4. Content VQ: project to 8d → 2-layer VQ → z_c
+5. Detail VQ: project to 8d → 3-layer VQ → z_d
+6. Decoder: sum(z_p, z_c, z_d) + Conditional Layer Norm(h_t) → waveform
+
+**注意**: 完整 TTS (text → waveform) 需要 factorized diffusion model 生成 z_p, z_c, z_d,但此部分未开源。
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| Encoder 下采样率 | 200 (16kHz → 80Hz) | `up_ratios=(2,4,5,5)` → 200 | 完全一致 |
+| Encoder base channels | 32 | `ngf=32` | 一致 |
+| FVQ codebook dim | 8 | `codebook_dim=8` | 完全一致 |
+| FVQ codebook size | 1024 | `codebook_size=1024` | 完全一致 |
+| Prosody VQ 层数 | 1 | 1 个 FVQ | 一致 |
+| Content VQ 层数 | 2 | 2 个 FVQ | 一致 |
+| Detail VQ 层数 | 3 | 3 个 FVQ | 一致 |
+| 总带宽 | 4.8 kbps (6 VQ x 80Hz x 10bit) | 6 个 FVQ x 80Hz x 10bit = 4.8kbps | 完全一致 |
+| Encoder output dim | 1024 | `out_channels=1024` | 一致 |
+| GRL alpha | 论文未报告 | 代码中需查配置文件 | 关键超参数 |
+
+### 复现 checklist (基于代码)
+
+- [x] FACodec Encoder/Decoder (卷积架构)
+- [x] FactorizedVectorQuantize (8 维信息瓶颈)
+- [x] 三组 FVQ (prosody 1 层 / content 2 层 / detail 3 层)
+- [x] Timbre Extractor (Transformer encoder + global pooling)
+- [x] GradientReversal Layer
+- [x] CNNLSTM 辅助预测器 (F0/phoneme/speaker)
+- [x] FACodec 训练 pipeline (含多 loss)
+- [x] FACodec 推理 pipeline
+- [x] 预训练权重 (Amphion 提供 FACodec checkpoint)
+- [ ] **Factorized Diffusion Model** — 未开源 (核心 TTS 生成模块)
+- [ ] **Duration Diffusion** — 未开源
+- [ ] **完整 TTS pipeline** — 仅有 codec 部分
+
+### 代码质量与可复现性评估
+
+**质量**: **高**。Amphion 是专业的语音合成研究框架,代码组织规范。FACodec 实现约 1500+ 行 (含辅助模块),清晰覆盖论文 Fig 2 的每个组件。GRL、FVQ 等核心模块实现简洁正确。
+
+**可复现性**: **仅 FACodec 部分可复现**。Amphion 提供了 FACodec 的预训练权重,可直接用于语音编码/解码和属性分解。但完整的 NaturalSpeech 3 TTS 系统 (factorized diffusion model + duration model + 端到端推理) 未开源,无法复现论文的 TTS 结果。FACodec 可作为独立的 speech tokenizer 用于其他 TTS 系统 (如论文 Table 6 中 VALL-E + FACodec 的实验)。

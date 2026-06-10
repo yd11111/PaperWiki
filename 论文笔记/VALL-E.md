@@ -162,3 +162,103 @@ VALL-E 的核心洞察: 如果用 neural codec 的离散 codes 替代 mel spectr
 > - [medium/template-compliance] frontmatter > datasets: 字段为空但论文使用 LibriLight/LibriSpeech/VCTK 三个核心数据集
 > - [medium/bad-linking] frontmatter > concepts: 仅 2 个概念,缺少 [[LLM-basedTTS]] 等核心概念挂接
 > **反向更新:** ✅
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/lifeiteng/vall-e (2206 stars)
+> - commit: 9c69096
+> - 分析日期: 2026-06-10
+> - 注意: 这是 Feiteng Li 的社区实现,非 Microsoft 官方代码。另有 Plachtaa/VALL-E-X (7939 stars, 多语言扩展) 和 enhuiz/vall-e (2981 stars) 等替代实现。本仓库是最忠实于原始论文的实现
+
+### 架构验证
+
+lifeiteng/vall-e 的实现对照论文 Fig 3 高度忠实:
+
+| 组件 | 论文描述 | 代码实现 | 一致性 |
+|------|----------|----------|--------|
+| AR model | decoder-only Transformer, 12 层 16 头 | `VALLF` class, `ar_decoder` 使用 TransformerDecoder/TransformerEncoder | 一致 |
+| NAR model | 相同架构但非自回归, AdaLN | `nar_decoder` + `AdaptiveLayerNorm` + `nar_stage_embeddings` | 一致 |
+| Text embedding | Phoneme embedding W_x | `ar_text_embedding = TokenEmbedding(d_model, NUM_TEXT_TOKENS=512)` | 一致 |
+| Audio embedding | 每层独立 embedding | AR: `ar_audio_embedding`; NAR: `nar_audio_embeddings` (8 个 ModuleList) | 一致 |
+| Output projection | 共享权重 | `nar_predict_layers[j].weight = nar_audio_embeddings[j+2].weight` | 与论文 "j-th prediction = (j+1)-th embedding" 一致 |
+| NUM_AUDIO_TOKENS | 1024 (EnCodec codebook) | `macros.py: NUM_AUDIO_TOKENS = 1024` | 一致 |
+| Positional encoding | 论文未明确 | `SinePositionalEmbedding` (with learnable alpha scale) | 代码选择 |
+
+### 论文未写的实现细节
+
+1. **两种 decoder 实现** (VALL-F vs VALL-E): 代码注释揭示两种方案:
+   - VALL-F: 标准 `TransformerDecoder`,text 作为 memory (cross-attention)
+   - VALL-E: 修改版 `TransformerEncoder` (causal),text 作为 decoder input prefix
+   - 通过 `prefix_mode` 参数切换,默认使用 prefix 模式
+
+2. **NAR 训练的 stage 采样**: 代码 `nar_stage = self.rng.choices([1..7], weights=[1/7]*7, k=1)[0]` — 均匀采样 stage,与论文一致。
+
+3. **Prompt 构造的 4 种模式** (prefix_mode 0-4):
+   - Mode 0: 无 prefix (baseline)
+   - Mode 1: 从 utterance 开头取固定长度 prefix
+   - Mode 2: 随机位置取 prefix + mask 掉对应 target 位置
+   - Mode 4: 外部提供 prompt codes
+   - 论文仅描述了 "从同一 utterance 取 3 秒 prompt" 的策略
+
+4. **BOS token**: AR 模型支持可选的 `prepend_bos` (token ID = NUM_AUDIO_TOKENS+1)。论文未提及此细节。
+
+5. **EOS 处理**: `pad_y_eos()` 在 target 序列末尾用 mask 值填充 EOS token (ID = NUM_AUDIO_TOKENS),使 AR 模型学习何时停止生成。
+
+6. **NAR 的 embedding sum**: 代码清晰实现了论文 Eq.4-5 — `y_emb = sum(nar_audio_embeddings[j](codes[..., j]) for j in range(nar_stage))`。
+
+7. **Prompt 长度**: 代码硬编码 `min(prefix_len, 225)`,即 225 frames = 24000/320 * 3s = 225 frames at 75 Hz,与论文的 3 秒 prompt 一致。
+
+### 训练 pipeline 拆解
+
+`valle/bin/trainer.py` 使用 icefall (k2 团队的框架) 管理训练:
+
+1. **数据准备**: `valle/data/` — 使用 Lhotse 格式的 manifest,支持 CutSet + dynamic batching
+2. **Tokenization**: EnCodec 编码 (24kHz, 75Hz, 8 层 RVQ) + phoneme G2P
+3. **两阶段训练**: `train_stage=1` (AR only) → `train_stage=2` (NAR only) → `train_stage=0` (joint)
+4. **Loss**: AR 使用标准 cross-entropy + Top-10 accuracy metric; NAR 同样 cross-entropy
+
+### 推理 pipeline 拆解
+
+`VALLE.generate()` 方法 (未在 VALLF 中实现,在子类 VALLE 中):
+1. Text → phoneme tokens
+2. Prompt speech → EnCodec → 8 层 codes
+3. AR: 自回归生成第 1 层 codes (sampling-based, 支持 top-k/temperature)
+4. NAR: 逐层生成第 2-8 层 codes (greedy argmax)
+5. EnCodec decoder → waveform
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| d_model | 1024 | 可配置 (默认 1024) | 一致 |
+| nhead | 16 | 可配置 (默认 16) | 一致 |
+| num_layers | 12 | 可配置 (默认 12) | 一致 |
+| FFN dim | 4096 | d_model * 4 = 4096 | 一致 |
+| NUM_AUDIO_TOKENS | 1024 | 1024 (macros.py) | 一致 |
+| NUM_TEXT_TOKENS | - | 512 (macros.py) | 论文未明确 |
+| num_quantizers | 8 | 8 (默认) | 一致 |
+| 位置编码 | - | SinePositionalEmbedding (非 T5 relative) | 代码选择,与论文不完全一致 |
+| Prompt 长度 | 3s = 225 frames | min(prefix_len, 225) | 一致 |
+| AdaLN (NAR) | 用于注入 stage embedding | `adaptive_layer_norm=True` + `nar_stage_embeddings` | 一致 |
+| Dropout | - | 0.1 (encoder/decoder), 0.25/0.5 (prenet) | 论文未报告 |
+| Optimizer | AdamW, peak 5e-4 | 由 icefall 框架管理 | 需检查配置文件 |
+
+### 复现 checklist (基于代码)
+
+- [x] AR Transformer (causal decoder-only)
+- [x] NAR Transformer (bidirectional with AdaLN)
+- [x] AR+NAR 层级设计匹配 RVQ 结构
+- [x] 权重共享: j-th predict = (j+1)-th embedding
+- [x] 3 秒 acoustic prompt 作为 in-context example
+- [x] EnCodec tokenization (24kHz, 8 层 RVQ)
+- [x] 完整训练 pipeline (基于 icefall/Lhotse)
+- [x] LibriLight 60K 数据准备脚本
+- [ ] **预训练权重** — 无官方 checkpoint
+- [ ] **大规模训练验证** — 社区报告在小数据集上可训练但未复现论文指标
+
+### 代码质量与可复现性评估
+
+**质量**: **高**。代码组织清晰,使用 icefall/Lhotse 工业级训练框架。单文件 `valle.py` (1302 行) 包含完整模型,注释充分,忠实对照论文公式。
+
+**可复现性**: **中等偏高**。这是最接近论文原始设计的社区实现,包含完整的数据准备、训练和推理 pipeline。主要障碍是计算资源 (论文用 16xV100, 800K steps) 和数据准备 (LibriLight 60K + ASR 自动标注)。多位社区用户报告在较小数据集上成功训练并获得合理结果。

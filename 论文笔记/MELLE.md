@@ -214,6 +214,75 @@ MELLE-R4 仅需 1.40s 生成 10s 语音,超越所有对比系统 [Table 5]。
 
 检索命中: [[LLM-basedTTS]], [[CodecLanguageModel]], [[ResidualVectorQuantization]], [[NeuralVocoder]], [[SemanticvsAcousticTokens]], [[SpeechFactorization]] | 过滤: [[MelSpectrogram]](pending-review), [[VariationalAutoencoderforTTS]](pending-review) | 未命中但可能相关: 无
 
+## 代码级分析
+
+> [!warning] 代码不可用
+> 截至 2026-06-10,未找到官方或高质量社区实现。GitHub 搜索 "MELLE TTS"、"MELLE autoregressive speech"、"MELLE vector quantization" 均无匹配结果。论文来自 Microsoft Research Asia,未在论文中提及代码开源计划。
+
+### 论文架构分析
+
+基于论文 Fig 1-2 和 Appendix A 的详细描述,MELLE 的架构可拆解为以下组件:
+
+**1. Text Pre-net**
+- BPE embedding layer,vocab 4K
+- 输入: BPE text tokens + \<EOS\> token
+
+**2. Acoustic Pre-net**
+- 3-layer MLP: mel-dim (80) → LM hidden dim (1024)
+- Dropout 0.5 (训练+推理均开启,Tacotron 经典技巧)
+- 输入: 80-dim log-magnitude mel spectrogram frames
+
+**3. Decoder-only Transformer**
+- 12 层,16 attention heads,embed dim 1024,FFN 4096
+- 输入: text embeddings + acoustic embeddings 的 concatenation
+- 输出: hidden states $e_t$ 用于后续 LSM 和 Stop Prediction
+
+**4. Latent Sampling Module (LSM)**
+- Linear layer: $e_t$ → $\mu_t$, $\log \sigma_t^2$
+- Reparameterization: $z_t = \mu_t + \sigma_t \odot \epsilon$
+- 3-layer MLP (with residual connection): $z_t$ → $y_t'$ (coarse mel)
+
+**5. Post-Net**
+- 5 层 Conv1D blocks: kernel=5, channels=256
+- 残差细化: $y'' = y' + \text{PostNet}(y')$
+
+**6. Stop Prediction Layer**
+- Linear → sigmoid → binary stop decision
+- BCE loss with 100x positive weight
+
+### 关键超参数表 (论文报告)
+
+| 参数 | 论文值 | 备注 |
+|------|--------|------|
+| Transformer layers | 12 | Decoder-only |
+| Attention heads | 16 | |
+| Embed dim / Hidden dim | 1024 | |
+| FFN dim | 4096 | |
+| Mel dim | 80 | Log-magnitude mel |
+| Pre-net dropout | 0.5 | 训练+推理均开启 |
+| BPE vocab size | 4K | |
+| Post-Net conv layers | 5 | Kernel=5, channels=256 |
+| $\lambda_{KL}$ | 0 → 0.1 | Warm-up 10K steps |
+| $\beta_{flux}$ | 0.5 | Spectrogram flux loss |
+| $\gamma_{stop}$ | 1.0 | Stop loss positive weight=100 |
+| Batch size | 480K frames | 16x V100 32G |
+| Total steps | 400K | |
+| Peak lr | 5e-4 | Linear warmup 32K steps → linear decay |
+| Reduction factor r | 1/2/4 | r=1 默认,r=4 最快 |
+| Optimizer | AdamW | |
+
+### 可复现性评估
+
+**复现难度: 3/5 (中等偏难)**
+
+- (+) 架构描述详细: 论文 Appendix A 给出了几乎所有超参数
+- (+) 技术组件已知: 所有组件(Transformer, MLP, Conv1D, HiFi-GAN)均有成熟开源实现
+- (+) 数据可得: LibriSpeech 960h + Libriheavy 均为公开数据集
+- (-) LSM 实现细节需推测: reparameterization + residual MLP 的具体维度和激活函数未完全明确
+- (-) 多损失函数平衡: flux loss + KL warm-up + regression + stop 四个损失的协同训练可能需要大量调参
+- (-) 无官方代码: 即使描述清晰,从零复现仍需验证许多细节
+- (-) HiFi-GAN vocoder: 论文使用 585h LibriTTS 训练的版本,非标准预训练 checkpoint
+
 
 > [!review] 审阅 (2026-06-09, batch-auto)
 > **结论**: pass

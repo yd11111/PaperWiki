@@ -329,6 +329,104 @@ RTF 0.17 on single RTX 4090 [§1]。
 3. **参数补偿消融 (24L+6L vs 30L+0L)**: 证明架构分离的归纳偏置比等量参数更有价值,是验证 "组件分工假设" 的标准实验范式。
 4. **WSD schedule + batch doubling for similarity**: 两阶段学习率策略在 stable phase 后用 decay + batch size x2 显著提升 zero-shot speaker similarity,值得在其他 TTS 模型训练中尝试。
 
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/OpenBMB/VoxCPM
+> - commit: 856d2fc
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 Fig 1 vs 代码实际**: 高度一致,关键差异如下:
+
+1. **FSQ 实现** (`scalar_quantization_layer.py:16-26`): 论文描述 FSQ 为 "round-to-nearest + STE"。代码确认: `forward()` 先 `tanh` 压缩到 [-1,1],再 `round(x * scale) / scale`。训练时用 `hidden + (quantized - hidden).detach()` 实现 STE — 这意味着 FSQ 不是直接量化到整数 levels,而是先 tanh 再量化,论文未提及 tanh 步骤。
+2. **LocDiT conditioning** (`local_dit.py:109`): 论文称三路条件 (semantic + residual + timestep) element-wise sum 为单个 token。代码确认: `x = torch.cat([(mu + t).unsqueeze(1), cond, x], dim=1)`,其中 `mu` 是 lm_to_dit_proj(lm_hidden) + res_to_dit_proj(residual_hidden) 的 sum,`t` 是 time + delta_time embedding 的 sum。前缀由 [condition_token, prev_patch_cond, noisy_patch] 组成。
+3. **RALM 输入** (`voxcpm.py:286`): 论文称 element-wise sum。代码确认: `residual_inputs = enc_outputs + audio_mask.unsqueeze(-1) * feat_embed`,即 FSQ 输出 + LocEnc embedding (仅音频位置),与论文一致。
+4. **Stop Predictor** (`voxcpm.py:188-191`): 论文称 3-layer MLP。代码实际为 Linear → SiLU → Linear (2层投影 + 激活),output dim=2 (CE loss 而非 BCE loss),与论文 "binary classifier + BCE" 略有出入。
+
+### 论文未写的实现细节
+
+1. **FSQ 前置 tanh** (`scalar_quantization_layer.py:18`): `hidden = torch.tanh(hidden)` — 在 round 量化前先用 tanh 将隐状态压缩到 [-1,1],确保量化范围有界。论文未提及此步骤。
+2. **LocDiT delta_time embedding** (`local_dit.py:74-77`): LocDiT 有 `delta_time_mlp`,接收额外的 `dt` 参数。推理时传入 0 但训练时可能用于 mean velocity 模式。
+3. **Causal attention 切换** (`voxcpm.py:281`): base_lm 用 `is_causal=True`,但 LocDiT 用 `is_causal=False`(全注意力) — LocDiT 的 [condition, prev_patch, noisy_patch] 序列内部是双向注意力。
+4. **Shifted hidden states** (`voxcpm.py:283-284`): 推理时 `lm_hidden = enc_outputs[:, -1, :]`,但训练时 `lm_hidden = cat(zeros, enc_outputs[:, :-1, :])` — 右移一位实现 next-token prediction,这是标准 causal LM 做法但论文未明确描述。
+5. **Audio VAE 始终 float32** (`voxcpm.py:903`): `model.audio_vae = model.audio_vae.to(torch.float32)`,即使主模型用 bfloat16,VAE 仍保持 float32 精度。
+6. **torch.compile 优化** (`voxcpm.py:236-244`): base_lm, residual_lm, feat_encoder, feat_decoder 均支持 `torch.compile(mode="reduce-overhead", fullgraph=True)`,提供显著推理加速。
+7. **Badcase 重试机制** (`voxcpm.py:478-489`): 推理时检测 audio_length/text_length 比例是否超过阈值(默认 6.0),超过则重新生成,最多重试 3 次。
+
+### 训练 pipeline 拆解
+
+```
+原始音频 (16kHz)
+  → AudioVAE.encode() → 64-dim latent @ 25Hz [frozen, float32]
+  → reshape to patches (T, P=2, D=64)
+  → feat_encoder (LocEnc, 4L Transformer) → feat_embed
+  → enc_to_lm_proj → LM hidden dim
+  → 与 text embedding 按 mask 混合
+  → base_lm (MiniCPM-4, 24L, causal) → enc_outputs
+  → fsq_layer(enc_outputs) [音频位置] + enc_outputs [文本位置]
+  → 右移 → lm_hidden
+  → residual_lm 输入 = enc_outputs + feat_embed [音频位置]
+  → residual_lm (6L, causal) → residual_outputs → 右移 → residual_hidden
+  → dit_hidden = lm_to_dit_proj(lm_hidden) + res_to_dit_proj(residual_hidden)
+  → feat_decoder (UnifiedCFM + VoxCPMLocDiT, 4L) → flow matching loss
+  → stop_head(lm_hidden) → stop CE loss
+  → Total loss = diff_loss + stop_loss
+```
+
+### 推理 pipeline 拆解
+
+```
+1. Text → tokenize → text_token [+ audio_start_token]
+2. Prompt audio → AudioVAE.encode → prompt feat patches
+3. Prefill: text_embed + feat_embed → base_lm → enc_outputs → fsq_layer → residual_lm
+4. AR loop (12.5Hz):
+   a. dit_hidden = lm_to_dit_proj(lm_hidden) + res_to_dit_proj(residual_hidden)
+   b. feat_decoder(mu=dit_hidden, cond=prev_patch, n_timesteps=10, cfg_value=2.0) → pred_feat
+   c. feat_encoder(pred_feat) → curr_embed
+   d. stop_head(lm_hidden) → stop flag
+   e. base_lm.forward_step(curr_embed) → new lm_hidden → fsq_layer
+   f. residual_lm.forward_step(lm_hidden + curr_embed) → new residual_hidden
+5. All patches → AudioVAE.decode → 16kHz waveform
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| patch_size | 2 | 2 | config.patch_size |
+| feat_dim | 64 | 64 | AudioVAE latent dim |
+| FSQ latent_dim | 256 | 256 | scalar_quantization_latent_dim |
+| FSQ scale | 9 | 9 | scalar_quantization_scale |
+| TSLM layers | 24 | 由 MiniCPM4Config 决定 | base_lm |
+| RALM layers | 6 | 6 | residual_lm_num_layers |
+| LocEnc layers | 4 | 4 | encoder_config.num_layers |
+| LocDiT layers | 4 | 4 | dit_config.num_layers |
+| Hidden dim | 1024 | 1024 | lm_config.hidden_size |
+| LocDiT dim | 1024 | 1024 | dit_config.hidden_dim |
+| max_length | 4096 | 4096 | config.max_length |
+| inference_timesteps | 10 | 10 | 默认推理 ODE 步数 |
+| cfg_value | 2.0 | 2.0 | 默认 CFG scale |
+| Stop loss | CE | CE (dim=2) | 论文称 BCE,代码用 CrossEntropyLoss |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: torch, torchaudio, transformers, einops, pydantic, safetensors, tqdm
+- [x] 数据准备: 16kHz 音频 + BPE text; AudioVAE 独立训练后冻结
+- [x] 预训练模型依赖: MiniCPM-4-0.5B (TSLM 初始化), AudioVAE checkpoint
+- [x] 训练命令: `scripts/train_voxcpm_finetune.py` (含 LoRA 支持)
+- [x] 推理命令: `from voxcpm import VoxCPMModel; model = VoxCPMModel.from_local(path); audio = model.generate(text, prompt_wav_path=wav)`
+- [x] LoRA 微调: 支持对 LM/DiT/Proj 层独立配置 LoRA
+- [ ] 已知坑: AudioVAE 必须 float32; torch.compile 需要 triton; CFG=1.0 导致崩溃
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 — 代码结构清晰,typing 完善,文档充分,有 LoRA 微调支持和 streaming 推理
+- **文档完善度**: 4/5 — README 详尽,含 CLI 用法和 API 示例
+- **社区活跃度**: 5/5 — 28K stars,持续更新,有 ComfyUI 集成
+- **复现难度**: 2/5 (容易) — 预训练权重公开,pip install 即可推理; 完整训练需 40xH100 + 1.8M h 数据
+
 > [!review] 审阅结论: pass (2026-06-10, repro 升级后重审)
 > - **conclusion**: pass
 > - **issues**: 0 (0 high, 0 medium, 0 low)

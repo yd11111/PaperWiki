@@ -237,3 +237,133 @@ EnCodec 的贡献不在于架构创新 (encoder-RVQ-decoder 框架继承自 Soun
 > - ⚠️ [template-compliance, medium] 实验表格中部分 baseline 数字为跨类别平均,与 Table 1 按类别报告的格式不完全一致
 > - 💡 [weak-reusability, low] 可复用 idea 4 (流式/非流式统一) 的描述偏向架构描述而非可迁移 trick
 > **审阅报告:** [[_review/EnCodec-review.yml]]
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/facebookresearch/encodec
+> - commit: 0e2d0ae
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+论文 Fig 1 与代码完全一致。核心数据流:
+
+```
+Audio → SEANetEncoder → latent [B, D=128, T=75] → RVQ → codes [B, Nq, T] → dequantize+sum → SEANetDecoder → Audio
+```
+
+**Encoder** (`modules/seanet.py:SEANetEncoder`): Conv1d(1→32, k=7) → 4 个 [ResBlock + strided Conv1d] 循环 (strides=[2,4,5,8], channels 32→64→128→256→512) → 2-layer LSTM → Conv1d(512→128, k=7)。ratios 在 init 时做了 `list(reversed(ratios))`,所以用户传入 `[8,5,4,2]` 实际 downsample 顺序是 `[2,4,5,8]`,与论文一致。
+
+**Decoder** (`modules/seanet.py:SEANetDecoder`): 镜像 encoder,Conv1d(128→512) → LSTM → 4 个 [ConvTranspose1d + ResBlock] 循环 (strides=[8,5,4,2]) → Conv1d(32→1, k=7)。与论文描述完全对齐。
+
+**差异**: 论文描述判别器使用 5 个 STFT 窗口尺寸 `[2048, 1024, 512, 256, 128]`。代码 `msstftd.py` 默认配置只有 3 个: `n_ffts=[1024, 2048, 512]`,但 init 支持任意数量,论文结果应使用了 5 个尺度的配置(非开源训练代码的默认值)。
+
+### 论文未写的实现细节
+
+1. **RVQ 训练 bug 警告** (`quantization/core_vq.py:309`): 代码中有显式 warning — `'When using RVQ in training model, first check github issue #25'`,表明 commitment loss 的梯度计算有已知 bug: `commit_loss = F.mse_loss(quantize.detach(), x)` 应该是 `F.mse_loss(x, quantize.detach())`(梯度应该只通过 encoder 输出 x 回传,不通过 quantize)。这个 bug 在开源代码中未修复以保证可复现性。
+
+2. **Dead code replacement 阈值** (`quantization/core_vq.py:133`): `threshold_ema_dead_code=2`,即 EMA cluster size 小于 2 的 codebook entry 会被替换为当前 batch 的随机样本。论文仅提到"entries that are not used are replaced",未给出具体阈值。
+
+3. **K-means 初始化** (`quantization/core_vq.py:119`): 代码默认使用 k-means 初始化 (`kmeans_init=True`, `kmeans_iters=50`),在第一个 training batch 上运行 50 轮 k-means。论文未提及此初始化策略。
+
+4. **LM 模型的 codebook embedding 方式** (`model.py:62-63`): LM 输入是 `indices+1`(0 保留给首时间步),各 codebook 的 embedding 通过独立 `nn.Embedding(1025, 200)` 映射后 **求和** (而非拼接),得到 200 维输入。论文仅说"transformed into a continuous representation using learnt embedding tables"。
+
+5. **Balancer 的 per_batch_item 归一化** (`balancer.py:88-89`): 实际实现中梯度范数是 per-batch-item 计算再取 mean (即 `grad.norm(dim=dims).mean()`)，而非论文 Eq.5 中隐含的 global norm。这使得 balancer 对 batch size 更鲁棒。
+
+6. **Residual block 的 compress 参数** (`seanet.py:40`): 残差块内部通道数为 `dim // compress` (默认 compress=2),即 ResBlock 是 bottleneck 结构。论文未提及此压缩设计。
+
+### 训练 pipeline 拆解
+
+开源代码仅包含推理代码,**训练代码未开源**。训练相关的组件 (balancer, msstftd) 作为参考实现提供,但完整的训练循环、数据加载、优化器配置等不在仓库中。
+
+推断的训练数据流:
+```
+Audio [B, 1, T] → SEANetEncoder → z [B, 128, T/320]
+                                    ↓
+                              RVQ (n_q codebooks)
+                                    ↓
+                         z_q [B, 128, T/320] + commitment_loss
+                                    ↓
+                         SEANetDecoder → x_hat [B, 1, T]
+                                    ↓
+    ┌─────────────────────────────────────────────────────┐
+    │ L_t = L1(x, x_hat)                                  │
+    │ L_f = multi-scale mel L1+L2                          │
+    │ L_g = hinge loss from MS-STFT discriminator           │
+    │ L_feat = feature matching (L1 on discriminator layers) │
+    │ L_w = commitment loss (MSE)                           │
+    │ → Balancer(L_t, L_f, L_g, L_feat, L_w) → backward   │
+    └─────────────────────────────────────────────────────┘
+```
+
+### 推理 pipeline 拆解
+
+```python
+# 1. 加载模型
+model = EncodecModel.encodec_model_24khz(pretrained=True)  # model.py:264
+model.set_target_bandwidth(6.0)  # 选择 bandwidth → 计算 n_q
+
+# 2. 编码
+frames = model.encode(wav)  # wav: [B, 1, T]
+# → _encode_frame: encoder(x) → emb [B,128,T'] → quantizer.encode(emb, frame_rate=75, bandwidth=6.0)
+# → n_q = floor(6000 / (75 * 10)) = 8 codebooks
+# → codes: [B, 8, T']
+
+# 3. 解码
+wav_out = model.decode(frames)
+# → quantizer.decode(codes) → emb_q [B,128,T'] → decoder(emb_q) → wav [B,1,T]
+
+# 4. (可选) 熵编码
+lm = model.get_lm_model()  # 5-layer transformer, 200 dim, 8 heads
+# probabilities = lm(codes_shifted)  # [B, 1024, n_q, T]
+# → arithmetic coding with range coder
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| Encoder base channels | C=32 | n_filters=32 | seanet.py:91 |
+| Encoder latent dim | D=128 | dimension=128 | seanet.py:91 |
+| Strides | (2,4,5,8) | ratios=[8,5,4,2] (reversed) | seanet.py:100 |
+| Codebook size | 1024 | bins=1024 | model.py:236 |
+| Max codebooks (24kHz) | 32 | n_q=32 (computed) | model.py:231 |
+| Max codebooks (48kHz) | 16 | n_q=16 (computed) | 同上 |
+| EMA decay | 0.99 | decay=0.99 | core_vq.py:120 |
+| Dead code threshold | 未提及 | threshold_ema_dead_code=2 | core_vq.py:133 |
+| K-means init iters | 未提及 | kmeans_iters=50 | core_vq.py:259 |
+| LM layers | 5 | num_layers=5 | model.py:203 |
+| LM dim | 200 | dim=200 | model.py:203 |
+| LM heads | 8 | 8 (via transformer config) | model.py:203 |
+| LM context | 3.5s | past_context=int(3.5*75)=262 | model.py:204 |
+| Balancer EMA decay | 0.999 | ema_decay=0.999 | balancer.py:67 |
+| MS-STFT filters | 32 | filters=32 | msstftd.py:110 |
+| MS-STFT dilations | [1,2,4] | dilations=[1,2,4] | msstftd.py:48 |
+| 24kHz bandwidths | [1.5,3,6,12,24] | target_bandwidths=[1.5,3.,6,12.,24.] | model.py:269 |
+| 24kHz causal | Yes | causal=True | model.py:275 |
+| 24kHz norm | weight_norm | model_norm='weight_norm' | model.py:275 |
+| 48kHz causal | No | causal=False | model.py:295 |
+| 48kHz norm | time_group_norm | model_norm='time_group_norm' | model.py:295 |
+| 48kHz segment | 1s | segment=1.0 | model.py:295 |
+| LSTM layers | 2 | lstm=2 | seanet.py:95 |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: torch, torchaudio, einops, numpy; 最小依赖,PyPI 安装 (`pip install encodec`)
+- [ ] 数据准备: 训练代码未开源,需自行准备 DNS-Challenge-4 + Common-Voice + AudioSet + FSD50K + Jamendo
+- [ ] 预训练模型依赖: 24kHz 和 48kHz 预训练权重可通过 `encodec_model_24khz(pretrained=True)` 自动下载
+- [ ] 训练命令: **训练代码未开源**,仅提供推理和模型定义
+- [x] 推理命令: `python -m encodec [-r] [-b BW] INPUT OUTPUT` 或 Python API
+- [x] 已知坑: (1) RVQ commitment loss 有 gradient bug (issue #25,未修复); (2) 训练代码缺失是最大障碍; (3) MS-STFT discriminator 默认 3 尺度,论文结果用 5 尺度
+
+### 代码质量与可复现性评估
+
+| 维度 | 评分 | 说明 |
+|------|------|------|
+| 工程质量 | 4/5 | 代码简洁清晰,模块化好,typing 完善,有单元测试 |
+| 文档完善度 | 3/5 | README 充分,但 API 文档有限,训练相关文档缺失 |
+| 社区活跃度 | 2/5 | 3.1K stars,但 2023 年后基本无更新,issues 积压 |
+| 复现难度 | 4/5 | 推理完全可复现;训练因代码缺失难度极高 |
+
+**总结**: 推理代码是标杆级开源,但训练代码缺失严重限制了复现价值。Balancer 和 MS-STFT discriminator 作为独立组件可直接复用。

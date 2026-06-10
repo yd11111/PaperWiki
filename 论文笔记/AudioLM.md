@@ -139,3 +139,91 @@ AudioLM 是 speech language model 领域的里程碑式工作。其核心贡献�
 > 
 > 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/lucidrains/audiolm-pytorch (2620 stars)
+> - commit: d65fd15
+> - 分析日期: 2026-06-10
+> - 注意: 这是 lucidrains (Phil Wang) 的社区实现,非 Google 官方代码。该仓库是目前最完整的 AudioLM 开源复现
+
+### 架构验证
+
+lucidrains 的实现覆盖了 AudioLM 的完整 pipeline:
+
+| 组件 | 论文描述 | 代码实现 | 文件 |
+|------|----------|----------|------|
+| SoundStream codec | 12 层 RVQ, codebook 1024 | `SoundStream` class (soundstream.py, 1023 行) — 含 encoder/decoder/multi-scale discriminator/RVQ | soundstream.py |
+| w2v-BERT semantic tokenizer | w2v-BERT 第 7 层 → k-means | `HubertWithKmeans` class — 支持 HuBERT/wav2vec2 + k-means 聚类 | hubert_kmeans.py |
+| Stage 1 (Semantic LM) | decoder-only Transformer | `SemanticTransformer` — 在 audiolm_pytorch.py 中实现 | audiolm_pytorch.py |
+| Stage 2 (Coarse Acoustic LM) | decoder-only Transformer, 条件于 semantic | `CoarseTransformer` — 接收 semantic tokens 作为 prefix | audiolm_pytorch.py |
+| Stage 3 (Fine Acoustic LM) | decoder-only Transformer, 条件于 coarse | `FineTransformer` — 接收 coarse acoustic tokens 作为条件 | audiolm_pytorch.py |
+| EnCodec 替代 | 可选 | `EncodecWrapper` 支持用 EnCodec 替代 SoundStream | encodec.py |
+| 完整 pipeline | 三阶段串行推理 | `AudioLM` class 整合三个 Transformer + 采样逻辑 | audiolm_pytorch.py |
+
+### 论文未写的实现细节
+
+1. **Semantic token 去重**: 代码实现了 `batch_unique_consecutive()` 函数,去除连续重复的 semantic tokens。论文提到 "follow prior practice" 但未详细说明。代码注释标注 "important detail noted by @eonglints"。
+
+2. **SoundStream 架构增强**: lucidrains 的 SoundStream 包含多项论文未提及的增强:
+   - `SqueezeExcite` channel attention 模块
+   - 可选的 `GateLoop` 层 (替代 local attention)
+   - `GroupedResidualVQ` / `GroupedResidualLFQ` / `GroupedResidualFSQ` 多种量化方案
+   - Multi-scale discriminator 架构与论文略有差异 (使用 `weight_norm` + `leaky_relu`)
+
+3. **Gradient shrink**: `grad_shrink(t, alpha=0.1)` 在某些 embedding 上使用,将梯度缩放到 10%,论文未提及此技巧。
+
+4. **Classifier-free guidance**: 代码中的 `prob_mask_like` 和 `generate_mask_with_prob` 支持 CFG 训练。论文未使用 CFG,这是 lucidrains 的扩展。
+
+5. **EOS token 处理**: `mask_out_after_eos_id()` 和 `all_rows_have_eos_id()` 实现了 EOS 后 mask 和 EOS 检测逻辑。论文未详细描述生成终止策略。
+
+6. **Top-k 采样**: `top_k(logits, thres=0.5)` + `gumbel_sample(t, temperature)` 实现了 top-k + gumbel 采样。论文报告温度参数 Stage 1/2/3 分别为 0.6/0.8/0.6。
+
+### 训练 pipeline 拆解
+
+训练由 `trainer.py` 的 `SoundStreamTrainer`, `SemanticTransformerTrainer`, `CoarseTransformerTrainer`, `FineTransformerTrainer` 四个 Trainer 类分别管理:
+
+1. **SoundStream 训练**: GAN 训练,支持 multi-scale discriminator + gradient penalty
+2. **三阶段 LM 训练**: 各自独立训练,标准 next-token prediction loss + cross-entropy
+
+### 推理 pipeline 拆解
+
+`AudioLM` class 封装完整推理:
+1. 输入原始音频 prompt
+2. SoundStream 编码为 acoustic tokens,HuBERT 编码为 semantic tokens
+3. `SemanticTransformer.generate()` → 续写 semantic tokens (AR, 温度采样)
+4. `CoarseTransformer.generate()` → 条件于 semantic,生成 coarse acoustic tokens
+5. `FineTransformer.generate()` → 条件于 coarse,生成 fine acoustic tokens
+6. SoundStream decoder 解码回波形
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码默认值 | 备注 |
+|------|--------|-----------|------|
+| Transformer 层数 | 12 | 可配置 (depth 参数) | 需用户指定 |
+| 注意力头数 | 16 | 可配置 (heads 参数) | 需用户指定 |
+| d_model | 1024 | 可配置 (dim 参数) | 需用户指定 |
+| FFN dim | 4096 | dim * 4 (可配置 ff_mult) | 默认一致 |
+| RVQ layers (Q) | 12 | 可配置 | 需用户指定 |
+| Codebook size | 1024 | 可配置 | 需用户指定 |
+| Coarse/Fine split | Q'=4 | 可配置 | 需用户指定 |
+| 位置编码 | T5-style relative PE | T5RelativePositionBias (可选 ALiBi/RoPE) | 提供多种选择 |
+
+### 复现 checklist (基于代码)
+
+- [x] 三阶段 decoder-only Transformer 架构
+- [x] Semantic + Acoustic token 分离
+- [x] SoundStream codec (含训练)
+- [x] HuBERT/wav2vec2 + k-means 作为 semantic tokenizer
+- [x] 续写 / 无条件生成 / 声学生成三种推理模式
+- [x] 完整 trainer 类 (含 DDP 分布式训练)
+- [x] EnCodec 作为可选替代
+- [ ] **预训练权重** — 无预训练 checkpoint
+- [ ] **Libri-Light 60K 训练** — 需用户自行准备数据和计算资源
+
+### 代码质量与可复现性评估
+
+**质量**: **高**。lucidrains 的代码质量一贯优秀,使用 `einops` 和 `beartype` 提升可读性和类型安全。模块化设计,每个组件可独立使用。代码约 4000+ 行,覆盖了 AudioLM 的全部组件。
+
+**可复现性**: **中等**。架构和训练逻辑完整,但 (1) 无预训练权重, (2) 需要大规模计算资源 (论文用 16 TPUv4, 1M steps), (3) SoundStream 实现包含论文之外的增强,可能影响复现精确度。适合作为 AudioLM 概念验证和二次开发基础,但完整复现论文结果需要可观的工程和计算投入。

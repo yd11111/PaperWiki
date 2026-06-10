@@ -195,3 +195,130 @@ MaskGCT 的核心贡献在于证明了 **masked generative modeling 可以完全
 > - [medium/fact-inference-mixing] 方法 > Semantic Codec & T2S: '为什么 VQ-VAE 优于 k-means' 和 '为什么 masked generative 比 AR 更适合 TTS' 未区分论文原文与 agent 解读
 > - [medium/missing-lineage] KB 背景: 空占位符,未定位 MaskGCT 在 NAR TTS 谱系中的位置 (SoundStorm → MaskGCT; vs NaturalSpeech 3)
 > **反向更新:** ✅
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/open-mmlab/Amphion (models/tts/maskgct/)
+> - commit: 26f6883
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+论文 Fig 1 的 two-stage 架构在代码中完全对应:
+
+- **T2S**: `maskgct_t2s.py:MaskGCT_T2S` — 使用 `DiffLlamaPrefix` (llama_nar.py) 作为 backbone,bidirectional attention (非 causal)
+- **S2A**: `maskgct_s2a.py:MaskGCT_S2A` — 使用 `DiffLlama` (llama_nar.py) 作为 backbone,同样 bidirectional
+
+**关键发现**: 论文称使用 "Llama-style Transformer",代码确实继承自 HuggingFace 的 `LlamaModel`,但做了两个关键修改:
+1. `_prepare_decoder_attention_mask` 被重写为 **non-causal mask** (llama_nar.py:256-293),即标准 Llama 的 causal mask 被替换为 bidirectional mask
+2. `LlamaDecoderLayer` 被替换为 `LlamaNARDecoderLayer`,将 `RMSNorm` 替换为 `LlamaAdaptiveRMSNorm`(接受 timestep 作为条件)
+
+### 论文未写的实现细节
+
+1. **Mask 概率下限 0.2** (`maskgct_t2s.py:118-120`): `mask_prob = torch.where(mask_prob < 0.2, 0.2, mask_prob)`。论文公式 gamma(t)=sin(pi*t/2T) 理论上可以很小,但代码强制最小 mask 20%。这防止了过早 "完成" 导致的训练不稳定。
+
+2. **Prompt 长度随机化** (`maskgct_t2s.py:133-135`): 训练时 prompt 长度从 `U[min(T/4, 5), T*0.4]` 均匀采样,S2A 从 `U[min(T/4, 5), T/2]`。CFG drop 概率: T2S 0.2, S2A 0.15。
+
+3. **S2A 层采样的 linear schedule** (`maskgct_s2a.py:166-179`): 论文说 `p(j) = 1 - 2j/(N(N+1))`(偏向 coarse),代码实现为 `weights = [num_quantizer - i for i in range(num_quantizer)]` 然后归一化,即 `p(j) = (N-j) / sum`。这与论文公式等价(都是线性递减)。
+
+4. **S2A 的 mask token 填充** (`maskgct_s2a.py:239-245`): 对于 mask_layer 以上的层,非 prompt 部分全部用 mask_token 填充(而非零)。这意味着 S2A 在推理时也知道"上层还没有生成",与论文描述一致但代码更清晰。
+
+5. **CFG rescale 策略** (`maskgct_t2s.py:310-312`): `rescale_embeds = embeds * pos_emb_std / embeds.std()`,即用条件输出的标准差重新归一化 CFG 输出。rescale_cfg 控制混合比例。论文 Appendix C 简要提及,但这个 std-based rescale 对避免 CFG 过强导致的失真至关重要。
+
+6. **Adaptive RMSNorm 的零初始化** (`llama_nar.py:38-39`): `nn.init.zeros_(self.to_weight.weight)` + `nn.init.ones_(self.to_weight.bias)`,即初始化时 adaptive norm 退化为标准 RMSNorm (权重=1)。这保证了训练初期的稳定性。
+
+### 训练 pipeline 拆解
+
+```
+T2S 训练:
+  Phone IDs → phone_emb [B, T_phone, 1536]
+  Semantic tokens x0 [B, T_sem] → forward_diffusion:
+    1. sample t ~ U(0,1), mask_prob = sin(pi*t/2)
+    2. 随机选 prompt_len → 前 prompt_len 帧不 mask
+    3. 以 mask_prob 概率 Bernoulli 采样 mask
+    4. xt = mask * mask_token + (1-mask) * cond_emb(x0)
+  xt + phone_emb → DiffLlamaPrefix(bidirectional) → embeds
+  to_logit(embeds) → logits [B, T, 8192]
+  CE loss on masked positions only
+
+S2A 训练:
+  Acoustic tokens x0 [B, T, 12] + semantic cond [B, T]
+  → forward_diffusion:
+    1. sample mask_layer (linear schedule)
+    2. layers < mask_layer: 用真实 token embedding
+    3. layer == mask_layer: Bernoulli mask
+    4. layers > mask_layer: 非 prompt 全 mask
+  xt + layer_emb + cond → DiffLlama(bidirectional) → embeds
+  to_logits[mask_layer](embeds) → logits [B, T, 1024]
+  CE loss on masked positions of mask_layer only
+```
+
+### 推理 pipeline 拆解
+
+```
+T2S 推理 (reverse_diffusion, maskgct_t2s.py:226-363):
+  1. phone_id → phone_emb
+  2. prompt semantic tokens → cond_emb → cur_prompt
+  3. seq 全初始化为 0, mask 全 True
+  4. for i in range(50 steps):
+     a. cur = cum + mask * mask_token + ~mask * cond_emb(seq)
+     b. [cur_prompt, cur] → DiffLlamaPrefix → embeds
+     c. (optional) CFG: mask_embeds = DiffLlamaPrefix(cur_only) → rescale
+     d. top-k(0.98) → gumbel_sample(temp * t_anneal) → sampled_ids
+     e. seq[mask] = sampled_ids[mask]
+     f. confidence = softmax(logits).gather(sampled_ids)
+     g. + gumbel_noise * choice_temp → 选最低 confidence 位置重新 mask
+     h. mask_num = sin(pi*t_next/2) * seq_len
+  5. 输出: seq [B, T_target] (semantic tokens)
+
+S2A 推理 (reverse_diffusion, maskgct_s2a.py:317-469):
+  同 T2S 但逐层生成:
+  for mask_layer in 0..11:
+    steps = n_timesteps[mask_layer]  # 默认 [40,16,1,1,...,1]
+    相同的 mask-predict-remask 循环
+    完成后: cum += token_emb(seq)
+  输出: xt [B, T, 12] (12层 acoustic tokens)
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| T2S hidden_size | 1536 | 1536 (cfg) | maskgct_t2s.py |
+| T2S num_layers | 16 | 16 | maskgct_t2s.py |
+| T2S num_heads | 16 | 16 | maskgct_t2s.py |
+| T2S params | 695M | ~695M | 论文 Table 7 |
+| S2A hidden_size | 1024 | 1024 | maskgct_s2a.py |
+| S2A num_layers | 16 | 16 | maskgct_s2a.py |
+| S2A num_quantizer | 12 | 12 | maskgct_s2a.py |
+| Semantic codebook | 8192 | cond_codebook_size=8192 | maskgct_t2s.py |
+| Acoustic codebook | 1024 | codebook_size=1024 | maskgct_s2a.py |
+| T2S CFG drop | 0.2 | cfg_scale=0.2 | maskgct_t2s.py:41 |
+| S2A CFG drop | 0.15 | cfg_scale=0.15 | maskgct_s2a.py:43 |
+| Mask schedule | sin(pi*t/2) | mask_prob = sin(t*pi/2) | 两处一致 |
+| Min mask prob | 未提及 | 0.2 | maskgct_t2s.py:118 |
+| S2A layer schedule | linear | weights=[N-i] | maskgct_s2a.py:167 |
+| Inference T2S steps | 50 | n_timesteps=40 (默认) | 代码默认 40 非 50 |
+| Inference S2A steps | [40,16,1*10] | [10,4,4,4,4,4,4,4] (默认) | 代码默认更少 |
+| Phone emb padding_idx | 未提及 | 1023 | maskgct_t2s.py:98 |
+| RoPE theta | 10000 | 10000 (Llama default) | LlamaConfig |
+| Intermediate size | 未提及 | hidden*4 | llama_nar.py:219 |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: transformers, einops, torch; 需要 Amphion 完整环境
+- [ ] 数据准备: 需要 Emilia 100K h (受限获取) + w2v-BERT 2.0 特征提取
+- [x] 预训练模型依赖: 权重通过 HuggingFace `amphion/MaskGCT` 下载; semantic codec、acoustic codec 均有 checkpoint
+- [ ] 训练命令: Amphion 框架内训练,需配置 JSON + 多组件串联
+- [x] 推理命令: `maskgct_demo.ipynb` 提供完整推理 demo
+- [x] 已知坑: (1) T2S 默认步数代码是 40 而非论文的 50; (2) LlamaNARDecoderLayer 有重复定义 (llama_nar.py:56 和 129,完全相同的 __init__ 和 forward); (3) 需要 w2v-BERT 2.0 做 semantic 特征提取,较大模型
+
+### 代码质量与可复现性评估
+
+| 维度 | 评分 | 说明 |
+|------|------|------|
+| 工程质量 | 3/5 | 代码可读但有冗余 (LlamaNARDecoderLayer 的重复定义),缺少 type hints |
+| 文档完善度 | 3/5 | 有 Jupyter demo 和 README,但训练文档不足 |
+| 社区活跃度 | 4/5 | Amphion 活跃维护 (7.5K+ stars),持续更新 |
+| 复现难度 | 3/5 | 推理可复现,训练需要大规模数据 + 多组件协调 |

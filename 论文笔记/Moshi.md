@@ -148,3 +148,137 @@ Moshi 是语音对话领域的里程碑式工作,其贡献在于系统性地解�
 > 
 > 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/kyutai-labs/moshi
+> - commit: e6a55d2722a65870ef52a6c9f6ecfc0e90f38362
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 vs 代码的关键对应:**
+
+1. **LMModel (Temporal Transformer)** (`moshi/moshi/models/lm.py:49-520`): 论文中的 Helium 7B backbone。代码中 `StreamingTransformer` 使用 4096 dim, 32 heads, 32 layers, GLU (SiLU gating), RMS norm, RoPE。与论文 Table 1 的 Helium 参数完全一致。
+
+2. **Depformer (Depth Transformer)** (`lm.py:204-217`): 论文中的 Depth Transformer。代码中使用独立的 `StreamingTransformer`,1024 dim, 16 heads, 6 layers, dim_feedforward=4224。与论文完全一致。
+
+3. **Depthwise parametrization** (`lm.py:173-182`): 论文 3.4.1 提出的每个 codebook 使用独立参数。代码通过 `depformer_multi_linear=True` 实现:每个 codebook index 有独立的 `nn.Linear(dim, depformer_dim)` 投影层。Depformer 本身通过 `weights_per_step=True` 支持每步独立权重。
+
+4. **Mimi Codec** (`moshi/moshi/models/compression.py:105-434`): 论文中的 Mimi neural audio codec。代码结构: SeaNet encoder → Transformer bottleneck (encoder side) → downsample → SplitRVQ (1 VQ + 7 RVQ) → upsample → Transformer bottleneck (decoder side) → SeaNet decoder。支持全因果流式处理。
+
+5. **Split RVQ** (`moshi/quantization/`): `SplitResidualVectorQuantizer` 将量化分为 `rvq_first` (1 层 VQ, 语义) 和 `rvq_rest` (7 层 RVQ, 声学),两者输出求和用于重建。与论文 3.3.2 一致。
+
+6. **Multi-stream 设计** (`lm.py:113-120`): `n_q=16` (8 Moshi codebooks + 8 user codebooks),`dep_q=8` (Moshi 的 codebook),文本流作为 `audio_offset=1` 之前的第 0 通道。总共 17 个子序列 (1 text + 16 audio),与论文 Eq. 6 一致。
+
+7. **Delay pattern** (`moshi_7b config`): `delays = [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1]`。第 0 位是 text (delay=0),第 1 位是 Moshi semantic (delay=0),第 2-8 位是 Moshi acoustic (delay=1),第 9 位是 user semantic (delay=0),第 10-16 位是 user acoustic (delay=1)。与论文 Eq. 4 的 tau=1 一致 (论文训练用 tau=2,但实际部署配置用 tau=1)。
+
+### 论文未写的实现细节
+
+1. **CUDAGraphed 推理优化** (`lm.py:527,631`): 推理时 `forward_text` 和 `depformer_step` 都被包装为 `CUDAGraphed` 对象,使用 CUDA Graph 消除 kernel launch overhead,这对流式实时推理至关重要。
+
+2. **Streaming 状态管理** (`lm.py:522-535,556-666`): `_LMGenState` 管理一个循环缓存 (`cache`),大小为 `max_delay + 2`,通过 `offsets % CT` 实现环形读写。支持 `exec_mask` 控制 batch 中哪些样本在执行,`reset_mask` 支持动态重置单个样本的流式状态。
+
+3. **Depformer streaming detached** (`lm.py:218`): Depformer 的 streaming 与 Temporal Transformer 解耦 (`set_streaming_detached(True)`)。每个时间步内,Depformer 独立地打开自己的 streaming context 做 K 步前向 (`lm.py:823-847`)。
+
+4. **Special token 设计** (`lm.py:246-278`): `zero_token_id = -1` (不参与嵌入), `ungenerated_token_id = -2` (标记待生成位置,允许部分 teacher forcing), `initial_token_id = card` (序列起始)。text 和 audio 有独立的 initial/padding token。
+
+5. **CFG 实现** (`lm.py:714-732`): CFG 通过将 batch 翻倍实现 (`input_ = input_.repeat(2, 1, 1)`)。支持两种 CFG 模式: (1) 基于 condition 的标准 CFG (使用 `condition_sum`); (2) 基于 mask 的延迟 CFG (`cfg_is_masked_until`),在前若干步将 input 置零; (3) text-only CFG (`cfg_is_no_text`)。
+
+6. **Mimi 的 CUDA Graph 支持** (`compression.py:219-230`): Mimi 的 encoder、decoder、encoder_transformer、decoder_transformer 都在 streaming 模式下被独立包装为 CUDAGraphed,实现极低延迟的编解码。
+
+7. **Quantizer dropout 实现**: Mimi 训练时 50% 概率跳过量化 (`compression.py:305-306`),直接将未量化的 embedding 传给 decoder。这个细节在论文中只简略提及。
+
+8. **Rust 后端** (`rust/`): Moshi 提供完整的 Rust 推理后端 (`moshi-backend/`),包含流式 WebSocket server、音频处理、benchmark 工具。Mimi 也有 Rust+PyO3 绑定 (`mimi-pyo3/`)。
+
+### 训练 pipeline 拆解
+
+```
+阶段 1 (Helium text pre-training):
+  Text tokens (SentencePiece 32K) → Transformer (32L, 4096d) → text logits
+  500K steps, batch 4.2M tokens, cosine LR 3e-4
+
+阶段 2 (Audio pre-training):
+  24kHz mono audio → Mimi encode → [text + 8 semantic/acoustic tokens] per timestep
+  Temporal Transformer (from Helium) + Depth Transformer (random init)
+  1M steps, batch 16h audio, 50% text-only batches
+  Text delay randomized [-0.6, +0.6]s, text masked 30%
+
+阶段 3 (Multi-stream post-training):
+  PyAnnote diarization → simulated 2-stream data
+  Joint sequence: V = [text, Moshi_sem, Moshi_aco x7, User_sem, User_aco x7]
+  100K steps, batch 8h, fixed LR 3e-6
+
+阶段 4 (Fisher finetuning):
+  Fisher 2000h real 2-speaker conversations (8kHz → AudioSR → 24kHz)
+  10K steps, batch 40min
+
+阶段 5 (Instruction finetuning):
+  20K+ hours synthetic conversations (Helium+Open Hermes → text → streaming TTS)
+  30K steps, single actor voice for Moshi stream
+```
+
+### 推理 pipeline 拆解
+
+```
+每个时间步 (80ms = 1920 samples @ 24kHz):
+  User audio (24kHz) → Mimi.encode → 8 user tokens
+  ↓
+  LMGen._step():
+    1. 写入 user tokens 到 cache (带 delay)
+    2. 从 cache 读取当前步的 17 通道 input
+    3. forward_text: input → sum(emb[k]) → Temporal Transformer → text_logits
+    4. sample text_token (top_k=25, temp=0.7)
+    5. depformer_step: 依次生成 8 个 audio tokens
+       for k in range(8):
+         [text/prev_token] emb + depformer_in[k](transformer_out) → Depformer → linear → sample
+       (top_k=250, temp=0.8)
+    6. 写入 text_token + 8 audio tokens 到 cache
+    7. 从 cache 读取 undelayed output (text + 8 Moshi tokens)
+  ↓
+  Mimi.decode(8 tokens) → 24kHz waveform chunk
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 (config) | 备注 |
+|------|--------|-----------|------|
+| Temporal dim | 4096 | 4096 | 一致 |
+| Temporal layers | 32 | 32 | 一致 |
+| Temporal heads | 32 | 32 | 一致 |
+| Hidden scale | 4 (论文) | 4.125 | 略有差异 (dim_ff=16896) |
+| Depth dim | 1024 | 1024 | 一致 |
+| Depth layers | 6 | 6 | 一致 |
+| Depth dim_ff | 未明确 | 4224 | 代码特有 |
+| Depth heads | 16 | 16 | 一致 |
+| Audio codebooks | 8 (Q) | n_q=16, dep_q=8 | 16=8 Moshi + 8 User |
+| Codebook size | 2048 | 2048 | 一致 |
+| Frame rate | 12.5Hz | 12.5Hz | 一致 |
+| Text vocab | 32000 | 32000 | 一致 |
+| Context (Temporal) | 3000 steps | 3000 | =4 min audio |
+| Context (Depth) | 未明确 | 8 | 仅看当前步 |
+| Acoustic delay | tau=2 (论文) | tau=1 (config) | 部署用 tau=1 |
+| Position embedding | RoPE | RoPE (Temporal), none (Depth) | Depth 无位置编码 |
+| Norm | RMS Norm | rms_norm_f32 | 一致 |
+| Gating | SiLU (GLU) | SiLU | 一致 |
+| Sampling temp (audio) | 未明确 | 0.8 | 代码默认 |
+| Sampling top_k (audio) | 未明确 | 250 | 代码默认 |
+| Sampling temp (text) | 未明确 | 0.7 | 代码默认 |
+| Sampling top_k (text) | 未明确 | 25 | 代码默认 |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: Python 3.10+, PyTorch 2.0+, `pip install moshi` (Python) 或 `cargo build` (Rust)
+- [ ] 数据准备: (1) 文本预训练: CommonCrawl + Wikipedia + StackExchange; (2) 音频: 7M hours (未公开数据集); (3) Fisher: 需购买 LDC 许可; (4) Instruct: 需自行合成
+- [ ] 预训练模型依赖: Mimi codec 权重 (公开), Helium 7B (公开), Moshi 完整模型 (公开, ~7B)。也有 2B 开发版。
+- [ ] 训练命令: 论文/代码未提供训练脚本 (仅推理代码开源)
+- [ ] 推理命令: `python -m moshi.server` (Python server) 或 `cargo run --release` (Rust server); 客户端: `moshi.client` 或 Web UI
+- [ ] 已知坑: (1) 训练代码未开源,仅推理可用; (2) 仅支持英语; (3) 4-bit 量化会降低质量; (4) Mimi codec 非幂等,watermarking 不可用
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 5/5 -- 多语言实现 (Python + Rust + MLX), 流式架构设计精良, CUDA Graph 优化, 完善的 WebSocket server/client。代码有完整类型标注和文档字符串。
+- **文档完善度**: 4/5 -- README 清晰, 有 FAQ, 安装文档完善。但训练流程完全缺失。
+- **社区活跃度**: 4/5 -- 6K+ stars, Kyutai 团队维护, issue 响应较好。414 PRs (主要是 Kyutai 内部贡献)。
+- **复现难度**: 4/5 (难) -- 推理部署 2/5 (容易); 但训练从零复现 5/5 (极难): 训练代码未公开, 7M hours 音频数据不可用, 多阶段训练极其复杂, Fisher 数据需商业许可。

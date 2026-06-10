@@ -221,3 +221,126 @@ CosyVoice 2 是一篇工程驱动的系统论文,其价值在于将多个正确�
 > 
 > 结构检查: 速查卡片 ✓ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/FunAudioLLM/CosyVoice
+> - commit: 074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc
+> - 分析日期: 2026-06-10
+> - 备注: CosyVoice2 对应 `Qwen2LM` 类 + `CausalMaskedDiffWithXvec` 类,配置文件 `cosyvoice2.yaml`
+
+### 架构验证
+
+论文 Fig 1 的架构与代码对应关系:
+
+| 论文组件 | 代码实现 | 文件位置 |
+|---------|---------|---------|
+| Text-Speech LM (Qwen2.5 init) | `Qwen2LM` 继承 `TransformerLM`,内部 `llm = Qwen2Encoder(Qwen2ForCausalLM)` | `cosyvoice/llm/llm.py:257-296` |
+| FSQ Speech Tokenizer | 外部 ONNX `speech_tokenizer_v2.onnx` (或 batch ONNX) | `cosyvoice/cli/cosyvoice.py:156` |
+| Chunk-aware Causal CFM | `CausalMaskedDiffWithXvec` + `CausalConditionalCFM` | `cosyvoice/flow/flow.py:149`, `flow_matching.py:196` |
+| Vocoder | 同 CosyVoice v1 HiFi-GAN | `cosyvoice/hifigan/` |
+
+**关键差异 vs 论文**:
+1. 论文说移除了 text encoder 和 speaker embedding,代码验证: `Qwen2LM` 确实没有 `text_encoder`/`text_encoder_affine_layer`/`spk_embed_affine_layer`,text token 直接通过 `self.llm.model.model.embed_tokens(text_token)` 获取 Qwen2 的 word embedding (`llm.py:366-367`)
+2. 论文说使用 Qwen2.5-0.5B 初始化: 代码中 `Qwen2Encoder.__init__` 从 `pretrain_path` 加载 `Qwen2ForCausalLM`,配置 `cosyvoice2.yaml` 中指定 `CosyVoice-BlankEN` 目录 (`cosyvoice.py:150`)
+
+### 论文未写的实现细节
+
+1. **Bistream (流式) 序列构造** (`cosyvoice/llm/llm.py:302-349`): 训练时以 50% 概率选择 bistream 模式,将 text 和 speech 按 `mix_ratio=[5,15]` 交替排列。具体实现: 每 5 个 text token 后接 15 个 speech token,末尾组不满时追加 task_id + 剩余 speech + EOS。`fill_token = speech_token_size + 2` 用于标记需要填充 text token 的位置。
+
+2. **LLM 输出 vocab 扩展** (`cosyvoice/llm/llm.py:275-277`): CosyVoice2 的 `llm_decoder` 输出 `speech_token_size + 3` 维,额外 3 个 token 为: EOS(`speech_token_size`), unused(`speech_token_size+1`), fill_token(`speech_token_size+2`)。stop_token_ids 包含这三个。
+
+3. **DPO 训练的实现** (`cosyvoice/llm/llm.py:407-456`): `forward_dpo` 方法将 chosen 和 rejected speech tokens 在 batch 维度拼接,一次前向计算两组 logits,然后计算 per-sample log probability 用于 DPO loss。这是标准的 offline DPO 实现。
+
+4. **vLLM 加速** (`cosyvoice/llm/llm.py:506-534`): 推理时支持 vLLM 后端,将 lm_input 的 embedding 传入 vLLM engine (通过 `enable_prompt_embeds` 参数),实现高效批量推理。
+
+5. **Bistream 推理** (`cosyvoice/llm/llm.py:552-661`): 流式推理 `inference_bistream` 接受 text 作为 Generator (逐步产生 text chunk),每收到足够 text token (5 个) 就拼接到 LLM 输入并解码 15 个 speech token,直到收到 fill_token 则暂停等待下一组 text。
+
+6. **Causal CFM 的统一训练** (`cosyvoice/flow/flow.py:201`): 训练时以 50% 概率选择 streaming 模式 (`streaming = True if random.random() < 0.5 else False`),这对应论文中"四种 mask 随机采样"的简化实现(代码中只有 streaming/non-streaming 二选一)。
+
+7. **Causal CFM 固定随机噪声** (`cosyvoice/flow/flow_matching.py:199-200`): `CausalConditionalCFM` 在初始化时预生成一个固定的随机噪声张量 `rand_noise = torch.randn([1, 80, 50*300])`,推理时从中截取而非实时生成。这保证了流式生成时不同 chunk 使用相同的噪声,避免拼接处的不连续。
+
+8. **Pre-lookahead 机制** (`cosyvoice/flow/flow.py:159,261`): `pre_lookahead_len=3` 表示流式推理时额外向前看 3 个 token (约 120ms),这是论文中 chunk-M mask 的实际实现参数。
+
+9. **流式推理的 token hop** (`cosyvoice/cli/model.py:258`): `token_hop_len=25`(对应 1 秒的 speech token),且使用 `stream_scale_factor=2` 逐步增大 hop 长度到 `token_max_hop_len=100`,前几个 chunk 更短以降低首包延迟。
+
+### 训练 pipeline 拆解
+
+```
+原始音频
+  → speech_tokenizer_v2.onnx (FSQ) → speech_token (codebook=6561)
+  → mel_spectrogram → speech_feat (80-dim)
+  → campplus.onnx → embedding (192-dim, 仅 CFM 使用)
+  → Qwen2.5 BPE tokenizer → text_token
+
+训练:
+  text_token → Qwen2.embed_tokens → text_token_emb
+  speech_token → speech_embedding → speech_token_emb
+  
+  50% 概率 unistream: [sos, text_emb, task_id, speech_emb]
+  50% 概率 bistream: [sos, text_5, speech_15, text_5, speech_15, ..., task_id, remaining_speech]
+  
+  LLM: Qwen2ForCausalLM forward → hidden_states[-1]
+  → llm_decoder (Linear → 6564) → LabelSmoothingLoss
+  
+  CFM: 50% streaming / 50% non-streaming
+  speech_token → input_embedding → causal_encoder → encoder_proj → h
+  条件: h + spk_embedding + masked_mel
+  → CausalConditionalCFM.compute_loss → MSE on velocity
+```
+
+### 推理 pipeline 拆解
+
+```
+输入文本 + prompt 音频
+  → prompt 音频 → speech_tokenizer_v2 → prompt_speech_token
+  → prompt 音频 → mel_extractor → prompt_feat
+  → prompt 音频 → campplus → flow_embedding (仅 CFM 使用)
+  
+  Stage 1 (LLM, 异步线程):
+    Non-streaming: [sos, text_emb(prompt+input), task_id, prompt_speech_emb] → AR decode
+    Streaming: bistream 交替生成,每收到 5 text → 输出 15 speech
+    top-k=25, min_ratio=2, max_ratio=20
+    
+  Stage 2 (CFM, 主线程):
+    等待 token_hop_len (25) + pre_lookahead_len (3) 个 token
+    token → causal_encoder → repeat_interleave(token_mel_ratio=2) → h
+    prompt_mel 作为条件
+    固定噪声 + 10 步 Euler ODE + cosine scheduler + CFG(0.7)
+    → mel (streaming: 逐 chunk 生成)
+    
+  Vocoder: mel → HiFi-GAN → waveform
+  后处理: fade_in_out 消除 chunk 拼接噪声
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| FSQ codebook size | 6561 | 6561 (vocab_size) | `speech_token_size` 在 YAML 配置 |
+| LLM backbone | Qwen2.5-0.5B | Qwen2ForCausalLM | 从 `CosyVoice-BlankEN` 加载 |
+| LLM output vocab | 未明确 | 6564 (6561+3) | speech + EOS + unused + fill |
+| Mix ratio (bistream) | N:M | 5:15 | `mix_ratio=[5,15]` |
+| CFM steps | 10 | 10 | `n_timesteps=10` |
+| Token-mel ratio | 未明确 | 2 (1 token = 2 mel frames) | `token_mel_ratio` |
+| Pre-lookahead | 未明确 | 3 tokens | `pre_lookahead_len=3` |
+| Stream token hop | 未明确 | 25 (初始) → 100 (最大) | `token_hop_len`, `token_max_hop_len` |
+| Stream scale factor | 未明确 | 2x | 每次 hop 翻倍 |
+| Silent token 过滤 | 未提及 | 最多连续 5 个 | `max_silent_token_num=5` |
+
+### 复现 checklist (基于代码)
+
+- [ ] 环境依赖: 同 CosyVoice + vllm (可选), Qwen2.5 预训练权重
+- [ ] 数据准备: speech_tokenizer_v2 (FSQ ONNX), mel, speaker embedding, Qwen BPE tokens
+- [ ] 预训练模型依赖: Qwen2.5-0.5B (CosyVoice-BlankEN), speech_tokenizer_v2.onnx, campplus.onnx, HiFi-GAN
+- [ ] 训练命令: `cosyvoice/bin/train.py` + cosyvoice2.yaml
+- [ ] 推理命令: `CosyVoice2(model_dir).inference_zero_shot(text, prompt_text, prompt_wav, stream=True)`
+- [ ] 已知坑: (1) FSQ tokenizer 训练代码缺失; (2) DPO 训练需要额外构造 reject samples; (3) vLLM 需要自定义 embedding 输入支持
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 - 继承 CosyVoice 的良好结构,bistream 逻辑较复杂但有详细日志
+- **文档完善度**: 3/5 - 缺少 bistream 训练和 DPO 微调的详细文档
+- **社区活跃度**: 5/5 - 与 CosyVoice 共享仓库,持续维护
+- **复现难度**: 3/5 - 推理易复现,流式推理需要理解 bistream 协议;训练需要 FSQ tokenizer

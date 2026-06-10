@@ -500,3 +500,155 @@ bash examples/run_eval.sh
 > - 💡 [template-compliance] frontmatter.models: 缺少 ZipVoice (同团队前序工作 + Table 1 直接 baseline)
 > - 💡 [traceability-gap] Table 2 CMOS/SMOS: 缺少置信区间 (+-0.16/+-0.17),repro 层级建议补充
 > **反向更新:** ✅ 安全
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/k2-fsa/OmniVoice
+> - commit: 30bb7ac
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+论文描述的单阶段 bidirectional masked diffusion 架构在代码中完全对应:
+
+**模型核心** (`models/omnivoice.py:OmniVoice`):
+- 继承 HuggingFace `PreTrainedModel`,LLM backbone 通过 `AutoModel.from_config(llm_config)` 初始化 (Qwen3-0.6B)
+- `audio_embeddings`: `nn.Embedding(8 * 1025, hidden_size)` — 8 codebook 共享一个 flat embedding 表,通过 offset 区分层
+- `audio_heads`: `nn.Linear(hidden_size, 8 * 1025, bias=False)` — 单个 fused head,reshape 后得到 per-codebook logits
+- 论文称 "C independent, codebook-specific prediction heads",代码实际是单个大 Linear,这与笔记中已有的分析一致
+
+**关键验证**: 代码中 `_prepare_embed_inputs` (line 360-380) 实现了 text/audio 混合 embedding:
+```python
+text_embeds = self.get_input_embeddings()(input_ids[:, 0, :])  # 第0层做text
+shifted_ids = input_ids * audio_mask.unsqueeze(1) + self.codebook_layer_offsets.view(1,-1,1)
+audio_embeds = self.audio_embeddings(shifted_ids).sum(dim=1)  # 8层求和
+return torch.where(audio_mask.unsqueeze(-1), audio_embeds, text_embeds)
+```
+这确认了: text position 用 LLM 原生 embedding,audio position 用 offset+sum 的 multi-codebook embedding。
+
+### 论文未写的实现细节
+
+1. **Codebook layer offsets 是 buffer 而非参数** (`omnivoice.py:221-223`): `register_buffer("codebook_layer_offsets", torch.arange(8) * 1025)` — 这保证了 layer offset 不参与梯度更新且自动跟随 device。
+
+2. **Loss 权重归一化** (`omnivoice.py:231-234`): `normalized_audio_codebook_weights` 是在 `__init__` 时预计算的,而非训练时动态归一化。权重 `[8,8,6,6,4,4,2,2]` 归一化后为 `[0.2, 0.2, 0.15, 0.15, 0.1, 0.1, 0.05, 0.05]`。
+
+3. **PaddingDataCollator 的 4D attention mask** (`collator.py:91-92`): `attention_mask = valid[:, None, None, :].expand(B, 1, max_len, max_len)` — 这是一个 **bidirectional** mask (每个 query 可以 attend 到所有非 padding key 位置),传入 HuggingFace 时作为 4D tensor 直接使用,不会被 LLM 的 causal mask 覆盖。这是 causal LLM 权重能用于 bidirectional 架构的关键实现细节。
+
+4. **PackingDataCollator 使用 flex_attention** (`collator.py`): 序列 packing 时通过 `document_ids` + `create_block_mask` 实现跨文档隔离。flex_attention 需要 PyTorch 2.8+,否则 fallback 到 SDPA + PaddingDataCollator。
+
+5. **Duration 估计的 short text boost** (`utils/duration.py:RuleDurationEstimator`): 当估计帧数 < `low_threshold` (50 frames) 时,使用 power curve 提升: `boosted = low_threshold * (est / low_threshold) ** power`。这防止了超短文本生成时长不足。
+
+6. **Voice design instruct validation** (`utils/voice_design.py`): 支持的属性包括 gender, age, accent 等,有中英互译映射和互斥检测 (如 male/female 不能同时出现)。验证逻辑使用 difflib 做模糊匹配建议。
+
+7. **推理时的 CFG 在 log-softmax 空间** (`omnivoice.py`, generate 内部): 实际实现是 `log_probs = log_softmax(c_logits + scale * (c_logits - u_logits))`。注意外层还有一个 log_softmax,这是双重 softmax normalize,与标准 CFG 的 logit-space 操作不同。
+
+8. **Audio tokenizer MPS 不兼容** (`omnivoice.py:273-274`): Higgs-audio v2 tokenizer 的 conv 层 output channels > 65536,MPS backend 不支持,自动 fallback 到 CPU。
+
+### 训练 pipeline 拆解
+
+```
+完整训练数据流 (从 training/ 目录推断):
+
+1. 数据加载 (data/):
+   WebDataset tar shards → SampleDecoder (读取 .npy audio tokens [C,T] + metadata)
+   → OmniVoiceSampleProcessor:
+     a. 随机 prompt_ratio ~ U(0, 0.3)
+     b. 随机 mask_ratio ~ U(0, 1.0)
+     c. 10% 概率 drop 所有条件 (CFG 训练)
+     d. 前 prompt_len 帧不 mask,剩余帧独立 Bernoulli(mask_ratio)
+     e. 被 mask 位置 → audio_mask_id=1024; 未 mask 位置 → label=-100
+
+2. Batching (collator.py):
+   flex_attention: PackingDataCollator → [1, C, L=8192] (packing + document_ids)
+   SDPA: PaddingDataCollator → [B, C, max_len] (padding + 4D mask)
+
+3. Forward (omnivoice.py:382-461):
+   input_ids [B,C,S] + audio_mask [B,S] → _prepare_embed_inputs → inputs_embeds [B,S,H]
+   → LLM (Qwen3 backbone, bidirectional) → hidden_states [B,S,H]
+   → audio_heads → logits [B,C,S,V=1025]
+   → per-layer CE loss (ignore -100) → weighted sum by [8,8,6,6,4,4,2,2]
+
+4. Optimization:
+   AdamW, LR=1e-4, cosine schedule, 3% warmup, BF16
+   8x H800, 8192 tokens/GPU (packing), 2M updates (多语言) / 300K (Emilia)
+```
+
+### 推理 pipeline 拆解
+
+```
+推理 (generate → _generate_iterative):
+
+1. 预处理:
+   text → Qwen3 tokenizer → text_tokens
+   ref_audio → remove_silence → trim → Higgs-audio encode → ref_audio_tokens [C, T_ref]
+   目标长度: RuleDurationEstimator(text, ref_text, T_ref)
+
+2. 输入构建:
+   style tokens: <|denoise|> + <|lang_start|>XX<|lang_end|> + <|instruct_start|>...<|instruct_end|>
+   text tokens: <|text_start|> + ref_text + target_text + <|text_end|>
+   audio: ref_audio_tokens (unmasked) + target (全 MASK=1024)
+   batch 翻倍: [conditional | unconditional] (unconditional 仅含 masked target)
+
+3. 迭代解码 (32 步):
+   for step in range(32):
+     a. forward → logits [2B, C, S, V]
+     b. CFG: log_probs = log_softmax(c + scale*(c-u))
+     c. token 选择: argmax (class_temperature=0.0)
+     d. position 选择:
+        - confidence = max log-prob per position
+        - confidence -= layer_idx * 5.0 (低层优先)
+        - + Gumbel noise / 5.0
+        - 选 top-k 个 masked 位置 unmask
+     e. schedule: r(n) = tau*(n/N) / (1+(tau-1)*(n/N)), tau=0.1
+
+4. 后处理:
+   Higgs-audio decode → waveform
+   remove_silence(mid_sil=500ms)
+   volume normalization (match ref_rms)
+   fade_and_pad
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| LLM backbone | Qwen3-0.6B | llm_config (Qwen3) | omnivoice.py:214 |
+| Audio vocab size | 1025 | audio_vocab_size=1025 | omnivoice.py:169 |
+| Audio mask ID | 1024 | audio_mask_id=1024 | omnivoice.py:170 |
+| Num codebooks | 8 | num_audio_codebook=8 | omnivoice.py:171 |
+| Codebook weights | [8,8,6,6,4,4,2,2] | audio_codebook_weights | omnivoice.py:187 |
+| Num inference steps | 32 | num_step=32 | OmniVoiceGenerationConfig |
+| Guidance scale | 2.0 | guidance_scale=2.0 | OmniVoiceGenerationConfig |
+| t_shift | 0.1 | t_shift=0.1 | OmniVoiceGenerationConfig |
+| Layer penalty | 5.0 | layer_penalty_factor=5.0 | OmniVoiceGenerationConfig |
+| Position temperature | 5.0 | position_temperature=5.0 | OmniVoiceGenerationConfig |
+| Class temperature | 0.0 | class_temperature=0.0 (argmax) | OmniVoiceGenerationConfig |
+| Chunk threshold | 30s | audio_chunk_threshold=30.0 | OmniVoiceGenerationConfig |
+| Chunk duration | 15s | audio_chunk_duration=15.0 | OmniVoiceGenerationConfig |
+| Drop cond ratio | 0.1 | drop_cond_ratio=0.1 | 训练配置 |
+| Prompt ratio range | [0, 0.3] | prompt_ratio_range=[0.0, 0.3] | 训练配置 |
+| Mask ratio range | [0, 1.0] | mask_ratio_range=[0.0, 1.0] | 训练配置 |
+| Audio tokenizer | Higgs-audio v2 | eustlb/higgs-audio-v2-tokenizer | 8 codebooks, 24kHz |
+| Training batch tokens | 8192/GPU | batch_tokens=8192 | sequence packing |
+| Special tokens | 7 个 | denoise, lang_start/end, instruct_start/end, text_start/end | |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: `pip install omnivoice` (PyPI); torch>=2.0, transformers>=4.46, webdataset, torchaudio
+- [x] 数据准备: Emilia 数据 + JSONL manifests; `omnivoice.scripts.extract_audio_tokens` 提取 audio tokens 到 WebDataset
+- [x] 预训练模型依赖: `k2-fsa/OmniVoice` (HuggingFace), `eustlb/higgs-audio-v2-tokenizer`
+- [x] 训练命令: `bash examples/run_emilia.sh` (300K steps) 或 `bash examples/run_finetune.sh` (5K steps)
+- [x] 推理命令: `omnivoice.generate(text=..., ref_audio=...)` 或 `bash examples/run_eval.sh`
+- [x] 已知坑: (1) flex_attention 需要 PyTorch 2.8+; (2) Higgs-audio MPS 不兼容; (3) 多语言版 2M updates 需 ~10 天 8xH800; (4) WebDataset 格式有学习成本
+
+### 代码质量与可复现性评估
+
+| 维度 | 评分 | 说明 |
+|------|------|------|
+| 工程质量 | 5/5 | 模块化清晰 (model/data/training/eval 分层),PyPI 可装,HuggingFace 集成,typing 完善 |
+| 文档完善度 | 4/5 | README 详尽,有训练/推理/微调/评估完整示例; Gradio demo + Colab notebook |
+| 社区活跃度 | 4/5 | k2-fsa 团队活跃维护 (Daniel Povey 团队),2026 年新项目 |
+| 复现难度 | 1/5 | 全流程可复现: 推理 (pip install + 3行代码)、训练 (Emilia 1.33天)、微调 (数小时) |
+
+**总结**: OmniVoice 是 5 篇论文中开源质量最高的项目。代码覆盖推理/训练/微调/评估全流程,且与论文描述高度一致。核心发现: (1) 4D bidirectional attention mask 是 causal LLM 权重迁移到 NAR 架构的关键技术细节; (2) fused prediction head 的实现确认论文的 "independent heads" 实际是 reshape 后的单个 Linear; (3) sequence packing + flex_attention 的训练实现是工程亮点,值得其他 NAR TTS 项目参考。

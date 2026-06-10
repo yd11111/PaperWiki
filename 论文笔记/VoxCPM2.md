@@ -317,6 +317,75 @@ VoxCPM2 相对 VoxCPM 的三处关键修改:
 
 ## 审阅
 
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/OpenBMB/VoxCPM (同仓库,VoxCPM2 为 `voxcpm2.py`)
+> - commit: 856d2fc
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文描述 vs 代码实际**: 高度一致,VoxCPM2 继承 VoxCPM 架构并做如下代码级改动:
+
+1. **Concat-projection fusion** (`voxcpm2.py:231,334-336`): 新增 `fusion_concat_proj = nn.Linear(hidden_size*2, hidden_size)`。训练: `residual_inputs = self.fusion_concat_proj(torch.cat((enc_outputs, audio_mask * feat_embed), dim=-1))`,确认论文 Eq.2 的 concat-then-project 实现。VoxCPM 原版用 `enc_outputs + feat_embed` 的 element-wise sum。
+2. **Multi-token LocDiT prefix** (`local_dit_v2.py:109-110`): VoxCPM 的 LocDiT 用 `torch.cat([(mu + t).unsqueeze(1), cond, x])` (mu 是 1-dim sum);VoxCPM2 的 LocDiTV2 用 `torch.cat([mu, t.unsqueeze(1), cond, x])` 其中 `mu = mu.view(B, -1, hidden)`,即 mu 被 reshape 为多个 prefix tokens。这验证了论文中"分离的 prefix tokens"设计。
+3. **FSQ 维度 512** (`voxcpm2.py:122`): `scalar_quantization_latent_dim: int = 512`,确认从 VoxCPM 的 256 扩展到 512。
+4. **RALM NoPE** (`voxcpm2.py:121,192`): 新增 `residual_lm_no_rope: bool = False` 配置项和 `residual_lm_config.no_rope = config.residual_lm_no_rope`,通过 MiniCPM4 config 控制是否禁用 RoPE。
+5. **Reference audio pathway** (`voxcpm2.py:185-186,424-454`): 新增 `ref_audio_start_token=103, ref_audio_end_token=104` 和 `_make_ref_prefix()` 方法,构建 [REF_START, ref_latent, REF_END] 前缀段。
+6. **Patch size 4** (`voxcpm2.py:118`): `patch_size: int = 4`,从 VoxCPM 的 2 改为 4,token rate 从 12.5Hz 降到 6.25Hz。
+7. **AudioVAE V2** (`voxcpm2.py:43,239-244`): 使用 `AudioVAEV2` 类,支持非对称 encode/decode sample rate。`_encode_sample_rate` 和 `sample_rate` (output) 可以不同。
+
+### 论文未写的实现细节
+
+1. **dit_hidden 的 concat 而非 sum** (`voxcpm2.py:344,1063`): VoxCPM: `dit_hidden = lm_proj + res_proj` (sum)。VoxCPM2: `dit_hidden = torch.cat((lm_proj, res_proj), dim=-1)` (concat)。这意味着 LocDiTV2 接收 2x hidden_dim 的输入,但论文仅提及 "separate prefix tokens",未明确 dit_hidden 本身也改为 concat。
+2. **Streaming VAE decode** (`voxcpm2.py:651-654`): VoxCPM2 使用 `self.audio_vae.streaming_decode()` 上下文管理器实现流式解码,每次只解码一个 patch。VoxCPM 使用固定 3-patch window。
+3. **VAD-based silence trimming** (`voxcpm2.py:58-94`): 新增 `_trim_audio_silence_vad()` 函数,可选地在推理时去除音频前后静音。使用 librosa 的 energy-based VAD。
+4. **Reference + Continuation 组合模式** (`voxcpm2.py:484-529`): 推理支持 4 种模式 (zero-shot / continuation / reference / ref+continuation),通过 sequence assembly 自动区分。
+5. **RALM 推理的 fusion** (`voxcpm2.py:1099`): `curr_residual_input = self.fusion_concat_proj(torch.cat((lm_hidden, curr_embed[:, 0, :]), dim=-1))` — 推理时 RALM 每步输入是 FSQ 输出 concat 当前 LocEnc embedding,与训练一致。
+
+### 训练 pipeline 拆解
+
+```
+与 VoxCPM 相同框架,关键差异:
+1. fusion_concat_proj: residual_inputs = W_fuse[enc_outputs || feat_embed] (replace sum)
+2. dit_hidden = cat(lm_to_dit_proj(lm_hidden), res_to_dit_proj(residual_hidden)) (replace sum)
+3. LocDiTV2 prefix = [mu_tokens, t_token, cond_patches, noisy_patches] (multi-token)
+4. RALM 可选 NoPE
+5. patch_size=4, max_length=8192
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| patch_size | 4 | 4 | VoxCPM=2 |
+| FSQ latent_dim | 512 | 512 | VoxCPM=256 |
+| RALM layers | 8 | 8 | VoxCPM=6 |
+| RALM NoPE | Yes | configurable | residual_lm_no_rope |
+| LocEnc layers | 12 | config-dependent | VoxCPM=4 |
+| LocDiT layers | 12 | config-dependent | VoxCPM=4 |
+| TSLM | MiniCPM-4-1B, 28L | config-dependent | VoxCPM=0.5B, 24L |
+| max_length | 8192 | 8192 | VoxCPM=4096 |
+| dit_hidden input | 2*hidden_dim (concat) | concat | VoxCPM=sum |
+| Ref tokens | 103/104 | 103/104 | 新增 |
+| streaming_prefix_len | 4 | 4 | VoxCPM=3 |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: 同 VoxCPM + librosa (for VAD trimming)
+- [x] 预训练模型: MiniCPM-4-1B + AudioVAE V2
+- [x] 推理: `VoxCPM2Model.from_local(path)` → `model.generate(target_text, reference_wav_path=ref, prompt_wav_path=prompt)`
+- [x] LoRA 微调: 支持,额外包含 fusion_concat_proj
+- [ ] 已知坑: dit_hidden 是 concat 不是 sum (与 VoxCPM 的关键区别); AudioVAE V2 的非对称 sample rate
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 — 与 VoxCPM 共享仓库,代码风格一致,streaming 支持完善
+- **文档完善度**: 4/5 — README 覆盖多模式推理
+- **社区活跃度**: 5/5 — 28K stars (共享仓库)
+- **复现难度**: 2/5 (容易) — 预训练权重公开; 完整训练需 >2M h 数据
+
 > [!review] 审阅结论: pass (2026-06-10)
 > - **conclusion**: pass
 > - **issues**: 0 (0 high, 0 medium, 0 low)

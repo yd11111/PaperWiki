@@ -195,3 +195,67 @@ LM Guidance 是一个优雅的工程设计: 利用 LM 输出已编码全部历�
 > 
 > Issues: 2 (high: 0, medium: 1, low: 1)
 > 详见 `_review/DiTAR-review.yml`
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: **未开源** (截至 2026-06-10)
+> - 论文来源: ByteDance Seed 团队
+> - 搜索范围: GitHub (zhenye234/DiTAR, bytedance/DiTAR, tencentgamemate/DiTAR 均不存在或无权限), PyPI (ditar 无包)
+> - 分析日期: 2026-06-10
+
+### 代码可用性状态
+
+DiTAR 论文 (arXiv 2502.03930) 来自 ByteDance Seed 团队,截至 2026-06-10 **无公开代码仓库**。GitHub 搜索仅找到两个 demo page 仓库 (spicyresearch/ditar, faceless-rex/ditar.github.io),不含模型代码。
+
+**原因推测**: ByteDance Seed 的 TTS 系统 (Seed-TTS 系列) 通常不开源核心代码,DiTAR 作为其技术路线之一延续了这一策略。论文中也未提及 code release 计划。
+
+### 基于论文的架构复现可行性分析
+
+虽然无代码,但论文提供了足够的架构细节用于独立复现:
+
+**1. VAE Tokenizer** [§3.5.1]: Conv encoder + BigVGAN decoder,对抗训练,输出 40Hz dim=64 latent。BigVGAN 开源可用,Conv encoder 需自行实现。关键缺失: beta 值和训练 schedule 未报告。
+
+**2. Aggregation Encoder** [§3.5.2]: 双向 Transformer,在每个 patch 前加 learnable [CLS] token,输出 [CLS] 位置的 hidden state 作为 patch embedding。实现直接。
+
+**3. Causal LM** [§3.5.2]: 标准 causal Transformer,Pre-Norm + RoPE。可直接使用 HuggingFace LlamaModel。
+
+**4. LocDiT** [§3.2]: 双向 DiT,以 LM 输出 h_t 为条件。需要实现 historical context 拼接机制 (前一个 patch 的 token 作为 prefix)。DiT 架构参考 DiT/SiT 系列。
+
+**5. Diffusion Loss** [§3.5.3]: VP cosine schedule + v-prediction + CFM loss。标准实现参考 score_sde 或 diffusers 库。
+
+**6. LM Guidance** [§3.3]: 训练时 10% drop h_i → h_∅ (全零); 推理时 (1+w)*eps_cond - w*eps_uncond,仅需 2 次 LocDiT forward。
+
+**关键复现障碍**:
+1. VAE 训练细节不足 (beta, adversarial loss 权重, 训练数据)
+2. 模型规模 scaling 的具体配置 (0.1B/0.3B/0.6B/1B 各组件的 layer/dim 分配)
+3. Stop prediction 的具体实现和训练策略
+4. 280K h 训练数据不可获取
+
+### 与可用开源工作的代码对比
+
+| 组件 | DiTAR 设计 | 最接近的开源实现 |
+|------|-----------|----------------|
+| VAE tokenizer | Conv+BigVGAN, 40Hz, d=64 | WavTokenizer (开源), DAC VAE mode |
+| Causal LM | Standard Llama | HuggingFace Llama |
+| Diffusion head | LocDiT (bidirectional DiT) | SiT, MDT 的 DiT 实现 |
+| Patchification | Aggregation encoder | 无直接对应,需自行实现 |
+| CFM training | VP cosine + v-pred | diffusers, torchdiffeq |
+
+### 复现 checklist
+
+- [ ] 环境依赖: PyTorch, BigVGAN (开源), HuggingFace transformers
+- [ ] 数据准备: 需要 Librilight 60K h 或 Emilia (可获取但量大)
+- [ ] 预训练模型依赖: VAE tokenizer 需从头训练; LM 可用 Llama 初始化
+- [ ] 训练命令: 无参考实现
+- [ ] 推理命令: 无参考实现
+- [ ] 已知坑: VAE 和 LocDiT 的训练稳定性是主要风险
+
+### 代码质量与可复现性评估
+
+| 维度 | 评分 | 说明 |
+|------|------|------|
+| 工程质量 | N/A | 无代码 |
+| 文档完善度 | 2/5 | 论文描述详细但缺少训练细节 |
+| 社区活跃度 | 1/5 | 无开源社区 |
+| 复现难度 | 5/5 | 需从头实现全部组件 + 大规模训练 |

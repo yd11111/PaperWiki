@@ -233,3 +233,97 @@ Audio model: 24 层, 16 heads, 1024/4096 embed/FFN, 330M 参数 [§5.1]。关键
 > 
 > Issues: 2 (high: 0, medium: 0, low: 2)
 > 详见 `_review/Voicebox-review.yml`
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/lucidrains/voicebox-pytorch (691 stars)
+> - commit: d115a99
+> - 分析日期: 2026-06-10
+> - 注意: 这是 lucidrains 的社区实现,非 Meta Research 官方代码。Meta 未开源 Voicebox
+
+### 架构验证
+
+lucidrains 的实现覆盖了 Voicebox 的核心概念,但存在架构差异:
+
+| 组件 | 论文描述 | 代码实现 | 差异 |
+|------|----------|----------|------|
+| Audio model | Transformer, 24 层 16 头 1024 dim | `ConditionalFlowMatcherWrapper` + 内部 Transformer | 骨架一致,细节有差异 |
+| 流匹配 | OT-CFM (Lipman et al., 2023) | 使用 `torchdiffeq.odeint` 求解 ODE + `torchode` 备选 | 功能等价 |
+| 特征表示 | 80-dim log mel @ 100Hz | 支持可配置的 audio_enc_dec (含 EnCodec/Vocos) | 更灵活 |
+| Duration model | CFM/regression duration predictor | `DurationPredictor` class 支持回归模式 | 部分实现 |
+| Masking | 连续 mask r% (r ~ U[70,100]) | `mask_from_frac_lengths()` — 随机位置+长度连续 mask | 一致 |
+| CFG | p_uncond=0.2 | `prob_mask_like()` + `cond_drop_prob` 参数 | 一致 |
+| 位置编码 | Convolutional PE + Symmetric ALiBi | `RotaryEmbedding` (可选 ALiBi) | 代码默认 RoPE 而非论文的 ALiBi |
+
+### 论文未写的实现细节
+
+1. **ODE 求解器选择**: 代码同时支持 `torchdiffeq.odeint` 和 `torchode`,用户可配置求解器类型 (dopri5/euler/midpoint 等) 和 NFE 步数。论文使用 midpoint 求解器。
+
+2. **Mask 构造**: `mask_from_frac_lengths()` 实现了论文的连续 mask 策略 — 随机采样起点和长度,确保 mask 区域连续。`mask_from_start_end_indices()` 是基础工具函数。
+
+3. **音频前端抽象**: 代码通过 `AudioConditionerBase` 接口支持多种音频编码器 (mel spectrogram/EnCodec/Vocos),而论文固定使用 80-dim log mel。
+
+4. **Aligner 集成**: 代码导入了 `naturalspeech2_pytorch.aligner` 的 `Aligner, ForwardSumLoss, BinLoss, maximum_path`,支持内部学习 alignment 而非依赖外部 MFA。这是论文未提及但实用的扩展。
+
+5. **GateLoop 层**: 代码可选使用 `GateLoop` (一种线性注意力变体) 替代标准 attention,这是论文之后的架构改进。
+
+6. **流匹配公式**: 代码中 OT path 的实现:
+   - 前向采样: `x_t = t * x_1 + (1 - (1-sigma_min)*t) * noise`
+   - 向量场目标: `u_t = x_1 - (1-sigma_min) * noise`
+   - 与论文 Eq. 一致
+
+### 训练 pipeline 拆解
+
+`trainer.py` 的 `VoiceBoxTrainer` 管理训练:
+1. 输入: 原始音频 + 文本 + alignment
+2. 随机生成连续 mask (frac_lengths 采样)
+3. 将 mask 区域加噪 (t ~ U[0,1], OT path)
+4. Transformer 预测向量场
+5. CFM loss: 仅在 mask 区域计算 (masked CFM loss)
+6. CFG 训练: 以 cond_drop_prob 概率丢弃条件
+
+### 推理 pipeline 拆解
+
+1. 输入文本 + 参考音频 (作为 context)
+2. Duration model 预测帧长
+3. 构造 mask: 待生成区域全 mask
+4. ODE 求解: 从 N(0, I) 出发,用学到的向量场沿 OT path 积分
+5. CFG guidance: `v_guided = (1 + alpha) * v_cond - alpha * v_uncond`
+6. 输出 mel spectrogram → HiFi-GAN/Vocos vocoder → waveform
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码默认值 | 备注 |
+|------|--------|-----------|------|
+| Transformer 层数 | 24 | 可配置 (depth) | 需用户指定 |
+| 注意力头数 | 16 | 可配置 (heads) | 需用户指定 |
+| d_model | 1024 | 可配置 (dim) | 需用户指定 |
+| FFN dim | 4096 | dim * 4 | 一致 |
+| 参数量 | 330M | 取决于配置 | 需用户匹配 |
+| NFE (推理) | 论文测试 2-64 | 可配置 | 默认需用户指定 |
+| CFG p_uncond | 0.2 | `cond_drop_prob` 可配置 | 需用户设置 |
+| sigma_min | 1e-4 (论文消融) | `sigma` 参数可配置 | 需用户设置 |
+| Mask ratio | U[70%, 100%] | `frac_lengths_mask` 可配置 | 需用户设置 |
+| 特征维度 | 80-dim log mel | 可配置 | 需用户匹配 |
+
+### 复现 checklist (基于代码)
+
+- [x] OT-CFM 训练目标
+- [x] Masked CFM loss (仅 mask 区域计算)
+- [x] Classifier-Free Guidance
+- [x] 连续 mask 策略
+- [x] Duration predictor (回归模式)
+- [x] ODE 求解推理 (支持多种求解器)
+- [x] 完整 Trainer 类
+- [ ] **Duration model 的 flow matching 变体** — 仅实现回归模式
+- [ ] **Ghost silence / Word-position phone** — 未实现这两个工程技巧
+- [ ] **Convolutional PE + Symmetric ALiBi** — 默认使用 RoPE
+- [ ] **预训练权重** — 无 checkpoint
+- [ ] **60K 小时数据训练** — 需用户自行准备
+
+### 代码质量与可复现性评估
+
+**质量**: **中高**。代码结构清晰,约 1400 行覆盖核心模型。但与论文存在部分架构差异 (位置编码、音频前端),且包含较多论文之外的扩展,可能使精确复现更困难。
+
+**可复现性**: **低**。主要障碍: (1) Meta 未开源任何代码或权重, (2) 论文依赖 MFA forced alignment 和特定的 phoneme set, (3) lucidrains 的实现与论文在多处细节上存在差异, (4) 60K 小时数据训练需要大量计算资源。该仓库更适合作为 "flow matching for speech" 的概念验证,不适合精确复现 Voicebox 论文结果。后续开源的 F5-TTS 和 Matcha-TTS 更适合作为 flow matching TTS 的实际复现基础。

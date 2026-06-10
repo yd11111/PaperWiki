@@ -265,6 +265,110 @@ t = τ^p / (τ^p + s(1-τ^p)), 其中 p=2, s=3
 
 ## 审阅
 
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/cwx-worst-one/WavTTS
+> - commit: 6ecbed9
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 Fig 1 vs 代码实际**: 高度一致,代码基于 F5-TTS 的架构框架修改而来。
+
+1. **Waveform patchification** (`cfm.py:68-69`): `self.wav_frame_len = int(waveform_kwargs.pop("wav_frame_len", 160))` — patch size F=160 与论文一致。序列率 16000/160=100Hz。
+2. **x-prediction** (`cfm.py:408-410`): `if self.prediction == "x_pred": x_pred = raw_pred` — 网络直接输出 clean waveform prediction。从 x_pred 反推速度: `v_pred = (x_pred - z) / (1-t)` (`cfm.py:153-158`)。
+3. **Variance alignment** (`cfm.py:370,190`): `x1 = x1 * self.latents_scale` (训练) / `cond = cond * self.latents_scale` (推理)。推理输出: `out = out / self.latents_scale`。`latents_scale` 即论文中的 k=9。
+4. **Multi-scale mel loss** (`modules.py:667-877`): `MelSpectrogramLoss` 类完整实现了论文的 7 尺度 mel loss。`n_mels=[5,10,20,40,80,160,320]`, `window_lengths=[32,64,128,256,512,1024,2048]`, `hop_length=window_length//4`。mel loss 在原始尺度上计算: `x1_pred_flat_unscaled = x_pred / self.latents_scale` (`cfm.py:438-439`)。
+5. **Logit-normal 时间步采样** (`cfm.py:142-145`): `z = randn * P_std + P_mean; t = sigmoid(z)` — 对应论文的 logit-normal 分布。
+6. **Time shift** (`cfm.py:148-149`): `t = t / (t + time_shift * (1 - t))` — 额外的 time shift,与 PolyShift 类似但更简单。
+7. **Joint CFG drop** (`cfm.py:387-398`): 支持 `joint_cond_drop_prob` (joint drop) 或独立的 `audio_drop_prob` + `cond_drop_prob`。论文称 joint drop p=0.1。
+8. **Speech infilling 任务** (`cfm.py:354-355`): `frac_lengths_mask = (0.7, 1.0)` — 随机 mask 70-100% 连续段。
+9. **DiT backbone** (`modules.py:528-574`): `DiTBlock` 实现了 adaLN-Zero modulation + self-attention + FFN,与论文描述一致。
+
+### 论文未写的实现细节
+
+1. **基于 F5-TTS 的代码基** — WavTTS 代码直接继承自 F5-TTS 框架,修改了 `CFM` 类以支持原始波形输入。Text encoder (ConvNeXt V2) 和 DiT backbone 的实现与 F5-TTS 共享。
+2. **loss_space 可配置** (`cfm.py:417-430`): 除了论文描述的 x-prediction loss,代码还支持 `loss_space="flow"` (MSE on v_pred vs flow) 和 `loss_space="v"` (v-loss with clamping)。默认 `loss_space="flow"`,即实际训练的 loss 空间可能与论文 Eq.3 的 x-prediction 表述不同。
+3. **Mel loss 的 aligned mask** (`modules.py:829-877`): 当使用 mel loss 时,random span mask 的边界会自动对齐到所有 mel transform 的 hop_length 的 LCM,确保 mel 计算的边界一致性。
+4. **t_eps clamp** (`cfm.py:153-156`): 从 x_pred 反推 v_pred 时,`denom = (1-t).clamp_min(t_eps)` (默认 `t_eps=1e-4`) 防止 t→1 时的数值爆炸。
+5. **PolyShift 通过 power + shift 组合实现** (`cfm.py:291-303`): 推理时支持 `timestep_mapping="power"` + `shift` 参数。`t = t.pow(timestep_power)` 然后 `t = t / (t + shift * (1-t))`。
+6. **EMA 模型** (`trainer.py:142`): 训练使用 `ema_pytorch.EMA` 维护指数移动平均模型,推理时使用 EMA 权重。
+7. **CFG 推理缓存** (`cfm.py:248`): `cache=True` 参数允许 Transformer 缓存 text/cond 投影,CFG 双 forward 时避免重复计算 text 部分。
+8. **多种推理 timestep mapping** (`cfm.py:289-303`): 支持 uniform / sway_sampling / power 三种,并可叠加 time shift。还支持 EPSS (Empirically Pruned Step Sampling) 加速低 NFE 推理。
+
+### 训练 pipeline 拆解
+
+```
+原始波形 (16kHz)
+  → [不做任何特征提取,直接使用 raw waveform]
+  → 按 frac_lengths_mask (0.7-1.0) 生成随机连续 span mask (可选 mel-aligned)
+  → x1 = wav * latents_scale (k=9, variance alignment)
+  → x0 = randn (Gaussian noise)
+  → t = sigmoid(randn * P_std + P_mean) (logit-normal, P_mean=-0.8, P_std=0.8)
+  → x_t = (1-t)*x0 + t*x1 (linear interpolation)
+  → cond = where(span_mask, 0, x1) (unmasked region as condition)
+  → CFG drop: joint drop (p=0.1) or independent drop
+  → DiT(x=x_t, cond=cond, text=text, time=t) → raw_pred (x_pred or v_pred)
+  → Flow loss: MSE(v_pred, x1-x0) [masked region only]
+  → Mel aux loss: Σ_{7 scales} L1(log_mel(x_pred/k), log_mel(x1/k)) [masked, λ=0.05]
+  → Total loss = flow_loss + aux_mel_loss
+```
+
+### 推理 pipeline 拆解
+
+```
+1. Reference audio (prompt) → pad to max_duration → cond = wav * k
+2. Masked region: cond = 0, unmasked: cond = prompt
+3. ODE solve (50 Euler steps, PolyShift/sway_sampling):
+   For each step t_k → t_{k+1}:
+     a. Transformer forward (x_t, cond, text, time=t) → pred (x_pred or v_pred)
+     b. CFG: v_cond + cfg_strength * (v_cond - v_uncond), cfg_strength=3.0
+     c. x_{t+dt} = x_t + v * dt
+4. Final x_1 → x_1 / k → output waveform
+5. Replace prompt region with original audio
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| wav_frame_len (patch F) | 160 | 160 | 100Hz @ 16kHz |
+| latents_scale (k) | 9 | configurable | Variance alignment |
+| prediction | x_pred | "flow" or "x_pred" | 代码默认 "flow" |
+| loss_space | flow | "flow"/"v"/"x" | 代码默认 "flow" |
+| P_mean (logit-normal) | -0.8 | configurable | |
+| P_std (logit-normal) | 0.8 | configurable | |
+| time_shift | 1.0 | configurable | |
+| frac_lengths_mask | (0.7, 1.0) | (0.7, 1.0) | 70-100% span mask |
+| audio_drop_prob | 0.1 (joint) | 0.3 | joint_cond_drop_prob 可覆盖 |
+| cfg_strength | 3.0 | 参数传入 | 推理时 |
+| DiT layers | 28 | config-driven | |
+| DiT hidden_dim | 1152 | config-driven | |
+| DiT heads | 16 | config-driven | |
+| DiT params | 673M | — | 含 text encoder |
+| mel loss weight | 0.05 | aux_mel_loss_weight | |
+| mel loss scales | 7 | 7 | [32..2048] windows |
+| NFE (inference) | 50 | steps 参数 | |
+| t_eps | — | 1e-4 | v-prediction 数值保护 |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: torch, torchaudio, transformers, torchdiffeq, einops, x_transformers, ema_pytorch, accelerate, wandb
+- [x] 数据准备: `src/wavtts/train/datasets/prepare_emilia.py` (Emilia), `prepare_libritts.py`, `prepare_ljspeech.py`
+- [x] 训练命令: `src/wavtts/train/train.py` (Accelerate-based)
+- [x] 推理命令: `src/wavtts/infer/infer_cli.py`
+- [x] 评估脚本: `src/wavtts/eval/eval_seedtts_testset.py`, `eval_utmos.py`, `eval_librispeech_test_clean.py`
+- [x] Dockerfile: 提供完整的 Docker 环境
+- [ ] 已知坑: 代码默认 prediction="flow" 而非论文称的 "x_pred",需确认 config 文件; EMA 模型是推理用的实际权重; Emilia 100Kh 需大存储
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 4/5 — 基于 F5-TTS 成熟框架,代码整洁,含 Dockerfile,pre-commit 配置
+- **文档完善度**: 3/5 — README 覆盖推理和训练基础,但具体 config 配置文档不足
+- **社区活跃度**: 2/5 — 163 stars,较新仓库
+- **复现难度**: 3/5 (中等) — 需要 8xA100 + Emilia 100Kh; 585h LibriTTS 上 SIM-o=0.31 基本不可用
+
 > [!review] 审阅结论: pass (2026-06-10, repro 升级后重审)
 > - **conclusion**: pass
 > - **issues**: 0 (0 high, 0 medium, 0 low)

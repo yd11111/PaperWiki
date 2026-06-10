@@ -3,15 +3,37 @@ type: paper
 tier: repro
 title: "dots.tts: A 2B-Parameter Continuous Autoregressive TTS Foundation Model"
 arxiv_id: "2606.07080"
-source: "Sources/dots.tts.pdf"
-authors: [dots.tts Team (Rednote)]
+source: Sources/dots.tts.pdf
+authors:
+  - dots.tts Team (Rednote)
 year: 2026
-venue: "arXiv preprint"
-tags: [TTS, continuous-AR, flow-matching, self-corrective-alignment, MeanFlow-distillation, zero-shot, end-to-end, LLM-based, multilingual]
-concepts: ["[[ConditionalFlowMatching]]", "[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[SpeechTokenizer]]", "[[Classifier-FreeGuidance]]", "[[VariationalAutoencoderforTTS]]"]
-models: ["[[模型库/CosyVoice3|CosyVoice 3]]", "[[模型库/CosyVoice2|CosyVoice 2]]"]
-tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
-datasets: ["[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]", "[[数据集/Emilia|Emilia]]", "[[数据集/CV3-Eval|CV3-Eval]]"]
+venue: arXiv preprint
+tags:
+  - TTS
+  - continuous-AR
+  - flow-matching
+  - self-corrective-alignment
+  - MeanFlow-distillation
+  - zero-shot
+  - end-to-end
+  - LLM-based
+  - multilingual
+concepts:
+  - "[[ConditionalFlowMatching]]"
+  - "[[LLM-basedTTS]]"
+  - "[[SemanticvsAcousticTokens]]"
+  - "[[SpeechTokenizer]]"
+  - "[[Classifier-FreeGuidance]]"
+  - "[[VariationalAutoencoderforTTS]]"
+models:
+  - "[[模型库/CosyVoice3|CosyVoice 3]]"
+  - "[[模型库/CosyVoice2|CosyVoice 2]]"
+tasks:
+  - "[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"
+datasets:
+  - "[[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]"
+  - "[[数据集/Emilia|Emilia]]"
+  - "[[数据集/CV3-Eval|CV3-Eval]]"
 kb_context_sources: 5
 status: draft
 created: 2026-06-10
@@ -302,6 +324,105 @@ SOAR 主要提升 SIM (+0.4),MF NFE=4 保持 WER 接近 SOAR 水平,SIM 代价�
 5. **AudioVAE Stage 2 的多任务 learnability training**: 不只做重建,还要做下游任务对齐,让 latent space "prediction-friendly"。
 
 ## 审阅
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/rednote-hilab/dots.tts
+> - commit: 607f0ef
+> - 分析日期: 2026-06-10
+
+### 架构验证
+
+**论文 Fig 1 vs 代码实际**: 高度一致,代码完整实现了论文描述的所有组件。
+
+1. **LLM backbone** (`core.py:69-73`): 使用 `Qwen2ForCausalLM._from_config()` 初始化,含 language modeling head (可输出 logits)。论文称 Qwen2.5-1.5B,代码通过外部 `llm_config.json` 配置。
+2. **Semantic encoder (patch_encoder)** (`core.py:75-79`): `VAESemanticEncoder`,输入 latent_dim,输出 llm_hidden_size。对应论文的 24L causal Transformer + 4x 下采样。
+3. **AR-FM Head (velocity_field_predictor)** (`core.py:101-106`): `DiT` 类,接收 `fm_hidden_size` 维输入,输出 `latent_dim` 维速度场。支持 flow_matching 和 meanflow 两种模式。
+4. **Full-history conditioning** (`core.py:719-882`): 训练时通过 `prepare_inputs_for_dit()` 构建完整的 [H_0, P_0, ..., H_n, Z_n] 序列,使用 `create_causal_chunk_mask_and_pos()` 生成 block-causal attention mask。这验证了论文的 block-causal 并行训练设计。
+5. **CFG 双路 drop** (`core.py:206-213,758-763`): 代码实现了 LM conditioning drop (`cfg_droprate`) 和 speaker x-vector drop (`xvec_drop_rate`) 两路独立 CFG。推理时在 `fm_solver_step()` 中合并 conditional 和 unconditional 预测。
+6. **MeanFlow 模式** (`core.py:389-428`): 完整实现了 MeanFlow 蒸馏推理,包含 `meanflow_solver_step()` 和 `duration` 参数支持。
+
+### 论文未写的实现细节
+
+1. **IOHelper 的 normalize/denormalize** (`core.py:684-700`): 使用预计算的全局 latent 统计量 (mean, var) 做标准化: `x = (x - mean) / sqrt(var)`。这对 flow matching 的训练稳定性至关重要,但论文未明确提及。
+2. **sample_from_latent** (`core.py:709-712`): AudioVAE 的 encoder 输出 mean + log_std,推理时从后验分布采样: `z = mean + randn * exp(log_std)`。VAE 的 reparameterization trick 用于生成训练 target。
+3. **EOS 使用 softmax 阈值** (`model.py:1590-1595`): 停止预测用 `eos_proj(llm_hiddens).softmax(dim=-1)[:, -1, 1] > eos_threshold` (默认 0.8),而非 argmax。这提供了更灵活的停止控制。
+4. **Generate length buckets** (`model.py:99-113`): 推理使用 [32, 64, 128, 256, 512, 1024] 的固定 bucket 做 torch.compile 缓存,避免动态 shape 触发重编译。
+5. **Speaker x-vector 使用 CAM++ encoder** (`model.py:157-160`): `SpeakerXVectorFeatures` 封装了 CAM++ speaker encoder,推理时对 prompt audio 提取 x-vector 并经 `xvec_proj` 投影到 FM hidden size。`speaker_scale=1.5` 是默认的缩放因子。
+6. **Prompt prefill 机制** (`model.py:1336-1387`): 对 prompt audio 执行完整的 patch_encoder + LLM prefill,然后将生成的 hidden states 和 latent patches 交替注入 FM 序列。首个生成 patch 被丢弃 (regenerated prompt-tail patch)。
+7. **Streaming vocoder** (`model.py:1726-1773`): 支持 LSTM-based streaming BigVGAN 解码,每个 patch 生成后立即解码为音频 chunk。
+8. **delta_time_mlp** (`core.py:87-100`): MeanFlow 模式下 DiT 接收额外的 `duration` 参数。`dit_mode = "meanflow"` 时启用 duration embedding。
+
+### 训练 pipeline 拆解
+
+```
+原始音频 (48kHz)
+  → vocoder.extract_latents() → 128-dim latent @ 25Hz [frozen]
+  → io_helper.sample_from_latent() → 采样后 latent
+  → patch_encoder (24L causal Transformer, 4x 下采样) → 6.25Hz embeddings
+  → 替换 input_ids 中 audio span token 的 embedding
+  → Qwen2ForCausalLM (全部参数, causal attention) → llm_logits + llm_hidden
+  → eos_proj(llm_hidden.detach()) → EOS prediction
+  → io_helper.prepare_inputs_for_dit():
+    - 构建完整 FM 序列 [hidden, history_latent, ..., hidden, noisy_latent]
+    - block-causal attention mask (history 部分 causal, noisy 部分 block-diagonal)
+    - position indices reset for noisy blocks
+  → velocity_field_predictor (DiT, 18L) → predicted velocity
+  → io_helper.get_dit_outputs() → 提取 latent 位置的预测
+  → Losses: ce_loss (LLM logits) + fm_loss (velocity MSE) + eos_loss (binary CE)
+```
+
+### 推理 pipeline 拆解
+
+```
+1. Prompt audio → vocoder.extract_latents → latent → sample → normalize → patches
+2. patch_encoder.prefill(prompt_latents) → prompt_patch_embeddings
+3. LLM prefill: text tokens + prompt embeddings → llm_cache + llm_hiddens
+4. AR loop (6.25Hz):
+   a. Append hidden_proj(llm_hiddens) to FM sequence
+   b. FM head: construct [history_seq, noisy_patch], block-causal mask
+   c. ODE solve: 10 Euler steps + CFG (γ=1.2) → clean audio patch
+   d. Append latent_proj(audio_patch) to FM sequence
+   e. patch_encoder.decode_patch(audio_patch) → LLM embedding
+   f. LLM step → new llm_hiddens
+   g. eos_proj(llm_hiddens) → stop check (threshold 0.8)
+5. All patches → denormalize → vocoder decoder → 48kHz waveform
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| LLM | Qwen2.5-1.5B | Qwen2ForCausalLM (config-driven) | 含 LM head |
+| patch_size | 4 | config.patch_size | |
+| latent_dim | 128 | config.latent_dim | AudioVAE output |
+| FM hidden_size | 1024 | config.DiT.hidden_size | |
+| hidden_patch_size | 1 | hardcoded as 1 | LLM hidden per audio step |
+| cfg_droprate | 0.5 | config.cfg_droprate (default 0.2) | 论文称 0.5,代码默认 0.2 |
+| xvec_drop_rate | 0.5 | config.xvec_drop_rate (default 0.2) | 论文称 0.5,代码默认 0.2 |
+| speaker_scale | — | 1.5 | 默认 x-vector 缩放 |
+| eos_threshold | — | 0.8 | Softmax probability |
+| CFG guidance_scale | 1.2 | 参数传入 | 推理时指定 |
+| MeanFlow NFE | 2-4 | 参数传入 | 推理时指定 |
+| Vocoder | BigVGAN | AudioVAE (BigVGAN variant) | 48kHz, 含 streaming |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: torch, transformers (Qwen2), einops, torchdiffeq, loguru, safetensors, pydantic
+- [x] 数据准备: `scripts/prepare_train_jsonl_manifest.py` 生成 JSONL manifest
+- [x] 预训练模型: Qwen2.5-1.5B + AudioVAE (BigVGAN) + CAM++ speaker encoder
+- [x] 训练命令: `scripts/train_dots_tts.py` (pretrain) / `scripts/train_dots_tts_meanflow.py` (MeanFlow distillation)
+- [x] 推理命令: `DotsTtsModel.from_pretrained(path)` → `model.generate_audio(data, precision="bfloat16", ode_method="euler", num_steps=10, guidance_scale=1.2)`
+- [x] Streaming 推理: `model.generate_audio_stream()` 逐 patch 输出
+- [ ] 已知坑: cfg_droprate 论文值 (0.5) 与代码默认值 (0.2) 不一致; latent_stats.pt 需要预计算; MeanFlow 训练需要先完成 SOAR
+
+### 代码质量与可复现性评估
+
+- **工程质量**: 5/5 — 专业级工程: 完整的 training/inference/streaming 框架,torch.compile 优化,bucket 化缓存管理,LoRA 扩展性设计,全面的类型标注
+- **文档完善度**: 4/5 — README 含模型下载和推理示例,但训练文档偏简略
+- **社区活跃度**: 3/5 — 419 stars,有 ComfyUI/MLX 社区移植
+- **复现难度**: 2/5 (推理容易) / 4/5 (完整训练难) — 推理权重公开; 完整训练需 1.5M h 数据 + 6 阶段 pipeline
 
 > [!review] 审阅结论: pass (2026-06-10)
 > - **conclusion**: pass

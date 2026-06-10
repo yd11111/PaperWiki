@@ -198,3 +198,103 @@ SoundStorm 的影响体现在后续工作中: MaskGCT 将 masked generative mode
 > 
 > 结构检查: 速查卡片 ✗ | 方法 ✓ | 实验 ✓ | KB背景 ✓
 > 详细审阅待后续安排
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/lucidrains/soundstorm-pytorch (1543 stars)
+> - commit: 8119522
+> - 分析日期: 2026-06-10
+> - 注意: 这是 lucidrains 的社区实现,非 Google 官方代码
+
+### 架构验证
+
+lucidrains 的实现忠实还原了 SoundStorm 的核心设计:
+
+| 组件 | 论文描述 | 代码实现 | 一致性 |
+|------|----------|----------|--------|
+| 模型骨架 | Conformer (12 层, 16 头, dim 1024) | `Conformer` class: 可配置 depth/heads/dim | 架构一致 |
+| Frame-level embedding sum | 同一帧所有 RVQ token embedding 求和 | `ConformerWrapper.forward()` — code_embeds 按 quantizer offset 索引后 reduce sum | 完全一致 |
+| Q 个输出 head | 每个 RVQ level 独立 head | `self.heads` + per-quantizer logit weights/biases | 完全一致 |
+| Mask token | 每个 quantizer 有独立 mask token | `self.mask_tokens = quantizer_offsets + num_codes_with_mask` | 完全一致 |
+| 位置编码 | Rotary PE | `RotaryEmbedding` | 完全一致 |
+| Conformer 模块 | FF-Attn-Conv-FF sandwich | `ConformerBlock`: ff1 → attn → conv → ff2 → post_norm | 完全一致 |
+| Depth-wise Conv | kernel_size=31 | `DepthWiseConv1d(kernel_size=31)` 默认 | 一致 |
+
+### 论文未写的实现细节
+
+1. **Embedding 分离策略**: 代码使用 `self.code_embeds = nn.Embedding(num_codes_with_mask * num_effective_quantizers, dim)`,将所有 quantizer 的 codebook + mask token 放在一个大 embedding table 中,通过 `quantizer_offsets` 索引不同 quantizer 的 embedding 区间。论文未描述这种具体实现方式。
+
+2. **Grouped quantizers**: 代码支持 `grouped_quantizers` 参数,允许将多个 RVQ level 分组处理。论文未提及此扩展。有 `embedding_proj` 将 grouped embedding 投影回 dim 维。
+
+3. **Cosine schedule 实现**: `cosine_schedule(t) = cos(t * pi / 2)`,直接对应 MaskGIT 的 schedule。代码同时提供 `linear_schedule(t) = 1 - t` 作为备选。
+
+4. **Confidence-based masking**: `get_mask_subset_prob()` 实现了按概率选择要 mask 的位置 — 使用 `logits.argsort().argsort()` 得到排名,再按阈值选择。这个实现比论文描述更通用,支持 `min_mask` 和 `min_keep_mask` 约束。
+
+5. **Hyper-connections**: 代码使用 `hyper_connections` 库的 `get_init_and_expand_reduce_stream_functions` 实现残差流的多流扩展。这是论文之后的架构改进,论文使用标准残差连接。
+
+6. **Value residual mixing**: Conformer 的 attention 层支持 `has_value_residual_mix`,将前一层的 value 与当前层混合。第一层不启用 (`is_first`),后续层启用。这是论文未提及的增强。
+
+7. **SPEAR-TTS 集成**: 代码导入了 `spear_tts_pytorch.TextToSemantic`,支持直接从 text 生成 semantic tokens 作为条件,构成完整 TTS pipeline。
+
+### 训练 pipeline 拆解
+
+`SoundStorm` class 的 `forward()` 方法实现训练:
+1. 输入: RVQ codes (B, T, Q) + conditioning semantic tokens
+2. 随机采样 RVQ level q ~ U[1, Q]
+3. 随机采样 prompt boundary t ~ U[0, T]
+4. 按 cosine schedule 随机 mask 第 q 层的 non-prompt tokens
+5. 将 q+1 到 Q 层的 non-prompt tokens 全部 mask
+6. Frame-level embedding sum → Conformer → Q 个 head 输出 logits
+7. Loss: 仅第 q 层被 mask 位置的 cross-entropy
+
+### 推理 pipeline 拆解
+
+`SoundStorm.generate()` 方法:
+1. 初始化: 所有 acoustic tokens 设为 mask
+2. 逐 RVQ level (coarse → fine):
+   a. 设定该层的迭代次数 (第 1 层多次,后续层可 1 次)
+   b. 每次迭代:
+      - Forward pass → logits
+      - Gumbel sampling → predicted tokens
+      - 按 confidence score 排序,保留 top 比例
+      - 低 confidence 位置 remask
+   c. 最后一次迭代: greedy (argmax)
+3. 输出完整 RVQ codes → SoundStream decoder
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码默认值 | 备注 |
+|------|--------|-----------|------|
+| Conformer depth | 12 | 可配置 | 需用户指定 |
+| Conformer heads | 16 | 8 (默认) | 需调整为 16 |
+| Conformer dim | 1024 | 可配置 | 需用户指定 |
+| FFN mult | 4 | 4 (ff_mult=4) | 一致 |
+| Conv kernel | 31 | 31 (conv_kernel_size=31) | 一致 |
+| Codebook size | 1024 | 可配置 | 需用户指定 |
+| RVQ layers (Q) | 12 | 可配置 (num_quantizers) | 需用户指定 |
+| 迭代次数 | (16, 1, 1, ..., 1) | 可配置 (steps 参数) | 需用户设置 |
+| Schedule | Cosine | cosine_schedule | 一致 |
+| 位置编码 | Rotary PE | RotaryEmbedding | 一致 |
+
+### 复现 checklist (基于代码)
+
+- [x] Conformer 架构 (FF-Attn-Conv-FF sandwich)
+- [x] Frame-level embedding sum (序列长度与 Q 无关)
+- [x] Q 个独立输出 head
+- [x] RVQ level-wise coarse-to-fine decoding
+- [x] Cosine schedule confidence-based masking
+- [x] Greedy at last iteration
+- [x] Training masking scheme (random level + random prompt + cosine mask)
+- [x] Rotary Positional Embeddings
+- [x] SPEAR-TTS 集成 (text → semantic → acoustic)
+- [ ] **SoundStream 预训练** — 需要先训练好的 SoundStream
+- [ ] **w2v-BERT semantic tokenizer** — 需要先训练好的 semantic tokenizer
+- [ ] **预训练权重** — 无 checkpoint
+- [ ] **LibriLight 60K 训练** — 需自行准备数据和计算资源
+
+### 代码质量与可复现性评估
+
+**质量**: **高**。lucidrains 一贯的高质量代码,约 1300 行覆盖完整模型。核心的 masked generative modeling 逻辑清晰正确,coarse-to-fine decoding 实现忠实于论文。
+
+**可复现性**: **中等**。模型架构完整,但依赖多个上游组件 (SoundStream codec + semantic tokenizer + SPEAR-TTS text-to-semantic)。论文结果需要端到端 pipeline 协同工作。仓库适合验证 SoundStorm 的并行解码思路,但完整复现需要可观的工程集成工作。

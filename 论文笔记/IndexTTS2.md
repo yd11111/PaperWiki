@@ -217,3 +217,113 @@ else:
 > - [medium/fact-inference-mixing] 方法 > "为什么能 work" 子节: agent 解读与论文原文未区分,建议标注来源
 > - [medium/traceability-gap] 局限性 > 第 2 条: "1000 个训练样本" 缺少出处标注,建议补充 [§T2E]
 > **反向更新:** ✅
+
+## 代码级分析
+
+> [!info] 代码来源
+> - 仓库: https://github.com/index-tts/Index-TTS
+> - commit: 830f6f8
+> - 分析日期: 2026-06-10
+> - 说明: 仓库名为 Index-TTS,包含 v1 和 v2 两个版本的推理代码,v2 对应 IndexTTS2 论文
+
+### 架构验证
+
+论文 Fig 1 的三模块级联在代码中完全对应:
+
+1. **T2S (GPT)**: `gpt/model_v2.py:UnifiedVoice` — 基于 GPT-2 架构的自回归 Transformer,输入序列为 `[conditioning + emo + duration_emb + text_emb + mel_codes]`
+2. **S2M (CFM)**: `s2mel/modules/commons.py:MyModel` — Conditional Flow Matching 模型,从 semantic tokens + GPT latent 生成 mel spectrogram
+3. **Vocoder**: `BigVGAN/bigvgan.py` — BigVGAN v2,mel → waveform
+
+### 论文未写的实现细节
+
+1. **Speaker conditioning 使用 Conformer + Perceiver** (`model_v2.py:352-358`): 论文称 "frozen speaker perceiver conditioner"。代码实现为 `ConformerEncoder` (6-block Conformer) → `PerceiverResampler` (32 latent tokens)。Speaker conditioning 从 w2v-BERT 2.0 特征提取,而非直接从 mel。conditioner 输入维度 1024 (w2v-BERT hidden size)。
+
+2. **Emotion conditioning 同样是 Conformer + Perceiver** (`model_v2.py:367-376`): 但输出只有 1 个 latent token (num_latents=1),而 speaker 有 32 个。这个不对称设计论文未详述。emotion 经过两层线性变换: `emovec_layer(1024→model_dim)` → `emo_layer(model_dim→model_dim)`。
+
+3. **Duration control 使用 speed_emb 而非 W_sem=W_num** (`model_v2.py:402-403`): 代码中 `speed_emb = nn.Embedding(2, model_dim)`,**初始化为全零** (`weight.data.normal_(mean=0.0, std=0.0)`)。推理时构造 `conds = [spk+emo, speed_emb(1), speed_emb(0)]` 拼接。论文描述的"W_sem=W_num 位置编码共享"在开源推理代码中未直接体现为共享 embedding table,而是通过两个 speed embedding slot 实现,但初始化为零意味着训练初期 duration 信号不影响模型。
+
+4. **Semantic codec 直接复用 MaskGCT** (`infer_v2.py:124-128`): `build_semantic_codec` 加载 MaskGCT 的 semantic codec 权重 (`amphion/MaskGCT/semantic_codec/model.safetensors`)。w2v-BERT 2.0 特征先做 mean/std 归一化再送入 semantic codec。
+
+5. **GPT latent 增强的实现** (`model_v2.py:630-631`): 在 `forward` 的 `get_logits` 中通过 `return_latent=True` 返回 GPT 最后一层 hidden state 的 mel 部分。推理时 `s2mel` 接收这个 latent 作为额外条件。
+
+6. **情感向量混合** (`model_v2.py:791-796`): `merge_emovec` 方法实现了 `out = base_vec + alpha * (emo_vec - base_vec)`,即线性插值。这支持情感强度控制但论文未详细讨论。
+
+7. **CamPlus 说话人验证模型** (`infer_v2.py:153-160`): 加载 `funasr/campplus` 作为说话人 embedding 提取器 (192维),用于运行时说话人相似度验证。
+
+8. **Qwen 情感推理模块** (`infer_v2.py:83`): `QwenEmotion` 类用于 T2E 功能,加载 fine-tuned Qwen 模型预测文本的情感概率分布。
+
+### 训练 pipeline 拆解
+
+训练代码未完整开源,但从 `forward` 方法可推断:
+
+```
+训练数据流 (model_v2.py:589-631):
+  1. Speech condition [B, 1024, T_spk] → ConformerEncoder → PerceiverResampler → cond [B, 32, dim]
+  2. Emotion condition [B, 1024, T_emo] → ConformerEncoder → PerceiverResampler(1) → emo [B, 1, dim]
+  3. emo_vec = emo_layer(emovec_layer(emo))  # 两层线性变换
+  4. duration_emb = speed_emb(0), speed_emb(1)  # 两个 speed token
+  5. conds = concat([cond + emo_vec, duration_emb_half, duration_emb])  # [B, 34, dim]
+  6. text → text_embedding + text_pos_embedding  # [B, T_text, dim]
+  7. mel_codes → mel_embedding + mel_pos_embedding  # [B, T_mel, dim]
+  8. [conds, text_emb, mel_emb] → GPT2 → logits → CE loss (text_head + mel_head)
+  9. GPT latent (mel部分) → S2M (CFM) → mel → L_rec loss
+```
+
+### 推理 pipeline 拆解
+
+```
+完整推理 (infer_v2.py:38-):
+  1. 文本前端: TextNormalizer → TextTokenizer(BPE) → text_tokens
+  2. 参考音频:
+     a. 提取 w2v-BERT 2.0 特征 (SeamlessM4TFeatureExtractor)
+     b. 归一化: (feat - mean) / std
+     c. Semantic codec 编码 → semantic tokens
+  3. 说话人 conditioning: w2v-BERT features → ConformerEncoder → PerceiverResampler → cond [1, 32, dim]
+  4. 情感 conditioning:
+     a. 如有 style prompt: 同 3 的流程 → emo_vec
+     b. 如有文本情感: QwenEmotion → 7维概率 → 加权 emo_matrix → emo_vec
+  5. GPT 自回归生成:
+     input = [pad | cond+emo | speed_half | speed | start_text | text | stop_text | start_mel]
+     → GPT2InferenceModel.generate() → mel_codes (semantic tokens)
+  6. S2M: semantic_tokens + GPT_latent + spk_embedding(CamPlus) → CFM → mel
+  7. BigVGAN: mel → waveform 24kHz
+```
+
+### 关键超参数表
+
+| 参数 | 论文值 | 代码实际值 | 备注 |
+|------|--------|-----------|------|
+| GPT layers | 未明确 | cfg.gpt.layers (配置文件) | model_v2.py:305 |
+| GPT model_dim | 未明确 | cfg.gpt.model_dim | model_v2.py:305 |
+| Speaker cond latents | 未明确 | 32 | model_v2.py:349 |
+| Emotion cond latents | 1 | 1 (num_latents=1) | model_v2.py:373 |
+| Speed embedding dim | 未提及 | 2 classes, model_dim | model_v2.py:402 |
+| Speed emb init | 未提及 | std=0.0 (全零) | model_v2.py:403 |
+| Semantic codebook | MaskGCT 8192 | amphion/MaskGCT codec | infer_v2.py:124 |
+| Stop mel token | 未提及 | cfg.gpt.stop_mel_token=8193 | infer_v2.py:79 |
+| Start mel token | 未提及 | 8192 | model_v2.py:306 |
+| Number mel codes | 未提及 | 8194 | model_v2.py:306 |
+| Vocoder | BigVGAN v2 | bigvgan (HuggingFace) | infer_v2.py:163 |
+| Speaker emb model | 未提及 | CamPlus (192d) | infer_v2.py:153 |
+| Max mel tokens | 未明确 | cfg.gpt.max_mel_tokens | model_v2.py:305 |
+| Condition type | 未明确 | conformer_perceiver | model_v2.py:309 |
+
+### 复现 checklist (基于代码)
+
+- [x] 环境依赖: torch, transformers, omegaconf, librosa, torchaudio, safetensors, modelscope; 可选 flash_attn, deepspeed
+- [ ] 数据准备: 需要 55K h 多说话人语音 + 135h 情感数据 (7种情感, 361 speakers)
+- [x] 预训练模型依赖: (1) MaskGCT semantic codec (amphion/MaskGCT); (2) w2v-BERT 2.0 (facebook); (3) BigVGAN v2; (4) CamPlus (funasr); (5) Qwen 情感模型; (6) GPT+S2M checkpoint (需下载)
+- [ ] 训练命令: 训练代码未开源,仅推理
+- [x] 推理命令: `python webui.py` 或 API 调用 `IndexTTS2(cfg_path, model_dir).infer(ref_wav, text, output_path)`
+- [x] 已知坑: (1) 首次运行会从 HuggingFace/ModelScope 下载多个模型 (>10GB); (2) MPS 不支持 fp16; (3) BigVGAN CUDA kernel 需要编译; (4) W_sem=W_num 在代码中实现为 speed_emb 而非显式共享
+
+### 代码质量与可复现性评估
+
+| 维度 | 评分 | 说明 |
+|------|------|------|
+| 工程质量 | 3/5 | 推理代码完整但结构较散,训练代码缺失; 有 print 调试语句残留 |
+| 文档完善度 | 3/5 | README 完整,WebUI 可用,但 API 文档不足 |
+| 社区活跃度 | 4/5 | 活跃更新 (2.5K+ stars),v1→v2 持续迭代 |
+| 复现难度 | 4/5 | 推理完全可复现; 训练因代码缺失 + 情感数据难获取而困难 |
+
+**总结**: 开源代码以推理为主,工程化程度不错 (支持 DeepSpeed、torch.compile、flash attention 加速)。核心发现是论文的 "W_sem=W_num 位置编码共享" 在代码中的实现形式是 speed_emb(全零初始化的 2-class embedding),而非显式的 embedding table 共享。情感解耦通过 Conformer+Perceiver(1 latent) 实现,GRL 训练部分未在推理代码中体现。
