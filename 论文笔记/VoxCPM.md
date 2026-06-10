@@ -1,6 +1,6 @@
 ---
 type: paper
-tier: deep
+tier: repro
 title: "VoxCPM: Tokenizer-Free TTS for Context-Aware Speech Generation and True-to-Life Voice Cloning"
 arxiv_id: "2509.24650"
 source: "Sources/VoxCPM.pdf"
@@ -106,17 +106,105 @@ Patch size = 2, 即 TSLM/RALM 工作在 12.5 Hz token rate, VAE latent 在 25 Hz
 
 训练时以 0.1 概率 mask 掉 LocDiT 的 LM 条件,推理时使用 CFG scale=2.0 增强条件引导 [§3.3.4, Table 9]。[agent 解读] CFG 在这里的作用是加强 TSLM+RALM 对 LocDiT 的语义引导,防止 diffusion decoder 退化为不依赖条件的纯分布拟合。
 
+### 模块细节
+
+#### AudioVAE
+
+- **Input:** 16kHz mono waveform
+- **Output:** 64-dim latent @ 25Hz (640x compression)
+- **Structure:** DAC-like causal CNN; Encoder downsample strides [2, 5, 8, 8]; Decoder symmetric upsample
+- **Training:** Mel-spectrogram reconstruction loss + multi-scale GAN loss + KL divergence (weight λ_KL=5e-5); 独立于主模型训练 [§3.5]
+- **Key params:** d_latent=64, frame_rate=25Hz, output_sr=16kHz
+
+#### LocEnc (Local Encoder)
+
+- **Input:** Previous latent patches Z_{<i} (历史生成 patch)
+- **Output:** Patch-level acoustic history embeddings E_{<i}
+- **Structure:** 4L Transformer, H=1024, FFN=4096 [Table 1]
+- **Key params:** 与 TSLM 共享输入投影; 输出 E_{<i} 同时送入 TSLM 和 RALM
+
+#### TSLM (Text-Semantic Language Model)
+
+- **Init:** MiniCPM-4-0.5B [§3.3.1]
+- **Structure:** 24L Transformer, H=1024, FFN=4096 [Table 1]
+- **Input:** BPE text tokens (字符级中文分词) + LocEnc embeddings E_{<i}
+- **Output:** Text hidden states H^TSLM_text + audio hidden states → FSQ → h^FSQ
+- **Key params:** Causal attention; 无外部 phonemizer; RoPE position encoding
+
+#### FSQ Bottleneck
+
+- **Dimensionality:** 256 [§3.1, Table 1]
+- **Levels:** 9 per dimension
+- **Implicit codebook size:** 9^256 (理论值;不作为预测目标,仅做中间正则化)
+- **Gradient:** STE (Straight-Through Estimator) [§3.1]
+
+#### RALM (Residual Acoustic Language Model)
+
+- **Structure:** 6L Transformer, H=1024, FFN=4096 [Table 1]
+- **Input:** H^TSLM_text + (H^FSQ_{≤i} ⊕ E_{<i}),element-wise sum fusion [§3.3.3]
+- **Output:** h^residual_i
+- **Key params:** 接收 TSLM 的 text hidden states 作为 cross-attention context; h^final = h^FSQ + h^residual (残差连接)
+
+#### LocDiT (Local Diffusion Transformer)
+
+- **Structure:** 4L DiT, H=1024, FFN=4096 [Table 1]
+- **Input:** h^final (= h^FSQ + h^residual) + z_{i-1} (前一 patch,outpainting 设计) + timestep embedding
+- **Output:** Velocity field → ODE integration → clean latent patch z_i (P=2 frames @ 25Hz)
+- **CFG:** Training drop rate=0.1; inference scale α=2.0 [§3.3.4, Table 9]
+- **Key params:** 三路条件 (semantic + residual + timestep) element-wise sum 为单个 conditioning token; adaLN-Zero 注入
+
+#### Stop Predictor
+
+- **Structure:** 3-layer MLP, H=1024, output dim=2 [Table 1]
+- **Input:** Detached h^FSQ (stop-gradient)
+- **Output:** Binary stop probability (EOS detection)
+
 ### 训练策略
 
-**单目标端到端训练**: 全模型使用 flow matching loss L_FM + stop prediction loss L_Stop 联合训练 [§3.4]。FSQ 的梯度通过 STE 传播。[论文原文] 这允许 "each component to learn its specialized role in a coordinated manner, guided by the unified objective" [§3.4]。
+#### Loss 设计
 
-**两阶段 WSD learning rate schedule** [§4.1, Table 2]:
-- Stable phase: lr=1e-4, batch=4096 tokens, 400K iter
-- Decay phase: lr 从 1e-4 退火到 5e-6, batch 翻倍到 8192, 100K iter
+- **Flow matching loss:** L_FM = E_{t,q(z_0)} ||u_θ(z_t, t; c) - (z_1 - z_0)||² (Eq. 5),在 LocDiT 输出上计算,c 为 h^final 条件 [§3.4]
+- **Stop loss:** L_Stop = BCE(StopPredictor(sg(h^FSQ_i)), y_stop_i) (Eq. 6),在 detached h^FSQ 上计算二值停止预测 [§3.4]
+- **Total:** L = L_FM + λ·L_Stop; 全模型端到端训练,FSQ 梯度通过 STE 传播 [§3.4]
+
+[论文原文] "each component to learn its specialized role in a coordinated manner, guided by the unified objective" [§3.4]。
+
+#### 训练配置
+
+| 参数 | Stable Phase | Decay Phase | 出处 |
+| --- | --- | --- | --- |
+| Learning rate | 1e-4 (constant) | 1e-4 → 5e-6 (linear decay) | [Table 2] |
+| Batch size | 4096 tokens | 8192 tokens | [Table 2] |
+| Iterations | 400K | 100K | [Table 2] |
+| Hardware | 40× H100 | 40× H100 | [Table 2] |
+| Optimizer | AdamW | AdamW | [§4.1] |
+| LR Schedule | WSD (Warmup-Stable-Decay) | WSD | [§4.1] |
 
 [论文原文] Decay phase "是实现最优性能的关键,特别是 zero-shot speaker similarity" [§4.5]。[agent 解读] batch size 翻倍 + lr 退火的组合很可能在稳定训练后期帮助模型学到更精细的 speaker-specific 声学映射。
 
-**Audio VAE**: DAC-like 架构,causal CNN,stride sequence [2,5,8,8],640x 下采样 → 25 Hz latent。训练目标: Mel-spectrogram loss + GAN loss + KL divergence (weight=5e-5)。独立于主模型训练 [§3.5]。
+#### 数据处理
+
+- **总量:** 1.8M 小时双语语音 (中文 + 英文) [§4.1]
+- **采样率:** 16kHz [§3.5]
+- **预处理:** Source separation + VAD + ASR transcription [§4.1]
+- **AudioVAE 独立训练:** DAC-like 架构,causal CNN,stride [2,5,8,8],640x 下采样 → 25Hz latent; 训练目标: Mel loss + GAN loss + KL (weight=5e-5); 独立于主模型训练 [§3.5]
+
+### 推理流程
+
+```
+1. Text tokenization (BPE, 字符级中文) → text tokens
+2. Reference audio → AudioVAE encoder → prompt latent Z_prompt (continuation-based cloning)
+3. Autoregressive loop at 12.5Hz (patch size P=2):
+   a. LocEnc: Z_{<i} → E_{<i} (acoustic history encoding)
+   b. TSLM: text tokens + E_{<i} → H^TSLM → FSQ → h^FSQ_i
+   c. Stop Predictor: sg(h^FSQ_i) → stop probability → if stop, exit loop
+   d. RALM: H^TSLM_text + [h^FSQ_{≤i} ⊕ E_{<i}] → h^residual_i
+   e. h^final_i = h^FSQ_i + h^residual_i (element-wise sum)
+   f. LocDiT: h^final_i + z_{i-1} → ODE integration (CFG α=2.0) → z_i
+4. Concatenate all patches → AudioVAE decoder → 16kHz waveform
+```
+
+**推理参数** [§4.1]: CFG scale α=2.0; RTF 0.17 on single RTX 4090 [§1]
 
 ## 实验
 
@@ -198,6 +286,19 @@ CFG=5.0 (过强): EN-WER 12.78% → 过度条件导致发散 [Table 9]
 ### 推理效率
 
 RTF 0.17 on single RTX 4090 [§1]。
+
+## 复现要点
+
+1. **FSQ 是正则化瓶颈,不是预测目标** [§3.1]: FSQ 256-dim x 9-levels 量化 TSLM 输出,但下游 LocDiT 的预测目标是连续 VAE latent,不是 FSQ codes。梯度通过 STE 传过 FSQ。实现时 FSQ forward 做 round-to-nearest,backward 做 straight-through。
+2. **RALM 输入是 element-wise sum** [§3.3.3]: h^FSQ + LocEnc embedding E_i 用 element-wise sum 融合后送入 RALM。注意这与 VoxCPM2 的 concat-projection 不同。RALM 同时接收 TSLM 的 text hidden states 作为额外上下文。
+3. **LocDiT 的 outpainting 设计** [§3.3.4]: LocDiT 输入序列为 [h^final, z_{i-1}, z̃_i],z_{i-1} 是前一 patch 的 clean latent 作为额外上下文,将任务从独立 patch 生成转为 outpainting。三路条件 (semantic + residual + timestep) element-wise sum 为单个 conditioning token。
+4. **CFG drop rate 和 scale** [§3.3.4, Table 9]: 训练时 10% 概率 mask 掉 LocDiT 的 LM 条件。推理 CFG scale=2.0 是最优值; scale=1.0 (无 CFG) 完全崩溃 (WER 16.32%); scale=5.0 过度条件导致发散 (WER 12.78%)。
+5. **WSD 两阶段训练** [§4.1, Table 2]: Stable phase (lr=1e-4, batch=4096, 400K iter) → Decay phase (lr 1e-4→5e-6, batch=8192, 100K iter)。Decay phase 对 zero-shot similarity 至关重要 (ZH-SIM: 75.1→77.2, Hard-CER: 13.22→8.87) [Table 8]。
+6. **AudioVAE 独立训练** [§3.5]: DAC-like causal CNN,stride [2,5,8,8] = 640x 下采样,64-dim latent @ 25Hz,16kHz 输出。训练目标: Mel loss + multi-scale GAN loss + KL (weight=5e-5)。AudioVAE 冻结后再训练主模型。
+7. **Patch size P=2** [Table 1]: TSLM/RALM 工作在 12.5Hz token rate (25Hz / P=2)。每步生成 2 帧 VAE latent。这与 VoxCPM2/dots.tts 的 P=4 (6.25Hz) 不同,序列更长但每步生成更精细。
+8. **Stop Predictor 在 detached h^FSQ 上** [§3.4, Table 1]: 3-layer MLP,输入是 stop-gradient 的 h^FSQ (不让 stop loss 影响 TSLM 训练)。输出 2-dim (stop/continue)。
+9. **MiniCPM-4-0.5B 初始化** [§3.3.1]: TSLM 用 MiniCPM-4-0.5B 初始化,保留 BPE tokenizer。中文使用字符级切分而非 phoneme,消除外部 phonemizer 依赖。这要求模型自行学习 grapheme-to-phoneme 映射。
+10. **数据量要求** [§4.1]: 完整性能需 1.8M 小时双语数据; Emilia 95K 小时的结果有明显差距 (EN-WER 2.34% vs 1.85%),说明模型对大规模数据依赖较强。16kHz 采样率。
 
 ## 局限性
 

@@ -1,6 +1,6 @@
 ---
 type: paper
-tier: deep
+tier: repro
 title: "WavTTS: Towards High-Quality Zero-Shot TTS via Direct Raw Waveform Modeling"
 arxiv_id: "2606.03455"
 source: "Sources/WavTTS.pdf"
@@ -105,14 +105,82 @@ t = τ^p / (τ^p + s(1-τ^p)), 其中 p=2, s=3
 
 [agent 解读] 训练和推理都向高噪声区域偏移的一致性很重要 — 训练时在困难的高噪声区域投入更多样本学习粗粒度结构,推理时在相同区域投入更多 ODE 步减少截断误差。但过度偏移会牺牲细节 (aggressive μ=-1.2 导致 SIM-o 和 UTMOS 退化) [Fig 5]。
 
+### 模块细节
+
+#### DiT Backbone
+
+- **Structure:** 28L Transformer, H=1152, FFN ratio=4 (FFN=4608), 16 attention heads, 673M params [Appendix A]
+- **Small variant:** 22L, H=1024, FFN ratio=2 (FFN=2048), 340M params [Table 6]
+- **Normalization:** RMSNorm + adaLN-Zero for timestep injection [Appendix A]
+- **Position encoding:** RoPE [Appendix A]
+- **Input:** Concatenated [text_encoded, audio_patches] along sequence dimension; masked regions filled with noised patches x_t [§3.1]
+- **Output:** Per-position prediction x_θ (clean waveform patches in x-prediction mode) [§3.1]
+
+#### Text Encoder
+
+- **Structure:** 4 ConvNeXt V2 blocks, embed_dim=512, FFN ratio=2 [Appendix A]
+- **Input:** Bilingual tokens (Chinese pinyin + English letters) with filler tokens for implicit text-audio alignment [§3.1]
+- **Output:** Text condition embeddings, projected to DiT hidden dim and concatenated with audio patches along sequence [§3.1]
+- **Key params:** 无 duration predictor; 对齐通过 filler tokens + cross-attention 隐式学习
+
+#### Waveform Patchification
+
+- **Patch size F:** 160 samples (non-overlapping) [§3.1]
+- **Sequence rate:** 100Hz (16000 / 160) [§3.1]
+- **Projection:** 2-layer linear: bias-free 768-dim → biased 1024-dim → project to DiT hidden dim [Appendix A]
+- **Unpatchify:** Linear projection from DiT hidden dim → F=160 samples per patch [§3.1]
+
 ### 训练策略
 
-- **数据**: Emilia 95K 小时英中双语语音, 16kHz [§4]
-- **训练**: 1.2M 步, 8x A100 80GB, batch size 153,600 audio patch frames (≈ 0.43h audio/batch) [§4]
-- **优化器**: AdamW, 峰值 lr 7.5e-5, 20K 步 warmup 后恒定 [§4]
-- **CFG**: 训练时以 0.1 概率同时丢弃文本和音频提示 [§3.1]
-- **推理**: 50 NFE, CFG scale α=3, PolyShift (p=2, s=3) [§4]
-- **Infilling**: 随机 mask 70%-100% 的连续音频段 [Appendix A]
+#### Loss 设计
+
+- **Flow matching loss:** L_FM = E[||(x_θ - x_1) ⊙ m / (1-t)||²] (Eq. 3),x-prediction 形式,仅在 masked region (m) 上计算 [§3.1]
+- **Multi-scale mel loss:** L_mel = Σ_{s=1}^{7} ||log mel_s(x_θ/k) - log mel_s(x_1)||_1 (Eq. 6-7),7 个尺度: window sizes [32, 64, 128, 256, 512, 1024, 2048], hop=window/4, mel bins [5, 10, 20, 40, 80, 160, 320]; 在原始尺度上计算 (x_θ/k),不受 variance alignment 影响; 仅 masked region [§3.2, Appendix A]
+- **Total:** L = L_FM + λ_mel · L_mel, λ_mel=0.05 [§3.2]
+
+#### 训练配置
+
+| 参数 | 值 | 出处 |
+| --- | --- | --- |
+| Steps | 1.2M | [§4] |
+| Hardware | 8× A100 80GB | [§4] |
+| Batch size | 153,600 audio patch frames (≈0.43h audio/batch) | [§4] |
+| Optimizer | AdamW | [§4] |
+| Peak lr | 7.5e-5 | [§4] |
+| LR schedule | 20K warmup → constant | [§4] |
+| Variance alignment | k=9 (σ_Emilia ≈ 0.12 → σ_scaled ≈ 1.08) | [§3.3.1] |
+| Timestep sampling | Logit-normal, μ=-0.8, σ=0.8 | [§3.3.2] |
+| CFG drop | p=0.1, joint text+audio drop | [§3.1] |
+| CFG t clipping | t clipped to max 0.98 | [Appendix A] |
+| Infilling mask | 70-100% continuous span (random) | [Appendix A] |
+
+#### 数据处理
+
+- **数据集:** Emilia 95K hours 英中双语语音 [§4]
+- **采样率:** 16kHz [§4]
+- **预处理:** 标准 Emilia pipeline (source separation + ASR)
+
+### 推理流程
+
+```
+1. Input: text y + reference audio x_ctx (prompt)
+2. Text encoding: bilingual tokens → 4× ConvNeXt V2 → text embeddings (filler-padded to audio length)
+3. Audio patchification: x_ctx → non-overlapping patches (F=160), 100Hz sequence
+4. Mask: 生成区域标记为 masked, prompt 区域保持 clean
+5. ODE integration (50 Euler steps, PolyShift schedule):
+   For each step τ_k → τ_{k+1}:
+     a. t = PolyShift(τ; p=2, s=3)
+     b. x_t = (1-t)·ε + t·x_1 (for prompt region, x_1 is ground truth)
+     c. DiT: [text_emb, x_t] → x_θ (x-prediction)
+     d. CFG: x_θ_cfg = (1+α)·x_θ_cond - α·x_θ_uncond, α=3
+     e. v = (x_θ_cfg - x_t) / (1-t) (derived velocity)
+     f. x_{t+dt} = x_t + v·dt
+6. Unpatchify: predicted patches → continuous waveform
+7. Rescale: x_out = x_θ_final / k (k=9, undo variance alignment)
+8. Output: 16kHz waveform
+```
+
+**推理参数** [§4]: 50 NFE, CFG scale α=3, PolyShift (p=2, s=3)
 
 ## 实验
 
@@ -155,6 +223,19 @@ t = τ^p / (τ^p + s(1-τ^p)), 其中 p=2, s=3
 - LibriTTS 585h + 673M: SIM-o 0.31 (零样本失败)
 - Emilia 100K + 340M: SIM-o 0.56
 - Emilia 100K + 673M: SIM-o **0.65** (数据+模型都需要)
+
+## 复现要点
+
+1. **Variance alignment k=9 是最关键参数** [§3.3.1, Table 4]: 训练前将波形乘以 k=9,推理后除以 k 恢复原始幅度。k=1 (无缩放) 导致 SIM-o 从 0.65 暴降到 0.32,UTMOS 从 3.93 降到 2.40。k 值应根据数据集计算: k ≈ 1/σ_data (Emilia σ ≈ 0.12 → k ≈ 8.3,取整为 9)。
+2. **x-prediction 而非 v-prediction** [§3.1, Eq. 2-3]: 网络直接预测 clean waveform x_θ = net_θ(x_t, t),FM loss 变为 ||x_θ - x_1||² / (1-t)²。x-prediction 的关键好处: (1) 允许直接对预测波形计算 mel aux loss; (2) 在静音段更稳定 (SIM-o: 0.65 vs v-prediction 的 0.61) [Table 3]。
+3. **Multi-scale mel loss 在原始尺度计算** [§3.2, Appendix A]: mel loss 计算 log mel(x_θ/k) vs log mel(x_1),必须先 undo variance scaling (除以 k),在原始幅度上比较。λ_mel=0.05。去掉 mel loss 后 200K 步仍无法生成可理解语音 [§5.2.1]。
+4. **7 个 mel 尺度的精确配置** [Appendix A]: window sizes [32, 64, 128, 256, 512, 1024, 2048]; hop = window/4; mel bins [5, 10, 20, 40, 80, 160, 320]; L1 loss on log-mel; 仅 masked region。源自 DAC 的设计。
+5. **Logit-normal 时间步采样** [§3.3.2]: μ=-0.8, σ=0.8。偏向高噪声 (低 t) 区域。过度偏移 (μ=-1.2) 反而损害细节 [Fig 5]。
+6. **PolyShift 推理时间表** [§3.3.2, Eq. 10]: t = τ^p / (τ^p + s(1-τ^p)), p=2, s=3。比 Sway Sampling 对波形空间更有效。50 个均匀 τ 点通过 PolyShift 映射为非均匀 t 序列。
+7. **CFG 的 joint drop + t clipping** [§3.1, Appendix A]: 训练时以 p=0.1 同时 drop 文本和音频 prompt (joint),不做独立 drop。推理 CFG scale α=3。t 值 clipped to max 0.98 避免数值不稳定。
+8. **Patch size F=160 @ 16kHz** [§3.1]: 等效 10ms/patch, 100Hz 序列速率。Non-overlapping。Projection: 2-layer linear (bias-free 768 → biased 1024)。这是将波形序列压缩到 DiT 可处理长度的关键。
+9. **Infilling 任务 (非 AR)** [§3.1, Appendix A]: 随机 mask 70-100% 连续段,模型做 speech infilling。Zero-shot cloning 通过将 prompt audio 作为 unmasked context 实现。这与 Voicebox/F5-TTS 范式一致。
+10. **数据和模型 scaling 要求** [Table 6]: LibriTTS 585h + 673M → SIM-o 仅 0.31 (零样本完全失败); 需要 Emilia 100K h + 673M 参数才能达到 0.65。340M 版本在相同数据下 SIM-o 仅 0.56。波形空间建模对数据和模型规模的需求比 latent 模型更大。
 
 ## 局限性
 
