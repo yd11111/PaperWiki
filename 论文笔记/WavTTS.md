@@ -265,16 +265,9 @@ t = τ^p / (τ^p + s(1-τ^p)), 其中 p=2, s=3
 
 ## 审阅
 
-> [!review] 审阅 (2026-06-06, auto)
-> **结论**: pass
-> 
-> | 原则 | 状态 | 备注 |
-> |------|------|------|
-> | 可复述 | pass | 4 个设计选择均有因果解释 + 消融支持,速查可借鉴字段具体可操作 |
-> | 可信赖 | pass | 数字标注覆盖率 >90%, Table 1/3/4/6 交叉验证全部正确 |
-> | 可区分 | pass | 方法节 [论文原文]/[agent 解读] 标注覆盖充分,无未标注推断 |
-> | 可定位 | pass | KB 背景谱系定位具体 (mel/latent/waveform 三路线对比),创新判断有基准 |
-> | 不污染 | pass | 仅追加 key_papers,无实质修改,污染风险低 |
-> 
-> Issues: 0 (high: 0, medium: 0, low: 0)
-> 详见 `_review/WavTTS-review.yml`
+> [!review] 审阅结论: pass (2026-06-10, repro 升级后重审)
+> - **conclusion**: pass
+> - **issues**: 0 (0 high, 0 medium, 0 low)
+> - 前次 (2026-06-06 deep): pass, 0 issues
+> - 本次: 新增模块细节/训练配置表/Loss公式/推理流程/复现要点,全部通过
+> - 详见 `_review/WavTTS-review.yml`

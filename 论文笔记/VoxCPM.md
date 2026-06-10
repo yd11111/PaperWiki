@@ -329,9 +329,9 @@ RTF 0.17 on single RTX 4090 [§1]。
 3. **参数补偿消融 (24L+6L vs 30L+0L)**: 证明架构分离的归纳偏置比等量参数更有价值,是验证 "组件分工假设" 的标准实验范式。
 4. **WSD schedule + batch doubling for similarity**: 两阶段学习率策略在 stable phase 后用 decay + batch size x2 显著提升 zero-shot speaker similarity,值得在其他 TTS 模型训练中尝试。
 
-> [!review] 审阅结论: pass-with-fixes (2026-06-03)
-> - **conclusion**: pass-with-fixes
-> - **issues**: 2 (0 high, 1 medium, 1 low)
-> - medium/traceability-gap: 原始表格混合 open-source 与 non-open-source baseline 未标注区别,已修正
-> - low/template-compliance: 主观评估表缺少部分 baseline (MaskGCT),已补充关键对比
+> [!review] 审阅结论: pass (2026-06-10, repro 升级后重审)
+> - **conclusion**: pass
+> - **issues**: 0 (0 high, 0 medium, 0 low)
+> - 前次 (2026-06-03 deep): pass-with-fixes, 2 issues 已修正
+> - 本次: 新增模块细节/训练配置/推理流程/复现要点,全部通过
 > - 详见 `_review/VoxCPM-review.yml`

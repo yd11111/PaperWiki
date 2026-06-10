@@ -317,6 +317,7 @@ VoxCPM2 相对 VoxCPM 的三处关键修改:
 
 ## 审阅
 
-> [!review] 审阅 (2026-06-10, auto)
-> **结论**: pending
-> 详见 `_review/VoxCPM2-review.yml`
+> [!review] 审阅结论: pass (2026-06-10)
+> - **conclusion**: pass
+> - **issues**: 0 (0 high, 0 medium, 0 low)
+> - 详见 `_review/VoxCPM2-review.yml`

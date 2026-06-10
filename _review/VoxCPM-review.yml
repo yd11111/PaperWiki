@@ -1,70 +1,68 @@
 paper: "VoxCPM"
+note_path: "论文笔记/VoxCPM.md"
+tier: repro
 reviewer: agent
-date: 2026-06-03
-conclusion: pass-with-fixes
-total_issues: 2
-high: 0
-medium: 1
-low: 1
+date: 2026-06-10
+conclusion: pass
+note: "升级 deep→repro 后重新审阅。前次审阅 (2026-06-03) 结论 pass-with-fixes,2 个 issues 已修正。"
 
 principles:
   可复述:
     verdict: pass
     notes: >
-      方法节包含 5 个关键设计选择,每个都有 WHY 解释(FSQ 作为正则化瓶颈 vs tokenizer 的区别、
-      TSLM+RALM 残差分工的归纳偏置来源、MiniCPM-4 初始化 vs phoneme 的权衡、LocDiT outpainting 设计、
-      CFG 对条件引导的作用)。速查卡片"可借鉴"给出 3 个具体可迁移 trick。
-      消融分析包含参数补偿实验(24L+6L vs 30L+0L),清晰展示架构分离 > 等量参数。
+      方法节包含 5 个关键设计选择,每个有充分 WHY 解释。新增模块细节节覆盖 7 个模块的
+      Input/Output/Structure/Key params。推理流程有完整步骤图。复现要点 10 条涵盖
+      FSQ 实现、RALM 融合方式、LocDiT outpainting、CFG 参数、WSD schedule、
+      AudioVAE 训练、Patch size、Stop Predictor、LLM 初始化、数据量要求。
 
   可信赖:
     verdict: pass
     notes: >
-      数字型 claim 标注覆盖率 ~90%+,所有实验数字标注 [Table N] 或 [§X.X]。
-      指标名使用正确(CER/WER/SIM/MOS/N-MOS/S-MOS/DNSMOS/RTF)。
-      速查卡片指标字段含完整数字+数据集+出处。方向性无误(WER↓, SIM↑等)。
+      数字型 claim 标注覆盖率 >90%。新增训练配置表和 Loss 公式均有出处标注。
+      指标名使用正确。前次审阅的 2 个 issues (traceability-gap, template-compliance) 已修正。
 
   可区分:
     verdict: pass
     notes: >
-      方法节的 WHY 解释全部标注了 [论文原文] 或 [agent 解读],覆盖率约 87%。
-      agent 解读限定在合理推断范围内(如 FSQ 瓶颈诱导分工的机制、batch doubling 对 similarity 的影响)。
-      无推断-断言混淆。"开源 SOTA"标注了具体数字和来源。
+      因果解释来源标注覆盖率约 87%。模块细节和复现要点均标注出处节/表号。
 
   可定位:
-    verdict: pass-with-fixes
+    verdict: pass
     notes: >
-      KB 背景有具体谱系定位(LLM-based TTS 中 hybrid 路线 vs CosyVoice 两阶段 vs DiTAR/CLEAR 纯连续)。
-      创新判断有明确对比基准。frontmatter 字段完整,models 列本文引用的已有模型页(CosyVoice 2/3, MELLE 等)。
-      原始主结果表混合 open-source 与 non-open-source baseline 未标注区别(见 issue #1),已修正。
+      KB 背景和谱系定位保持不变(已通过前次审阅)。frontmatter tier 已更新为 repro。
 
   不污染:
     verdict: pass
     notes: >
-      未新建概念页。所有引用概念页均已存在。
-      反向更新将在审阅通过后执行,仅做 key_papers 追加(不改 status)。
+      无新建概念页。反向更新仅做 key_papers 追加。
 
-issues:
-  - id: 1
-    type: traceability-gap
-    severity: medium
-    principle: 可定位
-    location: "## 实验 > ### 主要结果"
-    detail: >
-      原始主结果表将 DiTAR 和 CosyVoice 3 与 VoxCPM 并列对比但未标注 open-source 属性,
-      而 VoxCPM 的"开源 SOTA"claim 仅限开源系统。论文 Table 3 明确区分了开源和非开源系统。
-      若不标注区别,读者可能误认为 VoxCPM 在 EN-WER 上超越了 DiTAR(实际 1.85% vs 1.69%)。
-    suggestion: >
-      在表头标注各模型的开源/非开源属性,并添加注释说明"开源 SOTA"的比较范围。
-    fix_applied: true
+issues: []
 
-  - id: 2
-    type: template-compliance
-    severity: low
-    principle: 可定位
-    location: "## 实验 > ### 主要结果"
-    detail: >
-      原始主观评估表仅包含 VoxCPM 和 IndexTTS2 的 N-MOS/S-MOS,
-      缺少 CosyVoice 2 等论文 Table 5 中的其他 baseline。
-    suggestion: >
-      补充 CosyVoice 2 等关键 baseline 的主观评分数据。
-    fix_applied: true
+checklist:
+  reproducible:
+    mechanism_not_summary: pass
+    design_choices_why: pass
+    reusable_concrete: pass
+  trustworthy:
+    claim_sourced: pass
+    metric_names_correct: pass
+    quickcard_metrics: pass
+    no_direction_error: pass
+    baseline_cross_check: pass
+    ablation_consistency: pass
+  distinguishable:
+    source_annotation: pass
+    source_coverage: pass
+    no_assertion_without_evidence: pass
+    strong_claims_supported: pass
+  locatable:
+    kb_lineage_specific: pass
+    innovation_has_baseline: pass
+    fields_present: pass
+    fields_semantically_correct: pass
+    quickcard_complete: pass
+  no_pollution:
+    new_concept_admission: n/a
+    dedup_check: n/a
+    no_factual_error_in_update: pass
+    update_classification_correct: pass

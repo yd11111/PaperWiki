@@ -1,60 +1,71 @@
-review:
-  paper: "WavTTS"
-  note_path: "论文笔记/WavTTS.md"
-  reviewer: "auto"
-  date: "2026-06-06"
-  conclusion: "pass"
+paper: "WavTTS"
+note_path: "论文笔记/WavTTS.md"
+tier: repro
+reviewer: agent
+date: 2026-06-10
+conclusion: pass
+note: "升级 deep→repro 后重新审阅。前次审阅 (2026-06-06) 结论 pass,0 issues。"
 
-  principles:
-    reproducible:
-      score: 9
-      reasoning: "方法节包含充分的因果解释(WHY): x-prediction 的动机(噪声分量不稳定优化)、variance alignment 的信号论分析(SNR 下移 20dB)、noise-shifted scheduling 的 loss reweighting 视角。每个设计选择都回答了'为什么选这个',有清晰的消融支持。速查卡片的可借鉴字段具体可操作。"
-    trustworthy:
-      score: 9
-      reasoning: "数字型 claim 标注覆盖率高(>90%): 所有实验数字均标注 [Table N] 或 [Fig N] 或 [§X.X]。指标名无混淆。速查卡片指标字段含具体数字+数据集+来源。交叉验证 Table 1/3/4/6 数字全部正确。"
-    distinguishable:
-      score: 9
-      reasoning: "因果解释来源标注覆盖率高: 方法节中 4 个设计选择均明确标注了 [论文原文] 和 [agent 解读],无未标注的推断。不存在把推测写成断言的情况。"
-    locatable:
-      score: 9
-      reasoning: "KB 背景节有具体谱系定位,明确对比了 mel 路线(F5-TTS)、VAE latent 路线(LongCat-AudioDiT)和波形路线(WavTTS)。创新判断有对比基准(E3-TTS 此前未达 SOTA)。frontmatter 字段齐全。"
-    no_pollution:
-      score: 8
-      reasoning: "反向更新计划为追加 key_papers 到已有概念页,不涉及实质修改,污染风险低。无新建概念页需求(WavTTS 的技术贡献是已有概念的组合应用)。"
+principles:
+  可复述:
+    verdict: pass
+    notes: >
+      方法节保持 4 个关键设计选择的完整 WHY 解释。新增模块细节节覆盖 DiT backbone
+      (28L/H=1152/673M)、Text Encoder (4× ConvNeXt V2)、Waveform Patchification (F=160)。
+      新增完整 Loss 公式 (L_FM x-prediction + L_mel 7-scale)、训练配置表、推理流程 8 步。
+      复现要点 10 条涵盖 variance alignment k=9、x-prediction、mel loss 原始尺度计算、
+      7-scale mel 精确配置、logit-normal 采样、PolyShift、CFG joint drop、patch size、
+      infilling 任务、数据/模型 scaling 要求。
 
-  issues: []
+  可信赖:
+    verdict: pass
+    notes: >
+      数字标注覆盖率 >90%。新增训练配置表所有字段含出处标注。
+      Loss 公式标注 Eq. 号。推理流程标注 §4。指标名无混淆。
 
-  summary:
-    total: 0
-    high: 0
-    medium: 0
-    low: 0
+  可区分:
+    verdict: pass
+    notes: >
+      因果解释来源标注覆盖充分。新增内容 (模块细节、复现要点) 均标注
+      [Table 1]/[§X.X]/[Appendix A] 等具体出处,不含未标注推断。
 
-  checklist:
-    reproducible:
-      mechanism_not_summary: pass
-      design_choices_why: pass
-      reusable_concrete: pass
-    trustworthy:
-      claim_sourced: pass
-      metric_names_correct: pass
-      quickcard_metrics: pass
-      no_direction_error: pass
-    distinguishable:
-      source_annotation: pass
-      source_coverage: pass
-      no_assertion_without_evidence: pass
-      strong_claims_supported: pass
-    locatable:
-      kb_lineage_specific: pass
-      innovation_has_baseline: pass
-      fields_present: pass
-      fields_semantically_correct: pass
-      quickcard_complete: pass
-    no_pollution:
-      new_concept_admission: n/a
-      dedup_check: n/a
-      no_factual_error_in_update: pass
-      update_classification_correct: pass
+  可定位:
+    verdict: pass
+    notes: >
+      KB 背景和谱系定位保持不变(已通过前次审阅)。frontmatter tier 已更新为 repro。
 
-  learning_signals: []
+  不污染:
+    verdict: pass
+    notes: >
+      无新建概念页。反向更新仅做 key_papers 追加。
+
+issues: []
+
+checklist:
+  reproducible:
+    mechanism_not_summary: pass
+    design_choices_why: pass
+    reusable_concrete: pass
+  trustworthy:
+    claim_sourced: pass
+    metric_names_correct: pass
+    quickcard_metrics: pass
+    no_direction_error: pass
+    baseline_cross_check: pass
+    ablation_consistency: pass
+  distinguishable:
+    source_annotation: pass
+    source_coverage: pass
+    no_assertion_without_evidence: pass
+    strong_claims_supported: pass
+  locatable:
+    kb_lineage_specific: pass
+    innovation_has_baseline: pass
+    fields_present: pass
+    fields_semantically_correct: pass
+    quickcard_complete: pass
+  no_pollution:
+    new_concept_admission: n/a
+    dedup_check: n/a
+    no_factual_error_in_update: pass
+    update_classification_correct: pass

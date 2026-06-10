@@ -303,6 +303,7 @@ SOAR 主要提升 SIM (+0.4),MF NFE=4 保持 WER 接近 SOAR 水平,SIM 代价�
 
 ## 审阅
 
-> [!review] 审阅 (2026-06-10, auto)
-> **结论**: pending
-> 详见 `_review/dots.tts-review.yml`
+> [!review] 审阅结论: pass (2026-06-10)
+> - **conclusion**: pass
+> - **issues**: 0 (0 high, 0 medium, 0 low)
+> - 详见 `_review/dots.tts-review.yml`
