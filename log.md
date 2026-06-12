@@ -2,6 +2,10 @@
 
 ## 2026-06-12
 
+- [kb/search] [[TTS-SAE-Steering]] — 命中 6 页: [[LLM-basedTTS]]✓, [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[SpeechFactorization]]✓ | 过滤: [[CosyVoice3]](pending-review), [[CodecLanguageModel]](pending-review)
+- [ingest/deep] [[TTS-SAE-Steering]] — 精读, kb_sources=6 (4 confirmed + 2 pending-review), 新建 0, 追加 5 key_papers (LLM-basedTTS, SpeechLanguageModel, SpeechTokenizer, SpeechFactorization, CosyVoice3)
+- [review/auto] [[TTS-SAE-Steering]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
+- [lint/local] TTS-SAE-Steering — 通过
 - [kb/search] [[SARA]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
 - [ingest/deep] [[SARA]] — 精读, kb_sources=6 (4 confirmed + 2 pending-review), 新建 0, 追加 2 (VariationalAutoencoderforTTS body, SemanticvsAcousticTokens body)
 - [review/auto] [[SARA]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)

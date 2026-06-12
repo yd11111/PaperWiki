@@ -13,7 +13,7 @@ models: ["[[模型库/CosyVoice3|CosyVoice 3]]", "[[论文笔记/SparseAutoencod
 tasks: []
 datasets: ["[[Emilia]]"]
 kb_context_sources: 6
-status: draft
+status: reviewed
 created: 2026-06-12
 updated: 2026-06-12
 ---
