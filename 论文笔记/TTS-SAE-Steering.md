@@ -60,7 +60,7 @@ LLM-based TTS 系统(如 CosyVoice3)的 LM backbone 在处理 text+speech 混合
 
 ### 整体架构
 
-本文不提出新的 TTS 模型,而是在已有的 CosyVoice3 上附加分析和控制工具。CosyVoice3 的 LM backbone 是 Qwen2.5-0.5B (hidden size 896, 28 layers),接收 BPE 文本 token + 25 Hz 离散 speech token,自回归生成语音 token。[§3.1]
+本文不提出新的 TTS 模型,而是在已有的 CosyVoice3 上附加分析和控制工具。CosyVoice3 的 LM backbone 是 Qwen2.5-0.5B (hidden size 896, 24 layers),接收 BPE 文本 token + 25 Hz 离散 speech token,自回归生成语音 token。[§3.1; 论文 §3.1 误记为 28 layers,但 §4.1 Figure 1 caption 明确为 "24-layer",且 layer sweep 覆盖 L0-L23 共 24 层]
 
 分析流程 [Fig 5, Appendix A]:
 ```
@@ -121,7 +121,7 @@ CosyVoice3 residual stream (layer L)
 - 活跃特征数: k = 50 per token
 - 训练数据: ~250M tokens from Emilia dataset
 - 训练目标: 标准 reconstruction + sparsity + auxiliary dead-feature loss
-- 层覆盖: 全 28 层扫描 (modality + reconstruction 分析), layer 20 作为详细 case study
+- 层覆盖: 全 24 层扫描 L0-L23 (modality + reconstruction 分析), layer 20 作为详细 case study
 
 **Concept probing [Appendix G]**:
 - 线性 logistic regression probe (L-BFGS, MaxAbs scaling, 5-fold CV)
@@ -174,7 +174,7 @@ CosyVoice3 residual stream (layer L)
 4. **缺乏人类评估**: 所有 steering 效果仅用自动指标衡量,未进行主观听感评估
 5. **无内容保持性定量评估**: steering 是否影响语音内容(WER/CER)未报告,仅声称"preserving spoken content" [§4.4]
 6. **负样本策略局限**: 负样本来自其他特征而非 representation-neighbor,不测试表示空间邻近混淆 [§7]
-7. **与 SAE-Emotion (Du et al., 2026) 缺乏直接对比**: 两篇同期工作方法相似但未互引
+7. **与 SAE-Emotion (Du et al., 2026) 缺乏直接对比** [agent 解读]: 两篇同期工作方法相似但未互引
 
 ## 点评
 
@@ -203,6 +203,10 @@ CosyVoice3 residual stream (layer L)
 ## 审阅
 
 > [!review] 审阅 (2026-06-12, auto)
-> **结论**: pending
+> **结论**: pass-with-fixes
+> - 可复述 9 | 可信赖 8 | 可区分 9 | 可定位 9 | 不污染 9
+> - ⚠️ [factual-error/medium] 论文 §3.1 说 "28 layers" 但 §4.1 说 "24-layer",笔记跟随 §3.1,实际应为 24 层 (L0-L23)
+> - [traceability-gap/low] 局限性第7条 agent 观察未标注来源
+> - [template-compliance/low] 速查卡片笑声指标简写值与实验表精确值微小差异
 > 
 > 详见 `_review/TTS-SAE-Steering-review.yml`
