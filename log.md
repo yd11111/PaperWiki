@@ -2,6 +2,14 @@
 
 ## 2026-06-12
 
+- [kb/search] [[StateInertia-FD-SLM]] — 命中 5 页: [[Full-duplexSpokenDialogue]]✓, [[Turn-takinginSpokenDialogue]]✓, [[SpeechLanguageModel]]✓, [[StreamingSpokenDialogue]]✓, [[SpokenDialogueEvaluation]]✓
+- [ingest/deep] [[StateInertia-FD-SLM]] — 精读, kb_sources=5 (1 confirmed + 4 pending-review), 新建 0, 追加 3 (Full-duplexSpokenDialogue body, Turn-takinginSpokenDialogue body, SpokenDialogueEvaluation body)
+- [review/auto] [[StateInertia-FD-SLM]] — pass-with-fixes, 1 issue (0 high, 0 medium, 1 low)
+- [review/kb] [[StateInertia-FD-SLM]] — pass, 0 issues
+- [skip/update] [[Full-duplexSpokenDialogue]] — key_papers 已达上限(17>12),改追加到正文
+- [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(15>12),改追加到正文
+- [skip/update] [[SpokenDialogueEvaluation]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] StateInertia-FD-SLM — 通过
 - [kb/search] [[TTS-SAE-Steering]] — 命中 6 页: [[LLM-basedTTS]]✓, [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[SpeechFactorization]]✓ | 过滤: [[CosyVoice3]](pending-review), [[CodecLanguageModel]](pending-review)
 - [ingest/deep] [[TTS-SAE-Steering]] — 精读, kb_sources=6 (4 confirmed + 2 pending-review), 新建 0, 追加 5 key_papers (LLM-basedTTS, SpeechLanguageModel, SpeechTokenizer, SpeechFactorization, CosyVoice3)
 - [review/auto] [[TTS-SAE-Steering]] — pass-with-fixes, 3 issues (0 high, 1 medium fixed, 2 low)
