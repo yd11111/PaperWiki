@@ -7,7 +7,7 @@ year: 2025
 tags: [TTS, zero-shot, multilingual, LLM-based, coarse-to-fine]
 key_concepts: ["[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
-key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/Fun-Audio-Chat|Fun-Audio-Chat]]", "[[论文笔记/WhispSynth|WhispSynth]]", "[[论文笔记/JoyVoice|JoyVoice]]"]
+key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/Fun-Audio-Chat|Fun-Audio-Chat]]", "[[论文笔记/WhispSynth|WhispSynth]]", "[[论文笔记/JoyVoice|JoyVoice]]", "[[论文笔记/TTS-SAE-Steering|TTS-SAE-Steering]]"]
 supersedes: ["[[CosyVoice2]]"]
 superseded_by: []
 status: pending-review
