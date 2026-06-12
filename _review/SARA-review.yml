@@ -1,0 +1,60 @@
+review:
+  paper: "SARA"
+  note_path: "论文笔记/SARA.md"
+  reviewer: "auto"
+  date: "2026-06-12"
+  conclusion: "pass-with-fixes"
+
+  principles:
+    reproducible:
+      score: 8
+      verdict: pass
+      reason: "方法节详细解释了 dual-stream VAE 的设计动机和 anchor-residual 工作原理,WHY/HOW 覆盖充分,包含 4 个关键设计选择的因果解释"
+    trustworthy:
+      score: 8
+      verdict: pass
+      reason: "所有实验数字均与 PDF 原文交叉验证通过;出处标注覆盖率 >90%;消融数字在方法节的引用与实验表一致"
+    distinguishable:
+      score: 9
+      verdict: pass
+      reason: "因果解释来源标注完整([论文原文]/[agent 解读]),覆盖率 >90%;推断与断言边界清晰"
+    locatable:
+      score: 8
+      verdict: pass
+      reason: "KB 背景节提供了具体谱系定位(Semantic-VAE 前身,continuous VAE tokenizer 路线),含 4 confirmed + 2 pending-review 实体页引用;速查卡片 5 字段均有实质内容"
+    non-polluting:
+      score: 7
+      verdict: pass-with-fixes
+      reason: "frontmatter models 已修正(移除未引用的 BigVGAN/VITS);反向更新内容安全,但 SpeechFactorization 概念关联度偏弱"
+
+  issues:
+    - severity: medium
+      type: template-compliance
+      location: "frontmatter.models"
+      detail: "原始版本包含 BigVGAN 和 VITS,但论文中未引用这两个模型作为 baseline 或组件"
+      suggestion: "已修正: 移除 BigVGAN 和 VITS"
+      fixed: true
+
+    - severity: medium
+      type: bad-linking
+      location: "frontmatter.concepts"
+      detail: "SpeechFactorization 概念关联度偏弱 — SARA 的核心贡献是 dual-stream VAE representation,不是 factorization/disentanglement。论文虽然将语义和声学信息分到两个分支,但这更接近 complementary encoding 而非传统 speech factorization"
+      suggestion: "可考虑保留但优先级较低;不影响反向更新安全性"
+
+    - severity: low
+      type: traceability-gap
+      location: "局限性 §6"
+      detail: "HoliTok 的 PESQ 4.10 和 SPKSIM 0.968 数字来源未标注出处"
+      suggestion: "添加 [HoliTok Table 1, 3] 标注"
+
+    - severity: low
+      type: template-compliance
+      location: "Table 1 Semantic-VAE CMOS/SMOS"
+      detail: "Semantic-VAE 的 CMOS 和 SMOS 标为 '—',但 PDF 中的表格格式因 pdftotext 解析可能存在歧义"
+      suggestion: "保持当前标注,待 HTML 版本确认后可更新"
+
+  issue_counts:
+    high: 0
+    medium: 2
+    low: 2
+    total: 4

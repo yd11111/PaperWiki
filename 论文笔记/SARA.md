@@ -9,7 +9,7 @@ year: 2026
 venue: "Interspeech 2026"
 tags: [TTS, VAE, speech-tokenizer, semantic-acoustic-fusion, zero-shot-TTS, dual-stream, SSL, flow-matching]
 concepts: ["[[SemanticvsAcousticTokens]]", "[[VariationalAutoencoderforTTS]]", "[[SpeechTokenizer]]", "[[Self-SupervisedSpeechRepresentation]]", "[[ConditionalFlowMatching]]", "[[SpeechFactorization]]"]
-models: ["[[论文笔记/SARA|SARA]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/BigVGAN|BigVGAN]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "[[模型库/VITS|VITS]]", "F5-TTS", "CosyVoice", "E2 TTS", "Vocos", "HiFi-GAN", "BigCodec"]
+models: ["[[论文笔记/SARA|SARA]]", "[[论文笔记/Semantic-VAE|Semantic-VAE]]", "[[模型库/w2v-BERT|w2v-BERT]]", "[[模型库/HuBERT|HuBERT]]", "[[模型库/WavLM|WavLM]]", "F5-TTS", "CosyVoice", "E2 TTS", "Vocos", "HiFi-GAN", "BigCodec"]
 tasks: ["[[任务库/Zero-shotSpeechSynthesis]]", "[[任务库/NeuralAudioCompression]]"]
 datasets: ["[[数据集/LibriSpeech]]", "[[数据集/LibriTTS]]", "LibriHeavy", "LibriSpeech-PC"]
 kb_context_sources: 6
@@ -195,3 +195,19 @@ SARA 提出了一个优雅的设计思想: **用架构约束替代正则化约�
 1. **Anchor + Residual 设计模式**: 冻结一个强预训练模型作为"锚点",训练一个轻量残差分支补充遗漏信息。这种设计可迁移到任何需要融合预训练表征和 task-specific 表征的场景 (如 audio-visual fusion, multimodal LM)。
 2. **帧率对齐的零成本融合**: 选择天然帧率匹配的模型组合 (w2v-BERT 2.0 的 50Hz = 声学 encoder 的 [2,3,4,4,5] 降采样后的 50Hz),避免重采样开销,直接 concat 即可融合。
 3. **SSL 语义注入改善 flow matching 收敛**: SARA 的 latent space 让 flow matching 在更少 NFE 下保持质量,暗示"语义结构化的 latent space 对确定性 ODE 求解器更友好"的一般性结论,值得在其他 flow-based 生成模型中验证。
+
+## 审阅
+
+> [!review] 审阅 (2026-06-12, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY/HOW 覆盖充分,4 个关键设计选择有因果解释 |
+> | 可信赖 | pass | 所有实验数字与 PDF 交叉验证通过,出处标注 >90% |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率 >90%,边界清晰 |
+> | 可定位 | pass | KB 背景含具体谱系定位,速查卡片 5 字段实质内容 |
+> | 不污染 | pass-with-fixes | models 已修正 (移除未引用的 BigVGAN); SpeechFactorization 关联度偏弱 |
+> 
+> Issues: 4 (high: 0, medium: 2, low: 2)
+> 详见 `_review/SARA-review.yml`
