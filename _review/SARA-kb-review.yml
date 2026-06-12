@@ -1,0 +1,45 @@
+review:
+  paper: "SARA"
+  note_path: "论文笔记/SARA.md"
+  reviewer: "auto-kb"
+  date: "2026-06-12"
+  conclusion: "pass"
+
+  change_plan:
+    - target: "概念库/VariationalAutoencoderforTTS.md"
+      action: "append"
+      content: "追加 SARA 段落到正文 (key_papers 已超 20 上限); SARA 是对 Semantic-VAE 的架构性替代方案,有直接贡献"
+      safe: true
+
+    - target: "概念库/SemanticvsAcousticTokens.md"
+      action: "append"
+      content: "追加 SARA 到正文相关引用 (key_papers 已超 20 上限); SARA 用 dual-stream VAE 直接融合两类表征"
+      safe: true
+
+    - target: "概念库/SpeechTokenizer.md"
+      action: "skip"
+      content: "key_papers 79 条远超上限; SARA 是下游使用者非核心贡献; 跳过"
+      safe: true
+
+    - target: "概念库/ConditionalFlowMatching.md"
+      action: "skip"
+      content: "key_papers 69 条远超上限; SARA 仅使用 F5-TTS 作为 backbone, 无 CFM 方法创新; 跳过"
+      safe: true
+
+    - target: "概念库/Self-SupervisedSpeechRepresentation.md"
+      action: "skip"
+      content: "key_papers 26 条超上限; SARA 仅使用 frozen w2v-BERT 2.0, 无 SSL 方法创新; 跳过"
+      safe: true
+
+    - target: "概念库/SpeechFactorization.md"
+      action: "skip"
+      content: "关联度弱: SARA 的 dual-stream 是 complementary encoding, 不是传统 factorization/disentanglement; 跳过"
+      safe: true
+
+  issues: []
+
+  issue_counts:
+    high: 0
+    medium: 0
+    low: 0
+    total: 0
