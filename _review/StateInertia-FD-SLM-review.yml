@@ -1,0 +1,53 @@
+paper: "StateInertia-FD-SLM"
+reviewer: agent
+date: "2026-06-12"
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    verdict: pass
+    notes: "方法节清晰解释了三个 Finding 的因果逻辑 + perception vector 构造 + steering schedule。每个设计选择有 WHY 解释。速查卡片5字段完整且具体。"
+  trustworthy:
+    verdict: pass-with-fixes
+    notes: "所有 Table 2/3/5 数字与 PDF 一致; Eq. 4-7 引用正确; ZBB 数据集细节 (50 subjects x 2, Dia2-2B, parakeet, GPT-4.1-mini) 准确。一处出处标注存在小问题 (speech-induced suppression 的引用位置)。"
+  distinguishable:
+    verdict: pass
+    notes: "因果解释均标注 [论文原文] 或 [agent 解读], 覆盖率 ~90%。agent 解读标注合理 (Fig 12 的 generation affinity 延迟解读, Raon 绝对性能低的原因推断等)。无推断写成断言的情况。"
+  positionable:
+    verdict: pass
+    notes: "KB 背景节基于5个实体页, 谱系定位具体 (dGSLM/Moshi/LSLM/PersonaPlex/Raon 等), 创新判断有对比基准 (首个 mechanistic interpretability 视角分析 FD-SLM)。"
+  no_pollution:
+    verdict: pass
+    notes: "概念挂接合理。无新概念页创建风险。分析论文不提出新模型, frontmatter models 列被评估 FD-SLM 合理。"
+
+checklist:
+  method_has_causal_why: true
+  design_choices_explained: true
+  speedcard_reusability_specific: true
+  claims_sourced_80pct: true
+  metric_names_correct: true
+  speedcard_has_numbers: true
+  no_directional_error: true
+  baseline_numbers_accurate: true
+  ablation_consistent: true
+  source_labels_present: true
+  source_labels_80pct_coverage: true
+  no_inference_as_assertion: true
+  kb_background_specific: true
+  kb_innovation_has_baseline: true
+  frontmatter_present: true
+  frontmatter_semantically_correct: true
+  speedcard_five_fields: true
+
+issues:
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "Finding 3: State Inertia"
+    detail: "笔记写 '[§3.4, ref 28, 20]' 将 state inertia 定义 (§3.4) 和 speech-induced suppression 类比 (§1, refs [28,20]) 合并标注。实际上 speech-induced suppression 类比仅在 §1 introduction 出现, §3.4 未提及该类比。"
+    suggestion: "改为 '[§3.4]' 用于 state inertia 定义, 另起一句注明 '作者在 §1 将其类比为人类的 speech-induced suppression [28, 20]'。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""

@@ -147,6 +147,10 @@ WavChat (Table 3 & Section 6.3) 总结了 8 个主要 benchmark:
 
 **关键发现**: 没有任何单一 benchmark 覆盖所有 11 个维度。Interaction Capability、Streaming Latency、Security、Multimodal 等维度的评估严重不足。
 
+### Zero-Buffer Benchmark (ZBB) (Chang et al., 2026)
+
+[[论文笔记/StateInertia-FD-SLM|ZBB (Chang et al., 2026)]] 是首个专门评估 FD-SLM 即时打断理解能力的诊断性 benchmark。核心设计: 将关键语义词放在打断话语的第一个词 (zero-buffer),直接测试模型在 state inertia 最严重时的感知能力。100 个 query (50 subjects x 2 correct/incorrect descriptions),用 Dia2-2B 合成语音,评估指标为 Correctness (回答是否正确) 和 IWOR (Initial Word Occurrence Rate, 是否识别第一个语义词) [§4]。填补了上表中 Interaction Capability 评估的空白。
+
 ## 与 Audio Understanding 评估的区别
 
 [[AudioUnderstanding]] 页面列出的 benchmark (SUPERB, AudioBench, AIR-Bench, SD-Eval 等) 侧重于单任务理解能力评估。Spoken Dialogue Evaluation 是更全面的框架,不仅包含理解,还覆盖:

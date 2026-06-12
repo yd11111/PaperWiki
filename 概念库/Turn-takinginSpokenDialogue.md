@@ -159,6 +159,10 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - 1 秒 time block 设计简化了 turn-taking 学习,但引入了较高的最小延迟
 - 详见 [[论文笔记/ELLSA|ELLSA]]
 
+### State Inertia 分析 (Chang et al., 2026)
+
+[[论文笔记/StateInertia-FD-SLM|State Inertia (Chang et al., 2026)]] 提供了首个从 mechanistic interpretability 角度对 FD-SLM 打断处理的内部机制分析。与上述所有方法关注"训练时如何学习 turn-taking"不同,本文揭示了一个推理时的问题: 即使训练好的 FD-SLM (PersonaPlex, Moshi, Raon-SpeechChat) 在用户打断时仍存在 **state inertia** — 内部隐藏表征延迟约 7-8 timestep (~0.6s) 才从 generative 切换到 perceptive state [§3.4]。提出 training-free 的 activation steering 方案: 在打断 onset 注入 perception vector (从对比 timestep 的 mean diff 构造),无需微调即可恢复 81-94% 的打断造成的性能损失 [Table 2]。这表明训练时方案 (IRQ token, SIL/BOW/BC 等) 与推理时干预可以互补。
+
 ## VAD 的局限
 
 最早期的全双工系统使用 Voice Activity Detection (VAD) 判断用户是否有打断意图。然而 VAD 存在根本性局限:

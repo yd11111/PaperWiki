@@ -190,4 +190,11 @@ Steering 后,模型对打断早期 timestep 的 attention weight 明显恢复,�
 
 ## 审阅
 
-(待独立审阅 agent 填充)
+> [!review] pass-with-fixes (2026-06-12)
+> **结论**: pass-with-fixes | 无 high issue
+> **可复述**: pass — 三个 Finding + perception vector + steering 的因果逻辑清晰
+> **可信赖**: pass-with-fixes — 所有数字与 PDF 一致; 1 处 low severity 出处标注问题
+> **可区分**: pass — 因果解释来源标注覆盖率 ~90%
+> **可定位**: pass — KB 背景基于 5 个实体页, 谱系定位具体
+> **不污染**: pass — 概念挂接合理
+> 详见 `_review/StateInertia-FD-SLM-review.yml`

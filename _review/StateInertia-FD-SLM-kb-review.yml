@@ -1,0 +1,39 @@
+paper: "StateInertia-FD-SLM"
+reviewer: agent
+date: "2026-06-12"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "所有追加内容可追溯到论文原文。State inertia 定义来自 §3.4, activation steering 方法来自 §5, ZBB benchmark 来自 §4。无 overclaim。"
+  no_bloat:
+    verdict: pass
+    notes: "不创建新实体页。'State Inertia' 和 'Activation Steering for Speech' 仅有本文一篇论文涉及,不满足准入规则 (多篇引用/前置知识/连接论文 >=2)。三个目标页均追加,不改 status。"
+  traceable:
+    verdict: pass
+    notes: "每条追加含论文 wikilink。"
+
+change_plan_summary:
+  total_targets: 3
+  appends: 3
+  substantive: 0
+  new_pages: 0
+
+change_plan:
+  - target: "概念库/Full-duplexSpokenDialogue.md"
+    action: append
+    detail: "key_papers 已有 17 条 (>12), 按规则追加到正文。在'代表系统'节或'挑战与未来'节末尾追加一段: 本文发现 FD-SLM 在用户打断时存在 state inertia (延迟内部状态切换), 并用 training-free activation steering 缓解。"
+  - target: "概念库/Turn-takinginSpokenDialogue.md"
+    action: append
+    detail: "key_papers 已有 15 条 (>12), 按规则追加到正文。在'端到端系统中的实现'节末尾追加一小节: 本文从 mechanistic interpretability 角度分析 FD-SLM 打断处理的内部机制。"
+  - target: "概念库/SpokenDialogueEvaluation.md"
+    action: append
+    detail: "key_papers 有 12 条 (=12), 追加 1 条到 key_papers。在'主要 Benchmark'节追加 ZBB 条目。"
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
