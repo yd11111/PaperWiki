@@ -139,3 +139,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## HoliTok: 渐进式 AE→VAE 训练解决 KL-vs-Fidelity 困境
 
 [[论文笔记/HoliTok|HoliTok]] (Li et al., 2026) 提出渐进式三阶段训练策略,直接回应了 Semantic-VAE 发现的**重建-生成困境**: 不是在高维 latent 上加语义正则化 (Semantic-VAE 路线),也不是选低维 latent + 大模型 (LongCat-AudioDiT 路线),而是通过分阶段引入正则化来保持两者兼顾。Stage I 训练确定性 AE 建立高保真重建流形; Stage II 冻结 encoder/decoder 仅训练 LSTM variational bottleneck (β=0.1),利用"implicit fidelity transfer"使 VAE 采样留在 AE 的高保真区域; Stage III 解冻全部参数,联合优化强 KL (β=7) + WavLM/x-vector 多粒度蒸馏 + 多任务 LM 监督。结果: 25Hz/128-dim (7.5x 压缩) 下 PESQ 4.10, SPKSIM 0.968 最优; 在统一 AR+DiT 生成-理解架构中是唯一稳健运行的表示 (Semantic-VAE TTS WER 崩至 102%) [HoliTok Table 1, 3]。关键发现: 多任务 LM 监督对**生成鲁棒性**也至关重要,去掉后 TTS WER 从 27.85%→110% [Table 8]。
+
+## SARA: 架构性语义融合替代正则化
+
+[[论文笔记/SARA|SARA]] (Chen et al., Interspeech 2026) 提出了与 Semantic-VAE 正交的路线来解决重建-生成困境: **不通过正则化 loss 引导 latent space,而是通过架构设计直接将语义信息嵌入 VAE**。具体做法是构建 dual-stream encoder: 冻结 w2v-BERT 2.0 作为 semantic anchor (50Hz) + 可训练残差 CNN-LSTM 作为 acoustic encoder (50Hz,strides [2,3,4,4,5] 实现 480x 降采样),两路在 channel 维 concat 后线性投影到 64-dim latent。冻结 SSL 分支保证语义下界,可训练残差分支只需补充声学增量,避免双分支信息竞争。集成到 F5-TTS 后 WER 1.79% vs Semantic-VAE 1.95% (LibriSpeech-PC),重建 PESQ 4.389 vs Semantic-VAE 3.968 [SARA Table 1, 2]。额外发现: SARA 的结构化 latent space 使 flow matching 在更少 NFE 下保持质量 (8-step WER 1.82 优于 vanilla 32-step 2.23) [Table 4]。但 SIM 0.63 略低于 Semantic-VAE 0.64,且 w2v-BERT 2.0 (580M) 引入额外推理开销。

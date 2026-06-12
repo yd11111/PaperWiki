@@ -71,6 +71,12 @@ Semantic tokens 和 Acoustic tokens 是 Speech Language Model 中两类根本不
 - **优点**: 统一框架,无需串联
 - **缺点**: 设计复杂,仍在探索中
 
+### 策略三: 连续 VAE 融合 (Continuous VAE Fusion)
+绕过离散量化,用 VAE latent space 直接融合两类表征:
+- **SARA** (Chen et al., Interspeech 2026): dual-stream VAE — 冻结 w2v-BERT 2.0 作为 semantic anchor + 可训练残差 CNN-LSTM 作为 acoustic encoder,两路 50Hz concat 后线性投影到 64-dim latent。架构性融合避免了额外正则化 loss (对比 Semantic-VAE 的 cosine similarity loss 路线)。F5-TTS 下游 WER 1.79% 优于串联/混合 tokenizer 方案 [SARA Table 1]
+- **优点**: SSL 语义锚点保证内容一致性,残差分支只需学习声学增量; latent space 对 flow matching 更友好 (8-step 接近 32-step 效果)
+- **缺点**: 冻结 SSL 模型 (580M) 引入推理开销; speaker similarity 不如部分方案
+
 ## Paralinguistic Tokens
 
 Survey 特别指出第三类 "副语言 token",弥补 semantic tokens 的表现力缺陷:
