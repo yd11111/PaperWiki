@@ -1,5 +1,13 @@
 # Log
 
+## 2026-06-12
+
+- [kb/search] [[SARA]] — 命中 6 页 (取 Top 6): [[SemanticvsAcousticTokens]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓ | 过滤: [[VariationalAutoencoderforTTS]](pending-review), [[Self-SupervisedSpeechRepresentation]](pending-review)
+- [ingest/deep] [[SARA]] — 精读, kb_sources=6 (4 confirmed + 2 pending-review), 新建 0, 追加 2 (VariationalAutoencoderforTTS body, SemanticvsAcousticTokens body)
+- [review/auto] [[SARA]] — pass-with-fixes, 4 issues (0 high, 2 medium, 2 low)
+- [review/kb] [[SARA]] — pass, 0 issues
+- [lint/local] SARA — 通过
+
 ## 2026-06-09
 
 - [kb/search] [[JELLY]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓ | 过滤: [[EmotionControlinTTS]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[Speech-LLMIntegrationTaxonomy]](pending-review), [[Full-duplexSpokenDialogue]](pending-review)
