@@ -95,6 +95,10 @@ SARA 是一个 dual-stream VAE,由三个主要组件构成 [§2, Fig 1]:
 
 SARA 选择了 50Hz 帧率和 64 维 latent,这与 Semantic-VAE (40Hz, 64-dim) 和 Vanilla VAE (50Hz, 64-dim) 不同。SARA 避免了 Semantic-VAE 的 16kHz 带宽限制,支持 24kHz 高保真合成 [论文原文, §3.3.1]。
 
+### 架构图
+
+![[Sources/SARA.pdf#page=2|Fig 1: SARA dual-stream VAE 整体架构。左侧为冻结 w2v-BERT 2.0 语义分支,右侧为可训练残差声学 encoder,两路 50Hz 特征 concat 后经 linear projection 得到 64-dim latent z,由 HiFi-GAN decoder 重建波形。]]
+
 ### 训练策略
 
 VAE 训练目标 [§2.1, Eq. 2]:
@@ -110,6 +114,23 @@ Loss 权重: $\lambda_{KL}=0.01, \lambda_{adv}=1, \lambda_{feat}=1, \lambda_{rec
 训练配置: 200k iterations, batch size 256, 1-second clips, AdamW (lr=$1 \times 10^{-4}$), linear warmup 10k steps (对 lr 和 $\lambda_{KL}$), exponential decay $\gamma=0.9999996$ [§3.2.1]。
 
 下游 TTS: F5-TTS backbone,用 SARA encoder 提取的 latent 替代 mel spectrogram,使用 sway sampling + Euler ODE solver 推理 [§3.2.2]。
+
+## 关键公式
+
+**VAE ELBO 目标** [Eq. 1]:
+$$\log p_\theta(x) \geq \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - D_{KL}(q_\phi(z|x) \| p(z))$$
+
+其中 $q_\phi(z|x)$ 为 dual-stream encoder 输出的后验分布,$p(z) = \mathcal{N}(0, I)$ 为标准高斯先验。
+
+**Dual-stream latent 融合** [§2.3.1]:
+$$z = \text{Linear}([\mathbf{z}_{sem}; \mathbf{z}_{ac}]) \in \mathbb{R}^{T \times 64}$$
+
+其中 $\mathbf{z}_{sem} = \text{w2v-BERT}(x)$ (冻结, 50Hz),$\mathbf{z}_{ac} = \text{ResEncoder}(x)$ (可训练, 50Hz),$[;]$ 表示 channel 维度拼接。
+
+**完整训练 loss** [Eq. 2]:
+$$L_{VAE} = 15 \cdot L_{recon} + 0.01 \cdot L_{KL} + L_{adv} + L_{feat}$$
+
+极低的 $\lambda_{KL}=0.01$ 配合 warmup 策略,避免 KL 项在训练早期主导优化,使 encoder 先学到好的表征再逐步约束 latent 分布 [agent 解读]。
 
 ## 实验
 

@@ -113,6 +113,32 @@ CosyVoice3 residual stream (layer L)
 
 [agent 解读] 这一步引入了外部验证信号,避免仅依赖 auto-interp 标签选择控制特征。这比 SparseAutoencoderEmotion 的方法(直接用 auto-interp 标签定位)更稳健。
 
+## 关键公式
+
+**SAE 编码-解码 [§3.1]**:
+
+$$z = \text{BatchTopK}(W_{\text{enc}} h + b_{\text{enc}}, k=50)$$
+
+$$\hat{h} = W_{\text{dec}} z + b_{\text{dec}}$$
+
+其中 $h \in \mathbb{R}^{896}$ 是某一层的残差向量, $z \in \mathbb{R}^{16384}$ 是稀疏 latent, BatchTopK 保留 batch 内平均活跃特征数为 $k=50$。
+
+**SAE 训练损失 [§3.1]**:
+
+$$\mathcal{L} = \|h - \hat{h}\|_2^2 + \lambda_{\text{aux}} \mathcal{L}_{\text{dead}}$$
+
+第一项为 reconstruction loss, $\mathcal{L}_{\text{dead}}$ 是 dead-feature auxiliary loss (Gao et al., 2024), 防止特征退化。
+
+**SAE latent steering [§3.6, Appendix C]**:
+
+$$z' = z + \alpha \cdot s \odot \bar{Z}$$
+
+其中 $\alpha$ 是 steering 强度 (实验中取 $[-60, +60]$), $s \in \{-1, +1\}$ 是方向, $\bar{Z}$ 是目标特征在训练集上的平均激活幅度 (归一化尺度)。
+
+**Modality tagging 规则 [§3.3]**:
+
+$$\text{modality}(f) = \begin{cases} \text{audio} & \text{if } \frac{\#\text{speech positions in top-20}}{\text{20}} \geq 0.8 \\ \text{text} & \text{if } \frac{\#\text{speech positions in top-20}}{\text{20}} \leq 0.2 \\ \text{mixed} & \text{otherwise} \end{cases}$$
+
 ### 训练策略
 
 **SAE 训练 [§3.1]**:
@@ -144,6 +170,9 @@ CosyVoice3 residual stream (layer L)
 | Top-1 SAE feature ROC-AUC (laughter, L12) | 0.924 | — | VocalSound + Emilia | [Table 5] |
 
 **Layer sweep 关键发现 [§4.1, Fig 1]**:
+
+![Figure 1: Layer-wise modality composition — 三段式模态演进 (early mixed → audio commitment → final text reversal)](Sources/TTS-SAE-Steering/fig1-layer-sweep.png)
+
 
 1. **三段式模态演进**: Early/middle layers (0-14) 以 mixed 和 audio 特征为主; Late layers (16-20) 被 audio-modal 特征主导 (layer 16: 76.1%, layer 20: 74.3%); Final layer 23 急剧翻转为 text-modal (83.1%)
 
