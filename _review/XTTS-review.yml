@@ -56,3 +56,4 @@ learning_signals:
   new_pattern: true
   matches_known_pattern: "PDF 表格行对齐错误是新发现的模式。pdftotext 对多列表格的提取不可靠，同一行的不同列值可能错位。"
   system_upgrade_suggestion: "对 pdftotext 提取的表格数据，应交叉验证: (1) 与正文讨论的定性描述对比; (2) 相同数据在不同表格中出现时交叉核对。建议在 paperwiki-reader skill 中增加 '表格数据交叉验证' 步骤。"
+  digested: true  # 2026-06-09 batch

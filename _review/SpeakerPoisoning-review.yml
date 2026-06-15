@@ -51,3 +51,4 @@ learning_signals:
   new_issue_type: "metric-naming-ambiguity — 当同一论文中存在名称相近但语义不同的指标 (SSIM-F vs FSSIM) 时,笔记需在首次出现时明确区分"
   rule_gap: ""
   checklist_upgrade_suggestion: "考虑增加检查项: 速查卡片指标字段中的指标名是否与论文原文表头一致"
+  digested: true  # 2026-06-09 batch

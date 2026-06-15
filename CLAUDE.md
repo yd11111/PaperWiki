@@ -64,7 +64,11 @@ Types: ingest|update|create|check|review|alert|skip|moc|kb|lifecycle|init
 
 ```
 AGENTS.md          ← 系统总纲 (Tier 1, ~200 行)
-docs/rules/        ← Tier 2 详细规则 (sources/notes/kb/moc/review/checks)
+docs/              ← 系统文档(根目录放 harness/使用手册等系统级文件)
+  docs/rules/      ← Tier 2 详细规则 (sources/notes/kb/moc/review/checks)
+  docs/reports/    ← 行业全景报告 + 调研方法论 + 原始数据
+  docs/research/   ← 技术调研 + 领域综述 + 论文列表
+  docs/planning/   ← 方向规划 + 实施计划 + 汇报材料
 docs/使用手册.md    ← 用户操作速查
 _templates/        ← 页面模板 + 审阅标准 (review/moc-review/kb-review checklist)
 scripts/           ← 自动化脚本 (lint.py)

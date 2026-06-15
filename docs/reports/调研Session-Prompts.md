@@ -398,5 +398,5 @@ Layer 5 引用网络:
 ## 最终输出位置
 
 所有 session 结果汇总后,保存为:
-- `docs/2026-TTS行业全景报告.md` — 最终汇总报告
-- `docs/2026-TTS行业全景报告-原始数据/` — 各 session 的原始调研结果(可选)
+- `docs/reports/2026-TTS行业全景报告.md` — 最终汇总报告
+- `docs/reports/2026-TTS行业全景报告-原始数据/` — 各 session 的原始调研结果(可选)

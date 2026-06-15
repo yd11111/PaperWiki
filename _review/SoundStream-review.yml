@@ -31,3 +31,4 @@ learning_signals:
   new_pattern: true
   matches_known_pattern: ""
   system_upgrade_suggestion: "SoundStream 笔记的'为什么 X'显式标记法是 understandability 满分的范例，可作为 reader skill 的参考模板。"
+  digested: true  # 2026-06-09 batch

@@ -71,3 +71,4 @@ learning_signals:
   new_issue_type: "successor-as-model: models 字段误列后继系统而非论文实际涉及模型,是 bad-linking 的子类型"
   system_upgrade_suggestion: "work agent models 字段规则应明确: 列本文模型 + 对比基准 + 关键组件,后继系统仅当论文正文讨论时才列"
   checklist_upgrade_suggestion: "将 frontmatter_complete 拆为 'fields_present' + 'fields_semantically_correct'; 增加规则: models 字段应列本文模型+对比基准而非后继系统"
+  digested: true  # 2026-06-09 batch

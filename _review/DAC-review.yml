@@ -55,3 +55,4 @@ learning_signals:
   new_pattern: true
   matches_known_pattern: "速查卡片数字缺标注 (同 CosyVoice 3、IndexTTS2)"
   system_upgrade_suggestion: "DAC 作为 repro tier 笔记,其模块细节、训练配置、复现要点的完整度可作为 repro 笔记的参考模板。建议将 DAC 的结构提取为 repro-tier 模板供后续使用。"
+  digested: true  # 2026-06-09 batch

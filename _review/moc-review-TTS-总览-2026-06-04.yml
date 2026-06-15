@@ -90,3 +90,4 @@ learning_signals:
   new_issue_type: "missing-evolution-markers — 标题为'演进脉络'的 section 缺少实际的演进关系标注(→/⇢/∥/⊃),仅为论文列表"
   rule_gap: "R4 '每条论文描述 ≤ 1 行' 缺少字数建议,导致单行内容差异从 15 字到 90+ 字"
   checklist_upgrade_suggestion: "建议增加检查项: (1) 按模型/按概念浏览区的链接优先指向实体页而非论文笔记; (2) 按概念浏览必须有分组(与核心概念区使用相同的 R2 规则); (3) 演进 section 必须使用 R7 关系符号"
+  digested: true  # 2026-06-09 batch

@@ -55,3 +55,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "速查卡片中数字缺标注是一个系统性模式,IndexTTS2 审阅中也出现过类似问题。fact-inference-mixing 同样是 deep 笔记的常见模式。"
   system_upgrade_suggestion: "在 paperwiki-reader skill 的速查模板中增加硬性要求: 速查中每个数字必须附带 [Table/Fig/§] 标注。"
+  digested: true  # 2026-06-09 batch

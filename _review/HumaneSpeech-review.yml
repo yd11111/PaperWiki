@@ -51,3 +51,4 @@ learning_signals:
   new_issue_type: ""
   rule_gap: "论文本身无定量指标的情况下,笔记如何处理实验节 — 当前方案(定性概括表格)是合理的折中,但缺少明确的标注规范"
   checklist_upgrade_suggestion: "考虑增加检查项: 当论文缺乏定量评估时,笔记须在实验节开头显式声明'本文无标准定量指标'"
+  digested: true  # 2026-06-09 batch

@@ -111,3 +111,4 @@ learning_signals:
   new_issue_type: "baseline-number-swap — 比较表中多个 baseline 的数字整体互换/混淆,不是单个数字错误而是模型身份映射错误。与 factual-error 的区别: 每个数字单独看都是 PDF 中存在的真实数字,但被归到了错误的模型名下。根因可能是 agent 读取 PDF 表格时行偏移。"
   system_upgrade_suggestion: "Reader agent 在提取多模型比较表时,应对每个 baseline 的数字做至少一项交叉验证(如用文中叙述段落中提到的数字与表格数字核对),防止行偏移导致的系统性错误。"
   checklist_upgrade_suggestion: "增加检查项: '比较表非本文模型数字准确性(抽样 ≥ 2 个 baseline 与 PDF 原表核对)' — 服务可信赖原则。当前 claim_coverage 检查项只看'有没有标注',不看'标注的数字对不对',这是一个重要 gap。"
+  digested: true  # 2026-06-09 batch

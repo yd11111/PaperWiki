@@ -137,3 +137,4 @@ learning_signals:
   new_issue_type: "key-papers-inflation — key_papers 从代表作列表退化为'所有提及该概念的论文全集',与 signal-dilution 相关但成因不同(非噪声链接,而是准入标准缺失)"
   rule_gap: "当前 key_papers ≤12 是硬上限但反向更新时每次 append 一条不触发警告,导致增量膨胀无人发现。建议 lint.py 增加 key_papers 数量检查项。"
   checklist_upgrade_suggestion: "增加检查项: key_papers 中每条论文是否对该概念的设计/理论有直接贡献(vs 仅作为下游使用者)。当前检查项只检查数量,不检查相关度。"
+  digested: true  # 2026-06-09 batch

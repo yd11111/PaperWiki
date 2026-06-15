@@ -64,3 +64,4 @@ learning_signals:
   new_issue_type: "无新类型"
   system_upgrade_suggestion: "work agent 应在方法节每个 WHY/因果解释后追加 [论文原文] 或 [agent 解读] 标签"
   checklist_upgrade_suggestion: "增加检查项: '因果解释来源标注覆盖率' (目标 ≥ 80%),与 claim 标注率并列,服务于可区分原则"
+  digested: true  # 2026-06-09 batch

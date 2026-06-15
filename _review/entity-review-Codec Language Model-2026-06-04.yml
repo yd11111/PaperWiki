@@ -144,3 +144,4 @@ learning_signals:
   new_issue_type: "frontmatter-body-desync: frontmatter key_papers(37条)与body关键论文section(6条)内容严重不一致,可能是反复append导致frontmatter膨胀但body未同步更新"
   rule_gap: "当前规则未明确key_papers的'仅保留有笔记的论文'要求。plain text条目(无wikilink)的处理规则也未明确——应该只在vault有笔记时才加入key_papers,还是允许plain text引用外部论文?"
   checklist_upgrade_suggestion: "增加检查项: frontmatter key_papers与body关键论文section是否一致(如有body section);key_papers中plain text条目占比(理想为0%)"
+  digested: true  # 2026-06-09 batch

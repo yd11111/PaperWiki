@@ -1,6 +1,6 @@
 # SpeechLLM 行业全景报告 — 论文清单
 
-> 来源: `docs/2026-SpeechLLM行业全景报告-原始数据/` Session1-10
+> 来源: `docs/reports/2026-SpeechLLM行业全景报告-原始数据/` Session1-10
 > 生成日期: 2026-06-08
 > 用途: 决定哪些论文需要下载精读
 

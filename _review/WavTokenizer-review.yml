@@ -68,3 +68,4 @@ learning_signals:
   new_issue_type: ""
   system_upgrade_suggestion: "消融实验的数字在方法节中引用时,建议 working agent 直接写出完整比较(A=X vs B=Y)而非使用模糊的'略高于/略低于',可减少方向性混淆。"
   checklist_upgrade_suggestion: "可考虑增加'消融数据交叉一致性'检查项:方法节/局限性节引用的消融数字与实验表的一致性验证。当前检查项仅覆盖 claim 有无出处标注,不覆盖引用是否与原始数据一致。"
+  digested: true  # 2026-06-09 batch

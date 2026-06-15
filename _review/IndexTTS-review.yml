@@ -49,3 +49,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "bad-linking (frontmatter models 不完整) 是批量 ingest 中常见模式。"
   system_upgrade_suggestion: "在 paperwiki-reader skill 中增加提示: 生成 frontmatter models 时应包含实验表中的主要 baseline 模型。"
+  digested: true  # 2026-06-09 batch

@@ -132,5 +132,6 @@ learning_signals:
 | 日期 | 变更 | 来源 |
 |------|------|------|
 | 2026-06-04 | v1 初始检查项 | Harness 升级报告 V1 + AGENTS.md §7 append/substantive 规则 |
+| 2026-06-09 | v1.1: 对应 kb.md 规则更新 — key_papers >20 改追加正文; append 准入判断(直接贡献 vs 下游使用); 禁止 plain text 条目 | 51 条 learning signals 批量消化 |
 
 *每次模式分析更新检查项时,在此表追加记录。*

@@ -129,3 +129,4 @@ learning_signals:
   new_issue_type: ""
   rule_gap: "R5 只规定 section 归属必须匹配 frontmatter year,但未规定 inline 描述中的年份文本也必须一致。建议补充: '每条论文描述中的年份标注也应与 frontmatter year 一致'。"
   checklist_upgrade_suggestion: "建议增加检查项: 'inline 描述年份与 frontmatter year 一致' (服务 no_decay 原则); sub-MOC 当论文超过 30 篇时,建议按技术子路线分组而非纯年份平铺 (服务 navigable 原则)。"
+  digested: true  # 2026-06-09 batch

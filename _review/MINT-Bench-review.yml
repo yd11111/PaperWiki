@@ -62,3 +62,4 @@ learning_signals:
   new_issue_type: ""
   rule_gap: "benchmark 论文的 models 字段语义不够明确——benchmark 评估了多个系统,但这些系统不是本文'提出'或'对比'的,而是被'评估'的对象。现有规则 (models 列本文模型+对比 baseline) 对 benchmark 论文适用性有限"
   checklist_upgrade_suggestion: "考虑为 benchmark 论文增加 frontmatter 语义指导: models 仅列本文提出的模型,被评估系统可放在正文中"
+  digested: true  # 2026-06-09 batch

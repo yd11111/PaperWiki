@@ -36,3 +36,4 @@ learning_signals:
   new_pattern: true
   matches_known_pattern: ""
   system_upgrade_suggestion: "reader skill 在生成速查卡片的'指标'字段时，应自动校验指标方向：WER/CER 越低越好，SIM/SS/MOS/MUSHRA 越高越好。当使用'超/优于/surpass'等比较词时，应验证数值方向一致性。"
+  digested: true  # 2026-06-09 batch

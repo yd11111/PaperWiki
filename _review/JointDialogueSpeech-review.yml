@@ -51,3 +51,4 @@ learning_signals:
   new_issue_type: ""
   rule_gap: "对于 feasibility study 类论文(无完整系统/无端到端验证),审阅标准中缺少'完整性'维度的判断指引"
   checklist_upgrade_suggestion: "考虑增加检查项:对于声称系统/框架论文,是否有端到端验证结果"
+  digested: true  # 2026-06-09 batch

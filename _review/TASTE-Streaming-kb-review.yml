@@ -41,3 +41,4 @@ learning_signals:
   new_issue_type: ""
   rule_gap: ""
   checklist_upgrade_suggestion: ""
+  digested: true  # 2026-06-09 batch

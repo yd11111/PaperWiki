@@ -41,3 +41,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "sparse-linking-for-paradigm-papers: 基于 VALL-E 架构但 models 未包含 VALL-E"
   system_upgrade_suggestion: "reader skill 应自动检查方法基于的 baseline 系统是否在 frontmatter models 中引用"
+  digested: true  # 2026-06-09 batch

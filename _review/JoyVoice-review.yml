@@ -70,3 +70,4 @@ learning_signals:
   new_issue_type: ""
   system_upgrade_suggestion: ""
   checklist_upgrade_suggestion: "可考虑增加检查项: 实验结果表每行的来源标注是否精确到单一Table(而非混用多Table数据但只标一个)"
+  digested: true  # 2026-06-09 batch

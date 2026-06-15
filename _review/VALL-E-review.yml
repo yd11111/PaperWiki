@@ -36,3 +36,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "sparse-linking-for-paradigm-papers: 范式开创性论文的概念挂接倾向于保守（只链接已有概念页），可能遗漏自身定义的核心概念"
   system_upgrade_suggestion: "reader skill 在处理范式开创性论文时，应自动检查该论文定义的新概念是否需要创建概念页并在 frontmatter 中挂接"
+  digested: true  # 2026-06-09 batch

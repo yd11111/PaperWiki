@@ -33,8 +33,11 @@
 | `_templates/` | Obsidian 模板 | 人类 | Yes |
 | `_lint/` | 系统检查报告 | Agent | Yes |
 | `_review/` | 审阅报告 | Agent | Yes |
-| `docs/` | 系统文档 | 人类 | Yes |
+| `docs/` | 系统文档(根目录放 harness/使用手册等系统级文件) | 人类 | Yes |
 | `docs/rules/` | Tier 2 规则文件 | 人类 | Yes |
+| `docs/reports/` | 行业全景报告 + 调研方法论 + 原始数据 | 人类/Agent | Yes |
+| `docs/research/` | 技术调研 + 领域综述 + 论文列表 | 人类/Agent | Yes |
+| `docs/planning/` | 方向规划 + 实施计划 + 汇报材料 | 人类 | Yes |
 | `scripts/` | 自动化脚本(lint 等) | 人类 | Yes |
 | `log.md` | Agent 操作日志 | Agent | Yes |
 

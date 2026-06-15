@@ -94,3 +94,4 @@ learning_signals:
   new_issue_type: "frontmatter-body-mismatch — frontmatter key_papers 列表与 body 关键论文 section 内容严重脱节(67 vs 9),这是一种新的不一致问题,现有词汇表未覆盖"
   rule_gap: "当前反向更新规则允许每篇论文 append key_papers 条目但无上限检查。67 条 key_papers 是逐篇精读累积的结果,说明 append 操作需要一个触发阈值检查的机制(如 key_papers > 12 时 lint 报警或自动触发 review)。"
   checklist_upgrade_suggestion: "建议增加检查项: 'frontmatter key_papers 列表与 body 关键论文/相关工作 section 一致性' — 确保 frontmatter 中列出的论文在 body 中有至少一句说明其与概念的关系。"
+  digested: true  # 2026-06-09 batch

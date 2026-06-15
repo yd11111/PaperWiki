@@ -61,3 +61,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "fact-inference-mixing 是 deep/repro 笔记中常见的模式，agent 生成的因果解释容易与论文原文混淆。"
   system_upgrade_suggestion: "在 paperwiki-reader skill 的 '为什么能 work' 模板中，增加强制标注 [论文原文]/[agent 解读] 的指令。"
+  digested: true  # 2026-06-09 batch

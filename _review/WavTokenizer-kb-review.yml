@@ -49,3 +49,4 @@ learning_signals:
   new_issue_type: "column-mismatch — 追加表格行时字段语义与列定义不匹配,是 factual-error 的子类型"
   rule_gap: ""
   checklist_upgrade_suggestion: "可增加检查项: 追加表格行时验证每个字段与列标题的语义一致性"
+  digested: true  # 2026-06-09 batch

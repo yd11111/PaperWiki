@@ -61,3 +61,4 @@ learning_signals:
   new_pattern: true
   matches_known_pattern: "bad-linking (frontmatter 缺少自身模型和核心概念) 是首次出现的新模式,之前 IndexTTS2 审阅中仅涉及 MaskGCT 未加 wikilink,而非 frontmatter 字段缺失。"
   system_upgrade_suggestion: "在 paperwiki-reader skill 中增加 frontmatter 完整性检查: (1) models 必须包含论文自身的模型; (2) concepts 必须包含论文标题/方法名中的核心概念; (3) datasets 必须包含实验表中使用的所有数据集。"
+  digested: true  # 2026-06-09 batch

@@ -36,3 +36,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "tokenizer-section-thin: 当原论文对某组件描述模糊时，笔记也倾向于薄弱地复述而非主动标注信息缺口"
   system_upgrade_suggestion: "reader skill 在遇到论文描述模糊的关键组件时，应主动插入 [⚠️ 论文未详述] 标记而非简单复述"
+  digested: true  # 2026-06-09 batch

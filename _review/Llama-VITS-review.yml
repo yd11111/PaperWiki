@@ -41,3 +41,4 @@ learning_signals:
   new_pattern: false
   matches_known_pattern: "none"
   system_upgrade_suggestion: "none"
+  digested: true  # 2026-06-09 batch

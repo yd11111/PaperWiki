@@ -83,3 +83,4 @@ learning_signals:
   new_issue_type: ""
   system_upgrade_suggestion: "Benchmark 类论文的数据统计数字(如类别数、样本数)建议在精读时通过数学验证(如 total/per_category = categories)交叉校验,避免将论文 abstract 中的总数误植为单语数。"
   checklist_upgrade_suggestion: "可增加检查项: '关键统计量数学一致性'(如 total = categories * per_category),这类简单交叉验证可机械化执行。"
+  digested: true  # 2026-06-09 batch

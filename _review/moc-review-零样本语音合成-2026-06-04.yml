@@ -123,3 +123,4 @@ learning_signals:
   new_issue_type: "year-section-batch-drift — 批量精读新论文后自动刷新 MOC 时,可能因 frontmatter year 与 arXiv 发布年份不同(如 2025 年发到 arXiv 但 arXiv ID 为 2025 而笔记写成 2026)导致整批论文被错放到下一年 section。这是系统性问题而非偶发错误"
   rule_gap: "R4 的 50 条阈值在快速增长的方向(如零样本 TTS)很容易突破,但目前没有'何时触发拆分'的操作指南;自动刷新脚本应在超过阈值时发出警告或自动拆分"
   checklist_upgrade_suggestion: "建议增加检查项: (1) 自动刷新后运行 year-mismatch 验证脚本; (2) 论文区超过 80 条时触发 sub-MOC 拆分建议; (3) 演进脉络中 → 使用的自动团队匹配验证"
+  digested: true  # 2026-06-09 batch

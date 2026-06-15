@@ -34,9 +34,16 @@
 ### 可信赖
 
 - [ ] 数字型 claim 旁有 [§X.X]/[Table N]/[Fig N] 标注(目标覆盖率 ≥ 80%)
-- [ ] 指标名使用正确(CER/WER/MOS/SIM/PESQ 不混淆)
-- [ ] 速查卡片"指标"字段含具体数字 + 数据集名 + 来源标注
+- [ ] 指标名使用正确(CER/WER/MOS/SIM/PESQ 不混淆),且与论文原文表头一致
+- [ ] 速查卡片"指标"字段含具体数字 + 数据集名 + 来源标注,指标名与原文表头一致
 - [ ] 无方向性错误(如"WER 越低越好"不被写成"超越")
+- [ ] 比较表中非本文模型数字准确(抽样 ≥2 个 baseline 与 PDF 核对)
+- [ ] 消融实验数字交叉一致(方法节引用的消融数字与实验表数据一致)
+- [ ] 消融总结中的数字与笔记内详细消融表格一致
+- [ ] 关键统计量数学一致(如 total = categories × per_category)
+- [ ] 无定量指标的论文在实验节显式声明"本文无标准定量指标"
+- [ ] 系统/框架论文有端到端验证结果(或显式说明无端到端评估)
+- [ ] benchmark 论文: `models` 仅列本文模型,被评估系统在正文讨论
 
 ### 可区分
 
@@ -79,6 +86,9 @@
 | template-compliance | 格式/字段不合规 |
 | kb-safety-risk | 会污染知识库 |
 | successor-as-model | frontmatter models 列了后续系统而非本文对比 baseline |
+| baseline-number-swap | 比较表多 baseline 数字整体互换(行偏移) |
+| metric-naming-ambiguity | 同论文中名称相近但语义不同的指标需区分 |
+| column-mismatch | 追加表格行时字段与列定义不匹配 |
 
 **如果发现新类型的问题(不在此表中),直接命名并记录。** 这个表会在模式分析时扩展。
 
@@ -111,5 +121,6 @@
 |------|------|------|
 | 2026-06-02 | v1 初始检查项 | 系统设计 + 首轮 8 篇审阅经验 |
 | 2026-06-02 | v1.1: +因果解释来源标注覆盖率; frontmatter 拆分为 present+semantically_correct; +successor-as-model 问题类型 | v2 reviewer 对 DAC+CosyVoice 的 learning signals |
+| 2026-06-09 | v1.2: +比较表数字交叉验证; +消融数据一致性; +统计量数学一致性; +特殊论文类型检查(无定量指标/系统论文/benchmark); +3 新 issue types (baseline-number-swap, metric-naming-ambiguity, column-mismatch) | 51 条 learning signals 批量消化 |
 
 *每次模式分析更新检查项时,在此表追加记录。*
