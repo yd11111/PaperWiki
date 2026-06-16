@@ -151,6 +151,14 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - FDB v1.0: interruption TOR 0.980, backchannel TOR 0.091 (均为 best); user backchannel resume 率 0.398 (弱于 MiniCPM-o 0.520)
 - 详见 [[论文笔记/Raon-Speech|Raon-Speech]]
 
+### BayLing-Duplex (Fang et al., 2026)
+- 4 个对话状态 token ([SILENCE]/[ASSISTANT]/[PAD]/[EPAD]) 将 turn-taking 和打断决策完全归结为 next-token prediction,无辅助分类头或状态机
+- 与 Raon-SpeechChat 的 SIL/BOW/BC 同属单序列状态 token 方案,但更极简 (无 backchannel token),且使用 DPO 优化 timing 精度
+- SFT 中 token 权重调整关键: ω_sil=0.1, ω_role=10,否则 TT SR@3s 仅 60.3% (模型几乎永远沉默)
+- DPO pair 仅改 timing 不改 content: turn-taking 正例 gap 0.8s / 负例 Uniform(2,5)s; interruption 正例 δ_react~Uniform(0.8,2.0)s / 负例 Uniform(3,5)s
+- TT SR@3s 92.0%, ISR@2s 100% [Table 2, InstructS2S-Eval]
+- 详见 [[论文笔记/BayLing-Duplex|BayLing-Duplex]]
+
 ### ELLSA (Wang et al., 2026)
 - 首个将 turn-taking 概念从纯语音扩展到四模态 (speech+vision+text+action) 的系统
 - **Action turn-taking**: 模型自行判断何时开始执行动作 (收到语音指令后),LIBERO 上成功率 96.4-100%
@@ -193,4 +201,4 @@ WavChat 定义了交互系统需具备的五项关键能力:
 
 ## 演进
 
-VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026)
+VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) / BayLing-Duplex 4 状态 token + timing-only DPO (2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026)

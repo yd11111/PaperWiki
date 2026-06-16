@@ -110,6 +110,16 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - 仅在 LIBERO 仿真环境验证,不支持 backchannel
 - 详见 [[论文笔记/ELLSA|ELLSA]]
 
+### BayLing-Duplex (Fang et al., 2026)
+- 9B 单模型全双工 SpeechLM,从 GLM-4-Voice turn-based checkpoint 微调而来
+- 单一自回归序列三通道交错 (user speech / assistant text / assistant speech),block 粒度 (N=10 speech tokens, M=5 text tokens, Δt=0.8s)
+- 仅 4 个对话状态 token: [SILENCE] (听) / [ASSISTANT] (开始说) / [PAD] (语音续播) / [EPAD] (完成),全双工决策完全归结为 next-token prediction,无辅助分类头/注意力 mask/状态机
+- 与 Raon-SpeechChat 同属单序列交错路线,但状态 token 设计不同 (4 token vs SIL/BOW/BC 3 token),且无 backchannel 支持
+- 训练: 400K SFT (token 权重调整: ω_sil=0.1, ω_role=10) + 200 步 DPO (timing-only pair,仅改 timing 不改 content)
+- TT SR@3s 92.0% vs Moshi 71.9%, ISR@2s 100% vs 81.9%, S2S Score 3.39 vs 2.17 [Table 2]
+- 全双工训练不牺牲生成质量: Llama Q. 46.0% vs turn-based 45.3% [Table 5]
+- 详见 [[论文笔记/BayLing-Duplex|BayLing-Duplex]]
+
 ## Interactive Period Recognition (IPR)
 
 Survey 特别提出 IPR 作为全双工的配套能力:
@@ -195,4 +205,4 @@ WavChat survey 进一步梳理了全双工系统的更多实现:
 
 ## 演进
 
-Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026) → ELLSA (四模态 MIMO 全双工: listen+look+speak+act, SA-MoE, 2026)
+Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026) / BayLing-Duplex (4 状态 token + block 交错, turn-based→full-duplex 微调, 2026) → ELLSA (四模态 MIMO 全双工: listen+look+speak+act, SA-MoE, 2026)

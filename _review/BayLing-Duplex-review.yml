@@ -1,0 +1,72 @@
+paper: BayLing-Duplex
+reviewer: auto
+date: 2026-06-16
+conclusion: pass
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节对每个关键设计选择都给出了 WHY 解释: block 粒度 vs 逐 token 交错 (保持文本分布连续性)、N=10/M=5 的选择 (感知延迟阈值 + 自然语速匹配)、token vs 分类头 (全归结于 next-token prediction)、因果偏移 (one-block lookahead 保持因果性)、沉默连续编码 (避免分布断裂)。每个解释明确标注 [论文原文] 或 [agent 解读]。速查卡片可借鉴字段列出 4 个具体可迁移 trick。"
+  trustworthy:
+    score: 9
+    rationale: "所有关键数字均与 PDF 原文交叉验证一致: Table 1 (Llama Q. 46.0/21.0, Web Q. 18.1/9.2), Table 2 (TT SR@3s 92.0/88.9/71.9, S2S 3.39/3.23/2.17, ISR@2s 100.0/91.4/81.9), Table 3 (token weight 消融 4 行), Table 4 (DPO 消融), Table 5 (全双工 vs turn-based)。指标名与原文表头一致。方向性标注正确 (SR↑, S2S↑, Overlap↓)。训练超参 (batch 32, lr 1e-5, 1 epoch, DPO 200 steps, β=0.5, λ_ftx=0.5) 均与 §4.1 一致。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读] 标注覆盖方法节全部因果解释。block 粒度选择有双重标注 (论文原文引用 §5 + agent 解读补充)。因果偏移的 one-block lookahead 标注为 agent 解读。沉默编码引用原文后附 agent 解读。无把推断写成断言的情况。"
+  positionable:
+    score: 9
+    rationale: "KB 背景基于 5 个实体页,谱系定位清晰: 与 Moshi 并行双流 RVQ 的路线对比、与 Raon-SpeechChat 同期状态 token 方案的比较、在 Full-duplex 演进线中的位置 (dGSLM→Moshi→LSLM→OmniFlatten→Raon→BayLing-Duplex)。创新判断有 3 点具体对比基准。frontmatter concepts 列 4 个实体, models 列 4 个。"
+  non_polluting:
+    score: 8
+    rationale: "无新建概念页。反向更新计划为 key_papers 追加 (append) 至 Full-duplexSpokenDialogue、Turn-takinginSpokenDialogue、SpeechLanguageModel 等页面。注意 Full-duplexSpokenDialogue 已有 17 个 key_papers (超 12 上限),应追加到正文演进节而非 key_papers 列表。"
+
+issues:
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 列了 LLaMA-Omni 和 LLaMA-Omni 2,但这两个模型在论文中是数据来源和相关工作,未出现在评估表中作为 baseline。严格来说 models 应列本文提出的模型 + 评估 baseline (GLM-4-Voice 是 backbone, Moshi 是唯一 baseline)。不过 LLaMA-Omni 2 作为数据来源确实与本文深度相关。"
+    suggestion: "可保留,不影响可信性"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter tasks 字段"
+    detail: "tasks 字段为空数组,论文涉及 full-duplex spoken dialogue、spoken QA 等任务"
+    suggestion: "待任务库扩展后补充"
+    status: noted
+
+  - type: traceability-gap
+    severity: low
+    location: "训练策略 Stage II DPO 节"
+    detail: "DPO 的 SFT 辅助项公式标注为 [§2.2],但 DPO pair 设计表格标注为 [§3],实际两者均在 §3 详细描述。§2.2 仅为概述。"
+    suggestion: "不影响可信性,可在后续批量修正时统一"
+    status: noted
+
+checklist:
+  reproducible:
+    method_has_causal_explanation: true
+    design_choices_justified: true
+    reusable_ideas_concrete: true
+  trustworthy:
+    claims_have_sources: true
+    metrics_correct: true
+    quick_card_has_numbers: true
+    no_direction_errors: true
+    baseline_numbers_verified: true
+    ablation_numbers_consistent: true
+  distinguishable:
+    causal_explanations_labeled: true
+    label_coverage_above_80pct: true
+    no_inference_as_assertion: true
+    strong_claims_supported: true
+  positionable:
+    kb_background_has_lineage: true
+    innovation_has_baseline: true
+    frontmatter_fields_present: true
+    frontmatter_semantically_correct: true
+    quick_card_5_fields_substantive: true
+  non_polluting:
+    new_concept_pages_meet_criteria: na
+    no_semantic_duplicates: na
+    reverse_updates_no_errors: pending
+    reverse_updates_correctly_classified: pending

@@ -226,3 +226,7 @@ $$L = L_{DPO} + \lambda_{ftx} \cdot L_{SFT}(s^+)$$
 3. **SFT loss 的 token 权重调整**: 当序列中某些 token 类型极度稀疏(如控制 token)时,uniform loss 权重会让这些 token 的学习信号被淹没。通过降低高频 token(silence)权重 + 提高稀有 token 权重的组合,解决类不平衡问题。这个方案比 focal loss 等更直接且可解释。
 
 4. **"Turn-based → Full-duplex 微调"技术路线**: 对于资源有限的团队,先训练/获取强 turn-based SpeechLM,再通过少量结构化数据微调获得全双工能力,比从头训练全双工系统成本低几个数量级。
+
+> [!review] 审阅: pass (2026-06-16)
+> 审阅报告: [[_review/BayLing-Duplex-review.yml]]
+> 所有关键数字与 PDF 原文交叉验证一致 (Tables 1-5)。方法节因果解释充分,来源标注覆盖率 ≥ 80%。3 个 low severity issues (frontmatter models/tasks 语义、§ 标注微调),均不影响可信性。
