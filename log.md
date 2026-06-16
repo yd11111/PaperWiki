@@ -1,5 +1,15 @@
 # Log
 
+## 2026-06-16
+
+- [kb/search] [[BayLing-Duplex]] — 命中 5 页: [[Full-duplexSpokenDialogue]]✓, [[Turn-takinginSpokenDialogue]]✓, [[SpeechLanguageModel]]✓, [[StreamingSpokenDialogue]]✓, [[Speech-LLMIntegrationTaxonomy]]✓
+- [ingest/deep] [[BayLing-Duplex]] — 精读, kb_sources=5 (1 confirmed + 4 pending-review), 新建 0, 追加 3 (Full-duplexSpokenDialogue body+演进, Turn-takinginSpokenDialogue body+演进, SpeechLanguageModel 演进)
+- [review/auto] [[BayLing-Duplex]] — pass, 3 issues (0 high, 0 medium, 3 low)
+- [skip/update] [[Full-duplexSpokenDialogue]] — key_papers 已达上限(17>12),改追加到正文
+- [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(22>12),改追加到正文
+- [skip/update] [[SpeechLanguageModel]] — key_papers 已达上限(46>12),改追加到演进
+- [lint/local] BayLing-Duplex — 通过
+
 ## 2026-06-12
 
 - [kb/search] [[StateInertia-FD-SLM]] — 命中 5 页: [[Full-duplexSpokenDialogue]]✓, [[Turn-takinginSpokenDialogue]]✓, [[SpeechLanguageModel]]✓, [[StreamingSpokenDialogue]]✓, [[SpokenDialogueEvaluation]]✓
