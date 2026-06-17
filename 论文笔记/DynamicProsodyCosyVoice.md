@@ -9,7 +9,7 @@ year: 2026
 venue: "arXiv preprint"
 tags: [TTS, prosody, LLM-based, speaker-similarity, CosyVoice, chain-of-thought, zero-shot, style-transfer]
 concepts: ["[[ProsodyModeling]]", "[[LLM-basedTTS]]", "[[SpeechFactorization]]", "[[SpeakerEmbedding]]"]
-models: ["[[模型库/CosyVoice]]", "[[论文笔记/RALL-E|RALL-E]]", "[[论文笔记/Vevo2|Vevo 1.5]]", "[[论文笔记/F5-TTS|F5-TTS]]"]
+models: ["[[模型库/CosyVoice]]", "[[论文笔记/RALL-E|RALL-E]]", "Vevo1.5", "F5-TTS"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[数据集/Emilia]]", "ESD", "AISHELL-3", "WenetSpeech"]
 kb_context_sources: 6
@@ -112,7 +112,7 @@ $$z_{i,t} = p(C^s | v, X, q_{1:i-1}, S_{1:i-1}, q_i, s_{i,1:t-1})$$
 $$L = -\alpha \frac{1}{I}\sum_{i=1}^{I} \hat{y}_i \log y_i - (1-\alpha) \frac{1}{\sum(T_i+1)} \sum_{i=1}^{I}\sum_{t=1}^{T_i+1} \hat{z}_{i,t} \log z_{i,t}$$
 
 - 韵律 CE loss + 语音 CE loss 的加权和
-- $\alpha = 0.5$(等权)
+- $\alpha = 0.5$(等权) [§4.2]
 - 韵律 loss 按音节数归一化,语音 loss 按总帧数归一化 [论文原文]
 
 **训练细节 [§4.2]**:
@@ -173,13 +173,14 @@ $$L = -\alpha \frac{1}{I}\sum_{i=1}^{I} \hat{y}_i \log y_i - (1-\alpha) \frac{1}
 | Energy RMSE | 5.93 | 6.42 | 6.39 | ESD | [Table 3] |
 | CER(%) | 10.44 | 13.69 | 13.60 | Internal | [Table 3] |
 | SIM | 0.821 | 0.802 | 0.799 | Internal | [Table 3] |
+| Emotion ACC(%) | 51.63 | 52.31 | 50.23 | Internal | [Table 3] |
 | CER(%) | 10.19 | 11.59 | 11.61 | AISHELL-3 | [Table 3] |
 | Pitch Corr(%) | 92.66 | 90.59 | 90.51 | AISHELL-3 | [Table 3] |
 | Pitch RMSE | 5.91 | 6.66 | 6.52 | AISHELL-3 | [Table 3] |
 
 **全面优于 CosyVoice(50k) 和 CoT**:
 - CER 在所有数据集上显著降低(ESD: 5.66 vs 6.38; Internal: 10.44 vs 13.69),说明韵律显式建模同时改善了语音内容清晰度
-- SIM(emotion2vec+ cosine similarity)和 Emotion ACC 在 ESD 上均最优
+- SIM(emotion2vec+ 情感嵌入的 cosine similarity,注意: 这里是**情感相似度**而非传统 speaker embedding SIM)和 Emotion ACC 在 ESD 上均最优
 - Pitch/Energy 的 Corr 更高、RMSE 更低,直接证明韵律建模能力提升
 
 ### 与开源模型对比 [Table 4, §4.5]
@@ -234,6 +235,22 @@ $$L = -\alpha \frac{1}{I}\sum_{i=1}^{I} \hat{y}_i \log y_i - (1-\alpha) \frac{1}
 2. **动态条件韵律预测**: "先预测韵律,用韵律 condition 后续语音生成,再用生成的语音 condition 下一个韵律预测"的循环依赖策略
 3. **小数据 + 显式韵律建模弥补数据量**: 在资源受限场景下,通过显式建模 variation information 提升模型利用数据的效率
 4. **EOSL Token 的音节级分段**: 在自回归 TTS 中引入音节级分段标记,使 duration 由模型自适应决定而非外部 predictor
+
+## 审阅
+
+> [!review] 审阅 (2026-06-17, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 动态 vs 静态韵律预测的 WHY 清晰,架构对比直观 |
+> | 可信赖 | pass | 全部数字有 [Table N] 标注,抽样与 PDF 交叉验证通过 |
+> | 可区分 | pass | 因果来源标注覆盖良好,[agent 解读]/[论文原文] 区分清楚 |
+> | 可定位 | pass | KB 谱系定位具体(CosyVoice→CoT→Dynamic 演进线) |
+> | 不污染 | pass | 反向更新为追加操作,无新概念页创建 |
+> 
+> Issues: 5 (high: 0, medium: 2, low: 3)
+> 详见 `_review/DynamicProsodyCosyVoice-review.yml`
 
 ---
 

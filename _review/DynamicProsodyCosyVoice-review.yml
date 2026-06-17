@@ -1,0 +1,62 @@
+review:
+  note: "论文笔记/DynamicProsodyCosyVoice.md"
+  date: 2026-06-17
+  reviewer: auto-independent
+  checklist_version: "v1.2"
+  conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 8
+    rationale: "方法的 WHY 清晰(动态 vs 静态韵律预测的动机),关键设计选择都有解释。架构对比(CosyVoice原版 vs CoT vs Dynamic)直观。速查卡片'可借鉴'字段具体。"
+  可信赖:
+    score: 9
+    rationale: "所有实验数字均有 [Table N] 标注,抽样验证 Table 2-4 数字与 PDF 一致。指标名准确(CER/SIM/ACC/Corr/RMSE)且与原文表头一致。"
+  可区分:
+    score: 8
+    rationale: "因果解释来源标注覆盖良好,所有 agent 推断标注了 [agent 解读],论文原文引用标注了 [论文原文] 或 [§X.X]。有一处 [⚠️ 论文未详述] 标注。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节谱系定位具体(CosyVoice → CoT → Dynamic 演进线),创新判断有对比基准。点评节与 KB 中 ProsodyModeling 演进线对照。"
+  不污染:
+    score: 8
+    rationale: "frontmatter concepts/models/datasets 合理。无新概念页需创建。反向更新为纯追加操作,风险低。"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter datasets"
+    detail: "datasets 中 ESD、AISHELL-3、WenetSpeech 为纯文本而非 wikilink,但 vault 中可能无对应数据集页。需确认是否已有数据集页。"
+    suggestion: "检查数据集页是否存在,若存在则改为 wikilink;若不存在则保持纯文本(符合 key_papers 规则但 datasets 无明确禁止纯文本的规则)。"
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "方法节 - 训练策略"
+    detail: "α=0.5 的选择未标注出处(是论文原文直接给的还是默认值)。"
+    suggestion: "补充 [§3.3] 或 [§4.2] 引用。"
+
+  - id: 3
+    severity: low
+    type: weak-reusability
+    location: "可复用的 idea #3"
+    detail: "'小数据 + 显式韵律建模弥补数据量' 稍泛,可更具体。"
+    suggestion: "补充具体数字对比(50k vs 170k 场景下 ESD preference 44.8% vs 32.7%)使 idea 更有说服力。"
+
+  - id: 4
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models"
+    detail: "Vevo 1.5 链接为 [[论文笔记/Vevo2|Vevo 1.5]],但 vault 中实际文件名为 Vevo2.md 且该文件对应 Vevo 2 而非 Vevo 1.5。Vevo 1.5 可能无独立笔记。"
+    suggestion: "若 Vevo2.md 实际是 Vevo 1.5+2 的合并页则保留;否则改为纯文本 'Vevo1.5'。另外检查 F5-TTS 笔记是否存在。"
+
+  - id: 5
+    severity: low
+    type: traceability-gap
+    location: "实验节 - 客观评估"
+    detail: "Internal 数据集的 Emotion ACC 和 Energy/Pitch 指标在 Table 3 中有值,但笔记中 Internal 仅列了 CER 和 SIM,遗漏了 Emotion ACC(52.31/50.23/51.63)。"
+    suggestion: "补充 Internal 数据集的 Emotion ACC 行。"
+
+learning_signals:
+  - "论文使用 emotion2vec+ 计算 SIM(情感相似度)而非传统 speaker embedding SIM,笔记中需注意区分两者"
