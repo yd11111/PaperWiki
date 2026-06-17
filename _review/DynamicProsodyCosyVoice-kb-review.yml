@@ -1,0 +1,40 @@
+kb_review:
+  note: "论文笔记/DynamicProsodyCosyVoice.md"
+  date: 2026-06-17
+  reviewer: auto-independent
+  conclusion: pass
+
+change_plan:
+  - target: "概念库/ProsodyModeling.md"
+    action: append-body
+    reason: "key_papers >20 (遗留页面); 论文对韵律建模有直接贡献(提出动态预测策略)"
+    content: "在'在现代 LLM-TTS 中的韵律建模'小节追加动态韵律预测条目"
+    status_change: none
+
+  - target: "概念库/LLM-basedTTS.md"
+    action: skip
+    reason: "key_papers >20 (遗留页面); 论文是 CosyVoice 框架改进,但对 LLM-based TTS 范式无新范式级贡献,仅是韵律建模技巧;已有 CosyVoice 模型页覆盖"
+    status_change: none
+
+  - target: "模型库/CosyVoice.md"
+    action: append-body
+    reason: "key_papers = 12 (达到上限); 论文是基于 CosyVoice 的直接扩展"
+    content: "在'作为 Baseline 被引用'段或新段追加一行引用"
+    status_change: none
+
+  - target: "概念库/SpeakerEmbedding.md"
+    action: skip
+    reason: "论文仅使用 CAM++ speaker embedding,无新见解,属于下游使用"
+    status_change: none
+
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: skip
+    reason: "论文使用 flow matching 模块未做修改,无新贡献"
+    status_change: none
+
+  - target: "概念库/SpeechFactorization.md"
+    action: skip
+    reason: "论文通过 prosody token 实现部分韵律-音色解耦,但未提出新解耦方法,属于下游应用"
+    status_change: none
+
+issues: []
