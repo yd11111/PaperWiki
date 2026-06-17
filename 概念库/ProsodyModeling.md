@@ -127,6 +127,7 @@ Survey 将 Prosody Control 定义为可控 TTS 的最基本任务,涵盖对 pitc
 - **CosyVoice**: speech tokenizer 编码部分韵律信息 + CFM 还原声学细节
 - **MaskGCT**: masked generative modeling 隐式学习韵律分布
 - **LLM-based 局限**: 隐式建模使细粒度韵律控制困难 (Survey 指出这是关键挑战)
+- **动态韵律预测**: [[论文笔记/DynamicProsodyCosyVoice|Mou et al. (2026)]] 在 CosyVoice LLM 阶段引入逐音节动态韵律 token 预测 --- 与 RALL-E/Vevo1.5 的静态 CoT 预计算不同,每个音节的韵律条件于已生成的前序语音 token,实现"先预测韵律再生成语音"的交替策略。韵律 token 由 4 维特征 (duration/energy/pitch/pitch range) k-means 量化而来。在 ESD 情感数据集上 preference 51.5% vs CosyVoice 28.8%,且 50k 训练优于 170k CosyVoice 开源版 (44.8% vs 32.7%),表明显式韵律建模可弥补数据量差距 [Table 2, 4]
 
 ## 在 SVS 中的韵律建模
 

@@ -51,6 +51,7 @@ Task derivative: [[论文笔记/CosyEdit|CosyEdit]] (Chen et al., 2026) — 基�
 - [[论文笔记/DialogueAgents|DialogueAgents]]
 - [[论文笔记/Prompt-Unseen-Emotion|Prompt-Unseen-Emotion]]
 - [[论文笔记/ParaStyleTTS|ParaStyleTTS]]
+- [[论文笔记/DynamicProsodyCosyVoice|Dynamic Prosody Prediction]] (Mou et al., USTC+iFlytek, 2026) — 在 CosyVoice LLM 阶段引入逐音节动态韵律 token 预测,通过 PQ embedding + EOSL token 实现韵律-语音交替生成,ESD preference 44.8% vs CosyVoice 170k 开源版 32.7%
 
 ## 关键贡献
 
