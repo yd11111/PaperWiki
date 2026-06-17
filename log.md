@@ -1,5 +1,15 @@
 # Log
 
+## 2026-06-17
+
+- [kb/search] [[DynamicProsodyCosyVoice]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[CosyVoice]]✓, [[SpeakerEmbedding]]✓, [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓
+- [ingest/deep] [[DynamicProsodyCosyVoice]] — 精读, kb_sources=6, 新建 0, 追加 2 (ProsodyModeling body, CosyVoice body)
+- [review/auto] [[DynamicProsodyCosyVoice]] — pass-with-fixes, 5 issues (0 high, 2 medium, 3 low)
+- [review/kb] [[DynamicProsodyCosyVoice]] — pass, 0 issues
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(55>12),改追加到正文
+- [skip/update] [[CosyVoice]] — key_papers 已达上限(12),改追加到正文
+- [lint/local] DynamicProsodyCosyVoice — 通过
+
 ## 2026-06-16
 
 - [kb/search] [[BayLing-Duplex]] — 命中 5 页: [[Full-duplexSpokenDialogue]]✓, [[Turn-takinginSpokenDialogue]]✓, [[SpeechLanguageModel]]✓, [[StreamingSpokenDialogue]]✓, [[Speech-LLMIntegrationTaxonomy]]✓
