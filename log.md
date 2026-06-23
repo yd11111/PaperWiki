@@ -2,6 +2,13 @@
 
 ## 2026-06-23
 
+- [kb/search] [[S5-TTS]] — 命中 4 页(取 Top 4): [[LLM-basedTTS]]✓, [[FiniteScalarQuantization]](pending-review), [[CodecLanguageModel]](pending-review), [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓
+- [ingest/deep] [[S5-TTS]] — 精读, kb_sources=4 (2 confirmed + 2 pending-review), 新建 0, 追加 0
+- [review/auto] [[S5-TTS]] — pass-with-fixes, 3 issues (1 medium fixed: DurationPredictor removed; 2 low: SSIM naming clarified, 点评 sourcing noted)
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(90+>20), S5-TTS 为下游使用非直接贡献, 跳过
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限(36>20), S5-TTS 为下游使用, 跳过
+- [skip/update] [[FiniteScalarQuantization]] — S5-TTS 仅使用 FSQ codec 无新贡献, 跳过
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限(60+>20), S5-TTS 主要创新在 streaming 非 zero-shot, 跳过
 - [kb/search] [[NVV-SuperBench]] — 命中 6 页(取 Top 6): [[TTSEvaluation]], [[ProsodyModeling]]✓, [[NaturalLanguageDescriptionforTTS]], [[EmotionControlinTTS]], [[SpokenDialogueEvaluation]], [[InstructedSpeechGeneration]]✓
 - [ingest/deep] [[NVV-SuperBench]] — 精读, kb_sources=6 (2 confirmed + 4 pending-review), 新建 0, 追加 2 (TTSEvaluation body, ProsodyModeling body)
 - [review/auto] [[NVV-SuperBench]] — pass, 0 issues
