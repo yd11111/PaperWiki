@@ -27,6 +27,7 @@
 - [[论文笔记/IterateDifferentiate|Iterate to Differentiate]] — 2026, 递归迭代合成放大模型间性能差距, 恢复客观指标对 SOTA TTS 的区分力
 - [[论文笔记/MCLP|MCLP]] — 2026, LALM continuation likelihood 量化风格一致性的可解释指标
 - [[论文笔记/MINT-Bench|MINT-Bench]] — 2026, 首个结构化多语言 instruction-following TTS benchmark, 分层 taxonomy + 层级混合评估
+- [[论文笔记/NVV-SuperBench|NVV-SuperBench]] — 2026, 45-type NVV taxonomy + multi-axis evaluation protocol (objective/subjective/LLM-judge), 15 systems benchmarked, NVV controllability decouples from speech quality
 - [[论文笔记/SALMONN-Guard|SALMONN-Guard]] — 2026, SACRED-Bench (语音-音频组合黑盒攻击 benchmark) + SALMONN-Guard (联合检查语音+音频+文本)
 - [[论文笔记/Survey-ResponsibleTTSEvaluation|Towards Responsible Evaluation for TTS]] — 2026, 首篇 TTS 评估 position paper, 三层 Responsible Evaluation 框架
 - [[论文笔记/UniSRM|UniSRM]] — 2026, 基于 Qwen2.5-Omni-7B 的统一语音 reward model, SFT+RCR-GRPO 两阶段, 4 种评估任务
