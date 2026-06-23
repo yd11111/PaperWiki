@@ -1,5 +1,14 @@
 # Log
 
+## 2026-06-23
+
+- [kb/search] [[NVV-SuperBench]] — 命中 6 页(取 Top 6): [[TTSEvaluation]], [[ProsodyModeling]]✓, [[NaturalLanguageDescriptionforTTS]], [[EmotionControlinTTS]], [[SpokenDialogueEvaluation]], [[InstructedSpeechGeneration]]✓
+- [ingest/deep] [[NVV-SuperBench]] — 精读, kb_sources=6 (2 confirmed + 4 pending-review), 新建 0, 追加 2 (TTSEvaluation body, ProsodyModeling body)
+- [review/auto] [[NVV-SuperBench]] — pass, 0 issues
+- [skip/update] [[TTSEvaluation]] — key_papers 已达上限(27>20),改追加到正文
+- [skip/update] [[ProsodyModeling]] — key_papers 已达上限(55>20),改追加到正文
+- [moc] TTS训练与評估-评估与基准 — add NVV-SuperBench
+
 ## 2026-06-17
 
 - [kb/search] [[DynamicProsodyCosyVoice]] — 命中 6 页(取 Top 6): [[ProsodyModeling]]✓, [[LLM-basedTTS]]✓, [[CosyVoice]]✓, [[SpeakerEmbedding]]✓, [[ConditionalFlowMatching]]✓, [[SpeechFactorization]]✓
