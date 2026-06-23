@@ -257,16 +257,16 @@ NVV-SuperBench 在三个方面推进了 NVV 评估的边界:
 
 ## 审阅
 
-> [!review] 审阅 (pending)
-> **结论**: pending
+> [!review] 审阅 (2026-06-23, auto)
+> **结论**: pass
 > 
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 | pending | — |
-> | 可信赖 | pending | — |
-> | 可区分 | pending | — |
-> | 可定位 | pending | — |
-> | 不污染 | pending | — |
+> | 可复述 | pass | taxonomy 设计原则 + 数据 pipeline 动机 + GT-conditioned 设计理由充分 |
+> | 可信赖 | pass | 数字准确 (抽查 Table 3/4/6 一致), benchmark 论文 models 字段正确为空 |
+> | 可区分 | pass | 因果解释来源标注覆盖 >85% |
+> | 可定位 | pass | 与 NV-Bench/NVSpeech/InstructTTSEval 定位清晰 |
+> | 不污染 | pass | 反向更新仅追加 key_papers |
 > 
-> Issues: pending
+> Issues: 0 (high: 0, medium: 0, low: 0)
 > 详见 `_review/NVV-SuperBench-review.yml`

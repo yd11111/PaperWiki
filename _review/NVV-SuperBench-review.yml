@@ -1,0 +1,26 @@
+review:
+  paper: "NVV-SuperBench"
+  date: "2026-06-23"
+  reviewer: "auto"
+  verdict: "pass"
+
+principles:
+  可复述:
+    status: pass
+    notes: "方法节清晰解释了 taxonomy 设计原则 (为什么细分/不细分)、数据构建三阶段 pipeline 的每步动机、GT-conditioned verification 的设计理由。4 个关键设计选择有 WHY 解释。速查卡片可借鉴字段具体且可迁移。"
+  可信赖:
+    status: pass
+    notes: "数字型 claim 覆盖率高 (>90%),所有关键数字标注了 [Table N]/[§X.X]/[Fig N]。抽查 ElevenLabs EN NVV PE 3.92 [Table 4]、Qwen3-TTS EN WER 2.06 [Table 3]、Table 6 CMOS 数字 — 均与原文一致。Benchmark 论文: models 字段为空 (正确,被评估系统在正文讨论),datasets 列了 NVV-SuperBench。指标方向正确 (WER↓, F1↑ 等)。"
+  可区分:
+    status: pass
+    notes: "因果解释均标注了 [论文原文] 或 [agent 解读]。局限性明确区分了论文自述和 agent 推断。覆盖率 >85%。"
+  可定位:
+    status: pass
+    notes: "KB 背景详细,与 NV-Bench 的对比定位清晰 (45 vs 14 types, multi-axis vs PCER)。与 NVSpeech 18 类、InstructTTSEval 的关系明确。谱系关系清楚。"
+  不污染:
+    status: pass
+    notes: "无新建概念页需求。反向更新计划仅追加 key_papers 到已有实体页,内容准确。"
+
+issues: []
+
+summary: "高质量 benchmark 论文笔记。Taxonomy + 数据构建 + 评估协议三部分结构清晰,关键设计选择有因果解释,实验结果组织合理 (按 prompt-based/tag-based 分块,核心发现突出)。数字准确,来源标注完备。无 high 或 medium issue。"
