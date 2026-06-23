@@ -4,7 +4,7 @@ title: "Turn-taking in Spoken Dialogue"
 aliases: [轮次切换, Barge-in Handling, 打断处理, Turn Management, Backchannel, 回传信号, Interruption Handling, 对话交互管理]
 category: "technique"
 tags: [speech-LM, dialogue, turn-taking, interaction, barge-in, backchannel, full-duplex, real-time]
-key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "Parrot (2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "SyncLLM (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "Duplex Conversation (2024)", "TurnGPT (Ekstedt & Skantze, 2020)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]", "[[论文笔记/DialoSpeech|DialoSpeech]]"]
+key_papers: ["dGSLM (Nguyen et al., 2023)", "Moshi (Defossez et al., 2024)", "VITA (Fu et al., 2024)", "Parrot (2024)", "Mini-Omni 2 (Xie & Wu, 2024)", "SyncLLM (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "CleanS2S (2024)", "Duplex Conversation (2024)", "TurnGPT (Ekstedt & Skantze, 2020)", "[[论文笔记/PersonaPlex|PersonaPlex (Roy et al., 2026)]]", "[[论文笔记/DialogueAgents|DialogueAgents]]", "[[论文笔记/ZipVoice-Dialog|ZipVoice-Dialog]]", "[[论文笔记/DialoSpeech|DialoSpeech]]", "[[论文笔记/ModeratorLM|ModeratorLM (Mitra et al., 2026)]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[Full-duplexSpokenDialogue]]", "[[StreamingSpokenDialogue]]", "[[SpokenDialogueEvaluation]]", "[[SpeechLanguageModel]]"]
 status: pending-review
@@ -201,4 +201,4 @@ WavChat 定义了交互系统需具备的五项关键能力:
 
 ## 演进
 
-VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) / BayLing-Duplex 4 状态 token + timing-only DPO (2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026)
+VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) / BayLing-Duplex 4 状态 token + timing-only DPO (2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026) → [[论文笔记/ModeratorLM|ModeratorLM]] role-conditioned multi-party turn-taking + CoT reasoning (2026)
