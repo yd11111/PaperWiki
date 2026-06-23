@@ -1,0 +1,48 @@
+review:
+  paper: "FlowTTS-GRPO"
+  note_path: "论文笔记/FlowTTS-GRPO.md"
+  reviewer: "auto"
+  date: "2026-06-23"
+  conclusion: "pass-with-fixes"
+
+principles:
+  reproducible:
+    score: 8
+    reason: "方法节详细解释了 ODE→SDE 转换的 WHY (FM 确定性推理缺乏 RL 随机性) 和 HOW (Eq.6-7 公式, window training 策略)。关键设计选择都有因果解释。速查卡片可借鉴字段具体可迁移。"
+  trustworthy:
+    score: 8
+    reason: "主要数字均标注了 Table/Fig 出处,数字与 PDF 原文交叉核对一致。指标名称正确 (SS1/SS2/P835/CER/WER 区分清楚)。消融结论与数字吻合。"
+  distinguishable:
+    score: 9
+    reason: "因果解释来源标注完整 ([论文原文] vs [agent 解读]),覆盖率高。无将推断写成断言的问题。SOTA claim 有具体数字支撑 (SS1 0.804 vs Seed-TTS 0.796)。"
+  locatable:
+    score: 9
+    reason: "KB 背景节谱系定位清晰,明确了本文在 TTS RL post-training 演进线中的位置 (FM 侧 vs LLM 侧),与 F5R-TTS/DiffRO/GRPO-TTS 的对比具体。frontmatter 字段完整。"
+  no_pollution:
+    score: 8
+    reason: "反向更新预期为追加 (key_papers 到 ConditionalFlowMatching, DifferentiableRewardOptimization, CosyVoice3, SEED-TTS-Eval 等),均为追加操作不改 status。无需新建概念页。"
+
+issues:
+  - id: 1
+    type: "template-compliance"
+    severity: "medium"
+    location: "frontmatter models"
+    detail: "F5-TTS 在模型库中无实体页,但在 frontmatter models 中未用 wikilink。F5R-TTS, MaskGCT, Seed-TTS, Llasa-1B 同理。建议已有笔记的用 wikilink 格式。"
+    suggestion: "将已有笔记的模型改为 wikilink: F5R-TTS → [[F5R-TTS]], MaskGCT → [[MaskGCT]], Seed-TTS → [[Seed-TTS]], Llasa-1B → [[Llasa]]"
+
+  - id: 2
+    type: "traceability-gap"
+    severity: "low"
+    location: "消融实验 - 噪声水平"
+    detail: "噪声水平消融结论 'a=0.5 达到训练饱和点' 未引用具体数字对比 (Fig.8 中 noise=0.5 vs noise=0.3 的 SS2 值差异)。"
+    suggestion: "补充 Fig.8 中 noise level 0.1/0.3/0.5 对应的最终 SS2 数字。"
+
+  - id: 3
+    type: "traceability-gap"
+    severity: "low"
+    location: "跨语言泛化"
+    detail: "跨语言泛化部分仅定性描述,未引用 Table 3 中具体数字。"
+    suggestion: "至少引用 1-2 个语言的具体 SS 改善数字以增强可信度。"
+
+learning_signals:
+  - "F5-TTS baseline CER 在 'TTS Models w/o RL' 段 (1.56) 与 'Our FlowTTS-GRPO' Step 0 (1.81) 不同,后者是本文自行重跑的结果。笔记正确使用了 Step 0 数字,但可标注此差异。"

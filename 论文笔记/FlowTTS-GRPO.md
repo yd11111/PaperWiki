@@ -9,7 +9,7 @@ year: 2026
 venue: "Interspeech 2026"
 tags: [TTS, reinforcement-learning, flow-matching, GRPO, post-training, zero-shot, speaker-similarity]
 concepts: ["[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]", "[[Classifier-FreeGuidance]]", "[[LLM-basedTTS]]"]
-models: ["[[CosyVoice3]]", "[[CosyVoice2]]", "[[CosyVoice]]", "F5-TTS", "F5R-TTS", "MaskGCT", "Seed-TTS", "Llasa-1B"]
+models: ["[[CosyVoice3]]", "[[CosyVoice2]]", "[[CosyVoice]]", "F5-TTS", "[[F5R-TTS]]", "[[MaskGCT]]", "[[Seed-TTS]]", "[[Llasa]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]"]
 datasets: ["[[SEED-TTS-Eval]]", "[[CV3-Eval]]", "WenetSpeech4TTS", "LibriTTS-960"]
 kb_context_sources: 6
@@ -195,3 +195,8 @@ A/B preference test (30 样本, 10 评审员) [Fig.9, Fig.10]:
 3. **训练时去 CFG**: FM-based 模型做 RL 时去掉 CFG 增加探索,推理时恢复 CFG,对条件速度场的优化仍然有效
 4. **Functional decoupling**: LLM+FM hybrid 系统中,分别对 LM 和 FM 做 targeted RL 可以更高效地改善不同维度的指标
 5. **Hard case synthesis 策略** (LWR/SMR/GSR): 简单的文本重复增强即可构造有效的困难训练样本,对 FM-only 系统的 intelligibility 改善尤为有效
+
+> [!review] 审阅结论: pass-with-fixes (2026-06-23)
+> reproducible: 8 | trustworthy: 8 | distinguishable: 9 | locatable: 9 | no_pollution: 8
+> issues: 3 (1 medium, 2 low) — 详见 `_review/FlowTTS-GRPO-review.yml`
+> medium fix applied: frontmatter models 字段已补充 wikilink
