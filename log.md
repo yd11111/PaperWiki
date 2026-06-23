@@ -15,6 +15,15 @@
 - [skip/update] [[TTSEvaluation]] — key_papers 已达上限(27>20),改追加到正文
 - [skip/update] [[ProsodyModeling]] — key_papers 已达上限(55>20),改追加到正文
 - [moc] TTS训练与評估-评估与基准 — add NVV-SuperBench
+- [kb/search] [[FlowTTS-GRPO]] — 命中 6 页: [[ConditionalFlowMatching]]✓, [[DifferentiableRewardOptimization]](pending-review), [[SEED-TTS-Eval]]✓, [[CV3-Eval]](pending-review), [[Classifier-FreeGuidance]](pending-review), [[LLM-basedTTS]]✓
+- [ingest/deep] [[FlowTTS-GRPO]] — 精读, kb_sources=6 (3 confirmed + 3 pending-review), 新建 0
+- [review/auto] [[FlowTTS-GRPO]] — pass-with-fixes, 3 issues (1 medium fixed: frontmatter models wikilinks)
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(68>20),改追加到正文演进线
+- [skip/update] [[DifferentiableRewardOptimization]] — key_papers 已达上限(25>20),改追加到正文+演进线
+- [update/model] [[CosyVoice3]] — key_papers 追加 FlowTTS-GRPO (11/12)
+- [update/dataset] [[SEED-TTS-Eval]] — used_by 追加 + 最新结果追加 FlowTTS-GRPO
+- [update/dataset] [[CV3-Eval]] — used_by 追加 FlowTTS-GRPO
+- [skip/update] [[Classifier-FreeGuidance]] — FlowTTS-GRPO 为下游使用(训练去 CFG 发现),非 CFG 直接贡献,跳过
 
 ## 2026-06-17
 

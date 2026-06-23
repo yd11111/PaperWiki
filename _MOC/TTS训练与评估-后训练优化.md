@@ -41,6 +41,7 @@
 - [[论文笔记/MimicLM|MimicLM]] — 2026, "role-swapping" 数据构造 + interleaved text-audio 建模 + DPO 对齐实现零样本语音模仿
 - [[论文笔记/Step-Audio-R1.5|Step-Audio-R1.5]] — 2026, 提出 "verifiable reward trap" 概念, RLVR 系统性损害音频模型对话自然度
 - [[论文笔记/TARS|TARS]] — 2026, on-policy RL + layer-wise representation alignment + output-level behavior 闭合 Speech LLM 模态推理差距
+- [[论文笔记/FlowTTS-GRPO|FlowTTS-GRPO]] — 2026, ODE→SDE 转换 + GRPO 直接微调 FM-based TTS (作者 claim 首次), SS1 0.804 超越闭源 Seed-TTS
 
 ## 演进脉络
 
@@ -62,6 +63,7 @@ Post-training 演进:
   DMOSpeech (2024, 端到端 CTC+SV direct metric optimization (作者 claim 首次), non-RL, DMD2 蒸馏打通梯度通路)
     → DMOSpeech 2 (2025, component-level GRPO 靶向 duration predictor)
   → F5R-TTS (2025, GRPO for NAR flow-matching TTS via output probabilization, RL 集成 NAR (作者 claim 首次))
+  → FlowTTS-GRPO (2026, ODE→SDE + GRPO 直接微调 FM, 消除独立 generator 依赖)
   → DLPO (2025, RLHF for diffusion TTS)
   → ARDM-DPO (2025, DPO for autoregressive diffusion)
   → NoVerifiableRewardforProsody (2025, 韵律坍缩诊断 + iterative DPO 修复)
