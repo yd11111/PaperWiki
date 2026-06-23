@@ -8,7 +8,7 @@ authors: [Muyang Du, Jason Roche, Junjie Lai]
 year: 2026
 venue: "Interspeech 2026"
 tags: [TTS, streaming, incremental-TTS, low-latency, encoder-decoder, monotonic-alignment, knowledge-distillation, zero-shot, LLM-TTS-pipeline, FSQ-codec]
-concepts: ["[[LLM-basedTTS]]", "[[FiniteScalarQuantization]]", "[[CodecLanguageModel]]", "[[SpeechTokenizer]]", "[[DurationPredictor]]"]
+concepts: ["[[LLM-basedTTS]]", "[[FiniteScalarQuantization]]", "[[CodecLanguageModel]]", "[[SpeechTokenizer]]"]
 models: ["S5-TTS", "T5-TTS", "[[模型库/CosyVoice|CosyVoice]]", "E2-TTS", "MaskGCT", "FireRedTTS"]
 tasks: ["[[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]"]
 datasets: ["LibriTTS", "HiFi-TTS", "VCTK", "UltraChat-200k"]
@@ -137,7 +137,7 @@ $$L = \text{CE}(\text{softmax}(z), y) + \text{CTCLoss}(\alpha, \omega) + L_{aux}
 | --- | --- | --- | --- | --- |
 | WER | 2.65% | 3.20% | LibriTTS (unseen) | [Table 1] |
 | CER | 1.47% | 2.05% | LibriTTS (unseen) | [Table 1] |
-| SSIM | 0.9340 | 0.9356 | LibriTTS (unseen) | [Table 1] |
+| SSIM (Speaker Similarity, WavLM cosine sim) | 0.9340 | 0.9356 | LibriTTS (unseen) | [Table 1] |
 | UTMOS | 3.72 | 3.77 | LibriTTS (unseen) | [Table 1] |
 | MOS | 3.71 ± 0.062 | 3.75 ± 0.064 | LibriTTS (unseen) | [Table 4] |
 | MOS | 4.12 ± 0.054 | 4.21 ± 0.051 | UltraChat (unseen) | [Table 4] |
@@ -211,5 +211,14 @@ IMSD 蒸馏方法也值得关注: text-only 数据 + ASR 过滤的组合既扩�
 5. **k=2 lookahead sweet spot**: 前人工作 (Stephenson et al., 2020) 量化了 1 词 lookahead 恢复 88%、2 词恢复 94% full-context 表征的结论 [§1],S5-TTS 实验验证了 k=2 在质量-延迟之间的最优平衡
 
 ---
+
+> [!review] 审阅结论: pass-with-fixes (2026-06-23, checklist v1.2)
+> - **reproducible**: 8/10 — 方法节详细解释了 LCM 的 WHY 和 HOW;关键设计选择均有因果解释
+> - **trustworthy**: 9/10 — 所有数字均与 PDF 交叉验证一致;claim 标注覆盖率 >90%
+> - **distinguishable**: 8/10 — 因果解释来源标注完整([论文原文]/[agent 解读]);关键处标注了 [⚠️ 论文未详述]
+> - **locatable**: 8/10 — KB 背景节有具体谱系定位(T5-TTS → S5-TTS);创新判断有对比基准
+> - **no_pollution**: 7/10 — ~~concepts 中 DurationPredictor 不准确~~ (已修复: 移除)
+> - **已修复**: issue #1 (移除 DurationPredictor), issue #2 (SSIM 命名澄清)
+> - **详细报告**: [[_review/S5-TTS-review.yml]]
 
 检索命中: [[LLM-basedTTS]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[CodecLanguageModel]](pending-review) | 未命中但可能相关: 无

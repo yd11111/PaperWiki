@@ -1,0 +1,50 @@
+review:
+  paper: "S5-TTS"
+  note_path: "论文笔记/S5-TTS.md"
+  reviewer: auto
+  date: 2026-06-23
+  checklist_version: "v1.2"
+
+principles:
+  reproducible:
+    score: 8
+    rationale: "方法节详细解释了 LCM 的 WHY(训练推理一致性)和 HOW(encoder/decoder 分层 mask + aux attention);关键设计选择均有因果解释;速查卡片可借鉴字段具体"
+  trustworthy:
+    score: 9
+    rationale: "所有数字均与 PDF 交叉验证一致;claim 标注覆盖率高(>90%);指标方向标注正确;消融数字与方法节引用一致"
+  distinguishable:
+    score: 8
+    rationale: "因果解释来源标注完整([论文原文]/[agent 解读]);无断言性推断;关键处标注了 [⚠️ 论文未详述] 等来源区分"
+  locatable:
+    score: 8
+    rationale: "KB 背景节有具体谱系定位(T5-TTS → S5-TTS,对比 VoXtream/StreamMel);创新判断有对比基准;frontmatter 字段完整"
+  no_pollution:
+    score: 7
+    rationale: "concepts 中 DurationPredictor 不太准确(S5-TTS 不使用 duration predictor,用 cross-attention 监控词边界);其余概念挂接合理"
+
+conclusion: pass-with-fixes
+
+issues:
+  - id: 1
+    type: bad-linking
+    severity: medium
+    location: "frontmatter.concepts"
+    detail: "concepts 包含 [[DurationPredictor]],但 S5-TTS 不使用 duration predictor。它通过 cross-attention monitoring 检测词边界,这与 duration predictor 是不同机制。"
+    suggestion: "移除 [[DurationPredictor]],考虑是否需要添加 [[Attention-basedTTS]] 或保持当前列表"
+
+  - id: 2
+    type: metric-naming-ambiguity
+    severity: low
+    location: "实验表 SSIM 列"
+    detail: "论文使用 SSIM 表示 Speaker SIMilarity (WavLM cosine similarity),但 SSIM 在信号处理中通常指 Structural Similarity Index (图像质量指标)。笔记中未澄清此命名"
+    suggestion: "在首次出现 SSIM 时添加括号说明: SSIM (Speaker Similarity, WavLM cosine sim)"
+
+  - id: 3
+    type: traceability-gap
+    severity: low
+    location: "点评节"
+    detail: "点评中提到'encoder-decoder 架构 + streaming 约束反而可能促使模型学到更精确的对齐'是 agent 推断,但点评节未做来源标注(点评节允许 agent 观点,但最好与事实区分)"
+    suggestion: "可忽略,点评节本身是 agent 观点区域"
+
+learning_signals:
+  - "S5-TTS 使用的 SSIM 缩写实际指 Speaker Similarity 而非图像 SSIM,未来遇到此缩写需注意上下文"
