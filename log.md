@@ -1,5 +1,19 @@
 # Log
 
+## 2026-06-25
+
+- [kb/search] [[ZONOS2]] — 命中 6 页(取 Top 6): [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓, [[SEED-TTS-Eval]]✓, [[Zero-shotSpeechSynthesis]]✓, [[LLM-basedTTS]]✓, [[CodecLanguageModel]](pending-review) | 过滤: TTSEvaluation(pending-review), PhonemeRepresentation(pending-review), CV3-Eval(pending-review)
+- [ingest/deep] [[ZONOS2]] — 精读, kb_sources=6 (5 confirmed + 1 pending-review), 新建 1 (ZTTS1-Eval dataset), 追加 3 (SEED-TTS-Eval used_by+results, CV3-Eval used_by+results, SpeakerEmbedding prose)
+- [review/auto] [[ZONOS2]] — pass-with-fixes, 1 medium issue (fixed: ITW set count 描述歧义修正)
+- [skip/update] [[LLM-basedTTS]] — key_papers 已达上限(90+>20), ZONOS2 为下游使用非直接贡献, 跳过
+- [skip/update] [[CodecLanguageModel]] — key_papers 已达上限(37>20), ZONOS2 为下游使用, 跳过
+- [skip/update] [[ResidualVectorQuantization]] — key_papers 已达上限(45>20), ZONOS2 为下游使用, 跳过
+- [skip/update] [[Zero-shotSpeechSynthesis]] — key_models 已达上限(60+>20), ZONOS2 为下游使用, 跳过
+- [create/dataset] [[ZTTS1-Eval]] — 新建数据集页, status=pending-review
+- [update/append] [[SpeakerEmbedding]] — 追加 LDA decorrelation 段落(prose), ZONOS2 对 embedding overfitting 的直接贡献, status 不变(confirmed)
+- [update/append] [[SEED-TTS-Eval]] — 追加 used_by + latest results, status 不变(confirmed)
+- [update/append] [[CV3-Eval]] — 追加 used_by + models, status 不变(pending-review)
+
 ## 2026-06-23
 
 - [kb/search] [[S5-TTS]] — 命中 4 页(取 Top 4): [[LLM-basedTTS]]✓, [[FiniteScalarQuantization]](pending-review), [[CodecLanguageModel]](pending-review), [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓
