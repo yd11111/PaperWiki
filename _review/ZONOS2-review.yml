@@ -1,0 +1,45 @@
+paper: ZONOS2
+reviewer: auto
+date: 2026-06-25
+conclusion: pass-with-fixes
+
+principles:
+  reproducible:
+    score: 9
+    rationale: "方法节对每个关键设计选择都提供了 WHY 解释: MoE 为何前3后1层 dense (routing 稳定性)、byte tokenization 为何替代 G2P (3个失败案例)、LDA 为何必要 (shortcut learning 机制)、delay pattern 的代价 (N-1 lookahead)。速查卡片可借鉴字段列出 5 个具体可迁移 trick,每个都有操作层面的描述。"
+  trustworthy:
+    score: 8
+    rationale: "抽样验证 Table IV/V/VII 中 12 个数字,全部与 PDF 原表一致。指标名 WER/UTMOS/Spk.sim 使用正确。初稿有 1 个 ITW set 规模描述歧义 (已修正)。因果解释来源标注覆盖率 >90%。"
+  distinguishable:
+    score: 9
+    rationale: "[论文原文]/[agent 解读]/[⚠️ 论文未详述] 三级标注清晰。agent 解读标注有 4 处: dense anchor 层的稳定性推断、byte tokenization 与 Qwen3-TTS 对比、GQA 选择的能力代价、speaker conditioning 保守性评价。无推断写成断言的问题。"
+  positionable:
+    score: 9
+    rationale: "KB 背景基于 6 个实体页构建,谱系定位明确 (Codec LM 路线 + VALL-E 范式 + MoE 首创)。与 CosyVoice 系列 prompt-based 方案的对比清晰。创新判断有具体对比基准 (Qwen3-TTS byte tokenization、Seed-TTS-Eval 局限)。frontmatter 字段完整,models 含本文模型 + 6 个 baseline。"
+  non-polluting:
+    score: 8
+    rationale: "反向更新将涉及 6 个已有实体页的 key_papers/used_by 追加和 1 个新数据集页 (ZTTS1-Eval)。追加操作安全。新数据集页满足准入规则 (本文提出的 benchmark,已有多系统评测)。"
+
+issues:
+  - type: factual-error
+    severity: medium
+    location: "ZTTS1-Eval Benchmark 小节, ITW set 描述"
+    detail: "原文写 '17 语言 x 1618 utterances' 暗示每语言 1618 条,但实际 1618 是 17 语言的总计 (Table VI 显示各语言 84-120 条不等)"
+    suggestion: "修正为 '17 语言共 1618 utterances'"
+    status: fixed
+
+  - type: traceability-gap
+    severity: low
+    location: "速查卡片 指标字段"
+    detail: "速查卡片列出了 ITW en 数据但未标注 [Table V],Clean en 数据标注了 [Table IV, V] 但 ITW 数据实际来自 Table V"
+    suggestion: "在 ITW 指标后补充 [Table V] 标注"
+    status: noted
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter models 字段"
+    detail: "models 列了 ZAYA1-8B 作为 router 设计来源,但它不是 TTS 对比 baseline,而是架构参考"
+    suggestion: "ZAYA1-8B 作为架构来源列入 models 可接受,无需修改"
+    status: noted
+
+learning_signals: []

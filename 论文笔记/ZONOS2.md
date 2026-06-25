@@ -133,7 +133,7 @@ LDA 的核心作用是 **decorrelation**: 保留区分不同说话人的方向,�
 [Table III]
 
 Clean set: 9 语言 x 500 utterances from FLEURS-R (~13h) [§V]
-ITW set: 17 语言 x 1618 utterances from VoxBlink2 (~3h) [§V, Table VI]
+ITW set: 17 语言共 1618 utterances from VoxBlink2 (~3h) [§V, Table VI]
 
 ## 实验
 
@@ -186,3 +186,10 @@ ITW set: 17 语言 x 1618 utterances from VoxBlink2 (~3h) [§V, Table VI]
 3. **Multi-ASR ensemble 数据过滤**: 用多个 ASR 系统的 inter-system WER 作为数据质量代理,不同训练阶段使用不同阈值。简单有效的数据清洗方案
 4. **ZTTS1-Eval 的 prosody diversity metrics**: TTSDS2 + DS-WED 可作为通用的 TTS 韵律多样性评估工具,补充 WER/SIM 的不足
 5. **Dense anchor layers in MoE**: 在 MoE backbone 的首尾保留 dense 层以稳定 routing,这个模式可能对其他模态的 MoE 应用也有参考价值
+
+## 审阅
+
+> [!review] Auto-review 2026-06-25: pass-with-fixes, 1 medium issue (fixed)
+> - [medium/fixed] ITW set 规模描述歧义: "17 语言 x 1618 utterances" 修正为 "17 语言共 1618 utterances"
+> - [low/noted] 速查卡片 ITW 指标缺 [Table V] 标注
+> - 详见 `_review/ZONOS2-review.yml`
