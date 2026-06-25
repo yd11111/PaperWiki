@@ -11,7 +11,7 @@ tags: [TTS, MoE, zero-shot, voice-cloning, autoregressive, codec-LM, multilingua
 concepts: ["[[LLM-basedTTS]]", "[[ResidualVectorQuantization]]", "[[SpeakerEmbedding]]", "[[CodecLanguageModel]]", "[[TTSEvaluation]]", "[[PhonemeRepresentation]]"]
 models: ["[[模型库/EnCodec|DAC]]", "Zonos-v0.1", "ZONOS2", "Qwen3-TTS", "Fish-S2-Pro", "VoxCPM2", "Cartesia-Sonic-3.5", "ElevenLabs-V3", "Gemini-3.1-Flash", "Inworld-TTS-2", "ZAYA1-8B"]
 tasks: ["[[任务库/Zero-shotSpeechSynthesis]]"]
-datasets: ["[[数据集/SEED-TTS-Eval]]", "[[数据集/CV3-Eval]]", "ZTTS1-Eval", "FLEURS-R", "VoxBlink2"]
+datasets: ["[[数据集/SEED-TTS-Eval]]", "[[数据集/CV3-Eval]]", "[[数据集/ZTTS1-Eval]]", "FLEURS-R", "VoxBlink2"]
 kb_context_sources: 6
 status: draft
 created: 2026-06-25

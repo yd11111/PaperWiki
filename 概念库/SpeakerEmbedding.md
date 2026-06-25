@@ -43,6 +43,10 @@ Speaker Embedding 是将说话人身份信息编码为固定维度向量的表�
 - GE2E: Generalized end-to-end loss 训练的 encoder
 - ECAPA-TDNN: 强 speaker verification 模型, 常用于 TTS
 
+### Embedding Overfitting 与 LDA Decorrelation
+
+[[论文笔记/ZONOS2|ZONOS2]] (Clark et al., 2026) 揭示了 speaker embedding 的 bandwidth-overfitting 矛盾: 高带宽 embedding (如 ECAPA-TDNN 2048d) 在携带 speaker identity 的同时也泄漏目标音频的 utterance-specific 信息 (lexical content, pause timing, duration),导致模型走 shortcut 而非学习通用 text-to-speech 映射。解决方案是对 ECAPA-TDNN 2048d embedding 施加 LDA (Linear Discriminant Analysis) 投影降至 1024d,最大化 between-speaker 方差 / within-speaker 方差,过滤 nuisance factors。配合两阶段 annealing (Stage 1: random crop + loss masking; Stage 2: 全序列覆盖 + 移除 masking) 延长可用训练 horizon [§II.C, §IV.C]。
+
 ## 在 TTS 中的注入方式
 
 Speaker embedding 注入 TTS 模型的常见方法:
