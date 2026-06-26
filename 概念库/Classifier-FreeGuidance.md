@@ -110,7 +110,7 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 ## 演进
 
-Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导) --> APG 替代 CFG (LongCat-AudioDiT, 2026, Adaptive Projection Guidance 衰减平行分量消除 oversaturation)
+Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导) --> APG 替代 CFG (LongCat-AudioDiT, 2026, Adaptive Projection Guidance 衰减平行分量消除 oversaturation) --> CFG 蒸馏吸收 ([[论文笔记/Wan-Streamer|Wan-Streamer]], 2026, teacher CFG 效果通过 rolling distillation 内化进 student,推理时无需双倍计算,与 DSFlow 的 CFG 内化发现一致)
 
 ## Adaptive Projection Guidance (APG) 替代方案
 

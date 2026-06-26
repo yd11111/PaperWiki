@@ -205,4 +205,4 @@ WavChat survey 进一步梳理了全双工系统的更多实现:
 
 ## 演进
 
-Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026) / BayLing-Duplex (4 状态 token + block 交错, turn-based→full-duplex 微调, 2026) → ELLSA (四模态 MIMO 全双工: listen+look+speak+act, SA-MoE, 2026)
+Traditional (完整输入→完整输出) → Streaming (低延迟, 2023) → dGSLM (首个全双工, 双 transformer, 2023) → NTPP (单模型 token-pair, 2024) → Moshi (RQ-Transformer 全双工, 2024) → LSLM (边说边听, 2024) → VITA/MiniCPM-o (IPR, 多模态, 2024) → FlexDuo (可插拔, 2025) → Raon-SpeechChat (SIL/BOW/BC 状态建模, 单序列交错三模态, 2026) / BayLing-Duplex (4 状态 token + block 交错, turn-based→full-duplex 微调, 2026) → ELLSA (四模态 MIMO 全双工: listen+look+speak+act, SA-MoE, 2026) → [[论文笔记/Wan-Streamer|Wan-Streamer]] (首个将 text/audio/video 输入输出统一在单一因果 Transformer 的全双工模型, 含视频生成, block-causal attention + flow matching 联合音视频 latent 生成, ~200ms model-side latency, 2026)
