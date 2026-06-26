@@ -1,0 +1,124 @@
+review:
+  paper: "Wan-Streamer"
+  note_path: "论文笔记/Wan-Streamer.md"
+  reviewer: "auto (inline fallback, no subagent dispatch available)"
+  date: "2026-06-26"
+  checklist_version: "v1.2"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节详细解释了 block-causal attention、全栈因果化、联合 flow matching、连续 vs 离散 latent 四个关键设计选择的 WHY;三阶段训练和 thinker-performer 推理系统的因果机制清晰;速查可借鉴字段列出 5 个具体可迁移 idea。"
+  可信赖:
+    score: 9
+    rationale: "所有延迟数字(200ms/550ms/350ms/160ms/25FPS/192p)均与 PDF 原文交叉验证一致;Tab 1/Tab 2 中的 baseline 数字抽样核对正确(Moshi 160ms/200ms, Doubao ~1s, Hume 0.9-1.4s, LiveTalk 24.82 FPS);明确声明'本文无标准定量指标';系统论文有端到端延迟验证结果。"
+  可区分:
+    score: 9
+    rationale: "方法节每个因果解释均标注 [论文原文] 或 [agent 解读];设计选择 #4(为什么不用离散 token)明确标注 [⚠️ 论文未详述] 和 [agent 解读];覆盖率 ~95%。"
+  可定位:
+    score: 9
+    rationale: "KB 背景命中 6 个实体页并逐一对比定位(vs Moshi, vs ELLSA, vs CFM TTS 应用, vs DSFlow CFG 内化);创新判断有明确对比基准('系统级因果流设计');点评节进一步与 KB 中 Moshi/ELLSA/级联系统对比。"
+  不污染:
+    score: 9
+    rationale: "无新建概念页计划;concepts 挂接 7 个已有概念页,均有实质关联;models 列出本文模型+Tab 1/Tab 2 中对比的系统;反向更新为追加操作(key_papers + 演进线),风险低。"
+
+checklist:
+  可复述:
+    - item: "方法节含因果解释"
+      result: pass
+    - item: "设计选择有 WHY"
+      result: pass
+      note: "4 个设计选择均有 WHY 解释,#4 明确标注论文未详述"
+    - item: "速查可借鉴具体"
+      result: pass
+      note: "5 个具体可迁移 trick,每个都有应用场景"
+
+  可信赖:
+    - item: "数字有出处标注"
+      result: pass
+      note: "覆盖率 ~95%; 延迟数据标注 [§2.4]/[§3]/[Tab 1]/[Tab 2]; 分辨率标注 [§5]"
+    - item: "指标名正确"
+      result: pass
+      note: "仅使用 latency/FPS/resolution,无指标名混淆风险"
+    - item: "速查指标有数字+数据集+来源"
+      result: pass
+      note: "无传统数据集,但延迟数字+分辨率+来源标注完整"
+    - item: "无方向性错误"
+      result: pass
+    - item: "比较表 baseline 数字准确"
+      result: pass
+      note: "抽样验证 Moshi/Doubao/Hume/LiveTalk 4 个 baseline 与 PDF 一致"
+    - item: "无定量指标论文声明"
+      result: pass
+      note: "实验节首行明确声明'本文无标准定量指标'"
+    - item: "系统论文有端到端验证"
+      result: pass
+      note: "有延迟验证;显式说明无生成质量评估"
+
+  可区分:
+    - item: "因果解释有来源标注"
+      result: pass
+    - item: "来源标注覆盖率 ≥ 80%"
+      result: pass
+      note: "估计 ~95%, 每个 WHY 解释均有标注"
+    - item: "无推断写成断言"
+      result: pass
+      note: "设计选择 #4 的推测部分用 '可能原因' 和 [agent 解读] 限定"
+    - item: "强断言有数字支撑"
+      result: pass
+      note: "'首个将视频输入+视频生成完全融入因果流中的全双工基础模型' 有 Tab 1/Tab 2 对比支撑"
+
+  可定位:
+    - item: "KB 背景有具体谱系定位"
+      result: pass
+    - item: "创新判断有对比基准"
+      result: pass
+    - item: "frontmatter 字段存在且非空"
+      result: pass
+    - item: "frontmatter 语义正确"
+      result: pass-with-fixes
+      note: "tasks 和 datasets 为空列表,但这符合论文特性(无标准任务/数据集评估)"
+    - item: "速查卡片 5 字段有实质内容"
+      result: pass
+
+  不污染:
+    - item: "新建概念页满足准入"
+      result: n/a
+      note: "无新建计划"
+    - item: "去重检查"
+      result: n/a
+    - item: "反向更新无 factual-error"
+      result: pass
+    - item: "反向更新分类正确"
+      result: pass
+      note: "计划均为追加操作(key_papers + 演进线末尾),不改 status"
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    location: "frontmatter models 字段"
+    detail: "models 列出了 Tab 1/Tab 2 中所有对比系统共 16 个,略多;部分系统如 Body of Her 仅在 Related Work 中简单提及,不属于直接对比 baseline"
+    suggestion: "可考虑精简 models 只保留 Tab 1/Tab 2 中直接对比的系统,Related Work 中仅提及的系统不必列入 frontmatter"
+    fixed: false
+
+  - id: 2
+    severity: low
+    type: traceability-gap
+    location: "速查卡片 → 路线"
+    detail: "路线字段中 'block-causal attention' 在原文中用于描述 Transformer 整体,但速查卡片将其放在括号中可能给人印象是额外注解"
+    suggestion: "保持原样,表述清晰且准确"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    location: "frontmatter tasks/datasets"
+    detail: "tasks 和 datasets 为空列表;论文确实没有标准任务/数据集评估,但可考虑列出 'real-time-interaction' 或 'full-duplex-dialogue' 作为 tasks"
+    suggestion: "可追加 tasks 但非必须,当前留空不违反规则"
+
+conclusion: "pass-with-fixes"
+high_issues: 0
+medium_issues: 1
+low_issues: 2
+
+learning_signals: []

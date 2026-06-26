@@ -180,3 +180,8 @@ Wan-Streamer 提出了一个极具野心的系统设计: 将 text/audio/video �
 3. **CFG 蒸馏吸收**: 将 teacher 的 CFG 效果蒸馏进 student 以消除推理时的双倍计算,与 DSFlow 的 CFG 内化发现一致,值得在 TTS flow matching 系统中进一步验证
 4. **因果全栈设计原则**: "streamability as modeling constraint" -- 从 encoder/decoder/VAE/attention 全部因果化,而非在 bidirectional 架构上做事后 streaming 适配。这个设计哲学对流式 TTS 系统也有参考价值
 5. **音视频 latent 联合 flow matching**: 在同一 ODE solver 中同时去噪音频和视频 latent,天然实现跨模态同步。可考虑在 speech+gesture、speech+facial expression 等场景中应用
+
+> [!review] 审阅: pass-with-fixes (2026-06-26, checklist v1.2)
+> 0 high / 1 medium / 2 low issues。详见 [[_review/Wan-Streamer-review.yml]]。
+> Medium: models 字段含 Related Work 中仅提及的系统,可精简。
+> 所有延迟数字与 PDF 交叉验证一致;来源标注覆盖率 ~95%;设计选择 WHY 充分;KB 背景命中 6 页,谱系定位清晰。
