@@ -1,5 +1,16 @@
 # Log
 
+## 2026-06-26
+
+- [kb/search] [[Wan-Streamer]] — 命中 6 页: [[Full-duplexSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[ConditionalFlowMatching]]✓, [[Classifier-FreeGuidance]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[DiffusionModel]](pending-review)
+- [ingest/deep] [[Wan-Streamer]] — 精读, kb_sources=6, 反向更新 5 页(演进线追加), 跳过 2 页(DiffusionModel/VariationalAutoencoderforTTS 贡献间接)
+- [review/auto] [[Wan-Streamer]] — pass-with-fixes, 0 high / 1 medium (models 字段含 Related Work 仅提及系统) / 2 low
+- [skip/update] [[ConditionalFlowMatching]] — key_papers 已达上限(69>20), 改追加到演进线正文
+- [skip/update] [[Full-duplexSpokenDialogue]] — key_papers 已达上限(26>20), 改追加到演进线
+- [skip/update] [[StreamingSpokenDialogue]] — key_papers 已达上限(20>12), 改追加到演进线
+- [skip/update] [[Classifier-FreeGuidance]] — key_papers 已达上限(39>20), 改追加到演进线
+- [skip/update] [[Turn-takinginSpokenDialogue]] — key_papers 已达上限(24>20), 改追加到演进线
+
 ## 2026-06-25
 
 - [kb/search] [[ZONOS2]] — 命中 6 页(取 Top 6): [[ResidualVectorQuantization]]✓, [[SpeakerEmbedding]]✓, [[SEED-TTS-Eval]]✓, [[Zero-shotSpeechSynthesis]]✓, [[LLM-basedTTS]]✓, [[CodecLanguageModel]](pending-review) | 过滤: TTSEvaluation(pending-review), PhonemeRepresentation(pending-review), CV3-Eval(pending-review)
