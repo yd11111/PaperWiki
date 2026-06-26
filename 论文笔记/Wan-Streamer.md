@@ -40,6 +40,8 @@ updated: 2026-06-26
 > - **可借鉴**: (1) Thinker-performer 双 GPU 流水线设计将感知/状态更新与昂贵的 flow matching 生成解耦,通过 KV-cache 交换保持统一模型语义; (2) Rolling distillation + self-forcing 策略解决 autoregressive 长时序生成的 train-test mismatch; (3) 将 CFG 通过蒸馏吸收进 student 减少推理开销
 > - **局限**: 仅 192p 输出分辨率 (proof of concept); 无定量生成质量评估 (无 MOS/FID/FVD/SIM); 训练数据混合和规模未披露; 无开源; 无 ablation 实验
 
+![Wan-Streamer 系统架构: 单一因果 Transformer 统一 text/audio/video 输入输出](https://arxiv.org/html/2606.25041v2/x1.png)
+
 ## 核心问题
 
 本文要解决的核心问题是: **如何构建一个原生流式 (native-streaming)、端到端的多模态交互基础模型,使其能够以亚秒级延迟实现全双工的音视频交互?**
