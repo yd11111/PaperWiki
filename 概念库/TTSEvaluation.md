@@ -155,6 +155,10 @@ Minixhofer et al. (2024) 提出 TTSDS (Text-to-Speech Distribution Score),首个
 
 TTSDS2 (ICLR 2026 under review) 提出**分布级**客观评估指标，在 20 个开源 TTS 系统、4 个域 (Clean/Noisy/Wild/Kids)、14 语言上验证。TTSDS2 使用 Wasserstein-2 距离比较合成与真实语音的特征分布，分解为 4 个因子 (Generic/Speaker/Prosody/Intelligibility)。核心发现: TTSDS2 是 16 个客观指标中唯一在所有条件下 Spearman ρ>0.5 的指标 (平均 ρ≈0.67)，大幅超越 UTMOSv2 (ρ≈0.12)、PESQ (ρ≈-0.1) 等; 4 个 TTS 系统合成语音被听众评为优于真实录音 [Table 2, Table 3]。同时发布 11,282 条人工 MOS 评分和自动化季度更新的多语言 benchmark pipeline。详见 [[论文笔记/TTSDS2|TTSDS2]]。
 
+### ZTTS1-Eval: Multilingual Comprehensive Benchmark
+
+[[论文笔记/ZONOS2|ZONOS2]] (Clark et al., Zyphra, 2026) 提出 ZTTS1-Eval,针对 Seed-TTS-Eval 的三个局限进行扩展: (1) 语言覆盖从 2 种扩展至最多 17 种; (2) 语音类型从仅 read speech 扩展至 read + in-the-wild spontaneous speech (ITW set 1618 utterances from VoxBlink2); (3) 更新所有评分模型 — ASR 从 Whisper-L/Paraformer 改为 Qwen3-ASR,Speaker similarity 从 WavLM 改为 ReDimNet,新增 MSR-UTMOS 质量评分和 TTSDS2 + DS-WED 韵律/多样性评分。Clean set 为 FLEURS-R 9 语言 x 500 utterances (~13h),ITW set 覆盖 17 语言 (~3h) [§V, Table II]。需注意 ZTTS1-Eval 由 ZONOS2 团队自行提出,且同时更换了所有 scoring 模型,与历史 Seed-TTS-Eval 结果不可直接对比。
+
 ### TTS-PRISM: Multi-dimensional Diagnostic Framework
 
 Wang et al. (2026) 提出 TTS-PRISM,首个面向中文的 12 维分层 TTS 诊断框架。与 GSRM (acoustic-feature-grounded)、SpeechJudge (pairwise preference)、TTSDS2 (distributional) 三条路线不同,TTS-PRISM 走"显式 schema + 端到端模型"路线: 定义 12 个维度的量化评分标准 (Basic Capability 8 维 1-5 分 + Advanced Expressiveness 4 维 0-2 分),通过 schema-driven instruction tuning 在 MiMo-Audio (7B) 上实现单次推理的多维评分 + 可解释推理。关键发现: (1) 训练中的对抗负样本至关重要 — 去掉后 LCC 从 0.717 暴跌至 0.150,比不训练还差; (2) 通用 Audio-LLM (Qwen3-Omni RSC=0.88) 展现"推理自洽但声学脱节"的悖论。系统 profiling 产出的 Diagnostic Flag (如 "Stable but Flat"、"Prosody-Limited") 比 MOS 排名提供更多可操作信息。详见 [[论文笔记/TTS-PRISM|TTS-PRISM]]。

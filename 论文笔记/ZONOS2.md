@@ -13,7 +13,7 @@ models: ["[[论文笔记/ZONOS2|ZONOS2]]", "[[论文笔记/Qwen3-TTS|Qwen3-TTS]]
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]"]
 datasets: ["ZTTS1-Eval", "Seed-TTS-Eval", "CV3-Eval", "FLEURS-R", "VoxBlink2", "Common Voice"]
 kb_context_sources: 6
-status: draft
+status: reviewed
 created: 2026-06-29
 updated: 2026-06-29
 ---

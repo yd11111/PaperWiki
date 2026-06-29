@@ -92,6 +92,10 @@ VALL-E 开创的典型两阶段:
 - [[论文笔记/MOSS-TTSD|MOSS-TTSD]] (Zhang et al., 2026): Qwen3-8B-base + MOSS-Audio-Tokenizer (16 层 RVQ, 2kbps/12.5Hz) + multi-head delay pattern,支持 5 说话人、60 分钟单次生成、零样本声音克隆;提出基于 forced alignment 的 TTSD-eval 评估框架;三阶段 curriculum learning 从单人到多人对话
 - [[论文笔记/JoyVoice|JoyVoice]] (Yu et al., JD, 2025): E2E Transformer-DiT 联合训练(AR hidden states 直接 conditioning 全局因果 DiT) + MM-Tokenizer (12.5Hz) + 无分割多说话人序列建模(最多 8 说话人、5 分钟),SEED test-zh CER 0.97%,自建 MSMT-eval 多说话人基准 cpCER 1.88% (2spk-zh)
 
+### MoE 架构在 TTS 中的引入
+
+[[论文笔记/ZONOS2|ZONOS2]] (Clark et al., Zyphra, 2026) 首次将 Mixture-of-Experts 架构引入开源 TTS,总参数 8B / 活跃参数 900M。28 层 decoder-only transformer 中前 3 层和最后 1 层为 dense,其余 MoE (16 experts, top-1 routing,末层 top-2)。直接在 DAC 9-codebook tokens 上做自回归生成,使用 delay pattern 处理帧内 codebook 依赖。关键发现: MoE expert balancing 在 audio tokens 上比 text data 更不稳定,normalized entropy 周期性崩塌,需手动调参干预 [§IV-A, §VII-B]。采用 UTF-8 byte tokenization 替代 G2P,在 6.2M 小时数据规模下超越 phoneme 方案。在 voice cloning (Spk.sim) 和 prosody diversity 维度达到开源最佳,但 intelligibility (WER) 尤其中文仍落后于 Qwen3-TTS 等系统 [Table III]。
+
 ## 在可控性方面的特点
 
 **优势**:
