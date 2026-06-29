@@ -97,4 +97,8 @@ Disentanglement 贯穿所有四类 cloning 方法:
 
 ## 演进
 
-Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → External timbre shifter (Seed-VC, 2024) → Global semantic dictionary re-expression (USM-VC, 2025) → Cascaded residual implicit disentanglement (MSR-Codec, 2025) → Fine-grained prosody disentanglement (open problem)
+Reference Encoder (GST, 2018) → 对抗训练 (GRL, 2019) → Information bottleneck (多分支, 2021) → 预训练模型引导 (2022) → Self-distillation (Seed-TTS, 2024) → Factorized codec (NaturalSpeech 3, 2024) → External timbre shifter (Seed-VC, 2024) → Global semantic dictionary re-expression (USM-VC, 2025) → Cascaded residual implicit disentanglement (MSR-Codec, 2025) → FSQ bottleneck for reward space factorization (HPRO, 2026) → Fine-grained prosody disentanglement (open problem)
+
+## FSQ 信息瓶颈在 Reward 空间的应用 (HPRO)
+
+[[论文笔记/HPRO|HPRO]] (Nie et al., 2026) 将 speech factorization 从生成/编码目的扩展到 reward optimization 目的: 用 FSQ 双流信息瓶颈 (content codebook=1296, style codebook=64, 20:1 容量差) 将语音 token 分解为 content/style preference tokens,构建结构化偏好空间作为 DiffRO 的可微 reward model。与传统 factorization 的关键区别: (1) 分解目标不是重建质量或可控性,而是为 reward 梯度提供干净的隔离路径; (2) content branch 用 stop-gradient 完全切断 reconstruction 梯度,仅由 ASR 监督更新。消融显示去除 content factorization 后 WER 暴涨至 13.61% (vs 完整系统 4.02%),验证了 reward 空间 factorization 的必要性 [Table III]。详见 [[论文笔记/HPRO|HPRO]]。

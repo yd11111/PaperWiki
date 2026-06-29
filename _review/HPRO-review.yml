@@ -1,0 +1,103 @@
+paper: HPRO
+reviewer: independent-agent
+date: 2026-06-29
+checklist_version: v1.2
+note_tier: deep
+
+verdict: pass-with-fixes
+
+summary: >
+  高质量 deep 笔记,结构完整,覆盖 HPRO 的两个核心贡献 (HD-Emo codec + 渐进式层级 reward)。
+  KB 背景准确定位了 HPRO 在 DiffRO 演进线和 Emotion Control in TTS 交叉域的位置。
+  所有数字经 PDF 交叉验证无误。方法节因果解释充分且来源标注覆盖率 >80%。
+  发现 3 个 medium 问题,均不阻塞反向更新。
+
+issues:
+  - id: 1
+    type: traceability-gap
+    severity: medium
+    location: "速查卡片 → 路线"
+    detail: >
+      速查路线描述中 "CosyVoice2 tokenizer → Gumbel-Softmax 可微采样 → HD-Emo codec"
+      的组件流是正确的,但缺少 [Fig 3] 或 [§II-B] 出处标注。速查卡片其他字段
+      (指标/可借鉴/局限) 均有出处,仅路线字段无标注。
+    suggestion: "在路线描述末尾补 [§II, Fig 3]"
+    fixed: false
+
+  - id: 2
+    type: template-compliance
+    severity: medium
+    location: "frontmatter → venue"
+    detail: >
+      venue 字段为 "arXiv preprint",但论文标注为 ICASSP 2026 格式的 7 页短文
+      (参考文献中 HD-PPT [18] 和 RRPO [15] 均标注 ICASSP 2026 proceedings)。
+      然而论文本身确实仅标注 arXiv,未明确声明投稿目标。当前标注可接受,
+      但建议确认是否已被会议接收。
+    suggestion: "保持现状,若后续确认会议归属则更新 venue"
+    fixed: false
+
+  - id: 3
+    type: traceability-gap
+    severity: medium
+    location: "方法节 → HD-Emo Codec → 融合重建"
+    detail: >
+      "调制后送入 speech token combiner (8-layer autoregressive transformer) 重建原始
+      speech tokens" 中 8-layer autoregressive transformer 的出处标注为 [§II-A, Eq. 5],
+      但实际这一架构细节来自 §III-A2 (Implementation Details),Eq. 5 仅描述 FiLM
+      调制公式。
+    suggestion: "将出处改为 [§II-A, Eq. 5; §III-A2]"
+    fixed: false
+
+checklist:
+  reproducible:
+    causal_explanation: true
+    design_choices_why: true
+    reusable_tricks_specific: true
+    notes: >
+      方法节 4 个关键设计选择 (FSQ 双流/stop-gradient/渐进策略/wVAD 上下文窗口)
+      均有 WHY 解释。可借鉴字段列出 4 个具体可迁移 trick。
+
+  trustworthy:
+    source_annotation_coverage: true
+    metric_names_correct: true
+    quick_ref_metrics_complete: true
+    no_direction_errors: true
+    baseline_numbers_verified: true
+    ablation_cross_consistent: true
+    ablation_summary_consistent: true
+    statistical_consistency: true
+    notes: >
+      抽样验证 Table I 全部 6 列 HPRO 行 + CosyVoice2 行 + IndexTTS2 行,
+      Table II 全 4 行, Table III w/o content + w/o frame&wvad + HPRO 行。
+      所有数字与 PDF 完全一致。消融总结数字 (如 0.653→0.672) 与表格一致。
+      指标名 (WER/wVAD-CCC/EMO-SIM/DNSMOS/MOS-N/MOS-E) 与论文表头一致。
+
+  distinguishable:
+    source_labels_present: true
+    source_label_coverage_80pct: true
+    no_assertion_without_qualifier: true
+    no_strong_claims_without_evidence: true
+    notes: >
+      方法节因果解释标注 [论文原文] 或 [agent 解读] 共约 20 处,覆盖率 >85%。
+      "为什么用 FSQ 而非 VQ" 标注为 [agent 解读],"stop-gradient 防声学泄漏"
+      标注为 [论文原文]。无未限定的强断言。
+
+  positionable:
+    kb_lineage_specific: true
+    innovation_comparison: true
+    frontmatter_present: true
+    frontmatter_semantic: true
+    quick_ref_all_fields: true
+    notes: >
+      KB 背景基于 6 个实体页,谱系定位精确 (DiffRO → RRPO / HPRO 双路线)。
+      创新判断有明确对比基准 (vs DiffRO 的 information conflict / scale gap)。
+      frontmatter models 列本文 HPRO + 4 个 baseline/前驱模型,语义正确。
+
+  no_pollution:
+    concept_admission_ok: true
+    dedup_check: true
+    reverse_update_no_error: true
+    reverse_update_classification: true
+    notes: >
+      未新建概念页。反向更新将追加至已有实体页 (DifferentiableRewardOptimization,
+      EmotionControlinTTS, SpeechFactorization 等),属于 append 操作。

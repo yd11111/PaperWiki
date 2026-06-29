@@ -196,4 +196,8 @@ Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distan
 
 ## 演进
 
-规则韵律 (SPSS) → Prosody tags (ToBI) → Reference Encoder (GST, 2018) → VAE 隐式建模 (2019) → 显式 variance adaptor (FastSpeech 2, 2020) → 生成模型隐式建模 (VITS/Glow-TTS, 2020-21) → In-context learning (VALL-E, 2023; prompt 驱动) → 副语言发声建模 (NVSpeech, 2025; word-level PV 控制) → 韵律多样性度量 (ProsodyEval/DS-WED, ICASSP 2026)
+规则韵律 (SPSS) → Prosody tags (ToBI) → Reference Encoder (GST, 2018) → VAE 隐式建模 (2019) → 显式 variance adaptor (FastSpeech 2, 2020) → 生成模型隐式建模 (VITS/Glow-TTS, 2020-21) → In-context learning (VALL-E, 2023; prompt 驱动) → 副语言发声建模 (NVSpeech, 2025; word-level PV 控制) → 韵律多样性度量 (ProsodyEval/DS-WED, ICASSP 2026) → word-level VAD 轨迹作为层级 reward 信号 (HPRO, 2026)
+
+## Word-level VAD 作为层级 Reward 信号 (HPRO)
+
+[[论文笔记/HPRO|HPRO]] (Nie et al., 2026) 将 word-level Valence-Arousal-Dominance (wVAD) 轨迹引入 DiffRO 层级 reward 体系,作为 frame-level 和 sentence-level 之间的中间粒度情感韵律监督。wVAD 由 wav2vec2-ft 预测,使用 MFA 词边界 + 上下文窗口 (目标词 + 两侧各一词) 计算 CCC 一致性。消融显示 w/o wVAD 使 wVAD-CCC 从 0.339 降至 0.310,词级约束对细粒度情感韵律轨迹的捕捉不可或缺 [Table III]。这是 wVAD 首次作为可微 reward 信号用于 TTS RL 优化 (区别于 EmoSphere-TTS 将 VAD 用于 SFT 损失)。详见 [[论文笔记/HPRO|HPRO]]。

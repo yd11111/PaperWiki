@@ -221,3 +221,14 @@ HPRO 提供了一个结构清晰的方案来解决 DiffRO 在 emotional TTS 中�
 3. **渐进式 reward 调度 (dense→sparse)**: 先建立局部声学基础 (frame-level),再引入中间结构约束 (word-level),最后统一全局目标 (sentence-level)。这种从 dense 到 sparse 的调度策略可迁移到其他层级化 RL/reward 场景
 
 4. **wVAD + 上下文窗口**: 用 wav2vec2-ft 提取 word-level Valence-Arousal-Dominance 轨迹作为细粒度情感 reward,配合 MFA 词边界和 +/-1 词的上下文窗口。提供了一种不依赖 SER 分类的连续情感信号
+
+## 审阅
+
+> [!review] 独立审阅 (2026-06-29)
+> **结论**: pass-with-fixes (3 medium issues, 0 high)
+> 详见 `_review/HPRO-review.yml`
+>
+> Issues:
+> 1. [medium/traceability-gap] 速查路线缺出处标注 → 补 [§II, Fig 3]
+> 2. [medium/template-compliance] venue 标注为 arXiv,需确认是否已被会议接收
+> 3. [medium/traceability-gap] 融合重建架构细节出处应为 [§II-A, Eq. 5; §III-A2]
