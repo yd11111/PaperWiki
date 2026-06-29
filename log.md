@@ -2,6 +2,7 @@
 
 ## 2026-06-29
 
+- [ingest/deep] [[HPRO]] — Hierarchical Progressive Reward Optimization via Preference Extraction for Emotional TTS (Nie et al., SCUT/Huya, 2026). KB 命中 6 页: EmotionControlinTTS, DifferentiableRewardOptimization, ProsodyModeling, LLM-basedTTS, SpeechFactorization, StyleTransferinTTS. 审阅: pass-with-fixes (3 medium). 反向更新 5 页 (DifferentiableRewardOptimization, EmotionControlinTTS, SpeechFactorization, ProsodyModeling, Gumbel-Softmax). Lint: all passed.
 - [kb/search] [[ZONOS2]] (re-read) — 命中 6 页: [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[SpeechTokenizer]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[TTSEvaluation]](pending-review), [[CosyVoice3]](pending-review)
 - [ingest/deep] [[ZONOS2]] — 重新精读, kb_sources=6, status draft→reviewed
 - [review/auto] [[ZONOS2]] — pass-with-fixes, 3 issues (0 high, 1 medium: TTSDS2/DS-WED 缺具体数值, 2 low)
