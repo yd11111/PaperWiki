@@ -163,6 +163,46 @@ Y[t, j] = X[t-j, j]  if t >= j, else padding
 - Clean set: 13h, FLEURS-R, 9 languages × 500 utterances [§V]
 - ITW set: 1618 utterances from VoxBlink2, ~3h, 17 languages [§V, Table VI]
 
+## 关键公式
+
+**Delay Pattern (Eq. 1-2)**: 将帧内多 codebook 依赖转化为序列维度自回归依赖
+
+$$Y[t, j] = \begin{cases} X[t-j, j] & \text{if } t \geq j \\ p & \text{otherwise} \end{cases}$$
+
+其中 $X[t, j]$ 为对齐的 DAC token (frame $t$, codebook $j$), $p$ 为 padding token。逆变换: $\hat{X}[t, j] = Y[t+j, j]$。
+
+**Speaker Embedding Projection (Eq. 3)**: LDA 降维后的 speaker embedding 通过线性投影映射到 transformer 隐层维度
+
+$$h_{\text{spk}} = W_{\text{spk}} \hat{e}_x + b_{\text{spk}}$$
+
+其中 $W_{\text{spk}} \in \mathbb{R}^{d_{\text{model}} \times 1024}$, $\hat{e}_x$ 为 ECAPA-TDNN 2048-d embedding 经 LDA 降至 1024-d 的结果。
+
+**Logit Soft-Capping (Eq. 4-5)**: 来自 Gemma 2 的数值稳定性技巧
+
+$$\tilde{\ell}_{t,j} = \tau \tanh\left(\frac{\ell_{t,j}}{\tau}\right), \quad p_\theta(Y_{t,j} = v \mid s_{<t}) = \text{softmax}(\tilde{\ell}_{t,j})_v$$
+
+其中 $\tau = 15$, 防止 logits 爆炸。
+
+**Masked NLL Loss (Eq. 6)**: 仅对非 padding 的 audio targets 计算 loss
+
+$$\mathcal{L}_{\text{NLL}} = -\frac{1}{M_{\text{aud}}} \sum_{t,j} m_{t,j} \log p_\theta(Y[t+1, j] \mid s_{<t})$$
+
+其中 $m_{t,j} = 1$ 仅当目标 $y_{t,j} \neq p$, $M_{\text{aud}} = \sum_{t,j} m_{t,j}$。文本 tokens 和 conditioning positions 仅作为 context, 不参与 loss。
+
+**MoE Router Balancing Loss (Eq. 7-8)**: 用 bias-based 方案平衡 expert usage
+
+$$\mathcal{L}_{\text{bal}} = \sum_{\ell \in \mathcal{M}} b_\ell^\top \text{sg}(u_\ell - \bar{u}), \quad \mathcal{L} = \mathcal{L}_{\text{NLL}} + \mathcal{L}_{\text{bal}}$$
+
+其中 $u_{\ell,e}$ 为 layer $\ell$ expert $e$ 的实际 token 分配比例, $\bar{u}_e = 1/E$ 为均匀分配, $\text{sg}(\cdot)$ 为 stop-gradient。使用独立的 AdamW 优化器学习 bias 向量 $b_\ell$。
+
+## 架构图
+
+![ZONOS2 Inference Pipeline](../Sources/figures/ZONOS2_fig1.png)
+*Fig 1: ZONOS2 推理流程总览 — text (UTF-8 bytes) + conditioning → MoE Transformer → delayed DAC tokens → waveform [§I, Fig 1]*
+
+![ZONOS2 MoE Architecture](../Sources/figures/ZONOS2_fig2.png)
+*Fig 2: ZONOS2 transformer MoE 架构示意图 — 28 层, 前3层+最后1层 dense, 其余 MoE (16 experts), router 使用 EDA + RMSNorm + 3-layer MLP [§II-F, Fig 2]*
+
 ## 实验
 
 | 指标 | ZONOS2 8B | ZONOS2 QM | Qwen3-TTS 1.7B | Fish S2 Pro | VoxCPM 2 | Cartesia Sonic 3.5 | 数据集 | 出处 |

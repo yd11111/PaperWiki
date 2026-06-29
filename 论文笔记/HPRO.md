@@ -50,6 +50,40 @@ HPRO 要解决的核心问题是: **如何在 LLM-based emotional TTS 的 post-t
 
 2. **Scale Gap (尺度缺口)**: 情感 reward (如 SER 分类) 是稀疏的句子级信号,而语音生成是稠密的帧级操作。这导致 credit assignment 困境 — 模型缺乏显式机制来定位句子内情感显著的片段 [§I]。
 
+## 关键公式
+
+**HD-Emo Codec 损失** [§II-A]:
+
+ASR 监督 (content branch):
+
+$$\mathcal{L}_{\text{ASR}} = -\sum_{j} \log P(y_j \mid y_{<j}, T_c)$$
+
+SER 监督 (style branch, 句子级):
+
+$$\mathcal{L}_{\text{SER}} = -\sum_{i} p_i \log \hat{p}_i$$
+
+wVAD 监督 (style branch, 词级, CCC loss):
+
+$$\mathcal{L}_{\text{word}} = \sum_{k \in \{V,A,D\}} \bigl(1 - \text{CCC}(v_k, \hat{v}_k)\bigr)$$
+
+Emo-FiLM 融合重建:
+
+$$\tilde{X} = X \odot \gamma + \beta, \quad \gamma, \beta = \text{Proj}(T_s)$$
+
+**Hierarchical Progressive Reward** [§II-B]:
+
+Frame-level reward (L1 regression on FSQ latent):
+
+$$\mathcal{L}_{cp} = \|\hat{Z}_c - T_c\|_1, \quad \mathcal{L}_{sp} = \|\hat{Z}_s - T_s\|_1$$
+
+总目标:
+
+$$\mathcal{L}_{\text{total}} = \sum_{i \in \{\text{KL}, cp, sp, \text{wVAD}, \text{ASR}, \text{SER}\}} \lambda_i \mathcal{L}_i$$
+
+## 架构图
+
+![HPRO 整体架构: HD-Emo Codec (左) 将 speech tokens 分流为 content/style preference tokens; Hierarchical Progressive Reward (右) 在三个粒度上渐进优化](Sources/HPRO.pdf#page=3 "Fig 3: Overall framework of HPRO")
+
 ## 方法: 它怎么 work
 
 > [!important] 区分来源
@@ -87,21 +121,21 @@ HD-Emo codec 的架构复用了同组前序工作 HD-PPT [18] 的设计理念,�
 
 **Content 分支的监督与隔离** [§II-A, Eq. 1]:
 - 量化前的 latent representation 经 content adapter 送入 ASR decoder (Whisper-medium 初始化)
-- ASR loss: 标准自回归负对数似然 L_ASR = -sum(log P(y_j | y_{<j}, T_c))
+- ASR loss: 标准自回归负对数似然 $\mathcal{L}_{\text{ASR}} = -\sum_j \log P(y_j \mid y_{<j}, T_c)$
 - **关键: stop-gradient 机制** — 切断从 reconstruction path 到 content extractor 的梯度流,确保 content extractor 仅由 ASR 监督更新 [论文原文]
 - 这防止了 acoustic leakage: 如果允许 reconstruction 梯度回传,content extractor 会倾向于捕获韵律细节来辅助重建,破坏语义纯度 [论文原文]
 
 **Style 分支的层级监督** [§II-A, Eq. 2-4]:
 - 句子级: 预训练 emotion2vec 提供 soft emotion distribution p,CE loss 监督预测分布 p_hat
-  - L_SER = -sum(p_i * log(p_hat_i))
+  - $\mathcal{L}_{\text{SER}} = -\sum_i p_i \log \hat{p}_i$
 - 词级: MFA 对齐获取词边界 → 预训练 wav2vec2-ft 模型预测 word-level VAD (Valence-Arousal-Dominance)
   - 使用 Concordance Correlation Coefficient (CCC) 度量一致性
-  - L_word = sum_{k in {V,A,D}} (1 - CCC(v_k, v_hat_k))
+  - $\mathcal{L}_{\text{word}} = \sum_{k \in \{V,A,D\}} (1 - \text{CCC}(v_k, \hat{v}_k))$
   - 上下文窗口: 目标词 + 两侧各一个词,考虑过渡韵律 [论文原文]
 
 **融合重建** [§II-A, Eq. 5]:
 - Content representation X (来自 T_c) 和 style T_s 通过 Emo-FiLM [26] 机制动态调制:
-  - X_tilde = X ⊙ gamma + beta (gamma, beta 由 T_s 投射)
+  - $\tilde{X} = X \odot \gamma + \beta$ ($\gamma, \beta$ 由 $T_s$ 投射)
 - 调制后送入 speech token combiner (8-layer autoregressive transformer) 重建原始 speech tokens
 - 重建用 CE loss 优化
 
@@ -110,7 +144,7 @@ HD-Emo codec 的架构复用了同组前序工作 HD-PPT [18] 的设计理念,�
 **层级 Reward 定义** [§II-B1]:
 
 1. **Frame-level reward** [Eq. 6]: 在 FSQ 的 latent 维度上,用 L1 regression 将生成的 pre-quantization representations (Z_hat_c, Z_hat_s) 与 ground-truth discrete preference tokens (T_c, T_s) 对齐:
-   - L_cp = ||Z_hat_c - T_c||_1, L_sp = ||Z_hat_s - T_s||_1
+   - $\mathcal{L}_{cp} = \|\hat{Z}_c - T_c\|_1$, $\mathcal{L}_{sp} = \|\hat{Z}_s - T_s\|_1$
    - 这提供了 dense frame-level 声学监督 [论文原文]
 
 2. **Word-level reward**: 基于 MFA 词边界,施加 wVAD CCC loss (L_wVAD) 约束情感轨迹 + ASR CE loss (L_ASR) 保护语义一致性
@@ -119,7 +153,7 @@ HD-Emo codec 的架构复用了同组前序工作 HD-PPT [18] 的设计理念,�
 
 4. **KL 正则化**: token-wise categorical KL divergence (L_KL) 约束 LLM 输出不偏离参考模型
 
-总目标 [Eq. 7]: L_total = sum_i (lambda_i * L_i), i in {KL, cp, sp, wVAD, ASR, SER}
+总目标 [Eq. 7]: $\mathcal{L}_{\text{total}} = \sum_i \lambda_i \mathcal{L}_i$, $i \in \{\text{KL}, cp, sp, \text{wVAD}, \text{ASR}, \text{SER}\}$
 
 **渐进式三阶段策略** [§II-B2]:
 
