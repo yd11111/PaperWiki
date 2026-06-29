@@ -1,5 +1,14 @@
 # Log
 
+## 2026-06-29
+
+- [kb/search] [[ZONOS2]] (re-read) — 命中 6 页: [[ResidualVectorQuantization]]✓, [[LLM-basedTTS]]✓, [[SpeakerEmbedding]]✓, [[SpeechTokenizer]]✓, [[CodebookCollapse]]✓, [[SpeechLanguageModel]]✓ | 过滤: [[CodecLanguageModel]](pending-review), [[VoiceCloningTaxonomy]](pending-review), [[TTSEvaluation]](pending-review), [[CosyVoice3]](pending-review)
+- [ingest/deep] [[ZONOS2]] — 重新精读, kb_sources=6, status draft→reviewed
+- [review/auto] [[ZONOS2]] — pass-with-fixes, 3 issues (0 high, 1 medium: TTSDS2/DS-WED 缺具体数值, 2 low)
+- [update/append] [[LLM-basedTTS]] — 追加 MoE 架构在 TTS 中的引入段落(prose), ZONOS2 首创 MoE TTS
+- [update/append] [[TTSEvaluation]] — 追加 ZTTS1-Eval benchmark 描述(prose), ZONOS2 提出的多语言综合评估基准
+- [check/lint] [[ZONOS2]] — all checks passed
+
 ## 2026-06-26
 
 - [kb/search] [[Wan-Streamer]] — 命中 6 页: [[Full-duplexSpokenDialogue]](pending-review), [[StreamingSpokenDialogue]](pending-review), [[ConditionalFlowMatching]]✓, [[Classifier-FreeGuidance]](pending-review), [[Turn-takinginSpokenDialogue]](pending-review), [[DiffusionModel]](pending-review)
