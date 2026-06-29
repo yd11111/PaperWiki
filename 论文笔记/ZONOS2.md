@@ -174,8 +174,8 @@ Y[t, j] = X[t-j, j]  if t >= j, else padding
 | WER ↓ (en, ITW) | 4.70 | 2.21 | 1.05 | 2.09 | 1.69 | 1.40 | ZTTS1 ITW | [Table IV] |
 | UTMOS ↑ (en, ITW) | 2.44 | 2.99 | 3.20 | 2.92 | 2.51 | 3.05 | ZTTS1 ITW | [Table IV] |
 | Spk.sim ↑ (en, ITW) | **67.0** | 56.9 | 61.5 | 65.0 | 68.1 | 70.2 | ZTTS1 ITW | [Table IV] |
-| TTSDS2 prosody (ITW en) | **Best** | — | — | — | — | — | ZTTS1 ITW | [Fig 5b] |
-| DS-WED (en) | **Highest diversity** | — | — | — | — | — | ZTTS1 | [Fig 6] |
+| TTSDS2 prosody (ITW en) | Best (定性, 见 Fig 5b) | — | — | — | — | — | ZTTS1 ITW | [Fig 5b] |
+| DS-WED (en) | Highest diversity (定性, 见 Fig 6) | — | — | — | — | — | ZTTS1 | [Fig 6] |
 
 **Quality Mode 效果分析**:
 - 英语: WER 从 2.76% 升到 3.99% (变差), 但 UTMOS 从 3.40 升到 3.47 [Table III]
@@ -225,4 +225,20 @@ Y[t, j] = X[t-j, j]  if t >= j, else padding
 3. **Multi-ASR ensemble for data quality**: 用多个 ASR 系统的 pairwise WER 作为 transcript 质量指标,不同训练阶段调整阈值,是大规模语音数据管理的实用方案
 4. **Byte tokenization for multilingual TTS**: 在足够数据规模下,byte tokenization 可完全替代 G2P phonemization,避免 G2P 的静默失败,尤其适合多语言/code-switched 场景
 5. **Quality Mode token**: 用 synthetic conditioning token 在推理时切换质量/保真度 trade-off,提供用户控制维度
-6. **TTSDS2 + DS-WED for prosody evaluation**: 补充 WER/UTMOS/Spk.sim 之外的 prosody distribution 和 generation diversity 评估维度
+6. **Prosody distribution 纳入 TTS 评估体系**: 将 TTSDS2 (distribution score) + DS-WED (diversity) 与传统 WER/UTMOS/Spk.sim 组合,构建更全面的 TTS 评估方法论
+
+## 审阅
+
+> [!review] 审阅 (2026-06-29, auto)
+> **结论**: pass-with-fixes
+> 
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 5 个关键设计选择均有 WHY 因果链 |
+> | 可信赖 | pass | 数字抽查一致,prosody 指标缺具体数值(medium) |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注覆盖率约 85% |
+> | 可定位 | pass | KB 背景基于 6 实体页,谱系定位准确 |
+> | 不污染 | pass | frontmatter 正确,反向更新目标合理 |
+> 
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> 详见 `_review/ZONOS2-review.yml`
