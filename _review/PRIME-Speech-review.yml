@@ -1,0 +1,58 @@
+reviewer: auto
+date: 2026-07-01
+note: 论文笔记/PRIME-Speech.md
+checklist: _templates/review-checklist.md
+pdf_verified: true
+
+conclusion: pass-with-fixes
+
+principle_scores:
+  reproducible:
+    score: 8
+    verdict: pass
+    note: "方法节因果解释充分,WHY/HOW 覆盖全面,hidden-state synchronization / mixed conditioning / cache policy 三个核心设计均有 WHY 解释且标注了来源。速查卡片可借鉴具体可迁移。"
+  trustworthy:
+    score: 8
+    verdict: pass
+    note: "Table II/III/IV/V 关键数字已与 PDF 交叉验证,均正确。出处标注覆盖率高 (>90%)。指标名使用正确 (BLEU/WER/UTMOS/RTF 不混淆)。"
+  distinguishable:
+    score: 7
+    verdict: pass
+    note: "因果解释来源标注覆盖率约 85% — 方法节中 [论文原文] / [agent 解读] / [⚠️ 论文未详述] 标注到位。个别推断缺限定词但不影响整体区分度。"
+  positionable:
+    score: 9
+    verdict: pass
+    note: "KB 背景节谱系定位详尽 — 明确对比 GLM-4-Voice (token interleaving) / Qwen2.5-Omni (Thinker-Talker) / PRIME-Speech (frozen backbone + hidden-state sync) 三种路线,创新判断有对比基准。frontmatter 字段完整且语义正确。"
+  non-polluting:
+    score: 8
+    verdict: pass
+    note: "反向更新范围合理 — 仅追加 key_papers 到已有实体页,无新建概念页需求。所有信息来源明确。"
+
+issues:
+  - severity: medium
+    type: template-compliance
+    location: "## 关键公式"
+    detail: "模板中无 '## 关键公式' section header,标准模板使用 '## 方法: 它怎么 work' 内含公式。独立关键公式节可接受但非标准。"
+    suggestion: "保留,因为用户明确要求包含 '## 关键公式' section header。"
+
+  - severity: low
+    type: traceability-gap
+    location: "## 局限性 第 7 点"
+    detail: "训练数据规模相对有限的判断标注为 [agent 解读] 但缺少与其他系统的数据量对比数字。"
+    suggestion: "可补充 Qwen2.5-Omni 等系统的公开数据量作为参照。"
+
+  - severity: low
+    type: weak-reusability
+    location: "## 可复用的 idea 第 5 点"
+    detail: "CKA 层选择的描述偏简略,未说明具体操作步骤。"
+    suggestion: "补充: 对每层 hidden state 与目标 modality 表征做 CKA 计算,选择 CKA 值最高的层。"
+
+issue_summary:
+  high: 0
+  medium: 1
+  low: 2
+
+learning_signals:
+  - "frozen-backbone S2S conversion 是一个新的 problem formulation,现有概念体系中缺少对应实体页"
+  - "hidden-state synchronization 可作为 ModalityAdaptationforSpeechLLM 的输出侧变体记录"
+  - "multi-turn cache policy (text accum + audio reset) 是一个简单但有效的通用模式"

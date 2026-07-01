@@ -240,3 +240,12 @@ MTP k=1→4: TTFA 从 1.07s 降至 0.39s, RTF 从 1.088 降至 0.296 [§IV-D]。
 3. **MTP 作为 efficiency adapter 的 staged training**: 先训练 single-token 模型建立稳定对齐,再加 MTP 压缩 — 避免随机初始化的模型直接做长 horizon 预测。可用于所有高帧率序列生成任务
 4. **训练时 packing unrelated samples 模拟多轮**: 用不相关单轮数据拼接为伪对话,低成本获得多轮能力。关键是配合 audio position reset 使用
 5. **CKA 层选择**: 用 CKA 分析找到 backbone 中最适合驱动语音的层,可迁移到其他 multimodal output 任务
+
+> [!review] 审阅: pass-with-fixes
+> - **审阅人**: auto | **日期**: 2026-07-01
+> - **原则得分**: reproducible=8 ✅ | trustworthy=8 ✅ | distinguishable=7 ✅ | positionable=9 ✅ | non-polluting=8 ✅
+> - **Issues**: 0 high / 1 medium / 2 low
+>   - [medium] template-compliance @ `## 关键公式`: 模板中无此 section header,但用户明确要求包含,保留
+>   - [low] traceability-gap @ `## 局限性 第 7 点`: 训练数据规模判断缺少对比数字
+>   - [low] weak-reusability @ `## 可复用的 idea 第 5 点`: CKA 层选择描述偏简略
+> - **详见**: `_review/PRIME-Speech-review.yml`
