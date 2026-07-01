@@ -1,5 +1,9 @@
 # Log
 
+## 2026-07-01
+
+- [ingest/deep] [[FlexiSLM]] — FlexiSLM: A Dynamic and Controllable Frame Rate Spoken Language Model (Li et al., CUHK-SZ/ByteDance, 2026). KB 命中 6 页: SpeechLanguageModel, SpeechTokenizer, ConditionalFlowMatching, SemanticvsAcousticTokens, FiniteScalarQuantization(pending-review), TokenRateandBitrateTrade-offs(pending-review). 审阅: pass-with-fixes (3 low). 反向更新 6 页 (key_papers 追加 + SpeechLanguageModel 演进线追加). Lint: all passed.
+
 ## 2026-06-29
 
 - [ingest/deep] [[HPRO]] — Hierarchical Progressive Reward Optimization via Preference Extraction for Emotional TTS (Nie et al., SCUT/Huya, 2026). KB 命中 6 页: EmotionControlinTTS, DifferentiableRewardOptimization, ProsodyModeling, LLM-basedTTS, SpeechFactorization, StyleTransferinTTS. 审阅: pass-with-fixes (3 medium). 反向更新 5 页 (DifferentiableRewardOptimization, EmotionControlinTTS, SpeechFactorization, ProsodyModeling, Gumbel-Softmax). Lint: all passed.
