@@ -4,7 +4,7 @@ title: "Finite Scalar Quantization"
 aliases: [FSQ, Finite Scalar Quantization]
 category: "quantization"
 tags: [quantization, discrete-representation, VQ-alternative, codebook-free]
-key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/SecoustiCodec|SecoustiCodec]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/VoxCPM2|VoxCPM2]]"]
+key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/Fish-Speech|Fish-Speech]]", "[[论文笔记/Llasa|Llasa]]", "[[论文笔记/VoxtralTTS|Voxtral TTS]]", "[[论文笔记/Spark-TTS|Spark-TTS]]", "[[论文笔记/VoxCPM|VoxCPM]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/Koel-TTS|Koel-TTS]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/Dragon-FM|Dragon-FM]]", "[[论文笔记/SecoustiCodec|SecoustiCodec]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/VoxCPM2|VoxCPM2]]", "[[论文笔记/FlexiSLM|FlexiSLM]]"]
 origin_paper: "Mentzer et al., Finite Scalar Quantization: VQ-VAE Made Simple, ICLR 2024"
 related_concepts: ["[[ResidualVectorQuantization]]", "[[SpeechTokenizer]]", "[[Gumbel-Softmax]]", "[[AudioTokenizerTaxonomy]]", "[[Single-codebookvsMulti-codebook]]", "[[CodecTrainingObjectives]]"]
 status: pending-review

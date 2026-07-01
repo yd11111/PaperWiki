@@ -244,4 +244,8 @@ FlexiSLM 12.5Hz 平均准确率 65.8%,超过 Gemini 2.5-Pro (48.3%)、LLaSO-3B (
 
 ---
 
+> [!review] 审阅: pass-with-fixes (2026-07-01)
+> 报告: `_review/FlexiSLM-review.yml`
+> 3 low issues: (1) frontmatter tasks 为空; (2) 点评中 Qwen2.5-Omni Thinker 行为描述缺 [agent 解读] 标注; (3) 表头命名可更精确。无 high/medium issue,不阻塞反向更新。
+
 > 检索命中: [[SpeechLanguageModel]]✓, [[SpeechTokenizer]]✓, [[ConditionalFlowMatching]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[FiniteScalarQuantization]](pending-review), [[TokenRateandBitrateTrade-offs]](pending-review) | 未命中但可能相关: 无

@@ -1,0 +1,64 @@
+paper: FlexiSLM
+reviewer: independent-inline
+date: 2026-07-01
+checklist_version: v1.2
+
+verdict: pass-with-fixes
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.tasks
+    detail: "tasks field is empty []. FlexiSLM performs TTS, ASR, speech-to-speech dialogue, and audio understanding — at least TTS and ASR should be listed."
+    suggestion: "Add tasks entries for relevant task pages if they exist in 任务库/."
+
+  - id: 2
+    type: traceability-gap
+    severity: low
+    location: "## 点评 > 不足 > Thinker 序列长度问题"
+    detail: "Claim about Qwen2.5-Omni Thinker only processing to text generation end is agent inference, not marked [agent 解读]."
+    suggestion: "Add [agent 解读] tag or find supporting text in paper."
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "## 实验"
+    detail: "Table 3 in note uses 'Overall s2t' and 'Overall s2s' as column headers. PDF uses 'Overall AVG' split by s2t/s2s. Current naming is fine but could be more precise."
+    suggestion: "Minor — acceptable as is."
+
+checklist:
+  reproducible:
+    causal_explanations: pass
+    design_choices_why: pass
+    reusable_ideas_concrete: pass
+  trustworthy:
+    claim_sourcing_80pct: pass
+    metric_names_correct: pass
+    quick_card_numbers: pass
+    no_direction_errors: pass
+    baseline_crosscheck: pass
+    ablation_consistency: pass
+    stats_math_consistency: pass
+  distinguishable:
+    source_annotations: pass
+    source_coverage_80pct: pass
+    no_assertion_without_qualifier: pass
+    strong_claims_supported: pass
+  locatable:
+    kb_lineage: pass
+    innovation_benchmark: pass
+    frontmatter_present: pass
+    frontmatter_semantic: pass-with-note  # tasks empty
+    quick_card_5_fields: pass
+  no_pollution:
+    new_concept_admission: n/a  # no new pages created
+    dedup_check: n/a
+    reverse_update_factual: pending  # reverse updates not yet done
+    reverse_update_classification: pending
+
+summary: |
+  High-quality deep note. All key numbers verified against PDF (Table 3, 4, 5, 6, 8, 10, 11).
+  Causal explanations well-annotated with [论文原文] and [agent 解读] markers.
+  KB background section provides excellent positioning against 6 entity pages.
+  3 low-severity issues found, none blocking. Ready for reverse updates.
