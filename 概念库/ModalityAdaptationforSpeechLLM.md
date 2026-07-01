@@ -4,7 +4,7 @@ title: "Modality Adaptation for Speech LLM"
 aliases: [模态适配, Speech-LLM Adapter, Speech Modality Adapter, 语音模态适配器, Bridge Network, Module Connector, Speech Encoder Adapter]
 category: "technique"
 tags: [speech-LM, adapter, modality-adaptation, downsampling, CTC, Q-Former, PEFT, LoRA]
-key_papers: ["Hono et al., 2023", "Yu et al., 2024", "Pham et al., 2024", "Wu et al., 2023", "Fathullah et al., 2024", "Li et al., 2023a (BLIP-2)", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/DualSpeechLM|DualSpeechLM]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/SALMONN|SALMONN]]"]
+key_papers: ["Hono et al., 2023", "Yu et al., 2024", "Pham et al., 2024", "Wu et al., 2023", "Fathullah et al., 2024", "Li et al., 2023a (BLIP-2)", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/DualSpeechLM|DualSpeechLM]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/SALMONN|SALMONN]]", "[[论文笔记/PRIME-Speech|PRIME-Speech]]"]
 origin_paper: "Yang et al., When LLM Meet Speech, 2025"
 related_concepts: ["[[Speech-LLMIntegrationTaxonomy]]", "[[Speech-TextAlignment]]", "[[SpeechLanguageModel]]", "[[SpeechTokenizer]]"]
 status: pending-review

@@ -4,7 +4,7 @@ title: "Streaming Spoken Dialogue"
 aliases: [流式语音对话, Streaming Speech Interaction, 实时语音处理, Real-time Speech Processing, Streaming Inference for Speech, 流式推理]
 category: "technique"
 tags: [speech-LM, streaming, real-time, causal, latency, dialogue, inference]
-key_papers: ["[[论文笔记/Moshi|Moshi]]", "Mini-Omni (Xie & Wu, 2024)", "LLaMA-Omni (Fang et al., 2024)", "IntrinsicVoice (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "SyncLLM (2024)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/STITCH|STITCH (Chiang et al., ICLR 2026)]]", "[[论文笔记/LiveSpeech2|LiveSpeech 2]]", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/OpenOmni|OpenOmni]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/Llasa+|Llasa+]]"]
+key_papers: ["[[论文笔记/Moshi|Moshi]]", "Mini-Omni (Xie & Wu, 2024)", "LLaMA-Omni (Fang et al., 2024)", "IntrinsicVoice (2024)", "OmniFlatten (Zhang et al., 2024)", "Freeze-Omni (2024)", "SyncLLM (2024)", "[[论文笔记/Step-Audio|Step-Audio]]", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/STITCH|STITCH (Chiang et al., ICLR 2026)]]", "[[论文笔记/LiveSpeech2|LiveSpeech 2]]", "[[论文笔记/LLMVoX|LLMVoX]]", "[[论文笔记/OpenOmni|OpenOmni]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/Llasa+|Llasa+]]", "[[论文笔记/PRIME-Speech|PRIME-Speech]]"]
 origin_paper: "Ji et al., WavChat, 2024"
 related_concepts: ["[[Full-duplexSpokenDialogue]]", "[[Turn-takinginSpokenDialogue]]", "[[SpeechLanguageModel]]", "[[NeuralVocoder]]", "[[SpokenDialogueEvaluation]]"]
 status: pending-review
@@ -129,6 +129,7 @@ WavChat 将 E2E streaming spoken dialogue 的设计归结为三项核心技术:
 | ARIA + Hybrid MoE | Qwen3.5-Omni | 自适应速率 text-speech 交错 + chunked prefilling + GDN | Plus 435ms (audio, 1 conc.) |
 | Causal encoder swap | Raon-SpeechChat | Voxtral-Mini-4B (causal sliding window 15s) 替换非因果 AuT encoder + text lookahead | 流式全双工 |
 | Streaming Thoughts | [[论文笔记/GLM-4-Voice]] | 13 text + 26 speech tokens 交替输出 + truncated audio decoder (b=0.8s) | 首段语音仅需 23 LLM decode 步 |
+| Hidden-state sync + MTP | [[论文笔记/PRIME-Speech]] | frozen backbone 中间层 hidden state 驱动 audio post-decoder + MTP k=4 | TTFA 0.39s, RTF 0.296 |
 
 ## Text-guided vs W/o Text-guided 的延迟 Trade-off
 

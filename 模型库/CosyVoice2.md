@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, streaming, LLM-based, coarse-to-fine]
 key_concepts: ["[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ConditionalFlowMatching]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[InstructedSpeechGeneration]]"]
-key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]"]
+key_papers: ["[[论文笔记/CosyVoice2|CosyVoice 2]]", "[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/DiffRO|DiffRO]]", "[[论文笔记/FPO|FPO]]", "[[论文笔记/GRPO-TTS|GRPO-TTS]]", "[[论文笔记/IndexTTS2|IndexTTS2]]", "[[论文笔记/EmoSteer-TTS|EmoSteer-TTS]]", "[[论文笔记/LLaMA-Omni2|LLaMA-Omni 2]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/HD-PPT|HD-PPT]]", "[[论文笔记/DiaMoE-TTS|DiaMoE-TTS]]", "[[论文笔记/TKTO|TKTO]]", "[[论文笔记/PRIME-Speech|PRIME-Speech]]"]
 supersedes: ["[[模型库/CosyVoice|CosyVoice]]"]
 superseded_by: ["[[模型库/CosyVoice3|CosyVoice 3]]"]
 status: confirmed
