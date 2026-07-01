@@ -2,6 +2,7 @@
 
 ## 2026-07-01
 
+- [ingest/deep] [[PRIME-Speech]] — Preserving Speech-to-Text LLM Capabilities in Speech-to-Speech Generation (Hu et al., Microsoft, 2026). KB 命中 6 页: SpeechLanguageModel, LLM-basedTTS, CodecLanguageModel, SpeechTokenizer, ModalityAdaptationforSpeechLLM(pending-review), StreamingSpokenDialogue(pending-review). 审阅: pass-with-fixes (1 medium + 2 low). 反向更新 6 页 (SpeechLanguageModel, StreamingSpokenDialogue, ModalityAdaptationforSpeechLLM, Speech-LLMIntegrationTaxonomy, CodecLanguageModel, CosyVoice2). Lint: all passed.
 - [ingest/deep] [[FlexiSLM]] — FlexiSLM: A Dynamic and Controllable Frame Rate Spoken Language Model (Li et al., CUHK-SZ/ByteDance, 2026). KB 命中 6 页: SpeechLanguageModel, SpeechTokenizer, ConditionalFlowMatching, SemanticvsAcousticTokens, FiniteScalarQuantization(pending-review), TokenRateandBitrateTrade-offs(pending-review). 审阅: pass-with-fixes (3 low). 反向更新 6 页 (key_papers 追加 + SpeechLanguageModel 演进线追加). Lint: all passed.
 
 ## 2026-06-29
