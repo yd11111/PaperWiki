@@ -210,3 +210,7 @@ UMETTS 用视觉+音频+文本多模态 prompt 对齐情感。EmoInstruct-TTS �
 5. **数据标注成本**: Emotion2embed 需要 (语音, 情感文本描述) 配对数据。28,402 条人工标注 + 49,903 条 Gemini-2.5 Pro 标注,成本不低。相比 EmoSteer-TTS 只需 ~7k 条情感语音 (不需要文本描述),数据效率偏低。
 
 6. **CosyVoice3 baseline 的 WER 差距**: EmoInstruct-TTS WER 0.0259 vs CosyVoice3 0.0197 [Table 4],说明情感嵌入的引入对语义准确性有一定负面影响。消融中 Emo2emb-Only WER 暴涨至 0.0486 更是警示: 没有语义路径的约束,情感控制会严重损害内容准确性。
+
+> [!review] 审阅 (auto, 2026-07-02)
+> verdict: pass-with-fixes | avg: 4.4
+> 详见 [[_review/EmoInstruct-TTS-review]]

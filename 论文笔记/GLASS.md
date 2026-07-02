@@ -202,3 +202,7 @@ Multi-Reward GRPO 的 5 维 reward 包含 WER+SIM+length penalty+entropy+prosody
 4. **LoRA rank 的影响**: 论文固定 rank=16，未做 rank 消融。rank 更高是否能增强 pitch 控制力? rank 更低是否仍然有效?
 
 5. **与 Flow Matching 层的交互**: GLASS 只训练 AR module 的 LoRA，FM 和 vocoder 冻结。但 style (尤其是 pitch) 最终由 FM 和 vocoder 渲染。AR LoRA 能改变 pitch 的机制是什么——是通过改变 speech token 的分布间接影响 FM 的 mel 输出? 还是通过改变 token 序列长度间接影响 duration?
+
+> [!review] 审阅 (auto, 2026-07-02)
+> verdict: pass-with-fixes | avg: 4.4
+> 详见 [[_review/GLASS-review]]

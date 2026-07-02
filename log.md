@@ -1,5 +1,22 @@
 # Log
 
+## 2026-07-02
+
+- [ingest/deep] batch 6 prosody/controllable TTS 关联论文精读:
+  - [[Reference-BasedProsodyEvaluation]] — 分层韵律参考区间评估协议 (JHU/Amazon, 2026). 审阅: pass (avg 4.2)
+  - [[EmoInstruct-TTS]] — 双路径指令驱动情感 TTS (iFLYTEK/USTC, 2026). 审阅: pass-with-fixes (avg 4.4)
+  - [[MagpieTTS-LF]] — 推理时长文本 TTS (NVIDIA, 2026). 审阅: pass (avg 4.6)
+  - [[FineCombo-TTS]] — 联合参考+描述精细可控 TTS (Tsinghua, 2026). 审阅: pass-with-fixes (avg 4.4)
+  - [[ProsodyEmbedding]] — 无监督韵律嵌入提取 (UBA, 2026). 审阅: pass (avg 4.2)
+  - [[GLASS]] — GRPO+LoRA 可组合风格控制 (2026). 审阅: pass-with-fixes (avg 4.4)
+  - FlowTTS-GRPO 已有 deep note,跳过
+- [update/kb] 5 概念页反向更新 (prose-only, legacy page rule):
+  - ProsodyModeling: +5 sections (参考区间/情感韵律嵌入/长文本韵律/CFM属性变换/无监督韵律嵌入)
+  - TTSEvaluation: +1 section (分层参考区间协议)
+  - EmotionControlinTTS: +2 sections (双路径情感嵌入/CFM情感控制)
+  - StyleTransferinTTS: +3 sections (相对控制/韵律风格嵌入/GRPO-LoRA风格方向) + 演进线更新
+  - DifferentiableRewardOptimization: +1 section (GRPO-LoRA风格控制信号)
+
 ## 2026-07-01
 
 - [ingest/deep] [[PRIME-Speech]] — Preserving Speech-to-Text LLM Capabilities in Speech-to-Speech Generation (Hu et al., Microsoft, 2026). KB 命中 6 页: SpeechLanguageModel, LLM-basedTTS, CodecLanguageModel, SpeechTokenizer, ModalityAdaptationforSpeechLLM(pending-review), StreamingSpokenDialogue(pending-review). 审阅: pass-with-fixes (1 medium + 2 low). 反向更新 6 页 (SpeechLanguageModel, StreamingSpokenDialogue, ModalityAdaptationforSpeechLLM, Speech-LLMIntegrationTaxonomy, CodecLanguageModel, CosyVoice2). Lint: all passed.
