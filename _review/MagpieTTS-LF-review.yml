@@ -1,0 +1,63 @@
+note: MagpieTTS-LF
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass
+scores:
+  factual_accuracy: 5
+  technical_depth: 5
+  kb_integration: 4
+  writing_quality: 5
+  template_compliance: 4
+issues:
+  - type: template-compliance
+    severity: low
+    location: 速查.指标
+    detail: >
+      速查卡片指标字段缺少数据集名称。checklist 要求"具体数字 + 数据集名 + 来源标注"三者齐全,
+      当前有数字和 [Table N] 来源标注,但未在指标行内标注评估数据集 "Long-Form HifiTTS"。
+    suggestion: "在指标首行末尾补充 '(Long-Form HifiTTS)'"
+  - type: traceability-gap
+    severity: low
+    location: 核心问题.第2段
+    detail: >
+      "VibeVoice 的 1/5" 实际比率为 0.025/0.115 ≈ 0.217 (约 1/4.6),
+      "1/5" (0.2) 是一个略有偏差的近似。对比表中已使用准确的 "低 4.6x",
+      散文部分的近似不够精确。
+    suggestion: "改为 '不到 VibeVoice 的 1/4' 或 '约 VibeVoice 的 1/4.6',与对比表保持一致"
+suggestions:
+  - "速查指标字段首个指标后补充数据集名: '(Long-Form HifiTTS)'"
+  - "核心问题段 'VibeVoice 的 1/5' 改为 '约 VibeVoice 的 1/4.6' 或删除近似表述保留原始数字对比"
+  - "可考虑在存疑部分展开讨论: 该方法在 decoder-only TTS (如 VALL-E 系列,无 cross-attention) 上的适用性困难具体是什么"
+checklist_walkthrough:
+  可复述:
+    causal_explanation: "pass — 方法节三大创新均有 WHY 解释: soft prior 为何优于 binary mask (log-space bias 保留远距离信息), H_enc 为何缓存而非重编码 (完整上下文质量更高), history-aware encoding 为何不需额外模块 (复用 encoder 原生能力)"
+    design_choices_justified: "pass — soft prior vs binary mask, cache vs re-encode, history text vs GNN modules 三组对比均明确"
+    reusable_tricks_concrete: "pass — 3 条具体可迁移 trick: (1) soft attention prior 公式, (2) 三状态传递机制, (3) 推理时 overlay 方案"
+  可信赖:
+    source_annotation_coverage: "pass — 数字型 claim 出处标注覆盖率 >95%,几乎每个定量断言都有 [§X.X]/[Table N]/[Fig N]"
+    metric_naming_correct: "pass — WER/CER/SSIM(TitaNet/WavLM)/PBD(ΔF0/ΔEnergy)/UTMOSv2 全部正确使用,箭头方向无误"
+    quick_card_metrics: "partial — 有数字和来源标注,缺数据集名"
+    no_directional_error: "pass — 所有 ↓/↑ 箭头正确,bold 标注在正确的 winner 上"
+    cross_table_consistency: "pass — Table 1/Table 2 数字与正文引用一致"
+    ablation_consistency: "n/a — 论文无消融实验,笔记在存疑第4点正确标注此缺失"
+  可区分:
+    source_tagging: "pass — [论文原文]/[agent 解读] 标注贯穿全文,方法节开头有显式 callout box 声明"
+    source_coverage: "pass — 因果解释来源标注覆盖率 >90%"
+    no_inference_as_assertion: "pass — 推断均以 [agent 解读] 明确标记,论文 claim 有 [论文原文] 或 [§X.X] 归属"
+    strong_claims_supported: "pass — '显著优于' 有完整数字支撑, '完胜' 有 4.6x WER 差距支撑"
+  可定位:
+    kb_lineage: "pass — KB 背景划分三条路线 (压缩/流式训练/跨句韵律) 并定位本文为 '第四条路线: 纯推理时'"
+    innovation_benchmark: "pass — 对比基准明确: vs VibeVoice (重训+极端压缩), vs CosyVoice 2 (重训+block mask), vs HiGNN (联合训练+GNN)"
+    frontmatter_present: "pass — 所有字段非空"
+    frontmatter_semantics: "pass — models 列基础架构 (Koel-TTS) + 对比 baseline (XTTS/Qwen3-TTS/VibeVoice), 无后续系统; concepts 列相关概念"
+    quick_card_5_fields: "pass — 一句话/路线/指标/可借鉴/局限 均有实质内容"
+  不污染:
+    status: "n/a — 笔记处于 draft 状态,尚未触发反向更新"
+summary: >
+  高质量 deep note,三项创新 (soft attention prior / stateful chunk generation / history-aware
+  text encoding) 的因果机制解释完整清晰,来源标注覆盖率极高 (>95%),KB 定位精准。
+  方案谱系对比表和 VibeVoice 专项对比表提供了系统性的领域定位。7 条存疑质量高,
+  尤其对比系统偏弱、极端压缩代价、benchmark 生态价值三点批判视角独到。
+  仅有两处 low-severity 问题: 速查指标缺数据集名、散文近似值略有偏差,均不影响可信性。
+  平均分 4.6,无单项 ≤ 2,verdict: pass。

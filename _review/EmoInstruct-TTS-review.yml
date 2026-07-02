@@ -1,0 +1,34 @@
+note: EmoInstruct-TTS
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass-with-fixes
+scores:
+  completeness: 5
+  accuracy: 4
+  insight: 5
+  kb_positioning: 5
+  evidence_grounding: 3
+issues:
+  - type: fact-inference-mixing
+    severity: medium
+    location: "方法详解 全节"
+    detail: "因果解释缺少 [论文原文]/[agent 解读] 来源标注。例如 '这种设计的核心思想是…' '设计动机: 纯语义嵌入缺乏声学锚定…' 等 WHY 解释均未区分是论文原文论述还是 agent 推断。来源标注覆盖率远低于 80% 目标。"
+  - type: traceability-gap
+    severity: medium
+    location: "速查卡片 > 核心数字"
+    detail: "核心数字行列出了 ESMOS 4.25、ECS 0.870 等关键指标,但缺少 [Table 2]/[Table 4] 等来源标注。速查卡片是高频引用区域,来源标注缺失影响可信赖原则。"
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "models、tasks、datasets 三个字段为空数组。models 应至少列 CosyVoice2、CosyVoice3 (对比 baseline); datasets 应列 ESD、CNCED; tasks 可列 EmotionalTTS 或类似条目。"
+  - type: fact-inference-mixing
+    severity: low
+    location: "与已有工作的对比 全节"
+    detail: "多处 agent 比较判断写成事实陈述,缺少限定词。如 'EmoCtrl-TTS 在时变控制和连续空间上更灵活' '两者路线互补: steering 系列适合快速部署' 等均为 agent 解读但语气像客观事实。"
+suggestions:
+  - "在方法详解节的 WHY 解释后补充 [论文原文 §X.X] 或 [agent 解读] 标注,目标覆盖率 ≥ 80%"
+  - "速查卡片核心数字行补充 [Table 2] [Table 3] [Table 4] 来源标注"
+  - "填充 frontmatter 空字段: models: [CosyVoice2, CosyVoice3], datasets: [ESD, CNCED]"
+  - "对比节中 agent 判断性语句加 '从知识库对比来看' 或 [agent 解读] 前缀"
+summary: "笔记整体质量很高 — 结构完整(速查卡片+KB背景+方法+实验+消融+对比+存疑全覆盖),KB 谱系定位精准(5 个已有方法逐一对比),批判性思考深入(ECS 自评偏差、强度区分度、竞争力存疑)。主要短板是因果解释来源标注不足(可区分原则)和速查卡片溯源缺失(可信赖原则),均为 medium 级别,不阻塞反向更新。"

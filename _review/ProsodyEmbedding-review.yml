@@ -1,0 +1,115 @@
+note: ProsodyEmbedding
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass
+checklist_version: v1.2
+
+scores:
+  factual_accuracy: 4
+  technical_depth: 5
+  kb_integration: 4
+  writing_quality: 4
+  template_compliance: 4
+
+score_rationale:
+  factual_accuracy: >
+    RAVDESS decomposition "24人×2固定句子×8情感 = 1440条" arithmetic wrong
+    (24×2×8=384, not 1440); total 1440 is likely correct for full RAVDESS speech set
+    but factors shown are incomplete (missing repetitions/intensities). SynthID
+    19×16×2=608 checks out. Bestiary discrepancy explained by "(经平衡后)". All other
+    numbers (32-dim finding, bottleneck tradeoff, WavLM leakage percentages)
+    internally consistent across card and main text. No directional errors found.
+  technical_depth: >
+    Excellent coverage: detailed 3-channel input pipeline (F0/energy/voicing extraction
+    with normalization rationale), IU segmentation with linguistic motivation, three AE
+    architectures with explicit bottleneck strength comparison, three pretext tasks with
+    ablation result, training details (curriculum learning, teacher forcing decay schedule).
+    Six numbered experimental findings with causal explanations. The bottleneck-robustness
+    tradeoff (Finding 2) and "reconstruction != representation quality" (Finding 1) are
+    genuinely insightful, not surface-level summaries. 启发 section contains five
+    concrete transferable points with specific downstream applications.
+  kb_integration: >
+    KB background covers 2 entity pages (ProsodyModeling confirmed, StyleTransferinTTS
+    pending-review). Specific lineage positioning against GST-Tacotron (mel input),
+    FastSpeech 2 (explicit params), ProsodyVQ-VAE (frame-level discrete), SSL models
+    (entangled). Cross-references to SSLSuprasegmentalAnalysis, ProsodyEval,
+    DynamicProsodyCosyVoice in main text and 启发 section. Could potentially link to
+    more entities (e.g., MAE, auto-encoder concepts) but current coverage is solid.
+  writing_quality: >
+    Clear structure with logical flow from method to experiments to insights. Source
+    attribution coverage approximately 65% in 方法详解, below the 80% target. Several
+    causal and interpretive statements lack [论文原文] or [agent 解读] markers, including:
+    "核心价值在于从输入端就切断了非韵律信息的泄漏路径" (KB背景),
+    "这一设计的语言学动机是" (方法详解 IU分割段),
+    "本文最有洞察的发现之一" (方法详解 架构表后).
+    The 启发 and 存疑 sections are naturally agent interpretation and appropriately
+    framed. No instances of inference stated as assertion found.
+  template_compliance: >
+    All required sections present: 速查卡片 (10+ fields with substance), KB背景, 方法详解,
+    实验与结果, 对比, 启发与可迁移经验, 存疑与待验证, 审阅callout. Frontmatter has tags,
+    tier, status, arxiv_id, date_read, date_published, confidence, importance,
+    related_notes, kb_links. read_time is empty string (minor). No models/concepts
+    frontmatter fields but this note is about methods not a specific model system.
+
+issues:
+  - id: 1
+    type: factual-error
+    severity: medium
+    location: "速查卡片 > 数据集/规模 & 实验 > 评估 Benchmark 设计"
+    detail: >
+      RAVDESS 数据集分解 "24 人 × 2 固定句子 × 8 情感 = 1440 条" 数学不成立:
+      24×2×8=384, 非 1440。总数 1440 可能正确(RAVDESS speech 集的标准大小),
+      但乘法因子不完整, 缺少 repetitions/intensities 等维度。
+    suggestion: >
+      核对论文原文的 RAVDESS 统计, 补全正确的分解因子,
+      或改为 "RAVDESS (1440 条, 24 人, 8 情感类别)" 不列完整乘法式。
+
+  - id: 2
+    type: traceability-gap
+    severity: medium
+    location: "方法详解 全节 + KB 背景"
+    detail: >
+      因果解释来源标注覆盖率约 65%, 低于 80% 目标。多处解释性/判断性陈述
+      未标注 [论文原文] 或 [agent 解读], 包括: "核心价值在于从输入端就切断了
+      非韵律信息的泄漏路径" (KB背景), "这一设计的语言学动机是" (方法详解 IU
+      分割段), "本文最有洞察的发现之一" (方法详解 架构表后), "信息瓶颈"
+      架构表中的强/弱分类依据。
+    suggestion: >
+      对方法详解和 KB 背景中的 WHY 解释逐条标注来源:
+      来自论文原文的加 [论文 Section X], 来自 agent 综合判断的加 [agent 解读]。
+      优先处理 KB 背景中的判断性语句, 因为这些最容易被误认为论文原话。
+
+  - id: 3
+    type: template-compliance
+    severity: low
+    location: "frontmatter"
+    detail: "read_time 字段为空字符串"
+    suggestion: "填入实际阅读时长或删除该字段"
+
+suggestions:
+  - >
+    Finding 2 (瓶颈强度与鲁棒性权衡) 是本笔记最有价值的洞察,
+    建议在 KB 页 [[ProsodyModeling]] 的 key_papers 中追加本文并
+    注明 "输入端解耦 + 瓶颈-鲁棒性 tradeoff"。
+  - >
+    TCC 协议的通用性值得在 KB 中建立独立概念或在现有评估概念页中提及,
+    但需先确认是否有 >=2 篇论文引用此范式(准入规则)。
+  - >
+    存疑第 5 点提到的与 Mega-TTS prosody encoder 的对比, 如果后续
+    精读 Mega-TTS 2, 可在该笔记中做交叉比较并回填链接。
+
+high_issues: 0
+medium_issues: 2
+low_issues: 1
+
+summary: >
+  高质量精读笔记, 平均分 4.2/5, 各项均 >=4。方法机制解释充分 (三通道输入设计动机、
+  IU 分割语言学理据、瓶颈强度-鲁棒性 trade-off 的六项核心发现), KB 定位精准
+  (与 GST/ProsodyVQ-VAE/WavLM/SSL 的四路对比清晰), 启发部分 (输入端解耦 > 事后解耦、
+  TCC 协议通用性、32维足够) 对后续 TTS 韵律设计有直接参考价值。两个 medium issue
+  均不影响核心结论的可信度: RAVDESS 数据量分解公式缺少因子 (总数正确),
+  因果解释来源标注覆盖率 65% 略低于 80% 目标但无 fact-inference 混淆实例。
+  verdict: pass。
+
+learning_signals: []

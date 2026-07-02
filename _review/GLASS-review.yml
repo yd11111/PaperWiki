@@ -1,0 +1,55 @@
+note: GLASS
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass-with-fixes
+scores:
+  factual_accuracy: 4
+  technical_depth: 5
+  kb_integration: 5
+  writing_quality: 4
+  template_compliance: 4
+issues:
+  - type: factual-error
+    severity: medium
+    location: "实验与结果 > pitch table > F0 (F) row"
+    detail: "High LoRA F0 (F) = 156.1 Hz vs baseline 192.2 Hz — high-pitch adapter appears to DECREASE female F0 by 36 Hz. Moreover Low LoRA F0 (F) = 164.6 Hz is HIGHER than High LoRA for females (156.1). This direction reversal is either a transcription error needing PDF verification, or a genuine anomaly that the note fails to discuss. The 存疑 section addresses pitch weakness only in male magnitude terms, completely missing the female direction issue."
+    suggestion: "Verify F0 (F) numbers against PDF Table 1. If correct, add discussion to 存疑节 about gender-dependent pitch direction — this may indicate the pitch LoRA learned a speaker-gender interaction effect rather than a purely gender-agnostic pitch direction."
+  - type: overclaim
+    severity: medium
+    location: "实验与结果 > 关键发现 #1"
+    detail: "'LoRA 在质量指标上全面碾压 DSP' — WER for LoRA (3.05-3.49%) is worse than DSP (1.45-1.56%), so the claim is inaccurate if WER is considered a quality metric. Even interpreting '质量指标' as excluding WER, the word '全面碾压' is too strong without explicit qualification."
+    suggestion: "Rephrase to '在 SpkSim/UTMOS/S-MOS/N-MOS 等质量指标上 LoRA 全面优于 DSP,但 WER 略高 (3.05-3.49% vs 1.45-1.56%)' to accurately reflect the tradeoff."
+  - type: traceability-gap
+    severity: medium
+    location: "方法详解 全节 + 关键发现"
+    detail: "方法节中的 WHY 解释缺乏 [论文原文] vs [agent 解读] 标注。至少 3 处 agent 解读未标记: (1) '这比 token-level advantage...更粗粒度，但对 GLASS 这种目标是 utterance-level 属性的场景是合理的'; (2) '这使得 GLASS 的 reward 天然适合定义方向性控制'; (3) '两个对立 adapter 在中间点相互抵消 style shift...KL penalty 的正则化效果保留了'. 来源标注覆盖率估计 < 80%."
+    suggestion: "为 agent 自己的因果推断添加 [agent 解读] 标记,至少覆盖上述 3 处。"
+  - type: factual-error
+    severity: low
+    location: "实验与结果 > 关键发现 #3"
+    detail: "'比 baseline 2.81% 高约 0.7 pp' — 实际范围为 0.24 pp (3.05-2.81) 到 0.68 pp (3.49-2.81),0.7 pp 仅为上界,不具代表性。"
+    suggestion: "改为 '高 0.2-0.7 pp' 或 '最多高约 0.7 pp'."
+  - type: template-compliance
+    severity: low
+    location: frontmatter
+    detail: "read_time 字段为空字符串。"
+    suggestion: "补充 read_time 字段。"
+  - type: traceability-gap
+    severity: low
+    location: "训练规模 小节"
+    detail: "训练超参数列表 (500-750 steps, batch size 4, G=8, 2 PPO epochs, 50 speakers, 3000 sentences) 缺少 section/table 引用标注,不确定来自论文正文还是 Appendix。"
+    suggestion: "添加 [Appendix A] 或对应 section 引用。"
+suggestions:
+  - "优先验证 pitch table 中 F0 (F) 数据: 若与 PDF 一致,这是一个值得深挖的发现 (gender-dependent pitch effect),可补入存疑节; 若为转录错误,修正数字。"
+  - "为方法节 agent 解读添加来源标记,提升 fact/inference 可区分性至 80% 以上。"
+  - "修正'全面碾压'措辞,显式排除 WER 或改为更精确表达。"
+  - "补充 read_time 和训练参数引用标注。"
+summary: >
+  高质量深度笔记。技术深度出色: 方法节包含完整公式推导和超参设置,与 4 篇相关工作
+  (FlowTTS-GRPO / MCLP / Multi-Reward GRPO / FineGrainedStyleControl) 的横向对比
+  清晰且有独到视角。KB 定位在 DiffRO 演进线和 Style Transfer 谱系中均准确。5 条存疑
+  问题质量高,有科研引导价值。主要问题: (1) pitch table 中 female F0 数据存在方向性异
+  常 (High LoRA 反降 F0) 未被讨论,需 PDF 验证; (2) '全面碾压' overclaim 未排除 WER;
+  (3) 方法节因果解释的来源标注覆盖不足 (<80%)。三项均为 medium severity,不阻塞反向
+  更新但建议修正后质量更佳。

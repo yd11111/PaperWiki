@@ -201,3 +201,23 @@ Yang et al. (ICASSP 2026) 提出 DS-WED (Discretized Speech Weighted Edit Distan
 ## Word-level VAD 作为层级 Reward 信号 (HPRO)
 
 [[论文笔记/HPRO|HPRO]] (Nie et al., 2026) 将 word-level Valence-Arousal-Dominance (wVAD) 轨迹引入 DiffRO 层级 reward 体系,作为 frame-level 和 sentence-level 之间的中间粒度情感韵律监督。wVAD 由 wav2vec2-ft 预测,使用 MFA 词边界 + 上下文窗口 (目标词 + 两侧各一词) 计算 CCC 一致性。消融显示 w/o wVAD 使 wVAD-CCC 从 0.339 降至 0.310,词级约束对细粒度情感韵律轨迹的捕捉不可或缺 [Table III]。这是 wVAD 首次作为可微 reward 信号用于 TTS RL 优化 (区别于 EmoSphere-TTS 将 VAD 用于 SFT 损失)。详见 [[论文笔记/HPRO|HPRO]]。
+
+## 对话场景韵律参考区间 (Reference-Based Prosody Evaluation)
+
+[[论文笔记/Reference-BasedProsodyEvaluation|Hallur et al. (2026)]] 从韵律**评估**角度反向约束韵律建模: 从 4065h 英语对话语料 (Seamless Interaction) 构建按说话人特征 (sex/age) 和交互状态 (arousal/dominance) 分层的 F0/语速/停顿参考区间,提出百分位偏差协议替代粗暴的池化参考。核心发现: 池化参考在 F0 表现力维度上系统性过度标记 (低 arousal 组 flag rate 21.11% vs 名义 10%),匹配参考成功将其校正至 ~10% [Table V]; sex label 对 F0 的 Cliff's delta = -0.957 (近完全分离),arousal-F0 SD Spearman rho = 0.544 [Table II-III]。与本页已有的韵律多样性度量 (ProsodyEval/DS-WED) 互补: DS-WED 度量"系统韵律变化够不够丰富",参考区间度量"系统韵律在不在人类正常范围内"。对韵律建模的启示: 评估韵律模型输出时必须按说话人特征和对话语境分层,否则评估噪声会掩盖真实的建模质量差异。
+
+## 语义-声学联合情感韵律嵌入 (EmoInstruct-TTS)
+
+[[论文笔记/EmoInstruct-TTS|EmoInstruct-TTS]] (Wu et al., iFLYTEK/USTC, 2026) 提出 Emotion2embed: 将 Sentence-BERT 语义特征与 ECAPA-TDNN 声学特征拼接投影为 896 维联合嵌入,覆盖 48 种情感状态 (27 细粒度类别 + 7 主类 × 3 强度级)。通过 margin-based ranking loss 对 ℓ2 归一化嵌入施加序数强度约束,强制 low < medium < high 的投影顺序 [Eq. 3]。这种**语义提供结构、声学提供保真度、序数约束提供强度可控性**的设计思路与纯声学韵律编码 (如 reference encoder/VAE) 路线不同,是将韵律表示与语义描述联合建模的新范式。ICE-Flow (条件 flow 模型 + 分布正则化) 在推理时从自然语言指令生成嵌入,延迟 <5ms。
+
+## 长文本韵律连续性 (MagpieTTS-LF)
+
+[[论文笔记/MagpieTTS-LF|MagpieTTS-LF]] (Gritsenko et al., NVIDIA, 2026) 将韵律建模扩展到**篇章级连续性**维度: 通过三层创新解决长文本合成中韵律漂移问题 — (1) soft attention prior 替代 binary alignment mask,允许 chunk 边界处的柔性韵律过渡; (2) 三状态 stateful chunk generation (text history + encoder states + attention position) 跨 chunk 传递韵律上下文; (3) history-aware text encoding 通过历史文本 embedding 的 linear blending 注入全局韵律感知。关键发现: 在长文本 (>200 words) 场景中,energy (而非 F0) 是影响感知连续性的主要韵律瓶颈 [§5 分析]; WER 0.025 vs XTTS 0.051 [Table 1]。与传统帧级/句级韵律建模的区别: MagpieTTS-LF 在推理时通过状态传递而非重新编码实现跨段落韵律连贯,是工程化的篇章韵律保持方案。
+
+## CFM 韵律属性变换 (FineCombo-TTS)
+
+[[论文笔记/FineCombo-TTS|FineCombo-TTS]] (Pu et al., Tsinghua THUHCSI, 2026) 提出 Speech Variance Predictor (SVP): 用 CFM 在统一的韵律属性空间内进行可控变换。关键设计: (1) 从参考语音提取 pitch/speed/energy 序列 + emotion embedding 组成属性向量; (2) 将文本描述中的修改指令 (如"更快""更悲伤") 编码为条件; (3) CFM 学习从当前属性分布向目标属性分布的流,实现"相对控制"而非绝对指定。这是与传统 variance adaptor (FastSpeech 2 的确定性预测) 和 reference encoder (GST 的隐式提取) 都不同的第三条路线: 在显式韵律属性空间内做条件生成式变换。Speed Accuracy 98%, Pitch 93.33%, Emotion 85% [Tables 2-3]。
+
+## 无监督韵律嵌入表示 (ProsodyEmbedding)
+
+[[论文笔记/ProsodyEmbedding|Cámbara et al. (UBA, 2026)]] 提出从底层韵律信号 (F0 + energy + voicing flag) 出发的无监督 auto-encoder 韵律嵌入方法。核心价值: 通过将输入限制为三维韵律特征 (排除频谱/内容信息),从源头切断非韵律信息的泄漏路径,这是与 SSL 中间层 probing (de la Fuente & Jurafsky, 2024) 和 reference encoder (GST) 的根本区别。三级评估协议 — Speaker Independence (SI) / Speaker-Text Independence (STI) / Topic-Content Control (TCC) — 揭示了韵律表示中的信息泄漏层次。关键发现: WavLM 句级分类达 100% (严重信息泄漏) vs TransfSeq-AE 仅 41% [Table 2]; 32 维已足够,增加维度收益递减; GRU 架构在 TCC 控制下表现最稳健。与本页 SSL 超音段韵律表征节的联系: SSL probing 研究"预训练模型学到了什么韵律信息",ProsodyEmbedding 研究"如何从头构建纯净的韵律表示"。

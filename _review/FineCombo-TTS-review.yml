@@ -1,0 +1,126 @@
+note: FineCombo-TTS
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass-with-fixes
+scores:
+  factual_accuracy: 4
+  technical_depth: 5
+  kb_integration: 5
+  writing_quality: 4
+  template_compliance: 4
+  # average: 4.4
+
+issues:
+  - type: factual-error
+    severity: medium
+    principle: 可信赖
+    location: "Timbre Control [Table 3 right], WER row"
+    detail: >
+      WER 行中 VoxInstruct-Joint 的 19.24 被加粗标记为最优,
+      但 WER 越低越好,FineCombo-TTS 的 18.59 才是更优值。
+      加粗应在 18.59 上。这是一个方向性错误。
+    suggestion: "将 WER 行改为: WER | 19.24 | **18.59** |"
+
+  - type: overclaim
+    severity: medium
+    principle: 可区分
+    location: "速查卡片 > 一句话总结 + 核心数字"
+    detail: >
+      卡片一句话总结写"提出首个真正联合参考语音+文本描述的可控 TTS 框架",
+      但正文 vs ControlSpeech 段承认 ControlSpeech "也做 reference + description
+      联合控制",与"首个"矛盾。此外核心数字写"全面超越 VoxInstruct-Joint",
+      但 prosody WER (12.87 vs 11.12) 实际更差,非"全面"。
+    suggestion: >
+      一句话总结改为"提出首个(作者声称)真正联合..." 或
+      "基于 CFM 的联合参考语音+文本描述框架";
+      核心数字改为"在可控性指标上全面超越 VoxInstruct-Joint,WER 略有 trade-off"
+
+  - type: template-compliance
+    severity: low
+    principle: 可定位
+    location: "frontmatter > read_time"
+    detail: "read_time 字段为空字符串,应填入实际阅读时长或删除此字段。"
+    suggestion: "填入估算时长或保留空值(不影响主要功能)"
+
+  - type: traceability-gap
+    severity: low
+    principle: 可信赖
+    location: "速查卡片 > 核心数字"
+    detail: "核心数字缺少评估测试集/条件说明(如 test set 来源、合成条数等)"
+    suggestion: "在核心数字末尾补充评估条件,如 '[100 条 test set, §4.1]'"
+
+suggestions:
+  - >
+    方法详解中 TTS Backbone 的 cross-attention 注入方式描述为
+    "text features as Q, E_a as K/V",这是一个较不常见的设计
+    (通常 conditioning signal 作 K/V 而 main sequence 作 Q),
+    建议回查原文 §2.3 确认 Q/K/V 分配是否准确。
+  - >
+    "与已有工作的对比"表格质量很高,建议在 ControlSpeech 行补充
+    其论文发表时间,以帮助读者判断同期性。
+  - >
+    "存疑与待验证"第 4 点关于 80M pairs 可能导致过拟合的分析很有洞察力,
+    可考虑在 KB 反向更新时将此观察追加到 EmotionControlinTTS 页面。
+
+checklist_details:
+  可复述:
+    mechanism_not_listing: true
+    design_choices_justified: true
+    reusability_concrete: true
+    notes: >
+      核心思路"不解耦,做变换"的 insight 清晰,
+      三模块设计均有因果解释。借鉴意义 3 条均具体可迁移。
+      启发与可迁移经验节独立展开 4 个 transferable insights。
+
+  可信赖:
+    source_annotation_coverage: 90%
+    metric_names_correct: true
+    card_metrics_with_numbers: true
+    no_direction_error: false
+    baseline_numbers_accurate: likely
+    ablation_consistent: true
+    notes: >
+      数字引用规范,消融分析 (Table 4/5) 数字与正文完全一致。
+      唯一问题是 Timbre WER 的加粗方向错误 (medium)。
+
+  可区分:
+    inference_labeled: true
+    inference_label_coverage: 85%
+    no_assertion_as_fact: true
+    strong_claims_supported: partially
+    notes: >
+      事实与推断边界清晰,4 处 [agent 解读] 标注到位。
+      存疑与待验证节 6 条均为开放问题,未混为断言。
+      仅"首个"和"全面超越"两处轻微 overclaim。
+
+  可定位:
+    lineage_specific: true
+    innovation_has_baseline: true
+    frontmatter_present: true
+    frontmatter_semantics: true
+    card_fields_substantive: true
+    notes: >
+      KB 背景节是本篇亮点,基于 3 个实体页提供三维谱系定位
+      (style transfer 演进线、emotion control 路线对比、prosody modeling 视角)。
+      与已有工作对比表含 5 方法横向比较,维度选取合理。
+
+  不污染:
+    new_concepts_justified: n/a
+    no_duplicate_concepts: true
+    reverse_update_safe: n/a
+    notes: >
+      笔记状态为 draft,尚未执行反向更新。
+      kb_links 指向 3 个已有实体页,均为合理关联,无去重风险。
+      速查卡片"首个"claim 来自作者原文 [Abstract],
+      但笔记正文已通过 ControlSpeech 对比自行质疑了该 claim。
+
+summary: >
+  FineCombo-TTS 笔记整体质量很高 (均分 4.4/5)。
+  技术深度满分:方法解释有机制因果而非组件罗列,消融分析透彻,
+  跨工作对比表提供了有价值的五维比较。
+  KB 背景的三轴定位 (style/emotion/prosody) 是亮点。
+  存疑与待验证节 6 条问题均有深度。
+  主要问题: (1) Timbre WER 加粗方向错误 (medium);
+  (2) 卡片"首个"与正文自身分析矛盾 + "全面超越"overclaim (medium)。
+  修正这两处后可放行反向更新。verdict 为 pass-with-fixes。

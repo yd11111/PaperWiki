@@ -1,0 +1,72 @@
+note: Reference-BasedProsodyEvaluation
+reviewer: auto
+date: 2026-07-02
+tier: deep
+verdict: pass
+scores:
+  factual_accuracy: 4
+  technical_depth: 5
+  kb_integration: 4
+  writing_quality: 4
+  template_compliance: 4
+
+issues:
+  - type: fact-inference-mixing
+    severity: medium
+    location: "实验与结果 > 性别对 F0 的决定性影响; 匹配参考的校准优势; KB 背景 > 创新判断"
+    detail: >
+      多处 agent 推断未标注来源。例如: "这意味着不按性别分层的 F0 评估毫无意义"
+      (§III-A 段); "这是全文最核心的实验结果" (校准优势段首); "核心贡献不在方法...
+      而在大规模参考数据的构建" (KB 背景创新判断); "互补而非竞争" (对比节)。
+      这些推断合理,但速查卡片已正确区分 "局限(作者自述)" 和 "局限(我的判断)",
+      正文应保持同样的标注纪律。
+    suggestion: >
+      在这些推断性语句前添加 [agent 解读] 标记或使用限定语
+      (如 "可以认为"、"从数据来看"),与速查卡片风格一致。涉及约 4 处修改。
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > tasks"
+    detail: >
+      tasks 字段列出 [[Zero-shotSpeechSynthesis]],但本文是韵律评估方法论论文,
+      不涉及 zero-shot 语音合成任务本身。错挂会导致搜索零样本合成论文时混入
+      这篇评估方法论,污染 KB 关联。
+    suggestion: >
+      将 tasks 清空为 [] 或替换为与评估方法论更贴切的任务链接。
+      SpokenDialogueEvaluation 已在 concepts 中,不必重复到 tasks。
+
+  - type: template-compliance
+    severity: low
+    location: "frontmatter > datasets"
+    detail: >
+      datasets 字段为空 [],但 Seamless Interaction 数据集 (4065h / 64739 interactions /
+      4284 participants) 是本文的核心数据基础。虽非论文提出的新数据集,但作为
+      评估参考区间的构建基础应予标注。
+    suggestion: >
+      若 vault 中存在 Seamless Interaction 数据集页则链接;否则可先以纯文本标注
+      或保持空值(速查卡片已有充分描述,当前可接受)。
+
+suggestions:
+  - >
+    正文中约 4 处 agent 推断添加 [agent 解读] 标记,提升事实-推断可区分度。
+    具体位置: (1) §III-A "毫无意义"; (2) 校准优势 "最核心的实验结果";
+    (3) KB 背景 "核心贡献不在方法"; (4) 对比节 "互补而非竞争"。
+  - >
+    frontmatter tasks 字段语义修正: 清空或替换。
+  - >
+    与已有工作的对比节 (ProsodyEval / TTSDS2 / TTS-PRISM / Responsible TTS Eval)
+    是本笔记的突出亮点,系统性地定位了本文在评估工具链中的位置,可作为模板参考。
+  - >
+    存疑与待验证第 4 点 (未在真实 S2S 系统上验证) 准确指出了标题与内容的落差,
+    是高价值的批判性分析。
+  - >
+    方法节可补充一句 sextile binning 的选择理由 (为什么六分位而非四分位/十分位),
+    提升 "为什么选这个而不是那个" 的覆盖。
+
+summary: >
+  高质量深度笔记。技术深度突出 (5/5): 6 个韵律维度的提取方法、4 步评估协议、
+  pooled vs matched 校准实验均有清晰的因果解释。KB 定位优秀: 与 ProsodyEval /
+  TTSDS2 / TTS-PRISM / DS-WED / Responsible TTS Evaluation 的互补关系梳理清晰,
+  创新判断有对比基准。数字引用扎实 (16+ 处 Table/Fig/Section 标注)。
+  主要改善点: 正文 3-4 处 agent 推断未显式标记 (medium),frontmatter tasks 字段
+  语义错挂 (low)。平均分 4.2,无单项 <=2,无阻断性问题,verdict 为 pass。

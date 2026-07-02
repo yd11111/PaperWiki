@@ -204,3 +204,7 @@ Wang et al. (CUHK, 2026) 提出 UniSRM,首个覆盖 4 种语音评估任务的�
 ### I2D: Iterative Evaluation for Score Saturation
 
 Shen et al. (2026) 提出 Iterate to Differentiate (I2D),通过迭代合成协议增强现有客观指标的区分力。核心思路: 递归使用模型自身合成输出作为参考音频进行多轮合成,利用差异化退化(stronger models degrade slower)放大被 score saturation 掩盖的性能差距。在 11 个开源零样本 TTS 模型上验证,UTMOSv2 的 system-level SRCC 从 0.118 提升至 0.464 (Mean 聚合),DNSMOS 从 0.091 提升至 0.255 [Table 3]。cross-model 参考交换实验证实退化主要由参考质量渐进恶化驱动,而非分布外崩溃。与 TTSDS2 (distributional)、SpeechJudge (GRM)、TTS-PRISM (multi-dimensional) 等新指标路线不同,I2D 不引入新模型或指标,而是改变评估协议本身,复用已有指标即可提升区分力。详见 [[论文笔记/IterateDifferentiate|I2D]]。
+
+### Reference-Based Prosody Evaluation: 分层参考区间协议
+
+[[论文笔记/Reference-BasedProsodyEvaluation|Hallur et al. (JHU/Amazon, 2026)]] 提出面向 S2S 对话系统的韵律/节奏评估协议: 从 4065h 英语对话语料构建按说话人特征 (sex/age) 和交互状态 (arousal/dominance) 分层的 F0/语速/停顿参考区间,输出百分位偏差向量 + 越界标记,替代单一标量评分。核心发现: 池化参考在 F0 表现力维度上系统性过度标记 — 低 arousal 组 flag rate 21.11%、高 arousal 组 16.07% (名义 10%),匹配参考校正至 ~10% [Table V]。与 TTSDS2 Prosody factor (Wasserstein-2 单一分数) 和 TTS-PRISM prosody 维度 (LLM 评分) 路线不同,本方法走"描述统计 + 条件分层 + 可解释百分位向量"路线,填补了**对话场景韵律评估**的空白。局限: 方法本质是分位数查表,无学习组件; 尚未在真实 S2S 系统输出上验证; 偏差与人类感知自然度的映射未建立。与 ProsodyEval/DS-WED 互补: DS-WED 度量韵律**多样性**,参考区间度量韵律**合理性**。

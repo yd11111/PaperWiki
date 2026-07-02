@@ -127,6 +127,18 @@ Singing Style Transfer 是 Style Transfer in TTS 在歌声领域的延伸,但具
 
 [[论文笔记/FineGrainedStyleControl|Kang et al. (2026)]] 提出两种 training-free 方法在 prompt-based TTS (Parler-TTS) 上实现细粒度风格控制: (1) Inter-utterance — 在 text encoder embedding space 中计算对比 style prompt 的方向向量,通过标量 alpha 插值实现 pitch/speed/gender 的连续控制 (gender 转换 99-100%, pitch +/-36 Hz, speed +/-1.6 SPS); (2) Intra-utterance — 发现 style self-referencing 现象 (AR decoder 早期 audio token 通过 self-attention 锁定风格,使中途 prompt 替换无效),提出 KV-cache swap + sliding-window attention masking 实现单条语音内的风格过渡 (SIM 0.81-0.91, 过渡感知率达 96.2%)。与 EmoSteer-TTS 的激活空间操作互补: EmoSteer-TTS 在 flow-matching DiT 层做 emotion steering,本文在 AR decoder 的 text encoder embedding + KV-cache 层面做 style control。
 
+## 联合参考+描述的"相对控制"范式 (FineCombo-TTS)
+
+[[论文笔记/FineCombo-TTS|FineCombo-TTS]] (Pu et al., Tsinghua THUHCSI, 2026) 提出将参考语音和文本描述联合使用的风格控制范式,核心是"相对控制" — 不要求解耦 timbre/style/prosody,而是在统一属性空间内做条件变换。CFM-based Speech Variance Predictor 从参考语音提取 pitch/speed/energy + emotion embedding,以文本描述的修改意图为条件,学习属性分布的变换流。FACodec 处理 timbre,残差 style encoder 捕获参考未覆盖的风格细节。与 ControlSpeech (也联合 reference+description) 的区别: FineCombo-TTS 的 SVP 用 CFM 做属性变换 (生成式),ControlSpeech 用三分支对齐 (对比式)。Speed Accuracy 98%, Pitch 93.33%, Timbre SIM 0.872 [Tables 2-3]。配套发布 FineEdit 数据集 (3 维 × 方向 × 程度描述模板)。
+
+## 无监督韵律风格嵌入 (ProsodyEmbedding)
+
+[[论文笔记/ProsodyEmbedding|Cámbara et al. (UBA, 2026)]] 从底层韵律信号 (F0 + energy + voicing flag) 出发,通过 auto-encoder 框架 (GRU/TransfSeq/TransfCLS) 构建无监督韵律嵌入。与 GST/reference encoder 的根本区别: 输入仅限三维韵律特征,从源头排除频谱和内容信息,避免"风格表示其实是说话人/内容表示"的泄漏问题。三级评估协议 (SI/STI/TCC) 量化了不同方法的信息泄漏层次,发现 WavLM 句级分类达 100% (严重泄漏) vs TransfSeq-AE 仅 41% [Table 2]。32 维足够,GRU 架构在严格控制条件下最稳健。对风格迁移的启示: 若目标是纯韵律风格迁移 (不含 timbre/content),需要从输入端而非编码端做信息隔离。
+
+## GRPO-LoRA 可组合风格方向 (GLASS)
+
+[[论文笔记/GLASS|GLASS]] (Fang et al., 2026) 在冻结 CosyVoice2 backbone 上用 GRPO 训练任务专属 LoRA,将 LoRA 权重更新视为参数空间中的**风格方向向量**: 每个 LoRA 控制一个风格维度 (speed/pitch),运行时通过 LoRA 组合实现多维风格同时控制。与 EmoSteer-TTS 的激活空间 steering 和 TaskVectorTTS 的 task vector 合并不同,GLASS 的方向性来自 GRPO reward (SER/pitch/speed 评估器) 的梯度引导,不需要对比数据集。Fast LoRA SPS 5.59 (vs baseline 3.65),S-MOS 4.72 vs DSP 3.08 [Table 1]。核心价值: 将 GRPO 从"改善生成质量"的传统用法拓展到"学习模块化风格控制信号",LoRA 的可组合性使多维风格控制变为即插即用。
+
 ## 演进
 
-固定风格合成 (SPSS) → GST 无监督风格发现 (2018) → VAE 风格隐空间 (2019) → Meta-learning 零样本 (2021) → 扩散+对抗达人类水平 (StyleTTS 2, 2023) → LLM in-context style (2023-) → 指令驱动自由风格 (VoxInstruct, 2024) → Training-free 推理时风格操控 (EmoSteer-TTS/FineGrainedStyleControl, 2025-2026)
+固定风格合成 (SPSS) → GST 无监督风格发现 (2018) → VAE 风格隐空间 (2019) → Meta-learning 零样本 (2021) → 扩散+对抗达人类水平 (StyleTTS 2, 2023) → LLM in-context style (2023-) → 指令驱动自由风格 (VoxInstruct, 2024) → Training-free 推理时风格操控 (EmoSteer-TTS/FineGrainedStyleControl, 2025-2026) → GRPO-LoRA 可组合风格方向 (GLASS, 2026)

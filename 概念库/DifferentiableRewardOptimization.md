@@ -125,3 +125,7 @@ Ouyang et al. (2026) [[论文笔记/ConversationalTTS-RL|ConversationalTTS-RL]] 
 ## Structured Preference Space + Hierarchical Progressive Reward / HPRO (SCUT/Huya, 2026)
 
 Nie et al. (2026) [[论文笔记/HPRO|HPRO]] 从 reward 空间结构和优化粒度两个维度改进 DiffRO 在 emotional TTS 中的应用。核心方法: (1) HD-Emo codec — 双 FSQ 信息瓶颈将 speech tokens 分流为 content preference tokens (codebook=1296) 和 style preference tokens (codebook=64),用 stop-gradient 隔离 content branch 仅由 ASR 监督更新,style branch 由 SER + wVAD 层级监督; (2) 渐进式三阶段优化 — Frame warm-up (Lcp+Lsp) → Word refinement (+LwVAD+LASR) → Sentence alignment (+LSER),Gumbel 温度从 2→1→0.8 退火。在 CosyVoice2 上验证: WER 4.02% (vs CosyVoice2 SFT 5.45%), EMO-SIM 0.672 (vs 0.613), wVAD-CCC 0.339 (vs 0.307) [Table I]。消融 w/o frame&wvad (模拟 DiffRO) 的 WER 4.35% / wVAD-CCC 0.315 均劣于 HPRO,验证了层级 reward 对单尺度全局 reward 的改进 [Table III]。与 RRPO 的区别: RRPO 从 RM 鲁棒性切入 (加固 RM 本身),HPRO 从 reward 空间结构 (content/style 分离) 和优化粒度 (层级渐进) 切入,两者互补。
+
+## GRPO-LoRA 作为可组合风格控制信号 / GLASS (2026)
+
+[[论文笔记/GLASS|GLASS]] (Fang et al., 2026) 将 GRPO 的用途从"改善 TTS 生成质量"拓展到"学习模块化风格控制信号": 在冻结 CosyVoice2 backbone 上,为每个风格维度 (speed/pitch) 独立训练 GRPO-LoRA,SER/pitch/speed 评估器提供 reward,LoRA 权重更新方向被 reward 梯度引导为参数空间中的风格方向向量。运行时通过 LoRA 组合实现多维风格同时控制。Fast LoRA SPS 5.59 (vs baseline 3.65),S-MOS 4.72 vs DSP 3.08 [Table 1]。与 DiffRO/GRPO 在 TTS RL 中的传统角色 (优化 WER/SIM/MOS 等生成质量指标) 不同,GLASS 中 GRPO 的优化目标是**风格变化方向的准确性**而非整体生成质量,LoRA 的可组合性使 GRPO 产出的 reward 知识可模块化复用。与 FlowTTS-GRPO 的区别: FlowTTS-GRPO 在 FM 声学空间做全局质量优化,GLASS 在 LM 参数空间做维度化风格控制。

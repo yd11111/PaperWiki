@@ -233,3 +233,11 @@ NVSpeech (Liao et al., 2025) 从不同角度切入情感表达 — 不直接建�
 ## 结构化偏好空间 + 层级 Reward (HPRO)
 
 [[论文笔记/HPRO|HPRO]] (Nie et al., SCUT/Huya, 2026) 从 DiffRO 在 emotional TTS 中的两个结构性失配 (information conflict + scale gap) 切入,提出 HD-Emo codec (FSQ 双流 content/style preference token 分离) + 渐进式三阶段层级 reward (frame→word→sentence)。在 CosyVoice2 上 WER 4.02% / EMO-SIM 0.672 / wVAD-CCC 0.339,同时实现最高情感表现和最低 WER [Table I]。消融显示 w/o content 时 WER 暴涨至 13.61%,完美展示 information conflict [Table III]。与 RRPO (RM 鲁棒性) 和 DiffRO-MTR (零样本情感) 形成三条互补的 DiffRO emotional TTS 改进路线。详见 [[论文笔记/HPRO|HPRO]]。
+
+## 双路径指令驱动情感嵌入 (EmoInstruct-TTS)
+
+[[论文笔记/EmoInstruct-TTS|EmoInstruct-TTS]] (Wu et al., iFLYTEK/USTC, 2026) 提出将情感控制分为语义规划和情感声学两条路径。核心组件 Emotion2embed 通过 Sentence-BERT + ECAPA-TDNN 联合编码构建覆盖 48 种情感状态 (27 类 + 7 主类 × 3 强度级) 的结构化嵌入空间,以 margin-based ranking loss 强制强度序数约束。ICE-Flow (条件 flow 模型) 在推理时从自然语言指令生成嵌入 (<5ms),配合协方差正则化抑制 mode collapse (VR 0.88→0.96) [Table 1]。基于 CosyVoice2/3 pipeline,21 类情感-强度 ESMOS 4.25 (vs CosyVoice3 3.98) [Table 2]。消融证实双路径互补: 去掉 Emotion2embed 则 ESMOS 降至 3.78,去掉文本指令则 WER 暴涨至 0.0486 [Table 2, 4]。与 EmoCtrl-TTS (帧级连续 AV) 的区别: EmoInstruct-TTS 是句级离散类别+强度控制; 与 EmoSteer-TTS (training-free) 的区别: 需训练但提供显式强度解释性。
+
+## CFM 韵律属性变换用于情感控制 (FineCombo-TTS)
+
+[[论文笔记/FineCombo-TTS|FineCombo-TTS]] (Pu et al., Tsinghua THUHCSI, 2026) 通过 CFM-based Speech Variance Predictor 在统一属性空间内实现情感控制: 从参考语音提取 pitch/speed/energy + emotion embedding 组成属性向量,将文本描述中的情感修改指令编码为 CFM 条件,学习从当前属性分布向目标情感分布的流。这种"**相对控制**"范式不需要解耦情感与其他属性 (区别于 DiEmo-TTS 的 DINO 蒸馏和 EmoCtrl-TTS 的帧级 AV 条件),而是在混合属性空间内直接做条件生成式变换。Emotion 控制准确率 85%,同时保持 Timbre SIM 0.872 [Tables 2-3]。与 EmoInstruct-TTS 的区别: FineCombo-TTS 将参考语音和文本描述联合使用 (非二选一),实现更灵活的情感修改。
