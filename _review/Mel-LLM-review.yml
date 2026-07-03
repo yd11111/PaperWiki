@@ -1,0 +1,61 @@
+review:
+  note: "论文笔记/Mel-LLM.md"
+  reviewer: agent-v3
+  date: 2026-07-03
+  checklist_version: v1.2
+
+principles:
+  可复述:
+    status: pass
+    notes: >
+      方法节包含 4 个关键设计选择,每个有 WHY 解释且标注 [论文原文]/[agent 解读]。
+      速查卡片"可借鉴"列出 4 个具体可迁移 trick (layer-freezing, mel 直接输入,
+      多模态预训练 bootstrap, token rate 匹配)。
+  可信赖:
+    status: pass
+    notes: >
+      5 个实验表均有 [Table N] 标注,关键数字与 PDF 交叉验证一致
+      (WER 7.12/5.61/6.97/7.44, IEMOCAP 40.69→66.16, MMLU-speech 53.12→41.30)。
+      指标名正确 (WER/ACC/MAE/UTMOS)。消融数字内部一致。
+  可区分:
+    status: pass
+    notes: >
+      方法节 8 处 [论文原文] + 3 处 [agent 解读] 标注,覆盖率 >80%。
+      无推断被写成断言的情况。
+  可定位:
+    status: pass
+    notes: >
+      KB 背景基于 6 个实体页 (3 confirmed + 3 pending-review),有具体谱系定位
+      (encoder-projector-LLM 三件套 → encoder-free 挑战),创新判断有对比基准
+      (Vision Fuyu/EVE/Tuna-2 已验证但语音缺失)。frontmatter 完整。
+  不污染:
+    status: pass
+    notes: >
+      无新概念页需要创建。反向更新均为追加 (key_papers + 末尾追加一行),
+      不改 status。
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    description: >
+      TTS 评测使用 LibriSpeech-PC (Table VII) 但未列入 frontmatter datasets 字段。
+    fix: 在 datasets 列表中追加 "LibriSpeech-PC"。
+    fixed: false
+
+  - id: 2
+    type: template-compliance
+    severity: low
+    location: frontmatter.datasets
+    description: >
+      Libriheavy 用于 TTS 训练 (§IV-B) 但未列入 frontmatter datasets 字段。
+      当前已在 datasets 中。
+    fix: 无需修改,已列入。
+    fixed: true
+
+conclusion: pass-with-fixes
+summary: >
+  笔记质量高,5 个原则全部通过。方法节设计选择解释充分且来源标注清晰,
+  实验数据与 PDF 交叉验证一致。唯一问题是 frontmatter datasets 缺少
+  LibriSpeech-PC (severity: low),不阻塞反向更新。

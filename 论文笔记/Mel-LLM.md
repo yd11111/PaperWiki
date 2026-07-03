@@ -11,7 +11,7 @@ tags: [speech-LLM, encoder-free, mel-spectrogram, ASR, speech-understanding, TTS
 concepts: ["[[MelSpectrogram]]", "[[ModalityAdaptationforSpeechLLM]]", "[[SpeechLanguageModel]]", "[[LLM-basedTTS]]", "[[SemanticvsAcousticTokens]]", "[[AudioUnderstanding]]", "[[VariationalAutoencoderforTTS]]", "[[LLM-enhancedASR]]"]
 models: ["[[Mel-LLM]]", "[[Whisper]]", "[[MELLE]]", "Phi-4-MM", "Gemma-4-12B-it", "WavLLM", "SALMONN", "LTU-AS", "VibeVoice"]
 tasks: [ASR, speech-understanding, TTS, emotion-recognition, speaker-verification, audio-classification]
-datasets: ["[[LibriSpeech]]", "GigaSpeech", "MLS-English", "SPGISpeech", "CommonVoice 15", "VoxPopuli", "TED-LIUM", "AMI", "Earnings-22", "FLEURS", "Libriheavy", "ESC-50", "IEMOCAP", "VoxCeleb", "GTZAN", "MMAU-mini", "MMLU-speech"]
+datasets: ["[[LibriSpeech]]", "GigaSpeech", "MLS-English", "SPGISpeech", "CommonVoice 15", "VoxPopuli", "TED-LIUM", "AMI", "Earnings-22", "FLEURS", "Libriheavy", "LibriSpeech-PC", "ESC-50", "IEMOCAP", "VoxCeleb", "GTZAN", "MMAU-mini", "MMLU-speech"]
 kb_context_sources: 6
 status: draft
 created: 2026-07-03
@@ -236,3 +236,6 @@ TTS 仅为 proof-of-concept, 连续 mel 生成可行但远不及 latent diffusio
 ---
 
 检索命中: [[SpeechLanguageModel]]✓, [[LLM-basedTTS]]✓, [[SemanticvsAcousticTokens]]✓ | 过滤: [[MelSpectrogram]](pending-review), [[ModalityAdaptationforSpeechLLM]](pending-review), [[MELLE]](pending-review) | 未命中但可能相关: 无
+
+> [!review] agent-v3 2026-07-03 — **pass-with-fixes**
+> 5 原则全部通过。方法节设计选择解释充分且来源标注清晰,实验数据与 PDF 交叉验证一致。已修复: frontmatter datasets 追加 LibriSpeech-PC。详见 `_review/Mel-LLM-review.yml`。
