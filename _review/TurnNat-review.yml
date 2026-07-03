@@ -1,0 +1,57 @@
+review:
+  paper: "TurnNat"
+  note_path: "论文笔记/TurnNat.md"
+  reviewer: auto
+  date: 2026-07-03
+  checklist_version: "v1.2"
+
+principles:
+  可复述:
+    score: 9
+    rationale: "方法节清晰解释了三阶段 pipeline 的 WHY (为什么 NLL, 为什么 TBU, 为什么 Mean+Tail),4 个设计选择均有 why-not-that 对比。速查卡片可借鉴字段具体可迁移。"
+  可信赖:
+    score: 9
+    rationale: "数字型 claim 均有 [Table]/[§] 标注,覆盖率 ~95%。指标名 (paired accuracy, C-index, NLL, Krippendorff's alpha) 使用正确且与原文一致。抽样核对 V0=80.6%, D4 alpha=8=88.0% 与 PDF Table III 一致。"
+  可区分:
+    score: 9
+    rationale: "因果解释有 [论文原文]/[agent 解读] 标注,覆盖率约 90%。不存在把推断写成断言的句子。速查一句话中的'首个'有上下文限定(基于似然的统一框架)。"
+  可定位:
+    score: 9
+    rationale: "KB 背景节精确定位了两大对比路线 (行为-事件式 vs 通用语音评估),引用了 Full-Duplex-Bench, Talking Turns, GSRM, SpeechJudge 等具体工作。点评节进一步与 Reference-Based Prosody Evaluation 做了互补性分析。"
+  不污染:
+    score: 9
+    rationale: "不涉及新建概念页。反向更新计划 (追加到 Turn-takinginSpokenDialogue, SpokenDialogueEvaluation) 属于安全的 append 操作,内容 factual。"
+
+conclusion: pass-with-fixes
+total_issues: 3
+issue_summary:
+  high: 0
+  medium: 2
+  low: 1
+
+issues:
+  - id: 1
+    severity: medium
+    type: template-compliance
+    principle: 可信赖
+    location: "frontmatter > tasks"
+    detail: "tasks 字段值为 [[Turn-takinginSpokenDialogue]],这是一个概念页而非任务页。论文的核心 task 是 turn-taking naturalness evaluation,但任务库中没有对应页面。"
+    suggestion: "将 tasks 改为空列表 [],或如果认为需要新建 Turn-taking Evaluation 任务页则记入 [待决]。Turn-takinginSpokenDialogue 已在 concepts 中引用。"
+
+  - id: 2
+    severity: medium
+    type: traceability-gap
+    principle: 可区分
+    location: "方法节 > Stage 2 设计选择 2"
+    detail: "为什么选择 TBU 而不是全帧评估,仅标注 [agent 解读],但论文 §III-B 末尾有相关原文解释: 'a TBU covers the local turn-taking region around an onset or offset boundary... while preserving a causal scoring setup'。"
+    suggestion: "补充 [论文原文] 标注,引用 §III-B 的原文理由。"
+
+  - id: 3
+    severity: low
+    type: template-compliance
+    principle: 可定位
+    location: "frontmatter > datasets"
+    detail: "datasets 字段写了 'Seamless Interaction' 但未使用 wikilink 格式,且数据集库中可能没有对应页面。"
+    suggestion: "保持当前格式即可(非 wikilink 不阻塞)。数据集页创建标记为 [待决] — 该数据集是一个较新的大规模双通道对话数据集,未来可能被多篇论文引用。"
+
+learning_signals: []

@@ -10,7 +10,7 @@ venue: "arXiv"
 tags: [evaluation, turn-taking, spoken-dialogue, full-duplex, voice-activity-detection, likelihood-based, naturalness]
 concepts: ["[[Turn-takinginSpokenDialogue]]", "[[SpokenDialogueEvaluation]]", "[[Full-duplexSpokenDialogue]]"]
 models: ["TurnNat", "VAP", "DualTurn"]
-tasks: ["[[Turn-takinginSpokenDialogue]]"]
+tasks: []
 datasets: ["Seamless Interaction"]
 kb_context_sources: 5
 status: draft
@@ -88,6 +88,7 @@ TurnNat 是一个三阶段评估框架 [§III, Fig 1]:
 - [agent 解读] 这是 TurnNat 相比 Full-Duplex-Bench 和 Talking Turns 的根本区别: 前者需要为每种行为定义阈值/判决规则,TurnNat 只需一个似然分数
 
 **2. 为什么选择 TBU 而不是全帧评估?**
+- [论文原文] TBU 覆盖 onset/offset 边界附近的局部 turn-taking 区域,同时保持因果评分设置 ("a TBU covers the local turn-taking region around an onset or offset boundary... while preserving a causal scoring setup") [§III-B]
 - [agent 解读] 对话中大部分时间是稳态 (一个人持续说话),真正体现 turn-taking 质量的是 onset/offset 附近的转换区域; TBU 聚焦这些区域,避免了稳态帧对评分的稀释
 
 **3. 256-way categorical vs independent Bernoulli**
@@ -194,3 +195,10 @@ TurnNat 是一个三阶段评估框架 [§III, Fig 1]:
 2. **TBU + Mean/Tail 聚合**: 先识别"关键区域" (boundary units),再对关键区域做 mean+tail 聚合。Tail 项防止极端不自然被均值稀释,这个设计可迁移到其他需要检测局部异常的评估任务。
 3. **受控扰动 benchmark 构建方法**: 在自然数据上做定向局部扰动 (延迟/提前/替换/插入),生成 paired 数据用于验证指标的区分力。相比从头收集不自然数据,这种方法成本低且控制变量。
 4. **非均匀 horizon binning**: 近未来细分、远未来粗分 (4 bins: 0-200, 200-600, 600-1200, 1200-2000 ms),反映 timing 预测不确定性随时间增大的先验。适用于任何需要多尺度时间预测的任务。
+
+> [!review] Auto-review 2026-07-03
+> Conclusion: **pass-with-fixes** | Issues: 0 high, 2 medium, 1 low
+> - [x] ~~(M) tasks 字段引用了概念页而非任务页~~ → 已改为空列表
+> - [x] ~~(M) TBU 设计选择仅标 [agent 解读],论文 §III-B 有原文理由~~ → 已补充 [论文原文] 标注
+> - [ ] (L) datasets 字段 'Seamless Interaction' 未用 wikilink 格式 → 保持现状,数据集页创建标记为 [待决]
+> Report: `_review/TurnNat-review.yml`
