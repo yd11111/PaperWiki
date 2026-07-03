@@ -164,6 +164,10 @@ WavChat (Table 3 & Section 6.3) 总结了 8 个主要 benchmark:
 
 [[论文笔记/MOSS-TTSD|MOSS-TTSD]] (Zhang et al., 2026) 提出 TTSD-eval,专门针对 script-to-dialogue(非交互式对话合成)场景。核心思路: 当输入脚本已知说话人归属时,用 MMS-FA (forced alignment) 做词级对齐直接获取 speaker 标签,绕过 speaker diarization 误差。指标包括 Speaker Attribution Accuracy (ACC)、Speaker Similarity (SIM)、WER。相比 cpWER/cpSIM,TTSD-eval 在多说话人(3-5 人)场景中评估更可靠。
 
+### TurnNat: 统一 Turn-taking 自然度评估 (Zhang et al., 2026)
+
+[[论文笔记/TurnNat|TurnNat (Zhang et al., JHU/Amazon, 2026)]] 尝试填补 Interaction Capability 评估的空白,提出首个基于似然的统一 turn-taking 自然度自动评估框架。用因果模型预测未来双说话人语音活动状态的 NLL 作为 timing 异常性度量,通过 Turn-Taking Boundary Units (TBUs) 聚焦 onset/offset 附近区域。最佳配置 paired accuracy 88.0%, C-index 0.676 [Table III]。与 dGSLM 的事件统计分布比较和 Full-Duplex-Bench 的行为-事件分别计分不同,TurnNat 提供统一的单分数评估。局限: 仅在人-人对话受控扰动上验证,未在真实人-AI 对话上测试; 仅关注 timing 不涉及语义/韵律。与 ZBB (即时打断理解) 互补 — ZBB 评估语义理解能力,TurnNat 评估 timing 自然度。
+
 ## 开放问题
 
 WavChat (Section 5.2.3 & 6.2) 指出以下评估方向仍待发展:

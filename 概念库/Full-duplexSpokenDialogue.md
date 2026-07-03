@@ -142,6 +142,10 @@ Survey 特别提出 IPR 作为全双工的配套能力:
 - **Talking Turns**: 训练神经网络预测全双工输出的 turn-taking 事件
 - **NTPP 方法**: reflective pause (沉默能力) + interruption (被打断停止能力)
 
+### TurnNat: 基于似然的统一评估 (Zhang et al., 2026)
+
+[[论文笔记/TurnNat|TurnNat (Zhang et al., JHU/Amazon, 2026)]] 提出基于似然的统一 turn-taking 自然度评估框架,与上述行为-事件式评估路线 (dGSLM 统计分布比较、Full Duplex Bench、Talking Turns) 形成互补。用因果模型在 Turn-Taking Boundary Units (onset/offset 附近 2s 区间) 内预测未来双说话人语音活动状态的 NLL 作为评分。最佳配置 (DualTurn+256-way categorical+aux, alpha=8) paired accuracy 88.0%, C-index 0.676 [Table III]。优势: 无需事件类型标签,统一评分框架可跨不同类型的 timing 失败; 局限: 仅在人-人对话扰动上验证。
+
 ### State Inertia 与 Activation Steering (Chang et al., 2026)
 
 [[论文笔记/StateInertia-FD-SLM|State Inertia (Chang et al., 2026)]] 首次从 mechanistic interpretability 角度分析 FD-SLM 的内部"听-说"协调机制。通过 logit lens 发现 FD-SLM 隐藏表征具有 stream-specific predictive focus (中间层追踪当前活跃语流),并定义 generation/perception affinity 量化内部状态。关键发现: 用户打断时模型存在 **state inertia** — 内部状态延迟约 7-8 timestep (~0.6s) 才从 generative 切换到 perceptive state [§3.4]。通过 training-free 的 activation steering (在打断 onset 注入 perception vector),PersonaPlex 上打断理解正确率从 28% 提升到 45% [Table 2]。配套提出 Zero-Buffer Benchmark (ZBB) 评估即时打断理解能力。

@@ -1,5 +1,9 @@
 # Log
 
+## 2026-07-03
+
+- [ingest/deep] [[TurnNat]] — TurnNat: Automatic Evaluation of Turn-Taking Naturalness in Dyadic Spoken Dialogue (Zhang et al., JHU/Amazon, 2026). KB 命中 5 页: Turn-takinginSpokenDialogue, Full-duplexSpokenDialogue, TTSEvaluation, StreamingSpokenDialogue, SpokenDialogueEvaluation (全部 pending-review). 审阅: pass-with-fixes (0H/2M/1L). 反向更新 3 页 (Turn-takinginSpokenDialogue, SpokenDialogueEvaluation, Full-duplexSpokenDialogue, prose-only). Lint: all passed.
+
 ## 2026-07-02
 
 - [ingest/deep] batch 6 prosody/controllable TTS 关联论文精读:

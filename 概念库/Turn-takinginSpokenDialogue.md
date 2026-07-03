@@ -199,6 +199,10 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - [[SpokenDialogueEvaluation]]: Interaction Capability 评估涵盖 turn-taking 质量
 - [[SpeechLanguageModel]]: Turn-taking 是 SpeechLM 的高级交互能力
 
+### TurnNat: 基于似然的统一 Turn-taking 评估 (Zhang et al., 2026)
+
+[[论文笔记/TurnNat|TurnNat (Zhang et al., JHU/Amazon, 2026)]] 将 turn-taking 预测模型从"预测工具"转化为"评估工具": 在自然人-人对话上训练因果模型预测未来双说话人语音活动状态 (256-way categorical, 2s horizon),用帧级 NLL 作为 timing 异常性度量。核心设计: Turn-Taking Boundary Units (TBUs, onset/offset 附近 2s 区间) 聚焦转换区域,Mean+Tail 聚合兼顾全局和极端。最佳配置 (DualTurn+256-way+aux, alpha=8) paired accuracy 88.0%, C-index 0.676 [Table III]。与 Full-Duplex-Bench (行为-事件分别计分) 和 Talking Turns (训练监督 judge) 路线不同,TurnNat 提供统一的单分数评估,无需事件类型标签。局限: 仅在人-人对话扰动上验证,未在真实人-AI 对话上测试。
+
 ## 演进
 
 VAD-only 打断检测 (早期, 高误判) → Duplex Conversation 三模块 (多模态检测, 2024) → Full-duplex LLM 感知-动作-FSM (2024) → dGSLM 隐式 turn-taking (dual-tower DLM, 2023) → Moshi multi-stream (无显式 turn, 单一 PAD token, 2024) → Mini-Omni2 irq/n-irq markers (2024) → SyncLLM time-sync chunks (2024) → Freeze-Omni chunk-level state prediction (State 0/1/2, 2024) → Raon-SpeechChat SIL/BOW/BC 三状态建模 (显式解耦 when-to-speak/what-to-say/backchannel, 2026) / BayLing-Duplex 4 状态 token + timing-only DPO (2026) → ELLSA action turn-taking + action barge-in (四模态扩展, 2026) → [[论文笔记/ModeratorLM|ModeratorLM]] role-conditioned multi-party turn-taking + CoT reasoning (2026) → [[论文笔记/Wan-Streamer|Wan-Streamer]] 从交错交互数据隐式学习 turn-taking (含视觉打断感知和主动发言, 无显式状态 token, 2026; 注: 无定量 turn-taking 评估)
