@@ -2,6 +2,7 @@
 
 ## 2026-07-03
 
+- [ingest/deep] [[Mel-LLM]] — LLM can Read Spectrogram: Encoder-free Speech-Language Modeling (Fan et al., Microsoft, 2026). KB 命中 6 页: SpeechLanguageModel✓, LLM-basedTTS✓, SemanticvsAcousticTokens✓, MelSpectrogram(pr), ModalityAdaptationforSpeechLLM(pr), MELLE(pr). 审阅: pass-with-fixes (0H/0M/1L, fix: +LibriSpeech-PC to datasets). 反向更新 5 页 (ModalityAdaptationforSpeechLLM +key_papers+section, MelSpectrogram +section, MELLE +key_papers+後続, SpeechLanguageModel +演進, SemanticvsAcousticTokens +section). Lint: all passed.
 - [ingest/deep] [[TurnNat]] — TurnNat: Automatic Evaluation of Turn-Taking Naturalness in Dyadic Spoken Dialogue (Zhang et al., JHU/Amazon, 2026). KB 命中 5 页: Turn-takinginSpokenDialogue, Full-duplexSpokenDialogue, TTSEvaluation, StreamingSpokenDialogue, SpokenDialogueEvaluation (全部 pending-review). 审阅: pass-with-fixes (0H/2M/1L). 反向更新 3 页 (Turn-takinginSpokenDialogue, SpokenDialogueEvaluation, Full-duplexSpokenDialogue, prose-only). Lint: all passed.
 
 ## 2026-07-02
