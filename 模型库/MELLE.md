@@ -7,7 +7,7 @@ year: 2024
 tags: [TTS, zero-shot, autoregressive, continuous-token, mel-spectrogram, codec-free, LLM-TTS]
 key_concepts: ["[[MelSpectrogram]]", "[[VariationalAutoencoderforTTS]]", "[[LLM-basedTTS]]", "[[CodecLanguageModel]]", "[[NeuralVocoder]]"]
 tasks: [TTS, zero-shot-TTS]
-key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/MELD|MELD]]"]
+key_papers: ["[[论文笔记/MELLE|MELLE]]", "[[论文笔记/FELLE|FELLE]]", "[[论文笔记/LatentLM|LatentLM]]", "[[论文笔记/CLEAR|CLEAR]]", "[[论文笔记/Cont-SPT|Cont-SPT]]", "[[论文笔记/SMLLE|SMLLE]]", "[[论文笔记/StreamMel|StreamMel]]", "[[论文笔记/MELD|MELD]]", "[[论文笔记/Mel-LLM|Mel-LLM]]"]
 supersedes: []
 superseded_by: []
 status: pending-review
@@ -60,3 +60,4 @@ Tacotron (mel prediction, AR) → VALL-E (discrete codec LM) → **MELLE (contin
 ## 后续工作
 
 - [[论文笔记/StreamMel|StreamMel]] (2025, Nankai/Microsoft): 将 MELLE 的连续 mel AR 框架扩展到流式场景,通过 text-mel interleaving (n:m=1:4) 实现单阶段流式零样本 TTS; 直接继承 MELLE 的 latent sampling module + spectrogram flux loss + KL divergence; cross-sentence WER-H 2.76 接近 MELLE-L 离线 2.80, SIM-O 0.622 超越 MELLE-L 的 0.591, FPL-A 仅 0.01s [StreamMel Table I-IV]
+- [[论文笔记/Mel-LLM|Mel-LLM]] (2026, Microsoft): 在 encoder-free Speech-LLM 中复用 MELLE 的 VAE decoder 框架 (linear → μ/σ → reparameterize → residual MLP → postnet) 实现连续 mel 生成,作为 TTS proof-of-concept; LibriSpeech-PC WER 11.03 vs latent diffusion 4.2,表明 encoder-free LLM 直接输出连续 mel 可行但远不及专用系统 [Table VII]

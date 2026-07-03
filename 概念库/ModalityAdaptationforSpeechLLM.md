@@ -4,7 +4,7 @@ title: "Modality Adaptation for Speech LLM"
 aliases: [模态适配, Speech-LLM Adapter, Speech Modality Adapter, 语音模态适配器, Bridge Network, Module Connector, Speech Encoder Adapter]
 category: "technique"
 tags: [speech-LM, adapter, modality-adaptation, downsampling, CTC, Q-Former, PEFT, LoRA]
-key_papers: ["Hono et al., 2023", "Yu et al., 2024", "Pham et al., 2024", "Wu et al., 2023", "Fathullah et al., 2024", "Li et al., 2023a (BLIP-2)", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/DualSpeechLM|DualSpeechLM]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/SALMONN|SALMONN]]", "[[论文笔记/PRIME-Speech|PRIME-Speech]]"]
+key_papers: ["Hono et al., 2023", "Yu et al., 2024", "Pham et al., 2024", "Wu et al., 2023", "Fathullah et al., 2024", "Li et al., 2023a (BLIP-2)", "[[论文笔记/Step-Audio2.5|StepAudio 2.5]]", "[[论文笔记/GOAT-TTS|GOAT-TTS]]", "[[论文笔记/OpenS2S|OpenS2S]]", "[[论文笔记/DualSpeechLM|DualSpeechLM]]", "[[论文笔记/Raon-Speech|Raon-Speech]]", "[[论文笔记/SALMONN|SALMONN]]", "[[论文笔记/PRIME-Speech|PRIME-Speech]]", "[[论文笔记/Mel-LLM|Mel-LLM]]"]
 origin_paper: "Yang et al., When LLM Meet Speech, 2025"
 related_concepts: ["[[Speech-LLMIntegrationTaxonomy]]", "[[Speech-TextAlignment]]", "[[SpeechLanguageModel]]", "[[SpeechTokenizer]]"]
 status: pending-review
@@ -144,4 +144,8 @@ Modality adaptation 主要服务于语音理解任务 (ASR, S2TT 等)。在 TTS 
 
 ## 演进
 
-Random downsampling (Wang et al., 2023c, 早期) → Convolutional downsampling (Hono et al., 2023) → CTC compression (blank-removal/frame-averaging, 2023) → Q-Former 引入 (BLIP-2 → 语音, 2024) → PEFT + adapter 联合训练 (LoRA, 2024) → 两阶段训练策略 (Wu et al., 2023) → 开放问题: 最优 adapter 架构因任务而异
+Random downsampling (Wang et al., 2023c, 早期) → Convolutional downsampling (Hono et al., 2023) → CTC compression (blank-removal/frame-averaging, 2023) → Q-Former 引入 (BLIP-2 → 语音, 2024) → PEFT + adapter 联合训练 (LoRA, 2024) → 两阶段训练策略 (Wu et al., 2023) → Encoder-free 极端简化 (Mel-LLM, 2026) → 开放问题: 最优 adapter 架构因任务而异
+
+### Encoder-Free 路线: 去掉编码器主体 [Mel-LLM, 2026]
+
+[[论文笔记/Mel-LLM|Mel-LLM]] (Fan et al., 2026) 提出最极端的简化: 完全去掉 Transformer/Conformer 编码器主体,仅保留轻量 NeMoConv 下采样 (8x, 12.6M params) + 线性投影 (12.6M params),将 80-dim log-mel patches 直接喂给 LLM。总非 LLM 语音参数仅 25.2M (vs 编码器通常 600M+)。在 Phi-4-MM (14B) 上用 LoRA 适配,OpenASR 平均 WER 7.12% 仅比 random encoder baseline 高 0.15% [Table II],且在 paralinguistic 任务上显著优于 encoder-based 系统 (IEMOCAP emotion +25.47, gender +5.16) [Table VI]。代价是 knowledge-intensive spoken QA 下降 (MMLU-speech 53.12→41.30),瓶颈在 semantic anchoring。这一结果表明编码器在 adapter pipeline 中不仅做下采样,还提供了 semantic anchor 的 inductive bias。

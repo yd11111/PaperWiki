@@ -154,3 +154,7 @@ Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBER
 ### WavLM 中层单码本路线 [WavSLM, 2026]
 
 [[论文笔记/WavSLM|WavSLM]] (Della Libera et al., 2026) 提供了一种新的 mixed token 路线: 用 WavLM 第 6 层 (中层) 特征经 FocalCodec-Stream 量化为单码本 discrete tokens。论文实验证明这种 mid-level SSL feature 的单码本 token 在 SALMon 声学一致性 (Speaker 88.5, Gender 90.5) 和 ZeroSpeech 语义任务上均表现竞争性,支持"中层 SSL 表征天然兼顾语义和声学"的假设 [WavSLM Table 1]。
+
+### Encoder-Free 的 Acoustic-Semantic Trade-off [Mel-LLM, 2026]
+
+[[论文笔记/Mel-LLM|Mel-LLM]] (Fan et al., 2026) 从连续表征维度揭示了 semantic-acoustic trade-off 的新形态: 去掉编码器后直接将 mel spectrogram patches 喂给 LLM,暴露了编码器通常压缩掉的副语言信息 (speaker traits, prosody, timbre, emotion),paralinguistic 任务大幅提升 (IEMOCAP emotion +25.47, gender +5.16) [Table VI]; 但同时移除了编码器提供的 semantic anchor,导致 knowledge-intensive spoken QA 下降 (MMLU-speech 53.12→41.30) [Table VI]。这是 token 二分法在连续特征维度的映射: encoder 压缩 ≈ 离散化时的信息选择,保留语义但丢弃声学;encoder-free ≈ 保留全部声学但缺乏语义锚定。
