@@ -2359,3 +2359,11 @@
 - [lint/local] FlexiVoice — 通过/0 问题
 - [ingest/deep] [[ECSS]] — 异构图情感 CSS + DailyTalk 情感标注 (AAAI 2024); KB append: ProsodyModeling, EmotionControlinTTS, GlobalStyleTokens
 - [ingest/repro] [[dots.tts]], [[VoxCPM]]→repro, [[VoxCPM2]], [[WavTTS]]→repro — 4篇复现级笔记; 审阅全pass; KB反向更新9概念页 (CFM, LLM-basedTTS, SemanticvsAcousticTokens, FSQ, VAE-TTS, SpeechTokenizer, CFG, NAR-TTS, Next-TokenDiffusion)
+
+- [kb/search] [[STAR-VAE]] — 命中 5 页(取 Top 5): [[ConditionalFlowMatching]]✓, [[Classifier-FreeGuidance]]✓, [[VariationalAutoencoderforTTS]](pending), [[Next-TokenDiffusion]](pending), [[AudioTokenizerTaxonomy]](pending) | 过滤: 无
+- [ingest/deep] [[STAR-VAE]] — 精读 (ICML 2026, 连续音频 VAE tokenizer), kb_sources=5, 新建 1 概念(STAR)+ 3 数据集(AudioCaps/SongDescriber/WavCaps), 追加 3 概念页(VAE-TTS/CFM/Next-TokenDiffusion, 均 prose)
+- [review/auto] [[STAR-VAE]] — inline (无 dispatch 工具), conclusion=pass-with-fixes, 3 issues (1 medium models 空, 2 low linking); 数字逐表核对 PDF 无误
+- [review/kb] [[STAR-VAE]] — inline, conclusion=pass, 4 项变更(1 new + 3 append), 无 factual-error/overclaim, confirmed 页(CFM)仅正文追加保持 confirmed
+- [review/entity] [[StructuredTopology-AwareRegularization]] — inline entity-review, 保持 pending-review(无独立 dispatch 不自动 confirm); 准入满足(连接 VAE-TTS/CFM/tokenizer, 前置知识); dedup 通过(无既有 STAR 页)
+- [lint/local] STAR-VAE — 通过(首轮 3 ERROR: dataset broken links, 当场新建 3 数据集页后 all passed)
+- [待决] STAR-VAE models 字段空: baseline(Stable Audio Open/Mamba/Qwen3/TangoFlux)无实体页, general-audio 方向扩展时再补建
