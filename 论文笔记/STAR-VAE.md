@@ -213,6 +213,6 @@ STAR-Gen 这块我持保留态度但觉得有启发。它把 LLM decoder 当序�
 >
 > Issues: 3 (high: 0, medium: 1, low: 2)
 > - medium [template-compliance]: `models` 字段空 — 本文模型(STAR-VAE/STAR-Gen)与 baseline(Stable Audio Open/Mamba/Qwen3/TangoFlux 等)在 vault 中均无实体页,暂留空,已在正文充分引用。
-> - low [bad-linking]: `datasets` 引用 [[AudioCaps]]/[[SongDescriber]]/[[WavCaps]] 目标页暂不存在(通用音频数据集,TTS vault 未收录),记 [待决]。
+> - low [bad-linking, 已修复]: `datasets` 引用的 [[AudioCaps]]/[[SongDescriber]]/[[WavCaps]] 已按 lint ERROR 当场新建最小数据集页(pending-review)。
 > - low [bad-linking]: `tasks` 挂 [[NeuralAudioCompression]](离散 codec 任务),STAR-VAE 为连续 VAE tokenizer,任务匹配不完美但为最近似。
 > 详见 `_review/STAR-VAE-review.yml`

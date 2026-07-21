@@ -81,3 +81,7 @@ MELLE (2024, continuous mel AR, Gaussian assumption, no diffusion) → LatentLM 
 ## HoliTok: AR+DiT 统一建模的 holistic tokenizer
 
 [[论文笔记/HoliTok|HoliTok]] (Li et al., 2026) 将 AR+DiT 范式的瓶颈从架构端转移到 tokenizer 端。其 AR+DiT 下游架构与 DiTAR/Ming-UniAudio 相同 (Qwen2.5-0.5B + 18-layer DiT flow-matching head),但核心贡献在于: 通过渐进式三阶段训练 (AE→VAE→downstream-aware enrichment) 构建的 25Hz/128-dim VAE latent 是测试的所有连续表示中唯一能在统一 TTS+ASR 架构中稳健运行的表示。Semantic-VAE 在统一设置中 TTS WER 崩至 102%, MingTok-Audio 崩至 51%, 而 HoliTok-Unite 仅 8.59% [Table 3]。消融显示多任务 LM 监督不仅帮助理解,对 **生成鲁棒性** 也至关重要——去掉后 TTS WER 从 27.85% 升至 110% [Table 8]。
+
+## 对照:STAR-Gen 是序列级 flow matching,不是 per-token
+
+[[论文笔记/STAR-VAE|STAR-VAE]] 的生成模块 **STAR-Gen** (Liu et al., ICML 2026) 容易被误归为 next-token diffusion,但其实是**不同范式**,适合作为反例澄清本页概念边界。STAR-Gen 不在每个 token 位置挂独立 head,而是把整段连续 latent 序列喂给 LLM decoder(Qwen3-0.6B 初始化),对 audio latent 用**双向 attention**、对 text 用 causal attention,一次性预测整个序列的 flow matching 向量场 L_FM = E‖v_θ(z_t,t|c)−(z1−z0)‖² [STAR-VAE §3.3]。这恰好绕开了本页 DiTAR 段落指出的"per-token(patch=1)因单向 causal attention 而性能退化"的瓶颈——DiTAR 的解法是 patch 级分治,STAR-Gen 的解法是整段双向。二者殊途同归地承认 audio latent 生成不应被 causal 单向约束。"LLM-based"在 STAR-Gen 中更多指复用 LLM decoder 权重与可扩展骨干,而非 next-token 语言建模。

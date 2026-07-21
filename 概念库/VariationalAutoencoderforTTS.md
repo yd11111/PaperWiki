@@ -143,3 +143,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## SARA: 架构性语义融合替代正则化
 
 [[论文笔记/SARA|SARA]] (Chen et al., Interspeech 2026) 提出了与 Semantic-VAE 正交的路线来解决重建-生成困境: **不通过正则化 loss 引导 latent space,而是通过架构设计直接将语义信息嵌入 VAE**。具体做法是构建 dual-stream encoder: 冻结 w2v-BERT 2.0 作为 semantic anchor (50Hz) + 可训练残差 CNN-LSTM 作为 acoustic encoder (50Hz,strides [2,3,4,4,5] 实现 480x 降采样),两路在 channel 维 concat 后线性投影到 64-dim latent。冻结 SSL 分支保证语义下界,可训练残差分支只需补充声学增量,避免双分支信息竞争。集成到 F5-TTS 后 WER 1.79% vs Semantic-VAE 1.95% (LibriSpeech-PC),重建 PESQ 4.389 vs Semantic-VAE 3.968 [SARA Table 1, 2]。额外发现: SARA 的结构化 latent space 使 flow matching 在更少 NFE 下保持质量 (8-step WER 1.82 优于 vanilla 32-step 2.23) [Table 4]。但 SIM 0.63 略低于 Semantic-VAE 0.64,且 w2v-BERT 2.0 (580M) 引入额外推理开销。
+
+## STAR-VAE: 各向异性 channel-wise KL 重塑隐空间拓扑
+
+[[论文笔记/STAR-VAE|STAR-VAE]] (Liu et al., ICML 2026) 给出了重建-生成困境的**第四条正交路线**(前三条见上:Semantic-VAE 语义正则、SARA 架构融合、HoliTok/LongCat)。它不动语义、不动维度、不动训练阶段,而是把标准 VAE 均匀施加的各向同性 KL 惩罚换成**沿 channel index 凸增长的各向异性惩罚**([[StructuredTopology-AwareRegularization|STAR]]:β_c = β_min + (β_max−β_min)·((c−1)/(C−1))^γ, γ=2.0),逼隐空间按信息密度自动分层。论文将各向同性高斯先验诊断为 audio VAE"信息乱堆"的病根(Rate-Distortion-Regularity Trilemma),并指出高容量 encoder(Mamba)在均匀 KL 下会出现 **Reconstruction Drift**("语义连贯但纹理空洞"的重建)。虽在 sound effect/music 而非语音上验证,但"channel index 索引 KL 权重"这个零额外参数、任意 VAE 可插的技巧,对 TTS acoustic VAE 也是低成本可试项。同 21.5Hz 下重建 FAD 3.29→2.31、LC 0.11→0.08,MOS 4.32 vs Stable Audio Open 4.05 [STAR-VAE Table 1, 7]。详见 [[StructuredTopology-AwareRegularization]]。

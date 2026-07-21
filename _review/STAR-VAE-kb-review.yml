@@ -1,0 +1,38 @@
+note: "论文笔记/STAR-VAE.md"
+reviewer: inline
+review_mode: kb-review
+date: 2026-07-21
+independence: "inline (no subagent dispatch tool this session); factual accuracy re-verified against Sources/STAR-VAE.pdf"
+conclusion: pass
+
+change_plan:
+  - target: "概念库/StructuredTopology-AwareRegularization.md"
+    action: new
+    status_set: pending-review
+    note: "本文核心新技术(channel-wise 各向异性 KL);category=technique;含来源标注。范式感知触发新建。"
+  - target: "概念库/VariationalAutoencoderforTTS.md"
+    action: append
+    status_change: none
+    note: "追加 prose 段落(第四条重建-生成困境路线);key_papers 已 19 条(>12),按规则改正文追加,不动 frontmatter。"
+  - target: "概念库/Next-TokenDiffusion.md"
+    action: append
+    status_change: none
+    note: "追加对照段落,澄清 STAR-Gen 是序列级 FM 非 per-token;prose-only。"
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: append
+    status_change: none
+    note: "confirmed 页;key_papers 远超 20(遗留),按规则仅正文追加一条 bullet,保持 confirmed。"
+
+checks:
+  factual_accuracy: pass  # FAD/LC/MOS/FDopenl3 与 PDF Table 1/2/4/7 核对一致
+  dedup: pass             # 概念库无既有 STAR / anisotropic-KL 页;最近似 VAE-TTS 已交叉链接
+  append_vs_substantive: pass  # 三处均为末尾 prose 追加,未改任何既有定义/关系字段
+  overclaim: pass         # 强断言("病根""SOTA")均归因于"论文声称/作者指出",且带出处
+  no_status_pollution: pass  # confirmed 页(CFM)仅 append 保持 confirmed;无既有页降级
+
+issues: []
+
+issue_counts:
+  high: 0
+  medium: 0
+  low: 0
