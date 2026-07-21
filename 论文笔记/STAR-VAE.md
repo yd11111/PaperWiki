@@ -196,3 +196,23 @@ STAR-Gen 这块我持保留态度但觉得有启发。它把 LLM decoder 当序�
 ---
 
 检索命中: [[ConditionalFlowMatching]], [[VariationalAutoencoderforTTS]], [[Next-TokenDiffusion]], [[AudioTokenizerTaxonomy]], [[Classifier-FreeGuidance]] | 过滤: 无 | 未命中但可能相关: [[DiffusionModel]](baseline 相关但未深入)
+
+## 审阅
+
+> [!review] 审阅 (2026-07-21, inline)
+> **结论**: pass-with-fixes
+> (注: 本 session 无独立 subagent dispatch 工具,审阅以 inline 方式执行,已对照 review-checklist 并与 PDF 逐表交叉核对数字。)
+>
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 WHY(凸函数选择/两阶段/双向 attention 动机),速查"可借鉴"为具体 trick |
+> | 可信赖 | pass | Table 1/2/3/4/5/6/7/8 及 Fig 3 数字逐一核对无误,方向性正确,消融与正文一致 |
+> | 可区分 | pass | 因果解释均标 [论文原文]/[agent 解读]/[⚠️ 论文未详述],覆盖率 ≥90% |
+> | 可定位 | pass | KB 背景给出四条重建-生成困境路线对比 + STAR-Gen vs per-token diffusion 定位 |
+> | 不污染 | pass | 反向更新均为 prose 追加(不改既有定义);新建 STAR 页含来源标注 |
+>
+> Issues: 3 (high: 0, medium: 1, low: 2)
+> - medium [template-compliance]: `models` 字段空 — 本文模型(STAR-VAE/STAR-Gen)与 baseline(Stable Audio Open/Mamba/Qwen3/TangoFlux 等)在 vault 中均无实体页,暂留空,已在正文充分引用。
+> - low [bad-linking]: `datasets` 引用 [[AudioCaps]]/[[SongDescriber]]/[[WavCaps]] 目标页暂不存在(通用音频数据集,TTS vault 未收录),记 [待决]。
+> - low [bad-linking]: `tasks` 挂 [[NeuralAudioCompression]](离散 codec 任务),STAR-VAE 为连续 VAE tokenizer,任务匹配不完美但为最近似。
+> 详见 `_review/STAR-VAE-review.yml`

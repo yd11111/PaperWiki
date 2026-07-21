@@ -1,0 +1,51 @@
+note: "论文笔记/STAR-VAE.md"
+reviewer: inline
+review_mode: note-review
+date: 2026-07-21
+note_independence: "inline (no subagent dispatch tool available this session); numbers cross-verified against Sources/STAR-VAE.pdf"
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节给出凸函数(γ>1)选择、两阶段训练、双向 attention 的 WHY;速查'可借鉴'为可迁移 trick(channel-indexed KL、latent truncation 诊断)。"
+  可信赖:
+    score: 9
+    reason: "Table 1/2/3/4/5/6/7/8 与 Fig 3 数字逐条与 PDF 核对无误;FAD/LC/MOS/FDopenl3/CLAP 指标名与原文表头一致;方向性正确;消融数字(如 γ=0.5 1.42 vs Linear 1.38)与 Table 4 一致。"
+  可区分:
+    score: 9
+    reason: "因果解释均标注来源;两阶段动机、Mamba 稳定性机制明确标为 [agent 解读]/[⚠️ 论文未详述];无把推断写成断言。"
+  可定位:
+    score: 9
+    reason: "KB 背景把 STAR-VAE 定位为重建-生成困境第四条路线(vs Semantic-VAE/SARA/HoliTok/LongCat);STAR-Gen 与 Next-Token Diffusion(LatentLM/CLEAR/DiTAR)明确区分。"
+  不污染:
+    score: 8
+    reason: "反向更新均为 prose 追加不改既有定义;新建 STAR 概念页有来源标注。models/datasets 字段的不完整是 vault 收录范围问题,非事实污染。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: medium
+    location: "frontmatter: models"
+    detail: "models 为空。本文模型 STAR-VAE/STAR-Gen 及主要 baseline(Stable Audio Open, Mamba, Qwen3, TangoFlux, Tango2, AudioLDM2, ϵar-VAE)在 vault 中均无实体页。"
+    suggestion: "维持空值,正文已充分引用;若后续 general-audio 方向扩展,可补建 Stable Audio Open / Mamba 模型页。"
+  - id: 2
+    type: bad-linking
+    severity: low
+    location: "frontmatter: datasets"
+    detail: "[[AudioCaps]]/[[SongDescriber]]/[[WavCaps]] 目标页不存在(通用音频/音乐 caption 数据集,当前 TTS-focused vault 未收录)。"
+    suggestion: "记 [待决];这些是标准 T2A 评测集,若 general-audio 论文增多再建页。"
+  - id: 3
+    type: bad-linking
+    severity: low
+    location: "frontmatter: tasks"
+    detail: "挂 [[任务库/NeuralAudioCompression]](离散 codec 压缩任务),而 STAR-VAE 是连续 VAE tokenizer + T2A 生成,任务匹配不完美。"
+    suggestion: "作为最近似任务保留;可考虑未来新建 'Text-to-Audio Generation' / 'Continuous Audio Tokenization' 任务页。"
+
+learning_signals:
+  - "general-audio(sound effect + music)论文进入 TTS-focused vault 时,models/datasets/tasks 实体页普遍缺失,frontmatter 语义完整性与 broken-link 之间存在结构性张力;可考虑对 out-of-domain 论文放宽 datasets 必填或引入 'external-dataset' 占位约定。"
+
+issue_counts:
+  high: 0
+  medium: 1
+  low: 2
