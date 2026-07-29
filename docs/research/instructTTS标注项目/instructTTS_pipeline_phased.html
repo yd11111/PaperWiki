@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>instruct TTS 数据 Pipeline(两阶段)</title>
+<style>
+  :root{
+    --ink:#1f2a36; --sub:#5b6772; --line:#c9d2dc;
+    --step:#e9eff5; --stepbd:#b9c9d8; --stepink:#26384a;
+    --p1:#7fa8c9; --p2:#e0a83c; --new:#c25a3c; --teal:#2e8a8f;
+    --corpus:#8ea6be; --arrow:#9aa7b4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:30px 20px 40px;background:#fbfcfd;color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;}
+  .wrap{max-width:1300px;margin:0 auto;}
+  h1{font-size:21px;margin:0 0 3px;}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:22px;}
+
+  .canvas{display:flex;align-items:stretch;gap:14px;}
+  .col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+
+  .src{min-width:120px;}
+  .src .ic{font-size:46px;line-height:1;}
+  .src .cap{font-weight:700;font-size:13px;text-align:center;}
+  .arrowline{display:flex;align-items:center;color:var(--arrow);font-size:26px;font-weight:900;}
+
+  .phase{border:2px dashed var(--stepbd);border-radius:14px;padding:34px 16px 16px;position:relative;background:#fff;}
+  .phase .ptitle{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:#fff;padding:2px 14px;font-weight:700;font-size:13.5px;white-space:nowrap;}
+  .phase.p1 .ptitle{color:#33566f;} .phase.p1{border-color:var(--p1);}
+  .phase.p2 .ptitle{color:#9a7420;} .phase.p2{border-color:var(--p2);}
+
+  .prow{display:flex;align-items:center;gap:16px;}
+  .pstack{display:flex;flex-direction:column;gap:9px;}
+  .step{background:var(--step);border:1px solid var(--stepbd);border-radius:10px;
+    padding:9px 12px;min-width:190px;color:var(--stepink);}
+  .step .t{font-weight:700;font-size:13px;}
+  .step .d{font-size:11px;color:var(--sub);margin-top:3px;line-height:1.4;}
+  .step.new{background:#fbeee8;border-color:#e0b3a3;}
+  .step.new .t{color:var(--new);}
+  .down{align-self:center;color:var(--arrow);font-size:20px;line-height:.6;}
+
+  .wave{display:inline-flex;align-items:center;gap:2px;height:20px;margin-top:5px;}
+  .wave i{width:2.5px;border-radius:2px;background:#3a566e;}
+
+  .branch{display:flex;flex-direction:column;gap:9px;align-self:center;}
+  .toarrow{color:var(--arrow);font-size:24px;font-weight:900;align-self:center;}
+
+  /* Phase2 */
+  .modelbox{display:flex;align-items:center;gap:9px;background:#fff;border:1.6px solid;border-radius:10px;
+    padding:9px 12px;min-width:200px;font-weight:700;font-size:12.5px;}
+  .modelbox.emb{border-color:#6fae6f;} .modelbox.cap{border-color:var(--p2);background:#fdf6e6;}
+  .modelbox .ic{font-size:20px;}
+  .lbl{font-size:10.5px;color:var(--teal);font-weight:700;}
+  .loop{font-size:11px;color:var(--sub);text-align:center;line-height:1.4;}
+  .pool{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .pool .cyl{width:52px;height:40px;background:linear-gradient(#cbd7e4,#aebfd0);border-radius:50%/22%;
+    border:1px solid #93a6ba;}
+  .pool .t{font-size:10.5px;color:var(--sub);}
+
+  /* corpus */
+  .corpusrow{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px;}
+  .corpus{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .corpus .cyl{width:96px;height:66px;border-radius:50%/26%;
+    background:linear-gradient(#c3d0de,#9fb3c7);border:1.5px solid #8ba0b5;position:relative;}
+  .corpus .cyl:before{content:"";position:absolute;top:6px;left:8px;width:80px;height:22px;
+    border-radius:50%;background:#d7e0ea;}
+  .corpus .t{font-weight:700;font-size:13px;}
+  .chips{display:flex;flex-direction:column;gap:6px;}
+  .chips i{font-style:normal;font-size:12px;font-weight:600;background:#fff;border:1.4px solid var(--stepbd);
+    border-radius:9px;padding:4px 12px;color:#33485c;}
+  .updown{display:flex;flex-direction:column;align-items:center;color:var(--arrow);font-size:22px;font-weight:900;}
+  .caption{margin-top:26px;color:var(--sub);font-size:12.5px;line-height:1.6;}
+  .caption b{color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>instruct TTS 数据处理 Pipeline(两阶段)</h1>
+  <div class="sub">Phase 1 采集与标注(真实数据) · Phase 2 扩增放量(style-guided mining) · 输出带多维标签+NL指令的训练语料</div>
+
+  <div class="canvas">
+
+    <!-- Source -->
+    <div class="col src">
+      <div class="ic">🎬🎙️</div>
+      <div class="cap">多来源语音<br><span style="font-weight:400;font-size:11px;color:var(--sub)">影视/播客/有声书</span></div>
+      <div class="wave">
+        <i style="height:8px"></i><i style="height:15px"></i><i style="height:20px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:9px"></i>
+      </div>
+    </div>
+
+    <div class="arrowline">▶</div>
+
+    <!-- Phase 1 -->
+    <div class="phase p1">
+      <div class="ptitle">Phase 1 · 采集与标注</div>
+      <div class="prow">
+        <!-- 预处理栈(复用已有上游) -->
+        <div class="pstack">
+          <div class="step"><div class="t">(1) 说话人分离</div><div class="d">已有上游</div></div>
+          <div class="down">▼</div>
+          <div class="step"><div class="t">(2) 去噪 & 质量过滤</div><div class="d">DNSMOS ≥ 3.0</div></div>
+          <div class="down">▼</div>
+          <div class="step"><div class="t">(3) 单说话人过滤 / VAD 细分</div><div class="d">✓ 单人 ✗ 混说 → 几十秒片段</div></div>
+          <div class="down">▼</div>
+          <div class="step"><div class="t">(4) ASR 转写</div><div class="d">词级时间戳(WordVoice-5A 复用)</div></div>
+        </div>
+
+        <div class="toarrow">▶</div>
+
+        <!-- 标注分支(本方案新增) -->
+        <div class="branch">
+          <div class="step new"><div class="t">结构化标注</div><div class="d">韵律(5A)/性别年龄/SER情感 L1·L2/register</div></div>
+          <div class="down">▼</div>
+          <div class="step new"><div class="t">交叉验证</div><div class="d">SER↔Omni · 文本↔语音;不一致人工/丢弃</div></div>
+          <div class="down">▼</div>
+          <div class="step new"><div class="t">NL 扩写</div><div class="d">L3 情感描述 → global_desc + 指令</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrowline">▶</div>
+
+    <!-- Phase 2 -->
+    <div class="phase p2" style="align-self:flex-start;">
+      <div class="ptitle">Phase 2 · 扩增放量</div>
+      <div class="col" style="gap:12px;align-items:stretch;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="lbl">Train ▶</span>
+          <div class="modelbox emb"><span class="ic">🧲</span>Speech-CLAP 嵌入模型</div>
+          <span class="lbl">▶ Retrieve</span>
+          <div class="pool"><div class="cyl"></div><div class="t">语音池<br>(内部TTS/大库)</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="lbl">Train ▶</span>
+          <div class="modelbox cap"><span class="ic">📝</span>Caption 模型(降本)</div>
+        </div>
+        <div class="loop">GPT 生成 style query → 检索表达性长尾<br>↳ 回流 <b>Undergo Phase 1</b></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Corpus -->
+  <div class="corpusrow">
+    <div class="updown">▲<span style="font-size:11px;font-weight:600;">汇入</span></div>
+    <div class="corpus">
+      <div class="cyl"></div>
+      <div class="t">训练语料 Training Corpus</div>
+    </div>
+    <div class="chips">
+      <i>🗣️ Speech 语音</i>
+      <i>📄 Text 文本</i>
+      <i>🏷️ Labels 多维标签</i>
+      <i>✨ Instruction 指令</i>
+    </div>
+  </div>
+
+  <div class="caption">
+    <b>图 2</b>:instruct TTS 标注 pipeline(仿 MOSS-VoiceGenerator 两阶段)。
+    <b>Phase 1</b> 对真实语音做 分离→去噪质量过滤(DNSMOS≥3.0)→单人/VAD细分→ASR,再经「结构化标注→交叉验证→NL扩写」产出带多维标签+指令的语料;
+    <b>Phase 2</b> 训练 Speech-CLAP 嵌入 + Caption 模型,从大库检索表达性长尾(尤其稀有情感),回流 Phase 1 放量。
+    产出语料含 语音 / 文本 / 多维标签 / NL 指令 四要素。
+  </div>
+</div>
+</body>
+</html>

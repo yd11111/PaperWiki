@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>instruct TTS 数据处理 Pipeline</title>
+<style>
+  :root{
+    --ink:#1f2a36; --sub:#5a6672; --line:#c9d2dc; --bg:#ffffff;
+    --up:#7a8794;          /* 已有上游 */
+    --new:#c25a3c;         /* 本方案新增 */
+    --arrow:#b9c2cc;
+    --blk:#242424; --org:#e08a3c; --blu:#4a86c5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:34px 22px 50px;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;}
+  .wrap{max-width:1240px;margin:0 auto;}
+  h1{font-size:21px;margin:0 0 3px;}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:10px;}
+  .legend{display:flex;gap:18px;font-size:12.5px;color:var(--sub);margin-bottom:26px;}
+  .legend b{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--ink);}
+  .swatch{width:26px;height:0;border-top:3px solid;border-radius:2px;}
+
+  .row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;}
+  .row.rev{flex-direction:row-reverse;}
+  .turn{display:flex;margin:2px 0;}
+  .turn.right{justify-content:flex-end;padding-right:60px;}
+  .turn.left{justify-content:flex-start;padding-left:60px;}
+  .turn .v{color:var(--arrow);font-size:30px;line-height:.7;}
+
+  /* 数据节点:波形/图标 + 粗体标题,无框 */
+  .dnode{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:96px;max-width:130px;text-align:center;}
+  .dnode .cap{font-size:12px;font-weight:700;line-height:1.25;}
+  .wave{width:104px;height:38px;}
+  .chips{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;max-width:120px;}
+  .chips i{font-style:normal;font-size:9.5px;background:#eef1f5;border:1px solid var(--line);
+    border-radius:9px;padding:1px 6px;color:#3a4653;}
+  .bigicon{font-size:34px;line-height:1;}
+
+  /* 算子框 */
+  .op{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    width:112px;min-height:78px;border:1.6px solid var(--up);border-radius:11px;padding:8px 6px;background:#fff;}
+  .op .ic{font-size:26px;line-height:1;}
+  .op .lb{font-style:italic;font-size:11.5px;font-weight:600;color:var(--up);line-height:1.2;text-align:center;}
+  .op.new{border-color:var(--new);}
+  .op.new .lb{color:var(--new);}
+  .op .tiny{font-style:normal;font-size:9.5px;color:var(--sub);line-height:1.15;}
+
+  /* 块箭头 */
+  .ar{color:var(--arrow);font-size:26px;font-weight:900;flex:0 0 auto;user-select:none;}
+
+  .band{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;color:#fff;}
+  .band.up{background:var(--up);} .band.new{background:var(--new);}
+  .caption{text-align:center;color:var(--sub);font-size:12.5px;margin-top:30px;}
+  .caption b{color:var(--ink);}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="wm" viewBox="0 0 92 36">
+    <!-- 三色多说话人波形 -->
+    <g>
+      <rect x="0"  y="13" width="3" height="10" rx="1.5" fill="#242424"/>
+      <rect x="5"  y="9"  width="3" height="18" rx="1.5" fill="#242424"/>
+      <rect x="10" y="5"  width="3" height="26" rx="1.5" fill="#242424"/>
+      <rect x="15" y="2"  width="3" height="32" rx="1.5" fill="#242424"/>
+      <rect x="20" y="7"  width="3" height="22" rx="1.5" fill="#242424"/>
+      <rect x="25" y="11" width="3" height="14" rx="1.5" fill="#242424"/>
+      <rect x="31" y="12" width="3" height="12" rx="1.5" fill="#e08a3c"/>
+      <rect x="36" y="4"  width="3" height="28" rx="1.5" fill="#e08a3c"/>
+      <rect x="41" y="1"  width="3" height="34" rx="1.5" fill="#e08a3c"/>
+      <rect x="46" y="6"  width="3" height="24" rx="1.5" fill="#e08a3c"/>
+      <rect x="51" y="10" width="3" height="16" rx="1.5" fill="#e08a3c"/>
+      <rect x="57" y="8"  width="3" height="20" rx="1.5" fill="#4a86c5"/>
+      <rect x="62" y="3"  width="3" height="30" rx="1.5" fill="#4a86c5"/>
+      <rect x="67" y="9"  width="3" height="18" rx="1.5" fill="#4a86c5"/>
+      <rect x="72" y="12" width="3" height="12" rx="1.5" fill="#4a86c5"/>
+      <rect x="77" y="5"  width="3" height="26" rx="1.5" fill="#4a86c5"/>
+      <rect x="82" y="11" width="3" height="14" rx="1.5" fill="#4a86c5"/>
+    </g>
+  </symbol>
+  <symbol id="wc" viewBox="0 0 92 36">
+    <!-- 单色干净波形 -->
+    <g fill="#242424">
+      <rect x="0"  y="13" width="3" height="10" rx="1.5"/>
+      <rect x="5"  y="9"  width="3" height="18" rx="1.5"/>
+      <rect x="10" y="5"  width="3" height="26" rx="1.5"/>
+      <rect x="15" y="2"  width="3" height="32" rx="1.5"/>
+      <rect x="20" y="7"  width="3" height="22" rx="1.5"/>
+      <rect x="25" y="11" width="3" height="14" rx="1.5"/>
+      <rect x="31" y="12" width="3" height="12" rx="1.5"/>
+      <rect x="36" y="4"  width="3" height="28" rx="1.5"/>
+      <rect x="41" y="1"  width="3" height="34" rx="1.5"/>
+      <rect x="46" y="6"  width="3" height="24" rx="1.5"/>
+      <rect x="51" y="10" width="3" height="16" rx="1.5"/>
+      <rect x="57" y="8"  width="3" height="20" rx="1.5"/>
+      <rect x="62" y="3"  width="3" height="30" rx="1.5"/>
+      <rect x="67" y="9"  width="3" height="18" rx="1.5"/>
+      <rect x="72" y="12" width="3" height="12" rx="1.5"/>
+      <rect x="77" y="5"  width="3" height="26" rx="1.5"/>
+      <rect x="82" y="11" width="3" height="14" rx="1.5"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <h1>instruct TTS 数据处理 Pipeline</h1>
+  <div class="sub">In-the-wild 语音 → 结构化标注 → 自然语言扩写 → 成品数据集(多维标签)</div>
+  <div class="legend">
+    <b><span class="swatch" style="border-color:var(--up)"></span>已有上游(VAD/ASR/分离)</b>
+    <b><span class="swatch" style="border-color:var(--new)"></span>本方案新增(标注/扩写)</b>
+  </div>
+
+  <!-- Row 1: L→R -->
+  <div class="row">
+    <div class="dnode"><svg class="wave"><use href="#wm"/></svg><div class="cap">In-the-wild 语音</div></div>
+    <span class="ar">▶</span>
+    <div class="op"><div class="ic">📁</div><div class="lb">标准化</div><div class="tiny">→WAV/16k</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><svg class="wave"><use href="#wm"/></svg><div class="cap">标准化语音</div></div>
+    <span class="ar">▶</span>
+    <div class="op"><div class="ic">🔊</div><div class="lb">源分离</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><svg class="wave"><use href="#wc"/></svg><div class="cap">干净人声</div></div>
+    <span class="ar">▶</span>
+    <div class="op"><div class="ic">👥</div><div class="lb">说话人分离</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><svg class="wave"><use href="#wm"/></svg><div class="cap">说话人标注</div></div>
+  </div>
+
+  <div class="turn right"><span class="v">▼</span></div>
+
+  <!-- Row 2: R→L (row-reverse) -->
+  <div class="row rev">
+    <div class="op"><div class="ic">✂️</div><div class="lb">VAD 细分</div><div class="tiny">几十秒片段</div></div>
+    <span class="ar">◀</span>
+    <div class="dnode"><svg class="wave"><use href="#wm"/></svg><div class="cap">语音片段</div></div>
+    <span class="ar">◀</span>
+    <div class="op"><div class="ic">📝</div><div class="lb">ASR 转写</div><div class="tiny">词级时间戳</div></div>
+    <span class="ar">◀</span>
+    <div class="dnode"><svg class="wave"><use href="#wc"/></svg><div class="cap">带转写片段</div></div>
+    <span class="ar">◀</span>
+    <div class="op new"><div class="ic">🎚️</div><div class="lb">结构化标注</div><div class="tiny">韵律/性别年龄/情感/register</div></div>
+    <span class="ar">◀</span>
+    <div class="dnode"><div class="chips"><i>gender</i><i>age</i><i>prosody</i><i>emotion L1/L2</i><i>register</i><i>env</i></div><div class="cap">多维结构化标签</div></div>
+  </div>
+
+  <div class="turn left"><span class="v">▼</span></div>
+
+  <!-- Row 3: L→R -->
+  <div class="row">
+    <div class="op new"><div class="ic">✅</div><div class="lb">交叉验证</div><div class="tiny">SER↔Omni / 文本↔语音</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><div class="chips"><i>高置信标签</i><i>cross_val</i></div><div class="cap">校验后标签</div></div>
+    <span class="ar">▶</span>
+    <div class="op new"><div class="ic">✨</div><div class="lb">NL 扩写</div><div class="tiny">L3 描述 + global_desc</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><div class="chips"><i>labels</i><i>global_desc</i><i>instructions</i></div><div class="cap">标签 + NL 指令</div></div>
+    <span class="ar">▶</span>
+    <div class="op"><div class="ic">🔍</div><div class="lb">质量过滤</div><div class="tiny">DNSMOS/CER/门</div></div>
+    <span class="ar">▶</span>
+    <div class="dnode"><div class="bigicon">🗂️</div><div class="cap">成品数据集<br>(音频+多维标签+指令)</div></div>
+  </div>
+
+  <div class="caption"><b>图 1</b>:instruct TTS 标注 pipeline 总览 —— 复用已有 VAD/ASR/分离,新增「结构化标注 → 交叉验证 → NL 扩写 → 过滤」四段。</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>instruct TTS 标注 Pipeline</title>
+<style>
+  :root{
+    --up:#8894a6; --dsp:#2e7d95; --clf:#7b5ea7; --llm:#c25a3c; --rule:#4a8a5c; --logic:#b58900; --json:#2d3b4e;
+    --bg:#f6f7f9; --card:#ffffff; --ink:#23303e; --sub:#63707e; --line:#c9d2dc;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;padding:32px 20px 60px;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;}
+  h1{font-size:22px;margin:0 0 4px;}
+  .subtitle{color:var(--sub);font-size:13px;margin-bottom:20px;}
+  .wrap{max-width:1180px;margin:0 auto;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 24px;font-size:12.5px;color:var(--sub);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  /* stage */
+  .stage{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px 20px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .stage-hd{font-weight:700;font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .stage-hd .tag{font-size:11px;font-weight:600;color:#fff;background:var(--json);
+    padding:2px 9px;border-radius:20px;}
+  .row{display:flex;flex-wrap:wrap;gap:12px;}
+  /* upstream chain */
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  .chip{background:#eef1f5;border:1px solid var(--line);border-radius:8px;padding:8px 13px;
+    font-size:13px;font-weight:600;color:#4a5765;}
+  .arrow-h{color:var(--line);font-size:18px;}
+  /* operator card */
+  .op{flex:1 1 220px;min-width:210px;background:var(--card);border:1px solid var(--line);
+    border-left-width:5px;border-radius:9px;padding:11px 13px 12px;}
+  .op .n{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;
+    border-radius:50%;color:#fff;font-size:11.5px;font-weight:700;margin-right:7px;}
+  .op .name{font-weight:700;font-size:13.5px;}
+  .op .kind{float:right;font-size:10.5px;color:var(--sub);border:1px solid var(--line);
+    border-radius:10px;padding:1px 7px;}
+  .op .io{margin-top:8px;font-size:11.5px;color:var(--sub);line-height:1.55;}
+  .op .fld{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:11px;color:#2d3b4e;
+    background:#eef1f5;border-radius:4px;padding:1px 5px;}
+  .op.up{border-left-color:var(--up);}   .op.up .n{background:var(--up);}
+  .op.dsp{border-left-color:var(--dsp);}  .op.dsp .n{background:var(--dsp);}
+  .op.clf{border-left-color:var(--clf);}  .op.clf .n{background:var(--clf);}
+  .op.llm{border-left-color:var(--llm);}  .op.llm .n{background:var(--llm);}
+  .op.rule{border-left-color:var(--rule);} .op.rule .n{background:var(--rule);}
+  .op.logic{border-left-color:var(--logic);} .op.logic .n{background:var(--logic);}
+  /* flow arrows between stages */
+  .flow{display:flex;flex-direction:column;align-items:center;color:var(--sub);
+    font-size:12px;margin:6px 0;}
+  .flow .v{font-size:22px;color:var(--line);line-height:1;}
+  .gate{background:#fff4ec;border:1px dashed var(--llm);color:#a24428;border-radius:8px;
+    padding:6px 12px;font-size:12px;font-weight:600;margin:4px auto;}
+  .note{font-size:11.5px;color:var(--sub);margin-top:10px;line-height:1.5;}
+  .json-box{background:var(--json);color:#e8eef5;border-radius:12px;padding:16px 20px;
+    font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12px;line-height:1.7;}
+  .json-box b{color:#7fd1e0;}
+  .cols2{display:flex;gap:14px;flex-wrap:wrap;}
+  .cols2 > .op{flex:1 1 340px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>instruct TTS 标注 Pipeline</h1>
+  <div class="subtitle">两阶段(结构化标注 → 自然语言扩写)· 挂载于现有 VAD/ASR/说话人分离之后 · v0.1</div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--up)"></i>上游(已有)</span>
+    <span><i class="dot" style="background:var(--dsp)"></i>内部 DSP(WordVoice-5A)</span>
+    <span><i class="dot" style="background:var(--clf)"></i>开源分类器</span>
+    <span><i class="dot" style="background:var(--llm)"></i>LLM(Omni / text)</span>
+    <span><i class="dot" style="background:var(--rule)"></i>规则/信号</span>
+    <span><i class="dot" style="background:var(--logic)"></i>逻辑(交叉验证)</span>
+  </div>
+
+  <!-- 上游 -->
+  <div class="stage">
+    <div class="stage-hd"><span class="tag">上游 · 已有</span></div>
+    <div class="chain">
+      <span class="chip">原始音频</span><span class="arrow-h">▶</span>
+      <span class="chip">VAD</span><span class="arrow-h">▶</span>
+      <span class="chip">ASR(词级时间戳)</span><span class="arrow-h">▶</span>
+      <span class="chip">说话人分离</span><span class="arrow-h">▶</span>
+      <span class="chip">几十秒片段 + 文本</span>
+    </div>
+    <div class="note">产出 <code>text</code> / <code>context.*</code>(片段元信息)。</div>
+  </div>
+
+  <div class="flow"><div class="v">▼</div></div>
+
+  <!-- 第一阶段 -->
+  <div class="stage">
+    <div class="stage-hd"><span class="tag">第一阶段 · 结构化标注</span> 产 <code>labels</code> · 能并行的并行</div>
+
+    <div class="row">
+      <div class="op dsp"><span class="n">1</span><span class="name">WordVoice-5A</span><span class="kind">内部DSP</span>
+        <div class="io">音频+文本 → 词级 Duration/Boundary/Energy/Pitch/Tone<br>产出 <span class="fld">word_prosody[]</span></div></div>
+
+      <div class="op rule"><span class="n">2</span><span class="name">分位档聚合器</span><span class="kind">规则</span>
+        <div class="io">word_prosody → 句级档(pitch 性别内归一)<br>产出 <span class="fld">prosody.{pitch_level·range·tone·energy·rate}</span></div></div>
+
+      <div class="op clf"><span class="n">3</span><span class="name">gender/age 分类器</span><span class="kind">开源ckpt</span>
+        <div class="io">音频段 → 说话人属性<br>产出 <span class="fld">gender</span> <span class="fld">age</span></div></div>
+
+      <div class="op rule"><span class="n">4</span><span class="name">质量算子</span><span class="kind">信号</span>
+        <div class="io">DNSMOS + SNR + VAD<br>产出 <span class="fld">environment</span> <span class="fld">quality.*</span></div></div>
+
+      <div class="op clf"><span class="n">5</span><span class="name">SER</span><span class="kind">开源ckpt</span>
+        <div class="io">音频段 → 情感基础类 + 中性门<br>产出 <span class="fld">emotion.l1_base</span> <span class="fld">is_expressive</span></div></div>
+
+      <div class="op llm"><span class="n">6</span><span class="name">register 分类</span><span class="kind">text-LLM+Omni</span>
+        <div class="io">文本主判 7 类 → 语音校验<br>产出 <span class="fld">register</span>(兼质量门)</div></div>
+
+      <div class="op rule"><span class="n">7</span><span class="name">text_challenges</span><span class="kind">规则</span>
+        <div class="io">文本 → 格式挑战标签<br>产出 <span class="fld">text_challenges[]</span></div></div>
+    </div>
+
+    <div class="gate">质量门(④ DNSMOS/silence)+ 文本门(⑥【断句破碎】【其他无效】)+ 中性门(⑤)→ 尽早剔除 / 分流</div>
+
+    <div class="cols2" style="margin-top:12px;">
+      <div class="op llm"><span class="n">8</span><span class="name">emotion L2(依赖 ⑤)</span><span class="kind">audio-Omni</span>
+        <div class="io">输入 = 音频 + ASR文本 + L1 标签(三路融合)→ 从受控清单选细类<br>产出 <span class="fld">emotion.l2_fine[]</span> <span class="fld">emotion.intensity</span></div></div>
+
+      <div class="op logic"><span class="n">9</span><span class="name">交叉验证 reconciler(汇总 ⑤⑥⑧)</span><span class="kind">逻辑</span>
+        <div class="io">emotion: SER vs Omni roll-up · register: text vs audio<br>一致→入库 / 不一致→人工·加权·丢弃 · 产出 <span class="fld">annotation_meta.cross_validation</span></div></div>
+    </div>
+  </div>
+
+  <div class="flow"><div class="v">▼</div><div>结构化标签就绪</div></div>
+
+  <!-- 第二阶段 -->
+  <div class="stage">
+    <div class="stage-hd"><span class="tag">第二阶段 · 自然语言扩写</span> 产 <code>nl</code></div>
+    <div class="cols2">
+      <div class="op llm"><span class="n">10</span><span class="name">L3 情感自由描述</span><span class="kind">text-LLM</span>
+        <div class="io">输入 = ASR文本 + L1 + L2(以标签为事实锚,不臆测)<br>产出 <span class="fld">nl.l3_emotion_desc</span></div></div>
+
+      <div class="op llm"><span class="n">11</span><span class="name">global_desc + 指令扩写</span><span class="kind">text-LLM</span>
+        <div class="io">全部结构化标签 + L3 → 四阶段 prompt programming<br>产出 <span class="fld">nl.global_desc</span> <span class="fld">nl.instructions[]</span></div></div>
+    </div>
+  </div>
+
+  <div class="flow"><div class="v">▼</div></div>
+
+  <!-- 成品 -->
+  <div class="stage" style="border-color:var(--json);">
+    <div class="stage-hd"><span class="tag">成品样本</span> 见「成品数据格式规范」</div>
+    <div class="json-box">
+{ id, audio_path, duration_s, text,<br>
+&nbsp;&nbsp;<b>labels</b>:{ gender, age, prosody{…}, emotion{l1_base,l2_fine,intensity}, register, environment, text_challenges },<br>
+&nbsp;&nbsp;<b>labels_phase2</b>:{ intent, persona, accent, paralinguistics }&nbsp;<span style="color:#8894a6">// 二期预留 null</span>,<br>
+&nbsp;&nbsp;<b>nl</b>:{ l3_emotion_desc, global_desc, instructions[] },<br>
+&nbsp;&nbsp;<b>word_prosody</b>[…], <b>annotation_meta</b>{…cross_validation}, <b>context</b>{…}, <b>quality</b>{…} }
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:18px;">
+    <b>第二期(语义推理/派生层,非本图)</b>:intent(纯言语行为)· persona(片段级派生)· accent · 副语言 span —— 无现成模型、需语义推理,以第一期结构化标签为输入,schema 已预留字段。
+  </div>
+
+</div>
+</body>
+</html>
