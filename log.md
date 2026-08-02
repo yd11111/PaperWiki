@@ -2367,3 +2367,13 @@
 - [review/entity] [[StructuredTopology-AwareRegularization]] — inline entity-review, 保持 pending-review(无独立 dispatch 不自动 confirm); 准入满足(连接 VAE-TTS/CFM/tokenizer, 前置知识); dedup 通过(无既有 STAR 页)
 - [lint/local] STAR-VAE — 通过(首轮 3 ERROR: dataset broken links, 当场新建 3 数据集页后 all passed)
 - [待决] STAR-VAE models 字段空: baseline(Stable Audio Open/Mamba/Qwen3/TangoFlux)无实体页, general-audio 方向扩展时再补建
+
+## 2026-08-02 (Qwen-Audio-3.0-Gen-Preview)
+- [kb/search] [[Qwen-Audio-3.0-Gen-Preview]] — 命中 6 页(kb_context_sources=6): [[Non-autoregressiveTTS]]✓, [[VariationalAutoencoderforTTS]]✓, [[ConditionalFlowMatching]], [[Classifier-FreeGuidance]], [[SeedAudio]](模型库), [[TTSEvaluation]] | 过滤: 无
+- [ingest/repro] [[Qwen-Audio-3.0-Gen-Preview]] — 复现级精读 (Alibaba Token Foundry, 2026; arxiv 2607.27011; 纯 NAR DiT + 共享连续 VAE 的复杂音频场景统一生成), tier=repro, status=draft, kb_sources=6, 新建 0 实体, 反向更新 3 页(均 prose append)
+- [review/auto] [[Qwen-Audio-3.0-Gen-Preview]] — inline (无 dispatch 工具), conclusion=pass, 0 high/0 medium/1 low (missing-lineage: 'complex audio scene generation' 单篇引用不足以建页); 采样数字逐条核对 PDF 无误, 14 个 frontmatter 链接全部存在
+- [review/kb] [[Qwen-Audio-3.0-Gen-Preview]] — inline, conclusion=pass, 3 项变更(全 append-prose, 无 status/key_papers 变更), 不污染/不膨胀/可溯源 全 pass, 0 issue
+- [update/kb] — 3 页 prose 追加: [[Non-autoregressiveTTS]](演进线末尾追加, key_papers=29 超限走正文), [[VariationalAutoencoderforTTS]](新增 "Qwen-Audio-Gen VAE 三阶段 schedule" 节 + 负证据 SIM 0.507→0.488, key_papers=19 超限走正文), [[SeedAudio]](模型库, 新增 "外部对比数据" 节 — 首个第三方 head-to-head 对照数字, 竞品不入 key_papers)
+- [lint/local] Qwen-Audio-3.0-Gen-Preview — 笔记 --per-ingest 通过; 反向更新 3 页触发 L8 dotted-name 假阳性([[论文笔记/Qwen-Audio-3.0-Gen-Preview]] 中 "3.0" 被 resolve_wikilink 误判为扩展名而丢弃 .md, 与全库 26 处既有同类假阳性(Qwen2.5-Omni/wav2vec2.0/w2v-BERT2.0 等)一致, 文件实存, 不阻断)
+- [待决] resolve_wikilink dotted-name bug: scripts/lint.py L114-136 `has_extension = "." in Path(target).name` 将版本号点号误判为扩展名, 全库 29 处 L8 中 26 处属此类假阳性; 建议后续修复(未 prompt 不擅改工具)
+- [alert/backlog] pending-review: 80, draft deep/repro: 548 — 建议抽空审核
