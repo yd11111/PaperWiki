@@ -1,0 +1,40 @@
+note: "论文笔记/Qwen-Audio-3.0-Gen-Preview.md"
+reviewer: inline
+review_mode: note-review
+date: 2026-08-02
+note_independence: "inline (no subagent dispatch tool available this session); 所有采样数字与 Sources/Qwen-Audio-3.0-Gen-Preview.pdf (/tmp/paper_text.txt) 逐条交叉核对"
+conclusion: pass
+
+principles:
+  可复述:
+    score: 9
+    reason: "方法节给出关键设计的 WHY:view-level dropout 为何替代 field-level(防 dialogue 主导目标解释)、role-bundle 原子绑定(长上下文音色锚点)、VAE 三阶段(纳入语义同时限制对已学声学表示的破坏)。速查'可借鉴'为具体可迁移 trick(schema R=(G,P,E,U)+确定性渲染、视图 dropout、角色捆绑、Scaper 反事实),非'提出了新方法'式空话。"
+  可信赖:
+    score: 9
+    reason: "采样核对全部无误:SIM 0.805/0.819/0.808 vs LongCat 0.786/0.818/0.797 (Table 2, L717-725)、WER 1.61/1.06/8.25、CONS 0.702/0.740 vs Seed 0.659/0.704 (L770-780)、mIoU 43.73/43.12 vs 38.48/37.36、event recall 88.58 vs 98.77 (L991-1011)、AudioCaps LALM 0.8393 vs AudioX 0.7832、AudioBox 6.256/3.616/3.960/5.389、Table 11 (WER 7.71/2.96/4.08, SIM 0.507/0.488, UTMOS 3.015/3.367)、§6.1 body Song Describer Mel 0.4534 vs 0.6009、AudioCaps SI-SDR 6.595 vs 0.4401 均与 PDF 一致。VAE 规格 (48kHz stereo→25Hz/128-dim/Stable Audio Open/frozen Qwen2.5-3B) 与 L479-496 一致。指标名 SIM/WER/CER/CONS/mIoU/ViSQOL/UTMOS/SI-SDR 与原文表头一致;方向性正确(WER/CLAP/recall 明确标为非最优,保留作者自陈'不构成一致领先')。"
+  可区分:
+    score: 9
+    reason: "方法节因果解释系统性标注 [论文原文]/[agent 解读]/[⚠️ 论文未详述];架构超参、λ 权重、NFE/solver、输出时长决定机制等缺失项显式标 ⚠️ 未详述,未臆测。强断言(SIM 三子集全最高)有 Table 2 支撑;role-bundle 完整性目的标为 [agent 解读]。无把推断写成断言。"
+  可定位:
+    score: 9
+    reason: "KB 背景谱系明确:Voicebox→LLM-TTS 回归 AR→Hybrid(CosyVoice)→纯 NAR diffusion(LongCat-AudioDiT)→本文范式扩张(单一语音→异质混合场景);创新判断有对比基准(vs UniAudio/Audiobox/AudioX/UNISON'扩大任务范围' vs 本文'组织连贯场景')。与直接对标对象 [[SeedAudio]] 的 NAR-DiT vs DiTAR AR+DiT 路线对比清晰。14 个 frontmatter 链接目标页全部存在,无 broken link。"
+  不污染:
+    score: 8
+    reason: "笔记仍为 draft,反向更新尚未执行。frontmatter 所有 concepts/models/tasks/datasets 链接均指向已存在实体页。混合 KB status 正确处理(confirmed 直用,pending-review 标'[待确认]')。唯一决策点:笔记 KB 背景 footer 标注'Complex Audio Scene Generation'/'Unified Audio Generation'尚无概念页——反向更新时需做准入+去重判断(见 issue 1)。"
+
+issues:
+  - id: 1
+    type: missing-lineage
+    severity: low
+    location: "KB 背景 footer + 反向更新决策"
+    detail: "笔记正确指出'complex audio scene generation'/'unified audio generation'范式在 KB 中尚无专页覆盖。本文是该范式的代表工作之一,但单篇引用不满足概念页准入(需 ≥2 篇引用)。"
+    suggestion: "反向更新阶段不新建该概念页(准入不足);先把本文贡献追加到 [[Non-autoregressiveTTS]] 演进线 + [[VariationalAutoencoderforTTS]] 重建-生成困境解法谱系 + [[SeedAudio]] 对比线。待 UniAudio/Audiobox/UNISON/AudioX 等有 ≥2 篇进入 vault 再评估建页。"
+
+learning_signals:
+  - "技术报告/preview 类论文(数据混合比例、模型规模、超参刻意不披露)在 repro tier 下,'复现要点'应聚焦可迁移设计思想(schema/渲染/dropout 策略)而非实现规格;本文把复现可行性明确评级'低'并区分设计层 vs 规格层,是 preview 论文的正确 repro 处理范式。"
+  - "自建未开源 benchmark(多说话人/rich-timeline,各'数百'量级)+ LALM-as-judge 结论,审阅时须保留作者自陈的不确定性声明,不可在笔记中把'某维度领先'升格为整体 SOTA。"
+
+issue_counts:
+  high: 0
+  medium: 0
+  low: 1

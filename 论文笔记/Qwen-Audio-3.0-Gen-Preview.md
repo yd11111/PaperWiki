@@ -233,18 +233,18 @@ free-form prompt →(PE:LLM 抽取字段 + 校验修复)→ 结构化记录 → 
 
 ## 审阅
 
-> [!review] 审阅 (2026-08-02, auto)
-> **结论**: {{待独立 subagent 填写}}
+> [!review] 审阅 (2026-08-02, inline)
+> **结论**: **pass**(无 high/medium issue;所有采样数字与 PDF 逐条核对无误,14 个 frontmatter 链接全部存在)
 >
 > | 原则 | 状态 | 备注 |
 > |------|------|------|
-> | 可复述 |  |  |
-> | 可信赖 |  |  |
-> | 可区分 |  |  |
-> | 可定位 |  |  |
-> | 不污染 |  |  |
+> | 可复述 | 9 | 方法节 WHY 充分(view dropout/role-bundle/VAE 三阶段);可借鉴为具体 trick |
+> | 可信赖 | 9 | SIM/CONS/mIoU/recall/AudioBox/Table 11/§6.1 全部核对无误,指标名与表头一致,方向正确 |
+> | 可区分 | 9 | 因果解释系统标注 [论文原文]/[agent 解读]/[⚠️ 未详述];缺失超参显式标记未臆测 |
+> | 可定位 | 9 | 谱系(→纯 NAR diffusion→本文场景扩张)+ 创新判断有对比基准;SeedAudio 路线对比清晰 |
+> | 不污染 | 8 | draft 待反向更新;链接全部有效;新概念'complex audio scene'准入不足,暂不建页 |
 >
-> Issues: {{N}}
+> Issues: 1 (low: missing-lineage — 'complex audio scene generation' 范式暂无专页,单篇引用不足准入,反向更新走追加而非建页)
 > 详见 `_review/Qwen-Audio-3.0-Gen-Preview-review.yml`
 </content>
 </invoke>
