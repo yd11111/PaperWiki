@@ -1,0 +1,46 @@
+note: "论文笔记/Qwen-Audio-3.0-Gen-Preview.md"
+reviewer: inline
+review_mode: kb-update-review
+date: 2026-08-02
+conclusion: pass
+
+change_plan:
+  - target: "模型库/SeedAudio.md"
+    op: append-prose
+    section: "## 外部对比数据 (Qwen-Audio-3.0-Gen-Preview head-to-head)"
+    status_change: none
+    key_papers_change: none
+    rationale: "SeedAudio 页此前无任何独立/外部 benchmark 数字(无技术论文)。本文 Table 3/6 提供 Seed-Audio-1.0 与 Qwen-Audio-3.0-Gen-Preview 的直接对比(多说话人 + rich-timeline),是该模型页首次可引用的第三方对照数据。Qwen-Audio-Gen 是竞品而非 SeedAudio 的定义/底层论文,故不入 key_papers,只作 prose。"
+    traceability: "所有数字标注 [Qwen-Audio-3.0-Gen-Preview Table 3/6];明确标注为对方自建 benchmark(可能有利于己方)。"
+
+  - target: "概念库/Non-autoregressiveTTS.md"
+    op: append-prose
+    section: "## 演进 (末尾追加一句)"
+    status_change: none
+    key_papers_change: "none (frontmatter key_papers=29 已超 20,按规则一律追加正文)"
+    rationale: "本文是纯 NAR diffusion 范式(承接 LongCat-AudioDiT)从单一语音扩展到异质混合场景的代表,属演进线的自然延伸。"
+    traceability: "标注 [Qwen-Audio-3.0-Gen-Preview]。"
+
+  - target: "概念库/VariationalAutoencoderforTTS.md"
+    op: append-prose
+    section: "## Qwen-Audio-Gen VAE: 重建→语义续训→重引判别器 的三阶段 schedule"
+    status_change: none
+    key_papers_change: "none (frontmatter key_papers=19 已超 12,按规则追加正文)"
+    rationale: "补入重建-生成困境解法谱系的第 6 条(前五:Semantic-VAE 语义正则 / SARA 架构融合 / HoliTok 渐进 AE→VAE / LongCat 低维+大模型 / STAR-VAE 各向异性 KL)。本文提供 schedule-based recipe + 诚实负证据(语义续训降 SIM 0.507→0.488, Table 11)。压缩到 ≤3 行以控页面膨胀。"
+    traceability: "标注 [Qwen-Audio-3.0-Gen-Preview §5.4 / Table 11]。"
+
+principles:
+  不污染:
+    status: pass
+    reason: "3 处 append 均为 prose 末尾追加,不修改任何已有定义/关系字段;所有数字已与 PDF 逐条核对无误(见 note-review),无 factual-error/overclaim。SeedAudio 对比数据显式标注'对方自建 benchmark',不夸大。"
+  不膨胀:
+    status: pass
+    reason: "0 新建实体页;0 frontmatter key_papers 追加(两概念页均超限,按规则走正文;SeedAudio 竞品不入 key_papers)。review issue 1 已判定'complex audio scene'范式单篇引用不足准入,不建页。"
+  可溯源:
+    status: pass
+    reason: "每处追加均带 [Qwen-Audio-3.0-Gen-Preview Table/§] 出处;VAE 负证据标 Table 11。"
+
+issue_counts:
+  high: 0
+  medium: 0
+  low: 0

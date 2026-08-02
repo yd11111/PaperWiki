@@ -147,3 +147,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## STAR-VAE: 各向异性 channel-wise KL 重塑隐空间拓扑
 
 [[论文笔记/STAR-VAE|STAR-VAE]] (Liu et al., ICML 2026) 给出了重建-生成困境的**第四条正交路线**(前三条见上:Semantic-VAE 语义正则、SARA 架构融合、HoliTok/LongCat)。它不动语义、不动维度、不动训练阶段,而是把标准 VAE 均匀施加的各向同性 KL 惩罚换成**沿 channel index 凸增长的各向异性惩罚**([[StructuredTopology-AwareRegularization|STAR]]:β_c = β_min + (β_max−β_min)·((c−1)/(C−1))^γ, γ=2.0),逼隐空间按信息密度自动分层。论文将各向同性高斯先验诊断为 audio VAE"信息乱堆"的病根(Rate-Distortion-Regularity Trilemma),并指出高容量 encoder(Mamba)在均匀 KL 下会出现 **Reconstruction Drift**("语义连贯但纹理空洞"的重建)。虽在 sound effect/music 而非语音上验证,但"channel index 索引 KL 权重"这个零额外参数、任意 VAE 可插的技巧,对 TTS acoustic VAE 也是低成本可试项。同 21.5Hz 下重建 FAD 3.29→2.31、LC 0.11→0.08,MOS 4.32 vs Stable Audio Open 4.05 [STAR-VAE Table 1, 7]。详见 [[StructuredTopology-AwareRegularization]]。
+
+## Qwen-Audio-Gen VAE: "重建 → 语义续训 → 重引判别器" 三阶段 schedule
+
+[[论文笔记/Qwen-Audio-3.0-Gen-Preview|Qwen-Audio-3.0-Gen-Preview]] (Alibaba Token Foundry, 2026) 给出重建-生成困境的一条 **schedule-based** 工程 recipe(区别于 Semantic-VAE 一次性正则、HoliTok 冻结分阶段):基于 Stable Audio Open 的卷积波形 VAE(48kHz stereo→25Hz/128-dim),先用 rec+KL+adv+fm 训出高保真声学 checkpoint;再语义续训——后验均值 μ_φ(x) 经轻量投影送入 **frozen Qwen2.5-3B** 做 next-token 监督(梯度只更 encoder+投影),此阶段**早期临时关闭判别器**;最后重引判别器联合优化 [§5.4]。关键负证据(与其它解法互补):§6.1 受控下游探针(LibriSpeech-PC,固定 F5 式 CFM 生成器)显示语义续训相对纯声学版**降 WER、升 UTMOS 但降 SIM(0.507→0.488)**,且仍逊于 Semantic-VAE/LoSATok 的 WER/SIM [Table 11],印证"语义正则常以说话人保真为代价"。
