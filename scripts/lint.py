@@ -116,7 +116,11 @@ def resolve_wikilink(target: str) -> Path | None:
     if target.startswith("http") or target.endswith((".png", ".jpg", ".jpeg", ".gif", ".svg")):
         return None
 
-    has_extension = "." in Path(target).name
+    # Only treat as a path-with-extension when the suffix is a real known
+    # extension. Dotted page names (e.g. "Qwen-Audio-3.0-TTS", "Qwen2.5-Omni")
+    # would otherwise be mis-parsed as having an extension and never resolve to .md.
+    KNOWN_EXTS = (".md", ".pdf", ".txt", ".yml", ".yaml", ".json", ".csv")
+    has_extension = Path(target).suffix.lower() in KNOWN_EXTS
     if has_extension:
         exact = VAULT / target
         return exact

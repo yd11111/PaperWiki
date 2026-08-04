@@ -82,6 +82,8 @@ FSQ 在 TTS 中的优势:
 
 训练时通过 STE 近似梯度,与 CosyVoice 的端到端训练兼容。
 
+- **码本扩容补偿降帧率** ([[论文笔记/Qwen-Audio-3.0-TTS|Qwen-Audio-3.0-TTS]], 2026): 把 FSQ 推到 **10 维 / 每维 3 level → 3^10 = 59,049 码**,验证"扩大量化空间可抵消降帧率的信息损失"。SEED-TTS-Eval 消融 [Table 2]: 同 6561 码从 25→12.5Hz test-zh CER 1.45→2.59、SIM 80.60→72.44(退化);扩到 59049 码后 CER 反超到 1.23、SIM 恢复 83.09。这是 FSQ"性能随 codebook size 持续改善"特性在低帧率 TTS tokenizer 上的直接工业利用。
+
 ## 关键论文
 
 - Mentzer et al., "Finite Scalar Quantization: VQ-VAE Made Simple", ICLR 2024 — 原始论文,在 MaskGIT + UViM 上验证

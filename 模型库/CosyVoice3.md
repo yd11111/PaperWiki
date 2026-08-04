@@ -7,7 +7,7 @@ year: 2025
 tags: [TTS, zero-shot, multilingual, LLM-based, coarse-to-fine]
 key_concepts: ["[[SpeechTokenizer]]", "[[FiniteScalarQuantization]]", "[[ConditionalFlowMatching]]", "[[DifferentiableRewardOptimization]]"]
 tasks: ["[[Zero-shotSpeechSynthesis]]", "[[Cross-lingualVoiceCloning]]", "[[InstructedSpeechGeneration]]"]
-key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/Fun-Audio-Chat|Fun-Audio-Chat]]", "[[论文笔记/WhispSynth|WhispSynth]]", "[[论文笔记/JoyVoice|JoyVoice]]", "[[论文笔记/TTS-SAE-Steering|TTS-SAE-Steering]]", "[[论文笔记/FlowTTS-GRPO|FlowTTS-GRPO]]"]
+key_papers: ["[[论文笔记/CosyVoice3|CosyVoice 3]]", "[[论文笔记/LLaDA-TTS|LLaDA-TTS]]", "[[论文笔记/PilotTTS|PilotTTS]]", "[[论文笔记/TTS-PRISM|TTS-PRISM]]", "[[论文笔记/UDDETTS|UDDETTS]]", "[[论文笔记/MELA-TTS|MELA-TTS]]", "[[论文笔记/Fun-Audio-Chat|Fun-Audio-Chat]]", "[[论文笔记/WhispSynth|WhispSynth]]", "[[论文笔记/JoyVoice|JoyVoice]]", "[[论文笔记/TTS-SAE-Steering|TTS-SAE-Steering]]", "[[论文笔记/FlowTTS-GRPO|FlowTTS-GRPO]]", "[[论文笔记/Qwen-Audio-3.0-TTS|Qwen-Audio-3.0-TTS]]"]
 supersedes: ["[[CosyVoice2]]"]
 superseded_by: []
 status: pending-review
@@ -52,3 +52,4 @@ CosyVoice (2024, FSQ-SenseVoice, 10K h) → CosyVoice 2 (2024, streaming, LLM in
 - 首个支持 9 种语言 + 18 种中文方言的开源零样本 TTS
 - 提出 CV3-Eval 多语言 benchmark
 - 验证了 TTS 领域的 data scaling (10K → 1M h) 和 model scaling (0.5B → 1.5B) 效果
+- 同门后继 [[论文笔记/Qwen-Audio-3.0-TTS|Qwen-Audio-3.0-TTS]] (2026) 在其基础上把 tokenizer 帧率 25→12.5Hz(码本扩到 59049 补偿)、引入 JoyVoice 式 LM-FM hidden-state 联合训练与五阶段渐进 RL,并在多语言/长文/劣质 prompt 鲁棒性上大幅推进(跨语言平均错误率 10.09%→4.05%)
