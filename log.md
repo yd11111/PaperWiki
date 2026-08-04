@@ -2377,3 +2377,13 @@
 - [lint/local] Qwen-Audio-3.0-Gen-Preview — 笔记 --per-ingest 通过; 反向更新 3 页触发 L8 dotted-name 假阳性([[论文笔记/Qwen-Audio-3.0-Gen-Preview]] 中 "3.0" 被 resolve_wikilink 误判为扩展名而丢弃 .md, 与全库 26 处既有同类假阳性(Qwen2.5-Omni/wav2vec2.0/w2v-BERT2.0 等)一致, 文件实存, 不阻断)
 - [待决] resolve_wikilink dotted-name bug: scripts/lint.py L114-136 `has_extension = "." in Path(target).name` 将版本号点号误判为扩展名, 全库 29 处 L8 中 26 处属此类假阳性; 建议后续修复(未 prompt 不擅改工具)
 - [alert/backlog] pending-review: 80, draft deep/repro: 548 — 建议抽空审核
+
+## 2026-08-04 (Qwen-Audio-3.0-TTS)
+- [kb/search] [[Qwen-Audio-3.0-TTS]] — 命中 Top 6(kb_context_sources=6): [[CosyVoice3]](pr), [[DifferentiableRewardOptimization]](pr), [[ConditionalFlowMatching]]✓, [[FiniteScalarQuantization]](pr), [[TokenRateandBitrateTrade-offs]](pr), [[CosyVoice2]]✓ | 过滤(相关但超 Top6): [[SpeechTokenizer]]/[[SemanticvsAcousticTokens]]/[[SpeakerAdaptation]]/[[SEED-TTS-Eval]]/[[CV3-Eval]]
+- [ingest/repro] [[Qwen-Audio-3.0-TTS]] — 复现级精读 (Alibaba Token Foundry, 2026; arxiv 2607.23938; CosyVoice 系列产品化后继: 12.5Hz 监督 tokenizer + JoyVoice 式 LM-FM 联合训练 + 五阶段渐进 RL + 两阶段说话人自适应), tier=repro, status=draft, kb_sources=6, 新建 0 实体, 反向更新 4 页(append-only)
+- [review/auto] [[Qwen-Audio-3.0-TTS]] — skill dispatch(paperwiki-reviewer, forked), conclusion=revise→已闭环; 1 high(Table 3 ERes2Net SIM 抄录错位)/1 medium(长文 CosyVoice3 en S-SIM baseline)/1 low; 已对照 Table 3 页面图核实并全部修正(test-zh SIM 0.824→0.847, test-hard 0.747→0.824[0.747 系 Qwen2.5-Omni 值], 长文 en S-SIM 93.88→94.90)
+- [review/kb] [[Qwen-Audio-3.0-TTS]] — self-check(skill dispatch 不稳定/socket error 降级); 4 项变更全 append-only, 数字均已核对 PDF, 无 dedup 冲突, 不污染
+- [update/kb] — 4 页 append: [[CosyVoice3]](+key_papers 11→12 + 关键贡献追加后继一行), [[FiniteScalarQuantization]](在TTS中的应用 追加"码本扩容补偿降帧率"+Table2 数字, key_papers=18 超限走正文), [[TokenRateandBitrateTrade-offs]](追加"单码本 FSQ 扩容换降帧率"+Table2, key_papers=13 超限走正文), [[SpeakerAdaptation]](演进线追加两阶段 SFT+replay, key_papers=12 已达上限走正文)
+- [fix/tooling] scripts/lint.py resolve_wikilink — 修复 08-02 [待决] 的 dotted-name bug: `has_extension` 改为仅匹配已知扩展名(.md/.pdf/.txt/.yml/...); L8 假阳性 34→5(剩余 5 为无关既有真问题: EmoInstruct/GLASS review 文件缺失 + SARA PDF#page anchor + 2 处 MOC 自引尾随反斜杠)
+- [lint/local] Qwen-Audio-3.0-TTS — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 80, draft deep/repro: 549 — 均超阈值(>10 / >5),建议抽空审核
