@@ -41,7 +41,7 @@ updated: 2026-08-04
 > [!summary] 速查
 > - **一句话**: CosyVoice 系列的产品化后继,用 **12.5 Hz 监督 tokenizer + LM-FM 五阶段渐进训练**在内容/音色/韵律/可控/多语/鲁棒八维同时达到 SOTA 或最强综合,登顶 Artificial Analysis TTS 榜首(Elo 1237)。
 > - **路线**: 文本+指令 → Qwen LM(自回归预测 12.5 Hz 语义 token,同时输出连续 hidden state)→ DiT flow-matching(以 LM hidden state + prompt mel + speaker embedding 为条件重建 mel)→ causal BigVGAN vocoder → 波形。
-> - **指标**: SEED-TTS-Eval test-zh CER **0.84** / ERes2Net SIM **0.824**(全场 SIM 最优)[Table 3];跨语言平均错误率对 CosyVoice3-1.5B 从 10.09%→**4.05%**(-60%)[Table 6];长文 zh CER 2.22 vs CosyVoice3 25.41 [Table 8];噪声 prompt SIM 76.14 / DNSMOS 3.96 且无需去噪模式 [Table 9]。
+> - **指标**: SEED-TTS-Eval test-zh CER **0.84** / ERes2Net SIM **0.847**(全场 SIM 最优)[Table 3];跨语言平均错误率对 CosyVoice3-1.5B 从 10.09%→**4.05%**(-60%)[Table 6];长文 zh CER 2.22 vs CosyVoice3 25.41 [Table 8];噪声 prompt SIM 76.14 / DNSMOS 3.96 且无需去噪模式 [Table 9]。
 > - **可借鉴**: (1) 五阶段"冻结-解冻"编排:LM-RL 冻 FM/vocoder、FM-鲁棒 冻 LM、FM-RL 冻 LM,各阶段靶向单一能力;(2) 鲁棒性训练把 degraded-prompt 增强**嵌入克隆路径**而非推理时去噪,规避"去噪↑但 SIM↓"的 trade-off(Table 9 对 MiniMax/ElevenLabs 的实证);(3) LM-RL 的 reward 全部在 token 域计算、FM/vocoder 前完成 → token-only rollout 省算力;(4) 码本扩容补偿帧率减半(Table 2)。
 > - **局限**: **闭源技术报告**(无代码/权重/超参),复现受阻;所有 reward 权重(λ)、GRPO 组大小/KL 系数、生成 LM 与 FM 的参数量、训练数据小时数均未给出;多处关键机制仅一句带过(见复现要点)。
 
@@ -128,21 +128,21 @@ text+instruction → Qwen LM 自回归吐 12.5 Hz token + hidden state → hidde
 
 ## 实验
 
-评估指标 [§3.3]:内容一致性 CER/WER(en 用 Whisper-large V3,zh 用 Paraformer);说话人相似度 ERes2Net + WavLM cosine;音质 DNSMOS。核心测试集 SEED-TTS-Eval + 扩展 CV3-Eval(+7 语言),另建诊断 benchmark **Qwen-Audio-TTS-Eval**(TN 1375 例 / 长文 200 例 / 声学鲁棒 894 例 / 指令跟随 440 例)。
+评估指标 [§3.3]:内容一致性 CER/WER(en 用 Whisper-large V3,zh 用 Paraformer);说话人相似度 ERes2Net + WavLM cosine;音质 DNSMOS。核心测试集 SEED-TTS-Eval + 扩展 CV3-Eval(+7 语言),另建诊断 benchmark **Qwen-Audio-TTS-Eval**(TN 1375 例 / 长文 200 例 / 声学鲁棒 894 例 / 指令跟随 440 例)[§3.3]。
 
 ### 主实验
 
 | 维度 | 本文 | 关键 Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
-| test-zh CER / SIM(ERes2Net) | **0.84** / **0.824** | Qwen3-TTS 0.77(CER 最优) / CosyVoice3 (0.837) | SEED-TTS-Eval | Table 3 |
-| test-en WER / SIM(ERes2Net) | 1.54 / **0.815** | Qwen3-TTS 1.24 / — | SEED-TTS-Eval | Table 3 |
-| test-hard CER / SIM(ERes2Net) | 7.00 / **0.747** | Qwen3-TTS 5.83 | SEED-TTS-Eval | Table 3 |
+| test-zh CER / SIM(ERes2Net) | **0.84** / **0.847** | Qwen3-TTS 0.77(CER 最优);CosyVoice3 0.837 | SEED-TTS-Eval | Table 3 |
+| test-en WER / SIM(ERes2Net) | 1.54 / **0.815** | Qwen3-TTS 1.24(CER 最优);CosyVoice3 0.789 | SEED-TTS-Eval | Table 3 |
+| test-hard CER / SIM(ERes2Net) | 7.00 / **0.824** | Qwen3-TTS 5.83(CER 最优);CosyVoice3 0.816 | SEED-TTS-Eval | Table 3 |
 | 跨语言平均错误率 | **4.05%** | CosyVoice3-1.5B 10.09%(-60%) | CV3-Eval cross-lingual | Table 6 |
 | 多语言最优语种数 | ja/ko/ru/ar/ms/th 6 项最优 | MiniMax/ElevenLabs/CosyVoice3 等 | CV3-Eval multilingual | Table 4 |
 | hard-zh / hard-en SIM | **78.7 / 76.6**(均最优) | CosyVoice3 78.5 / 76.1 | CV3-Eval hard | Table 5 |
 | TN 总体 zh / en | **68.7% / 65.7%**(均最优) | CosyVoice3 59.3 / 54.2 | Qwen-Audio-TTS-Eval | Table 7 |
 | 长文 zh CER(all) / P-SIM / S-SIM | **2.22 / 78.85 / 93.16** | CosyVoice3 25.41 / 80.44 / 93.88 | Qwen-Audio-TTS-Eval | Table 8 |
-| 长文 en WER(all) / P-SIM / S-SIM | 5.00 / **82.35** / 93.45 | CosyVoice3 23.24 / 84.52 / 93.88 | Qwen-Audio-TTS-Eval | Table 8 |
+| 长文 en WER(all) / P-SIM / S-SIM | 5.00 / **82.35** / 93.45 | CosyVoice3 23.24 / 84.52 / 94.90 | Qwen-Audio-TTS-Eval | Table 8 |
 | Noisy prompt WER / SIM / DNSMOS | 1.18 / **76.14** / **3.962** | CosyVoice3 1.56/75.40/3.301 | Qwen-Audio-TTS-Eval | Table 9 |
 | Reverb prompt WER / SIM / DNSMOS | **0.69** / **74.12** / 3.925 | ElevenLabs·Denoise 0.58/44.39/4.025 | Qwen-Audio-TTS-Eval | Table 9 |
 | 指令跟随总体 zh / en | **78.94 / 80.45**(均最优) | CosyVoice3 75.91/64.09; IndexTTS2 54.39/59.39 | Qwen-Audio-TTS-Eval | Table 10 |
@@ -212,3 +212,16 @@ text+instruction → Qwen LM 自回归吐 12.5 Hz token + hidden state → hidde
 5. **reward 按 std 归一化让 λ 表达"目标平衡"而非"方差"**(Eq 6):多目标 RL 组合 reward 时,先各自除以 batch std 再加权,是个干净的工程细节。
 
 > 检索命中: [[CosyVoice3]], [[DifferentiableRewardOptimization]], [[ConditionalFlowMatching]], [[FiniteScalarQuantization]], [[TokenRateandBitrateTrade-offs]], [[CosyVoice2]] | 过滤: [[SpeechTokenizer]], [[SemanticvsAcousticTokens]], [[SpeakerAdaptation]], [[SEED-TTS-Eval]], [[CV3-Eval]](相关但超 Top 6) | 未命中但可能相关: "Multi-Stage TTS Training Paradigm" / "Acoustic Robustness Training" 尚无概念页
+
+> [!review] 自动审阅 (2026-08-04)
+> **结论:** revise
+> **原则:** 复述 9 | 信赖 5 | 区分 9 | 定位 10 | 污染 6
+> **Claim 标注率:** 91% (51/56)
+> **问题:** 1 high, 1 medium, 1 low
+> - ❌ [factual-error] Table 3 & 速查卡片: 本文 ERes2Net SIM 抄录错位 — test-zh 0.824 应为 **0.847**、test-hard 0.747 应为 **0.824**(0.747 实为 Qwen2.5-Omni 的值,且低于 CosyVoice3 0.816,与"全场 SIM 最优"自相矛盾);速查卡片 0.824→0.847。结论方向正确,仅需改数字。
+> - ⚠️ [baseline-number-swap] 长文表: CosyVoice3 en S-SIM 93.88 应为 **94.90**(误用了其 zh S-SIM)。
+> - 💡 [traceability-gap] 诊断 benchmark TN 1375 / 长文 200 未在本次核对中定位到明确出处(894/440 已核实)。
+> **交叉核对:** Table 2 四行全对 · Table 5/6(-60%)/7/8-own/9/10 全对 · Elo 1237 · tokenizer 规格(32层/1280/20head/FSQ 10维 59049/Qwen2.5-7B)全对。
+> **反向更新:** ❌ 需先修正 Table 3 两处 SIM(主源 Table 2 本身正确,但错值若经 CosyVoice3 对比数据传播会污染)。
+>
+> **[修订跟进 2026-08-04]** 已对照 Table 3 页面图核实并全部修正:test-zh ERes2Net SIM 0.824→**0.847**、test-hard 0.747→**0.824**(0.747 系 Qwen2.5-Omni 值)、速查卡片同步;长文 en S-SIM baseline 93.88→**94.90**;诊断 benchmark 尺寸补 [§3.3] 出处。high/medium/low 三项均已闭环,反向更新可继续。

@@ -1,0 +1,74 @@
+paper: "Qwen-Audio-3.0-TTS: Freely Controllable and Highly Robust Speech Synthesis with Multi-Stage Training Paradigm"
+file: "论文笔记/Qwen-Audio-3.0-TTS.md"
+tier: repro
+date: "2026-08-04"
+conclusion: revise
+
+# 第一层: 原则判断
+principles:
+  reproducible:     # 可复述
+    score: 9
+    judgment: "方法节对每个设计选择都给了 WHY(12.5Hz why、hidden-state 条件 why、渐进 why、鲁棒内化 why),五阶段冻结逻辑与可复用 idea 具体可迁移,读完能向同事解释为何 work。"
+  trustworthy:      # 可信赖
+    score: 5
+    judgment: "绝大多数数字与 PDF 逐一核对无误(Table 2 四行全对、Table 5/6/7/8-own/9/10、Elo 1237、tokenizer 规格全对),但 Table 3 本文自身 ERes2Net SIM 有两处硬错误,且已污染速查卡片,构成可信性硬伤。"
+  distinguishable:  # 可区分
+    score: 9
+    judgment: "[论文原文]/[agent 解读]/[⚠️ 论文未详述] 三态标注贯穿方法节;复现要点把'可锚定配置'与'主要阻断项(论文未给)'清晰分区,推断与断言边界干净。"
+  positioned:       # 可定位
+    score: 10
+    judgment: "KB 背景把本文精确钉在 CosyVoice→2→3→'3.5' 演进线上,逐条对照 JoyVoice/FlowTTS-GRPO/DiffRO/FSQ 说清承袭与差异,并与同门 Gen-Preview 做并行产品线对照,定位极清晰。"
+  non_polluting:    # 不污染
+    score: 6
+    judgment: "反向更新主源 Table 2(TokenRate 消融)全部正确,DiffRO/CFM/鲁棒性为 prose 不涉错值;但 Table 3 SIM 错误若经 CosyVoice3 模型页外部对比数据传播,会引入错误相似度数字。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 56
+    annotated: 51
+    rate: "91%"
+  metric_names_correct: true          # CER/WER/SIM/DNSMOS/Elo 使用正确,WavLM vs ERes2Net 已区分标注
+  source_labels_present: true         # [论文原文]/[agent 解读]/[⚠️ 论文未详述]
+  source_labels_coverage: "90%"
+  speed_card_complete: true
+  speed_card_metrics_match_original: false  # 速查卡片 "ERes2Net SIM 0.824" 与原文 Table 3 test-zh 括号内 0.847 不一致
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true    # models 含本文+CosyVoice2/3/SenseVoice/Qwen3-TTS(均为对比/前身,非后继);concepts/datasets 语义正确
+  baseline_numbers_crosschecked: false      # 抽样核对: CosyVoice3 test-zh 0.837 ✓、Qwen3-TTS 0.77/1.24/5.83 ✓、Table6 -60% ✓、Table9 ElevenLabs·Denoise ✓;但 Table 8 CosyVoice3 en S-SIM 93.88 应为 94.90
+  ablation_consistency: true                # Table 2 方法节引用值(1.45→2.59/80.60→72.44、59049 反超 1.23/83.09)与表格逐一一致
+  concept_admission_ok: true                # 未新建概念页(仅提及 "Multi-Stage TTS Training Paradigm"/"Acoustic Robustness Training" 尚无页,未擅自创建)
+
+# 发现的问题
+issues:
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "主实验表 line 137 & line 139;速查卡片 line 44"
+    detail: "Table 3 本文 ERes2Net SIM(括号内值)抄录错误。PDF Table 3: Qwen-Audio-3.0-TTS test-zh 0.792(0.847)、test-hard 0.768(0.824)。笔记 test-zh SIM 写成 0.824(实为 test-hard 的值)、test-hard SIM 写成 0.747(该值实为 Qwen2.5-Omni-7B 的 test-hard SIM,非本文)。速查卡片同步误写 'ERes2Net SIM 0.824'(应为 0.847)。0.747 尤其危险:它低于 CosyVoice3 test-hard 0.816,与笔记 '全场 SIM 最优' 的加粗表述自相矛盾,读者会误判本文 test-hard SIM 落后。"
+    suggestion: "test-zh SIM 0.824→0.847;test-hard SIM 0.747→0.824;速查卡片 '0.824'→'0.847'。'全场 SIM 最优' 结论本身正确(0.847/0.815/0.824 三列均为 bold),仅需改数字。"
+  - severity: medium
+    type: baseline-number-swap
+    principle: trustworthy
+    location: "主实验表 line 145(长文 en 行 baseline 列)"
+    detail: "Table 8 CosyVoice3-1.5B 英文 S-SIM 笔记写作 93.88,PDF 实为 94.90;93.88 是 CosyVoice3 中文 S-SIM 的值,被误复用到英文列。不改变'本文长文 CER 大幅领先'的结论。"
+    suggestion: "CosyVoice3 长文 en S-SIM 93.88→94.90。"
+  - severity: low
+    type: traceability-gap
+    principle: trustworthy
+    location: "实验节 line 131 诊断 benchmark 规模"
+    detail: "Qwen-Audio-TTS-Eval 子集规模 TN 1375 / 长文 200 未在本次核对中在 PDF 定位到明确对应句(894 声学鲁棒、440 指令跟随已核实)。非错误,但 1375/200 未逐字确认。"
+    suggestion: "回原文 §3.2/benchmark 描述确认 1375 与 200 两个数字的出处。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: false
+  safe_for_trusted_layer: false
+  reason: "存在 1 个 high factual-error(Table 3 SIM 两处误值 + 速查卡片污染)。反向更新主源 Table 2 全部正确,但若 CosyVoice3 模型页/外部对比数据引用了 Table 3 SIM,会传播错误。须先修正两处 SIM 值再放行反向更新。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: "ablation_consistency 与多数 baseline 核对通过,但检查项未强制交叉核对'本文自身'主结果表的括号内(ERes2Net)值——本次 high error 恰在此。检查项目前偏重 baseline,对'本文自身多列相似度值'的逐列核对缺乏专项要求。"
+  new_issue_type: "own-model-number-misplacement — 本文自身指标在多列表格中跨行错位(把 test-hard 的值填进 test-zh、把其他系统的值填进 test-hard)。区别于 baseline-number-swap(仅错在 baseline 列),此类错在'本文'列,危害更大且更易与结论自相矛盾。"
+  system_upgrade_suggestion: "reader 抄录多列(WavLM/ERes2Net 括号双值)主结果表时,应对'本文'行逐列与 PDF 复核一次,尤其括号内的 ERes2Net 值最易与括号外 WavLM 值或相邻行混淆。"
+  checklist_upgrade_suggestion: "在'可信赖'新增检查项:'本文自身在主结果表的每一列指标与原文逐列一致(含括号内/外双指标)',并把 own-model-number-misplacement 加入问题词汇表。"
