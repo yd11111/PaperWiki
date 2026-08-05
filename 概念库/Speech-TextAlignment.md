@@ -139,6 +139,7 @@ Survey 的核心发现:
 - Moshi (Defossez et al., 2024): word-level 多流对齐
 - Align-SLM (2024): DPO 后对齐语义一致性
 - SpeechAlign (2024): 声学质量后对齐
+- [[论文笔记/ECCD|ECCD]] (Liu et al., 2026): 把"text-present vs text-independent 推理"的开放问题落到解码层——在同一 LM 内用"全条件 pE / 去文本 pA"两次前向的对比,显式提取文本对齐信息的增量并有选择地放大,是 alignment 信息在 decoding-time 被操作化度量(KL(pE‖pA))和干预的一个具体实例
 
 ## 相关概念
 

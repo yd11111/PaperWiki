@@ -107,7 +107,7 @@ VALL-E 开创的典型两阶段:
 - 离散 token 的量化损失 → 声学瑕疵
 - 高计算成本: 长序列自回归推理慢
 - 细粒度控制困难: 难以精确控制 pitch/energy/duration
-- 稳定性问题: 可能出现 word skip/repeat
+- 稳定性问题: 可能出现 word skip/repeat(即 [[SpeechHallucination]]);[[论文笔记/ECCD|ECCD]] (2026) 提出首个 training-free 的 decoding-time 缓解手段——用同模型"有/无文本条件"两次前向做对比解码,在脆弱转换点定向增强对齐支持,4 个基座上 WER/CER 最多降 55.6%
 
 ## 与 Speech Language Model / Codec Language Model 的关系
 

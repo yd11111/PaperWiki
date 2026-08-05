@@ -1,0 +1,35 @@
+paper: "ECCD"
+reviewer: "inline (independent-subagent dispatch unavailable in this execution context)"
+date: "2026-08-05"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "新建 2 页与追加 2 处均忠于论文原文,数字/机制经笔记审阅核对;不改任何已有页定义。"
+  no_bloat:
+    verdict: pass
+    notes: "SpeechHallucination: 58 篇 vault 笔记引用该问题却无专页,强连接节点,准入满足(多篇引用+前置知识+连接论文 3/3)。ContrastiveDecoding: 跨 LLM/vision/speech 文献的 training-free 解码技术,ECCD 为首个 TTS 适配,准入满足(前置知识+连接论文)。已搜索 title+aliases 确认无语义相近页(概念库无 hallucination/decoding/contrastive 相关页)。"
+  traceable:
+    verdict: pass
+    notes: "两新页 key_papers 均含触发论文 [[论文笔记/ECCD|ECCD]];追加 prose 均带 [[论文笔记/ECCD|ECCD]] wikilink。"
+
+change_plan_summary:
+  total_targets: 4
+  appends: 2
+  substantive: 0
+  new_pages: 2
+
+issues:
+  - severity: low
+    type: missing-provenance
+    principle: 可溯源
+    target: "概念库/ContrastiveDecoding.md, 概念库/SpeechHallucination.md"
+    action: new
+    detail: "部分历史工作(Li et al. 2023, DoLa, VCD, VALL-E R 等)以 plain text 出现在正文'关键论文'段,因这些论文暂无 vault 笔记,无法 wikilink。"
+    suggestion: "符合规则(key_papers 仅用 wikilink,正文可 plain text);待相应论文入库后回填 wikilink。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "新建实体页的 entity-review(Step 4.5)依赖 subagent dispatch,本执行环境不可用;两页暂保持 pending-review,未走 auto-confirm 路径。"
+  checklist_upgrade_suggestion: ""
