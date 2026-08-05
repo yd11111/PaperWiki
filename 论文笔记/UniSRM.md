@@ -61,7 +61,7 @@ updated: 2026-06-06
 ### 整体架构
 
 UniSRM 是一个两阶段训练的统一语音 reward model [§4, Fig 2]:
-- **Stage 1: SFT** — 在 UniSRM-Data 上对 Qwen2.5-Omni-7B-thinker 做多任务有监督微调,学习结构化输出格式 (<think> 多维推理 + <answer> 最终判断)
+- **Stage 1: SFT** — 在 UniSRM-Data 上对 Qwen2.5-Omni-7B-thinker 做多任务有监督微调,学习结构化输出格式 (/<think/> 多维推理 + /<answer/> 最终判断)
 - **Stage 2: RCR-GRPO** — 在人工验证的高质量子集上做 GRPO 强化学习,加入维度级 reasoning-consistent rewards
 
 模型处理 4 种任务,统一为条件生成问题 [§4.1, Eq. 4]:
@@ -185,7 +185,7 @@ R = λ_fmt * R_fmt + λ_acc * R_acc + λ_rc * R_rc  (λ_fmt = λ_acc = λ_rc = 1
 1. **RCR 维度级 sign consistency reward**: 对任何多维度评估+CoT 的 judge model 训练均可使用。核心: 不仅优化最终 answer 的正确性,还监督每个维度的比较方向是否与 ground truth 一致。可直接应用于 TTS-PRISM 的 RL 优化
 2. **Cyclic conflict filtering**: 数据清洗时移除 A>B, B>C, C>A 循环矛盾,适用于任何 pairwise preference 数据集构建
 3. **Hard negative 构造策略**: T3 的 emotion mismatch + TTS negative, T4 的 text/audio/mixed 三类 negative,均是系统性的 hard negative 设计,可应用于对话/风格评估的数据构建
-4. **四任务统一为条件生成**: 不同评估任务共享 <think>+<answer> 格式,仅通过 system prompt 区分任务,实现参数共享和跨任务知识迁移
+4. **四任务统一为条件生成**: 不同评估任务共享 /<think/>+/<answer/> 格式,仅通过 system prompt 区分任务,实现参数共享和跨任务知识迁移
 
 ## 审阅
 

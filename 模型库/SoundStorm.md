@@ -39,7 +39,7 @@ SoundStorm 是 Google Research 提出的高效非自回归音频生成模型,作
 
 ## 历史地位
 
-SoundStorm 建立了"非自回归生成 RVQ tokens"的技术范式,后续 MaskGCT 将 masked generative modeling 扩展到完整 TTS pipeline (T2S + S2A),NaturalSpeech 3 的 factorized discrete diffusion 也借鉴了 mask-and-predict 的公式。
+SoundStorm 建立了"非自回归生成 RVQ tokens"的技术范式,后续 MaskGCT 将 masked generative modeling 扩展到完整 TTS pipeline (T2S + S2A),NaturalSpeech 3 的 factorized discrete diffusion 也借鉴了 mask-and-predict 的公式。[[论文笔记/StellarTTS|StellarTTS]] (2026) 继承该范式并做移动端优化,复用 RVQ + masked 逐层生成 (推理步数 [8,4,1,1,1,1]),但重新引入 phone-level 时序锚点 (sparse temporal embedding) 以修复 alignment-free 路线的鲁棒性问题。
 
 ## 关键论文
 

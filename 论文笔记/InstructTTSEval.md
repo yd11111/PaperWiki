@@ -124,25 +124,25 @@ InstructTTSEval 不是一个 TTS 模型,而是一个评估 benchmark。它的"�
 
 ### 主要结果
 
-| 指标 | 系统 | APS | DSD | RP | Avg. | 数据集 | 出处 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| True rate (%) | reference_audio | 96.2 | 89.4 | 67.2 | 84.3 | EN-subset | [Table 5] |
-| True rate (%) | gemini-flash* | 92.3 | 93.8 | 80.1 | 88.7 | EN-subset | [Table 5] |
-| True rate (%) | gemini-pro* | 87.6 | 86.0 | 67.2 | 80.3 | EN-subset | [Table 5] |
-| True rate (%) | gpt-4o-mini-tts | 76.4 | 74.3 | 54.8 | 68.5 | EN-subset | [Table 5] |
-| True rate (%) | hume* | 83.0 | 75.3 | 54.3 | 71.1 | EN-subset | [Table 5] |
-| True rate (%) | VoxInstruct | 54.9 | 57.0 | 39.3 | 50.4 | EN-subset | [Table 5] |
-| True rate (%) | Parler-TTS-mini | 63.4 | 48.7 | 28.6 | 46.9 | EN-subset | [Table 5] |
-| True rate (%) | Parler-TTS-large | 60.0 | 45.9 | 31.2 | 45.7 | EN-subset | [Table 5] |
-| True rate (%) | PromptTTS | 64.3 | 47.2 | 31.4 | 47.6 | EN-subset | [Table 5] |
-| True rate (%) | PromptStyle | 57.4 | 46.4 | 30.9 | 38.2 | EN-subset | [Table 5] |
-| True rate (%) | reference_audio | 90.9 | 86.7 | 69.8 | 82.5 | ZH-subset | [Table 6] |
-| True rate (%) | gemini-flash* | 88.2 | 90.9 | 77.3 | 85.4 | ZH-subset | [Table 6] |
-| True rate (%) | gemini-pro* | 89.0 | 90.1 | 75.5 | 84.8 | ZH-subset | [Table 6] |
-| True rate (%) | gpt-4o-mini-tts | 54.9 | 52.3 | 46.0 | 51.1 | ZH-subset | [Table 6] |
-| True rate (%) | VoxInstruct | 47.5 | 52.3 | 42.6 | 47.5 | ZH-subset | [Table 6] |
-| 一致率 (%) | Human-Gemini (EN) | 86 | 78 | 66 | 76.7 | EN-subset | [Table 4] |
-| 一致率 (%) | Human-Gemini (ZH) | 88 | 80 | 76 | 81.3 | ZH-subset | [Table 4] |
+| 指标            | 系统                | APS  | DSD  | RP   | Avg. | 数据集       | 出处        |
+| ------------- | ----------------- | ---- | ---- | ---- | ---- | --------- | --------- |
+| True rate (%) | reference_audio   | 96.2 | 89.4 | 67.2 | 84.3 | EN-subset | [Table 5] |
+| True rate (%) | gemini-flash*     | 92.3 | 93.8 | 80.1 | 88.7 | EN-subset | [Table 5] |
+| True rate (%) | gemini-pro*       | 87.6 | 86.0 | 67.2 | 80.3 | EN-subset | [Table 5] |
+| True rate (%) | gpt-4o-mini-tts   | 76.4 | 74.3 | 54.8 | 68.5 | EN-subset | [Table 5] |
+| True rate (%) | hume*             | 83.0 | 75.3 | 54.3 | 71.1 | EN-subset | [Table 5] |
+| True rate (%) | VoxInstruct       | 54.9 | 57.0 | 39.3 | 50.4 | EN-subset | [Table 5] |
+| True rate (%) | Parler-TTS-mini   | 63.4 | 48.7 | 28.6 | 46.9 | EN-subset | [Table 5] |
+| True rate (%) | Parler-TTS-large  | 60.0 | 45.9 | 31.2 | 45.7 | EN-subset | [Table 5] |
+| True rate (%) | PromptTTS         | 64.3 | 47.2 | 31.4 | 47.6 | EN-subset | [Table 5] |
+| True rate (%) | PromptStyle       | 57.4 | 46.4 | 30.9 | 38.2 | EN-subset | [Table 5] |
+| True rate (%) | reference_audio   | 90.9 | 86.7 | 69.8 | 82.5 | ZH-subset | [Table 6] |
+| True rate (%) | gemini-flash*     | 88.2 | 90.9 | 77.3 | 85.4 | ZH-subset | [Table 6] |
+| True rate (%) | gemini-pro*       | 89.0 | 90.1 | 75.5 | 84.8 | ZH-subset | [Table 6] |
+| True rate (%) | gpt-4o-mini-tts   | 54.9 | 52.3 | 46.0 | 51.1 | ZH-subset | [Table 6] |
+| True rate (%) | VoxInstruct       | 47.5 | 52.3 | 42.6 | 47.5 | ZH-subset | [Table 6] |
+| 一致率 (%)       | Human-Gemini (EN) | 86   | 78   | 66   | 76.7 | EN-subset | [Table 4] |
+| 一致率 (%)       | Human-Gemini (ZH) | 88   | 80   | 76   | 81.3 | ZH-subset | [Table 4] |
 
 ### 关键发现
 

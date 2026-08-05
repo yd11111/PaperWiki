@@ -210,4 +210,7 @@ d=32 就够用的发现, 对 TTS 系统设计有直接意义:
 6. **TCC 协议的生态效度**: TCC 人为构造了极端的虚假相关场景, 现实中 text-class 的相关程度可能没有这么极端。在更自然的分布偏移条件下, 纯韵律嵌入的优势是否仍然显著?
 
 > [!review] 审阅状态
-> 待审阅。
+> **pass** (2026-07-02, auto reviewer)
+> 平均分 4.2/5 | factual_accuracy 4 | technical_depth 5 | kb_integration 4 | writing_quality 4 | template_compliance 4
+> 2 medium issues: RAVDESS 数据量分解公式缺因子 (24×2×8≠1440); 因果解释来源标注覆盖率 ~65% (目标 80%)
+> 详见 `_review/ProsodyEmbedding-review.yml`

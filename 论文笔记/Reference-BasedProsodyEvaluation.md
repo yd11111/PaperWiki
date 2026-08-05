@@ -174,5 +174,8 @@ Yang et al. 的 Position Paper 指出 F0 RMSE 仅捕获 pitch 一个维度且与
 
 5. **与 TTSDS2/DS-WED/TTS-PRISM 的经验对比缺失**: 不清楚在实际使用中,本文的参考区间方法是否比 TTSDS2 的 Prosody factor 或 TTS-PRISM 的 prosody 维度提供更有用的诊断信息。
 
-> [!review] 审阅 (agent-v2, 2026-07-02)
-> **结论: 待审阅** | 自动审阅尚未运行
+> [!review] 审阅 (auto, 2026-07-02)
+> **结论: pass** | 平均 4.2 (factual 4 / depth 5 / kb 4 / writing 4 / template 4)
+> 1 medium issue: 正文 3-4 处 agent 推断未标 [agent 解读]
+> 2 low issues: tasks 字段语义错挂 Zero-shotSpeechSynthesis; datasets 字段空
+> 详见 `_review/Reference-BasedProsodyEvaluation-review.yml`

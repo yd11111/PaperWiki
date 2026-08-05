@@ -37,7 +37,7 @@ updated: 2026-06-23
 ## 速查
 
 > [!summary] 速查
-> - **一句话**: 首个统一评估 NVV 可控性、放置精度和感知显著性的双语 benchmark,覆盖 45 种 NVV 类型 × 15 个系统 × 三轴评估 (客观/主观/LLM-judge)
+> - **一句话**: 利用 Gemini 2.5 Pro 的多模态能力,针对语音生成中 NVV 难评估的问题,设计了 45 类 taxonomy + 4,500 条双语评测集 + 多轴评估协议 (客观/主观/LLM-judge),核心贡献在问题定义和评估框架设计
 > - **路线**: 45-type taxonomy → 3-stage data pipeline (seed mining + controlled generation + validation) → 4,500 bilingual instances → 15 systems (7 prompt + 8 tag) → multi-axis evaluation (objective metrics + human listening + LLM multi-rater)
 > - **指标**: ElevenLabs tag-based 最佳 (NVV PE 3.92, F1 0.720 EN) [Table 3, 4]; Gemini 2.5 Pro prompt-based EN 最佳 (NVV IF 2.74, NVV PE 2.68) [Table 4]; NVV 可控性与语音质量 decouple (CosyVoice 2: quality 4.35 但 NVV accuracy 1.65 ZH) [Table 4]
 > - **可借鉴**: (1) GT-conditioned verification: 用 LLM 在已知 ground-truth NVV 类型约束下做 constrained editing 验证,比 open-ended 检测更可靠 [§2.4.1]; (2) Coverage-aware 评估: 不能只看 precision/recall, 需同时考虑系统支持的 NVV 类型覆盖率 [§4.1]; (3) 三阶段数据构建: seed mining → taxonomy-driven generation → iterative validation, 适用于任何需要细粒度类型平衡的 benchmark 数据集构建 [§2.3]
@@ -254,6 +254,8 @@ NVV-SuperBench 在三个方面推进了 NVV 评估的边界:
 4. **NVV PE 0-5 scale with explicit 0**: 在评分量表中为"事件完全缺失"设置显式 0 分,区分于"存在但质量差"的 1 分。适用于任何评估特定事件是否出现的主观测试 [§2.4.2]
 
 5. **CMOS ablation for NVV contribution**: 比较 with/without NVV 的 paired output,直接量化 NVV 对自然度/质量/表现力的边际贡献 [§4.4, Table 6]
+
+6. **多模态 LLM 音频感知的能力边界**: GT-conditioned 方案之所以必要,揭示了当前最强多模态 LLM (Gemini 2.5 Pro) 在音频理解上的结构性 gap — 感知能力 ≠ 检测能力。给约束能判断对 (验证级别),但开放检测会幻觉和混淆 (感知级别不足)。推论: 用 LLM 做音频中细粒度事件评估时,open-ended 模式可能不可信,需要设计 constrained verification 协议;这一限制可能同样适用于其他低 SNR / 短时 / 与主信号混叠的音频事件检测场景 [§2.4.1, agent 解读]
 
 ## 审阅
 
