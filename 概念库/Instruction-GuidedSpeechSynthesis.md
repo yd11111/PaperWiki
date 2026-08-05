@@ -132,6 +132,10 @@ Survey (Sec 5.2) 指出的关键挑战:
 
 Style tagging (离散标签, 2018) → Reference prompt (参考音频, 2021) → NL description (文本描述, 2023) → **Instruction-guided** (统一指令, VoxInstruct, 2024) → Multi-step editing (InstructSpeech, 2024) → Omni-modal agent (Step-Audio, 2025) → 统一 TTS+TTM 指令控制 (InstructAudio, 2025) → **统一 TTS+TTM+TTA 三模态** (UniSonate, 2026) → **Open-Vocabulary InstructTTS** (叙事上下文指令 + reasoning chain, OV-InstructTTS, 2026) → **统一生成+编辑** (UNISON, 2026, 纯文本 LLM 指令 + channel-mask 多任务, 无 phoneme encoder)
 
+## 结构化 XML 编辑指令 (dots.tts.edit)
+
+[[论文笔记/dots.tts.edit|dots.tts.edit]] (Wang et al., 2026) 在**语音编辑**场景下反向强调**结构化指令**相对自由文本指令的价值。核心主张: 自由文本 (如 MMAE 的 free-form NL) 灵活但有歧义——操作类别、参数或目标区域可能欠规定; 而 transcript-grounded 的 **XML typed tag** 把"改什么/改多少/改哪里"三者显式解耦: typed tag 指定操作类别与参数,span 包裹 (`<sub>`/`<emo>`) 或边界点 (`<pause/>`) 绑定作用域,按源顺序串联多个不重叠操作。这种表示"外部可检查、可组合",适合 studio 前端与 agent 调用作为稳定工具边界 [dots.tts.edit §1, §3.1]。确定性渲染器 `g_src`/`g_tgt` 从同一指令 `u` 派生源/目标转写。与 VoxInstruct 统一 content+style、OV-InstructTTS 开放叙事指令的方向不同,dots.tts.edit 走的是**收敛、可校验**的相反取向。局限: 论文未做自由文本 vs 结构化接口的对照实验,"precise"仅指接口的显式性与可检查性,非生成确定性或对 NL 的因果优越性。
+
 ## 评估 Benchmark
 
 ### MINT-Bench (Chen et al., 2026)
