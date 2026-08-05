@@ -2392,3 +2392,4 @@
 - [review/auto] [[StellarTTS]] — conclusion=pass, 0 high/0 medium/2 low; 全部数字(Table I/II/III + Fig 2 + 推理/训练配置)交叉核对 PDF 一致。注: 本 harness 无嵌套 Agent dispatch 工具,Step 3.5/3.7 独立 subagent 审阅降级为 inline 自审
 - [update/kb] — 5 页 append: [[MaskedGenerativeModeling]](演进线追加逆向修正,key_papers=12 已达上限走演进), [[DurationPredictor]](演进线追加 sparse temporal embedding 新中间点,key_papers>20 走正文), [[SemanticvsAcousticTokens]](策略二混合 追加 StellarTTS 单阶段 1+5 codec), [[Non-autoregressiveTTS]](演进线追加移动端 masked generative NAR), [[SoundStorm]](历史地位 追加 StellarTTS 继承+移动端优化)
 - [lint/local] StellarTTS — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 80, draft deep/repro: 550 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
