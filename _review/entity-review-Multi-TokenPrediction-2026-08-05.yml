@@ -1,0 +1,79 @@
+entity: "Multi-Token Prediction"
+file: "概念库/Multi-TokenPrediction.md"
+type: concept
+reviewer: agent
+date: "2026-08-05"
+conclusion: pass-with-fixes
+
+principles:
+  no_layer_mixing:
+    verdict: pass
+    notes: "内容全部在概念层(定义/机制/边界/应用)。'## 演进' 是单行 lineage,比 vault 内已 confirmed 的 RVQ/SpeechFactorization 的演进段更克制,符合本库概念页惯例,非 MOC 式研究池。无 >3 行逐论文长摘要。"
+  no_overload:
+    verdict: pass
+    notes: "key_papers=3(远低于 12),正文 59 行(远低于 200)。8 个 h2 标题略超 checklist 的 ≤6,但与本库 confirmed 页普遍 7-9 个 h2 一致(QuantizerDropout=7/MultiscaleSTFTDisc=9/RVQ=8),属阈值口径问题而非真实过载。"
+  traceable:
+    verdict: pass
+    notes: "关键洞察(任务确定性决定 MTP 可行性)明确标注 [agent 综合];所有数据点带 [Table 2/3/4] 引用;指标方向正确(4B+MTP 快于 1.7B baseline,RTF 越低越快)。仅 '关键工程杠杆' 一处为未标注的 agent 定性描述(low)。"
+  navigable:
+    verdict: pass
+    notes: "frontmatter key_papers 3 篇全为 wikilink 且目标文件存在;正文关键论文段每篇有关系说明;应用对比表按 系统/形态/任务/结果 分列,导航信号清晰;related_concepts(SLM/LLM-basedTTS/IntegrationTaxonomy)与本页语义区分明确。"
+  non_pollution:
+    verdict: pass-with-fixes
+    notes: "定义与机制准确,3 篇源笔记数字逐条交叉验证无误。但 aliases 含 'Lookahead Decoding'(NLP 中是 Jacobi 迭代的另一种并行解码技术,与 MTP 不同),会造成 KB alias-match 假阳性,是潜在污染向量。"
+
+structure_metrics:
+  key_papers_count: 3
+  heading_count: 8
+  line_count: 59
+  long_paper_paragraphs: 0
+
+# 交叉验证结果 (与 3 篇源笔记逐条核对)
+cross_check:
+  ParaASR:
+    - "RTF 0.0053 ✓; 4B decoder 快于 Qwen3-ASR-1.7B(0.0053 vs 0.0094)✓"
+    - "MTP-5 平均接受长度 5.0/6 ✓; 逐位接受率 1st 0.95 → 5th 0.64 ✓"
+    - "MTP-3 3.6→5(+39%)、5→7 +22%(→6.1)✓; α=0.9 指数衰减权重 w_h ✓"
+    - "Table 4 Δ: 中文 0.00 / 英文 +0.04 / 长音频 +0.06,'≤0.06 绝对点' ✓"
+    - "分支串行依赖(h 分支吃 h-1 hidden)✓"
+  StepAudio2.5:
+    - "MoE backbone ✓; ASR 分支 MTP-5 verifiable decoding ✓"
+    - "同源数字 2.97/3.68/RTF 0.0053 ✓"
+  SpeechSpeculativeDecoding:
+    - "独立 8 层 draft model ✓; tolerance factor 放松接受准则 ✓"
+    - "LM-RTF 1.4x(0.360 vs 0.504)✓; TTS ✓"
+
+issues:
+  - severity: medium
+    type: frontmatter-drift
+    principle: non_pollution
+    location: "frontmatter aliases (line 4)"
+    detail: "aliases 混入 'Lookahead Decoding' —— 在 NLP 语境中这是 Fu et al. 2024 基于 Jacobi 迭代的另一种并行解码方法,与 Multi-Token Prediction 不是同一概念。aliases 参与 KB 检索的 alias-match 命中条件,错误别名会让检索 MTP 时误命中 Lookahead Decoding 相关论文,反向污染下游精读的 KB 背景。"
+    suggestion: "从 aliases 移除 'Lookahead Decoding'。若确需连接该技术,写入 related_concepts 或正文边界段做区分,而非 alias。"
+  - severity: low
+    type: frontmatter-drift
+    principle: non_pollution
+    location: "frontmatter aliases (line 4)"
+    detail: "'MTP head' 是 MTP 的子部件(实现分支),'Parallel Token Decoding' 是宽泛近义描述,'Multi-Token Prediction' 与 title 完全重复。严格按 'aliases 仅含同一概念的不同名称' 规则,前两者属子概念/近义。"
+    suggestion: "aliases 收敛为 [MTP, 多token预测, MTP head] 一类真别名;去掉与 title 重复项(可选,不影响功能)。"
+  - severity: low
+    type: unsourced-claim
+    principle: traceable
+    location: "## 为什么重要 (line 28)"
+    detail: "'是把大 decoder 部署到实时场景的关键工程杠杆' 含 '关键' 触发词,为 agent 定性判断但未标注来源/agent 标签。"
+    suggestion: "句末补 [agent 解读],或改为中性表述。"
+
+restructure_plan:
+  split_targets: []
+  merge_into: ""
+  demote_to: ""
+
+risk_assessment:
+  safe_for_kb_retrieval: false
+  reason: "定义/机制/数字均可靠,可作 KB 背景;唯 aliases 的 'Lookahead Decoding' 会引入 alias-match 假阳性,建议修正后再晋升 confirmed。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "entity-review-checklist 与 kb.md 的两条阈值与本库 confirmed 页实际惯例不符: (1) '一级标题 ≤ 6' —— 抽查 4 个 confirmed 页均为 7-9 个 h2(定义/机制/边界/应用/关键论文/相关概念/演进 本就 ≥7);(2) '无研究演进时间线' —— RVQ/Multi-scaleSTFTDiscriminator/SpeechFactorization 等 confirmed 页均含 '## 演进' 段。审阅时若机械执行会误判合规页。"
+  checklist_upgrade_suggestion: "建议把标题阈值上调到 ≤9,或明确 '关键论文/相关概念/演进' 为不计入配额的标准 footer 段;并把 kb.md '无研究演进时间线' 澄清为 '禁止 MOC 式多条目研究池,允许单行 lineage 演进段'。"
+  rule_gap_2: "aliases 污染(混入 distinct technique)是本次真实高信号问题,但当前 checklist 只有 'aliases 仅含同一概念' 的定性描述,缺少 '别名不得是独立技术/独立论文名' 的可机械判定条目。建议增设一条: alias 若在 vault 中已是/可成为独立实体页,则应移到 related_concepts。"
