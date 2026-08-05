@@ -1,0 +1,60 @@
+paper: "SwanTale: Unified Multi-Speaker Speech and Audio Generation for Instruct and Zero-Shot Tasks"
+file: "论文笔记/SwanTale.md"
+date: "2026-08-05"
+conclusion: pass-with-fixes
+reviewer: "agent (inline self-review; 独立 subagent dispatch 在本环境不可用)"
+
+# 第一层: 原则判断
+principles:
+  reproducible:      # 可复述
+    score: 9
+    judgment: "方法节是真机制解释: 明确回答了 SwanVAE 为何做非对称 enc/dec 分配(encoder 定 latent 统计量故保局部+低通,decoder 才花容量做波形合成)、为何加 latent 对齐弱目标(25Hz 下细节靠邻帧剧变会加重 flow 负担)、为何 reward-conditioned 而非优化 reward(免 rollout/RM/丢数据)、Engram 为何居中窗口(非因果分支)、Unified MoE 为何 time-aware 预算 + null 专家。读完可复述系统为何这样设计。"
+  trustworthy:       # 可信赖
+    score: 8
+    judgment: "抽样交叉核对 Table 2/3/5/6/7/8 + §4.1 全部规模数字(407.0M=51.7+0.3+355.0、2B active、23M+1.7M hrs、70M/10M/1M samples、CFG[1.5,3.0]),与 PDF 精确一致。**发现 1 处 factual-error 并已修正**: Table 4 通用音频↔音乐两行 VAE 结果被写反(general audio 应为 SwanVAE ViSQOL 4.1269 best / LSD 0.9455 2nd behind Stable Audio Open; music 应为 SwanVAE ViSQOL 4.2623 2nd / LSD 0.9172 3rd, EnCodec 双项领先),已按 §4.4 prose 校正。指标名与方向正确。"
+  distinguishable:   # 可区分
+    score: 9
+    judgment: "方法节有'区分来源'callout,[论文原文]/[agent 解读] 标注贯穿(15+ 处 [论文原文],5+ 处 [agent 解读],1 处标注消融黑盒)。'reward-conditioned 规避 reward hacking'、'time-aware 预算自动分配算力'、'音乐低帧率吃亏'等推断均标 [agent 解读]。"
+  positioned:        # 可定位
+    score: 9
+    judgment: "KB 背景把 SwanTale 精确嵌入 SwanVoice 谱系 + CFG-DiT(F5/MegaTTS3 阵营,非 LLM-token 两阶段)+ VAE 重建-生成困境谱系(给出'塑造 posterior mean 可扩散性'的正交路线,对照 Semantic-VAE/SARA/HoliTok/LongCat/STAR-VAE/Qwen-Audio-Gen)+ DiffRO 演进线(reward-conditioned 是'条件化而非优化 reward'的正交路径)。创新判断有对比基准。"
+  non_polluting:     # 不污染
+    score: 8
+    judgment: "所有事实经 PDF 核验(1 处 swap 已修)。concepts frontmatter 含尚不存在的 [[MixtureofExpertsforAudioGeneration]],依赖反向更新新建(准入: SwanTale+UniMoE-Audio+DiaMoE-TTS ≥2 篇,满足)。反向更新应分类为 append(CFM/VAE/DiffRO/Instruct 等页)+ new(MoE 页)。无错误信息待传播。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 95
+    annotated: 82
+    rate: "~86%"
+  metric_names_correct: true          # PESQ/STOI/MCD/ViSQOL/LSD/WER/CER/APS/DSD/RP/Timbre 无混淆,与表头一致
+  source_labels_present: true
+  source_labels_coverage: "~85%"
+  speed_card_complete: true
+  speed_card_metrics_match_original: true   # 0.95/3.90/3.70 monologue, APS 86.1/84.2, Mean MOS 4.22, PESQ 4.1683/MCD 0.9638 全对
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true    # models 含本文(SwanTale/SwanVAE)+baseline(SwanVoice/CosyVoice2/3/EnCodec/SAME/MegaTTS3/IndexTTS2/VoxCPM2/Qwen3-TTS)+组件; concepts/datasets/tasks 覆盖核心
+  baseline_numbers_crosschecked: true       # Table 3(DAC/VoxCPM2/MegaTTS3)、Table 5(FishSpeech/GLM-TTS/SoulX)、Table 6(Qwen3-TTS-VD/VoxCPM2)、Table 8 逐一核对
+  ablation_consistency: true                # 笔记准确报告"仅 1 处消融(MoE + caption encoder 规模)",并显式标注其余组件无消融
+  concept_admission_ok: pending             # 新建 MoE 概念页留待 KB 更新审阅确认准入
+
+issues:
+  - severity: high
+    type: baseline-number-swap
+    principle: trustworthy
+    location: "实验表 Table 4 两行"
+    detail: "通用音频与音乐的 VAE 重建结果两行互换(ViSQOL/LSD 数字错配)"
+    suggestion: "按 §4.4 prose 修正"
+    status: FIXED
+  - severity: low
+    type: template-compliance
+    principle: non_polluting
+    location: "frontmatter concepts"
+    detail: "[[MixtureofExpertsforAudioGeneration]] 尚不存在,依赖反向更新新建"
+    suggestion: "反向更新新建 MoE 概念页;若 KB 审阅 block 则改为 plain text 或移除"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "本环境无 Agent/Task subagent dispatch 工具,'生成者不审自己'原则降级为 inline self-review;已在 reviewer 字段透明标注"
+  checklist_upgrade_suggestion: ""

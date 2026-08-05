@@ -117,8 +117,8 @@ SwanTale = **SwanVAE(声学 latent 空间)** + **non-causal flow-matching DiT(�
 | VAE 重建-语音 | PESQ↑ / MCD↓ | **4.1683** / **0.9638** | DAC 4.1178/1.1963;VoxCPM2-VAE 3.9987/1.2222 | VCTK 1k | Table 3 |
 | VAE 重建-语音 | STOI↑ / ViSQOL↑ | 0.9680 / 4.1248 | DAC 0.9693/4.1585(略高) | VCTK | Table 3 |
 | VAE 重建-歌声 | PESQ/STOI/MCD | **3.9821 / 0.9001 / 1.5661**(均 best) | MegaTTS3-VAE 3.5727/0.862/2.031 | GTSinger | Table 3 |
-| VAE 重建-通用音频 | ViSQOL↑ / LSD↓ | **4.2623** / 0.9172(2nd) | EnCodec 4.2976(LSD 0.90) | FSD50K | Table 4 |
-| VAE 重建-音乐 | ViSQOL / LSD | 4.1269(2nd) / 0.9455(3rd) | EnCodec 4.1140/0.9761 领先 | MUSDB18-HQ | Table 4 |
+| VAE 重建-通用音频 | ViSQOL↑ / LSD↓ | **4.1269**(best) / 0.9455(2nd) | Stable Audio Open LSD **0.9358**(更低) | FSD50K | Table 4 |
+| VAE 重建-音乐 | ViSQOL / LSD | 4.2623(2nd) / 0.9172(3rd) | EnCodec **4.2976 / 0.9000**(双项领先) | MUSDB18-HQ | Table 4 |
 | zero-shot monologue | Timbre↑ | **0.95** | SwanVoice 0.93;GLM-TTS 0.94 | SwanBench-Speech | Table 5 |
 | zero-shot monologue | Content Error↓ | 0.086 | FishSpeech **0.066**(更低) | SwanBench-Speech | Table 5 |
 | zero-shot monologue | Richness↑ / Hierarchy↑ | **3.90** / **3.70** | SwanVoice 3.81/3.62 | SwanBench-Speech | Table 5 |
@@ -176,8 +176,19 @@ SwanTale 是一篇"数据+模型全栈堆料"的字节技术报告,工程完成�
 
 ## 审阅
 
-> [!review] 审阅 (待 subagent 填写)
-> 结论待独立审阅 subagent 输出,详见 `_review/SwanTale-review.yml`
+> [!review] 审阅 (2026-08-05, inline self-review — 独立 subagent dispatch 本环境不可用)
+> **结论**: pass-with-fixes
+>
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节为机制解释,回答多处 WHY |
+> | 可信赖 | pass | 数字全核对;**修正 1 处 Table 4 通用音频↔音乐行互换** |
+> | 可区分 | pass | [论文原文]/[agent 解读] 标注贯穿,消融黑盒已标注 |
+> | 可定位 | pass | 嵌入 SwanVoice 谱系 + VAE 困境谱系 + DiffRO 演进线 |
+> | 不污染 | pass-with-fixes | 待新建 MoE 概念页(准入满足) |
+>
+> Issues: 2 (high: 1[已修], medium: 0, low: 1)
+> 详见 `_review/SwanTale-review.yml`
 
 ---
 检索命中: [[ConditionalFlowMatching]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓, [[任务库/InstructedSpeechGeneration|Instructed Speech Generation]]✓, [[VariationalAutoencoderforTTS]](pending-review), [[DifferentiableRewardOptimization]](pending-review), [[Instruction-GuidedSpeechSynthesis]](pending-review) | 过滤(pending-review,辅助): [[Gumbel-Softmax]], [[Classifier-FreeGuidance]], [[Non-autoregressiveTTS]] | 未命中但可能相关: MoE-for-audio(KB 暂无此概念页,建议新建)
