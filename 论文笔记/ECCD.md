@@ -28,7 +28,7 @@ updated: 2026-08-05
 **已有认知 (vault 内幻觉缓解手段几乎全是 training-based).** 检索 vault 内 58 篇提及 hallucination 的笔记,主流缓解路线可归为四类,均需改架构或训练:
 - 单调对齐 (VALL-E R, [[论文笔记/TTS-Transducer|TTS-Transducer]] / VALL-T): 架构层强制 text→speech 单调性;
 - 序列重排 (ELLA-V): 交织 phoneme 与 acoustic token;
-- 后训练分布对齐 ([[论文笔记/GOAT-TTS|GOAT-TTS]] 线的 GFlowNet 版本 = 本文作者的前作 Liu et al. 2025 EMNLP, 注意与 vault 中同名的 GOAT-TTS 模型区分; 以及 [[论文笔记/FPO|FPO]] 的 token-level DPO, attention guidance);
+- 后训练分布对齐 (本文作者前作 Liu et al. 2025 EMNLP 用 GFlowNet 做分布对齐,该论文不在 vault 内,勿与 vault 中的 [[论文笔记/GOAT-TTS|GOAT-TTS]] 模型混淆——后者是无关的 dual-branch 架构; 同类还有 [[论文笔记/FPO|FPO]] 的 token-level DPO 与 attention guidance);
 - 注意力约束推理 (Wang et al. 2024): 操纵对齐相关的注意力头。
 
 **创新判断.** ECCD 是 vault 内**首个纯 decoding-time、training-free** 的幻觉缓解方法,且是**首次把对比解码 (Contrastive Decoding) 适配到自回归 acoustic-token 生成** [§Introduction, 作者自述]。它与 [[Speech-TextAlignment]] 概念页的一个开放问题直接呼应: 该页指出 "text-present inference 减少幻觉但增加延迟,text-independent 效率高但稳定性下降"——ECCD 的巧思正是在**同一个模型**内用"有/无文本条件"两次前向 (teacher-forcing 同一历史) 构造对比,把文本条件的增量影响显式提取出来并有选择地放大,既不需额外模型也不需训练。vault 中无 [[ContrastiveDecoding]] 与 [[SpeechHallucination]] 概念页,本文触发新建。
@@ -158,7 +158,16 @@ SECCD(xi) =
 
 ## 审阅
 
-> [!review] 审阅 (2026-08-05, auto)
-> **结论**: 待独立 subagent 审阅
+> [!review] 审阅 (2026-08-05, inline — 独立 subagent dispatch 在本执行环境不可用,已就地对照 checklist + PDF 核对)
+> **结论**: pass-with-fixes
 >
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节讲清 WHY(为何改常规 CD、positive-only、Ci 校准),消融逐步有数字 |
+> | 可信赖 | pass | Table 1-7 数字逐条与 PDF 核对一致;55.6% 降幅算术复核通过;指标名/方向正确 |
+> | 可区分 | pass | 因果解释均标 [论文原文]/[agent 解读];推断句带限定词 |
+> | 可定位 | pass | 谱系具体(VALL-E R/ELLA-V/GFlowNet/FPO)+ 创新判断有基准(首个 training-free decoding-time) |
+> | 不污染 | pass | 拟建 2 页满足准入;反向更新为 append 型 |
+>
+> Issues: 3 (high: 0, medium: 1, low: 2) — medium(bad-linking: GFlowNet 前作 vs GOAT-TTS 混淆)已当场修正
 > 详见 `_review/ECCD-review.yml`

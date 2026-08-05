@@ -1,0 +1,57 @@
+note: "论文笔记/ECCD.md"
+reviewer: "inline (independent-subagent dispatch unavailable in this execution context)"
+date: 2026-08-05
+conclusion: pass-with-fixes
+
+principles:
+  可复述:
+    score: 9
+    note: "方法节讲清了 WHY——为什么从 CD 出发、为什么常规 CD 不行(amateur 当负证据→时长压缩)、为什么 positive-only+expert-anchor、为什么用集合级 Ci 而非固定 α。三步消融各有数字支撑,不看原文可复述机制。"
+  可信赖:
+    score: 9
+    note: "全部数字型 claim 均与 PDF 交叉核对通过(Table 1/2/3/4/5/6/7 抽样逐条一致);55.6% 降幅经算术复核=(6.83-3.03)/6.83;指标名 CER/WER/SS/UTMOS/CMOS/SMOS/UAC/TAD 与原文表头一致;方向性正确(WER/CER 越低越好,未误写为超越)。"
+  可区分:
+    score: 9
+    note: "因果解释系统标注 [论文原文]/[agent 解读];推断句均带限定词(作者归因/论文声明/agent 解读);无强断言无出处的情况(唯一强断言'首个 training-free decoding-time'标注为作者自述)。"
+  可定位:
+    score: 9
+    note: "KB 背景有具体谱系(VALL-E R 单调对齐、ELLA-V 序列重排、GFlowNet 后训练、FPO DPO、attention guidance)+ 创新判断有对比基准(vault 内幻觉缓解几乎全 training-based,ECCD 首个纯 decoding-time);与 Speech-TextAlignment 页 text-present/independent 开放问题呼应到位。"
+  不污染:
+    score: 8
+    note: "拟新建 2 页均满足准入: Speech Hallucination(58 篇笔记引用,强连接节点)、Contrastive Decoding(跨 LLM/vision 文献 + 本文首个 TTS 适配)。反向更新为 append 型(不改 status)。扣分点见 issue #1(新页创建质量待 entity-review 验证)。"
+
+issues:
+  - id: 1
+    type: template-compliance
+    severity: low
+    location: "frontmatter concepts 字段"
+    detail: "concepts 引用 [[ContrastiveDecoding]] 与 [[SpeechHallucination]] 两个尚未创建的实体页,当前为悬空 wikilink。"
+    suggestion: "在 Step 4 反向更新中创建两页(pending-review),创建后悬空链接消除;lint 前完成创建。"
+  - id: 2
+    type: bad-linking
+    severity: medium
+    location: "KB 背景节 '已有认知' 段"
+    detail: "初稿把本文作者前作(Liu et al. 2025 EMNLP GFlowNet)与 vault 中的 GOAT-TTS(2504.12339 dual-branch,无关)混为一谈,存在误导风险。"
+    suggestion: "已修正: 明确 GFlowNet 前作不在 vault 内,并提示勿与 GOAT-TTS 模型混淆。"
+    status: fixed
+  - id: 3
+    type: overclaim
+    severity: low
+    location: "局限性 / 速查"
+    detail: "'推理成本≈2x' 为 agent 推断(每步 expert+amateur 两次前向),论文未直接给出 FLOPs/RTF 数字。"
+    suggestion: "已标注 [agent 解读] 且明确论文未报 RTF,表述得当,无需再改。"
+
+numbers_verified:
+  - "Llasa test-en WER 6.83→3.03 (55.6%) [Table 1] ✓"
+  - "Llasa test-zh CER 8.66→3.95, test-hard 26.26→14.27 [Table 1] ✓"
+  - "CosyVoice2 test-en WER native 2.98 / LT0.75 4.35 / ECCD 2.08 [Table 1] ✓"
+  - "CMOS +0.644 vs LT +0.021/+0.037 [Table 4] ✓"
+  - "CV3 CosyVoice3 日语 12.13→10.29; CosyVoice2 日语反例 9.46→9.71 [Table 3] ✓"
+  - "消融 Table 7: native CER8.10/SS0.822/UAC1.00/TAD1.00; CD 8.72/0.738/0.66/0.76; +anchor 6.86; +pos-only 6.43; +Ci 6.91/0.811/0.87/0.93 ✓"
+  - "Table 6 Gi Δ_C-E {−1}=0.237 > Ii Δ=0.073 ✓"
+
+learning_signals:
+  - "跨篇同名歧义: 方法在文献里的俗称(如作者前作被称 'GOAT')可能与 vault 内某已有笔记(GOAT-TTS)重名但实为无关工作;精读时凡引用'俗称+作者年份'的前作,须先核对是否等同 vault 内同名页,避免 bad-linking。"
+  - "decoding-time 方法的成本披露: 讲 'lightweight/training-free decoding' 的论文若未报 RTF/延迟,应在局限性显式点出(尤其针对流式基座),这是该类论文的通用审阅点。"
+
+conclusion_detail: "5 原则均满足(最低 8/10),无 high issue;1 个 medium(bad-linking)已当场修正,2 个 low(悬空链接将在反向更新解决 / 成本推断已妥善标注)。结论 pass-with-fixes,不阻塞反向更新。"
