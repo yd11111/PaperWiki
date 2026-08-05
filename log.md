@@ -7,6 +7,7 @@
 - [review/entity] [[Multi-TokenPrediction]] — 新建概念页, entity-review pass-with-fixes (0H/1M/2L): 已修正 aliases (移除 'Lookahead Decoding' 独立技术避免检索假阳性) + '关键工程杠杆' 补 [agent 解读] 标注. 保持 pending-review (待下次定期审阅晋升 confirmed).
 - [lint/local] ParaASR — all passed.
 - [review/learning] entity-reviewer 提出 rule_gap: 抽查 4 个 confirmed 概念页均有 7-9 个 h2 + `## 演进` 段, 与 checklist `一级标题≤6` + kb.md `无研究演进时间线` 冲突; 建议标题阈值上调或将 关键论文/相关概念/演进 列为 footer 不计配额. 记录待后续规则校准.
+- [alert/backlog] pending-review 实体页 81 (>10), draft deep/repro 笔记 551 (>5) — 存量积压 (非本次 ingest 引起), 建议抽空批量审阅晋升.
 
 ## 2026-07-03
 
