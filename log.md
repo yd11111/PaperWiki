@@ -2408,3 +2408,12 @@
 - [update/kb] [[Locodec]] — 5 页 append: [[TokenRateandBitrateTrade-offs]](正文追加原生高维单token路线,key_papers=13已满走正文), [[SemanticvsAcousticTokens]](追加单一reconstruction-first token的语义-声学trade-off), [[QuantizerDropout]](key_papers 7→8 + PDD连续维度版新节), [[Classifier-FreeGuidance]](追加多路残差CFG节), [[ConditionalFlowMatching]](演进追加球面FM/direction-only)
 - [lint/local] Locodec — --per-ingest 通过(All checks passed)
 - [alert/backlog] pending-review: 81, draft deep/repro: 552 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
+- [kb/search] [[ECCD]] — 命中 6 页: [[LLM-basedTTS]]✓, [[Speech-TextAlignment]](待确认), [[CosyVoice2]]✓, [[论文笔记/CosyVoice3|CosyVoice 3]]✓, [[SEED-TTS-Eval]]✓, [[CV3-Eval]](待确认) | 过滤: 无 | 未命中且无专页(触发新建): Contrastive Decoding, Speech Hallucination
+- [ingest/deep] [[ECCD]] — 精读(HIT+浙大, 训练无关对比解码: 同模型全条件pE/去文本pA两次前向, positive-only增强+expert anchor+ECC集合级校准, 缓解LM-TTS幻觉), kb_sources=6, 新建 2, 追加 2
+- [review/auto] [[ECCD]] — conclusion=pass-with-fixes, 0 high/1 medium/2 low; medium=bad-linking(作者GFlowNet前作误与vault内GOAT-TTS模型混淆)审阅中发现并当场修正; Table 1-7 + Fig 1-2 数字全核对通过。注: 本 harness 无嵌套 Agent dispatch 工具,Step 3.5/3.7/4.5 独立 subagent 审阅降级为 inline 自审
+- [review/kb] [[ECCD]] — conclusion=pass, 4 targets(2 new/2 append/0 substantive), 无 high issue
+- [create/concept] [[SpeechHallucination]] — 新建(problem, pending-review): vault 58 篇笔记引用幻觉却无专页, 归纳5类表现+架构/训练/解码4类缓解路线; 因 entity-review dispatch 不可用, 保持 pending-review 未 auto-confirm
+- [create/concept] [[ContrastiveDecoding]] — 新建(technique, pending-review): Li et al.2023 起源, DoLa/context-aware/VCD/audio-aware 谱系, ECCD 首个 TTS 适配; 保持 pending-review 未 auto-confirm
+- [update/kb] [[ECCD]] — 2 页 append: [[LLM-basedTTS]](confirmed, 局限段追加 decoding-time 幻觉缓解一行, 保持confirmed), [[Speech-TextAlignment]](pending-review, 关键论文追加 ECCD 一行, 保持 pending-review)
+- [lint/local] ECCD — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 83, draft deep/repro: 553 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
