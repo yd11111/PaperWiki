@@ -1,0 +1,60 @@
+paper: "ParaASR"
+reviewer: agent
+date: "2026-08-05"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: >
+      新建页所有 MTP 机制数字与 ParaASR 笔记/PDF 逐条一致 (α=0.9 分支权重 w_h=α^{h-1}/Σα^{j-1};
+      RTF 0.0053 且 4B 反比 1.7B baseline 0.0094 更快; 逐位置接受率 1st 0.95→5th 0.64;
+      平均接受长度 5.0/6; MTP-3→5 +39% (3.6→5.0)、5→7 +22% (→6.1); Table 4 类别均值波动
+      ≤0.06; 4B dense decoder + 0.6B frozen Qwen3-Omni encoder)。关键: 页面只引用 Table 2/3/4
+      (MTP 机制) 而完全回避 Table 1 baseline 数字 — 正是笔记审阅 (ParaASR-review) 明确划定的安全
+      边界 ("仅写 MTP 机制/训练配方可放行, 禁引 Table 1 baseline 数字")。之前笔记 Table 1 的三个
+      high issue 无一流入本页, 无错误扩散风险。强判断 (任务确定性决定可行性) 已标注 [agent 综合]。
+  no_bloat:
+    verdict: pass
+    notes: >
+      准入 3 of 3 满足 (多篇引用: ParaASR/StepAudio2.5/SSD 三篇; 前置知识: 连接 ASR/TTS 解码加速;
+      连接论文 ≥2)。dedup 确认无语义相近已有页 — 概念库现有 Multi-scale/Next-Token-Diffusion/
+      SemanticvsAcousticTokens 等均非同一概念; Full-duplex/Streaming 页的 "text lookahead" 是
+      流式对话语境, 与 MTP lookahead 解码无关。页面结构克制 (7 个一级标题, 单页无过载)。
+  traceable:
+    verdict: pass
+    notes: >
+      key_papers 含触发创建的 ParaASR ✅; 三篇 key_paper 文件均存在; 三个 related_concepts
+      (SpeechLanguageModel/LLM-basedTTS/Speech-LLMIntegrationTaxonomy) 目标文件均存在, 无死链。
+      正文强判断均带 wikilink + section 引用 ([[论文笔记/ParaASR]] [Table 2/3/4]); origin_paper
+      Gloeckle et al. 2024 归因正确。
+
+change_plan_summary:
+  total_targets: 1
+  appends: 0
+  substantive: 0
+  new_pages: 1
+
+issues:
+  - severity: low
+    type: missing-provenance
+    principle: traceable
+    target: "概念库/Multi-TokenPrediction.md"
+    action: new
+    detail: >
+      语音应用表中 SpeechSpeculativeDecoding 行的 "LM-RTF 1.4x" 未在 ParaASR 笔记中出现,
+      属跨论文数字, 本次审阅范围 (ParaASR 笔记/PDF) 内无法交叉核对; 应源自 SSD 笔记本身。
+      "独立 8 层 draft model + tolerance factor + TTS" 的定性描述与 ParaASR 笔记一致, 已核实。
+    suggestion: >
+      非污染 MTP 概念核心, 可放行。若追求严谨, 建议后续与 [[论文笔记/SpeechSpeculativeDecoding]]
+      笔记核对 "LM-RTF 1.4x" 数字或加来源锚点。
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: >
+    跨论文引用数字 (如本页 SSD 行的 1.4x) 在 KB 审阅时超出"触发论文"核对范围, 无法就地交叉验证。
+    当新建概念页汇聚多篇论文数字时, 审阅仅能验证触发论文对应行, 其余行的 factual accuracy 依赖
+    各来源笔记自身审阅质量。目前风险低 (来源笔记均已存在且被引), 记录备查。
+  checklist_upgrade_suggestion: >
+    可考虑在 kb-review-checklist 可溯源节增加一条: 新建概念页的多论文汇总表, 每行数字须能追溯到
+    对应 key_paper 笔记 (而非仅触发论文), 或标注 [跨论文, 见源笔记]。
