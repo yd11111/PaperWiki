@@ -12,7 +12,7 @@ lifecycle: active
 merged_into: ""
 deprecated_reason: ""
 created: 2026-06-02
-updated: 2026-06-02
+updated: 2026-08-05
 ---
 
 ## 定义
@@ -119,6 +119,10 @@ Survey 将语音交互范式划分为三个渐进阶段:
 - TT SR@3s 92.0% vs Moshi 71.9%, ISR@2s 100% vs 81.9%, S2S Score 3.39 vs 2.17 [Table 2]
 - 全双工训练不牺牲生成质量: Llama Q. 46.0% vs turn-based 45.3% [Table 5]
 - 详见 [[论文笔记/BayLing-Duplex|BayLing-Duplex]]
+
+### Joy-Duplex (JD.com, 2026)
+
+详见 [[论文笔记/JoyAI-Talker|JoyAI-Talker]]。解耦模块化、插件化 (plug-and-play) 全双工:外挂一个 1.7B decoder-only LM 处理 160ms chunk 流式音频,在单一序列内交错输出 Text Token + `<|asr_eos|>` 转写边界 + 5 个状态 token (`<|partial|>`/`<|complete|>`/`<|backchannel|>`/`<|accept|>`/`<|reject|>`),**不改下游半双工 SDM backbone 参数**。语义拒识门 `<|accept|>/<|reject|>` 替代能量 VAD。FDB v1.5 四场景全 SOTA:打断响应 0.88/误留 0.07、回传续说 0.96/误触 0.01、对他人说话误触 0.17、背景语音误触 0.10 [Table 5]。与 Freeze-Omni (State 0/1/2) 及论文引用的 SoulX-DupLug/Easy Turn/FastTurn 同属"外挂式状态预测器"家族。
 
 ## Interactive Period Recognition (IPR)
 

@@ -1,0 +1,54 @@
+paper: "JoyAI-Talker"
+reviewer: agent
+date: "2026-08-05"
+conclusion: pass
+
+# 第一层: 原则判断
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "两条追加内容逐项与笔记正文/PDF 一致核对无误。Full-duplex 块的架构参数(1.7B decoder-only LM、160ms chunk、单序列交错 Text+<|asr_eos|>+5 状态 token、不改 backbone)与 §2.3.1-2.3.3 一致;FDB v1.5 四组数字(打断 0.88/0.07、回传 0.96/0.01、背景语音误触 0.10)与笔记 Table 5 逐一吻合。Turn-taking 块 5 状态 token 语义与 §2.3.3 一致,'下游 SDM 仅在 <|accept|> 时激活'与原文'当且仅当解码器发 <|accept|> 才激活生成'一致。无 factual-error,无 overclaim。"
+  no_bloat:
+    verdict: pass
+    notes: "无新建实体页,均为向已有页的正文追加。两页均已有 Joy-Duplex 同族系统(Freeze-Omni/Raon-SpeechChat/BayLing-Duplex 等)的 ### 子节,新增 ### Joy-Duplex 与既有结构一致,不产生冗余页。无语义相近的待合并页。"
+  traceable:
+    verdict: pass
+    notes: "两条追加内容均内嵌 [[论文笔记/JoyAI-Talker|JoyAI-Talker]] wikilink,可回溯到源笔记。强判断'四场景全 SOTA'与笔记 §3.4 及速查一致(笔记审阅已交叉验证 Table 5 全部 baseline 数字)。"
+
+change_plan_summary:
+  total_targets: 2
+  appends: 2
+  substantive: 0
+  new_pages: 0
+
+# 第二层: 检查项
+checks:
+  factual_accuracy: true          # 数字/名称/token/指标全部与笔记+PDF一致
+  no_overclaim: true              # '替代能量VAD'/'四场景全SOTA'均为笔记已验证的论文级表述
+  existing_prose_unchanged: true  # 纯末尾追加,未改任一已有段落/定义
+  admission_direct_contribution: true  # Joy-Duplex 是新全双工框架+turn-taking语义状态机,对两概念均属直接贡献
+  key_papers_guard_respected: true     # Full-duplex 17条 / Turn-taking 16条,均>12,正确改追加正文而非frontmatter
+  classification_append_correct: true  # append(不改status),两页保持 pending-review
+  provenance_wikilink_present: true    # 两块均含 JoyAI-Talker wikilink
+  dedup_no_collision: true             # 两页此前均无 JoyAI-Talker/Joy-Duplex 条目
+
+# 发现的问题
+issues:
+  - severity: low
+    type: page-bloat-pressure
+    principle: no_bloat
+    target: "概念库/Full-duplexSpokenDialogue.md, 概念库/Turn-takinginSpokenDialogue.md"
+    action: append
+    detail: "两页在追加前已超 kb.md 的 200 行阈值(Full-duplex 213 行 / Turn-taking 209 行)。key_papers 满额→追加正文的逃生阀会进一步推高行数,与'超 200 行应拆分'规则存在张力。本次追加本身合规,但两页已到需要结构性精简/拆分的临界点。"
+    suggestion: "本次按计划放行。后续对这两页做实体页审阅时评估:将 ## 代表系统 / ## 端到端系统中的实现 里的逐系统 ### 子节精简到 1-2 行,或拆出 sub-MOC。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: true
+  reason: "两条均为事实准确、来源清晰、分类正确的正文追加,不改 status、不改已有定义、无去重冲突。可直接执行。"
+
+# 学习信号
+learning_signals:
+  new_issue_type: "page-bloat-pressure — key_papers 满额后的'追加正文'逃生阀,在页面已超 200 行时会加剧膨胀,当前 checklist 未在 KB 反向更新审阅阶段捕捉行数阈值。"
+  rule_gap: "kb.md 的两条规则存在潜在冲突:'key_papers 达上限→追加正文' vs '页面 >200 行→拆分'。当页面同时满足两条时,追加正文是合规操作却会恶化行数超限。建议规则补充:追加正文前若页面已 >200 行,在 log 记录一条 [alert] 提示该页待拆分。"
+  checklist_upgrade_suggestion: "KB 反向更新审阅 checklist 可增一项(不阻断):'目标页追加后是否触发/加剧结构阈值超限(行数>200 / 一级标题>6)',命中记 low issue + 触发后续实体页审阅提醒。"

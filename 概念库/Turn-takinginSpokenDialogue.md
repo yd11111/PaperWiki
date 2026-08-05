@@ -12,7 +12,7 @@ lifecycle: active
 merged_into: ""
 deprecated_reason: ""
 created: 2026-06-02
-updated: 2026-06-02
+updated: 2026-08-05
 ---
 
 ## 定义
@@ -166,6 +166,10 @@ WavChat 定义了交互系统需具备的五项关键能力:
 - 同时保持 dialogue turn-taking 100% 成功率 (优于 Moshi 37-85%, Freeze-Omni 72-99.8%)
 - 1 秒 time block 设计简化了 turn-taking 学习,但引入了较高的最小延迟
 - 详见 [[论文笔记/ELLSA|ELLSA]]
+
+### Joy-Duplex (JD.com, 2026)
+
+详见 [[论文笔记/JoyAI-Talker|JoyAI-Talker]]。5 状态 token 语义状态机 + `<|asr_eos|>` 转写边界交错:`<|partial|>` (说话进行中,下游 standby) / `<|complete|>` (到达句法-语义边界,门控前兆) / `<|backchannel|>` (用户短反馈,不起完整轮次) / `<|accept|>`|`<|reject|>` (**语义拒识门**:确认有效系统导向 query 才 accept 开门,背景泄漏/离题/噪声则 reject 抑制)。用语义而非帧级声学能量做门控,直接回应 VAD 无法区分有意打断与背景/犹豫的根本局限;下游 SDM 仅在 `<|accept|>` 时激活。FDB v1.5 打断响应 0.88、背景语音误触 0.10 [Table 5]。
 
 ### State Inertia 分析 (Chang et al., 2026)
 
