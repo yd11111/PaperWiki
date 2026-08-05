@@ -174,4 +174,13 @@ updated: 2026-08-05
 
 ## 审阅
 
-> [!review] 审阅 (待 dispatch)
+> [!review] 自动审阅 (2026-08-05)
+> **结论:** pass
+> **原则:** 复述 9 | 信赖 10 | 区分 9 | 定位 10 | 污染 9
+> **Claim 标注率:** ~95% (105/110);来源标注 ~90% ([论文原文]×7 / [agent 解读]×6)
+> **交叉验证:** Table 5 四场景×5 系统全部 baseline 数字 + Table 1/3/4/6 逐一核对,与 PDF 精确一致;架构参数(48.9B/3.28B、256 专家、12.5Hz、160ms chunk、1.7B decoder、10 副语言 token)全对;核心主张缺消融经 PDF grep 验证属实。
+> **问题:** 0 high, 0 medium, 3 low
+> 💡 [metric-naming-ambiguity] Aishell 'WER' 实为 CER(遵论文原文命名,不算错,下游引用可加注)
+> 💡 [template-compliance] Table 2 EQ 行与 Table 3 Direct 行同源(98.25≈98.2 等),分两处报告未点明
+> 💡 [template-compliance] frontmatter models 混列 baseline 与内部组件(JoyVoice/JoyAI-LLM Flash),语义可接受
+> **反向更新:** ✅ 安全(建议按 append 处理 Full-duplex/Turn-taking 概念页)
