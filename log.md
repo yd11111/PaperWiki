@@ -13,6 +13,7 @@
 - [review/auto] [[JoyAI-Talker]] — 笔记审阅 pass (0H/0M/3L, 独立 reviewer). 抽样数字零误差, Table 5 全 20 单元逐格核对匹配; 被评为"对论文卖点主动反证据审查"的正面范本.
 - [review/kb] [[JoyAI-Talker]] — KB 更新审阅 pass (0H/0M/1L). 2 target 均 append-prose 无 status 变更; 1 low: 两概念页已超 200 行 (213/209), "key_papers 满额→追加正文"逃生阀与"超 200 行拆分"规则张力, 建议后续实体页审阅时拆 sub-MOC.
 - [lint/local] JoyAI-Talker — all passed.
+- [alert/backlog] pending-review 实体页 85 (>10), draft deep/repro 笔记 555 (>5) — 存量积压持续 (本次 ingest 仅 +1 draft 笔记, 未新建实体页), 建议抽空批量审阅晋升.
 
 ## 2026-07-03
 
