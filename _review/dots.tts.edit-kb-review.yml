@@ -1,0 +1,56 @@
+paper: "dots.tts.edit"
+reviewer: agent
+date: "2026-08-05"
+conclusion: pass
+note: "同 session 审阅(无 Agent 工具);变更内容已对照源 PDF 核验。"
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "新建页描述均来自 §2-§6,无 overclaim;两处 append 不改写已有定义,仅在列表/末尾追加。"
+  no_bloat:
+    verdict: pass
+    notes: "SpeechEditing 准入充分(vault 内 AST-Edit/CosyEdit/CosyEdit2/Step-Audio-EditX/Ming-UniAudio/SonoEdit/EditContentPreserveAcoustics 等 >5 篇引用且无 hub 页);doteBench 为 benchmark origin 页(与 SEED-TTS-Eval 同类模式,单源可接受)。无语义相近已有页。"
+  traceable:
+    verdict: pass
+    notes: "append 含 [[论文笔记/dots.tts.edit]] wikilink + 章节引用;新建页 key_papers 含触发论文。"
+
+change_plan_summary:
+  total_targets: 4
+  appends: 2
+  substantive: 0
+  new_pages: 2
+
+change_plan:
+  - target: "概念库/SpeechEditing.md"
+    action: new
+    detail: "新建语音编辑 hub 概念页(category: problem),定义 + 技术路线分类(mask-infill / flow-inversion / codec-LM 属性编辑 / 连续 AR 适配)+ 边界 + key_papers。status pending-review,触发 entity-review。"
+  - target: "数据集/doteBench.md"
+    action: new
+    detail: "新建 doteBench 数据集页(双语语音编辑评测,5 类 1781 例,三维度 + WDTW-F0)。status pending-review,触发 entity-review。"
+  - target: "数据集/SEED-TTS-Eval.md"
+    action: append
+    detail: "used_by 追加 dots.tts.edit;最新结果追加一行(en WER 1.39 / zh CER 0.96,编辑后训练保持性 ≤0.29% 退化)。不改 status。"
+  - target: "概念库/Instruction-GuidedSpeechSynthesis.md"
+    action: append
+    detail: "末尾追加'结构化 XML 编辑指令'小节,对照 free-form NL 指令。不改 status(保持 pending-review)。"
+
+skipped:
+  - target: "概念库/ConditionalFlowMatching.md"
+    reason: "dots.tts.edit 仅下游使用 F5-TTS/IndexTTS2 的 FM 作造对工具,非对 CFM 概念的直接贡献;且 key_papers 已远超上限。跳过以避免低价值污染。"
+  - target: "概念库/Next-TokenDiffusion.md"
+    reason: "dots.tts.edit 是连续 AR 骨干的编辑应用而非对 next-token-diffusion 技术的直接贡献;基座 dots.tts 已在 key_papers。跳过避免膨胀。"
+
+issues:
+  - severity: low
+    type: admission-violation
+    principle: no_bloat
+    target: "数据集/doteBench.md"
+    action: new
+    detail: "doteBench 目前仅被本文引用(brand-new benchmark),单源。"
+    suggestion: "可接受:benchmark origin 页天然单源(SEED-TTS-Eval 创建时亦如此),后续被引用时自然增长;pending-review + entity-review 兜底。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: ""
+  checklist_upgrade_suggestion: ""
