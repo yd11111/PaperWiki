@@ -174,3 +174,19 @@ Lcodec = λrec·(1/Td)‖α - α̂‖² + λcodebook·(1/Td)‖sg(ε(α)) - E‖
 5. **单阶段 semantic-aware codec 的取舍认知**: 把语义蒸馏进 codec channel 0 能压掉一个生成阶段,但会压低重建 SIM-o 上限 —— 做 latency-first 系统时值得借鉴,做 timbre-first 系统时需警惕。
 
 检索命中: [[SemanticvsAcousticTokens]], [[ResidualVectorQuantization]], [[MaskedGenerativeModeling]](待确认), [[Non-autoregressiveTTS]](待确认), [[DurationPredictor]](待确认), [[SoundStorm]](待确认) | 过滤: 无 | 未命中但可能相关: [[Emilia]], [[SEED-TTS-Eval]], [[w2v-BERT]]
+
+## 审阅
+
+> [!review] 审阅 (2026-08-05, inline-self-review)
+> **结论**: pass （注: 本 harness 无独立 Agent dispatch 工具，退化为生成后自审，已交叉核对 PDF 全部数字）
+>
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节 WHY 充分,可借鉴为具体 trick |
+> | 可信赖 | pass | Table I/II/III + Fig 2 + 推理配置数字全核对一致 |
+> | 可区分 | pass | 因果解释来源标注覆盖率高,SOTA 断言均归因作者 |
+> | 可定位 | pass | 谱系定位具体(MaskGIT→SoundStorm→MaskGCT→StellarTTS) |
+> | 不污染 | pass | 未新建概念页,反向更新均为 append |
+>
+> Issues: 2 (high: 0, medium: 0, low: 2)
+> 详见 `_review/StellarTTS-review.yml`

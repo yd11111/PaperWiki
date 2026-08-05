@@ -1,0 +1,58 @@
+note: "论文笔记/StellarTTS.md"
+reviewed: 2026-08-05
+reviewer: inline-self-review   # 本 harness 无独立 Agent dispatch 工具,退化为生成后自审(交叉核对 PDF 全部数字)
+mode: paper-note-review
+checklist_version: v1.2
+conclusion: pass
+
+principles:
+  可复述:
+    status: pass
+    score: 9
+    note: 方法节含 sparse temporal embedding / 梯度截断 / 单阶段 codec 的 WHY,均有来源标注;可借鉴字段是具体 trick(锚点+padding、梯度截断、per-channel 步数)。
+  可信赖:
+    status: pass
+    score: 10
+    note: Table I/II/III、Fig 2、推理配置全部数字与 PDF 交叉核对一致;指标方向正确(WER/RTF↓、SIM-o/CMOS/SMOS↑);baseline 数字准确。
+  可区分:
+    status: pass
+    score: 9
+    note: 因果解释标注 [论文原文]/[agent 解读]/[⚠️ 论文未详述] 覆盖率高;SOTA 类断言均归因于作者;局限节明确区分实验证据与未量化项。
+  可定位:
+    status: pass
+    score: 9
+    note: KB 背景给出具体谱系(MaskGIT→SoundStorm→MaskGCT→StellarTTS)与逆向修正定位,创新判断有对比基准(SpeechTokenizer/Mimi/FireRedTTS2)。
+  不污染:
+    status: pass
+    score: 9
+    note: 未新建概念页(sparse temporal embedding 目前仅单篇引用,不满足准入,拟并入 DurationPredictor 演进线);反向更新均为 append 类。
+
+number_verification:
+  Table_I: verified   # WER/SIM-o/RTF 6 行全核对
+  Table_II: verified  # CMOS/SMOS
+  Table_III: verified # 消融 4 行
+  Fig_2: verified     # x0.7 WER 2.18 < MaskGCT 2.27
+  inference_config: verified  # [8,4,1,1,1,1], 16 steps, top-10%, temp 0.1->0
+  training_config: verified   # Emilia, 8xA100 40G, AdamW lr5e-4, 10k warmup, wd 0.01
+
+issues:
+  - id: 1
+    severity: low
+    type: template-compliance
+    location: frontmatter venue
+    detail: venue 为 "arXiv 2026 (IEEE conf format)",实际投稿会议未知(版权页 © 2025 IEEE,格式近 ICASSP)。
+    suggestion: 若后续确认会议再更新;当前标注可接受。
+  - id: 2
+    severity: low
+    type: template-compliance
+    location: frontmatter models
+    detail: models 混用 wikilink 与纯文本(F5-TTS 无实体页/笔记,以纯文本列出)。
+    suggestion: 符合既有 baseline 纯文本惯例,无需强制建页。
+
+issue_summary:
+  high: 0
+  medium: 0
+  low: 2
+
+learning_signals:
+  - 本 harness(paperwiki-reader 作为 subagent 运行)不具备嵌套 Agent dispatch 工具,Step 3.5/3.7/4.5 的"独立 subagent 审阅"退化为 inline 自审。这是流程性偏差,非笔记质量问题,建议在 skill 中补充"无 dispatch 工具时的降级路径"说明。
