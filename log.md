@@ -2402,3 +2402,9 @@
 - [update/kb] — 5 页 append: [[MaskedGenerativeModeling]](演进线追加逆向修正,key_papers=12 已达上限走演进), [[DurationPredictor]](演进线追加 sparse temporal embedding 新中间点,key_papers>20 走正文), [[SemanticvsAcousticTokens]](策略二混合 追加 StellarTTS 单阶段 1+5 codec), [[Non-autoregressiveTTS]](演进线追加移动端 masked generative NAR), [[SoundStorm]](历史地位 追加 StellarTTS 继承+移动端优化)
 - [lint/local] StellarTTS — --per-ingest 通过(All checks passed)
 - [alert/backlog] pending-review: 80, draft deep/repro: 550 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
+- [kb/search] [[Locodec]] — 命中 5 页 + 前作笔记: [[TokenRateandBitrateTrade-offs]](待确认), [[SemanticvsAcousticTokens]]✓, [[ConditionalFlowMatching]]✓, [[Classifier-FreeGuidance]](待确认), [[QuantizerDropout]]✓, 前作 [[DiTAR]] | 过滤: 无 | 未命中但可能相关: Spherical/Riemannian FM(内嵌 CFM)
+- [ingest/deep] [[Locodec]] — 精读(ByteDance Seed, Locodec 8Hz/768维原生高维球面连续token + MP-ELD 多路残差CFG, from scratch 无SSL/ASR/预训练LM), kb_sources=5, 新建 0, 追加 5(全 append)
+- [review/auto] [[Locodec]] — conclusion=pass, 0 high/1 medium/2 low; medium=EN WER baseline 串号(VoxCPM2 1.34→1.84)审阅中发现并修正; Table 2/3/4/5 + Fig 3/5/6/8 全核对。注: 本 harness 无嵌套 Agent dispatch 工具,Step 3.5/3.7 独立 subagent 审阅降级为 inline 自审
+- [update/kb] [[Locodec]] — 5 页 append: [[TokenRateandBitrateTrade-offs]](正文追加原生高维单token路线,key_papers=13已满走正文), [[SemanticvsAcousticTokens]](追加单一reconstruction-first token的语义-声学trade-off), [[QuantizerDropout]](key_papers 7→8 + PDD连续维度版新节), [[Classifier-FreeGuidance]](追加多路残差CFG节), [[ConditionalFlowMatching]](演进追加球面FM/direction-only)
+- [lint/local] Locodec — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 81, draft deep/repro: 552 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
