@@ -1,0 +1,48 @@
+paper: "SwanTale"
+reviewer: "agent (inline; 独立 subagent dispatch 本环境不可用)"
+date: "2026-08-05"
+conclusion: pass
+
+principles:
+  no_pollution:
+    verdict: pass
+    notes: "所有追加内容的数字/名称经 PDF 核验(含已修正的 Table 4 行互换)。强断言均 hedge 为'作者报告/§X'。已有页定义/核心描述不改写,仅正文末尾追加。"
+  no_bloat:
+    verdict: pass
+    notes: "新建 MixtureofExpertsforAudioGeneration 页准入满足(SwanTale Unified MoE + UniMoE-Audio[65] + DiaMoE-TTS ≥2 篇引用,且是连接节点+前置知识)。dedup 已确认无同义页(概念库无 MoE-titled 页,grep 命中均为他页 prose 提及)。3 个 concept 页 + 2 个 task 页 key_papers 均 >12,故新论文一律追加正文,不动 frontmatter key_papers。"
+  traceable:
+    verdict: pass
+    notes: "每条追加含 [[论文笔记/SwanTale]] wikilink + §/Table 引用;新页 key_papers 含触发论文 SwanTale。"
+
+change_plan_summary:
+  total_targets: 6
+  appends: 5
+  substantive: 0
+  new_pages: 1
+
+change_plan:
+  - target: "概念库/MixtureofExpertsforAudioGeneration.md"
+    action: new
+    detail: "新建 MoE-for-audio 概念页,key_papers=SwanTale,prose 提及 UniMoE-Audio/DiaMoE-TTS。category=technique。"
+  - target: "概念库/VariationalAutoencoderforTTS.md"
+    action: append
+    detail: "正文追加'SwanVAE: 塑造 posterior mean 可扩散性'段,作为重建-生成困境的又一正交路线。"
+  - target: "概念库/DifferentiableRewardOptimization.md"
+    action: append
+    detail: "正文追加'reward-conditioned quality control (SwanTale): 条件化 reward 而非优化'段。"
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: append
+    detail: "演进/相关末尾追加 1 行 SwanTale(纯 DiT + SwanVAE waveform latent + Unified MoE FFN)。"
+  - target: "任务库/Zero-shotSpeechSynthesis.md"
+    action: append
+    detail: "代表模型/相关追加 1 行 SwanTale(统一 instruct+zero-shot 单模型)。"
+  - target: "任务库/InstructedSpeechGeneration.md"
+    action: append
+    detail: "代表模型追加 1 行 SwanTale(纯 caption 生成语音+场景音,SwanBench-Scene/InstructTTSEval)。"
+
+issues: []
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "无 Agent dispatch 工具,KB 审阅同为 inline;已透明标注 reviewer。"
+  checklist_upgrade_suggestion: ""

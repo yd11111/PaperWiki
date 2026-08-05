@@ -32,6 +32,7 @@ updated: 2026-06-01
 - CosyVoice 2 (2024): 基础指令能力
 - [[论文笔记/Seed-TTS|Seed-TTS]] (2024): 通过 Speaker Fine-tuning + Instruction Fine-tuning 支持情感/expressiveness/speaking rate/style 控制;RL-SER 变体将 SER accuracy 作为 reward,emotion control accuracy 从 ICL 的 0.44 提升至 0.80 (happy) [Table 9]
 - [[论文笔记/IndexTTS2|IndexTTS2]] (2025): 通过 T2E 模块实现自然语言情感控制,将 DeepSeek-R1 的情感分布预测能力蒸馏到 Qwen-3-1.7b,支持 7 种情感的 soft 混合控制
+- [[论文笔记/SwanTale|SwanTale]] (ByteDance, 2026): 纯 caption(环境+说话人风格+fine-grained content)驱动,在**单条波形**里同时生成多说话人语音+环境音+局部音效,无需参考录音即可"设计声音"。InstructTTSEval ZH-APS 86.1(best)、EN-APS 84.2(tie best),但 RP(角色扮演)两语言都弱 [SwanTale Table 6];另建 SwanBench-Scene(广告/漫剧/通用场景,Mean MOS 4.22 best)评声学质量 [Table 7]。是 instruct 从"仅语音"扩展到"语音+场景音统一生成"的代表。
 
 ## 评估
 

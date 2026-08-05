@@ -151,3 +151,7 @@ LatentLM (Sun et al., 2024) 提出的 sigma-VAE 解决了标准 VAE 在自回归
 ## Qwen-Audio-Gen VAE: "重建 → 语义续训 → 重引判别器" 三阶段 schedule
 
 [[论文笔记/Qwen-Audio-3.0-Gen-Preview|Qwen-Audio-3.0-Gen-Preview]] (Alibaba Token Foundry, 2026) 给出重建-生成困境的一条 **schedule-based** 工程 recipe(区别于 Semantic-VAE 一次性正则、HoliTok 冻结分阶段):基于 Stable Audio Open 的卷积波形 VAE(48kHz stereo→25Hz/128-dim),先用 rec+KL+adv+fm 训出高保真声学 checkpoint;再语义续训——后验均值 μ_φ(x) 经轻量投影送入 **frozen Qwen2.5-3B** 做 next-token 监督(梯度只更 encoder+投影),此阶段**早期临时关闭判别器**;最后重引判别器联合优化 [§5.4]。关键负证据(与其它解法互补):§6.1 受控下游探针(LibriSpeech-PC,固定 F5 式 CFM 生成器)显示语义续训相对纯声学版**降 WER、升 UTMOS 但降 SIM(0.507→0.488)**,且仍逊于 Semantic-VAE/LoSATok 的 WER/SIM [Table 11],印证"语义正则常以说话人保真为代价"。
+
+## SwanVAE: 塑造 posterior mean 的"可扩散性"
+
+[[论文笔记/SwanTale|SwanTale]] (ByteDance, 2026) 的 SwanVAE(48kHz/25Hz/96-dim 连续 latent)给出了重建-生成困境的又一条正交路线:**既不加语义正则(Semantic-VAE)、不动维度(LongCat)、不改架构(SARA)、不分阶段(HoliTok),而是在训练期直接优化 latent 的"可扩散性 (diffusability)"**。做法是对 posterior mean μφ 施加几个**训练期弱目标、推理全部丢弃** [SwanTale §3.1.3]: (1) **生成对齐** —— 联合训一个轻量无条件 flow-matching 预测器,回传 encoder 的梯度单独缩小,直接度量"当前 latent 分布有多容易被 flow 网络建模"; (2) **causal 预测器** —— 从历史预测未来 latent patch,残差衡量"局部不可从近史推断的部分",比固定时间差惩罚更能容忍可预测变化; (3) **语义/声学 readouts** —— 预测多尺度 chroma + 归一化帧能量 + 多带能量分布。动机与 Skorokhodov et al. (2025) "improving diffusability of autoencoders" 一致:25Hz 低帧率下细节若靠相邻帧剧变承载,会加重下游 DiT 的建模负担。这是把"latent 好不好被生成器建模"显式做成 VAE 训练信号的思路,与上述几条"改重建/改结构"的路线互补。作者报告语音重建 PESQ 4.1683 / MCD 0.9638 均为对比系统最佳 [SwanTale Table 3];但未对这些对齐目标做独立消融,各自贡献是黑盒。

@@ -75,6 +75,10 @@ updated: 2026-06-01
 
 - [[论文笔记/X-Voice|X-Voice]] (Xu et al., 2026): 0.4B NAR CFM 系统,30 语言 transcript-free 零样本克隆。Seed-TTS test-zh WER 1.28% / SIM 0.76, test-en WER 1.30% / SIM 0.65, RTF 0.073 [Table 3]
 
+### 与 instruct 统一的零样本 (SwanTale)
+
+- [[论文笔记/SwanTale|SwanTale]] (ByteDance, 2026): 用**单个 flow-matching DiT** 同时支持 zero-shot(参考音 prompt)与 instruct(纯 caption)两任务,只差 caption 输入/context mask。zero-shot monologue Timbre Consistency 0.95、Expressive Richness 3.90、Expressive Hierarchy 3.70 均为对比系统最佳,但 Content Error 0.086 逊于 FishSpeech 0.066 [SwanTale Table 5]。零样本 GRPO 用 speaker similarity(WavLM+ECAPA)作 task-specific reward。
+
 ## 开放问题
 
 - 音色可控性: 能否通过文本指令编辑音色而非仅克隆

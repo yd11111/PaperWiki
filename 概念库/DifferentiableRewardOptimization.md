@@ -129,3 +129,7 @@ Nie et al. (2026) [[论文笔记/HPRO|HPRO]] 从 reward 空间结构和优化粒
 ## GRPO-LoRA 作为可组合风格控制信号 / GLASS (2026)
 
 [[论文笔记/GLASS|GLASS]] (Fang et al., 2026) 将 GRPO 的用途从"改善 TTS 生成质量"拓展到"学习模块化风格控制信号": 在冻结 CosyVoice2 backbone 上,为每个风格维度 (speed/pitch) 独立训练 GRPO-LoRA,SER/pitch/speed 评估器提供 reward,LoRA 权重更新方向被 reward 梯度引导为参数空间中的风格方向向量。运行时通过 LoRA 组合实现多维风格同时控制。Fast LoRA SPS 5.59 (vs baseline 3.65),S-MOS 4.72 vs DSP 3.08 [Table 1]。与 DiffRO/GRPO 在 TTS RL 中的传统角色 (优化 WER/SIM/MOS 等生成质量指标) 不同,GLASS 中 GRPO 的优化目标是**风格变化方向的准确性**而非整体生成质量,LoRA 的可组合性使 GRPO 产出的 reward 知识可模块化复用。与 FlowTTS-GRPO 的区别: FlowTTS-GRPO 在 FM 声学空间做全局质量优化,GLASS 在 LM 参数空间做维度化风格控制。
+
+## Reward-Conditioned Quality Control (SwanTale): 条件化 reward 而非优化 reward
+
+[[论文笔记/SwanTale|SwanTale]] (ByteDance, 2026) 走了一条与整条 DiffRO/GRPO 演进线**正交**的路径:**不优化 reward,而是把 reward 作为 condition** [SwanTale §3.2]。做法是把数据预处理时标注的四个客观质量分(STOI/PESQ/SI-SDR/MOS)拼成 quality caption 并映射成离散 quality flag q∈{low,normal,high,unknown},训练时 dropout 到 unknown 以支持 CFG,**推理固定用 high**。这使模型成为 reward-conditioned policy [Kumar et al. 2019]:reward 以条件形式提供、模型学"每个质量档在声学上如何实现",推理把 reward 钉到最大。相比显式优化质量 reward(DiffRO/GRPO 路线),它**无需 rollout、无需 RM in-loop、无需额外采样**,且中低质样本仍以"标注质量档"的方式保留在训练集贡献覆盖,而非被过滤丢弃。SwanTale 同时也用了 **Flow-GRPO(ODE→SDE)** 做发音/稳定性/属性控制的后训练(即本页已收录的 [[论文笔记/FlowTTS-GRPO|FlowTTS-GRPO]] 方案),与 reward-conditioning 分工:前者优化难 case,后者做全局质量偏置。这提示"用 reward 信号"存在"优化 vs 条件化"两种范式,后者是低成本、免 reward-hacking 的替代。
