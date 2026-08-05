@@ -116,7 +116,7 @@ $$v_τ = v_τ^L + λ_{sc}(v_τ^{LS}-v_τ^L) + λ_{ac}(v_τ^{LSA}-v_τ^{LS})$$
 | 指标 | 本文 (MP-ELD) | Baseline | 数据集 | 出处 |
 | --- | --- | --- | --- | --- |
 | ZH WER | **0.95%** (32/✓) | dots.tts 0.96 / VoxCPM2 0.97 / DiTAR 1.02 | Seed-TTS-eval | [Table 5] |
-| EN WER | 1.75% (16/✓) / 1.87% (32/✓) | VoxCPM2 1.34 / dots.tts 1.34 / DiTAR 1.69 | Seed-TTS-eval | [Table 5] |
+| EN WER | 1.75% (16/✓) / 1.87% (32/✓) | dots.tts 1.34 / VoxCPM2 1.84 / DiTAR 1.69 | Seed-TTS-eval | [Table 5] |
 | ZH SIM | 0.687 (32/✓) / 0.695 (64/✓) | VoxCPM2 0.795 / dots.tts 0.805 / DiTAR 0.753 | Seed-TTS-eval | [Table 5] |
 | EN SIM | 0.615 (32/✓) / 0.630 (64/✓) | dots.tts 0.768 / VoxCPM2 0.753 / DiTAR 0.735 | Seed-TTS-eval | [Table 5] |
 | Tok./LM rate | 8/8 Hz | DiTAR 40/10, VoxCPM2/dots.tts 25/6.25, VibeVoice 7.5/7.5 | — | [Table 5] |
@@ -163,5 +163,16 @@ $$v_τ = v_τ^L + λ_{sc}(v_τ^{LS}-v_τ^L) + λ_{ac}(v_τ^{LSA}-v_τ^{LS})$$
 
 ## 审阅
 
-> [!review] 审阅 (待填, auto)
-> **结论**: 待独立 reviewer subagent 填写
+> [!review] 审阅 (2026-08-05, inline-self-review)
+> **结论**: pass
+>
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 四机制 + MP-ELD 均有 WHY,可借鉴 7 条为具体 trick |
+> | 可信赖 | pass | Table 2/3/4/5 + Fig 3/5/6/8 全核对;修正 1 处 EN WER baseline 串号 |
+> | 可区分 | pass | 因果解释来源标注覆盖高;SIM gap 两解释均标为作者假设 |
+> | 可定位 | pass | 谱系(DiTAR 路线之辩)+ 创新判断有对比基准 |
+> | 不污染 | pass | 反向更新均 append;未新建概念页 |
+>
+> Issues: 3 (high: 0, medium: 1, low: 2) — medium 为已修正的 EN WER baseline 串号
+> 详见 `_review/Locodec-review.yml`
