@@ -2437,3 +2437,4 @@
 - [review/kb] [[SwanTale]] — conclusion: pass, 0 issues; MoE 页准入满足(≥2 篇), 5 处 append 均正文(目标页 key_papers 全 >12)
 - [create/concept] [[MixtureofExpertsforAudioGeneration]] — 新建(technique, pending-review): 音频生成 MoE hub, 归纳 sample/frame/diffusion-time 三级路由; 因深入覆盖仅 SwanTale(DiaMoE-TTS/UniMoE-Audio 名字级引用)且 entity-review dispatch 不可用, 保持 pending-review 未 auto-confirm
 - [lint/local] SwanTale — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 86, draft deep/repro: 556 — 均超阈值(>10 / >5),存量积压(非本次引入),建议抽空审核
