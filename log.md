@@ -2417,3 +2417,11 @@
 - [update/kb] [[ECCD]] — 2 页 append: [[LLM-basedTTS]](confirmed, 局限段追加 decoding-time 幻觉缓解一行, 保持confirmed), [[Speech-TextAlignment]](pending-review, 关键论文追加 ECCD 一行, 保持 pending-review)
 - [lint/local] ECCD — --per-ingest 通过(All checks passed)
 - [alert/backlog] pending-review: 83, draft deep/repro: 553 — 均超阈值(>10 / >5),建议抽空审核(存量积压,非本次 ingest 引入)
+- [kb/search] [[dots.tts.edit]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[LLM-basedTTS]]✓, [[数据集/SEED-TTS-Eval|SEED-TTS-Eval]]✓ | 参考(pending): [[Next-TokenDiffusion]], [[Instruction-GuidedSpeechSynthesis]], [[EmotionControlinTTS]] | 关键基座: [[论文笔记/dots.tts|dots.tts]]
+- [ingest/deep] [[dots.tts.edit]] — 精读, kb_sources=6, 新建 2 ([[SpeechEditing]], [[数据集/doteBench|doteBench]]), 追加 2 ([[数据集/SEED-TTS-Eval|SEED-TTS-Eval]] used_by+prose, [[Instruction-GuidedSpeechSynthesis]] 结构化指令小节)
+- [review/auto] [[dots.tts.edit]] — conclusion: pass, 2 low issues (dangling wikilink 待反向更新闭合 / 高层可借鉴); 因 Agent 工具不可用,审阅在同 session 对照 checklist+PDF 交叉核验(非 context-isolated)
+- [review/kb] [[dots.tts.edit]] — conclusion: pass, 1 low (doteBench 单源, benchmark origin 页可接受)
+- [create/concept] [[SpeechEditing]] — 新建(problem, pending-review): vault >5 篇编辑笔记(AST-Edit/CosyEdit/Step-Audio-EditX/Ming-UniAudio/SonoEdit 等)无 hub 页, 归纳 mask-infill/flow-inversion/CFM/codec-LM/连续AR适配 5 路线; 因 entity-review dispatch 不可用, 保持 pending-review 未 auto-confirm
+- [create/dataset] [[数据集/doteBench|doteBench]] — 新建(pending-review): 双语精确语音编辑评测, 5 类 1781 例, 三维度 + 新提出 WDTW-F0; 保持 pending-review 未 auto-confirm
+- [lint/local] dots.tts.edit — --per-ingest 通过(All checks passed)
+- [alert/backlog] pending-review: 85, draft deep/repro: 554 — 均超阈值(>10 / >5),存量积压(非本次引入),建议抽空审核
