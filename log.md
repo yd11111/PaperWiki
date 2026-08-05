@@ -2387,3 +2387,8 @@
 - [fix/tooling] scripts/lint.py resolve_wikilink — 修复 08-02 [待决] 的 dotted-name bug: `has_extension` 改为仅匹配已知扩展名(.md/.pdf/.txt/.yml/...); L8 假阳性 34→5(剩余 5 为无关既有真问题: EmoInstruct/GLASS review 文件缺失 + SARA PDF#page anchor + 2 处 MOC 自引尾随反斜杠)
 - [lint/local] Qwen-Audio-3.0-TTS — --per-ingest 通过(All checks passed)
 - [alert/backlog] pending-review: 80, draft deep/repro: 549 — 均超阈值(>10 / >5),建议抽空审核
+- [kb/search] [[StellarTTS]] — 命中 6 页(取 Top 6): [[SemanticvsAcousticTokens]]✓, [[ResidualVectorQuantization]]✓, [[MaskedGenerativeModeling]](待确认), [[Non-autoregressiveTTS]](待确认), [[DurationPredictor]](待确认), [[SoundStorm]](待确认) | 过滤: 无 | 未命中但可能相关: [[Emilia]], [[SEED-TTS-Eval]], [[w2v-BERT]]
+- [ingest/deep] [[StellarTTS]] — 精读(Honor+SJTU, sparse temporal embedding + 单阶段 semantic-aware codec + 83M LLaMA masked generative, RTF 0.08), kb_sources=6, 新建 0, 追加 5(全 append)
+- [review/auto] [[StellarTTS]] — conclusion=pass, 0 high/0 medium/2 low; 全部数字(Table I/II/III + Fig 2 + 推理/训练配置)交叉核对 PDF 一致。注: 本 harness 无嵌套 Agent dispatch 工具,Step 3.5/3.7 独立 subagent 审阅降级为 inline 自审
+- [update/kb] — 5 页 append: [[MaskedGenerativeModeling]](演进线追加逆向修正,key_papers=12 已达上限走演进), [[DurationPredictor]](演进线追加 sparse temporal embedding 新中间点,key_papers>20 走正文), [[SemanticvsAcousticTokens]](策略二混合 追加 StellarTTS 单阶段 1+5 codec), [[Non-autoregressiveTTS]](演进线追加移动端 masked generative NAR), [[SoundStorm]](历史地位 追加 StellarTTS 继承+移动端优化)
+- [lint/local] StellarTTS — --per-ingest 通过(All checks passed)
