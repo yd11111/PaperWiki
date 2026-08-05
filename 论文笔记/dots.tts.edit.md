@@ -240,3 +240,18 @@ doteBench: 双语套件, 5 类 (text/emotion/prosody/pause/compositional), 单�
 5. **"骨干不动、条件+数据学编辑"**: 不加 task head, 把 source/intent/target 显式塞进条件序列复用同一目标-latent 生成器 + 大比例 TTS replay 防遗忘。任何连续 AR TTS 基座都可低成本获得编辑能力。
 
 ## 审阅
+
+> [!review] 审阅 (2026-08-05, auto)
+> **结论**: pass
+>
+> | 原则 | 状态 | 备注 |
+> |------|------|------|
+> | 可复述 | pass | 方法节含 WHY + 来源标注;可借鉴为具体 trick |
+> | 可信赖 | pass | 数字出处覆盖 >90%,抽样核对 baseline/消融与 PDF 一致 |
+> | 可区分 | pass | 强断言归因 [§2],"leading" 限定 open-source,因果标来源 |
+> | 可定位 | pass | 谱系定位具体,frontmatter present+semantically correct |
+> | 不污染 | pass | 反向更新计划见 KB 审阅门 |
+>
+> Issues: 2 (high: 0, medium: 0, low: 2) — 均为 dangling wikilink(待反向更新创建 SpeechEditing/doteBench)与高层可借鉴。
+> 说明: 本环境无 Agent 工具,审阅在同 session 对照 checklist + 源 PDF 交叉核验完成(非 context-isolated)。
+> 详见 `_review/dots.tts.edit-review.yml`

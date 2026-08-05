@@ -1,0 +1,41 @@
+paper: "dots.tts.edit"
+reviewer: agent
+date: "2026-08-05"
+conclusion: pass
+note: "Agent-dispatch 工具在本环境不可用,审阅在同一 session 内对照 review-checklist + 源 PDF 交叉核验完成 (非 context-isolated)。关键数字已逐项与 PDF 表格核对。"
+
+principles:
+  restatable:
+    verdict: pass
+    notes: "方法节含 WHY (骨干不动只改条件+数据、双向监督动机、F5 修补 trade-off),[论文原文]/[agent 解读] 标注齐;可借鉴为具体 trick。"
+  trustworthy:
+    verdict: pass
+    notes: "数字 claim 出处覆盖率 >90% ([Table 2-8]/[§]);抽样核对 Step-Audio-EditX(Text Hard 5.87/21.69)、Kimi(Emotion 22.36)、pipeline(67.57/34.17) 与 PDF 一致;消融 Table 8 与方法节引用一致;计数一致(1541 单任务 + 240 组合 = 1781)。"
+  distinguishable:
+    verdict: pass
+    notes: "'首个端到端联合 text/emotion/prosody/pause 编辑器' 归因 [§2];'leading' 限定为 among evaluated open-source;因果解释均标来源。"
+  locatable:
+    verdict: pass
+    notes: "KB 背景给出具体谱系(A3T/CampNet/Voicebox/VoiceCraft mask 路线、AST-Edit flow-inversion、CosyEdit CFM、Step-Audio-EditX/Ming-UniAudio codec-LM),创新判断有对比基准;frontmatter present+semantically correct(models 为基座+组件+baseline,无 successor-as-model)。"
+  no_pollution:
+    verdict: pass
+    notes: "反向更新计划见 kb-review;新建页(SpeechEditing/doteBench)准入在 KB 审阅门判定。"
+
+issues:
+  - severity: low
+    type: template-compliance
+    principle: locatable
+    location: "frontmatter concepts/datasets"
+    detail: "concepts 引用 [[SpeechEditing]]、datasets 引用 [[数据集/doteBench]] 在草稿提交时尚不存在,属 dangling wikilink,直到 Step 4 反向更新创建后才闭合。"
+    suggestion: "Step 4 反向更新须创建 SpeechEditing 概念页与 doteBench 数据集页;若 KB 审阅阻断创建,则从 frontmatter 移除对应链接。lint(Step 5)会最终校验。"
+  - severity: low
+    type: weak-reusability
+    principle: restatable
+    location: "可复用的 idea #5"
+    detail: "'骨干不动、条件+数据学编辑' 是较高层的方法论主张,可迁移性依赖读者已理解连续 AR 基座。"
+    suggestion: "可接受;已在方法节 Eq 3 给出具体条件分解落地,不阻塞。"
+
+learning_signals:
+  new_issue_type: ""
+  rule_gap: "reader skill 假设有 Agent 工具做独立审阅;本 harness 未暴露 Agent 工具,导致审阅无法 context-isolated。建议 skill 增加降级路径说明。"
+  checklist_upgrade_suggestion: ""
