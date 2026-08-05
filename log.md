@@ -2431,3 +2431,9 @@
 - [create/dataset] [[数据集/doteBench|doteBench]] — 新建(pending-review): 双语精确语音编辑评测, 5 类 1781 例, 三维度 + 新提出 WDTW-F0; 保持 pending-review 未 auto-confirm
 - [lint/local] dots.tts.edit — --per-ingest 通过(All checks passed)
 - [alert/backlog] pending-review: 85, draft deep/repro: 554 — 均超阈值(>10 / >5),存量积压(非本次引入),建议抽空审核
+- [kb/search] [[SwanTale]] — 命中 6 页(取 Top 6): [[ConditionalFlowMatching]]✓, [[任务库/Zero-shotSpeechSynthesis|Zero-shot Speech Synthesis]]✓, [[任务库/InstructedSpeechGeneration|Instructed Speech Generation]]✓ | 参考(pending): [[VariationalAutoencoderforTTS]], [[DifferentiableRewardOptimization]], [[Instruction-GuidedSpeechSynthesis]] | 关键基座: [[论文笔记/SwanVoice|SwanVoice]]
+- [ingest/deep] [[SwanTale]] — 精读(ByteDance 技术报告), kb_sources=6, 新建 1 ([[MixtureofExpertsforAudioGeneration]]), 追加 5 (VAE/DiffRO/CFM prose + Zero-shot/Instructed 任务页)
+- [review/auto] [[SwanTale]] — conclusion: pass-with-fixes, 2 issues (1 high 已修: Table 4 通用音频↔音乐行互换 / 1 low: MoE 页待建); 因 Agent dispatch 不可用, 审阅在同 session 对照 checklist+PDF 交叉核验(非 context-isolated)
+- [review/kb] [[SwanTale]] — conclusion: pass, 0 issues; MoE 页准入满足(≥2 篇), 5 处 append 均正文(目标页 key_papers 全 >12)
+- [create/concept] [[MixtureofExpertsforAudioGeneration]] — 新建(technique, pending-review): 音频生成 MoE hub, 归纳 sample/frame/diffusion-time 三级路由; 因深入覆盖仅 SwanTale(DiaMoE-TTS/UniMoE-Audio 名字级引用)且 entity-review dispatch 不可用, 保持 pending-review 未 auto-confirm
+- [lint/local] SwanTale — --per-ingest 通过(All checks passed)
