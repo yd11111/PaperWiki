@@ -1,5 +1,13 @@
 # Log
 
+## 2026-08-05
+
+- [kb/search] [[ParaASR]] — 命中 6 页 (均 pending-review): [[Speech-LLMIntegrationTaxonomy]], [[ModalityAdaptationforSpeechLLM]], [[Audio-LanguagePretraining]], [[模型库/Whisper|Whisper]], [[数据集/LibriSpeech|LibriSpeech]] + 强相关笔记 [[Step-Audio2.5]] (同源交叉验证) / [[SpeechSpeculativeDecoding]] (MTP 对照)
+- [ingest/deep] [[ParaASR]] — ParaASR: Multi-Token Prediction for Fast and Long-Context LLM-Based ASR (StepFun, 2026). MTP-5 verifiable decoding, 4B dense decoder + 0.6B frozen Qwen3-Omni encoder, 32K 原生长音频, RTF 0.0053. 关键判断: 与 [[Step-Audio2.5]] ASR 分支高度同源 (数字全重合). 审阅: revise→fixed (3 high 全为 Table 1 baseline 列错位, 用 pdftotext -layout 逐格重核已修正). KB 审阅: pass (0H/0M/1L). kb_sources=6, 新建 1 (Multi-TokenPrediction), 追加 0 (其余 frontmatter 实体为下游使用, 按准入不追加 key_papers).
+- [review/entity] [[Multi-TokenPrediction]] — 新建概念页, entity-review pass-with-fixes (0H/1M/2L): 已修正 aliases (移除 'Lookahead Decoding' 独立技术避免检索假阳性) + '关键工程杠杆' 补 [agent 解读] 标注. 保持 pending-review (待下次定期审阅晋升 confirmed).
+- [lint/local] ParaASR — all passed.
+- [review/learning] entity-reviewer 提出 rule_gap: 抽查 4 个 confirmed 概念页均有 7-9 个 h2 + `## 演进` 段, 与 checklist `一级标题≤6` + kb.md `无研究演进时间线` 冲突; 建议标题阈值上调或将 关键论文/相关概念/演进 列为 footer 不计配额. 记录待后续规则校准.
+
 ## 2026-07-03
 
 - [ingest/deep] [[Mel-LLM]] — LLM can Read Spectrogram: Encoder-free Speech-Language Modeling (Fan et al., Microsoft, 2026). KB 命中 6 页: SpeechLanguageModel✓, LLM-basedTTS✓, SemanticvsAcousticTokens✓, MelSpectrogram(pr), ModalityAdaptationforSpeechLLM(pr), MELLE(pr). 审阅: pass-with-fixes (0H/0M/1L, fix: +LibriSpeech-PC to datasets). 反向更新 5 页 (ModalityAdaptationforSpeechLLM +key_papers+section, MelSpectrogram +section, MELLE +key_papers+後続, SpeechLanguageModel +演進, SemanticvsAcousticTokens +section). Lint: all passed.
