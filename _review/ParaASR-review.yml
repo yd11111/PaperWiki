@@ -1,0 +1,91 @@
+paper: "ParaASR: Multi-Token Prediction for Fast and Long-Context LLM-Based Speech Recognition"
+file: "论文笔记/ParaASR.md"
+date: "2026-08-05"
+conclusion: revise
+
+# 第一层: 原则判断
+principles:
+  reproducible:     # 可复述
+    score: 9
+    judgment: "方法节机制解释完整,MTP 提议-验证原语、串行依赖衰减、两阶段训练(冻结分支对齐→联合校准)、horizon 选择的量化权衡都讲清了 WHY,读完可复述为什么 work。"
+  trustworthy:      # 可信赖
+    score: 4
+    judgment: "方法/训练数字与 Table 3/Table 4 全部核对无误,但 Table 1 baseline 列大面积错位(见 high issues),且 AISHELL-1 脚注捏造 Qwen3-ASR=0.71(实为 1.49)。比较表数字不可直接引用。"
+  distinguishable:  # 可区分
+    score: 9
+    judgment: "[论文原文]/[agent 解读]/[⚠️ 论文未详述] 标注贯穿全文,来源边界清晰,推断处均有限定词,覆盖率约 90%+。"
+  positioned:       # 可定位
+    score: 9
+    judgment: "KB 背景是范本级定位:Step-Audio2.5 同源分析、SpeechSpeculativeDecoding 跨模态对照、taxonomy 谱系落点都具体到论文/模型名,创新落点判断有对比基准。"
+  non_polluting:    # 不污染
+    score: 6
+    judgment: "MTP 机制内容(反向更新主体)全部正确,新建 Multi-TokenPrediction 概念安全;但 Table 1 baseline 错误数字若流入模型/benchmark 页会污染,反向更新须规避比较表数字。"
+
+# 第二层: 检查项
+checks:
+  claim_coverage:
+    total: 46
+    annotated: 40
+    rate: "~87%"
+  metric_names_correct: true          # CER(中)/WER(英/长音频)/RTF 使用正确,方向(越低越好)标注正确
+  source_labels_present: true         # [论文原文]/[agent 解读]/[⚠️ 论文未详述]
+  source_labels_coverage: "~90%"
+  speed_card_complete: true
+  speed_card_metrics_match_original: true   # 2.97/3.68/3.70, RTF 0.0053, 5.0/6 均与原文一致
+  frontmatter_fields_present: true
+  frontmatter_semantically_correct: true    # models 均为 baseline/前置(无后继系统); concepts 含核心 MTP; 但 datasets 仅列 LibriSpeech(欠全)
+  baseline_numbers_crosschecked: false      # ❌ Table 1 baseline 列大面积错位
+  ablation_consistency: true                # Table 4 均值 3.00/3.83/3.63→3.00/3.87/3.69 与原文一致
+  concept_admission_ok: true                # Multi-TokenPrediction 满足准入(核心机制+多篇连接)
+
+# 发现的问题
+issues:
+  - severity: high
+    type: baseline-number-swap
+    principle: trustworthy
+    location: "实验 Table 1 — 中文 + 英文分区所有非 Average 行"
+    detail: "中/英文各测试集行的 baseline 列 (FunASR-Nano/Doubao-ASR-2603/Qwen3-ASR-1.7B) 系统性错位。例: AISHELL-1 PDF 为 VibeVoice5.19/FunASR1.88/Doubao2.07/Qwen3 1.49/ParaASR0.71,笔记写成 5.19/2.07/1.49/0.71/0.71(丢失 FunASR 1.88 后整列左移)。AISHELL-2 ios、Wenet testnet/testmeeting、FLEURS zh 同样错位;英文 LibriSpeech clean 等行 FunASR/Doubao/Qwen3 三列被打乱排列。VibeVoice 列、ParaASR 列、中/英 Average 行均正确。"
+    suggestion: "按 PDF 逐行重抄 Table 1 中文+英文分区的 FunASR-Nano/Doubao/Qwen3 三列(VibeVoice 与 ParaASR 列保持不动)。"
+  - severity: high
+    type: column-mismatch
+    principle: trustworthy
+    location: "实验 Table 1 — 长音频分区"
+    detail: "长音频各行 VibeVoice-ASR 列错误(被填入前面丢失的中文 FunASR 值):PDF LibriSpeech clean long=1.66/other long=3.48/Wenet testnet long=8.73/Earnings22=5.62,笔记写成 1.88/2.61/5.30/5.31。长音频 Average 行整体右移:PDF 为 4.87/5.59/6.11/4.20/3.70,笔记写成 3.19/4.87/5.59/6.11/3.70 — 即 VibeVoice avg 应为 4.87(笔记 3.19 错)、Qwen3-ASR long-form avg 应为 4.20(笔记 6.11 错)。ParaASR 3.70 正确。"
+    suggestion: "重抄长音频分区:各行 VibeVoice 列改回 1.66/3.48/8.73/5.62;Average 行改为 4.87/5.59/6.11/4.20/3.70。"
+  - severity: high
+    type: factual-error
+    principle: trustworthy
+    location: "实验 Table 1 下方脚注 (对应笔记 §实验 AISHELL-1 脚注)"
+    detail: "脚注称『AISHELL-1 上 Qwen3-ASR 与 ParaASR 均标 0.71,原文 Fig 1/Table 1 未区分谁 second-best』。PDF Table 1 明确 Qwen3-ASR AISHELL-1 = 1.49(second-best,下划线),ParaASR = 0.71。整条脚注前提捏造。"
+    suggestion: "删除该脚注;如需注明,改为『AISHELL-1 second-best 为 Qwen3-ASR 1.49,ParaASR 0.71 最优』。"
+  - severity: low
+    type: metric-naming-ambiguity
+    principle: trustworthy
+    location: "实验 Table 4 后括注 (笔记 §实验末)"
+    detail: "括注将 Table1/Table4 不一致表述为『Table 4 的 w/o MTP 中文均值 3.00 略高于 Table 1 的 ParaASR 2.97』。更精确说法应是:Table 4 中 MTP-5 列即 ParaASR,其中文均值 3.00 与 Table 1 ParaASR 2.97 冲突(w/o MTP 与 MTP-5 在 Table4 均为 3.00)。观察方向正确,但主语指认略偏。"
+    suggestion: "把主语从『w/o MTP 3.00』改为『Table 4 中 ParaASR(MTP-5)均值 3.00』。"
+  - severity: low
+    type: template-compliance
+    principle: positioned
+    location: "frontmatter datasets"
+    detail: "datasets 仅列 LibriSpeech,但正文实验用了 AISHELL-1/2、WenetSpeech、FLEURS、Common Voice、VoxPopuli、Earnings22 等多个数据集。欠全(非错误)。"
+    suggestion: "视需要补充 AISHELL / WenetSpeech / FLEURS 等主要评测集,或保持现状(不阻塞)。"
+  - severity: low
+    type: bad-linking
+    principle: positioned
+    location: "frontmatter models — [[论文笔记/Seed-ASR|Seed-ASR]]"
+    detail: "Seed-ASR 列入 models 但正文未讨论(仅其他 baseline 在 Table 1/2 出现)。非错误,属挂接冗余。"
+    suggestion: "若正文不涉及可移除,或在 KB 背景补一句 Seed-ASR 的定位关系。"
+
+# 风险评估
+risk_assessment:
+  safe_for_reverse_update: false
+  safe_for_trusted_layer: false
+  reason: "MTP 机制/训练内容全部正确,针对 Multi-TokenPrediction 概念页的反向更新本身安全;但 Table 1 baseline 数字大面积错误,任何触及模型对比/benchmark 数字的反向更新必须规避,且笔记进可信层前须先修正 3 个 high issue。建议:反向更新只写 MTP 机制/训练配方,不引 Table 1 baseline 数字。"
+
+# 学习信号
+learning_signals:
+  checks_passed_but_principle_failed: ""
+  new_issue_type: ""
+  system_upgrade_suggestion: "比较表转抄是高频错误源(本篇 Table 1 三段全错但 Average 行正确,提示是逐行转抄时列对齐丢失)。建议 reader 在生成含 baseline 的比较表后,做一次『列自检』:抽验每列非 Average 行之和/均值是否≈Average 行,或直接从 pdftotext -layout 复制而非重排。"
+  checklist_upgrade_suggestion: "baseline_numbers_crosschecked 检查项建议明确要求『分区抽验:每个分区至少核对 1 行完整多列 + Average 行』,因为本篇 Average 行正确会掩盖个体行错位。"

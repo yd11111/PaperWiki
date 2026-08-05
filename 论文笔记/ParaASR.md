@@ -112,25 +112,25 @@ ParaASR 遵循 encoder–adapter–decoder 模式,叠加一个 MTP-5 head 提议
 
 | 类别 | 测试集 | VibeVoice-ASR | FunASR-Nano | Doubao-ASR-2603 | Qwen3-ASR-1.7B | **ParaASR** |
 | --- | --- | --- | --- | --- | --- | --- |
-| 中文 | AISHELL-1 | 5.19 | 2.07 | 1.49 | 0.71* | **0.71** |
-| 中文 | AISHELL-2 ios | 5.10 | 2.70 | 2.50 | 2.29 | **2.29** |
-| 中文 | Wenet testnet | 14.79 | 4.03 | 4.44 | 4.54 | **4.54** |
-| 中文 | Wenet testmeeting | 17.09 | 5.09 | 4.66 | 4.70 | **4.70** |
-| 中文 | FLEURS zh | 8.77 | 2.83 | 2.74 | 2.63 | **2.63** |
+| 中文 | AISHELL-1 | 5.19 | 1.88 | 2.07 | 1.49 | **0.71** |
+| 中文 | AISHELL-2 ios | 5.10 | 2.61 | 2.70 | 2.50 | **2.29** |
+| 中文 | Wenet testnet | 14.79 | 5.30 | 4.03 | 4.44 | **4.54** |
+| 中文 | Wenet testmeeting | 17.09 | 5.31 | 5.09 | 4.66 | **4.70** |
+| 中文 | FLEURS zh | 8.77 | 3.19 | 2.83 | 2.74 | **2.63** |
 | 中文 | **Average** | 10.19 | 3.66 | 3.34 | 3.17 | **2.97** |
-| 英文 | LibriSpeech clean | 2.30 | 2.94 | 1.69 | 1.80 | **1.38** |
-| 英文 | LibriSpeech other | 5.79 | 5.98 | 3.57 | 4.43 | **3.16** |
-| 英文 | Common Voice v11 en | 20.03 | 14.06 | 7.50 | 11.05 | **7.57** |
-| 英文 | FLEURS en | 5.20 | 6.74 | 3.23 | 4.96 | **3.55** |
-| 英文 | VoxPopuli cleaned AA | 2.38 | 3.61 | 3.28 | 3.97 | **2.76** |
+| 英文 | LibriSpeech clean | 2.30 | 1.80 | 2.94 | 1.69 | **1.38** |
+| 英文 | LibriSpeech other | 5.79 | 4.43 | 5.98 | 3.57 | **3.16** |
+| 英文 | Common Voice v11 en | 20.03 | 11.05 | 14.06 | 7.50 | **7.57** |
+| 英文 | FLEURS en | 5.20 | 4.96 | 6.74 | 3.23 | **3.55** |
+| 英文 | VoxPopuli cleaned AA | 2.38 | 3.97 | 3.61 | 3.28 | **2.76** |
 | 英文 | **Average** | 7.14 | 5.24 | 6.67 | 3.85 | **3.68** |
-| 长音频 | LibriSpeech clean long | 1.88 | 2.34 | 2.81 | 1.95 | **1.27** |
-| 长音频 | LibriSpeech other long | 2.61 | 4.89 | 5.59 | 3.81 | **2.90** |
-| 长音频 | Wenet testnet long | 5.30 | 4.74 | 3.72 | 4.15 | **4.09** |
-| 长音频 | Earnings22 cleaned AA | 5.31 | 10.38 | 12.33 | 6.90 | **6.52** |
-| 长音频 | **Average** | 3.19 | 4.87 | 5.59 | 6.11 | **3.70** |
+| 长音频 | LibriSpeech clean long | 1.66 | 2.34 | 2.81 | 1.95 | **1.27** |
+| 长音频 | LibriSpeech other long | 3.48 | 4.89 | 5.59 | 3.81 | **2.90** |
+| 长音频 | Wenet testnet long | 8.73 | 4.74 | 3.72 | 4.15 | **4.09** |
+| 长音频 | Earnings22 cleaned AA | 5.62 | 10.38 | 12.33 | 6.90 | **6.52** |
+| 长音频 | **Average** | 4.87 | 5.59 | 6.11 | 4.20 | **3.70** |
 
-(*AISHELL-1 上 Qwen3-ASR 与 ParaASR 均标 0.71,原文 Fig 1/Table 1 未区分谁 second-best; 论文正文强调 ParaASR 把 AISHELL-1 降到 0.71。) ParaASR 三类别全部取得最低平均错误率,长音频尤其受益于原生 32K 上下文 — 无需分段拼接即可保持一致性,避免 segmentation 管线的边界错误 [§4.1]。
+(数字逐格核对自 `pdftotext -layout` 提取的 Table 1。列序: VibeVoice-ASR / FunASR-Nano / Doubao-ASR-2603 / Qwen3-ASR-1.7B / ParaASR。) ParaASR 三类别全部取得最低平均错误率; AISHELL-1 上 ParaASR 0.71,second-best 为 Qwen3-ASR 1.49 [Table 1]。长音频尤其受益于原生 32K 上下文 — 无需分段拼接即可保持一致性,避免 segmentation 管线的边界错误; 注意 Qwen3-ASR 长音频均值 4.20 明显高于其英文均值 3.85,而 ParaASR 长音频 3.70 反而低于短音频均值,体现原生长上下文优势 [§4.1]。
 
 ### 解码效率 [Table 2] (RTF, 100 段 × 30s)
 
@@ -189,16 +189,19 @@ ParaASR 用 4B decoder 却比 1.7B 的 Qwen3-ASR 更快 (0.0053 vs 0.0094),关�
 
 ## 审阅
 
-> [!review] 审阅 (2026-08-05, auto)
-> **结论**: {{待独立 subagent 填写}}
->
-> | 原则 | 状态 | 备注 |
-> |------|------|------|
-> | 可复述 | {{}} | |
-> | 可信赖 | {{}} | |
-> | 可区分 | {{}} | |
-> | 可定位 | {{}} | |
-> | 不污染 | {{}} | |
->
-> Issues: {{N}}
+> [!review] 自动审阅 (2026-08-05)
+> **结论:** revise
+> **原则:** 复述 9 | 信赖 4 | 区分 9 | 定位 9 | 污染 6
+> **Claim 标注率:** ~87% (40/46) · 来源标注 ~90%
+> **问题:** 3 high, 0 medium, 3 low
+> - ❌ [baseline-number-swap] Table 1 中文+英文分区: FunASR/Doubao/Qwen3 三列逐行错位(如 AISHELL-1 应为 FunASR1.88/Doubao2.07/Qwen3 1.49,笔记写成 2.07/1.49/0.71)。VibeVoice/ParaASR 列与 Average 行正确。
+> - ❌ [column-mismatch] Table 1 长音频分区: VibeVoice 列错(应 1.66/3.48/8.73/5.62,笔记 1.88/2.61/5.30/5.31);长音频 Average 行右移(应 4.87/5.59/6.11/4.20/3.70)。
+> - ❌ [factual-error] AISHELL-1 脚注捏造 Qwen3-ASR=0.71(实为 1.49),脚注前提不成立,应删。
+> - 💡 [metric-naming-ambiguity] Table 4 括注主语指认偏差(应指 Table4 中 ParaASR/MTP-5 均值 3.00 vs Table1 2.97)。
+> - 💡 [template-compliance] frontmatter datasets 仅列 LibriSpeech,欠 AISHELL/WenetSpeech/FLEURS 等。
+> - 💡 [bad-linking] models 列 Seed-ASR 但正文未讨论。
+> **已核对无误:** 方法/训练全部数字、Table 3、Table 4、RTF、架构(4B dense + 0.6B Qwen3-Omni frozen)、one-liner。
+> **反向更新:** ❌ 需先修正 3 个 high issue(仅写 MTP 机制/训练配方可放行,禁引 Table 1 baseline 数字)
 > 详见 `_review/ParaASR-review.yml`
+>
+> **✅ 修正记录 (2026-08-05, reader)**: 3 个 high issue 全部修正 — 用 `pdftotext -layout` 重新提取 Table 1 逐格核对,FunASR/Doubao/Qwen3 三列错位已纠正,长音频分区 VibeVoice 列与 Average 行已纠正 (Qwen3 长音频均值 4.20),AISHELL-1 捏造脚注已删除并改为正确表述 (second-best = Qwen3-ASR 1.49)。方法/训练/Table 3/Table 4/RTF/架构原本即核对无误。high issue 清零后可进入反向更新与可信层。
