@@ -8,6 +8,11 @@
 - [lint/local] ParaASR — all passed.
 - [review/learning] entity-reviewer 提出 rule_gap: 抽查 4 个 confirmed 概念页均有 7-9 个 h2 + `## 演进` 段, 与 checklist `一级标题≤6` + kb.md `无研究演进时间线` 冲突; 建议标题阈值上调或将 关键论文/相关概念/演进 列为 footer 不计配额. 记录待后续规则校准.
 - [alert/backlog] pending-review 实体页 81 (>10), draft deep/repro 笔记 551 (>5) — 存量积压 (非本次 ingest 引起), 建议抽空批量审阅晋升.
+- [kb/search] [[JoyAI-Talker]] — 命中 6 页 (取 Top 6): [[SpeechLanguageModel]]✓(confirmed), [[Full-duplexSpokenDialogue]], [[Turn-takinginSpokenDialogue]], [[Speech-LLMIntegrationTaxonomy]], [[Instruction-GuidedSpeechSynthesis]], [[StreamingSpokenDialogue]] (后 5 页均 pending-review, 已标注仅供参考).
+- [ingest/deep] [[JoyAI-Talker]] — JoyAI-Talker: 全双工共情语音对话大模型 (JD.com, arXiv 2608.01119). 解耦 Duplex-Thinker-Talker, 48.9B MoE/3.28B 激活 backbone, 从 mid-training 起语音-文本联合训练缓解认知退化, PAER (感知→CoT→共情生成), Joy-Duplex 5 状态 token 语义门控插件式全双工. 关键判断: Joy-Duplex 为最硬贡献 (FDB v1.5 四场景全 SOTA), 但核心训练配方主张无消融 + 与不同 backbone 的 Qwen3-Omni 比存在规模混淆. kb_sources=6, 新建 0, 追加 2 (Full-duplex/Turn-taking 概念页正文追加 Joy-Duplex, key_papers 已超 12 上限故入正文).
+- [review/auto] [[JoyAI-Talker]] — 笔记审阅 pass (0H/0M/3L, 独立 reviewer). 抽样数字零误差, Table 5 全 20 单元逐格核对匹配; 被评为"对论文卖点主动反证据审查"的正面范本.
+- [review/kb] [[JoyAI-Talker]] — KB 更新审阅 pass (0H/0M/1L). 2 target 均 append-prose 无 status 变更; 1 low: 两概念页已超 200 行 (213/209), "key_papers 满额→追加正文"逃生阀与"超 200 行拆分"规则张力, 建议后续实体页审阅时拆 sub-MOC.
+- [lint/local] JoyAI-Talker — all passed.
 
 ## 2026-07-03
 
