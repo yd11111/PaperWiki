@@ -108,6 +108,10 @@ log_probs = log_softmax(c_log_probs + scale * (c_log_probs - u_log_probs))
 
 [[论文笔记/DiTAR|DiTAR]] (Jia et al., ByteDance, 2025) 提出 LM Guidance: 在 causal LM + diffusion head (LocDiT) 架构中,利用 LM 输出 h_i 已编码全部历史信息的特性,仅需 **1 次 LM forward + 2 次 LocDiT forward** 即可实现 CFG。训练时以 10% 概率将 h_i 替换为全零 h_∅; 推理时 ε̃ = (1+w)·ε(z,h_i) - w·ε(z,h_∅)。相比离散 LM CFG 需要 2 次完整 LM 计算,LM Guidance 将大部分 unconditional 计算卸载到轻量 diffusion head。消融显示 w=0 时 WER/SIM 显著退化; 即使 NFE=2 配合 guidance 仍保持良好性能 [Fig 4]。
 
+## 多路残差 CFG: 信息路由缓解 AR 长程漂移 [MP-ELD, 2026]
+
+[[论文笔记/Locodec|Locodec]] 中的 MP-ELD (Luo et al., ByteDance, 2026) 把单一 CFG 拆成**多路残差 CFG**,直接对准 AR 连续 token 生成的长程漂移。作者假设漂移主因是"CFG 下的信息路径冲突"——功能部分重叠的条件出现在多条路径中却被不一致组合,经 AR 回路反馈成属性漂移 [Locodec §4.2]。解法: 用 3 个轻量 encoder/LM 构造 local-continuity(短程续接)、self-consistency(模态内长程一致,管音色)、alignment-consistency(跨模态内容对齐)三条件,经 Gram-Schmidt 正交化成残差分解,推理时 v_τ = v^L + λ_sc(v^{LS}-v^L) + λ_ac(v^{LSA}-v^{LS}) [Eq 63]。关键发现: **λ_ac 主控 WER**(内容对齐,1→2.5 使 WER 从 >10% 降到 ~2.7%),**λ_sc 主控 SIM**(声学一致性,1.5→2.5 使 SIM 0.74→0.76),二者可独立调 [Fig 6]。且 self-consistency 早期外推是长程漂移主因,需**时间相关调度** λ_sc(τ)=1+(λ_max-1)τ^γ 延迟外推——γ 0→1 把 50s 末段 SIM 从 0.402 救回 0.679、WER 从 31.42% 降到 4.97% [Fig 8]。这把 CFG 从"单一标量强度"推广到"功能正交的多残差独立引导",且 CFG 后不重归一化速度幅值(固定幅值=固定路径长,与弯曲的 guided 轨迹冲突)。与 VoXtream2 的多条件 CFG(text/audio/speaker 独立 γ)思路相通,但 MP-ELD 强调**残差正交分解 + 时间调度**。
+
 ## 演进
 
 Conditional Diffusion (直接输入条件, 2020) --> Classifier Guidance (Dhariwal & Nichol, 2021, 需额外分类器) --> Classifier-Free Guidance (Ho & Salimans, 2022, 不需额外模型) --> 成为 diffusion/flow 条件生成标准 --> 在 TTS (Guided-TTS 2) / 音频 / 图像生成中广泛采用 --> 离散空间 CFG (OmniVoice, 2026, log-softmax 空间) --> 多条件 AR TTS CFG (VoXtream2, 2026, text/audio/speaker 三条件独立引导) --> APG 替代 CFG (LongCat-AudioDiT, 2026, Adaptive Projection Guidance 衰减平行分量消除 oversaturation) --> CFG 蒸馏吸收 ([[论文笔记/Wan-Streamer|Wan-Streamer]], 2026, teacher CFG 效果通过 rolling distillation 内化进 student,推理时无需双倍计算,与 DSFlow 的 CFG 内化发现一致)

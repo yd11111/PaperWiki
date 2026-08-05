@@ -159,3 +159,7 @@ Mel spectrogram (连续, 传统 TTS) → VQ-VAE acoustic tokens (2019) → HuBER
 ### Encoder-Free 的 Acoustic-Semantic Trade-off [Mel-LLM, 2026]
 
 [[论文笔记/Mel-LLM|Mel-LLM]] (Fan et al., 2026) 从连续表征维度揭示了 semantic-acoustic trade-off 的新形态: 去掉编码器后直接将 mel spectrogram patches 喂给 LLM,暴露了编码器通常压缩掉的副语言信息 (speaker traits, prosody, timbre, emotion),paralinguistic 任务大幅提升 (IEMOCAP emotion +25.47, gender +5.16) [Table VI]; 但同时移除了编码器提供的 semantic anchor,导致 knowledge-intensive spoken QA 下降 (MMLU-speech 53.12→41.30) [Table VI]。这是 token 二分法在连续特征维度的映射: encoder 压缩 ≈ 离散化时的信息选择,保留语义但丢弃声学;encoder-free ≈ 保留全部声学但缺乏语义锚定。
+
+### 单一 reconstruction-first 连续 token 的语义-声学 trade-off [Locodec, 2026]
+
+[[论文笔记/Locodec|Locodec]] (Luo et al., ByteDance, 2026) 从"不做显式分解"的角度给二分法提供反面证据。它刻意用**单一 reconstruction-first 连续 token 空间**(8Hz/768 维),不依赖 SSL/ASR 语义监督,把内容/音色/局部声学挤进同一低帧率高维 token。结果在 Seed-TTS-eval 上 WER SOTA 级(ZH 0.95%)但 SIM 系统性落后最强系统(~0.69 vs VoxCPM2/dots.tts ~0.79-0.80)[Locodec Table 5]。作者假设 [§5.3]: 低帧率 + 单一空间在 AR 预测下自然偏向内容稳定成分,削弱对微韵律/瞬态频谱/短时说话人线索的建模。反例是 VibeVoice(7.5Hz 更低却 SIM 更高),作者归因于其**显式语义-声学 tokenizer 分解**——低帧率语义分量提供长跨度内容聚合与 AR 稳定,独立声学分量保留说话人细节。这直接支持本页"混合/分解路线最有前景"的判断,并提示: 在低帧率连续 token 里引入(可无需 SSL 的)语义-声学分解,可能兼得内容稳定与声学保真。

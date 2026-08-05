@@ -4,7 +4,7 @@ title: "Quantizer Dropout"
 aliases: [RVQ Dropout, Variable Bitrate Training]
 category: "training-technique"
 tags: [quantization, training-trick, variable-bitrate, audio-codec]
-key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]"]
+key_papers: ["[[论文笔记/SoundStream|SoundStream]]", "[[论文笔记/DAC|DAC]]", "[[论文笔记/Survey-DiscreteAudioTokens|Survey-Discrete Audio Tokens]]", "[[论文笔记/FlexiCodec|FlexiCodec]]", "[[论文笔记/DiSTAR|DiSTAR]]", "[[论文笔记/MBCodec|MBCodec]]", "[[论文笔记/MOSS-TTS|MOSS-TTS]]", "[[论文笔记/Locodec|Locodec]]"]
 origin_paper: "Zeghidour et al., SoundStream: An End-to-End Neural Audio Codec, 2021"
 related_concepts: ["[[ResidualVectorQuantization]]", "[[CodebookCollapse]]", "[[TokenRateandBitrateTrade-offs]]"]
 status: confirmed
@@ -59,6 +59,10 @@ Survey 明确区分了三种 bitrate 策略:
 | **Scalable bitrate** | 通过改变活跃码本数量实现多档位; Quantizer Dropout 是其训练方法 | 否 (层粒度) | EnCodec, SoundStream, DAC |
 
 **关键区分**: Adaptive bitrate 逐 token 调整 bits (需 entropy coding); Scalable bitrate 按层整体调整 (需 quantizer dropout 训练)。两者可以叠加使用。
+
+## 连续维度版本: Postfix Dimension Dropout [Locodec, 2026]
+
+[[论文笔记/Locodec|Locodec]] (Luo et al., ByteDance, 2026) 把 quantizer dropout 从"离散 RVQ 层"迁移到"连续 token 维度",提出 **Postfix Dimension Dropout (PDD)**。对每个连续 token: 以概率 p 保留全部维度,否则采 K∼Unif{1,...,N-1} 只留前缀维度 1..K、置零后缀 K+1..N(不重归一化),默认 p=0.5 [Locodec §3.3, Eq 10]。这使低索引维度保留概率严格更高(Pr(m_1=1)=1, Pr(m_N=1)=p),诱导出 prefix-to-postfix 的可用性层级——与 RVQ dropout 诱导的 coarse→fine 层级同构。关键差异: 结合球面固定能量预算后,训练动力学把"可用性偏置"转成"能量偏置"(前缀维度获得更大能量 → 更高抗噪可识别性),Fig 3 显示 per-dim log-energy 近似线性衰减,而无 PDD 时能量近均匀 [Locodec §3.3]。实验证据: PDD 版 MP-ELD 训练损失显著更低、长程稳定性更好(CFG-S 下 32/× → 32/✓ 使长程 WER 20.80%→9.73%)[Locodec Fig 5, Table 4]。这表明 quantizer dropout 的"层级诱导"思想不限于离散 RVQ,可推广到连续 token 空间。
 
 ## 相关概念
 

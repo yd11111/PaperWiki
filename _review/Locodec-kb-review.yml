@@ -1,0 +1,34 @@
+note: "论文笔记/Locodec.md"
+reviewed: 2026-08-05
+reviewer: inline-self-review   # 本 harness 无独立 Agent dispatch 工具,退化为生成后自审
+mode: kb-update-review
+conclusion: pass
+
+change_plan:
+  - target: "概念库/TokenRateandBitrateTrade-offs.md"
+    action: append   # 正文 "在 TTS 中的应用" 追加一行(key_papers 已达 13 条上限,不追加 frontmatter)
+    content: "Locodec 原生 8Hz/768 维高维单 token 路线,把分组压缩从生成器搬进 tokenizer"
+  - target: "概念库/SemanticvsAcousticTokens.md"
+    action: append   # 正文追加(key_papers 已满)
+    content: "低帧率单 reconstruction-first token 的语义-声学 trade-off 新证据 + 帧率作为语义-声学分辨率钮"
+  - target: "概念库/QuantizerDropout.md"
+    action: append   # key_papers 7→8 + 正文追加 PDD 段
+    content: "PDD = quantizer dropout 的连续维度版本"
+  - target: "概念库/Classifier-FreeGuidance.md"
+    action: append   # 正文追加(key_papers 已满)
+    content: "多路残差 CFG(local/self/alignment 正交残差分解)"
+  - target: "概念库/ConditionalFlowMatching.md"
+    action: append   # 正文演进追加(key_papers 已远超上限)
+    content: "球面 flow matching (SFM) + direction-only 参数化"
+
+checks:
+  factual_accuracy: pass   # 5 处追加内容均与 Locodec 笔记/PDF 一致(8Hz/768、PDD p=0.5、多路残差 CFG、SFM direction-only)
+  dedup: pass              # 无新建页;球面/黎曼 FM 暂不拆页(准入不足,内嵌 CFM)
+  append_vs_substantive: pass  # 全部为列表/正文末尾追加,不改已有 prose,不改关系型 frontmatter → 保持各页 status
+  overclaim: pass          # 追加均限定"Locodec 声称/在作者实验中",无强断言
+
+issues: []
+issue_summary:
+  high: 0
+  medium: 0
+  low: 0
